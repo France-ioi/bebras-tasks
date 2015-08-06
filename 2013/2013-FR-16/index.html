@@ -1,0 +1,360 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-16</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-16/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron, Arthur Charguéraud",
+          "translators": [
+          ],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": []
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+         .smallinput {
+            width:50px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 100%;
+            padding: 3px;
+         }
+         .strategy td {
+            height: 2em;
+         }
+         .strategy-title  {
+            text-align: center;
+            font-weight: bold;
+            text-decoration: underline;
+         }
+      </style>
+      <script class="grader" type="text/javascript">
+         var grader = {
+            gradeTask: function(strAnswer, answerToken, callback) {
+               var taskParams = platform.getTaskParams();
+               task.load({'task': true}, function() {
+                  task.reloadAnswer(strAnswer, function() {
+                     var score = taskParams.minScore;
+                     if (updateAll(false)) {
+                        score = taskParams.maxScore;
+                     }
+                     callback(score);
+                  });
+               });
+            }
+         }
+      </script>
+      <script type="text/javascript">
+         var inputs = ["fruits0_weight", "fruits0_price", "fruits1_weight", "fruits1_price", "user0", "user1"];
+
+         task.load= function(views, callback) {
+               $(".smallinput").on("keyup", function() { updateAll(true); });
+               this.reloadAnswer("", function() {
+                  updateAll(false);
+                  callback();
+               });
+            };
+
+            task.getAnswer= function(callback) {
+               var answer = [];
+               for (var iInput = 0; iInput < inputs.length; iInput++) {
+                  answer.push($("#" + inputs[iInput]).val());
+               }
+               answer = JSON.stringify(answer);
+               callback(answer);
+            };
+            
+            task.reloadAnswer= function(strAnswer, callback) {
+               var answer = [7,5,6,4,0,0];
+               if (strAnswer != "") {
+                  answer = $.parseJSON(strAnswer);
+               }
+               for (var iInput = 0; iInput < inputs.length; iInput++) {
+                  $("#" + inputs[iInput]).val(answer[iInput]);
+               }
+               updateAll(false);
+               callback();
+            };
+
+         function toFixed(value, precision) {
+             var power = Math.pow(10, precision || 0);
+             return String(Math.round(value * power) / power);
+         }
+
+         function toFrench(value) {
+             return value.replace('.', ',');
+         }
+
+         function isInteger(value) {
+            var intRegex = /^\d+$/;
+            return (intRegex.test(value));
+         }
+
+         function isPositiveInteger(value) {
+            return (isInteger(value) && parseInt(value) > 0);
+         }
+
+         function updateAll(canValidate) {
+            for (var iInput = 0; iInput < inputs.length; iInput++) {
+               var id = inputs[iInput];
+               if (isPositiveInteger($("#" + id).val()) || (isInteger($("#" + id).val()) && iInput > 3)) {
+                  $("#" + id).css("border", "solid red 1px");
+               } else {
+                  $("#" + id).css("border", "solid red 1px");
+               }
+            }
+            var rates = [];
+            var weights = [];
+            var prices = [];
+            var validRates = true;
+            for (var iFruit = 0; iFruit < 2; iFruit++) {
+               if (isPositiveInteger($("#fruits" + iFruit + "_weight").val()) && isPositiveInteger($("#fruits" + iFruit + "_price").val())) {
+                  weights[iFruit] = parseInt($("#fruits" + iFruit + "_weight").val());
+                  prices[iFruit] = parseInt($("#fruits" + iFruit + "_price").val());
+                  rates[iFruit] = prices[iFruit] / weights[iFruit];
+                  $("#fruits" + iFruit + "_rate").html(toFrench(toFixed(rates[iFruit], 2)));
+               } else {
+                  $("#fruits" + iFruit + "_rate").html("...");
+                  validRates = false;
+               }              
+            }
+
+            // ---- init
+
+            $("#beaver0").html("...");
+            $("#beaver0_weight").html("...");
+            $("#beaver0_price").html("...");
+            $("#beaver1").html("...");
+            $("#beaver1_weight").html("...");
+            $("#beaver1_price").html("...");
+            $("#beaver_weight").html("...");
+            $("#beaver_price").html("...");
+
+            $("#user0_weight").html("...");
+            $("#user0_price").html("...");
+            $("#user1_weight").html("...");
+            $("#user1_price").html("...");
+            $("#user_weight").html("...");
+            $("#user_price").html("...");
+
+            $("#message1").html("");
+            $("#message1").css("color", "red");
+            $("#message1").css("font-weight", "bold");
+            $("#message2").html("");
+            $("#message2").css("color", "red");
+            $("#message2").css("font-weight", "bold");
+
+            // ---- rates
+           
+            if (! validRates) {
+               $("#message1").html("Indiquez des nombres entiers pour le poids et le prix des briques et des bûches.");
+              return false;
+            }
+
+            if (rates[0] < rates[1]) {
+               $("#message1").html("Attention, le prix au kilo des briques doit être supérieur à celui des bûches.");
+              return false;
+            }
+            validRates = false;
+
+
+            // ---- beaver
+
+            var beaver0 = Math.floor(20 / weights[0]);
+            var beaver0Weight = beaver0 * weights[0];
+            var beaver0Price = beaver0 * prices[0];
+            var beaver1 = Math.floor((20 - beaver0Weight) / weights[1]);
+            var beaver1Weight = beaver1 * weights[1];
+            var beaver1Price = beaver1 * prices[1];
+            var beaverWeight = beaver0Weight + beaver1Weight;
+            var beaverPrice  = beaver0Price + beaver1Price;
+
+            $("#beaver0").html(beaver0);
+            $("#beaver0_weight").html(beaver0Weight);
+            $("#beaver0_price").html(beaver0Price);
+            $("#beaver1").html(beaver1);
+            $("#beaver1_weight").html(beaver1Weight);
+            $("#beaver1_price").html(beaver1Price);
+            $("#beaver_weight").html(beaverWeight);
+            $("#beaver_price").html(beaverPrice);
+
+            // ---- user
+
+            if (! (isInteger($("#user0").val()) && isInteger($("#user1").val()))) {
+               $("#message2").html("Indiquez un nombre entier de briques et de bûches à emporter.");
+               return false;
+            }
+
+            var user0 = parseInt($("#user0").val());
+            var user0Weight = user0 * weights[0];
+            var user0Price = user0 * prices[0];
+            var user1 = parseInt($("#user1").val());
+            var user1Weight = user1 * weights[1];
+            var user1Price = user1 * prices[1];
+            var userWeight = user0Weight + user1Weight;
+            var userPrice  = user0Price + user1Price;
+
+            $("#user0_weight").html(user0Weight);
+            $("#user0_price").html(user0Price);
+            $("#user1_weight").html(user1Weight);
+            $("#user1_price").html(user1Price);
+            $("#user_weight").html(userWeight);
+            $("#user_price").html(userPrice);
+
+            if (userWeight > 20) {
+               $("#message2").html("Attention : votre sac à dos dépasse 20&nbsp;kg !");
+            } else if (userPrice < beaverPrice) {
+               $("#message2").html("Votre stratégie est moins bonne que celle de Castor.");
+            } else if (userPrice == beaverPrice) {
+               $("#message2").html("Votre stratégie n'est pas strictement meilleure que celle de Castor. Essayez encore.");
+            } else {
+               $("#message2").html("Bravo ! Vous avez fait mieux que Castor !");
+               $("#message2").css("color", "blue ");
+               if (canValidate) {
+                  platform.validate("done");
+               }
+               return true;
+            }
+            return false;
+         }
+      </script>
+    </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Sac à dos</h1>
+         <p>
+         Tous les dimanches, Castor charge son sac à dos pour aller vendre des briques et des bûches au marché. Il peut porter 20&nbsp;kg au maximum. 
+         <p></p>
+         Pour choisir combien de briques et de bûches emporter, Castor suit la stratégie suivante. D'abord, il remplit son sac avec autant de briques que possible, sans dépasser 20&nbsp;kg. En effet, les briques ont toujours un prix au kilo supérieur à celui des bûches. Ensuite, Castor complète si possible son sac avec autant de bûches que possible, toujours sans dépasser 20&nbsp;kg.
+         </p>
+         <p>Ci-dessous sont affichés des poids et des prix des briques et des bûches pour lesquels la stratégie de Castor donne le sac à dos dont la valeur totale est la plus grande possible. Cependant, si les poids ou les prix étaient différents, sa stratégie ne serait pas forcément la meilleure. Pouvez-vous trouver un tel exemple ?</p>
+         <p>Vous pouvez modifier ci-dessous le poids et le prix des briques et des bûches, et indiquer le nombre de briques et de bûches que vous mettriez dans le sac à dos. N'oubliez pas que le poids du sac ne doit pas dépasser 20&nbsp;kg et que le prix au kilo d'une brique doit être supérieur à celui d'une bûche. Votre but est d'obtenir un sac à dos valant plus que celui de Castor.
+         </p>
+         <div>
+         <table>
+         <tr>
+         <td>Poids d'une brique : </td><td> <input maxlength=4 type='text' class="smallinput" id="fruits0_weight" /> kg.</td>
+         <td>Prix d'une brique : </td><td> <input maxlength=4 type='text' class="smallinput" id="fruits0_price" /> €.</td>
+         <td>Prix par kilo des briques : </td><td> <b><span id="fruits0_rate">...</span></b> €/kg.</td>
+         </tr>
+         <tr>
+         <td>Poids d'une bûche : </td><td> <input maxlength=4 type='text' class="smallinput" id="fruits1_weight" /> kg.</td>
+         <td>Prix d'une bûche : </td><td> <input maxlength=4 type='text' class="smallinput" id="fruits1_price" /> €.</td>
+         <td>Prix par kilo des bûches : </td><td> <b><span id="fruits1_rate">...</span></b> €/kg.</td>
+         </tr>
+         </table>
+         </div>
+         <div><span id="message1"></span></div>
+         <div style="margin-top:1em; margin-bottom:1em">
+         <table>
+         <tr>
+         <td style="border-right: 3px solid black; padding-right:0.5em">
+            <div class="strategy-title">Stratégie de Castor</div>
+            <table class="strategy" style="padding-top:0.5em">
+            <tr><td>Prendre <span id="beaver0" style="font-weight:bold">...</span> brique(s) :</td>
+                <td style="text-align: right"><span id="beaver0_weight">...</span> kg </td>
+                <td>pour <span id="beaver0_price">...</span> €. </td>
+            </tr>
+            <tr><td>Prendre <span id="beaver1" style="font-weight:bold">...</span> bûche(s) :</td>
+                <td style="text-align: right"><span id="beaver1_weight">...</span> kg </td>
+                <td>pour <span id="beaver1_price">...</span> €. </td>
+            </tr>
+            <tr><td>Total du sac à dos : </td>
+                <td style="text-align: right"> <span id="beaver_weight">...</span> kg </td>
+                <td>pour <b><span id="beaver_price">...</span></b> €. </td>
+            </tr>
+            </table>
+         </td><td class="strategy" style="padding-left:0.5em">
+            <div class="strategy-title">Votre stratégie</div>
+            <table style="padding-top:0.5em">
+            <tr><td>Prendre <input maxlength=4 type="text" class="smallinput" id="user0" /> brique(s) :</td>
+                <td style="text-align: right"><span id="user0_weight">...</span> kg </td>
+                <td>pour <span id="user0_price">...</span> €. </td>
+            </tr>
+            <tr><td>Prendre <input maxlength=4 type="text" class="smallinput" id="user1" /> bûche(s) : </td>
+                <td style="text-align: right"> <span id="user1_weight">...</span> kg </td>
+                <td>pour <span id="user1_price">...</span> €. </td>
+            </tr>
+            <tr><td>Total du sac à dos : </td>
+                <td style="text-align: right"> <span id="user_weight">...</span> kg </td>
+                <td>pour <b><span id="user_price">...</span></b> €. </td>
+            </tr>
+            </table>
+         </td>
+         </tr>
+         </table>
+         </div>
+         <div><span id="message2"></span></div>
+         <div style="text-align:right"><input type="button" value="Recommencer" onclick="task.reloadAnswer('', function() {})"/></div>
+      </div><!-- task -->
+      <div id="solution">
+          <h2>Solution</h2>
+          <p>La première chose que l'on peut remarquer, c'est que pour obtenir un
+          sac à dos plus cher que celui de Castor, il faut absolument arriver à
+          obtenir un sac à dos plus lourd que celui de Castor. Sinon, si on a un
+          sac à dos de même poids ou plus léger, on ne pourra pas faire mieux
+          que Castor car il a pris un maximum de briques. 
+          </p>
+          <p>Pour obtenir un sac à dos plus lourd que celui de Castor, il faut
+          créer une situation où Castor ne remplit pas tout à fait son sac à 
+          dos, alors qu'en prenant davantage de bûches il serait possible de
+          le remplir. Par exemple, si les briques pèsent 6&nbsp;kg et les
+          briques pèsent 4&nbsp;kg chacune, alors Castor va remplir un sac
+          de 18&nbsp;kg avec 3 briques, tandis que l'on peut en fait prendre
+          2 briques et 2 bûches, pour un total de 20&nbsp;kg.
+          </p>
+          <p>Une fois que l'on a obtenu un sac à dos plus lourd, il
+          est toujours possible d'ajuster le prix des briques et des bûches
+          de sorte à ce que ce sac à dos soit plus cher. Il suffit pour
+          cela de régler les prix de sorte que les bûches soient un tout petit
+          peu moins cher au kilo que les briques. Par exemple, on pourrait
+          prendre 60&nbsp;€ par brique (10&nbsp;€/kg) et 39&nbsp;€ par 
+          bûche (9,75&nbsp;€/kg). Lorsque la différence de prix entre les
+          briques et les bûches est suffisamment faible, peu importe si l'on prend
+          des briques ou des bûches, le sac à dos le plus cher sera celui
+          qui est le plus lourd.
+          </p>
+          <p>En fait, on peut pousser tout ce raisonnement à l'extrême,
+          pour obtenir une solution encore plus simple à ce sujet.
+          On peut choisir qu'une brique pèse 19&nbsp;kg et qu'une bûche pèse 20&nbsp;kg,
+          et que rendre la différence de prix au kilo suffisamment faible,
+          par exemple en prenant 20&nbsp;€ par brique et 21&nbsp;€ par bûche, 
+          (ou même 19&nbsp;€ par brique et 20&nbsp;€ par bûche si on
+          autorise que les deux aient le même prix au kilo).
+          Dans cette situation, Castor va prendre une brique, alors que la
+          meilleure stratégie consiste à prendre une bûche.
+          </p>
+
+          <h2>C'est de l'informatique !</h2>
+          <p>Le problème de savoir comment remplir au mieux un conteneur 
+          avec des objets de poids et/ou de taille données est un problème 
+          d'optimisation classique. Il s'agit d'un problème «&nbsp;difficile&nbsp;»
+          au sens où, dans le cas général, on est obligé de faire beaucoup beaucoup
+          de calculs pour déterminer la stratégie de remplissage optimale 
+          (c'est-à-dire qui remplisse au mieux le conteneur).
+          Heureusement, il existe des algorithmes qui calculent
+          rapidement un remplissage proche du résultat optimal.
+          </p>
+      </div> <!-- task-solution -->
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Robot tortue</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "<img src='2011-SK-06-3.png'><img src='2011-SK-06-1.png'><img src='2011-SK-06-3.png'><img src='2011-SK-06-1.png'>",
+            "<img src='2011-SK-06-3.png'><img src='2011-SK-06-1.png'><img src='2011-SK-06-3.png'><img src='2011-SK-06-2.png'>",
+            "<img src='2011-SK-06-1.png'><img src='2011-SK-06-3.png'><img src='2011-SK-06-1.png'><img src='2011-SK-06-3.png'><img src='2011-SK-06-3.png'>",
+            "<img src='2011-SK-06-1.png' /><img src='2011-SK-06-3.png' /><img src='2011-SK-06-3.png' /><img src='2011-SK-06-1.png' />"
+            ], "added", "#answers_2011-SK-06");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-SK-06/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Robot tortue</h1>
+<p>
+Le robot tortue répond aux commandes suivantes :
+</p>
+<p>
+<img src="2011-SK-06-1.png" /> Tourner à droite (d'un quart de tour)<br>
+<img src="2011-SK-06-2.png" /> Tourner à gauche (d'un quart de tour)<br>
+<img src="2011-SK-06-3.png" /> Avancer lentement de 10 pas<br>
+</p>
+<p>
+On a programmé le robot pour qu'il se déplace en exécutant une suite de commandes en boucle. C'est à dire qu'il fait la suite de commande une fois, et quand il a fini, il la recommence au début, et ainsi de suite.
+</p>
+<p>
+Sachant que le robot tortue a effectué un déplacement qui forme un carré, laquelle des suites de commandes suivantes a-t-il fait en boucle ?
+</p>
+<div class="reponses" id="answers_2011-SK-06">
+</div>
+
+<img style="display: none;" src="2011-SK-06-1.png" />
+<img style="display: none;" src="2011-SK-06-2.png" />
+<img style="display: none;" src="2011-SK-06-3.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Le plus simple ici est de se demander quel déplacement va effectuer la tortue pour chacun des programmes :
+   </p>
+   <p>
+   <img src="2011-SK-06-sol.png"/>
+   </p>
+   <p>
+   <B>La solution est la proposition <span class="2011-SK-06_choice_1">A</span></b> qui donne un carré si on l'exécute indéfiniment. 
+   <!--
+   1
+   -->
+   <h2>C'est de l'informatique</h2>
+   <p>Les commandes de programmation présentées ici sont inspirées d'un véritable langage de programmation : le langage <i>Logo</i>. Ce langage de programmation orienté objet et récursif a été conçu initialement pour permettre aux enfants de découvrir la programmation, dans une démarche de pédagogie active. Il est très connu pour sa tortue graphique que l'on peut programmer pour lui faire tracer des formes.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

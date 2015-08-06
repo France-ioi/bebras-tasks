@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>La scierie</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2012-CH-09", 2, 1);
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-CH-09/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "7"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>La scierie</h1>
+
+<p>Les castors ont construit une scierie où ils préparent des troncs d'arbres.
+Ils transportent ensuite les troncs sur des canaux jusqu'au barrage. Chaque canal ne peut laisser passer qu'un nombre limité de troncs chaque minute.
+</p><p>
+Sur le schéma ci-dessous, la scierie est au point S et le barrage au point B.
+Chaque flèche représente un canal et est annotée par le nombre de troncs pouvant passer en une minute sur ce canal.
+</p>
+
+<img src="2012-CH-09.png" />
+
+<p>Quel est le nombre maximum de troncs qui peuvent atteindre le barrage chaque minute&nbsp;?
+</p>
+
+<div class="reponses" id="answers_2012-CH-09">test
+</div>
+
+
+<img style="display: none;" src="2012-CH-09.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 7 -->
+
+<div class="explications">
+
+<h2>La solution</h2>
+
+<p>La réponse est <b>7</b> troncs par minute. L'image ci-dessous montre 
+combien de troncs faire passer sur chaque canal pour atteindre ce résultat.
+Les traits en rouge indiquent les canaux qui ne sont pas utilisés à
+leur pleine capacité.</p>
+
+<p><img src="2012-CH-09-sol.png" /></p>
+
+<p>Comment savoir que l'on ne peut pas faire mieux ? Étudions
+la situation aux points de passage que l'on a numérotés en rouge.</p>
+<ul>
+<li>Au point de passage numéro 1, seuls deux troncs peuvent repartir,
+donc le canal qui arrive à ce point de passage sera forcément
+sous-exploité (2 troncs au lieu de 3 possibles).</li>
+<li>Au point de passage numéro 2, seuls deux troncs peuvent arriver,
+donc le canal qui repart sera forcément sous-exploité 
+(2 troncs au lieu de 3 possibles).</li>
+<li>Au point de passage numéro 3, seul deux troncs peuvent arriver,
+donc un des canaux qui repartent doit être sous-exploité. Il n'y a aucun
+intérêt à priver le canal qui rejoint le point de passage numéro 4 de son
+tronc, donc on choisit d'enlever un tronc à l'autre canal.</li>
+<li>Pour les autres points de passages, qui ne sont pas numérotés,
+on utilise le maximum du débit possible.</li>
+</ul>
+
+
+
+<h2>C'est de l'informatique</h2>
+
+<p>Ce sujet illustre un problème appelé <b>problème du flot maximum</b>.
+Il s'agit d'un problème classique en informatique.
+Ce problème a de très nombreuses applications dans la vie courante, par exemple pour optimiser
+le transport aérien, le transport d'électricité, le transfert des données Internet, etc...
+Il existe des algorithmes relativement efficaces permettant de 
+trouver le flot maximum.</p>
+ 
+<!--<a href="https://fr.wikipedia.org/wiki/Probl%C3%A8me_de_flot_maximum">page wikipedia</a> -->
+
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

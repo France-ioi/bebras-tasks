@@ -1,0 +1,12 @@
+#! /usr/bin/python3 -B
+conv = {}
+# -bordercolor '#ffffff' -trim
+# -colorspace Gray
+conv["2012-FR-02b-arbre-original.png"] = "-quality 50 -colors 50"
+
+if __name__=="__main__":
+   import sys, os
+   sys.path.append(os.path.join('..', 'scripts'))
+   from common import *
+   execute(conv)
+

@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Généalogie</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(5, [
+            "Rachel",
+            "Martin",
+            "Sophie",
+            "Victor",
+            "Georges",
+            "Leila",
+            "Catherine",
+            "Tiffany",
+            "Thibault",
+            "Michel" // inexistant (fait exprès)
+            ], "added", "#answers_2012-HU-06");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-HU-06/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "1"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Généalogie</h1>
+<p>
+Grand-père Castor a saisi son arbre généalogique sur son
+ordinateur. Dans cet arbre, les enfants de chaque membre de la famille sont
+représentés en-dessous de leur parent et reliés à eux par des traits. Les
+enfants sont placés de gauche à droite dans l'ordre de leur naissance.
+</p>
+
+<img src="arbre.png" style="width:750px" />
+
+<p>
+Sur l'ordinateur, à un instant donné, le nom d'un seul castor est affiché. Pour voir
+les autres, il faut exécuter une séquence de commandes. Il y a deux types de
+commandes possibles.
+<ul>
+<li>La commande <b><code>parent</code></b> affiche le parent du castor affiché
+  actuellement.</li>
+<li>La commande <b><code>enfant[1]</code></b> affiche le 1<sup>er</sup> enfant (celui à gauche) du castor
+  affiché actuellement, <b><code>enfant[2]</code></b> affiche le 2<sup>e</sup>, et ainsi de suite.</li>
+</ul>
+</p>
+
+<p>Au départ, le nom &laquo;&nbsp;Michael&nbsp;&raquo; est affiché à l'écran.
+</p>
+<p>
+On exécute les commandes suivantes&nbsp;:
+<b>
+ <code>parent</code>, <code>parent</code>, <code>parent</code>, <code>enfant[1]</code>,
+   <code>enfant[2]</code>, <code>enfant[1]</code>.
+</b>
+Quel est alors le nom affiché&nbsp;?
+</p>
+
+<div class="reponses" id="answers_2012-HU-06">
+</div>
+
+
+<img style="display: none;" src="arbre.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : A=1 -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>On part de Michael.</p>
+<ul>
+<li>On exécute <b><code>parent</code></b>. On obtient Gregory.</li>
+<li>On exécute <b><code>parent</code></b>. On obtient Flore.</li>
+<li>On exécute <b><code>parent</code></b>. On obtient Thibault.</li>
+<li>On exécute <b><code>enfant[1]</code></b>. On obtient Éva.</li>
+<li>On exécute <b><code>enfant[2]</code></b>. On obtient Victor.</li>
+<li>On exécute <b><code>enfant[1]</code></b>. On obtient Rachel.</li>
+</ul>
+<p>Le nom final affiché est donc Rachel.</p>
+
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>Les structures d'arbres sont très utilisées en informatique pour représenter des
+informations de manière organisée. Les arbres ont pour intérêt principal qu'il est
+possible d'efficacement ajouter, retirer, modifier ou accéder à des valeurs 
+stockées dans la structure.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

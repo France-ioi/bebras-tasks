@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-14</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-14/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Francoise Tort and Mahdi Miled",
+          "translators": [
+          ],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": []
+      };
+      </script>
+      <style>
+         #nbOddLins, #nbOddCols {
+            font-weight: bold;
+            font-size: 1.1em;
+         }
+      </style>
+      <script class="grader" type="text/javascript">
+      var grader = {
+         gradeTask: function(strAnswer, answerToken, callback) {
+            var taskParams = platform.getTaskParams();
+            if (! task.isLoaded) {
+               task.load({task: true}, function() {
+                  task.reloadAnswer(strAnswer, function() {
+                     score = taskParams.minScore;
+                     if(sumArray(sumCol) + sumArray(sumLin) === 0) {
+                        score = taskParams.maxScore;
+                     }
+                     callback(score);
+                  });
+               });
+            }
+            task.reloadAnswer(strAnswer, function() {
+               score = taskParams.minScore;
+               if(sumArray(sumCol) + sumArray(sumLin) === 0) {
+                  score = taskParams.maxScore;
+               }
+               callback(score);
+            });
+         }
+      }
+      </script>
+      <script class="" type="text/javascript">         
+         var cellSize = 50;
+         var paper;
+         var sumCol;
+         var sumLin;
+         var boardColors;
+         var steps;
+         var boardShapes = [[1, 1, 1, 2, 2, 1, 1, 2], // 1 = circle, 2 = square
+                            [2, 2, 0, 1, 0, 0, 0, 2],
+                            [1, 2, 1, 2, 1, 0, 0, 0],
+                            [2, 1, 0, 2, 1, 0, 1, 1],
+                            [1, 1, 2, 0, 1, 0, 2, 1],
+                            [0, 1, 2, 0, 2, 2, 2, 0],
+                            [0, 0, 0, 2, 1, 1, 1, 0],
+                            [2, 1, 1, 2, 0, 1, 1, 2]];
+
+         task.isLoaded= false;
+         task.load = function(views, callback) {
+               if (this.isLoaded)
+                  return;
+               this.isLoaded = true;
+               paper = Raphael("game", 8 * (cellSize + 2), 8 * (cellSize + 2));
+               resetBoard();
+               redrawBoard();
+               callback();
+            };
+
+            task.unload= function(callback) {
+               this.isLoaded = false;
+               $("#game").html("");
+               callback();
+            };
+
+            task.getAnswer= function(callback) {
+               callback(JSON.stringify(steps));
+            };
+
+            task.reloadAnswer= function(strAnswer, callback) {
+               var answer = [];
+               if (strAnswer != "") {
+                  answer = $.parseJSON(strAnswer);               
+               }
+               resetBoard();
+               steps = answer;
+               for (var iStep = 0; iStep < steps.length; iStep++) {
+                  var step = steps[iStep];
+                  switchColor(step[0], step[1]);
+               }
+               redrawBoard();
+               checkState();
+               callback();
+            };
+
+          function resetBoard() {
+             steps = [];
+             sumCol = [0,1,0,0,0,0,0,0];
+             sumLin = [0,0,0,0,0,1,0,0]; 
+             boardColors = [[1, 2, 2, 1, 1, 1, 2, 2], // 1 = white, 2 = black
+                            [1, 1, 0, 1, 0, 0, 0, 1],
+                            [2, 2, 2, 1, 2, 0, 0, 0],
+                            [2, 2, 0, 1, 2, 0, 1, 2],
+                            [1, 2, 1, 0, 2, 0, 1, 1],
+                            [0, 2, 2, 0, 1, 2, 1, 0],
+                            [0, 0, 0, 1, 2, 1, 2, 0],
+                            [1, 1, 2, 1, 0, 2, 1, 1]];
+          }
+
+          function redrawBoard() {
+              paper.clear();
+              var background = paper.rect(10, 10, 8 * cellSize, 8 * cellSize).attr({fill:"#46BC2A", "stroke-width": 0});
+              paper.setStart();
+              for(var i = 0; i < 9; i++) {
+                  paper.rect(10 + i * cellSize, 10, 1, 8 * cellSize).attr({"stroke-width": 2.5});
+                  paper.rect(10, 10 + i * cellSize, 8 * cellSize, 1).attr({"stroke-width": 2.5});
+              }
+              paper.rect(10 + 1 * cellSize, 10 + 5 * cellSize, cellSize + 1, cellSize + 1).attr({"stroke-width": 2.5, "stroke": "red"});
+              paper.rect(10 + 1 * cellSize + 1, 10 + 5 * cellSize + 1, cellSize - 1, cellSize - 1).attr({"stroke-width": 2.5, "stroke": "red"});
+              var grid = paper.setFinish();
+
+              var colors = ["#FFFFFF", "#000000"];
+              for (var lin = 0; lin < 8; lin++) {
+                 for (var col = 0; col < 8; col++) {
+                  var shape = boardShapes[lin][col];
+                  var color = boardColors[lin][col];
+                  var drawing = null;
+                  if(shape === 1) {
+                      drawing =paper.circle(10 + col * cellSize + cellSize / 2,
+                                   10 + lin * cellSize + cellSize / 2,
+                                   cellSize / 3).attr({fill:colors[color - 1]});
+                  } else if (shape == 2) {
+                      drawing = paper.rect(10 + col * cellSize + cellSize / 5,
+                                               10 + lin * cellSize + cellSize / 5,
+                                               3 * cellSize / 5,
+                                               3 * cellSize / 5).attr({fill:colors[color - 1]});
+                  }
+                  if (drawing != null) {
+                     setMouseDown(drawing, lin, col);
+                  }
+                }
+              }
+            updateOddLinsCols();
+         }
+
+         function checkState() {
+            $("#success, #error").html("");
+            if (sumArray(sumCol) + sumArray(sumLin) === 0) {
+               $("#success").html("Bravo ! Toutes les lignes et colonnes ont un nombre pair de pions noirs.");
+               $("#reset").hide();
+               return true;
+            }
+            $("#reset").show();
+            return false;
+         }
+
+         function sumArray(arr) {
+            var sum = 0;
+            for (var iPos = 0; iPos < arr.length; iPos++) {
+               sum += arr[iPos];
+            }
+            return sum;
+         }
+
+         function setMouseDown(drawing, lin, col) {
+             drawing.click(function() {
+                 if (sumArray(sumCol) + sumArray(sumLin) === 0) {
+                     return;
+                 }
+                 var shape = boardShapes[lin][col];
+                 if (shape !== 2) {
+                    $("#error").html("Vous ne pouvez retourner que les pions carrés !");
+                    return;
+                  }
+                  $("#error").html("");
+                 steps.push([lin, col]);
+                 var newColor = switchColor(lin, col);
+                 if (newColor == 2) {
+                     this.animate({fill: "#000000"}, 300);
+                 } else {
+                     this.animate({fill: "#FFFFFF"}, 300);
+                 }
+                 if (checkState()) {
+                     platform.validate("done", 1);
+                 }
+             });
+         }
+
+         function switchColor(lin, col) {
+            sumCol[col] = (sumCol[col] + 1) % 2; 
+            sumLin[lin] = (sumLin[lin] + 1) % 2
+            var newColor =  3 - boardColors[lin][col];
+            boardColors[lin][col] = newColor;
+            updateOddLinsCols();
+            return newColor;
+         }
+
+         function updateOddLinsCols() {
+            $("#nbOddLins").html(sumArray(sumLin));
+            $("#nbOddCols").html(sumArray(sumCol));
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Jeu de parité</h1>
+         <p>
+         Castor vous défie à son nouveau jeu de plateau.
+         L'objectif est de réussir à ce que chaque ligne et 
+         chaque colonne du plateau contienne un nombre pair de pions noirs.
+         </p>
+         <p>
+         Vous pouvez retourner des pions carrés en cliquant dessus
+         et les faire passer de noir à blanc, ou vice versa.
+         Remarque&nbsp;: retourner le pion encadré de rouge 
+         suffirait pour gagner, mais il est rond donc vous
+         ne pouvez pas changer sa couleur.
+         </p>
+         <table><tr><td>
+         <div id="game" style="margin:10px;text-align:center;width:416px;height:420px"></div>
+         </td><td style="vertical-align:top;padding-top:50px;">
+            <div style="height:40px"><span id="error"></span><span id="success"></span></div>
+            <p>
+             Il reste <span id="nbOddLins">1</span> ligne(s) et <span id="nbOddCols">1</span> colonne(s) avec un nombre impair de pions noirs.
+            </p>
+          <button id="reset" onclick="task.reloadAnswer('', function() {})">Recommencer</button>         
+         </td></tr></table>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         <p>Le but est de restaurer la parité sur chaque ligne et chaque colonne. 
+         &Agrave; chaque fois que l'on change la couleur d'un carré, on inverse
+         la parité sur sa ligne et sa colonne. Il faut donc obligatoirement qu'il
+         y ait un changement d'une autre pièce 
+         pour compenser.
+         </p>
+         <p>Une manière de visualiser ce qu'implique chaque changement est de relier
+         ensemble tous les carrés situés sur une même ligne ou une même colonne,
+         en considérant que le rond de la case rouge est également un carré, puisque
+         c'est de là que provient le problème de parité.
+         </p>
+         <div style="text-align:center"><img src="correction1.png" /></div>
+         <p>On cherche alors à trouver un chemin qui part du rond de la case rouge
+         et qui y retourne, après être passé par une succession de carrés, c'est-à-dire
+         en suivant des traits bleus. Il y a de nombreux chemins possibles. On peut 
+         prendre celui que l'on veut. Considérons par exemple le chemin rouge ci-dessous
+         (c'est le plus court).</p>
+         <div style="text-align:center"><img src="correction2.png" /></div>
+         <p>Une fois le chemin trouvé, il suffit d'inverser la couleur de chaque carré par lequel 
+         passe le chemin. Ainsi, on rétablit le fait que chaque ligne et chaque colonne contient un nombre
+         pair de pions noirs. Ci-dessous, on a marqué en rouge les carrés dont il faut inverser
+         la couleur.
+         <div style="text-align:center"><img src="2013-FR-14_equilibrium_sol.png" /></div>
+         <h2>C'est de l'informatique !</h2>
+         <p>
+         Dans ce sujet, on a réexprimé le problème à résoudre sous forme d'un problème
+         de «&nbsp;graphe&nbsp;», dans lequel il faut trouver un chemin passant par
+         les traits bleus et reliant les ronds bleus. Une fois que l'on voit le problème
+         sous forme de graphe, il est beaucoup plus facile à résoudre. 
+         </p>
+         <p>
+         En informatique, on essaie autant que possible de transformer les problèmes
+         que l'on doit résoudre en des problèmes de graphes, car on dispose pour
+         les graphes de nombreux algorithmes très efficaces.
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

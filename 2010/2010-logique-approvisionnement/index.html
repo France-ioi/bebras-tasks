@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Logique de l'approvisionnement en eau</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "((non V1) et V2) ou (V3 et V4)",
+             "V2 et (V3 et V4)",
+             "(non V1) et V2",
+             "non (V1 et V2) ou (V3 et V4)"
+            ], "added", "#answers_2010-logique-approvisionnement");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-logique-approvisionnement/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Logique de l'approvisionnement en eau</h1>
+<p>
+Castor a construit un système de tuyaux pour assurer l'arrosage de son arbre. Des valves peuvent être
+ouvertes et fermées individuellement, pour laisser passer l'eau ou au contraire bloquer son passage. Les
+valves sont numérotées 1, 2, 3 et 4.
+</p>
+<p>
+<center><img src="enonce.jpg" /></center>
+<p>
+Castor utilise la formulation logique suivante pour décrire l'état de son système d'arrosage.
+<ul>
+   <li>V1, V2, V3, V4 désignent quatre variables qui ont pour valeur soit "vrai" soit "faux".</li>
+   <li>Une variable a la valeur "vrai" si la valve correspondante est ouverte.</li>
+   <li>Une variable a la valeur "faux" si la valve correspondante est fermée.</li>
+</ul>
+<p><b>Parmi les formules logiques suivantes, laquelle décrit correctement le système, c'est à dire est
+évaluée vraie si l'arbre est arrosé, et faux si l'arbre n'est pas arrosé, pour toutes les combinaisons
+possibles des positions des valves&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-logique-approvisionnement">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-logique-approvisionnement_choice_1">A</span> est correcte.
+   </p><p>
+La formule <span class="2010-logique-approvisionnement_choice_2">B</span> est incorrecte car l'arbre reçoit aussi de l'eau si V2 est fermée mais V3 et V4 sont ouvertes.<br/>
+La formule <span class="2010-logique-approvisionnement_choice_3">C</span> est incorrecte car l'arbre reçoit aussi de l'eau si V2 est fermée alors que V3 et V4 sont ouvertes.<br/>
+La formule <span class="2010-logique-approvisionnement_choice_4">D</span> est incorrecte car l'arbre ne reçoit pas d'eau si V1 est ouverte et V2 est fermée.<br/>
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>Les programmeurs utilisent des modélisations des objets réels. Un modèle est une abstraction, une image simplifiée
+de la réalité. Dans cet exemple, les variables représentent l'ouverture ou la fermeture d'une valve. C'est une
+abstraction, parce que d'autres fonctionnalités des valves sont ignorées.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

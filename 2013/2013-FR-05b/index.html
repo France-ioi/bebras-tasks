@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-05b</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script type="text/javascript" src="../2013-FR-05a/2013-FR-05_compass.js"></script>
+      <script class="grader" type="text/javascript">
+         var grader = {
+            gradeTask: function(strAnswer, answerToken, callback) {
+               var taskParams = platform.getTaskParams();
+               var taskG = new Task("hard");
+               taskG.isGrader = true;
+               taskG.clearGrid();
+               taskG.execute(strAnswer);
+               var score = taskParams.minScore;
+               if (taskG.successState()) {
+                  score = taskParams.maxScore;
+               }
+               taskG.unload(function() {
+                  callback(score);
+               });
+            }
+         }
+      </script>
+      <script type="text/javascript" src="../2013-FR-05a/task.js"></script>
+      <link rel="stylesheet" type="text/css" href="../2013-FR-05a/task.css" />
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-05b/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Charles Freou",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <script class="" type="text/javascript">
+         var task = new Task("hard");
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Robot peintre</h1>
+   <p>
+   Castor a acheté un robot programmable pour peindre le sol de sa maison.
+   </p>
+   <p>
+   Voici quelques exemples de programmes et leur effet&nbsp;:
+   </p>
+   <style>
+   .examples_2013_FR_05ab  {
+      border-collapse: collapse;
+   }
+   .examples_2013_FR_05ab td {
+      border: 1px solid black;
+      padding: 0.5em;
+   }
+   </style>
+   <table class='examples_2013_FR_05ab'>
+         <td>1S</td>
+         <td>avance de 1 case vers le sud</td>
+      </tr>
+      <tr>
+         <td>3E 1O</td>
+         <td>avance de 3 cases vers l'est, puis 1 case vers l'ouest</td>
+      </tr>
+      <tr>
+         <td>3S 2E 1N</td>
+         <td>avance de 3 cases vers le sud, puis 2 cases vers l'est, puis 1 case vers le nord</td>
+      </tr>
+      <tr class='easy'>
+         <td>4(3S 2E)</td>
+         <td>fait 4 fois de suite : avance de 3 cases vers le sud, puis 2 cases vers l'est</td>
+      </tr>
+      <tr class='hard'>
+         <td>3E 4(3S 2E 1N)</td>
+         <td>avance de 3 cases vers l'est, puis exécute le programme ci-dessus 4 fois de suite</td>
+      </tr>
+      <tr class='hard'>
+         <td>2(3E 4(3S 2E 1N)) 1N</td>
+         <td>exécute deux fois le programme ci-dessus, puis avance de 1 case vers le nord</td>
+      </tr>
+   </table>
+   <div style='float:right;'>
+   <div id='compass' style='width:90px;height:90px'></div>
+   </div>
+   <p>Aidez Castor à écrire un programme de moins de 50 caractères qui reproduit le motif de gauche. Le robot commence sur la case rouge.</p>
+   <table>
+      <tr>
+         <td><div id='tableLeft'></div></td>
+         <td width='35px'></td>
+         <td><div id='tableRight'></div></td>
+         <td></td>
+      </tr>
+   </table>
+   <p>
+   <div><span id='error'></span><span id='success'></span></div>
+   Votre programme&nbsp;:
+   <input type='text' cols='50' maxlength='50' style='width:300px' id='answer'/> <input type='button' value='Essayer le programme' onclick='task.executeAnswer()'/>
+   </p>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+           <p class='easy'>La solution la plus simple est : <input type='text' readonly='true' style='border:none;font-size:100%;font-weight:bold;margin:auto' value='7(1S 1N 2E 1S)'></p> 
+           <p class='hard'>La solution la plus simple est : <input type='text' readonly='true' style='border:none;font-size:100%;font-weight:bold' value='2(5(1S 2E 1S 1O) 3E 10N)'></p> 
+           <h2>C'est de l'informatique !</h2>
+           <p>
+           Pour résoudre ce problème, il fallait tout d'abord repérer le motif 
+           à faire répéter au robot, puis trouver la séquence de déplacements permettant 
+           de dessiner ce motif, et enfin «&nbsp;programmer&nbsp;» cette séquence. 
+           </p>
+           <p>
+           Le «&nbsp;code&nbsp;» du programme est exprimé dans un petit langage constitué 
+           de 4 instructions de base, correspondant aux 4 déplacements possibles. 
+           Le langage contient également une notion de «&nbsp;répétition d'une suite d'instructions&nbsp;». 
+           Cette notion s'appelle en informatique une «&nbsp;boucle&nbsp;», parce que l'on 
+           recommence un certain nombre de fois l'exécution d'une même suite d'instructions. 
+           </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

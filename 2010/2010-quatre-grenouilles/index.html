@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Quatre grenouilles</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+             "<img src='reponseA.jpg'>",
+             "<img src='reponseB.jpg'>",
+             "<img src='reponseC.jpg'>",
+             "<img src='reponseD.jpg'>"
+            ], "added", "#answers_2010-quatre-grenouilles");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-quatre-grenouilles/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Quatre grenouilles</h1>
+
+<p>Castor possède un robot magicien. Il se déplace sur une ligne
+  droite composée de cases. Il est commandé par des symboles.</p>
+
+<table>
+   <tr>
+      <td><img src="robot.jpg" /></td> 
+      <td>Le robot magicien avance d'un case.</td>
+   </tr>
+   <tr>
+      <td><img src="grenouille.jpg" /></td> 
+      <td>Le robot magicien fait apparaître une grenouille dans la case
+        qui se trouve devant lui.</td>
+   </tr>
+</table>
+
+<p>Pour faire exécuter au robot magicien une commande plusieurs fois de suite, il est possbile d'utiliser des chiffres.</p>
+
+<table>
+   <tr>
+      <td><img src="4robots.jpg"/></td>
+      <td>Le robot magicien fait quatre fois : avance d'un case. Il avance donc de 4 cases.</td>
+   </tr>
+   <tr>
+      <td><img src="4grenouilles.jpg"/></td>
+      <td>Le robot magicien fait quatre fois : faire apparaître une
+        grenouille dans la case se trouvant devant lui. Il y a alors quatre
+        grenouilles dans la case devant lui.</td>
+   </tr>
+</table>
+
+<p>Pour faire exécuter plusieurs commandes plusieurs fois, on peut
+utiliser des parenthèses.</p>
+
+<table>
+   <tr>
+      <td><img src="parenthese.jpg"/></td>
+      <td>Le robot magicien fait quatre fois : avance d'un case puis
+        avance d'une case. Il avance donc de 4 fois 2 cases (8
+        cases).</td>
+   </tr>
+</table>
+
+<p>Le robot magicien a le droit de se déplacer sur une case contenant une ou plusieurs grenouilles.</p>
+
+<p><b>Avec quelle suite de symboles le robot magicien fait-il apparaître 4 grenouilles sur une rangée de 4 cases (une grenouille par case)&nbsp;?</b></p>
+
+<div class="reponses" id="answers_2010-quatre-grenouilles">
+</div>
+
+
+<img style="display: none;" src="robot.jpg" />
+<img style="display: none;" src="grenouille.jpg" />
+<img style="display: none;" src="4robots.jpg" />
+<img style="display: none;" src="4grenouilles.jpg" />
+<img style="display: none;" src="parenthese.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-quatre-grenouilles_choice_3">C</span> est correcte.
+   </p><p>
+   Le robot magicien avance d'une case puis fait apparaître une grenouille sur la case située devant lui. Il avance
+   ensuite de nouveau (sur la case où se trouve la grenouille), et fait apparaître une nouvelle grenouille sur la case
+   suivante. Il recommence quatre fois l'opération au total, et forme ainsi une série de quatre grenouilles côte à côte.
+   </p><p>
+La réponse <span class="2010-quatre-grenouilles_choice_1">A</span> fait avancer le robot magicien de 4 cases, et apparaître une grenouille dans la cinquième case.<br/>
+La réponse <span class="2010-quatre-grenouilles_choice_2">B</span> fait avancer le robot magicien de 4 cases, et apparaître 4 grenouilles dans la cinquième case.<br/>
+La réponse <span class="2010-quatre-grenouilles_choice_4">D</span> fait avancer le robot magicien d'une case et apparaître 4 grenouilles dans la deuxième case.<br/>
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>La programmation d'un robot est un exercice typique en informatique. Pour écrire un programme qui fonctionne
+correctement, il est important de comprendre ce que fait chaque instruction, et comment on peut regrouper
+correctement plusieurs instructions. Dans l'exemple on utilise la boucle ou répétition, qui permet de regrouper des
+instructions pour les répéter un nombre défini de fois.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2012-DE-02</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    <script id="js_2012-DE-02">
+      var nm_2012_DE_02 = {
+        problem_id: '2012-DE-02',
+
+        saveResult: function() {
+          var res = $('#solution_2012_DE_02 > .item_2012_DE_02');
+          var solution = "";
+          for (var i=0; i< res.length; i++) {
+            solution += res[i].id.split('_')[0];
+          }
+          selectAnswer(nm_2012_DE_02.problem_id, solution)
+        }
+      };
+
+      setSelectAnswer(nm_2012_DE_02.problem_id, function(key, answer) {
+        var sol = answer.split('i');
+        for(var i = 0; i < sol.length; i++) {
+          $("#solution_2012_DE_02").append($('#i' + sol[i] + '_2012_DE_02'));
+        }
+        return 0;
+      });
+
+      function load() {
+        $('#solution_2012_DE_02').sortable({
+          placeholder: "highlight_2012_DE_02",
+          containment: '#animationcontainer_2012_DE_02',
+          items: 'div.item_2012_DE_02'
+        });
+      }
+    </script>
+    <style>
+
+      #animationcontainer_2012_DE_02 {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+
+      .animation_2012_DE_02 {
+        width:308px;
+        z-index:-2;
+        border: 1px solid;
+        padding-bottom:10px;
+        margin-bottom:10px;
+      }
+
+      #solution_2012_DE_02 {
+        background: #ddf;
+      }
+
+      #solution_2012_DE_02 .item_2012_DE_02 {
+        background: white;
+        color:black;
+      }
+
+      .item_2012_DE_02, .title_2012_DE_02 {
+        border: 1px solid;
+        margin: 3px;
+        padding: 0px;
+        width: 300px;
+        cursor: move;
+        position: relative;
+        height: 20px;
+        text-align:center;
+      }
+
+      .title_2012_DE_02 {
+        font-weight: bold;
+        cursor: default;
+        border: none;
+        height: 30px;
+      }
+
+      #buttons_2012_DE_02 input {
+        font-size: large;
+      }
+
+      .highlight_2012_DE_02 {
+        background: yellow;
+        border: 2px dashed;
+        height: 20px;
+      }
+    </style>
+  </head>
+  <body onload="load()">
+    <h1>Choisir les places au cinéma</h1>
+    <p>Alice, Bob, Charlie, Dominique et Emilie vont au cinéma. Ils veulent
+      s'assoir ensemble sur la même rangée. Mais, bien sûr, chacun d'entre
+      eux ne peut s'assoir à côté d'au plus deux autres.</p>
+
+    <img src="reseau.png"/>
+
+    <p>Cette figure montre leurs relations : si deux élèves qui ont une
+      certaine affinité s'assaient à côté, ils ont une certaine
+      satisfaction :</p>
+
+    <table>
+      <tr>
+	<th>Symbole</th>
+	<th>Relation</th>
+	<th>Points de satisfaction</th>
+      </tr>
+      <tr>
+	<td><img src="pointilles.png"/></td>
+	<td>Connaissances</td>
+	<td>1</td>
+      <tr>
+      </tr>
+	<td><img src="plein.png"/></td>
+	<td>Amis</td>
+	<td>2</td>
+      </tr>
+      <tr>
+	<td><img src="double.png"/></td>
+	<td>Amoureux</td>
+	<td>3</td>
+      </tr>
+    </table>
+
+    <p>On mesure la satisfaction globale du groupe en additionnant la
+      satisfaction des individus.</p>
+
+    <div class="question">
+      <p>Dans quel ordre devraient-ils s'assoir pour qu'ils soient le pls satisfaits&nbsp;? Vous pouvez déplacer les noms avec la souris.</p>
+    </div>
+
+    <div id="animationcontainer_2012_DE_02">
+      <div id="solution_2012_DE_02" class="animation_2012_DE_02">
+        <div class="title_2012_DE_02">Nom</div>
+        <div class="item_2012_DE_02" id="i1_2012_DE_02">Alice</div>
+        <div class="item_2012_DE_02" id="i2_2012_DE_02">Bob</div>
+        <div class="item_2012_DE_02" id="i3_2012_DE_02">Charlie</div>
+        <div class="item_2012_DE_02" id="i4_2012_DE_02">Dominique</div>
+        <div class="item_2012_DE_02" id="i5_2012_DE_02">Emilie</div>
+      </div>
+      <div id="buttons_2012_DE_02">
+        <input type="button" value="Valider" onclick="nm_2012_DE_02.saveResult();">
+      </div>
+    </div>
+  </body>
+</html>

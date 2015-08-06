@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>La chute</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(6, [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            ], "asButtons", "#answers_2012-FR-10", true);
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-10/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "4"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>La chute</h1>
+<p>
+Castor dépose son robot en haut d'un labyrinthe, pour ensuite le regarder tomber de plate-forme en plate-forme, jusqu'à ce que le robot atteigne une des cases situées tout en bas.
+Le robot se déplace toujours de la même façon&nbsp;: il commence par partir vers la droite, puis, à chaque fois qu'il tombe d'une plate-forme à une autre, <strong>il repart dans la direction opposée</strong>. </p>
+<p>
+L'illustration ci-dessous à gauche montre en rouge le trajet parcouru par le robot dans le labyrinthe n<sup>o</sup>&nbsp;1.
+</p>
+
+<center><table><tr><td><img src="2012-FR-10-exemple.png" style="width:320px;"/></td><td><img src="2012-FR-10.png" style="width:320px;"/></td></tr>
+<tr><td width="50%" align="center">Labyrinthe n<sup>o</sup>&nbsp;1&nbsp;: exemple.</td><td width="50%" align="center"><strong>Labyrinthe n<sup>o</sup>&nbsp;2&nbsp;: à vous de trouver&nbsp;!</strong></td></tr></table></center>
+
+<p>Si Castor place son robot en haut à gauche du labyrinthe n<sup>o</sup>&nbsp;2, dans quelle case le robot va-t-il tomber&nbsp;?</p>
+
+<div class="reponses" id="answers_2012-FR-10">
+</div>
+
+
+<img style="display: none;" src="2012-FR-10-exemple.png" />
+<img style="display: none;" src="2012-FR-10.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+<h2>La solution</h2>
+<p><img src="2012-FR-10_solution.png" style="width:320px;"/>
+</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>Le robot se déplace selon un <b>algorithme</b>, qu'il fallait comprendre
+et appliquer sur le deuxième labyrinthe.
+
+En langage informatique, cet algorithme peut être décrit ainsi&nbsp;:</p>
+<!--
+<div style="margin-left:2em; border:1px solid black; padding:1em" >
+<b>Tant qu'on n'est pas arrivé en bas</b>, répéter les 4 lignes suivantes :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;      <b>Avancer dans la direction courante</b>, puis<br>
+&nbsp;&nbsp;&nbsp;&nbsp;      <b>Si on atteint le bord d'une plateforme</b>, alors effectuer les 2 lignes suivantes :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         <b>Tomber à la première plateforme qui se trouve dessous</b>, et<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        <b>Inverser la direction courante</b><br>
+</div>
+-->
+
+<pre style="margin-left:2em; border:1px solid black; padding:1em">
+<b>Tant qu'on n'est pas arrivé en bas</b>, répéter les 4 lignes suivantes :
+    <b>Avancer dans la direction courante</b>, puis
+    <b>Si on atteint le bord d'une plateforme</b>, effectuer les 2 lignes suivantes :
+        <b>Tomber à la première plateforme qui se trouve dessous</b>, et
+        <b>Inverser la direction courante</b>
+</pre>
+
+
+<p>De manière générale, un <b>algorithme</b> décrit une séquence d'instructions
+à suivre jusqu'à atteindre un état final ou une réponse finale.
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

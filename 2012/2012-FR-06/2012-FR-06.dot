@@ -1,0 +1,16 @@
+digraph G {
+    Trombone -> Ballon [label="Anne"];
+    Trombone -> Panier [label="Mathilde",color=".7 .3 1.0",fontcolor=".7 .3 1.0"];
+    Ballon -> Bateau [label="Lucie"];
+    Bateau -> Robot [label="Daniel"];
+    Ballon -> Vélo [label="Marc"];
+    Panier -> Bateau [label="Thibault"];
+    Panier -> Canapé [label="Marie",color=".7 .3 1.0",fontcolor=".7 .3 1.0"];
+    Canapé -> Ballon [label="Sarah"];
+    Vélo -> Ballon [label="Pierre"];
+    Canapé -> Tapis [label="Manon",color=".7 .3 1.0",fontcolor=".7 .3 1.0"];
+    Tapis -> Robot [label="Xavier"];
+    Peinture -> Tapis [label="Sophie"];
+    Vélo -> Robot [label="Romain"];
+    Tapis -> Maison [label="Lucas",color=".7 .3 1.0",fontcolor=".7 .3 1.0"];
+}

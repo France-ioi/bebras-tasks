@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Troncs d'arbres</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">// list of used images (generated) : "27.png", "40.gif", "41.gif", "42.gif", "43.gif",
+//"44.gif", "45.gif", "46.gif", "47.gif", "48.gif", "49.gif", "50.gif", "51.gif"
+
+   task.answer= "";
+   task.couts= [0, 3, 3, 2, 4, 2, 5, 9, 11, 7, 8, 3];
+   task.load= function(views, callback) {
+     task.answer = "00000000000";
+     for(var area = 1; area <= 11; area++)
+       $("#chemins-2011-AT-11").append("<img id='chemin" + area + "-2011-AT-11' " +
+         "style='display:none;position:absolute;top:0;left:0' src='" + (52 - area) + ".gif' />");
+
+     for(var area = 1; area <= 11; area++)
+       $("#area" + area + "-2011-AT-11").click({i:area}, function(e){switchChemin(e.data.i)});
+
+     drawAnswer(task.answer);
+     callback();
+   };
+   task.getAnswer= function(callback) {
+       callback(task.answer);
+   };
+   task.reloadAnswer= function(strAnswer, callback)  {
+      task.answer = "00000000000";
+      if (strAnswer != "") {
+         task.answer = strAnswer;
+      }
+      drawAnswer(task.answer);
+      callback();
+   };
+
+function drawAnswer(answer) {
+   var score = 0;
+   for(var i = 1; i <= 11; i++) {
+      var disp;
+      if(answer.charAt(i) == "1") {
+         disp = "inline";
+         score += task.couts[i];
+      } else {
+         disp = "none";
+      }
+      $("#chemin" + i + "-2011-AT-11").css("display", disp);
+   }
+   $("#scoretot-2011-AT-11").html(score);
+   return score;
+}
+
+var switchChemin = function(i) {
+   var chr = task.answer.charAt(i) == "1" ? "0" : "1";
+   task.answer = task.answer.substr(0,i) + chr + task.answer.substr(i+1)
+   drawAnswer(task.answer);
+};
+</script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-AT-11/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "010001001001"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Troncs d'arbres</h1>
+<p>
+Les Castors ont abattu 50 troncs d'arbres sur un îlôt et souhaitent les rapporter à leur maison. Pour cela, ils doivent passer par différents bras de la rivière. Ils savent qu'à chaque bras de rivière, ils vont perdre un certain nombre de troncs.
+</p><p>
+Sur l'illustration ci-dessous, à gauche se trouve l'îlôt, le point de départ, tandis que tout à droite se trouve la maison des Castors : leur destination. Chaque bras de rivière porte un nombre, qui correspond au nombre de troncs que les Castors vont perdre s'ils le traversent.
+</p><p>
+Par quel chemin doivent-ils passer pour perdre le moins possible de troncs ? 
+</p><p>
+Cliquez sur les bras de rivière pour tracer le chemin choisi. Essayez autant de chemins que vous voulez.
+</p><p>
+N'oubliez pas de valider quand vous pensez avoir la bonne réponse.
+</p>
+ <div style="position:relative" id="laby-2011-AT-11">
+    <div id="chemins-2011-AT-11"></div>
+    <img src ='27.png'/>
+    <img style="position:absolute;top:0;left:0" src='40.gif' usemap="#mapfond-2011-AT-11"/>
+    <map name="mapfond-2011-AT-11">
+       <area shape="polygon"
+          coords="163,111,234,201,223,213,176,164,146,148"
+          id="area1-2011-AT-11"/>
+       <area shape="polygon"
+          coords="250,192,275,192,274,175,289,152,282,149,299,98,273,72,263,123,255,145,253,181"
+          id="area2-2011-AT-11"/>
+       <area shape="polygon"
+          coords="132,72,161,88,190,60,233,41,260,50,275,72,305,54,265,31,264,17,237,8,207,14,198,23,193,32"
+          id="area3-2011-AT-11"/>
+       <area shape="polygon"
+          coords="324,88,341,94,350,104,366,101,374,112,388,88,366,87,326,62,306,56"
+          id="area4-2011-AT-11"/>
+       <area shape="polygon"
+          coords="280,195,306,209,312,200,366,195,373,179,390,169,396,146,380,118,375,142,349,165,345,165,313,187"
+          id="area5-2011-AT-11"/>
+       <area shape="polygon"
+          coords="306,211,389,216,411,225,421,238,427,274,411,267,391,243,326,231,303,239"
+          id="area6-2011-AT-11"/>
+       <area shape="polygon"
+          coords="421,238,427,274,442,268,470,226,456,194,442,206,443,216"
+          id="area7-2011-AT-11"/>
+       <area shape="polygon"
+          coords="457,190,489,181,488,159,467,147,461,122,442,114,416,137,426,140,420,166,433,166"
+          id="area8-2011-AT-11"/>
+       <area shape="polygon"
+          coords="411,74,434,98,438,90,439,68,449,57,448,29,433,37"
+          id="area9-2011-AT-11"/>
+       <area shape="polygon"
+          coords="449,57,448,29,511,69,555,91,520,139,508,117,499,115,493,106,494,77,481,65"
+          id="area10-2011-AT-11"/>
+       <area shape="polygon"
+          coords="492,183,523,185,541,191,542,211,492,210"
+          id="area11-2011-AT-11"/>
+     </map>
+ </div>
+ <div style="color:red;font-weight:bold">Total des troncs perdus : <span id="scoretot-2011-AT-11"></span></div>
+
+<img style="display: none;" src="27.png" />
+<img style="display: none;" src="40.gif" />
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+   <h2>La solution</h2>
+   Le parcours emprunté pour cette solution passe par les bras dessinés sur le dessin ci-dessous. On voit que le Castor va perdre successivement : 3 puis 2 puis 11 puis 3 troncs d'arbre, soit 3+2+11+3 = 19 troncs.
+   <center><img src="2011-AT-11-sol.jpg"></center>
+
+   <h2>C'est de l'informatique</h2>
+   <p>Il s'agit d'un problème d'optimisation de parcours. Parmi tous les chemins il faut trouver le chemin optimal, c'est-à-dire celui qui fera perdre le moins de troncs d'arbre. Ici il faut minimiser la valeur cumulée sur le chemin emprunté. </p>
+   <p>Pour résoudre un problème d'optimisation de parcours, on peut essayer tous les chemins possibles et retenir le meilleur. Toutefois ceci peut être très long. </p>
+   <p>Une autre méthode consiste pour chaque embranchement sur le chemin à repérer le chemin qui permet d'y arriver en optimisant la contrainte posée, dans notre exemple en perdant le moins d'arbres.  On peut même appliquer la méthode systématique décrite ci-dessous.
+   <p>Tout d'abord, il faut repérer chaque intersection sur laquelle aboutissent différents bras de rivière. Nous les avons repérées par des ronds blancs sur le dessin.
+   </p>
+   <p>
+   Ensuite, en commencant le plus à gauche du dessin, on avance vers la droite, et pour chaque intersection traversée : si un seul chemin venant de la gauche y mène, on reporte dessus la somme du nombre indiqué sur le chemin avec le nombre calculé pour l'intersection précédente. Si plusieurs chemins y mènent, on fait ce calcul pour chacun des chemins, et on reporte le plus petit nombre obtenu, on repère (ici en rouge) le chemin correspondant. On continue ainsi jusqu'à avoir couvert toutes les intersections. Le chemin à emprunter est celui partant du début et arrivant à la fin, qui a été repéré (en rouge) par ce procédé.</li>
+   <center><img src="2011-AT-11-resol.png"></center></p>
+   <p>La méthode présentée ici est le principe qui est mis en oeuvre dans un algorithme bien connu : l'<i>algorithme de Dijkstra</i>.</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

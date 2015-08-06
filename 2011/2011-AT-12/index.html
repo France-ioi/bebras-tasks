@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Couleur des chaussures</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "<img src='2011-AT-12-a.png'><br />" +
+            "<b>Léa</b><br>" +
+            "Grande queue<br>" +
+            "T-shirt mauve<br>" +
+            "Pantalon bleu<br>" +
+            "Chaussures jaunes<br>" +
+            "Avec des lunettes<br>" +
+            "Dents longues<br>",
+            
+            "<img src='2011-AT-12-d.png'><br>" +
+            "<b>Cyril</b><br>" +
+            "Petite queue<br>" +
+            "T-shirt mauve<br>" +
+            "Pantalon orange<br>" +
+            "Chaussures bleues<br>" +
+            "Pas de lunettes<br>" +
+            "Dents courtes<br>",
+            
+            "<img src='2011-AT-12-c.png'><br>" +
+            "<b>Aïcha</b><b>" +
+            "Grande queue<br>" +
+            "T-shirt vert<br>" +
+            "Pantalon rouge<br>" +
+            "Chaussures jaunes<br>" +
+            "Pas de lunettes<br>" +
+            "Dents courtes<br>",
+            
+            "<img src='2011-AT-12-b.png'><br>" +
+            "<b>Yann</b><br>" +
+            "Grande queue<br>" +
+            "T-shirt vert<br>" +
+            "Pantalon marron<br>" +
+            "Chaussures rouges<br>" +
+            "Pas de lunettes<br>" +
+            "Dents longues<br>"
+            ], "added", "#answers_2011-AT-12");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-AT-12/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Couleur des chaussures</h1>
+<p>
+Pour leur grande fête annuelle, les Castors se sont mis d'accord sur un code vestimentaire. Celui-ci établit comment chaque castor doit choisir la couleur de ses chaussures.
+</p>
+<p>
+Le schéma ci-dessous décrit ce code. Il s'utilise du haut vers le bas. A chaque ovale, si la caractéristique indiquée est vraie on suit la ligne "oui", sinon on suit la ligne "non". On descend jusqu'à arriver sur un rectangle, dans lequel une couleur de chaussures est indiquée.
+</p>
+<p> Par exemple, si le castor a une <i>grande queue</i> (premier ovale), on suit la ligne "oui". On se demande alors s'il a des <i>lunettes</i> (deuxième ovale rencontré), s'il n'en a pas, on suit la ligne "non". On se demande alors s'il a un "T-shirt vert" (troisième ovale rencontré), etc., jusqu'à arriver à un rectangle donnant la couleur des chaussures.
+<p>
+<p>
+<center><img src="2011-AT-12-small.png"/></center>
+</p>
+<p>
+L'un des Castors suivants s'est trompé. Lequel&nbsp;?
+</p>
+<div class="reponses" id="answers_2011-AT-12">
+</div>
+
+<img style="display: none;" src="2011-AT-12-small.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+   <h2>La solution </h2>
+   <p> <img src="2011-AT-12_sol.png"></p>
+   <p>Yann porte des chaussures rouges. Il n'a donc pas respecté le code vestimantaire, qui indique qu'il devrait porter des chaussures bleues. <b> La solution était donc la <span class="2011-AT-12_choice_4">D</span> : Yann</b>
+   </p>
+   <p>Les trois autres Castors ont respecté le code vestimentaire :
+   <ul><li>Léa a-t-elle une grande queue&nbsp;? Oui. Dans ce cas, porte-t-elle des lunettes&nbsp;? Oui. Dans ce cas, a-t-elle un pantalon bleu&nbsp;? Oui. Alors, ses chaussures doivent être jaunes. C'est bien le cas.</li>
+   <li>Aïcha a-t-elle une grande queue&nbsp;? Oui. Dans ce cas, porte-t-elle des lunettes&nbsp;? Non. Dans ce cas, a-t-elle  un T-shirt vert&nbsp;? Oui. Dans ce cas, a-t-elle un pantalon marron&nbsp;? Non. Alors, ses chaussures doivent être jaunes. C'est bien le cas.</li>
+   <li>Cyril a-t-il une grande queue ? Non. Dans ce cas, a-t-il de longues dents ? Non. Alors, il doit porter des chaussures bleues. C'est bien le cas.</li>
+   </ul>
+   </p>
+
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Le code vestimentaire Castor est présenté sous la forme d'un <i>arbre de décision</i>. L'ovale tout en haut est appelé <i>racine</i>. Deux branches partent chacune vers un autre ovale qui lui même a deux branches et ainsi de suite. Il s'agit d'un arbre à l'envers !
+   </p>
+   <p>
+   Pourquoi aime-t-on tant ce type d'arbres en informatique ? Entre autres parce qu'ils donnent beaucoup d'informations en un minimum d'étapes. Dans le cas présent, nous arrivons à décider parmi 8 façons de s'habiller (autant que de rectangles) en suivant un chemin dans l'arbre et en ne répondant qu'à 4 questions au maximum. Si vous essayez d'agrandir cet arbre en rajoutant seulement 3 questions de plus avant chaque rectangle, vous obtiendrez un code vestimentaire avec 64 façons de s'habiller pour seulement 7 questions !
+   </p>
+   </div>
+</div> <!-- task-solution -->
+   </body>
+</html>

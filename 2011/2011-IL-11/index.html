@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Atteindre 51</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+var goal;
+var current;
+var score;
+var best_score;
+
+   task.load= function(views, callback) {
+      goal = 51;
+      current = 0;
+      score = 0;
+      best_score = -1;
+
+      dessine(best_score == -1 ? "" : "Bravo ! Vous avez réussi. Arriverez-vous à faire un meilleur score ?");
+      $("#inc-2011-FR-07").click(function(){ score++; changeCurrent(current+1); });
+      $("#double-2011-FR-07").click(function(){ score++; changeCurrent(current*2); });
+      $("#reset-2011-FR-07").click(function(){
+         current = score = 0;
+         dessine("");
+      });
+      callback();
+   };
+   task.getAnswer= function(callback) {
+      callback("" + best_score);
+   };
+   task.reloadAnswer= function(newAnswer, callback)  {
+      best_score = -1;
+      if (newAnswer != "") {
+         best_score = parseInt(newAnswer);
+      }
+      dessine();
+      callback();
+   };
+
+var dessine = function(msg) {
+  $("#score-2011-FR-07").html("Nombre d'étapes effectuées : " + score);
+  if(best_score > 0)
+    $("#score-2011-FR-07").append("<br>Meilleur score : " + best_score);
+  $("#message-2011-FR-07").html(msg);
+  $("#result-2011-FR-07").html(current);
+};
+
+var changeCurrent = function(val) {
+  if(val > goal) {
+      current = score = 0;
+      dessine("Vous avez dépassé 51. Réessayez !");
+  } else if (val == goal) {
+      if(best_score == -1 || best_score > score) {          
+          best_score = score;
+          platform.validate("stay", 1);
+      }
+      current = 0;
+      dessine("Bravo ! Vous avez réussi a faire un score de "+score+". Arriverez-vous à faire un meilleur score ?");
+      score = 0;
+  } else {
+      current = val;
+      dessine("");
+  }
+}
+         </script>
+         <style class="">#message-2011-FR-07 { color:red; font-weight:bold; }
+   #score-2011-FR-07 { font-weight:bold; }
+   #result-2011-FR-07 { font-weight:bold; font-size:300%; }
+   .operation-2011-FR-07 { background-color:red;  font-size:150%; }
+   .tablenoborder-2011-FR-07 td { border:none; }
+   #resultdiv-2011-FR-07 { border:2px solid black; padding:10px; }</style>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-IL-11/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["9"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Atteindre 51</h1>
+<p>
+Dans ce sujet, vous ne pouvez pas perdre de points. Plus vous vous rapprochez de la meilleure solution, plus vous gagnez de points.
+</p>
+<p>
+Fabriquez 51 en cliquant sur les boutons rouges. Trouvez la solution qui utilise le moins de clics possibles.
+</p>
+<p>
+Faites autant d'essais que vous le désirez. Améliorez votre score en essayant d'utiliser encore moins de clics. Votre meilleur score sera retenu.
+</p>
+<p id="message-2011-FR-07"></p>
+<table class="tablenoborder-2011-FR-07">
+   <tr><td>
+      <div id="resultdiv-2011-FR-07">Nombre :<p id="result-2011-FR-07"></p></div>
+   </td><td>
+      <p id="score-2011-FR-07"></p>
+      <input type="button" class="operation-2011-FR-07" id="inc-2011-FR-07" value="+1" />
+      <input type="button" class="operation-2011-FR-07" id="double-2011-FR-07" value="x2" /><br/>
+      <input type="button" id="reset-2011-FR-07" value="Recommencer" />
+   </td>
+</tr></table>
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Pour trouver la solution la plus courte à coup sûr, on peut remarquer qu'il n'est jamais intéressant de faire deux fois "+1" à la suite, du fait des deux observations suivantes :
+   <ul><li>Au départ, en partant de 0, plutôt que de faire "+1, +1" pour obtenir 2, on peut toujours choisir de faire "+1, *2" qui donne aussi 2.</li>
+   <li>Si l'on a à un moment la séquence "*2, +1, +1", alors on peut obtenir le même résultat en utilisant "+1, *2" à la place, en une opération de moins.</li></ul>
+   </p>
+   <p>
+   Une fois que l'on a fait cette observation, on peut trouver la séquence la plus courte en se débrouillant pour ne jamais mettre deux "+1" à la suite. Une manière efficace de l'obtenir consiste à prendre le problème à l'envers, et en partant de 51 pour arriver à 0, en se basant sur le raisonnement suivant :
+   </p>
+
+   <ul><li>Si le nombre actuel est impair, par exemple 51, alors on sait que l'opération précédente était forcément "+1", car une multiplication par deux aurait donné un nombre pair.</li>
+   <li>Si le nombre actuel est pair, par exemple 50, alors on sait que l'opération précédente était forcément "*2", car si elle était "+1", alors le nombre précédent aurait été impair, donc l'étape d'avant aurait aussi été "+1", ce qui comme on l'a vu, ne donne pas la bonne solution.</li></ul>
+   </p>
+   <p>
+   En partant de 51, cela donne donc :
+   <ul><li>51 est impair, donc l'opération précédente était "+1", en partant de 50.</li>
+   <li>50 est pair, donc l'opération précédente était "*2", en partant de 25.</li>
+   <li>25 est impair, donc l'opération précédente était "+1", en partant de 24.</li>
+   <li>24 est pair, donc l'opération précédente était "*2", en partant de 12.</li>
+   <li>12 est pair, donc l'opération précédente était "*2", en partant de 6.</li>
+   <li>6 est pair, donc l'opération précédente était "*2", en partant de 3.</li>
+   <li>3 est impair, donc l'opération précédente était "+1", en partant de 2.</li>
+   <li>2 est pair, donc l'opération précédente était "*2", en partant de 1.</li>
+   <li>1 est impair, donc l'opération précédente était "+1", en partant de 0.</li>
+   </ul>
+   <p>
+   Il était donc possible d'atteindre 51 en 9 étapes :
+   </p>
+   <table border=1><tr><td>Opération :</td><td>-</td><td>+1</td><td>*2</td><td>+1</td><td>*2</td><td>*2</td><td>*2</td><td>+1</td><td>*2</td><td>+1</td></tr>
+          <tr><td>Résultat :</td><td>0</td><td>1</td><td>2</td><td>3</td><td>6</td><td>12</td><td>24</td><td>25</td><td>50</td><td>51</td></tr>
+   </table>
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Observer un problème pour en déterminer ses propriétés permet d'exploiter ensuite ces propriétés pour concevoir des algorithmes simples et efficaces. C'est ce que l'on a fait dans la solution présentée. En fait, trouver comment atteindre un nombre par une succession de "+1" et "*2", revient à trouver la décomposition en puissances de deux du nombre fourni en entrée, autrement dit, à déterminer la représentation binaire du nombre.
+   </p>
+   <p>
+   Ainsi, le nombre 51 se représente en binaire par 110011. Si l'on part de la droite, et que l'on fait "+1" à chaque fois que l'on rencontre un 1, puis "*2" à chaque fois que l'on passe au chiffre suivant, on obtient exactement la séquence décrite dans la solution.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

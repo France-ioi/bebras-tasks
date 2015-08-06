@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Découpe</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(3, [
+            "<img src='2012-FR-09_a.png' width='200'>",
+            "<img src='2012-FR-09_b.png' width='200'>",
+            "<img src='2012-FR-09_c.png' width='200'>",
+            "<img src='2012-FR-09_d.png' width='200'>",
+            "<img src='2012-FR-09_e.png' width='200'>",
+            "<img src='2012-FR-09_f.png' width='200'>",
+            ], "added", "#answers_2012-FR-09");
+      </script>
+}</script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-09/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "4"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Découpe</h1>
+<p>Vous disposez d'une bande de papier de 16&nbsp;cm de long et 1&nbsp;cm de haut. Cette bande est divisée en 16 petits carrés de 1&nbsp;cm de côté.</p>
+
+<img src="2012-FR-09_1.png" />
+
+<p>Vous posez la bande sur une table. Vous coupez alors la bande en deux morceaux égaux, puis vous glissez le morceau de droite de 1 cm vers le haut.</p>
+
+<img src="2012-FR-09_2.png" />
+
+<p>Ensuite, vous répétez la même procédure pour chacun des deux morceaux obtenus&nbsp;: vous les coupez en deux au milieu, puis vous faites glisser le morceau de droite de 1 cm vers le haut.</p> 
+
+<img src="2012-FR-09_3.png" />
+
+<p>Vous appliquez de nouveau la procédure pour les 4 nouveaux morceaux obtenus, puis vous répétez encore une fois la procédure avec les 8 morceaux obtenus. À quoi ressemble alors le résultat&nbsp;?</p>
+
+<div class="reponses"  id="answers_2012-FR-09">
+</div>
+
+
+<img style="display: none;" src="2012-FR-09_1.png" />
+<img style="display: none;" src="2012-FR-09_2.png" />
+<img style="display: none;" src="2012-FR-09_3.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : D=4
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>On applique la procédure sur les 4 morceaux&nbsp;:</p>
+<p><img src="2012-FR-09_solution_1.png" /></p>
+
+<p>puis sur les 8 morceaux&nbsp;:</p>
+<p><img src='2012-FR-09_solution_2.png' /></p>
+
+<p>La bonne réponse est donc <span class="2012-FR-09_choice_4">4</span>.</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>L'algorithme est décrit de manière <b>récursive</b> : pour obtenir le résultat final, on part d'une configuration, on effectue une transformation qui produit deux morceaux, puis on applique à nouveau le même algorithme sur chacun des morceaux produits, et ainsi de suite, jusqu'à obtenir des morceaux de taille 1.</p>
+
+<p>Beaucoup de problèmes informatiques peuvent être résolus par des <b>algorithmes récursifs</b>.</p>
+
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

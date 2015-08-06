@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-RU-04-carrot-storehouses</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-RU-04-carrot-storehouses/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Mathias Hiron<br/>Christian Datzko, christian@datzko.ch, Switzerland<br/>Khairul Anwar M. Zaki, Malaysia<br/>Sergei Pozdniakov, Russia<br/>Eljakim Schrijvers, Pays-Bas",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"3": "hard", "4": "hard"},
+          "categories": {ALG : true},
+          "answerType": "Interactive, click on a grid",
+          "fullFeedback": true,
+          "status": "test"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #task table td {
+         vertical-align: top;
+      }
+      #task table td p {
+         margin-top: 0em;
+      }
+      </style>
+    </style>
+  </head>
+  <body>
+      <div id="task">
+          <h1>Pièces d'or</h1>
+          <p>
+          <table><tr>
+          <td>
+             <p>
+             Castor range ses pièces d'or dans une boîte contenant des cases disposées de manière particulière. Il s'arrange pour que chaque case contienne exactement autant de pièces que les deux cases situées juste en dessous d'elle. Par exemple, la case verte ci-contre contient le même nombre de pièces que les deux cases situées dans le cadre noir.
+             </p>
+             <p>
+             Dans la grande boîte ci-dessous, le nombre de pièces de chaque case est masqué.
+            </p>
+            <p><b>Sélectionnez le plus petit nombre de
+            cases possible, en faisant en sorte que le nombre total de leurs pièces soit égal au total des pièces des cases du cadre noir.</b>
+            </p>
+          </td>
+          <td>
+          <div id="sample" style="float:right;margin-left: 1em"></div>
+          </td>
+          </tr></table>
+          <center>
+             <div id="anim"></div>
+             <div id="result" style="height:40px;color:blue;font-weight:bold">
+             </div>            
+          </center>
+      </div><!-- task -->
+      <div id="solution">
+          <h2>Solution</h2>
+           <div id="animSolution"></div>
+
+          <h2>C'est de l'informatique!</h2>
+  
+
+      </div>
+  </body>
+</html>

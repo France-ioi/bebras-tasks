@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Apprendre l'anglais</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "the pretty pretty boy likes",
+            "the girl who sees the pretty boy likes pretty pretty boy",
+            "who sees the boy who sees the pretty girl",
+            ""
+            ], "added", "#answers_2010-apprendre-anglais");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-apprendre-anglais/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Apprendre l'anglais</h1>
+<p>
+Une enseignante d'informatique et d'anglais utilise depuis peu des
+diagrammes comportant des cercles et des flèches. Elle les utilise pour décrire comment former correctement
+des phrases anglaises :
+</p>
+<ul>
+   <li>On commence au niveau du cercle situé tout à gauche.</li>
+   <li>À partir d'un cercle, on suit l'une des flèches qui en partent, jusqu'au cercle auquel elle mène, et on
+   affiche l'un des mots inscrits près de cette flèche.</li>
+   <li>Si rien n'est inscrit près de la flèche, on n'affiche rien lorsqu'on la suit.</li>
+   <li>On peut s'arrêter uniquement lorsque l'on se trouve sur le cercle situé tout à droite.</li>
+</ul>
+<center><img src="enonce2.jpg" /></center>
+<p>
+Avec le diagramme ci-dessus, il est possible de créer des phrases anglaises telles que "I like beavers", "she
+likes beavers". Le diagramme suivant est erroné car il permet de construire des suites incohérentes de mots
+qui n'ont pas de sens en anglais.
+</p>
+<center><img src="enonce1.jpg" /></center>
+<p>
+<b>Avec ce second diagramme, de nombreuses suites incohérentes de mots peuvent être créées, mais
+une des suivantes ne peut PAS l'être. Laquelle&nbsp;?</b>
+<div class="reponses" id="answers_2010-apprendre-anglais">
+</div>
+
+
+<img style="display: none;" src="enonce2.jpg" />
+<img style="display: none;" src="enonce1.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-apprendre-anglais_choice_2">B</span> est correcte.
+   </p><p>
+La solution peut être déterminée en suivant sur le diagramme le chemin correspondant à chaque proposition, et
+ainsi constater qu'on ne trouve pas de chemin pour obtenir la proposition <span class="2010-apprendre-anglais_choice_2">B</span>.
+On peut aussi remarquer directement sur le diagramme qu'il n'est pas possible d'avoir "boy" (ou "girl") sans qu'il soit
+précédé d'un "the" (éventuellement suivi d'un ou plusieurs "pretty"). La proposition "<span class="2010-apprendre-anglais_choice_2">B</span>" est donc impossible, puisque
+le dernier "boy" n'est pas précédé d'un "the" (avant les "pretty").
+La séquence vide de la proposition <span class="2010-apprendre-anglais_choice_4">D</span> peut être formée en suivant les deux flèches vides dessinées sur le haut du
+diagramme.
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>
+   Ce genre de diagramme correspond à ce que l'on appelle en informatique un "automate fini". Les automates finis
+sont les formes les plus simples de tout un ensemble de modèles de machines abstraites permettant de modéliser
+un problème et d'aider à le résoudre. Plus la machine abstraite nécessaire pour résoudre un problème est complexe,
+plus le problème est difficile. En fait, le problème de la construction et la reconnaissance de phrases d'un langage
+naturel est un problème extrèmement difficile qu'il est impossible de résoudre avec un automate fini.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

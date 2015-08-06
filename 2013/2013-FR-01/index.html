@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script type="text/javascript" src="2013-FR-01.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-01/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [
+          ],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": []
+      };
+      </script>
+      <script class="grader" type="text/javascript">
+      var grader = {
+         gradeTask: function(answer, answerToken, callback) {
+            var taskParams = platform.getTaskParams();
+            var answer = parseJsonAnswer(answer);
+            var score = taskParams.minScore;
+            var wrong = false;
+            for (var iArea = 0; iArea < 19; iArea++) {
+               if (answer[iArea] == 0) {
+                  wrong = true;
+                  break;
+               }
+            }
+            if (! wrong && checkNeighbors(answer)) {
+               score = taskParams.maxScore;
+            }
+            callback(score);
+         }
+      }
+      </script>
+      <style class="">
+         #patch0, #patch1, #patch2, #patch3, #patch4 {
+            width:40px;
+            height:40px;
+            padding:5px;
+            border: solid #E0E0E0 4px;
+            text-align: center;
+            margin: auto;
+         }
+         .patchText {
+            font-weight: bold;
+            padding-top: 10px;
+         }
+         #nbPiecesToColor {
+            font-weight: bold;
+            font-size: 1.1em;
+         }
+      </style>
+      <script class="" type="text/javascript">
+         var currentColor = 0;
+         var colors = ["white", "yellow", "#FF6060", "#60FF60", "#6060FF"];
+         var colorsLetters = ['', 'J', 'R', 'V', 'B'];
+         var nbPiecesToColor;
+         var selectedColors = [];
+
+         task.load = function(views, callback) {
+            loadCircle('circle');
+            nbPiecesToColor = 19;
+
+            for (var iPatch = 0; iPatch < 5; iPatch++) {               
+               setMouseDown(iPatch);
+            }
+            selectPatch(1);
+            callback();
+         };
+
+         task.getAnswer= function(callback) {
+            callback(JSON.stringify(selectedColors));
+         };
+
+         task.reloadAnswer= function(strAnswer, callback) {
+            var answer = parseJsonAnswer(strAnswer);
+            var savedCurrentColor = currentColor;
+            for (var iArea = 0; iArea < 19; iArea++) {
+               currentColor = answer[iArea];
+               clickArea(iArea, true);
+            }
+            currentColor = savedCurrentColor;
+            callback();
+         };
+
+         function setMouseDown(selectedPatch) {
+            $("#patch" + selectedPatch).css("background-color", colors[selectedPatch]);
+            $("#patch" + selectedPatch).mousedown(function() { selectPatch(selectedPatch) });
+         }
+
+         function selectPatch(selectedPatch) {
+            for (var iPatch = 0; iPatch < 5; iPatch++) {
+               $("#patch" + iPatch).css("border", "solid #E0E0E0 4px");
+            }
+            $("#patch" + selectedPatch).css("border", "solid black 4px");
+            currentColor = selectedPatch;
+         }
+
+         function parseJsonAnswer(strAnswer) {
+            var answer = [];
+            for (var iArea = 0; iArea < 19; iArea++) {
+               answer[iArea] = 0;
+            }
+            if (strAnswer != "") {
+               answer = $.parseJSON(strAnswer);
+            }
+            return answer;
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Vitrail coloré</h1>
+         <p>
+         Castor souhaite peindre le grand vitrail de son salon de telle sorte que deux morceaux qui se touchent n'aient pas la même couleur. Aucun morceau ne doit rester blanc, y compris le contour.
+         <p>
+         Aidez Castor à trouver comment il pourrait peindre son vitrail. Cliquez sur un carré de couleur sur le côté, puis cliquez sur les morceaux que vous souhaitez colorier de cette couleur.
+         </p>
+         <p>
+         Il vous reste <span id="nbPiecesToColor">19</span> morceaux à colorier. <span id="error"></span><span id="success"></span>
+         </p>
+         <center>
+         <table><tr><td>
+         <div id='circle'></div>
+         </td><td style="vertical-align:top">
+            <table class="patches">
+               <tr><td>Choisissez une couleur&nbsp;:</td></tr>
+               <tr><td><div id="patch0"></div></td></tr>
+               <tr><td><div id="patch1"><div class="patchText">J</div></div></td></tr>
+               <tr><td><div id="patch2"><div class="patchText">R</div></div></td></tr>
+               <tr><td><div id="patch3"><div class="patchText">V</div></div></td></tr>
+               <tr><td><div id="patch4"><div class="patchText">B</div></div></td></tr>
+               <tr><td><center><input type="button" value="Tout remettre en blanc" onclick="task.reloadAnswer('')" /></center></td></tr>
+            </table>
+         </td></tr></table>
+         </center>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         <p>Pour trouver rapidement une solution, on essaie de colorier en premier les zones qui sont les plus «&nbsp;contraintes&nbsp;», en coloriant d'abord les morceaux qui touchent le plus d'autres morceaux, ou alors en essayant d'utiliser les couleurs qu'on ne pourra pas facilement utiliser ailleurs. Et puis on essaye au maximum de ne pas remettre en cause les choix déjà faits.
+         </p>
+         <style>
+         .table-sol td { 
+            vertical-align: top;
+            padding-right: 1em;
+         }
+         .table-sol td p { 
+            margin: 0em;
+            padding: 0em;
+            padding-top: 0.5em;
+         }
+         </style>
+         <table class="table-sol">
+         <tr>
+            <td>
+               <p>On commence par colorier le morceau le plus contraint : le cercle du tour. Ensuite, les trois plus grand morceaux se touchant tous (au centre de la rosace) et touchant le cercle, il n'y a pas d'autres choix que d'utiliser les 3 couleurs restantes sur chacun. Le triangle du bas touchant trois couleurs (J, V, B), ne peut prendre que la quatrième (R). </p>
+            </td>
+            <td>
+               <p>. Ensuite, on regarde la partie droite de ce qui reste. Elle est encadrée de rouge et de bleu qui touchent beaucoup des morceaux restants. Ce seront donc les couleurs les plus contraintes : on commence par elles. Pour le bleu, il y a 4 morceaux possibles. Au mieux, on peut en colorier 2 en bleu.</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <img src="2013-FR-01_sol_exp0.png" style="margin:auto">
+            </td>
+            <td>
+               <img src="2013-FR-01_sol_exp1.png" style="margin:auto">
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>Pour le rouge, il y a 3 morceaux possibles. Comme ils se touchent, il ne sera possible de ne colorier qu'un seul de ces 3 morceaux en rouge.</p>
+            </td>
+            <td>
+               <p>On choisit donc de colorier 2 morceaux en bleu (il n'y a qu'une seule façon de faire), et 1 morceau en rouge (n'importe lequel des 3 possibles).</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <img src="2013-FR-01_sol_exp2.png" style="margin:auto">
+            </td>
+            <td>
+               <img src="2013-FR-01_sol_exp3.png" style="margin:auto">
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <p>Il reste alors à colorier ce qui reste avec du jaune et du vert. On commence par le bord extérieur, qui ne doit pas être jaune, puis on complète en alternant les couleurs.</p>
+            </td>
+             <td>
+              <p>On procéde de manière similaire pour l'autre partie, qui est symétrique. On gagne du temps en y appliquant le même raisonnement (mais pas avec les mêmes couleurs). On a alors tout colorié !</p>
+            </td>
+         </tr>
+         <tr>
+            <td>
+               <img src="2013-FR-01_sol_exp4.png" style="margin:auto">
+            </td>
+            <td>
+               <img src="2013-FR-01_sol_exp5.png" style="margin:auto">
+            </td>
+         </tr>
+         </table>
+         
+         <h2>C'est de l'informatique !</h2>
+         <p>
+         La stratégie consistant à se concentrer d'abord sur les parties les
+         plus contraintes d'un problème est une technique classique en 
+         informatique, qui permet de réduire considérablement le nombre
+         de configurations à essayer.
+         </p>
+         <p>Le problème consistant à colorier des morceaux 
+         est un vieux problème,
+         traditionellement posé sous la forme suivante&nbsp;: 
+         étant donnée une carte, combien de couleurs faut-il pour colorer 
+         cette carte pour que deux zones adjacentes ne soient pas de la même couleur?
+         </p>
+         <p>Trois couleurs ne suffisent pas pour certaines cartes, comme le montre
+         l'exemple du vitrail dans ce sujet, que l'on ne peut pas colorier avec 
+         seulement 3 couleurs. En 1852, Francis
+         Guthrie, intéressé par la coloration de la carte des régions
+         d'Angleterre, a émis l'hypothèse (la «&nbsp;conjecture&nbsp;»)
+         que 4 couleurs suffisent à colorier n'importe quelle carte.
+         </p>
+         <p>
+         Plusieurs démonstrations fausses ont suivi. Des preuves ont ensuite été
+         développées dans les années 70. Ces preuves étaient composées
+         en partie de
+         raisonnements mathématiques, et en partie du coloriage de millions
+         de petites cartes à l'aide de programmes informatiques.
+         Pendant longtemps s'est posée la question&nbsp;: est-ce que l'on
+         peut vraiment faire confiance à un programme informatique pour faire
+         une démonstration, étant donné que les programmes contiennent très
+         souvent des «&nbsp;bugs&nbsp;»&nbsp;?
+         </p>
+         <p>
+         Récemment, Georges Gonthier et Benjamin Werner ont re-prouvé le
+         «&nbsp;théorème des 4 couleurs&nbsp;» en utilisant un logiciel,
+         appelé Coq, qui permet notamment de prouver que le programme qui colorie
+         les millions de petites cartes ne contient pas de bugs.
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

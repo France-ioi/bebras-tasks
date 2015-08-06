@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Alphabet noir et blanc</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("string", "#answers_2011-NL-08", 1, 1);
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-NL-08/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["H", "h"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Alphabet noir et blanc</h1>
+<p>
+Castor s'amuse à dessiner des lettres majuscules en coloriant en noir les carreaux sur une feuille à petits carreaux.  Ensuite, il code son dessin à l'aide d'une suite de chiffres qui décrit le nombre de carreaux blancs et de carreaux noirs. </p>
+
+Par exemple : 
+ <br/>
+<img src="2011-NL-08-on_white.png">
+<p>Il construit le code comme suit : pour chaque ligne, la suite de chiffres indique alternativement le nombre de carreaux blancs au début de la ligne, puis le nombre de carreaux noirs qui suivent, et ainsi de suite jusqu'à avoir décrit tous les carreaux de la ligne. La suite de chiffres commence toujours par un nombre de carreaux blancs. <br>Ainsi par exemple, sur le dessin du T de l'exemple, la première ligne comporte 0 carreau blanc, puis 5 carreaux noirs, la seconde ligne comporte 2 carreaux blancs puis 1 carreau noir puis 2 carreaux blancs, etc.</p>
+<p>
+Castor a dessiné une deuxième lettre majuscule, dont le code en chiffres est le suivant. <br/>
+0,1,3,1 <br/>
+0,1,3,1 <br/>
+0,5 <br/>
+0,1,3,1 <br/>
+0,1,3,1 <br/>
+</p>
+<p>De quelle lettre s'agit-il ? Inscrivez la lettre dans la zone ci-dessous :</p>
+<div class="reponses" id="answers_2011-NL-08">
+</div>
+
+<img style="display: none;" src="2011-NL-08-on_white.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   On peut remarquer que les deux lignes du haut et les deux lignes du bas sont toutes identiques, et que seule la ligne du milieu est différente des autres. Cela nous donne déjà un indice sur la lettre, et nous permet de nous concentrer sur le décodage de deux lignes seulement.
+   </p>
+   <p>
+   La ligne du milieu contient 0 pixel blanc, suivi de 5 pixels noirs. C'est donc une barre horizontale noire qui traverse toute la grille.
+   </p>
+   <p>
+   Les autres lignes commencent par 0 pixel blanc, puis 1 pixel noir, puis 3 pixels blancs, puis 1 pixel noir. On a donc un pixel noir à chaque extrémité de la ligne, avec du blanc au milieu.
+   </p>
+   <p>
+   <img src="2011-NL-08-sol.png">
+   </p>
+   <p>
+   La réponse était donc "H".
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Les images affichées sur un écran d'ordinateur sont divisées en une grille de points appelés pixels. Dans le cas simplifié d'une image en noir et blanc, chaque pixel peut être soit éteint (noir), soit allumé (blanc). Pour des images en couleur, le principe est le même, mais chaque pixel peut avoir une couleur quelconque.
+   </p>
+   <p>
+   La mémoire d'un ordinateur ne peut contenir que des nombres, les uns à la suite des autres. Pour stocker une image, la manière la plus simple consiste à stocker deux entiers indiquant ses dimensions, puis un entier pour chaque pixel. Ainsi le "T" représenté dans l'énoncé pourrait être stocké comme la suite d'entiers suivantes :
+   <pre>
+   5 5
+   1 1 1 1 1
+   0 0 1 0 0
+   0 0 1 0 0
+   0 0 1 0 0
+   0 0 1 0 0
+   </pre>
+   <p>
+   Dans la mémoire de l'ordinateur, ils sont simplement stockés les uns après les autres :
+   <pre>
+   5 5 1 1 1 1 1 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0
+   </pre>
+   </p>
+   <p>
+   Le mode de représentation présenté dans l'énoncé permet de stocker les images en utilisant moins de mémoire. Plutôt que d'utiliser un entier par pixel, on n'utilise qu'un entier pour toute une suite de pixels de même couleur. Le "T" peut ainsi être stocké en mémoire de la manière suivante :
+   </p>
+   <pre>
+   5 5 0 5 2 1 2 2 1 2 2 1 2 2 1 2
+   </pre>
+   <p>
+   On voit que le nombre d'entiers est réduit par rapport à la version précédente. Lorsque les images sont grandes et contiennent de grandes zones unies, on utilise nettement moins de mémoire que si l'on utilise un nombre pour représenter chaque pixel.
+   </p>
+   <p>
+   Ce mode de stockage fait par exemple partie des techniques de compression utilisées pour le format d'images PNG, parmi les plus utilisés.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

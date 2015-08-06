@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Robot bâtisseur</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="remove" type="text/javascript">
+            var json = {
+               "id": "http://castor-informatique.fr/tasks/2012/2012-AT-12/",
+               "language": "fr",
+               "version": "fr.01",
+               "authors": "",
+               "translators": [],
+               "license": "",
+               "taskPathPrefix": "",
+               "modulesPathPrefix": "",
+               "browserSupport": [],
+               "acceptedAnswers": ["3"]
+            };
+         </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+            "<img src='carte_A.png'>",
+            "<img src='carte_B.png'>",
+            "<img src='carte_C.png'>",
+            "<img src='carte_D.png'>"
+            ], "added", "#answers_2012-AT-12");
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Robot bâtisseur</h1>
+         <img src="2012-AT-12-exemple.png" style="float:right">
+         <p>Une robot placé sur une grille cherche à atteindre la case verte. Le robot est programmé pour avancer tout droit. Quand il atteint un obstacle (une case noire ou un bord de la grille), il tourne de  90° vers la droite et recommence à aller tout droit. Mais attention, chaque case par laquelle le robot est passé devient un nouvel obstacle&nbsp;!</p>
+         <p>Les flèches sur les cartes montrent les points de départ et les directions de départ du robot.</p>
+         <p>Sur quelle carte le robot <strong>n'atteint pas</strong> la case verte&nbsp;?</p>
+
+         <div class="reponses" id="answers_2012-AT-12"></div>
+
+         <img style="display: none;" src="2012-AT-12-exemple.png" />
+      </div>
+      <div id="solution">
+         <div class="explications">
+            <h2>La solution</h2>
+            <p>Le robot n'atteint pas sa cible sur la carte C.</p>
+            <img src="2012-AT-12-sol.png">
+            <h2>C'est de l'informatique</h2>
+            <p>TEXTE DE LA SOLUTION</p>
+         </div>
+      </div>
+   </body>
+</html>

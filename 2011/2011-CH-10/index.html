@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>La pièce manquante</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "<img src='2011-CH-10-answerA.png'>",
+            "<img src='2011-CH-10-answerB.png'>",
+            "<img src='2011-CH-10-answerC.png'>",
+            "<img src='2011-CH-10-answerD.png'>"
+            ], "added", "#answers_2011-CH-10");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-CH-10/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>La pièce manquante</h1>
+<p> 
+Castor a reçu un message secret sous la forme d'un tableau de cases
+blanches et noires. Malheureusement, 4 cases du tableau ont été détruites.
+</p>
+<center><img src="2011-CH-10-gris.png" width=250></center>
+<p>
+Cette perte d'information était heureusement prévue et le message contient 
+des informations supplémentaires pour tenter de le réparer. 
+Ainsi, chaque case dans la colonne la plus à droite (colonne 6) est colorée de façon
+à ce que le nombre de cases noires par ligne soit pair. De même,
+chaque case dans la ligne du bas (ligne 6) est colorée de façon
+à ce que le nombre de cases noires par colonne soit pair. <br>
+</p>
+<p>
+Par exemple, sur la ligne 1, si l'on ne tient pas compte de la case de la colonne 6, il y a un nombre impair (3) de cases noires. Il a donc fallu noircir la case de la colonne 6, pour avoir au total un nombre pair (4) de cases noires.</p>
+
+<p>Parmi les 4 possibilités suivantes pour remplir la zone détruite, une seule valide la règle de remplissage de la colonne 6 et de la ligne 6. Laquelle ?
+</p>
+<div class="reponses" id="answers_2011-CH-10">
+</div>
+
+<img style="display: none;" src="2011-CH-10-gris.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p> On parvient à éliminer les solutions proposées en établissant les caractéristiques de la solution ligne par ligne :
+   <ul><li> Ligne 3 : les cases noires sont déjà en nombre pair, il faut ajouter un nombre pair de cases noires, cela élimine le cas A</li>
+   <li>Ligne 4 : les cases noires sont en nombre impair, il faut ajouter un nombre impair de cases noires, cela élimine le cas D</li>
+   <li>Colonne 3 : les cases noires sont déjà en nombre pair, il faut ajouter un nombre pair de cases noires,cela élimine le cas C</li>
+   <li>Colonne 4 : les cases noires sont en nombre impair, il faut ajouter un nombre impair de cases noires, cela confirme le cas B.</li>
+   </ul>
+   </p>
+   <p><b >La réponse est la <span class="2011-CH-10_choice_2">B</span>.</b> Les cases de la réponse <span class="2011-CH-10_choice_2">B</span> replacées dans le message codé permettent bien que chaque ligne, et chaque colonne comporte un nombre pair de cases noires.<br>
+    <img src="2011-CH-10_sol.jpg"></p>
+
+   <h2>C'est de l'informatique.</h2>
+
+   <p> 
+   La transmission d'information numérique à travers les réseaux de
+   communication occasionne inévitablement des pertes d'informations liées
+   aux supports matériels de communication. Toutes les informations que nous
+   échangeons entre nous par ces moyens modernes sont donc régulièrement
+   abîmées puis réparées ! Castor utilise ici un technique de <i>code
+   correcteur d'erreurs</i> basée sur les <i>bits de parité</i> : le
+   message initial est transmis avec un peu de redondance pour permettre
+   de détecter (éventuellement) à la réception la perte d'information et tenter 
+   de la réparer ensuite.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

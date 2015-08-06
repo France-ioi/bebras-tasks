@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Cache cache</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+     <script class="remove" type="text/javascript">
+var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-DE-03/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "7"
+    ]
+};
+</script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2011-DE-03", 2, 1);
+      </script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Cache cache</h1>
+<p>
+Les Castors jouent à cache cache. Dans l'idéal, chaque Castor essaie de se cacher derrière un
+arbre aussi grand que lui (voir figure I).
+</p>
+<img src="2011-DE-03_A.png" width=350 border=1> <img src="2011-DE-03_B.png" width=350 border=1>
+<p>
+S'ils jouent à cache-cache sans faire attention, certains Castors peuvent se retrouver derrière
+des arbres qui sont trop petits (voir figure II).
+</p>
+<p>
+Pour atteindre la situation idéale I en partant de la situation II, les Castors utilisent la règle suivante.
+Elle est appliquée arbre par arbre en partant de l'arbre A, dans le sens des aiguilles d'une montre, et pour chaque arbre
+(A - B - C - D - E - A - B - ...) :
+</p>
+<p>
+<i>Si le Castor derrière l'arbre est plus grand que celui-ci, il doit échanger sa place avec
+le Castor suivant dans le sens des aiguilles d'une montre. On passe alors à l'arbre suivant.
+</i>
+</p>
+<p>
+Après combien d'échanges est-ce que les Castors atteignent la situation idéale de la figure I ?
+</p>
+<p>
+Entrez le nombre ici :
+<div class="reponses" id="answers_2011-DE-03">
+</div>
+<img style="display: none;" src="2011-DE-03_A.png" />
+<img style="display: none;" src="2011-DE-03_B.png" />
+
+</div><!-- task -->
+      <div id="solution">
+
+</div> <!-- task-solution -->
+   </body>
+</html>

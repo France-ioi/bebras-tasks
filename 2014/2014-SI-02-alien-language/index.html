@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-SI-02</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-SI-02-alien-languages/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback" : true,
+          "acceptedAnswers": []
+      };
+      </script>
+      <script class="task" type="text/javascript"> 
+         task.solutions = [
+            [ 3, 2, 2, 1, 0, 1, 2 ],
+            [ 1, 0, 1, 2, 2, 3, 2 ] ];
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #programming {
+            /* border: 1px solid black; */
+            height: 130px;
+            width: 512px;
+         }
+         #textSolution0, #textSolution1 {
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Langage alien</h1>
+         <p>
+         <img src="maze.png" style="float:right; margin-left:1em; width:234px" />
+         En arrivant sur Pluton, Castor a trouvé un robot que l'on peut diriger en sifflant.
+         Lorsque Castor a sifflé les notes «&nbsp;<b>Mi, Mi, La, La, Si</b>&nbsp;», le robot s'est déplacé depuis la case de Castor jusqu'à sa place actuelle sur la carte.
+         </p>
+         <p>
+         Castor veut maintenant que le robot continue son chemin jusqu'à l'étrange palais doré. 
+         Placez ci-dessous les notes que Castor doit siffler.
+         </p>
+         <div id="programming" class="touch"></div>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+             <p>
+             Pour résoudre ce sujet, il faut identifier à quelle direction correspond chaque note. Pour arriver à sa position en 5 étapes, le robot a forcément dû s'éloigner de Castor en partant vers la gauche de 2 cases, puis en montant 2 cases, puis en allant d'une case vers la droite.
+             </p>
+             <p>
+             On en déduit ainsi que <b>Mi</b> correspond à «&nbsp;gauche&nbsp;», que <b>La</b> correspond à «&nbsp;haut&nbsp;», et que <b>Si</b> correspond à «&nbsp;droite&nbsp;». Du coup, on se doute que la note <b>Do</b> doit correspondre à «&nbsp;bas&nbsp;», la quatrième direction possible.
+             </p>
+             <p>Il y avait deux chemins de 7 déplacements chacun permettant au robot de rejoindre le palais doré. Les deux solutions correspondantes sont&nbsp;:</p>
+             <ul>
+             <li><span id="textSolution0"></span> (pour le chemin passant par le bas),</li>
+             <li><span id="textSolution1"></span> (pour le chemin passant par le haut).</li>
+             </ul>
+
+         <h2>C'est de l'informatique !</h2>
+            <p>
+            Dans ce sujet, il faut programmer un robot avec des instructions pour le faire arriver à destination. Cependant, contrairement à d'autres sujets où les instructions sont nommées explicitement («&nbsp;gauche&nbsp;», «&nbsp;droite&nbsp;», etc&hellip;), les instructions sont ici codées par des notes de musique.
+            </p>
+            <p>
+            Pour résoudre le sujet, il fallait donc décoder les instructions, en déduisant la signification des instructions à partir de l'observation d'une exécution précédente de ces instructions (la partie déjà parcourue par le robot).
+            </p>
+            <p>
+            L'activité qui consiste à déduire les règles d'exécution à partir d'observations s'appelle la «&nbsp;rétroingénierie&nbsp;» (<em>reverse engineering</em> en anglais). 
+           La rétroingénierie est très utilisé notamment pour «&nbsp;cracker&nbsp;» des logiciels, comme par exemple pour pouvoir sauter des niveaux dans des jeux vidéos. Elle est également utilisée pour récupérer des algorithmes utilisés dans des logiciels dont le code source est gardé secret par les auteurs.
+            </p>
+
+      </div> <!-- task-solution -->
+   </body>
+</html>
+ 

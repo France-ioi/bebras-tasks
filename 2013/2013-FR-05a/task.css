@@ -1,0 +1,18 @@
+ .borders, .borders td {
+   border: solid black 1px;
+ }
+ .empty, .painted, .robot {
+	border:solid black 1px;
+	width:16px;
+	height:16px;
+	font-size:0.1em;
+ }
+ .empty {
+	background-color: white;
+ }
+ .painted {
+	background-color: #606060;
+ }
+ .robot {
+	background-color: red;
+ }

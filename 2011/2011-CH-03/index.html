@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Planter des poteaux</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "<img src='2011-CH-03_A.png' width=400>",
+            "<img src='2011-CH-03_B.png' width=400>",
+            "<img src='2011-CH-03_C.png' width=400>",
+            "Le castor ne s'arrête jamais."
+            ], "added", "#answers_2011-CH-03");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-CH-03/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Planter des poteaux</h1>
+<p>Les ouvriers de la Société des Castors Travailleurs suivent des règles très précises leur  indiquant quand planter des poteaux, mais aussi quand porter un chapeau. Ces règles sont définies par le tableau suivant.
+</p>
+<table border=1 cellspacing=0>
+<tr><td></td><td>Si je ne porte pas de chapeau</td><td>Si je porte un chapeau</td></tr>
+<tr><td>S'il n'y a pas de poteau derrière moi</td>
+<td><ul><li>Planter un poteau</li>  <li>Mettre mon chapeau</li>  <li>Faire un pas vers la droite</li></ul></td>
+<td><ul><li>Planter un poteau</li>  <li>Enlever mon chapeau</li>  <li>Faire un pas vers la gauche</li></ul></td></tr>
+<tr><td>S'il y a déjà un poteau derrière moi</td>  <td><ul><li>Mettre mon chapeau</li>  <li>Faire un pas vers la gauche</li>  </ul></td>
+<td><ul><li>Arrêter tout</li></ul></td></tr></table>
+<br />
+<p>  Au départ il n'y a aucun poteau le long de la route, et Castor se trouve quelque part sur cette route, sans chapeau sur la tête, comme  illustré ci-dessous :
+</p>
+<p>
+<center><img src="2011-CH-03_init.png" width=400></center>
+</p>
+<p>
+<b>Question : À quoi ressemble la situation une fois que Castor s'arrête ?</b>
+</p>
+<p>
+<div class="reponses" id="answers_2011-CH-03">
+</div>
+</p>
+
+
+<img style="display: none;" src="2011-CH-03_init.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>La situation initiale est <b>pas de chapeau</b>, <b>pas de poteau derrière moi</b><br/>
+   Les actions à exécuter sont : Planter un poteau, mettre un chapeau, faire un pas à droite.<br>
+   <img src="2011-CH-03_sol1.jpg"  width="380"><br>
+   La situation est devenue <b>un chapeau</b>, un poteau à gauche, <b>pas de poteau derrière moi</b><br>
+   Les actions à exécuter sont : Planter un poteau, enlever mon chapeau, faire un pas vers la gauche.<br>
+   <img src="2011-CH-03_sol2.jpg"  width="380"><br>
+   La situation est devenue  <b>pas de chapeau</b>, <b>un poteau derrière moi</b>, un poteau à droite<br>
+   Les actions à exécuter sont : Mettre mon chapeau, faire un pas vers la gauche.<br>
+   <img src="2011-CH-03_sol3.jpg"  width="380"><br>
+   La situation est devenue <b>un chapeau</b>, <b>pas de poteau derrière moi</b>, deux poteaux à droite<br>
+   Les actions à exécuter sont : Planter un poteau, enlever mon chapeau, faire un pas vers la gauche.<br>
+   <img src="2011-CH-03_sol4.jpg"  width="380"><br> La situation est devenue <b>pas de chapeau</b>, <b>pas de poteau derrière moi</b>, trois poteaux à droite<br> Les actions à exécuter sont : Planter un poteau, mettre un chapeau, faire un pas à droite.<br>
+   <img src="2011-CH-03_A.png" width="380"><br>
+   La situation est devenue <b>un chapeau</b>, un poteau à gauche, <b>un poteau derrière moi</b>, deux poteaux à droite<br>
+   Les actions à exécuter sont : Arrêter tout.<br>
+   La dernière situation obtenue correspond au dessin de la réponse <span class="2011-CH-03_choice_1">A</span>. La réponse <span class="2011-CH-03_choice_1">A</span> est donc correcte. </p>
+
+   <h2>C'est de l'informatique</h2>
+   <p>
+   La machine de Turing inventée en 1936 par Alan Turing est
+   un modèle théorique constitué d'un simple ruban et d'une tête de
+   lecture/écriture positionnée sur ce ruban. La machine est programmée
+   en indiquant quel symbole écrire à la position courante et quel
+   déplacement réaliser sur le ruban, en fonction du symbole actuellement
+   sous la tête de lecture et de l'historique des actions précédentes. Ce
+   modèle de calcul reste encore de nos jours une référence pour tous les
+   langages de programmation modernes.
+   </p>
+   <p>
+   Ici, nous avons exactement affaire à une telle machine ! La route joue le rôle du ruban. Le castor, c'est la  tête de lecture/écriture. Ce qu'il inscrit et lit ce sont des poteaux. La seule variation vis à vis du modèle classique que nous décrivons est ce petit chapeau. Qu'à cela ne tienne, il existe de nombreuses variantes des machines de Turing. Ici, la tête de lecture possède une information en plus qu'elle peut mettre à jour (enlever ou mettre le chapeau) et dont le statut courant  intéragit avec ses décisions. Un résultat intéressant est que tous les langages de programmation séquentielle sont équivalents à la machine de Turing en termes de ce qu'ils permettrent de calculer d'un point de vue théorique (sans se soucier de la vitesse de calcul).
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

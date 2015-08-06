@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <meta charset="utf-8">
+     <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+     <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+     <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+     <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://castor-informatique.fr/tasks/modules/drag_lib.js"></script>
+     <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+     <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+     <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+     <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+     <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+     <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+     <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+     <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+     <script class="remove" type="text/javascript">
+     var json = {
+       "id": "http://castor-informatique.fr/tasks/2014/2014-FR-06-bridge/",
+       "language": "fr",
+       "version": "fr.01",
+       "authors": "Mathias Hiron",
+       "license": "CC BY-SA 3.0",
+       "translators": [
+       ],
+       "taskPathPrefix": "",
+       "modulesPathPrefix": "",
+       "browserSupport": [
+       ],
+       "acceptedAnswers": [
+       ],
+       "difficulty": {"1": "hard", "2": "hard", "3": "medium", "4": "easy"},
+       "categories": {ALG : true},
+       "answerType": "Interactive, click on a grid",
+       "fullFeedback": true,
+       "status": "test"
+     };
+     </script>
+     <script class="solution" type="text/javascript">
+         // Not needed for task or grader
+         task.solutions = {
+            easy: [4, 6, 3, 7, 2, 8, 1, 9],
+            hard: [6, 8, 5, 9, 4, 10, 3, 11, 2, 12, 1, 13]
+         }
+     </script>
+     <script type="text/javascript" src="task.js"></script>
+     <style>
+         .easy, .hard { display:none; }
+          #textSolution {
+            font-weight: bold;
+          }
+     </style>
+   </head>
+   <body>
+     <div id="task">
+       <h1>Traverser le pont</h1>
+       <p>
+         Castor doit faire passer une série de bûches sur un pont qui supporte au maximum
+         <span class="easy">10&nbsp;kg.</span>
+         <span class="hard">14&nbsp;kg.</span>      
+       </p>
+       <p>
+         Sur chaque bûche est indiqué son poids en kg. Changez leur ordre pour que le pont ne s'écroule pas. 
+       </p>
+       <center>
+         <div id="anim" class="touch"></div>
+         <button id="cross_or_retry" onclick="task.crossOrRetry()">Essayer</button>
+         <br/>
+       </center>
+     </div>
+     <!-- task -->
+     <div id="solution">
+       <h2>Solution</h2>
+
+       <p>La bûche la plus lourde est la plus difficile à faire traverser. Commençons donc par faire passer cette bûche en premier. Pour la deuxième bûche, on n'a pas le choix, il faut mettre la bûche de poids <b>1</b>, car c'est la seule qui peut passer le pont en même temps que la précédente sans faire écrouler le pont. Pour la suivante, on a plein de choix possibles. Faisons donc passer la deuxième bûche la plus lourde, qui sera également difficile à faire passer. Ensuite, on n'a pas le choix, on met la bûche de poids <b>2</b>. 
+       </p>
+       <p>En continuant ainsi, on se rend compte qu'une méthode efficace consiste à alterner les bûches plus lourdes avec le plus légères, en plaçant les bûches lourdes dans un ordre, et les bûches légères dans l'ordre inverse. Au final, on peut résoudre l'exercice avec la séquence&nbsp;:
+       <span id="textSolution"></span>. Notez que d'autres séquences conviennent également.
+       </p>
+
+       <h2>C'est de l'informatique !</h2>
+
+       <p>Ce sujet fait intervenir la notion de «&nbsp;contrainte&nbsp;». Ici, les contraintes qui s'appliquent sur la séquence solution correspondent au fait que, pour chaque paire de bûches successives, il y a un maximum pour la somme de leur poids. Il existe des algorithmes performants capables de trouver automatiquement des solutions à ce genre de problèmes, une fois exprimés sous forme de contraintes.</p>
+
+       <p>En particulier, une stratégie exploitée par les algorithmes de «&nbsp;résolution sous contraintes&nbsp;» consiste à faire comme nous l'avons fait ici&nbsp;: commencer par se débarrasser des éléments qui sont associés aux contraintes les plus fortes (les plus contraignantes). Ici, on essaie de placer les bûches les plus lourdes en premier. En répétant ce processus, on arrive à construire une solution du premier coup, sans avoir à essayez des milliers de séquences avant d'en trouver une qui convienne.
+       </p>
+       
+      
+     </div> <!-- task-solution -->
+   </body>
+</html>

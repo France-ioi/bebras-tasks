@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>La boîte magique</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "ALLURE",
+            "TUNNEL",
+            "BELLES",
+            "SOUTES",
+            ], "added", "#answers_2012-SI-06");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-SI-06/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "2"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>La boîte magique</h1>
+
+<p> Castor a reçu une boîte avec six nombres inscrits dessus. Ces nombres remplacent les lettres d'un mot magique qui ouvre la boîte. À chaque lettre correspond un seul nombre et inversement.</p>
+
+<img src="2012-SI-06.png" />
+<p>Un seul des mots ci-dessous peut être le mot magique. Lequel&nbsp;? </p>
+
+<div class="reponses" id="answers_2012-SI-06">
+</div>
+
+
+<img style="display: none;" src="2012-SI-06.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Pour trouver la solution, il faut comparer la structure de la suite de nombres écrits sur la boîte avec la structure de la suite des lettres apparaissant dans les mots proposés.
+En observant la suite de nombres, on observe que le 3ème nombre et le 4ème nombre sont identiques. Ainsi :
+</p>
+<p><b>Règle 1 : le mot magique doit avoir une lettre répétée au milieu. </b></p>
+<p>
+De plus, on remarque que tous les autres nombres sont différents. Ainsi :
+</p>
+<p><b>Règle 2 : le mot magique ne doit pas utiliser d'autres lettres plusieurs fois. </b></p>
+<p>
+Seul le mot TUNNEL respecte ces deux règles, c'est donc la solution.
+</p>
+
+<p>Les autres mots ne conviennent pas&nbsp;:</p>
+<ul>
+<li>ALLURE : la 3ème lettre (L) est différente de la 4ème lettre (U) : règle 1 non repectée.
+<li>SOUTES : la 3ème lettre (U) est différente de la 4ème lettre (T) : règle 1 non repectée.
+<li>BELLES : la 2ème lettre (E) et la 5ème lettre (E) sont identiques : règle 2 non repectée.
+</ul>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>
+Dans les machines, les caractères (les lettres, les chiffres, et les 
+tous caractères spéciaux comme %, $, etc.) sont représentés par des nombres.
+La table de correspondance s'appelle un <b>jeu de caractères</b>.
+</p>
+
+<p>
+Les jeux de caractères respectent généralement l'ordre alphabétique,
+ainsi le nombre associé à la lettre <b>B</b>  est typiquement le suivant du
+nombre associé à la lettre <b>A</b>. 
+Cependant, tous les autres jeux de caractères qui associent exactement
+un nombre différent à chaque caractère possible, quel que soit l'ordre choisi,
+seraient également valides.
+</p>
+
+<p>Pour résoudre cet exercice, il fallait comprendre ce principe de la représentation
+de caractères par des nombres, puis observer les propriétés particulières du mot à
+deviner afin de sélectionner la seule proposition qui convient.</p>
+
+<h2>Culture informatique</h2>
+
+<p>Pour rendre incompréhensible un message, une possibilité est de remplacer chaque lettre par un nombre (ou une autre lettre) de toujours la même manière. 
+C'est l'idée du <a href="http://interstices.info/codes-secrets" target="blank">chiffrement par substitution</a> qu'on connaissait déjà dans l'Antiquité, notamment la méthode du chiffre de César.</p>
+
+<p> Ce n'est pas forcément le meilleur cryptage si le message codé est suffisamment long. 
+Une attaque redoutablement efficace étudie les probabilités d'occurrence des lettres dans la langue du message. 
+Par exemple, pour le français, la lettre <b>E</b> est la plus courante avec une fréquence de 15,87%, tandis que les lettres <b>K</b> et <b>W</b> ont des probabilités inférieures à 0,01%.  
+En comparant ces probabilités avec celles des nombres dans le message codé, on peut retrouver le message d'origine.  
+Cette technique d'analyse fréquentielle sert aussi à détecter automatiquement la langue d'un texte, ou à assigner la valeur des lettres au Scrabble. </p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

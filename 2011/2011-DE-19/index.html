@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Boîtes de billes</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "<img src='2011-DE-19_question1.png'>",
+            "<img src='2011-DE-19_question2.png'>",
+            "<img src='2011-DE-19_question3.png'>",
+            "<img src='2011-DE-19_question4.png'>"
+            ], "added", "#answers_2011-DE-19");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-DE-19/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Boîtes de billes</h1>
+<p>
+On a trois boîtes marquées respectivement par les symboles <img src="2011-DE-19_moon.png" align=bottom>, <img src="2011-DE-19_star.png" align=bottom> et <img src="2011-DE-19_heart.png" align=bottom>, chacune pouvant contenir des billes.
+</p>
+<p>
+Voici des exemples d'actions possibles :
+<table border=1>
+<tr><td width=100><img src="2011-DE-19_moon.png" align=bottom> := 0;</td><td>signifie : retirer toutes les billes de la boîte marquée du symbole <img src="2011-DE-19_moon.png" align=bottom></td></tr>
+<tr><td><img src="2011-DE-19_star.png" align=bottom> := 3;</td><td>signifie : changer le nombre de billes de la boîte marquée du symbole <img src="2011-DE-19_star.png" align=bottom> pour qu'elle en contienne exactement 3.</td></tr>
+<tr><td><img src="2011-DE-19_heart.png" align=bottom> := <img src="2011-DE-19_moon.png" align=bottom>;</td><td>signifie : changer le nombre de billes de la boîte marquée du symbole <img src="2011-DE-19_heart.png" align=bottom> pour qu'elle en contienne exactement autant que la boîte marquée d'un <img src="2011-DE-19_moon.png" align=bottom>.</td></tr>
+</table>
+<p>
+Par exemple, si on part de la situation de gauche suivante et qu'on effectue la suite d'opérations au centre, on obtient la situation à droite. 
+<table align=center border=1>
+  <tr><td width=370  align=center>Situation initiale</td><td width=100  align=center>Les opérations</td><td width=370  align=center>Situation finale</td></tr>
+  <tr><td  align=center><img src="2011-DE-19-config4.png"></td>
+    <td  align=center>
+      <img src="2011-DE-19_exemple.png">
+    </td>
+  <td align=center><img src="2011-DE-19-config3.png"></td>
+  </tr></table>
+</p>
+On est passé par les situations intermédiaires suivantes&nbsp;:
+<p>
+
+<table align=center>
+  <tr><td align=center><img src="2011-DE-19_exemple_etats_intermediaires.png"></td></tr>
+</table>
+</p>
+<p>
+Dans l'exemple suivant, laquelle de ces suites d'opérations permet de passer de la situation
+de gauche à la situation de droite ?
+<table align=center border=1>
+  <tr><td width=370  align=center>Situation initiale</td><td width=100  align=center>Les opérations</td><td width=370  align=center>Situation finale</td></tr>
+  <tr><td align=center><img src="2011-DE-19-config2.png"></td><td align=center>?</td><td align=center><img src="2011-DE-19-config1.png"></td></tr>
+</table>
+</p>
+<div class="reponses" id="answers_2011-DE-19">
+</div>
+
+<img style="display: none;" src="2011-DE-19_moon.png" />
+<img style="display: none;" src="2011-DE-19_star.png" />
+<img style="display: none;" src="2011-DE-19_heart.png" />
+<img style="display: none;" src="2011-DE-19-config4.png" />
+<img style="display: none;" src="2011-DE-19_exemple.png" />
+<img style="display: none;" src="2011-DE-19-config3.png" />
+<img style="display: none;" src="2011-DE-19_exemple_etats_intermediaires.png" />
+<img style="display: none;" src="2011-DE-19-config2.png" />
+<img style="display: none;" src="2011-DE-19-config1.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>La bonne réponse est la <span class="2011-DE-19_choice_3">C</span>.
+   </p>
+   <p>
+   Voici les situations intermédiaires associées aux différents programmes :<br>
+   <table align=center border=1>
+     <tr>
+        <td align=center><span class="2011-DE-19_choice_1">A</span></td>
+        <td align=center><span class="2011-DE-19_choice_2">B</span></td>
+        <td align=center><span class="2011-DE-19_choice_3">C</span></td>
+        <td align=center><span class="2011-DE-19_choice_4">D</span></td></tr>
+     <tr>
+       <td align=center><img src="2011-DE-19-solution_A.png" width="175px"></td>
+       <td align=center><img src="2011-DE-19-solution_B.png" width="175px"></td>
+       <td align=center><img src="2011-DE-19-solution.png" width="175px"></td>
+       <td align=center><img src="2011-DE-19-solution_D.png" width="175px"></td>
+     </tr>
+   </table>
+   </p>
+
+   <h2>C'est de l'informatique</h2> 
+   <p>
+   Cet exercice de programmation met en évidence la notion
+   d'<i>affectation de variable</i>. Un programme manipule généralement
+   des variables qui comme les boîtes de cet exercice peuvent être
+   modifiées avec des instructions. Le programme C solution comporte 4
+   instructions organisées en séquence. Les opérations sont exécutées les
+   unes après les autres. On parle d'affectation séquentielle. Même si ce
+   type d'affectation est présente dans la plupart des langages de
+   programmation, certains langages proposent des procédés différents
+   comme l'<i>affectation en parallèle</i>. Avec un tel procédé, les
+   boîtes sont toutes modifiées en même temps.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

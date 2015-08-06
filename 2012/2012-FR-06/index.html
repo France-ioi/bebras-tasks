@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Trombone rouge</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" src="../../modules/ext/jquery-ui/1.10/jquery-ui-1.10.3.custom.min.js" id="http://jqueryui.com/download/jquery-ui-1.10.3.custom.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+        task.getAnswer= function(callback) {
+          var res = $('#solution_2012_FR_06 > .item_2012_FR_06');
+          var strAnswer = "";
+          for (var i=0; i< res.length; i++) {
+            strAnswer += res[i].id.split('_')[0];
+          }
+          callback(strAnswer);
+        };
+
+        task.reloadAnswer= function(strAnswer, callback) {
+           task.resetAnimation();
+           if (strAnswer != "") {
+              var sol = strAnswer.split('i');
+              for(var i = 0; i < sol.length; i++) {
+                $("#solution_2012_FR_06").append($('#i' + sol[i] + '_2012_FR_06'));
+              }
+           }
+           callback();
+        };
+
+        task.load= function(views, callback) {
+           $('#ads_2012_FR_06').sortable({
+             connectWith: '#solution_2012_FR_06',
+             placeholder: "highlight_2012_FR_06",
+             containment: '#animationcontainer_2012_FR_06',
+             items: 'div.item_2012_FR_06'
+           });
+           $('#solution_2012_FR_06').sortable({
+             connectWith: '#ads_2012_FR_06',
+             placeholder: "highlight_2012_FR_06",
+             containment: '#animationcontainer_2012_FR_06',
+             items: 'div.item_2012_FR_06'
+           });
+           callback();
+        };
+
+        task.resetAnimation= function() {
+          $("#ads_2012_FR_06").append($('#i1_2012_FR_06'));
+          for (var i=1; i<14; i++) {
+            $('#i'+(i+1)+"_2012_FR_06").insertAfter('#i'+i+"_2012_FR_06");
+          }
+        };
+      </script>
+         <style class="">#animationcontainer_2012_FR_06 {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+
+      .animation_2012_FR_06 {
+        width:308px;
+        float: left;
+        height:420px;
+        z-index:-2;
+        border: 1px solid;
+      }
+
+
+      #solution_2012_FR_06 {
+        background: #bbd;
+      }
+
+      #ads_2012_FR_06 {
+        background: #ddd;
+      }
+
+
+      #ads_2012_FR_06 .item_2012_FR_06 {
+        background: #eef;
+        color:#333;
+      }
+      #solution_2012_FR_06 .item_2012_FR_06 {
+        background: white;
+        color:black;
+      }
+
+
+      .person_2012_FR_06, .takes_2012_FR_06, .gives_2012_FR_06 {
+        width: 95px;
+        position: absolute;
+        padding-left: 5px;
+      }
+
+      .person_2012_FR_06 {
+        //background: white;
+      }
+
+      .takes_2012_FR_06 {
+        //background: #fff8f8;
+        left: 100px;
+      }
+
+      .gives_2012_FR_06 {
+        //background: #f8fff8;
+        left: 200px;
+      }
+
+      .item_2012_FR_06, .title_2012_FR_06 {
+        border: 1px solid;
+        margin: 3px;
+        padding: 0px;
+        width: 300px;
+        cursor: move;
+        position: relative;
+        height: 20px;
+      }
+
+      .title_2012_FR_06 {
+        font-weight: bold;
+        cursor: default;
+        border: none;
+        height: 30px;
+      }
+
+      #buttons_2012_FR_06 {
+        clear: both;
+      }
+
+      #buttons_2012_FR_06 input {
+        font-size: large;
+      }
+
+
+      .highlight_2012_FR_06 {
+        background: yellow;
+        border: 2px dashed;
+        height: 20px;
+      }
+
+      #hintbackground_2012_FR_06 {
+        position: absolute;
+        width: parent;
+        font-size: 40px;
+        color: #777;
+        z-index:0;
+        width:280px;
+        padding:20px;
+        padding-top:50px;
+      }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-06/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "i2i7i10i14"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Trombone rouge</h1>
+<p>
+À la suite d'une inondation, Castor a perdu tout ce qu'il possédait, 
+sauf un petit trombone rouge. Mais Castor ne perd pas espoir&nbsp;: il
+compte récupérer une maison grâce à son trombone.
+</p>
+<p>
+Pour cela, Castor a passé des heures sur le site d'échange en ligne
+CastorBay. Il a sélectionné la liste d'annonces montrées ci-dessous.
+Par exemple, la première annonce indique qu'Anne a besoin d'un
+trombone et qu'elle est prête à donner un ballon en échange.
+</p>
+
+<p>
+Aidez Castor à sélectionner et ordonner les échanges 
+à effectuer afin d'échanger son trombone contre une maison.</p>
+
+<div id="animationcontainer_2012_FR_06">
+   <center>
+   <table><tr><td width="50%">
+      <div id="ads_2012_FR_06" class="animation_2012_FR_06"><center><b>Annonces disponibles</b></center>
+         <div class="title_2012_FR_06"><div class="person_2012_FR_06">Prénom</div><div class="takes_2012_FR_06">Prend</div><div class="gives_2012_FR_06">Donne</div></div>
+         <div class="item_2012_FR_06" id="i1_2012_FR_06"><div class="person_2012_FR_06">Anne</div><div class="takes_2012_FR_06">Trombone</div><div class="gives_2012_FR_06">Ballon</div></div>
+         <div class="item_2012_FR_06" id="i2_2012_FR_06"><div class="person_2012_FR_06">Mathilde</div><div class="takes_2012_FR_06">Trombone</div><div class="gives_2012_FR_06">Panier</div></div>
+         <div class="item_2012_FR_06" id="i3_2012_FR_06"><div class="person_2012_FR_06">Lucie</div><div class="takes_2012_FR_06">Ballon</div><div class="gives_2012_FR_06">Bateau</div></div>
+         <div class="item_2012_FR_06" id="i4_2012_FR_06"><div class="person_2012_FR_06">Daniel</div><div class="takes_2012_FR_06">Bateau</div><div class="gives_2012_FR_06">Robot</div></div>
+         <div class="item_2012_FR_06" id="i5_2012_FR_06"><div class="person_2012_FR_06">Marc</div><div class="takes_2012_FR_06">Ballon</div><div class="gives_2012_FR_06">Vélo</div></div>
+         <div class="item_2012_FR_06" id="i6_2012_FR_06"><div class="person_2012_FR_06">Thibault</div><div class="takes_2012_FR_06">Panier</div><div class="gives_2012_FR_06">Bateau</div></div>
+         <div class="item_2012_FR_06" id="i7_2012_FR_06"><div class="person_2012_FR_06">Marie</div><div class="takes_2012_FR_06">Panier</div><div class="gives_2012_FR_06">Canapé</div></div>
+         <div class="item_2012_FR_06" id="i8_2012_FR_06"><div class="person_2012_FR_06">Sarah</div><div class="takes_2012_FR_06">Canapé</div><div class="gives_2012_FR_06">Ballon</div></div>
+         <div class="item_2012_FR_06" id="i9_2012_FR_06"><div class="person_2012_FR_06">Pierre</div><div class="takes_2012_FR_06">Vélo</div><div class="gives_2012_FR_06">Ballon</div></div>
+         <div class="item_2012_FR_06" id="i10_2012_FR_06"><div class="person_2012_FR_06">Manon</div><div class="takes_2012_FR_06">Canapé</div><div class="gives_2012_FR_06">Tapis</div></div>
+         <div class="item_2012_FR_06" id="i11_2012_FR_06"><div class="person_2012_FR_06">Xavier</div><div class="takes_2012_FR_06">Tapis</div><div class="gives_2012_FR_06">Robot</div></div>
+         <div class="item_2012_FR_06" id="i12_2012_FR_06"><div class="person_2012_FR_06">Sophie</div><div class="takes_2012_FR_06">Peinture</div><div class="gives_2012_FR_06">Tapis</div></div>
+         <div class="item_2012_FR_06" id="i13_2012_FR_06"><div class="person_2012_FR_06">Romain</div><div class="takes_2012_FR_06">Vélo</div><div class="gives_2012_FR_06">Robot</div></div>
+         <div class="item_2012_FR_06" id="i14_2012_FR_06"><div class="person_2012_FR_06">Lucas</div><div class="takes_2012_FR_06">Tapis</div><div class="gives_2012_FR_06">Maison</div></div>
+      </div>
+      </td>
+      <td width="50%">
+         <div id="solution_2012_FR_06" class="animation_2012_FR_06"><center><b>Annonces utilisées</b></center>
+            <div id="hintbackground_2012_FR_06"><br/>Glissez ici les offres, dans le bon ordre.</div>
+            <div class="title_2012_FR_06"><div class="person_2012_FR_06">Prénom</div><div class="takes_2012_FR_06">Prend</div><div class="gives_2012_FR_06">Donne</div></div>
+         </div>
+      </td></tr>
+   </table>
+   <input type="button" value="Recommencer" onclick="task.reloadAnswer('', function() {});" />
+   </center>
+</div>
+
+
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Voici la solution :</p>
+
+<p><img src="2012-FR-06_solution.png" /></p>
+
+<p>La manière la plus rapide de trouver la solution consiste à partir de la fin.
+Pour avoir une maison, il faut forcément avoir un tapis avant.
+Pour avoir un tapis, il faut un canapé ou de la peinture.
+Mais vu que personne n'offre de la peinture, il faut forcément un canapé.
+Pour avoir un canapé, il faut forcément un panier.
+Pour avoir un panier, il faut forcément un trombone.
+Et ça tombe bien, on en a un !
+</b>
+
+<h2>C'est de l'informatique </h2>
+
+<p>La table fournie en question décrit
+ce qu'on appelle un <b>graphe orienté</b>.
+Dans ce graphe, on présente chaque objet
+par un rond et chaque offre d'échange
+sous la forme d'une flèche.
+</p>
+
+<p><img src="2012-FR-06_graph-solution.png" /></p>
+
+<p>Pour répondre à la question du sujet, il suffit de trouver un chemin entre
+l'objet «&nbsp;<b>Trombone</b>&nbsp;» et l'objet «&nbsp;<b>Maison</b>&nbsp;».
+Le chemin qui convient est coloré.
+</p>
+
+  </div>
+</div> <!-- task-solution -->
+   </body>
+</html>

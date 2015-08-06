@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-AT-02a</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-AT-02ab/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Thomas Eitler (AT)",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["011000"]
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "R5#a",
+             "Ouvre-T@1",
+             "1Grand-Pere",
+             "Sesame7",
+             "100%grandpa",
+             "P@ss%word"
+            ], "checkboxes", "#answers_2013-AT-02");
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Mot de passe</h1>
+
+         <p>Grand-père Castor a besoin d'aide pour choisir un mot de passe qui respecte certaines règles.
+         Son mot de passe doit comporter&nbsp;:
+         <ul><li> au moins 8 caractères,</li>
+         <li> au moins un chiffre,</li>
+         <li> à la fois des lettres majuscules et des lettres minuscules,</li>
+         <li> au moins un caractère spécial parmi % $ - # @ ? ! : / &amp;.</li>
+         </ul>
+         </p>
+         <p>
+         Parmi les mots de passe ci-dessous, quels sont <b>ceux qui respectent toutes les règles</b>&nbsp;?  
+         </p>
+         <div class="reponses" id="answers_2013-AT-02">
+         </div>
+      </div><!-- task -->
+   <div id="solution">
+      <h2>La solution</h2>
+      <p> Il y a deux mots de passe valides&nbsp;: <b>Ouvre-T@1</b> et <b>1Grand-Pere</b>. En effet&nbsp;:
+      </p>      
+      <ul>
+      <li><b>R5#a</b> comporte moins de 8 lettres,</li>
+      <li><b>P@ss%word</b> ne comporte pas de chiffre,</li>
+      <li><b>100%grandpa</b> ne comporte pas de lettre majuscule,</li>
+      <li><b>Sesame7</b> est trop court et ne comporte pas de caractère spécial.</li>
+      </ul>
+
+
+      <h2>C'est de l'informatique </h2>
+
+      <p>Les mots de passe sont utilisés quotidiennement pour vérifier que seules les personnes autorisées accèdent à certains services numériques, comme par exemple à ses e-mails, au wifi, ou à ses factures de téléphone. Un mot de passe n'est utile que s'il est connu seulement de son (ou ses) utilisateurs légitimes. Cela implique deux principes fondamentaux. Premièrement, un mot de passe personnel ne doit jamais être transmis à quelqu'un d'autre. Deuxièmement, un mot de passe ne doit pas être facile à deviner.
+      </p>
+      <p>
+      La condition «&nbsp;pas facile à deviner&nbsp;» est très souvent mal comprise. Non seulement, le mot de passe doit être difficile à deviner par un être humain (utiliser le nom de son chien comme mot de passe est une très mauvaise idée), mais le mot de passe doit également être difficile à deviner pour un ordinateur capable d'essayer plusieurs millions de mot de passe chaque seconde&hellip;
+      </p>
+      <p>
+      Ainsi, si votre mot de passe est un mot du dictionnaire, il ne résistera qu'une fraction de seconde à un ordinateur. De même, si votre mot de passe fait partie de la liste des mots de passe les plus utilisés, comme par exemple <i>123456</i> ou <i>azerty</i>, il sera très facile à «&nbsp;cracker&nbsp;». Si votre mot de passe comporte 8 caractères mais est constitué uniquement de chiffres, alors il ne sera pas très difficile à trouver, car il n'y a que 100 millions (10<sup>8</sup>) de mots de passes satisfaisant ces critères. De même, si votre mot de passe n'utilise que 6 lettres, alors c'est un mauvais mot de passe, car il suffit de tester 309 millions de mots (26<sup>6</sup>) pour le trouver.
+      </p>
+      <p>
+      Un bon mot de passe doit être facile à retenir, mais difficile à deviner surtout par un ordinateur, donc ne doit pas être trop court. Une bonne méthode pour un long mot de passe facile à retenir est de coller bout à bout trois ou quatre mots faciles à mémoriser, par exemple "barragecastortasbuches". Il est souvent demandé d'y inclure des caractères spéciaux ou chiffres, donc on peut par exemple écrire "barragec@stor42buches". Attention : utilisez un mot de passe différent sur chaque site où vous vous connectez.
+      </p>
+   </div> <!-- task-solution -->
+</body>
+</html>

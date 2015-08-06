@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-SI-04</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script type="text/javascript" src="2013-SI-04.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-SI-04/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Janez Demsar, SI ",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["32"]
+      };
+      </script>
+     <script class="solution" type="text/javascript">
+        var solution = {
+           links: [],
+           labels: [
+             [20,60,0],
+             [135,64,6],
+             [223,8,14],
+             [250,172,14],
+             [351,128,16],
+             [445,160,22],
+             [442,8,22],
+             [496,113,26],
+             [574,40,28],
+             [620,162,29],
+             [684,160,32],
+             ],
+           labelsObj: [],
+           step: 0,
+           reset: function() {
+             for (var i = 0; i < this.labelsObj.length; i++) {
+               var link = this.links[i];
+               if (link != null)
+                  link.attr({'stroke': 'black'});
+               this.labelsObj[i].hide();
+             }
+             this.step = 0; },
+           next: function() { 
+             this.labelsObj[this.step].show();
+             var link = this.links[this.step];
+             if (link != null)
+                  link.attr({'stroke': 'red'});
+             if (this.step < this.labelsObj.length-1) {
+                this.step++; 
+             }
+           },
+           load: function(raph) {
+             this.links = raph.my_links;
+             for (var i = 0; i < this.labels.length; i++) {
+               var args = this.labels[i];
+               var item = raph.text(args[0], args[1], args[2]);
+               item.attr({id: 'text3827',parent: 'layer1',"font-size": '18px',"font-style": 'norma',"font-weight": 'normal',"line-height": '125%',"letter-spacing": '0px',"word-spacing": '0px',fill: '#FF0000',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1',"font-family": 'Sans'});
+               item.hide();
+               this.labelsObj.push(item);
+             }
+             var last = raph.text(684, 180, 'terminé');
+             last.attr({id: 'text3827',parent: 'layer1',"font-size": '18px',"font-style": 'norma',"font-weight": 'normal',"line-height": '125%',"letter-spacing": '0px',"word-spacing": '0px',fill: '#FF0000',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1',"font-family": 'Sans'});
+             last.hide();
+             this.labelsObj.push(last);
+           }
+        }
+     </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2013-SI-04", 3, 1);
+      </script>
+      <script class="task" type="text/javascript">
+         // TODO: fix with the future pub/sub system
+         var taskViewLoaded = false;
+         var solutionViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               taskViewLoaded = true;
+               loadNecklace('necklace');
+            }
+            if (views.solution && !solutionViewLoaded) {
+               solutionViewsLoaded = true;
+               var raph = loadNecklace('necklace_sol');
+               solution.load(raph);
+            }
+      }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Taille du collier</h1>
+         <p> Castor a fabriqué un collier, mais il n'est pas sûr qu'il ait la bonne taille. 
+         <p>Sur le dessin, on voit les attaches à chaque extrémité du collier
+         et les longueurs des lacets entre les perles.</p>
+
+         <div id='necklace'></div>
+
+         <p>Si l'on tend le collier en tirant sur les attaches, quelle sera sa longueur entre les deux attaches ? </p>
+         <div class="reponses" id="answers_2013-SI-04">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>La solution</h2>
+         <p>Lorsqu'on tend le collier, sa longueur va être déterminée par le chemin le plus court
+         qui relie une attache à l'autre en passant par les fils. 
+         Le chemin le plus court est de taille : 6 + 8 + 2 + 6 + 4 + 3 + 3 = 32,
+         donc le collier une fois tendu aura la taille 32.</p>
+         <p>&Eacute;numérer tous les chemins possibles afin de trouver le plus court 
+         prend du temps. Il existe une manière de procéder qui permet de le trouver
+         plus efficacement.</p>
+         <p>On commencer par une attache, par exemple celle de gauche.
+         &Agrave; cette attache, on se trouve à la distance 0. Ensuite, 
+         on va noter la distance de chacune des perles par rapport à
+         l'attache de gauche. Ce qui est important, c'est de procéder
+         dans l'ordre. Parmi les perles dont on n'a pas encore noté la
+         distance, il faut choisir à chaque fois celle dont la distance
+         serait la plus petite.</p>
+         <p>L'animation ci-dessous montre l'ordre dans lequel on numérote
+         les perles selon cet algorithme.</p>
+         <p><input type='button' id='reset' value='&Eacute;tape suivante' onclick="solution.next();" />
+          <input type='button' id='reset' value='Recommencer' onclick="solution.reset();" /></p>
+         <div id='necklace_sol'></div>
+
+         <h2>C'est de l'informatique </h2>
+         <p>La correction ci-dessus illustre la stratégie utilisée par
+         un algorithme, appelé «&nbsp;algorithme de Dijkstra&nbsp;», 
+         qui est capable de calculer efficacement des plus court chemins,
+         y compris lorsqu'il y a des millions voire des milliards
+         de chemins.</p>
+         <p>Déterminer le plus court chemin a de nombreuses applications
+         pratiques, comme par exemple la navigation GPS pour les voitures,
+         permettant de trouver le chemin le plus rapide d'un point à un
+         autre.</p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

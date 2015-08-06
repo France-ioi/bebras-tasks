@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-FR-19</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-19-summed-row/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      .maps {
+         margin-left: 0.3em;
+         margin-top: 2em;
+         margin-bottom: 1em;
+      }
+      .maps td {
+         vertical-align: center;
+         text-align: left;
+         padding-right: 0.2em;
+         padding-bottom: 1em;
+      }
+      .legend {
+         width: 5em;
+         color: gray;
+      }
+      .easy, .hard {
+         display: none;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <img src="beaver.png" style="display:none">
+         <img src="beaver_small.png" style="display:none">
+         <h1>Position secrète</h1>
+         <p>
+           Des <span class="hard">petits castors et des grands</span> castors se trouvent à certaines positions le long d'un chemin.
+           Afin de se protéger des espions, les castors utilisent une grille de nombres pour décrire leurs positions.
+         </p>
+
+         <table class="maps">
+         <tr><td>
+            <div class="legend">Grille&nbsp;:</div>
+         </td><td>
+            <div id="table1" class="table"></div>
+         </td></tr>
+         <tr><td>
+            <div class="legend">Positions&nbsp;:</div>
+         </td><td>
+            <div id="map1" class="map"></div>
+         </td></tr>
+         </table>
+
+         <p>
+         Les castors ont maintenant complètement changé de position. Vous avez récupéré la grille de nombres correspondante. Pouvez-vous retrouver la nouvelle position des <span class="hard">petits et des grands</span> castors&nbsp;?
+         </p>
+
+         <table class="maps">
+         <tr><td>
+            <div class="legend">Nouvelle grille&nbsp;:</div>
+         </td><td>
+            <div id="table2" class="table"></div>
+         </td></tr>
+         <tr><td>
+            <div class="legend">Nouvelles positions&nbsp;:</div>
+         </td><td>
+            <div id="map2" class="map"></div>
+         </td></tr>
+         </table>
+
+         <p>
+         <span class="easy">Cliquez dans les cases ci-dessus pour placer ou retirer des castors. </span>
+         <span class="hard">Cliquez une ou plusieurs fois dans les cases ci-dessus pour y placer des petits et des grands castors. </span>
+         </p>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+         <div class="easy">
+            <p>
+            Pour résoudre ce sujet, il faut comprendre que la grille contient une séquence de nombres à lire de gauche à droite. Cette séquence est telle que, à chaque fois que l'on passe la position d'un castor, on augmente le nombre précédent d'une unité. S'il n'y a pas de castor, on recopie le nombre précédent.
+            </p>
+            <p>
+            Pour construire la réponse, il suffit donc de placer un castor à chaque fois que le nombre inscrit dans la case au-dessus augmente par rapport à la case précédente.
+            </p>
+         </div>
+         <div class="hard">
+            <p>
+            Pour résoudre ce sujet, il faut comprendre que la grille contient une séquence de nombres à lire de gauche à droite. Cette séquence est telle que, à chaque fois que l'on passe la position d'un grand castor, on augmente le nombre précédent d'une unité, et à chaque fois que l'on passe la position d'un petit castor, on diminue le nombre précédent d'une unité. S'il n'y a pas de castor, on recopie simplement le nombre précédent.
+            </p>
+            <p>
+            Pour construire la réponse, il suffit donc de placer un grand castor à chaque fois que le nombre inscrit dans la case au-dessus augmente par rapport à la case précédente, et de placer un petit à chaque fois que le nombre inscrit diminue par rapport à la case précédente.
+            </p>
+         </div>
+
+         <table class="maps">
+         <tr><td>
+            <div class="legend">Nouvelle grille&nbsp;:</div>
+         </td><td>
+            <div id="table3" class="table"></div>
+         </td></tr>
+         <tr><td>
+            <div class="legend">Nouvelles positions&nbsp;:</div>
+         </td><td>
+            <div id="map3" class="map"></div>
+         </td></tr>
+         </table>
+
+         <div class="easy">
+            <p>
+            Une autre manière de voir les choses consiste à observer que le nombre inscrit dans une case correspond au nombre total de castors se trouvant à gauche de cette case (en incluant cette case). 
+            </p>
+         </div>
+         <div class="hard">
+            <p>
+            Une autre manière de voir les choses consiste à observer que le nombre inscrit dans une case correspond à la différence entre le nombre total de grands castors se trouvant à gauche de cette case (en incluant cette case) et le nombre total de petits castors se trouvant à gauche de cette case. 
+            </p>
+         </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+         <p>
+         La grille de nombres présentée dans ce sujet correspond à un «&nbsp;tableau cumulatif&nbsp;». En effet, chaque case compte le nombre cumulé  <span class="easy"> de castors que l'on a vus jusqu'à une position donnée.</span> <span class="hard"> de grands castors que l'on a vus jusqu'à une position donnée moins le nombre de petits castors que l'on a vus jusqu'à cette même position. Supposons pour commencer qu'il n'y ait que des grands castors.</span> 
+         </p>
+         <p>
+         Un tableau cumulatif est très utile car il permet de déterminer extrêmement efficacement le nombre de castors qui se trouvent entre deux positions données. Il suffit pour cela de faire une simple soustraction. Par exemple, pour compter le nombre de castors dans la zone rouge ci-dessous, il suffit de prendre le nombre de castors situés à gauche de la fin de la zone, et de soustraire le nombre de castors situés à gauche du début de la zone&nbsp;: 4 - 1 = 3 castors.
+         </p>
+         <center><img src="cumul.png" /></center>
+         <p>
+         Bien sûr, sur un exemple aussi simple, on voit bien qu'il y a 3 castors dans la zone considérée. Mais le principe du tableau cumulatif marche tout aussi bien lorsqu'on a des millions de castors répartis sur des millions de cases, voire même des milliards de castors répartis sur des milliards de cases. On peut alors compter le nombre de castors contenus dans n'importe quelle zone sans avoir besoin de regarder toutes les cases de la zone une par une&nbsp: une simple soustraction suffit&nbsp;!
+         </p>
+         <p class="hard">
+         Dans le cas où l'on a aussi des petits castors, le tableau cumulatif permet de déterminer, sur n'importe quelle zone, combien il y a de grands castors de plus que de petits castors. On peut donc, entre autres, utiliser ce tableau pour déterminer si, dans une zone donnée, il y a autant de petits castors que de grands castors&nbsp;: c'est le cas lorsque la case située juste avant le début de la zone contient un nombre égal à la dernière case de la zone.
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

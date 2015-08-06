@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Une vie de plante</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+            "<div align=left><tt>a.pousser(droite)<br/>a.pousser(droite)<br/>[b,c] = a.se_séparer()<br/>b.mourir()</tt></div>",
+            "<div align=left><tt>a.pousser(haut)<br/>a.pousser(droite)<br/>a.pousser(droite)<br/>[b,c] = a.se_séparer()<br/>b.mourir()</tt></div>",
+            "<div align=left><tt>a.pousser(droite)<br/>a.pousser(droite)<br/>a.pousser(haut)<br/>a.mourir()</tt></div>",
+            "<div align=left><tt>a.pousser(droite)<br/>[b,c] = a.se_séparer()<br/>c.pousser(haut)<br/>c.pousser(droite)<br/>b.mourir()</tt></div>"
+            ], "added", "#answers_2011-DE-01");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-DE-01/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Une vie de plante</h1>
+<p>Castor adore les plantes. Il a inventé un langage de programmation permettant de simuler l'évolution d'une plante imaginaire. 
+</p><p>
+Chaque image commence par une forme carrée, désignée par "a". Toute forme peut être transformée par trois opérations :
+<ul><li><p><tt>pousser</tt> : cette opération  fait doubler la forme. On doit donner, entre parenthèses, la direction : <tt>droite</tt>, <tt>gauche</tt>, <tt>haut</tt>, ou <tt>bas</tt>, par exemple <tt>a.pousser(droite)</tt> fait doubler vers la droite la largeur de la forme <tt>a</tt>.</p>
+<p><img src="2011-DE-01_enonce.png"></p>
+</li>
+<li><p><tt>se_séparer</tt> : cette opération  sépare la forme en deux formes identiques, en la coupant au milieu du côté le plus long. Une forme carrée ne peut pas être séparée en deux. On doit donner 2 lettres pour désigner ces nouvelles formes.</p><p>Par exemple <tt>[b,c] = a.se_séparer()</tt> coupe la forme <tt>a</tt> en deux formes <tt>b</tt> et <tt>c</tt> plus petites et identiques. La première lettre (ici, <tt>b</tt>) est la nouvele forme du bas ou à gauche, la deuxième lettre (ici, <tt>c</tt>) est l'autre.</p>
+<p><img src="2011-DE-01_enonce2.png"></p>
+</li>
+<li><p><tt>mourir</tt> : cette opération détruit la forme, par exemple <tt>b.mourir()</tt> détruit la forme <tt>b</tt>.</p>
+<p><img src="2011-DE-01_enonce3.png"></p>
+</li>
+</ul>
+<p>
+Castor souhaite écrire un programme qui transforme l'image 1 ci-dessous jusqu'à obtenir l'image 2 ci-dessous. La lettre n'est pas précisée pour la forme de l'image 2, elle peut-être une lettre quelconque.<br/> 
+<img src="2011-DE-01_question.png"></p>
+<p>
+On vous propose ci-après 4 débuts de programmes. Trois d'entre eux ne conviennent pas car ils donnent des images qui ne pourront pas être transformées vers l'image souhaitée. Quel est celui qui peut être utilisé pour débuter le programme de Castor ?
+</p>
+<div class="reponses" id="answers_2011-DE-01">
+</div>
+
+<img style="display: none;" src="2011-DE-01_enonce.png" />
+<img style="display: none;" src="2011-DE-01_enonce2.png" />
+<img style="display: none;" src="2011-DE-01_enonce3.png" />
+<img style="display: none;" src="2011-DE-01_question.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Voici le résultat de l'exécution de chacune des propositions :
+   </p>
+   <p>
+   <center><span class="2011-DE-01_choice_1">A</span><img style="vertical-align:middle" src="2011-DE-01_reponse_debut_A.png"/></center>
+   <center><span class="2011-DE-01_choice_2">B</span><img style="vertical-align:middle" src="2011-DE-01_reponse_debut_B.png"/></center>
+   <center><span class="2011-DE-01_choice_3">C</span><img style="vertical-align:middle" src="2011-DE-01_reponse_debut_C.png"/></center>
+   <center><span class="2011-DE-01_choice_4">D</span><img style="vertical-align:middle" src="2011-DE-01_reponse_debut_D.png"/></center>
+   </p>
+   <p>
+   L'exécution de la proposition <span class="2011-DE-01_choice_3">C</span> ne laisse plus aucune forme, donc on ne peut plus rien faire.
+   </p>
+   <p>
+   L'exécution des propositions <span class="2011-DE-01_choice_2">B</span> et <span class="2011-DE-01_choice_4">D</span> donne dans les deux cas une forme carrée de 2x2. On ne peut pas couper un carré en 2, et si on l'agrandit pour le redécouper ensuite, on ne pourra jamais obtenir une forme plus petite que ce carré. Ces deux propositions sont donc fausses.
+   </p>
+   <p>
+   La proposition <span class="2011-DE-01_choice_1">A</span> permet par contre d'atteindre l'objectif, en continuant par l'exécution des commandes suivantes :
+   </p>
+   <p>
+   <center><img src="2011-DE-01_reponse_fin.png"/></center>
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Cet exercice introduit plusieurs notions de programmation :
+   </p>
+   <ul>
+   <li>La notion de programme comme une suite d'instructions.</li>
+   <li>Le principe de l'appel de fonction avec ou sans paramètre.</li>
+   <li>La notion de variable, et la notion d'affectation.</li>
+   <li>La notion de modèle objet, où la notation a.pousser(droite) permet d'exécuter une fonction sur l'objet a.</li>
+   </ul>
+   <p>
+   En plus de l'introduction de ces notions, il demande d'être capable de comprendre un programme existant. Enfin, et c'est sans doute le plus difficile, il demande de déterminer, à partir d'un ensemble de fonctions disponibles, ce qu'il est possible ou non en combinant un certain nombre de ces fonctions. Ces problématiques sont fréquemment rencontrées par un programmeur.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

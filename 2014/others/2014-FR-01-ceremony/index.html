@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-FR-01-ceremony</title>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/jquery-1.7.1.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="remove" type="text/javascript" src="../2014-FR-modules/platform_api.js" ></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="remove" type="text/javascript" src="../2014-FR-modules/gen_task_resources.js"></script>
+      <link class="module" rel="stylesheet" type="text/css" href="../2014-FR-modules/styles.css" id="http://castor-informatique.fr/tasks/modules/styles.css" />
+      <script class="module" type="text/javascript" src="../2014-FR-modules/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/drag_lib.js" id="http://castor-informatique.fr/tasks/modules/drag_lib.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/drag_lib.js" id="http://castor-informatique.fr/tasks/modules/drag_lib.js"></script>
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-01-ceremony/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Alexandre Talon and Mathias Hiron",
+          "translators": [
+          ],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"3": "hard", "4": "medium"},
+          "categories": {ALG : true},
+          "answerType": "Interactive, sort elements in a list",
+          "status": "evaluation"
+      };
+      </script>
+      <style>
+         #animationcontainer_2013_FR_15 {
+           -moz-user-select: none;
+           -webkit-user-select: none;
+           -ms-user-select: none;
+         }
+
+         .solution_table {
+           width:350px;
+           text-align: center;
+           font-size: 95%;
+         }
+          .solution_table div {
+           background: #ddf;
+           padding: 0.3em;
+           margin: 1px 10px 1px 10px;
+           border: 1px solid gray;
+           font-weight: bold;
+           border-radius: 5px;
+          } 
+         .cell{
+           border: 1px solid;
+           width: 60px;
+           height: 60px;
+         }
+      </style>
+      <script src="2014-FR-01_task.js"></script>
+    </style>
+  </head>
+  <body>
+      <div id="task">
+          <h1>Ceremony</h1>
+          <p>
+          <center><img src="ceremony.png" style="width:700px"></center>
+          </p>
+          <p>
+             <table>
+               <tr>
+                 <td>
+                   <p>
+                   The Beaver community has a very strict protocol for organizing ceremonies, represented by the illustration above. Each text represent a possible
+                   step of a ceremony.
+                   </p>
+                   <p> 
+                   An arrow between two steps means that if both steps are performed during a ceremony, then the step at the start
+                   of the arrow has to be performed at some point <b>before</b> the step at the end of the arrow.
+                   </p>
+                   <p>
+                     Drag the steps on the right to change their order, so that the final order corresponds to the rules defined by the illustration
+                   </p>			
+                 </td>
+                 <td>
+                   <div id="anim" class="touch" style="width:320px;height:330px" class="touch"></div>
+                 </td>
+                 <td>
+                   <div id="buttons_2014_FR_01">
+                     <input type="button" id="execute" value="Check" />
+                     <div id="error"></div>
+                     <div id="success"></div>
+                   </div>
+                 </td>
+             </tr>
+             </table>
+          </p>
+      </div><!-- task -->
+      <div id="task-solution">
+          <h2>Solution</h2>
+          <p>One possible order was the following&nbsp;:</p>
+          <div>
+            <div class="solution_table">
+              <div class="item_2014_FR_01">Sing a song</div>
+              <div class="item_2014_FR_01">10 minutes break</div>
+              <div class="item_2014_FR_01">Minute of silence</div>
+              <div class="item_2014_FR_01">Drum rolls</div>
+              <div class="item_2014_FR_01">Long speech</div>
+              <div class="item_2014_FR_01">Dance performance</div>
+              <div class="item_2014_FR_01">Play the clairon</div>
+              <div class="item_2014_FR_01">Fireworks</div>
+              <div class="item_2014_FR_01">Announce prize winner</div>
+              <div class="item_2014_FR_01">Thank everyone</div>
+            </div>
+          </div>
+          <h2>It's informatics!</h2>
+          <p>Solving this tasks means performing a topological sort of the graph. This implies understanding the graph representation, as well as the precedence relationships expressed by the edges of the graph.</p>
+      </div>
+  </body>
+</html>

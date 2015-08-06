@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Championnat d'échecs</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "Benjamin et Élise.",
+            "Élise et Félix.",
+            "Benjamin et David.",
+            "Charlotte et Félix."
+            ], "added", "#answers_2011-UA-07");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-UA-07/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Championnat d'échecs</h1>
+<p>
+Les Castors ont organisé un tournoi d'échecs par équipe, et il ne reste plus que deux équipes qui s'affrontent en finale.
+</p>
+<p>
+Il y a six Castors au total répartis en deux équipes de trois joueurs. 
+<br>Ils se prénomment : Ahmed, Benjamin, Charlotte, David, Élise et Félix.
+<br>Chaque Castor joue une partie contre l'un des joueurs de l'autre équipe.
+</p>
+De plus :
+<ul>
+<li>Benjamin joue contre Félix ;</li>
+<li> Élise et Félix jouent pour la même équipe ;</li> 
+<li> Charlotte et Benjamin jouent dans des équipes différentes l'une de l'autre.</li>
+</ul>
+<p>
+Quels sont les deux Castors qui sont dans la même équipe que <b>Ahmed</b> ?
+</p>
+<div class="reponses" id="answers_2011-UA-07">
+</div>
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   <b>Réponse <span class="2011-UA-07_choice_2">B</span>.</b>
+   </p>
+   <p>
+   Pour trouver la solution, nous allons représenter chaque joueur par
+   une case dans laquelle est inscrit l'initiale de son prénom.  Nous
+   associons une couleur à chaque équipe. L'équipe de Benjamin sera
+   rouge. L'équipe adverse sera verte. Une case blanche signifie que nous
+   n'avons pas encore pris de décision.
+   </p>
+
+   <p>
+   Au départ nous ne colorions que la case de Benjamin puisqu'il fait
+   assurément partie de l'équipe rouge.
+   </p>
+   <img src="2011-UA-07_solution1.png" width="300px">
+   <p>
+   Puisque Benjamin joue contre Félix, nous pouvons colorier en vert la case de Félix.
+   </p>
+   <img src="2011-UA-07_solution2.png" width="300px">
+   <p>
+   Nous savons de plus que Élise et Félix sont dans la même équipe, donc la case d'Élise peut, elle aussi, 
+   être coloriée en vert.
+   </p>
+   <img src="2011-UA-07_solution3.png" width="300px">
+   <p>
+   Enfin, Charlotte et Benjamin sont dans des équipes différentes, donc Charlotte est elle aussi dans
+   l'équipe verte de Félix.
+   </p>
+   <img src="2011-UA-07_solution4.png" width="300px">
+   <p>
+    L'équipe verte
+   a maintenant ses trois joueurs. Les deux cases blanches sont des cases
+   de joueurs de l'équipe rouge.
+   </p>
+   <img src="2011-UA-07_solution5.png" width="300px">
+   <p>
+   Conclusion: Charlotte, Élise et Félix sont dans la même équipe. Les autres Castors, Ahmed, Benjamin et David constituent l'autre équipe.
+   </p>
+
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Les trois contraintes nous ont permis de déterminer directement la bonne
+   composition des équipes sans passer par ce que l'on appelle <i>une énumération exhaustive</i>. Une telle énumération aurait demandé de 
+   considérer une à une chaque composition d'équipe possible et de progressivement éliminer chaque composition qui viole l'une des règles.
+   </p><p>
+   À la fin d'un tel calcul, il serait resté une seule composition d'équipe valide, la solution C. 
+   L'ordinateur possède une capacité de calcul phénoménale qui lui permet d'énumérer très rapidement un grand nombre de possibilités.
+   Il serait donc tentant de penser qu'une recherche exhaustive est toujours à la portée d'un ordinateur suffisamment
+   puissant. Il n'en est rien, certains problèmes nécessitent d'énumérer une telle quantité de cas qu'il est rapidement
+   impossible de passer par une recherche aussi longue. Dans le cas présent, si au lieu de 3 joueurs par équipe nous avions 
+   constitué des équipes de rugby en coupant 30 joueurs en deux équipes de 15, nous aurions eu plus de 1 million d'équipes possibles à considérer !
+   </p><p>
+   En informatique, l'invention de bons algorithmes permet souvent de résoudre des problèmes de taille aussi gigantesque en des temps records.
+   Ce n'est donc pas uniquement la puissance de calcul qui fait la force des ordinateurs mais aussi l'inventivité des hommes et des femmes qui les programment !
+   <p>
+
+   <!-- C[n, n/2] / 2 -->
+
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

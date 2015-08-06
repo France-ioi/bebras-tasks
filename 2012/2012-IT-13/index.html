@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>&OElig;ufs de Pâques</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "Ouvrir l'&oelig;uf n<sup>o</sup>&nbsp;1.",
+            "Ouvrir l'&oelig;uf n<sup>o</sup>&nbsp;2.",
+            "Retourner l'&oelig;uf n<sup>o</sup>&nbsp;3.",
+            "Retourner l'&oelig;uf n<sup>o</sup>&nbsp;4.",
+            ], "checkboxes", "#answers_2012-IT-13", true);
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-IT-13/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "0101"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>&OElig;ufs de Pâques</h1>
+<p>
+Castor a trouvé des &oelig;ufs de Pâques. Les deux premiers &oelig;ufs sont encore fermés&nbsp;: il peut voir la couleur de leur coquille, mais il ne peut pas savoir s'il y a un cadeau à l'intérieur sans les ouvrir. Les deux suivants sont ouverts&nbsp;: il peut voir s'il y a un cadeau à l'intérieur, mais il ne peut pas voir la couleur de l'extérieur de leur coquille sans les retourner. 
+</p>
+
+<img src="2012-IT-13.png" />
+
+<p>
+Castor suspecte que <strong>si un &oelig;uf a une coquille bleue alors il contient un cadeau</strong>.
+</p>
+
+<p>Cochez la ou les actions qui sont <strong>indispensables</strong> pour déterminer si sa théorie est vraie.</p>
+
+<div class="reponses" id="answers_2012-IT-13">
+</div>
+
+
+<img style="display: none;" src="2012-IT-13.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+
+<h2>La solution</h2>
+
+<p>Il s'agit de trouver quelles actions sont nécessaires pour vérifier si l'implication logique
+<strong>si un &oelig;uf a une coquille bleue alors il contient un cadeau</strong> est vraie.
+Considérons les actions une par une.</p>
+
+<ul>
+<li>"Ouvrir l'&oelig;uf n<sup>o</sup>&nbsp;1." : on n'a pas besoin de le faire, car l'&oelig;uf en question n'est pas bleu.</li>
+<li>"Ouvrir l'&oelig;uf n<sup>o</sup>&nbsp;2." : on a besoin de le faire, pour s'assurer que cet &oelig;uf bleu contient bien un cadeau.</li>
+<li>"Retourner l'&oelig;uf n<sup>o</sup>&nbsp;3." : on n'a pas besoin de le faire. D'une part, si cet &oelig;uf est bleu, alors il contient bien un cadeau, puisqu'on le voit. D'autre part, si cet &oelig;uf n'est pas bleu, alors peu importe ce qu'il contient.</li>
+<li>"Retourner l'&oelig;uf n<sup>o</sup>&nbsp;4." : on a besoin de le faire, car si jamais l'&oelig;uf est bleu, on aurait un &oelig;uf bleu ne contenant pas de cadeau, ce qui contredirait la théorie.</li>
+</ul>
+
+<p>En résumé, il faut ouvrir l'&oelig;uf n<sup>o</sup>&nbsp;2 et retourner l'&oelig;uf n<sup>o</sup>&nbsp;4.</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>La logique joue un rôle important en informatique, en particulier pour <b>raisonner</b> sur les programmes. 
+Par exemple, on peut utiliser des raisonnements logiques pour prouver mathématiquement qu'un programme ne contient pas de bugs.</p>
+
+<p>Ainsi, lorsqu'on veut prouver qu'un programme calcule la valeur absolue d'un nombre entier,
+on doit entre autres choses prouver que l'implication logique "si le nombre considéré est négatif alors le programme
+calcule la valeur opposée de ce nombre" est vraie.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

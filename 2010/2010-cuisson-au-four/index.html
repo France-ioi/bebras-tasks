@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Cuisson au four</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "Le réglage du grill est passé de la position 2 à la position 1.",
+             "Le grill a été éteint et la porte est restée fermée.",
+             "Le grill est resté en position 1 plus de 20 secondes.",
+             "La porte a été ouverte.",
+            ], "added", "#answers_2010-cuisson-au-four");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-cuisson-au-four/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Cuisson au four</h1>
+<p>
+Le grill du four de Castor peut être réglé sur trois positions : "position 1",
+"position 2" et "arrêt". Normalement, la porte du four est fermée, mais Castor peut toujours l'ouvrir, notamment pour contrôler la cuisson.
+
+Selon le réglage de la position du grill et de la porte du four, la température varie :
+<ul>
+<li>Porte fermée et grill position 1 : la température augmente de 10 °C toutes les 5 secondes</li>
+<li>Porte fermée et grill position 2 : la température augmente de 20 °C toutes les 5 secondes</li>
+<li>Porte fermée et grill éteint : la température diminue de 5 °C toutes les 10 secondes jusqu'au retour à la température ambiante</li>
+<li>Porte ouverte, grill position indifférente : la température diminue de 15 °C toutes les 5 secondes jusqu'au retour à la température ambiante</li>
+</ul>
+Le diagramme suivant montre la température dans le four de Castor pendant les 2 dernières minutes (120 secondes) :
+</p>
+<center><img src="cuisson.png" /></center>
+<p>
+<b>Qu'est-ce qui n'est PAS arrivé au four de Castor pendant les 2 dernières minutes&nbsp;?</b>
+</p>
+
+<div class="reponses" id="answers_2010-cuisson-au-four">
+</div>
+
+
+<img style="display: none;" src="cuisson.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-cuisson-au-four_choice_2">B</span> est correcte.
+<p>
+En effet, le graphe ne montre aucune baisse de 5°C sur une durée de 10 secondes, cette situation n'a donc pas été rencontrée.
+</p><p>
+Les autres cas se sont produits au moins une fois :
+<ul>
+<li>Le cas <span class="2010-cuisson-au-four_choice_1">A</span> s'est produit à partir de la seconde 20.</li>
+<li>Le cas <span class="2010-cuisson-au-four_choice_3">C</span> s'est produit entre les secondes 20 et 40, et entre les secondes 80 et 120.</li>
+<li>Le cas <span class="2010-cuisson-au-four_choice_4">D</span> s'est produit de la seconde 60 à la 80.</li>
+</ul>
+   
+   </p>
+   <h2>C'est de l'informatique </h2>
+   <p>
+   Le comportement d'un appareil suit un certain nombre de règles internes, et dans tous les cas, les lois de la nature.
+   </p><p>
+   L'analyse et l'explication rétroactive du comportement assez basique de notre grill peut encore se faire de tête, mais pour un système plus complexe comme une voiture, un avion ou un satellite, des outils logiciels sont nécessaires.
+   </p><p>
+   Ils offrent des fonctionnalités d'analyse logique des séquences cause-effet et de simulation de l'exécution des possibilités en fonctions de nombreux paramètres. De logiciels similaires sont également utilisés pour prédire le comportement de systèmes dès leur conception.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

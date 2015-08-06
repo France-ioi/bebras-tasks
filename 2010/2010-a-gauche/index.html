@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>À gauche !</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "Avance ! Avance !",
+            "À droite ! À droite ! À droite !",
+            "À droite ! À droite !",
+            "Avance ! À droite ! Avance !"
+            ], "added", "#answers_2010-a-gauche");
+      </script>
+         <style class="">.table-2010-a-gauche td {
+   border: solid black 1px;
+   text-align: center
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-a-gauche/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>À gauche !</h1>
+<p>
+Vous disposez d'un robot capable d'exécuter les ordres suivants :
+</p>
+<center><table class="table-2010-a-gauche" cellspacing=0>
+<tr><td><b>Ordre</b></td><td>Signification</td></tr>
+<tr><td>Avance !</td><td>Le robot avance de 10 cm.</td></tr>
+<tr><td>A droite !</td><td>Le robot se tourne de 90 degrés vers la droite (il effectue donc un quart de tour).</td></tr>
+</table></center>
+<p>
+Vous aimeriez à présent faire bouger le robot pour qu'à la fin il soit tourné de 90 degrés (un quart de tour) vers
+la gauche par rapport à sa position d'origine.
+</p>
+<p><b>Quelle suite d'ordres devez-vous lui donner pour qu'il atteigne cette position&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-a-gauche">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-a-gauche_choice_2">B</span> est correcte.
+   </p><p>
+Trois fois 90 degrés vers la droite donne 270 degrés vers la droite, ce qui a le même effet que de tourner de 90
+degrés vers la gauche.</p>
+La réponse <span class="2010-a-gauche_choice_1">A</span> ne fait pas tourner du tout (0 degrés)<br/>
+La réponse <span class="2010-a-gauche_choice_3">C</span> fait faire demi-tour (180 degrés)<br/>
+La réponse <span class="2010-a-gauche_choice_4">D</span> tourne dans la mauvaise direction (90 degrés vers la droite).<br/>
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>
+   Un programmeur doit souvent réfléchir aux différentes situations et actions possibles. Des raisons techniques
+   peuvent souvent limiter les actions élémentaires possibles d'un système, et le programmeur doit en tenir compte
+   dans sa conception. Notre robot ne peut malheureusement pas répondre à la commande "Gauche !". La
+   combinaison de nombreuses petites actions permet cependant d'atteindre de très nombreuses situations du
+   système. Dans notre exemple, même si le robot ne peut pas tourner directement à gauche, une suite d'actions
+   permet d'atteindre la situation recherchée. En informatique, on s'intéresse aux aspects pratiques et théoriques de la
+   problématique consistant à permettre au système d'accéder à toutes les situations souhaitées, à partir d'un
+   ensemble d'actions possible petit et peu coûteux à implémenter.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

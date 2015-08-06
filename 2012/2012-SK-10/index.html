@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Convocations</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" src="../../modules/ext/jquery-ui/1.8/jquery-ui-1.8.22.custom.min.js" id="http://jqueryui.com/download/jquery-ui-1.8.22.custom.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+         task.getAnswer= function(callback) {
+          var res = $('#solution_2012_SK_10 > .item_2012_SK_10');
+          var solution = "";
+          for (var i=0; i< res.length; i++) {
+            solution += res[i].id.split('_')[0];
+          }
+          callback(solution);
+        };
+
+         task.load= function(views, callback) {
+           $('#solution_2012_SK_10').sortable({
+             placeholder: "highlight_2012_SK_10",
+             containment: '#animationcontainer_2012_SK_10',
+             items: 'div.item_2012_SK_10',
+             tolerance: "pointer"
+           });
+           callback();
+         };
+
+         task.reloadAnswer= function(strAnswer, callback) {
+           if (strAnswer == "") {
+           } else {
+              for(var i = 0; i < strAnswer.length; i++) {
+                $("#solution_2012_SK_10").append($('#' + strAnswer.charAt(i) + '_2012_SK_10'));
+              }
+           }
+           callback();
+         };
+      </script>
+         <style class="">#animationcontainer_2012_SK_10 {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+
+      .animation_2012_SK_10 {
+        width:60px;
+        z-index:-2;
+        border: 1px solid;
+        padding-bottom:10px;
+        margin-bottom:10px;
+      }
+
+      #solution_2012_SK_10 {
+        background: #ddf;
+      }
+
+      #solution_2012_SK_10 .item_2012_SK_10 {
+        background: white;
+        color:black;
+      }
+
+      .item_2012_SK_10, .title_2012_SK_10 {
+        border: 1px solid;
+        margin: 3px;
+        padding: 0px;
+        width: 50px;
+        cursor: move;
+        position: relative;
+        height: 20px;
+        text-align:center;
+      }
+
+      .title_2012_SK_10 {
+        font-weight: bold;
+        cursor: default;
+        border: none;
+        height: 40px;
+      }
+
+      #buttons_2012_SK_10 input {
+        font-size: large;
+      }
+
+      .highlight_2012_SK_10 {
+        background: yellow;
+        border: 2px dashed;
+        height: 20px;
+      }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-SK-10/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "BCDA"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Convocations</h1>
+<p>
+Quatre castors sont convoqués au barrage pour parler individuellement avec le grand chef Castor. <br />
+Les durées de leurs entretiens varient&nbsp;: 
+<center><table border="1" cellspacing="0" cellpadding="5" style="text-align:center">
+<tr><td>Alan</td><td>Berni</td><td>Carol</td><td>Dylan</td></tr>
+<tr><td>12 minutes</td><td>3 minutes</td><td>5 minutes</td><td>6 minutes</td></tr>
+</table></center>
+</p>
+<p>
+Les quatre castors arrivent tous au même moment. Du coup, certains vont devoir attendre.<br />
+Par exemple, considérez l'ordre de passage&nbsp;: Alan, puis Berni, puis Carol, puis Dylan,
+comme illustré ci-dessous.
+ <table border="0">
+ <tr>
+ <td><img src="2012-SK-10.png" width="450" /></td>
+ <td><ul><li>Alan parle pendant 12&nbsp;minutes (min).</li>
+<li> Berni attend 12&nbsp;min puis parle 3&nbsp;min, soit au total 15&nbsp;min.</li>
+<li> Carol attend 12&nbsp;+&nbsp;3&nbsp;min puis parle 5&nbsp;min, soit au total 20&nbsp;min.</li>
+<li> Dylan attend 12&nbsp;+&nbsp;3&nbsp;+&nbsp;5&nbsp;min puis parle 6&nbsp;min, soit au total 26&nbsp;min.</li></ul>
+ </td></tr>
+ </table>
+</p>
+
+<p>Dans cet exemple, le temps moyen passé par les castors au barrage est de 
+(12&nbsp;+&nbsp;15&nbsp;+&nbsp;20&nbsp;+&nbsp;26)&nbsp;&div;&nbsp;4&nbsp;=&nbsp;18,25&nbsp;minutes. </p>
+  
+<table><tr><td width="60%">
+<p>
+Le grand chef Castor souhaite organiser les rendez-vous de façon à <strong>minimiser le temps moyen</strong> passé par les castors au barrage. Quel ordre de passage doit-il proposer&nbsp;?
+<br />
+Mettez les prénoms des castors dans l'ordre en faisant glisser les étiquettes.
+</p>
+</td>
+<td width="20">&nbsp;</td>
+<td>
+ <div id="animationcontainer_2012_SK_10" style="float:left">
+   <div id="solution_2012_SK_10" class="animation_2012_SK_10">
+     <div class="title_2012_SK_10">Nom</div>
+     <div class="item_2012_SK_10" id="A_2012_SK_10">Alan</div>
+     <div class="item_2012_SK_10" id="B_2012_SK_10">Berni</div>
+     <div class="item_2012_SK_10" id="C_2012_SK_10">Carol</div>
+     <div class="item_2012_SK_10" id="D_2012_SK_10">Dylan</div>
+   </div>
+ </div>
+</td>
+<td>
+</td>
+</tr></table>
+   <center>
+      <span id="cancel_2012_SK_10" style="display:none">
+         <span style="color:blue;font-weight:bold">Votre réponse a été enregistrée. </span>
+         <br/>
+         <input type="button" value="Annuler la réponse enregistrée" onclick="task.cancel()">
+      </span>
+   </center>
+
+
+<img style="display: none;" src="2012-SK-10.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+<h2>La solution</h2>
+<p> 
+Pour faire attendre les gens le moins de temps possible, il faut faire passer 
+en priorité ceux qui ont un temps de passage le plus petit. Donc, le meilleur ordre de passage
+est&nbsp;:
+Berni (3 min), Carol (5 min), Dylan (6 min), Alan (12 min).
+</p>
+
+<p>
+Le temps total passé au barrage est : 3 + (3+5) + (3+5+6) + (3+5+6+12) = 51 minutes,
+soit un temps moyen de 12,75 minutes.
+Ceci dit, observez que pour résoudre ce sujet, 
+on n'avait pas du tout besoin de calculer des sommes ni des moyennes.
+</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>
+L'algorithme qui donne le <b>résultat optimal</b> (le meilleur possible)
+pour ce sujet se contente de considérer à chaque étape la personne dont
+le temps de passage est le plus petit possible, sans prendre en considération
+ce qui se passera par la suite. 
+On appelle ce type d'algorithme un <b>algorithme glouton</b>.
+Pour certains problèmes, comme par exemple celui présenté ici, 
+un algorithme glouton permet d'obtenir le résultat optimal. 
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

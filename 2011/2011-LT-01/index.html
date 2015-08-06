@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Capteur RVB</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "<table class='rvb-2011-LT-01' cellspacing=0px cellpadding=0px><tr><td class='n-2011-LT-01' style='border-style:none'>&nbsp;</td><td class='v-2011-LT-01'>V</td></tr><tr><td class='v-2011-LT-01'>V</td><td class='b-2011-LT-01'>B</td></tr></table>",
+            "<table class='rvb-2011-LT-01' cellspacing=0px cellpadding=0px><tr><td class='n-2011-LT-01' style='border-style:none'>&nbsp;</td><td class='v-2011-LT-01'>V</td></tr><tr><td class='v-2011-LT-01'>V</td><td class='r-2011-LT-01'>R</td></tr></table>",
+            "<table class='rvb-2011-LT-01' cellspacing=0px cellpadding=0px><tr><td class='n-2011-LT-01' style='border-style:none'>&nbsp;</td><td class='b-2011-LT-01'>B</td></tr><tr><td class='r-2011-LT-01'>R</td><td class='v-2011-LT-01'>V</td></tr></table>",
+            "<table class='rvb-2011-LT-01' cellspacing=0px cellpadding=0px><tr><td class='n-2011-LT-01' style='border-style:none'>&nbsp;</td><td class='r-2011-LT-01'>R</td></tr><tr><td class='b-2011-LT-01'>B</td><td class='v-2011-LT-01'>V</td></tr></table>"
+            ], "added", "#answers_2011-LT-01");
+      </script>
+         <style class="">.rvb-2011-LT-01 {
+   padding:0px;
+   margin:0px;
+}
+
+.rvb-2011-LT-01 td {
+   width:20px;
+   height:20px;
+   border-style:solid;
+   border-color:black;
+   border-width:1px;
+   text-align:center;
+   font-weight:bold;
+   font-size:1.2em;
+}
+
+.b-2011-LT-01 {
+   background-color:#0000FF;
+}
+
+.r-2011-LT-01 {
+   background-color:#FF0000;
+}
+
+.v-2011-LT-01 {
+   background-color:#00FF00;
+}
+
+.g-2011-LT-01 {
+   background-color:#808080;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-LT-01/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Capteur RVB</h1>
+<table><tr><td>
+<p>
+La grille ci-contre de 8x11 cases repr&eacute;sente une partie d'un capteur d'appareil photo numérique. Remarquez que les cases de la premi&egrave;re ligne sont alternativement en bleu puis en vert, puis celles de la ligne 2 sont alternativement en vert puis en rouge, et ainsi de suite.
+</p><p>En supposant que toute la grille soit color&eacute;e selon ce m&ecirc;me principe,  quelle serait la couleur des trois derni&egrave;res cases (dans le coin en bas &agrave; droite) ?
+</p>
+</td><td width="400px">
+<table class="rvb-2011-LT-01" cellspacing=0px cellpadding=0px>
+<tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+<tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td></tr>
+<tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+<tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td></tr>
+<tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+<tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td>&nbsp;</td></tr>
+<tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td class="g-2011-LT-01">&nbsp;</td></tr>
+<tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td class="g-2011-LT-01">&nbsp;</td><td class="g-2011-LT-01">&nbsp;</td></tr>
+</table>
+</td></tr></table>
+</p>
+<div class="reponses" id="answers_2011-LT-01">
+</div>
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   <b>Réponse <span class="2011-LT-01_choice_4">D</span>.</b>
+   </p>
+   <p>
+   Voici la grille complétée. 
+   <table class="rvb-2011-LT-01" cellspacing=0px cellpadding=0px>
+   <tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+   <tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td></tr>
+   <tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+   <tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td></tr>
+   <tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+   <tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td></tr>
+   <tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+   <tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td></tr>
+   <tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+   <tr><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td><td class="v-2011-LT-01">V</td><td class="r-2011-LT-01">R</td></tr>
+   <tr><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td><td class="b-2011-LT-01">B</td><td class="v-2011-LT-01">V</td></tr>
+   </table>
+
+   </p>
+
+   </p>
+   <!--reponse
+   4
+   -->
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Les capteurs des appareils photos num&eacute;riques sont compos&eacute;s d'une grille de petits pixels capables de mesurer la quantit&eacute; de lumi&egrave;re re&ccedil;ue. Devant chaque pixel est plac&eacute; un filtre rouge, vert ou bleu, qui permet de mesurer les diff&eacute;rentes couleurs de la lumi&egrave;re re&ccedil;ue, ce qui permet de prendre des photos en couleur, selon le principe du mod&egrave;le RVB (Rouge/Vert/Bleu).
+   </p>
+   <p>
+   Pour s'adapter &agrave; l'oeil humain qui est plus sensible &agrave; la couleur verte, le nombre de pixels sur lesquels un filtre vert est plac&eacute; est deux fois plus grand que pour les autres couleurs.
+   </p>
+   Analyser les motifs répétitifs et en déduire des manières de déterminer automatiquement leur état à toute position, est un problème classique d'informatique. Sur cet exemple, il est possible d'écrire une fonction simple qui détermine la couleur d'une case en fonction de ses coordonnées (ligne, colonne). Si l'on considère que la case en haut à gauche a pour coordonnées (0, 0) :
+   </p>
+   <p>
+   <ul><li>Si ((ligne + colonne) est impair), la case est verte.</li>
+   <li>Sinon, si (ligne est paire), la case est bleue.</li>
+   <li>Sinon, la case est rouge.</li>
+   </ul>
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

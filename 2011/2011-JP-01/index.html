@@ -1,0 +1,644 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Transport ferroviaire</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+<style>
+         .Wagon-2011-JP-01
+         {
+            position:relative; 
+            border-width: 3px;
+            border-style: solid;
+            border-color: #404ACA;
+            background-color: #C8FFC8;
+            width: 42px;
+            height: 18px;
+            text-align:center;
+            font-size:18px;
+            font-weight: bold;
+            color: #701004;
+            z-index:100;
+         }
+         DIV.Separator-2011-JP-01
+         {
+            overflow:hidden;
+            position:absolute; 
+            background-color:black; 
+            left:40px;
+            width:14px; 
+            top:10px; 
+            height:3px;
+            z-index:90;
+         }
+         .Box-2011-JP-01
+         {
+            border-width: 3px;
+            border-style: solid;
+            border-color: red;
+            z-index:150;
+            height:32px;
+         }
+         .AllWagon-2011-JP-01
+         {
+            position:absolute; 
+            width:54px;
+            top:3px;
+            z-index:300;
+         }
+         .Switch-2011-JP-01
+         {
+            border-width: 0px;
+            border-style: solid;
+            border-color: red;
+            position:absolute; 
+            left:330px; 
+         }
+         table.solution-2011-JP-01
+         {
+            border-spacing: 0px;    
+         }
+         table.solution-2011-JP-01  tr td
+         {
+            border:1px solid black;
+            padding-top:16px;
+            padding-bottom:16px;
+         }
+      </style>
+         <script class="" type="text/javascript">var obj2011_JP_01 = {};
+var Wagon = new Array();
+var Memorize = new Array();
+var RightWag = -1;
+var LeftWag = -1;
+var TopWag = -1;
+var BottomWag = -1;
+
+var WidthDec = 54;
+var HeightDec = 16;
+
+var POS_SWITCH = "TOP";
+
+var best_jp01 = 100000;
+var compteur = 0;
+
+   task.load= function(views, callback) {
+      obj2011_JP_01.Reset();
+      callback();
+   };
+   task.getAnswer= function(callback) {
+      callback(best_jp01);
+   };
+   task.reloadAnswer= function(newAnswer, callback)  {
+      SetNewScore(newAnswer);
+      callback();
+   };
+   
+obj2011_JP_01["Reset"] = function()
+{
+   compteur = 0;
+   while (Wagon.length > 0)
+      Wagon.pop();
+   while (Memorize.length > 0)
+      Memorize.pop();
+   for (var wag = 0 ; wag < 6 ; wag++)
+      Wagon.push(new Object());
+   Wagon[5].name="L-2011-JP-01";
+   Wagon[0].name="A-2011-JP-01";
+   Wagon[1].name="B-2011-JP-01";
+   Wagon[2].name="C-2011-JP-01";
+   Wagon[3].name="D-2011-JP-01";
+   Wagon[4].name="E-2011-JP-01";
+   
+   Wagon[5].pos="LEFT";
+   Wagon[0].pos="LEFT";
+   Wagon[1].pos="LEFT";
+   Wagon[2].pos="LEFT";
+   Wagon[3].pos="LEFT";
+   Wagon[4].pos="LEFT";
+   
+   Wagon[5].back=-1;
+   Wagon[0].back=2;
+   Wagon[1].back=4;
+   Wagon[2].back=1;
+   Wagon[3].back=5;
+   Wagon[4].back=3;
+   
+   Wagon[5].next=3;
+   Wagon[0].next=-1;
+   Wagon[1].next=2;
+   Wagon[2].next=0;
+   Wagon[3].next=4;
+   Wagon[4].next=1;
+   
+   LeftWag = 5;
+   TopWag = -1;
+   BottomWag = -1;
+   
+   Display();
+}
+   
+function Save()
+{
+   var obj = new Object();
+   
+   obj.Wagon = new Array();
+   for (var wag = 0 ; wag < 6 ; wag++)
+   {
+      obj.Wagon.push(new Object());
+      obj.Wagon[wag].name=Wagon[wag].name;
+      obj.Wagon[wag].pos=Wagon[wag].pos;
+      obj.Wagon[wag].back=Wagon[wag].back;
+      obj.Wagon[wag].next=Wagon[wag].next;
+   }
+   
+   obj.compteur = compteur;
+   obj.LeftWag = LeftWag;
+   obj.BottomWag = BottomWag;
+   obj.TopWag = TopWag;
+   obj.pos_switch = POS_SWITCH;
+   Memorize.push(obj);
+}
+   
+obj2011_JP_01["Back"] = function()
+{
+   if (Memorize.length == 0) return;
+   var obj = Memorize[Memorize.length-1];
+   for (var wag = 0 ; wag < 6 ; wag++)
+   {
+      Wagon[wag].name   = obj.Wagon[wag].name;
+      Wagon[wag].pos   = obj.Wagon[wag].pos;
+      Wagon[wag].back = obj.Wagon[wag].back;
+      Wagon[wag].next = obj.Wagon[wag].next;
+   }
+   compteur = obj.compteur;
+   LeftWag = obj.LeftWag;
+   BottomWag = obj.BottomWag;
+   TopWag = obj.TopWag;
+   if (POS_SWITCH != obj.pos_switch)
+      obj2011_JP_01.Switch();
+   Memorize.pop();
+   Display();
+}
+   
+function Display()
+{
+   var nbTop = 0;
+   var nbBottom = 0;
+   for (var wag = 0 ; wag < 6 ; wag++)
+      if (Wagon[wag].pos == "TOP")
+         nbTop++;
+      else if (Wagon[wag].pos == "BOTTOM")
+         nbBottom++;
+   
+   DisplayLeft(LeftWag, 0);
+   DisplayTop(TopWag, -nbTop * WidthDec);
+   DisplayBottom(BottomWag, -nbBottom * WidthDec);
+
+   if (compteur > 1) 
+      document.getElementById("nbr_mvt-2011-JP-01").innerHTML = "Vous avez effectué " + compteur + " mouvements depuis le début.";
+   else 
+      document.getElementById("nbr_mvt-2011-JP-01").innerHTML = "Vous avez effectué " + compteur + " mouvement depuis le début.";
+}
+   
+function Draw(name, x, y)
+{
+   var obj = document.getElementById(name);
+   if (obj == null) 
+   {
+      alert(name + " n'a pas été trouvé");
+      return;
+   }
+   obj.style.left = x + "px";
+   obj.style.top = y + "px";
+}
+   
+function DisplayLeft(id, pos)
+{
+   if (id == -1) return;
+   Draw(Wagon[id].name, pos + 13, 25);
+   DisplayLeft(Wagon[id].next, pos + WidthDec);
+}
+
+function DisplayTop(id, pos)
+{
+   if (id == -1) return;
+   Draw(Wagon[id].name, pos + 714, 25 - HeightDec);
+   DisplayTop(Wagon[id].next, pos + WidthDec);
+}
+
+function DisplayBottom(id, pos)
+{
+   if (id == -1) return;
+   Draw(Wagon[id].name, pos + 714, 25 + HeightDec);
+   DisplayBottom(Wagon[id].next, pos + WidthDec);
+}
+
+obj2011_JP_01["Switch"] = function()
+{
+   if (POS_SWITCH == "TOP")
+   {
+      POS_SWITCH = "BOTTOM";
+      document.getElementById("SWITCHT-2011-JP-01").style.visibility = "hidden";
+      document.getElementById("SWITCHB-2011-JP-01").style.visibility = "visible";
+   }
+   else 
+   {
+      POS_SWITCH = "TOP";
+      document.getElementById("SWITCHB-2011-JP-01").style.visibility = "hidden";
+      document.getElementById("SWITCHT-2011-JP-01").style.visibility = "visible";
+   }
+   document.getElementById("BADMOVE-2011-JP-01").style.visibility = "hidden";
+   Display();
+}
+
+function PushLeft(id)
+{
+   right_id = LeftWag;
+   while (right_id != -1 && Wagon[right_id].next != -1)
+      right_id = Wagon[right_id].next;
+      
+   Wagon[id].back = right_id;
+   Wagon[id].next = -1; 
+   if (right_id != -1)
+   {
+      Wagon[right_id].next = id;
+   }
+   else
+      LeftWag = id;
+      
+   Wagon[id].pos = "LEFT";
+}
+
+function PushTop(id)
+{
+   Wagon[id].next = TopWag;
+   Wagon[id].back = -1; 
+   if (TopWag != -1)
+   {
+      Wagon[TopWag].back = id;
+   }
+   TopWag = id;
+   
+   Wagon[id].pos = "TOP";
+}
+
+function PushBottom(id)
+{
+   Wagon[id].next = BottomWag;
+   Wagon[id].back = -1; 
+   if (BottomWag != -1)
+   {
+      Wagon[BottomWag].back = id;
+   }
+   BottomWag = id;
+   
+   Wagon[id].pos = "BOTTOM";
+}
+
+function Check()
+{
+   if (LeftWag != 5) return false;
+   if (Wagon[5].next != 0) 
+      return false;
+   for (var wag = 0 ; wag < 4 ; wag++)
+      if (Wagon[wag].next != wag+1) 
+         return false;
+   return true;
+}
+
+function SetNewScore(score) {
+   if (best_jp01 > score) {
+      best_jp01 = score;
+      platform.validate("stay");
+  }
+   document.getElementById("WIN-2011-JP-01").innerHTML = "<font color=red>Vous avez reorganisé comme il le fallait en " + score + " mouvements.\n</font>";
+   document.getElementById("BEST-2011-JP-01").innerHTML = "Votre meilleur score est" + best_jp01 + " mouvements.\n";
+   if (best_jp01 != 12) {
+      document.getElementById("BEST-2011-JP-01").innerHTML += "<br>Vous pouvez faire encore mieux.\n";
+   }
+   else {
+      document.getElementById("BEST-2011-JP-01").innerHTML += "<br>C'est le meilleur possible pour cet exercice.\n";      
+   }
+}
+   
+   
+obj2011_JP_01["MooveDisplay"] = function(id)
+{
+   obj2011_JP_01.SeparateOUT();
+   document.getElementById("BADMOVE-2011-JP-01").style.visibility = "hidden";
+   if (Wagon[id].pos == "TOP")
+      if (TopWag != 5) 
+      {
+         document.getElementById("BADMOVE-2011-JP-01").style.visibility = "visible";
+         return;
+      }
+   if (Wagon[id].pos == "BOTTOM")
+      if (BottomWag != 5)
+      {
+         document.getElementById("BADMOVE-2011-JP-01").style.visibility = "visible";
+         return;
+      }
+      
+   if (Wagon[id].pos != "LEFT" && Wagon[id].pos != POS_SWITCH)
+      obj2011_JP_01.Switch(); // previously undefined Switch()
+      
+   Save();
+   
+   if (Wagon[id].pos == "LEFT")
+      id = LeftWag;
+   else
+      obj2011_JP_01.Switch();
+   
+   obj2011_JP_01.Moove(id);
+   compteur++;
+   Display();
+   if (Check())
+   {
+      SetNewScore(compteur);         
+      selectAnswer('2011-JP-01', best_jp01);
+   }
+   else
+      document.getElementById("WIN-2011-JP-01").innerHTML = "";
+}
+obj2011_JP_01["Moove"] = function(id)
+{
+   if (id == -1) return;
+   if (Wagon[id].pos == "LEFT")
+   {
+      obj2011_JP_01.Moove(Wagon[id].next);
+      
+      if (Wagon[id].back == -1)
+         LeftWag = -1;
+      else
+         Wagon[Wagon[id].back].next = -1; 
+      
+      if (POS_SWITCH == "TOP")
+         PushTop(id);
+      else
+         PushBottom(id);
+   }
+   else
+   {   
+      obj2011_JP_01.Moove(Wagon[id].back);
+
+      if (Wagon[id].next != -1)
+         Wagon[Wagon[id].next].back = -1;
+
+      if (Wagon[id].pos == "TOP")
+         TopWag = Wagon[id].next;
+      else
+         BottomWag = Wagon[id].next;
+      
+      PushLeft(id);
+   }
+}
+
+function count_right(id)
+{
+   if (Wagon[id].next == -1)
+      return 1;
+   return 1 + count_right(Wagon[id].next);
+}
+
+obj2011_JP_01["SeparateOVER"] = function(id)
+{
+   if (Wagon[id].pos != Wagon[5].pos)
+      return;
+      
+   var nb = count_right(5);
+   document.getElementById("Box-2011-JP-01").style.width = WidthDec*nb+10 + "px";
+   
+   document.getElementById("Box-2011-JP-01").style.left = 708-WidthDec*nb + "px";
+   if (Wagon[id].pos == "LEFT")
+      document.getElementById("Box-2011-JP-01").style.left = "5px";
+   else
+      document.getElementById("Box-2011-JP-01").style.width = WidthDec*(1+nb-count_right(id)) + "px";
+      
+   if (Wagon[id].pos == "TOP")
+      document.getElementById("Box-2011-JP-01").style.top = "4px";
+   else if (Wagon[id].pos == "LEFT")
+      document.getElementById("Box-2011-JP-01").style.top = "19px";
+   else
+      document.getElementById("Box-2011-JP-01").style.top = "36px";
+      
+   document.getElementById("Box-2011-JP-01").style.visibility = "visible";
+}
+obj2011_JP_01["SeparateOUT"] = function()
+{   
+   document.getElementById("Box-2011-JP-01").style.visibility = "hidden";
+}
+obj2011_JP_01["TurnONSwitch"] = function()
+{
+   document.getElementById("SWITCHB-2011-JP-01").style.borderWidth = "2px";
+   document.getElementById("SWITCHT-2011-JP-01").style.borderWidth = "2px";
+   document.getElementById("SWITCHB-2011-JP-01").style.left = "328px";
+   document.getElementById("SWITCHT-2011-JP-01").style.left = "328px";
+   document.getElementById("SWITCHB-2011-JP-01").style.top = "0px";
+   document.getElementById("SWITCHT-2011-JP-01").style.top = "-3px";
+}
+obj2011_JP_01["TurnOFFSwitch"] = function()
+{
+   document.getElementById("SWITCHB-2011-JP-01").style.borderWidth = "0px";
+   document.getElementById("SWITCHT-2011-JP-01").style.borderWidth = "0px";
+   document.getElementById("SWITCHB-2011-JP-01").style.left = "330px";
+   document.getElementById("SWITCHT-2011-JP-01").style.left = "330px";
+   document.getElementById("SWITCHB-2011-JP-01").style.top = "2px";
+   document.getElementById("SWITCHT-2011-JP-01").style.top = "-1px";
+}
+</script>
+         <style class="">.Wagon-2011-JP-01
+         {
+            position:relative; 
+            border-width: 3px;
+            border-style: solid;
+            border-color: #404ACA;
+            background-color: #C8FFC8;
+            width: 42px;
+            height: 18px;
+            text-align:center;
+            font-size:18px;
+            font-weight: bold;
+            color: #701004;
+            z-index:100;
+         }
+         DIV.Separator-2011-JP-01
+         {
+            overflow:hidden;
+            position:absolute; 
+            background-color:black; 
+            left:40px; 
+            width:14px; 
+            top:10px; 
+            height:3px;
+            z-index:90;
+         }
+         .Box-2011-JP-01
+         {
+            border-width: 3px;
+            border-style: solid;
+            border-color: red;
+            z-index:150;
+            height:32px;
+         }
+         .AllWagon-2011-JP-01
+         {
+            position:absolute; 
+            width:54px;
+            top:3px;
+            z-index:300;
+         }
+         .Switch-2011-JP-01
+         {
+            border-width: 0px;
+            border-style: solid;
+            border-color: red;
+            position:absolute; 
+            left:330px; 
+         }
+         table.solution-2011-JP-01
+         {
+            border-spacing: 0px;    
+         }
+         table.solution-2011-JP-01  tr td
+         {
+            border:1px solid black;
+            padding-top:16px;
+            padding-bottom:16px;
+         }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-JP-01/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["12"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+   <h1>Transport ferroviaire</h1>
+      <div style="width:770px; height:160px; position:relative">
+         <div style="width:336px; height:28px; position:absolute; left:1px; top:22px;background-image:url('rail.jpg');">
+            <div class="AllWagon-2011-JP-01" style="left:63px"><div class="Wagon-2011-JP-01">A</div><div class="Separator-2011-JP-01"></div></div>
+            <div class="AllWagon-2011-JP-01" style="left:117px"><div class="Wagon-2011-JP-01">B</div><div class="Separator-2011-JP-01"></div></div>
+            <div class="AllWagon-2011-JP-01" style="left:170px"><div class="Wagon-2011-JP-01">C</div><div class="Separator-2011-JP-01"></div></div>
+            <div class="AllWagon-2011-JP-01" style="left:224px"><div class="Wagon-2011-JP-01">D</div><div class="Separator-2011-JP-01"></div></div>
+            <div class="AllWagon-2011-JP-01" style="left:278px"><div class="Wagon-2011-JP-01">E</div><div class="Separator-2011-JP-01"></div></div>
+            <div class="AllWagon-2011-JP-01" style="left:10px"><img src="trainL.jpg" style="position:relative;z-index:300"/><div class="Separator-2011-JP-01"></div></div>
+            
+         </div>
+         <div style="width:336px; height:28px; position:absolute; left:378px; top:7px;background-image:url('rail.jpg');"></div>
+         <div style="width:336px; height:28px; position:absolute; left:378px; top:38px;background-image:url('rail.jpg');"></div>
+
+
+         <div style="position:absolute; left:330px; top:-1px; z-index:-200">
+            <img src="switchT.jpg" />
+         </div>
+         <div style="position:absolute; top:80px">
+            Vous devez atteindre la configuration ci-dessus en effectuant le moins de mouvements possible.
+            <br />
+            Cliquez sur les wagons que vous voulez déplacer pour les bouger (vous ne pouvez déplacer que des wagons reliés à la locomotive).
+            <br />
+            Vous pouvez changer l'aiguillage en cliquant dessus.
+         </div>
+         
+      </div>
+      <div id="DIV-2011-JP-01" style="width:770px; height:152px; position:relative">
+         <div id="Box-2011-JP-01" class="Box-2011-JP-01" style="visibility:hidden; position:absolute" onmouseout="javascript:obj2011_JP_01.SeparateOUT()"></div>
+         <div style="width:328px; height:28px; position:absolute; left:1px; top:22px;background-image:url('rail.jpg');"></div>
+         <div style="width:336px; height:28px; position:absolute; left:378px; top:7px;background-image:url('rail.jpg');"></div>
+         <div style="width:336px; height:28px; position:absolute; left:378px; top:38px;background-image:url('rail.jpg');"></div>
+         <div id="A-2011-JP-01" class="AllWagon-2011-JP-01" onclick="javascript:obj2011_JP_01.MooveDisplay(0)" onmouseover="javascript:obj2011_JP_01.SeparateOVER(0)" onmouseout="javascript:obj2011_JP_01.SeparateOUT()">
+            <div class="Wagon-2011-JP-01">A</div><div class="Separator-2011-JP-01"></div>
+         </div>
+         <div id="B-2011-JP-01"  class="AllWagon-2011-JP-01" onclick="javascript:obj2011_JP_01.MooveDisplay(1)" onmouseover="javascript:obj2011_JP_01.SeparateOVER(1)" onmouseout="javascript:obj2011_JP_01.SeparateOUT()">
+            <div class="Wagon-2011-JP-01">B</div><div class="Separator-2011-JP-01"></div>
+         </div>
+         <div id="C-2011-JP-01"  class="AllWagon-2011-JP-01" onclick="javascript:obj2011_JP_01.MooveDisplay(2)" onmouseover="javascript:obj2011_JP_01.SeparateOVER(2)"onmouseout="javascript:obj2011_JP_01.SeparateOUT()">
+            <div class="Wagon-2011-JP-01">C</div><div class="Separator-2011-JP-01"></div>
+         </div>
+         <div id="D-2011-JP-01"  class="AllWagon-2011-JP-01" onclick="javascript:obj2011_JP_01.MooveDisplay(3)" onmouseover="javascript:obj2011_JP_01.SeparateOVER(3)"onmouseout="javascript:obj2011_JP_01.SeparateOUT()">
+            <div class="Wagon-2011-JP-01">D</div><div class="Separator-2011-JP-01"></div>
+         </div>
+         <div id="E-2011-JP-01"  class="AllWagon-2011-JP-01" onclick="javascript:obj2011_JP_01.MooveDisplay(4)" onmouseover="javascript:obj2011_JP_01.SeparateOVER(4)"onmouseout="javascript:obj2011_JP_01.SeparateOUT()">
+            <div class="Wagon-2011-JP-01">E</div><div class="Separator-2011-JP-01"></div>
+         </div>
+         <div id="L-2011-JP-01"  class="AllWagon-2011-JP-01" onclick="javascript:obj2011_JP_01.MooveDisplay(5)" onmouseover="javascript:obj2011_JP_01.SeparateOVER(5)" onmouseout="javascript:obj2011_JP_01.SeparateOUT()">
+            <img src="trainL.jpg" style="position:relative;z-index:300"/><div class="Separator-2011-JP-01"></div>
+         </div>
+         
+         <div id="SWITCHT-2011-JP-01" class="Switch-2011-JP-01" style="top:-1" onclick="javascript:obj2011_JP_01.Switch()" onmouseout="javascript:obj2011_JP_01.TurnOFFSwitch()" onmouseover="javascript:obj2011_JP_01.TurnONSwitch()">
+            <img src="switchT.jpg" />
+         </div>
+         <div id="SWITCHB-2011-JP-01" class="Switch-2011-JP-01" style="top:2; visibility:hidden"onclick="javascript:obj2011_JP_01.Switch()" onmouseout="javascript:obj2011_JP_01.TurnOFFSwitch()" onmouseover="javascript:obj2011_JP_01.TurnONSwitch()">
+            <img src="switchB.jpg" />
+         </div>
+         
+         <div id="SEP-2011-JP-01" style="position:absolute; background-color:red; width:4px; height:40px; left:415px; top:3px; visibility:hidden">
+         </div>
+         
+         <div style="position:absolute; top:100px">
+            <input type="button" value="Recommencer" onclick="javascript:obj2011_JP_01.Reset()">
+            <input type="button" value="Annuler le dernier mouvement" onclick="javascript:obj2011_JP_01.Back()">
+            <div id="nbr_mvt-2011-JP-01" style="position:relative"></div>
+            <div id="BADMOVE-2011-JP-01" style="position:absolute; left:280px;width:440px;top:8px; visibility:hidden"><font color=red>Vous ne pouvez pas déplacer ces wagons car ils ne sont pas reliés à la locomotive.</font></div>
+            <div id="WIN-2011-JP-01" style="position:absolute; left:280px;width:440px;top:8px;"></div>
+            <div id="BEST-2011-JP-01" style="position:absolute; left:0px;width:320px;top:40px;"></div>
+         </div>
+      </div>
+      
+<img style="display: none;" src="rail.jpg" />
+<img style="display: none;" src="trainL.jpg" />
+<img style="display: none;" src="switchT.jpg" />
+<img style="display: none;" src="switchB.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+         <p>12 mouvements suffisent. Voici les différentes étapes.<br>
+         <table class="solution">
+           <tr><td>0</td><td><img src="2011-JP-01_solution01.png" style="width:600px"></td></tr>
+           <tr><td>1</td><td><img src="2011-JP-01_solution02.png" style="width:600px"></td></tr>
+           <tr><td>2</td><td><img src="2011-JP-01_solution03.png" style="width:600px"></td></tr>
+           <tr><td>3</td><td><img src="2011-JP-01_solution04.png" style="width:600px"></td></tr>
+           <tr><td>4</td><td><img src="2011-JP-01_solution05.png" style="width:600px"></td></tr>
+           <tr><td>5</td><td><img src="2011-JP-01_solution06.png" style="width:600px"></td></tr>
+           <tr><td>6</td><td><img src="2011-JP-01_solution07.png" style="width:600px"></td></tr>
+           <tr><td>7</td><td><img src="2011-JP-01_solution08.png" style="width:600px"></td></tr>
+           <tr><td>8</td><td><img src="2011-JP-01_solution09.png" style="width:600px"></td></tr>
+           <tr><td>9</td><td><img src="2011-JP-01_solution10.png" style="width:600px"></td></tr>
+           <tr><td>10</td><td><img src="2011-JP-01_solution11.png" style="width:600px"></td></tr>
+           <tr><td>11</td><td><img src="2011-JP-01_solution12.png" style="width:600px"></td></tr>
+           <tr><td>12</td><td><img src="2011-JP-01_solution13.png" style="width:600px"></td></tr>
+         </table>
+         </p>
+
+         <h2>C'est de l'informatique</h2>
+         <p>Pour programmer un logiciel, il faut
+         s'appuyer sur des <i>structures de données</i>. Une structure de
+         données c'est une sorte de moyen de rangement pour le programmeur. Il
+         peut y stocker des informations puis les récupérer pour les traiter.
+         Ici, le problème est constitué de trois rails dans lesquels on peut
+         placer des wagons.  Ces rails peuvent être vues comme
+         des <i>piles</i>. Les piles sont des structures de données très
+         importantes en informatique. On peut ajouter des éléments dans une
+         pile mais lorsqu'on veut en extraire des éléments, on doit toujours
+         commencer par extraire le dernier élément inséré. Les mêmes
+         contraintes s'appliquent ici. Toute la difficulté consiste à savoir
+         utiliser les opérations d'ajout et d'extraction dans un bon ordre.
+         </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2014-FR-08-maze</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://castor-informatique.fr/tasks/modules/drag_lib.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-08-maze/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Anouk Baradawis and Mathias Hiron, Eljakim Schrijvers",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "hard", "2": "medium", "3": "medium", "4": "easy"},
+          "categories": {ALG : true},
+          "answerType": "Interactive, drag instructions to create a program",
+          "fullFeedback": true,
+          "status": "test"
+      };
+      </script>
+      <script class="solution" type="text/javascript">
+      // Not needed for task or grading
+      task.solution = [0, 1, 0, 1, 2, 1, 2, 3, 2, 1, 2, 1];
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #laby {
+         text-align:center;
+      }
+      #laby > table {
+         background:white;
+         padding:5px;
+         margin:auto;
+      }
+      #simuToolbar {
+         /*text-align:center;*/
+      }
+      .instruction {
+         border: solid black 1px;
+         text-align: center;
+      }
+      #textSolution {
+         font-weight: bold;
+       }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Deux billes</h1>
+         <p>
+         Écrivez un programme permettant de <b>faire sortir les deux billes</b> du labyrinthe. 
+         Chaque commande du programme fait rouler les billes dans une certaine direction.
+         </p>
+         <p>      
+         Commencez par exécuter l'exemple ci-dessous pour bien comprendre le fonctionnement. 
+         Faites ensuite glisser les commandes afin de modifier le programme.
+         </p>
+
+         <table>
+            <tr>
+               <td style="vertical-align:top; width:380px">
+                  <div id="anim" class="touch"></div>
+               </td>
+               <td style="vertical-align:top; width:380px">
+                  <div id="laby" style="margin-left:0.8em">
+                  </div>
+                  <!-- Toolbar -->
+                  <div id="simuToolbar">
+                     <input type="button" class="play" onclick="task.play()" value="Tout exécuter">
+                     <input type="button" class="step" onclick="task.step()" value="Une étape">
+                     <input type="button" class="restart" onclick="task.resetLaby(true)" value="Remettre à zéro">
+                  </div>
+               </td>
+            </tr>
+         </table>
+      </div>
+      <div id="solution">
+       <h2>Solution</h2>
+
+          <p>Il y avait plusieurs solutions. Par exemple&nbsp;:<br>
+          <span id="textSolution"></span>.
+          </p>
+          
+       <h2>C'est de l'informatique !</h2>
+            <p>
+            Pour résoudre ce sujet, il fallait écrire un programme sous la forme d'une séquence d'instructions. La difficulté consistait à trouver une séquence qui convient.
+            </p>
+            <p>
+            Les programmes informatiques en général sont également constitués d'une séquence d'instructions à exécuter. La principale différence est qu'ils utilisent des instructions plus compliquées.
+            </p>
+      </div>
+   </body>
+</html>

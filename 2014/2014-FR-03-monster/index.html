@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>2014-FR-03-monster</title>
+  <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+  <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+  <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+  <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+  <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+  <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+  <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+  <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+  <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+  <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+  <script class="remove" type="text/javascript">
+
+  var json = {
+    "id": "http://castor-informatique.fr/tasks/2014/2014-FR-03-monster/",
+    "language": "en",
+    "version": "en.01",
+    "authors": "Mathias Hiron",
+    "license": "CC BY-SA 3.0",
+    "translators": [
+    ],
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+    ],
+    "acceptedAnswers": [
+    ],
+    "difficulty": {"1": "medium", "2": "medium", "3": "easy", "4": "easy"},
+    "categories": {ALG : true},
+    "answerType": "Interactive, click on a grid",
+    "fullFeedback": true,
+    "usesRandomSeed": true
+  };
+  </script>
+  <style>
+  </style>
+  <script type="text/javascript" src="task.js"></script>
+
+</head>
+<body>
+  <div id="task">
+    <img src="monster.png" style="display:none">
+    <h1>Attraper le monstre</h1>
+    <table>
+      <tr>
+        <td style="vertical-align:top">
+          <p>
+            Un monstre vient de s'introduire dans les douves du donjon de Castor&nbsp;!
+          </p>
+          <center><img src="monster.png" style="width:100px" /></center>
+          <p>
+            Votre objectif est de coincer le monstre pour qu'il ne puisse plus bouger, en utilisant un <b>minimum</b> de barrages.
+          </p>
+          <p>
+          Les cases bleues montrent à chaque fois la zone où se cache le monstre. 
+          </p>
+          <center>
+            <b><div id="status"></div></b>
+            <br>
+            <div id="success"></div>
+            <br><br>
+            <b><div id="best"></div></b>
+          </center>
+        </td>
+        <td>
+          <div id="anim"></div>
+          <div style='text-align: right;'><input type="button" id="cancelLast" value="Annuler une étape" onclick="task.cancelLastStep()"></div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <!-- task -->
+  <div id="solution">
+    <h2>Solution</h2>
+    <p>
+    Pour accomplir cette mission, il faut trouver une bonne stratégie. En posant des barrages au hasard, on observe qu'à chaque fois, le monstre se réfugie dans la plus grande des deux parties séparées par le nouveau barrage. Or, si l'on veut poser le moins possible de barrages, on a intérêt à laisser au monstre le plus petit espace possible. Du coup, on a intérêt à couper l'espace restant en deux parties égales.</p>
+    <p>
+    En répétant cette stratégie, on divise en gros le nombre de cases restantes par deux à chaque étape. Plus précisément, à la première étape, on a 127 cases de douve. En plaçant un bloc au milieu, il reste au monstre un espace de (127-1)/2 = 63 cases. En divisant en deux à nouveau, il lui reste 31 cases, puis 15, puis 7, puis 3 et finalement plus qu'une seule case. Donc, quels que soient les choix du monstre, on peut toujours le coincer avec 6 barrages.
+    </p>
+    <p>
+    Voici ci-dessous un exemple de «&nbsp;chasse au monstre&nbsp;» en 6 barrages.
+    </p>
+    <center><img src="solution.png" /></center>
+
+    <h2>C'est de l'informatique !</h2>
+    <p>
+    La stratégie consistant à diviser exactement en deux l'ensemble des possibilités restantes porte un nom en informatique&nbsp;: la recherche par «&nbsp;dichotomie&nbsp;».
+    </p>
+    <p>
+    La dichotomie est un algorithme utilisé dans de nombreux «&nbsp;algorithmes&nbsp;» en informatique, par exemple pour effectuer des recherches dans des ensembles de données triées, ou bien pour calculer sur un ordinateur des valeurs approchées pour les solutions d'une équation mathématique très compliquée.
+    </p>
+
+  </div>
+</body>
+</html>

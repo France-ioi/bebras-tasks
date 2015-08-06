@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Bébrocarina</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "+ = = = + = = = + = = = + = = = +",
+            "&ndash; &ndash; &ndash; = + &ndash; = &nbsp;&ndash; &ndash; = = = +",
+            "&ndash; &ndash; &ndash; &ndash; &ndash;&nbsp;&nbsp;= + + + + + = &ndash; &ndash; &ndash; &ndash; &ndash;",
+            "&ndash; &ndash; + &ndash; &ndash;&nbsp;&nbsp;+ &ndash; &ndash; = &ndash; + &ndash; &ndash;"
+            ], "added", "#answers_2012-CZ-04");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-CZ-04/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "4"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Bébrocarina</h1>
+<p>Le Bébrocarina est un instrument de musique sur lequel, <strong>après avoir joué une note, on ne peut jouer que la même note, ou bien une note un ton au-dessous ou un ton au-dessus</strong>.
+Pour écrire une partition de Bébrocarina, on n'utilise que trois symboles différents&nbsp;:
+<ul style="list-style:none">
+<li><b>=</b> signifie &laquo;&nbsp;jouer la même note que précédemment&nbsp;&raquo;,</li>
+<li><b>&ndash;</b> signifie &laquo;&nbsp;jouer la note un ton au-dessous&nbsp;&raquo;,</li>
+<li><b>+</b> signifie &laquo;&nbsp;jouer la note un ton au-dessus.&nbsp;&raquo;</li>
+</ul></p>
+<p>
+La partition n'indique pas quelle doit être la première note à jouer, elle ne décrit que l'enchaînement des notes. </p>
+<p>
+Par exemple, la partition &laquo;&nbsp;&ndash;&nbsp;+&nbsp;&raquo; indique de jouer une première note quelconque, puis jouer une note un ton au-dessous de la première note, puis jouer une note un ton au-dessus de la deuxième note (la dernière note est donc la même que la première).</p>
+
+<p>
+Sachant qu'un Bébrocarina ne permet de jouer que six notes différentes, laquelle de ces partitions <strong>ne peut pas</strong> être jouée&nbsp;? </p>
+
+<div class="reponses"  id="answers_2012-CZ-04">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+
+<h2>La solution</h2>
+
+<p>Le Bébrocarina ne permet de jouer que 6 notes différentes, et ne permet donc pas de jouer des partitions dont la note la plus aiguë est plus de 5 tons au-dessus de la note la plus grave.
+</p>
+<p>
+Pour calculer l'écart entre la note la plus aiguë et la plus grave, on va considérer (de manière arbitraire) que la première note que l'on joue est la note zéro. On ajoute alors une unité à chaque &laquo;&nbsp;+&nbsp;&raquo; et l'on soustrait une unité à chaque &laquo;&nbsp;&ndash;&nbsp;&raquo;. Par exemple, la partition &laquo;&nbsp;&ndash;&nbsp;+&nbsp;+&nbsp;&ndash;&raquo; correspond aux notes 
+&laquo;0&nbsp;-1&nbsp;0&nbsp;1&nbsp;0&raquo;.
+</p>
+<p>On peut faire ce calcul pour chaque partition et se souvenir de la valeur la plus petite et la plus grande que l'on a obtenu. On peut aussi utiliser une représentation graphique, en représentant les notes un peu comme sur une vraie partition de musique, mais où chaque ligne représente une note différente :
+</p>
+<center><img src="2012-CZ-04-solution.png"></center>
+<p>
+<p>On constate que la dernière partition, qui est la partition <span class="2012-CZ-04_choice_4">4</span>, n'est pas jouable à l'aide d'un Bébrocarina car elle utilise 7 notes différentes. Les autres partitions sont jouables car elles n'utilisent que 6 notes différentes.</p>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>Dans cet exercice il fallait d'abord comprendre le langage utilisé pour décrire les partitions. En informatique, il est courant de manipuler de nouveaux langages pour représenter diverses informations.</p>
+<p>Ensuite, il fallait trouver une méthode pour compter le nombre de notes différentes utilisées. Une première manière était de garder en tête un compteur partant de 0, et l'augmenter ou le diminuer au fil de la lecture des +, - et =, tout en se souvenant de la valeur la plus élevée et de la valeur la plus basse. On "exécutait" en quelque sorte le programme en utilisant une variable.</p>
+
+<p>Une autre approche consistait à utiliser une bonne représentation graphique pour s'aider à réfléchir et à mieux comprendre ce que représentait chaque partition, comme on l'a présenté ici. Représenter les informations visuellement est souvent une très bonne manière de résoudre des problèmes en informatique, et plus particulièrement en algorithmique. Des problèmes difficiles peuvent devenir beaucoup plus simples avec le bon dessin.</p>
+
+
+<h2>Culture informatique </h2>
+
+<p>Pour décrire une séquence de nombres, on peut donner naïvement la liste des nombres un par un. 
+On peut également décrire la même séquence en donnant le premier nombre puis en indiquant les variations successives.
+Par exemple, on peut décrire la séquence "3145 3149 3147 3149 3152" sous la forme : "départ : 3145; ensuite : +4 -2 2 +3".
+</p>
+
+<p>
+Lorsqu'une séquence est formée de nombres qui sont souvent proches les uns des autres, décrire les variations
+plutôt que les nombres permet d'économiser beaucoup de chiffres. Cette technique fait partie des méthodes
+de <b>compression</b>, qui permettent de stocker des images ou des vidéos numériques en 
+économisant de grandes quantités de mémoire. En effet, deux pixels d'une photo qui se touchent ont
+tendance à avoir des couleurs proches, et deux pixels à la même position sur deux images successives constituant
+une vidéo ont également tendance à avoir des couleurs proches.
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

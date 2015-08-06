@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-CA-02-shout-your-name</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-CA-02-shout-your-name/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": []
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         task.solution = [ 1, 5, 6, 3, 4, 2, 0 ]; 
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      .task-columns td {
+         vertical-align: top;
+      }
+      .task-columns li {
+         margin-top: 0.5em;
+      }
+      .task-columns li li {
+         margin-top: 0.2em;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <table class="task-columns" style="margin-top: -1em"><tr><td>
+            <p>
+            Le diagramme ci-contre représente l'arbre généalogique de Julien,
+            avec Paul et Émilie (les parents de Julien), César et Hélène
+            (les parents d'Émilie), ainsi que Rodolf et Yasmine (les parents de César).
+            </p>
+            <p>
+            Toutes ces personnes se retrouvent pour une réunion de famille.
+            Chaque personne va donner un petit discours, selon le rituel suivant.
+            </p>
+            <p>
+            Lorsqu'une personne reçoit une tape sur l'épaule&nbsp;:
+            </p>
+            <ul>
+            <li>Si ses parents sont absents&nbsp;:
+                <ol>
+                <li>elle prononce son discours.</li>
+                </ol>
+            </li>
+            <li>Sinon, si ses parents sont présents&nbsp;:
+               <ol>
+               <li> elle tape sur l'épaule de son père,</li>
+               <li> elle attend la fin du discours de son père,</li>
+               <li> elle tape sur l'épaule de sa mère,</li>
+               <li> elle attend la fin du discours de sa mère,</li>
+                <li> elle prononce son propre discours.</li>
+               </ol>
+            </li>
+            </ul>
+            <p>
+            Pour démarrer le rituel, Julien se tape lui-même sur l'épaule.
+            </p>
+            <p>
+            Votre objectif est de retrouver dans quel ordre les personnes réunies ont fait leurs discours.
+            </p>
+ 
+         </td>
+         <td>
+            <pre style="font-family:courier, monospace; border: 1px solid black; padding: 0.5em; margin: 0.2em">
+ Rodolf     Yasmine
+      \     /  
+       César      Hélène
+           \      /
+Paul        Émilie
+    \      /
+     Julien
+</pre>
+            <p style="margin-top: 1.5em; margin-left: 2.4em">
+              <b>Ordre des discours&nbsp;:</b>
+            </p>
+            <div id='anim'></div>
+         </td></tr></table>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+      <p>Voici les détails du rituel appliquée (qui n'est rien d'autre qu'un algorithme)&nbsp;:</p>
+      <p>
+		Julien a ses parents, donc il tape sur l'épaule de son père, Paul. <br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Paul n'a pas ses parents, il fait son discours. &rarr; <b>1)&nbsp;Paul</b> <br />
+		Julien tape sur l'épaule de sa mère, Émilie. <br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Émilie a ses parents, donc elle tape sur l'épaule de son père, César. <br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;César a ses parents, donc il tape sur l'épaule de son père, Rodolf.  <br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rodolf n'a pas ses parents, il fait son discours. &rarr; <b>2)&nbsp;Rodolf</b> <br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;César tape sur l'épaule de sa mère, Yasmine. <br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yasmine n'a pas ses parents, elle fait son discours. &rarr; <b>3)&nbsp;Yasmine</b><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;César fait son discours. &rarr; <b>4)&nbsp;César</b><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Émilie tape sur l'épaule de sa mère, Hélène. <br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hélène n'a pas ses parents, elle fait son discours. &rarr; <b>5) Hélène</b><br />
+		&nbsp;&nbsp;&nbsp;&nbsp;Émilie fait son discours. &rarr; <b>6) Émilie</b><br />
+		Julien fait son discours. &rarr; <b>7) Julien</b>
+	  </p>
+     <p>Au final, l'ordre est donc : <span id="textSolution"></span>.</p>
+           <pre style="font-family:courier, monospace; padding: 0.5em; margin: 0.2em">
+ 2:Rodolf     3:Yasmine
+        \     /  
+        4:César      5:Hélène
+              \      /
+  1:Paul      6:Émilie
+       \      /
+       7:Julien
+</pre>
+
+         <h2>C'est de l'informatique !</h2>
+
+         <p>
+         Les «&nbsp;structures arborescentes&nbsp;» sont très utilisées en informatique, que ce soit pour concevoir des algorithmes efficaces ou simplement pour représenter des données de manière structurée. Par exemple, une page web est représentée comme un document au format «&nbsp;HTML&nbsp;», dont les balises organisent implicitement le contenu sous forme d'un arbre.
+         </p> 
+         <p>
+         Par exemple, une page web peut contenir plusieurs sections, chaque section peut contenir des tableaux, qui contiennent eux-mêmes des cases, contenant chacune du texte ou des images. Afin d'afficher le contenu de la page, le navigateur traverse la structure d'arbre selon un «&nbsp;ordre de parcours&nbsp;» particulier. Il peut le faire dans différents ordres, selon la méthode adoptée : d'abord obtenir une vision globale de où vont se trouver les tableaux, ou bien  d'abord déterminer quelle taille auront les textes et les images se trouvant dans les tableaux.
+         </p>
+         <p>
+         Dans ce sujet, il fallait suivre un ordre de parcours particulier, appelé «&nbsp;ordre post-fix&nbsp;», selon lequel on commence par afficher les branches d'un «&nbsp;noeud&nbsp;» avant d'afficher le noeud lui-même.
+         </p>
+
+	  </div>
+   
+   </body>
+</html>
+ 

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Castor bûcheron</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("string", "#answers_2011-FR-05", 1, 1);
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-FR-05/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["B"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Castor bûcheron</h1>
+<p>
+Le papa de Castor lui a demandé d'aller couper un arbre, mais il ne se souvient plus bien duquel il s'agit parmi ceux présentés ci-dessous. Il se souvient cependant qu'il s'agit du sixième (6<sup>ème</sup>) arbre le plus grand. Quel arbre doit-il couper ?
+</p>
+<p>
+<img src="2011-FR-Arbres-better.png" width=600/>
+</p>
+<p>
+Inscrivez ci-dessous la lettre de l'arbre à couper :
+</p>
+<div class="reponses" id="answers_2011-FR-05">
+</div>
+
+<img style="display: none;" src="2011-FR-Arbres-better.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Une approche possible pour trouver le 6ème arbre le plus grand, est de partir du haut, et de considérer une ligne horizontale qui descend petit à petit, en regardant quels arbres cette ligne touche en premier. Une fois que l'on a atteint le 6ème arbre le plus grand, on peut vérifier son résultat en considérant la ligne qui passe par le haut de l'arbre, et en recomptant combien d'arbres sont au dessus de cette ligne.
+   </p>
+   <p>
+   <img src="2011-FR-Arbres-solution.png" width=600/>
+   </p>
+   <p>
+   Comme on peut le constater sur l'illustration ci-dessus, le 6ème arbre le plus grand est <b>l'arbre dénoté par la lettre "B"</b>.
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   L'approche décrite dans la solution, qui consiste à imaginer une ligne horizontale qui parcourt le plan, et à effectuer une action chaque fois que cette ligne rencontre un nouvel objet ou une extrémité d'objet, est ce que l'on appelle un algorithme de <i>balayage</i>. Ici il s'agit d'un balayage simple parmi les arbres, où l'on ne fait qu'augmenter un compteur chaque fois que la ligne rencontre le sommet d'un arbre.
+   </p>
+   <p>
+   Les algorithmes de balayage sont généralement basés sur le principe d'une ligne qui parcourt des données dans un ordre bien choisi, mais l'action effectuée à chaque rencontre d'un objet peut impliquer l'utilisation de toutes sortes de structures de données pour maintenir diverses informations au fur et à mesure de la progression de la ligne.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

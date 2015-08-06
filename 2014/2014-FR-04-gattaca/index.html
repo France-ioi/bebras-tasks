@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-FR-04</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-04-gattaca/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Mathias Hiron",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "difficulty": {"3": "hard", "4": "hard"},
+          "categories": {ALG : true},
+          "answerType": "Interactive, click on a grid",
+          "fullFeedback": true,
+          "status": "test"
+      };
+      </script>
+     <style>
+         .twolines { display:none; }
+     </style>
+     <script type="text/javascript" src="task.js"></script>
+  </head>
+  <body>
+      <div id="task">
+      <h1>Le défi</h1>
+          <p>
+         <img src="castor_small.png" style="float:right;margin-left:1em;height:120px" >
+           Castor vous défie au jeu suivant. Quand vous cliquez sur une case, il y inscrit une lettre parmi <b>C</b>, <b>A</b>, <b>S</b> ou <b>T</b>.
+          </p>
+          <p>
+            Votre but est d'obtenir le mot «&nbsp;<span id="target_pattern" style="font-weight:bold"></span>&nbsp;» en cliquant sur un <b>minimum</b> de cases. 
+          </p>
+          <p>
+           Castor est obligé de faire apparaître ce mot quelque part, mais attention, il a une stratégie efficace pour vous empêcher de réussir à le trouver facilement&nbsp;!
+           <span class="twolines">La séquence peut se trouver soit sur la première ligne, soit sur la seconde.</span>      
+          </p>
+          <center>
+             <div id="anim"></div>
+             <b><div id="status" style="margin-bottom:0.8em"></div></b>
+          </center>
+      </div><!-- task -->
+      <div id="solution">
+          <h2>Solution</h2>
+            <p>
+            Une approche méthodique consiste à chercher le mot «&nbsp;CATS&nbsp;» en progressant parmi les cases de gauche à droite, et en réduisant petit à petit la zone où le mot peut se trouver.
+            Si l'on commence en cliquant sur la première case, et que cette lettre n'est pas un <b>C</b>, on peut uniquement déduire que le mot ne commence pas là. </p>
+            <center><img src="gattaca_sol2.png" /></center>
+            <p>
+            Cependant, on n'apprend rien de plus. Du coup, si l'on continue comme cela à cliquer sur la première case vide à chaque fois, on devra potentiellement cliquer sur toutes les cases une par une.
+            </p>
+            <p>
+            Une meilleure stratégie consiste à cliquer dès le départ sur la 4ème case. Supposons pour commencer que l'on obtienne un <b>C</b>. Dans ce cas, on peut tout de suite déduire que Castor ne pourra pas utiliser les trois premières cases pour faire apparaître le mot «&nbsp;CATS&nbsp;». On n'aura alors jamais besoin de cliquer sur ces cases.
+            </p>
+            <center><img src="gattaca_sol3.png" /></center>
+            <p>
+            Dans une telle situation, on se dit que Castor pourrait écrire  «&nbsp;CATS&nbsp;» en utilisant le <b>C</b> qui est visible. Plutôt que de cliquer sur la case située juste après le <b>C</b>, on va cliquer sur la case correspondant au <b>S</b>, car c'est celle qui se trouve le plus à droite possible. 
+            </p>
+            <p>
+            Supposons que l'on découvre la lettre <b>A</b>. On en déduit que Castor ne pourra plus utiliser la case située juste après le <b>C</b> pour afficher son mot. Par contre, il pourrait utiliser la case suivante en y mettant un <b>C</b>, de sorte à écrire «&nbsp;CATS&nbsp;» en utilisant le <b>A</b> qui est déjà visible. Pour tester cette hypothèse, plutôt que de cliquer sur la case qui pourrait correspondre au <b>C</b>, on va de nouveau cliquer sur la case qui pourrait correspondre au <b>S</b>, car c'est une case située plus à droite, et qui nous apportera donc davantage d'information.
+            </p>
+            <center><img src="gattaca_sol1.png" /></center>
+            <p>
+            Si Castor fait apparaître un <b>S</b> à la position marquée ci-dessus, il faudra alors cliquer sur la case précédente pour voir si Castor y place un <b>T</b>, et si c'est le cas cliquer sur la case située avant le <b>A</b> pour voir si Castor y place un <b>C</b>. En revanche, si Castor fait apparaître autre chose qu'un <b>S</b> à la position marquée ci-dessus, alors on pourra en déduire qu'il ne pourra plus se servir de la case située avant le <b>A</b>, et on pourra donc éliminer cette case.
+            </p>
+            <p>
+            En résumé, la stratégie consiste à cliquer à chaque fois sur la case la plus à droite possible parmi celles qui pourraient servir à éliminer la case blanche située la plus à gauche. (Une case est blanche si elle ne contient ni uen lettre ni une croix rouge).
+            </p>
+            <p>
+            <p>
+            Voici ci-dessous un autre exemple illustrant une application de cette stratégie jusqu'au bout.
+            </p>
+            <center><img src="gattaca_sol4.png" /></center>
+            <p>
+            Notez cependant que, si Castor était vraiment vicieux, il pourrait vous forcer à cliquer sur toutes les cases avant de faire apparaître le mot. Comment s'y prendrait-il&nbsp;?
+            </p>
+          <h2>C'est de l'informatique !</h2>
+             <p>
+             L'objectif de cet exercice est de trouver et d'appliquer un algorithme efficace pour rechercher une «&nbsp;occurrence&nbsp;» (une «&nbsp;apparition&nbsp;») d'un mot dans un texte. 
+             L'algorithme décrit dans la solution, développé par Boyer et Moore en 1977, est utilisé encore dans de nombreux programmes actuels.
+             </p>
+             <p>
+             Le problème consistant à trouver un mot dans un texte a des applications bien au-delà des logiciels de traitement de textes. Par exemple, une séquence d'ADN peut être vue comme une très long texte (avec des milliards de lettres), écrit avec seulement 4 lettres différentes (A, C, G, et T). Un gène particulier correspond à un très long mot. Déterminer si un fragment d'ADN contient ou non un gène donné revient à déterminer si un mot apparaît dans un texte.
+             </p>
+      </div>
+  </body>
+</html>

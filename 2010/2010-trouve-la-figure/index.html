@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Trouve la figure</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2010-trouve-la-figure", 1, 1);
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-trouve-la-figure/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Trouve la figure</h1>
+<p>
+Vous jouez à un jeu informatique. Neuf figures se trouvent à l'écran :
+</p>
+<center><img src="enonce.jpg" /></center>
+<p>
+Vous choisissez d'abord une figure mais vous ne révélez pas à l'ordinateur de laquelle il s'agit.
+</p><p>
+Mais l'ordinateur a le droit de te poser des questions et vous devez y répondre honnêtement par Oui ou par Non.
+L'ordinateur ne peut te poser que les questions suivantes :
+</p>
+<ul>
+   <li>Votre figure est-elle rouge&nbsp;?</li>
+   <li>Votre figure est-elle jaune&nbsp;?</li>
+   <li>Votre figure est-elle bleue&nbsp;?</li>
+   <li>Votre figure est-elle un cercle&nbsp;?</li>
+   <li>Votre figure est-elle un carré&nbsp;?</li>
+   <li>Votre figure est-elle un triangle&nbsp;?</li>
+</ul>
+</p><p>
+L'ordinateur cherche à trouver votre figure avec aussi peu de questions que possible. Il est programmé pour
+pouvoir jouer parfaitement au jeu.
+</p><p>
+<b>De combien de questions l'ordinateur a-t-il besoin au maximum pour trouver à coup sûr la figure
+que vous avez choisie&nbsp;?</b></p>
+
+<div class="reponses" id="answers_2010-trouve-la-figure">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse est 4.
+   </p><p>
+   Le nombre de questions à poser au maximum est le nombre de questions que l'on poserait dans le pire des cas,
+c'est à dire celui où on commencerait par poser les questions sur les mauvaises couleurs (et les mauvaises formes).
+Il y a trois couleurs différentes. Dans le pire des cas, on pose les questions sur les deux mauvaises couleurs, les
+réponses sont négatives et on en déduit que c'est la troisième (celle qu'on n'a pas demandée). C'est la même chose
+pour les formes. Pour déterminer à la fois la couleur et la forme, il faut donc 2 + 2 = 4 questions.
+</p><p>
+De manière générale, avec N questions de type oui/non, on peut distinguer 2N objets au maximum. On peut donc
+distinguer jusqu'à 16 objets avec 4 questions, jusqu'à 8 objets avec 3 questions, mais jamais 9, quels que soient les
+objets et les questions.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>Un aspect important de l'informatique est le développement d'algorithmes qui fonctionnent de manière optimale.
+Une question que l'on est souvent amené à se poser, illustrée dans cet exemple, est : combien d'actions au
+minimum doit on poser dans le pire des cas pour résoudre un problème donné&nbsp;?
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

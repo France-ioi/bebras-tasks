@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Couverture maximale</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+             "3 tubes",
+             "4 tubes",
+             "5 tubes",
+             "6 tubes"
+            ], "added", "#answers_2010-couverture-maximale");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-couverture-maximale/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Couverture maximale</h1>
+<p>
+Les deux assemblages de tubes ci-dessous se composent chacun de huit
+tubes identiques différemment agencés.
+</p>
+<center><img src="enonce.jpg" /></center>
+<p>
+L'agencement des tubes ne peut être modifié, mais chaque assemblage de tubes peut être tourné ou déplacé
+en entier.
+</p><p>
+On souhaite tourner et déplacer l'un des assemblages de tubes de manière à ce qu'il couvre l'autre
+assemblage de tubes avec le plus grand nombre possible de tubes consécutifs.
+</p><p>
+<b>Quel est le nombre maximum possible de tubes consécutifs qui peuvent se recouvrir&nbsp;?</b>
+</p>
+<div class="reponses" id="answers_2010-couverture-maximale">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-couverture-maximale_choice_3">C</span> est correcte.
+   </p><p>
+La séquence de tubes de gauche peut être représentée par la chaîne "GGADGDA", qui signifie : après le premier
+tube, placer le tube suivant en tournant vers la Gauche, puis le suivant encore en tournant vers la Gauche, puis le
+suivant vers l'Avant, puis vers la Droite, etc.
+</p><p>
+Une séquence de huit tubes nécessite sept caractères pour être décrite selon cet encodage. L'encodage a la
+propriété intéressante qu'il ne change pas lorsque l'on déplace ou fait tourner l'assemblage. Le deuxième
+assemblage peut s'encoder par "AGADGGA". On recherche le plus long motif qui soit à la fois dans "GGADGDA" et
+dans "AGADGGA". Il s'agit de "GADG", et correspond à un assemblage composé de cinq tuyaux consécutifs.
+</p><p>
+La superposition s'obtient en tournant l'assemblage de gauche de 90 degrés dans le sens des aiguilles d'une
+montre, et en le déplaçant un peu vers le bas et à droite.
+</p><p>
+L'encodage change cependant suivant le bout de l'assemblage par lequel on commence. On a donc deux encodages
+possibles pour chaque assemblage. Pour s'assurer de trouver le plus long motif commun, il faut donc refaire
+l'opération en encodant le premier groupe dans l'autre sens : "AAGDGADD", le motif le plus long qui soit dans cet
+encodage et dans "AGADGGA" est "GAD", ce qui est moins bonque le motif trouvé précédemment.
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>La représentation de l'information est au centre de l'informatique. La recherche de "Motifs" présents dans deux
+chaînes est ainsi très importante en bioinformatique, où des fragments d'ADN qui se superposent partiellement
+doivent être assemblés.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

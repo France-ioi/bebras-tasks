@@ -1,0 +1,37 @@
+===============================================================================
+Titre 
+
+Choisir des Sushi
+
+===============================================================================
+Texte version (très) facile
+
+Kevin, Alice et Léa sont au restaurant japonais. Devant eux, les plats défilent sur un tapis roulant. Il y a 4 types de plats, toujours dans l’ordre : maki, crevette, thon et saumon. 
+
+Les 3 amis prennent chacun le plat devant eux, puis recommencent avec les plats qui arrivent : un plat chacun, l’un après l’autre, sans sauter de plat. Ils s’arrêtent quand ils ont 4 plats chacun.
+
+Placez sur le plateau les plats de Kevin dans l’ordre où il les a pris. 
+
+[modifier l’image d’origine : placer les castors le plus à gauche, et donc présenter la série de plats à leur droite, assez pour qu’ils puissent y prendre les 4 plats de Kevin]
+
+===============================================================================
+Texte version (moins) facile (plus abstraite)
+
+idem, mais l’image ne montre pas toute la série.
+On ne prend pas sur le tapis, mais on construit la réponse dans une zone à part.
+===============================================================================
+Texte version difficile
+
+Ils prennent chacun 10 plats.
+Donnez les 3 derniers plats de Léa, dans l’ordre où elle les a pris.
+
+
+
+===============================================================================
+Interactif
+
+version facile :
+[interaction : drag an drop sur les plats du tapis pour les placer sur une zone de réponse]
+[version difficile : zone de réponse à 4 (ou 3) cellules avec clic successifs pour choisir le plats]
+===============================================================================
+Correction

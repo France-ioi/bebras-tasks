@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Tuyauterie</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(5, [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            ], "checkboxes", "#answers_2012-ES-04", true);
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-ES-04/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "00011"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Tuyauterie</h1>
+
+
+<img src="2012-ES-04.png" style="float:right" width="350" />
+
+<p>Des tuyaux de différents diamètres (mesurés en centimètres)
+sont assemblés comme sur le dessin ci-contre. 
+Castor dispose d'une bille de 1,5&nbsp;cm de diamètre.
+Il la laisse tomber dans les tuyaux.
+</p>
+
+<p>Si la bille ressort des tuyaux, où peut-elle ressortir&nbsp;?
+Sélectionne toutes les sorties possibles.
+</p>
+
+<div class="reponses" id="answers_2012-ES-04">
+</div>
+<div style="clear:both"></div>
+
+
+<img style="display: none;" src="2012-ES-04.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : D=4, E=5
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>La bonne réponse est D et E</p>
+
+<h2>C'est de l'informatique !</h2>
+
+<p>La structure formée par l'ensemble des tuyaux est ce qu'on appelle
+  un <b>arbre</b>, en informatique. On peut comprendre pourquoi en imaginant
+l'image tournée de 180 degrés. L'entrée est la <b>racine</b> de l'arbre, et les sorties sont appelées les <b>feuilles</b>.</p>
+
+<p>Dans l'exercice, il fallait parcourir les différentes branches de l'arbre, en faisant attention au diamètre <b>minimum</b> rencontré pour atteindre chaque sortie. Seules les sorties pour lesquelles ce minimum était supérieur à 1,5 convenaient ici.</p>
+
+<p>On remarque en résolvant l'exercice que pour éliminer les sorties B et C, on n'a pas besoin de reparcourir tout le chemin depuis l'entrée vers chacune de ces deux sorties : dès que l'on voit le tuyau de diamètre 1, on sait que l'on peut se débarrasser de tout ce qui est en dessous. C'est en faisant ce type d'observations que l'on invente des algorithmes rapides pour faire des calculs sur des arbres.</b>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

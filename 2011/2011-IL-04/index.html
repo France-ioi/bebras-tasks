@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Rangée de billes rouges et bleues</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "N",
+            "N / 2",
+            "Le plus petit entre X et N - X",
+            "N - X"
+            ], "added", "#answers_2011-IL-04");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-IL-04/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Rangée de billes rouges et bleues</h1>
+<p>
+Un plateau de jeu est composé d'une rangée de N trous numérotés de 1 à N, de gauche à droite, où N est un nombre pair. On a N billes, dont X sont rouges, et les autres bleues. On place les N billes dans les N trous.
+</p>
+<p>
+Un robot peut échanger les positions de deux billes quelconques. Un échange de deux billes est considéré comme une étape.
+</p>
+<p>
+On veut que le robot trie les billes de telle sorte que toutes les billes rouges se trouvent à gauche en commençant au premier trou, et que toutes les billes bleues se trouvent à leur droite. 
+</p>
+<p>
+Par exemple, pour la configuration de départ suivante, 4 étapes sont nécessaires pour trier les billes :
+</p>
+<center><img src="2011-IL-04.png"></center>
+<p>
+La pire situation de départ est une situation où le plus grand nombre de billes rouges possible n'est pas à la bonne place.
+</p>
+<p>
+Combien d'étapes faut-il pour que le robot trie les billes, si l'on part de la pire situation possible ?
+</p>
+<div class="reponses" id="answers_2011-IL-04">
+</div>
+
+<img style="display: none;" src="2011-IL-04.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   La réponse correcte est <span class="2011-IL-04_choice_3">C</span>. Min(X, N-X).
+   </p>
+   <p>
+   La situation à atteindre est : les X billes rouges sont à gauche et les N-X billes bleues sont à droite. Il y a deux cas possibles :
+   </p>
+   <p>
+   a) X <= N / 2 (dans ce cas, X <= N - X)<br/>
+   Dans le pire cas, aucune des billes rouges ne se trouve dans les trous de 1 à X, donc X échanges sont nécessaires.
+   </p>
+   <p>
+   b) X > N / 2 (dans ce cas, X > N - X)<br/>
+   Dans le pire cas, N / 2 billes rouges se trouvent à droite, donc X - N / 2 sont à la bonne place à gauche. Le nombre d'échanges nécessaires est donc N / 2 - (X - N / 2) = N - X échanges.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

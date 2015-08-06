@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Mauvais chapeau</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "<img src='2011-NLD-12-a2.png'><br/><b>Léa</b><br>T-shirt : rouge<br />Chapeau : vert",
+            "<img src='2011-NLD-12-b2.png'><br/><b>Mehdi</b><br />T-shirt : jaune<br/>Chapeau : rouge",
+            "<img src='2011-NLD-12-c2.png'></br><b>Yamina</b><br />T-shirt : jaune<br/>Chapeau : bleu",
+            "<img src='2011-NLD-12-d2.png'></br><b>Félix</b><br />T-shirt : rouge<br/>Chapeau : bleu"
+            ], "added", "#answers_2011-NL-12");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-NL-12/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Mauvais chapeau</h1>
+<p>
+Tous les Castors ont un chapeau, mais ils ont mélangé leurs chapeaux, et aucun ne porte le bon.
+<ul><li>Chaque castor devrait porter un chapeau d'une couleur différente de celui qu'il porte actuellement.</li>
+<li>Chaque castor devrait porter un chapeau d'une couleur différente de celle de son T-shirt.</li>
+</ul>
+<p>
+Qui devrait porter le chapeau vert ?
+</p>
+<div class="reponses" id="answers_2011-NL-12">
+</div>
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution </h2>
+
+   <ul><li>Règle 1 : Chaque castor devrait porter un chapeau d'une couleur différente de celui qu'il porte actuellement.</li>
+   <li>Règle 2 : Chaque castor devrait porter un chapeau d'une couleur différente de celle de son T-shirt.</li>
+   </ul>
+   <p>On peut représenter les possibilités dans une table à double entrée :</p>
+   <table border="1">
+   <tr><td></td><td></td><td><img src="2011-NLD-12-ch-vert.jpg"></td><td><img src="2011-NLD-12-ch-rouge.jpg"></td><td><img src="2011-NLD-12-ch-bleu.jpg"></td><td><img src="2011-NLD-12-ch-bleu.jpg"></td><td></td></tr>
+   <tr><td>Léa</td><td><img src="2011-NLD-12-ts-rouge.jpg"></td><td>NON<br>(règle 1)</td><td>NON<br>(règle 2)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Mehdi</td><td><img src="2011-NLD-12-ts-jaune.jpg"></td><td>&nbsp;</td><td>NON<br>(règle 1)</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Yamina</td><td><img src="2011-NLD-12-ts-jaune.jpg"></td><td>&nbsp;</td><td>&nbsp;</td><td>NON<br>(règle 1)</td><td>NON<br>(règle 1)</td></tr>
+   <tr><td>Félix</td><td><img src="2011-NLD-12-ts-rouge.jpg"></td><td>&nbsp;</td><td>NON<br>(règle 2)</td><td>NON<br>(règle 1)</td><td>NON<br>(règle 1)</td></tr>
+   </table>
+   <p> Il ne reste qu'une possibilité pour Félix : le chapeau vert. La solution est donc Félix</p>
+
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Résoudre cet exercice est avant tout une question de logique, et on fait très souvent appel à la logique en informatique. En fait, on peut représenter cet exercice sous une forme plus habituelle pour un informaticien : un <i>graphe</i>, c'est à dire un ensemble de <i>noeuds</i> (ici les t-shirts et les chapeaux) reliés par des <i>arcs</i>. Chaque arc (trait noir sur l'illustration ci-dessous) représente une possibilité d'association entre un t-shirt et un chapeau qui n'est pas interdite directement par l'une des deux règles. Le graphe qu'on obtient est un graphe particulier car il contient deux types de noeuds, et un arc relie toujours un noeud d'un type à un noeud d'un autre type (ici, un noeud "t-shirt" à un noeud "chapeau"). C'est ce que les informaticiens appellent un <i>graphe biparti</i>.
+   </p>
+   <p>
+   <img src="2011-NLD-12-graphe.png"/>
+   </p>
+   <p>
+   Si les t-shirts, chapeaux et couleurs avaient été beaucoup plus nombreux, une simple déduction logique n'aurait pas suffi à trouver la solution. Il aurait fallu appliquer un algorithme bien connu des informaticiens : un algorithme de <i>couplage maximal</i>.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

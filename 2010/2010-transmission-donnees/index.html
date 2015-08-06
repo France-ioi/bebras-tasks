@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Transmission de données</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "J'ai trouvé le trésor. J'attends sur l'île. Dépêchez-vous.",
+             "Dépêchez-vous. J'ai trouvé le trésor. J'attends sur l'île.",
+             "Dépêchez-vous. Dépêchez-vous. J'ai trouvé le trésor. J'attends sur l'île.",
+             "J'attends sur l'île. Dépêchez-vous."
+            ], "added", "#answers_2010-transmission-donnees");
+      </script>
+         <style class="">.table-2010-transmission-donnees td {
+   border: solid black 1px;
+   padding: 5px;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-transmission-donnees/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "3"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Transmission de données</h1>
+<p>
+Popeye le marin a trouvé un trésor sur une île des Caraïbes et voudrait le
+faire savoir à ses amis sur le continent. Chacun sait que dès que Popeye a mangé des épinards, il devient
+super-fort et peut provoquer de vraies vagues sur la surface de l'océan.
+</p><p>
+Ses amis savent ce que les vagues suivantes signifient :
+<center>
+<table class="table-2010-transmission-donnees" cellspacing=0>
+   <tr><td><img src="exemple1.jpg" /></td><td>J'ai trouvé le trésor.</td></tr>
+   <tr><td><img src="exemple2.jpg" /></td><td>J'attends sur l'île.</td></tr>
+   <tr><td><img src="exemple3.jpg" /></td><td>Dépêchez-vous.</td></tr>
+</table>
+</center>
+<p>
+Popeye mange une énorme boîte d'épinards et envoie à ses amis un message en provoquant les vagues
+suivantes :
+</p>
+<p>
+<center><img src="exemple3.jpg" /><img src="exemple3.jpg" /><img src="exemple1.jpg" /><img src="exemple2.jpg" /></center>
+</p>
+<p>
+<b>Que signifie ce message&nbsp;?</b>
+</p>
+<div class="reponses" id="answers_2010-transmission-donnees">
+</div>
+
+
+<img style="display: none;" src="exemple1.jpg" />
+<img style="display: none;" src="exemple2.jpg" />
+<img style="display: none;" src="exemple3.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-transmission-donnees_choice_3">C</span> est correcte.
+   </p><p>
+      <span class="2010-transmission-donnees_choice_3">C</span> est le seul message qui soit constitué de quatre parties. Les hauteurs des vagues sont également les bonnes : basse - basse - moyenne - haute.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>La transmission d'informations d'un endroit à un autre était déjà un sujet fascinant avant même que l'informatique
+n'existe. Pour pouvoir transmettre des informations, il est nécessaire de définir un code utilisant des symboles (ici 3
+types de vagues) et spécifier le sens des symboles. Un médium à l'aide duquel les symboles codés peuvent être
+transmis est également nécessaire (l'océan dans notre exemple). Il faut un système d'émission des symboles (ici les
+gros bras de Popeye), et un système pour leur réception (ici, les yeux de ses amis fixés sur les vagues). Les codes,
+le média, les transmetteurs et les récepteurs occupent tous une place importante en informatique. Le thème
+interdisciplinaire des "télécommunications" regroupe de nombreuses disciplines scientifiques, dont l'informatique.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

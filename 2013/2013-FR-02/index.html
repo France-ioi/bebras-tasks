@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-02</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script type="text/javascript" src="2013-FR-02.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-02/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["10", "12"]
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2013-FR-02", 2, 1);
+      </script>
+      <script class="task" type="text/javascript">
+         // TODO: fix with the future pub/sub system
+         var taskViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               taskViewLoaded = true;
+               loadRings("rings");
+            }
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Castor des anneaux</h1>
+         <p>
+         Castor part à l'aventure&nbsp;: il doit partir de sa maison, 
+         ramasser les 3 anneaux en or, les jeter dans la lave d'un des deux volcans, puis <b> retourner dans sa maison</b>.</p>
+         <p style="margin-bottom:0em;">
+         Sur la carte ci-dessous, chaque trait noir
+         correspond à une journée de marche.
+         Castor peut revenir sur ses pas et n'est pas obligé de passer par tous les chemins. Il peut passer par un volcan sans y jeter ses anneaux.
+          </p>
+         <table style="margin-bottom:1em"><tr><td style="vertical-align:top">
+            <p>
+            Quel est le nombre minimum de jours nécessaires à Castor
+            pour réussir sa mission&nbsp;?
+            </p>
+         </td><td>
+            <center><div id="rings" style="width:462px;height:280px"></div></center>
+         </td></tr></table>
+         <div class="reponses" id="answers_2013-FR-02">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         <p>Attention : lors du concours, il n'était pas précisé que Castor pouvait passer par un volcan sans y jeter ses anneaux, et le sujet pouvait être interprété de telle sorte qu'on s'interdisait de passer par le volcan avec seulement deux anneaux dans la main. <b>La réponse 12 a donc été acceptée, de même que la réponse attendue, qui était 10</b>.</p>
+         <p>La réponse est&nbsp;: <b>10</b> jours. L'unique chemin qui permet à Castor de réaliser sa mission en 10 jours est le suivant&nbsp;:</p>
+         <div><img src="solution.png""></div>
+         <p>Un aspect intéressant de ce sujet est la manière dont on peut se convaincre qu'il n'existe pas de meilleure solution. Pour cela, il faut essayer d'aller chercher les anneaux dans tous les ordres possibles.</p>
+          <style>
+          .solution-ul li { 
+            padding-bottom: 0.5em;
+          }
+          ul.solution-ul { 
+            margin-bottom: 0em;
+            padding-bottom: 0em;
+          }
+          </style>
+         <ul class="solution-ul">
+         <li>Si on va d'abord chercher l'anneau 3, le trajet le plus court est clairement d'aller chercher le 2 puis le 1, et de jeter les anneaux dans le volcan de gauche en rentrant à la maison. On a alors besoin de 12 jours.</li>
+         <li>Si on va d'abord chercher l'anneau 2, puis le 1 et le 3, on a également besoin de 12 jours.</li>
+         <li>Si on va d'abord chercher l'anneau 2, puis le 3 et le 1, on a besoin de 14 jours, car il faut faire un détour pour aller au volcan de gauche.</li>
+         <li>Enfin, si on va d'abord chercher l'anneau 1, le trajet le plus court est clairement d'aller chercher le 2 et le 3. On a besoin de 10 jours, ce qui est la meilleure solution.</li>
+         </ul>
+         <p>Au final, il n'y avait que 4 cas à tester. Avec un peu de méthode, on pouvait donc résoudre le sujet assez vite&nbsp!</p>
+         <h2>C'est de l'informatique !</h2>
+         <!---<p>
+         Cet exercice se base sur la notion de <i>graphe</i>&nbsp;: il s'agit de points (les <i>noeuds</i>) reliés par des traits (les <i>arêtes</i>) qui permettent d'aller d'un noeud à l'autre. Le but de cet exercice est de trouver sur un graphe le <i>chemin le plus court</i> 
+         qui respecte plusieurs <i>contraintes</i>. Le chemin doit passer par 3 noeuds précis
+         (ceux des anneaux), et doit passer par un noeud parmi deux possibles (ceux des volcans). </p>--->
+         <p>
+         Une méthode pour s'assurer de trouver le chemin le plus court, consiste à vérifier les longueurs de tous les chemins possibles, et à retenir le plus court. Cette méthode est qualifiée de <i>force brute</i>.
+         La méthode de la force brute est <i>sûre</i> car elle donne la bonne solution.  Mais elle n'est pas toujours <i>efficace</i> car elle prend beaucoup de temps quand il y a beaucoup de possibilités. Avec un ordinateur, cette méthode reste relativement rapide même pour un très grand nombre de possibilités. En effet, on peut énumérer de l'ordre du milliard de possibilités en quelques secondes.
+         Cependant, pour des problèmes complexes, dont le nombre de possibilités est plus grand que quelques milliards, il est nécessaire de trouver des algorithmes plus astucieux.
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

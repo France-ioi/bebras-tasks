@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2015-FR-taquin</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript" src="task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-21-taquin/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Charles Freou",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": true
+      };
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Taquin</h1>
+         <div id="tabsContainer"></div>
+         <p>
+         La grille ci-dessous représente un jeu de taquin. Le jeu comporte des pièces numérotées, et un trou, représenté par la case grise. 
+         À chaque étape, on peut faire glisser vers le trou une pièce se trouvant à côté du trou. Le trou se retrouve ainsi déplacé vers le haut (H), le bas (B), la droite (D) ou la gauche (G).
+         </p>
+         <p>
+         Pour effectuer une commande plusieurs fois, on peut mettre un nombre devant, par exemple "3DH" déplace 3 fois le trou vers la droite, puis une fois vers le haut.
+         </p>
+         <p>Écrivez un programme qui amène la pièce bleue numérotée 1 sur la case située tout en haut à droite de la grille.
+         Pour vous aider, essayez d'abord les programmes ci-dessous en cliquant sur les boutons.
+         </p>
+         <p class="medium hard"><b>Versions moyenne et difficile :</b> pour exécuter un groupe de commandes plusieurs fois, mettez le entre parenthèses avec un nombre devant. Par exemple, 3(HB) exécute 3 fois "HB".
+         </p>
+         <p class="hard"><b>Version difficile :</b> les cases en rouge sont des obstacles infranchissables.</p>
+         <style>
+         .examples  {
+            border-collapse: collapse;
+         }
+         .examples td {
+            border: 1px solid black;
+            padding: 0.5em;
+         }
+         .resetButton {
+            display:none;
+         }
+         </style>
+         <center><table class='examples'>
+            <tr>
+               <td class="easy medium"><input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="H"></input></td>
+               <td class="easy medium"><input type="button" id="sample1" class="exampleButton"  onclick="task.executeSample(1)" value="2D"></input></td>
+               <td class="easy medium"><input type="button" id="sample2" class="exampleButton"  onclick="task.executeSample(2)" value="HDBG"></input></td>
+               <td class="easy medium"><input type="button" id="sample3" class="exampleButton"  onclick="task.executeSample(3)" value="3DHG"></input></td>
+               <td class='medium'><input type="button" id="sample4" class="exampleButton" onclick="task.executeSample(4)" value="3(DHGB)"></input></td>
+               <td class='hard'><input type="button" id="sample5" class="exampleButton" onclick="task.executeSample(5)" value="3(GHDB)"></input></td>
+               <td class='hard'><input type="button" id="sample6" class="exampleButton" onclick="task.executeSample(6)" value="3(2(HB)G)H"></input></td>
+            </tr>
+         </table></center>
+         <div style='float:right;'>
+         </div>
+         <p>
+         <table style="width:100%"><tr>
+         <td style="width:200px">
+         Votre programme&nbsp;:<br/>
+         <center>
+            <div style="padding:8px">
+               <textarea cols='50' maxlength='200' style='width:300px;height:100px' id='answer' onkeydown="task.resetExecution()"></textarea>
+            </div>
+            <p>
+            <input class="exampleButton" type='button' value='Essayer' onclick='task.executeAnswer()'/>
+            </p>
+         </center>
+         </td>
+         <td style="text-align:center">
+         <div style="padding-bottom:0.5em">Le jeu de taquin&nbsp;:</div>
+         <div id='taquin'></div>
+         <p id="programRan" style="width:400px;word-wrap: break-word">&nbsp;</p>
+         <p>&nbsp;<input id='resetButton' disabled=true type='button' value='Réinitialiser' onclick='task.resetExecution()' />&nbsp;</p>
+         </td>
+         </tr></table>
+         </p>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+         <ul>
+            <li>Version facile : H5DB</li>
+            <li>Version moyenne : 11(DHGBD)</li>
+            <li>Version difficile : 11(GHDBG)   GH   3(HDBGH)  BD 11(DHGBD)</li>
+         </ul>
+      </div> <!-- task-solution -->
+   </body>
+</html>

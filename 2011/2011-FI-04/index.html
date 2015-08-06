@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Trésor caché</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2011-FI-04", 2, 1);
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-FI-04/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["7"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Trésor caché</h1>
+<img src="2011-FI-04-V2.png" style="float:right">
+<p>
+Un trésor est caché sous une pierre dans un labyrinthe. L'image représente ce labyrinthe et les points gris représentent les pierres.
+</p>
+
+<p>Pour être certain de trouver le trésor, Castor adopte une méthode de recherche systématique. Ainsi, quand il arrive à une intersection, si c'est possible, il va d'abord vers la droite. Quand il arrive à un cul-de-sac, s'il y a une pierre, il la soulève, puis il revient à l'intersection précédente.
+</p>
+<p>
+Quand il revient en arrière à une intersection, il va alors vers la gauche (du point de vue de l'image), si c'est possible. Là il réapplique la même méthode. C'est seulement lorsqu'il a fini d'explorer des deux côtés qu'il regarde sous la pierre (s'il y en a une) de l'intersection, puis qu'il revient à l'intersection plus bas sur l'image. Il s'arrête quand il a trouvé le trésor.
+</p>
+<p>
+Nous avons marqué d'une croix rouge la pierre où est cachée le trésor. Si Castor applique sa méthode en partant de l'entrée située en bas du labyrinthe, combien de pierres  va-t-il soulever avant de trouver le trésor ? Il faut bien sûr compter la pierre sous laquelle se trouve le trésor.
+</p>
+<div class="reponses" id="answers_2011-FI-04">
+</div>
+
+<img style="display: none;" src="2011-FI-04-V2.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <img src="2011-FI-04-sol.png" style="float:right">
+   <p>
+   Castor va explorer toute la moitié droite du labyrinthe en premier, donc soulever 4 pierres. Il va ensuite commencer à explorer la partie gauche, passer par une première pierre qu'il ne soulève pas, puis aller vers la droite, passer sur la pierre du trésor mais sans la soulever pour l'instant. Il explore d'abord la partie de droite et soulève donc une cinquième pierre, puis la partie gauche pour une 6ème pierre, et soulève enfin une 7ème pierre, sous laquelle se trouve le trésor.
+   </p>
+   <p>L'illustration ci-dessous montre le chemin emprunté par Castor, et l'ordre dans lequel il va soulever les 7 pierres.</p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Le labyrinthe présenté ici a une structure que l'on appelle un <i>arbre</i>, qui est une structure très souvent manipulée en informatique. Il est composé d'un ensemble de <i>noeuds</i> qui sont ici les intersections du labyrinthe, et d'<i>arcs</i> qui sont les tunnels reliant deux intersections. Le <i>noeud</i> correspondant à l'entrée est appelé la <i>racine</i> de l'arbre. Chaque noeud sauf la racine a un noeud que l'on appelle son <i>père</i> : celui par lequel on doit passer en premier pour aller vers la racine. Un noeud qui n'est pas un cul de sac a des <i>fils</i>, qui sont l'ensemble des  noeuds voisins sauf son noeud père. Les noeuds "cul de sac" sont appelés les <i>feuilles</i> de l'arbre.
+   </p>
+   <p>
+   La méthode qu'utilise Castor pour explorer le labyrinthe est un algorithme classique. Il s'agit d'un algorithme de parcours d'arbre, appelé parcours en profondeur, associé à une variante du principe de la numérotation dite <i>postfixe</i> des noeuds de l'arbre. De très nombreux problèmes sur les arbres peuvent se résoudre avec un parcours en profondeur, et divers types de numérotations.
+   </p>
+   <p>
+   Voici un exemple de pseudo-code correspondant à cet algorithme :
+   </p>
+   <pre>
+   trésorTrouvé = Faux
+
+   Fonction compterPierres(noeud)
+      Si (trésorTrouvé)
+         Retourner 0
+      nbPierres = 0
+      Pour chaque fils de noeud
+         nbPierres = nbPierres + compterPierres(fils)
+      Si (non trésorTrouvé)
+         Si (noeud.contientPierre)
+           nbPierres = nPierres + 1
+          Si (noeud.contientTrésor)
+             trésorTrouvé = Vrai
+      Retourner nbPierres
+   </pre>
+</div> <!-- task-solution -->
+   </body>
+</html>

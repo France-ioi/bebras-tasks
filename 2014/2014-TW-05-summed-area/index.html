@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-TW-05</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-TW-05-summed-area/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      .maps {
+      }
+      .maps td {
+         vertical-align: top;
+         text-align: center;
+         padding-right: 3em;
+      }
+      .infos {
+         text-align: center;
+         font-weight: bold;
+         color: red;
+         padding: 0.5em;
+         height: 1em;
+      }
+      .legend {
+         padding: 0.3em;
+         color: gray;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <img src="castor_tete_original.png" style="display:none" />
+         <img src="bg_map_claire.png" style="display:none" />
+         <h1>Carte secrète</h1>
+         <p style="margin-bottom: 0.5em">
+         Afin de se protéger des espions, les castors utilisent une grille de nombres pour décrire leurs positions.
+         </p>
+
+         <center><table class="maps"><tr><td>
+            <div class="legend"><!--Grille--></div>
+            <div id="table1" class="table"></div>
+        </td><td>
+            <div class="legend"><!--Carte--></div>
+            <div id="map1" class="map"></div>
+         </td></tr></table></center>
+
+         <p style="margin-bottom:0.5em">
+         Vous avez récupéré la grille décrivant là où les 5 castors habiteront l'année prochaine.
+         Pouvez-vous reconstruire la carte correspondante&nbsp;? Cliquez sur la carte ci-dessous pour y placer les castors.
+         </p>
+
+         <center><table class="maps"><tr><td>
+            <div class="legend"><!--Nouvelle grille--></div>
+            <div id="table2" class="table"></div>
+         </td><td>
+            <div class="legend"><!--Nouvelle carte--></div>
+            <div id="map2" class="map"></div>
+         </td></tr></table></center>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+         <p>
+         Pour résoudre le sujet, il faut comprendre ce à quoi correspondent les nombres de la grille. 
+         On peut observer en parcourant de gauche à droite les lignes une par une qu'on trouve un castor à chaque fois qu'on passe sur une case qui a un changement par rapport à la ligne précédente. Une fois qu'on a trouvé un castor, les nombres sont alors décalés d'une unité par rapport à la ligne précédente. Si on trouve un décalage de plus d'une unité, c'est qu'il y a un second castor, comme c'est le cas pour le castor en bas à droite dans l'exemple.
+         </p>
+         <p>
+         Pour construire la réponse, il suffit donc de parcourir la grille ligne par ligne et de placer un castor à chaque fois qu'on observe un tel décalage. On obtient les positions ci-dessous.
+         </p>
+
+         <center><table class="maps"><tr><td>
+            <div class="legend"><!--Nouvelle grille--></div>
+            <div id="table3" class="table"></div>
+         </td><td>
+            <div class="legend"><!--Nouvelle carte--></div>
+            <div id="map3" class="map"></div>
+         </td></tr></table></center>
+
+         <p>
+         Une autre manière de voir les choses consiste à observer que le nombre inscrit dans une case correspond au nombre de castors se trouvant dans la zone située en haut à gauche de cette case.
+         Vous pouvez vérifier, cette propriété se vérifie pour tous les nombres de la grille, comme par exemple pour le nombre 3 dans la case bleue ci-dessous, qui correspond au fait qu'il y a trois castors dans la zone bleue.
+         </p>
+         <center><img src="cumul.png" /></center>
+
+         <h2>C'est de l'informatique !</h2>
+         <p>
+         La grille de nombre présentée dans ce sujet correspond à un «&nbsp;tableau cumulatif 2D&nbsp;» (où 2D signifie «&nbsp;2 dimensions&nbsp;»). En effet, chaque case compte le nombre cumulé de castors qui se trouvent dans le rectangle entre le coin tout en haut à droite et la case considérée.
+         </p>
+         <p>
+         Un tableau cumulatif 2D est très utile car il permet de déterminer extrêmement efficacement le nombre de castors qui se trouvent dans une zone rectangle donnée. Supposons par exemple que l'on souhaite compter le nombre de castors se trouvant dans la zone bleue ci-dessous. Bien sûr, ici on «&nbsp;voit bien&nbsp;» qu'il y a deux castors, mais si la grille était beaucoup plus grande et contenait beaucoup de castors, ça serait moins évident de les compter de tête.
+         </p>
+         <p>
+         Pour compter les castors, il suffit de lire le nombre 4 situé dans la case bleue (qui correspond au coin en bas à droite de la zone bleue), d'ajouter le nombre 1 situé dans la case rose (qui correspond à la case située juste avant le coin en haut à gauche de la zone bleue), et de soustraire les deux valeurs situées dans les cases jaunes (qui se trouvent juste à l'extérieur des deux autres coins de la zone bleue). On fait 4 + 1 - 1 - 2 = 2 castors.
+         </p>
+         <center><img src="cumul_use2.png" /></center>
+         <p>
+         Les illustrations ci-dessous permettent de comprendre pourquoi ce calcul donne toujours le bon résultat. Chacun des nombres (4, 1, 1 et 2) situés dans les cases que l'on a considéré (la bleue, la rose, et les deux jaunes) correspond au nombre de castors situés dans la zone de la couleur associée, comme illustré ci-dessous.
+         </p>
+         <center><img src="cumul_use.png" /></center>
+         <p>
+         Pour compter le nombre de castors qui nous intéresse, il faut compter tous ceux qui se trouvent dans le grand rectangle bleu, enlever ceux qui se trouvent plus à gauche et tous ceux qui se trouvent plus haut, c'est-à-dire ceux qui se trouvent dans les zones jaunes. Cependant, lorsqu'on a fait cela, on a soustrait deux fois les castors qui se trouvent dans la zone rose, car la zone rose est couverte par chacune des deux zones jaunes. Du coup, pour compenser, il faut rajouter le nombre de castors se trouvant dans la zone rose.
+         </p>
+         <p>
+         Bien sûr, sur un exemple aussi simple, on voit bien qu'il y a 2 castors dans la zone considérée. Mais le principe du tableau cumulatif 2D fonctionne tout aussi bien lorsqu'on a des millions de castors répartis sur des millions de cases, voire même des milliards de castors répartis sur des milliards de cases. On peut alors compter le nombre de castors contenus dans n'importe quel rectangle sans avoir besoin de regarder toutes les cases de la zone une par une&nbsp: une addition et deux soustractions suffisent&nbsp;!
+         </p>
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-FR-01-ceremony</title>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/jquery-1.7.1.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="remove" type="text/javascript" src="../2014-FR-modules/platform_api.js" ></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="remove" type="text/javascript" src="../2014-FR-modules/gen_task_resources.js"></script>
+      <link class="module" rel="stylesheet" type="text/css" href="../2014-FR-modules/styles.css" id="http://castor-informatique.fr/tasks/modules/styles.css" />
+      <script class="module" type="text/javascript" src="../2014-FR-modules/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-02-rainbow/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Mathias Hiron",
+          "translators": [
+          ],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"2": "hard", "3": "medium", "4": "medium"},
+          "categories": {ALG : true},
+          "answerType": "Interactive, click on grid",
+          "status": "evaluation"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      </style>
+    </style>
+  </head>
+  <body>
+      <div id="task">
+          <h1>Rainbow marbles</h1>
+          <p>
+              Colored marbles are hidden behind some of the cells in the grid below.
+          </p>
+          <p>
+            <b>Move the top right corner of the rectangle so that it contains exactly 2 marbles of each color.</b> You can click on a cell to move the corner to that cell.
+          </p>
+          <p>
+            On the right side of the grid, the number of marbles of each color in the rectangle is displayed.
+          </p>
+          <p>
+             <div id="anim" class="touch" style="width:320px;height:430px"></div>
+          </p>
+          <p>Note : in the final version, the goal will be to minimize the number of clicks. You can restart at any time to try to improve your score, but then the marbles change their positions. The positions of the marbles will actually be set while you click, so that you can't just be lucky.</p>
+      </div><!-- task -->
+      <div id="task-solution">
+          <h2>Solution</h2>
+          <p>
+            To find the correct rectangle with a small number of steps, a strategy, or algorithm was needed. A good algorithm in this case, was to start from the top-left corner of the grid.
+          </p>
+          <p>
+            At each step :
+            <ul><li>If a marble type is present more than twice in the rectangle, reduce the height of the rectangle by 1.</li>
+            <li>Otherwise, increase the width of the rectangle by 1.</li>
+            </ul>
+          </p>
+          <p>
+            With this method, you are guaranteed to find the solution, sice for each height, you will find the widest rectangle that doesn't have more than 2 marbles of each type. If there is a solution, it will be one of these.
+          </p>           
+          <h2>It's informatics!</h2>
+          <p>
+            To solve this task and get a good score, it was necessary to invent an algorithm, and apply it on the grid.
+          </p>
+          <p>
+            One possible algorithm, explained in the solution, corresponds to a 2D sliding window. A sliding window algorithm is an algorithm that is often used when you are looking for an interval of positions on an axis, such that the content of the interval satisfies some constraints and/or maximizes (or minimizes) some value. The idea is to move the beginning of the interval step by step, and at each step, increase the end of the interval until a constraint is broken.
+          </p>
+          <p>
+            In this case, it is a 2D sliding window in the sense that the beginning and end of the interval are represented on 2 different axis.
+          </p>
+      </div>
+  </body>
+</html>

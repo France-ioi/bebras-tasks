@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Tas de pierres</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "20, 22, 24",
+            "21, 21, 21",
+            "25, 13, 25",
+            "24, 28, 11",
+            ], "added", "#answers_2012-RU-05");
+      </script>
+         <style class="">.RU-05-piles {
+   border: 1px solid black;
+   border-spacing: 0;
+}
+.RU-05-piles td {
+   border: 1px solid black;
+   padding: 5px;
+   text-align: center;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-RU-05/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "4"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Tas de pierres</h1>
+<p>
+Castor joue avec trois tas de pierres. Au démarrage du jeu, chaque tas contient un certain nombre de pierres&nbsp;: 
+</p>
+
+<center><table class="RU-05-piles"><tr><td>Tas n<sup>o</sup>&nbsp;1</td><td>Tas n<sup>o</sup>&nbsp;2</td><td>Tas n<sup>o</sup>&nbsp;3</td></tr>
+<tr><td>11 pierres</td><td>21 pierres</td><td>31 pierres</td></tr></table></center>
+
+<p>
+À chaque tour, Castor peut choisir deux tas. Il déplace alors, du tas le plus gros vers le tas le plus petit, un nombre de pierres égal au nombre de pierres qui se trouvent déjà dans le petit tas.
+</p>
+<p>
+Par exemple, si Castor choisit les tas n<sup>o</sup>&nbsp;1 et n<sup>o</sup>&nbsp;2, alors il doit déplacer 11 pierres du tas n<sup>o</sup>&nbsp;2 vers le tas n<sup>o</sup>&nbsp;1, obtenant ainsi&nbsp;:
+</p>
+<center><table class="RU-05-piles"><tr><td>Tas n<sup>o</sup>&nbsp;1</td><td>Tas n<sup>o</sup>&nbsp;2</td><td>Tas n<sup>o</sup>&nbsp;3</td></tr>
+<tr><td>22 pierres</td><td>10 pierres</td><td>31 pierres</td></tr></table></center>
+
+<p>
+Castor peut déplacer des pierres en suivant cette règle autant de fois qu'il le souhaite, en choisissant la paire de tas qu'il veut à chaque étape.
+</p>
+
+<p>
+En partant de la situation de départ décrite dans le premier tableau, il n'est possible d'atteindre qu'une seule des situations décrites ci-dessous. Laquelle&nbsp;?
+</p>
+
+<div class="reponses" id="answers_2012-RU-05">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Ce sujet n'est pas facile. Une manière de s'y prendre consiste à procéder par élimination.
+<ul>
+<li>La réponse &laquo;&nbsp;20, 22, 24&nbsp;&raquo; est impossible car le nombre total de
+pierres (66) n'est pas identique au nombre de pierres initialement présentes (63).
+<li>Les réponses &laquo;&nbsp;21, 21, 21&nbsp;&raquo; et &laquo;&nbsp;25, 13, 25&nbsp;&raquo; sont également impossibles à atteindre. Pour comprendre pourquoi, il faut remarquer que lorsqu'on effectue une opération de transfert de pierres, le plus petit des deux tas impliqués dans l'opération va voir sa taille doubler. Du coup, ce tas aura après l'opération un nombre pair de pierres. Les configurations 
+ &laquo;&nbsp;21, 21, 21&nbsp;&raquo; et &laquo;&nbsp;25, 13, 25&nbsp;&raquo; 
+ ne font apparaître que des tas ayant un nombre impair de pierres, donc il n'est pas possible d'atteindre ces configurations.
+</ul>
+<p>Ainsi, par élimination, la réponse &laquo;&nbsp;24, 28, 11&nbsp;&raquo; doit être la bonne.</p>
+
+<p>S'il on veut, on peut vérifier qu'il est effectivement possible d'atteindre cette configuration.</p>
+
+<table class="RU-05-piles"><tr><td width="60">Tas n<sup>o</sup>&nbsp;1</td><td width="60">Tas n<sup>o</sup>&nbsp;2</td><td width="60">Tas n<sup>o</sup>&nbsp;3</td></tr>
+<tr><td>11</td><td>21</td><td>31</td></tr>
+<tr><td colspan="2">__ &larr; 11 __</td><td>&nbsp;</td></tr>
+<tr><td>22</td><td>10</td><td>31</td></tr>
+<tr><td colspan="2">__ 10 &rarr; __</td><td>&nbsp;</td></tr>
+<tr><td>12</td><td>20</td><td>31</td></tr>
+<tr><td>&nbsp;</td><td colspan="2">__ &larr; 20 __</td></tr>
+<tr><td>12</td><td>40</td><td>11</td></tr>
+<tr><td colspan="2">__ &rarr; 12 __</td><td>&nbsp;</td></tr>
+<tr><td>24</td><td>28</td><td>11</td></tr>
+</table>
+<!-- <br /> 11, 21, 31
+<br /> 10, 22, 31
+<br /> 12, 20, 31
+<br /> 12, 11, 40
+<br /> 28, 11, 24 -->
+</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>Ce sujet peut sembler très difficile. En effet, on pourrait se dire
+qu'il faut tout essayer, c'est-à-dire explorer toutes les
+configurations possibles. C'est envisageable pour un ordinateur : on
+part de la configuration initiale. Ensuite, pour toutes les
+configurations que l'on a pas encore étudiées, on fait tous les
+déplacements de pierre possibles et on ajoute les nouvelles
+configurations à la liste des configurations pas encore
+étudiées. C'était impossible à faire pendant le concours&nbsp;!</p>
+
+<p>Heureusement, ici, il y avait deux astuces permettant de répondre 
+à la question sans faire trop de calculs : utiliser le 
+fait que le nombre de pierres ne change pas, et utiliser le fait qu'après un
+déplacement, il y a toujours un tas avec un nombre pair de
+pierres. Cela peut sembler de la triche, mais cela permet de répondre
+à la question bien plus vite&nbsp;! </p>
+
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

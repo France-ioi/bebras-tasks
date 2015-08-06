@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Territoire castor</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" src="../../modules/ext/jquery-ui/1.8/jquery-ui-1.8.22.custom.min.js" id="http://jqueryui.com/download/jquery-ui-1.8.22.custom.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+        task.length= 12;
+        task.height= 8;
+        task.map= [
+          [0,0,0,0,0,0,0,0,0,0,0,0],
+          [0,1,0,0,0,1,0,0,0,0,1,0],
+          [0,1,0,0,0,0,0,0,0,0,0,0],
+          [0,1,0,0,1,0,0,1,0,0,0,0],
+          [0,0,0,0,1,2,0,0,0,0,0,0],
+          [0,0,1,0,0,0,1,0,0,1,0,0],
+          [0,0,0,0,0,1,0,0,0,0,0,0],
+          [0,0,0,0,0,0,0,0,0,0,0,0]
+        ];
+
+        task.solution= [];
+        task.fillValue= 0;
+        task.dirs= [[0, -1], [-1, 0], [0, 1], [1, 0]];
+
+        task.getAnswer= function(callback) {
+          var sol = "";
+          for(var i = 0; i < task.height; i++) {
+            for(var j = 0; j < task.length; j++) {
+              sol += task.solution[i][j];
+            }
+          }
+          callback(sol);
+        };
+
+        task.reloadAnswer= function(strAnswer, callback) {
+           if (strAnswer == "") {
+              task.reset();
+           } else {
+              $("#cancel_2012_FR_07").show();
+              for(var i = 0; i < task.height; i++) {
+                for(var j = 0; j < task.length; j++) {
+                  task.solution[i][j] = parseInt(strAnswer.charAt(i*task.length + j));
+                }
+              }
+           }
+           task.draw();
+           callback();
+        };
+
+        task.load= function(views, callback) {
+           task.reset();
+
+           $("#c2012_FR_07 #nums td").click(function() {
+             var col = $(this).parent().children().index($(this)) + 1;
+             if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"fill=" + col});}
+             $(this).parent().find(":nth-child(" + (task.fillValue) + ")").removeClass("topred rightred bottomred leftred");
+             $(this).parent().find(":nth-child(" + (task.fillValue - 1) + ")").removeClass("rightred");
+             task.fillValue = col;
+             $(this).parent().find(":nth-child(" + (task.fillValue) + ")").addClass("topred rightred bottomred leftred");
+             $(this).parent().find(":nth-child(" + (task.fillValue - 1) + ")").addClass("rightred");
+           });
+
+           $("#c2012_FR_07 #nums td").first().click();
+           callback();
+        };
+
+        task.selectCell= function (row, col) {
+          return $("#pic_2012_FR_07 tr:eq("+(row)+") td:eq("+(col)+")");
+        };
+
+        task.select= function(row, col) {
+          if(task.solution[row][col] == task.fillValue) {
+            task.solution[row][col] = 0;
+          } else {
+            task.solution[row][col] = task.fillValue;
+          }
+          if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"[" + row + "][" + col + "] = " + task.solution[row][col]});}
+          task.draw();
+        };
+
+        task.draw= function() {
+          var htmlContent = "";
+          for(var i = 0; i < task.height; i++) {
+            htmlContent += "<tr>";
+            for(var j = 0; j < task.length; j++) {
+              var style = '';
+              var cont = '';
+              if(task.map[i][j] == 1) {
+                style = 'background:black;';
+              }
+              else if(task.map[i][j] == 2) {
+                style = 'background:red;';
+                cont = "X";
+              } else if(task.solution[i][j] != 0) {
+                cont = task.solution[i][j];
+              }
+              if(cont != '') {
+                style += '" class="text';
+              }
+              htmlContent += '<td style="'+style+'">'+cont+'</td>';
+            }
+            htmlContent += "</tr>";
+          }
+          $("#pic_2012_FR_07").html(htmlContent);
+
+          $("#pic_2012_FR_07 td").click(function() {
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).parent().parent().children().index($(this).parent());
+            task.select(row, col);
+          });
+        };
+
+        task.reset= function(withConfirmation) {
+          if (withConfirmation) {
+             if (!confirm("Êtes-vous certain de vouloir repartir de zéro sur ce sujet ?")) {
+                return;
+             }
+             if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"reset"});}
+          }
+          task.solution = new Array(task.height);
+          for(var i = 0; i < task.height; i++) {
+            task.solution[i] = new Array(task.length);
+            for(var j = 0; j < task.length; j++) {
+              task.solution[i][j] = 0;
+            }
+          }
+          task.draw();
+        };
+
+         </script>
+         <style class="">#pic_2012_FR_07 td {
+        width: 40px;
+        height: 40px;
+        padding: 0px;
+        margin: 0px;
+        border: 2px solid black;
+        text-align: center;
+        font-size: 2em;
+      }
+
+      #pic_2012_FR_07 td.wall    { background: black; }
+      #pic_2012_FR_07 td.beaver  { background: red; }
+
+      #pic_2012_FR_07 td.leftred, #c2012_FR_07 #nums td.leftred   { border-left:4px solid red; }
+      #pic_2012_FR_07 td.rightred, #c2012_FR_07 #nums td.rightred  { border-right:4px solid red; }
+      #pic_2012_FR_07 td.topred, #c2012_FR_07 #nums td.topred    { border-top:4px solid red; }
+      #pic_2012_FR_07 td.bottomred, #c2012_FR_07 #nums td.bottomred { border-bottom:4px solid red; }
+      #pic_2012_FR_07 td.text {
+        background:#99CCFF;
+      }
+
+      #pic_2012_FR_07 {
+        border-collapse: collapse;
+        margin: 0 20px 20px 20px;
+      }
+
+      #pic_2012_FR_07 td {
+        cursor: pointer;
+      }
+
+      #c2012_FR_07 #nums {
+        margin: 20px;
+        border-collapse: collapse;
+      }
+      #c2012_FR_07 #nums td {
+        background:#99CCFF;
+        border: 2px solid black;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 2em;
+      }</style>
+         <script class="grader" type="text/javascript">var grader = {
+   gradeTask: function(answer, answerToken, callback) {
+      var taskParams = platform.getTaskParams();
+      var walls = new Array(
+         new Array(0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 ,0),
+         new Array(0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0 ,0),
+         new Array(0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0 ,0),
+         new Array(0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0 ,0),
+         new Array(0, 0, 1, 1, 0, 2, 1, 1, 1, 1, 1 ,0),
+         new Array(0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0 ,0),
+         new Array(0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0 ,0),
+         new Array(0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0 ,0)
+      );
+      var score = null;
+      if (answer.length !== parseInt(8 * 12)) {
+         score = taskParams.noScore;
+      }
+      
+      var errors = 0;
+      for (var row = 0; row < 8; row++) {
+         for (var col = 0; col < 12; col++) {
+            if (walls[row][col] === 2) {
+               continue;
+            }
+            
+            var ans = parseInt(answer[row * 12 + col]);
+            if (!ans && walls[row][col]) {
+               errors++;
+            }
+            else if (ans && !walls[row][col]) {
+               errors++;
+            }
+         }
+      }
+      score = Math.max(taskParams.minScore, taskParams.maxScore - errors);
+      callback(score);
+   }
+};
+
+/* Tests :
+grader.gradeTask('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', null, function(score) {console.log(score + ' (wrong)')});
+grader.gradeTask('000050500000000540450000005432345000000501204500005400123450000321034000005430545000000545050000', null, function(score) {console.log(score + ' (ok)')});
+*/</script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-07/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        ""
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Territoire castor</h1>
+<p><strong>Coloriez en bleu les cases que Castor peut atteindre en 5 pas ou moins à partir de sa maison, représentée par une croix.</strong></p>
+<p>
+En <strong>un pas</strong>, Castor se déplace d'une case au-dessus, au-dessous, à droite ou à gauche (mais pas en diagonale). Il ne va pas sur les cases noires.
+</p>
+<p>
+Pour colorier des cases, cliquez sur l'un des nombres à droite de la grille, puis cliquez sur toutes les cases que vous voulez colorier et marquer de ce nombre. En cas d'erreur, vous pouvez recliquer sur une case pour la vider.
+</p><p>
+Les nombres au milieu des cases coloriées n'ont pas d'importance pour la réponse, mais peuvent vous aider à vous organiser.</p>
+<p>
+Chaque case coloriée en trop ou en moins dans votre réponse finale coûte 1 point.</p>
+</p>
+<div id="c2012_FR_07">
+   <table id="pic_2012_FR_07" style="float:left">
+   </table>
+   <table id="nums">
+     <tr>
+       <td>1</td>
+       <td>2</td>
+       <td>3</td>
+       <td>4</td>
+       <td>5</td>
+     </tr>
+   </table>
+   <span id="buttons_2012_FR_07">
+      <br/><br/><br/>
+      <input type="button" value="Recommencer" onclick="task.reloadAnswer('', function() {})" />
+   </span>
+</div>
+<div style="clear:both"></div>
+
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+<h2>La solution</h2>
+
+<p>L'image ci-dessous montre le nombre de pas nécessaires pour arriver à chaque case que l'on
+peut atteindre en 5 pas ou moins.</p>
+
+<img src="2012-FR-07_sol.png" />
+
+<h2>C'est de l'informatique </h2>
+
+<p>Ce sujet présente un problème de <b>calcul de plus courts chemins</b>,
+c'est-à-dire qu'on cherche à mesurer le nombre minimum de pas qu'il faut
+à Castor pour atteindre certaines cases à partir de sa maison.</p>
+
+<p>Pour résoudre ce sujet, on peut appliquer l'algorithme de
+<b>parcours en largeur</b>, qui consiste à noter d'abord toutes les
+cases que l'on peut atteindre en 1 pas, puis toutes les cases que l'ont
+peut atteindre en 2 pas, puis toutes les cases accessibles en 3 pas, etc...
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

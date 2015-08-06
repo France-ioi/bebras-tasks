@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Les amis de Lucie</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "Thomas",
+            "Kim",
+            "Félix",
+            "Sarah",
+            "Sandy",
+            "Sira",
+            "Karim",
+            "Ahmed",
+            "Laure",
+            "Jules",
+            "Kévin",
+            "Manon"
+            ], "checkboxes", "#answers_2011-SK-08");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-SK-08/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["010110011110"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Les amis de Lucie</h1>
+<p>
+Lucie et ses amis se sont inscrits sur un réseau social. L'illustration
+ci-dessous montre le réseau des amis de Lucie, et des amis de ses amis.
+</p>
+<p>
+<img src="2011-SK-08.png" alt="Amis de Lucie"><br>
+</p>
+<p>
+Sur cette illustration, deux personnes sont reliées par un segment si elles
+sont amies sur le réseau social. Ainsi, Sira est l'amie de Lucie, mais
+Jules n'est pas un ami de Lucie.
+</p>
+<p>
+Ci-dessous, cochez les cases devant les noms des personnes qui ne sont
+<b>pas des amis</b> de Lucie sur ce réseau social.
+</p>
+<div class="reponses" id="answers_2011-SK-08">
+</div>
+
+<img style="display: none;" src="2011-SK-08.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Les amis de Lucie sont ceux qui sont reliés à elle sur l'illustration. On peut donc rayer tous les noms qui sont reliées à Lucie. Les noms qui restent seront ceux qui ne sont pas ses amis :
+   </p>
+   <p>
+   <img src="amisLucie-sol.png"/>
+   </p>
+   <p>
+   Les personnes qui ne sont pas des amis de Lucie sont donc Sandy, Sarah, Jules, Kim, Ahmed, Laure et Kévin.
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Cet exercice consiste essentiellement à comprendre la signification de la représentation graphique d'un objet essentiel en informatique : le graphe. Les personnes du réseau social sont les noeuds du graphe, et les liens d'amitié entre personnes sont les arêtes du graphe.
+   </p>
+   <p>
+   Les graphes donnent une représentation abstraite des relations entre objets de toutes sortes. Ils sont utiles, par exemple pour modéliser des réseaux d'amis ou de télécommunications. La transition entre un objet réel et un modèle n'est pas toujours facile. Le modèle abstrait peut permettre de voir des structures cachées. 
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

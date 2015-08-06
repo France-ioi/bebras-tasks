@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv= "content-type" content= "text/html;" charset="UTF8">
+<title>2012-CZ-04</title>
+</head>
+<body>
+
+<h1>Bebrocarina</h1>
+<p> Bebrocarina est un instrument de musique qui possède les caractéristiques suivantes :
+<ul>
+<li>Il ne peut jouer que 6 différentes notes.</li>
+<li>Après avoir joué une note, on ne peut jouer que la même note ou bien la note avec un ton juste au dessus ou bien juste en dessous.</li>
+</ul>
+Pour écrire une partition de bebrocarina, on n'a besoin que de trois symboles différents :
+<br /> = signifie "jouer la même note".
+<br /> - signifie "jouer la note un ton en dessous".
+<br /> + signifie "jouer la note un ton au dessus".
+</p>
+<p>
+Par exemple [- +] signifie "jouer trois notes, la deuxième un ton en dessous de la première note et la troisième note un ton au dessus de la seconde (donc la même que la première note).
+</p>
+
+<div class="question">
+ <p>Laquelle de ces partitions ne peut être jouée à l'aide d'un bebrocarina ? </p>
+</div>
+
+<div class="reponses">
+
+<ul>
+<li>A. [+ = = = + = = = + = = = + = = = +] </li>
+<li>B. [ - - - = + - = - - = = = +]</li>
+<li>C. [- - - - - = + + + + + = - - - - -]</li>
+<li>D. [- - + - - + - - = - + - -]</li>
+</ul>
+
+</div>
+
+<!-- réponse : 4 -->
+
+<div class="explications">
+<h2>La solution</h2>
+<p>Le bebrocarina ne peut jouer que 6 différentes notes, donc on peut passer de la note le plus haute à la note la plus basse en 5 étapes. Cela correspond à "-" dans notre notation. Donc la différence entre le nombre de "-" et de "+" ne devrait pas excéder 5 dans n'importe quelle partie de la partition.
+<br /> Le nombre de "=" n'est par contre pas limité.
+<br /> A est correct car il n'y a que 5 "+".
+<br /> B contient 6 "-" mais pas à la suite, il y a un "+" au milieu, donc on ne joue bien que 6 notes.
+<br /> C commence par une suite de 5 "-", donc en commençant avec la note la plus haute, on se retrouve à jouer la note la plus basse. Ensuite il y a une séquence de 5 "+" qui nous ramène à la note la plus haute. Et la dernière suite de 5 "-" nous ramène une fois de plus à la note la plus basse. On n'a bien besoin que de 6 notes.
+<br /> D contient 9 "-" et 3 "+", donc la différence est 6, on n'a besoin de 7 notes pour la jouer, ce qui n'est pas possible.</p>
+
+<h2>C'est de l'informatique </h2>
+<p>TEXTE DE LA SOLUTION</p>
+
+</div>
+</body>
+</html>

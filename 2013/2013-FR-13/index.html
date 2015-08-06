@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-13</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-13/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "",
+          "translators": [
+          ],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+              "[5,3,0,2,1,4]"
+          ]
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+      </style>
+      <script src="scale.js"></script>
+      <script class="" type="text/javascript">
+         // Array Remove - By John Resig (MIT Licensed)
+         Array.prototype.remove = function (from, to) {
+             var rest = this.slice((to || from) + 1 || this.length);
+             this.length = from < 0 ? this.length + from : from;
+             return this.push.apply(this, rest);
+         };
+         var paper;
+         var NB_BALLS;
+         var dragAndDrop;
+         var weighted_circles;
+
+         task.load = function(views, callback) {
+               paper = Raphael("raf", 650, 320);
+					weighted_circles = new Array();
+					NB_BALLS = 6;
+               r = 30;
+               d  = 10;
+               var offset = 0;
+               var offset_shelf = 200;
+               yScale = 100;
+               dist = 2*r+d;
+               offset_total = offset+offset_shelf;
+               offset_scale = 150;
+               
+               scale = new Scale(paper, offset_scale);				
+
+					var lightLeft = paper.text(300,245,"plus léger").attr('font-size','12').hide();
+					var heavyLeft = paper.text(300,280,"plus lourd").attr('font-size','12').hide();
+					var lightRight = paper.text(500,245,"plus léger").attr('font-size','12').hide();
+					var heavyRight = paper.text(500,280,"plus lourd").attr('font-size','12').hide();
+
+               // Drag And Drop
+               dragAndDrop = DragAndDropSystem({
+                  paper : paper,
+                  actionIfDropped : function(srcCont, srcPos, dstCont, dstPos, type)
+                  {
+                     if(dstCont == null)
+                        return false;
+                     return true;
+                  },
+                  drop : function(srcCont, srcPos, dstCont, dstPos, type)
+                  {
+                     scale.reset(-1);
+							lightLeft.hide(); heavyLeft.hide(); lightRight.hide(); heavyRight.hide();  
+                  },
+                  over : function(srcCont, srcPos, dstCont, dstPos)
+                  {
+							lightLeft.hide(); heavyLeft.hide(); lightRight.hide(); heavyRight.hide();  
+                     if(dstCont == null)
+                        scale.reset(-1);
+                     else
+                     {
+                        var objs = dragAndDrop.getObjects('seq');
+                        scale.reset(-1);
+                        scale.compare(weighted_circles[objs[srcPos]],weighted_circles[objs[dstPos]],0);
+								// not used: if(weighted_circles[objs[srcPos]].weight < weighted_circles[objs[dstPos]].weight)
+								lightLeft.show();
+								heavyRight.show();
+                     }
+                  }
+               });
+               dragAndDrop.addContainer({
+                  ident : 'seq',
+                  cx : 400, cy : 70, widthPlace : 60, heightPlace : 60,
+                  nbPlaces : NB_BALLS,
+                  dropMode : 'insertBefore',
+                  dragDisplayMode : 'marker',
+                  placeBackgroundArray : []
+               });
+               paper.rect(200,102,400,1).attr('stroke-width',5);
+
+               for(var i = 0; i < NB_BALLS; i++) {
+                  var circle = getObject(i);
+                  dragAndDrop.insertObject('seq',i, {ident : i, elements : circle} );
+               }
+               callback();
+            },
+
+            task.getAnswer= function(callback) {
+               callback(JSON.stringify(dragAndDrop.getObjects('seq')));
+            };
+            
+            task.reloadAnswer= function(strAnswer, callback) {
+               var answer = [0, 1, 2, 3, 4, 5];
+               if (strAnswer != "") {
+                  answer = $.parseJSON(strAnswer);
+               }
+               for (var i = 0; i < NB_BALLS; i++) {
+                  dragAndDrop.removeObject('seq', i);
+               }
+               for (var i = 0; i < NB_BALLS; i++) {
+                  dragAndDrop.insertObject('seq',i, {ident : answer[i], elements : getObject(answer[i])});
+               }
+               callback();
+            };
+
+         function getObject(id) {
+				var weights = [3, 5, 4, 2, 6, 1];
+				var colors = ["#FFFF00", "#00FFFF", "#FF00FF", "#0000FF", "#FF0000", "#00FF00"];
+				var texts = ["A", "B", "C", "D", "E", "F"];
+            var c = paper.circle(0,0,26).attr('fill', colors[id]);
+            var t = paper.text(0,0,texts[id]).attr({'font-size' : 25, 'font-weight' : 'bold'});
+				 $(t.node).css({
+					"-webkit-touch-callout": "none",
+					"-webkit-user-select": "none",
+					"-khtml-user-select": "none",
+					"-moz-user-select": "none",
+					"-ms-user-select": "none",
+					"user-select": "none",
+					"cursor" : "default"
+				});
+            weighted_circles[id] = paper.set();
+            weighted_circles[id].push(c, t);
+            weighted_circles[id].weight = weights[id];
+            return [c, t];
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Trier par poids</h1>
+         <p>
+         Castor possède 6 frisbees de différentes couleurs et de différents poids. Il souhaite les ranger sur son étagère du plus léger (à gauche) au plus lourd (à droite). 
+         </p>
+         <p>
+         Aidez Castor à ranger ses frisbees. Pour comparer le poids de deux frisbees, faites-en glisser un sur l'autre. La balance vous indiquera alors quel est le plus léger des deux. 
+         </p>
+         <div id="raf" style="margin:10px;" class="touch"></div>
+         <div style="text-align:right">
+            <input type="button" value="Recommencer" onclick="task.reloadAnswer('')"/>
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         <p>La solution est : <b>FDACBE</b>.</p>
+         <p>Il existe de nombreuses méthodes pour trier des objets.
+         Une méthode particulièrement adaptée pour ce sujet consiste
+         à trier d'abord les deux premiers frisbees, puis prendre le
+         troisième et le placer au bon endroit par rapport aux deux 
+         premiers, puis prendre le quatrième et l'insérer à sa place
+         par rapport aux trois premiers, etc... Par exemple, au moment
+         où l'on a déjà les trois premiers frisbees dans l'ordre (A, puis C, puis B), 
+         on se retrouvent dans la situation suivante, où l'on se 
+         demande où placer le frisbee D.<p/>
+         <p><img src="correction_img.png"></p>
+         <p>Pour savoir où insérer D, on le compare avec les 
+         frisbees déjà triés. Par exemple, si D était plus lourd
+         que C mais plus léger que B, on le placerait entre C et B.
+         Il se trouve que D est plus léger que A, du coup on
+         place D tout à gauche.
+         </p>
+         <p>
+         En répétant ce processus, on peut ranger les frisbees un par
+         un à leur place. &Agrave; la fin, pour vérifier que l'on ne s'est
+         pas trompé, on peut s'assurer que tous les frisbees sont dans le
+         bon ordre. Pour cela, on vérifie que chaque frisbee est bien plus léger que
+         le frisbee placé immédiatement à sa droite.
+         </p>
+       </p>
+         <h2>C'est de l'informatique !</h2>
+         <p>
+         Dans ce sujet, il fallait trouver et appliquer une méthode pour trier des objets.
+         Il existe de nombreux «&nbsp;algorithmes de tris&nbsp;». 
+         </p>
+         <p>
+         Tant qu'il n'y a qu'un petit nombre d'objets à trier, on peut utiliser n'importe
+         quel algorithme de tri. En revanche, en informatique ont est souvent amené à
+         trier des millions, voire des milliards de données. Pour de telles applications,
+         il est important d'utiliser un algorithme de tri plus efficace que celui décrit
+         dans la solution de ce sujet.
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

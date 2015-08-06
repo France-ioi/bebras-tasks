@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Course de grenouilles</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+
+        task.grid= [[0,0,0,0],[0,1,1,1],[0,0,0,0],[1,0,1,1],[0,0,0,0]];
+        task.frogs= [[],[]];
+        task.cmd= [];
+        task.intervalID= -1;
+        task.invalid= 0;
+        task.limit= [5,4];
+        task.default_cmd= ["OOOSS", "OONNO"];
+        task.buttonReset= '<input type="button" value="Ok" onclick="task.reset();" />';
+
+        task.load= function(views, callback) {
+           task.reset();
+           $("#success_2012_FR_01").hide();
+           callback();
+        };
+        
+        task.unload= function(callback) {
+           window.clearInterval(task.intervalID);
+           callback();
+        };
+        task.getAnswer= function(callback) {
+          var f1 = $("#f1_2012_FR_01").val();
+          var f2 = $("#f2_2012_FR_01").val();
+          var answer = f1 + "," + f2;
+          callback(answer);
+        };
+
+        task.reloadAnswer= function(strAnswer, callback) {
+           var sol = strAnswer.split(',');
+           $("#f1_2012_FR_01").val(sol[0]);
+           $("#f2_2012_FR_01").val(sol[1]);
+           callback();
+        };
+
+        task.draw= function() {
+          //console.log(task.frogs[0][0] + "," + task.frogs[0][1] + "/" + task.frogs[1][0] + "," + task.frogs[1][1]);
+
+          var htmlContent = "";
+          for(var r = 0; r < 5; r++) {
+            htmlContent += "<tr>";
+            for(var c = 0; c < 4; c++) {
+              var color = 'white';
+              var content = '&nbsp;';
+              if(task.grid[r][c]) {
+                color = 'black';
+              } else {
+                var f = 0;
+                if(task.frogs[0][0] == r && task.frogs[0][1] == c) {
+                  color = 'yellow' ;
+                  content='C';
+                  f++;
+                }
+                if(task.frogs[1][0] == r && task.frogs[1][1] == c) {
+                  color = 'grey';
+                  content='R';
+                  f++;
+                }
+                if(f == 2) {
+                  color = 'red';
+                  content='RC';
+                }
+              }
+              htmlContent += '<td style="background:'+color+'">'+content+'</td>';
+            }
+            htmlContent += "</tr>";
+          }
+          $("#pic_2012_FR_01").html(htmlContent);
+        };
+
+        task.reset= function() {
+          //$("#f1_2012_FR_01").val(task.default_cmd[0]);
+          //$("#f2_2012_FR_01").val(task.default_cmd[1]);
+          task.reset_play();
+        };
+
+        task.reset_play= function() {
+          $("#success_2012_FR_01").hide();
+          window.clearInterval(task.intervalID);
+
+          $("#message_2012_FR_01").empty();
+
+          task.frogs = [[0, 3], [4, 3]];
+          task.cmd = ["",""];
+          task.draw();
+        };
+
+        task.play= function() {
+          if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"play"});}
+          task.reset_play();
+
+          var f1 = $("#f1_2012_FR_01").val();
+          var f2 = $("#f2_2012_FR_01").val();
+          if(f1.length > 0 || f2.length > 0) {
+            task.cmd = [f1,f2];
+            task.intervalID = window.setInterval(task.loop, 300);
+          }
+        };
+
+        task.loop= function() {
+          var cmd = task.cmd;
+          var new_frogs = [[],[]];
+          var msg = "";
+
+          for(var i = 0; i < 2; i++) {
+            var dirR = 0;
+            var dirC = 0;
+
+            if(cmd[i].length == 0) { }
+            else if(cmd[i].charAt(0) == 'N' || cmd[i].charAt(0) == 'n') { dirR=-1; }
+            else if(cmd[i].charAt(0) == 'S' || cmd[i].charAt(0) == 's') { dirR=1; }
+            else if(cmd[i].charAt(0) == 'O' || cmd[i].charAt(0) == 'o') { dirC=-1; }
+            else if(cmd[i].charAt(0) == 'E' || cmd[i].charAt(0) == 'e') { dirC=1; }
+            else {
+              msg = "Erreur&nbsp;: vous devez utiliser uniquement les lettres N, O, S et E&nbsp;!";
+            }
+
+            new_frogs[i] = [task.frogs[i][0] + dirR, task.frogs[i][1] + dirC];
+
+            if(msg == "" && (new_frogs[i][0] < 0 || new_frogs[i][1] < 0 || new_frogs[i][0] >= task.limit[0] || new_frogs[i][1] >= task.limit[1] || task.grid[new_frogs[i][0]][new_frogs[i][1]] == 1)) {
+              msg = "Aïe&nbsp;! L'une des grenouilles essaie d'aller sur un mur ou de sortir de la grille&nbsp;!";
+            }
+          }
+
+          if(msg == "" && new_frogs[0][0] == new_frogs[1][0] && new_frogs[0][1] == new_frogs[1][1]) {
+            msg = "Aïe&nbsp;! Collision entre les deux grenouilles&nbsp;!";
+          }
+
+          task.frogs = new_frogs;
+          task.cmd = [cmd[0].substr(1), cmd[1].substr(1)];
+          task.draw();
+
+          if(msg != "") {
+            $("#message_2012_FR_01").html(msg + task.buttonReset);
+            window.clearInterval(task.intervalID);
+            return;
+          }
+
+          if(cmd[0].length <= 1 && cmd[1].length <= 1) {
+            window.clearInterval(task.intervalID);
+            if(cmd[0].length == 0 || cmd[1].length == 0) {
+              $("#message_2012_FR_01").html("Donnez le même nombre d'ordres aux deux grenouilles&nbsp;!" + task.buttonReset);
+            } else if(new_frogs[0][0] == 4 && new_frogs[0][1] == 3 && new_frogs[1][0] == 0 && new_frogs[1][1] == 3) {
+              $("#success_2012_FR_01").show();
+               platform.validate("done", 1);
+            } else {
+              $("#message_2012_FR_01").html("Les grenouilles n'ont pas échangé leurs positions !" + task.buttonReset);
+            }
+          }
+        };
+
+      </script>
+         <style class="">table.laby {
+        border-spacing: 0px;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        margin-left: 20px;
+        margin-bottom: 20px;
+      }
+      table.laby td {
+        width: 30px;
+        height: 30px;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 0px;
+        margin: 0px;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: bold;
+      }
+
+      #f1_2012_FR_01, #f2_2012_FR_01 {
+         font-family: Courier, "Courier New", monospace;
+         font-size: 1.2em;
+      }</style>
+         <script class="grader" type="text/javascript">var grader = {
+   gradeTask: function(answer, answerToken, callback) {
+      var walls = new Array(
+         new Array(0, 0, 0, 0),
+         new Array(0, 1, 1, 1),
+         new Array(0, 0, 0, 0),
+         new Array(1, 0, 1, 1),
+         new Array(0, 0, 0, 0)
+      );
+      var taskParams = platform.getTaskParams();
+      answer = answer.toUpperCase();
+      var sequences = answer.split(',');
+      var wrong = false;
+      if (!sequences[0].length || sequences[0].length !== sequences[1].length) {
+         callback(taskParams.minScore);
+         return;
+      }
+      
+      var rows = new Array(0, 4);
+      var cols = new Array(3, 3);
+      var nbSteps = sequences[0].length;
+      
+      for (var step = 0; step < nbSteps; step++) {
+         for (var animal = 0; animal < 2; animal++) {
+            switch(sequences[animal][step]) {
+               case 'N':
+                  rows[animal]--;
+                  break;
+               case 'S':
+                  rows[animal]++;
+                  break;
+               case 'O':
+                  cols[animal]--;
+                  break;
+               case 'E':
+                  cols[animal]++;
+                  break;
+               default:
+                  //console.log('Wrong sequence : ' + sequences[animal][step]);
+            }
+            /*if (animal == 0) {
+               console.log(sequences[0][step] + '  : ' + rows[0] + ';' + cols[0]);
+            }*/
+            if (cols[animal] < 0 || cols[animal] > 3 || rows[animal] < 0 || rows[animal] > 4) {
+               wrong = true;
+            } else if (walls[rows[animal]][cols[animal]]) {
+               wrong = true;
+            }
+         }
+         
+         if (rows[0] === rows[1] && cols[0] === cols[1]) {
+            wrong = true;
+         }
+      }
+      
+      if (rows[0] !== 4 || rows[1] !== 0 || cols[0] !== 3 || cols[1] !== 3) {
+         wrong = true;
+      }
+      var score = (wrong === true) ? taskParams.minScore : taskParams.maxScore;
+      callback(score);
+   }
+};
+
+/* Tests :
+console.log(grader.gradeTask(0, 'OOOSSEEEOOSSEE,OOOEOENNONNEEE', 0, 9) + ' (ok)');
+console.log(grader.gradeTask(0, 'OOOSSEEEOOSSEE,OOEOOENNONNEEE', 0, 9) + ' (ok)');
+console.log(grader.gradeTask(0, 'OOOSSEEEOOSSEE,OONSOENNONNEEE', 0, 9) + ' (ok)');
+console.log(grader.gradeTask(0, 'OEOOOSSEEEOOSSEE,OEOONSOENNONNEEE', 0, 9) + ' (ok)');
+console.log(grader.gradeTask(0, 'OOOSSEEEOOSSEE,OOOEOENNONNEEEOE', 0, 9) + ' (different length)');
+console.log(grader.gradeTask(0, 'OOOSSEEEOOSSEE,OOOEOENNONNEEO', 0, 9) + ' (bad destination)');
+console.log(grader.gradeTask(0, 'OOOSSEEEOOSSEN,OOOEOENNONNEEE', 0, 9) + ' (run into wall)');
+console.log(grader.gradeTask(0, 'SSSNSS,ONNNNE', 0, 9) + ' (run into walls)');
+*/</script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-01/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        ""
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Course de grenouilles</h1>
+<p>
+Les grenouilles programmables de Castor et Raton sont placées dans un labyrinthe. Le but est de programmer les grenouilles pour qu'elles échangent leurs positions en sautant le même nombre de fois et sans entrer en collision.</p>
+<p>
+Les grenouilles peuvent être programmées par une séquence de lettres dirigeant leurs sauts&nbsp;: <b>N</b> pour Nord, <b>S</b> pour Sud, <b>O</b> pour Ouest, et <b>E</b> pour Est.
+Castor et Raton ont écrit un programme utilisant 5 sauts, mais comme vous pouvez le voir en cliquant sur le bouton &laquo;&nbsp;Exécuter&nbsp;&raquo;, ce programme n'échange pas les positions des deux grenouilles.</p>
+
+  <table><tr>
+    <td width="160px">
+      <table id="pic_2012_FR_01" class="laby"></table>
+    </td> 
+    <td width="380px">
+     <table width="100%">
+      <tr><td colspan="2">
+        <span id="message_2012_FR_01" style="color:red;font-weight:bold;width:100%;"></span>&nbsp;
+        <span id="success_2012_FR_01" style="color:blue;font-weight:bold;display:none">Bravo, vous avez réussi&nbsp;!</span>
+      </td></tr>
+      <tr><td colspan="2">&nbsp;</td></tr>
+      <tr><td>Ordres de Castor&nbsp;:</td><td><input type="text" id="f1_2012_FR_01" value="OOOSS" size="20" /></td></tr>
+      <tr><td>Ordres de Raton&nbsp;:</td><td><input type="text" id="f2_2012_FR_01" value="OONNO" size="20" /></td></tr>
+      <tr><td colspan="2">
+        <input type="button" value="Exécuter" onclick="task.play();" />
+      </td></tr>
+     </table>
+    </td>
+    <td width="160px">
+      <b>Objectif&nbsp;:</b><br/>
+      <table class="laby">
+      <tbody><tr><td style="background:white">&nbsp;</td><td style="background:white">&nbsp;</td><td style="background:white">&nbsp;</td><td style="background:grey">R</td></tr>
+      <tr><td style="background:white">&nbsp;</td><td style="background:black">&nbsp;</td><td style="background:black">&nbsp;</td><td style="background:black">&nbsp;</td></tr>
+      <tr><td style="background:white">&nbsp;</td><td style="background:white">&nbsp;</td><td style="background:white">&nbsp;</td><td style="background:white">&nbsp;</td></tr>
+      <tr><td style="background:black">&nbsp;</td><td style="background:white">&nbsp;</td><td style="background:black">&nbsp;</td><td style="background:black">&nbsp;</td></tr>
+      <tr><td style="background:white">&nbsp;</td><td style="background:white">&nbsp;</td><td style="background:white">&nbsp;</td><td style="background:yellow">C</td></tr>
+      </tbody></table>
+    </td>
+  </tr></table>
+
+  <p>Trouvez deux séries de commandes de même longueur (une série pour chaque grenouille) qui permettent aux grenouilles d'échanger leur position sans se rentrer dedans. N'hésitez pas à faire des essais, vous ne pouvez pas perdre de points.</p>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+<h2>La solution</h2>
+<p>
+Voici un exemple de séquences d'ordres que l'on peut donner à la grenouille de Castor et à celle de Raton, respectivement&nbsp;: </p>
+<pre>
+   OOOSSESSEEOEOE
+   OONNEEOOONNEEE
+</pre>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>
+Chacune des grenouilles se comporte comme un petit robot que l'on peut <b>programmer</b>.
+Ici, un programme est simplement une séquence de directions, chaque direction étant
+l'une des lettres N, S, E ou O.
+</p>
+<p>
+Ce qui est intéressant dans ce sujet, c'est que le temps entre en compte.
+En effet, il y a deux grenouilles, donc il faut <b>synchroniser</b> leurs actions
+pour éviter une collision.
+De manière générale, les programmes qui ont besoin de prendre en compte des 
+interactions avec l'environnement, et donc qui dépendent du temps,
+sont souvent bien plus difficiles à écrire que les autres.
+</p>
+
+  </div>
+</div> <!-- task-solution -->
+   </body>
+</html>

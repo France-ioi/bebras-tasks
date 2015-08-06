@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-11</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-11/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+      </style>
+      <script src="2013-FR-11_task.js"></script>
+      <script class="grader" type="text/javascript">
+      var grader = {
+         taskGrader: null,
+         gradeTask: function(strAnswer, answerToken, callback) {
+            if (this.taskGrader == null) {
+               this.taskGrader = new Task('grader');
+            }
+            var taskParams = platform.getTaskParams();
+            var minScore = taskParams.minScore;
+            var maxScore = taskParams.maxScore;
+            var t = this.taskGrader;
+            t.reloadAnswer(strAnswer);
+
+            var minBuiltEdges = 3;
+            var edges = allEdges.concat(t.builtEdges);
+            var success = this.graphHasNoCriticalEdge(allNodes.length, edges);
+            var built = t.builtEdges.length;
+            var score = minScore;
+            // alert( edges.length + '/' + success + '/' + built);
+            if (success) {
+               if (built < 3) {
+                  score = minScore; // TODO: impossible normalement
+               } else if (built == minBuiltEdges) {
+                  score = maxScore;
+               } else if (built == 4) {
+                  score = Math.floor( (2 * maxScore + minScore) / 3 ); // 66%
+               } else if (built == 5) {
+                  score = Math.floor( (maxScore + 2 * minScore) / 3 );  // 33%
+               } else if (built == 6) {
+                  score = Math.floor( (maxScore + 4 * minScore) / 5 );  // 20%
+               }
+            }
+            callback(score);
+         },
+         parent: [],
+         graphIsConnected: function (nbNodes, edges) {
+            // union find
+            var parent = this.parent;
+            for (var i = 0; i < nbNodes; i++)
+               parent[i] = i;
+            function repr(a) {
+               if (parent[a] == a)
+                  return a;
+               var b = repr(parent[a]);
+               parent[a] = b;
+               return b;
+            }
+            function link(a, b) {
+               parent[repr(a)] = repr(b);
+            }
+            // connectivity
+            for (var e = 0; e < edges.length; e++)
+              link(edges[e][0], edges[e][1]);
+            var compo = repr(0);
+            for (var i = 1; i < nbNodes; i++)
+               if (repr(i) != compo)
+                  return false;
+            return true;
+         },
+
+         graphHasNoCriticalEdge: function(nbNodes, edges) {
+            for (var e = 0; e < edges.length; e++) {
+               var edges2 = edges.slice();
+               edges2.splice(e, 1);
+               if (! this.graphIsConnected(nbNodes, edges2))
+                  return false;
+            }
+            return true;
+         }
+      }
+      </script>
+      <script class="solution" type="text/javascript">
+      function solution_load_edges() {
+         return [ [7,2], [4,17], [13,16] ];
+      }
+      </script>
+      <script class="" type="text/javascript">
+            task.load = function(views, callback) {
+               task.task = new Task('task');
+               callback();
+            };
+
+            task.solutionViewLoaded = false;
+            task.hackShowViews = function(views) {
+               if (views.solution && !task.solutionViewLoaded) {
+                  task.sol = new Task('solution');
+                  task.solutionViewLoaded = true;
+               }
+            };
+           
+            task.getAnswer= function(callback) {
+               callback(task.task.getAnswer());
+            };
+
+            task.reloadAnswer= function(strAnswer, callback) {
+               task.task.reloadAnswer(strAnswer);
+               callback();
+            };
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Transport d'électricité</h1>
+         <p>Au pays des castors, l'électricité est produite par un barrage,
+         et toutes les maisons sont reliées par des lignes électriques.
+         Les castors souhaitent construire des lignes électriques supplémentaires
+         afin que la coupure d'<b>une seule</b> ligne ne suffise plus à priver une maison
+         d'électricité.
+         </p>
+         <p style="margin-bottom:0.5em">
+         Aidez les castors en leur montrant où construire les lignes.
+         Moins vous utilisez de lignes, plus vous aurez de points.
+         </p>
+         <center>
+         <table>
+         <tr>
+         <td>
+
+            <div id="graph_task" style="width:450px; height:300px; text-align:center"></div>
+
+         </td>
+         <td>
+            <p>
+            Cliquez sur deux maisons pour les relier par une ligne.
+            Cliquez sur une ligne pour l'effacer.
+            </p>
+               <center>
+               <div id="buttons_2013_FR_11">
+                  <div id="message"></div>
+                  <div id="error"></div>
+                  <input type="button" id="reset" value="Recommencer" />
+               </div>
+               </center>
+         </td>
+         </tr>
+         </table>
+         </center>
+          <center>
+            <span id="cancel_2013_FR_11" style="display:none">
+              <span style="color:blue;font-weight:bold">Votre réponse a été enregistrée. </span>
+              <br/>
+              <input type="button" value="Annuler la réponse enregistrée" onclick="nm_2013_FR_11.cancel()">
+            </span>
+          </center>
+
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         <p>Il suffisait de <b>3</b> lignes pour que le réseau résiste à la destruction d'une seule ligne. </p>
+         <style> 
+           .soltable td { 
+              vertical-align: top;
+              padding-right: 1em; 
+           }
+         </style>
+
+         <table class="soltable">
+         <tr>
+            <td>Commençons par repérer les maisons qui ne sont reliées au barrage que par un seul chemin, et qui risquent donc une coupure d'électricité si une seule ligne de ce chemin est coupée. Ces maisons «&nbsp;à risque&nbsp;» sont montrées en rouge sur le dessin ci-contre.
+            </td>
+            <td><img src="2013-FR-11_electricity_sol_1.png">
+            </td>
+         </tr>
+         <tr>
+            <td>Le but du sujet est d'ajouter des lignes de sorte à ce qu'il n'y ait plus aucune maison à risque. Par exemple, le schéma ci-contre montre comment l'ajout d'une ligne permet de sécuriser l'alimentation en électricité de deux maisons à risque.
+            </td>
+            <td><img src="2013-FR-11_electricity_sol_2.png">
+            </td>
+         </tr>
+         <tr>
+            <td>Afin de construire le moins de lignes possibles, il faut mieux ajouter des lignes reliant entre elles des maisons isolées. Par exemple, le schéma ci-contre montre qu'avec une seule nouvelle ligne on peut retirer 5 maisons à risque par rapport à la situation initiale.
+            </td>
+            <td><img src="2013-FR-11_electricity_sol_3.png">
+            </td>
+         </tr>
+         </table>
+         <p>En ajoutant deux lignes de plus, on arrive à la meilleure solution, qui n'utilise que 3 lignes.</p>
+         <div id="graph_solution" style="width:500px; height:300px; margin:10px; text-align:center"></div>
+         <h2>C'est de l'informatique !</h2>
+         <p>Les réseaux, que ce soit des réseaux d'électricité ou de communication, 
+         doivent être <b>robustes</b>, c'est-à-dire qu'ils doivent être construits
+         de sorte à ce que la connexion ne soit pas interrompue trop souvent.
+         </p>
+         <p>Un certain degré de robustesse peut être obtenu en s'assurant que
+         chaque paire de ronds est reliée par plusieurs chemins. Dans le sujet
+         ci-dessus, on demandait qu'il y ait au moins deux chemins distincts
+         entre chaque paire de ronds, mais on aurait pu se poser la question 
+         pour trois chemins, par exemple. </p>
+         <p>Dans le sujet, seriez-vous capable, en ne construisant pas plus de 10 lignes
+         (et sans construire de lignes superposées),
+         de faire en sorte que la coupure de 2 lignes (n'importe lesquelles)
+         ne suffisent pas à déconnecter une maison du réseau&nbsp;?</p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

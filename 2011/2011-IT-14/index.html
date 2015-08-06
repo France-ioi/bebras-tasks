@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Canettes et bouteilles</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "<div class='conveyor-2011-IT-14' style='width:510px'><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxBottles-2011-IT-14'>B</span></div>",
+            "<div class='conveyor-2011-IT-14' style='width:510px'><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxCans-2011-IT-14'>C</span></div>",
+            "<div class='conveyor-2011-IT-14' style='width:510px'><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxCans-2011-IT-14'>C</span></div>",
+            "<div class='conveyor-2011-IT-14' style='width:510px'><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxBottles-2011-IT-14'>B</span><span class='smallBoxCans-2011-IT-14'>C</span><span class='smallBoxBottles-2011-IT-14'>B</span></div>"
+            ], "added", "#answers_2011-IT-14");
+      </script>
+         <style class="">.can-2011-IT-14
+{
+   border-width:1px;
+   border-color:black;
+   border-style:solid;
+   background:green;
+   height:30px;
+   width:15px;
+   margin:5px;
+   display:inline-block;
+}
+
+.boxBottles-2011-IT-14, .boxCans-2011-IT-14
+{
+   border-width:1px;
+   border-color:black;
+   border-style:solid;
+   height:40px;
+   width:100px;
+   margin:10px;  
+   margin-bottom:0px;
+   text-align:center;
+   display:inline-block;
+}
+
+.smallBoxBottles-2011-IT-14, .smallBoxCans-2011-IT-14
+{
+   border-width:1px;
+   border-color:black;
+   border-style:solid;
+   height:30px;
+   width:50px;
+   margin:10px;  
+   margin-bottom:0px;
+   text-align:center;
+   padding:5px;
+   display:inline-block;
+}
+
+.boxBottles-2011-IT-14, .smallBoxBottles-2011-IT-14
+{
+   background:#40CE00;
+}
+
+.boxCans-2011-IT-14, .smallBoxCans-2011-IT-14
+{
+   background:#FF7A00;
+}
+
+.conveyor-2011-IT-14
+{
+   border-style:solid;
+   border-color:black;
+   border-width:0px 0px 1px 0px;
+   padding:0px;
+   margin:0px;
+   display:block-inline;
+}
+
+.barrel-2011-IT-14
+{
+    position:relative;
+	top:20px;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-IT-14/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<style>
+.can-2011-IT-14
+{
+   border-width:1px;
+   border-color:black;
+   border-style:solid;
+   background:green;
+   height:30px;
+   width:15px;
+   margin:5px;
+   display:inline-block;
+}
+
+.boxBottles-2011-IT-14, .boxCans-2011-IT-14
+{
+   border-width:1px;
+   border-color:black;
+   border-style:solid;
+   height:40px;
+   width:100px;
+   margin:10px;  
+   margin-bottom:0px;
+   text-align:center;
+   display:inline-block;
+}
+
+.smallBoxBottles-2011-IT-14, .smallBoxCans-2011-IT-14
+{
+   border-width:1px;
+   border-color:black;
+   border-style:solid;
+   height:30px;
+   width:50px;
+   margin:10px;  
+   margin-bottom:0px;
+   text-align:center;
+   padding:5px;
+   display:inline-block;
+}
+
+.boxBottles-2011-IT-14, .smallBoxBottles-2011-IT-14
+{
+   background:#40CE00;
+}
+
+.boxCans-2011-IT-14, .smallBoxCans-2011-IT-14
+{
+   background:#FF7A00;
+}
+
+.conveyor-2011-IT-14
+{
+   border-style:solid;
+   border-color:black;
+   border-width:0px 0px 1px 0px;
+   padding:0px;
+   margin:0px;
+   display:block-inline;
+}
+
+.barrel-2011-IT-14
+{
+    position:relative;
+	top:20px;
+}
+
+</style>
+<h1>Canettes et bouteilles</h1>
+<p>
+Castor travaille dans une usine de sodas. Lorsque la boisson est prête, la première étape consiste à en remplir des bouteilles et des canettes. Une fois pleines, les bouteilles et les canettes sont amenées sur une table pour l'étape suivante : la mise en cartons. Les cartons B peuvent contenir deux bouteilles, les cartons C peuvent contenir quatre canettes.
+</p>
+<p>
+L'illustration ci-dessous représente la situation sur la table après la première étape.
+</p>
+<center><img src="2011-IT-14.png"></center>
+<p>
+<center><table width=500>
+<tr><td width=50 style="text-align:center"><img src="2011-IT-14_barrel.png"></td><td>Bouteille</td>
+<td width=50 style="text-align:center"><span class="boxBottles-2011-IT-14"><br/>B</span></td><td>Carton de bouteilles</td></tr>
+<tr><td style="text-align:center"><span class="can-2011-IT-14">&nbsp;</span></td><td>Canette</td>
+<td style="text-align:center"><span class="boxCans-2011-IT-14"><br/>C</span></td><td>Carton de canettes</td></tr>
+</table></center>
+</p>
+<p>
+Laquelle de ces images représente la situation sur la table après la mise en cartons, sachant que les bouteilles et les cannettes ont été emballées en restant dans le même ordre qu'au départ ?
+</p>
+<div class="reponses" id="answers_2011-IT-14">
+</div>
+
+<img style="display: none;" src="2011-IT-14.png" />
+<img style="display: none;" src="2011-IT-14_barrel.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   On considère les objets de gauche à droite. Chaque fois que l'on rencontre deux bouteilles successives, on crée un carton B, et chaque fois que l'on rencontre quatre canettes successives, on crée un carton C. Le résultat est présenté ci-dessous :
+   </p>
+   <p>
+   <center><img src="2011-IT-14_solution.png"/></center>
+   </p>
+   <p>
+   <b>La configuration obtenue correspond à la réponse <span class="2011-IT-14_choice_3">C</span>.</b>
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   L'approche décrite dans la solution, qui consiste à parcourir les objets de gauche à droite, et à effectuer une action chaque fois que l'on rencontre un nouvel objet, est ce que l'on appelle un algorithme de <i>balayage</i>. Ici il s'agit d'un balayage simple parmi les bouteilles et canettes, où l'on ne fait qu'augmenter un compteur chaque fois que l'on rencontre un objet, et créer un carton dès que l'on a compté 2 bouteilles ou 4 canettes.
+   </p>
+   <p>
+   Les algorithmes de balayage sont toujours basés sur le principe du parcours des données dans un ordre bien choisi, mais l'action effectuée à chaque rencontre d'un objet peut impliquer l'utilisation de toutes sortes de structures de données pour maintenir à jour diverses informations au fur et à mesure de la progression.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

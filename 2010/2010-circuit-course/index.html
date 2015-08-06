@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Circuit de course</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "<code>gauche90, gauche90, tronçondroit30, gauche60, gauche60, gauche60, tronçondroit15, tronçondroit15</code>",
+            "<code>droite60, gauche60, tronçondroit15, droite90, droite90, droite60, gauche60, tronçonspécial, droite90, droite90</code>",
+            "<code>tronçondroit15, droite60, gauche60, gauche60, gauche60, tronçondroit30, gauche90, gauche90, tronçonspécial</code>",
+            "<code>tronçondroit30, gauche90, gauche90, tronçondroit15, tronçonspécial, droite90, droite90</code>"
+            ], "added", "#answers_2010-circuit-course");
+      </script>
+         <style class="">.table-2010-circuit-course td {
+   border: solid black 1px;
+   text-align: center;
+   padding: 5px;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-circuit-course/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Circuit de course</h1>
+<p>
+Le circuit de voitures électriques de Sophie se compose de quatre
+éléments de formes différentes.</p>
+<center><table class="table-2010-circuit-course" cellspacing=0>
+<tr>
+   <td><img src="exemple1.jpg" /></td>
+   <td><img src="exemple2.jpg" /></td>
+   <td><img src="exemple3.jpg" /></td>
+   <td><img src="exemple4.jpg" /></td>
+</tr>
+<tr>
+   <td>Tronçon courbe à 90°</td>
+   <td>Tronçon courbe à 60°</td>
+   <td>Tronçon droit de 30cm</td>
+   <td>Tronçon droit de 15cm</td>
+</tr>
+</table></center>
+<p>
+Les tronçons courbes peuvent être utilisés pour les virages vers la gauche ou vers la droite : "gauche 90",
+"droite 90", "gauche 60", "droite 60".
+</p><p>
+Les voitures ne peuvent circuler que si le circuit est fermé et qu'il comprend un tronçon électrique. Cet
+élément spécial est un tronçon droit de 15 cm qui alimente le circuit en courant.
+</p><p>
+Sophie conçoit sans cesse de nouveaux circuits de course et note toujours comment ils sont construits. La
+notice suivante décrit l'un de ses premiers circuits viables :
+tronçonspécial, gauche90, gauche90, tronçondroit30, gauche90, gauche90, tronçondroit15.
+</p><p>
+Sophie voudrait reconstruire un ancien circuit de course. Elle feuillette ses notes et découvre des fautes. Rien
+qu'en lisant les notes suivantes, elle constate que seule une de celles-ci décrit un circuit de course qui
+fonctionne.
+</p>
+<p><b>Laquelle de ces notices décrit un circuit valide&nbsp;?</b></p>
+
+<div class="reponses" id="answers_2010-circuit-course">
+</div>
+
+
+<img style="display: none;" src="exemple1.jpg" />
+<img style="display: none;" src="exemple2.jpg" />
+<img style="display: none;" src="exemple3.jpg" />
+<img style="display: none;" src="exemple4.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-circuit-course_choice_2">B</span> est correcte.
+   </p><p>
+<span class="2010-circuit-course_choice_2">B</span> décrit un circuit fonctionnel, avec un tronçon spécial.<br/>
+<span class="2010-circuit-course_choice_1">A</span> décrit un circuit circulaire, mais n'a pas de tronçon spécial pour l'alimentation.<br/>
+<span class="2010-circuit-course_choice_3">C</span> n'est pas un circuit à cause de la courbe supplémentaire "droite60".<br/>
+<span class="2010-circuit-course_choice_4">D</span> n'est pas un circuit circulaire : les virages n'ont pas la même direction.<br/>
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>
+Les notes de Sophie sont écrites dans un langage de programmation simple, proche du langage Logo. En général, il
+est très difficile d'écrire des programmes corrects, et prouver qu'ils sont corrects ou non l'est encore plus. Ici,
+l'erreur est clairement visible lorsque Sophie "exécute" ses programmes en construisant les blocs correspondants.
+</p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

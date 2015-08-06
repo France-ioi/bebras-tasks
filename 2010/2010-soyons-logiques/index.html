@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Soyons logiques</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+             "<img src='reponseA.jpg'>",
+             "<img src='reponseB.jpg'>",
+             "<img src='reponseC.jpg'>",
+             "<img src='reponseD.jpg'>",
+            ], "added", "#answers_2010-soyons-logiques");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-soyons-logiques/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Soyons logiques</h1>
+<p>
+L'illustration ci-dessous représente un damier de 93 carrés de côté. Les
+rangées et les colonnes de 7 à 89 ne sont qu'esquissées, car votre écran n'est pas assez grand pour afficher
+tout le damier.
+</p><p>
+Certains carrés sont déjà remplis de symboles selon un motif régulier.
+</p>
+<center><img src="enonce.jpg" /></center>
+<p>
+<b>Si vous remplissez les autres carrés avec le même motif, quel est le symbole qui sera dans le carré situé
+tout en bas à droite, repéré par un point d'interrogation&nbsp;?</b>
+
+<div class="reponses" id="answers_2010-soyons-logiques">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-soyons-logiques_choice_1">A</span> est correcte.
+   </p><p>
+   Il semble correct de ne considérer que la diagonale du carré en haut à gauche, jusqu'au carré en bas à droite. Dans
+   cette diagonale, on voit que les carrés des lignes paires contiennent une spirale, alors que les carrés des lignes
+   impaires contiennent une étoile. Le dernier carré étant sur la 93e ligne (impaire) contiendra une étoile.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>L'ordinateur apporte une puissance de calcul considérable permettant de réaliser des calculs complexes sur des
+données de tailles gigantesques. Cependant, il est souvent nécessaire de tirer partie des régularités d'un objet pour
+bien l'analyser, et ainsi découvrir la simplicité cachée dans des structures apparemment complexes. Cela fait partie
+des talents nécessaires en informatique.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

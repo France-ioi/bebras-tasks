@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>OX</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "<code>X X X X X X X X X X X X X X X O O O O O O|</code>",
+             "<code>|_ O O O O O O O O O O O O O O _ _ _ _ _ _</code>",
+             "<code>O O O O O O O O O O O O O O O X X X X X X|</code>",
+             "<code>|O X X X X X X X X X X X X X X _ _ _ _ _ _</code>"
+            ], "added", "#answers_2010-ox");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-ox/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>OX</h1>
+<p>
+Vous voyez ici une ligne de texte qui se compose uniquement de deux
+caractères : "_" et "X". La position du curseur est représentée par | et il se trouve au début de la ligne.
+</p>
+<center><code>|_ _ _ _ _ _ _ _ _ _ _ _ _ _ X _ _ _ _ _ _</code></center>
+<p>
+Attention, le système est en mode Remplacement (il écrase le texte). Cela signifie que lorsque vous tapez un signe, vous
+écrasez le signe qui se trouve à droite de cette position et le curseur avance automatiquement d'une position
+vers la droite.
+</p>
+<p>
+Imaginez que vous suiviez les instructions suivantes :
+</p>
+<ul>
+   <li>Répète cette action tant que le curseur ne se trouve pas devant un X : « tape un O »</li>
+   <li>Répète cette action tant que le curseur ne se trouve pas au début de la phrase : « tape un X et déplace le
+   curseur de deux positions vers la gauche ».</li>
+</ul>
+<p><b>Que devient alors la ligne montrée ci-dessus&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-ox">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-ox_choice_4">D</span> est correcte.
+   </p><p>
+   L'instruction 1 est d'abord exécutée, et elle commence de la façon suivante :
+   </p><p>
+   <code>
+   O| _ _ _ _ _ _ _ _ _ _ _ _ X _ _ _ _ _ _<br/>
+   O O| _ _ _ _ _ _ _ _ _ _ _ X _ _ _ _ _ _<br/>
+   O O O| _ _ _ _ _ _ _ _ _ _ X _ _ _ _ _ _<br/>
+   </code>
+   </p><p>
+   Et ainsi de suite, jusqu'à ce qu'elle s'arrête dans la situation où le curseur est devant le X :
+   </p><p>
+   <code>O O O O O O O O O O O O O|X _ _ _ _ _ _</code>
+   </p><p>
+   Puis l'instruction 2 est exécutée : un X est écrit à droite du curseur (la première fois cela écrase le dernier X), puis le
+   curseur se déplace après le X, puis ensuite le curseur se dépalce de deux positions vers la gauche, ce qui le place
+   devant le O qui dest devant le X écrit. Cela donne pour les 3 premières exécutions :
+   </p><p>
+   <code>
+   O O O O O O O O O O O O|O X _ _ _ _ _ _<br/>
+   O O O O O O O O O O O|O X X _ _ _ _ _ _<br/>
+   O O O O O O O O O O|O X X X _ _ _ _ _ _<br/>
+   </code>
+   </p><p>
+   Et ainsi de suite, jusqu'à ce que le cruseur arrive au début de la ligne :
+   </p>
+   <p>
+   <code>|O X X X X X X X X X X X X X _ _ _ _ _ _</code>
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>Le défi ici est de comprendre un algorithme formulé en langage naturel. Cet exemple comporte les ingrédients
+classiques d'un algorithme : une structure de contrôle pour les répétitions d'actions, l'indentation pour marquer les
+blocs répétés, et une condition logique permettant l'arrêt de la répétition quand elle n'est plus respectée. Ces
+éléments font partie de la formalisation d'un langage de programmation.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

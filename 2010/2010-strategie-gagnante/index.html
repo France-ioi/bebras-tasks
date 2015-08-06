@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Stratégie gagnante</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+             "par 1",
+             "par 2",
+             "par 3",
+             "par 4"
+            ], "added", "#answers_2010-strategie-gagnante");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-strategie-gagnante/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Stratégie gagnante</h1>
+<p>
+Castor et Raton jouent à un jeu de stratégie extrêmement compliqué.
+Castor veut absolument gagner, c'est pourquoi il dessine tous les déroulements possibles du jeu. Castor a le
+droit de commencer et dispose de quatre coups possibles. Ensuite, c'est au tour de Raton, puis de nouveau à
+Castor et ainsi de suite.
+</p><p>
+Le jeu se termine lorsqu'un coup aboutit sur un :-) (smiley), et Castor a alors gagné. Le jeu se termine
+également lorsqu'un coup aboutit sur un :-( (frowney), mais Castor a alors perdu.
+</p>
+<center><img src="enonce.jpg" /></center>
+<p><b>Par quel coup Castor doit-il commencer pour être absolument certain de gagner, indépendamment
+des coups de Raton&nbsp;?</b></p>
+
+<div class="reponses" id="answers_2010-strategie-gagnante">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-strategie-gagnante_choice_3">C</span> est correcte.
+   </p><p>
+   Pour résoudre ce problème, on suppose implicitement que Castor est rationnel, c'est à dire que s'il a le choix entre
+   deux solutions, dont l'une est gagnante pour lui, il la choisit.
+   </p><p>
+   Ainsi, si Castor commence avec un 3, le raton laveur a alors deux possibilités. S'il choisit celle de droite, cela mène
+   vers un smiley, Castor gagne. Si le raton laveur choisit la possibilité de gauche, c'est alors le tour de Castor, qui
+   peut choisir la solution de droite qui mène à un smiley et il gagne la partie.
+   </p><p>
+   Si Castor ne commence pas avec un 3, alors le raton laveur peut toujours aboutir à un frowney s'il ne commet pas
+   d'erreur.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>
+   Représenter sous la forme d'un arbre les coups possibles d'un jeu est une approche souvent utilisée en informatique
+   pour définir la stratégie que l'ordinateur peut utiliser pour battre son adversaire. Cette approche fonctionne bien par
+   exemple dans des jeux comme le morpion ou puissance 4. Pour des jeux plus exigeants comme les échecs, l'arbre
+   des possibilités de coups est gigantesque, et il n'est possible d'en examiner qu'une petite partie.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

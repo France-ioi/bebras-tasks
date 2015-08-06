@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2015-FR-25-rectangles</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript" src="task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-25-rectangles/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": true
+      };
+      </script>
+      <style>
+         #drawing {
+            margin-left: 1em;
+         }
+         .columns td {
+            vertical-align: top;
+            padding-right: 1em;
+         }
+         .column_head {
+            font-weight: bold;
+         }
+         #message {
+            text-align: center;
+            font-weight: bold;
+            color: red;
+            padding: 0.5em;
+            height: 1em;
+         }
+         .buttons input {
+            margin-bottom: 5px;
+         }
+         #textSolution li {
+            margin-top: 0.2em;
+         }
+         .valigntop td {
+            vertical-align: top;
+         }
+         .examples  {
+            border-collapse: collapse;
+         }
+         .examples td {
+            border: 1px solid black;
+            padding: 0.5em;
+         }
+         .easy, .medium, .hard {
+            display:none
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Fonction rectangle</h1>
+         <div id="tabsContainer"></div>
+      <p>
+         Chaque exemple ci-dessous est formé d'une séquence d'instructions 
+         à exécuter dans l'ordre.
+         Chaque instruction est un appel à la fonction <b>rectangle</b>, qui dessine un rectangle dans la grille située en bas à droite.
+      </p>
+      <center>
+         <table class='examples' style='text-align:center'>
+            <tr>
+               <td><code id="sample0"></code></td>
+               <td><code id="sample1"></code></td>
+               <td><code id="sample2"></code></td>
+            </tr>
+            <tr>
+               <td><input id="button0" type='button' value="Essayer cet exemple" onclick="task.testSample(0)"></div></td>
+               <td><input id="button1"  type='button' value="Essayer cet exemple" onclick="task.testSample(1)"></div></td>
+               <td><input id="button2"  type='button' value="Essayer cet exemple" onclick="task.testSample(2)"></div></td>
+            </tr>
+         </table>
+      </center>
+      <p>
+      Les 5 nombres entre parenthèses sont les <b>paramètres</b> de la fonction rectangle, et décrivent, dans l'ordre&nbsp;:
+      </p>
+      <center>
+      <table class='examples'><td>sa colonne<br/>de gauche</td>
+      <td>sa ligne<br/>du haut</td>
+      <td>sa colonne<br/>de droite</td>
+      <td>sa ligne<br/>du bas</td>
+      <td>sa couleur :<br/>0 pour du noir,<br/>1 pour du blanc.</td
+      </tr></table>
+      </center>
+      <table style='width:100%; margin-top:0.5em'><tr>
+         <td><b>Motif à obtenir :</b><p><div id="target"></div></p></td>
+         <td><b>Résultat du programme :</b><p><div id="grid"></div></p></td>
+      </tr></table>
+      <p>Complétez le programme ci-dessous pour qu'il reproduise le motif de gauche dans la grille de droite&nbsp;:</p>
+      <center>
+         <table><tr>
+            <td style='vertical-align:top;width:350px'>
+               <table id="rectangles">
+               </table>
+            </td>
+            <td style='vertical-align:top;width:300px'>
+               <input type="button" value="Essayer votre programme" onclick="task.tryAnswer()"></input>               
+               <p class="medium hard">Notez que le programme ne peut pas contenir plus de 4 instructions.</p>
+            </td>
+         </tr>
+         </table>
+      </center>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+         <ul>
+            <li>Version facile :
+               <ul>
+                  <li>rectangle(1, 2, 7, 3, 0)</li>
+                  <li>rectangle(1, 2, 5, 5, 0)</li>
+               </ul>
+            </li>
+            <li>Version moyenne :
+               <ul>
+                  <li>rectangle(0, 0, 9, 6, 0)</li>
+                  <li>rectangle(1, 1, 8, 5, 1)</li>
+                  <li>rectangle(4, 0, 5, 6, 1)</li>
+                  <li>rectangle(0, 2, 9, 4, 1)</li>
+               </ul>
+            </li>
+            <li>Version difficile :
+               <ul>
+                  <li>rectangle(1, 0, 9, 6, 0)</li>
+                  <li>rectangle(3, 1, 7, 5, 1)</li>
+                  <li>rectangle(4, 2, 9, 6, 1)</li>
+                  <li>rectangle(3, 3, 5, 3, 0)</li>
+               </ul>
+            </li>
+      </div> <!-- task-solution -->
+   </body>
+</html>

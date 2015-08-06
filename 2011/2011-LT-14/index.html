@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Voyage en Lituanie</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "44 910",
+            "109 034",
+            "336 817",
+            "63 651"
+            ], "added", "#answers_2011-LT-14");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-LT-14/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Voyage en Lituanie</h1>
+<p>
+Castor va rendre visite à ses cousins de Lituanie, pr&egrave;s de la ville de Alytus. Avant de partir, il veut connaître la taille de la population à Alytus. Il trouve deux documents :
+<ul><li>Une carte sur laquelle 7 villes sont reliées en partant de celle ayant la plus grande population, puis dans l'ordre décroissant, jusqu'à celle ayant la plus petite population.</li>
+<li>Un graphique qui représente les tailles des populations de ces 7 villes.</li>
+</ul>
+</p>
+<img src="2011-LT-mapLT_small.png"><img src="2011-LT-14_chart.png">
+<p>Aide Castor à trouver quelle est la taille de la population de Alytus.</p>
+<div class="reponses" id="answers_2011-LT-14">
+</div>
+
+<img style="display: none;" src="2011-LT-mapLT_small.png" />
+<img style="display: none;" src="2011-LT-14_chart.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Réponse <span class="2011-LT-14_choice_4">D</span>.
+   </p>
+   <p>
+   <ul><li>Sur la carte on constate que Vilnius est la plus grande ville et, en suivant les fl&egrave;ches, que Alytus est l'avant derni&egrave;re, avant la plus petite ville, Marijampole. <br>
+   Vilnius > Kaunas > Klaip&eacute;da > &#352;iauliai > Panev&eacute;&#382;ys > Alytus > Marijampole.
+   <br> On peut aussi dire que Alytus est la deuxi&egrave;me plus petite ville. </li>
+   <li>Sur le graphique &agrave; barres, on voit que la deuxi&egrave;me plus petite taille de population est 63 651.</li></ul>
+   </p>
+   <p>
+   C'est donc Alytus qui comporte 63 651 habitants.</p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Résoudre ce problème nécessite de bien comprendre la relation d'ordre entre les villes, puis de suivre en parallèle les deux représentations triées : la suite des villes sur la carte en suivant les flèches, et la séquence des populations dans l'ordre décroissant. Choisir le bon ordre de parcours, et parcourir deux listes en parallèle, sont des techniques de base en algorithmique, avec lesquels il faut être très à l'aise pour concevoir des programmes.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

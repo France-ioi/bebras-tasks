@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Exploration souterraine</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+var nrows = 7, ncols = 10;
+
+var murs = [[0,0], [0,1], [0,6], [0,7], [1,0], [1,1],
+          [2,4], [2,5], [2,8], [2,9], [3,0], [3,1], [3,8], [3,9],
+          [4,0], [4,1], [4,4], [4,5], [4,6], 
+          [6,0], [6,1], [6,2], [6,3], [6,4], [6,6], [6,7], [6,8], [6,9]];
+var posInit = [4, 9];
+var posOut = [[0, 4], [0, 3]];
+var pccLength = 9;
+
+   task.load= function(views, callback) {
+      creeTerrain();
+      dessine();
+      $("#code-2011-FR-06").attr("value", "GGBG");
+      $("#result-2011-FR-06").html("Exécutez l'exemple pour bien comprendre.");
+      $("#runbutton-2011-FR-06").click(go);
+      $(".hash-2011-FR-06").css("background-image", "url('5.png')");
+      callback();
+   };
+   task.getAnswer= function(callback) {
+       callback($("#code-2011-FR-06").attr("value"));
+   };
+   task.reloadAnswer= function(strAnswer, callback)  {
+       if (strAnswer === "") {
+          $("#code-2011-FR-06").attr("value", "GGBG");
+          $("#result-2011-FR-06").html("Exécutez l'exemple pour bien comprendre.");
+       }
+       else {
+          $("#code-2011-FR-06").attr("value", strAnswer);
+          $("#result-2011-FR-06").html("");
+       }
+      callback();
+   };
+
+ var selectCell = function (row, col) {
+     return $("#terrain-2011-FR-06 tr:eq("+row+") td:eq("+col+")");
+ }
+
+ var creeTerrain = function () {
+     for(var row = 0; row < nrows; row++) {
+         $("#terrain-2011-FR-06").append("<tr></tr>");
+         for(var col = 0; col < ncols; col++)
+             $("#terrain-2011-FR-06 tr:eq("+row+")").append("<td></td>");
+     };
+
+     for(var mur in murs)
+         selectCell(murs[mur][0], murs[mur][1]).addClass("wall-2011-FR-06");
+     for(var out in posOut)
+         selectCell(posOut[out][0], posOut[out][1]).addClass("hash-2011-FR-06");
+ };
+
+ var dessine = function () {
+     $("#terrain-2011-FR-06 td").html("");
+     selectCell(posInit[0], posInit[1]).html("<img src='4.png' />");
+ }
+
+ var containsPos = function(tab, pos) {
+     for(var i in tab)
+         if(tab[i][0] == pos[0] && tab[i][1] == pos[1])
+             return true;
+     return false;
+ }
+
+ var go = function () {
+     $("#runbutton-2011-FR-06").attr("disabled", "disabled");
+     var commands = $("#code-2011-FR-06").attr("value").replace(/\s/g, "").toUpperCase();
+     for(var cmd = 0; cmd < commands.length; cmd++)
+         switch(commands.charAt(cmd)) {
+         case "G": case "D": case "H": case "B": break;
+         default:
+             $("#result-2011-FR-06").html("Commande inconnue : \""+commands.charAt(cmd)+"\"");
+             $("#runbutton-2011-FR-06").removeAttr("disabled");
+             return;
+         }
+
+     var pos = [posInit[0], posInit[1]];
+     var t = 0;
+     var step = function (){
+         if(containsPos(posOut, pos)) {
+             if(t == pccLength) {
+                 $("#result-2011-FR-06").html("Le robot est bien arrivé et c'est le plus court chemin. Bravo !");
+                 platform.validate("done", 1);
+             } else
+                 $("#result-2011-FR-06").html("Le robot est bien arrivé mais ce n'est pas le plus court chemin. Essayez encore !");
+             $("#runbutton-2011-FR-06").removeAttr("disabled");
+             $(this).dequeue();
+             dessine();
+             return;
+         }
+
+         if(commands.length == t) {
+             $("#result-2011-FR-06").html("Le robot est encore perdu. Essayez encore !");
+             $("#runbutton-2011-FR-06").removeAttr("disabled");
+             $(this).dequeue();
+             dessine();
+             return;
+         }
+
+         selectCell(pos[0], pos[1]).html("<img src='3.png' />");
+         switch(commands.charAt(t)) {
+         case "G": pos[1]--; break;
+         case "D": pos[1]++; break;
+         case "H": pos[0]--; break;
+         case "B": pos[0]++; break;
+         }
+         selectCell(pos[0], pos[1]).html("<img src='4.png'/>");
+         if(pos[0] < 0 || pos[0] >= nrows ||
+            pos[1] < 0 || pos[1] >= ncols ||
+            containsPos(murs, pos)) {
+             $("#result-2011-FR-06").html("Le robot est rentré dans un mur. Essayez encore !");
+             $("#runbutton-2011-FR-06").removeAttr("disabled");
+             $(this).dequeue();
+             dessine();
+             return;
+         }
+         t++;
+         $("#terrain-2011-FR-06").delay(1000/3).queue(step);
+         $(this).dequeue();
+     };
+     $("#terrain-2011-FR-06").queue(step);
+ }
+</script>
+         <style class="">#terrain-2011-FR-06 td { width:27px; height:32px; text-align: center; vertical-align: middle; border: 3px solid black; }
+   .wall-2011-FR-06 { background-color: black; }
+   #terrain-2011-FR-06 { border-collapse: collapse; }
+   #result-2011-FR-06 { color:red; font-weight:bold; }</style>
+         <script class="grader" type="text/javascript">var grader = {
+   gradeTask: function(answer, answerToken, callback) {
+      var taskParams = platform.getTaskParams();
+      var validAnswers = new Array(
+         'GGHHHGGGH',
+         'GGHHGHGGH',
+         'GGHGHHGGH',
+         'GGHHHGGHG',
+         'GGHHGHGHG',
+         'GGHGHHGHG'
+      );
+      
+      answer = answer.replace(/^\s+|\s+$/g,'');
+      answer = answer.toUpperCase();
+      var score = taskParams.minScore;
+      if ($.inArray(answer, validAnswers) > -1) {
+         score = taskParams.maxScore;
+      }
+      callback(score);
+   }
+};
+
+/* Tests :
+console.log(grader.gradeTask(0, 'gghhhgggh', 0, 1) + ' (ok)');
+console.log(grader.gradeTask(0, '  gghhhgggh ', 0, 1) + ' (ok)');
+console.log(grader.gradeTask(0, 'GGHHGHGGH', 0, 1) + ' (ok)');
+console.log(grader.gradeTask(0, 'ghhhgghhg', 0, 1) + ' (wrong)');
+*/</script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-FR-06/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        ""
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Exploration souterraine</h1>
+<p>
+Dans ce sujet, vous ne pouvez pas perdre de points.
+</p>
+<p>
+Castor a programmé un robot pour explorer un souterrain trop étroit pour qu'il puisse s'y faufiler, représenté par la grille ci-dessous. Le robot, représenté par un rond rouge ne peut passer que sur les cases blanches ou hachurées.  Malheureusement les batteries de ce robot sont presque vides. Il va falloir le sortir de là rapidement, avec le peu d'énergie qu'il reste.
+</p>
+<p>
+Le robot peut être programmé par une séquence de commandes :
+</p>
+<p>
+</p><ul>
+<li><b>G</b> : le robot se déplace d'une case vers la gauche</li>
+<li><b>D</b> : le robot se déplace d'une case vers la droite</li>
+<li><b>B</b> : le robot se déplace d'une case vers la bas</li>
+<li><b>H</b> : le robot se déplace d'une case vers la haut</li>
+</ul>
+<p></p>
+<p>
+Le robot exécute les commandes dans l'ordre, et par exemple "GGB" fait avancer le robot de deux cases vers la gauche, puis d'une case vers le bas. Écrivez la séquence de commandes la plus courte possible, qui permette au robot d'atteindre la sortie, représentée par les cases hachurées. Vous pouvez faire autant d'essais que vous le souhaitez.
+</p>
+<p>Exécutez l'exemple pour bien comprendre.</p>
+
+<p id="result-2011-FR-06"></p>
+<table>
+   <tr><td><table id="terrain-2011-FR-06"></table></td>
+   <td><textarea rows="2" cols="20" id="code-2011-FR-06"></textarea><br>
+   <input type="button" value="Exécuter" id="runbutton-2011-FR-06" /></td></tr>
+</table>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Plusieurs réponses étaient valides, pour atteindre la sortie en 9 étapes. Il fallait avant tout passer par la droite et au dessus du premier obstacle. Une solution possible était le programme suivant :
+   </p>
+   <pre>
+   GGHHHGGGH
+   </pre>
+   <p>
+   Voici le chemin correspondant :
+   </p>
+   <p>
+   <img src="exploration_sol.png">
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Pour résoudre le problème, il fallait écrire un programme sous la forme d'une suite de commandes dans un langage très simple. Comme lorsque l'on écrit un programme classique, on avait la possibilité de tester son programme et de le corriger avant de le soumettre. La notion de plus court chemin, un classique en algorithmique, était également abordée, même s'il n'était pas utile ici de prendre une approche systématique pour déterminer le meilleur chemin.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

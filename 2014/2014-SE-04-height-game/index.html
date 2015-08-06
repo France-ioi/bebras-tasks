@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2014-SE-04-height-game</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-SE-04-height-game/",
+          "language": "fr",
+          "version": "",
+          "authors": "",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "medium", "2": "medium", "3": "easy", "4": "easy"},
+          "categories": {},
+          "answerType": "Interactive, drag and drop",
+          "fullFeedback": true, 
+          "status": "test"
+      };
+      </script>
+      <script class="task" type="text/javascript"> 
+         task.solutions = {
+            hard: [18, 21, 7, 4, 10],
+            easy: [8, 1, 3] };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      .easy, .hard {
+         display: none;
+      }
+      .solution_table {
+         border-collapse: collapse;
+         margin: 0.5em;
+         margin-left: 3em;
+         display: block;
+      }
+      .solution_panels > tbody > tr > td {
+         vertical-align: top;
+         width: 50%;
+      }
+      .solution_table td {
+         border: 2px solid black;
+         width: 25px;
+         text-align: center;
+      }
+      </style>
+  </head>
+  <body>
+      <div id="task">
+          <img src="castor2.png" style="display:none">
+          <img src="montagne.png" style="display:none">
+          <h1>Parapente</h1>
+          <div class="easy">
+             <p>
+               Trois castors font du parapente.
+               Un castor peut voler plus haut qu'un autre castor.<br/>
+               Un castor peut aussi se trouver devant un autre castor, c'est-à-dire plus loin de la falaise.
+             </p>
+             <p style="margin-bottom: 0.5em;">
+               Les castors vous transmettent par radio des informations sur leur position dans le ciel.
+             </p>
+               <ul style="margin-top: 0.5em;">
+                 <li><b>Castor A</b>&nbsp;: «&nbsp;Je me trouve devant les deux autres castors.&nbsp;»</li>
+                 <li><b>Castor B</b>&nbsp;: «&nbsp;Il n'y a pas de castor plus haut que moi&nbsp;; et il y a un castor derrière moi.&nbsp;»</li>
+                 <li><b>Castor C</b>&nbsp;: «&nbsp;Un castor se trouve plus haut que moi et un autre se trouve plus bas que moi.&nbsp;»</li>
+               </ul>
+          </div>
+          <div class="hard">
+             <p>
+               Cinq castors font du parapente.
+               Un castor peut voler plus haut qu'un autre castor.<br/>
+               Un castor peut aussi se trouver devant un autre castor, c'est-à-dire plus loin de la falaise.
+             </p>
+             <p style="margin-bottom: 0.5em;">
+               Les castors vous transmettent par radio des informations sur leur position dans le ciel.
+             </p>
+               <ul style="margin-top: 0.5em;">
+                 <li><b>Castor A</b>&nbsp;: «&nbsp;Il y a 3 castors plus haut que moi&nbsp;: 1 devant moi, et 2 derrière moi.&nbsp;»</li>
+                 <li><b>Castor B</b>&nbsp;: «&nbsp;Il y a 4 castors plus haut que moi&nbsp;: 3 devant moi, et 1 derrière moi.&nbsp;»</li>
+                 <li><b>Castor C</b>&nbsp;: «&nbsp;Il n'y a que 1 castor plus haut que moi, et il est devant moi.&nbsp;»</li>
+                 <li><b>Castor D</b>&nbsp;: «&nbsp;Il n'y a pas de castor plus haut que moi.&nbsp;»</li>
+                 <li><b>Castor E</b>&nbsp;: «&nbsp;Il n'y a que 2 castors plus haut que moi, et les deux sont devant moi.&nbsp;»</li>
+               </ul>
+          </div>
+          <p>
+          Pouvez-vous retrouver la position des castors dans le ciel&nbsp;?
+          </p>
+
+          <center><div id="anim" class="touch" style="margin-bottom: 0.5em"></div></center>
+     </div>
+
+      <div id="solution">
+          <h2>Solution</h2>
+
+          <div class="easy">
+          <p>
+          Il était utile de lire toutes les informations avant de commencer à placer les Castors.
+          </p>
+          <p>
+          On pouvait commencer par trouver la hauteur à laquelle vole chaque castor. De la dernière information, on apprend que le castor C se trouve sur la ligne du milieu. De la deuxième information, on comprend que le castor B est en haut. Il en résulte que le castor A est en bas.
+          Du coup, on peut déjà placer les castors sur les bonnes lignes.
+          </p>
+            <table class="solution_table">
+            <tr><td>B</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>C</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>A</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+          </table>  
+          <p>
+          Il reste ensuite à placer les castors sur les bonnes colonnes. D'après la première information, le castor A se trouve tout à droite. De la deuxième information, on déduit que le castor B est au milieu et que le castor C se trouve derrière lui, donc tout à gauche.
+          En résumé, les castors sont forcément positionnés comme montré ci-dessous.
+          </p>
+          </div>
+
+          <div class="hard">
+          <p>Après avoir lu les 5 indications, on constate que les 5 castors ont, au-dessus d'eux, respectivement, 0, 1, 2, 3 et 4 castors. Cela signifie qu'il y a un castor positionné sur chacune des lignes de la grille, et qu'ils sont dans l'ordre montré ci-dessous.</p>
+          <table class="solution_table">
+            <tr><td>D</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>C</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>E</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>A</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+            <tr><td>B</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+          </table>  
+          <p>On s'intéresse ensuite à la répartition des castors sur les colonnes.</p> 
+           <table class="solution_panels"><tr><td>
+            On commence par l'information du castor C, qui indique que le seul castor plus haut que lui est également devant lui. On décale donc D vers la droite pour la placer en avant de C.<br />
+            <table class="solution_table">
+               <tr><td>&nbsp;</td><td>D</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>C</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>E</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>A</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>B</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+             </table> 
+             </td><td>
+            De même, le castor E indique que les deux castors plus haut que lui sont devant lui. On décale donc C et D vers la droite pour les placer devant E.<br />
+            <table class="solution_table">
+               <tr><td>&nbsp;</td><td>&nbsp;</td><td>D</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>&nbsp;</td><td>C</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>E</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>A</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>B</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+             </table> 
+             </td></tr><tr><td>
+             <p>On continue avec le castor A. Parmi les castors situés au-dessus de lui, il y en a un devant et deux derrière. On décale donc A de 2 cases vers la droite, E et C sont derrière lui, et on décale D pour qu'il soit devant A, de sorte à préserver l'ordre relatif entre E, C et D.</p>
+            <table  class="solution_table">
+               <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>D</td><td>&nbsp;</td></tr>
+               <tr><td>&nbsp;</td><td>C</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>E</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>&nbsp;</td><td>&nbsp;</td><td>A</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>B</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+             </table>  
+             </td><td>
+             <p>Il reste les informations du castor B. Parmi les castors situés au-dessus de lui, il y en a 3 devant et 1 derrière. On décale donc B d'une case vers la droite, de sorte que E soit derrière lui, et on décale A, C et D chacun d'une case vers la droite, pour qu'ils soient devant B.</p> 
+             <table  class="solution_table">
+              <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>D</td></tr>
+               <tr><td>&nbsp;</td><td>&nbsp;</td><td>C</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>E</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+               <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>A</td><td>&nbsp;</td></tr>
+               <tr><td>&nbsp;</td><td>B</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+             </table>  
+         </td></tr></table>
+      <p>En résumé, les castors sont forcément positionnés comme montré ci-dessous.</p>
+        </div>
+           <center><div id="animSolution" class="touch" style="margin-bottom: 0.5em"></div></center>
+
+          <h2>C'est de l'informatique !</h2>
+          <p>
+          Il s'agit d'un problème de logique. Les ordinateurs, lorsqu'on sait correctement les programmer, sont très forts pour résoudre de tels problèmes de logique. Par rapport aux humains, les ordinateurs ont moins d'intuition, mais ils ont deux avantages stratégiques&nbsp;: d'une part, ils peuvent inspecter des millions de combinaisons par seconde, et, d'autre part, ils ne se trompent jamais (du moins, en théorie).
+          </p>
+
+      </div>
+  </body>
+</html>

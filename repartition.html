@@ -1,0 +1,107 @@
+<!doctype html>
+<html ng-app="admin">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <script class="module" type="text/javascript" src="modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+      <script type="text/javascript" src="demo_files/angular.min.js"></script>
+      <script src="demo_files/ui-bootstrap-tpls-0.5.0.min.js"  type="text/javascript"></script>
+      <link href="demo_files/bootstrap-combined.min.css" rel="stylesheet">
+      <script src="demo_files/mainCtrl.js" type="text/javascript"></script>
+      <script class="module" type="text/javascript" src="modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+   </head>
+   <script type="text/javascript" src="tasks_2014.js"></script>
+   <script class="" type="text/javascript">
+      // TODO: better factorize the code with demo_2014.html (and other years demo).
+
+      var show_order = true; 
+      $(document).ready(function() {
+         var items = [];
+         var target = "";
+         for (var iLevel = 0; iLevel < nbLevels; iLevel++) {
+            items[iLevel] = [];
+         }
+         for (var iTask = 0; iTask < tasks.length; iTask++) {
+            var task = tasks[iTask];
+            var short_code = extractShortCode(task.code);
+            /*
+            var title = task.title;
+            if (task.options != null && task.options.hasOwnProperty('difficulty')) {
+               title += " [" + task.options.difficulty + "]";
+            }
+            */
+            target = getLinkTask(task.code, task.options);
+            var dev = "";
+            if (task.hasOwnProperty("dev")) {
+               dev = "&nbsp;&nbsp;&nbsp;";
+            }
+            var rowCore = dev + " <a href='" + target + "'>" + /*short_code + " " + */ task.title + "</a>";
+            $("#levels_all").append(row);
+            for (var iLevel = 0; iLevel < nbLevels; iLevel++) {
+               var order = task.levels[iLevel];
+               if (order != 0) {
+                  var sOrder = "" + order;
+                  if (show_order) {
+                     if (iLevel > 0 && iLevel < nbLevels-1
+                         && task.levels[iLevel-1] == 0) {
+                        sOrder = "<b>" + sOrder + "</b>";
+                     }
+                     if (iLevel < nbLevels-1 && iLevel >= 0
+                         && task.levels[iLevel+1] == 0) {
+                        sOrder = "<u>" + sOrder + "</u>";
+                     }
+                     sOrder = "<small>[" + sOrder + "]</small>&nbsp;";
+                  }
+                  var row = sOrder + rowCore;
+                  items[iLevel].push({order: order, label: row})
+               }
+            }
+         }
+         for (var iLevel = 0; iLevel < nbLevels; iLevel++) {
+            var curGroup = -1;
+            Beav.Array.stableSort(items[iLevel], function(a, b) {return a.order - b.order});
+            for (var iItem = 0; iItem < items[iLevel].length; iItem++) {
+               var item = items[iLevel][iItem];
+               var margin = "0em";
+               var group = Math.floor(item.order / 10);
+               if (group != curGroup) {
+                  curGroup = group;
+                  margin = "0.7em";
+               }
+               $("#levels_" + iLevel).append("<div style='margin-top:" + margin + "'>" + item.label + "</div>");
+            }
+         }
+      });
+   </script>
+   <style>
+   #tasks {
+      margin-left: 1em;
+      border-collapse: collapse;
+   }
+   #tasks td {
+      vertical-align: top;
+      width: 14em;
+      border: 1px solid black;
+      padding: 0.2em;
+   }
+   </style>
+   <body ng-controller="MainCtrl">
+      <table id="tasks">
+      <tr>
+      <td>Tous</td>
+      <td>6ème/5ème</td>
+      <td>4ème/3ème</td>
+      <td>Seconde</td>
+      <td>1ère/Terminale</td>
+      </tr>
+      <tr>
+      <td id="levels_4"></td>
+      <td id="levels_0"></td>
+      <td id="levels_1"></td>
+      <td id="levels_2"></td>
+      <td id="levels_3"></td>
+      </tr>
+      </table>
+     
+   </body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Le langage aibi</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "aX",
+            "a",
+            "aaaabbbb",
+            "aabbaabb"
+            ], "added", "#answers_2011-CH-05");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-CH-05/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Le langage aibi</h1>
+<p>
+Castor invente une nouvelle langue appelée <i>aibi</i>.
+Les mots de ce langage sont construits selon un ensemble de règles très précises. 
+<ol>
+  <li>La construction d'un mot commence toujours en inscrivant la lettre <i>S</i>.</li>
+  <li>Durant la construction, la lettre <i>S</i> peut être remplacée par la séquence de lettres <i>aX</i>.</li>
+  <li>Durant la construction, la lettre <i>X</i> peut être remplacée par la séquence de lettres <i>aXb</i>.</li>
+  <li>Durant la construction, la lettre <i>X</i> peut aussi être remplacée par la lettre <i>b</i>.</li>
+  <li>La construction est terminée quand le mot ne comporte plus que les lettres <i>a</i> et <i>b</i>.</li>
+
+</ol>
+</p>
+<p>
+De nombreux mots peuvent être construits en utilisant uniquement ces cinq règles. 
+</p>
+<p>
+Par exemple, le mot <i>aabb</i> peut être construit de la façon suivante :
+</p>
+<table align=center>
+<tr><td align=center><i>S</i></td><td align=center>&rarr;</td><td align=center><i>aX</i></td><td align=center>&rarr;</td><td align=center><i>aaXb</i></td><td align=center>&rarr;</td><td align=center><i>aabb</i></td></tr>
+<tr><td>règle 1</td><td>règle 2</td><td></td><td>règle 3</td><td></td><td>règle 4</td><td>règle 5</td></tr></table>
+
+</p>
+<p>
+Parmi les mots suivants, lequel est un autre mot du langage <i>aibi</i> ?
+</p>
+<p>
+Réponses :
+</p>
+<div class="reponses" id="answers_2011-CH-05">
+</div>
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <ul>
+   <li>La réponse <span class="2011-CH-05_choice_1">A</span> est fausse. Règle 5 : un mot du langage ne peut pas comporter la lettre "X". Le mot "aX" n'est donc pas un mot du langage.</li>
+   <li>La réponse <span class="2011-CH-05_choice_2">B</span> est fausse. Le mot "a" n'est pas un mot du langage. En effet, le plus petit mot que l'on puisse obtenir est "ab" comme suit :
+   <table align=center>
+   <tr>
+   <td align=center><i>S</i></td>
+   <td align=center>&rarr;</td>
+   <td align=center><i>aX</i></td>
+   <td align=center>&rarr;</td>
+   <td align=center><i>ab</i></td>
+   </tr>
+   <tr><td>règle 1</td>
+   <td>règle 2</td><td></td>
+   <td>règle 3</td><td>règle 5</td></tr>
+   </table>
+   .</li>
+   <li><b>La réponse <span class="2011-CH-05_choice_3">C</span> est correcte.</b> Le mot "aaaabbbb" est obtenu comme suit&nbsp;:
+   <table align=center>
+   <tr>
+   <td align=center><i>S</i></td>
+   <td align=center>&rarr;</td>
+   <td align=center><i>aX</i></td>
+   <td align=center>&rarr;</td>
+   <td align=center><i>aaXb</i></td>
+   <td align=center>&rarr;</td>
+   <td align=center><i>aaaXbb</i></td>
+   <td align=center>&rarr;</td>
+   <td align=center><i>aaaaXbbb</i></td>
+   <td align=center>&rarr;</td>
+   <td align=center><i>aaaabbbb</i></td>
+   </tr>
+   <tr><td>règle 1</td>
+   <td>règle 2</td><td></td>
+   <td>règle 3</td><td></td>
+   <td>règle 3</td><td></td>
+   <td>règle 3</td><td></td>
+   <td>règle 4</td><td>règle 5</td></tr>
+   </table>
+   </li>
+   <li>La solution <span class="2011-CH-05_choice_4">D</span> est fausse. En effet, on remarque sur les différents exemples proposés que les règles disponibles construiront toujours un mot fait de <i>n</i> "a" suivis de <i>n</i> "b", où <i>n</i> est un entier positif. Le mot de la réponse <span class="2011-CH-05_choice_4">D</span> n'est donc pas possible.</li>
+   </ul>
+   </p>
+
+   <h2>C'est de l'informatique</h2>
+   Cette façon de décrire un ensemble de mots possibles, en donnant des règles de construction de cette forme, est bien connue en informatique. Il s'agit d'une <i>grammaire</i>.
+   Si nous prenons maintenant comme règles :
+   <ol>
+     <li>La construction commence avec <i>X</i>;</li>
+     <li>La lettre <i>X</i> peut être remplacée par la séquence de lettres <i>aXbX</i>, ou bien <i>bXaX</i>, ou bien <i>ab</i>, ou bien <i>ba</i>.</li>
+   </ol>
+   nous décrivons ainsi tous les mots d'au moins 2 lettres comportant autant de <i>a</i> que de <i>b</i>.
+   </p>
+   <p>
+   Les grammaires sont particulièrement utiles pour décrire les langages de programmation. Il est en effet indispensable de préciser de manière non-ambiguë quelles séquences de caractères représentent un programme exécutable et quelles sont celles qui n'ont aucun sens en tant que programme.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,515 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Labyrinthe</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" src="../../modules/ext/jquery-ui/1.8/jquery-ui-1.8.22.custom.min.js" id="http://jqueryui.com/download/jquery-ui-1.8.22.custom.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">//this code is created to fix this problem: http://stackoverflow.com/questions/4299241/
+
+      (function( $, undefined ) {
+
+        $.widget("ui.fixedsortable", $.ui.sortable, {
+
+          options: $.extend({},$.ui.sortable.prototype.options,{fixed:[]}),
+
+          _create: function() {
+            var o = this.options;
+            this.containerCache = {};
+            this.element.addClass("ui-sortable");
+
+            //Get the items
+            $.ui.sortable.prototype.refresh.apply(this,arguments);
+
+            if( typeof this.options.fixed == "number") {
+              var num = this.options.fixed
+              this.options.fixed = [num];
+            }
+            else if( typeof this.options.fixed == "string" || typeof this.options.fixed == "object") {
+              if(this.options.fixed.constructor != Array) {
+                var selec = this.options.fixed;
+                var temparr = [];
+                var temp = $(this.element[0]).find(selec);
+                var x = this;
+
+
+                temp.each(function() {
+                  var i;
+                  for(i=0;i<x.items.length && x.items[i].item.get(0) != this;++i) {}
+                  if(i<x.items.length) temparr.push(i);
+                });
+                this.options.fixed = temparr;
+              }
+            }
+
+
+            //Let's determine if the items are being displayed horizontally
+            this.floating = this.items.length ? o.axis === 'x' || (/left|right/).test(this.items[0].item.css('float')) || (/inline|table-cell/).test(this.items[0].item.css('display')) : false;
+
+            //Let's determine the parent's offset
+            this.offset = this.element.offset();
+
+            //Initialize mouse events for interaction
+            $.ui.sortable.prototype._mouseInit.apply(this,arguments);
+          },
+
+          _mouseCapture: function( event ) { 
+
+            this._fixPrev = this._returnItems();
+            return $.ui.sortable.prototype._mouseCapture.apply(this,arguments);
+          },
+
+          _mouseStart: function( event ) { 
+
+            for(var i=0;i<this.options.fixed.length;++i) {
+              var num = this.options.fixed[i];
+              var elem = this.items[num];
+              if(event.target == elem.item.get(0)) return false;
+            }
+
+            return $.ui.sortable.prototype._mouseStart.apply(this,arguments);
+          },
+
+          _rearrange: function(event, i, a, hardRefresh) {
+
+            a ? a[0].appendChild(this.placeholder[0]) : 
+            i.item[0].parentNode.insertBefore(this.placeholder[0], (this.direction == 'down' ? i.item[0] : i.item[0].nextSibling));
+
+            this._refix(i);
+
+
+
+            //Various things done here to improve the performance:
+            // 1. we create a setTimeout, that calls refreshPositions
+            // 2. on the instance, we have a counter variable, that get's higher after every append
+            // 3. on the local scope, we copy the counter variable, and check in the timeout, if it's still the same
+            // 4. this lets only the last addition to the timeout stack through
+
+
+
+            this.counter = this.counter ? ++this.counter : 1;
+            var self = this, counter = this.counter;
+
+
+            window.setTimeout(function() {
+              if(counter == self.counter)
+              self.refreshPositions(!hardRefresh); //Precompute after each DOM insertion, NOT on mousemove
+            },0);
+
+          },
+
+          _refix: function(a) {
+            var prev = this._fixPrev;
+            var curr = this._returnItems();
+
+            var Fixcodes = this.options.fixed;
+
+            var NoFixed = [];
+            var Fixed = [];
+            var Mixed = []
+            var post = [];
+
+
+            for(var i=0;i<Fixcodes.length;++i) {
+              var fix_index = Fixcodes[i];
+              var fix_item  = prev[fix_index];
+              var j = 0;
+
+              for(j=0;j<curr.length && curr[j].item.get(0) != fix_item.item.get(0);++j) {}
+
+              curr.splice(j,1);
+
+              Fixed.push(fix_item);
+            }
+
+            for(var i=0;i<curr.length;++i) {
+              if(curr[i].item.get(0) != this.currentItem.get(0)) {
+                NoFixed.push(curr[i]);
+              }
+            }
+
+            var fix_count = 0;
+            var nofix_count = 0;
+
+            var assocFixCodes = {};
+            for(var i=0;i<Fixcodes.length;++i) {
+               assocFixCodes[Fixcodes[i]] = i;
+            }
+            for(var i=0;i<Fixed.length + NoFixed.length;++i) {
+              if(assocFixCodes[i] >= 0) {
+                Mixed.push(Fixed[fix_count++]);
+              }
+              else {
+                Mixed.push(NoFixed[nofix_count++]);
+              }
+            }
+
+            var parent = this.currentItem.get(0).parentNode;    
+            var allchild = parent.children;
+
+            for(var i=0;i<Mixed.length;++i) {
+              parent.removeChild(Mixed[i].item.get(0));
+              parent.appendChild(Mixed[i].item.get(0));
+            }
+          },
+
+          _returnItems: function(event) {
+
+            this.containers = [this];
+            var items = [];
+            var self = this;
+            var queries = [[$.isFunction(this.options.items) ? this.options.items.call(this.element[0], event, { item: this.currentItem }) : $(this.options.items, this.element), this]];
+            var connectWith = $.ui.sortable.prototype._connectWith.apply;
+
+            if(connectWith) {
+              for (var i = connectWith.length - 1; i >= 0; i--){
+                var cur = $(connectWith[i]);
+                for (var j = cur.length - 1; j >= 0; j--){
+                  var inst = $.data(cur[j], 'sortable');
+                  if(inst && inst != this && !inst.options.disabled) {
+                    queries.push([$.isFunction(inst.options.items) ? inst.options.items.call(inst.element[0], event, { item: this.currentItem }) : $(inst.options.items, inst.element), inst]);
+                    this.containers.push(inst);
+                  }
+                };
+              };
+            }
+
+            for (var i = queries.length - 1; i >= 0; i--) {
+              var targetData = queries[i][1];
+              var _queries = queries[i][0];
+
+              for (var j=0, queriesLength = _queries.length; j < queriesLength; j++) {
+                var item = $(_queries[j]);
+
+                item.data('sortable-item', targetData); // Data for target checking (mouse manager)
+
+                items.push({
+                  item: item,
+                  instance: targetData,
+                  width: 0, height: 0,
+                  left: 0, top: 0
+                });
+              };
+            };
+
+            return items;
+          },
+
+
+          value: function(input) {
+            //console.log("test");
+            $.ui.sortable.prototype.value.apply(this,arguments);
+          }
+        });
+
+      })(jQuery);
+
+        task.load= function(views, callback) {
+           task.reset_pos();
+           task.reset();
+           callback();
+        };
+
+        task.unload= function(callback) {
+           window.clearInterval(task.intervalID);
+           callback();
+        };
+
+        task.getAnswer= function(callback) {
+           callback(task.get_cmd());
+        };
+
+        task.reloadAnswer= function(strAnswer, callback) { // TODO : reload any answer
+           if (strAnswer == "") {
+              return;
+           }
+           if (strAnswer != "0312210010") {
+              alert("Rechargement impossible pour cette question");
+              return;
+           }
+           var order = [0, 8, 2, 1, 4, 3, 9, 5, 6, 7];
+           for(var i = 0; i < order.length; i++) {
+             $("#solution_2012_CZ_12").append($('#CZ-12_' + order[i]));
+           }
+           callback();
+        };
+
+        task.walls= [
+        [[1,1,1,0], [0,0,0,0], [0,0,0,0], [0,1,1,0], [1,1,1,1]], //horiz
+        [[1,1,1,1], [0,1,1,1], [1,1,0,0], [0,1,1,0], [1,1,1,1]], //vert
+        ];
+        task.pos= [1, 1];
+        task.intervalID= -1;
+        task.cmd= "";
+
+        task.get_cmd= function() {
+          var res = $('#solution_2012_CZ_12 > .item_2012_CZ_12');
+          var solution = "";
+          for (var i=0; i< res.length; i++) {
+            solution += res[i].className.split(' ')[1];
+          }
+          return solution;
+        };
+
+        task.up_wall= function(row, col) { return task.walls[0][row][col]; };
+        task.down_wall= function(row, col) { return task.walls[0][row + 1][col]; };
+        task.left_wall= function(row, col) { return task.walls[1][col][row]; };
+        task.right_wall= function(row, col) { return task.walls[1][col + 1][row]; };
+
+        task.draw= function () {
+          var htmlContent = "";
+
+          for(var i = 0; i < 4; i++) {
+            htmlContent += "<tr>";
+            for(var j = 0; j < 4; j++) {
+              var color = "white";
+              if(i == task.pos[0] && j == task.pos[1]) {
+                color="blue";
+              }
+              var borders="";
+              if(task.up_wall(i, j)) {
+                borders += "border-top: 4px solid black; ";
+              }
+              if(task.down_wall(i, j)) {
+                borders += "border-bottom: 4px solid black; ";
+              }
+              if(task.right_wall(i, j)) {
+                borders += "border-right: 4px solid black; ";
+              }
+              if(task.left_wall(i, j)) {
+                borders += "border-left: 4px solid black; ";
+              }
+              htmlContent += '<td style="background:'+ color + '; ' + borders + '"></td>';
+            }
+            htmlContent += "</tr>";
+          }
+          $("#CZ-12 .pic").html(htmlContent);
+        };
+
+        task.reset_pos= function() {
+          $("#wall_2012_CZ_12").hide();
+          $("#message_2012_CZ_12").hide();
+          task.pos = [1,1];
+          task.draw();
+        };
+        task.reset= function() {
+          $('#solution_2012_CZ_12').fixedsortable('enable');
+          $('#solution_2012_CZ_12').fixedsortable({
+            placeholder: "highlight_2012_CZ_12",
+            containment: '#animationcontainer_2012_CZ_12',
+            fixed:[1,6],
+            tolerance: "pointer"
+
+          });
+          window.clearInterval(task.intervalID);
+
+          task.cmd = task.get_cmd();
+          task.draw();
+        },
+
+        task.play= function() {
+          if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"answer", answer: task.get_cmd()});}
+          task.reset_pos();
+          task.reset();
+          if(task.cmd.charAt(1) == '3' && task.cmd.charAt(6) == '0') {
+            task.intervalID = window.setInterval(task.loop, 500);
+            $('#solution_2012_CZ_12').fixedsortable('disable');
+          } else {
+            //hack?
+          }
+        },
+
+        task.loop= function() {
+          cmd = task.cmd;
+          pos = task.pos;
+          walls = task.walls;
+
+          if(cmd.charAt(0) == '0' && !task.up_wall(pos[0], pos[1])) {
+            task.pos[0]--;
+          }
+          else if(cmd.charAt(0) == '2' && !task.down_wall(pos[0], pos[1])) {
+            task.pos[0]++;
+          }
+          else if(cmd.charAt(0) == '1' && !task.right_wall(pos[0], pos[1])) {
+            task.pos[1]++;
+          }
+          else if(cmd.charAt(0) == '3' && !task.left_wall(pos[0], pos[1])) {
+            task.pos[1]--;
+          } else {
+            $("#wall_2012_CZ_12").show();
+            task.reset();
+            return;
+          }
+
+          task.cmd = cmd.substr(1);
+
+          task.draw();
+
+          if(cmd.length == 1) {
+            window.clearInterval(task.intervalID);
+            if(pos[0] == -1 && pos[1] == 3) {
+              $("#success_2012_CZ_12").show();
+              platform.validate("done");
+            } else {
+              $("#message_2012_CZ_12").show();
+              task.reset();
+            }
+          }
+        }
+      </script>
+      <style class="">
+      #animationcontainer_2012_CZ_12 {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+
+      .animation_2012_CZ_12 {
+        width:540px;
+        z-index:-2;
+        border: 1px solid;
+        height:55px;
+      }
+
+      #solution_2012_CZ_12 {
+        background: #ddf;
+      }
+
+      #solution_2012_CZ_12 .item_2012_CZ_12 {
+        background: white;
+        color:black;
+        border: 1px solid;
+        margin: 6px;
+        padding: 0px;
+        width: 40px;
+        cursor: move;
+        position: relative;
+        height: 40px;
+        text-align:center;
+        float:left;
+      }
+
+
+      .highlight_2012_CZ_12 {
+        margin: 6px;
+        padding: 0px;
+        position: relative;
+        background: yellow;
+        border: 1px dashed;
+        height: 40px;
+        width: 40px;
+        float: left;
+      }
+      #CZ-12 .pic {
+        border-spacing: 0px;
+        margin-left: 40px;
+        margin-bottom: 40px;
+        border-collapse: collapse;
+      }
+      #CZ-12 .pic td {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #CCCCCC;
+        padding: 0px;
+        margin: 2px;
+      }
+
+      #CZ-12 .fixed {
+        border: 5px solid red;
+        margin: 0px;
+        margin-top:2px;
+      }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-CZ-12/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "0312210010"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Labyrinthe</h1>
+<p>Votre objectif est de trouver une séquence de déplacements permettant de faire sortir le carré bleu du labyrinthe.
+</p>
+<p>Les déplacements sont décrits par des flèches. Vous pouvez réordonner les flèches comme vous le souhaitez, sauf les deux flèches encadrées en rouge qui sont fixées. Pour déplacer une flèche, appuyez dessus, glissez-la vers l'endroit où vous voulez l'insérer, puis relâchez le bouton de la souris. Une fois la séquence prête, vous pouvez visualiser les déplacements en cliquant sur le bouton &laquo;&nbsp;Exécuter&nbsp;&raquo;.
+</p>
+<p>À la fin des déplacements, si le carré bleu est sorti du labyrinthe, vous validez l'exercice. Sinon, recommencez autant de fois que nécessaire. Vous ne pouvez pas perdre de points sur cette question.
+</p>
+    <div id="CZ-12" style="margin-right:10px;">
+       <table><tr><td>
+       <table class="pic">
+       </table>
+       </td><td>
+         <span id="message_2012_CZ_12" style="color:red;font-weight:bold;display:none">Le carré n'est pas sorti&nbsp;!&nbsp;<input type="button" value="Ok" onclick="task.reset_pos();" /><br/></span>
+         <span id="wall_2012_CZ_12" style="color:red;font-weight:bold;display:none">Le carré ne peut pas traverser les murs&nbsp;!&nbsp;<input type="button" value="Ok" onclick="task.reset_pos();" /><br/></span>
+         <span id="success_2012_CZ_12" style="color:blue;font-weight:bold;display:none">Bravo, le carré bleu est sorti&nbsp;!&nbsp;</span>
+       </td></tr></table>
+       <div id="animationcontainer_2012_CZ_12">
+       <table><tr><td>
+         <div id="solution_2012_CZ_12" class="animation_2012_CZ_12">
+           <img class="item_2012_CZ_12 2" id="CZ-12_1" src="down.png" alt="Sud" height="20" />
+           <img class="item_2012_CZ_12 3 fixed" id="CZ-12_8" src="left.png" alt="Ouest" height="20" />
+           <img class="item_2012_CZ_12 0" id="CZ-12_0" src="up.png" alt="Nord" height="20" />
+           <img class="item_2012_CZ_12 1" id="CZ-12_2" src="right.png" alt="Est" height="20" />
+           <img class="item_2012_CZ_12 1" id="CZ-12_3" src="right.png" alt="Est" height="20" />
+           <img class="item_2012_CZ_12 0" id="CZ-12_5" src="up.png" alt="Nord" height="20" />
+           <img class="item_2012_CZ_12 0 fixed" id="CZ-12_9" src="up.png" alt="Nord" height="20" />
+           <img class="item_2012_CZ_12 2" id="CZ-12_4" src="down.png" alt="Sud" height="20" />
+           <img class="item_2012_CZ_12 0" id="CZ-12_7" src="up.png" alt="Nord" height="20" />
+           <img class="item_2012_CZ_12 1" id="CZ-12_6" src="right.png" alt="Est" height="20" />
+         </div>
+         </td><td>
+         <div id="buttons_2012_CZ_12">
+           <input type="button" value="Exécuter" onclick="task.play();" />
+         </div>
+         </td></tr></table>
+       </div>
+    </div>
+<img style="display: none;" src="down.png" />
+<img style="display: none;" src="left.png" />
+<img style="display: none;" src="up.png" />
+<img style="display: none;" src="right.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+
+<h2>La solution</h2>
+
+<p><img src='2012-CZ-12_solution.png'/></p>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>Il s'agit d'ordonner des <b>instructions</b> de sorte à écrire
+un <b>programme</b> qui déplace le carré bleu vers la sortie.</p>
+
+<p>Cela peut sembler un programme étrange, car on ne fait pas le chemin le plus rapide. En effet, comme on est obligé d'aller à gauche comme deuxième instruction, il faut commencer par s'éloigner avant d'aller à la sortie. Cela peut s'expliquer par exemple s'il y a un autre castor dans le labyrinthe avec lequel il ne faut pas avoir d'accident.</p>
+
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

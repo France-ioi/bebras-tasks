@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2014-SI-04-unknown-friendship</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js"        id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-SI-04-unknown-friendship/",
+          "language": "fr",
+          "version": "",
+          "authors": "",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "medium", "2": "medium", "3": "easy", "4": "easy"},
+          "categories": {},
+          "answerType": "Interactive, drag and drop",
+          "fullFeedback": true, 
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #relations td {
+         vertical-align: top;
+       }
+      #relations td ul {
+         margin-top: 0em;
+         margin-bottom: 0.5em;
+      }
+      .easy, .hard {
+         display: none;
+      }
+      </style>
+  </head>
+  <body>
+      <div id="task">
+         <h1>Les amis</h1>
+         <p>
+         Castor est arrivé dans une nouvelle classe. Il a très vite repéré qui est ami avec qui&nbsp;:
+         </p>
+         <div id="relations"></div>
+         <p>
+         Pour y voir plus clair, Castor a dessiné le diagramme ci-dessous,
+         où chaque rectangle représente un ami et chaque trait relie
+         deux amis. Cependant, il a oublié de noter les noms des personnes dans les 
+         rectangles. Pouvez-vous les retrouver&nbsp;?
+         </p>
+         <p>
+         Faites glisser les noms sur les rectangles correspondants.
+         </p>
+         <div id="anim" class="touch"></div>
+      </div>
+      
+      <div id="solution">
+          <h2>Solution</h2>
+          <p>
+          Une manière d'aborder le problème consiste à repérer sur le graphe qu'il y a des cas singuliers : une seule personne n'a qu'un ami, et une seule personne a 4 amis. On peut donc étudier le nombre d'amis de chaque personne et repérer qui peut être l'un de ces cas singuliers pour le placer en premier.
+          </p>
+          <ul>
+          <li>
+          Par exemple, on peut commencer par repérer le nom de la seule personne qui n'a qu'un seul ami ; puis le placer directement. Ensuite, on peut placer le nom de l'ami de cette personne.
+          </li>
+          <li>
+          Pour continuer, parmi les deux amis de cette dernière personne, l'une a un total de <span class="easy">3</span> <span class="hard">2</span> amis, tandis que l'autre a un total de 4 amis. On peut donc distinguer ces deux amis et les mettre aux bons endroits.
+          </li>
+          <li>
+          De même, on peut identifier les autres personnes en fonction du nombre total de leurs amis, en continuant de proche en proche.
+          </li>
+          </ul>
+          <p>
+          Voici la solution complète.
+          </p>
+          <div id="animSolution" class="touch"></div>
+
+          <h2>C'est de l'informatique !</h2>
+
+          <p>
+          Le diagramme ci-dessus est appelé un «&nbsp;graphe&nbsp;». De manière générale, un graphe sert à représenter un ensemble de «&nbsp;relations&nbsp;» entre des objets ou des personnes. 
+          </p>
+          <p>Les graphes peuvent être gigantesques, comme par exemple le graphe de Facebook qui contient plus d'un milliards de personnes, chacune ayant typiquement de l'ordre d'une centaine d'amis. Pour pouvoir récupérer des informations sur la structure de graphes aussi grands, comme par exemple pour trouver une chaîne d'amis connectant deux personnes données, il est nécessaire d'utiliser des algorithmes très efficaces.
+          </p>
+
+      </div>
+  </body>
+</html>

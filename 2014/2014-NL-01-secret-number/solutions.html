@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-NL-01</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/jquery.base64.min.js"></script>
+
+      <script type="text/javascript">
+var easy = [
+{ query: "6183", solutions: [ "PARC" ] },
+{ query: "6923", solutions: [ "FILM" ] }, 
+{ query: "4105", solutions: [ "DATE" ] }, 
+{ query: "2813", solutions: [ "VRAC" ] },
+{ query: "0975", solutions: [ "TIGE" ] }, 
+{ query: "2251", solutions: [ "BLEU" ] }, 
+{ query: "2253", solutions: [ "BLOC" ] },
+{ query: "2856", solutions: [ "BREF" ] }, 
+{ query: "0175", solutions: [ "JUGE" ] }, 
+{ query: "3810", solutions: [ "CHUT", "CHAT", "CRUT" ] }, 
+{ query: "3952", solutions: [ "MIEL", "CIEL" ] },  
+{ query: "8185", solutions: [ "RARE", "HURE", "HARO" ] },   
+{ query: "8525", solutions: [ "ROLE", "ROBE", "REVE", "HELE" ] }, 
+{ query: "8985", solutions: [ "RIRE" ] }, 
+{ query: "9175", solutions: [ "SAGE" ] }, 
+];
+var hard = [
+{ query: "7526", solutions: [ "GOLF" ] }, 
+{ query: "8595", solutions: [ "ROSE" ] }, 
+{ query: "2175", solutions: [ "LUGE" ] }, 
+{ query: "4598", solutions: [ "NOIR" ] }, 
+{ query: "1498", solutions: [ "UNIR" ] }, 
+{ query: "2190", solutions: [ "LAIT", "LUIT" ] },     
+{ query: "0125", solutions: [ "TUBE", "TALE", "JUBE", "JALE" ] },  
+{ query: "0145", solutions: [ "JUDO", "TUNE", "TAXE", "JADE" ] },  
+{ query: "0165", solutions: [ "JUPE", "TAPE" ] },   
+{ query: "0510", solutions: [ "TOUT" ] }, 
+{ query: "0518", solutions: [ "TOUR", "JOUR" ] },  
+{ query: "1958", solutions: [ "USER" ] }, 
+{ query: "2145", solutions: [ "LUNE", "LUXE", "LADY", "BADE" ] }, 
+{ query: "2598", solutions: [ "VOIR", "LOIR" ] },     
+{ query: "2951", solutions: [ "LIEU" ] }, 
+{ query: "2985", solutions: [ "LIRE", "VIRE" ] },  
+{ query: "3251", solutions: [ "CLOU" ] }, 
+{ query: "4145", solutions: [ "DUNE" ] }, 
+{ query: "4149", solutions: [ "DANS" ] }, 
+{ query: "4190", solutions: [ "NUIT", "NAIT", "DUIT" ] }, 
+{ query: "2540", solutions: [ "VONT", "VENT", "LENT" ] }, 
+{ query: "4540", solutions: [ "DONT", "DENT" ] },  
+{ query: "4543", solutions: [ "DONC" ] }, 
+{ query: "5085", solutions: [ "ETRE" ] }, 
+{ query: "5189", solutions: [ "OURS" ] }, 
+{ query: "6251", solutions: [ "FLOU" ] }, 
+{ query: "6592", solutions: [ "POIL", "FOIL" ] },   
+{ query: "8544", solutions: [ "ROND", "REND" ] }, 
+];
+/*
+{ query: "0121", solutions: [ "TUBA", "TALA", "JAVA" ] },   
+{ query: "3198", solutions: [ "CUIR", "CASH" ] }, 
+{ query: "6161", solutions: [ "PAPA" ] }, 
+*/
+
+var all = {easy: easy, hard: hard};
+var txt = $.base64.encode(JSON.stringify(all));
+/* DEBUG:
+var all2 = $.parseJSON($.base64.decode(txt));
+txt += "\n" + all2.easy[0].query + " : " + all2.easy[0].solutions[0];
+*/
+
+$(document).ready(function(){ $("#output").val(txt); }); 
+      </script>
+   </head>
+   <body>
+      <textarea cols=80 rows=20 id="output"></textarea>
+      </div>
+   </body>
+</html>
+ 

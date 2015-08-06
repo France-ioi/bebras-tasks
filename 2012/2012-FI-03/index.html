@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Code castor</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+            "Petit : x &nbsp;&nbsp; Moyen : xx &nbsp;&nbsp; Long : xxx &nbsp;&nbsp; Très long: xxxx",
+            "Petit : x	&nbsp;&nbsp; Moyen : o &nbsp;&nbsp; Long : xx &nbsp;&nbsp; Très long : ox",
+            "Petit : x	&nbsp;&nbsp; Moyen : ox &nbsp;&nbsp; Long : oox &nbsp;&nbsp; Très long : ooo",
+            "Petit : o	&nbsp;&nbsp; Moyen : ox &nbsp;&nbsp; Long : oo &nbsp;&nbsp; Très long : oxo",
+            ], "added", "#answers_2012-FI-03");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FI-03/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "3"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Code castor</h1>
+<p>
+Les Castors transportent sur la rivière des troncs
+de différentes tailles : Petit, Moyen, Long et Très long.
+Lorsqu'ils arrivent au barrage, ils décrivent leur chargement en jouant du tambour. 
+Le tambour utilisé permet de jouer deux notes différentes, que l'on note "x" et "o".
+Pour décrire leur chargement, les Castors ont donc besoin d'associer une séquence de notes à chaque taille de tronc.
+Pour gagner du temps, les Castors ne veulent pas faire de pause entre les séquences de notes lorsqu'ils décrivent plusieurs troncs.
+</p>
+
+<p>
+Avec cette contrainte, un seul des codes suivants peut être utilisé. Lequel&nbsp;?</p>
+</p>
+
+<div class="reponses" id="answers_2012-FI-03">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : C=3
+   -->
+
+   <div class="explications">
+   <h2>La solution</h2>
+   <p>La musique faite par la trompe va être une longue suite de notes, sans pause entre elles. Il ne sera pas possible de s'appuyer sur des pauses sonores pour savoir où commence l'indication d'une taille et où elle finie. Il faut donc choisir le code de telle sorte que la suite de notes d'une taille ne peut être mal coupée et confondue avec une autre. Plus précisément, il faut que chaque code d'une taille ne commence pas par le code d'une autre taille.
+   La proposition A ne fonctionne pas car le code de Moyen : xx débute par le code de Petit : x. Donc le message "xx" peut aussi bien correspondre à un chargement comportant un tronc moyen ou qu'à un chargement de deux petits troncs. Seule la proposition C propose des codes que l'on ne peut interpréter que d'une seule façon. </p>
+   <!-- MB: Je ne suis pas d'accord avec "il faut", je dirais plutôt "il suffit". Autre exemple de code qui fonctionne : o, oxoo, oxxo, oxxx -->
+
+   </div>
+</div> <!-- task-solution -->
+   </body>
+</html>

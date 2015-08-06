@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-SK-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script type="text/javascript" src="2013-SK-01-task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-SK-01/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Monika Gujberova et Martina Kabatova, sk",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["3"]
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+         #tree1, #tree2, #tree3, #tree4, #tree5, #tree6 {
+            border: solid black 1px;
+         }
+      </style>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+              "<table><tr><td><span id='tree_5_a'></span></td><td><span id='tree_4_a'></span></td><td><span id='tree_2_a'></span></td><td><span id='tree_1_a'></span></td><td><span id='tree_4_b'></span></td><td><span id='tree_3_a'></span></td><td><span id='tree_1_b'></span></td><td><span id='tree_4_c'></span></td></tr></table>",
+              "<table><tr><td><span id='tree_5_b'></span></td><td><span id='tree_1_c'></td><td></span><span id='tree_2_b'></span></td><td><span id='tree_6_a'></span></td><td><span id='tree_4_d'></span></td><td><span id='tree_1_d'></span></td><td><span id='tree_5_c'></span></td><td><span id='tree_4_e'></span></td></tr></table>",
+              "<table><tr><td><span id='tree_5_d'></span></td><td><span id='tree_1_e'></span></td><td><span id='tree_2_c'></span></td><td><span id='tree_6_b'></span></td><td><span id='tree_4_f'></span></td><td><span id='tree_4_g'></span></td><td><span id='tree_5_e'></span></td><td><span id='tree_4_h'></span></td></tr></table>",
+              "<table><tr><td><span id='tree_5_f'></span></td><td><span id='tree_4_i'></span></td><td><span id='tree_4_j'></span></td><td><span id='tree_6_c'></span></td><td><span id='tree_1_f'></span></td><td><span id='tree_2_d'></span></td><td><span id='tree_5_g'></span></td><td><span id='tree_4_k'></span></td></tr></table>"
+            ], "added", "#answers_2013-SK-01");
+      </script>
+      <script class="task" type="text/javascript">
+         var taskViewLoaded = false;
+         var solutionViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               loadGraph('graph');
+               taskViewLoaded = true;
+               for (var iTree = 0; iTree < 6; iTree++) {
+                  var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'];
+                  for (var iLetter = 0; iLetter < letters.length; iLetter++) {
+                     var id = "tree_" + (iTree + 1) + "_" + letters[iLetter];
+                     if ($("#" + id).length > 0) {
+                        loadTree(iTree, id);
+                     }
+                  }
+               }
+            }
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Promenade en forêt</h1>
+         
+         <p>Boris s'est promené dans la forêt représentée ci-dessous.</p>
+         <center><div id="graph"></div></center>
+         
+         <p>
+         Il a dessiné les arbres qu'il a rencontrés au fur et à mesure de sa promenade.
+         Une seule des propositions ci-dessous peut correspondre à son dessin. Laquelle&nbsp;?
+         </p>
+
+         <div class="reponses" id="answers_2013-SK-01">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>La solution</h2>
+         <p>Pour déterminer si une suite d'arbres dessinés peut correspondre à un chemin emprunté par Boris, on peut essayer d'avancer étape par étape à travers la forêt, en essayant à chaque fois de trouver le prochain arbre dessiné.</p>
+         <p>Il faut faire très attention au fait qu'il peut y avoir plusieurs choix possibles à un moment donné. Par exemple, tout au début, on a deux chemins possibles menant à un arbre dont la partie supérieure est représentée par un oval vert foncé. Dans un tel cas, il faut essayer tous les chemins possibles.</p>
+         <p>Si, à un moment donné, on ne trouve pas l'arbre suivant que l'on est censé rencontrer, c'est que le chemin que l'on a suivi n'est pas le bon. En essayant toutes les propositions, on peut voir que la seule qui correspond à un chemin rejoignant l'arrivée est celle représentée ci-dessous.</p>
+         <div style="text-align:center"><img src="solution2.png"></div>
+         <p>La réponse est donc : </p>
+         <div style="text-align:center"><img src="solution1.png" style="border:2px solid black"></div>
+         <h2>C'est de l'informatique </h2>
+         <p>
+         Le plan de la forêt constitue ce que l'on appelle un <i>graphe</i>. Les graphes ont de très nombreuses applications en informatique. En particulier, les graphes peuvent être utilisés pour représenter des cartes telles que des cartes routières dans les systèmes de navigation par GPS. </p>
+         <p>
+         Souvent, on étudie un graphe pour trouver le plus court chemin entre un point de départ et une arrivée. Dans ce sujet, on s'intéressait à différents chemins possibles, afin de reconnaître quels sont les chemins vérifiant certaines propriétés particulières.</p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

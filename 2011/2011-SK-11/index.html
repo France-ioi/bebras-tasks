@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Les photos de Lucie</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "Noa",
+            "Jean",
+            "David",
+            "Sam",
+            "Marie",
+            "Alexis",
+            "Pierre",
+            "Côme",
+            "Jason",
+            "Lena",
+            "Eve",
+            ], "checkboxes", "#answers_2011-SK-11");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-SK-11/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["10100000001"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Les photos de Lucie</h1>
+<p>
+Lucie et ses amis font partie du réseau social CastorBook. Voici les amis de Lucie, ainsi que les amis de ses amis dans ce réseau.
+</p>
+<p>
+<img src="2011-SK-11.png" alt="Photos de Lucie"><br>
+</p>
+<p>
+Une ligne représente un lien d'amitié entre deux personnes. Par exemple, Marie est l'amie de Lucie, Alexis n'est pas l'ami de Lucie, Alexis est l'ami de Marie.
+</p>
+<p>
+Quelqu'un peut partager une photo avec certains de ses amis. Les amis, avec qui la photo est partagée, peuvent voir et commenter la photo. Si quelqu'un commente une photo alors
+tous ses propres amis peuvent, à leur tour, voir le commentaire et la photo. Par contre, ils ne
+peuvent pas commenter la photo (sauf si son propriétaire avait choisi de partager la photo avec eux initialement).
+</p>
+<p>
+Lucie a ajouté une nouvelle photo sur son profil castorbook. Elle <b>ne veut pas</b> que Jason puisse la voir. Avec qui peut-elle partager sa photo, sans que Jason puisse la voir ? Cochez leurs prénoms ci-dessous.
+</p>
+<div class="reponses" id="answers_2011-SK-11">
+</div>
+
+<img style="display: none;" src="2011-SK-11.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Pour que Jason ne puisse pas voir la photo de Lucie, il ne faut pas qu'elle la partage avec les amis de Jason, car sinon ils risquent de commenter la photo, ce qui permettrait à leurs propres amis, donc à Jason, de la voir. Lucie peut donc partager la photo avec tous ceux de ses amis qui ne sont pas des amis de Jason.
+   </p>
+   <p>
+   Dans l'illustration ci-dessous, nous avons rayé les amis de Jason. Nous avons ensuite entouré les amis de Lucie qui ne sont pas parmi les amis de Jason.
+   </p>
+   <p>
+   <img src="photos_lucie_sol.png"/>
+   </p>
+   <p>
+   Les amis avec lesquels Lucie peut partager ses photos sont : Eve, Noa et David.
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Cet exercice consiste essentiellement à comprendre la signification de la représentation graphique d'un objet essentiel en informatique : le graphe. Les personnes du réseau social sont les noeuds du graphe, et les liens d'amitié entre personnes sont les arêtes du graphe. La notion de noeuds <i>voisins</i> d'un noeud est ici manipulée, de même que la notion de noeuds à une distance de 2 d'un autre noeud (accessibles en traversant deux arcs).
+   </p>
+   <p>
+   Les graphes donnent une représentation abstraite des relations entre objets de toutes sortes. Ils sont utiles, par exemple pour modéliser des réseaux d'amis ou de télécommunications. La transition entre un objet réel et un modèle n'est pas toujours facile. Le modèle abstrait peut permettre de voir des structures cachées. 
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Chez le dentiste</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2012-FR-04b", 2, 1);
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-04b/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "3"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Chez le dentiste</h1>
+<p> La semaine dernière, le dentiste a reçu 9 animaux et a noté les rendez-vous&nbsp;:</p>
+
+<table border="1" style="font-family:courier" cellpadding="5" cellspacing="0">
+<tr><th>Date</th><th>Animal</th><th>Adresse</th><th>Soin</th></tr>
+<tr><td>02/11/2012</td><td>Loutre</td><td>Rivière</td><td>Limage</td></tr>
+<tr><td>01/11/2012</td><td>Castor</td><td>Forêt</td><td>Arrachage</td></tr>
+<tr><td>01/11/2012</td><td>Castor</td><td>Rivière</td><td>Arrachage</td></tr>
+<tr><td>01/11/2012</td><td>Loutre</td><td>Rivière</td><td>Nettoyage</td></tr>
+<tr><td>30/10/2012</td><td>Loutre</td><td>Forêt</td><td>Nettoyage</td></tr>
+<tr><td>30/10/2012</td><td>Castor</td><td>Rivière</td><td>Limage</td></tr>
+<tr><td>29/10/2012</td><td>Castor</td><td>Forêt</td><td>Arrachage</td></tr>
+<tr><td>29/10/2012</td><td>Castor</td><td>Barrage</td><td>Arrachage</td></tr>
+<tr><td>29/10/2012</td><td>Loutre</td><td>Barrage</td><td>Arrachage</td></tr>
+</table>
+
+<p>Combien de castors ne venant pas du barrage sont venus pour un arrachage&nbsp;? </p>
+
+<div class="reponses" id="answers_2012-FR-04b">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3
+   -->
+
+<div class="explications">
+
+<h2>La solution</h2>
+
+<p>On regarde les lignes du tableau une par une, et on compte le nombre de lignes telles que :
+<ul>
+<li>la colonne "Animal" contienne "Castor"</li>
+<li>la colonne "Adresse" ne contienne pas "Barrage" (donc contienne "Rivière" ou "Forêt")</li>
+<li>la colonne "Soin" contienne "Arrachage"</li>
+</ul>
+
+<p>Les lignes 2, 3 et 7 conviennent. La bonne réponse est donc 3.</p>
+
+
+<p><i>Remarque : le sujet présenté pendant le concours comportait une coquille; sur certaines lignes 2012 était remplacé par 2011, et du coup certains participants ont répondu 2 à la place de 3. Pour remédier à cette erreur, nous avons donné aux participants concernés les points associés à ce sujet. Le sujet est maintenant corrigé.</i></p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>Le tableau présenté correspond à une version simple de ce que qu'on appelle 
+en informatique une <b>base de données</b>. La question que l'on pose s'appelle une <b>requête</b> sur la base de données.</p>
+
+<p>On peut tout à fait demander la réponse à cette requête à un ordinateur. 
+Il suffit de lui poser la question dans un langage qu'il comprend.
+Il existe un certain nombre de langages utilisables. 
+Le plus courant s'appele SQL (pour "Structured Query Language").
+En SQL, la question du sujet serait programmée ainsi&nbsp;:</p>
+
+<pre>
+   SELECT COUNT(*) 
+   FROM visites 
+   WHERE Animal = 'Castor' 
+   AND Adresse &lt;&gt; 'Barrage' 
+   AND Soin = 'Arrachage'
+</pre>
+
+<p>Cette requête se lit de la manière suivante : compte le nombre de lignes dans la 
+table des visites où le type de l'animal est égal à 'Castor' et  l'adresse est différente de 'Barrage' et le type de soin est égal à 'Arrachage'.
+Les mots clés se traduisent ici ainsi : "SELECT" veut dire "récupère", "COUNT" veut dire "le nombre de", "WHERE" signifie "où", "AND" signifie "et", et le symbol "&lt;&gt;" signifie "différent de".</p>
+
+<h2>Culture informatique </h2>
+
+<p>Les bases de données sont extrêmement répandues dans les systèmes informatiques.
+Par exemple, le site du Castor utilise une base de données.
+Ainsi, à chaque fois que vous avez cliqué sur une réponse pendant le concours Castor,
+une requête a été exécutée pour enregistrer votre réponse dans la base de données du site Castor.
+De même, une autre requête a été utilisée pour calculer votre score total.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

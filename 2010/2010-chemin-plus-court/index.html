@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Le chemin le plus court</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "Le chemin le plus court de Berlin à Berne passe par Bonn.",
+            "Le chemin le plus court de Berlin à Berne passe par Vienne.",
+            "Le chemin le plus court de Berlin à Berne en passant par Bonn est plus court que le chemin le plus court de Berlin à Berne en passant par Vienne.",
+            "Le chemin le plus court de Berlin à Vienne est plus court que le chemin le plus court de Vienne à Berne."
+            ], "added", "#answers_2010-chemin-plus-court");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-chemin-plus-court/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Le chemin le plus court</h1>
+<p>
+Un programme de planification de voyage utilise une fonction «Chemin le
+plus court (A, B)». Cette fonction calcule le chemin le plus court entre une ville A et une ville B.
+</p><p>
+Par exemple, le «Chemin le plus court (Bonn, Vienne)» calcule le résultat «850 kilomètres».
+</p><p>
+Soit l'inéquation ( "<" signifie "est-plus petit-que") :
+</p><p>
+Chemin le plus court (Berlin, Bonn) + Chemin le plus court (Bonn, Berne) < Chemin le plus court (Berlin,
+Vienne) + Chemin le plus court (Vienne, Berne)
+</p>
+<p><b>Quelle conclusion peut-on déduire de l'inéquation ci dessus&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-chemin-plus-court">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-chemin-plus-court_choice_3">C</span> est correcte.
+   </p><p>
+   C'est une paraphrase de l'inégalité décrite.
+Les réponses <span class="2010-chemin-plus-court_choice_1">A</span> et <span class="2010-chemin-plus-court_choice_2">B</span> ne peuvent pas être déduites de l'inégalité, car seuls deux chemins possibles sont comparés,
+mais pas l'ensemble des chemins. Le plus court de deux chemins n'est pas le plus court de l'ensemble des chemins.
+</p><p>
+Enfin, la phrase de la réponse <span class="2010-chemin-plus-court_choice_4">D</span> n'a rien à voir avec l'inégalité, et ne peut pas en être déduite, même si elle est vraie (610km de Berlin à Vienne, 800km de Vienne à Berne).
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>Décrire correctement sous la forme d'expressions logiques les propriétés des objets et événements de la vie
+courante est au coeur des problématiques de l'informatique. Lorsque l'on veut décrire des éléments de la vie de
+tous les jours à un ordinateur, il est important d'être très précis, pour pouvoir les traduire sous une forme
+exploitable par l'ordinateur. Le problème du plus court chemin se pose en permanence aux planificateurs. Ce
+problème et des problèmes similaires sont étudiés dans l'une des principales branches de l'informatique : la théorie
+des graphes.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

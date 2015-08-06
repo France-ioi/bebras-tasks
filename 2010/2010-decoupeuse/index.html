@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>La découpeuse</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+             "<div style='width:120px'><img src='reponseA.jpg'></div>",
+             "<div style='width:120px'><img src='reponseB.jpg'></div>",
+             "<div style='width:120px'><img src='reponseC.jpg'></div>",
+             "<div style='width:120px'><img src='reponseD.jpg'></div>"
+            ], "added", "#answers_2010-decoupeuse");
+      </script>
+         <style class="">.table-2010-decoupeuse, .table2-2010-decoupeuse {
+   text-align:center;
+}
+.table-2010-decoupeuse td, .table2-2010-decoupeuse td {
+   border: solid black 1px;
+   width: 150px;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-decoupeuse/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>La découpeuse</h1>
+<p>
+Une machine découpe différentes formes dans une feuille de plastique.
+Elle dispose de deux patrons de découpe : le carré et le cercle. Les patrons sont de même longueur et de
+même largeur. La machine travaille selon le programme suivant :
+</p>
+<ul>
+   <li>1. Place le carré et le cercle à n'importe quel endroit de la feuille plastique.</li>
+   <li>2.Effectue soit l'opération 2a soit l'opération 2b.</li>
+      <ul>
+      <li>2a Découpe le plastique uniquement là où les deux patrons se couvrent.</li>
+      <li>2b Découpe le plastique là où au moins un des deux patrons le recouvre.</li>
+      </ul>
+   </li>
+</ul>
+<p>
+Par exemple, si l'opération 1 donne la situation de l'image 1, ce programme peut soit exécuter l'opération 2a
+et obtenir la découpe de l'image 2a, soit exécuter l'opération 2b et obtenir la découpe de l'image 2b.
+</p>
+<center>
+   <table class="table-2010-decoupeuse" cellspacing=0>
+      <tr>
+         <td><img src="exemple1.jpg" /></td>
+         <td><img src="exemple2.jpg" /></td>
+         <td><img src="exemple3.jpg" /></td>
+      </tr>
+      <tr>
+         <td>Image 1</td>
+         <td>Image 2 a</td>
+         <td>Image 2 b</td>
+      </tr>
+   </table>
+</center>
+<p>
+   <b>Quelle est la forme que la machine n'est PAS en mesure de découper&nbsp;?</b>
+</p>
+<div class="reponses" id="answers_2010-decoupeuse">
+</div>
+
+
+<img style="display: none;" src="exemple1.jpg" />
+<img style="display: none;" src="exemple2.jpg" />
+<img style="display: none;" src="exemple3.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-decoupeuse_choice_1">A</span> est correcte.
+   </p><p>
+Le programme de la machine ne permet pas de créer la forme <span class="2010-decoupeuse_choice_1">A</span>. La machine ne peut découper que l'intersection ou l'union des aires des deux patrons. Or ici, il faudrait pouvoir ôter un demi-cercle d'un carré, ce qui n'est ni
+l'intersection, ni l'union des aires des deux formes.
+</p><p>
+La forme <span class="2010-decoupeuse_choice_2">B</span> est obtenue avec la superposition <span class="2010-decoupeuse_choice_2">B</span> ci dessous, puis en réalisant une découpe de type 2b.<br/>
+La forme <span class="2010-decoupeuse_choice_3">C</span> est obtenue avec la superposition <span class="2010-decoupeuse_choice_3">C</span> ci dessous, puis en réalisant une découpe de type 2a.<br/>
+La forme <span class="2010-decoupeuse_choice_4">D</span> avec la superposition <span class="2010-decoupeuse_choice_4">D</span> ci dessous, puis en réalisant une découpe de type 2b.<br/></p>
+<center>
+<table class="table2-2010-decoupeuse" cellspacing=0>
+   <tr>
+      <td><img src="solutionA.png" /></td>
+      <td><img src="solutionB.png" /></td>
+      <td><img src="solutionC.png" /></td>
+      <td><img src="solutionD.png" /></td>
+   </tr>
+   <tr>
+      <td><span class="2010-decoupeuse_choice_1">A</span></td>
+      <td><span class="2010-decoupeuse_choice_2">B</span></td>
+      <td><span class="2010-decoupeuse_choice_3">C</span></td>
+      <td><span class="2010-decoupeuse_choice_4">D</span></td>
+   </tr>
+</table>
+</center>
+<h2>C'est de l'informatique </h2>
+   <p>
+A l'aide d'opérations logiques, on peut obtenir des formes complexes en combinant des formes géométriques
+élémentaires. La création de structures complexes par la combinaisons d'objets simples est une approche
+fondamentale au domaine de la création de logiciels. Ainsi, combiner un grand nombre d'instructions très simples
+permet d'aboutir à des programmes d'une très grande complexité.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

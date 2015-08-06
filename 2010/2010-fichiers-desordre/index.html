@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Fichiers en désordre</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+             "*06*Zoe.j<span></span>pg",
+             "*-06-*+Zoe.j<span></span>pg",
+             "*-06-*Zoe*.j<span></span>pg",
+             "*-06+*Zoe*.j<span></span>pg"
+            ], "added", "#answers_2010-fichiers-desordre");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-fichiers-desordre/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Fichiers en désordre</h1>
+<p>
+La famille Castor prend beaucoup de photos numériques de ses enfants Eva, Lea, Ivo et Zoé.
+</p><p>
+Le nom des fichiers est structuré comme suit :
+<ul>
+<li>d'abord, la date selon le format AAAA-MM-JJ (année-mois-jour),</li>
+<li>ensuite le nom de chaque enfant figurant sur la photo précédé d'un '+'</li>
+<li>et finalement le type de fichier '.j<span></span>pg'.</li>
+</ul>
+<p>
+L'ordre des noms des enfants n'est pas important.
+</p><p>
+Exemple : '2008-11-06+Eva+Zoe+Ivo.j<span></span>pg'
+</p><p>
+Les Castor utilisent un programme qui trouve tous les fichiers photo correspondant à un motif de recherche à saisir.
+</p><p>
+Si le motif de recherche contient une étoile '*', cela signifie pour le programme : « Un nombre indéterminé
+(qui peut être 0) de signes indéterminés ».
+</p><p>
+Exemple : le motif de recherche '2010-*.j<span></span>pg' correspond à tous les noms de fichiers qui commencent par
+'2010-' et qui se terminent par '.j<span></span>pg'.
+</p><p>
+Parmi leurs milliers de photos, les Castor souhaitent trouver toutes celles qui ont été prises au mois de juin de
+n'importe quelle année, sur lesquelles se trouve Zoé et éventuellement d'autres enfants.
+</p><p>
+<b>Quel motif de recherche doivent-ils saisir&nbsp;?</b>
+<div class="reponses" id="answers_2010-fichiers-desordre">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-fichiers-desordre_choice_3">C</span> est correcte.
+   </p><p>
+   Le motif <span class="2010-fichiers-desordre_choice_1">A</span> trouverait tous les fichiers des photos de juin, mais aussi des photos enregistrées le 6ème jour de n'importe quels mois et année, ainsi que celles de l'année 2006 ; comme par exemple 2010-01-06+Zoe.j<span></span>pg ou 2006-01-01+Zoe.j<span></span>pg.
+   </p><p>
+   Le motif <span class="2010-fichiers-desordre_choice_2">B</span> trouverait bien des photos faites en juin, mais seulement celle dont le nom terminerait par Zoe. Par exemple la photo 2010-06-01+Lea+Zoe.j<span></span>pg mais pas la photo 2010-06-01+Zoe+Ivo.j<span></span>pg.
+   </p><p>
+   Le motif <span class="2010-fichiers-desordre_choice_4">D</span> trouverait tous les fichiers des photos prises le 6ème jours du mois, sur lesquelles figure Zoé. Par exemple 2010-01-06+Zoe.j<span></span>pg.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>Les motifs de recherche sont un outil important lorsqu'il s'agit d'analyser de grandes quantités d'informations sous la forme de texte structuré, comme les noms de fichiers ou de sites web. La notation introduite ici est utilisée par les outils de recherche des systèmes d'exploitation populaires ainsi que les moteurs de recherches. Les informaticiens utilisent des systèmes plus sophistiqués de description de motifs de recherche, que l'on appelle souvent "expressions régulières".
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

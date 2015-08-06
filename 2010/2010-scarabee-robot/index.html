@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Le scarabée-robot</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "A1 et A2",
+             "A2 et A4",
+             "A2, A3 et A4",
+             "A1 et A4"
+            ], "added", "#answers_2010-scarabee-robot");
+      </script>
+         <style class="">.table-2010-scarabee-robot td {
+   border: solid green 1px;
+   text-align:center;
+}
+
+.table-2010-scarabee-robot td:first-child {
+   padding: 5px;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-scarabee-robot/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Le scarabée-robot</h1>
+<p>
+Un scarabée-robot peut se déplacer sur ce damier de la façon suivante :
+</p><p>
+<table><tr>
+<td><table class="table-2010-scarabee-robot" cellspacing=0 cellpadding=0>
+<tr><td></td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td></tr>
+<tr><td>1</td><td><img src="right2.png" /></td><td><img src="right2.png" /></td><td><img src="down.png" /></td>  <td><img src="down2.png" /></td><td><img src="empty.png" /></td></tr>
+<tr><td>2</td><td><img src="down2.png" /></td> <td><img src="right.png" /></td> <td><img src="down3.png" /></td> <td><img src="right.png" /></td><td><img src="empty.png" /></td></tr>
+<tr><td>3</td><td><img src="right.png" /></td> <td><img src="up.png" /></td>    <td><img src="down.png" /></td>  <td><img src="left.png" /></td> <td><img src="empty.png" /></td></tr>
+<tr><td>4</td><td><img src="right.png" /></td> <td><img src="up3.png" /></td>   <td><img src="right2.png" /></td><td><img src="right.png" /></td><td><img src="empty.png" /></td></tr>
+</table></td>
+<td>
+<p>
+Le scarabée-robot commence sur une case quelconque dans l'une des colonnes A à D. 
+Le scarabée-robot compte alors le nombre de flèches qui se trouvent dans cette case. 
+Ensuite il se déplace dans le sens des flèches indiqué d'autant de cases qu'il y avait de flèches, et s'immobilise.
+</p><p>
+Si, par exemple, il se trouve sur B4, il va se déplacer de trois
+cases vers le haut et se trouver ensuite sur B1.
+</p><p>
+Le scarabée-robot continue, jusqu'à ce qu'il sorte du damier
+ou qu'il se trouve sur une case de la colonne E.
+</p>
+</td>
+</tr></table>
+<p>
+<b>À partir de quelles cases de la colonne A le scarabée peut-il démarrer pour se retrouver sur une
+case de la colonne E&nbsp;?</b>
+<div class="reponses" id="answers_2010-scarabee-robot">
+</div>
+
+
+<img style="display: none;" src="right2.png" />
+<img style="display: none;" src="down.png" />
+<img style="display: none;" src="down2.png" />
+<img style="display: none;" src="empty.png" />
+<img style="display: none;" src="right.png" />
+<img style="display: none;" src="down3.png" />
+<img style="display: none;" src="up.png" />
+<img style="display: none;" src="left.png" />
+<img style="display: none;" src="up3.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-scarabee-robot_choice_2">B</span> est correcte.
+   </p><p>
+Commencer en A2 mène à : A4, B4, B1, D1, D3, C3, C4 puis E4. A4 est sur ce chemin, donc A4 mène aussi à E4.<br/>
+Commencer en A1 mène à : C1, C2 puis fait sortir de la grille, en bas de la colonne C.<br/>
+Commencer en A3 mène à : B3, B2, C2 puis en dehors de la grille, en bas de la colonne C.<br/>
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>
+L'informatique pose de nombreuses questions sur les différentes propriétés des programmes. Le plateau décrit ici
+est un exemple de programme. Le robot commence dans une situation initiale (colonne A) et suit les commandes
+du programme jusqu'à-ce qu'une situation finale ait été atteinte. Certains états finaux sont désirables (Colonne E)
+et d'autres indésirables (sortie du plateau). Existe-t-il une situation telle que le robot n'atteint jamais de situation
+finale&nbsp;? Probablement pas dans ce programme. Est-ce que cela peut arriver avec un autre programme&nbsp;? Dans
+d'autres langages de programmation&nbsp;? Sous quelles contraintes&nbsp;? Cette propriété d'un programme, avec d'autres, a
+beaucoup d'importance en pratique, et est un thème essentiel de l'informatique.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

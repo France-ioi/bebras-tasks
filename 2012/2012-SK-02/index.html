@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Machine à textes</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "&nbsp;&nbsp;&nbsp;&nbsp;EUQ&nbsp;&nbsp;&nbsp;&nbsp;TS&nbsp;&nbsp;&nbsp;&nbsp;NOI",
+            "&nbsp;&nbsp;&nbsp;&nbsp;TSE&nbsp;&nbsp;&nbsp;&nbsp;UQ&nbsp;&nbsp;&nbsp;&nbsp;INO",
+            "&nbsp;&nbsp;&nbsp;&nbsp;I&nbsp;&nbsp;&nbsp;&nbsp;TSEUQ&nbsp;&nbsp;&nbsp;&nbsp;ON",
+            "&nbsp;&nbsp;&nbsp;&nbsp;QU&nbsp;&nbsp;&nbsp;&nbsp;EST&nbsp;&nbsp;&nbsp;&nbsp;ION"
+            ], "added", "#answers_2012-SK-02");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-SK-02/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "3"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Machine à textes</h1>
+<p>On dispose de deux types de machines pour manipuler les textes&nbsp;:
+<ul><li>La machine &laquo;&nbsp;Colle&nbsp;&raquo; prend deux morceaux de texte et les colle l'un à l'autre.</li>
+<li>La machine &laquo;&nbsp;Inverse&nbsp;&raquo; prend un morceau de texte et l'inverse.</li>
+</ul>
+</p>
+
+<table width="100%" border="1">
+<tr><td width="50%" align="center"><img src="2012-SK-02_1.png" width="250" /></td>
+<td rowspan="2" width="50%" align="center"><img src="2012-SK-02_3.png" width="300" /></td>
+</tr>
+<tr><td width="50%" align="center"><img src="2012-SK-02_2.png" width="100" /></td>
+</tr></table>
+<p>En combinant deux machines de type &laquo;&nbsp;Colle&nbsp;&raquo; et une machine de type &laquo;&nbsp;Inverse&nbsp;&raquo; on obtient une grosse machine plus compliquée (voir partie droite de l'image).
+
+<p>On veut que le résultat tout en bas soit le mot &laquo;&nbsp;QUESTION&nbsp;&raquo;. Quels sont les trois textes que l'on doit placer dans les ovales grisés, de gauche à droite&nbsp;?</p>
+
+<div class="reponses" id="answers_2012-SK-02">
+</div>
+
+
+<img style="display: none;" src="2012-SK-02_1.png" />
+<img style="display: none;" src="2012-SK-02_3.png" />
+<img style="display: none;" src="2012-SK-02_2.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse :C=3
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>La bonne réponse est la réponse <span class="2012-SK-02_choice_3">3</span>.</p>
+<p><img src="2012-SK-02_solution.png" width="300" /></p>
+
+<p>Les réponses <span class="2012-SK-02_choice_1">1</span> et <span class="2012-SK-02_choice_2">2</span> ne peuvent pas être bonnes car les terminaisons NOI et INO ne conviennent pas. La réponse <span class="2012-SK-02_choice_4">4</span> ne convient pas car les mots QU et EST vont être collés en QUEST qui va être inversé en TSEUQ, ce qui ne convient pas  non plus.</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>Le sujet présente ce qu'on appelle une forme simple d'<b>automate</b>,
+les automates étant eux-mêmes des formes particulières de <b>programmes</b>.</p>
+
+<p>L'automate présenté ici est construit à partir des éléments "Inverse" et "Colle", qui transforment
+et combinent des textes toujours de la même manière.
+Lorsque l'on fournit des mots en <b>entrée</b> à cet automate, il calcule
+un mot en <b>sortie</b>. Observez que quelque soit les mots d'entrée, le mot de sortie contient
+toujours une et une seule fois chacune des lettres des mots d'entrée.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

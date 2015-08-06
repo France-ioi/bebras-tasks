@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Castor facteur</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "4",
+            "5",
+            "7",
+            "9",
+            ], "added", "#answers_2011-NL-11");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-NL-11/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Castor facteur</h1>
+<p>
+Castor est facteur. Il organise ses tournées de distribution du courrier de façon étrange&nbsp;: 
+<ul><li>une tournée peut commencer par n'importe quelle maison,</li>
+<li>le numéro de la maison suivante doit avoir au moins un chiffre en commun avec le numéro de la maison précédente.</li>
+</ul>
+<p> Ainsi, par exemple, s'il commence à la maison <b>23</b>, la maison suivante peut être <b>2</b>8, <b>3</b>1 ou 7<b>2</b> mais pas 19.
+</p>
+<p> Avec un tel principe, il lui arrive de devoir faire plusieurs tournées pour distribuer tout le courrier. </p>
+<p>
+Aujourd'hui, Castor doit distribuer du courrier aux maisons qui ont les numéros suivants :
+</p>
+<p>
+11, 19, 29, 36, 40, 44, 52, 61, 70, 74, 83
+</p>
+<p>
+Quel est le <b>nombre maximum de maisons</b> auxquelles il peut distribuer du courrier en <b>une seule</b> tournée ?
+</p>
+<div class="reponses" id="answers_2011-NL-11">
+</div>
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   La réponse est 7
+   </p>
+   <p>
+   Castor peut distribuer tout son courrier en deux tournées :<br>
+   Tournée 1 : 83 - 36 - 61 - 11 - 19 - 29 - 52<br>
+   Tournée 2 : 40 - 44 - 74 - 70<br>
+   Lors de la tournée 1, il distribue du courrier à 7 maisons.
+   </p>
+   <p>
+   On peut représenter la solution avec un &laquo;&nbsp;graphe&nbsp;&raquo;. Pour cela nous créons un cercle dans lequel nous inscrivons chaque numéro et nous relions deux cercles si leurs numéros respectifs ont un chiffre en commun. 
+   <p align="middle"><img width="300" src="2011-NL-11_solution.jpg"></p>
+
+   <h2>C'est de l'informatique</h2>
+   <p>Les <i>graphes</i> sont des outils de représentation très utilisés en informatique. Les cercles sont appelés &laquo;&nbsp;n&oelig;uds&nbsp;&raquo; ou &laquo;&nbsp;sommets&nbsp;&raquo; et les liens entre eux &laquo;&nbsp;arcs&nbsp;&raquo; ou &laquo;&nbsp;arêtes&nbsp;&raquo; Un &laquo;&nbsp;chemin&nbsp;&raquo; est la suite d'arcs qui permet d'aller d'un n&oelig;ud à un autre.
+   </p>
+   <p>
+   Dans cet exemple, le sujet ne parle pas de graphes, mais les règles de la tournée du facteur définissent un graphe implicite, que nous avons représenté sur l'illustration. Analyser un problème pour y découvrir un ou plusieurs graphes implicites qui s'y cachent, puis analyser les propriétés de ces graphes permet souvent de résoudre des problèmes au prime abord difficiles, en appliquant des algorithmes classiques de graphes. Dans le sujet présenté, le simple fait de représenter le graphe fait que la réponse saute aux yeux.
+   </p>
+   <P>Les graphes sont utilisés pour la résolution de différents types de problèmes : l'ordonnancement de tâches, la représentation de dépendances, la recherche de plus court chemin, etc. </p>
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

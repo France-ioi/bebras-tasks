@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-06b</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="task" type="text/javascript" src="2013-FR-06_example.js"></script>
+      <script class="task" type="text/javascript" src="2013-FR-06_flower.js"></script>
+      <script class="solution" type="text/javascript" src="2013-FR-06_solution.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-06b/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Christine Leininger, Luc Baille, Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["5"]
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(5, [
+              "Bijou",
+              "Calin", 
+              "Demon",
+              "Fripon",
+              "Mini",
+              "Nino",
+              "Perle",
+              "Pirate",
+              "Tigris",
+              "Yuki"
+            ], "asButtons", "#answers_2013-FR-06");
+      </script>
+      <script class="task" type="text/javascript">
+         // TODO: fix with the future pub/sub system
+         var taskViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               taskViewLoaded = true;
+               loadExample();
+               loadFlower();
+            }
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Pétales de fleur</h1>
+         <table><tr><td style="vertical-align:top">
+            <p>
+            Pour décider du nom du chaton qu'elle vient d'adopter, Julie a inscrit des noms sur les pétales d'une fleur. Ensuite, elle a détaché un pétale. Puis elle a détaché un pétale sur deux, en tournant dans le sens des aiguilles d'une montre.</p>
+            <p>
+            Après avoir fini le premier tour, elle a continué à enlever un pétale sur deux parmi les pétales restants, et ainsi de suite, jusqu'à ce qu'il ne reste plus qu'un seul pétale sur la fleur.  </p>
+            <p>Si on applique ce jeu sur une fleur à cinq pétales, et que l'on commence par le pétale du haut, on obtient&nbsp;:</p>
+            <p><div id="example" style="width:420px;height:80px"></div></p>
+            </td><td>
+                <div id="flower" style="width:320px;height:320px;"></div>
+               <p>Pour vous aider, vous pouvez cliquer sur les pétales pour les marquer ou démarquer.</p>
+            </td></tr>
+         </table>
+         <p style="margin-top:0em">Julie a appliqué ce jeu sur sa fleur à 10 pétales. Le dernier pétale restant était celui portant le nom <b>Pirate</b>. <br />Quel nom portait le <b>premier pétale détaché</b> par Julie&nbsp;?</p>
+          <div class="reponses" id="answers_2013-FR-06">
+         </div>
+      </div><!-- task -->
+      
+      <div id="solution">
+         <h2>La solution</h2>
+         <p>La difficulté avec ce sujet, c'est qu'on ne sait pas par où commencer. Bien sûr, on pourrait essayer tous les pétales de départ possibles, jusqu'à trouver le bon, c'est-à-dire celui qui laisse 
+         «&nbsp;Pirate&nbsp;» comme dernier pétale.</p>
+         <p>On peut cependant procéder de manière beaucoup plus astucieuse. Tout d'abord, commençons de manière arbitraire par le premier pétale, «&nbsp;Bijou&nbsp;». </p>
+         <style>
+         .soltable td {
+            vertical-align: top;
+         }
+         </style>
+         <table class="soltable">
+         <tr>
+         <td>On commence par faire un premier tour, en partant du pétale du haut.</td>
+         <td>Puis, on passe Yuki, Bijou qui a déjà été enlevé, donc on enlève Calin.</td>
+         <td>On passe Fripon et on enlève Nino, on passe Pirate et on enlève Yuki.</td>
+         </tr>
+         <tr>
+         <td><img src='solution1.png'></td>
+         <td><img src='solution2.png'></td>
+         <td><img src='solution3.png'></td>
+         </td>
+         </tr>
+         </table>
+         <p>&Agrave; la dernière étape, on passe Fripon et on enlève Pirate. Le dernier pétale qui reste est donc «&nbsp;Fripon&nbsp;».</p>    
+         <p>On observe ainsi que le dernier pétale est le 3<sup>e</sup> pétale situé après celui que l'on a arraché en premier (en tournant dans le sens des aiguilles de la montre). Cette propriété serait vraie quelque soit le pétale par lequel on commence. Du coup, pour obtenir «&nbsp;Pirate&nbsp;» comme dernier pétale, il faut commencer par le 3<sup>e</sup> pétale situé avant celui-ci, c'est-à-dire le pétale «&nbsp;Mini&nbsp;».</p>
+         <p>Si on veut, on peut vérifier qu'en partant de «&nbsp;Mini&nbsp;» on obtient bien «&nbsp;Pirate&nbsp;», mais en fait il n'y a même pas besoin&nbsp;: ça doit forcément marcher&nbsp;!</p>
+         
+         <h2>C'est de l'informatique !</h2>
+         <!---attention, idem que dans fr06a--->
+         <p>
+         Dans ce sujet, le but est de comprendre la description d'un algorithme, décrit par du texte et illustré sur un exemple,
+         puis d'appliquer cet algorithme sur un autre exemple. La difficulté principale est que l'algorithme enlève des pétales, mais dépend des pétales restants pour se poursuivre. Autrement dit, l'action de l'algorithme dépend de l'état de l'objet (la fleur) mais le modifie en même temps (en retirant des pétales).
+         </p>
+         <p>
+         En informatique, un très grand nombre d'algorithmes opèrent de la sorte : l'algorithme peut modifier à une étape
+         certaines données, sachant que l'état de ces données conditionnera (influencera) par la suite les étapes de
+         ce même algorithme. Comme le suggère le sujet ci-dessus, il peut être très facile de se tromper lorsqu'on essaie
+         de concevoir un tel algorithme ou lorsqu'on essaie de comprendre comment un tel algorithme fonctionne. En effet,
+         on a facilement tendance à oublier de prendre en compte le fait que les données sont modifiées 
+         à chaque étape.
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

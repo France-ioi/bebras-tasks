@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-12a</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-12a/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud, Luc Baille, Mahdi Miled",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": []
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+      </style>
+      <script src="2013-FR-12_task.js"></script>
+      <script class="grader" type="text/javascript">
+      var grader = {
+         taskGrader: null,
+         gradeTask: function(strAnswer, answerToken, callback) {
+            if (this.taskGrader == null) {
+               this.taskGrader = new Task('grader');
+            }
+            var taskParams = platform.getTaskParams();
+            var minScore = taskParams.minScore;
+            var maxScore = taskParams.maxScore;
+            var t = this.taskGrader;
+            t.reloadAnswer(strAnswer);
+            var score = minScore;
+            if (t.isValid()) {
+               var nbSelected = t.countSelected();
+               if (nbSelected == t.nbToSelect)
+                  score = maxScore;
+               else if (nbSelected == t.nbToSelect - 1)
+                  score = Math.floor( (2 * maxScore + minScore) / 3 ); // 66%
+               else if (nbSelected == t.nbToSelect - 2)
+                  score = Math.floor( (maxScore + 2 * minScore) / 3 ); // 33%
+            }
+            callback(score);
+         }
+      }
+      </script>
+      <script class="solution" type="text/javascript" src="solution.js"></script>
+      <script class="" type="text/javascript">
+         task.level = "easy"; 
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         	<h1>Choix des invités</h1>
+	<p>
+	Julie veut organiser une petite fête avec un maximum de personnes qui ne se connaissent pas les unes les autres.
+	</p>
+	<p>Sur le diagramme, chaque personne est représentée par un rond, et les personnes qui se connaissent sont reliées par un trait.
+	</p>
+	<p>
+	Aide Julie à choisir un maximum de personnes qui ne se connaissent pas les unes les autres, en cliquant sur les ronds pour les sélectionner ou les désélectionner.
+	</p>
+	<center> 
+		<table><tr><td>
+			<div id='graph_task' style='width:450px; height:280px; text-align:center'></div>
+		</td><td>
+			<input type='button' id='reset' value='Recommencer' />
+		</td></tr></table>
+		
+		<div id='buttons_2013_FR_12'>
+			<div id='info'></div>
+			<div><span id='error'></span><span id='success'></span></div><br/>
+		</div>
+	</center>
+      </div><!-- task -->
+      <div id="solution">
+         <div id="solutionContent"></div>
+      </div> <!-- task-solution -->
+   </body>
+
+</html>

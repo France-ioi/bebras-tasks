@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Le prénom du héron</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "Adia",
+            "Andréa",
+            "Alain",
+            "Aman"
+            ], "added", "#answers_2011-FR-03");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-FR-03/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Le prénom du héron</h1>
+
+<p>Castor a 4 amis : une souris, une loutre, un lapin et un héron.
+<br> Malheureusement, il a du mal à se souvenir de leurs prénoms.</p>
+<p>Castor vous explique que :</p>
+<ul><li> Les prénoms sont : Adia, Andréa, Alain, Aman.</li>
+<li> Le prénom de la souris comporte deux voyelles exactement.</li>
+<li> Le prénom de la loutre ne comporte pas de "r".</li>
+<li> Le prénom du lapin comporte moins de lettres que celui de la loutre.</li>
+<br>
+</ul>
+<img src="2011-FR-03_amis.jpg">
+<p>Quel est le prénom du Héron ?</p>
+<div class="reponses" id="answers_2011-FR-03">
+</div>
+
+<img style="display: none;" src="2011-FR-03_amis.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p><ul>
+   <li> Le prénom de la souris comporte 2 voyelles exactement, un seul prénom a 2 voyelles : "Aman".</li>
+   <li> Le prénom de la loutre ne comporte pas de "r", elle ne s'appelle donc pas "Andréa", elle s'appelle soit "Adia" soit "Alain".</li>
+   <li> Le prénom du lapin comporte moins de lettres que celui de la loutre, ce n'est pas "Andréa", trop long, c'est le plus court des deux prénoms restant, c'est "Adia".</li>
+   <li>La loutre s'appelle donc "Alain".</li>
+   <li>Il reste le prénom "Andréa", c'est celui du Héron</li>
+   </ul>
+   <b>La réponse est donc <span class="2011-FR-03_choice_2">B</span> : Andréa</b>
+   <p>Si l'on préfère utiliser un brouillon pour réfléchir, on peut dessiner une table comme suit. On met un "Oui" quand c'est vrai, et un "Non" quand c'est faux. Si on met un "Oui" dans un case, on met des "Non" dans toutes les cases qui sont sur la même ligne et toutes celles qui sont sur la même colonne.
+   <table border="0">
+   <tr><td>
+   1. La table à remplir :
+   <table border="1"><tr><td></td><td>Souris</td><td>loutre</td><td>lapin</td><td>héron</td></tr>
+   <tr><td>Adia</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Andréa</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Alain</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Aman</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   </table>
+   </td>
+   <td>
+   2. Règle 1 : Le prénom de la souris comporte 2 voyelles exactement :
+   <table border="1"><tr><td></td><td>Souris</td><td>loutre</td><td>lapin</td><td>héron</td></tr>
+   <tr><td>Adia</td><td>Non</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Andréa</td><td>Non</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Alain</td><td>Non</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Aman</td><td><b>Oui</b></td><td>Non</td><td>Non</td><td>Non</td></tr>
+   </table>
+   </td>
+   <td>
+   3. Règle 2 : Le prénom de la loutre ne comporte pas de "r":
+   <table border="1"><tr><td></td><td>Souris</td><td>loutre</td><td>lapin</td><td>héron</td></tr>
+   <tr><td>Adia</td><td>Non</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Andréa</td><td>Non</td><td>Non</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Alain</td><td>Non</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+   <tr><td>Aman</td><td><b>Oui</b></td><td>Non</td><td>Non</td><td>Non</td></tr>
+   </table>
+   </td></tr>
+
+   <tr><td>
+   4. Règle 3 :Le prénom du lapin comporte moins de lettres que celui de la loutre
+   <table border="1"><tr><td></td><td>Souris</td><td>loutre</td><td>lapin</td><td>héron</td></tr>
+   <tr><td>Adia</td><td>Non</td><td>Non</td><td><b>Oui</b></td><td>Non</td></tr>
+   <tr><td>Andréa</td><td>Non</td><td>Non</td><td>Non</td><td>&nbsp;</td></tr>
+   <tr><td>Alain</td><td>Non</td><td>&nbsp;</td><td>Non</td><td>&nbsp;</td></tr>
+   <tr><td>Aman</td><td><b>Oui</b></td><td>Non</td><td>Non</td><td>Non</td></tr>
+   </table>
+   </td>
+   <td>
+   5. Il reste une seule solution pour la loutre :
+   <table border="1"><tr><td></td><td>Souris</td><td>loutre</td><td>lapin</td><td>héron</td></tr>
+   <tr><td>Adia</td><td>Non</td><td>Non</td><td><b>Oui</b></td><td>Non</td></tr>
+   <tr><td>Andréa</td><td>Non</td><td>Non</td><td>Non</td><td>&nbsp;</td></tr>
+   <tr><td>Alain</td><td>Non</td><td><b>Oui</b></td><td>Non</td><td>Non</td></tr>
+   <tr><td>Aman</td><td><b>Oui</b></td><td>Non</td><td>Non</td><td>Non</td></tr>
+   </table>
+   </td>
+   <td>
+   6. Il reste une seule solution pour le héron :
+   <table border="1"><tr><td></td><td>Souris</td><td>loutre</td><td>lapin</td><td>héron</td></tr>
+   <tr><td>Adia</td><td>Non</td><td>Non</td><td><b>Oui</b></td><td>Non</td></tr>
+   <tr><td>Andréa</td><td>Non</td><td>Non</td><td>Non</td><td><b>Oui</b></td></tr>
+   <tr><td>Alain</td><td>Non</td><td><b>Oui</b></td><td>Non</td><td>Non</td></tr>
+   <tr><td>Aman</td><td><b>Oui</b></td><td>Non</td><td>Non</td><td>Non</td></tr>
+   </table>
+   </td></tr>
+
+   </table>
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

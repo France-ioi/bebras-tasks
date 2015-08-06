@@ -1,0 +1,41 @@
+===============================================================================
+Titre 
+
+Castor 007
+
+===============================================================================
+Texte
+
+Castor est en mission secrète au pays des renards.
+Son objectif est de récupérer un maximum de noisettes.
+
+Castor peut se déplacer sur les cases blanches, et ne peut pas passer
+par les cases contenant un renard, sauf s'il dispose d'une souris qu'il
+peut donner à manger au renard.
+
+Cliquez sur les cases pour faire déplacer Castor 
+et ramasser un maximum de noisettes.
+
+
+===============================================================================
+Interactif
+
+- castor ne se déplace que vers les cases adjacentes, et que s'il peut y aller
+
+- on affiche le compteur d'objets accumulés en permanence.
+
+- est-ce qu'on affiche le message : "Bravo, Castor a récupéré le maximum de noisettes possible"
+  dès que c'est bon ?
+
+- est-ce qu'on ne met que des objets uniques dans la grille, ou bien que des noisettes ?
+
+- est-ce que la souris compte comme un objet ? a priori oui
+
+- ajouter un bouton [recommencer]. 
+
+- Est-ce qu'on a aussi un bouton [annuler un déplacement] ? pkoi pas, mais c'est pas obligé
+
+
+===============================================================================
+Correction
+

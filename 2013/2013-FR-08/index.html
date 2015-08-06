@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-08</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-08/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": []
+      };
+      </script>
+      <script src="2013-FR-08_task.js"></script>
+      <script type="text/javascript">
+         var task = new Task();
+      </script>
+      <script class="grader" type="text/javascript">
+         var grader = {
+            gradeTask: function(strAnswer, answerToken, callback) {
+               var taskParams = platform.getTaskParams();
+               if (!this.graderTaskLoaded) {
+                 task.myload(taskParams.randomSeed, 'grader');
+                 this.graderTaskLoaded = true;
+               } 
+               //debug: console.log(strAnswer);
+               var score = taskParams.maxScore;
+               task.reloadAnswer(strAnswer, function() {
+                  if (task.checkCollisions(false) || !task.checkAllOnBeach()) {
+                     score = taskParams.minScore;
+                  }
+               });
+               callback(score);
+            }
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Parasols</h1>
+         <p style="margin-bottom:0em">
+         Les castors sont à la plage. La marée est montée, et certains parasols se retrouvent maintenant dans l'eau.
+         Aidez les castors à replanter tous leurs parasols dans le sable sans qu'ils se touchent. Attrapez les parasols pour les déplacer, les monter ou les descendre. Vous ne pouvez pas changer leur ordre.
+         </p>  
+         <div id="beach" style="height:350px" class="touch">
+         </div>
+         <div style="text-align:right"><input type="button" id="reset" value="Recommencer" /></div>
+         <div id="error"></div>
+         <div id="info"></div>
+         <div id="success"></div>
+      </div><!-- task -->
+      <div id="solution">
+       <h2>Solution</h2>
+       <p>Une première stratégie possible consiste à mettre le premier parasol sur le bord gauche du sable, puis à essayer de serrer tous les autres parasols le plus possible vers la gauche. De sorte à les serrer le plus possible, si un parasol est plus large qu'un parasol précédent, alors il faut le placer au-dessus; si au contraire il est moins large, alors il faut le placer au-dessous. Au cours de ce processus, on a parfois besoin d'ajuster la hauteur des parasols déjà rangés afin de faire un peu de place pour le suivant. </p>
+       <div style="text-align:center"><img src="2013-FR-08_parasols_sol.png"></div>
+       <p>Une autre stratégie possible consiste à d'abord régler la hauteur de tous les parasols, de sorte à ce que plus un parasol est large plus il se trouve haut, comme illustré ci-dessous.</p>
+       <div style="text-align:center"><img src="2013-FR-08_parasols_sol_b1.png"></div>
+       <p>Ensuite, il suffit de rapprocher tous les parasols. Testez par vous-même pour voir que ça marche à chaque fois&nbsp;!</p>
+       <div style="text-align:center"><img src="2013-FR-08_parasols_sol_b2.png"></div>
+     
+       <h2>C'est de l'informatique</h2>
+       <p>Afin de trouver la solution sans perdre trop de temps, il fallait mettre au point une méthode de résolution, autrement dit, un «&nbsp;algorithme&nbsp;».</p>
+       <p>La première méthode décrite dans la solution, celle qui positionne les parasols un par un de la gauche vers la droite, correspond à un principe général de résolution appelé «&nbsp;algorithme glouton&nbsp;». Le principe est de régler les problèmes un par un, comme ils arrivent, dans l'espoir d'obtenir une solution à la fin.</p>
+       <p>La seconde méthode décrite dans la solution correspond à une approche plus globale de résolution, qui s'appuie sur un tri des parasols afin de simplifier le problème, de sorte à ce qu'il suffise de déplacer latéralement les parasols pour obtenir la solution. Comme illustré par ce sujet, les algorithmes de tris peuvent se révéler très utile pour résoudre des problèmes ou chercher la solution «&nbsp;optimale&nbsp;» (la meilleure possible).</p>
+      </div> <!-- task-solution -->
+  </body>
+</html>

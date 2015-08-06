@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-SE-02</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <!-- put task css here -->
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-SE-02/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": []
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+      </style>
+      <script src="2013-SE-02_task.js"></script>
+      <script class="grader" type="text/javascript">
+      var grader = {
+         taskGrader: null,
+         gradeTask: function(strAnswer, answerToken, callback) {
+            var taskParams = platform.getTaskParams();
+            if (this.taskGrader == null) {
+               this.taskGrader = new Task(false);
+               this.taskGrader.load(taskParams.randomSeed, 'grader');
+            } 
+            var t = this.taskGrader;
+            t.reloadAnswer(strAnswer);
+            if (! t.isNetworkCompleted()) {
+               return taskParams.minScore;
+            } 
+            var used = t.builtEdges.length;
+            var best = nbEdgesBest;
+            var score = taskParams.minScore;
+            // alert("ok: " + minScore + " to " + maxScore + " used= " + used + " best= " + best);
+            if (used == best) {
+               score = taskParams.maxScore;
+            } else if (used <= best + 1) {
+               score = Math.floor( (3 * taskParams.maxScore + taskParams.minScore) / 4 ); // 75% pour 1 arc de trop
+            } else if (used <= best + 3) {
+               score = Math.floor( (taskParams.maxScore + taskParams.minScore) / 2 ); // 50% pour 2 ou 3 arcs de trop
+            } else if (used <= best + 5) {
+               score = Math.floor( (taskParams.maxScore + 3 * taskParams.minScore) / 4 ); // 25% pour 4 ou 5 arcs de trop
+            }
+            callback(score);
+         }
+      }
+      </script>
+      <script class="solution" type="text/javascript">
+      function solution_load_edges() {
+         return [3, 4, 5, 6, 103, 111, 119, 56, 57, 58, 59, 60, 61, 62, 80, 24, 25, 26, 74, 82, 89, 67, 11, 38, 117, 116, 10, 97, 105, 113, 64, 72];
+
+      }
+      </script>
+      <script class="" type="text/javascript">
+         task.load= function(views, callback) {
+               var taskParams = platform.getTaskParams();
+               this.task = new Task(false);
+               this.task.load(taskParams.randomSeed, 'task');
+               callback();
+               /* deprecated:
+               if (mode == 'solution') {
+                  this.sol = new Task(true);
+                  this.sol.load(taskParams.randomSeed, 'solution');
+               }*/
+               //debug mode: 
+               // var test = [0,1,2,66,80,88,32,33,90,26,10,11,12,69,5,6,75,83,116,52,60,112,104,96,61,62,119,111,103,38,37,36,35,34];
+               // this.task.executeAnswer(test);
+               // alert ('score = ' + grader.gradeTask(taskParams.randomSeed, JSON.stringify(test),0, 19));
+               //this.task.executeAnswer(solution_load_edges());
+            };
+
+            task.getAnswer= function(callback) {
+               var answer = this.task.getAnswer();
+               callback(answer);
+            };
+
+            task.reloadAnswer= function(strAnswer, callback) {
+               this.task.reloadAnswer(strAnswer);
+               callback();
+            };
+      </script>
+    </head>
+   <body>
+      <div id="task">
+         <h1>Réseau pas cher</h1>
+         <p>
+         Pour pouvoir jouer tous ensemble, les castors souhaitent relier leurs ordinateurs par un réseau, sans gaspiller de câble.
+         Le schéma ci-dessous montre les emplacements des maisons des castors.
+         </p>
+         <p>
+         Votre but est de relier tous les ordinateurs entre eux. 
+         Moins vous utilisez de longueur de câble, plus vous aurez de points.
+         </p>
+         <center>
+         <table>
+         <tr>
+         <td>
+            <div id="graph_task" style="width:400px; height:400px; margin:10px; text-align:center"></div>
+         </td>
+         <td width="250" style="vertical-align:top">
+               <div style="margin-top:1em;margin-bottom:4em"><input type="button" id="reset" value="Recommencer" /></div>
+               <div style="margin-top:1em" id="info"></div>
+               <div style="margin-top:1em" id="error"></div>
+               <div style="margin-top:1em" id="advice"></div>
+               <div style="margin-top:1em" id="success"></div>
+         </td>
+         </tr>
+         </table>
+         </center>
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         <p>Pour trouver le réseau le moins cher, une bonne stratégie consiste à commencer par relier tous les ordinateurs à moins de 2 cases les uns des autres. On obtient ainsi 3 groupes, comme illustré par exemple ci-dessous.</p>
+         <div style="text-align:left;margin-left:7em"><img src="2013-SE-02-EN-sol-exp.png"></div>
+         <p>À partir de là, il n'y a plus beaucoup de possibilités à explorer. En effet, on doit forcément relier le point en bas à gauche à l'un des deux groupes, plus relier les deux groupes entre eux. Toutes les combinaisons requièrent 8 câbles, sauf une, montrée ci-dessous, qui n'utilise que 7 câbles.</p>
+         <div style="text-align:left;margin-left:7em"><img src="2013-SE-02-EN-sol.png"></div>
+
+	 <h2>C'est de l'informatique </h2>
+       <p>Ce type de problème est assez classique et existait bien avant
+       l'informatique. Par exemple, comment construire un réseau d'eau potable
+       reliant tout un ensemble de maisons pour que ce réseau coûte le moins cher possible&nbsp;? </p>
+       <p>Ce problème «&nbsp;d'optimisation&nbsp;» de la construction de réseaux
+       ne s'applique pas qu'aux réseaux d'eau, mais également aux réseaux
+       de télégraphe, aux réseaux électriques et aux réseaux informatiques. </p>
+       <p>Dans le monde de l'informatique, ce problème s'appelle la recherche de
+       «&nbsp;l'arbre de Steiner&nbsp;». On parle d'arbre car le réseau le moins cher est forcément constitué de plein de branches. Comme dans un arbre, il n'existe qu'un seul chemin pour aller d'une feuille à une autre feuille en suivant des branches.</p>
+   </div> <!-- task-solution -->
+
+   </body>
+</html>

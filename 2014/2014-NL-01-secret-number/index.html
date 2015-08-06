@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-NL-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/base64/jquery.base64.min.js" id="jquery.base64.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-NL-01-secret-number/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [],
+          "fullFeedback": true,
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      .secret_scheme, .query, .answer {
+          font-size: 1.2em; 
+      }
+      .secret_scheme { 
+          border-collapse: collapse;
+      }
+      .secret_scheme td {
+          border: 2px solid black; 
+          width: 1em;
+          padding: 0.2em;
+          text-align: center;
+      }
+      .secret_table td {
+          padding-bottom: 0.5em;
+          /* border: 1px solid black; */
+      }
+      .query { 
+      }
+      .answer { 
+      }
+      .feedback, .restart {
+         display: none;
+      }
+      .feedback_col {
+         width: 7em;
+       }
+      .restart_col {
+         width: 7em;
+       }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Retenir un code</h1>
+         <p>
+         Castor a un code secret à 4 chiffres. Plutôt que de retenir les chiffres, Castor préfère
+         retenir un mot. 
+         </p>
+         <p>Il utilise la grille suivante, qui montre, pour chaque chiffre, quelles sont les
+         lettres correspondantes.
+         </p>
+         <center>
+         <table class="secret_scheme">
+         <tr> <th>1</th><th>2</th> <th>3</th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>8</th> <th>9</th> <th>0</th> </tr>
+         <tr> <td>A</td> <td>B</td> <td>C</td> <td>D</td> <td>E</td> <td>F</td> <td>G</td> <td>H</td> <td>I</td> <td>J</td> </tr>
+         <tr> <td>K</td> <td>L</td> <td>M</td> <td>N</td> <td>O</td> <td>P</td> <td>Q</td> <td>R</td> <td>S</td> <td>T</td> </tr>
+         <tr> <td>U</td> <td>V</td> <td>W</td> <td>X</td> <td>Y</td> <td>Z</td> <td> </td> <td> </td> <td> </td> <td> </td> </tr>               
+         </table>
+         </center>
+         <p>
+         Par exemple, Castor a simplement besoin de se souvenir du mot <b>SURF</b> pour retrouver son code <b>9186</b>.
+         </p>
+         <p>
+         Pour <b><span id="nb_to_find_text"></span> des codes</b> ci-dessous, trouvez un mot français que Castor peut utiliser pour s'en souvenir.
+         </p>
+         <center>
+         <table class="secret_table">
+         <tr id="secret" style="display:none">
+         <td><span class="query"></span></td>
+         <td><input type="text" class="answer" maxlength="4" size="5"></td>
+         <td class="feedback_col"><span class="feedback"></span></td>
+         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+         </tr>
+         <tr id="secret_0">
+         <td><span class="query"></span></td>
+         <td><input type="text" class="answer" maxlength="4" size="5"></td>
+         <td class="feedback_col"><span class="feedback"></span></td>
+         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+         </tr>
+         <tr id="secret_1">
+         <td><span class="query"></span></td>
+         <td><input type="text" class="answer" maxlength="4" size="5"></td>
+         <td class="feedback_col"><span class="feedback"></span></td>
+         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+         </tr>
+         <tr id="secret_2">
+         <td><span class="query"></span></td>
+         <td><input type="text" class="answer" maxlength="4" size="5"></td>
+         <td class="feedback_col"><span class="feedback"></span></td>
+         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+         </tr>
+         </table>
+         <div><span id="success"></span></div>
+         </center>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+          <p>
+          Voici les mots qui pouvaient être utilisés pour les codes proposés.
+          </p>
+          <ul id="textSolution"></ul>
+          <p>
+          Pour gagner du temps, on peut utiliser une feuille de brouillon et recopier les colonnes associées aux chiffres, dans le bon ordre. Par exemple, si l'on souhaite trouver un mot associé au code 6183, on peut utiliser le tableau suivant.
+          </p>
+          <center><table class="secret_scheme">
+          <tr><th>6</th> <th>1</th> <th>8</th> <th>3</th></tr>
+          <tr><td>F</td> <td>A</td><td>H</td> <td>C</td></tr>
+          <tr><td>P</td><td>K</td> <td>R</td> <td>M</td></tr>
+          <tr><td>Z</td> <td>U</td><td> </td> <td>W</td></tr>               
+          </table></center>
+          <p>
+          Une fois qu'on a cette table, il suffit de piocher une lettre dans chaque colonne et essayer d'en faire un mot de 4 lettres. Une manière systématique de procéder consiste à essayer d'abord avec <b>F</b>, puis regarder si on peut compléter le mot, d'abord avec <b>A</b>, puis avec <b>K</b>, puis avec <b>U</b>, etc. Dès qu'on a un début qui ne correspond clairement à aucun mot français, on peut passer à la suite.
+          </p>
+          <p>
+          Si l'on procède de cette manière systématique, on est sûr de finir par trouver un mot s'il y en a un. Ici, on énumérerait les mots : FAHC&nbsp;; FAHM&nbsp;; FAHW&nbsp;; FARC&nbsp;; FARM&nbsp;; FARW&nbsp;; FK**&nbsp; (aucun mot ne commence par FK); FUHC&nbsp;; FUHM&nbsp;; FUHW&nbsp;; FURC&nbsp;; FURM&nbsp;; FURW&nbsp;; PAHC&nbsp;; PAHM&nbsp;; PAHW&nbsp;; <b>PARC</b>&nbsp; &hellip; et là c'est bon.
+          </p>
+ 
+          <h2>C'est de l'informatique !</h2>
+          <p>
+          Cet exercice présente un exemple de «&nbsp;codage&nbsp;». Ici, on utilise des lettres pour représenter des chiffres.
+          </p>
+          <p>
+          En fait, en informatique, on fait souvent le contraire&nbsp: on utilise des nombres pour représenter les lettres. Le codage le plus connu est le code «&nbsp;ASCII&nbsp;», introduit en 1963, et très largement utilisé pour représenter des fichiers contenant du texte. Dans ce code, la lettre <b>A</b> a le code 65, <b>B</b> a le code 66, etc&hellip; <b>Z</b> a le code 90, et plus loin on a les minuscules, avec <b>a</b> de code 97, <b>b</b> de code 98, etc&hellip; Il y a également des codes pour les caractères spéciaux, comme par exemple 63 pour le caractère <b>?</b>  (point d'interrogation).
+          </p>
+          <p>
+          Cependant, le code ASCII, développé par des américains, ne prévoit aucun code pour les lettres accentuées&nbsp;! D'autres codages étendus ont été développés pour chaque langue, chacune ayant différents types d'accents. La diversité des codages était traditionnellement un véritable casse-tête pour les programmeurs voulant que leurs logiciels fonctionnent dans toutes les langues.
+          </p>
+          <p>
+          Ce n'est qu'en 1991 qu'a été proposé le standard «&nbsp;Unicode&nbsp;» qui généralise le code ASCII de sorte à être capable de représenter les caractères de toutes les langues, du français au chinois, en passant par l'arabe, l'hébreux et même les hiéroglyphes égyptiens. Mais ce n'est que depuis 2007 que Unicode est l'encodage majoritairement utilisé sur les sites internet.
+          </p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

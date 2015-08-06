@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-CH-05</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-CH-05-abacus/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #abacusTask {
+         margin-bottom: 1em;
+      }
+      #valueTarget, #valueCurrent, #solutionTarget {
+         font-weight: bold;
+         font-size: 130%;
+         /*font-family: monospace;*/
+      }
+      #valueCurrent {
+         display: inline-block;
+         width: 6em;
+         text-align: right;
+      }
+      .easy, .hard {
+         display: none;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Boulier</h1>
+
+         <p>Positionnez les boules bleues de sorte à obtenir la valeur <span id="valueTarget"></span>.</p>
+         <p>Cliquez sur les boules pour comprendre ce qu'elles représentent.</p>
+
+         <center>
+         <p>Valeur courante&nbsp;: <span id="valueCurrent"></span>.</p>
+         <div id='abacusTask'></div>
+         </center>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+          
+         <div class="easy">
+         <p>
+         Dans la colonne de droite, chaque bille représente une unité.
+         Ainsi, si l'on place 3 billes en haut dans la colonne de droite,
+         on obtient la valeur 3.
+         </p>
+         <p>
+         Dans la seconde colonne en partant de la droite, chaque bille représente une dizaine. Ainsi, si en plus des 3 billes de la colonne tout à droite on place 5 billes en haut de la seconde colonne, on obtient 53.
+         </p>
+         <p>
+         Les colonnes suivantes représentent les centaines, puis les milliers, etc.
+         Donc, pour obtenir la solution, il fallait, pour chacun des 5 chiffres de la solution, faire monter le nombre de billes dans la colonne qui correspond à ce chiffre.
+         </p>
+         </div>
+         <div class="hard">
+         <p>
+         Dans la colonne de droite, chaque bille de la zone du bas qui est déplacée vers le milieu compte pour une unité, et chaque bille de la zone du haut qui est déplacée vers le milieu compte pour 5 unités. Ainsi, on peut obtenir n'importe qu'elle valeur entre 0 et 5 en n'utilisant que les billes du bas, et on peut obtenir n'importe quelle valeur entre 5 et 9 et utilisant une bille du haut et un certain nombre de billes du bas. On peut aussi aller jusqu'à 15 si on utilise toutes les billes, mais cela n'est pas utile.
+         </p>
+         <p>
+         Les billes de la seconde colonne en partant de la droite jouent un rôle similaire, sauf que leur valeur est multipliée par 10 : elles correspondent aux dizaines. Les billes de la troisième colonne ont une valeur multipliée par 100, et celles de la quatrième colonne ont une valeur multipliée par 1000, etc...
+         </p>
+         <p>
+         Ainsi, pour obtenir la solution, on pouvait positionner les billes de chaque colonne en fonction du chiffre correspondant dans la valeur à atteindre (le premier chiffre pour la première colonne, le second pour la seconde colonne, etc...).
+         </p>
+         </div>
+         <center>
+            <div id="solutionTarget"></div>
+            <div id='abacusSolution'></div>
+         </center>
+
+         <h2>C'est de l'informatique !</h2>
+    
+         <div class="easy">
+         <p>
+         Le boulier présenté ici est une forme simplifiée des vrais bouliers, qui possèdent des boules représentant une unité et d'autres boulent représentant 5 unités.
+         </p>
+         </div>
+
+         <p>
+         Le boulier (<i>abacus</i> en anglais) est l'un des plus anciens instruments d'aide au calcul et de mécanisation du calcul de l'histoire de l'humanité.
+         </p>
+         <p>
+         Lorsqu'on sait l'utiliser, le boulier permet d'effectuer des additions, soustractions, multiplications et divisions. Avec un certain entraînement, 
+         l'usage du boulier est aussi rapide que celui d'une calculatrice pour 
+         tous les calculs de la vie courante.
+         </p>
+         <p>
+         Le boulier est encore en usage aujourd'hui dans de nombreux pays d'Asie,
+         preuve que l'informatique n'a pas (encore) tout remplacé !
+         </p>
+
+     </div> <!-- task-solution -->
+   </body>
+</html>
+ 

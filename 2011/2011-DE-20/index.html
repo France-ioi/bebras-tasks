@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Lancers de dé</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "Premier lancer : 6 ; deuxième lancer : 5 ; troisième lancer : 2.",
+            "Premier lancer : 5 ; deuxième lancer : 3 ; troisième lancer : 6.",
+            "Premier lancer : 3 ; deuxième lancer : 4 ; troisième lancer : 3.",
+            "Premier lancer : 2 ; deuxième lancer : 4 ; troisième lancer : 5."
+            ], "added", "#answers_2011-DE-20");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-DE-20/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Lancers de dé</h1>
+<p>
+Après l'école, les jeunes Castors vont jouer avant de rentrer chez eux. Pour éviter de se disputer pour décider où aller jouer, ils lancent plusieurs fois un dé dont les faces sont numérotées de 1 à 6. La décision suit la règle décrite ci-dessous :
+</p>
+<span style="border-style:solid;border-color:black;width:550px;display:block;border-width:1px">
+<table>
+<tr><td>SI</td><td>le premier lancer donne un résultat plus grand que le deuxième</td></tr>
+<tr><td>ALORS</td><td>on va jouer dans les bois</td></tr>
+<tr valign="top"><td>SINON</td><td>
+<span style="border-style:solid;border-color:black;width:470px;display:block;border-width:1px">
+<table><tr><td>SI</td><td>le troisième lancer donne un résultat plus petit que le deuxième</td></tr>
+<tr><td>ALORS</td><td>on va jouer à la rivière</td></tr>
+<tr><td>SINON</td><td>on va jouer sur le terrain de sport</td></tr></table>
+</span>
+</td></tr></table>
+</span>
+<br/>
+<p>
+Pour laquelle de ces séquences de lancers de dés les Castors vont-il aller jouer sur le terrain de sport ?
+</p>
+<div class="reponses" id="answers_2011-DE-20">
+</div>
+
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p><ul>
+   <li>Dans les propositions <span class="2011-DE-20_choice_1">A</span>. et <span class="2011-DE-20_choice_2">B</span>., le premier lancer donne un résultat plus grand que le deuxième. Dans ces deux cas, les Castors iraient donc jouer dans les bois ("SI le premier lancer donne un résultat plus grand que le deuxième ALORS on va jouer dans les bois").</li>
+   <li>
+   Dans la proposition <span class="2011-DE-20_choice_3">C</span>., le troisième lancer (3) est plus petit que le deuxième (4). Dans ce cas, les Castors iraient jouer à la rivière ("SINON SI le troisième lancer donne un résultat plus petit que le deuxième ALORS on va jouer à la rivière"
+   </li></ul>
+   <p>
+   <b>La proposition <span class="2011-DE-20_choice_4">D</span>. est la seule qui convient</b> : le premier lancer (2) est plus petit que le deuxième (4), donc les Castors ne vont pas jouer dans les bois, et le troisième lancer (5) est plus grand que le deuxième (4), donc les Castors ne vont pas jouer à la rivière, mais sur le terrain de sport.
+   </p>
+   <h2>C'est de l'informatique :</h2>
+   <p>
+   L'énoncé présente un programme écrit en pseudo-code, c'est à dire qu'il n'est pas exprimé dans un langage de programmation qu'un ordinateur saura interpréter, mais dans un langage qui est proche du français tout en restant proche de ce que permettent les langages de programmation. On écrit souvent ses programmes en pseudo-code dans sa phase de réflexion pour éviter de s'encombrer trop tôt des détails de syntaxe du langage dans lequel on finira par traduire son programme.
+   </p>
+   <p>
+   Les notions mises en oeuvre ici sont essentiellement la condition, et la comparaison. Dans une syntaxe plus proche d'un véritable langage de programmation, on aurait pu écrire :
+   </p>
+   <pre>
+   lancer1 = nombreAléatoire(1, 6) // choisit au hasard un nombre entre 1 et 6
+   lancer2 = nombreAléatoire(1, 6)
+   lancer3 = nombreAléatoire(1, 6)
+   Si (lancer1 > lancer2)
+      afficher("On va jouer dans les bois")
+   Sinon
+      Si (lancer3 < lancer2)
+         afficher("On va jouer à la rivière")
+      Sinon
+         afficher("On va jouer sur le terrain de sport")
+   </pre>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Trier des chiffres</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "0, 2, 3, 1, 4, 5, 6, 7",
+             "0, 2, 3, 4, 1, 5, 6, 7",
+             "0, 1, 2, 3, 4, 5, 6, 7",
+             "0, 2, 1, 3, 4, 5, 6, 7"
+            ], "added", "#answers_2010-trier-chiffres");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-trier-chiffres/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Trier des chiffres</h1>
+<p>
+Castor trie une série de chiffres à l'aide d'un procédé très particulier. Les
+trois premières étapes modifient la série, de cette façon :
+</p>
+<code>
+Série : 5, 4, 7, 2, 0, 3, 6, 1<br/>
+Etape 1 : 4, 5, 2, 0, 3, 6, 1, 7<br/>
+Etape 2 : 4, 2, 0, 3, 5, 1, 6, 7<br/>
+Etape 3 : 2, 0, 3, 4, 1, 5, 6, 7<br/>
+</code>
+<p><b>Quelle est la série de l'étape suivante&nbsp;?</b></p>
+
+<div class="reponses" id="answers_2010-trier-chiffres">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-trier-chiffres_choice_1">A</span> est correcte.
+   </p><p>
+   Le castor a utilisé le procédé de tri suivant : à chaque étape, il prend la séquence de gauche à droite et échange un
+   nombre avec le suivant s'il est plus grand. À l'étape 4, le premier nombre 2 est échangé avec le 0, car il est plus
+   grand, mais il n'est pas échangé avec le 3. Le 3 n'est pas échangé avec le 4 car il est plus petit. Le 4 est échangé
+   avec le 1, mais pas avec le 5.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>Pour trouver la bonne réponse à ce problème, vous avez deviné l'algorithme de Castor. L'algorithme n'était pas
+décrit, mais vous avez un seul exemple de son éxecution avec des résultats intermédiaires. Ici, l'algorithme est
+assez clair pour être retrouvé facilement. Parfois, il est nécessaire d'avoir beaucoup d'informations pour retrouver,
+même partiellement, un algorithme. On appelle cette discipline le "reverse engineering".
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,483 @@
+[external_script]
+http://code.jquery.com/jquery-1.6.4.min.js
+[script]
+// <![CDATA[
+$(function() {
+	var imgs \= {
+      "imgSwitchB":"http://castor-informatique.fr/data/switchB.jpg",
+      "imgSwitchT":"http://castor-informatique.fr/data/switchT.jpg",
+      "imgRail":"http://castor-informatique.fr/data/rail.jpg",
+      "imgLoco":"http://castor-informatique.fr/data/trainL.jpg"
+    };
+	
+	var Wagon \= new Array();
+	var Memorize \= new Array();
+	var RightWag \= -1;
+	var LeftWag \= -1;
+	var TopWag \= -1;
+	var BottomWag \= -1;
+	var disable_exo \= false;
+	
+	var WidthDec \= 50;
+	var HeightDec \= 15;
+	
+	var POS_SWITCH \= "TOP";
+	
+	var best_jp01 \= 100000;
+	var compteur \= 0;
+
+	
+	Reset \= function()
+	{
+		compteur \= 0;
+		while (Wagon.length > 0)
+			Wagon.pop();
+		while (Memorize.length > 0)
+			Memorize.pop();
+		for (var wag \= 0 ; wag < 6 ; wag++)
+			Wagon.push(new Object());
+		Wagon[5].name\="JP01L";
+		Wagon[0].name\="JP01A";
+		Wagon[1].name\="JP01B";
+		Wagon[2].name\="JP01C";
+		Wagon[3].name\="JP01D";
+		Wagon[4].name\="JP01E";
+		
+		Wagon[5].pos\="LEFT";
+		Wagon[0].pos\="LEFT";
+		Wagon[1].pos\="LEFT";
+		Wagon[2].pos\="LEFT";
+		Wagon[3].pos\="LEFT";
+		Wagon[4].pos\="LEFT";
+		
+		Wagon[5].back\=-1;
+		Wagon[0].back\=2;
+		Wagon[1].back\=4;
+		Wagon[2].back\=1;
+		Wagon[3].back\=5;
+		Wagon[4].back\=3;
+		
+		Wagon[5].next\=3;
+		Wagon[0].next\=-1;
+		Wagon[1].next\=2;
+		Wagon[2].next\=0;
+		Wagon[3].next\=4;
+		Wagon[4].next\=1;
+		
+		LeftWag \= 5;
+		TopWag \= -1;
+		BottomWag \= -1;
+		
+		Display();
+	}
+	
+	Save \= function()
+	{
+		var obj \= new Object();
+		
+		obj.Wagon \= new Array();
+		for (var wag \= 0 ; wag < 6 ; wag++)
+		{
+			obj.Wagon.push(new Object());
+			obj.Wagon[wag].name\=Wagon[wag].name;
+			obj.Wagon[wag].pos\=Wagon[wag].pos;
+			obj.Wagon[wag].back\=Wagon[wag].back;
+			obj.Wagon[wag].next\=Wagon[wag].next;
+		}
+		
+		obj.compteur \= compteur;
+		obj.LeftWag \= LeftWag;
+		obj.BottomWag \= BottomWag;
+		obj.TopWag \= TopWag;
+		obj.pos_switch \= POS_SWITCH;
+		Memorize.push(obj);
+	}
+	
+	Back \= function()
+	{
+		if (Memorize.length \=\= 0) return;
+		var obj \= Memorize[Memorize.length-1];
+		for (var wag \= 0 ; wag < 6 ; wag++)
+		{
+			Wagon[wag].name	\= obj.Wagon[wag].name;
+			Wagon[wag].pos	\= obj.Wagon[wag].pos;
+			Wagon[wag].back \= obj.Wagon[wag].back;
+			Wagon[wag].next \= obj.Wagon[wag].next;
+		}
+		compteur \= obj.compteur;
+		LeftWag \= obj.LeftWag;
+		BottomWag \= obj.BottomWag;
+		TopWag \= obj.TopWag;
+		if (POS_SWITCH !\= obj.pos_switch)
+			Switch();
+		Memorize.pop();
+		Display();
+	}
+	
+	Display \= function()
+	{
+		var nbTop \= 0;
+		var nbBottom \= 0;
+		for (var wag \= 0 ; wag < 6 ; wag++)
+			if (Wagon[wag].pos \=\= "TOP")
+				nbTop++;
+			else if (Wagon[wag].pos \=\= "BOTTOM")
+				nbBottom++;
+		
+		DisplayLeft(LeftWag, 0);
+		DisplayTop(TopWag, -nbTop * WidthDec);
+		DisplayBottom(BottomWag, -nbBottom * WidthDec);
+
+		if (compteur > 1) 
+			document.getElementById("nbr_mvt").innerHTML \= "Vous avez effectué " + compteur + " mouvements depuis le début.";
+		else 
+			document.getElementById("nbr_mvt").innerHTML \= "Vous avez effectué " + compteur + " mouvement depuis le début.";
+	}
+	
+	Draw \= function(name, x, y)
+	{
+		var obj \= document.getElementById(name);
+		if (obj \=\= null) 
+		{
+			alert(name + " n'a pas été trouvé");
+			return;
+		}
+		obj.style.left \= x+"px";
+		obj.style.top \= y+"px";
+	}
+	
+	DisplayLeft \= function(id, pos)
+	{
+		if (id \=\= -1) return;
+		Draw(Wagon[id].name, pos + 5, 30);
+		DisplayLeft(Wagon[id].next, pos + WidthDec);
+	}
+	
+	DisplayTop \= function(id, pos)
+	{
+		if (id \=\= -1) return;
+		Draw(Wagon[id].name, pos + 655, 31 - HeightDec);
+		DisplayTop(Wagon[id].next, pos + WidthDec);
+	}
+	
+	DisplayBottom \= function(id, pos)
+	{
+		if (id \=\= -1) return;
+		Draw(Wagon[id].name, pos + 655, 31 + HeightDec);
+		DisplayBottom(Wagon[id].next, pos + WidthDec);
+	}
+	
+	Switch \= function()
+	{
+		if (POS_SWITCH \=\= "TOP")
+		{
+			POS_SWITCH \= "BOTTOM";
+			document.getElementById("JP01SWITCHT").style.visibility \= "hidden";
+			document.getElementById("JP01SWITCHB").style.visibility \= "visible";
+		}
+		else 
+		{
+			POS_SWITCH \= "TOP";
+			document.getElementById("JP01SWITCHB").style.visibility \= "hidden";
+			document.getElementById("JP01SWITCHT").style.visibility \= "visible";
+		}
+		document.getElementById("JP01BADMOVE").style.visibility \= "hidden";
+		Display();
+	}
+	
+	PushLeft \= function(id)
+	{
+		right_id \= LeftWag;
+		while (right_id !\= -1 && Wagon[right_id].next !\= -1)
+			right_id \= Wagon[right_id].next;
+			
+		Wagon[id].back \= right_id;
+		Wagon[id].next \= -1; 
+		if (right_id !\= -1)
+		{
+			Wagon[right_id].next \= id;
+		}
+		else
+			LeftWag \= id;
+			
+		Wagon[id].pos \= "LEFT";
+	}
+	
+	PushTop \= function(id)
+	{
+		Wagon[id].next \= TopWag;
+		Wagon[id].back \= -1; 
+		if (TopWag !\= -1)
+		{
+			Wagon[TopWag].back \= id;
+		}
+		TopWag \= id;
+		
+		Wagon[id].pos \= "TOP";
+	}
+	
+	PushBottom \= function(id)
+	{
+		Wagon[id].next \= BottomWag;
+		Wagon[id].back \= -1; 
+		if (BottomWag !\= -1)
+		{
+			Wagon[BottomWag].back \= id;
+		}
+		BottomWag \= id;
+		
+		Wagon[id].pos \= "BOTTOM";
+	}
+	
+	Check \= function()
+	{
+		if (LeftWag !\= 5) return false;
+		if (Wagon[5].next !\= 0) 
+			return false;
+		for (var wag \= 0 ; wag < 4 ; wag++)
+			if (Wagon[wag].next !\= wag+1) 
+				return false;
+		return true;
+	}
+	
+	MooveDisplay \= function(id)
+	{
+		if (disable_exo)
+			return;
+		SeparateOUT();
+		document.getElementById("JP01BADMOVE").style.visibility \= "hidden";
+		if (Wagon[id].pos \=\= "TOP")
+			if (TopWag !\= 5) 
+			{
+				document.getElementById("JP01BADMOVE").style.visibility \= "visible";
+				return;
+			}
+		if (Wagon[id].pos \=\= "BOTTOM")
+			if (BottomWag !\= 5)
+			{
+				document.getElementById("JP01BADMOVE").style.visibility \= "visible";
+				return;
+			}
+			
+		if (Wagon[id].pos !\= "LEFT" && Wagon[id].pos !\= POS_SWITCH)
+			Switch();
+			
+		Save();
+		
+		if (Wagon[id].pos \=\= "LEFT")
+			id \= LeftWag;
+		else
+			Switch();
+		
+		Moove(id);
+		compteur++;
+		Display();
+		if (Check())
+		{
+			if (best_jp01 > compteur)
+			{
+				best_jp01 \= compteur;
+				if (best_jp01 \=\= 12)
+				{
+					SaveAnswer(best_jp01+"");
+					disable_exo \= true;
+				}
+                                else
+				    SaveAnswer(best_jp01+"");
+					
+			}
+			document.getElementById("JP01WIN").innerHTML \= "<font color\=red>Vous avez reorganisé tous les wagons en " + compteur + " mouvements.\n</font>";
+			document.getElementById("JP01BEST").innerHTML \= "Votre meilleur score est <b>" + best_jp01 + "</b> mouvements.\n";
+			if (best_jp01 !\= 12)
+				document.getElementById("JP01BEST").innerHTML +\= "<br>Vous pouvez faire encore mieux.\n";
+			else
+                        {
+				document.getElementById("JP01BEST").innerHTML +\= "<br><font color\=red>C'est le meilleur";
+				document.getElementById("JP01BEST").innerHTML +\= " possible pour cet exercice.</font>\n";
+			}
+		}
+		else
+			document.getElementById("JP01WIN").innerHTML \= "";
+	}
+	Moove \= function(id)
+	{
+		if (id \=\= -1) return;
+		if (Wagon[id].pos \=\= "LEFT")
+		{
+			Moove(Wagon[id].next);
+			
+			if (Wagon[id].back \=\= -1)
+				LeftWag \= -1;
+			else
+				Wagon[Wagon[id].back].next \= -1; 
+			
+			if (POS_SWITCH \=\= "TOP")
+				PushTop(id);
+			else
+				PushBottom(id);
+		}
+		else
+		{	
+			Moove(Wagon[id].back);
+
+			if (Wagon[id].next !\= -1)
+				Wagon[Wagon[id].next].back \= -1;
+
+			if (Wagon[id].pos \=\= "TOP")
+				TopWag \= Wagon[id].next;
+			else
+				BottomWag \= Wagon[id].next;
+			
+			PushLeft(id);
+		}
+	}
+	
+	count_right \= function(id)
+	{
+		if (Wagon[id].next \=\= -1)
+			return 1;
+		return 1 + count_right(Wagon[id].next);
+	}
+	
+	SeparateOVER \= function(id)
+	{
+		if (Wagon[id].pos !\= Wagon[5].pos)
+			return;
+			
+		var nb \= count_right(5);
+		document.getElementById("JP01Box").style.width \= WidthDec*nb+10+"px";
+		
+		document.getElementById("JP01Box").style.left \= 650-WidthDec*nb+"px";
+		if (Wagon[id].pos \=\= "LEFT")
+			document.getElementById("JP01Box").style.left \= 0+"px";
+		else
+			document.getElementById("JP01Box").style.width \= WidthDec*(1+nb-count_right(id))+"px";
+			
+		if (Wagon[id].pos \=\= "TOP")
+			document.getElementById("JP01Box").style.top \= 8+"px";
+		else if (Wagon[id].pos \=\= "LEFT")
+			document.getElementById("JP01Box").style.top \= 24+"px";
+		else
+			document.getElementById("JP01Box").style.top \= 40+"px";
+			
+		document.getElementById("JP01Box").style.visibility \= "visible";
+	}
+	SeparateOUT \= function()
+	{	
+		document.getElementById("JP01Box").style.visibility \= "hidden";
+	}
+	TurnONSwitch \= function()
+	{
+		document.getElementById("JP01SWITCHB").style.borderWidth \= 2+"px";
+		document.getElementById("JP01SWITCHT").style.borderWidth \= 2+"px";
+		document.getElementById("JP01SWITCHB").style.left \= 298+"px";
+		document.getElementById("JP01SWITCHT").style.left \= 298+"px";
+		document.getElementById("JP01SWITCHB").style.top \= 9+"px";
+		document.getElementById("JP01SWITCHT").style.top \= 9+"px";
+	}
+	TurnOFFSwitch \= function()
+	{
+		document.getElementById("JP01SWITCHB").style.borderWidth \= 0+"px";
+		document.getElementById("JP01SWITCHT").style.borderWidth \= 0+"px";
+		document.getElementById("JP01SWITCHB").style.left \= 300+"px";
+		document.getElementById("JP01SWITCHT").style.left \= 300+"px";
+		document.getElementById("JP01SWITCHB").style.top \= 11+"px";
+		document.getElementById("JP01SWITCHT").style.top \= 11+"px";
+	}
+			
+
+    $("head").append("<style type\=\"text/css\">/*<![CDATA[*/" +
+	".Wagon { position:relative; border-width: 2px;	border-style: solid; border-color: #404ACA;	background-color: #C8FFC8; width: 40px; height: 15px; text-align:center;font-size:14;font-weight: bold; color: #701004;	z-index:100;}" +
+	"DIV.Separator { overflow:hidden; position:absolute; background-color:black; left:40px; width:10px; top:9px; height:3px; z-index:90; }" +
+	".Box { border-width: 3px; border-style: solid; border-color: red; z-index:150; height:28px; }" +
+	".AllWagon { position:absolute; width:50; top:3px; z-index:300; }" +
+	".Switch { border-width: 0px; border-style: solid; border-color: red; position:absolute; left:300px;top:11px; }" +
+	".mainid {width:650px; height:200px; position:relative;}" +
+	"/*]"+"]>*/</style>");
+	
+	$("#content").append("<div class\=\"mainid\"> "+
+"			Le train des Castors doit être organisé de telle sorte que les wagons soient placés dans l'ordre montré sur l'image ci-dessous :"+
+"			<div style\=\"position:relative; height:80px\">"+
+"			<div style\=\"width:300px; height:28px; position:absolute; left:1px; top:27px;background-image:url("+imgs["imgRail"]+");\">"+
+"				<div class\=\"AllWagon\" style\=\"left:55px\"><div class\=\"Wagon\">A</div><div class\=\"Separator\"></div></div>"+
+"				<div class\=\"AllWagon\" style\=\"left:105px\"><div class\=\"Wagon\">B</div><div class\=\"Separator\"></div></div>"+
+"				<div class\=\"AllWagon\" style\=\"left:155px\"><div class\=\"Wagon\">C</div><div class\=\"Separator\"></div></div>"+
+"				<div class\=\"AllWagon\" style\=\"left:205px\"><div class\=\"Wagon\">D</div><div class\=\"Separator\"></div></div>"+
+"				<div class\=\"AllWagon\" style\=\"left:255px\"><div class\=\"Wagon\">E</div><div class\=\"Separator\"></div></div>"+
+"				<div class\=\"AllWagon\" style\=\"left:5px\"><img src\="+imgs["imgLoco"]+" style\=\"position:relative;z-index:300\"/><div class\=\"Separator\"></div></div>				"+
+"			</div>"+
+"			<div style\=\"width:310px; height:28px; position:absolute; left:351px; top:10px;background-image:url("+imgs["imgRail"]+");\"></div>"+
+"			<div style\=\"width:310px; height:28px; position:absolute; left:351px; top:43px;background-image:url("+imgs["imgRail"]+");\"></div>"+
+"			<div class\=\"Switch\">"+
+"				<img src\="+imgs["imgSwitchT"]+" />"+
+"			</div>"+
+"			</div>"+
+"			<div style\=\"position:relative; width:650px\">"+
+"				<p>"+
+"				Sur l'image ci-dessous, les wagons sont en désordre. Remettez les"+
+"				wagons dans le bon ordre en effectuant <b>le moins</b> de mouvements"+
+"				possible."+
+"				</p><p>"+
+"				Cliquez sur les wagons que vous voulez déplacer pour les bouger. Vous "+
+"				ne pouvez déplacer que des wagons reliés à la locomotive. Vous pouvez"+
+"				changer l'aiguillage de position en cliquant dessus."+
+"				</p>"+
+"			</div>"+
+"		</div>"+
+"		<div id\=\"DIV2011JP01\" style\=\"width:650px; height:90px; position:relative\">"+
+"			<div id\=\"JP01Box\" class\=\"Box\" style\=\"visibility:hidden; position:absolute\"onmouseout\=\"javascript:SeparateOUT()\"></div>"+
+"			<div style\=\"width:300px; height:28px; position:absolute; left:1px; top:27px;background-image:url("+imgs["imgRail"]+");\"></div>"+
+"			<div style\=\"width:310px; height:28px; position:absolute; left:351px; top:10px;background-image:url("+imgs["imgRail"]+");\"></div>"+
+"			<div style\=\"width:310px; height:28px; position:absolute; left:351px; top:43px;background-image:url("+imgs["imgRail"]+");\"></div>"+
+"			<div id\=\"JP01A\" class\=\"AllWagon\" onclick\=\"javascript:MooveDisplay(0)\" onmouseover\=\"javascript:SeparateOVER(0)\"onmouseout\=\"javascript:SeparateOUT()\">"+
+"				<div class\=\"Wagon\">A</div><div class\=\"Separator\"></div>"+
+"			</div>"+
+"			<div id\=\"JP01B\"  class\=\"AllWagon\" onclick\=\"javascript:MooveDisplay(1)\" onmouseover\=\"javascript:SeparateOVER(1)\"onmouseout\=\"javascript:SeparateOUT()\">"+
+"				<div class\=\"Wagon\">B</div><div class\=\"Separator\"></div>"+
+"			</div>"+
+"			<div id\=\"JP01C\"  class\=\"AllWagon\" onclick\=\"javascript:MooveDisplay(2)\" onmouseover\=\"javascript:SeparateOVER(2)\"onmouseout\=\"javascript:SeparateOUT()\">"+
+"				<div class\=\"Wagon\">C</div><div class\=\"Separator\"></div>"+
+"			</div>"+
+"			<div id\=\"JP01D\"  class\=\"AllWagon\" onclick\=\"javascript:MooveDisplay(3)\" onmouseover\=\"javascript:SeparateOVER(3)\"onmouseout\=\"javascript:SeparateOUT()\">"+
+"				<div class\=\"Wagon\">D</div><div class\=\"Separator\"></div>"+
+"			</div>"+
+"			<div id\=\"JP01E\"  class\=\"AllWagon\" onclick\=\"javascript:MooveDisplay(4)\" onmouseover\=\"javascript:SeparateOVER(4)\"onmouseout\=\"javascript:SeparateOUT()\">"+
+"				<div class\=\"Wagon\">E</div><div class\=\"Separator\"></div>"+
+"			</div>"+
+"			<div id\=\"JP01L\"  class\=\"AllWagon\" onclick\=\"javascript:MooveDisplay(5)\" onmouseover\=\"javascript:SeparateOVER(5)\"onmouseout\=\"javascript:SeparateOUT()\">"+
+"				<img src\="+imgs["imgLoco"]+" style\=\"position:relative;z-index:300\"/><div class\=\"Separator\"></div>"+
+"			</div>"+
+			
+"			<div id\=\"JP01SWITCHT\" class\=\"Switch\" onclick\=\"javascript:Switch()\" onmouseout\=\"javascript:TurnOFFSwitch()\" onmouseover\=\"javascript:TurnONSwitch()\">"+
+"				<img src\="+imgs["imgSwitchT"]+" />"+
+"			</div>"+
+"			<div id\=\"JP01SWITCHB\" class\=\"Switch\" style\=\"visibility:hidden\"onclick\=\"javascript:Switch()\" onmouseout\=\"javascript:TurnOFFSwitch()\" onmouseover\=\"javascript:TurnONSwitch()\">"+
+"				<img src\="+imgs["imgSwitchB"]+" />"+
+"			</div>"+
+			
+"			<div id\=\"JP01SEP\" style\=\"position:absolute; background-color:red; width:4px; height:40px; left:415px; top:3px; visibility:hidden\">"+
+"			</div>"+
+"			</div>"+
+			
+"			<div style\=\"position:relative;\">"+
+"				<input type\=\"button\" value\=\"Recommencer\" onclick\=\"javascript:Reset()\">"+
+"				<input type\=\"button\" value\=\"Annuler le dernier mouvement\" onclick\=\"javascript:Back()\">"+
+"				<div id\=\"nbr_mvt\" style\=\"position:relative\"></div>"+
+"				<div id\=\"JP01BADMOVE\" style\=\"position:absolute; left:350px;width:300px;top:-5px; visibility:hidden\"><font color\=red>Vous ne pouvez pas déplacer ces wagons car ils ne sont pas reliés à la locomotive.</font></div>"+
+"				<div id\=\"JP01WIN\" style\=\"position:relative; width:550px;\"></div>"+
+"				<div id\=\"JP01BEST\" style\=\"position:relative; width:400px;;\"></div>"+
+"		</div>");
+
+    if($("#answer").attr("value") !\= "") {
+        best_jp01 \= parseInt($("#answer").attr("value"));
+		document.getElementById("JP01BEST").innerHTML \= "Votre meilleur score est <b>" + best_jp01 + "</b> mouvements.\n";
+		if (best_jp01 \=\= 12)
+			document.getElementById("JP01BEST").innerHTML +\= "<br><font color\=red>C'est le meilleur possible pour cet exercice.</font>\n";
+		else
+			document.getElementById("JP01BEST").innerHTML +\= "<br>Vous pouvez faire encore mieux.\n";
+    }
+		Reset();
+});
+//]]>
+[correct_answers]
+12

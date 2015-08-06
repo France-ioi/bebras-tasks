@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-FR-07-lock</title>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/jquery-1.7.1.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="remove" type="text/javascript" src="../2014-FR-modules/platform_api.js" ></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../2014-FR-modules/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="remove" type="text/javascript" src="../2014-FR-modules/gen_task_resources.js"></script>
+      <link class="module" rel="stylesheet" type="text/css" href="../2014-FR-modules/styles.css" id="http://castor-informatique.fr/tasks/modules/styles.css" />
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-07-lock/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Françoise Tort",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "hard", "2": "medium", "3": "medium", "4": "easy"},
+          "categories": {ALG : true},
+          "answerType": "Interactive, click on illustration",
+          "status": "evaluation"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      </style>
+    </style>
+  </head>
+  <body>
+      <div id="task">
+          <h1>Lock</h1>
+          <p>
+             Open the box by unlocking: turn the turtles in order to drag them all together to the right.
+             </p>
+             <p>
+             Click on the turtle to turn them.  A turtle can only be turned up or left. A turtle can not turn if it is not in front of the notch. Click the arrows to pull  or push the tab. 
+          </p>
+         <!-- <div id="anim" style="width:320px;height:400px"></div>-->
+          <img src="2014-FR-07_box_closed.png" width="500">
+          <p>
+            Note :
+           <ul><li> each turtle can have only two position: up and left
+           <li> only one turtle can rotate at a time
+           <li>the turtle i can rotate if 
+           <ul> <li> it is in front of the notch  (possible only if turtles i +2 to i+n, on its rigth are turned left)
+           <li> the turtle i+1 -just on its right- is turned up
+           </ul></ul>
+          </p>
+      </div><!-- task -->
+      <div id="task-solution">
+          <h2>Solution</h2>
+          <h2>It's informatics!</h2>
+      </div>
+  </body>
+</html>

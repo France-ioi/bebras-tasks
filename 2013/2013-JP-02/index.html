@@ -1,0 +1,291 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-JP-02</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script type="text/javascript" src="beaver_1.js"></script>
+      <script type="text/javascript" src="beaver_2.js"></script>
+      <script type="text/javascript" src="beaver_3.js"></script>
+      <script type="text/javascript" src="beaver_4.js"></script>
+      <script type="text/javascript" src="tunnel.js"></script>
+      <script type="text/javascript" src="arrow.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-JP-02/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Yukio Idosaka, JAP",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["[4,2,3,1]"]
+      };
+      </script>
+      <script class="" type="text/javascript">
+      var paper, paperWidth = 740, paperHeight = 80;
+      var dragAndDrop, wIm = 42, hIm = 70;
+
+      task.load= function(views, callback) {
+            var suffixes = ['a', 'b', 'c', 'd', 'e', 'f'];
+            var nbSuffixes = (views.solution) ? 6 : 4;
+            var displayMode = "withLetter";
+            for (var iSuffix = 0; iSuffix < nbSuffixes; iSuffix++) {
+               loadBeaver1('beaver_1' + suffixes[iSuffix], displayMode);
+               loadBeaver2('beaver_2' + suffixes[iSuffix], displayMode);
+               loadBeaver3('beaver_3' + suffixes[iSuffix], displayMode);
+               loadBeaver4('beaver_4' + suffixes[iSuffix], displayMode);
+            }
+            loadTunnel('tunnel_blacka', "#000000");
+            loadTunnel('tunnel_whitea', "#FFFFFF");
+            loadArrow('arrowa');
+            loadArrow('arrowb');
+
+            paper = Raphael('anim', paperWidth, paperHeight);
+
+            dragAndDrop = DragAndDropSystem({
+               paper : paper,
+               actionIfDropped : function(srcCont, srcPos, dstCont, dstPos, dropType)
+               {
+                  if(dstCont == 1)
+                     return true;
+                  var idEl = this.getObjects(srcCont)[srcPos];
+                  if(dstCont == 0)
+                     return action(0,idEl-1,'replace');
+                  return false;
+               },
+               actionIfEjected : function(refEl,previousContId, previousPos)
+               {
+                  return action(0,refEl.ident-1,'replace');
+               }
+            });
+
+            dragAndDrop.addContainer({
+               ident : 0,
+               cx : 95, cy : 40,
+               widthPlace : wIm, heightPlace : hIm, 
+               nbPlaces : 4,
+               dropMode : 'replace',
+               dragDisplayMode : 'preview',
+               placeBackgroundArray : [paper.rect(-wIm/2,-hIm/2,wIm,hIm)]
+            });
+
+            dragAndDrop.addContainer({
+               ident : 1,
+               cx : 645, cy : 40,
+               widthPlace : wIm, heightPlace : hIm, 
+               nbPlaces : 4,
+               dropMode : 'insertBefore',
+               dragDisplayMode : 'preview',
+               placeBackgroundArray : [paper.rect(-wIm/2,-hIm/2,wIm,hIm)]
+            });
+
+            for(var i = 0; i < 4; i++) {
+               dragAndDrop.insertObject(0,i,{ident : i+1, elements : createBeaver(i)});
+            }
+
+            component(185,5,tunnelObjects(paper, "#000000", 's0.6,0.6,0,0'));
+            component(310,5,tunnelObjects(paper, "#FFFFFF", 's0.6,0.6,0,0'));
+            component(435,5,tunnelObjects(paper, "#000000", 's0.6,0.6,0,0'));
+            callback();
+         };
+         
+         task.reloadAnswer= function(strAnswer, callback) {
+            var answer = [null, null, null, null];
+            if (strAnswer != "") {
+               answer = $.parseJSON(strAnswer);
+            }
+            var current0 = dragAndDrop.getObjects(0);
+            var current1 = dragAndDrop.getObjects(1);
+            for (var iObject = 0; iObject < 4; iObject++) {
+               if (current0[iObject] != null) {
+                  dragAndDrop.removeObject(0, iObject);
+               }
+               if (current1[iObject] != null) {
+                  dragAndDrop.removeObject(1, iObject);
+               }
+            }
+            var used = [false, false, false, false];
+            for (var pos = 0; pos < 4; pos++) {
+               var id = answer[pos];
+               if (id != null) {
+                  dragAndDrop.insertObject(1, pos, {ident : id, elements : createBeaver(id - 1) });
+                  used[id - 1] = true;
+               }
+            }
+            for (var iObject = 0; iObject < 4; iObject++) {
+               if (!used[iObject]) {
+                  dragAndDrop.insertObject(0, iObject, {ident : iObject + 1, elements : createBeaver(iObject) });
+               }
+            }
+            callback();
+         };
+         task.getAnswer= function(callback) {
+            callback(JSON.stringify(dragAndDrop.getObjects(1)));
+         };
+
+      function createBeaver(iBeaver) {
+         var sizeIms = [[85,107],[77,97],[69,86],[60,75]];
+         var scaleFactor = [0.5,0.48,0.45,0.4];
+         var fctBeaverObjects = [beaver1Objects, beaver2Objects, beaver3Objects, beaver4Objects];
+         var displayMode = "onlyLetter";
+         var beaverObject = fctBeaverObjects[iBeaver](paper, 's' + scaleFactor[iBeaver] + ',' + scaleFactor[iBeaver] + ',0,0', displayMode);
+			var beaverLength1 = beaverObject.length;
+
+         component(-sizeIms[iBeaver][0] * scaleFactor[iBeaver] / 2,
+                   -sizeIms[iBeaver][1] * scaleFactor[iBeaver] / 2,
+                   beaverObject, paper);
+			
+			var beaverLength2 = beaverObject.length;
+			for(var iSupp = beaverLength1; iSupp < beaverLength2; iSupp++)
+				beaverObject.pop(); // remove text transparent rectangle introduced by the call to component
+
+         var r = paper.rect(-wIm/2,-hIm/2,wIm,hIm,12).attr('fill','#EFF5FB');
+
+         return [r].concat(beaverObject);
+      }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+        <h1>Tunnels magiques</h1>
+
+            <p style="margin-bottom:0em">Quatre castors aiment jouer avec des tunnels magiques. Lorsqu'ils entrent tous ensemble dans un tunnel, ils en ressortent dans un ordre différent.</p>
+            <center>
+               <table>
+                  <tr>
+                     <td>Si le tunnel est <b>noir</b>, ils ressortent en ordre <b>inverse</b>.</td>
+                     <td style="vertical-align:bottom">
+                        <div id="beaver_1a" style="width:50px;height:90px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_2a" style="width:45px;height:80px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_3a" style="width:35px;height:65px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_4a" style="width:30px;height:59px;display:inline-block"></div>
+                     </td>
+                     <td style="vertical-align:bottom;height:90px">
+                        <div id="tunnel_blacka" style="width:120px;height:70px"></div>
+                     </td>
+                     <td style="vertical-align:bottom">
+                        <div id="beaver_4b" style="width:30px;height:59px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_3b" style="width:35px;height:65px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_2b" style="width:45px;height:80px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_1b" style="width:50px;height:90px;display:inline-block"></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td></td><td></td><td></td><td></td><td></td><td style="vertical-align:bottom">
+                        <div id="arrowa" style="width:120px;height:25px"></div>
+                     </td><td><td></td><td></td><td></td></td>
+                  </tr>
+               </table>
+               <table>
+                  <tr>
+                     <td>Si le tunnel est <b>blanc</b>, ils ressortent dans le même ordre sauf que le <b>premier et le dernier échangent leurs places</b>.</td>
+                     <td style="vertical-align:bottom">
+                        <div id="beaver_1c" style="width:50px;height:90px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_2c" style="width:45px;height:80px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_3c" style="width:35px;height:65px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_4c" style="width:30px;height:59px;display:inline-block"></div>
+                     </td>
+                     <td style="vertical-align:bottom;height:90px">
+                        <div id="tunnel_whitea" style="width:120px;height:70px"></div>
+                     </td>
+                     <td style="vertical-align:bottom">
+                        <div id="beaver_4d" style="width:30px;height:59px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_2d" style="width:45px;height:80px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_3d" style="width:35px;height:65px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_1d" style="width:50px;height:90px;display:inline-block"></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td></td><td></td><td></td><td></td><td></td><td>
+                        <div id="arrowb" style="width:120px;height:25px"></div>
+                     </td><td><td></td><td></td><td></td></td>
+                  </tr>
+               </table>
+            </center>
+            <p style="margin-top:0.2em">Les quatre castors traversent successivement les tunnels ci-dessous.
+            Glissez les lettres des castors à droite, dans l'ordre dans lequel ils vont ressortir.<br/>
+
+            <center>
+               <div id="anim" style="width:740px;height:80px" class="touch"></div>
+               <div style="text-align:right">
+               <input type="button" value="Recommencer" onclick="task.reloadAnswer('');" />
+               </div>
+            </center>
+            
+         </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+              <table>
+                  <tr>
+                     <td style="padding-left:1em">Si les castors<br/> entrent dans l'ordre :</td>
+                     <td style="vertical-align:bottom">
+                        <div id="beaver_1f" style="width:50px;height:90px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_2f" style="width:45px;height:80px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_3f" style="width:35px;height:65px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_4f" style="width:30px;height:59px;display:inline-block"></div>
+                     </td>
+                     <td style="padding-left:1em;padding-right:1em">alors ils sortent des<br/>3 tunnels dans l'ordre :</td>
+                     <td style="vertical-align:bottom">
+                        <div id="beaver_4e" style="width:25px;height:35px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_2e" style="width:40px;height:55px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_3e" style="width:33px;height:44px;display:inline-block"></div>
+                     </td><td style="vertical-align:bottom">
+                        <div id="beaver_1e" style="width:50px;height:66px;display:inline-block"></div>
+                     </td>
+                  </tr>
+              </table>
+
+         <p>
+         Il y avait plusieurs façons de résoudre le sujet. La manière naïve consiste à appliquer les règles des tunnels les une après les autres, en représentant la position des 4 castors à la sortie de chacun des 3 tunnels.</p>
+         <div style='text-align:center'><img src="2013-JP-02_sol.png" /></div>
+         <p>
+         Il existait une manière plus astucieuse de résoudre le sujet. On part des deux observations suivantes&nbsp;:
+         </p>
+         <ol>
+         <li>Le résultat final ne change pas si l'on modifie l'ordre des tunnels.</li>
+         <li>Si les castors passent successivement dans 2 tunnels noirs, leur ordre ne changent pas.</li>
+         </ol>
+         <p>
+         Ainsi, dans le sujet l'effet des deux tunnels noirs s'annule. Le passage à travers les trois tunnels est donc équivalent au passage dans le seul tunnel blanc. L'effet de ce tunnel blanc étant décrit dans le sujet, il suffit d'en recopier l'ordre de sortie des castors.
+         </p>
+         <h2>C'est de l'informatique&nbsp;!</h2>
+         <p>
+         De nombreux algorithmes, en particulier les algorithmes de tri, font intervenir des <i>permutations</i>, c'est-à-dire des opérations changeant l'ordre des éléments. En regardant la manière dont fonctionnent les différentes permutations, on peut souvent optimiser la manière dont on effectue (ou fait effectuer par un programme) les changements d'ordre.
+         </p>
+         <p>
+         Par exemple, dans ce sujet, on peut observer que la permutation «&nbsp;inverser l'ordre de tous les castors&nbsp;» et la permutation «&nbsp;inverser l'ordre du premier et du dernier castor&nbsp;»  sont des permutations que l'on peut effectuer dans l'ordre que l'on veut, sans changer le résultat. De plus, pour chacune de ces deux permutations, si on l'effectue deux fois de suite, alors cela revient à ne rien changer. Du coup, l'ordre final des castors ne dépend que de la parité du nombre de tunnels noirs et de la parité du nombre de tunnels blancs.
+         </p>
+         <p>Ainsi, un programme qui simule l'effet de plusieurs millions de tunnels n'a pas besoin de réaliser plusieurs millions d'opérations de changement de place&nbsp;: il suffit de regarder s'il y a un nombre impair de tunnels noirs (auquel cas il faut inverser tous les castors) et s'il y a un nombre impair de tunnels blancs (auquel cas il faut inverser le premier et le dernier castor). Un petit peu de réflexion économise des millions de calculs&nbsp;!
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

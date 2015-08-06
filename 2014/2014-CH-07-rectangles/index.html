@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-CH-07</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-CH-07-rectangles/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [],
+          "fullFeedback": true
+      };
+      </script>
+
+      <script type="text/javascript" src="task.js"></script>
+      <script class="task" type="text/javascript">
+         // Note: needed for displaying the task! 
+         task.solutions = {
+            easy: [ 0, 2, 1, 3, 6 ],
+            hard: [ 1, 4, 0, 2, 5, 2, 5, 2, 5, 2 ]
+            // harder: [ 2, 6, 2, 5, 0, 2, 1, 5, 2, 6, 2, 6 ]
+            };
+      </script>
+      <style>
+         #drawing1, #drawing2 {
+            margin-left: 1em;
+         }
+         #drawing1 {
+            margin-top: -0.5em;
+         }
+         #drawing2 {
+         }
+         #programming {
+            /*border: 1px solid black;*/
+            height: 300px;
+            width: 440px;
+         }
+         .columns td {
+            vertical-align: top;
+            padding-right: 1em;
+         }
+         .column_head {
+            font-weight: bold;
+         }
+         #message {
+            text-align: center;
+            font-weight: bold;
+            color: red;
+            padding: 0.5em;
+            height: 1em;
+         }
+         .buttons input {
+            margin-bottom: 5px;
+         }
+         #textSolution li {
+            margin-top: 0.2em;
+         }
+         .valigntop td {
+            vertical-align: top;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <img src="robot.png" style="display:none">
+         <h1>Dessin interactif</h1>
+         <p>
+         <div style="float: right; margin-top:-1.5em"><div id="drawing1"></div></div>
+         Vous disposez d'un robot capable de se déplacer et tracer des traits noirs ou rouges.
+         Votre objectif est de programmer le robot pour qu'il dessine l'image ci-contre.
+         </p>
+         <p>
+         Le robot, représenté par le triangle vert, va <b>répéter 4 fois</b> de suite 
+         votre séquence d'instructions. Pour construire la séquence, faites
+         glisser les instructions ci-dessous. 
+         </p>
+         <table class="columns" style="clear: both">
+         <tr>
+         <td style="width:220px"><div class="column_head">Choisissez les instructions</div></td>
+         <td style="width:220px"><div class="column_head">Construisez votre séquence</div></td>
+         <td style="width:250px"><div class="column_head">Résultat avec 4 répétitions</div></td>
+         </tr>
+         <tr>
+         <td colspan="2">
+            <div id="programming" class="touch"></div>
+         </td><td>
+            <div id="drawing2" style="margin-top: 1em"></div>
+            <div><span id="message"></span></div>
+         </td></tr></table>
+ 
+         <div class="buttons" style="text-align: center">
+            <input id="tryOrReset" type="button" onclick="task.tryOrReset()" value="Essayer">
+         </div>
+   
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+         <table class="valigntop"><tr><td>
+            <img src="rectangle_sol1.png" />
+         </td><td>
+            <p>
+            On commence par repérer dans la figure un morceau de figure répété 4 fois, comme par exemple, le morceau numéroté (1) ci-dessous.
+            </p>
+            <p>
+            Ensuite, on cherche la séquence d'instructions permettant de dessiner ce morceau de figure, sans oublier de s'assurer que le robot pointe dans la bonne direction à la fin pour pouvoir continuer les répétitions suivantes correctement.
+            </p>
+            <p>
+            Chacune des 4 répétitions dessine ainsi un quart de la figure, et à la fin, on obtient le résultat souhaité.</p>
+            <center><img src="rectangle_sol2.png" style="width:500px" /></center>
+         </td></tr></table>
+
+         <h2>C'est de l'informatique !</h2>
+         <p>
+         Cet exercice présente le concept de répétition, qui s'appelle en informatique le concept de «&nbsp;boucle&nbsp;». Ici, la boucle consiste à répéter exactement 4 fois une séquence d'instructions. Cette boucle permet de réduire le nombre d'instructions que l'on doit fournir pour obtenir la figure, en exploitant les symétries de cette figure.
+         </p>
+         <p>
+         De manière plus générale, les boucles peuvent s'exécuter un nombre variable de fois. Par exemple, imaginons un programme qui contrôle des cloches qui sonnent l'heure. Ce programme va lire l'heure, puis répéter l'instruction «&nbsp;sonner le cloche&nbsp;» un nombre de fois égal au nombre d'heures écoulées depuis midi ou minuit.
+         </p>
+         <p>
+         Il existe également des boucles qui s'exécutent jusqu'à ce qu'une certaine condition soit réalisée. Par exemple, si un robot explore un labyrinthe, il va répéter l'action «&nbsp;avancer d'une case&nbsp;» jusqu'à ce que la condition «&nbsp;il y a un mur juste devant&nbsp;» devienne vraie. À ce moment là, le robot est obligé de tourner. 
+         </p>
+         <p>
+         Enfin, il existe des boucles qui s'exécutent à l'infini, sans jamais s'arrêter. Par exemple, le programme qui gère un site web est basé sur une «&nbsp;boucle infinie&nbsp;», consistant à répéter l'opération &nbsp;: «&nbsp;si je reçois une requête me demandant le contenu d'une page, alors j'envoie le contenu de cette page&nbsp;».
+         </p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

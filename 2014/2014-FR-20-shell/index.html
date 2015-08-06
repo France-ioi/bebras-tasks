@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-FR-20</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-20-shell/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      .shell, .inline_shell, #shell_input {
+          font-size: 1.2em;  /* line-height: 120%; */
+          font-family: monospace;
+          line-height: 140%;
+      }
+      .shell,.inline_shell {
+          color: white;
+          background: black;
+      }
+      .shell {
+          padding: 5px;
+          margin-left: 1em;
+          margin-right: 1em;
+       }
+       .inline_shell {
+          padding: 3px;
+       }
+       .commands {
+          margin-top: 0.5em;
+          margin-bottom: 0.5em;
+       }
+       .commands li {
+          padding-bottom: 0.4em;
+          line-height: 150%;
+       }
+       .objective {
+          width: 100%;
+          border-collapse: collapse;
+       }
+       .objective td {
+          vertical-align: top;
+          width: 50%;
+       }
+       .objective span {
+          margin: 0em 0.6em 0em 0.6em;
+          display: block;
+       }
+       .easy, .hard {
+          display: none;
+       }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Terminal</h1>
+
+         <p>
+         Vous disposez d'une application permettant de manipuler des fichiers avec les commandes suivantes&nbsp;:
+         </p>
+         <div class="easy">
+            <ul class="commands">
+            <li><span class="inline_shell">ls</span> affiche le nom et la taille de tous les fichiers présents. Par exemple,
+            l'affichage <span class="inline_shell">zora&nbsp;&nbsp;50&nbsp;ko</span> indique qu'il y a un fichier nommé «&nbsp;zora&nbsp;» de taille 50&nbsp;ko. </li>
+            <li><span class="inline_shell">rm</span> permet de supprimer un fichier. Par exemple,
+                <span class="inline_shell">rm&nbsp;titi</span> supprime le fichier nommé «&nbsp;titi&nbsp;».</li>
+             </ul>
+            <p>Votre objectif est de trouver les deux fichiers ayant les plus grandes tailles et de <b>supprimer</b> ces deux fichiers et uniquement ceux-là.</p>
+         </div>
+         <div class="hard">
+            <ul class="commands">
+            <li><span class="inline_shell">ls</span> affiche le nom et la taille (en ko) de tous les fichiers présents.</li>
+            <li><span class="inline_shell">rm</span> permet de supprimer un fichier. Par exemple,
+                <span class="inline_shell">rm&nbsp;titi</span> supprime le fichier nommé «&nbsp;titi&nbsp;».</li>
+            <li><span class="inline_shell">mv</span> permet de renommer un fichier. Par exemple,
+                <span class="inline_shell">mv&nbsp;titi&nbsp;toto</span> renomme le fichier «&nbsp;titi&nbsp;» avec le nom «&nbsp;toto&nbsp;».</li>
+            <li><span class="inline_shell">cp</span> permet de copier un fichier. Par exemple,
+                <span class="inline_shell">cp&nbsp;titi&nbsp;toto</span> crée une copie du fichier «&nbsp;titi&nbsp;» portant le nom «&nbsp;toto&nbsp;».</li>
+            </ul>
+         
+            <table class="objective">
+            <tr>
+            <td>
+            <span>Vous disposez de deux fichiers&nbsp;:</span>
+            </td>
+            <td>
+            <span style="margin-right:0">Votre objectif est d'<b>échanger les noms</b> des deux fichiers, pour obtenir&nbsp;:</span>
+            </td>
+            <tr>
+            <td>
+<pre class="shell">
+momo         50 ko
+zora         90 ko
+</pre>
+            </td>
+            <td>
+<pre class="shell">
+momo         90 ko
+zora         50 ko
+</pre>
+            </td>
+            </tr>
+            </table>
+         </div>
+
+
+         <center>
+         <div><textarea class="shell" disabled id="shell_output" rows="8" cols="80" style="overflow-y: scroll"></textarea></div>
+         <div><span>Commande&nbsp;: </span>
+              <input type="text" id="shell_input" maxlength="50" size="50">
+              <input type="button" onclick="task.executeInput()" value="Exécuter"></div>
+         <div><span id="infos"></span></div>
+         </center>
+
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+      <div class="easy">
+         <p>Il faut tout d'abord découvrir combien de fichiers existent et quels sont leurs tailles. La commande <span class="inline_shell">ls</span> le permet.</p>
+<pre class="shell">
+$ ls
+      bibi         90 ko
+      momo         30 ko
+      toto         70 ko
+      zora         50 ko
+</pre>
+          <p>On observe alors que les deux fichiers les plus gros sont : «&nbsp;bibi&nbsp;» et «&nbsp;toto&nbsp;». Commençons par supprimer
+          le premier, à l'aide de la commande <span class="inline_shell">rm</span>.</p>
+<pre class="shell">
+$ rm bibi
+Le fichier a été supprimé.
+</pre>
+          <p>On peut ensuite supprimer le second, en utilisant à nouveau la commande <span class="inline_shell">rm</span>.</p>
+<pre class="shell">
+$ rm toto
+Le fichier a été supprimé.
+</pre>
+          <p>On peut alors exécuter <span class="inline_shell">ls</span> afin de vérifier qu'il reste bien les deux plus petits fichiers.</p>
+<pre class="shell">
+$ ls
+      momo         30 ko
+      zora         50 ko
+</pre>
+      </div>
+      <div class="hard">
+         <p>Une approche qui ne fonctionne pas serait de d'abord essayer de renommer le fichier «&nbsp;momo&nbsp;» en «&nbsp;zora&nbsp;» puis de renommer «&nbsp;zora&nbsp;» en «&nbsp;momo&nbsp;». En effet, à la suite de la première étape on aurait deux fichiers différents portant le même nom «&nbsp;zora&nbsp;», ce que le système n'autorise pas.</p>
+         <p>Pour pouvoir échanger les noms des deux fichiers, il faut utiliser un troisième nom, utilisé de manière temporaire. Ce nom peut être choisi comme on veut, prenons par exemple «&nbsp;temp&nbsp;». On va donc procéder en trois étapes&nbsp;:</p>
+         <ol>
+         <li>on renomme «&nbsp;momo&nbsp;» en «&nbsp;temp&nbsp;»,</li>
+         <li>on renomme «&nbsp;zora&nbsp;» en «&nbsp;momo&nbsp;»,</li>
+         <li>on renomme «&nbsp;temp&nbsp;» en «&nbsp;zora&nbsp;».</li>
+         </ol>
+         <p>Pour effectuer chacun des trois renommages, on utilise la commande <span class="inline_shell">mv</span>.</p>
+<pre class="shell">
+$ mv momo temp
+Le fichier a été renommé.
+</pre>
+
+<pre class="shell">
+$ mv zora momo
+Le fichier a été renommé.
+</pre>
+
+<pre class="shell">
+$ mv temp zora
+Le fichier a été renommé.
+</pre>
+
+          <p>On peut alors exécuter <span class="inline_shell">ls</span> afin de vérifier qu'on a bien obtenu le résultat souhaité.</p>
+<pre class="shell">
+$ ls
+      momo         90 ko
+      zora         50 ko
+</pre>
+      </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+         <p>Tous les ordinateurs se basent sur des «&nbsp;systèmes de fichiers&nbsp;». Même si l'on ne le voit pas toujours, tous les appareils photos numériques, les tablettes, et les téléphones de type «&nbsp;smartphone&nbsp;» s'appuient également sur des fichiers.
+         </p>
+         <p>
+         Un fichier contient des données (par exemple du texte, une image, etc&hellip;) ou bien les instructions d'un programme. Chaque fichier porte un nom. Ce nom est parfois choisi automatiquement, comme lorsqu'on prend une photo avec un appareil photo numérique, mais il peut également être spécifié par l'utilisateur, comme lorsqu'on enregistre un document créé avec un traitement de texte.
+         </p>
+         <p>La plupart des systèmes modernes permettent de «&nbsp;renommer&nbsp;» un fichier (changer son nom) à travers ce que l'on appelle une «&nbsp;interface graphique&nbsp;», dans laquelle on peut voir le nom du fichier, cliquer dessus, modifier le nom, puis valider. Cependant, aux débuts de l'informatique, les interfaces graphiques n'existaient pas. La seule manière de renommer, déplacer, copier, ou supprimer des fichiers consistait à utiliser des interfaces en «&nbsp;ligne de commande&nbsp;», comme il fallait le faire dans ce sujet.
+         </p>
+         <p>
+         Les interfaces en «&nbsp;ligne de commande&nbsp;» existent toujours dans les systèmes actuels, même si elles sont souvent cachées<!-- et réservées aux utilisateurs avancés-->. Dans certains cas, l'interface en ligne de commande permet d'effectuer des opérations complexes plus rapidement qu'avec une interface graphique. Surtout, les actions effectuées en ligne de commande peuvent être facilement effectuées de nouveau de manière automatique, ce qui permet de «&nbsp;programmer&nbsp;» des manipulations de fichiers.
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

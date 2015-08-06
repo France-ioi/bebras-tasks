@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Fenêtre d'impression</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "Imprimer tout le document, en imprimant 2 pages par côté, et en recto-verso.",
+            "Imprimer les pages n°15 à n°20, en recto seulement.",
+            "Imprimer les pages n°3, n°5, n°12 et n°25, en recto-verso.",
+            "Imprimer les 10 premières pages du document, en recto seulement."
+            ], "added", "#answers_2011-FR-01");
+      </script>
+         <style class="">table tr td, table tr th {
+border: 0px solid #FFFFFF;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-FR-01/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["3"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Fenêtre d'impression</h1>
+<style>
+table tr td, table tr th {
+border: 0px solid #FFFFFF;
+}
+</style>
+<p>Castor a cr&eacute;&eacute; un logiciel de traitement de texte simplifi&eacute;, offrant la possibilit&eacute; d'imprimer le document créé.</p>
+<p>Dans le logiciel, quand on active la commande "imprimer", la fenêtre suivante apparaît, permettant de préciser les options d'impression que l'on souhaite.</p>
+<table width="480" align="middle">
+<tbody bgcolor="#EBE9D8" border="0" >
+<tr>
+<td colspan="2" bgcolor="#727272" align="middle"><font color="white">IMPRIMER</font>
+<img align="right" src="2011-FR-1-croix.png"></td>
+</tr>
+<tr>
+<td colspan="2">
+Entrez les valeurs souhait&eacute;es pour chaque option&nbsp;:</td></tr>
+<tr><td><ul><li>Imprimer recto-verso&nbsp;: </li></ul></td>
+<td><input type="radio" name="rv">oui</input>
+<input type="radio" name="rv">non</input></td>
+</tr>
+<tr><td><ul><li>Nombre de pages par c&ocirc;t&eacute;&nbsp;:</li></li></td>
+<td><input type="radio" name="nb">1</input> 
+<input type="radio" name="nb">2</input></td></tr>
+<tr><td><ul><li>Pages &agrave; imprimer&nbsp;: </li></ul></td>
+<td><input type="radio" name="page">toutes </input><br>
+<input type="radio" name="page"> de la page 
+<input type="text" size="2">  &agrave; la <input type="text" size="2"></input></input></td></tr>
+<tr><td colspan="2">
+<br>
+<center><input type="button" value="Lancer l'impression"> </center>
+</td></tr>
+</tbody></table>
+<br/>
+<p>Imprimer recto-verso signifie imprimer des deux côtés d'une feuille de papier. Imprimer deux pages par côté, signifie que les deux pages sont imprimées côte à côte sur la feuille. 
+</p>
+<p> Parmi les 4 besoins d'impression décrits ci-dessous, il y en a un qui <b>ne</b> peut <b>pas</b> être demandé dans la fenêtre d'impression du logiciel de Castor. Lequel ?
+</p>
+<div class="reponses" id="answers_2011-FR-01">
+</div>
+
+<img style="display: none;" src="2011-FR-1-croix.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+    <p>
+    <b>La réponse est <span class="2011-FR-01_choice_3">C</span> :</b><br>
+    Il n'est pas possibe d'indiquer une liste de numéros de page à imprimer. On pourrait imaginer d'imprimer ces pages en 4 fois, en indiquant pour la première&nbsp;: de la page 3 à la page 3, puis de la page 5 à la page 5, etc. Mais comment obtenir le recto-veso ? En allant à l'imprimante retourner le papier&nbsp;? Dans ce cas, on ne peut pas dire que l'interface a permis de demander cette option d'impression.</p>
+   <p>Les trois autres besoins peuvent être demandés comme suit :
+   <table width="100%">
+   <tr>
+      <td>Cas <span class="2011-FR-01_choice_1">A</span></td>
+      <td>Cas <span class="2011-FR-01_choice_2">B</span></td>
+      <td>Cas <span class="2011-FR-01_choice_4">D</span></td></tr>
+   <!-- cas A ---------------------------------->
+   <tr>
+   <td>
+   <table width="250" align="middle"><tbody bgcolor="#EBE9D8" border="0" >
+   <tr><td colspan="2" bgcolor="#727272" align="middle"><font color="white">IMPRIMER</font>
+   <img align="right" src="2011-FR-1-croix.png"></td></tr>
+   <tr><td colspan="2">Entrez les valeurs souhait&eacute;es pour chaque option&nbsp;:</td></tr>
+   <tr><td><ul><li>Imprimer recto-verso&nbsp;: </li></ul></td>
+   <td><input type="radio" name="rvA" checked>oui</input>
+   <input type="radio" name="rvA">non</input></td>
+   </tr>
+   <tr><td><ul><li>Nombre de pages par c&ocirc;t&eacute;&nbsp;:</li></li></td>
+   <td><input type="radio" name="nbA">1</input> 
+   <input type="radio" name="nbA" checked>2</input></td></tr>
+   <tr><td><ul><li>Pages &agrave; imprimer&nbsp;: </li></ul></td>
+   <td><input type="radio" name="pageA" checked>toutes </input><br>
+   <input type="radio" name="pageA"> de la page <input type="text" size="2">  &agrave; la <input type="text" size="2"></input></input></td></tr>
+   <tr><td colspan="2"><br><center><input type="submit" value="Lancer l'impression"> </center></td></tr>
+   </tbody></table>
+   </td>
+   <!-- cas B ---------------------------------->
+   <td>
+   <table width="250" align="middle"><tbody bgcolor="#EBE9D8" border="0" >
+   <tr><td colspan="2" bgcolor="#727272" align="middle"><font color="white">IMPRIMER</font>
+   <img align="right" src="2011-FR-1-croix.png"></td></tr>
+   <tr><td colspan="2">Entrez les valeurs souhait&eacute;es pour chaque option&nbsp;:</td></tr>
+   <tr><td><ul><li>Imprimer recto-verso&nbsp;: </li></ul></td>
+   <td><input type="radio" name="rvB">oui</input>
+   <input type="radio" name="rvB" checked>non</input></td>
+   </tr>
+   <tr><td><ul><li>Nombre de pages par c&ocirc;t&eacute;&nbsp;:</li></li></td>
+   <td><input type="radio" name="nbB" checked>1</input> 
+   <input type="radio" name="nbB">2</input></td></tr>
+   <tr><td><ul><li>Pages &agrave; imprimer&nbsp;: </li></ul></td>
+   <td><input type="radio" name="pageB">toutes </input><br>
+   <input type="radio" name="pageB"> de la page <input type="text" size="2" value="15">  &agrave; la <input type="text" size="2" value="20"></input></input></td></tr>
+   <tr><td colspan="2"><br><center><input type="submit" value="Lancer l'impression"> </center></td></tr>
+   </tbody></table>
+   </td>
+   <!-- cas D ---------------------------------->
+   <td>
+   <table width="250" align="middle"><tbody bgcolor="#EBE9D8" border="0" >
+   <tr><td colspan="2" bgcolor="#727272" align="middle"><font color="white">IMPRIMER</font>
+   <img align="right" src="2011-FR-1-croix.png"></td></tr>
+   <tr><td colspan="2">Entrez les valeurs souhait&eacute;es pour chaque option&nbsp;:</td></tr>
+   <tr><td><ul><li>Imprimer recto-verso&nbsp;: </li></ul></td>
+   <td><input type="radio" name="rvD">oui</input>
+   <input type="radio" name="rvD" checked>non</input></td>
+   </tr>
+   <tr><td><ul><li>Nombre de pages par c&ocirc;t&eacute;&nbsp;:</li></li></td>
+   <td><input type="radio" name="nbD" checked>1</input> 
+   <input type="radio" name="nbD">2</input></td></tr>
+   <tr><td><ul><li>Pages &agrave; imprimer&nbsp;: </li></ul></td>
+   <td><input type="radio" name="pageD">toutes </input><br>
+   <input type="radio" name="pageD"> de la page <input type="text" size="2" value="1">  &agrave; la <input type="text" size="2" value="10"></input></input></td></tr>
+   <tr><td colspan="2"><br><center><input type="submit" value="Lancer l'impression"> </center></td></tr>
+   </tbody></table>
+   </td>
+   </tr>
+   </table>
+
+   <h2>C'est de l'informatique</h2>
+   <p>Les traitements de texte sont des <i>progiciels</i>; c'est-à-dire des logiciels standardisés et génériques, prévus pour répondre à des besoins ordinaires. Ils sont conçus pour être utilisables par un grand nombre d'utilisateurs. Ils présentent différentes fonctionnalités génériques, que chaque utilisateur peut plus ou moins "paramétrer" pour les adapter à ses besoins spécifiques. Par exemple, la fonction "Imprimer" peut dans notre exemple être paramètrée pour n'imprimer que certaines pages, et choisir leur disposition sur la feuille.<br>
+   La conception des fonctionalités d'un progiciel et de l'interface qui en découle est un compromis entre des besoins génériques et des besoins plus spécifiques. Une bonne conception est généralement une conception "ouverte",
+   qui laisse l'utilisateur faire ses propres choix, et participer ainsi à la définition de l'interface. L'informatique se dirige de plus en plus vers une conception ouverte des logiciels. 
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,88 @@
+
+
+=================================================
+bonus:
+
+* fr14 => serait plus classe si la dernière image de la solution avait la même tête que l'énoncé du sujet.
+
+* fr02: on peut remplacer le png par du raphael si on veut (mettre la pointe de la flèche en rouge)
+
+* factoriser les styles utilisés dans les solutions, en particulier pour les "ul"
+* rendre "vertical-align:top" le défaut pour les "td", et virer les définitions locales utilisées pour cela.
+
+* fr06a et b : est-ce qu'on veut factoriser le code source html ? pour l'instant il y a du copier-coller.
+
+* uniformiser les noms des fonctions "getSolutionContent" et" getSolutionHtml"
+
+* fr04: parler d'invariant de boucle ?
+
+* factoriser les style="border:none;font-size:100%;font-weight:bold"
+
+
+* fr05a => bug si on scroll vers le bas puis on demande à voir son score du coup on voit pas la box à confirmer.
+=================================================
+deprecated:
+
+          <!---<p>C'est exactement ce que l'on devait faire dans ce sujet&nbsp;:
+          d'une part, on a une description de ce que programme est censé faire, 
+          et, d'autre part, on a une observation de ce que le programme a effectué
+          sur une exécution donnée. Il fallait déterminer si l'observation était 
+          possible ou bien si elle correspondait à un bug.</p>-->
+          <!---
+          <tr>
+             <td style='width:12em'>Ci-dessus, le disque de gauche a forcément été dessiné en premier, car il est recouvert par tous les carrés.</td>
+             <td style='width:12em'>Ci-dessus</td>
+             <td style='width:12em'>Ci-dessus</td>
+          </tr>
+          --->
+
+                <!-- Sylvie: J'ai volontairement laissé tomber la compilation -->
+      <!-- Mathias: not convinced by this explanation. compilers don't use graphical representations of programs.
+      <p>
+      Flow diagrams are typically used by compilers, which are tools that transform a program written by a human into a sequence of basic instructions that a computer is able to process.
+      </p><p>
+      In particular, the control flow graph is used while making transformations to the program to optimize it in order to make it execute faster.</p>
+      </p>
+      -->
+      <!-- Mehdi : on peut aussi parler d'invariant de boucle, qui est plus simple ici pour résoudre le problème, on n'a jamais à calculer le 75, on a juste besoin de savoir quand la condition sera fausse, à ce moment, il y aura exactement 5 chocolats dans la boîte carrée. L'invariant est "il y a 82 chocolats au total" permet de déduire que les 77 autres sont dans la boîte ronde. -->
+
+         <!--<div id="solution" style="width:900px;height:200px"></div>-->
+
+
+<!--2013-06-29<br>
+Eljakim Schrijvers<br>
+Emil Kelevedjiev<p>
+We like the task, but we think the harder version should be a little bit
+harder. It is still too easy. The hardness comes more from the characters
+used than the actual algorithm you are looking for.
+
+Pour les couleurs, voir :
+http://pedagogie2.ac-reunion.fr/aa/pedago/theorie/couleur/syntheses/prim-secondaires.htm
+-->
+
+         <!----
+         Par exemple, lorsqu'on envoie un message électronique à un ami. Notre ordinateur envoie toutes les informations décrivant ce message et l'adresse de destination sur Internet. Ces informations sont propagées d'ordinateurs en ordinateurs jusqu'à parvenir à l'ordinateur gérant la boîte de messages du destinataire. 
+         Les ordinateurs intermédiaires font un travail de «&nbsp;routage&nbsp;» (on les nomme routeurs) c'est-à-dire qu'il dirigent le message vers l'adresse de destination. </p>
+         <p>Dans notre problème, un castor est absent et cela rompt la chaîne de propagation. Sur Internet, il arrive également qu'un routeur ne fonctionne pas. Mais dans ce cas, l'information doit quand même être propagée en utilisant un autre chemin. Il est donc important qu'il y ait plusieurs chemins possibles entre l'ordinateur de départ et l'ordinateur de destination. C'est le cas grâce au maillage des très nombreux ordinateurs connectés sur Internet. </p>
+         --->
+
+         <!---arthur:bof
+         <h2>En savoir plus…</h2>
+         <p>Une intéressante présentation du fonctionnement d'Internet, avec des animations illustrant notamment les principes du  «&nbsp;routage&nbsp;» est disponible ici&nbsp;: <a href="http://hwi.uni.be/archief/fr/" target="new">Comment fonctionne Internet&nbsp;?</a></p>
+         --->
+                  <!--         <div id="solution" style="width:900px;height:200px"></div> -->
+<!--2013-06-29<br>
+Eljakim Schrijvers<br>
+Emil Kelevedjiev<p>
+We like the task, but we think the harder version should be a little bit
+harder. It is still too easy. The hardness comes more from the characters
+used than the actual algorithm you are looking for.
+
+Pour les couleurs, voir :
+http://pedagogie2.ac-reunion.fr/aa/pedago/theorie/couleur/syntheses/prim-secondaires.htm
+-->
+         <!---solution interactive:
+         <div id="graph_solution" style="width:400px; height:400px; margin:10px; text-align:center"></div>-->
+
+   <p class='easy'>La solution la plus simple est : <b>7(1S 1N 2E 1S)</b>.</p> \
+   <p class='hard'>La solution la plus simple est : <b>2(5(1S 2E 1S 1O) 3E 10N)</b>.</p> \

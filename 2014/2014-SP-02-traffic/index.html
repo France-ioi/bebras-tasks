@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2014-SP-02-traffic</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-SP-02-traffic/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "hard", "2": "medium", "3": "medium", "4": "easy"},
+          "categories": {ALG : true},
+          "answerType": "Interactive, drag instructions to create a program",
+          "fullFeedback": true,
+          "status": "test"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <img src="castor_tete.png" style="display:none">
+         <h1>Grande réunion</h1>
+            <p>
+            Les flèches du diagramme ci-dessous décrivent les chemins que les castors peuvent emprunter pour se déplacer entre leurs maisons. La grille située à côté contient une case blanche pour chaque flèche. Par exemple, la case de la grille située à la ligne&nbsp;<b>A</b> et à la colonne&nbsp;<b>D</b> correspond à la flèche reliant la maison&nbsp;<b>A</b> à la maison&nbsp;<b>D</b>.
+            </p>
+            <p>
+            Votre objectif est de sélectionner un ensemble de flèches tel que si tous les castors sortent de leur maison et suivent les flèches, alors ils se retrouvent tous dans la maison rouge (marquée&nbsp;<b>L</b>). Cliquez sur les cases blanches pour sélectionner les flèches correspondantes.
+            </p>
+            <table><tr>
+               <td style="width:300px"><div id="graph"></div></td>
+               <td style="width:440px"><div id="matrix"></div></td>
+            </tr></table>
+            <center><div><input id="tryOrReset" type="button" value="Essayer" onclick="task.tryOrReset()"></div></center>
+      </div>
+      <div id="solution">
+
+          <h2>Solution</h2>
+
+          <p>Pour construire la solution, une bonne méthode consiste à partir de la maison rouge, et à sélectionner les chemins qui vont vers la maison, en remontant jusqu'à atteindre toutes les maisons.</p>
+          <p>On peut aussi procéder autrement, en sélectionnant d'abord tous les chemins, puis en enlevant certains chemins un par un, en se demandant pour chaque chemin (c'est-à-dire pour chaque case blanche)&nbsp;: «&nbsp;si j'enlève ce chemin, est ce que du point de départ de ce chemin je peux encore rejoindre la maison rouge&nbsp;?&nbsp;» Si oui, on enlève ce chemin; si non, on le garde.</p>
+ 
+          <p>Il y avait plusieurs solutions possibles. Par exemple celle-ci.</p>
+          <center><img src="solution.png"></center>
+
+          <h2>C'est de l'informatique !</h2>
+          <p>
+          Le diagramme formé des maisons et des chemins entre les maisons constitue ce qu'on appelle un  «&nbsp;graphe&nbsp;». L'objectif du sujet était de sélectionner un sous-ensemble des chemins, c'est-à-dire un «&nbsp;sous-graphe&nbsp;», tels que en partant de toutes les maisons on  accède à la maison rouge, sans tourner en rond.
+          </p>
+          <p>
+          La grille utilisée pour repérer les chemins s'appelle une «&nbsp;matrice d'adjacence&nbsp;». Le mot «&nbsp;matrice&nbsp;» est le nom mathématique pour une grille. Le mot «&nbsp;adjacence&nbsp;» provient du fait que, pour chaque maison, on connaît les maisons qui lui sont adjacentes, c'est-à-dire celles qui lui sont directement reliées sur le graphe. Dans cette matrice d'adjacence, il y a une ligne pour chaque maison, et une colonne pour chaque maison. 
+          </p>
+          <p>
+          La répartition des cases blanches dans la matrice d'adjacence décrivent précisément tous les chemins du graphes. En effet, si on ne disposait que du diagramme de gauche, on pourrait retrouver la position de toutes les cases blanches dans la grille. Et, réciproquement, si on ne disposait que de la matrice d'adjacence, on pourrait reconstruire l'ensemble des chemins entre les maisons des castors.
+          </p>
+          <p>
+          La structure de matrice d'adjacence présentée ici est fréquemment utilisée pour programmer des algorithmes sur les graphes.
+          </p>
+      </div>
+   </body>
+</html>

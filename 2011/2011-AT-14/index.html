@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Mot de passe</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "123aNNa",
+            "Peter3ABCd",
+            "2010Castor4EVEr",
+            "bENNOZzz"
+            ], "added", "#answers_2011-AT-14");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-AT-14/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+
+<h1>Mot de passe </h1>
+<p>
+Pour utiliser les ordinateurs de son &eacute;cole, Castor doit inventer un mot de passe pour son compte d'utilisateur. Il peut utiliser des lettres minuscules sans accent, des lettres majuscules et les chiffres de 0 &agrave; 9. De plus, son mot de passe ne sera accept&eacute; que s'il respecte la r&egrave;gle de construction repr&eacute;sent&eacute;e par le sch&eacute;ma ci-dessous.
+</p>
+<p>
+<img src="2011-AT-14.jpg">
+</p>
+<p>Ce sch&eacute;ma se lit comme suit : on part de la fl&egrave;che "DEPART", puis on suit n'importe quel chemin jusqu'&agrave; la fl&egrave;che "ARRIVEE". A chaque fois que l'on traverse une fl&egrave;che, on ajoute : une lettre minuscule si la flèche est notée "a-z", une lettre majuscule si la flèche est notée "A-Z" ou un chiffre si la flèche est notée "0-9". 
+</p>
+<p>
+Par exemple, le  mot de passe "Castor2m" respecte la règle de construction. Du départ, "C" est obtenu en traversant la flèche "A-Z" obliquant vers le haut à droite. Puis "a", puis "s", puis "t", puis "o", puis "r" sont obtenus en traversant 5 fois la boucle "a-z". Puis "2" est obtenu en traversant la flèche verticale "0-9". Puis "m" est obtenu en traversant la flèche "a-z", obliquant vers l'arrivée. </p>
+<p>
+Castor h&eacute;site entre 4 mots de passe. Mais l'un d'entre eux <b>ne</b> respecte <b>pas</b> la r&egrave;gle de construction d&eacute;crite par le sch&eacute;ma. Lequel ?
+</p>
+<div class="reponses" id="answers_2011-AT-14">
+</div>
+
+
+<img style="display: none;" src="2011-AT-14.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+   <h2>La solution</h2>
+   <p>Le dessin ci-dessous montre qu'on ne peut pas construire le mot de passe "bENNOZzz" à l'aide du schéma de construction proposé, car on ne peut ajouter le dernier "z" minusucle.
+   </p>
+   <p>
+   <img src="2011-AT-14-sol.jpg" style="width:750px">
+   </p>
+   <p>Les trois autres mot de passe respectent la règle de construction :
+   <ul><li>Le mot de passe "123aNNa" est construit comme suit : plusieurs chiffres (boucle "0,9" sur le premier point), puis une minuscule (flèche "a-z" obliquant vers le bas), puis plusieurs majuscules (boucle "A-Z" en bas du schéma), enfin, une minuscule "a" (flèche "a-z", obliquant vers l'arrivée). Le mot de passe se termine bien ici.</li>
+   <li>Le mot de passe "Peter3ABCd" est construit comme suit : une majuscule (flèche "A-Z" obliquant vers le haut), puis plusieurs minuscules (boucle "a-z" en haut du schéma), puis, un chiffre (flèche verticale "0-9"), puis plusieurs majuscules (boucle "A-Z" en bas du schéma), enfin une minuscule (flèche "a-z" obliquant vers l'arrivée). Le mot de passe se termine bien ici.</li>
+   <li>Le mot de passe "2010Castor4EVEr" est construit comme suit : plusieurs chiffres (boucle "0,9" sur le premier point), une majuscule (flèche "A-Z" obliquant vers le haut), puis plusieurs minuscules (boucle "a-z"), un chiffre (flèche verticale "0-9"), plusieurs majuscules (boucle  "A-Z" en bas du schéma), enfin, une minuscule (flèche "a-z" obliquant vers l'arrivée). Le mot de passe se termine bien ici.</li></ul>
+   </p>
+   <h2>C'est de l'informatique</h2> 
+   <p>Ce schéma de construction de mot de passe s'appelle un <i>automate</i> en informatique.
+   </p><p>
+   Les automates sont utiles pour nous aider à modéliser des problèmes afin de les résoudre. Ils sont notamment très utiles reconnaître un motif dans un texte, mais aussi pour simuler le fonctionnement de certains petits appareils (machine à café, distributeur de tickets, mais aussi les systèmes électroniques de voitures ou d'avions). Ils possèdent de nombreuses qualités théoriques et pratiques.
+   </p>
+   </div>
+</div> <!-- task-solution -->
+   </body>
+</html>

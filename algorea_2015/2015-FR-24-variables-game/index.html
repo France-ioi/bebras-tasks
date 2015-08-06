@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2015-FR-24-variables-game</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript" src="task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-24-variables-game/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": true
+      };
+      </script>
+      <style>
+         #drawing {
+            margin-left: 1em;
+         }
+         .columns td {
+            vertical-align: top;
+            padding-right: 1em;
+         }
+         .column_head {
+            font-weight: bold;
+         }
+         #message {
+            text-align: center;
+            font-weight: bold;
+            color: red;
+            padding: 0.5em;
+            height: 1em;
+         }
+         .buttons input {
+            margin-bottom: 5px;
+         }
+         #textSolution li {
+            margin-top: 0.2em;
+         }
+         .valigntop td {
+            vertical-align: top;
+         }
+         .examples  {
+            border-collapse: collapse;
+         }
+         .examples td {
+            border: 1px solid black;
+            padding: 0.5em;
+         }
+         .easy, .medium, .hard {
+            display:none
+         }
+         .instructions {
+            border-collapse: collapse;
+         }
+         .instructions tr {
+         }
+         .instructions td {
+            border: solid black 1px;
+            padding: 8px;
+            text-align: center;
+            width: 200px;
+         }
+         .result {
+            border-collapse: collapse;
+            text-align: center;
+         }
+         .result td {
+            border: none;
+            padding: 3px;
+         }
+         .result input {
+            text-align: center;
+         }
+   </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Jeu des variables</h1>
+         <div id="tabsContainer"></div>
+         <p>
+         Un programme est une séquence d'instructions exécutées les unes après les autres.
+         Dans un programme, on manipule une ou plusieurs <b>variables</b>. 
+         Une variable peut être vue comme le nom d'une boîte dans laquelle
+         on stocke un nombre.
+         </p>
+         <p>
+         Une instruction d'un programme peut modifier le nombre stocké dans une variable.
+         Par exemple, l'instruction "a = a + 1" ajoute 1 au nombre stocké
+         dans la variable "a".
+         Commencez par étudier les exemples ci-dessous pour bien comprendre 
+         comment fonctionnent les variables.
+         </p>
+         <table id="samples" class="instructions"></table>
+         <p>
+         <b>À vous de jouer, complétez les cases dans la colonne de droite :</b>
+         </p>
+         <table id="questions" class="instructions"></table>
+         <br/>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+            <ul><li>Version facile :
+               <ul>
+                  <li>Question 1 : a vaut 3</li>
+                  <li>Question 2 : a vaut 2</li>
+                  <li>Question 3 : a vaut 7</li>
+               </ul>
+            </li>
+            <li>Version moyenne :
+               <ul>
+                  <li>Question 1 : a vaut 3, b vaut 5</li>
+                  <li>Question 2 : a vaut 5, b vaut 5</li>
+                  <li>Question 3 : a vaut 4, b vaut 2</li>
+               </ul>
+            </li>
+            <li>Version difficile :
+               <ul>
+                  <li>Question 1 : a vaut 3, b vaut 1, c vaut 4</li>
+                  <li>Question 2 : a vaut 5, b vaut 2, c vaut 3</li>
+                  <li>Question 3 : a vaut 2, b vaut 1, c vaut 1</li>
+               </ul>
+            </li>
+      </div> <!-- task-solution -->
+   </body>
+</html>

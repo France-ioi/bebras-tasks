@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Dessine un castor</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+         task.start= [[1,0,0,0,0,0,1,0],[0,1,0,0,0,1,0,0],[0,1,0,0,0,1,0,0],[0,1,0,0,0,0,0,1],[1,0,0,0,1,0,0,0],[0,0,1,0,0,0,1,0],[0,0,1,0,0,1,0,0],[0,1,1,0,1,0,0,1]];
+        task.beaver= [[0,0,1,1,1,1,0,0],[0,1,0,0,0,0,1,0],[1,0,0,0,0,0,0,1],[1,0,1,0,0,1,0,1],[1,0,0,0,0,0,0,1],[1,0,0,1,1,0,0,1],[0,1,0,1,1,0,1,0],[0,0,1,1,1,1,0,0]];
+        task.current= [];
+        task.solution= [];
+        task.done= 0;
+
+        task.getAnswer = function(callback) {
+          var sol = "";
+          for(var i = 0; i < 7; i++) {
+            for(var j = 0; j < 7; j++) {
+              sol += task.solution[i][j];
+            }
+          }
+          callback(sol);
+        };
+        task.reloadAnswer= function(strAnswer, callback) {
+           task.reset(false);
+           for(var i = 0; i < strAnswer.length; i ++) {
+             if(strAnswer.charAt(i) == '1') {
+               task.click(Math.floor(i/7), i%7, true);
+             }
+           }
+           task.draw();
+           callback();
+        };
+
+        task.load= function(views, callback) {
+           task.reset(false);
+           var htmlContent = "";
+           for(var i = 0; i < 8; i++) {
+             htmlContent += "<tr>";
+             for(var j = 0; j < 8; j++) {
+               var style = '';
+               if(task.beaver[i][j]) {
+                 style = 'background:black;';
+               }
+               htmlContent += '<td style="'+style+'"></td>';
+             }
+             htmlContent += "</tr>";
+           }
+           $("#model_2012_FR_08").html(htmlContent);
+           callback();
+        };
+
+        task.getCell= function(element, event) {
+           var row = $(element).parent().parent().children().index($(element).parent());
+           var col = $(element).parent().children().index($(element));
+           if ((event.offsetX < 15) && (col > 0)) {
+              col--;
+           }
+           if ((event.offsetY < 15) && (row > 0)) {
+              row--;
+           }
+           row = Math.min(6, row);
+           col = Math.min(6, col);
+           return { row: row, col: col };
+        };
+
+        task.selectCell= function (row, col) {
+          return $("#pic_2012_FR_08 tr:eq("+(row)+") td:eq("+(col)+")");
+        };
+
+        task.click= function (row, col, replay) {
+          if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"[" + row + "][" + col + "]"});}
+          if (task.done && (!replay)) {
+             alert("Vous avez réussi à dessiner le castor, vous ne pouvez plus rien modifier.");
+             return;
+          }
+          task.solution[row][col] = 1 - task.solution[row][col];
+
+          for(var i = row; i < row + 2 && i < 8; i++) {
+            for(var j = col; j < col + 2 && j < 8; j++) {
+              task.current[i][j] = 1 - task.current[i][j];
+              if(task.current[i][j] == 1) {
+                task.selectCell(i, j).addClass("black_2012_FR_08");
+                } else {
+                task.selectCell(i, j).removeClass("black_2012_FR_08");
+              }
+            }
+          }
+
+          task.done = 1;
+          for(var i = 0; i < 8; i++) {
+            for(var j = 0; j < 8; j++) {
+              task.done &= (task.current[i][j] == task.beaver[i][j]);
+            }
+          }
+
+          if(task.done) {
+            $("#success_2012_FR_08").show();
+            if(replay == false) {
+               platform.validate("done", 1);
+            }
+          }
+        };
+
+        task.lastRow= -1;
+        task.lastCol= -1;
+
+        task.highlightCell= function(row, col) {
+           if (this.lastRow !== -1) {
+              task.selectCell(this.lastRow, this.lastCol).removeClass("topred_2012_FR_08 leftred_2012_FR_08");
+              task.selectCell(this.lastRow, this.lastCol+1).removeClass("topred_2012_FR_08 rightred_2012_FR_08");
+              task.selectCell(this.lastRow+1, this.lastCol).removeClass("bottomred_2012_FR_08 leftred_2012_FR_08");
+              task.selectCell(this.lastRow+1, this.lastCol+1).removeClass("bottomred_2012_FR_08 rightred_2012_FR_08");
+              task.selectCell(this.lastRow-1, this.lastCol).removeClass("bottomred_2012_FR_08");
+              task.selectCell(this.lastRow-1, this.lastCol+1).removeClass("bottomred_2012_FR_08");
+              task.selectCell(this.lastRow, this.lastCol-1).removeClass("rightred_2012_FR_08");
+              task.selectCell(this.lastRow+1, this.lastCol-1).removeClass("rightred_2012_FR_08");
+           }
+           task.selectCell(row, col).addClass("topred_2012_FR_08 leftred_2012_FR_08");
+           task.selectCell(row, col+1).addClass("topred_2012_FR_08 rightred_2012_FR_08");
+           task.selectCell(row+1, col).addClass("bottomred_2012_FR_08 leftred_2012_FR_08");
+           task.selectCell(row+1, col+1).addClass("bottomred_2012_FR_08 rightred_2012_FR_08");
+           task.selectCell(row-1, col).addClass("bottomred_2012_FR_08");
+           task.selectCell(row-1, col+1).addClass("bottomred_2012_FR_08");
+           task.selectCell(row, col-1).addClass("rightred_2012_FR_08");
+           task.selectCell(row+1, col-1).addClass("rightred_2012_FR_08");
+           this.lastRow = row;
+           this.lastCol = col;
+        };
+
+        task.draw= function() {
+          var htmlContent = "";
+          for(var i = 0; i < 8; i++) {
+            htmlContent += "<tr>";
+            for(var j = 0; j < 8; j++) {
+              var class_ = '';
+              if(task.current[i][j]) {
+                if(task.done) {
+                  class_ = 'green_2012_FR_08';
+                } else {
+                  class_ = 'black_2012_FR_08';
+                }
+              }
+              htmlContent += '<td class="'+class_+'"></td>';
+            }
+            htmlContent += "</tr>";
+          }
+          $("#pic_2012_FR_08").html(htmlContent);
+
+          $("#pic_2012_FR_08 td").mousemove(function(event) {
+             var cell = task.getCell(this, event);
+             task.highlightCell(cell.row, cell.col);
+          });
+
+
+          $("#pic_2012_FR_08 td").click(function(event) {
+             var cell = task.getCell(this, event);
+             task.click(cell.row, cell.col, false);
+          });
+        };
+
+        task.reset= function(withConfirm) {
+          if (withConfirm) {
+             if (task.done) {
+                alert("Vous avez réussi à dessiner le castor, vous ne pouvez pas recommencer.");
+                return;
+             }
+             if (!confirm("Voulez-vous vraiment repartir de zéro sur cette question ?")) {
+                return;
+             }
+             if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"reset"});}
+          }
+          task.done = 0;
+          task.current = $.extend(true, [], task.start);
+          task.solution = [[0,0,0,0,0,0,0], [0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]];
+          task.draw();
+        };
+
+      </script>
+         <style class="">.black_2012_FR_08 {
+        background: black;
+      }
+      .green_2012_FR_08 {
+        background: green;
+      }
+
+      #pic_2012_FR_08 td, #model_2012_FR_08 td {
+        width: 30px;
+        height: 30px;
+        padding: 0px;
+        margin: 0px;
+        border: 2px solid black;
+      }
+
+      #pic_2012_FR_08 td.leftred_2012_FR_08   { border-left:2px solid red; }
+      #pic_2012_FR_08 td.rightred_2012_FR_08  { border-right:2px solid red; }
+      #pic_2012_FR_08 td.topred_2012_FR_08    { border-top:2px solid red; }
+      #pic_2012_FR_08 td.bottomred_2012_FR_08 { border-bottom:2px solid red; }
+
+      #pic_2012_FR_08, #model_2012_FR_08 {
+        border-collapse: collapse;
+        margin-left: 40px;
+        margin-bottom: 40px;
+      }
+      #pic_2012_FR_08 {
+        float:left;
+        margin-right:40px;
+      }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-08/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "1101010110100001010111110111111000000110010110011"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Dessine un castor</h1>
+<p>Cliquez où vous voulez sur l'image de gauche, jusqu'à obtenir le même dessin que sur l'image de droite. Comme vous pourrez le voir, chaque clic inverse un bloc de 4 cases d'un coup.
+</p>
+<p>
+Le score ne dépend pas du nombre de clics, tout ce qui compte c'est d'arriver à dessiner le castor. Vous ne pouvez pas perdre de points sur ce sujet.
+</p>
+<p>
+Un conseil&nbsp;: soyez méthodique pour avoir une chance de réussir en un temps raisonnable&nbsp;!
+</p>
+    <center>
+   <table id="pic_2012_FR_08">
+    </table>
+    <table id="model_2012_FR_08">
+    </table>
+    <span id="success_2012_FR_08" style="color:blue;font-weight:bold;display:none">Bravo, vous avez réussi&nbsp;!</span>
+    <div id="buttons_2012_FR_08">
+      <input type="button" value="Recommencer" onclick="task.reloadAnswer('', function() {});" />      
+    </div></center>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : interactif -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Pour obtenir le résultat correct en un temps raisonnable, il faut utiliser une approche méthodique.  
+Une façon de faire est de considérer les cases une par une, ligne par ligne en partant du haut, et d'essayer de mettre ces
+cases dans leur état final, sans modifier les cases qui ont déjà été traitées.
+</p>
+
+<p>Si vous suivez cette approche, vous verrez que vous n'avez jamais vraiment le choix. Pour chaque case,
+soit elle est déjà dans le bon état, soit non. Si elle n'est pas dans le bon état, placez la souris de telle
+sorte que la case considérée se trouve dans le coin en haut à gauche du carré rouge associé à la souris,
+puis cliquez une fois. La case considérée passe alors dans le bon état. Les trois autres cases qui
+sont modifiées par cette opération sont des cases qui sont en bas et/ou à droite, donc ce sont des
+cases qui seront traitées plus tard.
+</p>
+
+<p>Lorsque vous arrivez sur la dernière ligne, les cases sont forcément dans le bon état,
+car sinon il n'aurait pas été possible de résoudre le sujet.</p>
+
+<h2>C'est de l'informatique</h2>
+
+<p>L'exercice portait sur la représentation informatique d'une image sous la forme d'une grille de pixels noirs et blancs, donc correspondant à des <b>bits</b> à 0 ou 1. La seule opération possible était l'inversion d'un bloc de 2x2 pixels, correspondant à l'opération binaire &laquo;&nbsp;NON&nbsp;&raquo; sur les 4 bits correspondants.</p>
+
+<p>Pour le résoudre en un temps raisonnable, il était nécessaire d'être méthodique, donc de trouver un algorithme et de l'appliquer. Ici l'algorithme le plus adapté consistait à parcourir la grille dans un ordre bien défini, par exemple ligne par ligne, et chaque ligne de gauche à droite, en prenant une décision à chaque case. Choisir un ordre de parcours bien précis des données disponibles est au c?ur de nombreux algorithmes.</p>
+
+<h2>Culture informatique</h2>
+
+<p>La dernière remarque de la correction soulève une question intéressante : pourquoi est-il toujours le cas
+que la dernière ligne est forcément dans le bon état lorsqu'on y arrive ?</p>
+
+<p>La réponse est liée à la notion de <b>parité</b> : le nombre de cases noires sur une
+ligne ou sur une colonne est toujours pair (c'est-à-dire est toujours un multiple de 2).
+En effet, lorsqu'on clique quelque part, on inverse toujours deux cases d'une ligne
+ou d'une colonne donnée. Soit on enlève deux cases noires, soit on ajoute deux cases
+noires, soit on en ajoute une et on en retire une autre.</p>
+
+<p>Ainsi, vu qu'au départ 
+le nombre de cases noires d'une ligne ou d'une colonne est pair, ce nombre va 
+toujours rester pair. Cela explique que si toutes les cases sauf celles de la dernière
+ligne et celles de la dernière colonne sont dans le bon état, alors les cases restantes
+sont forcément également dans le bon état.</p>
+
+<p>
+Autrement dit, l'information décrite par les cases de la dernière ligne et de la première
+colonne est redondante. En informatique, on évite en général les informations redondantes,
+car cela consomme de la mémoire inutilement. Néanmoins, il y a des situations où la redondance
+est justement très utile, comme par exemple pour pouvoir détecter si des données ont été 
+corrompues, que ce soit sur un disque dur cassé ou bien une liaison réseau défaillante.
+</p>
+
+<p>
+Supposons que l'on dispose d'une image carrée constituée de cases noires ou blanches (des pixels).
+On ajoute alors une ligne et une colonne à cette image, en coloriant ces nouvelles cases
+de telle sorte que chaque ligne et chaque colonne contienne un nombre pair de cases noirs.
+Si jamais l'image est altérée et que un, deux ou trois pixels changent de couleurs,
+alors on pourra facilement le détecter, car il y aura forcément une ligne ou une colonne 
+sur laquelle le nombre de cases ne sera plus un nombre pair. Exercice : démontrez-le !
+</p>
+
+<p>Que ce soient les disques durs, les CDroms, les mémoires flash ou les paquets Internet,
+tous utilisent un système de redondance d'information permettant de détecter et même de
+réparer les erreurs dues à des défaillances du matériel.
+</p>
+
+
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

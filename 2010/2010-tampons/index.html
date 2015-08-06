@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Tampons</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "D'abord le 5 puis le 2 puis le 4 puis le 3 et finalement le 1",
+             "D'abord le 5 puis le 2 puis le 3 puis le 4 et finalement le 1",
+             "D'abord le 5 puis le 3 puis le 4 puis le 2 et finalement le 1",
+             "D'abord le 5 puis le 4 puis le 2 puis le 3 et finalement le 1"
+            ], "added", "#answers_2010-tampons");
+      </script>
+         <style class="">.table-2010-tampons td {
+   border: solid black 1px;
+   text-align: center;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-tampons/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Tampons</h1>
+<p>
+Castor dispose de cinq tampons, numérotés de 1 à 5.
+</p>
+<center><table class="table-2010-tampons">
+<tr>
+   <td><img src="tampon1.jpg"/></td>
+   <td><img src="tampon2.jpg"/></td>
+   <td><img src="tampon3.jpg"/></td>
+   <td><img src="tampon4.jpg"/></td>
+   <td><img src="tampon5.jpg"/></td>
+</tr>
+<tr>
+   <td>1</td>
+   <td>2</td>
+   <td>3</td>
+   <td>4</td>
+   <td>5</td>
+</tr>
+</table></center>
+<p>
+Castor a réalisé cette amusante image.
+</p>
+<center><img src="enonce.jpg" /></center>
+<p><b>Dans quel ordre Castor a-t-il utilisé les tampons&nbsp;?</b></p>
+
+<div class="reponses" id="answers_2010-tampons">
+</div>
+
+
+<img style="display: none;" src="tampon1.jpg" />
+<img style="display: none;" src="tampon2.jpg" />
+<img style="display: none;" src="tampon3.jpg" />
+<img style="display: none;" src="tampon4.jpg" />
+<img style="display: none;" src="tampon5.jpg" />
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-tampons_choice_1">A</span> est correcte.
+   </p><p>
+   Les tampons recouvrent les tampons appliqués avant eux. Ici, l'arbre vert ne couvre aucun autre dessin. Le soleil
+   couvre l'arbre vert. L'arbre marron couvre le soleil. Le castor couvre l'arbre marron. La maison couvre le castor. Donc
+   l'ordre d'application des tampons est : arbre vert (5), soleil(2), arbre marron(4), castor(3), maison(1).
+   </p>
+   <h2>C'est de l'informatique </h2>
+   <p>
+   Les relations d'ordre ont souvent un rôle important dans la manipulation de données informatique. Dans cet
+   exemple, la relation d'ordre entre les images est définie par la notion de superposition, et correspond à l'ordre dans
+   lequel les tampons sont appliqués. Changer l'ordre selon cette relation donnerait ainsi une image différente.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

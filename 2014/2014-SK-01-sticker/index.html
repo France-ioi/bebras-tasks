@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2014-SK-01-sticker</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-SK-01-sticker/",
+          "language": "fr",
+          "version": "",
+          "authors": "",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "medium", "2": "medium", "3": "easy", "4": "easy"},
+          "categories": {},
+          "answerType": "Interactive, drag and drop",
+          "fullFeedback": true,
+          "status": "test"
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         task.solution = [3, 0, 2, 1];
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #textSolution img {
+         border: 1px solid gray;
+         margin: 1em;
+      }
+      </style>
+ 
+  </head>
+  <body>
+      <div id="task">
+          <img src="easy0.png" style="display:none" />
+          <img src="easy1.png" style="display:none" />
+          <img src="easy2.png" style="display:none" />
+          <img src="easy3.png" style="display:none" />
+          <h1>Autocollants</h1>
+          <p>
+            Castor a décoré son aquarium avec des autocollants.
+            Trouvez dans quel ordre Castor a collé les autocollants,
+            et faites-les glisser dans cet ordre.
+          </p>
+          <table>
+          <tr><td>
+             <img src="full_easy.png" style="width:400px;height:400px; margin-left:1em" />
+          </td>
+          <td>
+             <div id="anim" class="touch"></div>
+          </td>
+          </tr>
+          </table>
+      </div>
+      
+      <div id="solution">
+          <h2>Solution</h2>
+          <p>En observant l'aquarium, on note que :</p>
+          <ul>
+            <li>Castor est en partie recouvert par les algues et par le poisson, donc Castor a été collé avant les algues et avant le poisson.</li>
+            <li>Les algues sont en partie recouvertes par le poisson et par les cailloux, donc les algues ont été collées avant le poisson et les cailloux.</li>
+            <li>Le poisson est en partie recouvert par les cailloux, donc le poisson a été collé avant les cailloux.</li>
+          </ul>
+          <p>Ces observations nous permettent de déduire que les autocollants ont été collés dans l'ordre suivant&nbsp;:</p>
+          <div id="textSolution"></div>
+          
+          <h2>C'est de l'informatique</h2>
+          <p>
+          <img src="stickers_graph.png" style="float:right; margin-left:0.5em" />
+          Dans ce sujet, il fallait trouver un ordre qui respecte un certain nombre de contraintes. Le placement d'une image par dessus une
+          autre sur le dessin implique une contrainte du type "a été collé avant". L'ensemble des contraintes forme un «&nbsp;graphe&nbsp;», comme représenté
+          ci-contre, où chaque flèche correspond à une contrainte et part de l'image qui a été collée en première.
+          </p>
+          <p>
+          Trouver un ordre qui est compatible avec un graphe est ce que l'on appelle un «&nbsp;tri topologique&nbsp;» des sommets du graphe. Il s'agit d'un problème classique d'algorithmique. Dans cet exemple, il n'y avait qu'un seul ordre possible, mais pour des graphes plus complexes,
+          il peut y en avoir plusieurs.
+          </p>
+          <p>
+          Au contraire, lorsque le graphe contient un cycle, par exemple si le poisson recouvre
+          les algues, qui recouvrent les cailloux, qui recouvrent le poisson, aucun ordre n'est possible. Le tri topologique ne s'applique qu'aux graphes sans cycles, que l'on appelle les graphes «&nbsp;acycliques&nbsp;».
+          </p>
+          <div style="clear:both"></div>
+      </div>
+  </body>
+</html>

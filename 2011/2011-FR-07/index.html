@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ranger sa chambre</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">/* images en plus à charger
+  '6.png'
+  '7.png'
+  '8.png'
+  '9.png'
+*/
+ var nrows = 8, ncols = 12;
+ var objetsPos = 
+     [ [0, 3], [7, 10], [1, 0], [1, 7], [2, 2], [2, 5],
+       [3, 3], [3, 9], [5, 9], [4, 6], [4, 8], [5, 1], [5, 4], [6, 8] ];
+ var posFleche = [7, 4];
+ var dirFleche = 0;
+ var deltas = [ [-1, 0], [0, 1], [1, 0], [0, -1] ];
+
+   task.bestScore= "";
+   task.load= function(views, callback) {
+      task.bestScore = "";
+      creeTerrain();
+      task.reloadAnswer("");
+      dessine();
+      $("#runbutton-2011-FR-07").click(go);
+      callback();
+   };
+   task.getAnswer= function(callback) {
+       callback(task.bestScore + "$" + $("#code-2011-FR-07").val());
+   };
+   task.reloadAnswer= function(newAnswer, callback)  {
+       if (newAnswer === "") {
+          task.bestScore = "";
+          $("#code-2011-FR-07").attr("value", "FDAAD");
+       }
+       else {
+          var answerSepPos = newAnswer.indexOf("$", 0);
+          task.bestScore = newAnswer.substr(0, answerSepPos);
+          $("#code-2011-FR-07").attr("value", newAnswer.substr(answerSepPos+1, newAnswer.length-answerSepPos-1));
+       }
+       writeBest();
+   };
+
+var writeBest = function() {
+  if(task.bestScore != "") {
+      var plural = "";
+      if (task.bestScore > 1)
+          plural = "s";
+      var bestMessage = "Votre meilleur score : " + task.bestScore + " objet" + plural + ".";
+      if (task.bestScore < objetsPos.length)
+          bestMessage += " Vous pouvez faire mieux."
+      $("#best-2011-FR-07").html(bestMessage);
+  } else
+      $("#best-2011-FR-07").html("Exécutez l'exemple pour bien comprendre.");
+}
+
+var selectCell = function (row, col) {
+  return $("#terrain-2011-FR-07 tr:eq("+row+") td:eq("+col+")");
+}
+
+var creeTerrain = function () {
+  for(var row = 0; row < nrows; row++) {
+      $("#terrain-2011-FR-07").append("<tr></tr>");
+      for(var col = 0; col < ncols; col++)
+          $("#terrain-2011-FR-07 tr:eq("+row+")").append("<td></td>");
+  };
+};
+
+var dessine = function () {
+  $("#terrain-2011-FR-07 td").html("");
+  for(var pos in objetsPos)
+      selectCell(objetsPos[pos][0], objetsPos[pos][1])
+          .html("<img src='4.png'/>");
+
+  selectCell(posFleche[0], posFleche[1])
+      .html("<img src='" + (dirFleche + 6) + ".png' />");
+}
+
+var updateScore = function(score) {
+  var message = "Score : " +  score + " objet";
+  if (score > 1)
+      message += "s";
+  $("#result-2011-FR-07").html(message);
+}
+
+var go = function () {
+  $("#result-2011-FR-07").html("Score :");
+  var stepDuration = 400; // in ms
+  $("#runbutton-2011-FR-07").attr("disabled", "disabled");
+  var commands = $("#code-2011-FR-07").attr("value").replace(/\s/g, "").toUpperCase();
+  if(commands.length > 10) {
+      alert("Votre programme contient " + commands.length + " commandes, le robot n'a de la mémoire que pour 10 commandes.");
+      $("#runbutton-2011-FR-07").removeAttr("disabled");
+      return;
+  }
+
+  for(var cmd = 0; cmd < commands.length; cmd++)
+      switch(commands.charAt(cmd)) {
+      case "G": case "D": case "F": case "A": break;
+      default:
+          $("#result-2011-FR-07").html("Commande inconnue : \""+commands.charAt(cmd)+"\"");
+          $("#runbutton-2011-FR-07").removeAttr("disabled");
+          return;
+      }
+
+  var terrain = new Array(nrows);
+  for(var row = 0; row < nrows; row++) {
+      terrain[row] = new Array(ncols);
+      for(var col = 0; col < ncols; col++)
+          terrain[row][col] = 0;
+  }
+  for(var pos in objetsPos)
+      terrain[objetsPos[pos][0]][objetsPos[pos][1]] = 1;
+
+  var pos = [posFleche[0], posFleche[1]];
+  var dir = dirFleche;
+  var t = 0;
+  var score = 0;
+  for(var i = 0; i < 10 * commands.length; i++) {
+      stepDuration *= 0.96;
+      $("#terrain-2011-FR-07").delay(stepDuration).queue(function (){
+          var avance = function () {
+              var newpos = [pos[0] + deltas[dir][0], pos[1] + deltas[dir][1]];
+              if(newpos[0] < 0 || newpos[1] < 0 ||
+                 newpos[0] >= nrows || newpos[1] >= ncols)
+                  return false;
+              pos = newpos;
+              if(terrain[pos[0]][pos[1]] != 0) {
+                  terrain[pos[0]][pos[1]] = 0;
+                  score++;
+                  updateScore(score);
+              }
+              selectCell(pos[0], pos[1]).html("<img src='3.png' />");
+              return true;
+          };
+          selectCell(pos[0], pos[1]).html("<img src='3.png' />");
+          switch(commands.charAt(t % commands.length)) {
+          case "D": dir = (dir+1)%4; break;
+          case "G": dir = (dir+3)%4; break;
+          case "A": avance(); break;
+          case "F": while(avance()); break;
+          }
+          selectCell(pos[0], pos[1]).html("<img src='" + (dir + 6) + ".png' />");
+          t++;
+          $(this).dequeue();
+      });
+  }
+  $("#terrain-2011-FR-07").delay(stepDuration).queue(function (){
+      if (score > task.bestScore) {
+          task.bestScore = score;
+          platform.validate("stay", 1);
+      }
+      writeBest();
+      dessine();
+      $("#runbutton-2011-FR-07").removeAttr("disabled");
+      $(this).dequeue();
+  });
+}
+</script>
+         <style class="">#terrain-2011-FR-07 td { width:35px; height:35px; margin: 0; padding: 0;border: 3px solid black; text-align: center; vertical-align: middle; }
+   #terrain-2011-FR-07 { border: 5px solid black; border-collapse: collapse; }</style>
+         <script class="grader" type="text/javascript">var grader = {
+   gradeTask: function(answer, answerToken, callback) {
+      var pos = answer.indexOf('$');
+      if (pos <= 0) {
+         callback(0);
+         return;
+      }
+      var score = parseInt(answer.substr(0, pos));
+      callback(score);
+   }
+};
+
+
+/* Tests :
+console.log(grader.gradeTask(0, '2$', 0, 10) + ' (ok 2)');
+console.log(grader.gradeTask(0, '10$', 0, 10) + ' (ok 10)');
+console.log(grader.gradeTask(0, '', 0, 1) + ' (wrong)');
+*/</script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-FR-07/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": [""]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Ranger sa chambre</h1>
+<p>
+Dans ce sujet, vous ne pouvez pas perdre de points. Plus vous vous rapprochez de la meilleure solution, plus vous gagnez de points.
+</p>
+<p>
+Pour l'aider à ranger sa chambre représentée par la grille ci-dessous, Castor a construit un robot, représenté par une flèche bleue. Les déplacements du robot peuvent être programmés grâce aux quatre commandes suivantes :
+</p>
+<p>
+</p><ul>
+<li><b>A</b> pour <i>Avance</i> : le robot avance d'une case s'il le peut.</li>
+<li><b>F</b> pour <i>Fonce</i> : le robot avance jusqu'à rencontrer le bord de la chambre.</li>
+<li><b>G</b> pour <i>Gauche</i> : le robot tourne d'un quart de tour vers la gauche.</li>
+<li><b>D</b> pour <i>Droite</i> : le robot tourne d'un quart de tour vers la droite.</li>
+</ul>
+<p></p>
+<p>
+Pour programmer le robot, écrivez une suite de commandes (10 maximum) dans la zone de texte à côté de la grille, puis clique sur "Exécuter". Il exécutera les commandes une par une, dans l'ordre, puis recommencera depuis le début, et ceci dix fois de suite avant de s'arrêter.
+</p>
+<p>
+Ecrivez un programme qui permet au robot de passer sur le plus d'objets possibles (qu'il va ramasser). Vous pouvez faire autant d'essais que vous voulez, c'est le meilleur qui compte.
+</p>
+<div id="best-2011-FR-07" style="color:red;font-weight:bold"></div>
+<table>
+   <tr>
+      <td><table id="terrain-2011-FR-07"></table></td>
+      <td>
+         <div id="result-2011-FR-07" style="font-weight:bold">Score :</div>
+         <div style="font-weight:bold">Vos commandes :</div>
+         <textarea rows="3" cols="20" id="code-2011-FR-07"></textarea><br>
+         <input type="button" value="Exécuter" id="runbutton-2011-FR-07" />
+      </td>
+   </tr>
+</table>
+
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Plusieurs réponses étaient possibles pour ce sujet, permettant d'atteindre plus ou moins d'objets. Il était en fait possible d'écrire un programme permettant au robot de passer par tous les objets, par un parcours systématique de la grille.
+   </p>
+   <p>
+   L'une des quelques variantes de ce programme est la suivante :
+   <pre>
+   DFGAGFDA
+   </pre>
+   Il permet au robot de parcourir toute la droite de la rangée du bas, puis de passer à la rangée au dessus et de la parcourir jusqu'au bord gauche, avant de ce réorienter vers le haut et d'aller vers la rangée précédente. L'exécution suivante du programme permet alors de parcouir toute cette rangée de gauche à droite, puis celle au dessus de droite à gauche, et ainsi de suite. On obtient ainsi une sorte de parcours "en serpent" de la grille, constitué d'allers-retours successifs :
+   </p>
+   <p>
+   <img src="ranger_chambre_sol.png">
+   </p>
+   <p>
+   Sur cette illustration, on a représenté la position du robot au début de chaque exécution du programme.
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Le but de cette question était d'écrire son propre programme, dans un langage très rudimentaire, pour contrôler un robot. Trouver la meilleure solution demandait d'imaginer rapidement l'exécution de différents programmes possibles pour pouvoir envisager plusieurs approches. Comme souvent en algorithmique, la meilleure solution est finalement assez simple et élégante, et il fallait éviter de chercher des parcours trop tortueux.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Mosaïque cassée</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+    var imgs = {
+      "OK":"34.png",
+      "FAIL":"35.png"
+    };
+
+    var nrows = 5, ncols = 8;
+    var states =
+      [[0, 2, 3, 4, 5, 6, 7, 0],
+       [0, 1, 0, 1, 8, 9, 1, 1],
+       [1, 1, 0, 1, 1, 1, 0, 1],
+       [0, 1, 0, 0, 0, 1, 0, 1],
+       [1, 1, 1, 0, 1, 1, 0, 1]];
+    var answerOk = "01101100";
+
+    task.answer= "";
+    task.load= function(views, callback) {
+          task.answer = "????????";
+          for(var imgid in imgs)
+              $("#mosaique_content-2011-CH-01").append("<img src=\""+imgs[imgid]+"\" style=\"display:none\"/>");
+
+          $("#submitbutton-2011-CH-01").click(function() { selectAnswer('2011-CH-01', task.answer) });
+
+          creeMosaique();
+          callback();
+      };
+      
+    task.reloadAnswer= function(newAnswer, callback) {
+          task.answer = newAnswer;
+          if(task.answer == "" || task.answer == undefined)
+            task.answer = "????????";
+          redraw();
+          callback();
+       };
+       
+    task.getAnswer= function(callback) {
+       callback(task.answer);
+    };
+
+
+    var isCellChangeable = function(row, col) {
+      return row >= 0 && col >= 0 && row < nrows && col < ncols &&
+             states[row][col] >= 2;
+    };
+
+
+    var selectCell = function (row, col) {
+      return $("#mosaique-2011-CH-01 tr:eq("+(row)+") td:eq("+(col+1)+")");
+    };
+
+    var getCellValue = function (row, col) {
+      if(isCellChangeable(row, col))
+        switch(task.answer.charAt(states[row][col]-2)) {
+          case "0" : return 0;
+          case "1" : return 1;
+          default : return "?";
+        }
+      else
+        return states[row][col];
+    };
+
+    var redraw = function (row, col) {
+      for(var row = 0; row < nrows; row++){
+        for(var col = 0; col < ncols; col++) {
+          var cell = selectCell(row, col);
+          switch(getCellValue(row, col)){
+            case 0 : 
+              cell.css("background-color", "#FFFFFF");
+              cell.html("");
+              break;
+            case 1 : 
+              cell.css("background-color", "#808080");
+              cell.html("");
+              break;
+            case "?":
+              cell.css("background-color", "#D0D0D0");
+              cell.html("?");
+              break;
+          }
+        }
+      }
+    };
+
+    var creeMosaique = function () {
+      for(var row = 0; row < nrows; row++) {
+          $("#mosaique-2011-CH-01").append("<tr></tr>");
+          $("#mosaique-2011-CH-01 tr:eq("+row+")").append("<td class='td-2011-CH-01 noborder-2011-CH-01'></td>");
+          for(var col = 0; col < ncols; col++)
+            $("#mosaique-2011-CH-01 tr:eq("+row+")").append("<td class='td-2011-CH-01'></td>");
+          $("#mosaique-2011-CH-01 tr:eq("+row+")").append("<td class='td-2011-CH-01 noborder-2011-CH-01'></td>");
+      }
+      for(var row = 0; row < nrows; row++)
+        for(var col = 0; col < ncols; col++) {
+          var cell = selectCell(row, col);
+          if(isCellChangeable(row, col))
+            cell.click({row:row, col:col}, function(e){
+              var i = states[e.data.row][e.data.col]-2;
+              var chr;
+              switch(task.answer.charAt(i)) {
+                case "0": chr = "1"; break;
+                case "?": chr = "0"; break;
+                case "1": chr = "?"; break;
+              }
+              task.answer = task.answer.substr(0,i) + chr + task.answer.substr(i+1)
+              redraw();
+              if(task.answer == answerOk)
+                 platform.validate("done", 1);
+            });
+        }
+
+      for(var row = -1; row <= nrows; row++)
+        for(var col = -1; col <= ncols; col++) {
+          var cell = selectCell(row, col);
+          if(isCellChangeable(row, col) != isCellChangeable(row, col+1))
+            cell.addClass("rightquest-2011-CH-01");
+          if(isCellChangeable(row, col) != isCellChangeable(row, col-1))
+            cell.addClass("leftquest-2011-CH-01");
+          if(isCellChangeable(row, col) != isCellChangeable(row+1, col))
+            cell.addClass("bottomquest-2011-CH-01");
+          if(isCellChangeable(row, col) != isCellChangeable(row-1, col))
+            cell.addClass("topquest-2011-CH-01");
+        }
+
+      for(var row = 1; row < nrows; row++)
+        for(var col = 0; col < ncols; col++) {
+          selectCell(row, col).mouseenter({row:row, col:col}, function(e){
+            for(var col = e.data.col-1; col <=e.data.col+1; col++) {
+              selectCell(e.data.row-2, col).addClass("bottomred-2011-CH-01");
+              selectCell(e.data.row-1, col).addClass("topred-2011-CH-01 bottomred-2011-CH-01");
+              selectCell(e.data.row, col).addClass("topred-2011-CH-01");
+            }
+            for(var col = e.data.col-2; col <=e.data.col+1; col+=3) {
+              selectCell(e.data.row-1, col).addClass("rightred-2011-CH-01");
+              selectCell(e.data.row-1, col+1).addClass("leftred-2011-CH-01");
+            }
+          });
+          selectCell(row, col).mouseleave(function(){
+            $("#mosaique-2011-CH-01 tr td").removeClass("bottomred-2011-CH-01 topred-2011-CH-01 leftred-2011-CH-01 rightred-2011-CH-01");
+          });
+        } 
+      redraw();
+    };
+         </script>
+         <style class="">#mosaique-2011-CH-01 { border-collapse: collapse; }
+   .td-2011-CH-01  { width:27px; height:32px; text-align: center; vertical-align: middle; border: 2px solid black; font-size:20px; font-weight:bold }
+   .noborder-2011-CH-01 { border-style:none; }
+   .leftquest-2011-CH-01   { border-left-color:yellow; }
+   .rightquest-2011-CH-01  { border-right-color:yellow; }
+   .topquest-2011-CH-01    { border-top-color:yellow; }
+   .bottomquest-2011-CH-01 { border-bottom-color:yellow; }
+   .leftred-2011-CH-01   { border-left:2px solid red; }
+   .rightred-2011-CH-01  { border-right:2px solid red; }
+   .topred-2011-CH-01    { border-top:2px solid red; }
+   .bottomred-2011-CH-01 { border-bottom:2px solid red; }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-CH-01/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["01101100"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Mosaïque cassée</h1>
+<p>
+Castor a créé une mosaïque de carreaux noirs et blancs.
+</p>
+<p>
+Le contenu de chaque rangée de la mosaïque peut être déterminé à partir du contenu de la rangée précédente. Plus précisément, la couleur d'un carreau peut être déterminée à partir de la couleur des trois carreaux se trouvant au-dessus à gauche, juste au-dessus, et au-dessus à droite du carreau.
+</p>
+<p>
+Par exemple un carreau dont les trois carreaux au-dessus sont, de gauche à droite, noir, blanc et noir, sera toujours blanc. On représente une telle règle de la manière suivante :
+</p>
+<p>
+<img src="55.png" alt="Exemple simple"><br>
+</p>
+<p>
+Voici l'ensemble des règles de ce type. Les 8 cas possibles sont présentés :
+</p>
+<p>
+<img src="28.png" alt="Exemple 1"><br>
+<img src="29.png" alt="Exemple 2"><br>
+</p>
+<p>
+Notez que quand un carreau est à l'extérieur de la grille, sur le côté droit ou le côté gauche, on fait comme si il était blanc.
+</p>
+<p>
+Le haut de la mosaïque a malheureusement été détruit. Pouvez-vous le reconstruire ? Cliquez sur chaque carreau pour le passer du point d'interrogation à blanc, puis noir, etc. Aucun carreau ne doit contenir de point d'interrogation une fois la mosaïque réparée, et bien sûr les règles ci-dessus doivent être respectées.
+</p>
+<center>
+<table><tr><td style="width:500px">
+<table id="mosaique-2011-CH-01"></table>
+<div id="mosaique_content-2011-CH-01">
+</div>
+</td><td>
+</td></tr></table>
+</center>
+<img style="display: none;" src="55.png" />
+<img style="display: none;" src="28.png" />
+<img style="display: none;" src="29.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Pour résoudre ce sujet il faut prendre les cases libres une par une de gauche à droite en commençant pas la première ligne à trouver. Pour chaque case, on regarde les couleurs des 3 cases juste au dessus, et on recherche le motif correspondant dans l'énoncé, afin de déterminer la couleur de la case. On obtient le résultat décrit ci-dessous.
+   </p>
+   <p>
+   <img src="mosaique_sol.png">
+   </p>
+   <p>
+   Si l'on continue à appliquer ces règles sur une grande grille, on obtient une image qui ressemble à ceci :
+   </p>
+   <img src="solution_full.png">
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Les règles décrites dans l'énoncé constituent ce que l'on appelle un <i>automate cellulaire</i>. Il s'agit d'une <i>grille</i> composée de <i>cellules</i>, chaque cellule peut avoir un nombre d'<i>états</i> fini (ici, il y en a deux : noir ou blanc). Des règles définissent l'état d'une cellule. Les automates cellulaires permettent de modéliser beaucoup de choses, dont des phénomènes physiques, ou la circulation sur une autoroute par exemple.
+   </p>
+   <p>
+   L'ensemble de règles décrit dans l'exercice est connue sous le nom de "Règle 86". Il y a d'autres règles qui donnent des motifs divers et variés, vous pouvez en trouver de nombreux exemples <a href="http://mathworld.wolfram.com/ElementaryCellularAutomaton.html" target="_blank">sur cette page</a>.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

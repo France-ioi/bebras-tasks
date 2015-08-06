@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Groupe de travail</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+            "<img src='2012-DE-10_imageA.png' width='200'>",
+            "<img src='2012-DE-10_imageB.png' width='200'>",
+            "<img src='2012-DE-10_imageC.png' width='200'>",
+            "<img src='2012-DE-10_imageD.png' width='200'>",
+            ], "added", "#answers_2012-DE-10");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-DE-10/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "4"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Groupe de travail</h1>
+<p>
+Le Grand Castor entraîne quatre équipes de jeunes castors à construire leur barrage.
+C'est une opération délicate car un castor doit parfois attendre qu'un ou plusieurs autres membres de 
+son équipe aient terminé leur travail avant de pouvoir commencer le sien.
+Le Grand Castor a écouté ce que chaque castor avait prévu de faire, et 
+il a ensuite représenté par des flèches les contraintes d'ordre&nbsp;:
+une flèche de X vers Y indique que le castor Y doit attendre que le castor X
+ait terminé son travail avant de commencer le sien.
+</p>
+
+<p>Une des équipes de castors n'arrivera pas à construire son barrage. Laquelle&nbsp;?</p>
+
+<div class="reponses" id="answers_2012-DE-10">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+
+<h2>La solution</h2>
+
+<p>Si les membres d'une équipe s'attendent les uns les autres, alors ils ne pourront jamais faire leur travail. C'est le cas de l'équipe décrite par l'image <span class="2012-DE-10_choice_4">4</span>, où Ivo attend que Tom ait terminé, Yan attend que Ivo ait terminé, et Tom attend que Yan ait terminé. On tourne en rond !</p>
+<p><img src='2012-DE-10_imageD.png'  width='200' /></p>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>Les contraintes entre les différents travaux à effectuer s'appellent des <b>dépendances</b>.
+L'image qui matérialise les actions par des cercles et qui matérialise les dépendances par des flèches
+s'appelle un <b>graphe de dépendances</b>. Le but de ce sujet est de détecter des <b>dépendances cycliques</b>, c'est-à-dire un ensemble de dépendances qui "tournent en rond", et qui rendent impossible la réalisation des tâches.</p>
+
+<p>Lorsque le graphe de dépendances est très grand, on a besoin d'utiliser des algorithmes efficaces afin de détecter la présence de cycles.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>CuSphère et QuatreCyl</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "Un cylindre",
+            "Un cube",
+            "Une pyramide",
+            "Une sphère"
+            ], "added", "#answers_2011-DE-02");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-DE-02/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>CuSphère et QuatreCyl</h1>
+<p>
+Castor doit remplacer un élément cassé d'une usine automatisée représentée sur l'illustration. Lisez les explications ci-dessous pour déterminer quel élément Castor doit remplacer.
+</p>
+<center><img src="2011-DE-02-new.jpg"></center>
+<p>
+<ol>
+<li>Un <i>CuSphère</i> est un cube au-dessus duquel se trouve une sphère.</li>
+<li>Un <i>QuatreCyl</i> est composé d'un gros cube posé sur 4 cylindres.</li>
+<li>Une pyramide se trouve au coin de devant de la plate-forme.</li>
+<li>Sur le bord de l'un des côtés partant de ce coin, se trouve un <i>CuSphère</i>.</li>
+<li>À côté de ce <i>CuSphère</i> se trouve un autre <i>CuSphère</i>.</li>
+<li>Ce dernier est collé à un objet de type <i>X</i> qui n'est pas un <i>CuSphère</i>.</li>
+<li>Il y a exactement un <i>QuatreCyl</i> juste à côté d'un autre objet de type <i>X</i> sur la plate-forme.</li>
+<li>Appelons ce <i>QuatreCyl</i> <code>qc_1</code>.</li>
+<li>Au-dessus de <code>qc_1</code> se trouvent <code>nombre_p</code> pyramides.</li>
+<li>Il existe un autre <i>QuatreCyl</i> sur lequel <code>nombre_p</code> pyramides sont posées.</li>
+<li>Appelons ce <i>QuatreCyl</i> <code>qc_2</code>.</li>
+<li>L'élément cassé se trouve posé tout en haut de <code>qc_2</code>.</li>
+</ol>
+</p>
+<p>
+L'élément cassé est :
+<div class="reponses" id="answers_2011-DE-02">
+</div>
+
+<img style="display: none;" src="2011-DE-02-new.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Ci-dessous, l'illustration de chacune des étapes listées dans la question :
+   </p>
+   <p>
+   <center><img src="2011-DE-02-sol.jpg" width=700></center>
+   </p>
+   <p>
+   La bonne réponse est donc <span class="2011-DE-02_choice_1">A</span>. Un cyclindre.
+   </p>
+   <h2>C'est de l'informatique</h2>
+   <p>
+   La liste présentée est composée de phrases de différents types :
+   <ul>
+   <li>Des définitions de type d'objets composites : "Un [nom du type] est composé de ...".</li>
+   <li>L'identification d'objets selon certaines de leurs propriétés : "Une pyramide se trouve...".</li>
+   <li>L'identification d'objets à partir de leurs relations à d'autres objets : "À côté de ...".</li>
+   <li>L'utilisation d'identifiants pour référencer des objets : "Appelons ce <i>QuatreCyl</i> <code>qc_1</code>".</li>
+   </ul>
+   <p>
+   La définition de type d'objet composite, de propriétés des objets, de relations entre les objets, et l'utilisation d'identifiants sont des notions essentielles de la programmation. Ici le "programme" n'a pas la forme classique d'une suite d'instructions que l'on exécute les unes après les autres, mais cela reste une sorte de programme, exprimé de manière déclarative : un ensemble de faits à partir desquels on peut déduire (inférer) certaines informations.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

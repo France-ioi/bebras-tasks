@@ -1,0 +1,78 @@
+<!doctype html>
+<html ng-app="admin">
+   <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <script class="module" type="text/javascript" src="modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+      <script type="text/javascript" src="demo_files/angular.min.js"></script>
+      <script src="demo_files/ui-bootstrap-tpls-0.5.0.min.js"  type="text/javascript"></script>
+      <link href="demo_files/bootstrap-combined.min.css" rel="stylesheet">
+      <script src="demo_files/mainCtrl.js" type="text/javascript"></script>
+      <script class="module" type="text/javascript" src="modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+   </head>
+   <script type="text/javascript" src="tasks_2014.js"></script>
+   <script class="" type="text/javascript">
+   generating = false;
+      $(document).ready(function() {
+         var items = [];
+         for (var iLevel = 0; iLevel < nbLevels; iLevel++) {
+            items[iLevel] = [];
+         }
+         for (var iTask = 0; iTask < tasks.length; iTask++) {
+            var task = tasks[iTask];
+            var short_code = extractShortCode(task.code);
+            var targetNormal = getLinkTask(task.code, task.options);
+            var rowCore = " <a href=\"#\" onclick=\"$('#iframe').attr('src', '" + targetNormal + "')\">" + task.title + "</a>";
+            for (var iLevel = 0; iLevel < nbLevels; iLevel++) {
+               var order = task.levels[iLevel];
+               if (order != 0) {
+                  var row = rowCore;
+                  items[iLevel].push({order: order, label: row})
+               }
+            }
+         }
+         for (var iLevel = 0; iLevel < nbLevels; iLevel++) {
+            var curGroup = -1;
+            Beav.Array.stableSort(items[iLevel], function(a, b) {return a.order - b.order});
+            for (var iItem = 0; iItem < items[iLevel].length; iItem++) {
+               var item = items[iLevel][iItem];
+               var margin = "0em";
+               var group = Math.floor(item.order / 10);
+               if (group != curGroup) {
+                  curGroup = group;
+                  margin = "0.7em";
+               }
+               $("#levels_" + iLevel).append("<li style='margin-top:" + margin + "'>" + item.label + "</li>");
+            }
+         }
+      });
+   </script>
+
+   <body ng-controller="MainCtrl">
+      <table>
+      <tr><td style="width:300px;vertical-align:top">
+      <tabset>
+         <tab heading="6ème/5ème">
+            <ul id="levels_0"></ul>
+         </tab>
+         <tab heading="4ème/3ème">
+            <ul id="levels_1"></ul>
+         </tab>
+         <tab heading="Seconde">
+            <ul id="levels_2"></ul>
+         </tab>
+         <tab heading="1ère/Terminale">
+            <ul id="levels_3"></ul>
+         </tab>
+         <tab heading="Tous" style="display:none">
+            <ul id="levels_4"></ul>
+         </tab>
+      </tabset>
+      </td><td style="vertical-align:top">
+      <iframe id='iframe' style="width:800px;height:800px" src="demo_files/presentation.html"></iframe>
+      </td>
+      </tr></table>
+
+     
+   </body>
+</html>

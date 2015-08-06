@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Sauts de grenouille</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "4, 4, 1, 0, 0, 0, 6, 6, 4, 4, 2, 2, 1",
+            "0, 0, 0, 6, 6, 6, 4, 4, 2, 2, 4, 4, 1",
+            "5, 0, 0, 6, 6, 6, 0, 0, 2, 2, 2, 2, 4, 4, 4",
+            "0, 6, 6, 4, 4, 4, 2, 4, 1, 1, 1"
+            ], "added", "#answers_2011-AT-08");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-AT-08/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Sauts de grenouille</h1>
+<p>
+Une grenouille veut faire un peu d'exercice, en sautant de pierre en pierre dans un étang. Elle décide de faire le parcours présenté sur l'illustration ci-dessous. Chaque point noir représente un endroit où la grenouille atterrit après un saut.
+</p>
+<p>
+La grenouille commence à la pierre en haut à gauche comme montré sur l'illustration, et veut y retourner à la fin de son parcours.
+</p>
+<img src="2011-AT-08_2.jpg" style="float:right" >
+<img src="2011-AT-08_1-2.png" >
+<p>
+On représente un saut en utilisant un nombre pour chaque direction, comme présenté sur l'illustration ci-dessus à droite. 
+Quelle suite de nombres correspond aux sauts du parcours de la grenouille ?
+</p>
+<div class="reponses" id="answers_2011-AT-08">
+</div>
+
+<img style="display: none;" src="2011-AT-08_1-2.png" />
+<img style="display: none;" src="2011-AT-08_2.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+   <h2>La solution</h2>
+   <p>
+   Pour chaque saut de la grenouille, on a indiqué sur le schéma ci-dessous la direction correspondante : 
+   </p>
+   <img src="2011-AT-08_2.jpg" >
+   <img src="2011-AT-08_sol.png" >
+   <p>
+   Si on lit les chiffres en partant de la grenouille, en suivant son parcours et en finissant à la grenouille, on obtient la suite de chiffres "0, 0, 0, 6, 6, 6, 4, 4, 2, 2, 4, 4, 1" ce qui correspond à la solution <span class="2011-AT-08_choice_2">B</span>.
+   </p>
+   <p>
+   <b>La bonne réponse était donc la réponse <span class="2011-AT-08_choice_2">B</span>.</b>
+   </p>
+
+   <h2>C'est de l'informatique</h2>
+   <p>
+   Il s'agit ici de "coder" un processus sous forme d'une séquence d'actions : chaque action est ici un saut dans une direction donnée, il existe 8 directions possibles. Cet exercice utilise 2 notions fondamentales très utiles à l'informatique : la notion de codage (associer un symbole à chaque action) et la notion de séquence (suite ordonnée de symboles, qui, ici, représentent des actions).
+   </p>
+   <p>
+   De plus, la résolution du problème amène à comparer des motifs candidats. Elle nécessite soit de traduire le parcours de la grenouille en séquence de symboles (faire du codage), soit de dessiner les 4 parcours (faire du décodage) qui résulteraient des 4 séquences de symboles candidates, en les comparant au parcours de la grenouille.
+   </p>
+
+   </div>
+</div> <!-- task-solution -->
+   </body>
+</html>

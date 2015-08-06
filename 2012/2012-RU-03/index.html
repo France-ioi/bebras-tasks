@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Affichage digital</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+            "<table class='t2012_RU_03'><tr><td>Combine( </td><td><img src='digital5.png' width='20' /></td><td>, </td><td><img src='digital2.png' width='20' /></td><td>)</td></tr></table>",
+            "<table class='t2012_RU_03'><tr><td>Combine( Inverse(</td><td><img src='digital0.png' width='20' /></td><td>), </td><td><img src='digital0.png' width='20' /></td><td>)</td></tr></table>",
+            "<table class='t2012_RU_03'><tr><td>Combine( Inverse(</td><td><img src='digital7.png' width='20' /></td><td>), </td><td><img src='digital2.png' width='20' /></td><td>)</td></tr></table>",
+            "<table class='t2012_RU_03'><tr><td>Combine( Inverse(</td><td><img src='digital5.png' width='20' /></td><td>), </td><td><img src='digital8.png' width='20' /></td><td>)</td></tr></table>",
+            ], "added", "#answers_2012-RU-03");
+      </script>
+         <style class="">.t2012_RU_03 td {
+  vertical-align: middle;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-RU-03/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "3"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Affichage digital</h1>
+<p>
+Un affichage digital est formé de 7 segments lumineux, chacun d'entre eux pouvant être soit allumé, soit éteint. Ainsi, on peut représenter tous les chiffres de 0 à 9, comme illustré ci-dessous.
+<br />
+<div style="text-align:center">
+<img src="digital0.png" width="30" />
+<img src="digital1.png" width="30" />
+<img src="digital2.png" width="30" />
+<img src="digital3.png" width="30" />
+<img src="digital4.png" width="30" />
+<img src="digital5.png" width="30" />
+<img src="digital6.png" width="30" />
+<img src="digital7.png" width="30" />
+<img src="digital8.png" width="30" />
+<img src="digital9.png" width="30" /></div>
+</p>
+<p>
+On peut effectuer deux opérations sur un affichage.
+</p><p>
+<table border="1px" cellpadding="5px"><tr>
+<td align="center" width="40%"> L'opération <b>&laquo;&nbsp;Inverse&nbsp;&raquo;</b></td>
+<td  align="center" width="80%">L'opération <b>&laquo;&nbsp;Combine&nbsp;&raquo;</b></td></tr>
+<tr>
+<td>Allume les segments qui étaient éteints et éteint les segments qui étaient allumés.<br /><br />
+ Par exemple&nbsp;:
+<br /> 
+<center>
+<table class="t2012_RU_03"><tr>
+<td>Inverse(</td>
+<td><img src="digital3.png" width="30" /><td>
+<td>) donne</td>
+<td><img src="digital3inv.png" width="30" /></td>
+</tr></table></center></td>
+
+<td>S'applique à deux affichages et produit un nouvel affichage où tous les segments allumés sur au moins un de ces deux affichages se retrouvent allumés, et seulement ceux-ci.
+<br /><br />Par exemple&nbsp;:
+<br />
+<center>
+<table class="t2012_RU_03"><tr>
+<td>Combine(</td>
+<td><img src="digital4.png" width="30" /></td>
+<td>,</td>
+<td><img src="digital5.png" width="30" /></td>
+<td>) donne</td>
+<td><img src="digital9.png" width="30" /></td>
+</tr></table></center>
+</td>
+</tr></table>
+</p>
+
+<p>Laquelle des opérations suivantes <strong>ne donne pas</strong> <img src="digital8.png" width="30" />&nbsp;?</p>
+
+<div class="reponses" id="answers_2012-RU-03">
+</div>
+
+
+<img style="display: none;" src="digital0.png" />
+<img style="display: none;" src="digital1.png" />
+<img style="display: none;" src="digital2.png" />
+<img style="display: none;" src="digital3.png" />
+<img style="display: none;" src="digital4.png" />
+<img style="display: none;" src="digital5.png" />
+<img style="display: none;" src="digital6.png" />
+<img style="display: none;" src="digital7.png" />
+<img style="display: none;" src="digital8.png" />
+<img style="display: none;" src="digital9.png" />
+<img style="display: none;" src="digital3inv.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 3 -->
+
+<div class="explications">
+<h2>La solution</h2>
+<p>La réponse <span class="2012-RU-03_choice_3">3</span>&nbsp;:
+<table class='t2012-RU-03'><tr><td>Combine( Inverse(</td><td><img src="digital7.png" width="30" /></td><td>), </td><td><img src="digital2.png" width="30" /></td><td>) laisse le segment en bas à droite éteint.</td></tr></table> <br/>
+En effet, le calcul effectué passe par les étapes suivantes :<br />
+<table>
+<tr><td><img src="digital7.png" width="30" /> </td>
+	<td>-> Inverse -> </td>
+	<td><img src="digital7inv-solution.png" width="30" /></td>
+	<td rowspan="2" style="vertical-align:middle">-> Combine -> </td>
+	<td rowspan="2" style="vertical-align:middle"><img src="2012-RU-03-solution.png" width="30" /></td>
+<tr><td></td><td></td>
+	<td><img src="digital2.png" width="30" /></td>
+	</tr></table>
+</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>Cet exercice nécessite de manipuler deux concepts très importants en informatique&nbsp;:
+<p>Le principe des <b>opérations sur des valeurs binaires</b> : chaque segment, éteint ou allumé, peut être vu comme un chiffre binaire 0 ou 1. Les opérations effectuées sont des opérations classiques en binaire : "Inverser" est en fait un "NON" binaire, et "Combiner" est en fait un "OU" binaire.</p>
+<p>Le principe des <b>fonctions</b>, qui prennent un ou plusieurs paramètres, et retournent une valeur issue d'un calcul. "Inverser" prend un paramètre et retourne une valeur, et "Combiner" prend deux paramètres et retourne une valeur. Ici il fallait comprendre soi-même ce que signifiait le fait de passer en paramètre d'une fonction le résultat d'une autre fonction, en s'aidant du fait que 3 des 4 propositions avaient pour résultat 8.
+</p>
+
+<h2>Culture informatique </h2>
+
+<p>L'opération "inverse" est problablement l'opération la plus fondamentale parmi celles qu'un ordinateur sait effectuer.
+En effet, un ordinateur représente toutes les données par des <b>bits</b>, qui ne peuvent prendre que deux valeurs possibles : soit 0, soit 1.
+L'opération "inverse", appliquée à 0 donne 1, et appliquée à 1 donne 0.
+</p>
+
+<p>
+On peut appliquer une inversion à un ensemble de bits d'un seul coup. Par exemple, si l'on inverse "1010110",
+on obtient "0101001". Ce type d'opération peut par exemple servir à décrire le complémentaire d'un ensemble :
+si "1010110" décrit les jours "Lundi, Mercredi, Vendredi et Samedi", alors l'ensemble décrit par l'inverse,
+à savoir "0101001" décrit les jours "Mardi, Jeudi et Dimanche".
+</p>
+
+<p>
+Un ordinateur construit en 2012 est capable d'inverser de la sorte un paquet de 64 bits en un seul <b>cycle</b>
+de calcul, et il peut exécuter plusieurs milliards de tels cycles chaque seconde !
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

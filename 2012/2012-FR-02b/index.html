@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Ranger ses photos</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "<img src='2012-FR-02b-answerA.png' style='width:160px'>",
+            "<img src='2012-FR-02b-answerB.png' style='width:160px'>",
+            "<img src='2012-FR-02b-answerC.png' style='width:160px'>",
+            "<img src='2012-FR-02b-answerD.png' style='width:160px'>",
+            ], "added", "#answers_2012-FR-02b");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-02b/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "3"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Ranger ses photos</h1>
+
+<table><tr>
+<td style="margin-right:10px">
+<p>Castor a organisé ses photographies numériques, en utilisant des &laquo;&nbsp;albums&nbsp;&raquo; et des &laquo;&nbsp;boîtes&nbsp;&raquo; virtuels, comme décrit sur le schéma ci-contre.
+</p>
+
+<table><tr><td>Pour accéder à ses photos, Castor commence sur la fenêtre suivante&nbsp;:<br />
+
+<img style="height:120px" src="2012-FR-02b-fenetre1.png" /> </td>
+<td>
+S'il double-clique sur la boîte &laquo;&nbsp;mes photos&nbsp;&raquo;, il obtient une autre fenêtre&nbsp;:<br />
+
+<img style="height:120px" src="2012-FR-02b-fenetre2.png" /> </td>
+</tr></table>
+</td>
+<td style="vertical-align:top;border-left:solid black 1px;"><img style="width:300px;margin-top:20px" src="2012-FR-02b-arbre.png" /></td>
+</tr></table>
+
+<p>Quelle fenêtre obtiendra Castor s'il double-clique alors sur la boîte <b>&laquo;&nbsp;en vacances&nbsp;&raquo;</b>&nbsp;?
+</p>
+
+<div class="reponses" id="answers_2012-FR-02b">
+</div>
+
+
+<img style="display: none;" src="2012-FR-02b-fenetre1.png" />
+<img style="display: none;" src="2012-FR-02b-fenetre2.png" />
+<img style="display: none;" src="2012-FR-02b-arbre.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : C=3
+-->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Dans le schéma, le contenu de la boîte &laquo;&nbsp;en vacances&nbsp;&raquo; est décrit 
+par les traits noirs qui descendent puis partent vers la droite à partir de cette boîte.
+Il y a deux traits, donc la fenêtre correspondant au contenu de la boîte contient deux
+objets, qui sont ceux montrés dans la fenêtre &nbsp;:</p>
+<p><img src='2012-FR-02b-answerC.png' style='width:160px' /></p>
+
+<p>La bonne réponse est donc <span class="2012-FR-02b_choice_3">3</span>.</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>Cet exercice permettait de mieux comprendre la manière dont les fichiers sont souvent organisés au sein du <b>système de fichiers</b> d'un ordinateur, et plus généralement, de se familiariser avec la structure d'<b>arbre</b> souvent utilisée en algorithmique et en informatique en général.</p>
+
+<p>Pour le résoudre, on devait comprendre cette organisation en arbre : "mes photos" contient à la fois "mes amis" et "en vacances", "au collège" contient à la fois "img143" et "img345"... Il fallait aussi comprendre ce que voit Castor quand il clique : il va entrer dans ses albums pour voir ce qu'ils contiennent et il se déplace donc dans l'arbre général contenant touts ses albums, ses boîtes et ses photos.</p>
+
+<h2>Culture informatique </h2>
+
+<p>Les documents que nous créons à l'aide d'applications informatiques sont mémorisés dans des fichiers de données. Ces fichiers sont stockés dans des espaces de stockage, tels que le disque dur d'un ordinateur, la carte mémoire d'un appareil photo, etc...</p>
+<p>
+Sur la plupart des ordinateurs, l'utilisateur peut organiser ses fichiers en les classant dans des dossiers, selon une organisation arborescente. L'arborescence de fichiers (présentée dans l'exercice) offre une représentation schématique, lui facilitant l'organisation de ses fichiers.
+</p>
+<p>
+Cependant, depuis quelques années, sont apparus des outils mobiles tels que les tablettes ou les smartphones. Ils ne présentent plus cette organisation arborescente. En effet, les systèmes d'exploitation de ces outils sont conçus de telle sorte que ce sont les applications qui enregistrent automatiquement les fichiers de données, d'une façon non visible pour l'utilisateur.
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

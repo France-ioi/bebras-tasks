@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-NL-02</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	  <script type="text/javascript" src="2013-NL-02_graphe.js"></script>
+      <script class="solution" type="text/javascript" src="2013-NL-02_solution.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-NL-02/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Willem van der Vegt, NL",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["6"]
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2013-NL-02", 1, 1);
+      </script>
+      <script class="task" type="text/javascript">
+         // TODO: fix with the future pub/sub system
+         var taskViewLoaded = false;
+         var solutionViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               taskViewLoaded = true;
+               loadGraphe();
+            }
+            if (views.solution && !solutionViewLoaded) {
+               solutionViewsLoaded = true;
+               loadSolution();
+            }
+      }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Inspection de rivière</h1>
+         <table><tr><td style="vertical-align:top">
+            <p> Aujourd'hui, les castors souhaitent vérifier l'état de leur rivière.
+            Pour cela, il faut que chacune des branches de la rivière soit inspectée, à la nage, par au moins un castor.
+            </p>
+            <p>
+            À cause du courant, les castors ne peuvent nager que dans le sens du courant. De plus, chaque castor ne peut faire qu'une seule descente, partant du point A et arrivant au point B.
+            </p>
+            <p>
+            Dans ces conditions, quel est le nombre minimum de castors nécessaires pour vérifier toutes les branches de la rivière&nbsp;?</p>
+            </p>
+
+            <div class="reponses" id="answers_2013-NL-02">
+            </div>
+         </td><td>
+            <div id="graphe" style="width:210px;height:451px"/></div>
+         </td></tr></table>
+      </div><!-- task -->
+     
+      <div id="solution">
+         <h2>La solution</h2>
+         <style>
+           .soltable td { 
+               vertical-align: top;
+           }
+         </style>
+         <table class='soltable'>
+         <tr><td>
+            <p>Il faut au moins <b>6</b> castors pour inspecter la rivière.
+            Pour voir pourquoi on en a besoin d'autant, observez dans le dessin
+            ci-contre qu'il y a 6 branches
+            distinctes qui traversent toutes dans le même sens le trait rouge.
+            En une descente, un castor ne peut traverser la ligne rouge qu'une seule
+            fois, et ne peut donc inspecter qu'une seule de ces 6 branches de rivière.
+            </p>
+            <p>Réciproquement, si l'on dispose de 6 castors, on peut vérifier facilement
+            que l'on peut visiter toutes les branches de la rivière.</p>
+         </td>
+         <td>
+            <div id="solutionImage" style='float:right'/></div>
+         </td>
+         </tr>
+         </table>
+         <h2>C'est de l'informatique </h2>
+         <p>Ce problème fait partie de la famille des problèmes de <b>flots</b>
+         dans les réseaux. Ici, on s'intéressait à couvrir toutes les branches.
+         Dans d'autres problèmes de flots, on cherche à faire passer un maximum
+         d'eau à travers un réseau de tuyaux, sachant que chaque tuyau a une
+         certaine taille et permet donc un certain débit. Comme un
+         certain nombre de problèmes 
+         pratiques peuvent être traduits sous forme de problèmes de flots, les algorithmes
+         de flots ont de nombreuses applications en informatique.</p>
+      </div> <!-- task-solution -->
+   </body>
+</html>

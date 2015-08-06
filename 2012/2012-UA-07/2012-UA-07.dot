@@ -1,0 +1,23 @@
+digraph G {
+        init [label="",shape=box,color=white,fillcolor=white];
+        n50 [label="5 endroit\n0 envers"];
+        n41 [label="4 endroit\n1 envers"];
+        n32 [label="3 endroit\n2 envers"];
+        n23 [label="2 endroit\n3 envers"];
+        n14 [label="1 endroit\n4 envers"];
+        n05 [label="0 endroit\n5 envers"];
+        init -> n41;
+        n50 -> n23 [label="3 endroits",fontsize=8];
+        n23 -> n50 [label="3 envers",fontsize=8,color=red,fontcolor=red];
+        n23 -> n50 [label="3 envers",fontsize=8,color=blue,fontcolor=blue];
+        n41 -> n14 [label="3 endroits",fontsize=8,color=blue,fontcolor=blue];
+        n14 -> n41 [label="3 envers",fontsize=8];
+        n32 -> n05 [label="3 endroits",fontsize=8];
+        n05 -> n32 [label="3 endroits",fontsize=8];
+        n41 -> n32 [label="2 endroits\n1 envers",fontsize=8,color=red,fontcolor=red];
+        n32 -> n41 [label="1 endroit\n2 envers",fontsize=8];
+        n14 -> n23 [label="1 endroit\n2 envers",fontsize=8,color=blue,fontcolor=blue];
+        n23 -> n14 [label="2 endroits\n1 envers",fontsize=8];
+        n23 -> n32 [label="1 endroit\n2 envers",fontsize=8];
+        n32 -> n23 [label="2 endroits\n1 envers",fontsize=8,color=red,fontcolor=red];
+}

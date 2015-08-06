@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Verres</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">/* images utilisées : "glass.png", "glass_r.png" */
+
+        task.init= [1,1,1,1,0];
+        task.state= null;
+        task.score= 0;
+        task.selected= [];
+        task.n_selected= 0;
+        task.best_score= 100000000;
+
+        task.getAnswer= function(callback) {
+          var answer = "" + task.best_score;
+          callback(answer);
+        };
+
+        task.reloadAnswer= function(strAnswer, callback) {
+           task.best_score = parseInt(strAnswer);
+           task.reset();
+           callback();
+        };
+
+       task.load= function(views, callback) {
+         task.reset();
+         $("#u2012_UA_07 #glasses img").click(function () {
+            var col = $(this).parent().children().index($(this));
+            task.selected[col] = 1 - task.selected[col];
+            if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"[" + col + "] = " + task.selected[col]});}
+            if(task.selected[col] == 1) {
+               task.n_selected++;
+            } else {
+               task.n_selected--;
+            }
+            task.draw();
+         });
+         callback();
+       };
+       task.draw= function() {
+          $("#u2012_UA_07 .best_score").html(task.best_score);
+          if(task.best_score == 100000000) {
+            $("#u2012_UA_07 .best_score").html("vous n'avez pas encore réussi");
+          } else {
+             $("#validateScore").show();
+          }
+          $("#u2012_UA_07 .score").html(task.score);
+          for(var i = 0; i < 5; i++) {
+            var side = '';
+            var cl = ''
+            if(task.state[i] == 0) {
+               $("#u2012_UA_07_glass_" + i).attr("src", "glass_r.png");
+            } else {
+               $("#u2012_UA_07_glass_" + i).attr("src", "glass.png");
+            }
+            if(task.selected[i] == 1) {
+               $("#u2012_UA_07_glass_" + i).addClass("selected")
+            } else {
+               $("#u2012_UA_07_glass_" + i).removeClass("selected")
+            }
+          }
+        };
+
+        task.reset= function() {
+          task.state = $.extend(true, [], task.init)
+          if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"reset"});}
+          task.score = 0;
+          task.sol = [];
+          task.n_selected = 0;
+          task.selected = [0,0,0,0,0];
+
+          task.draw();
+        };
+
+        task.turn= function() {
+          if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"turn " + task.n_selected});}
+          if(task.n_selected == 3) {
+            task.score++;
+
+            for(var i = 0; i < 5; i++) {
+              if(task.selected[i] == 1) {
+                task.state[i] = 1 - task.state[i];
+                task.selected[i] = 0;
+              }
+            }
+
+            task.n_selected = 0;
+
+            var n_up = 0;
+            for(var i = 0; i < 5; i++) {
+              n_up += task.state[i];
+            }
+
+            if(n_up == 5) {
+              var msg = "";
+              if(task.best_score > task.score) {
+                msg = "Vous avez réussi en " + task.score + " tours.";
+                task.best_score = task.score;
+                platform.validate("stay");
+              } else if (task.best_score == task.score) {
+                msg = "Vous avez à nouveau réussi en " + task.score + " tours.";
+              } else {
+                msg = "Vous avez réussi en " + task.score + " tours, mais vous aviez déjà fait mieux&nbsp;!";
+              }
+              $("#u2012_UA_07 #info").html(msg);
+              task.reset();
+            } else {
+              $("#u2012_UA_07 #info").html("");
+              task.draw();
+            }
+          } else {
+            $("#u2012_UA_07 #info").html("Il faut sélectionner 3 verres&nbsp;!");
+          }
+        };
+
+      </script>
+         <style class="">#u2012_UA_07 #glasses img {
+        border: 1px solid black;
+        padding: 9px;
+        margin: 5px;
+      }
+      #u2012_UA_07 #glasses img.selected {
+        border: 4px solid red;
+        padding: 6px;
+      }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-UA-07/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "3"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Verres</h1>
+<p>Cinq verres vides sont posés sur une table&nbsp;: quatre sont à l'endroit et un est à l'envers. 
+En un tour de jeu, vous pouvez désigner <strong>exactement trois verres</strong> différents et retourner ces trois verres.</p>
+
+<p>Votre objectif est de remettre <strong>tous les verres à l'endroit en un minimum de tours</strong>. Vous pouvez réessayer autant de fois que vous le souhaitez. Vous n'aurez des points que si vous trouvez le plus petit nombre de tours possible, et vous ne pouvez pas perdre de points sur cette question.</p>
+<center>
+<div class="reponses">
+   <div id="u2012_UA_07" border="1">
+     <p><i>Nombre de tours minimum obtenu&nbsp;:</i> <b><span class="best_score">?</span></b><br />
+     <i>Nombre de tours pour cette tentative&nbsp;:</i> <b><span class="score">?</span></b></p>
+     <div id="glasses">
+        <img src="glass.png" id="u2012_UA_07_glass_0" />
+        <img src="glass.png" id="u2012_UA_07_glass_1" />
+        <img src="glass.png" id="u2012_UA_07_glass_2" />
+        <img src="glass.png" id="u2012_UA_07_glass_3" />
+        <img src="glass_r.png" id="u2012_UA_07_glass_4" />
+     </div>
+     <p>
+       <input type="button" value="Retourner ces 3 verres" onclick="task.turn()" />
+       <span id="info" style="color:blue;font-weight:bold"></span>
+     </p>
+   </div>
+   <p>
+   <input type="button" value="Recommencer" onclick="task.reset();" />
+   </p>
+</div>
+</center>
+
+<img style="display: none;" src="glass.png" />
+<img style="display: none;" src="glass_r.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse :
+-->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Il est possible de mettre tous les verres à l'endroit en 3 tours, et ce n'est pas possible de le faire en moins de tours. Voici par exemple une manière de faire&nbsp;:</p>
+
+<p><img src="2012-UA-07-solution.png" /></p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>Ce sujet soulève une question d'informatique très intéressante : comment pourrait-on programmer un ordinateur pour qu'il trouve une solution ? En allant plus loin, on pourrait même se demander comment s'y prendre pour être certain que le programme trouve la meilleure solution ?</p>
+
+<p>Une manière naïve de faire consiste à essayer tous les mouvements possibles. On peut alors se rendre compte qu'il y a des situations symétriques. En fait, la seule chose qui compte pour décrire une situation, c'est le nombre de verres à l'endroit, puisque tous les verres sont identiques et que du nombre de verres à l'endroit on peut déduire le nombre de verres à l'envers.<p>
+
+<p><b>Première étape</b></p>
+
+<p>Au départ on a <b>4</b> verres à l'endroit. Les opérations possibles sont les suivantes.
+<ul>
+<li>Sélectionner 3 verres qui sont à l'endroit. <br />
+On obtient une configuration avec <b>1</b> seul verre à l'endroit.
+<li>Sélectionner 2 verres à l'endroit et 1 à l'envers. <br />
+On obtient une configuration avec <b>3</b> verres à l'endroit.
+</ul>
+
+<p><b>Deuxième étape</b></p>
+
+<p>Si on repart de la configuration avec <b>1</b> verre à l'endroit, alors les opérations possibles sont les suivantes.
+<ul>
+<li>Sélectionner 1 verre à l'endroit et 2 à l'envers. <br />
+On obtient une configuration avec <b>2</b> verres à l'endroit.
+<li>Sélectionner 3 verres qui sont à l'envers. <br />
+On obtient une configuration avec <b>4</b> verres à l'endroit, <br />
+c'est-à-dire qu'on est revenu à la situation de départ.
+</ul>
+
+<p>Si on repart de la configuration avec <b>3</b> verres à l'endroit, alors les opérations possibles sont les suivantes.
+<ul>
+<li>Sélectionner 3 verres qui sont à l'endroit. <br />
+On obtient une configuration avec <b>0</b> verre à l'endroit.
+<li>Sélectionner 2 verres à l'endroit et 1 verre à l'envers. <br />
+On obtient une configuration avec <b>2</b> verres à l'endroit. <br />
+<li>Sélectionner 1 verre à l'endroit et 2 à l'envers. <br />
+On obtient une configuration avec <b>4</b> verres à l'endroit, <br />
+c'est-à-dire qu'on est revenu à la situation de départ.
+</ul>
+
+<p><b>Troisième étape</b></p>
+
+<p>Si on repart de la configuration avec <b>0</b> verre à l'endroit, alors les opérations possibles sont les suivantes.
+<ul>
+<li>Sélectionner 3 verres qui sont à l'envers. <br />
+On obtient une configuration avec <b>3</b> verres à l'endroit, <br />
+mais ça, on pouvait déjà le faire en une seule étape.
+</ul>
+
+<p>Si on repart de la configuration avec <b>2</b> verres à l'endroit, alors les opérations possibles sont les suivantes.
+<ul>
+<li>Sélectionner 2 verres à l'endroit et 1 verre à l'envers. <br />
+On obtient une configuration avec <b>1</b> verre à l'endroit,<br />
+mais ça, on pouvait déjà le faire en une seule étape.
+<li>Sélectionner 1 verre à l'endroit et 2 à l'envers. <br />
+On obtient une configuration avec <b>3</b> verres à l'endroit, <br />
+mais ça, on pouvait déjà le faire en une seule étape.
+<li>Sélectionner 3 verres qui sont à l'envers. <br />
+On obtient une configuration avec <b>5</b> verres à l'endroit, <br />
+c'est-à-dire qu'on a résolu le problème.
+</ul>
+
+
+<p>
+On a ainsi montré non seulement qu'on pouvait obtenir une configuration avec 5 verres
+à l'endroit en 3 étapes, mais on a également démontré qu'il n'était pas possible
+de faire moins. </p>
+
+<p>
+Le principe général qui consiste à regarder l'ensemble des configurations que 
+l'on peut atteindre à chaque étape s'appelle un <b>parcours en largeur</b>.
+Ce processus est assez fastidieux à faire à la main, mais les
+ordinateurs sont justement très forts pour faire des tâches fastidieuses !
+</p>
+
+<h2>Culture informatique </h2>
+
+<p>Une observation utile est que l'ordre des verres sur la table n'a
+  pas d'importance, et que seul le nombre de verres à l'endroit ou à
+  l'envers compte. On peut alors construire un graphe orienté avec
+  pour sommets les six combinaisons possibles de cinq verres, et des
+  arêtes correspondant au retournement de trois verres&nbsp;:
+</p>
+<img src="2012-UA-07_automate.png" />
+<p>On peut alors reformuler le but du sujet sous la question
+suivante&nbsp;: quel est le chemin le plus court joignant
+le sommet (4,1) au sommet (5,0) ? Il existe deux chemins de 
+longueur minimale (3 tours). Ils sont illustrés en rouge et
+en bleu sur le dessin.
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

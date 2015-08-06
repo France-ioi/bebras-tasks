@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2015-FR-27-boxes</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript" src="task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-27-boxes/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": true
+      };
+      </script>
+      <style>
+         #drawing {
+            margin-left: 0.5em;
+         }
+         .columns td {
+            vertical-align: top;
+            padding-right: 1em;
+         }
+         .column_head {
+            font-weight: bold;
+         }
+         #message {
+            text-align: center;
+            font-weight: bold;
+            color: red;
+            padding: 0.5em;
+            height: 1em;
+         }
+         .buttons input {
+            margin-bottom: 5px;
+         }
+         #textSolution li {
+            margin-top: 0.2em;
+         }
+         .valigntop td {
+            vertical-align: top;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+
+         <h1>Ranger les caisses</h1>
+         <div id="tabsContainer"></div>
+         <table><tr><td><b>Objectif :</b></td><td><div id="target"></div></td></tr></table>
+         <p>
+         Votre objectif est de programmer le robot, représenté par le 
+         rectangle rouge ci-dessous,
+         de sorte qu'il range les caisses comme représenté sur l'objectif ci-dessus.
+         Faites glisser les instructions disponibles à gauche
+         pour créer une séquence d'instructions que le robot va répéter 
+         jusqu'à ce qu'il ait terminé.
+         </p>
+         <center><div id="grid"></div><span id="message"></span></center>
+
+         <table class="columns" style="clear: both">
+            <tr>
+            <td style="width:350px"><div class="column_head">Choisissez les instructions :</div></td>
+            <td style="width:350px"><div class="column_head" style="text-align:center">Construisez votre séquence à répéter :</div></td>
+            </tr>
+            <tr>
+            <td colspan="2">
+               <div id="program" class="touch"></div>
+            </td>
+            </tr>
+         </table>
+
+         <div class="buttons" style="text-align: center">
+            <input id="tryOrReset" type="button" onclick="task.tryOrReset()" value="Essayer">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+         <ul>
+            <li>Version facile :
+               <ul>
+               <li>Va à droite jusqu'à être sur une caisse</li>
+               <li>Ramasse la caisse en dessous de toi</li>
+               <li>Va à droite jusqu'au bord</li>
+               <li>Dépose la caisse que tu portes</li>
+               </ul>
+            </li>
+            <li>Version moyenne : 
+               <ul>
+               <li>Va à droite jusqu'à être sur une caisse</li>
+               <li>Ramasse la caisse en dessous de toi</li>
+               <li>Va à droite jusqu'au bord</li>
+               <li>Va à gauche tant que tu es sur une caisse</li>
+               <li>Dépose la caisse que tu portes</li>
+               <li>Va à gauche jusqu'au bord</li>
+               </ul>
+            </li>
+            <li>Version difficile : 
+               <ul>
+               <li>Avance d'une case à droite</li>
+               <li>Va à droite jusqu'à être sur une caisse</li>
+               <li>Ramasse la caisse en dessous de toi</li>
+               <li>Va à gauche jusqu'à être sur une caisse</li>
+               <li>Avance d'une case à droite</li>
+               <li>Avance d'une case à droite</li>
+               <li>Dépose la caisse que tu portes</li>
+               </ul>
+            </li>
+         </ul>
+
+      </div> <!-- task-solution -->
+   </body>
+</html>

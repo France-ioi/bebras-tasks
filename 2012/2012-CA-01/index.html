@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Changer les flèches</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "<b>X := Y</b> puis <b>Y := Z</b> puis <b>Z := X</b>",
+            "<b>X := Z</b> puis <b>Z := X</b> puis <b>Y := H</b>",
+            "<b>Z := Y</b> puis <b>X := Z</b> puis <b>Y := H</b>",
+            "<b>Z := X</b> puis <b>X := Y</b> puis <b>Y := H</b>"
+            ], "added", "#answers_2012-CA-01");
+      </script>
+         <style class="">.CA-01-table {
+   border: 1px solid black;
+   border-spacing: 0;
+}
+.CA-01-table td {
+   border: 1px solid black;
+   padding: 5px;
+   /*text-align: center;*/
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-CA-01/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "4"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Changer les flèches</h1>
+<p>
+On dispose de boîtes reliées par des flèches. Une instruction, utilisant le signe <code>:=</code>, permet de modifier une flèche.
+Par exemple, l'instruction <b>A <code>:=</code> B </b> modifie la flèche qui part de A. Après l'exécution de cette instruction, la flèche qui part de A est modifiée pour arriver au même endroit que la flèche qui part de B.
+
+</p>
+
+<table>
+<tr>
+<td width="40%" align="center"><i>AVANT</i></td>
+<td width="20%" align="center"></td>
+<td width="40%" align="center"><i>APRÈS</i></td>
+</tr>
+<tr><td colspan="3" align="center"><img width="600" src="2012-CA-01-image.png" /></td></tr>
+</table>
+<p>On souhaite maintenant effectuer la transformation illustrée ci-dessous en utilisant une séquence d'instructions à exécuter dans l'ordre.</p>
+<table>
+<tr><td width="50%" align="center"><i>AVANT</i></td><td  width="50%" align="center"><i>APRÈS</i></td></tr>
+<tr><td align="center"><img width="300" src="2012-CA-01-Starting.png" /></td><td align="center"><img width="300" src="2012-CA-01-Final.png" /></td></tr>
+</table>
+
+<p>Quelle est la séquence qui convient&nbsp;?</p>
+
+<div class="reponses" id="answers_2012-CA-01">
+</div>
+
+
+<img style="display: none;" src="2012-CA-01-image.png" />
+<img style="display: none;" src="2012-CA-01-Starting.png" />
+<img style="display: none;" src="2012-CA-01-Final.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : D=4
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>La séquence <span class="2012-CA-01_choice_4">4</span> est celle qui convient&nbsp; <b>Z := X</b> puis <b>X := Y</b> puis <b>Y := H</b>.</p>
+
+<table class="CA-01-table">
+<tr>
+<td>Situation initiale</td>
+<td>H pointe vers X</td>
+<td>X pointe vers Y</td>
+<td>Y pointe vers Z</td>
+<td>Z pointe vers X</td>
+</tr>
+<tr>
+<td>Situation après <b>Z := X</b></td>
+<td>H pointe vers X</td>
+<td>X pointe vers Y</td>
+<td>Y pointe vers Z</td>
+<td>Z pointe vers Y</td>
+</tr>
+<tr>
+<td>Situation après <b>X := Y</b></td>
+<td>H pointe vers X</td>
+<td>X pointe vers Z</td>
+<td>Y pointe vers Z</td>
+<td>Z pointe vers Y</td>
+</tr>
+<tr>
+<td>Situation après <b>Y := H</b></td>
+<td>H pointe vers X</td>
+<td>X pointe vers Z</td>
+<td>Y pointe vers X</td>
+<td>Z pointe vers Y</td>
+</tr>
+</table>
+
+<p>Les autres séquences ne conviennent pas.</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>On peut voir les boîtes comme des <b>cases mémoires</b>, c'est-à-dire des emplacements dans la mémoire d'un ordinateur dans lequel on peut stocker des valeurs. En particulier, il est possible de stocker dans une case mémoire l'adresse d'une autre case mémoire. Une valeur qui correspond à l'addresse d'une case mémoire est appelée un <b>pointeur</b>. Les pointeurs jouent un rôle fondamental en programmation.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

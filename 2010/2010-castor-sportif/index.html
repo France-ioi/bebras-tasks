@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Castor sportif</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "100 pas",
+            "300 pas",
+            "400 pas",
+            "1200 pas"
+            ], "added", "#answers_2010-castor-sportif");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-castor-sportif/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Castor sportif</h1>
+<p>
+Le castor aime courir. Chaque matin après s'être levé, il part courir.
+</p><p>
+Voici son programme :
+</p><p>
+Activité « courir » :
+<ul>
+   <li>exécute l'activité « courir autour du bloc »</li>
+   <li>exécute l'activité « courir autour du bloc »</li>
+   <li>exécute l'activité « courir autour du bloc »</li>
+</ul>
+<p>
+Activité « courir autour du bloc » :
+<ul>
+   <li>exécute l'activité « courir le long de la route »</li>
+   <li>exécute l'activité « courir le long de la route »</li>
+   <li>exécute l'activité « courir le long de la route »</li>
+   <li>exécute l'activité « courir le long de la route »</li>
+</ul>
+</p>
+<p>
+Activité « courir le long de la route » :
+<ul>
+   <li>Fais 100 pas en courant</li>
+   <li>Tourne-toi de 90 degrés vers la gauche</li>
+</ul>
+<p>
+<b>Combien de pas a couru Castor lorsqu'il a effectué une fois l'activité « courir »&nbsp;?</b>
+</p>
+<div class="reponses" id="answers_2010-castor-sportif">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-castor-sportif_choice_4">D</span> (1200 pas) est correcte.
+   </p><p>
+Exécuter une fois l'activité "courir le long de la route" correspond à 100 pas.<br/>
+Exécuter une fois "courir autour du bloc" va exécuter 4 fois "courir le long de la route", soit un total de 4*100=400
+pas.<br/>
+Exécuter une fois "courir" va exécuter 3 fois "courir autour du bloc", ce qui va exécuter 12 fois "courir le long de la
+route" soit 12*100=1200 pas.
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>
+Le programme de l'entraînement de Castor fonctionne comme un programme informatique. Son programme
+combine des séquences d'instructions au sein de modules qui portent leur propre nom ("courir" par exemple) et
+peuvent être à leur tour utilisés comme des instructions. Le programme de course ne contient que trois blocs, l'un
+pour chaque activité. Les véritables programmes informatiques peuvent être très grands, donc il est important de
+bien les organiser en différentes parties, ce que les informaticiens appellent l'architecture d'un logiciel.
+Heureusement, les blocs d'un logiciel peuvent être utilisés encore et encore sans jamais s'user.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

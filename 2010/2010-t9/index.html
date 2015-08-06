@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>T9</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+             "Bois mon roi",
+             "Sois mon toi",
+             "Quel nom toi",
+             "Sois mon roi"
+            ], "added", "#answers_2010-t9");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-t9/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["4"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>T9</h1>
+<p>
+Sur le clavier du téléphone portable de Castor, les touches numérotées 2 à
+9 sont également associées à trois au quatre lettres. Ainsi, vous pouvez saisir un mot en appuyant pour chaque
+lettre sur la touche numérique correspondante.
+</p><p>
+Le logiciel T9 ("texte sur 9 touches") cherche dans un dictionnaire les mots qui correspondent à la
+combinaison de chiffres saisis. Si Castor tape par exemple "7243", T9 lui propose les mots "pages", "rages",
+"raid", "raie" et "scie".
+</p>
+<center><img src="enonce.jpg" /></center>
+<p><b>Quelle suite de mots T9 proposerait si Castor tapait : "7647" "666" "764"&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-t9">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 4 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-t9_choice_4">D</span> est correcte.
+   </p><p>
+   La proposition <span class="2010-t9_choice_1">A</span> est incorrecte car le B du premier mot se représente par un 2 et non un 7.
+   La proposition <span class="2010-t9_choice_2">B</span> est incorrecte car le B du troisième mot se représente par un 2 et non un 7.
+   La proposition <span class="2010-t9_choice_3">C</span> est incorrecte car le U du premier mot se représente par un 8 et non un 6.
+    </p>
+<h2>C'est de l'informatique </h2>
+   <p>L'encodage du T9 encode des mots utilisant un alphabet de 26 lettres en utilisant seulement 8 chiffres, pour des
+   raisons de place car le téléphone ne dispose que d'un petit clavier. Un tel encodage ne peut pas être unique, donc
+   un dictionnaire est nécessaire pour effectuer le décodage, en sélectionnant le mot le plus courant parmi ceux qui
+   correspondent. Le système T9 peut être considéré comme un mode de compression de données, qui permet de
+   fournir une interface de saisie de messages SMS (Short Message Service) nécessitant un mimimum d'appuis sur les
+   touches du clavier.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

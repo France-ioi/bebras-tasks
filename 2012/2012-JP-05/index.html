@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Cryptage</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("string", "#answers_2012-JP-05", 6, 1);
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-JP-05/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "OTSACR"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1> Cryptage </h1>
+
+<p>Alice et Bob coopèrent pour crypter un message qu'ils veulent envoyer à Charlie. Pour crypter un message, ils s'y prennent de la manière suivante.
+<ol>
+<li>Alice transforme d'abord le message en inversant l'ordre des lettres.<br />
+ Par exemple, <b>ABCDEF</b> devient <b>FEDCBA</b>.</li>
+<li style="margin-top:0.5em">Bob prend ensuite la première lettre du message produit par Alice et déplace cette lettre à la fin du message.<br />
+Par exemple, <b>FEDCBA</b> devient <b>EDCBAF</b>.</li>
+</ol>
+</p>
+
+<p>
+Selon ce procédé, quelle est la version cryptée du message <b>CASTOR</b>&nbsp;?</p>
+
+<div class="reponses" id="answers_2012-JP-05">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : OTSACR
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Il y a deux étapes.
+<ol>
+<li>Alice prend le mot <b>CASTOR</b> et inverse l'ordre des lettres. Elle obtient <b>ROTSAC</b>.
+<li>Bob prend ensuite le mot <b>ROTSAC</b> et déplace le <b>R</b> à la fin. Il obtient <b>OTSACR</b>.
+</ol>
+
+<p>La réponse est donc <b>OTSACR</b>.</p>
+
+<!--Réponse à cocher : "ORCAST", "RASTOC", "OTSACR", "CROTSA"-->
+<h2>C'est de l'informatique </h2>
+
+<p><b>Crypter</b> un message consiste à prendre un texte contenant
+des informations utiles et à le transformer en un autre texte, de
+telle sorte qu'une personne qui ne sait pas comment le message a été crypté
+aura beaucoup de mal à en extraire des informations utiles.
+</p>
+
+<p>Dans ce sujet, il s'agissait de crypter un message en modifiant l'ordre de ses lettres. Pour le résoudre, il fallait
+comprendre et appliquer correctement les deux étapes de l'algorithme de cryptage décrit dans le sujet.</p>
+
+<h2>Culture informatique</h2>
+
+<p>
+Nous utilisons tous la <b>cryptographie</b> quotidiennement, parfois même sans le savoir ! 
+</p>
+<p>
+Par exemple,
+toutes les pages internet dont l'adresse commence par "https" sont
+envoyées par des messages cryptés, de sorte qu'une personne qui se
+contente de surveiller le réseau internet ne sera pas capable de
+savoir quelles sont les informations échangées entre le site web
+et l'utilisateur. Bien sûr, les méthodes de cryptographie mises
+en jeu sont bien plus complexes que celles décrites dans ce sujet !
+</p>
+
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

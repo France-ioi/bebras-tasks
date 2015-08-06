@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Approvisionnement en eau</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "Valve 1 fermée, 2 ouverte, 3 fermée, 4 fermée",
+            "Valve 1 ouverte, 2 fermée, 3 fermée, 4 ouverte",
+            "Valve 1 ouverte, 2 ouverte, 3 fermée, 4 fermée",
+            "Valve 1 fermée, 2 fermée, 3 fermée, 4 ouverte"
+            ], "added", "#answers_2010-approvisionnement-eau");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-approvisionnement-eau/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Approvisionnement en eau</h1>
+<p>
+Castor a construit un système de tuyaux pour assurer l'arrosage de son
+arbre. Des valves peuvent être ouvertes et fermées individuellement, pour laisser passer l'eau ou au contraire
+bloquer son passage. Les valves sont numérotées 1, 2, 3 et 4.
+</p>
+<center><img src="enonce.jpg" /></center>
+<p>
+<b>Dans laquelle des situations ci dessous, l'arbre reçoit-il de l'eau&nbsp;?</b></p>
+
+<div class="reponses" id="answers_2010-approvisionnement-eau">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-approvisionnement-eau_choice_1">A</span> est correcte.
+   </p><p>
+Dans le cas <span class="2010-approvisionnement-eau_choice_2">B</span> et <span class="2010-approvisionnement-eau_choice_4">D</span> les valves 2 et 3 étant fermées, l'eau ne sort pas des réservoirs.
+</p><p>
+Dans les cas <span class="2010-approvisionnement-eau_choice_3">C</span>, la valve 2 est ouverte, mais l'eau est perdue par la valve 1 ouverte. La valve 3 est fermée, l'eau du second réservoir ne coule pas.
+</p><p>
+On peut constater que dans toutes les solutions la valve 3 est fermée. Il faut donc trouver une solution utilisant
+l'eau du réservoir le plus à gauche sur l'image. Il faut que la valve 2 soit ouverte mais la 1 fermée. C'est la réponse
+<span class="2010-approvisionnement-eau_choice_1">A</span>.
+</p>
+<h2>C'est de l'informatique </h2>
+   <p>Les formules de la logique binaire, c'est-à-dire avec des variables qui ne peuvent prendre que 2 valeurs (vrai et
+faux, oui et non), sont des outils importants en informatique. Dans la plupart des ordinateurs, le bit à deux valeurs
+est la plus petite unité d'information, et les circuits d'un ordinateur fonctionnent sous les lois de la logique bivaluée.
+Mais l'informatique s'intéresse aussi à des ordinateurs gouvernés par d'autes lois, par exemple dans les ordinateurs
+quantiques, ou des ensembles logiques avec plus de 2 valeurs.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

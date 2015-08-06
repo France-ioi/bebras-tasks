@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Vélos branchés</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+            "<img src='2012-AT-10_imageA.png'  width='150' />",
+            "<img src='2012-AT-10_imageB.png'  width='150' />",
+            "<img src='2012-AT-10_imageC.png'  width='150' />",
+            "<img src='2012-AT-10_imageD.png'  width='150' />"
+            ], "added", "#answers_2012-AT-10");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-AT-10/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "2"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Vélos branchés</h1>
+<img width="400" src="2012-AT-10_image.png" style="float:right;padding-bottom:1em"/>
+
+<p> Une nouvelle mode est apparue à Castorville&nbsp;: avoir un vélo multiforme et multicolore. Mais pour être à la mode, il faut bien choisir les différents éléments, et surtout bien les combiner.</p>
+<p>Le schéma ci-contre décrit les combinaisons à la mode. En partant des deux roues en haut, on descend le long des traits, soit à droite soit à gauche, pour savoir quels éléments on peut choisir et combiner.</p>
+
+<p>Parmi les vélos ci-dessous, lequel <strong>ne respecte pas</strong> les combinaisons d'éléments décrites par le schéma ci-contre&nbsp;?
+<div style="clear:both"></div>
+<div class="reponses" id="answers_2012-AT-10">
+</div>
+
+
+<img style="display: none;" src="2012-AT-10_image.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : B=2
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Trois vélos correspondent à un chemin partant des deux roues et descendant dans le schéma&nbsp;:</p>
+
+
+<Table border="1">
+</tr>
+<tr><td><img width="180" src="2012-AT-10_solutionA.png"/></td>
+<td><img width="180" src="2012-AT-10_solutionC.png"/></td>
+<td><img width="180" src="2012-AT-10_solutionD.png"/></td>
+<td><img width="180" src="2012-AT-10_solutionB.png"/></td>
+</tr>
+<tr><td>Pour le vélo <span class="2012-AT-10_choice_1">1</span>, on descend à gauche, puis à gauche, et encore à gauche.</td>
+<td>Pour le vélo <span class="2012-AT-10_choice_3">3</span>, on descend à gauche, puis à droite, et enfin à gauche.</td>
+<td>Pour le vélo <span class="2012-AT-10_choice_4">4</span>, on descend à droite, puis à droite, et enfin à gauche.</td>
+<td>En revanche, le vélo <span class="2012-AT-10_choice_2">2</span> n'est pas décrit. Il faudrait d'abord descendre à gauche, puis à droite, mais là on est coincé car aucune selle ne correspond. La bonne réponse est donc <span class="2012-AT-10_choice_1">2</span>.</td>
+</tr></table>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>Le schéma décrit dans ce sujet s'appelle un <b>arbre de décision</b>. Il s'agit d'une manière compacte de représenter un ensemble d'objets. </p>
+<p>Ici, le schéma décrit 7 vélos possibles, en ne dessinant que 14 éléments reliés par des traits. Si on avait voulu dessiner les 7 vélos explicitement, vu que chaque vélo contient 4 éléments, on aurait eu besoin de dessiner 7 fois 4 éléments, soit 28 éléments au total : deux fois plus qu'avec l'arbre de décision !</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

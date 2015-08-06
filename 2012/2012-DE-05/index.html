@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Plantons des fleurs</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+            "<img src='2012-DE-05_imageA.png' width='200'>",
+            "<img src='2012-DE-05_imageB.png' width='200'>",
+            "<img src='2012-DE-05_imageC.png' width='200'>",
+            "<img src='2012-DE-05_imageD.png' width='200'>"
+            ], "added", "#answers_2012-DE-05");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-DE-05/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "1"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Plantons des fleurs</h1>
+<p>Un petit castor et un grand castor plantent des fleurs dans un jardin. Le petit castor fait des pas plus petits et il plante les fleurs plus près de lui que le grand castor.</p>
+
+<p><img src="2012-DE-05_image.png" width="200" style="float:right"/></p>
+
+<p>Au départ, les deux castors se tiennent dos à dos, regardant donc dans des directions opposées. 
+Ensuite, chacun avance en suivant les instructions suivantes&nbsp;:</p>
+<pre style="background-color: #e7e7e7; padding: 1em; margin-left: 2em;width:300px">Répéter deux fois :
+    Plante une fleur à ta droite
+    Fais un pas en avant
+    Plante une fleur à ta gauche
+    Fais un pas en avant
+</pre>
+<p style="clear:left">Lorsque les deux castors ont terminé, à quoi ressemble le jardin&nbsp;? </p>
+ 
+<div class="reponses" id="answers_2012-DE-05">
+</div>
+
+
+<img style="display: none;" src="2012-DE-05_image.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 (A)
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Le petit castor fait des pas plus petits, donc ses empreintes sont celles qui apparaissent sur la moitié gauche de chacune des images. Il faut donc imaginer la situation de départ : le petit castor part du milieu et avance vers la gauche, tandis que le grand castor part du milieu et avance vers la droite.</p>
+
+<p>On peut alors observer de quel côté chaque castor plante sa première fleur&nbsp;:</p>
+<ul>
+<li>Image <span class="2012-DE-05_choice_1">1</span> : le petit castor plante sa première fleur à sa droite, et le grand castor plante sa première fleur à sa droite.</li>
+<li>Image <span class="2012-DE-05_choice_2">2</span> : le petit castor plante sa première fleur à sa gauche, et le grand castor plante sa première fleur à sa gauche.</li>
+<li>Image <span class="2012-DE-05_choice_3">3</span> : le petit castor plante sa première fleur à sa gauche, et le grand castor plante sa première fleur à sa droite.</li>
+<li>Image <span class="2012-DE-05_choice_4">4</span> : le petit castor plante sa première fleur à sa droite, et le grand castor plante sa première fleur à sa gauche.</li>
+</ul>
+
+<p>La bonne réponse correspond à l'image où les deux castors plantent leur première fleur sur leur droite. La réponse est donc <span class="2012-DE-05_choice_1">A</span>.</p>
+<p><img src='2012-DE-05_imageA.png'  width='200' /></p>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>Cet exercice présentait un <b>algorithme</b>, écrit en français mais sous une forme similaire aux langages de programmation, donc ce que l'on appelle du <b>pseudo-code</b>. Il incluait une boucle, <code>Répéter deux fois</code>, demandant de répéter 4 <b>instructions</b> concernant la position du castor et l'état du jardin.</p>
+
+<p>Pour le résoudre, il fallait comprendre cet algorithme et l'exécuter à la main, pour déterminer son résultat, sous la forme de la position des fleurs plantées. Il fallait aussi comprendre que l'application de cet algorithme dépendait de <b>paramètres</b> externes comme la taille et l'orientation initiale des castors.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

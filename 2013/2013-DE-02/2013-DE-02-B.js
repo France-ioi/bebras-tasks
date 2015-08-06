@@ -1,0 +1,40 @@
+function loadImageB(id) {
+   var rsr = Raphael(id, '172', '153');
+
+   var scale = "s0.6,0.6,0,0";
+   var layer1 = rsr.set();
+   var rect37979 = rsr.rect(383.7963, 255.60294, 284.72223, 254.62962);
+   rect37979.attr({id: 'rect3797-9',x: '383.7963',y: '255.60294',parent: 'layer1',fill: '#b3b3b3',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   rect37979.transform(scale + "t-383.7963,-255.60294").data('id', 'rect37979');
+   var path379984 = rsr.path("m 211.11111,410.69553 c 0,20.96636 -16.37477,37.96296 -36.57408,37.96296 -20.1993,0 -36.57407,-16.9966 -36.57407,-37.96296 0,-20.96637 16.37477,-37.96297 36.57407,-37.96297 20.19931,0 36.57408,16.9966 36.57408,37.96297 z");
+   path379984.attr({id: 'path3799-8-4',parent: 'layer1',fill: '#000000',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   path379984.transform(scale + "t-383.7963,-255.60294 m1.304878,0,0,1.304878,253.6416,-161.32317").data('id', 'path379984');
+   var path3799845 = rsr.path("m 211.11111,410.69553 c 0,20.96636 -16.37477,37.96296 -36.57408,37.96296 -20.1993,0 -36.57407,-16.9966 -36.57407,-37.96296 0,-20.96637 16.37477,-37.96297 36.57407,-37.96297 20.19931,0 36.57408,16.9966 36.57408,37.96297 z");
+   path3799845.attr({id: 'path3799-8-4-5',parent: 'layer1',fill: '#ffffff',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   path3799845.transform(scale + "t-383.7963,-255.60294 m1.304878,0,0,1.304878,379.19491,-161.78611").data('id', 'path3799845');
+   var rect299117758 = rsr.rect(399.19577, 277.48389, 75.682503, 75.682503);
+   rect299117758.attr({id: 'rect2991-1-7-7-5-8',x: '399.19577',y: '277.48389',parent: 'layer1',fill: '#ffffff',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   rect299117758.transform(scale + "t-383.7963,-255.60294").data('id', 'rect299117758');
+   var rect2991177585 = rsr.rect(394.56616, 376.55795, 46.052872, 46.052872);
+   rect2991177585.attr({id: 'rect2991-1-7-7-5-8-5',x: '394.56616',y: '376.55795',parent: 'layer1',fill: '#ffffff',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   rect2991177585.transform(scale + "t-383.7963,-255.60294").data('id', 'rect2991177585');
+   var rect29911775857 = rsr.rect(461.23282, 410.81723, 29.386206, 29.386206);
+   rect29911775857.attr({id: 'rect2991-1-7-7-5-8-5-7',x: '461.23282',y: '410.81723',parent: 'layer1',fill: '#ffffff',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   rect29911775857.transform(scale + "t-383.7963,-255.60294").data('id', 'rect29911775857');
+   var rect299117758576 = rsr.rect(514.01062, 381.18759, 21.978798, 21.978798);
+   rect299117758576.attr({id: 'rect2991-1-7-7-5-8-5-7-6',x: '514.01062',y: '381.18759',parent: 'layer1',fill: '#ffffff',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   rect299117758576.transform(scale + "t-383.7963,-255.60294").data('id', 'rect299117758576');
+   var path37998451 = rsr.path("m 211.11111,410.69553 c 0,20.96636 -16.37477,37.96296 -36.57408,37.96296 -20.1993,0 -36.57407,-16.9966 -36.57407,-37.96296 0,-20.96637 16.37477,-37.96297 36.57407,-37.96297 20.19931,0 36.57408,16.9966 36.57408,37.96297 z");
+   path37998451.attr({id: 'path3799-8-4-5-1',parent: 'layer1',fill: '#ffffff',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   path37998451.transform(scale + "t-383.7963,-255.60294 m1.304878,0,0,1.304878,324.10231,-77.526854").data('id', 'path37998451');
+   var path3799848 = rsr.path("m 211.11111,410.69553 c 0,20.96636 -16.37477,37.96296 -36.57408,37.96296 -20.1993,0 -36.57407,-16.9966 -36.57407,-37.96296 0,-20.96637 16.37477,-37.96297 36.57407,-37.96297 20.19931,0 36.57408,16.9966 36.57408,37.96297 z");
+   path3799848.attr({id: 'path3799-8-4-8',parent: 'layer1',fill: '#000000',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   path3799848.transform(scale + "t-383.7963,-255.60294 m1.304878,0,0,1.304878,368.54676,-105.30463").data('id', 'path3799848');
+   var path37998489 = rsr.path("m 211.11111,410.69553 c 0,20.96636 -16.37477,37.96296 -36.57408,37.96296 -20.1993,0 -36.57407,-16.9966 -36.57407,-37.96296 0,-20.96637 16.37477,-37.96297 36.57407,-37.96297 20.19931,0 36.57408,16.9966 36.57408,37.96297 z");
+   path37998489.attr({id: 'path3799-8-4-8-9',parent: 'layer1',fill: '#000000',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   path37998489.transform(scale + "t-383.7963,-255.60294 m1.304878,0,0,1.304878,368.0838,-229.3787").data('id', 'path37998489');
+   var rect29911775852 = rsr.rect(495.4921, 311.74316, 46.052872, 46.052872);
+   rect29911775852.attr({id: 'rect2991-1-7-7-5-8-5-2',x: '495.4921',y: '311.74316',parent: 'layer1',fill: '#ffffff',"fill-opacity": '1',stroke: 'none','stroke-width':'1','stroke-opacity':'1'});
+   rect29911775852.transform(scale + "t-383.7963,-255.60294").data('id', 'rect29911775852');
+   layer1.attr({'id': 'layer1','name': 'layer1'});layer1.transform(scale + "t-383.7963,-255.60294");
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Jeu de tri</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(4, [
+             "4 déplacements",
+             "5 déplacements",
+             "6 déplacements",
+             "7 déplacements"
+            ], "added", "#answers_2010-jeu-tri");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-jeu-tri/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Jeu de tri</h1>
+<p>
+Castor aime jouer à un jeu de tri de cartes dont les règles sont les
+suivantes.
+</p><p>
+Les cartes sont posées côte à côte et doivent être triées par ordre croissant de gauche à doite en un minimum
+de déplacements.
+</p><p>
+Un déplacement équivaut à l'échange de deux cartes voisines.
+</p>
+<center><img src="enonce.jpg" /></center>
+<p><b>Combien de déplacements faut-il effectuer au minimum pour classer ces cartes&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-jeu-tri">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-jeu-tri_choice_2">B</span> est correcte.
+   </p>
+   <p>
+   Une technique consite à comparer les cartes deux à deux, et les échanger si elles ne sont pas triées entre elles. On
+   arrête les échanges quand l'ensemble est trié. L'une des nombreuses solutions valides que l'on peut obtenir ainsi est
+   :
+   <ul>
+      <li>Étape 1 : 4-2-6-5-3 -> 2-4-6-5-3</li>
+      <li>Étape 2 : 2-4-6-5-3 -> 2-4-6-3-5</li>
+      <li>Étape 3 : 2-4-6-3-5 -> 2-4-3-6-5</li>
+      <li>Étape 4 : 2-4-3-6-5 -> 2-4-3-5-6</li>
+      <li>Étape 5 : 2-4-3-5-6 -> 2-3-4-5-6</li>
+   </ul>
+   <p>
+      Les réponses <span class="2010-jeu-tri_choice_3">C</span> et <span class="2010-jeu-tri_choice_4">D</span> sont donc certainement fausses.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>
+   Les algorithmes de tris sont un thème important de l'informatique. En effet, la recherche dans des données est
+   facilitée si les données sont triées, car cela évite d'avoir à toutes les parcourir. Par exemple la recherche d'adresses
+   des habitants d'une ville est facilitée si les habitants sont triés par ordre alphabétique de leur nom de famille.
+   Beaucoup des collections de données changent régulièrement. Par exemple, les habitants d'une ville changent suite
+   à des naissances, décès, déménagements ou changements de noms. Les données doivent être triées encore et
+   encore. Il est donc nécessaire de trouver des techniques de tri efficaces, c'est à dire utilisant un plus petit nombre
+   d'étapes. Trier par une succession d'échanges (tri à bulle) n'est qu'un des nombreux algorithmes possibles, d'autres
+   techniques existent, plus ou moins efficaces.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

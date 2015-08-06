@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Navigation</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "5 NO",
+            "2 NO, 2 O, 1 N, 1 O, 2 N",
+            "2 NO, 3 N, 3 O",
+            "2 NO, 2 O, 1 NO, 2 N",
+            ], "added", "#answers_2012-IT-04");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-IT-04/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "4"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1> Navigation </h1>
+<p>Castor navigue en bateau sur un lac comportant des îles. Son but est de rejoindre le drapeau.
+</p>
+<p>
+Castor peut programmer le pilote automatique par une suite de commandes de manière à déplacer le bateau de point en point
+sur la carte. Chaque commande indique un déplacement d'un certain nombre de pas dans l'une des 8 directions possibles. Par exemple, la commande <b>2 NO</b> effectue un
+déplacement de 2 pas vers le Nord-Ouest. 
+</p>
+
+<table><tr><td><img src="2012-IT-04_carte_bouee.png" width="500" /></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center" width="210">Par exemple, le programme <nobr><b>1 N, 2 NE</b></nobr> envoie
+le bateau<br>à la bouée en 3&nbsp;pas.<br />
+<img src="2012-IT-04_carte_bouee_V2.png" width="120" /></td></table>
+
+<p>Parmi les programmes suivants, lequel permet au bateau d'éviter les îles et de rejoindre le drapeau en un nombre <strong>minimum de pas&nbsp;</strong>?
+
+<div class="reponses" id="answers_2012-IT-04">
+</div>
+
+
+<img style="display: none;" src="2012-IT-04_carte_bouee.png" />
+<img style="display: none;" src="2012-IT-04_carte_bouee_V2.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : D=4
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+<p>Étudions les programmes&nbsp;:</p>
+<ul>
+<li>Les programmes <span class="2012-IT-04_choice_1">1</span> et <span class="2012-IT-04_choice_2">2</span> font entrer le bateau en collision avec une île.</li>
+<li>Le programme <span class="2012-IT-04_choice_3">3</span> conduit le bateau au drapeau en 8 pas.</li>
+<li>Le programme <span class="2012-IT-04_choice_4">4</span> conduit le bateau au drapeau en 7 pas. </li>
+</ul>
+<p>La bonne réponse est donc <span class="2012-IT-04_choice_4">4</span>.</p>
+
+<img src="2012-IT-04_solution.png" width="500" />
+<p>Remarque : on cherchait ici à minimiser le nombre de pas effectués par le bateau, et non pas à minimiser le nombre d'instructions nécessaires pour décrire le déplacement. </p>
+
+<h2>C'est de l'informatique </h2>
+<p>Résoudre cet exercice nécessitait de comprendre l'effet de programmes écrits dans un petit langage de programmation ayant une <b>syntaxe</b> précise&nbsp;:</p>
+<ul>
+<li>un <b>programme</b> est formé d'une suite de commandes séparées par des virgules,</li>
+<li>une <b>commande</b> est constituée d'un nombre entier positif suivi d'un espace puis d'une direction,</li>
+<li>une <b>direction</b>, décrite par une ou deux lettres, fait partie de l'ensemble : N, NE, E, SE, S, SO, O, NO.</li>
+</ul>
+<p>Chaque programme écrit dans ce langage peut être interprété comme la description d'un déplacement. 
+</p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Transport de troncs</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "A-B-E-H",
+            "A-B-F-H",
+            "A-C-F-H",
+            "A-D-G-H",
+            ], "added", "#answers_2012-LV-02");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-LV-02/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "2"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Transport de troncs</h1>
+
+<img src="2012-LV-02.png" style="float:right;width:250px" />
+
+<p>Les castors transportent des troncs entre leurs villages en les faisant descendre des rivières.
+Cependant, pour éviter d'encombrer les rivières, chaque village ne transporte ses troncs qu'un jour par semaine. En attendant ce jour, les villages stockent les troncs qu'ils reçoivent.
+</p>
+<p>Le schéma ci-contre représente le plan des rivières et le jour de la semaine où chaque village transporte ses troncs. Par exemple, le village B peut acheminer
+des troncs vers les villages E et F, mais uniquement le samedi.
+</p>
+
+<p>Quel est le chemin qui permet à un tronc de voyager le plus rapidement possible entre le village A et le village H&nbsp;?
+</p>
+
+<div class="reponses" id="answers_2012-LV-02">
+</div>
+
+
+<img style="display: none;" src="2012-LV-02.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Le chemin ayant le délai minimum est A-B-F-H (réponse <span class="2012-LV-02_choice_2">2</span>).</p>
+
+<p>Le tableau ci-dessous montre le calendrier des transferts. Chaque ligne correspond à un des chemins proposés.</p>
+
+<table border="1" cellspacing=0>
+<tr><td></td><td width="70">Jeudi</td><td width="70">Vendredi</td><td width="70">Samedi</td><td width="70">Dimanche</td><td width="70">Lundi</td><td width="70">Mardi</td><td width="70">Mercredi</td><td width="70">Jeudi</td><td width="70">Vendredi</td><td width="70">Samedi</td><td width="70">Dimanche</td><td>Lundi</td></tr>
+<tr><td>A-B-E-H</td><td>A vers B</td><td></td><td>B vers E</td><td></td><td></td><td></td><td>E vers <b>H</b></td><td></td><td></td><td></td><td></td><td></td></tr>
+
+<tr><td>A-B-F-H</td><td>A vers B</td><td></td><td>B vers F</td><td></td><td>F vers <b>H</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+
+<tr><td>A-C-F-H</td><td>A vers C</td><td></td><td></td><td></td><td></td><td>C vers F</td><td></td><td></td><td></td><td></td><td></td><td>F vers <b>H</b></td></tr>
+
+<tr><td>A-D-G-H</td><td>A vers D</td><td></td><td></td><td>D vers G</td><td></td><td></td><td></td><td></td><td></td><td>G vers <b>H</b></td><td></td><td></td></tr>
+</table>
+
+<h2>C'est de l'informatique </h2>
+
+<p>ll s'agit d'une forme particulière de problème de plus court chemin, dans laquelle la notion de temps apparaît. Un problème très similaire se présente lorsqu'on veut déterminer des trajets optimaux pour se déplacer en train ou en avion. Les algorithmes classiques de plus court chemin ne s'appliquent pas toujours directement lorsque le problème fait intervenir des contraintes supplémentaires comme des horaires fixes auxquels il est possible de voyager. Dans ces cas là, il est nécessaire d'adapter ou de compléter les algorithmes existants.</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

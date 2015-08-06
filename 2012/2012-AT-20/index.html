@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Trier des bâtons</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/2012/2012-AT-20/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "acceptedAnswers": ["2"]
+         };
+      </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "Toujours prendre le plus long.",
+            "Toujours prendre le deuxième plus long&nbsp;; s'il n'en reste plus qu'un, prendre celui-là.",
+            "Toujours prendre le plus court.",
+            "Toujours prendre le deuxième plus court&nbsp;; s'il n'en reste plus qu'un, prendre celui-là."
+            ], "added", "#answers_2012-AT-20");
+      </script>
+   </head>
+   <body>
+      <div id="task">
+      <h1>Trier des bâtons</h1>
+      <table><tr>
+         <td>
+            <p>Le robot Robin fonctionne de la manière suivante&nbsp;:
+            <ol>
+               <li>Robin ramasse un des troncs situés au point A, selon une règle définie par la suite.</li>
+               <li>Robin dépose ce tronc en haut de la rampe qui se trouve au point B.</li>
+               <li>Le tronc roule alors et va s'empiler sur le bas de la rampe.</li>
+               <li>Robin recommence ainsi jusqu'à ce que tous les troncs soient sur la rampe.</li>
+            </ol></td>
+         <td>
+            <img width="450" src="2012-AT-20_Robbie.png" />
+         </td>
+      </tr></table>
+
+      <table><tr>
+         <td><img width="175" src="2012-AT-20.png" /></td>
+         <td><p>Sachant que la situation finale est comme illustrée ci-contre,
+quelle règle a été appliquée pour choisir à chaque fois le tronc à ramasser&nbsp;?</p></td>
+      </tr></table>
+
+      <div class="reponses" id="answers_2012-AT-20"></div>
+
+      <img style="display: none;" src="2012-AT-20_Robbie.png" />
+      <img style="display: none;" src="2012-AT-20.png" />
+
+      </div>
+      
+      <div id="solution">
+      <div class="explications">
+<h2>La solution</h2>
+
+<p>Étudions les propositions une par une.</p>
+
+<ul>
+<li><span class="2012-AT-20_choice_3">3</span>. "Toujours prendre le plus court.". <br />
+On obtient une situation où les troncs auraient été triés par taille, avec le plus court tout en bas et le plus long tout en haut.<br />
+<img width="150" src="2012-AT-20_SticksC-solution.png" /></li>
+<li><span class="2012-AT-20_choice_1">1</span>. "Toujours prendre le plus long.". <br />
+On obtient une situation où les troncs auraient été triés par taille dans l'ordre inverse, avec le plus long tout en bas et le plus court tout en haut.<br />
+<img width="150" src="2012-AT-20_SticksA-solution.png" /></li>
+<li><span class="2012-AT-20_choice_4">4</span>. "Toujours prendre le deuxième plus court&nbsp;; s'il n'en reste plus qu'un, prendre celui-là.".<br /> 
+Avec cette règle, on ne prend le plus petit tronc que tout à la fin.
+On obtient la situation illustrée ci-dessous.<br />
+<img  width="150"  src="2012-AT-20_SticksD-solution.png" /></li>
+<li><span class="2012-AT-20_choice_2">2</span>. "Toujours prendre le deuxième plus long&nbsp;; s'il n'en reste plus qu'un, prendre celui-là.". <br />
+Avec cette règle, on ne prend le plus grand tronc que tout à la fin.
+On obtient la situation illustrée ci-dessous.<br />
+<img  width="150"  src="2012-AT-20.png" /></li>
+</ul>
+
+<p>La bonne réponse est donc la réponse <span class="2012-AT-20_choice_2">2</span>.</b>
+
+
+
+<h2>C'est de l'informatique </h2>
+<p>Cette tâche réalise un tri, selon une méthode proche du <em>tri par sélection</em>. Le <em>tri par sélection</em> consiste à rechercher le plus grand élément (ou le plus petit), le placer à la dernière position (ou la première), recommencer avec le second plus grand (ou le second plus petit), le placer en avant-dernière position (ou en deuxième position) et ainsi de suite jusqu'à avoir traité la totalité des éléments. Ici, la variante introduite porte sur le critère de sélection de l'élément&nbsp;: on choisit <em>le second plus</em> grand. </p>
+<p>De plus, cette tâche présente la façon dont est exécuté ce tri, l'algorithme lui-même. Il consiste en l'exécution en boucle des actions&nbsp;: (1) sélectionner un élément, (2) déplacer cet élément. Le critère de sélection doit être exprimé de telle sorte qu'il fonctionne à chaque boucle. C'est ce qui est proposé dans les solutions.</p>
+Le tri est une opération très courante en informatique. De nombreux algorithmes de tri existent. Ils diffèrent en complexité et en ressources consommées. Le tri par sélection appartient à la famille des <em>tris par comparaison</em>. Il est particulièrement simple, mais inefficace sur de grandes quantités d'éléments (car il prend trop de temps).</p>
+</div>
+</div> <!-- task-solution -->
+
+
+   </body>
+</html>

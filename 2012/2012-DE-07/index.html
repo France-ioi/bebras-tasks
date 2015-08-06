@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Sélection de robots</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2012-DE-07", 2, 1);
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-DE-07/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "5"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Sélection de robots</h1>
+
+
+<p>Castor dispose de 15 robots représentés ci-dessous. Ces robots peuvent écouter des ordres et les exécuter.</p>
+
+<img src="2012-DE-07-Robots.png" style="width:565px"/>
+
+<p>Castor veut envoyer à son barrage les robots dont il a besoin pour l'aider dans ses réparations.
+Pour ce faire, il donne les ordres suivants aux robots&nbsp;:
+<ol>
+<li>Si vous avez trois petites roues, arrêtez définitivement d'obéir aux ordres&nbsp;!</li>
+<li>Si vous avez à la fois des jambes et un bras, allez au barrage&nbsp;!</li>
+<li>Si vous avez des jambes ou un bras, arrêtez définitivement d'obéir aux ordres&nbsp;! </li>
+<li>Allez au barrage&nbsp;!</li>
+</ol>
+</p>
+<p>Après cette série d'ordres, combien de robots se retrouvent au barrage&nbsp;? (saisissez juste le nombre)</p>
+
+<div class="reponses" id="answers_2012-DE-07">
+</div>
+
+
+
+<img style="display: none;" src="2012-DE-07-Robots.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 5
+
+
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+<p>Au premier ordre, les robots avec trois petites roues n'obéissent plus, donc ils n'iront jamais au barrage. </p>
+<p><img src="2012-DE-07-solution1.png" /></p>
+<p style="margin-top:2em">Au deuxième ordre, le seul robot qui possède des jambes et un bras va au point de rencontre. </p>
+<p><img src="2012-DE-07-solution2.png" /></p>
+<p style="margin-top:2em">Au troisième ordre, les 3 robots avec des jambes et les 3 robots avec un bras n'obéissent plus, ils n'iront pas au barrage.</p> 
+<p><img src="2012-DE-07-solution3.png" /></p>
+<p style="margin-top:2em">Au quatrième ordre, les robots qui obéissent encore vont au barrage.</p>
+<p><img src="2012-DE-07-solution4.png" /></p>
+<p style="margin-top:2em">Au total, on a donc <b>5</b> robots qui vont au barrage.</p>
+
+<h2>C'est de l'informatique </h2>
+
+<p>
+Ici, Castor donne des ordres aux robots. Du point de vue d'un robot particulier, celui-ci reçoit une séquence d'ordres, qu'il doit appliquer tel un <b>programme</b>. Ce programme a la possibilité d'utiliser une commande particulière pour dire "arrêter de prendre en compte tout ce qui est décrit dans le reste du programme jusqu'à ce qu'on recommence tout à zéro". Ce genre de commande est également disponible dans les véritables langages de programmation. 
+</p>
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

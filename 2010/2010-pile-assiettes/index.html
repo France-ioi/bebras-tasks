@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Pile d'assiettes</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "<img src='reponseA.jpg'>",
+             "<img src='reponseB.jpg'>",
+             "<img src='reponseC.jpg'>",
+             "<img src='reponseD.jpg'>"
+            ], "added", "#answers_2010-pile-assiettes");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-pile-assiettes/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Pile d'assiettes</h1>
+<p>
+A la cantine de l'école de Castor, les petits castors mangent dans des
+assiettes creuses vertes, et les grands castors mangent dans des assiettes plates rouges. Les castors
+travailllant en cuisine préparent des piles d'assiettes corespondant à la file d'attente des castors. Ils doivent
+empiler les assiettes vertes et rouges de façon à ce que chaque castor dans la file d'attente reçoive une
+assiette corresponant à sa taille.
+<p>
+Sur l'exemple ci dessous, la pile d'assiettes correspond parfaitement à la file de castor.
+</p>
+<center><img src="enonce.jpg" /></center>
+<p>
+<b>Vous voyez ci desous quatre piles d'assiettes et files d'attente. Dans lequel de ces cas, la pile d'assiette
+NE correspond PAS à la file d'attente&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-pile-assiettes">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-pile-assiettes_choice_2">B</span> est correcte.
+   </p><p>
+   La pile contient les bonnes assiettes, mais elles doivent aussi être placées dans un ordre qui corresponde au
+   placement des Castors. Pour que la pile corresponde, il faut que les assiettes soient empilées exactement dans
+   l'ordre inverse de l'ordre des castors correspondants. Plus exactement l'ordre des assiettes en partant du haut de la
+   pile doit correspondre à l'ordre des castors en partant de la gauche de la file.
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>Dans un algorithme, l'ordre dans lequel on traite les données doit être bien choisi en fonction de ce que l'on veut en
+faire. Les ordinateurs manipulent de nombreuses structures de données, dont la "pile" et la "file" sont parmi les plus
+simples. Avec une "file", on ne peut accéder qu'au premier élément enfilé selon le principe FIFO ("First In, First
+Out"), tandis qu'avec une "pile", on ne peut accéder qu'au dernier élément empilé, selon le principe LIFO ("Last In,
+First Out"). Les castors attendent selon le principe d'une "file", tandis que les assiettes sont placées selon le principe
+d'une "pile".
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

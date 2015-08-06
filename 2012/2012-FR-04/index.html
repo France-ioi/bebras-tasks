@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Anonymisation</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(5, [
+            "Alice Chalin",
+            "Bob Smith",
+            "Greg Patters",
+            "Dominique Gray",
+            "Kathelin Pry",
+            "Melanie Barau",
+            "Romain Dortai",
+            "Isabelle Isy",
+            "Martin Klaus",
+            "Mehdi Duroc"
+            ], "added", "#answers_2012-FR-04");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-FR-04/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "7"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Anonymisation</h1>
+
+<p>Les dossiers médicaux contiennent des données sensibles qui ne doivent vraiment pas être rendues publiques. Cependant, il peut être très intéressant d'exploiter des statistiques sur un ensemble de patients, par exemple pour étudier la fréquence ou la propagation des maladies.
+Un hôpital peut donc être amené à divulguer des informations &laquo;&nbsp;anonymisées&nbsp;&raquo; sur ses patients.
+Par exemple, la table&nbsp;1 ci-dessous décrit la liste des patients de cet hôpital qui sont nés un 1<sup>er</sup> janvier.
+</p>
+
+<p>De manière indépendante, il est relativement facile de se procurer la liste des habitants d'une ville, par exemple auprès de la mairie. La table&nbsp;2 ci-dessous décrit la liste complète des habitants nés un 1<sup>er</sup> janvier et qui habitent la commune dont le code postal est 18250.
+</p>
+
+<table>
+<tr>
+<td style="vertical-align:top">
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th>Date de<br />naissance</th><th>Sexe</th><th>Code<br />postal</th><th>Maladie</th></tr>
+<tr><td>01/01/1974</td><td>Homme</td><td>29400</td><td>Diabète</td></tr>
+<tr><td>01/01/1976</td><td>Homme</td><td>18250</td><td>Calculs rénaux</td></tr>
+<tr><td>01/01/1976</td><td>Femme</td><td>29400</td><td>Cancer du sein</td></tr>
+<tr><td>01/01/1976</td><td>Femme</td><td>29400</td><td>Hépatite</td></tr>
+<tr><td>01/01/1984</td><td>Femme</td><td>18250</td><td>Problème cardiaque</td></tr>
+<tr><td>01/01/1985</td><td>Femme</td><td>16300</td><td>Calculs rénaux</td></tr>
+<tr><td>01/01/1987</td><td>Femme</td><td>25340</td><td>Cancer de la peau</td></tr>
+<tr><td>01/01/1998</td><td>Homme</td><td>18250</td><td>Diabète</td></tr>
+<tr><td>01/01/1998</td><td>Femme</td><td>18250</td><td>Infection pulmonaire</td></tr>
+</table>
+</td>
+<td style="width:10px"></td>
+<td style="vertical-align:top">
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th>Code<br />postal</th><th>Date de<br />naissance</th><th>Sexe</th><th>Nom</th></tr>
+<tr><td>18250</td><td>01/01/1958</td><td>Femme</td><td>Alice Chalin</td></tr>
+<tr><td>18250</td><td>01/01/1976</td><td>Homme</td><td>Bob Smith</td></tr>
+<tr><td>18250</td><td>01/01/1976</td><td>Homme</td><td>Greg Patters</td></tr>
+<tr><td>18250</td><td>01/01/1984</td><td>Femme</td><td>Dominique Gray</td></tr>
+<tr><td>18250</td><td>01/01/1984</td><td>Femme</td><td>Kathelin Pry</td></tr>
+<tr><td>18250</td><td>01/01/1998</td><td>Femme</td><td>Melanie Barau</td></tr>
+<tr><td>18250</td><td>01/01/1998</td><td>Homme</td><td>Romain Dortai</td></tr>
+<tr><td>18250</td><td>01/01/1998</td><td>Femme</td><td>Isabelle Isy</td></tr>
+<tr><td>18250</td><td>01/01/1999</td><td>Homme</td><td>Martin Klaus</td></tr>
+</table>
+</td>
+</tr>
+<tr><td><b>Table&nbsp;1. Patients de l'hôpital nés un 1<sup>er</sup> janvier</b></td><td></td>
+<td><b>Table&nbsp;2. Habitants de la ville 18250 nés un 1<sup>er</sup> janvier</b></td></tr>
+</table>
+<p>En croisant les informations des deux tables ci-dessus, 
+on peut trouver une personne dont on peut être certain qu'elle est malade.
+Quel est le nom de cette personne&nbsp;? </p>
+
+
+<div class="reponses" id="answers_2012-FR-04">
+</div>
+
+
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : G=7
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Une manière de résoudre ce sujet est de considérer un par un les patients du premier tableau qui correspondent à la ville de code postal 18250, et de regarder pour chacun de ces patients le nombre d'habitants apparaissant dans le second tableau qui seraient susceptibles d'être ce patient.</p>
+
+
+<ul>
+<li>Ligne 2 du premier tableau&nbsp;: un homme né le 1er janvier 1976. <br />
+On a deux habitants possibles dans le second tableau&nbsp;: Bob Smith et Greg Patters.</li>
+<li>Ligne 5 du premier tableau&nbsp;: une femme née le 1er janvier 1984. <br />
+On a deux  habitantes possibles dans le second tableau&nbsp;: Dominique Gray et Kathelin Pry.</li>
+<li>Ligne 8 du premier tableau&nbsp;: un homme né le 1er janvier 1998. <br />
+On a un seul habitant possible dans le second tableau&nbsp;: Romain Dortai.</li>
+<li>Ligne 9 du premier tableau&nbsp;: une femme née le 1er janvier 1998. <br />
+On a deux  habitantes possibles dans le second tableau&nbsp;: Melanie Barau et Isabelle Isy.</li>
+</ul>
+
+<p>La bonne réponse est donc &laquo;&nbsp;Romain Dortai&nbsp;&raquo;, dont on peut être certain qu'il souffre de diabète.</p>
+
+<!---
+<h2>C'est de l'informatique </h2>
+--->
+
+<h2>Culture informatique </h2>
+
+<p>Le traitement informatique de bases de données pose d'importantes questions concernant l'anonymat des données. <br />
+En effet, de grandes quantités de données concernant des individus
+  sont mémorisées et utilisées par de nombreuses organisations. Il est
+  nécessaire d'assurer l'anonymat des données dans les bases de
+  données afin de protéger ces informations personnelles d'utilisations abusives, par des personnes ou organisations non autorisées. <br />
+D'un autre côté, dans de nombreux domaines, notamment le domaine médical, les grandes quantités de données mémorisées peuvent être utiles à la recherche. Or, afin d'être exploitables pour la recherche, les données doivent être les plus précises possibles.</p>
+<p>
+Les chercheurs en informatique, intéressés par cette question, ont proposé la notion de &laquo;&nbsp;<i>k</i>-anonymisation&nbsp;&raquo; de bases de données. <br/>
+Une base de données comporte des tables telles que celles présentées dans l'exercice. Chaque ligne correspond à un &laquo;&nbsp;individu&nbsp;&raquo;, et décrit pour cet individu les valeurs des propriétés présentées en colonnes. Une table d'une base de données est &laquo;&nbsp;<i>k</i>-anonymée&nbsp;&raquo; si chaque ligne est <b>non</b> distinguable d'au moins <i>k</i>&nbsp;&minus;&nbsp;1 autres lignes.
+<ul><li>Si <i>k</i>&nbsp;=&nbsp;1, alors on peut identifier une ligne au moins dont les caractéristiques sont uniques, et que l'on peut donc distinguer de toutes les autres ou &laquo;&nbsp;identifier&nbsp;&raquo; par ses caractéristiques.</li><li>Si <i>k</i>&nbsp;=&nbsp;3, alors on peut trouver au moins un groupe de 3 lignes ayant les mêmes caractéristiques, donc distinguables des autres lignes, mais pas entre elles.</li></ul>
+Plus la valeur de <i>k</i> est élevée, plus la table est anonymée. </p>
+<p>
+La définition de la &laquo;&nbsp;<i>k</i>-anonymisation&nbsp;&raquo; soulève d'intéressantes questions. Par exemple, un problème consiste à trouver le nombre minimum de cellules (cases) qui doivent être effacées dans une table afin de la rendre <i>k</i>-anonymée. <br />
+La <i>k</i>-anonymisation montre qu'il est nécessaire de faire preuve de vigilance lors de l'ouverture en accès libre à des bases de données anonymées. En effet, même si deux extraits de bases sont individuellement <i>k</i>-anonymés, il est possible que par croisement de données qu'ils contiennent, on parvienne tout de même à identifier les individus.</p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+   <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2014-AU-02-pancake-flipping</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+       <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-AU-02-pancake-flipping/",
+          "language": "fr",
+          "version": "en.01",
+          "authors": "Judith Helgers",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"2": "hard", "3": "medium", "4": "easy"},
+          "categories": {ALG : true, PUZ : true},
+          "answerType": "Interactive, click on rectangles",
+          "fullFeedback": true,
+          "status": "evaluation"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      .easy, .hard, .many, .easy_hard {
+         display: none;
+      }
+      /* use: 
+           <div class="easy_hard">
+           <div class="many">
+      */
+      </style>
+  </head>
+  <body>
+      <div id="task">
+         <h1 id="task_title">Retourner les crêpes</h1>
+         <p>
+         <img src="castor_crepes.png" style="float:right; margin-left:1em;width:120px" />
+         <span class="easy_hard">Castor a préparé des crêpes. </span>
+         <span class="many">Castor a préparé beaucoup de crêpes&nbsp;! </span>
+         Maintenant, il souhaite les ranger par taille, 
+         en mettant la plus grande crêpe en bas de la pile.
+         </p>
+         <p>
+         Cliquez sur une crêpe pour retourner la partie de la pile se situant au-dessus. Moins vous effectuerez de retournements, plus vous aurez de points.
+         </p>
+
+         <center>
+         <div id="anim"></div>
+
+         <div style='text-align: right;'><input type="button" id="cancelLast" value="Annuler une étape" onclick="task.cancelLastStep()"></div>
+
+         <div id="status"></div>
+         </center>
+
+
+      </div>
+      <div id="solution">
+          <h2>Solution</h2>
+          <p>
+          Une première solution en <span class="easy_hard">six</span><span class="many">18</span> coups est basée sur un algorithme systématique
+          qui consiste à mettre les crêpes à leur place une par une,
+          en traitant à chaque fois la plus grande crêpe encore mal rangée. Pour placer une crêpe à sa place, il faut d'abord la positionner tout en haut
+          en cliquant dessus, puis cliquer là où on souhaite la placer.
+          </p>
+          <center class="easy"><img src="easy_sol1.png" style="width:750px" /></center>
+          <center class="hard"><img src="hard_sol1.png" style="width:750px" /></center>
+          <center class="many"><img src="many_sol1.png" style="width:750px" /></center>
+          <ul>
+            <li>Étape 1&nbsp;: on fait remonter la plus grande crêpe tout en haut.</li>
+            <li>Étape 2&nbsp;: on met la plus grande crêpe à sa place finale tout en bas.</li>
+            <li class="easy_hard">Étape 3&nbsp;: la 2ème plus grande crêpe est déjà tout en haut, on la met à sa place finale.</li>
+            <li class="easy_hard">Étape 4&nbsp;: on met la 3ème plus grande crêpe tout en haut.</li>
+            <li class="easy_hard">Étape 5&nbsp;: on met la 3ème plus grande à sa place en 3ème position.</li>
+            <li class="easy_hard">Étape 6&nbsp;: la 4ème plus grande crêpe est déjà tout en haut, on la met à sa place finale.</li>
+            <li class="easy">La dernière crêpe est déjà bien placée, on a terminé.</li>
+            <li class="hard">Les deux dernières crêpes sont déjà bien placées, on a terminé.</li>
+            <li class="many">Étape 3&nbsp;: on met la 2ème plus grande crêpe tout en haut.</li>
+            <li class="many">Étape 4&nbsp;: on met la 2ème plus grande crêpe à sa place finale.</li>
+            <li class="many">Étape 5&nbsp;: on met la 3ème plus grande crêpe tout en haut.</li>
+            <li class="many">Étape 6&nbsp;: on met la 3ème plus grande crêpe à sa place finale.</li>
+            <li class="many">etc.</li>
+          </ul>
+          <p>
+            Cette approche systématique ne donne pas le plus petit nombre d'étapes.
+            Ainsi, il y avait aussi une solution en <span class="easy">4</span><span class="hard">5</span><span class="many">13</span> coups&nbsp;:
+            <center class="easy"><img src="easy_sol2.png" style="width:750px" /></center>
+            <center class="hard"><img src="hard_sol2.png" style="width:750px" /></center>
+            <center class="many"><img src="many_sol2.png" style="width:750px" /></center>
+            <p>
+            Dans cette solution, à chaque coup on se concentre sur le meilleur endroit où placer la crêpe du haut :
+               <ul>
+                  <li>Soit tout en bas si c'est la plus grande crêpe</li>
+                  <li>Soit au dessus de la crêpe juste un peu plus grande si elle ne la touche pas déjà.</li>
+                  <li>Soit au dessus de la crêpe juste un peu plus petite si elle ne la touche pas déjà.</li>
+               </ul>
+            <p>
+            L'idée est qu'à chaque coup on se rapproche de la solution en augmentant le nombre de crêpes placées juste à côté de la crêpe à côté
+            de laquelle elles devront se trouver tout à la fin.
+            </p>
+            <p>
+            On doit cependant éviter les coups qui séparent une crêpe de la crêpe juste un peu plus grande ou juste un peu plus petite et empireraient la situation, donc il faut
+            parfois s'adapter selon la situation. Cette approche n'est donc pas aussi systématique que la précédente, mais donne souvent de meilleurs
+            résultats.
+            </p>
+          </p>
+
+
+          <h2>C'est de l'informatique !</h2>  
+
+          <p>
+          Cet exercice est un problème de tri bien connu, le <a href="http://fr.wikipedia.org/wiki/Tri_de_cr%C3%AApes" target="new">tri de crêpes</a>, sur lequel beaucoup d'informaticiens se sont penchés, dont Bill Gates. 
+          </p>
+          <p>
+          En informatique, on a très souvent besoin de trier des objets. Selon le type d'objet à trier, et selon les opérations que l'on peut effectuer pour déplacer les objets, différents «&nbsp;algorithmes de tris&nbsp;» peuvent être envisagés.
+          Dans ce sujet, on ne peut pas déplacer les objets individuellement. La seule opération que l'on peut effectuer consiste à inverser l'ordre de tous les objects (les crêpes) du haut de la pile.
+          </p>
+          <p>
+          La stratégie consistant à récupérer à chaque fois la plus grande crêpe n'étant pas à sa place pour la mettre à sa place correspond à une variante d'un algorithme très connu appelé «&nbsp;tri par sélection&nbsp;». L'idée étant qu'à chaque étape on «&nbsp;sélectionne&nbsp;» la prochaine crêpe à ranger.
+          </p> 
+          <p>
+          Avec cette stratégie, on est sûr qu'on peut ranger chaque crêpe en au plus 2 retournements. En remarquant que la dernière crêpe (la plus petite) est forcément à sa place lorsqu'on a rangé toutes les autres, on peut conclure que l'on peut toujours ranger les <b>N</b> crêpes de la pile en au plus <b>2*(N-1)</b> opérations.
+          </p>
+          <p>
+          Bien sûr, en cherchant bien, on peut généralement réussir à ranger les crêpes avec un nombre légèrement plus petit d'opérations. Cependant, il faut parfois beaucoup réfléchir (ou calculer) pour y arriver. Alors qu'avec un algorithme simple tel que le tri par sélection, il suffit de répéter une seule règle très simple (ranger la plus grande crêpe qui n'est pas à sa place à l'aide de 2 retournements) afin d'arriver à ranger toutes les crêpes, quelle que soit la situation de départ.
+          </p>
+          <p>
+          C'est cela que l'on vise en général en informatique&nbsp;: un principe simple, qui aboutit à la situation souhaitée en un temps raisonnable, et qui fonctionne sur n'importe quelle situation de départ.
+          </p>
+      </div>
+  </body>
+</html>

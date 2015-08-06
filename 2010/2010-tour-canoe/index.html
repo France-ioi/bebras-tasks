@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Tour en canoë</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "Poisson, grenouille, crocodile, tortue, cigogne, serpent, loutre, canard",
+             "Poisson, grenouille, tortue, crocodile, cigogne, loutre, canard, serpent",
+             "Poisson, crocodile, serpent, cigogne, canard, loutre, grenouille, tortue",
+             "Poisson, grenouille, tortue"
+            ], "added", "#answers_2010-tour-canoe");
+      </script>
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-tour-canoe/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["2"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Tour en canoë</h1>
+<p>
+Castor fait un tour en canoë dans une région riche en rivières et petits lacs.
+Il souhaite tous les visiter. C'est pourquoi, il procède systématiquement.</p>
+<center><img src="enonce.jpg" /></center>
+<p>
+Castor sait que chaque lac ne compte qu'un maximum de deux rivières qui s'y jettent et qu'il n'a pas encore
+explorées. À chaque fois qu'il atteint un lac, il décide comment poursuivre son exploration :
+</p>
+<ul>
+<li>S'il y a deux rivières qu'il n'a pas encore explorées, il prend celle de gauche.</li>
+<li>S'il n'y a qu'une rivière qu'il n'a pas encore explorée, il prend celle-ci.</li>
+<li>Sinon, il rebrousse chemin jusqu'au lac précédent.</li>
+</ul>
+<p>
+Le tour en canoë se termine dès que Castor a exploré tous les lacs et qu'il est revenu à son point de départ.
+</p>
+<p><b>Dans chaque lac, Castor rencontre un animal. Il note son nom lorsqu'il le rencontre pour la
+première fois. Dans quel ordre note-t-il les noms des animaux rencontrés&nbsp;?</b></p>
+<div class="reponses" id="answers_2010-tour-canoe">
+</div>
+
+
+<img style="display: none;" src="enonce.jpg" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 2 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-tour-canoe_choice_2">B</span> est correcte.
+   </p><p>
+   L'arbre binaire doit être exploré entièrement, et les règles définissent qu'il faut explorer l'arbre par un parours en
+profondeur, en allant en priorité à gauche.
+</p>
+La réponse <span class="2010-tour-canoe_choice_1">A</span> correspond plutôt à un parcours en largeur en allant en priorité à gauche.<br/>
+La réponse <span class="2010-tour-canoe_choice_3">C</span> correspond à un parcours en profondeur, en allant en priorité à droite.<br/>
+La réponse <span class="2010-tour-canoe_choice_4">D</span> ne parcourt pas entièrement l'arbre.<br/>
+   </p>
+<h2>C'est de l'informatique </h2>
+   <p>
+   La disposition des lacs peut être modélisée par une structure de données classique que l'on appelle un arbre.
+L'exploration systématique d'un arbre a de très nombreuses applications. Les techniques d'exploration de l'arbre en
+profondeur ou en largeur sont des techniques éprouvées de parcours systématique.
+   </p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

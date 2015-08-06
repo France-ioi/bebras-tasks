@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>L'art de Castor</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+            "(cube, briques, [(cylindre, acier, [(globe, bois, [])]), (cylindre, acier, [])])",
+            "(cube, briques, [(cylindre, acier, []), (globe, bois),[]),(cylindre, acier, [])])",
+            "(cube, briques, [(cylindre, acier, []), (globe, bois,[]),(cylindre, acier, [])])",
+            "(cube, briques, [(cylindre, acier, [], bois, globe, acier, cylindre, []])",
+            ], "added", "#answers_2010-art-castor");
+      </script>
+         <style class="">.c-2010-art-castor td {
+   border: solid black 1px;
+   text-align: center;
+}</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2010/2010-art-castor/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [],
+    "acceptedAnswers": ["1"]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>L'art de Castor</h1>
+<p>
+Castor a imaginé un système basé sur la combinaison de lettres pour décrire des sculptures : une sculpture est décrite par un triplet (K, M, Liste) avec un corps K composé de la matière M et une liste de sculptures plus petites placées au dessus du corps K.
+</p>
+<ul>
+<li>[ ] décrit une liste vide sans contenu</li>
+<li>[a] décrit une liste qui n'est composée que d'une petite sculpture a.</li>
+<li>[a, b] décrit une liste composée des deux plus petites sculptures a et b.</li>
+</ul>
+<table width="750px"><tr><td width="50%">
+<p>
+Exemples :
+<center><table class="c-2010-art-castor" cellspacing=0>
+<tr><td><img src="cylindre.png" /></td><td>(Cylindre, verre, [ ])</td></tr>
+<tr><td><img src="cylindre_globe.png" /></td><td>(Cylindre, béton, [(globe, briques, [ ])])</td></tr>
+</table></center>
+</td><td width="50%">
+<p><b>Quelle expression décrit cette sculpture&nbsp;?</b></p>
+<center><img src="art_castor.png" /></center>
+</td></tr></table>
+<div class="reponses" id="answers_2010-art-castor">
+</div>
+
+
+<img style="display: none;" src="cylindre.png" />
+<img style="display: none;" src="cylindre_globe.png" />
+<img style="display: none;" src="art_castor.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1 -->
+
+<div class="explications">
+   <h2>La solution</h2> 
+
+   <p>
+   La réponse <span class="2010-art-castor_choice_1">A</span> est correcte.
+<p>
+La réponse <span class="2010-art-castor_choice_3">C</span> décrit une sculpture dans laquelle un cylindre, une boule et un autre cylindre sont côte à côte sur le
+cube.
+La réponse <span class="2010-art-castor_choice_2">B</span> a une structure incorrecte ne correspondant à aucune sculpture : la parenthèse fermante après "bois"
+est de trop.
+La réponse <span class="2010-art-castor_choice_4">D</span> a une structure incorrecte ne correspondant à aucune sculpture : une parenthèse devrait être présente
+après la première liste vide "[]", puis la suite ne correspond pas à la syntaxe de Castor.   </p>
+   <h2>C'est de l'informatique </h2>
+   <p>
+Les programmes informatiques manipulent des structures pour modéliser la réalité. Dans ce sujet, il s'agit d'une
+oeuvre d'art décrite par une structure récursive représentant la combinaison d'objets constituant la sculpture.
+De la même manière que la langue française possède des règles de grammaire pour décrire les phrases
+grammaticalement correctes, les programmes informatiques doivent eux même obéir à une certaine grammaire
+similaire aux régles utilisées ici pour décrire les sculptures.
+</p>
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

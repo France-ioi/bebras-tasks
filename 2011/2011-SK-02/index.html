@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Piles d'assiettes</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(2, [
+            "<img src='2011-SK-02_A-v2.png'>",
+            "<img src='2011-SK-02_B-v2.png'>",
+            "<img src='2011-SK-02_C-v2.png'>",
+            "<img src='2011-SK-02_D-v2.png'>"
+            ], "added", "#answers_2011-SK-02");
+      </script>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2011/2011-SK-02/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "1"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Piles d'assiettes</h1>
+
+<p> 
+Le castor a fabriqué un robot pour ranger ses assiettes. Il le place devant trois piles d'assiettes, puis lui donne la suite de chiffres suivante :
+</p>
+<pre>
+2 1 2 1 1 2 1
+</pre>
+<p>
+Le robot lit chaque chiffre un par un, et effectue à chaque fois l'action correspondante :
+<ul><li>Si le chiffre est un 1, il prend l'assiette en haut de la pile de gauche, et la place sur la pile numéro 1.</li>
+<li>Si le chiffre est un 2, il prend l'assiette en haut de la pile de gauche, et la place sur la pile numéro 2.</li>
+</ul>
+</p>
+Après avoir exécuté toutes les actions de la suite de chiffres, les trois piles ont l'allure suivante :
+</p>
+<img src="2011-SK-02-v2.png">
+<p>
+Quel était l'agencement des assiettes avant que le robot ne commence ?
+</p>
+<div class="reponses" id="answers_2011-SK-02">
+</div>
+
+<img style="display: none;" src="2011-SK-02-v2.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<h2>La solution</h2>
+   <p>
+   Une première manière de résoudre ce problème consiste à partir de chacune des propositions, et à simuler les actions du robot sur chacune de ces situations de départ, pour déterminer le résultat et vérifier s'il correspond à la situation finale présentée dans le sujet. Cette solution fonctionne, mais nécessite de faire 4 fois l'exécution des commandes sans se tromper, ce qui est un peu long. On peut cependant gagner du temps si l'on remarque que seules les propositions A et D contiennent 7 assiettes bleues comme dans la situation finale, donc que ce sont les deux seules qui ont une chance de fonctionner.
+   </p>
+   <p>
+   Un deuxième manière plus astucieuse, consiste à "remonter le temps", et à effectuer les actions du robot en ordre inverse, en partant de la situation finale, et en lisant la séquence de nombre à l'envers. Un 1 signifie alors qu'on prend une assiette de la pile 1 pour la placer sur la pile de gauche, et un 2 signifie que l'on prend une assiette de la pile 2 pour la placer sur la pile de gauche. L'illustration ci-dessous présente cette méthode :
+   </p>
+   <p>
+   <img src="2011-SK-02-sol.png">
+   </p>
+   <p>
+   La situation que l'on obtient en exécutant les commandes à l'envers correspond à <b>la proposition <span class="2011-SK-02_choice_1">A</span></b>.
+   </p>
+   <h2>C'est de l'informatique.</h2>
+   <p> 
+   Ce robot exécute un programme dans un langage de programmation
+   extrêmement rudimentaire. Cela reste malgré tout représentatif de ce
+   qu'est un programme informatique : une série de commandes basiques
+   expliquant sans ambiguïté pour la machine les actions à entreprendre.
+   Les premiers modèles de programmation n'étaient pas tellement plus
+   évolués.
+   </p>
+   <p>
+   La machine de Turing inventée en 1936 par Alan Turing est par exemple
+   un modèle théorique constitué d'un simple ruban et d'une tête de
+   lecture/écriture positionnée sur ce ruban. La machine est programmée
+   en indiquant quel symbole écrire à la position courante et quel
+   déplacement réaliser sur le ruban, en fonction du symbole actuellement
+   sous la tête de lecture et de l'historique des actions précédentes. Ce
+   modèle de calcul reste encore de nos jours une référence pour tous les
+   langages de programmation modernes.
+   </p>
+</div> <!-- task-solution -->
+   </body>
+</html>

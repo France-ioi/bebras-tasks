@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Puzzle rotatif</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-proxy.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+        task.solution= [-1,-1];
+
+        task.getAnswer= function(callback) {
+          var sol = task.solution[0] + ',' + task.solution[1];
+          callback(sol);
+        };
+
+        task.reloadAnswer= function(strAnswer, callback) {
+           if (strAnswer == "") {
+              task.solution = [-1,-1];
+           } else {
+              task.solution = strAnswer.split(',');
+           }
+           task.draw();
+           callback();
+        };
+
+        task.load= function(views, callback) {
+           task.draw();
+           callback();
+        };
+
+        task.valid= function(row, col) {
+          return true;
+        };
+
+        task.cancel= function() {
+           task.reloadAnswer("", function() {});
+           if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"cancel"});}
+        };
+
+        task.draw= function() {
+          var htmlContent = "";
+          for(var i = 0; i < 3; i++) {
+            htmlContent += "<tr>";
+            for(var j = 0; j < 3; j++) {
+              cont = '';
+              class_ = '';
+              if(task.valid(i, j)) {
+                class_ = 'clickable_2012_HU_01a';
+              }
+              if(task.solution[0] == i && task.solution[1] == j) {
+                cont = '4';
+                class_ = ' selected_2012_HU_01a'
+              }
+              htmlContent += '<td class="'+class_+'">' + cont + '</td>';
+            }
+            htmlContent += "</tr>";
+          }
+          $("#pic_2012_HU_01a").html(htmlContent);
+
+          $("#pic_2012_HU_01a td").click(function() {
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).parent().parent().children().index($(this).parent());
+            if (typeof Tracker !== 'undefined') {Tracker.trackData({dataType:"clickitem", item:"[" + row + "][" + col + "]"});}
+            if(task.valid(row,col)) {
+              task.solution = [row, col];
+              task.draw();
+            }
+          });
+        };
+
+         </script>
+         <style class="">#pic_2012_HU_01a td {
+        width: 50px;
+        height: 50px;
+        border: 1px solid black;
+        padding: 0px;
+        margin: 0px;
+        text-align:center;
+      }
+
+      #pic_2012_HU_01a {
+        border-spacing: 0px;
+        border-collapse: collapse;
+        margin-left: 20px;
+      }
+
+      .selected_2012_HU_01a {
+        background-color: #3f3;
+        font-size: x-large;
+      }
+
+      .clickable_2012_HU_01a {
+        cursor:pointer;
+      }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-HU-01a/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "0,1"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Puzzle rotatif</h1>
+<p>Castor a reçu un nouveau jeu, constitué de cases numérotées de 1 à 9 et de quatre boutons (A, B, C et D). Lorsque Castor appuie sur un bouton, les nombres situés autour de ce bouton tournent dans le sens des aiguilles d'une montre. Par exemple, en partant de l'image ci-dessous à gauche et en appuyant sur le bouton A, les nombres tournent comme indiqué par les flèches, et on obtient la situation représentée ci-dessous à droite.
+</p>
+
+<table>
+<tr>
+<td><img src="2012-HU-01a_image0.png" width="200" /></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><img src="2012-HU-01a_image1.png" width="200" /></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><img src="2012-HU-01a_image2.png" width="200" /></td>
+</tr>
+</table>
+
+<p>Castor est parti de l'image de gauche, puis a appuyé dans l'ordre sur les boutons <strong>D, C, B et B</strong>. Où se trouve alors le nombre 4&nbsp;? Cliquez sur la case correspondante ci-dessous.</p>
+
+<center><table id="pic_2012_HU_01a"></table></center>
+
+
+<img style="display: none;" src="2012-HU-01a_image0.png" />
+<img style="display: none;" src="2012-HU-01a_image1.png" />
+<img style="display: none;" src="2012-HU-01a_image2.png" />
+
+</div><!-- task -->
+      <div id="solution">
+<!-- réponse : 1ère ligne, 2ème colonne
+   -->
+
+<div class="explications">
+<h2>La solution</h2>
+
+<p>La mauvaise façon de résoudre ce sujet consiste à recopier la grille en entier à chaque fois.</p>
+<table>
+<tr>
+<td>1) Après appui sur le bouton D</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>2) Après appui sur le bouton C</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td><img src="2012-HU-01a_solution1.png" width="200" /></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><img src="2012-HU-01a_solution2.png" width="200" /></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td>3) Après appui sur le bouton B</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>4) Après appui sur le bouton B</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+<tr>
+<td><img src="2012-HU-01a_solution3.png" width="200" /></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td><img src="2012-HU-01a_solution4.png" width="200" /></td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<p>La bonne façon de résoudre ce sujet consiste à uniquement suivre la trajectoire du 4.</p>
+
+<p><img src="2012-HU-01a_solution5.png" width="200" /></p>
+
+
+<!---
+<h2>C'est de l'informatique</h2>
+<p>TODO</p>
+-->
+
+   </div>
+</div> <!-- task-solution -->
+   </body>
+</html>
