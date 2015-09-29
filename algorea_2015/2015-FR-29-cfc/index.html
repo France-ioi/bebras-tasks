@@ -43,10 +43,10 @@
          <h1>Planètes</h1>
          <div id="tabsContainer"></div>
          <p>
-         Dans l'illustration ci-dessous, chaque cercle représente une planète, et chaque flèche représente un passage inter-sidéral entre deux planètes. Notez que certains passages sont à double-sens tandis que d'autres sont à sens unique.
+         Dans l'illustration ci-dessous, chaque cercle représente une planète, et chaque flèche représente un passage intersidéral entre deux planètes. Notez que certains passages sont à double-sens tandis que d'autres sont à sens unique.
          </p>
          <p>
-         En partant d'une planète et en empruntant une succession de passages inter-sidéraux, il est donc possible de voyager vers certaines autres planètes. Votre objectif est de colorier les planètes de telle sorte que :
+         En partant d'une planète et en empruntant une succession de passages intersidéraux, il est donc possible de voyager vers certaines autres planètes. Votre objectif est de colorier les planètes de telle sorte que :
          <ul>
          <li>deux planètes aient la même couleur s'il est possible de voyager entre ces deux planètes dans les deux sens,</li>
          <li>deux planètes aient des couleurs différentes si de l'une de ces planètes on ne peut pas voyager vers l'autre.</li>
@@ -54,7 +54,8 @@
          </p>
          <p>
          Pour colorier une planète, cliquez sur le rectangle de la couleur souhaitée, puis cliquez sur la planète.
-         </p>         <p class="easy">Dans la version facile, pour vous aider à comprendre, on vous prévient dès que vous faites une erreur.</p>
+         </p>
+         <p class="easy">Dans la version facile, pour vous aider à comprendre, on vous prévient dès que vous faites une erreur.</p>
          <div id="display"></div>
       </div><!-- task -->
       <div id="solution">
@@ -62,7 +63,7 @@
          <p>L'algorithme suivant permet de colorier rapidement toutes les planètes de la bonne couleur.</p>
          <ul>
          <li>Pour commencer, on sélectionne la première couleur, on considère une planète au hasard que l'on colorie de cette couleur.</li>
-         <li>Ensuite, on va colorier de la même couleur toutes les planètes avec lesquelles on peut voyager dans les deux sens depuis la planète déjà coloriée. Pour trouver ces planètes, on cherche un <i>cycle</i>, c'est-à-dire un chemin qui part de la planète de départ et qui revient à la planète de départ. Lorsqu'on a trouvé un tel cycle, on peut colorier toutes les planètes de ce cycle de la couleur courante.</li>
+         <li>Ensuite, on va colorier de la même couleur toutes les planètes avec lesquelles on peut voyager dans les deux sens depuis la planète déjà coloriée. Pour trouver ces planètes, on cherche un <em>cycle</em>, c'est-à-dire un chemin qui part de la planète de départ et qui revient à la planète de départ. Lorsqu'on a trouvé un tel cycle, on peut colorier toutes les planètes de ce cycle de la couleur courante.</li>
          <li>Ensuite, on passe à la couleur suivante, et on recommence le même processus à partir d'une planète qui n'est pas déjà coloriée. Notez que l'on ne change jamais la couleur d'une planète déjà coloriée. Autrement dit, il faut maintenant trouver des cycles qui passent uniquement par des planètes non encore coloriées.</li>
          <li>On continue jusqu'à ce que toutes les planètes soient coloriées.</li>
          </p>
