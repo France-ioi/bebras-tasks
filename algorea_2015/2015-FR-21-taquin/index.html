@@ -16,20 +16,32 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
-       var json = {
-          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-21-taquin/",
-          "language": "fr",
-          "version": "fr.01",
-          "authors": "Charles Freou",
-          "translators": [],
-          "license": "",
-          "taskPathPrefix": "",
-          "modulesPathPrefix": "",
-          "browserSupport": [],
-          "acceptedAnswers": [""],
-          "fullFeedback": true
-      };
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-21-taquin/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "Charles Freou",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "acceptedAnswers": [""],
+            "fullFeedback": true
+         };
       </script>
+      <style>
+         .examples {
+            border-collapse: collapse;
+         }
+         .examples td {
+            border: 1px solid black;
+            padding: 0.5em;
+         }
+         #resetButton {
+            display: none;
+         }
+      </style>
    </head>
    <body>
       <div id="task">
@@ -49,53 +61,36 @@
          Par exemple : 3(HB) exécute 3 fois « HB ».
          </p>
          <p class="hard"><b>Version difficile :</b> les cases en rouge sont des obstacles infranchissables.</p>
-         <style>
-         .examples  {
-            border-collapse: collapse;
-         }
-         .examples td {
-            border: 1px solid black;
-            padding: 0.5em;
-         }
-         .resetButton {
-            display:none;
-         }
-         </style>
-         <center><table class='examples'>
+         <table class="examples" style="margin: 0 auto;">
             <tr>
-               <td class="easy medium"><input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="H"></input></td>
-               <td class="easy medium"><input type="button" id="sample1" class="exampleButton"  onclick="task.executeSample(1)" value="2D"></input></td>
-               <td class="easy medium"><input type="button" id="sample2" class="exampleButton"  onclick="task.executeSample(2)" value="HDBG"></input></td>
-               <td class="easy medium"><input type="button" id="sample3" class="exampleButton"  onclick="task.executeSample(3)" value="3DHG"></input></td>
-               <td class='medium'><input type="button" id="sample4" class="exampleButton" onclick="task.executeSample(4)" value="3(DHGB)"></input></td>
-               <td class='hard'><input type="button" id="sample5" class="exampleButton" onclick="task.executeSample(5)" value="3(GHDB)"></input></td>
-               <td class='hard'><input type="button" id="sample6" class="exampleButton" onclick="task.executeSample(6)" value="3(2(HB)G)H"></input></td>
+               <td class="easy medium"><input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0);" value="H"/></td>
+               <td class="easy medium"><input type="button" id="sample1" class="exampleButton" onclick="task.executeSample(1);" value="2D"/></td>
+               <td class="easy medium"><input type="button" id="sample2" class="exampleButton" onclick="task.executeSample(2);" value="HDBG"/></td>
+               <td class="easy medium"><input type="button" id="sample3" class="exampleButton" onclick="task.executeSample(3);" value="3DHG"/></td>
+               <td class="medium"><input type="button" id="sample4" class="exampleButton" onclick="task.executeSample(4);" value="3(DHGB)"/></td>
+               <td class="hard"><input type="button" id="sample5" class="exampleButton" onclick="task.executeSample(5);" value="3(GHDB)"/></td>
+               <td class="hard"><input type="button" id="sample6" class="exampleButton" onclick="task.executeSample(6);" value="3(2(HB)G)H"/></td>
             </tr>
-         </table></center>
-         <div style='float:right;'>
-         </div>
-         <p>
-         <table style="width:100%"><tr>
-         <td style="width:200px">
-         Votre programme&nbsp;:<br/>
-         <center>
-            <div style="padding:8px">
-               <textarea cols='50' maxlength='200' style='width:300px;height:100px' id='answer' onkeydown="task.resetExecution()"></textarea>
-            </div>
-            <p>
-            <input class="exampleButton" type='button' value='Essayer' onclick='task.executeAnswer()'/>
-            </p>
-         </center>
-         </td>
-         <td style="text-align:center">
-         <div style="padding-bottom:0.5em">Le jeu de taquin&nbsp;:</div>
-         <div id='taquin'></div>
-         <p id="programRan" style="width:400px;word-wrap: break-word">&nbsp;</p>
-         <p>&nbsp;<input id='resetButton' disabled=true type='button' value='Réinitialiser' onclick='task.resetExecution()' />&nbsp;</p>
-         </td>
+         </table>
+         <table style="width: 100%; margin-top: 1em;"><tr>
+            <td style="width: 200px;">
+               Votre programme&nbsp;:<br/>
+               <div style="padding: 8px;">
+                  <textarea id="answer" cols="50" maxlength="200" style="width: 300px; height: 100px;" onkeydown="task.resetExecution();"></textarea>
+               </div>
+               <div style="text-align: center;">
+                  <input class="exampleButton" type="button" value="Essayer" onclick="task.executeAnswer();"/>
+               </div>
+            </td>
+            <td style="text-align: center;">
+               <div style="padding-bottom: .5em;">Le jeu de taquin&nbsp;:</div>
+               <div id="taquin"></div>
+               <p id="programRan" style="width: 400px; word-wrap: break-word;"></p>
+               <p><input id="resetButton" disabled="true" type="button" value="Réinitialiser" onclick="task.resetExecution();"/></p>
+            </td>
          </tr></table>
-         </p>
       </div><!-- task -->
+
       <div id="solution">
          <h2>Solution</h2> 
          <ul>
