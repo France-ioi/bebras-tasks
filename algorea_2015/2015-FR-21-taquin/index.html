@@ -43,25 +43,31 @@
          }
       </style>
    </head>
+
    <body>
       <div id="task">
          <h1>Taquin</h1>
          <div id="tabsContainer"></div>
          <p>
-         La grille ci-dessous représente un jeu de taquin. Le jeu comporte des pièces numérotées, et un trou, représenté par la case grise. 
-         À chaque étape, on peut faire glisser vers le trou une pièce se trouvant à côté du trou. Le trou se retrouve ainsi déplacé vers le haut (H), le bas (B), la droite (D) ou la gauche (G).
+            La grille ci-dessous représente un jeu de taquin. Le jeu comporte des pièces numérotées, et un trou, représenté par la case grise. 
+            À chaque étape, on peut faire glisser vers le trou une pièce se trouvant à côté du trou.
+            Le trou se retrouve ainsi déplacé vers le haut (H), le bas (B), la droite (D) ou la gauche (G).
          </p>
          <p>
-         Pour effectuer une commande plusieurs fois, on peut mettre un nombre devant ; par exemple « 3DH » déplace 3 fois le trou vers la droite, puis une fois vers le haut.
+            Pour effectuer une commande plusieurs fois, on peut mettre un nombre devant ; par exemple « 3DH » déplace 3 fois le trou vers la droite, puis une fois vers le haut.
          </p>
-         <p>Écrivez un programme qui amène la pièce bleue numérotée 1 sur la case située tout en haut à droite de la grille.
-         Pour vous aider, essayez d'abord les programmes ci-dessous en cliquant sur les boutons.
+         <p>
+            Écrivez un programme qui amène la pièce bleue numérotée 1 sur la case située tout en haut à droite de la grille.
+            Pour vous aider, essayez d'abord les programmes ci-dessous en cliquant sur les boutons.
          </p>
-         <p class="medium hard"><b>Versions moyenne et difficile :</b> pour exécuter un groupe de commandes plusieurs fois, mettez-le entre parenthèses avec un nombre devant.
-         Par exemple : 3(HB) exécute 3 fois « HB ».
+         <p class="medium hard">
+            <b>Versions moyenne et difficile :</b> pour exécuter un groupe de commandes plusieurs fois, mettez-le entre parenthèses avec un nombre devant.
+            Par exemple : 3(HB) exécute 3 fois « HB ».
          </p>
-         <p class="hard"><b>Version difficile :</b> les cases en rouge sont des obstacles infranchissables.</p>
-         <table class="examples" style="margin: 0 auto;">
+         <p class="hard">
+            <b>Version difficile :</b> les cases en rouge sont des obstacles infranchissables.
+         </p>
+         <table class="examples" style="margin: auto;">
             <tr>
                <td class="easy medium"><input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0);" value="H"/></td>
                <td class="easy medium"><input type="button" id="sample1" class="exampleButton" onclick="task.executeSample(1);" value="2D"/></td>
@@ -78,11 +84,11 @@
                <div style="padding: 8px;">
                   <textarea id="answer" cols="50" maxlength="200" style="width: 300px; height: 100px;" onkeydown="task.resetExecution();"></textarea>
                </div>
-               <div style="text-align: center;">
+               <div class="contentCentered">
                   <input class="exampleButton" type="button" value="Essayer" onclick="task.executeAnswer();"/>
                </div>
             </td>
-            <td style="text-align: center;">
+            <td class="contentCentered">
                <div style="padding-bottom: .5em;">Le jeu de taquin&nbsp;:</div>
                <div id="taquin"></div>
                <p id="programRan" style="width: 400px; word-wrap: break-word;"></p>
@@ -98,6 +104,6 @@
             <li>Version moyenne : 11(DHGBD)</li>
             <li>Version difficile : 11(GHDBG) GH 3(HDBGH) BD 11(DHGBD)</li>
          </ul>
-      </div> <!-- task-solution -->
+      </div><!-- task-solution -->
    </body>
 </html>

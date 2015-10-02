@@ -65,63 +65,66 @@
             padding: 0.5em;
          }
          .easy, .medium, .hard {
-            display:none
+            display: none;
          }
       </style>
    </head>
+
    <body>
       <div id="task">
          <h1>Fonction rectangle</h1>
          <div id="tabsContainer"></div>
-      <p>
-         Chaque exemple ci-dessous est formé d'une séquence d'instructions 
-         à exécuter dans l'ordre.
-         Chaque instruction est un appel à la fonction <b>rectangle</b>, qui dessine un rectangle dans la grille située en bas à droite.
-      </p>
-      <center>
-         <table class='examples' style='text-align:center'>
+         <p>
+            Chaque exemple ci-dessous est formé d'une séquence d'instructions 
+            à exécuter dans l'ordre.
+            Chaque instruction est un appel à la fonction <b>rectangle</b>, qui dessine un rectangle dans la grille située en bas à droite.
+         </p>
+         <table class="examples contentCentered" style="margin: auto;">
             <tr>
                <td><code id="sample0"></code></td>
                <td><code id="sample1"></code></td>
                <td><code id="sample2"></code></td>
             </tr>
             <tr>
-               <td><input id="button0" type='button' value="Essayer cet exemple" onclick="task.testSample(0)"></div></td>
-               <td><input id="button1"  type='button' value="Essayer cet exemple" onclick="task.testSample(1)"></div></td>
-               <td><input id="button2"  type='button' value="Essayer cet exemple" onclick="task.testSample(2)"></div></td>
+               <td><input id="button0" type="button" value="Essayer cet exemple" onclick="task.testSample(0);"></div></td>
+               <td><input id="button1"  type="button" value="Essayer cet exemple" onclick="task.testSample(1);"></div></td>
+               <td><input id="button2"  type="button" value="Essayer cet exemple" onclick="task.testSample(2);"></div></td>
             </tr>
          </table>
-      </center>
-      <p>
-      Les 5 nombres entre parenthèses sont les <b>paramètres</b> de la fonction rectangle, et décrivent, dans l'ordre&nbsp;:
-      </p>
-      <center>
-      <table class='examples'><td>sa colonne<br/>de gauche</td>
-      <td>sa ligne<br/>du haut</td>
-      <td>sa colonne<br/>de droite</td>
-      <td>sa ligne<br/>du bas</td>
-      <td>sa couleur :<br/>0 pour du noir,<br/>1 pour du blanc.</td
-      </tr></table>
-      </center>
-      <table style='width:100%; margin-top:0.5em'><tr>
-         <td><b>Motif à obtenir :</b><p><div id="target"></div></p></td>
-         <td><b>Résultat du programme :</b><p><div id="grid"></div></p></td>
-      </tr></table>
-      <p>Complétez le programme ci-dessous pour qu'il reproduise le motif de gauche dans la grille de droite&nbsp;:</p>
-      <center>
-         <table><tr>
-            <td style='vertical-align:top;width:350px'>
+         <p>
+            Les 5 nombres entre parenthèses sont les <b>paramètres</b> de la fonction rectangle, et décrivent, dans l'ordre&nbsp;:
+         </p>
+         <table class="examples" style="margin: auto;"><tr>
+            <td>sa colonne<br/>de gauche</td>
+            <td>sa ligne<br/>du haut</td>
+            <td>sa colonne<br/>de droite</td>
+            <td>sa ligne<br/>du bas</td>
+            <td>sa couleur :<br/>0 pour du noir,<br/>1 pour du blanc.</td>
+         </tr></table>
+         <table class="contentCentered" style="width: 100%; margin-top: .5em;"><tr>
+            <td>
+               <p><b>Motif à obtenir :</b></p>
+               <p><div id="target"></div></p></td>
+            <td>
+               <p><b>Résultat du programme :</b></p>
+               <p><div id="grid"></div></p>
+            </td>
+         </tr></table>
+         <p>
+            Complétez le programme ci-dessous pour qu'il reproduise le motif de gauche dans la grille de droite&nbsp;:
+         </p>
+         <table style="margin: auto;"><tr>
+            <td style="vertical-align: top; width: 350px;">
                <table id="rectangles">
                </table>
             </td>
-            <td style='vertical-align:top;width:300px'>
-               <input type="button" value="Essayer votre programme" onclick="task.tryAnswer()"></input>               
+            <td style="vertical-align: top; width: 300px;">
+               <input type="button" value="Essayer votre programme" onclick="task.tryAnswer();"/>               
                <p class="medium hard">Notez que le programme ne peut pas contenir plus de 4 instructions.</p>
             </td>
-         </tr>
-         </table>
-      </center>
+         </tr></table>
       </div><!-- task -->
+
       <div id="solution">
          <h2>Solution</h2> 
          <ul>
@@ -147,6 +150,6 @@
                   <li>rectangle(3, 3, 5, 3, 0)</li>
                </ul>
             </li>
-      </div> <!-- task-solution -->
+      </div><!-- task-solution -->
    </body>
 </html>

@@ -61,6 +61,7 @@
          }
       </style>
    </head>
+
    <body>
       <div id="task">
          <h1>Piste</h1>
@@ -76,7 +77,7 @@
             <b>Le robot va répéter cette séquence d'instructions</b> jusqu'à ce qu'il arrive au bout de la piste ou bien qu'il sorte de la piste.
          </p>
          <table class="columns" style="clear: both;">
-            <tr style="text-align: center;">
+            <tr class="contentCentered">
                <td style="width: 220px;"><div class="column_head">Choisissez les instructions</div></td>
                <td style="width: 220px;"><div class="column_head">Construisez votre séquence à répéter</div></td>
                <td style="width: 300px;"><div class="column_head">Résultat</div></td>
@@ -91,8 +92,8 @@
             </tr>
          </table>
 
-         <div class="buttons" style="text-align: center;">
-            <input id="tryOrReset" type="button" onclick="task.tryOrReset();" value="Essayer"/>
+         <div class="buttons contentCentered">
+            <input id="tryOrReset" type="button" value="Essayer" onclick="task.tryOrReset();"/>
          </div>
       </div><!-- task -->
 
@@ -123,6 +124,6 @@
             </ul>
          </li>
       </ul>
-      </div> <!-- task-solution -->
+      </div><!-- task-solution -->
    </body>
 </html>
