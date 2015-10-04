@@ -248,11 +248,16 @@ function initTask() {
    task.reloadAnswerObject = function(answerObj) {
       answer = answerObj;
       for (var iRect = 0; iRect < data[level].nbRectangles; iRect++) {
-         if (answerObj[level][iRect] != undefined) {
-            var rectangle = answerObj[level][iRect];
+         var rectangle = {}
+         if (answerObj[level][iRect] == undefined) {
             for (var iParam = 0; iParam < 5; iParam++) {
-               $("#param_" + iRect + "_" + iParam).val(rectangle[paramNames[iParam]]);
+               rectangle[paramNames[iParam]] = "";
             }
+         } else {
+            rectangle = answerObj[level][iRect];
+         }
+         for (var iParam = 0; iParam < 5; iParam++) {
+            $("#param_" + iRect + "_" + iParam).val(rectangle[paramNames[iParam]]);
          }
       }
    };
