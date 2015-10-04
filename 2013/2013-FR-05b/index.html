@@ -3,35 +3,34 @@
    <head>
       <meta charset="utf-8">
       <title>2013-FR-05b</title>
-    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script type="text/javascript">
+      var level = "hard";
+      </script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
       <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-      <script type="text/javascript" src="../2013-FR-05a/2013-FR-05_compass.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script class="grader" type="text/javascript">
-         var grader = {
-            gradeTask: function(strAnswer, answerToken, callback) {
-               var taskParams = platform.getTaskParams();
-               var taskG = new Task("hard");
-               taskG.isGrader = true;
-               taskG.clearGrid();
-               taskG.execute(strAnswer);
-               var score = taskParams.minScore;
-               if (taskG.successState()) {
-                  score = taskParams.maxScore;
-               }
-               taskG.unload(function() {
-                  callback(score);
-               });
+         grader.gradeTask = function(strAnswer, answerToken, callback) {
+            var taskParams = platform.getTaskParams();
+            task.isGrader = true;
+            task.clearGrid();
+            task.execute(strAnswer);
+            var score = taskParams.minScore;
+            if (task.successState()) {
+               score = taskParams.maxScore;
             }
+            task.unload(function() {
+               callback(score);
+            });
          }
       </script>
+      <script type="text/javascript" src="../2013-FR-05a/2013-FR-05_compass.js"></script>
       <script type="text/javascript" src="../2013-FR-05a/task.js"></script>
       <link rel="stylesheet" type="text/css" href="../2013-FR-05a/task.css" />
       <script class="remove" type="text/javascript">
@@ -47,9 +46,6 @@
           "browserSupport": [],
           "acceptedAnswers": [""]
       };
-      </script>
-      <script class="" type="text/javascript">
-         var task = new Task("hard");
       </script>
    </head>
    <body>
