@@ -67,33 +67,34 @@
          <h1>Piste</h1>
          <img style="display: none;" src="robot.png"/>
          <div id="tabsContainer"></div>
-         <p>
-            Programmez le robot représenté par un triangle vert pour qu'il suive la piste noire jusqu'au bout.
-         </p>
-         <p>
-            Faites glisser les instructions disponibles à gauche pour créer une séquence d'instructions.
-         </p>
-         <p>
-            <b>Le robot va répéter cette séquence d'instructions</b> jusqu'à ce qu'il arrive au bout de la piste ou bien qu'il sorte de la piste.
-         </p>
-         <table class="columns" style="clear: both;">
-            <tr class="contentCentered">
-               <td style="width: 220px;"><div class="column_head">Choisissez les instructions</div></td>
-               <td style="width: 220px;"><div class="column_head">Construisez votre séquence à répéter</div></td>
-               <td style="width: 300px;"><div class="column_head">Résultat</div></td>
-            </tr>
-            <tr>
-               <td colspan="2">
-                  <div id="program" class="touch"></div>
-               </td><td>
-                  <div id="drawing" style="margin-top: 1em;"></div>
-                  <div><span id="message"></span></div>
-               </td>
-            </tr>
-         </table>
-
-         <div class="buttons contentCentered">
-            <input id="tryOrReset" type="button" value="Essayer" onclick="task.tryOrReset();"/>
+         <div id="taskContent">
+            <p>
+               Programmez le robot représenté par un triangle vert pour qu'il suive la piste noire jusqu'au bout.
+            </p>
+            <p>
+               Faites glisser les instructions disponibles à gauche pour créer une séquence d'instructions.
+            </p>
+            <p>
+               <b>Le robot va répéter cette séquence d'instructions</b> jusqu'à ce qu'il arrive au bout de la piste ou bien qu'il sorte de la piste.
+            </p>
+            <table class="columns" style="clear: both;">
+               <tr class="contentCentered">
+                  <td style="width: 220px;"><div class="column_head">Choisissez les instructions</div></td>
+                  <td style="width: 220px;"><div class="column_head">Construisez votre séquence à répéter</div></td>
+                  <td style="width: 300px;"><div class="column_head">Résultat</div></td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <div id="program" class="touch"></div>
+                  </td><td>
+                     <div id="drawing" style="margin-top: 1em;"></div>
+                     <div><span id="message"></span></div>
+                  </td>
+               </tr>
+            </table>
+            <div class="buttons contentCentered">
+               <input id="tryOrReset" type="button" value="Essayer" onclick="task.tryOrReset();"/>
+            </div>
          </div>
       </div><!-- task -->
 

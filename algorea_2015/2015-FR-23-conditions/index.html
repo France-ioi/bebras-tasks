@@ -71,53 +71,55 @@
       <div id="task">
          <h1>Motif conditionnel</h1>
          <div id="tabsContainer"></div>
-         <p>
-            Cliquez sur les boutons ci-dessous pour voir l'effet de chaque condition sur la grille située en bas à droite.
-         </p>
-         <table class="examples" style="margin: auto">
-            <tr>
-               <td><input id="sample0" type="button" onclick="task.executeSample(0);" value="x < 3"/></td>
-               <td class="easy"><input id="sample1" type="button" onclick="task.executeSample(1);" value="x >= 4"/></td>
-               <td class="medium hard"><input id="sample2" type="button" onclick="task.executeSample(2);" value="y >= 4"/></td>
-               <td class="easy"><input id="sample3" type="button" onclick="task.executeSample(3);" value="x >= 4 ET x <= 8"/></td>
-               <td class="easy"><input id="sample4" type="button" onclick="task.executeSample(4);" value="x < 2 OU x > 4"/></td>
-               <td class="medium hard"><input id="sample5" type="button" onclick="task.executeSample(5);" value="y >= 4 ET x <= 8"/></td>
-               <td class="medium hard"><input id="sample6" type="button" onclick="task.executeSample(6);" value="x < 2 OU y > 4"/></td>
-               <td class="medium hard"><input id="sample7" type="button" onclick="task.executeSample(7);" value="x > 7 OU (x < 5 ET y > 4)"/></td>
-            </tr>
-         </table>
-         <!--
-         <p>Test erreurs :</p>
-         <table class="examples" style="margin: auto;">
-            <tr>
-               <td><input id="sample5" type="button" onclick="task.executeSample(5);" value="x < z"/></td>
-               <td><input id="sample6" type="button" onclick="task.executeSample(6);" value="ET >= 4"/></td>
-               <td><input id="sample7" type="button" onclick="task.executeSample(7);" value="4 <= x ET y"/></td>
-               <td><input id="sample8" type="button" onclick="task.executeSample(8);" value="4 <= 5 <= 6 <= 7"/></td>
-               <td><input id="sample9" type="button" onclick="task.executeSample(9);" value="(4) <= (X) ET X <= 8"/></td>
-               <td><input id="sample10" type="button" onclick="task.executeSample(10);" value="4 < "/></td>
-               <td><input id="sample11" type="button" onclick="task.executeSample(11);" value="x < 4 ET y < 5 OU x < 5"/></td>
-               <td><input id="sample12" type="button" onclick="task.executeSample(12);" value="x < 4 > 5"/></td>
-            </tr>
-         </table>
-         -->
-         <p>
-            Écrivez maintenant votre propre condition, de sorte à reproduire dans la grille en bas à droite le motif affiché ci-dessous à gauche.
-         </p>
-         <div style="display: inline-block; padding: 8px">
-            <input id="expression" type="text" style="width: 650px" onkeydown="task.keydown();"/>
+         <div id="taskContent">
+            <p>
+               Cliquez sur les boutons ci-dessous pour voir l'effet de chaque condition sur la grille située en bas à droite.
+            </p>
+            <table class="examples" style="margin: auto">
+               <tr>
+                  <td><input id="sample0" type="button" onclick="task.executeSample(0);" value="x < 3"/></td>
+                  <td class="easy"><input id="sample1" type="button" onclick="task.executeSample(1);" value="x >= 4"/></td>
+                  <td class="medium hard"><input id="sample2" type="button" onclick="task.executeSample(2);" value="y >= 4"/></td>
+                  <td class="easy"><input id="sample3" type="button" onclick="task.executeSample(3);" value="x >= 4 ET x <= 8"/></td>
+                  <td class="easy"><input id="sample4" type="button" onclick="task.executeSample(4);" value="x < 2 OU x > 4"/></td>
+                  <td class="medium hard"><input id="sample5" type="button" onclick="task.executeSample(5);" value="y >= 4 ET x <= 8"/></td>
+                  <td class="medium hard"><input id="sample6" type="button" onclick="task.executeSample(6);" value="x < 2 OU y > 4"/></td>
+                  <td class="medium hard"><input id="sample7" type="button" onclick="task.executeSample(7);" value="x > 7 OU (x < 5 ET y > 4)"/></td>
+               </tr>
+            </table>
+            <!--
+            <p>Test erreurs :</p>
+            <table class="examples" style="margin: auto;">
+               <tr>
+                  <td><input id="sample5" type="button" onclick="task.executeSample(5);" value="x < z"/></td>
+                  <td><input id="sample6" type="button" onclick="task.executeSample(6);" value="ET >= 4"/></td>
+                  <td><input id="sample7" type="button" onclick="task.executeSample(7);" value="4 <= x ET y"/></td>
+                  <td><input id="sample8" type="button" onclick="task.executeSample(8);" value="4 <= 5 <= 6 <= 7"/></td>
+                  <td><input id="sample9" type="button" onclick="task.executeSample(9);" value="(4) <= (X) ET X <= 8"/></td>
+                  <td><input id="sample10" type="button" onclick="task.executeSample(10);" value="4 < "/></td>
+                  <td><input id="sample11" type="button" onclick="task.executeSample(11);" value="x < 4 ET y < 5 OU x < 5"/></td>
+                  <td><input id="sample12" type="button" onclick="task.executeSample(12);" value="x < 4 > 5"/></td>
+               </tr>
+            </table>
+            -->
+            <p>
+               Écrivez maintenant votre propre condition, de sorte à reproduire dans la grille en bas à droite le motif affiché ci-dessous à gauche.
+            </p>
+            <div style="display: inline-block; padding: 8px">
+               <input id="expression" type="text" style="width: 650px" onkeydown="task.keydown();"/>
+            </div>
+            <button onclick="task.testAnswer()">Essayer</button>
+            <table class="contentCentered" style="width: 100%; margin: auto;">
+               <tr style="vertical-align: top;">
+                  <td><p><b>Motif à obtenir :</b></p></td>
+                  <td ><p id="programUsed">&nbsp;<br/>&nbsp;</p></td>
+               </tr>
+               <tr>
+                  <td><div id="target"></div></td>
+                  <td><div id="grid"></div></td>
+               </tr>
+            </table>
          </div>
-         <button onclick="task.testAnswer()">Essayer</button>
-         <table class="contentCentered" style="width: 100%; margin: auto;">
-            <tr style="vertical-align: top;">
-               <td><p><b>Motif à obtenir :</b></p></td>
-               <td ><p id="programUsed">&nbsp;<br/>&nbsp;</p></td>
-            </tr>
-            <tr>
-               <td><div id="target"></div></td>
-               <td><div id="grid"></div></td>
-            </tr>
-         </table>
       </div><!-- task -->
 
       <div id="solution">

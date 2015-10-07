@@ -68,13 +68,15 @@ function initTask() {
       for (var numQ in expectedAnswers[curLevel]) {
          if (curAnswer[curLevel][numQ] == undefined) {
             if (curLevel != "medium") {
-               throw "Répondez aux deux questions ci-dessus";
+               throw "Répondez aux deux questions ci-dessus.";
             } else {
-               throw "Cliquez sur le bouton de la réponse";
+               throw "Cliquez sur le bouton de la réponse.";
             }
          }
+      }
+      for (var numQ in expectedAnswers[curLevel]) {
          if (curAnswer[curLevel][numQ] != expectedAnswers[curLevel][numQ]) {
-            throw "Votre réponse est incorrecte, relisez bien";
+            throw "Votre réponse est incorrecte ; relisez bien.";
          }
       }
    };

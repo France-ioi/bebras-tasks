@@ -16,19 +16,19 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
-       var json = {
-          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-24-variables-game/",
-          "language": "fr",
-          "version": "fr.01",
-          "authors": "Mathias Hiron",
-          "translators": [],
-          "license": "",
-          "taskPathPrefix": "",
-          "modulesPathPrefix": "",
-          "browserSupport": [],
-          "acceptedAnswers": [""],
-          "fullFeedback": true
-      };
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-24-variables-game/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "Mathias Hiron",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "acceptedAnswers": [""],
+            "fullFeedback": true
+         };
       </script>
       <style>
          #drawing {
@@ -64,9 +64,6 @@
             border: 1px solid black;
             padding: 0.5em;
          }
-         .easy, .medium, .hard {
-            display:none
-         }
          .instructions {
             border-collapse: collapse;
          }
@@ -89,6 +86,9 @@
          .result input {
             text-align: center;
          }
+         #questions {
+            margin-bottom: 1em;
+         }
       </style>
    </head>
 
@@ -96,22 +96,23 @@
       <div id="task">
          <h1>Jeu des variables</h1>
          <div id="tabsContainer"></div>
-         <p>
-            Un programme est une séquence d'instructions exécutées les unes après les autres.
-            Dans un programme, on manipule une ou plusieurs <b>variables</b>.
-            Une variable peut être vue comme le nom d'une boîte dans laquelle on stocke un nombre.
-         </p>
-         <p>
-            Une instruction d'un programme peut modifier le nombre stocké dans une variable.
-            Par exemple, l'instruction « a = a + 1 » ajoute 1 au nombre stocké dans la variable « a ».
-            Commencez par étudier les exemples ci-dessous pour bien comprendre comment fonctionnent les variables.
-         </p>
-         <table id="samples" class="instructions"></table>
-         <p>
-            <b>À vous de jouer ; complétez les cases dans la colonne de droite :</b>
-         </p>
-         <table id="questions" class="instructions"></table>
-         <br/>
+         <div id="taskContent">
+            <p>
+               Un programme est une séquence d'instructions exécutées les unes après les autres.
+               Dans un programme, on manipule une ou plusieurs <b>variables</b>.
+               Une variable peut être vue comme le nom d'une boîte dans laquelle on stocke un nombre.
+            </p>
+            <p>
+               Une instruction d'un programme peut modifier le nombre stocké dans une variable.
+               Par exemple, l'instruction « a = a + 1 » ajoute 1 au nombre stocké dans la variable « a ».
+               Commencez par étudier les exemples ci-dessous pour bien comprendre comment fonctionnent les variables.
+            </p>
+            <table id="samples" class="instructions"></table>
+            <p>
+               <b>À vous de jouer ; complétez les cases dans la colonne de droite :</b>
+            </p>
+            <table id="questions" class="instructions"></table>
+         </div>
       </div><!-- task -->
 
       <div id="solution">

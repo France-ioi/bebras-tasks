@@ -18,19 +18,19 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
-       var json = {
-          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-27-boxes/",
-          "language": "fr",
-          "version": "fr.01",
-          "authors": "Mathias Hiron",
-          "translators": [],
-          "license": "",
-          "taskPathPrefix": "",
-          "modulesPathPrefix": "",
-          "browserSupport": [],
-          "acceptedAnswers": [""],
-          "fullFeedback": true
-      };
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-27-boxes/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "Mathias Hiron",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "acceptedAnswers": [""],
+            "fullFeedback": true
+         };
       </script>
       <style>
          #drawing {
@@ -67,27 +67,30 @@
 
          <h1>Ranger les caisses</h1>
          <div id="tabsContainer"></div>
-         <table><tr><td><b>Objectif :</b></td><td><div id="target"></div></td></tr></table>
-         <p>
-            Votre objectif est de programmer le robot, représenté par le rectangle rouge ci-dessous,
-            de sorte qu'il range les caisses comme représenté sur l'objectif ci-dessus.
-            Faites glisser les instructions disponibles à gauche pour créer une séquence d'instructions
-            que le robot va répéter jusqu'à ce qu'il ait terminé.
-         </p>
-         <div class="contentCentered"><div id="grid"></div><span id="message"></span></div>
-
-         <table class="columns" style="clear: both;">
-            <tr>
-               <td style="width: 350px;"><div class="column_head">Choisissez les instructions :</div></td>
-               <td style="width: 350px;"><div class="column_head contentCentered">Construisez votre séquence à répéter :</div></td>
-            </tr>
-            <tr>
-               <td colspan="2"><div id="program" class="touch"></div></td>
-            </tr>
-         </table>
-
-         <div class="buttons contentCentered">
-            <input id="tryOrReset" type="button" onclick="task.tryOrReset();" value="Essayer"/>
+         <div id="taskContent">
+            <table><tr>
+               <td><b>Objectif :</b></td>
+               <td><div id="target"></div></td>
+            </tr></table>
+            <p>
+               Votre objectif est de programmer le robot, représenté par le rectangle rouge ci-dessous,
+               de sorte qu'il range les caisses comme représenté sur l'objectif ci-dessus.
+               Faites glisser les instructions disponibles à gauche pour créer une séquence d'instructions
+               que le robot va répéter jusqu'à ce qu'il ait terminé.
+            </p>
+            <div class="contentCentered"><div id="grid"></div><span id="message"></span></div>
+            <table class="columns" style="clear: both;">
+               <tr>
+                  <td style="width: 350px;"><div class="column_head">Choisissez les instructions :</div></td>
+                  <td style="width: 350px;"><div class="column_head contentCentered">Construisez votre séquence à répéter :</div></td>
+               </tr>
+               <tr>
+                  <td colspan="2"><div id="program" class="touch"></div></td>
+               </tr>
+            </table>
+            <div class="buttons contentCentered">
+               <input id="tryOrReset" type="button" onclick="task.tryOrReset();" value="Essayer"/>
+            </div>
          </div>
       </div><!-- task -->
 
