@@ -37,7 +37,10 @@
          }
          .questions td {
             border: 1px solid black;
-            padding: 0.5em;
+            padding: .5em;
+         }
+         .questions td + td {
+            text-align: center;
          }
       </style>
    </head>
@@ -98,6 +101,7 @@
                   </td>
                   <td><input id="ans_3_0" type="button" value="non" onclick="task.selectAnswer(3, 0)"></td>
                   <td><input id="ans_3_1" type="button" value="oui" onclick="task.selectAnswer(3, 1)"></td>
+               </tr>
             </table>
          </div>
       </div><!-- task -->
