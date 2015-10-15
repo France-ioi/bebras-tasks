@@ -217,7 +217,7 @@ var getLinkTask = function(code, options) {
       arg += "}";
       sOptions = "?options=" + encodeURIComponent(arg); 
    }
-   var base = (use_trunk) ? "2014_trunk/" : "2014/";
+   var base = (use_trunk) ? "2014_trunk/" : "";
    return base + code + "/index.html" + sOptions;
 };
 
