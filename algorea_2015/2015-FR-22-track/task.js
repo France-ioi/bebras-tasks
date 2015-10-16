@@ -68,9 +68,8 @@ function initTask() {
 
 
    task.load = function(views, callback) {      
-      var initLevel = platform.getTaskParams("difficulty", "easy");
       displayHelper.hideValidateButton = true;
-      displayHelper.setupLevels(initLevel);
+      displayHelper.setupLevels();
       callback();
    };
 
@@ -397,7 +396,7 @@ function initTask() {
 
    grader.gradeTask = function(strAnswer, answerToken, callback, gradedLevel) {
       var answer = $.parseJSON(strAnswer);
-      var taskParams = platform.getTaskParams();      
+      var taskParams = displayHelper.taskParams;
       var scores = {};
       var messages = {};
       var maxScores = displayHelper.getLevelsMaxScores();

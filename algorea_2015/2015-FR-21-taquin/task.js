@@ -49,9 +49,8 @@ function initTask() {
    var answer = null;
 
    task.load = function(views, callback) {
-      var initLevel = platform.getTaskParams("difficulty", "easy");
       displayHelper.hideValidateButton = true;
-      displayHelper.setupLevels(initLevel);
+      displayHelper.setupLevels();
       callback();
    };
 
@@ -290,7 +289,7 @@ function initTask() {
                if (executeStep(command.charAt(pos), true)) {
                   DelayedExec.clearInterval("executeStep");
                   if (displayResult) {
-                     platform.validate("done");
+                     platform.validate("done", function() {});
                   }
                   return;
                }
@@ -355,7 +354,7 @@ function initTask() {
 
    grader.gradeTask = function(strAnswer, answerToken, callback, gradedLevel) {
       var answer = $.parseJSON(strAnswer);
-      var taskParams = platform.getTaskParams();
+      var taskParams = displayHelper.taskParams;
       var scores = {};
       var messages = {};
       var maxScores = displayHelper.getLevelsMaxScores();
