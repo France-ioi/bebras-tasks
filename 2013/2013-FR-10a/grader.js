@@ -6,6 +6,6 @@ grader.gradeTask= function(strAnswer, answerToken, callback) {
       if (current == dest) {
          score = taskParams.maxScore;
       }
-      callback(score);
+      callback(score, '');
    });
 };
