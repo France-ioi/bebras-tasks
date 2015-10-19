@@ -2,17 +2,16 @@ String.prototype.replaceAll = function(target, replacement) {
     return this.split(target).join(replacement);
 };
 
-function Task(level) {
-  this.level = level;
-  this.steps = [];
-  this.maxNbSteps = 11;
+function initTask(level) {
+  var steps = [];
+  var maxNbSteps = 11;
 
-  this.max_modify_reached_message = 'Vous avez effectué trop d\'étapes. Recommencez en procédant autrement.';
-  this.nb_steps_message = 'Nombre d\'étapes utilisées : ';
-  this.no_modification_message = 'La séquence n\'apparaît pas dans le texte.';
-  this.success_message = 'Félicitations, vous avez réussi !';
+  var max_modify_reached_message = 'Vous avez effectué trop d\'étapes. Recommencez en procédant autrement.';
+  var nb_steps_message = 'Nombre d\'étapes utilisées : ';
+  var no_modification_message = 'La séquence n\'apparaît pas dans le texte.';
+  var success_message = 'Félicitations, vous avez réussi !';
 
-  this.source = {
+  var source = {
     hard:
       "((42-3)+5),8:5,72\n" +
       "((33-2)+4),9:4,33\n" +
@@ -41,7 +40,7 @@ function Task(level) {
       "mix(vert,bleu)=bleu-vert\n"
   };
 
-  this.dest = {
+  var dest = {
     hard:
       "(42-3+5):8,5::72\n" +
       "(33-2+4):9,4::33\n" +
@@ -69,123 +68,95 @@ function Task(level) {
       "jaune + vert = vert clair\n" +
       "vert + bleu = bleu-vert\n"
   };
-};
 
-Task.prototype.load = function(views, callback) {
-  $(".easy, .hard").hide();
-  $("." + this.level).show();
-  this.reloadAnswer('', function() {
-     $('#cancel').off("click").click(cancel(task));
-     $('#reset').off("click").click(function () { task.reloadAnswer('', function() {}) });
-     $('#replace_all').off("click").click(replace(task));
+  task.dest = dest; // for grader
+
+  task.load = function(views, callback) {
+    $(".easy, .hard").hide();
+    $("." + level).show();
+    task.reloadAnswer('', function() {
+       $('#cancel').off("click").click(cancel(task));
+       $('#reset').off("click").click(function () { task.reloadAnswer('', function() {}) });
+       $('#replace_all').off("click").click(replace(task));
+       callback();
+    });
+  };
+
+  task.getAnswer = function(callback) {
+     callback(JSON.stringify(steps));
+  };
+
+  task.reloadAnswer = function(strAnswer, callback) {
+     steps = [];
+     $("#source, #current").val(source[level]);
+     $("#dest").val(dest[level]);
+     $("#info, #success, #error").html("");
+     var current = executeAnswer(strAnswer);
+     $("#current").val(current);
+     var nbStepsLeft = maxNbSteps - steps.length;
+     $('#info').html(nb_steps_message + steps.length + '.');
      callback();
-  });
-};
+  };
 
-Task.prototype.unload = function(callback) {
-  callback();
-};
+  var executeAnswer = function(strAnswer) {
+     var resSteps = [];
+     if (strAnswer != "") {
+        resSteps = $.parseJSON(strAnswer);
+     }
+     steps = resSteps;
 
-Task.prototype.getAnswer = function(callback) {
-   callback(JSON.stringify(this.steps));
-};
+     var current = source[level];
+     for (var iStep = 0; iStep < steps.length; iStep++) {
+        var step = steps[iStep];
+        if (step[0] != "") {
+           current = current.replaceAll(step[0], step[1]);
+        }
+     }
+     return current;
+  };
 
-Task.prototype.reloadAnswer = function(strAnswer, callback) {
-   this.steps = [];
-   $("#source, #current").val(this.source[this.level]);
-   $("#dest").val(this.dest[this.level]);
-   $("#info, #success, #error").html("");
-   var current = this.executeAnswer(strAnswer);
-   $("#current").val(current);
-   var nbStepsLeft = this.maxNbSteps - this.steps.length;
-   $('#info').html(this.nb_steps_message +  this.steps.length + '.');
-   callback();
-};
+  task.executeAnswer = executeAnswer; // for grader
 
-Task.prototype.showViews = function(views, callback) {
-   if (views['forum'] || views['hint'] || views['editor']) {
-      views['task'] = true;
-   }
-   $.each(['task', 'solution'], function(i, view) {
-      if (view in views) $('#'+view).show(); else $('#'+view).hide();
-   });
-   if (typeof task.hackShowViews === 'function') {task.hackShowViews(views);}
-   callback();
-}
+  var cancel = function() {
+    return function() {
+      $('#error, #success').html('');
+      if (steps.length == 0)
+        return;
+      steps.pop();
+      var strAnswer = JSON.stringify(steps);
+      task.reloadAnswer(strAnswer, function() {});
+    }
+  };
 
-Task.prototype.getViews = function(callback) {
-    // all beaver tasks have the same views
-    var views = {
-        task: {},
-        solution: {},
-        "hint" : {requires: "task"},
-        "forum" : {requires: "task"},
-        "editor" : {requires: "task"}
-    };
-    callback(views);
-}
-
-Task.prototype.updateToken = function(token) {
-};
-
-Task.prototype.getHeight = function(callback) {
-   callback(parseInt($("html").height()));
-};
-
-Task.prototype.executeAnswer = function(strAnswer) {
-   var steps = [];
-   if (strAnswer != "") {
-      steps = $.parseJSON(strAnswer);
-   }
-   this.steps = steps;
-
-   var current = this.source[this.level];
-   for (var iStep = 0; iStep < steps.length; iStep++) {
-      var step = steps[iStep];
-      if (step[0] != "") {
-         current = current.replaceAll(step[0], step[1]);
+  function replace() {
+    return function() {
+      $('#error, #success').html('');
+      var nbStepsLeft = maxNbSteps - steps.length;
+      if (nbStepsLeft <= 0) {
+        $('#error').html(max_modify_reached_message);
+        return;
       }
-   }
-   return current;
-}
-
-function cancel(task) {
-  return function() {
-    $('#error, #success').html('');
-    if (task.steps.length == 0)
-      return;
-    task.steps.pop();
-    var strAnswer = JSON.stringify(task.steps);
-    task.reloadAnswer(strAnswer, function() {});
+      var search = $('#search').val();
+      var replace = $('#replace').val();
+      var current = $('#current').val();
+      var oldAnswer = JSON.stringify(steps);
+      steps.push([search, replace]);
+      var strAnswer = JSON.stringify(steps);
+      var new_val = executeAnswer(strAnswer);
+      $("#current").val(new_val);
+      var nbStepsLeft = maxNbSteps - steps.length;
+      $('#info').html(nb_steps_message + steps.length + '.');
+      if (new_val == current) {
+        task.reloadAnswer(oldAnswer, function() {});
+        $('#error').html(no_modification_message);
+      } else if (new_val == dest[level]) {
+        $('#success').html(success_message);
+        platform.validate("done", function(){});
+      } else if (steps.length == maxNbSteps) {
+        $('#error').html(max_modify_reached_message);
+      } 
+    };
   }
 }
 
-function replace(task) {
-  return function() {
-    $('#error, #success').html('');
-    var nbStepsLeft = task.maxNbSteps - task.steps.length;
-    if (nbStepsLeft <= 0) {
-      $('#error').html(task.max_modify_reached_message);
-      return;
-    }
-    var search = $('#search').val();
-    var replace = $('#replace').val();
-    var current = $('#current').val();
-    var oldAnswer = JSON.stringify(task.steps);
-    task.steps.push([search, replace]);
-    var strAnswer = JSON.stringify(task.steps);
-    var new_val = task.executeAnswer(strAnswer);
-    $("#current").val(new_val);
-    var nbStepsLeft = task.maxNbSteps - task.steps.length;
-    $('#info').html(task.nb_steps_message +  task.steps.length + '.');
-    if (new_val == current) {
-      task.reloadAnswer(oldAnswer, function() {});
-      $('#error').html(task.no_modification_message);
-    } else if (new_val == task.dest[task.level]) {
-      $('#success').html(task.success_message);
-      platform.validate("done", 1);
-    } else if (task.steps.length == task.maxNbSteps) {
-      $('#error').html(task.max_modify_reached_message);
-    } 
-  };
-}
+initTask(level);
