@@ -218,24 +218,25 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var answers = answersFromStrAnswer(strAnswer);
-      var sizeOfPos = playFromStart(answers);
-      var nbSteps = answers.length;
-      if (isSolved(sizeOfPos)) {
-         if (nbSteps <= maxScoreNbSteps) {
-            callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
-            // avec le nombre minimum de retournements
+      platform.getTaskParams(null, null, function(taskParams) {
+         var answers = answersFromStrAnswer(strAnswer);
+         var sizeOfPos = playFromStart(answers);
+         var nbSteps = answers.length;
+         if (isSolved(sizeOfPos)) {
+            if (nbSteps <= maxScoreNbSteps) {
+               callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
+               // avec le nombre minimum de retournements
+            } else {
+               var score = Math.max(Math.floor(taskParams.maxScore / 2), taskParams.maxScore - (nbSteps - maxScoreNbSteps));
+               var extraMsg = "";
+               if (nbSteps <= 2*maxScoreNbSteps)
+                  extraMsg = " (mais ce n'est pas facile)";
+               callback(score, "Vous avez réussi en " + nbSteps + " retournements. Il est possible de faire mieux" + extraMsg + ".");
+            }
          } else {
-            var score = Math.max(Math.floor(taskParams.maxScore / 2), taskParams.maxScore - (nbSteps - maxScoreNbSteps));
-            var extraMsg = "";
-            if (nbSteps <= 2*maxScoreNbSteps)
-               extraMsg = " (mais ce n'est pas facile)";
-            callback(score, "Vous avez réussi en " + nbSteps + " retournements. Il est possible de faire mieux" + extraMsg + ".");
+            callback(taskParams.noScore, "Les crêpes ne sont pas dans le bon ordre.");
          }
-      } else {
-         callback(taskParams.noScore, "Les crêpes ne sont pas dans le bon ordre.");
-      }
+      });
    };
 }
 

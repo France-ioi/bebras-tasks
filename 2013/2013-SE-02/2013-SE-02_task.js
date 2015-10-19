@@ -99,7 +99,7 @@ Task.prototype.load = function(randomSeed, mode) {
   if (this.editable) {
     $('#reset').off("click").click(function() { the_task.reset(); });
   }
-
+  console.error('loading!');
   // init
   this.reset();
   if (this.loadCorrection) 

@@ -31,16 +31,15 @@
       </style>
       <script src="2013-FR-12_task.js"></script>
       <script class="grader" type="text/javascript">
-      var grader = {
-         taskGrader: null,
-         gradeTask: function(strAnswer, answerToken, callback) {
-            if (this.taskGrader == null) {
-               this.taskGrader = new Task('grader');
-            }
-            var taskParams = platform.getTaskParams();
+      var taskGrader = null;
+      grader.gradeTask = function(strAnswer, answerToken, callback) {
+         if (taskGrader == null) {
+            taskGrader = new Task('grader');
+         }
+         platform.getTaskParams(fnull, null, unction(taskParams) {
             var minScore = taskParams.minScore;
             var maxScore = taskParams.maxScore;
-            var t = this.taskGrader;
+            var t = taskGrader;
             t.reloadAnswer(strAnswer);
             var score = minScore;
             if (t.isValid()) {
@@ -52,9 +51,9 @@
                else if (nbSelected == t.nbToSelect - 2)
                   score = Math.floor( (maxScore + 2 * minScore) / 3 ); // 33%
             }
-            callback(score);
-         }
-      }
+            callback(score, '');
+         });
+      }; 
       </script>
       <script class="solution" type="text/javascript" src="solution.js"></script>
       <script class="" type="text/javascript">

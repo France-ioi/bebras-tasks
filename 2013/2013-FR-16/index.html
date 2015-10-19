@@ -48,19 +48,18 @@
          }
       </style>
       <script class="grader" type="text/javascript">
-         var grader = {
-            gradeTask: function(strAnswer, answerToken, callback) {
-               var taskParams = platform.getTaskParams();
-               task.load({'task': true}, function() {
+         grader.gradeTask = function(strAnswer, answerToken, callback) {
+            platform.getTaskParams(null, null, function(taskParams) {
+               task.load({'task': true, 'grader': true}, function() {
                   task.reloadAnswer(strAnswer, function() {
                      var score = taskParams.minScore;
                      if (updateAll(false)) {
                         score = taskParams.maxScore;
                      }
-                     callback(score);
+                     callback(score, '');
                   });
                });
-            }
+            });
          }
       </script>
       <script type="text/javascript">

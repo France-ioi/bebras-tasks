@@ -48,7 +48,7 @@
          var weighted_circles;
 
          task.load = function(views, callback) {
-               paper = Raphael("raf", 650, 320);
+               paper = new Raphael("raf", 650, 320);
 					weighted_circles = new Array();
 					NB_BALLS = 6;
                r = 30;
@@ -68,7 +68,7 @@
 					var heavyRight = paper.text(500,280,"plus lourd").attr('font-size','12').hide();
 
                // Drag And Drop
-               dragAndDrop = DragAndDropSystem({
+               dragAndDrop = new DragAndDropSystem({
                   paper : paper,
                   actionIfDropped : function(srcCont, srcPos, dstCont, dstPos, type)
                   {

@@ -30,10 +30,9 @@
       };
       </script>
       <script class="grader" type="text/javascript">
-      var grader = {
-         gradeTask: function(answer, answerToken, callback) {
-            var taskParams = platform.getTaskParams();
-            var answer = parseJsonAnswer(answer);
+      grader.gradeTask = function(answer, answerToken, callback) {
+         platform.getTaskParams(null, null, function(taskParams) {
+            answer = parseJsonAnswer(answer);
             var score = taskParams.minScore;
             var wrong = false;
             for (var iArea = 0; iArea < 19; iArea++) {
@@ -45,9 +44,9 @@
             if (! wrong && checkNeighbors(answer)) {
                score = taskParams.maxScore;
             }
-            callback(score);
-         }
-      }
+            callback(score, '');
+         });
+      };
       </script>
       <style class="">
          #patch0, #patch1, #patch2, #patch3, #patch4 {
@@ -112,7 +111,6 @@
             $("#patch" + selectedPatch).css("border", "solid black 4px");
             currentColor = selectedPatch;
          }
-
          function parseJsonAnswer(strAnswer) {
             var answer = [];
             for (var iArea = 0; iArea < 19; iArea++) {

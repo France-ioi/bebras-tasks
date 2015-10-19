@@ -49,9 +49,8 @@
          };
       </script>
       <script class="grader" type="text/javascript">
-      var grader = {
-         gradeTask: function(strAnswer, answerToken, callback) {
-            var taskParams = platform.getTaskParams();
+      grader.gradeTask= function(strAnswer, answerToken, callback) {
+          platform.getTaskParams(null, null, function(taskParams) {
             strAnswer = strAnswer.toUpperCase();
             var score = taskParams.minScore;
             var wrong = false;
@@ -80,9 +79,9 @@
             if (wrong === false && lin == 2 && col == 5) {
                score = taskParams.maxScore;
             }
-            callback(score);
-         }
-      }
+            callback(score, '');
+         });
+      };
       </script>
    </head>
    <body>

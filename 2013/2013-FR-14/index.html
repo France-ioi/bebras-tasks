@@ -35,9 +35,8 @@
          }
       </style>
       <script class="grader" type="text/javascript">
-      var grader = {
-         gradeTask: function(strAnswer, answerToken, callback) {
-            var taskParams = platform.getTaskParams();
+      grader.gradeTask = function(strAnswer, answerToken, callback) {
+         platform.getTaskParams(null, null, function(taskParams) {
             if (! task.isLoaded) {
                task.load({task: true}, function() {
                   task.reloadAnswer(strAnswer, function() {
@@ -56,8 +55,9 @@
                }
                callback(score);
             });
-         }
+         });
       }
+
       </script>
       <script class="" type="text/javascript">         
          var cellSize = 50;

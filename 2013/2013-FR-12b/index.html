@@ -31,26 +31,25 @@
       </style>
       <script src="../2013-FR-12a/2013-FR-12_task.js"></script>
       <script class="grader" type="text/javascript">
-      var grader = {
-         taskGrader: null,
-         gradeTask: function(strAnswer, answerToken, callback) {
+         var taskGrader = null;
+         grader.gradeTask = function(strAnswer, answerToken, callback) {
             if (this.taskGrader == null) {
                this.taskGrader = new Task('grader');
             }
             var t = this.taskGrader;
-            var taskParams = platform.getTaskParams();
-            var minScore = taskParams.minScore;
-            var maxScore = taskParams.maxScore;
-            t.reloadAnswer(strAnswer);
-            var score = minScore;
-            if (t.isValid()) { 
-               var nbSelected = t.countSelected();
-               if (nbSelected == t.nbToSelect)
-                  score = maxScore;
-            }
-            callback(score);
-         }
-      }
+            platform.getTaskParams(null, null, function(taskParams) {
+               var minScore = taskParams.minScore;
+               var maxScore = taskParams.maxScore;
+               t.reloadAnswer(strAnswer);
+               var score = minScore;
+               if (t.isValid()) { 
+                  var nbSelected = t.countSelected();
+                  if (nbSelected == t.nbToSelect)
+                     score = maxScore;
+               }
+               callback(score, '');
+            });
+         };
       </script>
       <script class="solution" type="text/javascript" src="../2013-FR-12a/solution.js"></script>
       <script class="" type="text/javascript">

@@ -30,15 +30,15 @@
       <script src="2013-FR-08_task.js"></script>
       <script class="grader" type="text/javascript">
          grader.gradeTask = function(strAnswer, answerToken, callback) {
-            var taskParams = platform.getTaskParams();
-            //debug: console.log(strAnswer);
-            var score = taskParams.maxScore;
-            task.reloadAnswer(strAnswer, function() {
-               if (task.checkCollisions(false) || !task.checkAllOnBeach()) {
-                  score = taskParams.minScore;
-               }
+            platform.getTaskParams(null, null, function(taskParams) {
+              var score = taskParams.maxScore;
+              task.reloadAnswer(strAnswer, function() {
+                 if (task.checkCollisions(false) || !task.checkAllOnBeach()) {
+                    score = taskParams.minScore;
+                 }
+              });
+              callback(score, "");
             });
-            callback(score, "");
          }
       </script>
    </head>

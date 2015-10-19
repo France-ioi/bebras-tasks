@@ -318,7 +318,6 @@ function initTask() {
    }
 
    function drag(iParasol, parasol) {
-     var me = this,
      lx = 0,
      ly = 0,
      ox = 0,
@@ -330,8 +329,8 @@ function initTask() {
        var nlx = Math.round((dx + ox) / gridWidth) * gridWidth;
        var nly = dy + oy;
        moveTo(iParasol, parasol.el, nlx, nly);
-       nlx += me.boundX(iParasol);
-       nly += me.boundY(iParasol);
+       nlx += boundX(iParasol);
+       nly += boundY(iParasol);
        lx = nlx;
        ly = nly;
        moveTo(iParasol, parasol.el, nlx, nly);

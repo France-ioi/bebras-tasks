@@ -271,18 +271,19 @@ function initTask() {
 
    grader.gradeTask = function(strAnswer, token, callback) {
       var solution = [2, 1, 0, 7, 3, 4, 6, 5];
-      var taskParams = platform.getTaskParams();
-      var score = taskParams.noScore;
-      if (strAnswer != "") {
-         score = taskParams.maxScore;
-         var answer = $.parseJSON(strAnswer);
-         for (var iStep = 0; iStep < solution.length; iStep++) {
-            if (solution[iStep] != answer[iStep]) {
-               score = taskParams.minScore;
-            }
-         }
-      }
-      callback(score, "");
+      platform.getTaskParams(null, null, function(taskParams) {
+        var score = taskParams.noScore;
+        if (strAnswer != "") {
+           score = taskParams.maxScore;
+           var answer = $.parseJSON(strAnswer);
+           for (var iStep = 0; iStep < solution.length; iStep++) {
+              if (solution[iStep] != answer[iStep]) {
+                 score = taskParams.minScore;
+              }
+           }
+        }
+        callback(score, "");
+      });
    };
 }
 

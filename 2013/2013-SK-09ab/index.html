@@ -31,12 +31,11 @@
       <style class="">
       </style>
       <script class="grader" type="text/javascript">
-      var grader = {
-            gradeTask: function(answer, answerToken, callback) {
-               var taskParams = platform.getTaskParams();
+      grader.gradeTask = function(answer, answerToken, callback) {
+            platform.getTaskParams(null, null, function(taskParams) {
                var score = task.gradeTask(taskParams.randomSeed, answer, taskParams.minScore, taskParams.maxScore);
-               callback(score);
-            }
+               callback(score, '');
+            });
       }
       </script>
       <script class="" type="text/javascript">

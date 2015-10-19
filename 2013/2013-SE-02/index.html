@@ -32,35 +32,34 @@
       </style>
       <script src="2013-SE-02_task.js"></script>
       <script class="grader" type="text/javascript">
-      var grader = {
-         taskGrader: null,
-         gradeTask: function(strAnswer, answerToken, callback) {
-            var taskParams = platform.getTaskParams();
-            if (this.taskGrader == null) {
-               this.taskGrader = new Task(false);
-               this.taskGrader.load(taskParams.randomSeed, 'grader');
-            } 
-            var t = this.taskGrader;
-            t.reloadAnswer(strAnswer);
-            if (! t.isNetworkCompleted()) {
-               return taskParams.minScore;
-            } 
-            var used = t.builtEdges.length;
-            var best = nbEdgesBest;
-            var score = taskParams.minScore;
-            // alert("ok: " + minScore + " to " + maxScore + " used= " + used + " best= " + best);
-            if (used == best) {
-               score = taskParams.maxScore;
-            } else if (used <= best + 1) {
-               score = Math.floor( (3 * taskParams.maxScore + taskParams.minScore) / 4 ); // 75% pour 1 arc de trop
-            } else if (used <= best + 3) {
-               score = Math.floor( (taskParams.maxScore + taskParams.minScore) / 2 ); // 50% pour 2 ou 3 arcs de trop
-            } else if (used <= best + 5) {
-               score = Math.floor( (taskParams.maxScore + 3 * taskParams.minScore) / 4 ); // 25% pour 4 ou 5 arcs de trop
-            }
-            callback(score);
-         }
-      }
+         var taskGrader = null;
+         grader.gradeTask = function(strAnswer, answerToken, callback) {
+            platform.getTaskParams(null, null, function(taskParams) {
+              if (this.taskGrader == null) {
+                 this.taskGrader = new Task(false);
+                 this.taskGrader.load(taskParams.randomSeed, 'grader');
+              } 
+              var t = this.taskGrader;
+              t.reloadAnswer(strAnswer);
+              if (! t.isNetworkCompleted()) {
+                 return taskParams.minScore;
+              } 
+              var used = t.builtEdges.length;
+              var best = nbEdgesBest;
+              var score = taskParams.minScore;
+              // alert("ok: " + minScore + " to " + maxScore + " used= " + used + " best= " + best);
+              if (used == best) {
+                 score = taskParams.maxScore;
+              } else if (used <= best + 1) {
+                 score = Math.floor( (3 * taskParams.maxScore + taskParams.minScore) / 4 ); // 75% pour 1 arc de trop
+              } else if (used <= best + 3) {
+                 score = Math.floor( (taskParams.maxScore + taskParams.minScore) / 2 ); // 50% pour 2 ou 3 arcs de trop
+              } else if (used <= best + 5) {
+                 score = Math.floor( (taskParams.maxScore + 3 * taskParams.minScore) / 4 ); // 25% pour 4 ou 5 arcs de trop
+              }
+              callback(score, '');
+            });
+         };
       </script>
       <script class="solution" type="text/javascript">
       function solution_load_edges() {
@@ -69,11 +68,15 @@
       }
       </script>
       <script class="" type="text/javascript">
+         console.error('debug0');
          task.load= function(views, callback) {
-               var taskParams = platform.getTaskParams();
-               this.task = new Task(false);
-               this.task.load(taskParams.randomSeed, 'task');
-               callback();
+               console.error('debug1');
+               platform.getTaskParams(null, null, function(taskParams) {
+                  console.error('pre loading ?');
+                  task.task = new Task(false);
+                  task.task.load(taskParams.randomSeed, 'task');
+                  callback();
+               });
                /* deprecated:
                if (mode == 'solution') {
                   this.sol = new Task(true);

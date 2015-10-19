@@ -31,43 +31,10 @@
       </style>
       <script src="2013-FR-11_task.js"></script>
       <script class="grader" type="text/javascript">
-      var grader = {
-         taskGrader: null,
-         gradeTask: function(strAnswer, answerToken, callback) {
-            if (this.taskGrader == null) {
-               this.taskGrader = new Task('grader');
-            }
-            var taskParams = platform.getTaskParams();
-            var minScore = taskParams.minScore;
-            var maxScore = taskParams.maxScore;
-            var t = this.taskGrader;
-            t.reloadAnswer(strAnswer);
-
-            var minBuiltEdges = 3;
-            var edges = allEdges.concat(t.builtEdges);
-            var success = this.graphHasNoCriticalEdge(allNodes.length, edges);
-            var built = t.builtEdges.length;
-            var score = minScore;
-            // alert( edges.length + '/' + success + '/' + built);
-            if (success) {
-               if (built < 3) {
-                  score = minScore; // TODO: impossible normalement
-               } else if (built == minBuiltEdges) {
-                  score = maxScore;
-               } else if (built == 4) {
-                  score = Math.floor( (2 * maxScore + minScore) / 3 ); // 66%
-               } else if (built == 5) {
-                  score = Math.floor( (maxScore + 2 * minScore) / 3 );  // 33%
-               } else if (built == 6) {
-                  score = Math.floor( (maxScore + 4 * minScore) / 5 );  // 20%
-               }
-            }
-            callback(score);
-         },
-         parent: [],
-         graphIsConnected: function (nbNodes, edges) {
+         var taskGrader = null;
+         var parent= [];
+         function graphIsConnected(nbNodes, edges) {
             // union find
-            var parent = this.parent;
             for (var i = 0; i < nbNodes; i++)
                parent[i] = i;
             function repr(a) {
@@ -88,18 +55,50 @@
                if (repr(i) != compo)
                   return false;
             return true;
-         },
+         }
 
-         graphHasNoCriticalEdge: function(nbNodes, edges) {
+         function graphHasNoCriticalEdge(nbNodes, edges) {
             for (var e = 0; e < edges.length; e++) {
                var edges2 = edges.slice();
                edges2.splice(e, 1);
-               if (! this.graphIsConnected(nbNodes, edges2))
+               if (! graphIsConnected(nbNodes, edges2))
                   return false;
             }
             return true;
          }
-      }
+
+         grader.gradeTask= function(strAnswer, answerToken, callback) {
+            if (taskGrader == null) {
+               taskGrader = new Task('grader');
+            }
+            platform.getTaskParams(null, null, function(taskParams) {
+               var minScore = taskParams.minScore;
+               var maxScore = taskParams.maxScore;
+               var t = taskGrader;
+               t.reloadAnswer(strAnswer);
+
+               var minBuiltEdges = 3;
+               var edges = allEdges.concat(t.builtEdges);
+               var success = graphHasNoCriticalEdge(allNodes.length, edges);
+               var built = t.builtEdges.length;
+               var score = minScore;
+               // alert( edges.length + '/' + success + '/' + built);
+               if (success) {
+                  if (built < 3) {
+                     score = minScore; // TODO: impossible normalement
+                  } else if (built == minBuiltEdges) {
+                     score = maxScore;
+                  } else if (built == 4) {
+                     score = Math.floor( (2 * maxScore + minScore) / 3 ); // 66%
+                  } else if (built == 5) {
+                     score = Math.floor( (maxScore + 2 * minScore) / 3 );  // 33%
+                  } else if (built == 6) {
+                     score = Math.floor( (maxScore + 4 * minScore) / 5 );  // 20%
+                  }
+               }
+               callback(score, '');
+            });
+         };
       </script>
       <script class="solution" type="text/javascript">
       function solution_load_edges() {
