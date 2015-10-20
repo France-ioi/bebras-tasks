@@ -29,10 +29,11 @@
    task.load= function(views, callback) {
       task.bestScore = "";
       creeTerrain();
-      task.reloadAnswer("");
-      dessine();
-      $("#runbutton-2011-FR-07").click(go);
-      callback();
+      task.reloadAnswer("", function() {
+         dessine();
+         $("#runbutton-2011-FR-07").click(go);
+         callback();
+      });
    };
    task.getAnswer= function(callback) {
        callback(task.bestScore + "$" + $("#code-2011-FR-07").val());
@@ -48,6 +49,7 @@
           $("#code-2011-FR-07").attr("value", newAnswer.substr(answerSepPos+1, newAnswer.length-answerSepPos-1));
        }
        writeBest();
+       callback();
    };
 
 var writeBest = function() {
