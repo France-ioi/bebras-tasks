@@ -229,7 +229,7 @@
                $("#message2").html("Bravo ! Vous avez fait mieux que Castor !");
                $("#message2").css("color", "blue ");
                if (canValidate) {
-                  platform.validate("done");
+                  platform.validate("done", function(){});
                }
                return true;
             }

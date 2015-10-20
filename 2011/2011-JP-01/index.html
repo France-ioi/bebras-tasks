@@ -316,7 +316,7 @@ function Check()
 function SetNewScore(score) {
    if (best_jp01 > score) {
       best_jp01 = score;
-      platform.validate("stay");
+      platform.validate("stay", function(){});
   }
    document.getElementById("WIN-2011-JP-01").innerHTML = "<font color=red>Vous avez reorganisé comme il le fallait en " + score + " mouvements.\n</font>";
    document.getElementById("BEST-2011-JP-01").innerHTML = "Votre meilleur score est" + best_jp01 + " mouvements.\n";

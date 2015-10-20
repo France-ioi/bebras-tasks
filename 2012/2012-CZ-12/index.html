@@ -356,7 +356,7 @@
             window.clearInterval(task.intervalID);
             if(pos[0] == -1 && pos[1] == 3) {
               $("#success_2012_CZ_12").show();
-              platform.validate("done");
+              platform.validate("done", function(){});
             } else {
               $("#message_2012_CZ_12").show();
               task.reset();

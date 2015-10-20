@@ -105,7 +105,7 @@
               if(task.best_score > task.score) {
                 msg = "Vous avez réussi en " + task.score + " tours.";
                 task.best_score = task.score;
-                platform.validate("stay");
+                platform.validate("stay", function(){});
               } else if (task.best_score == task.score) {
                 msg = "Vous avez à nouveau réussi en " + task.score + " tours.";
               } else {

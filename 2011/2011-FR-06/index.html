@@ -93,7 +93,7 @@ var pccLength = 9;
          if(containsPos(posOut, pos)) {
              if(t == pccLength) {
                  $("#result-2011-FR-06").html("Le robot est bien arrivé et c'est le plus court chemin. Bravo !");
-                 platform.validate("done", 1);
+                 platform.validate("done", , function(){});
              } else
                  $("#result-2011-FR-06").html("Le robot est bien arrivé mais ce n'est pas le plus court chemin. Essayez encore !");
              $("#runbutton-2011-FR-06").removeAttr("disabled");

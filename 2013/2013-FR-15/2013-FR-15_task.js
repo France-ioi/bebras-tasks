@@ -164,7 +164,7 @@ function initTask() {
              $('#error').html("Erreur : le robinet coule encore.");
            } else {
                $('#success').html('Bravo ! Vous avez réussi.');
-               platform.validate("done", 1);
+               platform.validate("done", function(){});
            }
            window.clearInterval(interval_id)
            interval_id = -1;

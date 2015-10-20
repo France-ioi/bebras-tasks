@@ -259,7 +259,7 @@ function clickArea(iArea, fakeClick) {
       if (nbPiecesToColor == 0) {
          if (!fakeClick) {
             $("#success").html("Bravo ! Vous avez tout colorié correctement.");
-            platform.validate("done", 1);
+            platform.validate("done", function(){});
          }
       }
       else if (nbPiecesToColor == 1 && selectedColors[0] == 0) {

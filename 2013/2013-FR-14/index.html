@@ -200,7 +200,7 @@
                      this.animate({fill: "#FFFFFF"}, 300);
                  }
                  if (checkState()) {
-                     platform.validate("done", 1);
+                     platform.validate("done", function(){});
                  }
              });
          }

@@ -155,7 +155,7 @@
               $("#message_2012_FR_01").html("Donnez le même nombre d'ordres aux deux grenouilles&nbsp;!" + task.buttonReset);
             } else if(new_frogs[0][0] == 4 && new_frogs[0][1] == 3 && new_frogs[1][0] == 0 && new_frogs[1][1] == 3) {
               $("#success_2012_FR_01").show();
-               platform.validate("done", 1);
+               platform.validate("done", function(){});
             } else {
               $("#message_2012_FR_01").html("Les grenouilles n'ont pas échangé leurs positions !" + task.buttonReset);
             }

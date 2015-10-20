@@ -182,7 +182,7 @@ Task.prototype.updateMessage = function(canValidate) {
      $('#success').html("Félicitations, vous avez réussi !");
      this.maxSelected = nbSelected;
      if (canValidate) {
-        platform.validate("done");
+        platform.validate("done", function(){});
      }
   }
   else if ((task.level == 'easy') && (nbSelected >= this.nbToSelect - 2)) {
@@ -193,7 +193,7 @@ Task.prototype.updateMessage = function(canValidate) {
      else {
         this.maxSelected = nbSelected;
         if (canValidate) {
-           platform.validate("stay");
+           platform.validate("stay", function(){});
         }
      }
   }

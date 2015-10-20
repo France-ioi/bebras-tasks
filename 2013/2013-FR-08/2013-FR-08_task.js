@@ -343,7 +343,7 @@ function initTask() {
        ox = lx;
        oy = ly;
        if (checkSuccess()) {
-          platform.validate("done");
+          platform.validate("done", function(){});
        }
      };
      for (iElem = 0; iElem < parasol.el.length; iElem++) {

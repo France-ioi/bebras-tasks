@@ -75,7 +75,7 @@ function execute() {
          clearInterval(setIntervalHandle);
          if(lin == 2 && col == 5) {
             $("#success").html("Bravo ! Le prince est sauvé.");
-            platform.validate("done", 1);
+            platform.validate("done", function(){});
          } else {
             $("#error").html("La princesse n'est pas arrivée à destination.")
          }

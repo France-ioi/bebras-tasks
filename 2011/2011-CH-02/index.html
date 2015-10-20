@@ -134,7 +134,7 @@
               task.answer = task.answer.substr(0,i) + chr + task.answer.substr(i+1)
               redraw();
               if(task.answer == answerOk)
-                 platform.validate("done", 1);
+                 platform.validate("done", function(){});
             });
         }
 

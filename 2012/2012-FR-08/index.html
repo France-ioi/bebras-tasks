@@ -103,7 +103,7 @@
           if(task.done) {
             $("#success_2012_FR_08").show();
             if(replay == false) {
-               platform.validate("done", 1);
+               platform.validate("done", function(){});
             }
           }
         };

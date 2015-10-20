@@ -207,7 +207,7 @@ function initTask() {
           if(pos == command.length) {
             clearInterval(setIntervalHandle);
             if (task.successState()) {
-               platform.validate("done", 1);
+               platform.validate("done", function(){});
             }
             return;
           }

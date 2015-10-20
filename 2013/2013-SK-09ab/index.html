@@ -371,7 +371,7 @@
                $("#success").html("");
                if (task.gradeTask(0, strAnswer, 0, 1) == 1) {
                   $("#success").html("Bravo, vous avez réussi !");
-                  platform.validate("done");
+                  platform.validate("done", function(){});
                }
                enCoursDeSimulation = false;
             });

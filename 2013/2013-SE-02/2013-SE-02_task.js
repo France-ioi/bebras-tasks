@@ -156,10 +156,10 @@ Task.prototype.getEdgeEnds = function(iEdge) {
 Task.prototype.validate = function(mode) {
   if (! this.isNetworkCompleted()) {
     $('#error').html("<b>Pour l'instant, tous les ordinateurs ne sont pas connectés entre eux.</b>");
-    platform.validate("stay");
+    platform.validate("stay", function(){});
     return;
   }
-  platform.validate(mode);
+  platform.validate(mode, function(){});
 }
 
 Task.prototype.mark = function(iEdge, marked) {

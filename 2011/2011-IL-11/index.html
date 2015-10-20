@@ -57,9 +57,9 @@ var changeCurrent = function(val) {
       current = score = 0;
       dessine("Vous avez dépassé 51. Réessayez !");
   } else if (val == goal) {
-      if(best_score == -1 || best_score > score) {          
+      if(best_score == -1 || best_score > score) {
           best_score = score;
-          platform.validate("stay", 1);
+          platform.validate("stay", function(){});
       }
       current = 0;
       dessine("Bravo ! Vous avez réussi a faire un score de "+score+". Arriverez-vous à faire un meilleur score ?");

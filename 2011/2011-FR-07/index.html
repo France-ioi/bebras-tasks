@@ -157,7 +157,7 @@ var go = function () {
   $("#terrain-2011-FR-07").delay(stepDuration).queue(function (){
       if (score > task.bestScore) {
           task.bestScore = score;
-          platform.validate("stay", 1);
+          platform.validate("stay", function(){});
       }
       writeBest();
       dessine();
