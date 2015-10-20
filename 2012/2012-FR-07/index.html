@@ -179,9 +179,8 @@
         cursor: pointer;
         font-size: 2em;
       }</style>
-         <script class="grader" type="text/javascript">var grader = {
-   gradeTask: function(answer, answerToken, callback) {
-      var taskParams = platform.getTaskParams();
+         <script class="grader" type="text/javascript">
+   grader.gradeTask= function(answer, answerToken, callback) {
       var walls = new Array(
          new Array(0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0 ,0),
          new Array(0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0 ,0),
@@ -193,30 +192,31 @@
          new Array(0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0 ,0)
       );
       var score = null;
-      if (answer.length !== parseInt(8 * 12)) {
-         score = taskParams.noScore;
-      }
-      
-      var errors = 0;
-      for (var row = 0; row < 8; row++) {
-         for (var col = 0; col < 12; col++) {
-            if (walls[row][col] === 2) {
-               continue;
-            }
-            
-            var ans = parseInt(answer[row * 12 + col]);
-            if (!ans && walls[row][col]) {
-               errors++;
-            }
-            else if (ans && !walls[row][col]) {
-               errors++;
+      platform.getTaskParams(null, null, function(taskParams) {
+         if (answer.length !== parseInt(8 * 12)) {
+            score = taskParams.noScore;
+         }
+         
+         var errors = 0;
+         for (var row = 0; row < 8; row++) {
+            for (var col = 0; col < 12; col++) {
+               if (walls[row][col] === 2) {
+                  continue;
+               }
+               
+               var ans = parseInt(answer[row * 12 + col]);
+               if (!ans && walls[row][col]) {
+                  errors++;
+               }
+               else if (ans && !walls[row][col]) {
+                  errors++;
+               }
             }
          }
-      }
-      score = Math.max(taskParams.minScore, taskParams.maxScore - errors);
-      callback(score);
+         score = Math.max(taskParams.minScore, taskParams.maxScore - errors);
+         callback(score);
+      });
    }
-};
 
 /* Tests :
 grader.gradeTask('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', null, function(score) {console.log(score + ' (wrong)')});

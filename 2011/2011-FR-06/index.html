@@ -93,7 +93,7 @@ var pccLength = 9;
          if(containsPos(posOut, pos)) {
              if(t == pccLength) {
                  $("#result-2011-FR-06").html("Le robot est bien arrivé et c'est le plus court chemin. Bravo !");
-                 platform.validate("done", , function(){});
+                 platform.validate("done", function(){});
              } else
                  $("#result-2011-FR-06").html("Le robot est bien arrivé mais ce n'est pas le plus court chemin. Essayez encore !");
              $("#runbutton-2011-FR-06").removeAttr("disabled");
@@ -138,9 +138,8 @@ var pccLength = 9;
    .wall-2011-FR-06 { background-color: black; }
    #terrain-2011-FR-06 { border-collapse: collapse; }
    #result-2011-FR-06 { color:red; font-weight:bold; }</style>
-         <script class="grader" type="text/javascript">var grader = {
-   gradeTask: function(answer, answerToken, callback) {
-      var taskParams = platform.getTaskParams();
+         <script class="grader" type="text/javascript">
+   grader.gradeTask = function(answer, answerToken, callback) {
       var validAnswers = new Array(
          'GGHHHGGGH',
          'GGHHGHGGH',
@@ -152,13 +151,14 @@ var pccLength = 9;
       
       answer = answer.replace(/^\s+|\s+$/g,'');
       answer = answer.toUpperCase();
-      var score = taskParams.minScore;
-      if ($.inArray(answer, validAnswers) > -1) {
-         score = taskParams.maxScore;
-      }
-      callback(score);
-   }
-};
+      platform.getTaskParams(null, null, function(taskParams) {
+         var score = taskParams.minScore;
+         if ($.inArray(answer, validAnswers) > -1) {
+            score = taskParams.maxScore;
+         }
+         callback(score);
+      });
+   };
 
 /* Tests :
 console.log(grader.gradeTask(0, 'gghhhgggh', 0, 1) + ' (ok)');
