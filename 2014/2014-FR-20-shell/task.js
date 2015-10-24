@@ -7,17 +7,18 @@ function initTask() {
    var output;
 
    task.load = function(views, callback) {
-      // displayHelper.hideValidateButton = true;
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      isEasy = (difficulty == "easy"); 
-      $("." + difficulty).show();
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         isEasy = (difficulty == "easy"); 
+         $("." + difficulty).show();
 
-      $("#shell_input").keyup(function (e) {
-          if (e.keyCode == 13) { // touche entrée
-              task.executeInput();
-          }
+         $("#shell_input").keyup(function (e) {
+             if (e.keyCode == 13) { // touche entrée
+                 task.executeInput();
+             }
+         });
+         task.reloadAnswer("", callback);
       });
-      task.reloadAnswer("", callback);
    };
 
    var commandsOfStrAnswer = function(strAnswer) {
@@ -254,14 +255,15 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var commands = commandsOfStrAnswer(strAnswer);
-      var files = executeCommands(commands);
-      if (isFinished(files)) {
-         callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
-      } else {
-         callback(taskParams.minScore, "Vous n'avez pas obtenu l'état souhaité. <br />Essayez d'autres commandes, ou bien recommencez tout.");
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var commands = commandsOfStrAnswer(strAnswer);
+         var files = executeCommands(commands);
+         if (isFinished(files)) {
+            callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
+         } else {
+            callback(taskParams.minScore, "Vous n'avez pas obtenu l'état souhaité. <br />Essayez d'autres commandes, ou bien recommencez tout.");
+         }
+      });
    }
 }
 initTask();

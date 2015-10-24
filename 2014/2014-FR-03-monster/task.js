@@ -129,49 +129,51 @@ function initTask() {
    };
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      if (difficulty == "debug") { 
-         makeDebugVersion(); 
-      }
-      randomSeed = platform.getTaskParams().randomSeed;
-      
-      ghostMin = 0;
-      ghostMax = ghostMaxInit;
-
-      $("#anim").width(paperWidth).height(paperHeight);
-      paper = Raphael(document.getElementById('anim'), nbColumns * cellSize + 2 * margin, nbLines * cellSize + 2 * margin);
-
-      var setRectGrille = paper.set();
-
-      // tower code assumes nbColmuns = nbLines
-      var towerPos = [ Math.floor(nbColumns/4), Math.floor(nbColumns/2), Math.floor(nbColumns*3/4), 0, Math.floor(nbColumns-1) ];
-      var towerSize = 7;
-      var towerAttr = {'fill': '#FF8888', 'stroke': '#000000'};
-      for (var iTower = 0; iTower < towerPos.length; iTower++) {
-         paper.rect(margin + towerPos[iTower] * cellSize, margin - towerSize, cellSize, towerSize).attr(towerAttr);
-         paper.rect(margin + towerPos[iTower] * cellSize, margin + nbColumns * cellSize, cellSize, towerSize).attr(towerAttr);
-         paper.rect(margin - towerSize, margin + towerPos[iTower] * cellSize, towerSize, cellSize).attr(towerAttr);
-         paper.rect(margin + nbColumns * cellSize, margin + towerPos[iTower] * cellSize, 8, cellSize).attr(towerAttr);
-      }
-
-      cells = [];
-      for (var iLig = 0; iLig < nbLines; iLig++) {
-         cells[iLig] = [];
-         for (var iCol = 0; iCol < nbColumns; iCol++) {
-            var rect = paper.rect(margin + iCol * cellSize, margin + iLig * cellSize, cellSize, cellSize);
-            cells[iLig].push(rect);
-            var fill = '#ffff00';
-            if (cellRank(iLig, iCol) == -1) {
-               fill = '#808080';
-            }
-            rect.attr({'stroke': '#000000', 'fill': fill});
-            setClick(rect, iLig, iCol);
-            setRectGrille.push(rect);
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         if (difficulty == "debug") { 
+            makeDebugVersion(); 
          }
-      }
-      monster = paper.image("monster.png", 0, 0, cellSize-2, cellSize-2 -4).hide();
-      updateDisplay();
-      callback();
+         randomSeed = taskParams.randomSeed;
+         
+         ghostMin = 0;
+         ghostMax = ghostMaxInit;
+
+         $("#anim").width(paperWidth).height(paperHeight);
+         paper = Raphael(document.getElementById('anim'), nbColumns * cellSize + 2 * margin, nbLines * cellSize + 2 * margin);
+
+         var setRectGrille = paper.set();
+
+         // tower code assumes nbColmuns = nbLines
+         var towerPos = [ Math.floor(nbColumns/4), Math.floor(nbColumns/2), Math.floor(nbColumns*3/4), 0, Math.floor(nbColumns-1) ];
+         var towerSize = 7;
+         var towerAttr = {'fill': '#FF8888', 'stroke': '#000000'};
+         for (var iTower = 0; iTower < towerPos.length; iTower++) {
+            paper.rect(margin + towerPos[iTower] * cellSize, margin - towerSize, cellSize, towerSize).attr(towerAttr);
+            paper.rect(margin + towerPos[iTower] * cellSize, margin + nbColumns * cellSize, cellSize, towerSize).attr(towerAttr);
+            paper.rect(margin - towerSize, margin + towerPos[iTower] * cellSize, towerSize, cellSize).attr(towerAttr);
+            paper.rect(margin + nbColumns * cellSize, margin + towerPos[iTower] * cellSize, 8, cellSize).attr(towerAttr);
+         }
+
+         cells = [];
+         for (var iLig = 0; iLig < nbLines; iLig++) {
+            cells[iLig] = [];
+            for (var iCol = 0; iCol < nbColumns; iCol++) {
+               var rect = paper.rect(margin + iCol * cellSize, margin + iLig * cellSize, cellSize, cellSize);
+               cells[iLig].push(rect);
+               var fill = '#ffff00';
+               if (cellRank(iLig, iCol) == -1) {
+                  fill = '#808080';
+               }
+               rect.attr({'stroke': '#000000', 'fill': fill});
+               setClick(rect, iLig, iCol);
+               setRectGrille.push(rect);
+            }
+         }
+         monster = paper.image("monster.png", 0, 0, cellSize-2, cellSize-2 -4).hide();
+         updateDisplay();
+         callback();
+      });
    };
 
    task.getAnswer = function(callback) {
@@ -193,22 +195,23 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      randomSeed = taskParams.randomSeed;
-      reloadAnswerNoDisplay(strAnswer);
-      if (ghostMin >= ghostMax) {
-         var msg = "";
-         if (nbSteps > bestSteps) {
-            msg = "Vous avez capturé le monstre&nbsp;! Essayez maintenant d'utiliser moins de barrages.";
+      platform.getTaskParams(null, null, function(taskParams) {
+         randomSeed = taskParams.randomSeed;
+         reloadAnswerNoDisplay(strAnswer);
+         if (ghostMin >= ghostMax) {
+            var msg = "";
+            if (nbSteps > bestSteps) {
+               msg = "Vous avez capturé le monstre&nbsp;! Essayez maintenant d'utiliser moins de barrages.";
+            } else {
+               msg = "Bravo, vous avez capturé le monstre avec le nombre minimum de barrages&nbsp;!";
+            }
+            var extraSteps = nbSteps - bestSteps;
+            var score = Math.max(taskParams.minScore, taskParams.maxScore - extraSteps);
+            callback(score, msg);
          } else {
-            msg = "Bravo, vous avez capturé le monstre avec le nombre minimum de barrages&nbsp;!";
+            callback(taskParams.minScore, "Vous n'avez pas capturé le monstre.");
          }
-         var extraSteps = nbSteps - bestSteps;
-         var score = Math.max(taskParams.minScore, taskParams.maxScore - extraSteps);
-         callback(score, msg);
-      } else {
-         callback(taskParams.minScore, "Vous n'avez pas capturé le monstre.");
-      }
+      });
    };
 }
 

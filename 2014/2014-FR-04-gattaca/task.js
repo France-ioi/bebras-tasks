@@ -152,51 +152,53 @@ function initTask() {
    };
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      // LATER: vérifier que difficulty est easy ou hard
-      if (difficulty == "debug") {
-          nbColumns = 8;
-          nbLines = 1;
-          target = "CATS";
-          fullScoreThreshold = 5;
-      } else if (difficulty == "easy") {
-          nbColumns = 20;
-          nbLines = 1;
-          target = "CATS";
-          fullScoreThreshold = 10;
-       } else if (difficulty == "very_hard") { 
-          target = "SATTACA";
-          nbLines = 2;
-          fullScoreThreshold = 22;
-          $(".twolines").show();
-      } else  { // hard
-          nbColumns = 30;
-          nbLines = 1;
-          target = "CATS";
-          fullScoreThreshold = 14;
-      }
-      $("#target_pattern").html(target);
-      $("#anim").css({height: 20 + nbLines * (cellHeight + margin)});
-
-      paper = Raphael(document.getElementById('anim'), nbColumns * cellWidth + 2, nbLines * cellHeight + 2 * margin);
-
-      for (var iLin = 0; iLin < nbLines; iLin++) {
-         cells[iLin] = [];
-         texts[iLin] = [];
-         for (var iCol = 0; iCol < nbColumns; iCol++) {
-            var x = iCol * cellWidth + 2;
-            var y = margin + iLin * cellHeight + 2;
-            var rect = paper.rect(x, y, cellWidth - 2, cellHeight - 2);
-            cells[iLin].push(rect);
-            rect.attr({'stroke': 'black', 'fill': 'white'});
-            var text = paper.text(x + cellWidth / 2, y + cellHeight / 2, "");
-            text.attr({"font-size": 20, "font-weight": "bold"});
-            texts[iLin].push(text);
-            setClick(rect, iLin, iCol);
-            setClick(text, iLin, iCol);
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: vérifier que difficulty est easy ou hard
+         if (difficulty == "debug") {
+             nbColumns = 8;
+             nbLines = 1;
+             target = "CATS";
+             fullScoreThreshold = 5;
+         } else if (difficulty == "easy") {
+             nbColumns = 20;
+             nbLines = 1;
+             target = "CATS";
+             fullScoreThreshold = 10;
+          } else if (difficulty == "very_hard") { 
+             target = "SATTACA";
+             nbLines = 2;
+             fullScoreThreshold = 22;
+             $(".twolines").show();
+         } else  { // hard
+             nbColumns = 30;
+             nbLines = 1;
+             target = "CATS";
+             fullScoreThreshold = 14;
          }
-      }
-      this.reloadAnswer("", callback);
+         $("#target_pattern").html(target);
+         $("#anim").css({height: 20 + nbLines * (cellHeight + margin)});
+
+         paper = Raphael(document.getElementById('anim'), nbColumns * cellWidth + 2, nbLines * cellHeight + 2 * margin);
+
+         for (var iLin = 0; iLin < nbLines; iLin++) {
+            cells[iLin] = [];
+            texts[iLin] = [];
+            for (var iCol = 0; iCol < nbColumns; iCol++) {
+               var x = iCol * cellWidth + 2;
+               var y = margin + iLin * cellHeight + 2;
+               var rect = paper.rect(x, y, cellWidth - 2, cellHeight - 2);
+               cells[iLin].push(rect);
+               rect.attr({'stroke': 'black', 'fill': 'white'});
+               var text = paper.text(x + cellWidth / 2, y + cellHeight / 2, "");
+               text.attr({"font-size": 20, "font-weight": "bold"});
+               texts[iLin].push(text);
+               setClick(rect, iLin, iCol);
+               setClick(text, iLin, iCol);
+            }
+         }
+         task.reloadAnswer("", callback);
+      });
    };
 
    task.getAnswer = function(callback) {
@@ -243,20 +245,21 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      innerReloadAnswer(strAnswer, false);
-      var score = taskParams.minScore;
-      var msg = "Vous n'avez pas trouvé le mot «&nbsp;" + target + "&nbsp;».";
-      if (solved) {
-         score = Math.max(taskParams.minScore + 1, Math.min(taskParams.maxScore, taskParams.maxScore - (nbSteps - fullScoreThreshold)));
-         if (score == taskParams.maxScore) {
-            msg = "Bravo, vous avez trouvé le mot en demandant " + nbSteps + " lettres seulement&nbsp;!"
-         } else {
-            msg = "Vous avez trouvé le mot en demandant " + nbSteps + " lettres.<br /><br />" +
-               "Recommencez pour essayer de faire mieux.";
+      platform.getTaskParams(null, null, function(taskParams) {
+         innerReloadAnswer(strAnswer, false);
+         var score = taskParams.minScore;
+         var msg = "Vous n'avez pas trouvé le mot «&nbsp;" + target + "&nbsp;».";
+         if (solved) {
+            score = Math.max(taskParams.minScore + 1, Math.min(taskParams.maxScore, taskParams.maxScore - (nbSteps - fullScoreThreshold)));
+            if (score == taskParams.maxScore) {
+               msg = "Bravo, vous avez trouvé le mot en demandant " + nbSteps + " lettres seulement&nbsp;!"
+            } else {
+               msg = "Vous avez trouvé le mot en demandant " + nbSteps + " lettres.<br /><br />" +
+                  "Recommencez pour essayer de faire mieux.";
+            }
          }
-      }
-      callback(score, msg);
+         callback(score, msg);
+      });
    };
 }
 

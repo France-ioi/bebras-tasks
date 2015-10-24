@@ -147,7 +147,7 @@ function initTask() {
 
       levelData = data[level];
       nbCursors = levelData.nbCursors;
-      var taskParams = platform.getTaskParams();
+      var taskParams = displayHelper.taskParams;
       target = levelData.targets[parseInt(taskParams.randomSeed) % levelData.targets.length];
       if (display) {
          $("#valueTarget").html(stringOfValue(target));
@@ -198,7 +198,7 @@ function initTask() {
             scores[curLevel] = 0;
          }
       }
-      if (gradedLevel == null) {
+      if (!gradedLevel) {
          displayHelper.sendBestScore(callback, scores, messages);
       } else {
          callback(scores[gradedLevel], messages[gradedLevel]);

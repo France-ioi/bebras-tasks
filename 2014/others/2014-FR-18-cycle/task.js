@@ -257,25 +257,26 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      innerReloadAnswer(strAnswer);
-      drawLaser(false);
-      if (solved) {
-         /*
-         var score = Math.max(taskParams.noScore + 1, taskParams.maxScore - (nbUsed - minReflection));
-         var msg = "Vous avez atteint la cible en " + nbUsed + " miroirs.";
-         if (score <= taskParams.maxScore) {
-            msg += " Bravo ! Vous avez réussi.";
+      platform.getTaskParams(null, null, function(taskParams) {
+         innerReloadAnswer(strAnswer);
+         drawLaser(false);
+         if (solved) {
+            /*
+            var score = Math.max(taskParams.noScore + 1, taskParams.maxScore - (nbUsed - minReflection));
+            var msg = "Vous avez atteint la cible en " + nbUsed + " miroirs.";
+            if (score <= taskParams.maxScore) {
+               msg += " Bravo ! Vous avez réussi.";
+            } else {
+               msg += " Il est possible de faire mieux.";
+            }
+            callback(score, msg);
+            */
+             callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
+           
          } else {
-            msg += " Il est possible de faire mieux.";
+            callback(taskParams.minScore, "Le laser ne revient pas sur Castor.");
          }
-         callback(score, msg);
-         */
-          callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
-        
-      } else {
-         callback(taskParams.minScore, "Le laser ne revient pas sur Castor.");
-      }
+      });
    };
 }
 

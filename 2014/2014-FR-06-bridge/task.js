@@ -57,31 +57,33 @@ function initTask() {
 
    task.load = function(views, callback) {
       displayHelper.hideValidateButton = true;
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      if (difficulty == "easy") {
-         $(".easy").show();
-         maxWeight = 10;
-         weights = [3, 6, 7, 4, 9, 2, 1, 8];
-      } else {
-         $(".hard").show();
-         maxWeight = 14;
-         weights = [2, 6, 12, 1, 9, 11, 5, 3, 13, 8, 4, 10];
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         if (difficulty == "easy") {
+            $(".easy").show();
+            maxWeight = 10;
+            weights = [3, 6, 7, 4, 9, 2, 1, 8];
+         } else {
+            $(".hard").show();
+            maxWeight = 14;
+            weights = [2, 6, 12, 1, 9, 11, 5, 3, 13, 8, 4, 10];
+         }
 
-      if (platform.getTaskParams("initState") == "solution") {
-         weights = task.solutions[difficulty];
-      } 
-      
-      nbBalls = weights.length;
-      nbSpacesAfter = nbBalls / 2;
-      if (views.solution) {
-         var solution = task.solutions[difficulty];
-         $("#textSolution").html(solution.join(", "));
-      }
+         if (taskParams.initState == "solution") {
+            weights = task.solutions[difficulty];
+         } 
+         
+         nbBalls = weights.length;
+         nbSpacesAfter = nbBalls / 2;
+         if (views.solution) {
+            var solution = task.solutions[difficulty];
+            $("#textSolution").html(solution.join(", "));
+         }
 
-      drawBridge();
-      lastAnswer = getInitAnswer();
-      task.reloadAnswer("", callback);
+         drawBridge();
+         lastAnswer = getInitAnswer();
+         task.reloadAnswer("", callback);
+      });
    }
 
 
@@ -231,14 +233,15 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var answer = strAnswerToAnswer(strAnswer);
-      var nbBallsCrossing = getNbBallsCrossing(answer);
-      if (nbBallsCrossing == nbBalls) {
-         callback(taskParams.maxScore, "Bravo, toutes les bûches ont traversé le pont&nbsp;!");
-      } else {
-         callback(taskParams.noScore, "Le pont s'est écroulé&nbsp;!");
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var answer = strAnswerToAnswer(strAnswer);
+         var nbBallsCrossing = getNbBallsCrossing(answer);
+         if (nbBallsCrossing == nbBalls) {
+            callback(taskParams.maxScore, "Bravo, toutes les bûches ont traversé le pont&nbsp;!");
+         } else {
+            callback(taskParams.noScore, "Le pont s'est écroulé&nbsp;!");
+         }
+      });
    }
 }
 

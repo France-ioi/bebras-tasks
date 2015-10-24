@@ -104,16 +104,17 @@ function initTask () {
    }
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var answer = answerOfStrAnswer(strAnswer);
-      if (Beav.Object.eq(answer, task.solution)) {
-         callback(taskParams.maxScore, "Bravo, c'est le bon ordre&nbsp;!");
-      // } else if (Beav.Object.eq(answer, initState)) {
-      //   callback(taskParams.noScore, "Ce n'est pas le bon ordre.");
-      } else {
-         callback(taskParams.minScore, "Ce n'est pas le bon ordre.");
-      }
-   }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var answer = answerOfStrAnswer(strAnswer);
+         if (Beav.Object.eq(answer, task.solution)) {
+            callback(taskParams.maxScore, "Bravo, c'est le bon ordre&nbsp;!");
+         // } else if (Beav.Object.eq(answer, initState)) {
+         //   callback(taskParams.noScore, "Ce n'est pas le bon ordre.");
+         } else {
+            callback(taskParams.minScore, "Ce n'est pas le bon ordre.");
+         }
+      });
+   };
 };
 
 initTask();

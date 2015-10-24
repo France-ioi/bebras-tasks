@@ -153,16 +153,17 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var sequence = answerOfStrAnswer(strAnswer);
-      if (sequence.length == 0) {
-         callback(taskParams.noScore, "Placez des notes dans les cases bleues pour diriger le robot.");
-      } else if (task.isCorrect(sequence)) {
-         callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
-      } else {
-         callback(taskParams.minScore, "Avec ces notes, le robot n'arrivera pas au palais doré.<br /> Castor ne les siffle donc pas, et le robot ne bouge pas. <br />Réessayez avec d'autres notes.");
-         // <br> (Le robot ne se déplace pas sur l'image, c'est normal.)
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var sequence = answerOfStrAnswer(strAnswer);
+         if (sequence.length == 0) {
+            callback(taskParams.noScore, "Placez des notes dans les cases bleues pour diriger le robot.");
+         } else if (task.isCorrect(sequence)) {
+            callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
+         } else {
+            callback(taskParams.minScore, "Avec ces notes, le robot n'arrivera pas au palais doré.<br /> Castor ne les siffle donc pas, et le robot ne bouge pas. <br />Réessayez avec d'autres notes.");
+            // <br> (Le robot ne se déplace pas sur l'image, c'est normal.)
+         }
+      });
    };
 }
 initTask();

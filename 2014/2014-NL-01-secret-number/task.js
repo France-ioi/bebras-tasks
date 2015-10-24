@@ -26,45 +26,46 @@ function initTask() {
    };
    
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      if (difficulty == "hard") {
-         nbToFind = 2;
-      } else {
-         nbToFind = 1;
-      }
-      if (nbToFind == 1) {
-         $("#nb_to_find_text").html("un seul");
-      } else {
-         $("#nb_to_find_text").html(nbToFind);
-      }
-
-      var taskParams = platform.getTaskParams();
-      pickQueriesSolutions(taskParams.randomSeed);
-      var secret = $("#secret");
-      var changeWrapper = function(i) {
-         return function() { eventChange(i); };
-      };
-      var restartWrapper = function(i) {
-         return function() { eventRestart(i); };
-      };
-      for (var i = 0; i < queries.length; i++) {
-         /* Remark: the following does not work:
-            var secret_i = secret.clone().attr('id', "#secret_" + i);
-            $(".secret_table").append(secret_i); */
-         var secret_i = $("#secret_" + i);
-         $("#secret_" + i + " .query").html(queries[i] + " : ");
-         $("#secret_" + i + " .answer").keyup(changeWrapper(i));
-         $("#secret_" + i + " .restart").click(restartWrapper(i));
-         $("#secret_" + i + " .restart").hide();
-         secret_i.show();
-      }
-
-      if (views.solution) {
-         for (var iQuery = 0; iQuery < queries.length; iQuery++) {
-            $("#textSolution").append("<li>" + queries[iQuery] + " : " + solutions[iQuery].join( " ou ") + ".</li>");
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         if (difficulty == "hard") {
+            nbToFind = 2;
+         } else {
+            nbToFind = 1;
          }
-      }
-      callback();
+         if (nbToFind == 1) {
+            $("#nb_to_find_text").html("un seul");
+         } else {
+            $("#nb_to_find_text").html(nbToFind);
+         }
+
+         pickQueriesSolutions(taskParams.randomSeed);
+         var secret = $("#secret");
+         var changeWrapper = function(i) {
+            return function() { eventChange(i); };
+         };
+         var restartWrapper = function(i) {
+            return function() { eventRestart(i); };
+         };
+         for (var i = 0; i < queries.length; i++) {
+            /* Remark: the following does not work:
+               var secret_i = secret.clone().attr('id', "#secret_" + i);
+               $(".secret_table").append(secret_i); */
+            var secret_i = $("#secret_" + i);
+            $("#secret_" + i + " .query").html(queries[i] + " : ");
+            $("#secret_" + i + " .answer").keyup(changeWrapper(i));
+            $("#secret_" + i + " .restart").click(restartWrapper(i));
+            $("#secret_" + i + " .restart").hide();
+            secret_i.show();
+         }
+
+         if (views.solution) {
+            for (var iQuery = 0; iQuery < queries.length; iQuery++) {
+               $("#textSolution").append("<li>" + queries[iQuery] + " : " + solutions[iQuery].join( " ou ") + ".</li>");
+            }
+         }
+         callback();
+      });
    };
 
    task.reloadAnswer = function(strAnswer, callback) {
@@ -150,36 +151,37 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      if (strAnswer == "") { 
-         callback(taskParams.noScore, "Tapez des mots dans les boîtes ci-dessus.");
-         return;
-      }
-      pickQueriesSolutions(taskParams.randomSeed);
-      var answers = $.parseJSON(strAnswer);
-      var count = 0;
-      for (var i = 0; i < queries.length; i++) {
-         if (Beav.Array.has(solutions[i], answers[i])) {
-            count++;
+      platform.getTaskParams(null, null, function(taskParams) {
+         if (strAnswer == "") { 
+            callback(taskParams.noScore, "Tapez des mots dans les boîtes ci-dessus.");
+            return;
          }
-      }
-      
-      if (count >= nbToFind) {
-         callback(taskParams.maxScore, "Bravo&nbsp;! Vous avez réussi&nbsp;!");
-      } else {
-         var nbLeft = nbToFind - count;
-         var msg = "Il vous reste " + nbLeft + " mot" + ((nbLeft > 1) ? "s" : "") + " à trouver.";
-         var score = 0;
-         if (count > 0) {
-            var full = taskParams.maxScore;
-            if (nbLeft <= 0) {
-               score = full;
-            } else {
-               score = Math.round(full/2 + full/2 * (count-1) / (nbToFind-1));
+         pickQueriesSolutions(taskParams.randomSeed);
+         var answers = $.parseJSON(strAnswer);
+         var count = 0;
+         for (var i = 0; i < queries.length; i++) {
+            if (Beav.Array.has(solutions[i], answers[i])) {
+               count++;
             }
          }
-         callback(score, msg);
-      }
+         
+         if (count >= nbToFind) {
+            callback(taskParams.maxScore, "Bravo&nbsp;! Vous avez réussi&nbsp;!");
+         } else {
+            var nbLeft = nbToFind - count;
+            var msg = "Il vous reste " + nbLeft + " mot" + ((nbLeft > 1) ? "s" : "") + " à trouver.";
+            var score = 0;
+            if (count > 0) {
+               var full = taskParams.maxScore;
+               if (nbLeft <= 0) {
+                  score = full;
+               } else {
+                  score = Math.round(full/2 + full/2 * (count-1) / (nbToFind-1));
+               }
+            }
+            callback(score, msg);
+         }
+      });
    }
 }
 initTask();

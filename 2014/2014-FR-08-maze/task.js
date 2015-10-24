@@ -250,26 +250,28 @@ function initTask() {
    }
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      // LATER: la fonction ci-dessus doit vérifier que difficulty est easy ou hard.
-      defaultAnswer = defaultAnswers[difficulty];
-      if (difficulty == "easy") {
-         makeWallsEasy();
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: la fonction ci-dessus doit vérifier que difficulty est easy ou hard.
+         defaultAnswer = defaultAnswers[difficulty];
+         if (difficulty == "easy") {
+            makeWallsEasy();
+         }
 
-      if (platform.getTaskParams("initState") == "solution") {
-         defaultAnswer = task.solution;
-      } 
+         if (taskParams.initState == "solution") {
+            defaultAnswer = task.solution;
+         } 
 
-      if (views.solution) {
-         var labels = $.map(task.solution, function(iInstr) {return texts[iInstr];});
-         $("#textSolution").html(labels.join(", "));
-      }
+         if (views.solution) {
+            var labels = $.map(task.solution, function(iInstr) {return texts[iInstr];});
+            $("#textSolution").html(labels.join(", "));
+         }
 
-      curSimulation = initSimulation();
-      createLaby();
-      drawLaby();
-      task.reloadAnswer("", callback);
+         curSimulation = initSimulation();
+         createLaby();
+         drawLaby();
+         task.reloadAnswer("", callback);
+      });
    }
 
    var drawLaby = function() {
@@ -389,25 +391,26 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var answer = defaultAnswer;
-      if (strAnswer != "") {
-         answer = $.parseJSON(strAnswer);
-      }
-      var simulation = initSimulation();
-      var iStep = 0;
-      var nbSteps = 0;
-      while ((iStep < answer.length) && (answer[iStep] != null)) {
-         updateMarblesPos(simulation, answer[iStep], false);
-         iStep++;
-      }
-      if (simulation.nbArrivees == 2) {
-         callback(taskParams.maxScore, "Bravo, vous avez fait sortir les deux billes&nbsp;!");
-      } else if (simulation.nbArrivees == 1) {
-         callback(taskParams.minScore, "Une seule des deux billes est sortie&nbsp;!");
-      } else {
-         callback(taskParams.minScore, "Aucune bille n'est sortie&nbsp;!"); 
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var answer = defaultAnswer;
+         if (strAnswer != "") {
+            answer = $.parseJSON(strAnswer);
+         }
+         var simulation = initSimulation();
+         var iStep = 0;
+         var nbSteps = 0;
+         while ((iStep < answer.length) && (answer[iStep] != null)) {
+            updateMarblesPos(simulation, answer[iStep], false);
+            iStep++;
+         }
+         if (simulation.nbArrivees == 2) {
+            callback(taskParams.maxScore, "Bravo, vous avez fait sortir les deux billes&nbsp;!");
+         } else if (simulation.nbArrivees == 1) {
+            callback(taskParams.minScore, "Une seule des deux billes est sortie&nbsp;!");
+         } else {
+            callback(taskParams.minScore, "Aucune bille n'est sortie&nbsp;!"); 
+         }
+      });
    };
 };
 

@@ -335,7 +335,7 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
+      var taskParams = displayHelper.taskParams;
       innerReloadAnswer(strAnswer);
       drawLaser(false);
       if (solved) {

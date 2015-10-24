@@ -33,38 +33,40 @@ function initTask() {
    var state = states.initial;
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      // LATER: vérifier que difficulty est easy ou hard
-      solution = task.solutions[difficulty];
-      simulationSpeed = simulationSpeeds[difficulty];
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: vérifier que difficulty est easy ou hard
+         solution = task.solutions[difficulty];
+         simulationSpeed = simulationSpeeds[difficulty];
 
-      var dimension1 = 150;
-      drawing1 = buildGrid("drawing1", dimension1);
-      var solSimulation = simulateAll(solution);
-      updateGrid(drawing1, solSimulation.colors);
-      targetColors = solSimulation.colors;
+         var dimension1 = 150;
+         drawing1 = buildGrid("drawing1", dimension1);
+         var solSimulation = simulateAll(solution);
+         updateGrid(drawing1, solSimulation.colors);
+         targetColors = solSimulation.colors;
 
-      var dimension2 = 200;
-      drawing2 = buildGrid("drawing2", dimension2);
-      var robotSize = 15;
-      drawing2.robot = drawing2.paper.image("robot.png", 0, 0, robotSize, robotSize);
-      drawing2.robot.size = robotSize;
+         var dimension2 = 200;
+         drawing2 = buildGrid("drawing2", dimension2);
+         var robotSize = 15;
+         drawing2.robot = drawing2.paper.image("robot.png", 0, 0, robotSize, robotSize);
+         drawing2.robot.size = robotSize;
 
-      buildInstructions();
-      clearDisplay();
+         buildInstructions();
+         clearDisplay();
 
-      if (views.solution) {
-         $.each(task.solutions[difficulty], function(iStep, iInstr) {
-           $("#textSolution").append("<li>" + instructions[iInstr] + "</li>");
-         });
-      }
+         if (views.solution) {
+            $.each(task.solutions[difficulty], function(iStep, iInstr) {
+              $("#textSolution").append("<li>" + instructions[iInstr] + "</li>");
+            });
+         }
 
-      if (platform.getTaskParams("showSolutionOnLoad") == 1) {
-         task.reloadAnswer(JSON.stringify(solution), callback);
-         return;
-      } 
-      
-      callback();
+         if (taskParams.showSolutionOnLoad == 1) {
+            task.reloadAnswer(JSON.stringify(solution), callback);
+            return;
+         } 
+         
+         callback();
+      };
    };
 
    var getInstructionObject = function(iInstr) {
@@ -364,19 +366,20 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var sequence = answerOfStrAnswer(strAnswer);
-      if (sequence.length == 0) {
-         callback(taskParams.noScore, "Déplacez les instructions dans les cases vides pour construire la séquence.");
-         return;
-      }
-      var simulation = simulateAll(sequence);
-      var finalColors = simulation.colors;
-      if (Beav.Object.eq(targetColors, finalColors)) {
-         callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
-      } else {
-         callback(taskParams.minScore, "Cette séquence ne produit pas le bon dessin. Essayez autrement.");
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var sequence = answerOfStrAnswer(strAnswer);
+         if (sequence.length == 0) {
+            callback(taskParams.noScore, "Déplacez les instructions dans les cases vides pour construire la séquence.");
+            return;
+         }
+         var simulation = simulateAll(sequence);
+         var finalColors = simulation.colors;
+         if (Beav.Object.eq(targetColors, finalColors)) {
+            callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
+         } else {
+            callback(taskParams.minScore, "Cette séquence ne produit pas le bon dessin. Essayez autrement.");
+         }
+      });
    }
 }
 initTask();

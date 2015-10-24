@@ -188,22 +188,23 @@ function initTask() {
 
    grader.gradeTask = function(strAnswer, token, callback) {
       var selectedCells = selectedCellsOfStrAnswer(strAnswer);
-      var taskParams = platform.getTaskParams();
-      var nbSelected = selectedCells.length;
-      if (nbSelected == 0) {
-         callback(taskParams.noScore, "");         
-      } else if (! isCovered(selectedCells)) {
-         callback(taskParams.minScore, "Les boîtes sélectionnées ne permettent pas de déduire le nombre de pièces du cadre noir.");
-      } else {
-         var score = Math.max(taskParams.minScore + 1, taskParams.maxScore - (nbSelected - nbSelectedMinimum));
-         var msg = "Vous avez réussi en sélectionnant " + nbSelected + " boîtes. ";
-         if (nbSelected == nbSelectedMinimum) {
-            msg += "Bravo ! C'est le minimum possible.";
+      taskParams = platform.getTaskParams(null, null, function(taskParams) {
+         var nbSelected = selectedCells.length;
+         if (nbSelected == 0) {
+            callback(taskParams.noScore, "");         
+         } else if (! isCovered(selectedCells)) {
+            callback(taskParams.minScore, "Les boîtes sélectionnées ne permettent pas de déduire le nombre de pièces du cadre noir.");
          } else {
-            msg += "Essayez en sélectionnant moins de boîtes.";
+            var score = Math.max(taskParams.minScore + 1, taskParams.maxScore - (nbSelected - nbSelectedMinimum));
+            var msg = "Vous avez réussi en sélectionnant " + nbSelected + " boîtes. ";
+            if (nbSelected == nbSelectedMinimum) {
+               msg += "Bravo ! C'est le minimum possible.";
+            } else {
+               msg += "Essayez en sélectionnant moins de boîtes.";
+            }
+            callback(score, msg);
          }
-         callback(score, msg);
-      }   
+      });
    };
 }
 

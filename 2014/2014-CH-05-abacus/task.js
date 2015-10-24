@@ -1,4 +1,5 @@
 function initTask() {
+   var seed;
    var difficulty;
    var animateBalls = false;
    var paperWidth = 400;
@@ -39,29 +40,31 @@ function initTask() {
    var animSolution;
 
    var getTarget = function() {
-      var seed = platform.getTaskParams().randomSeed;
       var id = seed % targets.length;
       return targets[id];
    };
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      if (difficulty == "easy") {
-         makeInstanceEasy();
-      }
-      $("." + difficulty).show();
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         seed = taskParams.randomSeed;
+         if (difficulty == "easy") {
+            makeInstanceEasy();
+         }
+         $("." + difficulty).show();
 
-      target = getTarget();
-      $("#valueTarget").html(stringOfValue(target));     
-      animTask = drawAbacus("abacusTask", true);
-      updateDisplay();
-      if (views.solution) {
-         $("#solutionTarget").html(stringOfValue(target));
-         animSolution = drawAbacus("abacusSolution", false);
-         animSolution.state = getSolutionState(target);
-         updateBalls(animSolution, true);
-      }
-      callback();
+         target = getTarget();
+         $("#valueTarget").html(stringOfValue(target));     
+         animTask = drawAbacus("abacusTask", true);
+         updateDisplay();
+         if (views.solution) {
+            $("#solutionTarget").html(stringOfValue(target));
+            animSolution = drawAbacus("abacusSolution", false);
+            animSolution.state = getSolutionState(target);
+            updateBalls(animSolution, true);
+         }
+         callback();
+      });
    };
 
    var getInitState = function() {
@@ -236,18 +239,19 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      if (strAnswer == "") {
-         return taskParams.minScore;
-      }
-      var state = $.parseJSON(strAnswer);
-      var value = valueOfState(state);
-      var target = getTarget();
-      if (value == target) {
-         callback(taskParams.maxScore, "Bravo ! vous avez réussi.");
-      } else {
-         callback(taskParams.minScore, "Les boules ne représentent pas la valeur demandée.");
-      }
+      platform.getTaskParams(null,null, function(taskParams) {
+         if (strAnswer == "") {
+            return taskParams.minScore;
+         }
+         var state = $.parseJSON(strAnswer);
+         var value = valueOfState(state);
+         var target = getTarget();
+         if (value == target) {
+            callback(taskParams.maxScore, "Bravo ! vous avez réussi.");
+         } else {
+            callback(taskParams.minScore, "Les boules ne représentent pas la valeur demandée.");
+         }
+      });
    }
 }
 initTask();

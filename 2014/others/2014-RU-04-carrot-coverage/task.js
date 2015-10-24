@@ -170,19 +170,20 @@ function initTask() {
 
    grader.gradeTask = function(strAnswer, token, callback) {
       innerReloadAnswer(strAnswer, false);
-      var taskParams = platform.getTaskParams();
-      if (!isCovered()) {
-         callback(taskParams.minScore, "La somme des cases sélectionnées ne correspond pas à la somme du cadre noir.");
-      } else {
-         var score = Math.max(taskParams.minScore, taskParams.maxScore - (nbSelected - 6));
-         var msg = "La somme correspond. Vous avez selectionné " + nbSelected + " cases.";
-         if (nbSelected == 6) {
-            msg += " Bravo ! C'est le minimum possible.";
+      platform.getTaskParams(null, null, function(taskParams) {
+         if (!isCovered()) {
+            callback(taskParams.minScore, "La somme des cases sélectionnées ne correspond pas à la somme du cadre noir.");
          } else {
-            msg += " Essayez de sélectionner moins de cases.";
-         }
-         callback(score, msg);
-      }   
+            var score = Math.max(taskParams.minScore, taskParams.maxScore - (nbSelected - 6));
+            var msg = "La somme correspond. Vous avez selectionné " + nbSelected + " cases.";
+            if (nbSelected == 6) {
+               msg += " Bravo ! C'est le minimum possible.";
+            } else {
+               msg += " Essayez de sélectionner moins de cases.";
+            }
+            callback(score, msg);
+         }   
+      });
    };
 }
 

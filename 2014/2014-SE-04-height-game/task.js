@@ -87,36 +87,38 @@ function initTask () {
    }
   
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      // LATER: vérifier que difficulty est easy ou hard
-      $("." + difficulty).show();
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: vérifier que difficulty est easy ou hard
+         $("." + difficulty).show();
 
-      if (difficulty == "easy") {
-         nbCastors = 3;
-      } else {// hard
-         nbCastors = 5;
-      }
+         if (difficulty == "easy") {
+            nbCastors = 3;
+         } else {// hard
+            nbCastors = 5;
+         }
 
-      nbCells = nbCastors * nbCastors;
-      cellSide = Math.min(1000, (animHeight-2*yMargin)/nbCastors);
-      if (isIE() && (isIE() <= 8)) {
-         dxText = cellSide / 2;
-         dyText = cellSide / 2;
-         width = cellSide;
-      } else {
-         width = cellSide*150/220;
-         dxText = width + 5;
-         dyText = 3*cellSide/4;
-      }
-      xGrid = 170 + cellSide;
+         nbCells = nbCastors * nbCastors;
+         cellSide = Math.min(1000, (animHeight-2*yMargin)/nbCastors);
+         if (isIE() && (isIE() <= 8)) {
+            dxText = cellSide / 2;
+            dyText = cellSide / 2;
+            width = cellSide;
+         } else {
+            width = cellSide*150/220;
+            dxText = width + 5;
+            dyText = 3*cellSide/4;
+         }
+         xGrid = 170 + cellSide;
 
-      drawPaper();
-      if (views.solution) {
-         setTimeout(function(){ // timeout as workaround for raphael          
-            drawSolution();
-         });
-      }
-      callback();
+         drawPaper();
+         if (views.solution) {
+            setTimeout(function(){ // timeout as workaround for raphael          
+               drawSolution();
+            });
+         }
+         callback();
+      });
    };
 
    task.unload = function(callback) {
@@ -248,28 +250,29 @@ function initTask () {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      innerReloadAnswer(strAnswer);
-      if (castorPos.length != nbCastors) { 
-         // TODO: ce n'est pas censé arriver, si ? on peut virer ce test je pense
-         callback(taskParams.noScore, "Placez tous les castors dans les cases de la grille.");
-         return;
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         innerReloadAnswer(strAnswer);
+         if (castorPos.length != nbCastors) { 
+            // TODO: ce n'est pas censé arriver, si ? on peut virer ce test je pense
+            callback(taskParams.noScore, "Placez tous les castors dans les cases de la grille.");
+            return;
+         }
 
-      var solution = task.solutions[difficulty];
-      var correct = true;
-      var allInGrid = true;
-      for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
-         allInGrid &= (castorPos[iCastor] < nbCells);
-         correct &= (castorPos[iCastor] == solution[iCastor]);
-       }
-      if (! allInGrid) {      
-         callback(taskParams.noScore, "Placez tous les castors dans les cases de la grille.");
-      } else if (correct) {
-         callback(taskParams.maxScore, "Bravo, vous avez bien placé les Castors&nbsp;!");
-      } else {
-         callback(taskParams.minScore, "Les castors sont mal placés.");
-      }
+         var solution = task.solutions[difficulty];
+         var correct = true;
+         var allInGrid = true;
+         for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
+            allInGrid &= (castorPos[iCastor] < nbCells);
+            correct &= (castorPos[iCastor] == solution[iCastor]);
+          }
+         if (! allInGrid) {      
+            callback(taskParams.noScore, "Placez tous les castors dans les cases de la grille.");
+         } else if (correct) {
+            callback(taskParams.maxScore, "Bravo, vous avez bien placé les Castors&nbsp;!");
+         } else {
+            callback(taskParams.minScore, "Les castors sont mal placés.");
+         }
+      });
    };
     
 };

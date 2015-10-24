@@ -22,17 +22,19 @@ function initTask() {
    var paper;
 
    task.load = function(views, callback) {
-      if (platform.getTaskParams("initState") == "solution") {
-         initNames = task.solution;
-      } 
+      platform.getTaskParams(null, null, function(taskParams) {
+         if (taskParams.initState == "solution") {
+            initNames = task.solution;
+         } 
 
-      if (views.solution) {
-         var labels = $.map(task.solution, function(pos) {return names[pos]; });
-         $("#textSolution").html(labels.join(", "));
-      }
+         if (views.solution) {
+            var labels = $.map(task.solution, function(pos) {return names[pos]; });
+            $("#textSolution").html(labels.join(", "));
+         }
 
-      drawPaper();
-      callback();
+         drawPaper();
+         callback();
+      });
    }
 
    var getNameObject = function(iName) {
@@ -111,17 +113,18 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var sequence = answerOfStrAnswer(strAnswer);
-      if (Beav.Object.eq(sequence, noScoreNames)) {
-         callback(taskParams.noScore, "Déplacez les noms pour les mettre dans le bon ordre.");
-         return;
-      }
-      if (Beav.Object.eq(sequence, task.solution)) {
-         callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
-      } else {
-         callback(taskParams.minScore, "Ce n'est pas le bon ordre. Essayez avec une autre séquence.");
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var sequence = answerOfStrAnswer(strAnswer);
+         if (Beav.Object.eq(sequence, noScoreNames)) {
+            callback(taskParams.noScore, "Déplacez les noms pour les mettre dans le bon ordre.");
+            return;
+         }
+         if (Beav.Object.eq(sequence, task.solution)) {
+            callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
+         } else {
+            callback(taskParams.minScore, "Ce n'est pas le bon ordre. Essayez avec une autre séquence.");
+         }
+      });
    }
 }
 

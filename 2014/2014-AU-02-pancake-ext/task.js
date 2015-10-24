@@ -146,32 +146,34 @@ function initTask() {
    };
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      // LATER: check difficulty is easy or hard
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: check difficulty is easy or hard
 
-      if (difficulty == "easy" || difficulty == "hard") {
-         $(".easy_hard").show();
-         if (difficulty == "easy") {
-            $(".easy").show();
-            makeInstanceEasy();
+         if (difficulty == "easy" || difficulty == "hard") {
+            $(".easy_hard").show();
+            if (difficulty == "easy") {
+               $(".easy").show();
+               makeInstanceEasy();
+            } else {
+               $(".hard").show();
+            }
          } else {
-            $(".hard").show();
+            makeInstanceMany();
+            $(".many").show();
+            $("#task_title").html("Davantage de crêpes");
          }
-      } else {
-         makeInstanceMany();
-         $(".many").show();
-         $("#task_title").html("Davantage de crêpes");
-      }
 
-      nbPancakes = startSizeOfPos.length;
-      if (paperWidth < margin * 2 + pancakeMinWidth + pancakeExtraWidth * nbPancakes) {
-         // console.log("Error: paperWidth is too small.");
-      }
-      centerX = paperWidth / 2;
-      paper = Raphael('anim', paperWidth, paperHeight); // pancakeHeight * nbPancakes
-      curSizeOfPos = startSizeOfPos.slice(0);
-      createPancakes(); 
-      task.reloadAnswer("", callback);
+         nbPancakes = startSizeOfPos.length;
+         if (paperWidth < margin * 2 + pancakeMinWidth + pancakeExtraWidth * nbPancakes) {
+            // console.log("Error: paperWidth is too small.");
+         }
+         centerX = paperWidth / 2;
+         paper = Raphael('anim', paperWidth, paperHeight); // pancakeHeight * nbPancakes
+         curSizeOfPos = startSizeOfPos.slice(0);
+         createPancakes(); 
+         task.reloadAnswer("", callback);
+      });
    };
 
    task.unload = function(callback) {

@@ -127,45 +127,47 @@ function initTask () {
    };
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      // LATER: vérifier que difficulty est easy ou hard
-      $("." + difficulty).show();
-         
-      if (difficulty == "easy") {
-         nbNodes = names.length - 2;
-         nbEdges = edges.length - 3;
-         names = names.slice(0, nbNodes);
-         positions = positions.slice(0, nbNodes);
-         edges = edges.slice(0, nbEdges);
-         for (var i = 0; i < positions.length; i++) {
-            positions[i][1] -= 50;
-         }
-         animHeight -= 80;
-      } else if (difficulty == "hard") {
-         edges.splice(7, 1);
-      }
-      nbNodes = names.length;
-      nbEdges = edges.length;
-
-      var seed = platform.getTaskParams().randomSeed;
-      Beav.Array.shuffle(names, seed);
-
-      writeNames();
-      drawPaper();
-
-      if (views.solution) {
-         setTimeout(function(){ // timeout as workaround for raphael
-            var paperSolution = Raphael('animSolution', animWidth, animHeight);
-            drawEdges(paperSolution);
-            for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-               var x = positions[iCastor][0];
-               var y = positions[iCastor][1];
-               paperSolution.rect(x, y, cellWidth, cellHeight).attr({"stroke": "black ", "fill": '#E0E0F8'});
-               paperSolution.text(x + cellWidth/2, y + cellHeight/2, names[iCastor]).attr("font-size", tailleLettreCastor);
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: vérifier que difficulty est easy ou hard
+         $("." + difficulty).show();
+            
+         if (difficulty == "easy") {
+            nbNodes = names.length - 2;
+            nbEdges = edges.length - 3;
+            names = names.slice(0, nbNodes);
+            positions = positions.slice(0, nbNodes);
+            edges = edges.slice(0, nbEdges);
+            for (var i = 0; i < positions.length; i++) {
+               positions[i][1] -= 50;
             }
-         });
-      }
-      callback();
+            animHeight -= 80;
+         } else if (difficulty == "hard") {
+            edges.splice(7, 1);
+         }
+         nbNodes = names.length;
+         nbEdges = edges.length;
+
+         var seed = taskParams.randomSeed;
+         Beav.Array.shuffle(names, seed);
+
+         writeNames();
+         drawPaper();
+
+         if (views.solution) {
+            setTimeout(function(){ // timeout as workaround for raphael
+               var paperSolution = Raphael('animSolution', animWidth, animHeight);
+               drawEdges(paperSolution);
+               for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
+                  var x = positions[iCastor][0];
+                  var y = positions[iCastor][1];
+                  paperSolution.rect(x, y, cellWidth, cellHeight).attr({"stroke": "black ", "fill": '#E0E0F8'});
+                  paperSolution.text(x + cellWidth/2, y + cellHeight/2, names[iCastor]).attr("font-size", tailleLettreCastor);
+               }
+            });
+         }
+         callback();
+      });
    };
 
    task.unload = function(callback) {
@@ -286,15 +288,16 @@ function initTask () {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      innerReloadAnswer(strAnswer);
-      if (! allPlaced()) {
-         callback(taskParams.noScore, "Placez tous les noms dans les rectangles.");
-      } else if (isCorrect()) {
-         callback(taskParams.maxScore, "Bravo, vous avez bien placé les amis&nbsp;!");
-      } else {
-         callback(taskParams.noScore, "Les amis sont mal placés. Essayez autrement.");
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         innerReloadAnswer(strAnswer);
+         if (! allPlaced()) {
+            callback(taskParams.noScore, "Placez tous les noms dans les rectangles.");
+         } else if (isCorrect()) {
+            callback(taskParams.maxScore, "Bravo, vous avez bien placé les amis&nbsp;!");
+         } else {
+            callback(taskParams.noScore, "Les amis sont mal placés. Essayez autrement.");
+         }
+      });
    };
     
 };

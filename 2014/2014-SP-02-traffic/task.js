@@ -395,18 +395,19 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      var selected = selectedOfStrAnswer(strAnswer);
-      var matrix = Beav.Matrix.copy(initMatrix);
-      addSelectedToMatrix(matrix, selected);
-      var simulation = pickArrows(matrix); 
-      if (simulation.hasCycle) {
-         callback(taskParams.noScore, "Certains castors tournent en rond&nbsp;!");
-      } else if (simulation.nbIsolatedNodes > 0) {
-         callback(taskParams.noScore, "Certains castors ne sont pas arrivés à la maison rouge.");
-      } else {
-         callback(taskParams.maxScore, "Bravo, les castors sont réunis&nbsp;!");
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         var selected = selectedOfStrAnswer(strAnswer);
+         var matrix = Beav.Matrix.copy(initMatrix);
+         addSelectedToMatrix(matrix, selected);
+         var simulation = pickArrows(matrix); 
+         if (simulation.hasCycle) {
+            callback(taskParams.noScore, "Certains castors tournent en rond&nbsp;!");
+         } else if (simulation.nbIsolatedNodes > 0) {
+            callback(taskParams.noScore, "Certains castors ne sont pas arrivés à la maison rouge.");
+         } else {
+            callback(taskParams.maxScore, "Bravo, les castors sont réunis&nbsp;!");
+         }
+      });
    };
 }
 

@@ -53,51 +53,52 @@ function initTask() {
    };
 
    task.load = function(views, callback) {
-      difficulty = platform.getTaskParams("difficulty", "hard");
-      // LATER: check difficulty is easy or hard
-      $("." + difficulty).show();
-      isEasy = (difficulty == "easy");
-      if (isEasy) {
-         items1 = items1Easy;
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: check difficulty is easy or hard
+         $("." + difficulty).show();
+         isEasy = (difficulty == "easy");
+         if (isEasy) {
+            items1 = items1Easy;
+         }
 
-      $(".map, .table").width(paperWidth).height(paperHeight);
-      //displayHelper.hideValidateButton = true;
+         $(".map, .table").width(paperWidth).height(paperHeight);
+         //displayHelper.hideValidateButton = true;
 
-      var taskParams = platform.getTaskParams();
-      items2Answer = getItems2Answer(taskParams.randomSeed);
+         items2Answer = getItems2Answer(taskParams.randomSeed);
 
-      var table1 = buildGrid("table1", false);
-      var table2 = buildGrid("table2", false);
-      var tableItems1 = tableItemsOfItems(items1);
-      var tableItems2 = tableItemsOfItems(items2Answer);
-      setTimeout(function(){ // timeout as workaround for raphael
-         fillTable(table1, tableItems1);
-         fillTable(table2, tableItems2);
-      });
-
-      var map1 = buildGrid("map1", false);
-      var map2 = buildGrid("map2", true);
-      mapItems1 = mapItemsOfList(items1);
-      mapItems2Answer = mapItemsOfList(items2Answer);
-      mapElements1 = createMap(map1, false);
-      mapElements2 = createMap(map2, true);
-
-      updateMap(mapElements1, mapItems1);
-      countItems2Answer = items2Answer.length;
-      restart();
-      // for debug: updateMap(mapElements2, mapItems2Solution);
-
-      if (views.solution) {
+         var table1 = buildGrid("table1", false);
+         var table2 = buildGrid("table2", false);
+         var tableItems1 = tableItemsOfItems(items1);
+         var tableItems2 = tableItemsOfItems(items2Answer);
          setTimeout(function(){ // timeout as workaround for raphael
-            var table3 = buildGrid("table3", false);
-            fillTable(table3, tableItems2);
-            var map3 = buildGrid("map3", false);
-            mapElements3 = createMap(map3, false);
-            updateMap(mapElements3, mapItems2Answer);
-        });
-      }
-      callback();
+            fillTable(table1, tableItems1);
+            fillTable(table2, tableItems2);
+         });
+
+         var map1 = buildGrid("map1", false);
+         var map2 = buildGrid("map2", true);
+         mapItems1 = mapItemsOfList(items1);
+         mapItems2Answer = mapItemsOfList(items2Answer);
+         mapElements1 = createMap(map1, false);
+         mapElements2 = createMap(map2, true);
+
+         updateMap(mapElements1, mapItems1);
+         countItems2Answer = items2Answer.length;
+         restart();
+         // for debug: updateMap(mapElements2, mapItems2Solution);
+
+         if (views.solution) {
+            setTimeout(function(){ // timeout as workaround for raphael
+               var table3 = buildGrid("table3", false);
+               fillTable(table3, tableItems2);
+               var map3 = buildGrid("map3", false);
+               mapElements3 = createMap(map3, false);
+               updateMap(mapElements3, mapItems2Answer);
+           });
+         }
+         callback();
+      });
    };
 
    var reset = function() {
@@ -236,24 +237,25 @@ function initTask() {
    }
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = platform.getTaskParams();
-      if (strAnswer == "") {
-         callback(taskParams.minScore, "Cliquez sur les cases où se trouvent les 5 castors.");
-         return;
-      }
-      var mapItems2Answer = mapItemsOfList(getItems2Answer(taskParams.randomSeed));
-      var mapItems2 = $.parseJSON(strAnswer);
-      var nbSmall = countItems(mapItems2Answer, -1);
-      var nbBig = countItems(mapItems2Answer, 1);
-      if (countItems(mapItems2, -1) != nbSmall) {
-         callback(taskParams.minScore, "Vous devez placer exactement " + nbSmall + " petits castors.");
-      } else if (countItems(mapItems2, 1) != nbBig) {
-         callback(taskParams.minScore, "Vous devez placer exactement " + nbBig + " grands castors.");
-      } else if (Beav.Object.eq(mapItems2, mapItems2Answer)) {
-         callback(taskParams.maxScore, "Bravo, vous avez bien placé les castors&nbsp;!");
-      } else {
-         callback(taskParams.minScore, "Les castors ne sont pas à la bonne place. Essayez encore.");
-      }
+      platform.getTaskParams(null, null, function(taskParams) {
+         if (strAnswer == "") {
+            callback(taskParams.minScore, "Cliquez sur les cases où se trouvent les 5 castors.");
+            return;
+         }
+         var mapItems2Answer = mapItemsOfList(getItems2Answer(taskParams.randomSeed));
+         var mapItems2 = $.parseJSON(strAnswer);
+         var nbSmall = countItems(mapItems2Answer, -1);
+         var nbBig = countItems(mapItems2Answer, 1);
+         if (countItems(mapItems2, -1) != nbSmall) {
+            callback(taskParams.minScore, "Vous devez placer exactement " + nbSmall + " petits castors.");
+         } else if (countItems(mapItems2, 1) != nbBig) {
+            callback(taskParams.minScore, "Vous devez placer exactement " + nbBig + " grands castors.");
+         } else if (Beav.Object.eq(mapItems2, mapItems2Answer)) {
+            callback(taskParams.maxScore, "Bravo, vous avez bien placé les castors&nbsp;!");
+         } else {
+            callback(taskParams.minScore, "Les castors ne sont pas à la bonne place. Essayez encore.");
+         }
+      });
    }
 }
 initTask();
