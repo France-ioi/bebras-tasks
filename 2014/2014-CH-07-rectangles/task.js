@@ -66,7 +66,7 @@ function initTask() {
          } 
          
          callback();
-      };
+      });
    };
 
    var getInstructionObject = function(iInstr) {
