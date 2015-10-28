@@ -44,7 +44,7 @@
                      if(sumArray(sumCol) + sumArray(sumLin) === 0) {
                         score = taskParams.maxScore;
                      }
-                     callback(score);
+                     callback(score, '');
                   });
                });
             }
@@ -53,7 +53,7 @@
                if(sumArray(sumCol) + sumArray(sumLin) === 0) {
                   score = taskParams.maxScore;
                }
-               callback(score);
+               callback(score, '');
             });
          });
       }
