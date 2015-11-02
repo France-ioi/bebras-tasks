@@ -32,20 +32,20 @@
       <script src="2013-FR-11_task.js"></script>
       <script class="grader" type="text/javascript">
          var taskGrader = null;
-         var parent= [];
+         var parentNode= [];
          function graphIsConnected(nbNodes, edges) {
             // union find
             for (var i = 0; i < nbNodes; i++)
-               parent[i] = i;
+               parentNode[i] = i;
             function repr(a) {
-               if (parent[a] == a)
+               if (parentNode[a] == a)
                   return a;
-               var b = repr(parent[a]);
-               parent[a] = b;
+               var b = repr(parentNode[a]);
+               parentNode[a] = b;
                return b;
             }
             function link(a, b) {
-               parent[repr(a)] = repr(b);
+               parentNode[repr(a)] = repr(b);
             }
             // connectivity
             for (var e = 0; e < edges.length; e++)
@@ -72,6 +72,7 @@
                taskGrader = new Task('grader');
             }
             platform.getTaskParams(null, null, function(taskParams) {
+               console.error(taskParams.minScore);
                var minScore = taskParams.minScore;
                var maxScore = taskParams.maxScore;
                var t = taskGrader;

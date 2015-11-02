@@ -335,21 +335,22 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      var taskParams = displayHelper.taskParams;
-      innerReloadAnswer(strAnswer);
-      drawLaser(false);
-      if (solved) {
-         var score = Math.max(taskParams.noScore + 1, taskParams.maxScore - (nbUsed - minReflection)/2);
-         var msg = "Vous avez atteint la cible en " + nbUsed + " miroirs.";
-         if (score >= taskParams.maxScore) {
-            msg += " Bravo ! C'est le minimum possible.";
+      platform.getTaskParams(null, null, function(taskParams) {
+         innerReloadAnswer(strAnswer);
+         drawLaser(false);
+         if (solved) {
+            var score = Math.max(taskParams.noScore + 1, taskParams.maxScore - (nbUsed - minReflection)/2);
+            var msg = "Vous avez atteint la cible en " + nbUsed + " miroirs.";
+            if (score >= taskParams.maxScore) {
+               msg += " Bravo ! C'est le minimum possible.";
+            } else {
+               msg += " Il est possible de faire mieux.";
+            }
+            callback(score, msg);
          } else {
-            msg += " Il est possible de faire mieux.";
+            callback(taskParams.minScore, "Le laser n'atteint pas la cible.");
          }
-         callback(score, msg);
-      } else {
-         callback(taskParams.minScore, "Le laser n'atteint pas la cible.");
-      }
+      });
    };
 }
 

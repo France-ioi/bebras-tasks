@@ -42,7 +42,8 @@
               var t = this.taskGrader;
               t.reloadAnswer(strAnswer);
               if (! t.isNetworkCompleted()) {
-                 return taskParams.minScore;
+                  callback(taskParams.minScore, '');
+                  return;
               } 
               var used = t.builtEdges.length;
               var best = nbEdgesBest;
@@ -68,11 +69,8 @@
       }
       </script>
       <script class="" type="text/javascript">
-         console.error('debug0');
          task.load= function(views, callback) {
-               console.error('debug1');
                platform.getTaskParams(null, null, function(taskParams) {
-                  console.error('pre loading ?');
                   task.task = new Task(false);
                   task.task.load(taskParams.randomSeed, 'task');
                   callback();
