@@ -244,7 +244,6 @@ function initTask() {
             callback(taskParams.minScore, 'Les boules ne représentent pas la valeur demandée.');
             return;
          }
-         console.error(strAnswer);
          var state = $.parseJSON(strAnswer);
          var value = valueOfState(state);
          var target = getTarget();
