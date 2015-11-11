@@ -1,0 +1,9 @@
+{
+   "devel":true,
+   "browser": true,
+   "predef":[ "grader", "task", "platform", "stdAnsTypes", "displayHelper", "Platform", "Task", "Raphael", "DragAndDropSystem"],
+   "trailing": true,
+   "futurehostile": true,
+   "eqnull": true,
+   "jquery": true
+}
