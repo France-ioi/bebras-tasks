@@ -93,7 +93,7 @@ var compteur = 0;
       callback();
    };
    task.getAnswer= function(callback) {
-      callback(best_jp01);
+      callback("" + best_jp01);
    };
    task.reloadAnswer= function(newAnswer, callback)  {
       SetNewScore(newAnswer);
