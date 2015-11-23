@@ -223,22 +223,23 @@ Le haut de la mosaïque a malheureusement été détruit. Pouvez-vous le reconst
       <div id="solution">
 <h2>La solution</h2>
    <p>
-   Pour résoudre ce sujet il faut prendre les cases libres une par une de gauche à droite en commençant pas la première ligne à trouver. Pour chaque case, on regarde les couleurs des 3 cases juste au dessus, et on recherche le motif correspondant dans l'énoncé, afin de déterminer la couleur de la case. On obtient le résultat décrit ci-dessous.
+   L'énoncé décrit comment on peut déterminer la couleur d'un carreau à partir de celles des trois carreaux juste au dessus. Cependant, aucun des carreaux manquants n'a ses trois carreaux au dessus qui sont connus. Il faut donc considérer le problème différemment : étant donné la couleur de deux des trois carreaux d'une rangée, et du carreau du dessous, peut-on déterminer la couleur du carreau manquant ? Voici un exemple :
    </p>
    <p>
-   <img src="mosaique_sol.png">
+   <center><img src="55_sol.png"></center>
    </p>
    <p>
-   Si l'on continue à appliquer ces règles sur une grande grille, on obtient une image qui ressemble à ceci :
+   En regardant toutes les configurations possibles données dans l'énoncé, on voit qu'il n'existe qu'une seule possibilité, le carreau manquant est ici gris foncé. En effet, d'après les règles, un carreau blanc aurait nécessité que le carreau du bas soit gris foncé, et non blanc. En fait, les règles sont définies de telle sorte que si l'on connaît la couleur des deux carreaux de gauche et du carreau du bas, on peut toujours déterminer à coup sûr la couleur du carreau de droite. En remplissant alors de bas en haut et de gauche à droite, on peut ainsi compléter toute la mosaïque :
    </p>
-   <img src="solution_full.png">
+   <p>
+   <center><img src="mosaique_sol.png"></center>
    </p>
    <h2>C'est de l'informatique</h2>
    <p>
    Les règles décrites dans l'énoncé constituent ce que l'on appelle un <i>automate cellulaire</i>. Il s'agit d'une <i>grille</i> composée de <i>cellules</i>, chaque cellule peut avoir un nombre d'<i>états</i> fini (ici, il y en a deux : noir ou blanc). Des règles définissent l'état d'une cellule. Les automates cellulaires permettent de modéliser beaucoup de choses, dont des phénomènes physiques, ou la circulation sur une autoroute par exemple.
    </p>
    <p>
-   L'ensemble de règles décrit dans l'exercice est connue sous le nom de "Règle 86". Il y a d'autres règles qui donnent des motifs divers et variés, vous pouvez en trouver de nombreux exemples <a href="http://mathworld.wolfram.com/ElementaryCellularAutomaton.html" target="_blank">sur cette page</a>.
+   L'ensemble de règles décrit dans l'exercice est connu sous le nom de "Règle 86". Il y a d'autres règles qui donnent des motifs divers et variés, vous pouvez en trouver de nombreux exemples <a href="http://mathworld.wolfram.com/ElementaryCellularAutomaton.html">sur cette page</a>.
    </p>
 </div> <!-- task-solution -->
    </body>
