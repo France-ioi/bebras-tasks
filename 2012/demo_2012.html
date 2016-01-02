@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ng-app="admin">
    <head>
       <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -7,201 +7,181 @@
       <script src="../demo_files/ui-bootstrap-tpls-0.5.0.min.js"  type="text/javascript"></script>
       <link href="../demo_files/bootstrap-combined.min.css" rel="stylesheet">
       <script src="../demo_files/mainCtrl.js" type="text/javascript"></script>
+      <script>
+         function loadTask(name) {
+            $('#iframe').attr('src', '2012-' + name + '/index.html');
+            return false;
+         }
+      </script>
    </head>
    <body ng-controller="MainCtrl">
-      <table>
-      <tr><td style="width:260px;vertical-align:top">
-      <center>
-         <img src="../demo_files/img/castor_small.png" style="width:80px;float:left" />
-         <span style="font-size:1.3em;font-weight:bold">Castor informatique</span>
+      <table><tr>
+      <td style="width: 260px; vertical-align: top;">
+      <div style="text-align: center;">
+         <img src="../demo_files/img/castor_small.png" style="width: 80px; float: left;"/>
+         <span style="font-size: 1.3em; font-weight: bold;">Castor informatique</span>
          <br/><br/>
-         <a style="margin-left:10px" href="#" onclick="$('#iframe').attr('src', '../demo_files/presentation.html')">Découvrez le concours</a>
-      </center>
-      <div style="clear:both;margin-top:20px"><b>Puis testez les questions 2012 :</b></div>
+         <a style="margin-left: 10px;" href="#" onclick="$('#iframe').attr('src', '../demo_files/presentation.html')">Découvrez le concours</a>
+      </div>
+      <div style="clear: both; margin-top: 20px;"><b>Puis testez les questions 2012 :</b></div>
       <br/>
       <tabset>
-         <tab heading="Tous">
+         <tab heading="Tous 1">
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-01/index.html')">Paysage</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-04/index.html')">Image pixellisée</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-10/index.html')">Vélos branchés</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-12/index.html')">Robot bâtisseur</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-20/index.html')">Trier les bâtons</a></li>
+               <li><a href="#" onclick="return loadTask('AT-01')">AT-01 Paysage</a></li>
+               <li><a href="#" onclick="return loadTask('AT-04')">AT-04 Image pixellisée</a></li>
+               <li><a href="#" onclick="return loadTask('AT-10')">AT-10 Vélos branchés</a></li>
+               <li><a href="#" onclick="return loadTask('AT-12')">AT-12 Robot bâtisseur</a></li>
+               <li><a href="#" onclick="return loadTask('AT-20')">AT-20 Trier les bâtons</a></li>
+               <li><a href="#" onclick="return loadTask('CA-01')">CA-01 Changer les flèches</a>
+               <li><a href="#" onclick="return loadTask('CH-09')">CH-09 La scierie</a>
+               <li><a href="#" onclick="return loadTask('CZ-04')">CZ-04 Bébrocarina</a></li>
+               <li><a href="#" onclick="return loadTask('CZ-12')">CZ-12 Labyrinthe</a></li>
+               <li><a href="#" onclick="return loadTask('DE-01')">DE-01 Réseau de Castoria</a></li>
+               <li><a href="#" onclick="return loadTask('DE-02')">DE-02 Choisir les places au cinéma</a></li>
+               <li><a href="#" onclick="return loadTask('DE-03')">DE-03 Accessibilité du web pour les castors aveugles</a></li>
+               <li><a href="#" onclick="return loadTask('DE-05')">DE-05 Plantons des fleurs</a></li>
+               <li><a href="#" onclick="return loadTask('DE-07')">DE-07 Sélection de robots</a></li>
+               <li><a href="#" onclick="return loadTask('DE-10')">DE-10 Groupe de travail</a>
+               <li><a href="#" onclick="return loadTask('ES-04')">ES-04 Tuyauterie</a></li>
+               <li><a href="#" onclick="return loadTask('FI-03')">FI-03 Code castor</a></li>
             </ul>
+         </tab>
+         <tab heading="Tous 2">
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CA-01/index.html')">Changer les flèches</a>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CH-09/index.html')">La scierie</a>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CZ-04/index.html')">Bébrocarina</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CZ-12/index.html')">Labyrinthe</a></li>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-01/index.html')">Réseau de Castoria</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-02/index.html')">Choisir les places au cinéma</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-03/index.html')">Accessibilité du web pour les castors aveugles</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-05/index.html')">Plantons des fleurs</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-07/index.html')">Sélection de robots</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-10/index.html')">Groupe de travail</a>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-ES-04/index.html')">Tuyauterie</a></li>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FI-03/index.html')">Code castor</a></li>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-01/index.html')">Course de grenouilles</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-02b/index.html')">Ranger ses photos</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-04/index.html')">Anonymisation</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-04b/index.html')">Chez le dentiste</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-06/index.html')">Trombone rouge</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-07/index.html')">Territoire de Castor</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-08/index.html')">Dessine un castor</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-09/index.html')">Découpe</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-10/index.html')">La chute</a></li>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-HU-01a/index.html')">Puzzle rotatif</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-HU-06/index.html')">Généalogie</a>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-IT-04/index.html')">Navigation</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-IT-13/index.html')">Œufs de Pâques</a></li>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-JP-05/index.html')">Cryptage</a></li>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-LV-02/index.html')">Transport de troncs</a>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-RU-03/index.html')">Affichage digital</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-RU-05/index.html')">Tas de pierres</a>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SI-06/index.html')">La boîte magique</a></li>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-02/index.html')">Machine à textes</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-03/index.html')">Animation</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-10/index.html')">Convocations</a>
-            </ul>
-            <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-UA-07/index.html')">Verres</a>
+               <li><a href="#" onclick="return loadTask('FR-01')">FR-01 Course de grenouilles</a></li>
+               <li><a href="#" onclick="return loadTask('FR-02b')">FR-02b Ranger ses photos</a></li>
+               <li><a href="#" onclick="return loadTask('FR-04')">FR-04 Anonymisation</a>
+               <li><a href="#" onclick="return loadTask('FR-04b')">FR-04b Chez le dentiste</a></li>
+               <li><a href="#" onclick="return loadTask('FR-06')">FR-06 Trombone rouge</a>
+               <li><a href="#" onclick="return loadTask('FR-07')">FR-07 Territoire de Castor</a>
+               <li><a href="#" onclick="return loadTask('FR-08')">FR-08 Dessine un castor</a></li>
+               <li><a href="#" onclick="return loadTask('FR-09')">FR-09 Découpe</a>
+               <li><a href="#" onclick="return loadTask('FR-10')">FR-10 La chute</a></li>
+               <li><a href="#" onclick="return loadTask('HU-01a')">HU-01a Puzzle rotatif</a>
+               <li><a href="#" onclick="return loadTask('HU-06')">HU-06 Généalogie</a>
+               <li><a href="#" onclick="return loadTask('IT-04')">IT-04 Navigation</a></li>
+               <li><a href="#" onclick="return loadTask('IT-13')">IT-13 Œufs de Pâques</a></li>
+               <li><a href="#" onclick="return loadTask('JP-05')">JP-05 Cryptage</a></li>
+               <li><a href="#" onclick="return loadTask('LV-02')">LV-02 Transport de troncs</a>
+               <li><a href="#" onclick="return loadTask('RU-03')">RU-03 Affichage digital</a>
+               <li><a href="#" onclick="return loadTask('RU-05')">RU-05 Tas de pierres</a>
+               <li><a href="#" onclick="return loadTask('SI-06')">SI-06 La boîte magique</a></li>
+               <li><a href="#" onclick="return loadTask('SK-02')">SK-02 Machine à textes</a></li>
+               <li><a href="#" onclick="return loadTask('SK-03')">SK-03 Animation</a></li>
+               <li><a href="#" onclick="return loadTask('SK-10')">SK-10 Convocations</a>
+               <li><a href="#" onclick="return loadTask('UA-07')">UA-07 Verres</a>
             </ul>
          </tab>
          <tab heading="6ème/5ème">
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-10/index.html')">La chute</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-02b/index.html')">Ranger ses photos</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-ES-04/index.html')">Tuyauterie</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-03/index.html')">Animation</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-10/index.html')">Vélos branchés</a></li>
+               <li><a href="#" onclick="return loadTask('FR-10')">La chute</a></li>
+               <li><a href="#" onclick="return loadTask('FR-02b')">Ranger ses photos</a></li>
+               <li><a href="#" onclick="return loadTask('ES-04')">Tuyauterie</a></li>
+               <li><a href="#" onclick="return loadTask('SK-03')">Animation</a></li>
+               <li><a href="#" onclick="return loadTask('AT-10')">Vélos branchés</a></li>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-01/index.html')">Paysage</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-JP-05/index.html')">Cryptage</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-04b/index.html')">Chez le dentiste</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-04/index.html')">Image pixellisée</a></li>
+               <li><a href="#" onclick="return loadTask('AT-01')">Paysage</a></li>
+               <li><a href="#" onclick="return loadTask('JP-05')">Cryptage</a></li>
+               <li><a href="#" onclick="return loadTask('FR-04b')">Chez le dentiste</a></li>
+               <li><a href="#" onclick="return loadTask('AT-04')">Image pixellisée</a></li>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-05/index.html')">Plantons des fleurs</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-07/index.html')">Sélection de robots</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-02/index.html')">Machine à textes</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SI-06/index.html')">La boîte magique</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-IT-04/index.html')">Navigation</a></li>
+               <li><a href="#" onclick="return loadTask('DE-05')">Plantons des fleurs</a></li>
+               <li><a href="#" onclick="return loadTask('DE-07')">Sélection de robots</a></li>
+               <li><a href="#" onclick="return loadTask('SK-02')">Machine à textes</a></li>
+               <li><a href="#" onclick="return loadTask('SI-06')">La boîte magique</a></li>
+               <li><a href="#" onclick="return loadTask('IT-04')">Navigation</a></li>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CZ-04/index.html')">Bébrocarina</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CZ-12/index.html')">Labyrinthe</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-01/index.html')">Course de grenouilles</a></li>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-08/index.html')">Dessine un castor</a></li>
+               <li><a href="#" onclick="return loadTask('CZ-04')">Bébrocarina</a></li>
+               <li><a href="#" onclick="return loadTask('CZ-12')">Labyrinthe</a></li>
+               <li><a href="#" onclick="return loadTask('FR-01')">Course de grenouilles</a></li>
+               <li><a href="#" onclick="return loadTask('FR-08')">Dessine un castor</a></li>
             </ul>
          </tab>
          <tab heading="4ème/3ème">
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-10/index.html')">Vélos branchés</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-02b/index.html')">Ranger ses photos</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-RU-03/index.html')">Affichage digital</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-01/index.html')">Paysage</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-10/index.html')">La chute</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-04/index.html')">Image pixellisée</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-05/index.html')">Plantons des fleurs</a>
+               <li><a href="#" onclick="return loadTask('AT-10')">Vélos branchés</a>
+               <li><a href="#" onclick="return loadTask('FR-02b')">Ranger ses photos</a>
+               <li><a href="#" onclick="return loadTask('RU-03')">Affichage digital</a>
+               <li><a href="#" onclick="return loadTask('AT-01')">Paysage</a>
+               <li><a href="#" onclick="return loadTask('FR-10')">La chute</a>
+               <li><a href="#" onclick="return loadTask('AT-04')">Image pixellisée</a>
+               <li><a href="#" onclick="return loadTask('DE-05')">Plantons des fleurs</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-02/index.html')">Machine à textes</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-07/index.html')">Sélection de robots</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-10/index.html')">Groupe de travail</a>
+               <li><a href="#" onclick="return loadTask('SK-02')">Machine à textes</a>
+               <li><a href="#" onclick="return loadTask('DE-07')">Sélection de robots</a>
+               <li><a href="#" onclick="return loadTask('DE-10')">Groupe de travail</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SI-06/index.html')">La boîte magique</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CZ-04/index.html')">Bébrocarina</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-HU-01a/index.html')">Puzzle rotatif</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-09/index.html')">Découpe</a>
+               <li><a href="#" onclick="return loadTask('SI-06')">La boîte magique</a>
+               <li><a href="#" onclick="return loadTask('CZ-04')">Bébrocarina</a>
+               <li><a href="#" onclick="return loadTask('HU-01a')">Puzzle rotatif</a>
+               <li><a href="#" onclick="return loadTask('FR-09')">Découpe</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-01/index.html')">Course de grenouilles</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-IT-13/index.html')">Œufs de Pâques</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-04/index.html')">Anonymisation</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-08/index.html')">Dessine un castor</a>
+               <li><a href="#" onclick="return loadTask('FR-01')">Course de grenouilles</a>
+               <li><a href="#" onclick="return loadTask('IT-13')">Œufs de Pâques</a>
+               <li><a href="#" onclick="return loadTask('FR-04')">Anonymisation</a>
+               <li><a href="#" onclick="return loadTask('FR-08')">Dessine un castor</a>
             </ul>
          </tab>
          <tab heading="Seconde">
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-02/index.html')">Machine à textes</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-RU-03/index.html')">Affichage digital</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-HU-06/index.html')">Généalogie</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-04/index.html')">Image pixellisée</a>
+               <li><a href="#" onclick="return loadTask('SK-02')">Machine à textes</a>
+               <li><a href="#" onclick="return loadTask('RU-03')">Affichage digital</a>
+               <li><a href="#" onclick="return loadTask('HU-06')">Généalogie</a>
+               <li><a href="#" onclick="return loadTask('AT-04')">Image pixellisée</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-10/index.html')">Groupe de travail</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-07/index.html')">Sélection de robots</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-10/index.html')">Convocations</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CZ-04/index.html')">Bébrocarina</a>
+               <li><a href="#" onclick="return loadTask('DE-10')">Groupe de travail</a>
+               <li><a href="#" onclick="return loadTask('DE-07')">Sélection de robots</a>
+               <li><a href="#" onclick="return loadTask('SK-10')">Convocations</a>
+               <li><a href="#" onclick="return loadTask('CZ-04')">Bébrocarina</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-09/index.html')">Découpe</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-06/index.html')">Trombone rouge</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CA-01/index.html')">Changer les flèches</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-UA-07/index.html')">Verres</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-01/index.html')">Course de grenouilles</a>
+               <li><a href="#" onclick="return loadTask('FR-09')">Découpe</a>
+               <li><a href="#" onclick="return loadTask('FR-06')">Trombone rouge</a>
+               <li><a href="#" onclick="return loadTask('CA-01')">Changer les flèches</a>
+               <li><a href="#" onclick="return loadTask('UA-07')">Verres</a>
+               <li><a href="#" onclick="return loadTask('FR-01')">Course de grenouilles</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-07/index.html')">Territoire de Castor</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-IT-13/index.html')">Œufs de Pâques</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-04/index.html')">Anonymisation</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-08/index.html')">Dessine un castor</a>
+               <li><a href="#" onclick="return loadTask('FR-07')">Territoire de Castor</a>
+               <li><a href="#" onclick="return loadTask('IT-13')">Œufs de Pâques</a>
+               <li><a href="#" onclick="return loadTask('FR-04')">Anonymisation</a>
+               <li><a href="#" onclick="return loadTask('FR-08')">Dessine un castor</a>
             </ul>
          </tab>
          <tab heading="1ère/Terminale">
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-02/index.html')">Machine à textes</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-DE-10/index.html')">Groupe de travail</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-HU-06/index.html')">Généalogie</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-RU-03/index.html')">Affichage digital</a>
+               <li><a href="#" onclick="return loadTask('SK-02')">Machine à textes</a>
+               <li><a href="#" onclick="return loadTask('DE-10')">Groupe de travail</a>
+               <li><a href="#" onclick="return loadTask('HU-06')">Généalogie</a>
+               <li><a href="#" onclick="return loadTask('RU-03')">Affichage digital</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-AT-20/index.html')">Trier les bâtons</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-SK-10/index.html')">Convocations</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-LV-02/index.html')">Transport de troncs</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CZ-04/index.html')">Bébrocarina</a>
+               <li><a href="#" onclick="return loadTask('AT-20')">Trier les bâtons</a>
+               <li><a href="#" onclick="return loadTask('SK-10')">Convocations</a>
+               <li><a href="#" onclick="return loadTask('LV-02')">Transport de troncs</a>
+               <li><a href="#" onclick="return loadTask('CZ-04')">Bébrocarina</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-09/index.html')">Découpe</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-06/index.html')">Trombone rouge</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-UA-07/index.html')">Verres</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-01/index.html')">Course de grenouilles</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-07/index.html')">Territoire de Castor</a>
+               <li><a href="#" onclick="return loadTask('FR-09')">Découpe</a>
+               <li><a href="#" onclick="return loadTask('FR-06')">Trombone rouge</a>
+               <li><a href="#" onclick="return loadTask('UA-07')">Verres</a>
+               <li><a href="#" onclick="return loadTask('FR-01')">Course de grenouilles</a>
+               <li><a href="#" onclick="return loadTask('FR-07')">Territoire de Castor</a>
             </ul>
             <ul>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-IT-13/index.html')">Œufs de Pâques</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-04/index.html')">Anonymisation</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-CH-09/index.html')">La scierie</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-FR-08/index.html')">Dessine un castor</a>
-               <li><a href="#" onclick="$('#iframe').attr('src', '2012-RU-05/index.html')">Tas de pierres</a>
+               <li><a href="#" onclick="return loadTask('IT-13')">Œufs de Pâques</a>
+               <li><a href="#" onclick="return loadTask('FR-04')">Anonymisation</a>
+               <li><a href="#" onclick="return loadTask('CH-09')">La scierie</a>
+               <li><a href="#" onclick="return loadTask('FR-08')">Dessine un castor</a>
+               <li><a href="#" onclick="return loadTask('RU-05')">Tas de pierres</a>
             </ul>
          </tab>
       </tabset>
