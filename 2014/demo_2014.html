@@ -30,6 +30,8 @@
                   items[iLevel].push({order: order, label: row})
                }
             }
+            $("#all_levels").append("<li><a href=\"#\" onclick=\"$('#iframe').attr('src', '" + targetNormal + "')\">" +
+                  task.code.substring(0, 10) + " " + task.title + "</a></li>");
          }
          for (var iLevel = 0; iLevel < nbLevels; iLevel++) {
             var curGroup = -1;
@@ -52,6 +54,9 @@
       <table>
       <tr><td style="width:300px;vertical-align:top">
       <tabset>
+         <tab heading="Tous">
+            <ul id="all_levels"></ul>
+         </tab>
          <tab heading="6ème/5ème">
             <ul id="levels_0"></ul>
          </tab>
