@@ -316,7 +316,11 @@ function initTask() {
       return res;
    };
 
-   grader.gradeTask = function(strAnswer, answerToken, callback, gradedLevel) {
+   grader.gradeTask = function(strAnswer, token, callback) {
+      task.getLevelGrade(strAnswer, answerToken, callback, null);
+   };
+
+   task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
       var answer = $.parseJSON(strAnswer);
       var taskParams = displayHelper.taskParams;
       var scores = {};
