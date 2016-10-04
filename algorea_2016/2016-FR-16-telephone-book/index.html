@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-16</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-16-telephone-book/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron", // variant from task telephone book from castor 2015
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         buildPattern: "Cliquez sur les boutons avec les lettres pour construire un motif.",
+         success: "Bravo ! Vous avez réussi.",
+         emptySelection: "Votre motif ne sélectionne aucun des mots.",
+         incorrectSelection: "Les mots sélectionnés par votre motif ne correspondent pas à ceux de l'objectif. Cliquez sur le bouton 'Effacer une lettre' pour modifier votre motif." };
+      </script>
+      <script type="text/javascript" src="keyboard.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+
+         .symbol, .pattern, .char, .keyboard_button {
+            font-family: 'Courier New';
+            font-size: 20px;
+         }
+         .symbol, .pattern {
+            color: #CC0000;
+            font-weight: bold;
+         }
+         .pattern {
+            margin-right: 0.5em;
+            margin-left: 0.5em;
+         }
+         .words {
+            border-collapse: collapse;
+            margin: auto;
+         }
+         .words td {
+            border: solid #AAAAAA 1px;
+            padding: 10px;
+            background-color: #EEEEEE;
+         }
+         .example td {
+            padding-top: 4px;
+            padding-bottom: 4px;
+         }
+         .words td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+         }
+         .example .word {
+            cursor: default;
+            padding: 5px 5px 5px 5px;
+         }
+         .words .word {
+            cursor: default;
+            padding: 10px 10px 10px 10px;
+         }
+         .words .selected {
+            background-color: blue;
+            color: white;
+         }
+         .char {
+            padding: 3px;
+            width: 10px;
+         }
+         .example {
+            margin-top: 10px;
+            margin-bottom: 5px;
+         }
+         .example_title {
+            text-align: center;
+         }
+         .words {
+            margin: 0px auto;
+            margin-bottom: 20px;
+         }
+
+
+         .samples {
+            border-collapse: collapse;
+            margin:auto;
+         }
+
+         .samples tr td {
+            border: solid black 1px;
+            padding: 8px 20px 8px 20px;
+            text-align: center;
+            width: 120px;
+         }
+
+         .table_main {
+            margin-top: 20px;
+            border-collapse: collapse;
+         }
+
+         .table_main td {
+            vertical-align: top;
+            margin-left: 1em;
+            padding: 0.5em;
+            padding-left: 20px;
+            padding-right: 20px;
+         }
+
+         .table_main td.middle_cells {
+            border-left: solid gray 1px;
+            border-right: solid gray 1px;
+         }
+
+         .table_headers {
+            text-align: center;
+            font-weight: bold;
+            padding-bottom: 5px;
+         }
+
+
+         /* #goal_container .char {
+            border-left: 0px;
+            border-right: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            margin: 0px;
+         }*/
+
+         #results_container, #goal_container {
+            width: 10em;
+         }
+
+
+         #input_container div {
+            text-align: center;
+            width: 200px;
+         }
+
+         #user_pattern_container {
+            padding-bottom: 16px;
+         }
+
+         .easy, .medium, .hard {
+            display: none;
+         }
+ 
+         #keyboard_input {
+            min-height: 24px;
+            font-size: 22px;
+            display: none;
+         }
+
+         .keyboard_button {
+            padding: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+            margin: 6px;
+            font-size: 24px !important;
+            font-weight: 700;
+         }
+
+         /* Backspace key */
+         .keyboard_button_8 {
+            font-family: arial;
+            margin-top: 18px;
+            margin-bottom: 12px;
+            font-size: 18px !important;
+         }
+
+        .current_pattern .char {
+            border: 0px;
+            padding-bottom: 12px;
+         }
+
+         .sources .pattern {
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+         }
+  
+         .pattern_box {
+            height: 1.5em;
+            margin-bottom: 0.5em;
+            text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Motif</h1> <!--Sélection de mots II-->
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               <p>
+                  Un motif est formé de lettres<span class="easy" style="display: inline;"> et de points d'interrogation</span><span class="medium hard" style="display: none;">, de points d'interrogation, et de "trois petits points"</span>.
+               
+                  Chaque symbole <span class="symbol">?</span> désigne exactement une lettre, n'importe laquelle.
+               <span class="medium hard" style="display: none;">
+                 Chaque symbole <span class="symbol">…</span> désigne zéro, une, ou plusieurs lettres.
+               </span>
+               </p>
+
+            <p>
+               Utilisez le clavier ci-dessous pour construire un motif qui sélectionne, dans la liste du milieu, les mots qui sont marqués en bleu dans la liste de droite.
+            </p>
+
+
+
+            <table class="samples">
+               <tr>
+                  <td style="width:15em"><b>Essayez les exemples pour bien comprendre.</b></td>
+
+                  <td class="sources" id="example0src">
+                     <div>Exemple 1 :</div>
+                     <div id="example0pattern" class="pattern">a***e</div>
+                     <div><input id="example0" type="button" value="Essayer" /></div>
+                     </td>
+                  <td class="sources" id="example1src">
+                     <div>Exemple 2 :</div>
+                     <div id="example1pattern" class="pattern">a***e</div>
+                     <div><input id="example1" type="button" value="Essayer" /></div>
+                  </td>
+                  <td class="sources" id="example2src">
+                     <div>Exemple 3 :</div>
+                     <div id="example2pattern" class="pattern">a***e</div>
+                     <div><input id="example2" type="button" value="Essayer" /></div>
+                  </td>
+               </tr>
+            <table class="table_main">
+               <tr class="table_headers">
+                  <td>
+                     Clavier
+                  </td>
+                  <td class="middle_cells">
+                     Mots sélectionnés
+                  </td>
+                  <td>
+                     Objectif
+                  </td>
+               </tr>
+               <tr>
+                  <td id="input_container">
+                     <div id="user_pattern_container">
+                        <div id="keyboard_input" class="patterns"></div>
+                        <div id="keyboard">
+                        </div>    
+
+                         <div style="margin-top: 1em">
+                            <input type="button" id="try" value="Essayer" style="font-weight: bold; font-size:120%" />
+                        </div>
+                     </div>
+                  </td>
+                  <td id="results_container" class="middle_cells words_container">
+                     <div class="pattern_box pattern" id="current_pattern">fdsf</div>
+                     <table class="words" id="results">
+                     </table>
+                  </td>
+                  <td id="goal_container" class="words_container">
+                     <div class="pattern_box pattern" id="goal_pattern"></div>
+                     <table class="words" id="goal">
+                     </table>
+                  </td>
+               </tr>
+            </table>
+            <img src="icon.png" style="display:none">
+         </div>
+     </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+            <div>La solution est : 
+            <span class="pattern easy">d&nbsp;?&nbsp;r&nbsp;?&nbsp;</span>
+            <span class="pattern medium">l&nbsp;…&nbsp;r&nbsp;?&nbsp;</span>
+            <span class="pattern hard">…&nbsp;p&nbsp;r&nbsp;o&nbsp;?&nbsp;…&nbsp;s&nbsp;…&nbsp;</span>
+            </div>
+
+	  </div> <!-- task-solution -->
+  </body>
+</html>

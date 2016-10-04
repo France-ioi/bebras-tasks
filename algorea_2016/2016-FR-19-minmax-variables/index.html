@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-19</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-19-minmax-variables/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            incompleteRow: "Certaines lignes sont incomplètes",
+            emptyResult: function(name) { return "Votre programme n'indique pas le nombre de cailloux à placer dans le trou " + name + "."; },
+            forExample: "Pour : ",
+            neverSet: function(name) {
+               return "Problème : votre programme fait référence au trou " + name + " avant de dire combien de cailloux y placer.";
+            },
+            failure: function(level) {
+               var s = "Erreur : votre programme ne place pas toujours dans le trou Z ";
+               if (level == "easy") {
+                  s += "le plus grand nombre parmi A, B et C";
+               } else if (level == "medium") {
+                  s += "le plus petit nombre parmi A, B, C, et D";
+               } else if (level == "hard") {
+                  s += "le deuxième plus grand nombre parmi A, B, et C";
+               } else {
+                  return "Error: incorrect level";
+               }
+               return s + ", comme le montre l'explication à droite."; 
+            }
+         };
+      </script>
+      <style>
+
+         #table_intro {
+            margin-top: 0.5em;
+         }
+         #table_intro td {
+            vertical-align: top;
+         }
+         #example {
+            border: 1px solid black;
+            padding: 0.5em;
+            width: 16em;
+            margin-left: 1.5em;
+         }
+         #example_code {
+            text-align: center;
+            font-weight: bold;
+            margin: 0.5em;
+         }
+         #descr {
+         }
+         #program {
+            margin-top: -0.5em;
+            margin-bottom: 2em;
+            margin-left: 0.5em;
+            margin-right: 0em;
+         }
+         #program_table td {
+            padding-top: 0.4em;
+            padding-bottom: 0.4em;
+         }
+         .easy .medium .hard {
+            display: none;
+         }
+         .arg_text_left {
+            display: inline-block;
+            width: 20px;
+         }
+         .arg_choice, .arg_text, .trace {
+            font-size: 150%;
+         }
+         .arg_choice, .arg_text {
+            font-weight: bold;
+         }
+         .arg_choice_var {
+            width: 2.5em;
+         }
+         .arg_choice_op {
+            width: 3.3em;
+         }
+         .arg_text, .arg_choice {
+            margin-left: 0.3em;
+            margin-right: 0.3em;
+         }
+         .trace {
+            margin-left: 2em;
+         }
+         #clean_trace_box {
+            height: 1.5em;
+            text-align: right;
+            margin-right: 150px;
+         }
+         #clean_trace {
+            display: none;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Variables</h1>
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+
+           <div>
+              <p class="hard"><strong style="color:red">Attention : cette version est difficile, gardez-la pour la fin si vous ne trouvez pas rapidement.</strong></p>
+              <p>
+              Jenny a mis des cailloux dans des trous, qu'elle a repéré par des lettres.
+              </p>
+              <p>
+              On ne peut pas voir le nombre de cailloux qu'elle a mis dans chaque trou.
+              </p>
+              <p>Vous aurez besoin de l'instruction <strong class="easy hard">max</strong><strong class="medium">min</strong>, qui fonctionne de la manière suivante :</p>
+              <center><div style="border: solid black 1px; width:650px;padding:5px;text-align:left">
+                 <p><strong>Exemple</strong> si vous pouviez voir le nombre de cailloux :
+                 <div id="paperExampleA"></div>
+                 <p>
+                    <strong style="font-size:1.5em"><span  id="exampleInstruction"></span></strong> place dans le trou
+                    <span class="easy">Y</span>
+                    <span class="medium">X</span>
+                    <span class="hard">V</span>
+                    <strong>le plus <span class="easy hard">grand</span><span class="medium">petit</span> des deux nombres</strong> de cailloux entre le nombre dans le trou A et le nombre dans le trou B :
+                 </p>
+                 <div id="paperExampleB"></div>
+              </div>
+              </center>
+              <p class="medium">L'instruction <strong>max</strong> fonctionne de la même manière mais en plaçant <strong>le plus grand</strong> des deux nombres.</p>
+              <p class="hard">L'instruction <strong>min</strong> fonctionne de la même manière mais en plaçant <strong>le plus petit</strong> des deux nombres.</p>
+              <div style="height:40px"></div>
+              <p>
+              Construisez une séquence d'instructions qui place dans le trou <strong>Z</strong>,
+              <span class="easy"><strong>le plus grand</strong> nombre parmi <strong>A, B et C</strong>.</span>
+              <span class="medium"><strong>le plus petit</strong> nombre parmi <strong>A, B, C et D</strong>.</span>
+              <span class="hard"><strong>le deuxième plus grand</strong> nombre parmi <strong>A, B et C</strong>.</span>
+              </p>
+              <center>
+              <div id="paperTarget" style="border: solid black 1px;width:650px;height:70px;padding-left:20px;"></div>
+              </center>
+              <p>
+                 <strong>Attention :</strong> vos instructions doivent fonctionner quels que soient les nombres de cailloux au départ.
+              </p>
+           </div>
+
+           <div id="program">
+              <table id="program_table">
+
+              </table>
+
+              <div id="clean_trace_box">
+              <input type="button" id="clean_trace" value="Effacer les explications"/>
+              </div>
+           </div>
+
+            <img src="icon.png" style="display:none">
+         </div>
+      </div>
+      <!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+
+         <p>Voici une solution possible :</p>
+         <div class="easy"><img src="solution_easy.png" /></div>
+         <div class="medium"><img src="solution_medium.png" /></div>
+         <!---<img src="solution_medium2.png" />-->
+         <div class="hard"><img src="solution_hard.png" /></div>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

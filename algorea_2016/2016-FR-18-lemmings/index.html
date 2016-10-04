@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-18</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-18-lemmings/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript">
+           var taskStrings = {
+              success: "Bravo, vous avez réussi !",
+              signHelp: "Cliquez pour poser\n ou retirer un panneau.", 
+              add1ToA: "augmenter A\nde 1",
+              playButton: "Essayer",
+              pauseButton: "Pause",
+              shapeLoop: "Un objet est coincé.", 
+              fullBucket: "Un objet est arrivé dans une boite déjà occupée.", 
+              wrongBucket: "Un objet est arrivé au mauvais endroit." 
+           };
+        </script>
+        <script type="text/javascript" src="task.js"></script>
+      <style>
+        #playback input {
+          width: 120px;
+          height: 32px;
+          margin: 20px;
+        }
+        #anim_container {
+          text-align: center;
+          margin: 0px auto;
+        }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Lemmings</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p class="hard"><strong style="color:red">Attention : cette version est l'une des plus difficiles du concours, gardez-la pour la fin.</strong></p>
+            <p>
+               Placez des panneaux sur des plateformes pour faire tomber un objet de la bonne forme dans chaque bac sous lequel est dessiné cette forme.
+            </p>
+            <p>
+                Chaque objet descend en faisant demi-tour dès qu'il rencontre un panneau sur lequel il est dessiné.
+            </p>
+            <p class="hard">
+               Des panneaux avec des conditions sont également disponibles. Par exemple, le panneau "≤ 4" fait faire demi-tour aux 4 premiers objets qui partent de la plateforme du haut et laisse passer les 4 suivants.
+            </p>
+            <p>
+               Pour placer un panneau, cliquez sur un type de panneau à gauche, puis sur l'extrémité d'une plateforme.
+            </p>
+            
+            <div id="anim_container">
+              <div id="anim">
+              </div>
+            </div>
+            <div id="playback" style="text-align: center">
+              <input type="button" id="playPause" value="Play">
+              <input type="button" id="stop" value="Arrêter">
+            </div>
+            <br><br>
+            <img src="icon.png" style="display:none">
+         </div>
+     </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2> 
+         <p>Voici une solution possible :</p>
+         <div class="easy"><img src="solution_easy.png" /></div>
+         <div class="medium"><img src="solution_medium.png" /></div>
+         <div class="hard"><img src="solution_hard.png" /></div>
+
+	  </div> <!-- task-solution -->
+  </body>
+</html>
