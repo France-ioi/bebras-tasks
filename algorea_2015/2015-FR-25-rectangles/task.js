@@ -293,7 +293,7 @@ function initTask() {
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
-      task.getLevelGrade(strAnswer, answerToken, callback, null);
+      task.getLevelGrade(strAnswer, token, callback, null);
    };
 
    task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
