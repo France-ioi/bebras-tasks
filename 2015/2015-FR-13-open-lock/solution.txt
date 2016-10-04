@@ -1,0 +1,6 @@
+
+         <div class="easy">On place le chiffre 8 à la fin, puis on essaie de placer le chiffre 3 à l'une des trois positions restantes, en complétant à chaque fois avec des 5.</div>
+         <div class="medium">On place le chiffre 6, puis on essaie de placer le chiffre 1 à l'une des trois positions restantes, en complétant à chaque fois avec des 5, et en essayant également de mettre un 2 à la place du 1.</div>
+         <div class="hard">Il y a 6 manières de placer des deux chiffres 5. Pour chacune d'entre elles, il y a 3 paires de nombres à tester : 1 et 2, ou alors 2 et 4, ou alors 3 et 6. Ce qui fait donc 18 combinaisons possibles à tester.</div>
+         <p>Les codes à essayer sont donc : <span id="codes_to_try"></span>.</p>
+
