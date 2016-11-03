@@ -20,6 +20,7 @@ function initTask(subTask) {
    'use strict';
    var level;
    var answer = null; // anwer[row][col] is a 2D array of boolean values, of size dimensions[level]
+   var state = {};
 
    var nbRows, nbCols;
    var data = { // rows, cols
@@ -66,6 +67,10 @@ function initTask(subTask) {
 
    subTask.getDefaultAnswerObject = function() {
       return Beav.Matrix.init(nbRows, nbCols, function() { return 0; });
+   };
+
+   subTask.getStateObject = function() {
+      return state;
    };
 
    subTask.getAnswerObject = function() {
