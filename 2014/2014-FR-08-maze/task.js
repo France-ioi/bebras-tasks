@@ -112,6 +112,9 @@ function initTask() {
 
    task.unload = function(callback) {
       stopAnimation();
+      if(dragAndDrop) {
+         dragAndDrop.disable();
+      }
       callback();
    };
 
