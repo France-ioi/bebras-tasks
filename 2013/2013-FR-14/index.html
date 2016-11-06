@@ -167,10 +167,8 @@
             $("#success, #error").html("");
             if (sumArray(sumCol) + sumArray(sumLin) === 0) {
                $("#success").html("Bravo ! Toutes les lignes et colonnes ont un nombre pair de pions noirs.");
-               $("#reset").hide();
                return true;
             }
-            $("#reset").show();
             return false;
          }
 
@@ -242,8 +240,7 @@
             <div style="height:40px"><span id="error"></span><span id="success"></span></div>
             <p>
              Il reste <span id="nbOddLins">1</span> ligne(s) et <span id="nbOddCols">1</span> colonne(s) avec un nombre impair de pions noirs.
-            </p>
-          <button id="reset" onclick="task.reloadAnswer('', function() {})">Recommencer</button>         
+            </p>         
          </td></tr></table>
       </div><!-- task -->
       <div id="solution">
