@@ -111,12 +111,6 @@ function Task(mode) {
   }
   var grid = paper.setFinish();
 
-  // buttons
-  if (this.editable) {
-    var task = this;
-    $('#reset').off("click").click(function() { task.reset(); });
-  }
-
   // init
   this.reset();
   if (mode == 'solution')
