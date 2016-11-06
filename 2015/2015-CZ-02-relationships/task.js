@@ -452,7 +452,7 @@ function initTask () {
          callback(scores[gradedLevel], messages[gradedLevel]);
       }
    };
-   grader.gradeTask = task.gradeTask;
+   //grader.gradeTask = task.gradeTask;
    
 }
 
