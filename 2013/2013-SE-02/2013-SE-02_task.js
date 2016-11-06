@@ -94,11 +94,6 @@ Task.prototype.load = function(randomSeed, mode) {
       .attr({stroke: "black", "stroke-width": 2, fill: "#1DF2FF"});
   }
 
-  // buttons
-  var the_task = this;
-  if (this.editable) {
-    $('#reset').off("click").click(function() { the_task.reset(); });
-  }
   // init
   this.reset();
   if (this.loadCorrection) 
