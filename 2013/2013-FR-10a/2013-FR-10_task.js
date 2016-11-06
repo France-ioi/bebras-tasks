@@ -76,7 +76,6 @@ function initTask(level) {
     $("." + level).show();
     task.reloadAnswer('', function() {
        $('#cancel').off("click").click(cancel(task));
-       $('#reset').off("click").click(function () { task.reloadAnswer('', function() {}) });
        $('#replace_all').off("click").click(replace(task));
        callback();
     });
