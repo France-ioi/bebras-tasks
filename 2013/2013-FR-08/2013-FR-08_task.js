@@ -103,10 +103,6 @@ function initTask() {
        drag(i, parasols[i]);
      }
 
-     // reset button
-     var task = this;
-     $('#reset').off("click").click(function() { task.reloadAnswer(""); });
-
      reset();
      callback();
    };
