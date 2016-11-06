@@ -182,12 +182,14 @@ function initTask() {
          drawing.nodes[id].attr("fill", color[selectedColor]);
          drawing.nodes[id].label.attr("text", colorLabel[selectedColor]);
       }
+      /*
       var message = getMessageForAnswer(answer[level], level, component);
       if (message == "") {
          platform.validate("done");
       } else {
          displayHelper.validate("stay");
       }
+      */
    }
    
    var buildComponent = function(curLevel) {
