@@ -244,6 +244,7 @@ function initTask() {
             callback(taskParams.minScore, 'Les boules ne représentent pas la valeur demandée.');
             return;
          }
+         seed = taskParams.randomSeed;
          var state = $.parseJSON(strAnswer);
          var value = valueOfState(state);
          var target = getTarget();
