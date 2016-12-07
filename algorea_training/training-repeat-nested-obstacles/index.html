@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-24-blockly-fill</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js" id="http://www.france-ioi.org/modules/ext/jschannel/jschannel.js"></script>      
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/ext/js-interpreter/acorn.js" id="acorn"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/js-interpreter/interpreter.js" id="interpreter"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/blockly/blockly_compressed.js" id="blockly"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/blockly/blocks_compressed.js" id="blockly_blocks"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/blockly/javascript_compressed.js" id="blockly_javascript"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/blockly/python_compressed.js" id="blockly_python"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/ext/blockly/fr.js" id="blockly_fr"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/blockly_lib.js" id="blockly_lib"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/blocklyRobot_lib.js" id="blocklyRobot_lib"></script>
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/algorea_tasks/algorea_2016_2/2015-FR-24-blockly-fill/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": true,
+          "minWidth": "auto"
+      };
+      </script>
+      <script>
+
+      window.stringsLanguage = 'fr';
+      var strings = {
+         marbleMoved: "Bravo ! Vous avez bien déplacé la bille.",
+         marbleNotMoved: "Vous n'avez pas correctement déplacé la bille."
+      };
+
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+   </head>
+   <body onresize="task.displayedSubTask.updateScale()">
+      <div id="task">
+         <h1>Parcours en lacets</h1>
+         <img src="green.png" style="display:none" />
+         <img src="obstacle.png" style="display:none" />
+         <img src="green_robot.png" style="display:none" />
+         <img src="icon.png" style="display:none" />
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent" style="text-align:left;position:relative">
+            <div id="gridContainer" style="float:right;width:400px;padding: 10px"></div>
+            <div id="taskIntro" style="width: 100%">
+               <p>
+                  Programmer le robot pour qu'il atteigne la zone verte tout au bout du parcours.
+               </p>
+               <div class="medium hard">
+                  <p>
+                     Vous aurez besoin de placer un bloc "répéter" à l'intérieur d'un autre, comme dans l'exemple ci-dessous.
+                  </p>
+                  <p>
+                  <img src="example_nested_repeat.png" style="width:250px">
+                  </p>
+                  <p>Indication : pour aller du bas en haut d'une colonne, le robot doit avancer 10 fois vers le haut.</p>
+               </div>
+            </div>
+            <div id="blocklyLibContent">
+            </div>
+         </div>
+
+      </div><!-- task -->
+   </body>
+</html>
+ 
