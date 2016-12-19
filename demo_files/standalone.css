@@ -148,9 +148,8 @@ body {
    margin: 0.3em;
 }
 #all_icons {
+   display: none;
    margin-top: 5em;
-}
-#all_icons {
    width: 440px;
    margin: 3em;
    border: 2px solid black;

@@ -152,14 +152,12 @@ var standaloneLoadPage = function() {
 
           // options for link generation
           var options = task.options;
-          if (options == null) {
-             options = [];
-          }
 
           // image and main link
-          options.difficulty = "easy";
-          var targetNormalEasy = getLinkTask(task.code, options);
-          var onclick = " onclick=\"loadTask('" + targetNormalEasy + "')\" ";
+          var targetNormal = getLinkTask(task.code, options);
+          //options.difficulty = "easy";
+          //var targetNormalEasy = getLinkTask(task.code, options);
+          var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
           var iconTitle = '<div class="icon_title">' + task.title + '</div>';
           var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;"><img src="' + task.code + '/icon.png"  ' + onclick + '/></td></tr></table></div>';
     
@@ -177,7 +175,7 @@ var standaloneLoadPage = function() {
             var shortCode = extractShortCode(task.code);
             var sLinkTitle = (dev) ? (shortCode + " " + textTitle) : task.title; // "Lien direct";
             var sLinkStyle = (dev) ? "icon_link_text_black" : "icon_link_text_link";
-            var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormalEasy + '">' + sLinkTitle + '</a>';
+            var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormal + '">' + sLinkTitle + '</a>';
             iconLink = '<div class="icon_link">' + sLink + '</div>';
           }
 
@@ -215,23 +213,27 @@ var standaloneLoadPage = function() {
             iconDev = '<div class="icon_dev">' + sDev + '</div>';
           }
 
-          $("#task_icons").append('<div class="icon" ' + onclick + '>' + [iconTitle, iconImg, iconStars, iconLink, iconDev].join('') + '</div>');
+          $("#task_icons").append('<div class="icon"><div ' + onclick + '>' + iconTitle + iconImg + iconStars + '</div>' +  iconLink + iconDev + '</div>');
        }
+
 
        // --- Generation of the image with combined icons ---
-
-       $("#all_icons").append("<table>");
-       for (var iTask = 0; iTask < tasks.length; iTask++) {
-          var task = tasks[iTask];
-          if (iTask % 4 == 0) {
-             $("#all_icons").append("<tr>");
-          }
-          $("#all_icons").append("<td><div class='icon_img'><img src='" + task.code + "/icon.png'></div></td>");
-          if (iTask % 4 == 3) {
-             $("#all_icons").append("</tr>");
-          }
+       
+       if (dev) {
+         $("#all_icons").css('display', "block");
+         $("#all_icons").append("<table>");
+         for (var iTask = 0; iTask < tasks.length; iTask++) {
+            var task = tasks[iTask];
+            if (iTask % 4 == 0) {
+               $("#all_icons").append("<tr>");
+            }
+            $("#all_icons").append("<td><div class='icon_img'><img src='" + task.code + "/icon.png'></div></td>");
+            if (iTask % 4 == 3) {
+               $("#all_icons").append("</tr>");
+            }
+         }
+         $("#all_icons").append("</table>");
        }
-       $("#all_icons").append("</table>");
 
 
    });
