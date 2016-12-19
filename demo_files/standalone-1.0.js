@@ -70,6 +70,7 @@ var getLinkTask = function(code, options, language) {
 function loadTask(taskCode) {
    $('#iframe').attr('src', taskCode);
    $('#iframe').css('display', "block");
+   $('body').scrollTop(0);
    $('#task_icons').css('display', "none"); 
 };
 
@@ -161,7 +162,6 @@ var standaloneLoadPage = function(codes) {
 
        // --- Setting up page elements ---
       
-
        $("#body").html(getHtmlContents());
        if (onlyOneGroup) {
          $("#header_title").html(theContents.title);
