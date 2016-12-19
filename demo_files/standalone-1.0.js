@@ -177,7 +177,7 @@ var standaloneLoadPage = function() {
             var shortCode = extractShortCode(task.code);
             var sLinkTitle = (dev) ? (shortCode + " " + textTitle) : task.title; // "Lien direct";
             var sLinkStyle = (dev) ? "icon_link_text_black" : "icon_link_text_link";
-            var sLink = "<a class=\"" + sLinkStyle + "\" href=\"" + targetNormalEasy + "\">" + sLinkTitle + "</a>";
+            var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormalEasy + '">' + sLinkTitle + '</a>';
             iconLink = '<div class="icon_link">' + sLink + '</div>';
           }
 
