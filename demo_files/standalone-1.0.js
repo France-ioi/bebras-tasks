@@ -75,15 +75,37 @@ function loadTask(taskCode) {
 
 //-----------------------------------------------------------------------------
 
-var standaloneLoadPage = function() {
+// Contents manager
+
+var standaloneContents = {};
+
+var standaloneAddContents = function(descr) {
+  // descr should have fields: code, title, folder, tasks;
+  // where tasks is an array of objects with fields: code and title.
+  standaloneContents[descr.code] = descr;
+}
+
+
+//-----------------------------------------------------------------------------
+
+var standaloneLoadPage = function(codes) {
 
   //------------------------------
   // Configuration
 
-  var links = ($.urlParam('links') == "1") ? true : false;
-  var dev = ($.urlParam('dev') == "1") ? true : false;
-  if (dev) { 
-    links = true;
+  var onlyOneGroup = (codes.length == 1);
+  var theContents = (onlyOneGroup) ? standaloneContents[codes[0]] : null;
+  
+  var pathToRoot = (onlyOneGroup) ? "../" : "";
+
+  var showLinks = ($.urlParam('links') == "1") ? true : false;
+  var showDev = ($.urlParam('dev') == "1") ? true : false;
+  var showGroupIcon = false;
+  if (showDev) { 
+    showLinks = true;
+    if (onlyOneGroup) {
+       showGroupIcon = true;
+    }
   }
 
   //------------------------------
@@ -107,7 +129,7 @@ var standaloneLoadPage = function() {
         <div id="header"> \
            <table id="header_table"> \
            <tr> \
-              <td id="header_logo"><img id="header_logo_img" src="../icons/castor_small.png" /></td> \
+              <td id="header_logo"></td> \
               <td id="header_title"></td> \
               <td id="header_button"> \
                 <input id="button_return_list" type="button" value="Retour à la liste des exercices"></input> \
@@ -138,109 +160,129 @@ var standaloneLoadPage = function() {
     $(document).ready(function() {
 
        // --- Setting up page elements ---
+      
 
        $("#body").html(getHtmlContents());
-       $("#header_title").html(standaloneContents.title);
+       if (onlyOneGroup) {
+         $("#header_title").html(theContents.title);
+       }
+
+       $("#header_logo").html('<img id="header_logo_img" src="' + pathToRoot + 'icons/castor_small.png" />');
+
        $("#button_return_list").click(function() {
            $('#iframe').css('display', "none");
            $('#task_icons').css('display', "block");  
         });
        $("#task_icons").css("display", "block");
 
-       // --- Setting up of tasks table ---
+       // --- Loop over codes ---
 
-       var tasks = standaloneContents.tasks;
-       for (var iTask = 0; iTask < tasks.length; iTask++) {
-          var task = tasks[iTask];
+       for (var iCode = 0; iCode < codes.length; iCode++) {
 
-          // options for link generation
-          var options = task.options;
+         var code = codes[iCode];
+         var contents = standaloneContents[code];
+         var tasks = contents.tasks;
+         var pathPrefix = pathToRoot + contents.folder;
+        
+         if (!onlyOneGroup) {
+            $("#task_icons").append('<div class="groupTitle">' + contents.title + '</div>');
+         }
 
-          // image and main link
-          var targetNormal = getLinkTask(task.code, options);
-          if (options == null) {
-            options = [];
-          }
-          //options.difficulty = "easy";
-          //var targetNormalEasy = getLinkTask(task.code, options);
-          var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
-          var iconTitle = '<div class="icon_title">' + task.title + '</div>';
-          var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;"><img src="' + task.code + '/icon.png"  ' + onclick + '/></td></tr></table></div>';
-    
-          // stars
-          var stars = '';
-          for (var i = 0; i < 4; i++) {
-             stars += (i < 2) ? getStarSVGfull() : getStarSVGempty();
-          }
-          var iconStars = '<div class="icon_stars">' + stars + '</div>';
+         // --- Setting up of tasks table ---
 
-          // standalone links
-          var iconLink = '';
-          if (links) {
-            var textTitle = extractTextCode(task.code);
-            var shortCode = extractShortCode(task.code);
-            var sLinkTitle = (dev) ? (shortCode + " " + textTitle) : task.title; // "Lien direct";
-            var sLinkStyle = (dev) ? "icon_link_text_black" : "icon_link_text_link";
-            var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormal + '">' + sLinkTitle + '</a>';
-            iconLink = '<div class="icon_link">' + sLink + '</div>';
-          }
-
-          // development links
-          var iconDev = '';
-          if (dev) { 
-            var versionTargets = [];
-            for (var iDifficulty = 0; iDifficulty < difficulties.length; iDifficulty++) {
-               var diff = difficulties[iDifficulty];
-               if (diff == "easy")
-                  diff = "1";
-               if (diff == "medium")
-                  diff = "2";
-               if (diff == "hard")
-                  diff = "3";
-               options.difficulty = difficulties[iDifficulty];
-               var targetNormal = getLinkTask(task.code, options);
-               var optionsSol = jQuery.extend({}, options);
-               optionsSol.showSolutionOnLoad = "1";
-               var targetSol = getLinkTask(task.code, optionsSol);            
-               var targetEnglish = getLinkTask(task.code, optionsSol, "en");            
-               versionTargets.push({normal: targetNormal, solution: targetSol, english: targetEnglish});
-            }
-            var sDev = "";
-            sDev += " <a href='" + versionTargets[0].normal + "' style='color:black'>[T1]</a>";
-            sDev += " <a href='" + versionTargets[1].normal + "' style='color:black'>[T2]</a>";
-            sDev += " <a href='" + versionTargets[2].normal + "' style='color:black'>[T3]</a>"; 
-            sDev += "&nbsp;&nbsp;&nbsp;";
-            sDev += " <a href='" + versionTargets[0].solution + "' style='color:black'>[S1]</a>";
-            sDev += " <a href='" + versionTargets[1].solution + "' style='color:black'>[S2]</a>";
-            sDev += " <a href='" + versionTargets[2].solution + "' style='color:black'>[S3]</a>"; 
-            //sDev += "&nbsp;&nbsp;";
-            //sDev += "<a href='" + versionTargets[0].english + "' style='color:black'>[en1]</a>";
-            sDev += "<br/><br/>";
-            iconDev = '<div class="icon_dev">' + sDev + '</div>';
-          }
-
-          $("#task_icons").append('<div class="icon"><div ' + onclick + '>' + iconTitle + iconImg + iconStars + '</div>' +  iconLink + iconDev + '</div>');
-       }
-
-
-       // --- Generation of the image with combined icons ---
-       
-       if (dev) {
-         $("#all_icons").css('display', "block");
-         $("#all_icons").append("<table>");
          for (var iTask = 0; iTask < tasks.length; iTask++) {
             var task = tasks[iTask];
-            if (iTask % 4 == 0) {
-               $("#all_icons").append("<tr>");
-            }
-            $("#all_icons").append("<td><div class='icon_img'><img src='" + task.code + "/icon.png'></div></td>");
-            if (iTask % 4 == 3) {
-               $("#all_icons").append("</tr>");
-            }
-         }
-         $("#all_icons").append("</table>");
-       }
 
+            // options for link generation
+            var options = task.options;
+
+            // image and main link
+            var targetNormal = pathPrefix + getLinkTask(task.code, options);
+            if (options == null) {
+              options = [];
+            }
+            //options.difficulty = "easy";
+            //var targetNormalEasy = pathPrefix + getLinkTask(task.code, options);
+            var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
+            var iconTitle = '<div class="icon_title">' + task.title + '</div>';
+            var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;"><img src="' + pathPrefix + task.code + '/icon.png"  ' + onclick + '/></td></tr></table></div>';
+      
+            // stars
+            var stars = '';
+            for (var i = 0; i < 4; i++) {
+               stars += (i < 2) ? getStarSVGfull() : getStarSVGempty();
+            }
+            var iconStars = '<div class="icon_stars">' + stars + '</div>';
+
+            // standalone links
+            var iconLink = '';
+            if (showLinks) {
+              var textTitle = extractTextCode(task.code);
+              var shortCode = extractShortCode(task.code);
+              var sLinkTitle = (showDev) ? (shortCode + " " + textTitle) : task.title; // "Lien direct";
+              var sLinkStyle = (showDev) ? "icon_link_text_black" : "icon_link_text_link";
+              var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormal + '">' + sLinkTitle + '</a>';
+              iconLink = '<div class="icon_link">' + sLink + '</div>';
+            }
+
+            // development links
+            var iconDev = '';
+            if (showDev) { 
+              var versionTargets = [];
+              for (var iDifficulty = 0; iDifficulty < difficulties.length; iDifficulty++) {
+                 var diff = difficulties[iDifficulty];
+                 if (diff == "easy")
+                    diff = "1";
+                 if (diff == "medium")
+                    diff = "2";
+                 if (diff == "hard")
+                    diff = "3";
+                 options.difficulty = difficulties[iDifficulty];
+                 var targetNormal = pathPrefix + getLinkTask(task.code, options);
+                 var optionsSol = jQuery.extend({}, options);
+                 optionsSol.showSolutionOnLoad = "1";
+                 var targetSol = pathPrefix + getLinkTask(task.code, optionsSol);            
+                 var targetEnglish = pathPrefix + getLinkTask(task.code, optionsSol, "en");            
+                 versionTargets.push({normal: targetNormal, solution: targetSol, english: targetEnglish});
+              }
+              var sDev = "";
+              sDev += " <a href='" + versionTargets[0].normal + "' style='color:black'>[T1]</a>";
+              sDev += " <a href='" + versionTargets[1].normal + "' style='color:black'>[T2]</a>";
+              sDev += " <a href='" + versionTargets[2].normal + "' style='color:black'>[T3]</a>"; 
+              sDev += "&nbsp;&nbsp;&nbsp;";
+              sDev += " <a href='" + versionTargets[0].solution + "' style='color:black'>[S1]</a>";
+              sDev += " <a href='" + versionTargets[1].solution + "' style='color:black'>[S2]</a>";
+              sDev += " <a href='" + versionTargets[2].solution + "' style='color:black'>[S3]</a>"; 
+              //sDev += "&nbsp;&nbsp;";
+              //sDev += "<a href='" + versionTargets[0].english + "' style='color:black'>[en1]</a>";
+              sDev += "<br/><br/>";
+              iconDev = '<div class="icon_dev">' + sDev + '</div>';
+            }
+
+            $("#task_icons").append('<div class="icon"><div ' + onclick + '>' + iconTitle + iconImg + iconStars + '</div>' +  iconLink + iconDev + '</div>');
+
+         } // end loop on iTaks
+
+
+         // --- Generation of the image with combined icons ---
+         
+         if (showGroupIcon) {
+           $("#all_icons").css('display', "block");
+           $("#all_icons").append("<table>");
+           for (var iTask = 0; iTask < tasks.length; iTask++) {
+              var task = tasks[iTask];
+              if (iTask % 4 == 0) {
+                 $("#all_icons").append("<tr>");
+              }
+              $("#all_icons").append("<td><div class='icon_img'><img src='" + task.code + "/icon.png'></div></td>");
+              if (iTask % 4 == 3) {
+                 $("#all_icons").append("</tr>");
+              }
+           }
+           $("#all_icons").append("</table>");
+         }
+
+      } // end loop on iCode
 
    });
 

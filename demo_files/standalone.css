@@ -159,3 +159,9 @@ body {
    max-height: 60px;
    max-width: 100px;
 }
+.groupTitle {
+   font-size: 25px;
+   text-align: center;
+   font-weight: bold;
+   margin: 1em;
+}
