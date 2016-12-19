@@ -119,6 +119,8 @@ var standaloneLoadPage = function() {
         \
         <div id="header_sep_bottom"></div>  \
         \
+        <div id="all_icons"></div>  \
+        \
      </div><!--main--> \
      </div><!--main_wrapper--> \
     ';
