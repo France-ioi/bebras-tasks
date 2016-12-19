@@ -77,7 +77,11 @@ var standaloneLoadPage = function() {
   //------------------------------
   // Configuration
 
+  var links = ($.urlParam('links') == "1") ? true : false;
   var dev = ($.urlParam('dev') == "1") ? true : false;
+  if (dev) { 
+    links = true;
+  }
 
   //------------------------------
   // Versions
@@ -166,11 +170,20 @@ var standaloneLoadPage = function() {
           }
           var iconStars = '<div class="icon_stars">' + stars + '</div>';
 
+          // standalone links
+          var iconLink = '';
+          if (links) {
+            var textTitle = extractTextCode(task.code);
+            var shortCode = extractShortCode(task.code);
+            var sLinkTitle = (dev) ? (shortCode + " " + textTitle) : task.title; // "Lien direct";
+            var sLinkStyle = (dev) ? "icon_link_text_black" : "icon_link_text_link";
+            var sLink = "<a class=\"" + sLinkStyle + "\" href=\"" + targetNormalEasy + "\">" + sLinkTitle + "</a>";
+            iconLink = '<div class="icon_link">' + sLink + '</div>';
+          }
+
           // development links
           var iconDev = '';
           if (dev) { 
-            var textTitle = extractTextCode(task.code);
-            var shortCode = extractShortCode(task.code);
             var versionTargets = [];
             for (var iDifficulty = 0; iDifficulty < difficulties.length; iDifficulty++) {
                var diff = difficulties[iDifficulty];
@@ -188,7 +201,7 @@ var standaloneLoadPage = function() {
                var targetEnglish = getLinkTask(task.code, optionsSol, "en");            
                versionTargets.push({normal: targetNormal, solution: targetSol, english: targetEnglish});
             }
-            var sDev = " <a class=\"menu_item\" href=\"" + versionTargets[0].normal + "\">" + shortCode + " " + textTitle + "</a> <br/>";
+            var sDev = "";
             sDev += " <a href='" + versionTargets[0].normal + "' style='color:black'>[T1]</a>";
             sDev += " <a href='" + versionTargets[1].normal + "' style='color:black'>[T2]</a>";
             sDev += " <a href='" + versionTargets[2].normal + "' style='color:black'>[T3]</a>"; 
@@ -202,7 +215,7 @@ var standaloneLoadPage = function() {
             iconDev = '<div class="icon_dev">' + sDev + '</div>';
           }
 
-          $("#task_icons").append('<div class="icon" ' + onclick + '>' + [iconTitle, iconImg, iconStars, iconDev].join('') + '</div>');
+          $("#task_icons").append('<div class="icon" ' + onclick + '>' + [iconTitle, iconImg, iconStars, iconLink, iconDev].join('') + '</div>');
        }
 
        // --- Generation of the image with combined icons ---
