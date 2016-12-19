@@ -3,6 +3,9 @@
      index.html
   or
      index.html?dev=1
+  or
+     index.html?links=1
+
 */
 
 //-----------------------------------------------------------------------------
@@ -155,6 +158,9 @@ var standaloneLoadPage = function() {
 
           // image and main link
           var targetNormal = getLinkTask(task.code, options);
+          if (options == null) {
+            options = [];
+          }
           //options.difficulty = "easy";
           //var targetNormalEasy = getLinkTask(task.code, options);
           var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
