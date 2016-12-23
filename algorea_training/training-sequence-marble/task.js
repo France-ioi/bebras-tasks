@@ -12,8 +12,7 @@ function initTask(subTask) {
       },
       maxInstructions: 20,
       generators: {
-         robot: ["east", "west", "pickTransportable", "dropTransportable"],
-         transport: ["col"]
+         robot: ["east", "west", "pickTransportable", "dropTransportable"]
       },
       ignoreInvalidMoves: false,
       groupByCategory: false,
