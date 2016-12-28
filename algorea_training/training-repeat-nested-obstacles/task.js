@@ -11,14 +11,19 @@ function initTask(subTask) {
          green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false },
       },
       maxInstructions: 16,
-      generators: {
-         robot: ["east", "north", "south"]
+      includeBlocks: {
+         groupByCategory: false,
+         generatedBlocks: {
+            robot: ["east", "north", "south"]
+         },
+         standardBlocks: {
+            includeAll: false,
+            wholeCategories: [],
+            singleBlocks: ["controls_repeat"]
+         },
       },
+      additionalBlocksByLevel: {},
       ignoreInvalidMoves: false,
-      groupByCategory: false,
-      includedAll: false,
-      includedCategories: [ ],
-      includedBlocks: ["controls_repeat"],
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {
          var robot = context.getRobotItem(context.curRobot);

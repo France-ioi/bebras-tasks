@@ -11,18 +11,21 @@ function initTask(subTask) {
          marker: { num: 2, img: "marker.png", side: cellSide, category: "paint", isObstacle: false, hasColor: true, color: "marker" }
       },
       maxInstructions: 18,
-      generators: {
-         robot: ["east", "north", "south", "paint", "markedCell"]
+      includeBlocks: {
+         groupByCategory: false,
+         generatedBlocks: {
+            robot: ["east", "north", "south", "paint", "markedCell"]
+         },
+         standardBlocks: {
+            includeAll: false,
+            wholeCategories: [],
+            singleBlocks: ["controls_repeat", "controls_if"]
+         },
+      },
+      additionalBlocksByLevel: {
+         hard: {standardBlocks: {singleBlocks: ["controls_if_else"]}}
       },
       ignoreInvalidMoves: false,
-      groupByCategory: false,
-      includedAll: false,
-      includedCategories: [ ],
-      includedBlocks: {
-         easy: ["controls_repeat", "controls_if"],
-         medium: ["controls_repeat", "controls_if"],
-         hard: ["controls_repeat", "controls_if", "controls_if_else"]
-      },
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {
          if (lastTurn) {

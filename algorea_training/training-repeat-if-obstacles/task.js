@@ -11,20 +11,24 @@ function initTask(subTask) {
          green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false },
       },
       maxInstructions: 10,
-      generators: {
-            easy: { robot: ["east", "north", "south", "obstacleEast"] },
-            medium: { robot: ["east", "north", "south", "obstacleEast"] },
-            hard: { robot: ["east", "north", "south", "obstacleEast", "obstacleNorth", "obstacleSouth"]}
+      includeBlocks: {
+         groupByCategory: false,
+         generatedBlocks: {
+            robot: ["east", "north", "south", "obstacleEast"]
+         },
+         standardBlocks: {
+            includeAll: false,
+            wholeCategories: [],
+            singleBlocks: ["controls_repeat", "controls_if"]
+         },
+      },
+      additionalBlocksByLevel: {
+         medium: {standardBlocks: {singleBlocks: ["controls_if_else"]}},
+         hard: {
+            standardBlocks: {singleBlocks: ["controls_if_else"]},
+            generatedBlocks: {robot: ["obstacleNorth", "obstacleSouth"]}}
       },
       ignoreInvalidMoves: false,
-      groupByCategory: false,
-      includedAll: false,
-      includedCategories: [ ],
-      includedBlocks: {
-         easy: ["controls_repeat", "controls_if"],
-         medium: ["controls_repeat", "controls_if", "controls_if_else"],
-         hard: ["controls_repeat", "controls_if", "controls_if_else"]
-      },
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {
          var robot = context.getRobotItem(context.curRobot);

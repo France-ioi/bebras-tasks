@@ -11,14 +11,19 @@ function initTask(subTask) {
          marble: { num: 3, img: "marble.png", side: cellSide, category: "marble", isObstacle: false, isTransportable: true, zOrder: 1 },
       },
       maxInstructions: 22,
-      generators: {
-         robot: ["east", "west", "north", "pickTransportable", "dropTransportable", "onTransportable", "onHole"]
+      includeBlocks: {
+         groupByCategory: false,
+         generatedBlocks: {
+            robot: ["east", "west", "north", "pickTransportable", "dropTransportable", "onTransportable", "onHole"]
+         },
+         standardBlocks: {
+            includeAll: false,
+            wholeCategories: [],
+            singleBlocks: ["controls_repeat", "controls_if"]
+         },
       },
+      additionalBlocksByLevel: {},
       ignoreInvalidMoves: false,
-      groupByCategory: false,
-      includedAll: false,
-      includedCategories: [ ],
-      includedBlocks: ["controls_repeat", "controls_if"],
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {
          var solved = true;
