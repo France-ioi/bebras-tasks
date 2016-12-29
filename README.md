@@ -9,3 +9,10 @@ git clone https://github.com/France-ioi/bebras-tasks.git
 cd bebras-tasks
 git submodule update --init
 ```
+
+To update:
+
+```
+git pull
+git submodule update --recursive
+```
