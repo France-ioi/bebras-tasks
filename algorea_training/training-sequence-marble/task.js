@@ -20,7 +20,7 @@ function initTask(subTask) {
             includeAll: false,
             wholeCategories: [],
             singleBlocks: []
-         },
+         }
       },
       additionalBlocksByLevel: {},
       ignoreInvalidMoves: false,
