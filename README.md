@@ -6,5 +6,6 @@ To start using:
 
 ```
 git clone https://github.com/France-ioi/bebras-tasks.git
+cd bebras-tasks
 git submodule update --init
 ```
