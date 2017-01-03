@@ -11,8 +11,16 @@ function initTask(subTask) {
          green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false, hasColor: true, color: "vert" }
       },
       maxInstructions: 6,
-      generators: {
-         robot: ["east", "north"]
+      includeBlocks: {
+         groupByCategory: false,
+         generatedBlocks: {
+            robot: ["east", "north"]
+         },
+         standardBlocks: {
+            includeAll: false,
+            wholeCategories: [],
+            singleBlocks: []
+         },
       },
       ignoreInvalidMoves: false,
       groupByCategory: false,
