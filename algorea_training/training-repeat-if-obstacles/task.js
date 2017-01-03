@@ -14,12 +14,22 @@ function initTask(subTask) {
       includeBlocks: {
          groupByCategory: false,
          generatedBlocks: {
-            robot: ["east", "north", "south", "obstacleEast"]
+            robot: {
+               shared: ["east", "north", "south", "obstacleEast"],
+               easy: [],
+               medium: [],
+               hard: ["obstacleNorth", "obstacleSouth"]
+            }
          },
          standardBlocks: {
             includeAll: false,
             wholeCategories: [],
-            singleBlocks: ["controls_repeat", "controls_if"]
+            singleBlocks: {
+               shared: ["controls_repeat", "controls_if"],
+               easy: [],
+               medium: ["controls_if_else"],
+               hard: ["controls_if_else"]
+            }
          },
       },
       additionalBlocksByLevel: {

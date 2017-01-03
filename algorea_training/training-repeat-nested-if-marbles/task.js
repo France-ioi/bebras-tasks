@@ -22,7 +22,6 @@ function initTask(subTask) {
             singleBlocks: ["controls_repeat", "controls_if"]
          },
       },
-      additionalBlocksByLevel: {},
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {

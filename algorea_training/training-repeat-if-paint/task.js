@@ -19,11 +19,13 @@ function initTask(subTask) {
          standardBlocks: {
             includeAll: false,
             wholeCategories: [],
-            singleBlocks: ["controls_repeat", "controls_if"]
+            singleBlocks: {
+               shared: ["controls_repeat", "controls_if"],
+               easy: [],
+               medium: [],
+               hard: ["controls_if_else"]
+            }
          },
-      },
-      additionalBlocksByLevel: {
-         hard: {standardBlocks: {singleBlocks: ["controls_if_else"]}}
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
