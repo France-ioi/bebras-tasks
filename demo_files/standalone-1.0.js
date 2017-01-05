@@ -1,5 +1,5 @@
 /*
-  usage : 
+  usage: 
      index.html
   or
      index.html?dev=1
@@ -96,6 +96,9 @@ var standaloneLoadPage = function(codes) {
 
   var onlyOneGroup = (codes.length == 1);
   var theContents = (onlyOneGroup) ? standaloneContents[codes[0]] : null;
+  if (theContents !== null && theContents === undefined) {
+     console.log("Resources not found: " + codes[0]);
+  }
   
   var pathToRoot = (onlyOneGroup) ? "../" : "";
 
@@ -181,6 +184,11 @@ var standaloneLoadPage = function(codes) {
 
          var code = codes[iCode];
          var contents = standaloneContents[code];
+         if (contents === undefined) {
+           console.log("Resources not found: " + code);
+           break;
+         }
+         var language = contents.language;
          var tasks = contents.tasks;
          var pathPrefix = pathToRoot + contents.folder;
         
@@ -197,12 +205,12 @@ var standaloneLoadPage = function(codes) {
             var options = task.options;
 
             // image and main link
-            var targetNormal = pathPrefix + getLinkTask(task.code, options);
+            var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
             if (options == null) {
               options = [];
             }
             //options.difficulty = "easy";
-            //var targetNormalEasy = pathPrefix + getLinkTask(task.code, options);
+            //var targetNormalEasy = pathPrefix + getLinkTask(task.code, options, language);
             var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
             var iconTitle = '<div class="icon_title">' + task.title + '</div>';
             var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;"><img src="' + pathPrefix + task.code + '/icon.png"  ' + onclick + '/></td></tr></table></div>';
@@ -238,12 +246,12 @@ var standaloneLoadPage = function(codes) {
                  if (diff == "hard")
                     diff = "3";
                  options.difficulty = difficulties[iDifficulty];
-                 var targetNormal = pathPrefix + getLinkTask(task.code, options);
+                 var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
                  var optionsSol = jQuery.extend({}, options);
                  optionsSol.showSolutionOnLoad = "1";
                  var targetSol = pathPrefix + getLinkTask(task.code, optionsSol);            
-                 var targetEnglish = pathPrefix + getLinkTask(task.code, optionsSol, "en");            
-                 versionTargets.push({normal: targetNormal, solution: targetSol, english: targetEnglish});
+                 // var targetEnglish = pathPrefix + getLinkTask(task.code, optionsSol, "en");            
+                 versionTargets.push({normal: targetNormal, solution: targetSol });
               }
               var sDev = "";
               sDev += " <a href='" + versionTargets[0].normal + "' style='color:black'>[T1]</a>";
