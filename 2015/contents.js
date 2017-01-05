@@ -1,6 +1,8 @@
 
-var standaloneContents = {
+standaloneAddContents({
+  code: "castor_2015",
   title: "Concours Castor 2015",
+  folder: "2015/",
   tasks: [
      { code: "2015-JP-04-crane-operating",
        title: "Piloter la grue" },
@@ -27,6 +29,6 @@ var standaloneContents = {
      { code: "2015-FR-15-guess-who",
        title: "Qui est-ce ?" } 
     ]
-  };
+  });
 
 
