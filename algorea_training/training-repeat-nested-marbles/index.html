@@ -53,17 +53,42 @@
                </p>
                <div class="medium hard">
                   <p>
-                     Vous aurez besoin d'imbriquer des blocs "répéter", comme dans l'exemple ci-dessous.
+                     Vous aurez besoin d'imbriquer des
+                     <span data-lang="blockly scratch">blocs "répéter",</span>
+                     <span data-lang="blockly scratch">boucles for,</span>
+                     comme dans l'exemple ci-dessous.
                   </p>
-<!--                  <p>
-                     Ainsi, l'exemple suivant permet de répéter 5 fois un déplacement vers la droite, suivi d'un déplacement de 3 cases vers le haut et d'un déplacement vers la droite :
-                  </p>-->
                   <p data-lang="blockly">
                      <img src="example_nested_repeat.png" style="width:250px">
                   </p>
                   <p data-lang="scratch">
                      <img src="example_nested_repeat_scratch.png" style="width:150px">
                   </p>
+<code data-lang="python">
+for loop in range(5):
+   droite()
+   for loop in range(3):
+      haut()
+   droite()
+</code>
+               </div>
+               <div data-lang="python">
+                  <p>
+                     Votre programme doit commencer par la ligne :
+                  </p>
+                  <p>
+                     <code>from robot import *</code>
+                  </p>
+                  <p data-lang="python">Les fonctions disponibles pour contrôler le robot sont :<br/>
+                  <ul>
+                     <li><code>droite()</code></li>
+                     <li><code>gauche()</code></li>
+                     <li><code>haut()</code></li>
+                     <li><code>bas()</code></li>
+                     <li><code>ramasser()</code></li>
+                     <li><code>deposer()</code></li>
+                  </ul>
+                  <p>
                </div>
             </div>
             <div id="gridContainer"></div>

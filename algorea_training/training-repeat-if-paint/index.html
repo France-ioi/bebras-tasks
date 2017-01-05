@@ -53,7 +53,10 @@
                </p>
                <div class="easy">
                   <p>
-                     Avec le bloc "si", vous pouvez tester le contenu de la case du robot, et ne la peindre que si elle est marquée&nbsp;:
+                     Avec
+                     <span data-lang="blockly scratch">le bloc "si",</span>
+                     <span data-lang="python">l'instruction "if",</span>
+                     vous pouvez tester le contenu de la case du robot, et ne la peindre que si elle est marquée&nbsp;:
                   </p>
                   <p data-lang="blockly">
                      <img src="example_if.png" style="width:250px">
@@ -61,10 +64,19 @@
                   <p data-lang="scratch">
                      <img src="example_if_scratch.png" style="width:200px">
                   </p>
+                  <p data-lang="python">
+<code>
+if caseMarquee():
+   peindre()
+</code>
+                  </p>
                </div>
                <div class="medium">
                   <p>
-                     Notez que vous pouvez placer plusieurs instructions dans un bloc "si" comme illustré ci-dessous :
+                     Notez que vous pouvez placer plusieurs instructions dans
+                     <span data-lang="blockly scratch">un bloc "si",</span>
+                     <span data-lang="python">une instruction "if",</span>
+                     comme illustré ci-dessous :
                   </p>
                   <p data-lang="blockly">
                      <img src="example_if_2.png" style="width:250px">
@@ -72,10 +84,20 @@
                   <p data-lang="scratch">
                      <img src="example_if_2_scratch.png" style="width:200px">
                   </p>
+                  <p data-lang="python">
+<code>
+if caseMarquee():
+   peindre()
+   droite()
+</code>
+                  </p>
                </div>
                <div class="hard">
                   <p>
-                     Vous pouvez utiliser un bloc "si / sinon" qui permet d'effectuer des opérations différentes selon si la case du robot contient une marque ou non.
+                     Vous pouvez utiliser
+                     <span data-lang="blockly scratch">un bloc "si / sinon",</span>
+                     <span data-lang="python">une instruction "if / else",</span>
+                     qui permet d'effectuer des opérations différentes selon si la case du robot contient une marque ou non.
                   </p>
                   <p data-lang="blockly">
                      <img src="example_if_else.png" style="width:250px">
@@ -83,8 +105,33 @@
                   <p data-lang="scratch">
                      <img src="example_if_else_scratch.png" style="width:200px">
                   </p>
+                  <p data-lang="python">
+<code>
+if caseMarquee():
+   peindre()
+else:
+   haut()
+</code>
+                  </p>
                </div>
                <p>Indication : au total, le robot doit se déplacer 14 fois vers la droite pour atteindre le dernier marqueur.</p>
+               <div data-lang="python">
+                  <p>
+                     Votre programme doit commencer par la ligne :
+                  </p>
+                  <p>
+                     <code>from robot import *</code>
+                  </p>
+                  <p data-lang="python">Les fonctions disponibles pour contrôler le robot sont :<br/>
+                  <ul>
+                     <li><code>droite()</code></li>
+                     <li><code>haut()</code></li>
+                     <li><code>bas()</code></li>
+                     <li><code>caseMarquee()</code></li>
+                     <li><code>peindre()</code></li>
+                  </ul>
+                  <p>
+               </div>
             </div>
             <div id="gridContainer"></div>
             <div id="blocklyLibContent"></div>

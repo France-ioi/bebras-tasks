@@ -49,18 +49,56 @@
                   Programmer le robot pour qu'il aille sur la case de la bille, la ramasse, puis aille la déposer dans le trou.
                </p>
                <p>
-                  Utilisez pour cela le bloc "répéter", qui permet d'exécuter plusieurs fois la même instruction.
+                  Utilisez pour cela
+                  <span data-lang="blockly scratch">le bloc "répéter",</span>
+                  <span data-lang="blockly scratch">l'instruction "for loop in range(...)",</span>
+                  qui permet d'exécuter plusieurs fois la même instruction.
                </p>
-               <p>Par exemple, plutôt que de mettre 5 fois le même bloc :
-                  <img data-lang="blockly" src="example_repeat_1.png" style='width:180px;vertical-align:middle'>
-                  <img data-lang="scratch" src="example_repeat_1_scratch.png" style='width:130px;vertical-align:middle'>
-               </p>
-               <p>Vous pouvez utiliser un bloc "répéter 5 fois" :
-                  <img data-lang="blockly" src="example_repeat_2.png" style='width:200px;vertical-align:middle'>
-                  <img data-lang="scratch" src="example_repeat_2_scratch.png" style='width:140px;vertical-align:middle'>
-               </p>
-               <p>Pour changer le nombre de répétitions, cliquez sur ce nombre et tapez la nouvelle valeur au clavier.</p>
+               <div data-lang="blockly scratch">
+                  <p>Par exemple, plutôt que de mettre 5 fois le même bloc :
+                     <img data-lang="blockly" src="example_repeat_1.png" style='width:180px;vertical-align:middle'>
+                     <img data-lang="scratch" src="example_repeat_1_scratch.png" style='width:130px;vertical-align:middle'>
+                  </p>
+                  <p>Vous pouvez utiliser un bloc "répéter 5 fois" :
+                     <img data-lang="blockly" src="example_repeat_2.png" style='width:200px;vertical-align:middle'>
+                     <img data-lang="scratch" src="example_repeat_2_scratch.png" style='width:140px;vertical-align:middle'>
+                  </p>
+                  <p>Pour changer le nombre de répétitions, cliquez sur ce nombre et tapez la nouvelle valeur au clavier.</p>
+               </div>
+               <div data-lang="python">
+                  <p>Par exemple, plutôt que de mettre 5 fois la même instruction :
+                  </p>
+<code>
+droite()
+droite()
+droite()
+droite()
+droite()
+</code>
+                  <p>Vous pouvez faire une boucle :</p>
+<code>
+for loop in range(5):
+   droite()
+</code>
             </div>
+               <div data-lang="python">
+                  <p>
+                     Votre programme doit commencer par la ligne :
+                  </p>
+                  <p>
+                     <code>from robot import *</code>
+                  </p>
+                  <p data-lang="python">Les fonctions disponibles pour contrôler le robot sont :<br/>
+                  <ul>
+                     <li><code>droite()</code></li>
+                     <li><code>gauche()</code></li>
+                     <li><code>haut()</code></li>
+                     <li><code>bas()</code></li>
+                     <li><code>ramasser()</code></li>
+                     <li><code>deposer()</code></li>
+                  </ul>
+                  <p>
+               </div>
             <div id="gridContainer"></div>
             <div id="blocklyLibContent"></div>
          </div>

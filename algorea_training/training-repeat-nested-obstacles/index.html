@@ -50,7 +50,10 @@
                </p>
                <div class="medium hard">
                   <p>
-                     Vous aurez besoin de placer un bloc "répéter" à l'intérieur d'un autre, comme dans l'exemple ci-dessous.
+                     Vous aurez besoin de placer
+                     <span data-lang="blockly scratch">un bloc "répéter" à l'intérieur d'un autre,</span>
+                     <span data-lang="python">une boucle "for" à l'intérieur d'une autre,</span>
+                     comme dans l'exemple ci-dessous.
                   </p>
                   <p data-lang="blockly">
                      <img src="example_nested_repeat.png" style="width:250px">
@@ -58,7 +61,30 @@
                   <p data-lang="scratch">
                      <img src="example_nested_repeat_scratch.png" style="width:130px">
                   </p>
+<code data-lang="python">
+for loop in range(10):
+   for loop in range(5):
+      bas()
+   droite()
+   for loop in range(3):
+      haut()
+</code>
                   <p>Indication : pour aller du bas en haut d'une colonne, le robot doit avancer 10 fois vers le haut.</p>
+               </div>
+               <div data-lang="python">
+                  <p>
+                     Votre programme doit commencer par la ligne :
+                  </p>
+                  <p>
+                     <code>from robot import *</code>
+                  </p>
+                  <p data-lang="python">Les fonctions disponibles pour contrôler le robot sont :<br/>
+                  <ul>
+                     <li><code>droite()</code></li>
+                     <li><code>haut()</code></li>
+                     <li><code>bas()</code></li>
+                  </ul>
+                  <p>
                </div>
             </div>
             <div id="gridContainer"></div>
