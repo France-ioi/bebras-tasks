@@ -32,12 +32,6 @@ function initTask(subTask) {
             }
          },
       },
-      additionalBlocksByLevel: {
-         medium: {standardBlocks: {singleBlocks: ["controls_if_else"]}},
-         hard: {
-            standardBlocks: {singleBlocks: ["controls_if_else"]},
-            generatedBlocks: {robot: ["obstacleNorth", "obstacleSouth"]}}
-      },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {
