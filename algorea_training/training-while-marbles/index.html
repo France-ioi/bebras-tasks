@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>training-while-marbles</title>
+      <script>
+      window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.0.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules/'
+        importModules([
+            'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'beaver-task-2.0', 'jschannel', 'raphaelFactory-1.0', 'delayFactory-1.0', 'simulationFactory-1.0',
+            'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+        // set Blockly as default language when none is specified through ?language=
+        importLanguageModules('blockly');
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/questions/algorea_training/training-while-marbles/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "minWidth": "auto"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+   </head>
+   <body onresize="task.displayedSubTask.updateScale()">
+      <div id="task">
+         <h1>Rangement de billes</h1>
+         <img src="hole.png" style="display:none" />
+         <img src="marble.png" style="display:none" />
+         <img src="obstacle.png" style="display:none" />
+         <img src="green_robot.png" style="display:none" />
+         <img src="icon.png" style="display:none" />
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="taskIntro">
+               <p>
+                  Programmer le robot pour qu'il ramasse <span class="easy">la</span><span class="medium hard">chaque</span> bille et la mette dans le trou plus loin sur sa rangée.
+               </p>
+               <p class="medium hard">
+                  Le robot ne peut transporter qu'une bille à la fois.
+               </p>
+               <div>
+                  <p>
+                     Vous aurez besoin d'utiliser
+                     <span data-lang="blockly">le bloc "répéter tant que" ou "répéter jusqu'à",</span>
+                     <span data-lang="blockly">le bloc "répéter jusqu'à",</span>
+                     <span data-lang="python">boucles for,</span>
+                     comme dans l'exemple ci-dessous.
+                  </p>
+                  <p data-lang="blockly">
+                     <img src="example_while.png" style="height:80px;vertical-align:middle"> ou
+                     <img src="example_until.png" style="height:80px;vertical-align:middle">
+                  </p>
+                  <p data-lang="scratch">
+                     <img src="example_while_scratch.png" style="width:150px">
+                  </p>
+<code data-lang="python">
+</code>
+               </div>
+               <div data-lang="python">
+                  <p>
+                     Votre programme doit commencer par la ligne :
+                  </p>
+                  <p>
+                     <code>from robot import *</code>
+                  </p>
+                  <p data-lang="python">Les fonctions disponibles pour contrôler le robot sont :<br/>
+                  <ul>
+                     <li><code>droite()</code></li>
+                     <li><code>gauche()</code></li>
+                     <li><code>haut()</code></li>
+                     <li><code>bas()</code></li>
+                     <li><code>ramasser()</code></li>
+                     <li><code>deposer()</code></li>
+                  </ul>
+                  <p>
+               </div>
+            </div>
+            <div id="gridContainer"></div>
+            <div id="blocklyLibContent"></div>
+         </div>
+
+      </div><!-- task -->
+   </body>
+</html>
+ 
