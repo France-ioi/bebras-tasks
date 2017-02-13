@@ -44,7 +44,7 @@ function initTask(subTask) {
             wholeCategories: [],
             singleBlocks: {
                easy: ["controls_repeat_ext"],
-               medium: ["controls_repeat_ext"],
+               medium: ["controls_repeat_ext", "math_arithmetic", "math_number"],
                hard: ["controls_repeat_ext", "math_arithmetic", "math_number"]
             }
          },

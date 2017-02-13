@@ -43,15 +43,36 @@
          <div id="tabsContainer"></div>
          <div id="taskContent" style="text-align:left;position:relative">
             <div id="taskIntro">
-               <p>
-                  Un dessin est codé par les nombres sur la grille. Sur chaque ligne, les 2 nombres indiquent les cases qu’il faut peindre dans la ligne : le premier nombre est le numéro de la colonne à partir de laquelle les cases de cette ligne doivent être peintes. Le deuxième nombre est le nombre de cases consécutives à peindre sur cette ligne.
-               </p>
-               <p>
-                  <b>Les colonnes sont numérotées à partir de 1.</b>
-               </p>
-               <p>
-                  Ainsi, si il y a marqué 5 3 sur une ligne, alors il faut peindre 3 cases consécutives sur cette ligne, à partir de la colonne numéro 5 (soit les colonnes de numéro 5, 6 et 7).
-               </p>
+               <div class="easy">
+                  <p>
+                     Programmez le robot pour qu'il recopie les numéros de la colonne de gauche dans la colonne de droite.
+                  </p>
+                  <p>
+                     Le robot doit lire le contenu de la case, le stocker dans sa mémoire, avancer de deux cases, puis écrire le contenu de sa mémoire dans la case.
+                  <p>
+                  <p>
+                     Pour lire le nombre de la case du robot et le stocker dans la variable "mémoire du robot", utilisez l'instruction suivante :
+                  </p>
+                  <img data-lang="blockly" src="read_number_blockly.png" style="height:50px" />
+                  <p>
+                     Pour écrire sur sa case la valeur stockée dans la variable "mémoire du robot", utilisez l'instruction suivante :
+                  </p>
+                  <img data-lang="blockly" src="write_number_blockly.png" style="height:50px" />
+               </div>
+               <div class="medium">
+                  <p>
+                     Programmez le robot pour qu'il écrive dans la colonne de zéros sur chaque ligne, la somme des deux nombres de gauche.
+                  </p>
+                  <p>
+                     Après avoir stocké premier nombre de la ligne dans la variable "mémoire du robot", vous devrez la modifier pour lui ajouter le deuxième nombre.
+                  </p>
+                  <img data-lang="blockly" src="change_variable_blockly.png" style="height:50px" />
+               </div>
+               <div class="hard">
+                  <p>
+                     Programmez le robot pour qu'il écrive à la place des zéros à droite de chaque ligne, la somme des nombres de la partie gauche de la ligne.
+                  </p>
+               </div>
             </div>
             <div id="gridContainer"></div>
             <div id="blocklyLibContent"></div>
