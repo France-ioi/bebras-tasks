@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>training-repeat-paint</title>
+      <script>
+      window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.0.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules/'
+        importModules([
+            'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'beaver-task-2.0', 'jschannel', 'raphaelFactory-1.0', 'delayFactory-1.0', 'simulationFactory-1.0',
+            'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+        // set Blockly as default language when none is specified through ?language=
+        importLanguageModules('blockly');
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/questions/algorea_training/training-repeat-paint/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "minWidth": "auto"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+   </head>
+   <body onresize="task.displayedSubTask.updateScale()">
+      <div id="task">
+         <h1>Dessiner un escalier</h1>
+         <img src="paint.png" style="display:none" />
+         <img src="marker.png" style="display:none" />
+         <img src="green_robot.png" style="display:none" />
+         <img src="icon.png" style="display:none" />
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="taskIntro">
+               <p>
+                  Programmez le robot pour qu'il peigne toutes les cases marquées.
+               </p>
+               <div class="easy">
+                  <p>
+                     L'objectif est d'écrire un programme constitué d'une seule boucle répéter et d'une condition, comme ceci :
+                  </p>
+                  <img data-lang="blockly" src="structure_easy_blockly.png" style="height:150px"/>
+                  <img data-lang="scratch" src="structure_easy_scratch.png" style="height:250px"/>
+                  <code data-lang="python">
+from robot import *
+for loop in range(10)
+   avancer()
+   if ...:
+      peindre()
+                  </code>
+                  <p>
+                     En choisissant la bonne condition, utilisant la colonne du robot. Par exemple :
+                  </p>
+                  <img data-lang="blockly" src="condition_easy_blockly.png" style="height:90px"/>
+                  <img data-lang="scratch" src="condition_easy_scratch.png" style="height:120px"/>
+                  <p>
+                     Notez qu'il y a plusieurs tests sur cet exercice, et que votre programme doit fonctionner sur chacun d'eux.
+                  </p>
+               </div>
+               <div class="medium hard">
+                  <p>
+                     L'objectif est d'écrire un programme qui passe sur chacune des cases de la grille, et utilise une condition pour décider s'il doit peindre cette case ou non. Cette condition peut utiliser la colonne et la ligne du robot.
+                  </p>
+                  <p>
+                     Les cases en dessous de la diagonale sont celles dont la colonne est inférieure ou égale à la ligne.
+                  <p>
+                  <p>
+                     Votre programme doit utiliser une seule fois l'instruction <code>peindre la case</code>
+                  </p>
+               </div>
+            </div>
+            <div id="gridContainer"></div>
+            <div id="blocklyLibContent"></div>
+         </div>
+
+      </div><!-- task -->
+   </body>
+</html>
+ 
