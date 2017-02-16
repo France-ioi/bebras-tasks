@@ -16,7 +16,7 @@ function initTask(subTask) {
          generatedBlocks: {
             robot: {
                easy: ["east", "pickTransportable", "dropTransportable", "onHole"],
-               medium: ["east", "west", "south", "pickTransportable", "dropTransportable", "onTransportable"],
+               medium: ["east", "west", "south", "pickTransportable", "dropTransportable", "onHole", "onTransportable"],
                hard: ["east", "west", "south", "pickTransportable", "dropTransportable", "onHole", "onTransportable"]
             }
          },
@@ -25,7 +25,7 @@ function initTask(subTask) {
             wholeCategories: [],
             singleBlocks: {
                easy: ["controls_whileUntil", "logic_negate"],
-               medium: ["controls_whileUntil", "logic_negate"],
+               medium: ["controls_repeat", "controls_whileUntil", "logic_negate"],
                hard: ["controls_whileUntil", "logic_negate", "controls_repeat"]
             }
          },
@@ -76,6 +76,16 @@ function initTask(subTask) {
             initItems: [
                   { row: 1, col: 0, dir: 0, type: "green_robot" },
                ]
+         },
+         {
+            tiles: [
+                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                   [1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1],
+                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+               ],
+            initItems: [
+                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+               ]
          }
       ],
       medium: [
@@ -84,6 +94,19 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
+                   [1, 3, 1, 1, 2, 1, 1],
+                   [1, 3, 1, 1, 2, 1, 1],
+                   [1, 3, 1, 1, 2, 1, 1],
+                   [1, 3, 1, 1, 2, 1, 1],
+                   [1, 1, 1, 1, 1, 1, 1],
+               ],
+            initItems: [
+                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+               ]
+         },
+         {
+            tiles: [
+                   [1, 1, 1, 1, 1, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
