@@ -69,29 +69,24 @@ function initTask(subTask) {
       easy: [
          {
             tiles: [
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                   [1, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                   [1, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" },
                ]
          },
          {
             tiles: [
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                   [1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1],
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                   [1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" },
                ]
          }
       ],
       medium: [
          {
             tiles: [
-                   [1, 1, 1, 1, 1, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
@@ -101,12 +96,11 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1],
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" },
                ]
          },
          {
             tiles: [
-                   [1, 1, 1, 1, 1, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
@@ -114,14 +108,13 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1],
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" },
                ]
          }
       ],
       hard: [
          {
             tiles: [
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
                    [1, 3, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1],
                    [1, 1, 1, 1, 3, 1, 1, 1, 2, 1, 1, 1, 1],
@@ -131,7 +124,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" },
                ]
          }
       ]
