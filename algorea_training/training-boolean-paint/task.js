@@ -4,6 +4,7 @@ function initTask(subTask) {
    subTask.gridInfos = {
       hideSaveOrLoad: true,
       cellSide: cellSide,
+      showLabels: true,
       actionDelay: 200,
       itemTypes: {
          green_robot: { img: "green_robot.png", side: 80, nbStates: 9, isObstacle: true, offsetX: -14, category: "robot", team: 0 },
