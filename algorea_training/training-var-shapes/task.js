@@ -89,22 +89,18 @@ function initTask(subTask) {
       easy: [
          {
             tiles: [
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1],
-                   [1, 5, 1, 9, 9, 9, 9, 9, 1],
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1]
+                   [1, 5, 1, 9, 9, 9, 9, 9, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" },
                ]
          },
          {
             tiles: [
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                   [1, 7, 1, 9, 9, 9, 9, 9, 9, 9, 1],
-                   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                   [1, 7, 1, 9, 9, 9, 9, 9, 9, 9, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" },
                ]
          }
       ],
