@@ -60,31 +60,17 @@ function initTask(subTask) {
          if (lastTurn) {
             for (var iRow = 0; iRow < context.tiles.length; iRow++) {
                var row = subTask.data[subTask.level][subTask.iTestCase].tiles[iRow];
-               var total = 0;
                for (var iCol = 0; iCol < row.length; iCol++) {
-                  var items = context.getItems(iRow, iCol, {category: "number"});
-                  var hasNumber = (items.length != 0);
-                  if (hasNumber) {
-                     var oldNumber = row[iCol];
-                     var item = items[0];
-                     var itemType = this.itemTypes[item.type];
-                     if (oldNumber != 100) {
-                        if (itemType.num != oldNumber) {
-                           context.success = false;
-                           throw("Vous ne devez modifier que les cases contenant un zéro.");
-                        }
-                        total += itemType.value;
-                     } else {
-                        if (total != itemType.value) {
-                           context.success = false;
-                           throw("Nombre incorrect.");
-                        }
-                     }
+                  var tile = row[iCol];
+                  var paints = context.getItems(iRow, iCol, {color: "gris"});
+                  if ((paints.length > 0) != (tile == 9)) {
+                     context.success = false;
+                     throw("Le robot n'a pas peint les cases exactement comme souhaité.");
                   }
                }
             }
             context.success = true;
-            throw("Bravo, vous avez inscrit les bons nombres !");
+            throw("Bravo, vous avez reproduit le motif !");
          }
       },
       computeGrade: function(context, message) {
