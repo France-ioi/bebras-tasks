@@ -211,7 +211,12 @@ var standaloneLoadPage = function(codes) {
             }
             //options.difficulty = "easy";
             //var targetNormalEasy = pathPrefix + getLinkTask(task.code, options, language);
+            
             var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
+            if (showLinks) {
+              onclick = " onclick=\"window.open('" + targetNormal + "', '_blank')\" ";
+            } 
+
             var iconTitle = '<div class="icon_title">' + task.title + '</div>';
             var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;"><img src="' + pathPrefix + task.code + '/icon.png"  ' + onclick + '/></td></tr></table></div>';
       
@@ -222,8 +227,9 @@ var standaloneLoadPage = function(codes) {
             }
             var iconStars = '<div class="icon_stars">' + stars + '</div>';
 
-            // standalone links
+            // standalone links placed below the image
             var iconLink = '';
+            /*
             if (showLinks) {
               var textTitle = extractTextCode(task.code);
               var shortCode = extractShortCode(task.code);
@@ -232,6 +238,7 @@ var standaloneLoadPage = function(codes) {
               var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormal + '">' + sLinkTitle + '</a>';
               iconLink = '<div class="icon_link">' + sLink + '</div>';
             }
+            */
 
             // development links
             var iconDev = '';
