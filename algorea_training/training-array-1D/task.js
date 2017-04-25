@@ -33,7 +33,7 @@ function initTask(subTask) {
             includeAll: false,
             wholeCategories: ["variables"],
             singleBlocks: {
-               easy: ["lists_repeat", "lists_getIndex", "lists_setIndex", "controls_repeat_ext", "controls_if", "logic_compare", "logic_boolean"],
+               easy: ["lists_repeat", "lists_getIndex", "lists_setIndex", "controls_repeat_ext", "controls_if", "math_number", "logic_compare", "logic_boolean"],
                medium: ["lists_create_with_empty", "lists_getIndex", "lists_setIndex", "controls_repeat_ext", "controls_if", "math_number", "math_arithmetic", "logic_compare"],
                hard: ["lists_repeat", "lists_create_with_empty", "lists_getIndex", "lists_setIndex", "controls_repeat_ext", "controls_if", "math_number", "math_arithmetic", "logic_compare"]
             }
