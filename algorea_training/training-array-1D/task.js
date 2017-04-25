@@ -26,7 +26,7 @@ function initTask(subTask) {
             robot: {
                easy: ["south", "east", "west", "paint", "paintOnCell", "col"],
                medium: ["south", "east", "west", "paint", "paintOnCell", "col"],
-               hard: ["north", "south", "east", "west", "paint", "paintOnCell", "col"]
+               hard: ["south", "east", "west", "paint", "paintOnCell", "col"]
             }
          },
          standardBlocks: {
