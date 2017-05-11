@@ -32,7 +32,14 @@
       };
       </script>
       <script type="text/javascript">
-         var taskStrings = {
+         var taskStrings = { 
+            availableWords: "Mots disponibles",
+            clickToAdd: "Cliquez sur un mot\npour l'ajouter",
+            clickToRemove: "Cliquez sur un mot\npour l'enlever",
+            otherSequence: "Autre séquence",
+            yourSequence: "Votre séquence",
+            message: "Message",
+            words: ["Barrage", "Bois", "Plage", "Cailloux", "Fruits", "Source", "Grotte"],
             success: "Bravo, vous avez réussi !",
             already: "Vous avez déjà trouvé cette séquence. Cliquez sur les mots pour les retirer.",
             tooLong: "Votre séquence de mots est trop longue.",
@@ -69,7 +76,7 @@
             </p>
 
             <div id="anim"></div>
-            <div id="clear_current_container"><input type="button" id="clear_current" value="Effacer le mot courant" /></div>
+            <div id="clear_current_container"><input type="button" id="clear_current" value="Effacer la séquence courante" /></div>
             <img src="icon.png" style="display:none">
          </div>
      </div><!-- task -->

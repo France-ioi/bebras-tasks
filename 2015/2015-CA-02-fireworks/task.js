@@ -42,7 +42,7 @@ function initTask() {
       }
       */
    };
-   var words = ["Barrage", "Bois", "Plage", "Cailloux", "Fruits", "Source", "Grotte"];
+   var words = taskStrings.words;
 
    var paper;
    var paperWidth = 770;
@@ -58,49 +58,49 @@ function initTask() {
    };
    var textParams = {
       bankTitleAttr: {
-         text: "Mots disponibles",
+         text: taskStrings.availableWords,
          x: 70,
          y: 20,
          "font-size": 16,
          "font-weight": 600
       },
       bankTextAttr: {
-         text: "Cliquez sur un mot\npour l'ajouter",
+         text: taskStrings.clickToAdd,
          x: 70,
          y: 60,
          "font-size": 16,
          "fill": "#CC2222" // "#337777"
       },
       targetTitleAttr: {
-         text: "Message",
+         text: taskStrings.message,
          x: 210,
          y: 20,
          "font-size": 16,
          "font-weight": 600
       },
       userSentenceTitle: {
-         text: "Votre séquence",
+         text: taskStrings.yourSequence,
          x: 340,
          y: 20,
          "font-size": 16,
          "font-weight": 600
       },
       userSentenceText: {
-         text: "Cliquez sur un mot\npour l'enlever",
+         text: taskStrings.clickToRemove,
          x: 340,
          y: 60,
          "font-size": 16,
          "fill": "#CC2222"
       },
       otherSequence1: {
-         text: "Autre séquence",
+         text: taskStrings.otherSequence,
          x: 520,
          y: 20,
          "font-size": 16,
          "font-weight": 600
       },
       otherSequence2: {
-         text: "Autre séquence",
+         text: taskStrings.otherSequence,
          x: 680,
          y: 20,
          "font-size": 16,

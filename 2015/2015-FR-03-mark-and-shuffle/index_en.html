@@ -35,17 +35,19 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-         success: "Bravo, vous avez réussi !",
-         wrongPhase: "Cliquez d'abord sur le bouton pour laisser les oiseaux s'envoler.",
-         emptySlot: "Il reste des oiseaux dans la zone du bas.",
-         incorrect: "Vous n'avez pas remis tous les oiseaux à leur place d'origine.<br/> Si vous n'y arrivez pas, revenez à l'étape précédente.",
-         restart: "Effacer les marques",
-         validate: "Valider la réponse",
-         shuffle: "Laisser les oiseaux s'envoler",
-         backToPrevious: "Revenir à l'étape précédente",
-         moveBirds: "Faites glissez les oiseaux à leur place d'origine.",
-         notDifferent: "Les oiseaux doivent tous avoir des marques différentes.",
-         instruction: "Remettez tous les oiseaux à leur place d'origine dans la zone du haut." };
+         success: "Success!",
+         emptySlot: "There remains birds in the lower area.",
+         incorrect: "Not all birds are placed in their original slot.<br/> If you don't how to place them, go back to the previous stage.",
+         restart: "Clear all marks",
+         validate: "Validate",
+         shuffle: "Let the bird fly away",
+         backToPrevious: "Go back to previous stage",
+         moveBirds: "Drag the birds back into their original slots.",
+         notDifferent: "Birds need to have distinct marks.",
+         instruction: "Put back all the birds into their original slot in the upper area.",
+         // not seen by user
+         wrongPhase: "You need to first let the bird fly away."
+         };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -63,12 +65,11 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               Cliquez sur les cases pour dessiner des motifs différents sur les pattes des oiseaux.
+               Click on the cells to draw distinct patterns on the bird legs.
             </p>
             <p>
-               Cliquez ensuite sur le bouton pour les laisser s'envoler. </p><p>
-               Les oiseaux se mélangeront,
-               et il vous faudra les remettre à leur place d'origine.
+               Then, click on the button to let the bird fly away. </p><p>
+               Birds will get shuffled, and your job will be to put them back into their original slot.
             </p>
             <div id="anim_container">
                <div id="anim"></div>

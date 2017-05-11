@@ -16,7 +16,7 @@ standaloneAddContents({
      { code: "2015-FR-04-next-distance",
        title: "Next distance" }, 
      { code: "2015-CA-02-fireworks",
-       title: "Fireworks signals" }, 
+       title: "Colored signals" }, 
      { code: "2015-FR-03-mark-and-shuffle",
        title: "Bird marking" }, 
      { code: "2015-FR-13-open-lock",

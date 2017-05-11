@@ -33,14 +33,21 @@
       </script>
       <script type="text/javascript">
          var taskStrings = {
+            availableWords: "Words available",
+            clickToAdd: "Click on a word\nto add it",
+            clickToRemove: "Click on a word\nto remove it",
+            otherSequence: "Other sequence",
+            yourSequence: "Your sequence",
+            message: "Message",
+            words: ["Dam", "Wood", "Beach", "Stone", "Fruits", "Spring", "Cave"],
             success: "Success!",
-            already: "Vous avez déjà trouvé cette séquence. Cliquez sur les mots pour les retirer.",
-            tooLong: "Votre séquence de mots est trop longue.",
-            tooShort: "Votre séquence de mots est trop courte.",
-            notMatch: "Votre séquence de mots ne correspond pas exactement au message.",
-            clickLeft: "Cliquez sur les mots à gauche pour construire une séquence.",
-            foundSoFar: function(nbCompleted) { return "Vous avez trouvé " + nbCompleted + " séquence" + ((nbCompleted>1) ? "s" : "") + ". Cherchez-en une autre."; },
-            hint: "<br/>Astuce : vous pouvez utiliser un même mot plusieurs fois." 
+            already: "You have already found this sequence. Click on words to remove them.",
+            tooLong: "Your word sequence is too long.",
+            tooShort: "Your word sequence is too short.",
+            notMatch: "Your word sequence does not fully match the message.",
+            clickLeft: "Click on the words located on the left to make a sequence.",
+            foundSoFar: function(nbCompleted) { return "You have found " + nbCompleted + " sequence" + ((nbCompleted>1) ? "s" : "") + ". Search for another sequence."; },
+            hint: "<br/>Hint: you may use a same word more than once in a sequence." 
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -55,21 +62,21 @@
    </head>
    <body>
       <div id="task">
-         <h1>Fireworks signals</h1>
+         <h1>Colored signals</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-            Castor communique en envoyant des signaux de couleur.
+            Beaver communicates by sending colored signals.
             </p>
             <p class="easy">
-            Trouvez <b>1</b> séquence de mots pouvant correspondre au message donné ci-dessous.
+            Find <b>1</b> word sequence that could correspond to the message shown below.
             </p>
             <p class="medium hard">
-            Trouvez <b>3</b> séquences de mots différentes pouvant correspondre au message donné ci-dessous.
+            Find <b>3</b> different word sequences that could correspond to the message shown below.
             </p>
 
             <div id="anim"></div>
-            <div id="clear_current_container"><input type="button" id="clear_current" value="Effacer le mot courant" /></div>
+            <div id="clear_current_container"><input type="button" id="clear_current" value="Clear current sequence" /></div>
             <img src="icon.png" style="display:none">
          </div>
      </div><!-- task -->
