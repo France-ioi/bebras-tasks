@@ -529,7 +529,7 @@ function initTask() {
             messages[curLevel] = taskStrings.success;
          } else if (curLevel == "hard" && mistakes.mistakesCount <= 2) {
             relativeScore = 0.5;
-            messages[curLevel] = taskStrings.incorrectPartial;
+            messages[curLevel] = taskStrings.incorrect;
          } else {
             relativeScore = 0.0;
             // if (curLevel == "hard") 
