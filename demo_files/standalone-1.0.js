@@ -89,10 +89,14 @@ var standaloneAddContents = function(descr) {
 
 //-----------------------------------------------------------------------------
 
-var standaloneLoadPage = function(codes) {
+var standaloneLoadPage = function(codes, pathToRoot) {
 
   //------------------------------
   // Configuration
+
+  if (pathToRoot === undefined) {
+    pathToRoot = "../";
+  }
 
   var onlyOneGroup = (codes.length == 1);
   var theContents = (onlyOneGroup) ? standaloneContents[codes[0]] : null;
@@ -100,8 +104,6 @@ var standaloneLoadPage = function(codes) {
      console.log("Resources not found: " + codes[0]);
   }
   
-  var pathToRoot = (onlyOneGroup) ? "../" : "";
-
   var showLinks = ($.urlParam('links') == "1") ? true : false;
   var showDev = ($.urlParam('dev') == "1") ? true : false;
   var showGroupIcon = false;
