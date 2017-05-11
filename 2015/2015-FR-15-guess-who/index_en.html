@@ -34,20 +34,19 @@
       <script type="text/javascript">
       var taskStrings = {
          elements: { // [yes-message, no-message]
-            "tie": ["un noeud papillon", "de noeud papillon"], 
-            "glasses": ["des lunettes", "de lunettes"],
-            "hat": ["un bonnet", "de bonnet"],
-            "hair": ["des cheveux", "de cheveux"],
-            "mouth": ["une bouche", "de bouche"],
-            "nose": ["un nez", "de nez"] },
-         remainingFaces: "Il reste des personnages à placer dans les rectangles.",
-         remainingQuestions: "Il reste des ovales vides.",
+            "tie": ["a tie", "a tie"], 
+            "glasses": ["glasses", "glasses"],
+            "hat": ["a hat", "a hat"],
+            "hair": ["hair", "hair"],
+            "mouth": ["a mouth", "a mouth"],
+            "nose": ["a nose", "a nose"] },
+         remainingFaces: "There remains men to place into the rectangles.",
+         remainingQuestions: "The remains empty oval slots.",
          errorHasNotButShouldHave: function(part) { 
-            return "Le personnage encadré en rouge devrait avoir " + this.elements[part][0] + "."; },
+            return "The man in the red frame should have " + this.elements[part][0] + "."; },
          errorHasButShouldNot: function(part) {
-            return "Le personnage encadré en rouge ne devrait pas avoir " + this.elements[part][1] + "."; },
+            return "The man in the red frame should not have " + this.elements[part][1] + "."; },
          success: "Success!" };
-         /* incorrect: "Le personnage encadré en rouge ne correspond pas aux éléments qui y mènent.", */
 
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -85,17 +84,17 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p class="easy">
-               Glissez les personnages sur les rectangles appropriés dans la zone bleue.
+               Drag the men's faces into the appropriate rectangles from the blue area.
             </p>
             <p class="medium hard">
-               Glissez des éléments dans les ovales, et les personnages dans les rectangles, pour remplir le schéma selon les règles suivantes.
+               Drag features from the oval slots and drag men's faces from the rectangles in order to fill the blue rectangle according to the following rules.
             </p>
 
-            <p id="ellipse_descr" class="easy"> Chaque ovale contient un élément qui différencie les personnages&nbsp;: </p>
-            <p id="ellipse_descr" class="medium hard"> Chaque ovale doit contenir un élément qui différencie les personnages&nbsp;: </p>
+            <p id="ellipse_descr" class="easy"> Each oval slot contains a feature used for selection: </p>
+            <p id="ellipse_descr" class="medium hard"> Each oval slot should contain a feature used for selection: </p>
             <ul id="ellipse_descr_ul">
-               <li>en dessous à gauche d'un ovale, tous les personnages doivent posséder cet élément.
-               <li>en dessous à droite d'un ovale, aucun personnage ne doit posséder cet élément.
+               <li>below to the left of an oval slot, all men should have that feature.
+               <li>below to the right of an oval slot, all men should not have that feature.
                </ul>
 
             <div id="anim_container">

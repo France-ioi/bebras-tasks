@@ -75,7 +75,7 @@ function initTask() {
       titleAttr: {
          "font-size": 20,
          "fill": "black",
-         "text": "Résultats des\n courses passées :",
+         "text": taskStrings.pastRaces,
          x: 96
       },
       horseLetterAttr: {
@@ -147,17 +147,11 @@ function initTask() {
          y: 490,
          width: 150,
          height: 30,
-         text: "Lancer la course"
+         text: taskStrings.launch
       },
       prepareText: {
          x: 470,
          y: 505,
-         "font-size": 16
-      },
-      afterRaceText: {
-         x: 485,
-         y: 505,
-         text: "Videz la zone d'arrivée.",
          "font-size": 16
       },
       maxRaceText: {
@@ -645,7 +639,7 @@ function initTask() {
 
          paper.text(podiumParams.slotPositions[iSlot].x + podiumParams.slotAttr.width / 2, podiumParams.slotPositions[iSlot].y + podiumParams.textOffsetY, iSlot).attr(podiumParams.textAttr);
       }
-      paper.text(podiumParams.bottomRightX - 1.5 * podiumParams.slotWidth, podiumParams.bottomRightY - 20, "Podium").attr(podiumParams.textAttr).attr({"font-size": 16});
+      paper.text(podiumParams.bottomRightX - 1.5 * podiumParams.slotWidth, podiumParams.bottomRightY - 20, taskStrings.podium).attr(podiumParams.textAttr).attr({"font-size": 16});
       // {"font-size": 16, "font-weight": "bold"}
    };
 
@@ -718,7 +712,6 @@ function initTask() {
       racePanel.prepareText.attr("text", taskStrings.prepareRaceText(data[level].race));
       racePanel.maxRaceText = paper.text().attr(racePanelParams.maxRaceText).hide();
       racePanel.maxRaceText.attr("text", racePanelParams.maxRaceText.text.replace(/#/g, maxRaces));
-      racePanel.afterRaceText = paper.text().attr(racePanelParams.afterRaceText).hide();
 
       clearRace();
       racePanel.slotSquares = [];
@@ -732,7 +725,6 @@ function initTask() {
    var loadRacePanel = function() {
       racePanel.prepareText.show();
       racePanel.maxRaceText.hide();
-      racePanel.afterRaceText.hide();
       racePanel.startButton.disable();
       racePanel.startButton.show();
       setSlotsDisplay(true);
@@ -775,7 +767,6 @@ function initTask() {
       racePanel.startButton.disable();
 
       racePanel.prepareText.show();
-      racePanel.afterRaceText.hide();
       racePanel.maxRaceText.hide();
       setSlotsDisplay(true);
    };
@@ -892,6 +883,8 @@ function initTask() {
                break;
             }
          }
+          
+         var cannotRaceFromPodium = "Cannot put horse from\nthe podium on a race";
 
          if(checkSnap(horse.originalX + horse.maxDiffX, horse.originalY + horse.maxDiffY, horse.originalX, horse.originalY, horseParams.dragThreshold)) {
             if(inRace) {
@@ -909,7 +902,7 @@ function initTask() {
             else if(answer[level].races.length < maxRaces && racePanel.raceSize < data[level].race) {
                if(horse.fromPodium !== undefined) {
                   setHorsePosition(horse, horse.canvasPosition, true, true);
-                  racePanel.prepareText.attr("text", taskStrings.cannotRaceFromPodium);
+                  racePanel.prepareText.attr("text", cannotRaceFromPodium);
                   return;
                }
                for(var iSlot = 0; iSlot < data[level].race; iSlot++) {
@@ -933,7 +926,7 @@ function initTask() {
                   if (checkSnap(x, y, racePanel.slotSquares[jSlot].attrs.x, racePanel.slotSquares[jSlot].attrs.y, podiumParams.snap)) {
                      setHorsePosition(horse, horse.canvasPosition, true, true);
                      answer[level].podium[horse.fromPodium] = iHorse;
-                     racePanel.prepareText.attr("text", taskStrings.cannotRaceFromPodium);
+                     racePanel.prepareText.attr("text", cannotRaceFromPodium);
                      return;
                   }
                }
@@ -1092,7 +1085,6 @@ function initTask() {
    var onSimulationFinish = function(params, duration, callback) {
       loadHistory();
       setSlotsDisplay(true);
-      // racePanel.afterRaceText.show();
       racePanel.prepareText.show();
       racePanel.startButton.show();
       clearRace();
@@ -1108,7 +1100,6 @@ function initTask() {
       }
       racePanel.startButton.hide();
       racePanel.prepareText.hide();
-      racePanel.afterRaceText.hide();
       racePanel.maxRaceText.show();
       setSlotsDisplay(false);
    };

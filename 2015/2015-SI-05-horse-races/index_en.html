@@ -35,18 +35,20 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-         arrival: ["1er", "2ème", "3ème"],
-         maxRacesReached: "Vous avez effectué # courses, ce qui est le maximum autorisé.\nVous pouvez placer des chevaux sur le podium, ou tout recommencer.",
+         podium: "Podium",
+         pastRaces: "Results of\n previous races:",
+         arrival: ["1st", "2nd", "3rd"],
+         launch: "Launch the race",
+         maxRacesReached: "You performed # races, which is the maximum number allowed.\nYou may place horses on the podium, or restart everything.",
          success: "Success!",
-         successPartial: function(steps, stepsOptimal) { return "Vous avez réussi en " + steps + " courses.<br> Recommencez pour essayer de trouver le podium en seulement " + stepsOptimal + " courses."; },
-         incorrect: "Votre podium n'est pas le bon.",
-         incorrectCannotBeSure: "Vous n'avez pas organisé un ensemble de courses vous permettant d'être certain que votre podium est correct.",
-         incomplete: "Vous n'avez pas placé de chevaux sur le podium.",
+         successPartial: function(steps, stepsOptimal) { return "You succeeded in " + steps + " races.<br> Try again to deduce the podium in only " + stepsOptimal + " races."; },
+         incorrect: "Your podium is incorrect.",
+         incorrectCannotBeSure: "You have not organized a set of races that allow you to be certain that your podium is correct.",
+         incomplete: "You have not placed horses on the podium.",
 
          prepareRaceText: function(raceSize) {
-            return "Sélectionnez " + raceSize + " chevaux pour\norganiser une course.";
-         },
-         cannotRaceFromPodium: "Cannot put horse from\nthe podium on a race" // TODO translate
+            return "Select " + raceSize + " horses in order to\norganize a race.";
+         }
       };
 
       </script>
@@ -61,16 +63,16 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               <span class="easy">Trouvez le cheval qui court </span>
-               <span class="medium">Trouvez les <b>2</b> chevaux qui courent </span>
-               <span class="hard">Trouvez les <b>3</b> chevaux qui courent </span>
-               le plus vite, en organisant le moins de courses possibles.
+               <span class="easy">Find the fastest horse </span>
+               <span class="medium">Find the <b>2</b> fastest horses </span>
+               <span class="hard">Find the <b>3</b> fastest horses </span>
+                by organizing as few races as possible.
             </p>
-            <p>Trois chevaux participent à chaque course. Un même cheval court toujours à la même vitesse.</p>
+            <p>Three horses compete in each race. A given horse always runs at the same speed.</p>
 
-            <p>Pour organiser d'autres courses, cliquez sur les chevaux désirés, puis lancez la course. </p> 
+            <p>To organize additional races, click on the desired horses, then launch the race. </p> 
 
-            <p>Notez que trois courses ont déjà été effectuées.</p>
+            <p>Note that three races have already been performed.</p>
  
             <div id="anim"></div>
             <img src="icon.png" style="display:none">

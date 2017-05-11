@@ -35,7 +35,10 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+         podium: "Podium",
+         pastRaces: "Résultats des\n courses passées :",
          arrival: ["1er", "2ème", "3ème"],
+         launch: "Lancer la course",
          maxRacesReached: "Vous avez effectué # courses, ce qui est le maximum autorisé.\nVous pouvez placer des chevaux sur le podium, ou tout recommencer.",
          success: "Bravo, vous avez réussi !",
          successPartial: function(steps, stepsOptimal) { return "Vous avez réussi en " + steps + " courses.<br> Recommencez pour essayer de trouver le podium en seulement " + stepsOptimal + " courses."; },
@@ -45,8 +48,7 @@
 
          prepareRaceText: function(raceSize) {
             return "Sélectionnez " + raceSize + " chevaux pour\norganiser une course.";
-         },
-         cannotRaceFromPodium: "Cannot put horse from\nthe podium on a race" // TODO translate
+         }
       };
 
       </script>
