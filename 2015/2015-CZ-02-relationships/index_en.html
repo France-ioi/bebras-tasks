@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2015-CZ-02-relationships</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js"        id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-CZ-02-relationships/",
+          "language": "fr",
+          "version": "",
+          "authors": "",
+          "license": "CC BY-SA 3.0",
+          "translators": ["Arthur Chargueraud"],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "medium", "2": "medium", "3": "easy", "4": "easy"},
+          "categories": {},
+          "answerType": "Interactive, drag and drop",
+          "fullFeedback": true, 
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         error: "Le castor au début de la flèche rouge est plus âgé que celui à la fin de la flèche.",
+         remains: "Il vous reste des étiquettes à placer.",
+         success: "Bravo, vous avez réussi !" };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #relations td {
+         vertical-align: top;
+       }
+      #relations td ul {
+         margin-top: 0em;
+         margin-bottom: 0.5em;
+      }
+      .easy, .hard {
+         display: none;
+      }
+      #execute_container {
+         text-align: center;
+      }
+      #remark {
+         text-align: center;
+         font-weight: bold;
+      }
+      </style>
+  </head>
+  <body>
+      <div id="task">
+         <h1>Age relationships</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+           <p>
+            Glissez les étiquettes avec les prénoms dans les bonnes cases.
+            </p>
+            <div class="easy medium">
+               <p>
+               Une flèche doit toujours aller d'une personne plus jeune vers une personne plus âgée.
+               </p>
+            </div>
+            <div class="hard">
+               <p>
+               Une flèche doit toujours aller d'une personne plus jeune vers une personne plus âgée, lorsque les deux cases aux extrémités de cette flèche contiennent une étiquette.
+               </p>
+               <p id="remark">Notez qu'une des cases restera vide.</p>
+            </div>
+            <div id="anim" class="touch"></div>
+            <div id="execute_container">
+               <input type="button" value="Valider votre réponse" id="execute"/>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div>
+      
+      <div id="solution">
+<!--TODO
+         <h2>Solution</h2> 
+         <div class="easy medium">
+            <p>Pour obtenir la solution, on place les personnes une par une par ordre d'âge, intuitivement &laquo; en suivant l'ordre des flèches &raquo;. Plus précisément, on remplit à chaque fois une case vérifiant la propriété suivante : s'il y a des flèches qui arrivent à cette case, alors les cases d'où viennent les flèches sont déjà remplies. </p>
+         </div>
+         <div class="easy">
+            <img src="solution_easy.png">
+         </div>
+         <div class="medium">
+            <img src="solution_medium.png">
+        </div>   
+        <div class="hard">      
+           <img style="float:right" src="graphe_cycles.png">
+           <p>Le schéma avec des flèches représente ce que l'on appelle un &laquo; graphe &raquo;. </p>
+           <p>Ce graphe représente des suites de de flèches qui tournent en rond, que l'on appelle des &laquo; cycles &raquo;</p>
+           <p>Dans le graphe considéré, il y a deux cycles : le cycle rouge (passant par les cases marquées B, C, et E), et le cycle bleu (passant par les cases marquées A, C, E, et D).</p>
+           <p>Sur un cycle, il n'est pas possible de mettre une personne sur chacune des cases, sinon forcément une des relations d'âges ne sera pas respectée. Donc, sur chacun des deux cycles, il faut qu'il y ait impérativement au moins une case vide.</p>
+           <p>Comme on ne peut laisser qu'une seule case vide, il faut que cette case se trouve sur les deux cycles à la fois. La case vide est donc soit E (solution 1), soit C (solution 2).</p>
+          
+            <center>
+            <table>
+            <tr>
+            <td><b>Solution 1 :</b></td>
+            <td><b>Solution 2 :</b></td>
+            </tr>
+            <tr>
+            <td><img src="solution_hard_1.png" style="margin-right:3em" width="330"></td>
+            <td><img src="solution_hard_2.png" width="330"></td>
+            </tr>
+            </table>
+            </center>
+         </div>
+
+         <h2>C'est de l'informatique</h2> 
+         <!-- <div class="hard">   -->
+         <p>
+         Les flèches représentent ici des contraintes d'âges, mais elles pourraient 
+         représenter n'importe quel type de relation entre des objets.
+         </p>
+         <p>
+         Par exemple,
+         les cases peuvent représenter des opérations à effectuer pour construire
+         une maison et les flèches représenter des contraintes sur quelle opération
+         doit être réalisée avant telle autre. Par exemple, il faut construire les
+         murs avant de poser le toit. Il est cependant possible que des actions ne soient pas contraintes.
+         Par exemple, aménager le jardin et décorer la maison sont deux
+         tâches que l'on peut faire dans n'importe quel ordre, voir même 
+         en parallèle. 
+         </p>
+         <p>
+         Si une seule personne veut effectuer toutes les opérations,
+         elle peut vouloir mettre dans un ordre particulier toutes les 
+         opérations à effectuer. Il y a plusieurs ordres possibles, mais
+         tout ce qui compte au final, c'est que l'ordre choisi respecte 
+         bien les contraintes représentées par les flèches. 
+         </p>
+         <p>
+         Choisir un ordre particulier est une opération que l'on appelle
+         &laquo; tri topologique &raquo;, et qui est très utile en informatique.
+         Un ordinateur est capable de construire un tri topologique
+         en quelques secondes, même lorsqu'il y a des milliards de flèches.
+         </p>
+      <!-- </div> -->
+  </body>
+</html>

@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-13</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-13-open-lock/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": ["Arthur Chargueraud"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            alreadyFound: function(found) {
+               if (found.length == 0) {
+                  return "Cherchez un code qui correspond.";
+               } else if (found.length == 1) {
+                  return "Vous avez trouvé le code " + found[0] + ".";
+               } else if (found.length == 2) {
+                  return "Vous avez trouvé les codes " + found[0] + " et " + found[1] + ".";
+               } else if (found.length == 3) {
+                  return "Vous avez trouvé les codes suivants : " + found.join(", ") + "."; 
+               }
+            },
+            instruction: "Cliquez dans les cases ci-dessous pour modifier le code.",
+            freshlyTried: "Vous avez trouvé un nouveau code.",
+            alreadyTried: "Vous aviez déjà trouvé ce code.",
+            remaining: function(nbRemaining) { return "Il en reste " + nbRemaining + " autre" + ((nbRemaining>1) ? "s" : "") + "."; },
+            success: "Bravo, vous avez réussi !",
+            successPartial: function(counter, bestCounter) { return "Vous avez testé toutes les possibilités en " + counter + " étapes.<br> Recommencez pour essayer en " + bestCounter + " étapes.";  } };
+
+      </script>
+      <style>
+         .table_main div {
+            margin: 0em;
+            padding: 0em;
+         }
+         .digits_title {
+            color: #555555;
+         }
+         div.digits {
+            margin-left: 1.3em;
+            padding-top: 0.5em;
+            margin-bottom: 1em;
+         }
+         .easy, .medium, .hard {
+            display: none;
+         }
+         .current_code_message {
+            font-weight: bold;
+         }
+         .table_main td { 
+            border: 1px solid black;
+            vertical-align: top;
+            margin: 1em;
+            padding: 0.5em;
+         }   
+         #anim_container { 
+            text-align: center;
+         }
+         .features li {
+            margin-left: 15em;
+            font-weight: bold;
+            margin-top: 0.5em;
+         }
+         #counter {
+            text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Opening the lock</h1>
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+
+
+            <p>
+            Pour ouvrir le cadenas de Castor, essayez tous les codes qui :
+            </p>
+           <div class="features">
+           <ul class="easy">
+              <li>commencent par le chiffre 8,</li>
+              <li>et contiennent deux fois le chiffre 5,</li>
+              <li>et contiennent une fois le chiffre 3.</li>
+           </ul>
+           <ul class="medium">
+              <li>commencent par le chiffre 8,</li>
+              <li>et contiennent deux fois le chiffre 5,</li>
+              <li>et contiennent soit un 1 soit un 2.</li>
+           </ul>
+           <ul class="hard">
+              <li>contiennent deux fois le chiffre 3,</li>
+              <li>et contiennent deux fois le chiffre 5.</li>
+              <li style="list-style-type:none">&nbsp;</li>
+           </ul>
+           </div>
+
+           <p class="hard">
+           Essayez d'ouvrir le cadenas en faisant le moins d'étapes possible.
+           N'hésitez pas à vous aider d'un papier&nbsp;! <!-- et d'un crayon-->
+           </p>
+            
+           <p class="hard" id="counter"><b>Nombre d'étapes effectuées : <span id='step_counter'></span></b>.</p>
+
+          
+            <div id="anim_container">
+               <div id="anim">
+               </div>
+            </div>
+
+            <img src="icon.png" style="display:none">
+         </div>
+      </div>
+      <!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+<!--TODO
+         	<div class="easy">
+               <p>Il faut essayer les 3 codes montrés ci-dessous.</p>
+               <table><tr>
+               <td style="text-align:center"><b>8553</b></td>
+               <td style="text-align:center"><b>8535</b></td>
+               <td style="text-align:center"><b>8355</b></td>
+               </tr>
+               <tr>
+               <td><img src="solution_easy_1.png" width="220" style="margin-right:1em"></td>
+               <td><img src="solution_easy_2.png" width="220" style="margin-right:1em"></td>
+               <td><img src="solution_easy_3.png" width="220"></td>
+               </tr>
+               </table>
+               <p>En effet, pour placer deux fois le chiffre <b>5</b> et une fois le chiffre <b>3</b>, il y a trois possibilités, selon l'endroit où l'on place le chiffre <b>3</b>.</p>
+           </div>
+               
+			<div class="medium">
+           <p>Il y a 6 codes possibles : <b> 8551, 8553, 8515, 8535, 8155, 8355</b>.</p>
+       	  
+           <p>Pour trouver ces codes, on commence par placer le chiffre <b>8</b>. Ensuite, on choisit l'endroit où l'on ne va pas mettre de chiffre <b>5</b>. Il y a trois endroits possibles pour cela. A chacun de ces endroits, on peut mettre soit un <b>1</b>, soit un <b>2</b>.
+  			
+			</div>
+			<div class="hard">
+	
+	      <p>Il y a 6 codes possibles : <b>3355, 3553, 3535, 5335, 5353, 5533 </b>.</p>
+
+         <p>Pour trouver ces codes, on peut considérer deux cas possibles. </p>
+         <ul>
+         <li>Soit le code commence par un <b>3</b>. Dans ce cas, il reste un chiffre <b>3</b> et deux chiffres <b>5</b> à placer. Il y a trois cas possibles, selon où l'on place le chiffre <b>3</b>.</li>
+         <li>Soit le code commence par un <b>5</b>. Dans ce cas, il reste un chiffre <b>5</b> et deux chiffres <b>3</b> à placer. Il y a trois cas possibles, selon où l'on place le chiffre <b>5</b>.</li>
+         </ul>
+  			
+         <p>Pour essayer tous les codes en un nombre minimum de clics, il faut les prendre dans un certain ordre, de sorte à passer d'un code au suivant en ne faisant que 2 modifications. </p>
+         <p>On effectue alors 4 clics pour le premier code, puis 2 clics pour chaque code suivant, soit 14 clics au total.</p>
+
+   		</div>
+
+		 <h2>C'est de l'informatique !</h2>
+         <p>Pour trouver un mot de passe, une approche qui marche à tous les coups, c'est d'essayer toutes les possibilités&nbsp;! Cependant, cette approche peut prendre un temps considérable.</p>
+         <p>Lorsqu'on a des informations supplémentaires sur la manière dont le mot de passe à été construit, on peut gagner beaucoup de temps en n'essayant que les possibilités qui ont une chance de marcher.</p>
+         <p>Pour cela, il faut être capable d'énumérer efficacement les possibilités qui satisfont certaines contraintes. C'est exactement ce que l'on demandait dans ce sujet.</p>
+-->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 
