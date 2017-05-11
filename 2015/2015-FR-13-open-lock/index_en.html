@@ -41,21 +41,21 @@
          var taskStrings = {
             alreadyFound: function(found) {
                if (found.length == 0) {
-                  return "Cherchez un code qui correspond.";
+                  return "Find a combination that matches.";
                } else if (found.length == 1) {
-                  return "Vous avez trouvé le code " + found[0] + ".";
+                  return "You have found the combination " + found[0] + ".";
                } else if (found.length == 2) {
-                  return "Vous avez trouvé les codes " + found[0] + " et " + found[1] + ".";
+                  return "You have found the combinations " + found[0] + " and " + found[1] + ".";
                } else if (found.length == 3) {
-                  return "Vous avez trouvé les codes suivants : " + found.join(", ") + "."; 
+                  return "You have found the following combinations: " + found.join(", ") + "."; 
                }
             },
-            instruction: "Cliquez dans les cases ci-dessous pour modifier le code.",
-            freshlyTried: "Vous avez trouvé un nouveau code.",
-            alreadyTried: "Vous aviez déjà trouvé ce code.",
-            remaining: function(nbRemaining) { return "Il en reste " + nbRemaining + " autre" + ((nbRemaining>1) ? "s" : "") + "."; },
+            instruction: "Click on the cells below to select a combination.",
+            freshlyTried: "You have found a new combination.",
+            alreadyTried: "You had already found this combination.",
+            remaining: function(nbRemaining) { return "There remains " + nbRemaining + " other" + ((nbRemaining>1) ? "s" : "") + "."; },
             success: "Success!",
-            successPartial: function(counter, bestCounter) { return "Vous avez testé toutes les possibilités en " + counter + " étapes.<br> Recommencez pour essayer en " + bestCounter + " étapes.";  } };
+            successPartial: function(counter, bestCounter) { return "You have tested all possibilities in " + counter + " steps.<br> Try again to succeed in no more than " + bestCounter + " steps.";  } };
 
       </script>
       <style>
@@ -103,34 +103,33 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
 
-
             <p>
-            Pour ouvrir le cadenas de Castor, essayez tous les codes qui :
+            To open Beaver's lock, try all combinations that:
             </p>
            <div class="features">
            <ul class="easy">
-              <li>commencent par le chiffre 8,</li>
-              <li>et contiennent deux fois le chiffre 5,</li>
-              <li>et contiennent une fois le chiffre 3.</li>
+              <li>begin with the digit 8,</li>
+              <li>and contain twice the digit 5,</li>
+              <li>and contain once the digit 3.</li>
            </ul>
            <ul class="medium">
-              <li>commencent par le chiffre 8,</li>
-              <li>et contiennent deux fois le chiffre 5,</li>
-              <li>et contiennent soit un 1 soit un 2.</li>
+              <li>begin with the digit 8,</li>
+              <li>and contain twice the digit 5,</li>
+              <li>and contain either the digit 1 or the digit 2.</li>
            </ul>
            <ul class="hard">
-              <li>contiennent deux fois le chiffre 3,</li>
-              <li>et contiennent deux fois le chiffre 5.</li>
+              <li>contain twice the digit 3,</li>
+              <li>and contain twice the digit 5.</li>
               <li style="list-style-type:none">&nbsp;</li>
            </ul>
            </div>
 
            <p class="hard">
-           Essayez d'ouvrir le cadenas en faisant le moins d'étapes possible.
-           N'hésitez pas à vous aider d'un papier&nbsp;! <!-- et d'un crayon-->
+           Try opening the lock in as few steps as possible.
+           You might find it helpful to use a piece of paper!
            </p>
             
-           <p class="hard" id="counter"><b>Nombre d'étapes effectuées : <span id='step_counter'></span></b>.</p>
+           <p class="hard" id="counter"><b>Number of steps so far: <span id='step_counter'></span></b>.</p>
 
           
             <div id="anim_container">

@@ -174,7 +174,7 @@ function initTask() {
       $("#feedback").html("");
       setButtonState("stop", false);
       setButtonState("execute", true);
-      setExecuteText("Essayer");
+      setExecuteText(taskStrings.execute);
    };
 
    task.getAnswerObject = function() {
@@ -205,7 +205,7 @@ function initTask() {
       resetRobot();
       setButtonState("stop", false);
       setButtonState("execute", true);
-      setExecuteText("Essayer");
+      setExecuteText(taskStrings.execute);
    };
 
    var clickExecute = function() {
@@ -215,17 +215,17 @@ function initTask() {
          simulate(simulation, answer[level], level);
          simulation.setAutoPlay(true);
          simulation.play();
-         setExecuteText("Pause");
+         setExecuteText(taskStrings.pause);
          setButtonState("stop", true);
       }
       else if (simulation.isPlaying()) {
          simulation.stop();
-         setExecuteText("Continuer");
+         setExecuteText(taskStrings.resume);
       }
       else {
          simulation.setAutoPlay(true);
          simulation.play();
-         setExecuteText("Pause");
+         setExecuteText(taskStrings.pause);
       }
    };
 
@@ -433,7 +433,7 @@ function initTask() {
       else {
          displayHelper.validate("stay");
       }
-      setExecuteText("Essayer");
+      setExecuteText(taskStrings.execute);
       simulation = null;
       callback();
    };

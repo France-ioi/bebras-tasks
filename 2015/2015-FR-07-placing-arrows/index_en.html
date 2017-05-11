@@ -34,9 +34,12 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-         alreadyObstacle: "Cette case contient déjà un obstacle.",
-         refuseObstacle: "Vous ne pouvez pas ajouter d'obstacle dans cette case.",
-         errorLoop: "Le robot tourne en boucle. Il n'arrivera donc jamais à la sortie.",
+         execute: "Try",
+         pause: "Pause",
+         resume: "Resume",
+         alreadyObstacle: "This cell already contains an obstacle.",
+         refuseObstacle: "You cannot add an obstacle in that cell.",
+         errorLoop: "The robot turns in cycles, thus it may never reach the exit.",
          success: "Success!"         
          };
 
@@ -76,17 +79,17 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               Le robot bleu avance s'il n'a pas d'obstacle devant lui. Sinon, il tourne d'un quart de tour à droite.
+               The blue robot moves forwards if there is no obstacle ahead. Else, it makes a quarter turn to its right.
             </p>
             <p>
-               Cliquez pour ajouter des obstacles, afin que le robot atteigne le rond vert. 
+               Click to add obstacles, in such a way as to make the robot reach the green circle.
             </p>
             <div id="anim_container">
                <div id="anim"></div>
                <div id="feedback"></div>
                <div id="instructions">
-                  <input type="button" id="execute" value="Essayer"/>
-                  <input type="button" id="stop" value="Arrêter"/>
+                  <input type="button" id="execute" value="Try"/>
+                  <input type="button" id="stop" value="Stop"/>
                   </div>
             </div>
             <img src="icon.png" style="display:none">
