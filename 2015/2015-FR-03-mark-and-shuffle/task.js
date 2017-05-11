@@ -539,7 +539,7 @@ function initTask() {
    var getResult = function(answer, level) {
       if (answer[level].phase != phases.drag && answer[level].phase != phases.finish) {
          // should never be seen by the user
-         return {success: false, message: taskStrings.wrongPhase };
+         return {success: false, message: "You need to first let the bird fly away." };
       }
       var iBird;
       for (iBird = 0; iBird < data[level].birds; iBird++) {

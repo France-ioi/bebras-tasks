@@ -18,14 +18,26 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script type="text/javascript">
          var taskStrings = {
+           instructions: [
+                  "1 step right",
+                  "1 step left",
+                  "1 step up",
+                  "1 step down",
+                  "N steps right",
+                  "N steps left",
+                  "N steps up",
+                  "N steps down",
+                  "increase N by 1"
+                  ],
+            resume: "Resume",
+            pause: "Pause",
             success: "Success!",
-            missingInstr: "Ajoutez des instructions à votre programme.",
-            incorrect: "Le dessin ne correspond pas.<br> Essayez avec d'autres instructions.",
-            noInstruction: "Aucune instruction fournie.",
-            completed: "Exécution terminée.",
-            repetitionNumber: "Répétition n°",
-            exitGrid: "Vous êtes sorti de la grille.",
-            cannotDecrease: "La valeur actuelle de N est 0, donc vous ne pouvez pas diminuer N."
+            missingInstr: "Add instructions to build your program.",
+            incorrect: "The drawing does not match.<br> Try with a different sequence of instructions.",
+            noInstruction: "No instruction provided.",
+            completed: "Execution completed.",
+            repetitionNumber: "Repetition n°",
+            exitGrid: "You went outside the grid."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -118,7 +130,7 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-            Pour reproduire le dessin objectif, construisez une séquence de commandes. <strong>Elle sera répétée <span class="nbLoops"></span> fois.</strong>
+            To reproduce the target drawing, make a sequence of instructions. <strong>It will be repeated <span class="nbLoops"></span> times.</strong>
             </p>
             <div id="top-spacing"></div>
             <div style="text-align:center">
@@ -127,7 +139,7 @@
                      <td>
                         <table class='examples valigntop'>
                            <tr>
-                              <td style="text-align:center"><b>Exemple<br> (la séquence est répétée <span class="nbLoops"></span> fois)</b></td>
+                              <td style="text-align:center"><b>Example<br> (sequence gets repeated <span class="nbLoops"></span> times)</b></td>
                            </tr>
                            <tr>
                               <td style="text-align:center">
@@ -140,7 +152,7 @@
                      <td>
                         <table class='objectif valigntop'>
                            <tr>
-                              <td style="text-align:center"><b>Objectif</b></td>
+                              <td style="text-align:center"><b>Target</b></td>
                            </tr>
                            <tr>
                               <td>
@@ -157,13 +169,13 @@
                <table class="columns" style="clear: both">
                <tr>
                   <td style="width:170px">
-                     <div class="column_head" style="text-align:center">Prenez les<br />instructions ici</div>
+                     <div class="column_head" style="text-align:center">Take instructions<br /> from here</div>
                   </td>
                   <td style="width:250px">
-                     <div class="column_head" style="text-align:center">Glissez les<br />instructions là <!--pour créer votre programme--></div>
+                     <div class="column_head" style="text-align:center">Drop instructions<br />there</div>
                   </td>
                   <td>
-                     <div class="column_head" style="text-align:center">Résultat de l'exécution<br/> (la séquence est répétée <span class="nbLoops"></span> fois)</div>
+                     <div class="column_head" style="text-align:center">Result of the execution<br/> (sequence gets repeated <span class="nbLoops"></span> times)</div>
                   </td>
                </tr>
                <tr>
@@ -174,9 +186,9 @@
                      <div id="simuButtons" class="buttons" style="text-align:center;padding:10px">
                         <input type="button" id="pause" value="Pause" onclick="task.pause()"/>
                         &nbsp;&nbsp;&nbsp;
-                        <input type="button" id="stop" value="Arrêter" onclick="task.stop()" />
+                        <input type="button" id="stop" value="Stop" onclick="task.stop()" />
                      </div>
-                     <div id="variableInfo" class="medium hard">La valeur actuelle de N est : <span id="valueS">1</span>.</div>
+                     <div id="variableInfo" class="medium hard">Current value of N is: <span id="valueS">1</span>.</div>
                      <div><span id="message"></span></div>
                      <div id="result"></div>            
                      
@@ -186,7 +198,7 @@
                   <td></td>
                   <td>
                      <div class="buttons" style="text-align: center">
-                        <input id="tryOrReset" type="button" onclick="task.trySequence()" value="Essayer">
+                        <input id="tryOrReset" type="button" onclick="task.trySequence()" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
                      </div>
                   </td>
                </tr>

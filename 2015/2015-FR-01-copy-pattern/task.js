@@ -12,17 +12,7 @@ function initTask() {
       medium: 12,
       hard: 12
    };
-   var instructions = [
-      "1 pas à droite",
-      "1 pas à gauche",
-      "1 pas en haut",
-      "1 pas en bas",
-      "N pas à droite",
-      "N pas à gauche",
-      "N pas en haut",
-      "N pas en bas",
-      "augmenter N de 1"
-      ];
+   var instructions = taskStrings.instructions;
    var nbLoops = {
       easy: 6,
       medium: 5,
@@ -488,7 +478,7 @@ function initTask() {
       curSimulation = getSimulationInit([], level);
       simuState = simuStates.initial;
       $("#simuButtons input").attr("disabled", "disabled");
-      $("#pause").val("Pause");
+      $("#pause").val(taskStrings.pause);
       $("#valueS").html(curSimulation.s);
       $("#message").html("");
    };
@@ -546,10 +536,10 @@ function initTask() {
    task.pause = function() {
       if (simuState == simuStates.animating) {
          simuState = simuStates.paused;
-         $("#pause").val("Continuer");
+         $("#pause").val(taskStrings.resume);
       } else {
          simuState = simuStates.animating;
-         $("#pause").val("Pause");
+         $("#pause").val(taskStrings.pause);
       }
    };
 

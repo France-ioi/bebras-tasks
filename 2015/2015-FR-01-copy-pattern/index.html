@@ -18,14 +18,26 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script type="text/javascript">
          var taskStrings = {
+           instructions: [
+                  "1 pas à droite",
+                  "1 pas à gauche",
+                  "1 pas en haut",
+                  "1 pas en bas",
+                  "N pas à droite",
+                  "N pas à gauche",
+                  "N pas en haut",
+                  "N pas en bas",
+                  "augmenter N de 1"
+                  ],
+            resume: "Continuer",
+            pause: "Pause",
             success: "Bravo, vous avez réussi !",
             missingInstr: "Ajoutez des instructions à votre programme.",
             incorrect: "Le dessin ne correspond pas.<br> Essayez avec d'autres instructions.",
             noInstruction: "Aucune instruction fournie.",
             completed: "Exécution terminée.",
             repetitionNumber: "Répétition n°",
-            exitGrid: "Vous êtes sorti de la grille.",
-            cannotDecrease: "La valeur actuelle de N est 0, donc vous ne pouvez pas diminuer N."
+            exitGrid: "Vous êtes sorti de la grille."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -160,7 +172,7 @@
                      <div class="column_head" style="text-align:center">Prenez les<br />instructions ici</div>
                   </td>
                   <td style="width:250px">
-                     <div class="column_head" style="text-align:center">Glissez les<br />instructions là <!--pour créer votre programme--></div>
+                     <div class="column_head" style="text-align:center">Glissez les<br />instructions là</div>
                   </td>
                   <td>
                      <div class="column_head" style="text-align:center">Résultat de l'exécution<br/> (la séquence est répétée <span class="nbLoops"></span> fois)</div>
