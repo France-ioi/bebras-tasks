@@ -3,6 +3,7 @@ standaloneAddContents({
   code: "castor_2015_en",
   title: "French Beaver 2015",
   folder: "2015/",
+  language: "en",
   tasks: [
      { code: "2015-JP-04-crane-operating",
        title: "Crane operating" },
@@ -23,7 +24,7 @@ standaloneAddContents({
      { code: "2015-FR-07-placing-arrows",
        title: "Turning robot" }, 
      { code: "2015-FR-01-copy-pattern",
-       title: "Pattern copying" }, 
+       title: "Pattern copy" }, 
      { code: "2015-SI-05-horse-races",
        title: "Horse races" }, 
      { code: "2015-FR-15-guess-who",

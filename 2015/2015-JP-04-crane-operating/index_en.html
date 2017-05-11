@@ -34,10 +34,11 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-         cannotDrop: "Cette case est pleine, la grue ne peut rien y déposer.",
-         cannotGrab: "Cette case est vide, la grue ne peut rien y prendre.",
-         success: "Bravo, vous avez réussi !",
-         successPartial: function(steps, minSteps) { return "Vous avez atteint l'objectif en " + steps + " étapes.<br/> Recommencez pour essayer de ne faire que " + minSteps + " étapes."; } };
+         instructions: "Click on the numbered buttons above.",
+         cannotDrop: "This cell is not empty, thus the crane cannot drop a block there.",
+         cannotGrab: "This cell is empty, thus the crane cannot pick up a block there.",
+         success: "Success!",
+         successPartial: function(steps, minSteps) { return "You have reached the target in " + steps + " steps.<br/> Try again to perform no more than " + minSteps + " steps."; } };
 
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -127,16 +128,17 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
                <p>
-                  Pilotez la grue aimantée en cliquant sur les boutons numérotés, pour déplacer les blocs comme illustré ci-dessous.
+                  Operate the magnetic crane by clicking on the numbered buttons. 
+                  <p>Your goal is to place the blocks as shown below.</p>
                </p>
                <p>
-                  Moins vous ferez d'étapes, plus vous aurez de points.
+                  The fewer steps you take, the more points you will get.
                </p>
             <table id="inputs">
                <tr>
                   <td id="target_container">
                      <p>
-                        Objectif :
+                        Target:
                      </p>
                      <div id="target_anim"></div>
                   </td>
@@ -161,8 +163,8 @@
 
             
             <div id="buttons">
-               <span id="message_counter">Nombre d'étapes effectuées : <span id="step_counter"></span>.</span>
-               <input type="button" id="undo" value="Annuler la dernière étape" />
+               <span id="message_counter">Number of steps so far: <span id="step_counter"></span>.</span>
+               <input type="button" id="undo" value="Cancel last step" />
                <!--<input type="button" id="reset" value="Recommencer" />-->
             </div>
             <img src="magnet.png" style="display:none">           

@@ -33,9 +33,9 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-         incorrectNumber: function(nbTarget) { return "Vous devez sélectionner " + nbTarget + " mots."; },
-         incorrect: "Vous n'avez pas sélectionné les bons mots. Essayez encore.",
-         correct: "Bravo, vous avez réussi !" };
+         incorrectNumber: function(nbTarget) { return "You should select " + nbTarget + " words."; },
+         incorrect: "You did not select the right words. Try again.",
+         correct: "Success!" };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -134,29 +134,29 @@
                <tr>
                   <td>
                      <p>
-                        Un motif est formé de lettres<span class="easy"> et de points d'interrogation</span><span class="medium hard">, de points d'interrogation, et de "trois petits points"</span>.
+                        A pattern is made of letters<span class="easy"> and question marks</span><span class="medium hard">, question marks, and "triple dots"</span>.
                      </p>
                      <p>
-                        Chaque symbole <span class="symbol">?</span> désigne exactement une lettre, n'importe laquelle.
+                        Each symbol <span class="symbol">?</span> stands for exactly one letter (any letter).
                      </p>
                      <p class="medium hard">
-                       Chaque symbole <span class="symbol">&#8230;</span> désigne zéro, une, ou plusieurs lettres.
+                        Each symbol <span class="symbol">&#8230;</span> stands for zero, one, or several letters.
                      </p>
                   </td>
                   <td>
                      <div class="example_container">
-                        <p class="example_title"><strong>Exemple</strong></p>
-                        <p> Motif&nbsp;: <strong><span id="pattern_example_0" class="pattern"></span></strong>
+                        <p class="example_title"><strong>Example</strong></p>
+                        <p> Pattern: <strong><span id="pattern_example_0" class="pattern"></span></strong>
                         </p>
-                        <p> Mots correspondants&nbsp;: </p>
+                        <p> Matching words: </p>
                         <table id="example0" class="words example"></table>
                      </div>
                   </td>
                   <td>
                      <div class="example_container">
-                       <p class="example_title"><strong>Exemple</strong></p>
-                        <p> Motif&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
-                        <p> Mots correspondants&nbsp;: </p>
+                       <p class="example_title"><strong>Example</strong></p>
+                        <p> Pattern:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
+                        <p> Matching words: </p>
                         <table id="example1" class="words example"></table>
                      </div>
                   </td>
@@ -164,9 +164,9 @@
             </table>
             <br/>
             <div id="pattern_given">
-               Sélectionnez <span class="hard">tous</span> les <span class="easy medium"><b>3</b></span> mots qui correspondent
-               au motif&nbsp;:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
-               <span class="hard"><br/>On ne vous dit pas combien de mots correspondent.</span>
+               Select <span class="hard">all</span> the <span class="easy medium"><b>3</b></span> words that corrrespond
+               to the pattern:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
+               <span class="hard"><br/>You are not getting told the number of matching words.</span>
             </div>
             <table id="main_words" class="words"></table>
             <img src="icon.png" style="display:none">

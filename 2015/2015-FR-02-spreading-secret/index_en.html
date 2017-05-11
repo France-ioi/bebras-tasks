@@ -38,10 +38,10 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-         overlap: "Au moins deux antennes ont leurs ondes qui se recouvrent.",
-         missing: "Il reste des cases blanches qui ne sont pas couvertes.",
-         success: "Bravo, vous avez réussi !",
-         warning: "Attention : les ondes ne doivent pas se recouvrir." };
+         overlap: "At least two antennas have an overlapping wave range.",
+         missing: "There remains uncovered white cells.",
+         success: "Success!",
+         warning: "Warning: the wave ranges should not overlap." };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -70,9 +70,9 @@
            <tr>
               <td>
                  <p>
-                  Cliquez sur les cases <span class="hard"><b>blanches et grises</b></span> de la grille pour y placer des antennes, afin que toutes les cases <span class="easy medium">blanches</span> <span class="hard"><b>blanches</b></span> soient couvertes par des ondes.
+                  Click on the <span class="hard"><b>white and gray</b></span> cells from the grid to place antennas, in such a way that all the white cells get covered by waves.
                  </p>
-                <p>Les ondes des antennes ne doivent pas se superposer. </p>
+                <p>The wave ranges associated with the antennas should not overlap. </p>
                 <div id="error_text"></div>
               </td>
               <td>
@@ -81,7 +81,6 @@
               </td>
            </tr>
            </table>
-
 
             <div id="grid_container" style="text-align:center">
                <div id="grid"></div>

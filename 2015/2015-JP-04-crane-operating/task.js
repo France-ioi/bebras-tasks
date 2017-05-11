@@ -361,7 +361,7 @@ function initTask() {
    var resetPaperPositions = function() {
       $("#feedback").html("");
       if (answer[level].length === 0) {
-         $("#feedback").html("Cliquez sur les boutons numérotés ci-dessus.");
+         $("#feedback").html(taskStrings.instructions);
       }
 
       for (var iSlot in initialSlotToBlock) {

@@ -42,9 +42,9 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-         error: "Le castor au début de la flèche rouge est plus âgé que celui à la fin de la flèche.",
-         remains: "Il vous reste des étiquettes à placer.",
-         success: "Bravo, vous avez réussi !" };
+         error: "The beaver at the start of the red arrow is older than the beaver at the end of the arrow.",
+         remains: "There remains labels to be placed.",
+         success: "Success!" };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -73,18 +73,19 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
            <p>
-            Glissez les étiquettes avec les prénoms dans les bonnes cases.
+            Place the labels showing the names into the appropriate cells.
             </p>
             <div class="easy medium">
                <p>
-               Une flèche doit toujours aller d'une personne plus jeune vers une personne plus âgée.
+               An arrow should always go from a younger person to an older person.
                </p>
             </div>
             <div class="hard">
                <p>
-               Une flèche doit toujours aller d'une personne plus jeune vers une personne plus âgée, lorsque les deux cases aux extrémités de cette flèche contiennent une étiquette.
+               An arrow should always go from a younger person to an older person,
+               when both the start cell and the end cell of this arrow contain a label.
                </p>
-               <p id="remark">Notez qu'une des cases restera vide.</p>
+               <p id="remark">Note that one of the cells will remain empty.</p>
             </div>
             <div id="anim" class="touch"></div>
             <div id="execute_container">
@@ -129,7 +130,6 @@
          </div>
 
          <h2>C'est de l'informatique</h2> 
-         <!-- <div class="hard">   -->
          <p>
          Les flèches représentent ici des contraintes d'âges, mais elles pourraient 
          représenter n'importe quel type de relation entre des objets.
@@ -157,6 +157,7 @@
          Un ordinateur est capable de construire un tri topologique
          en quelques secondes, même lorsqu'il y a des milliards de flèches.
          </p>
-      <!-- </div> -->
+-->
+	  </div> <!-- task-solution -->
   </body>
 </html>
