@@ -30,7 +30,7 @@
    task.load= function(views, callback) {
       task.bestScore = "";
       creeTerrain();
-      task.reloadAnswer("");
+      task.reloadAnswer("", function() {});
       dessine();
       $("#runbutton-2011-FR-07").click(go);
       callback();
