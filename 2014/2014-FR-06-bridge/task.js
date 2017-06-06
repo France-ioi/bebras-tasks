@@ -222,7 +222,7 @@ function initTask() {
          }
       }
       timeoutId = setTimeout(function() {
-         $("#cross_or_retry").text("Remettre les bûches");
+         $("#cross_or_retry").text(taskStrings.putLogsBack);
          $("#cross_or_retry").removeAttr('disabled');
          if (nbBallsCrossing == nbBalls) {
             platform.validate("done");
@@ -237,9 +237,9 @@ function initTask() {
          var answer = strAnswerToAnswer(strAnswer);
          var nbBallsCrossing = getNbBallsCrossing(answer);
          if (nbBallsCrossing == nbBalls) {
-            callback(taskParams.maxScore, "Bravo, toutes les bûches ont traversé le pont&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          } else {
-            callback(taskParams.noScore, "Le pont s'est écroulé&nbsp;!");
+            callback(taskParams.noScore, taskStrings.failure);
          }
       });
    }

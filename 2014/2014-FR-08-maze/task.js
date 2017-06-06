@@ -50,7 +50,12 @@ function initTask() {
    var curStep = 0;
 
    var difficulty;
-   var texts = ["haut", "droite", "bas", "gauche"];
+   var texts = [
+      "haut",
+      "droite",
+      "bas",
+      "gauche"
+   ];
    
    var playModes = {
       stopped: 0,
@@ -280,8 +285,8 @@ function initTask() {
    var drawLaby = function() {
       paper = Raphael('anim', paperWidth, paperHeight);
 
-      paper.text(paperWidth / 4, 15, "Commandes disponibles").attr({'font-size':16, 'font-weight': 'bold'});
-      paper.text(3 * paperWidth / 4, 15, "Votre programme").attr({'font-size':16, 'font-weight': 'bold'});
+      paper.text(paperWidth / 4, 15, taskStrings.availableCommands).attr({'font-size':16, 'font-weight': 'bold'});
+      paper.text(3 * paperWidth / 4, 15, taskStrings.yourProgram).attr({'font-size':16, 'font-weight': 'bold'});
 
 
       //DragAndDropSystem
@@ -407,11 +412,11 @@ function initTask() {
             iStep++;
          }
          if (simulation.nbArrivees == 2) {
-            callback(taskParams.maxScore, "Bravo, vous avez fait sortir les deux billes&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          } else if (simulation.nbArrivees == 1) {
-            callback(taskParams.minScore, "Une seule des deux billes est sortie&nbsp;!");
+            callback(taskParams.minScore, taskStrings.partialFailure);
          } else {
-            callback(taskParams.minScore, "Aucune bille n'est sortie&nbsp;!"); 
+            callback(taskParams.minScore, taskStrings.failure); 
          }
       });
    };

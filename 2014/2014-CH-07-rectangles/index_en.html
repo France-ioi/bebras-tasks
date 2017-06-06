@@ -18,8 +18,8 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-CH-07-rectangles/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
           "translators": [],
           "license": "",
@@ -32,23 +32,23 @@
       </script>
       <script>
          var taskStrings = {
-            takeRedPencil: "Prends le crayon rouge",
-            takeBlackPencil: "Prends le crayon noir",
-            move1Cell: "Avance d'une case",
-            move2Cells: "Avance de 2 cases",
-            move3Cells: "Avance de 3 cases",
-            turnLeft: "Tourne à gauche",
-            turnRight: "Tourne à droite",
-            deleteDrawing: "Effacer le dessin",
-            noInstructionProvided: "Aucune instruction fournie.",
-            executionOver: "Exécution terminée.",
-            repetitionNumber: "Répétition n°",
-            robotExitsGrid: "Le robot est sorti de la zone.",
-            attempt: "Essayer",
-            stop: "Arrêter",
-            moveInstructions: "Déplacez les instructions dans les cases vides pour construire la séquence.",
-            success: "Bravo ! Vous avez réussi.",
-            failure: "Cette séquence ne produit pas le bon dessin. Essayez autrement."
+            takeRedPencil: "Take the red pencil",
+            takeBlackPencil: "Take the black pencil",
+            move1Cell: "Move one cell forward",
+            move2Cells: "Move 2 cells forward",
+            move3Cells: "Move 3 cells forward",
+            turnLeft: "Turn left",
+            turnRight: "Turn right",
+            deleteDrawing: "Clear drawing",
+            noInstructionProvided: "No instructions provided.",
+            executionOver: "Execution completed.",
+            repetitionNumber: "Repetition number ",
+            robotExitsGrid: "The robot is out of the zone.",
+            attempt: "Try",
+            stop: "Stop",
+            moveInstructions: "Move the instructions in the empty boxes to build the program.",
+            success: "Congratulations! You succeeded.",
+            failure: "This sequence does not produce the right design. Try again."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -102,22 +102,27 @@
    <body>
       <div id="task">
          <img src="robot.png" style="display:none">
-         <h1>Dessin interactif</h1>
+         <h1>Robot Drawing</h1>
          <p>
          <div style="float: right; margin-top:-1.5em"><div id="drawing1"></div></div>
-         Vous disposez d'un robot capable de se déplacer et tracer des traits noirs ou rouges.
-         Votre objectif est de programmer le robot pour qu'il dessine l'image ci-contre.
+         You have a robot. This robot can move and draw black or red lines.
+         </p>
+<p>         
+Program the robot to draw the target image.
+</p>
+         <p>
+         The robot is represented by the green triangle.
          </p>
          <p>
-         Le robot, représenté par le triangle vert, va <b>répéter 4 fois</b> de suite 
-         votre séquence d'instructions. Pour construire la séquence, faites
-         glisser les instructions ci-dessous. 
-         </p>
+         Drag the instructions below to Build your program. </p>
+         <p>
+         <b> Your Program will repeat itself 4 times. </ b></p>
+         
          <table class="columns" style="clear: both">
          <tr>
-         <td style="width:220px"><div class="column_head">Choisissez les instructions</div></td>
-         <td style="width:220px"><div class="column_head">Construisez votre séquence</div></td>
-         <td style="width:250px"><div class="column_head">Résultat avec 4 répétitions</div></td>
+         <td style="width:220px"><div class="column_head">Instructions</div></td>
+         <td style="width:220px"><div class="column_head">Build your Program</div></td>
+         <td style="width:250px"><div class="column_head">Result after 4 repetitions</div></td>
          </tr>
          <tr>
          <td colspan="2">

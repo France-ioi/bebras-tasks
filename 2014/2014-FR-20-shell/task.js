@@ -111,98 +111,99 @@ function initTask() {
          var op = pieces[0];
          if ((op == "ls")) {
             if (nb != 1) {
-                msg = "La commande ls ne doit pas être suivie par du texte.\n";
+                msg = taskStrings.lsNotFollowedByText;
             } else {
                sortFiles(files);
                if (files.length == 0)
-                  msg = "Aucun fichier présent.\n"
+                  msg = taskStrings.noFilePresent;
                for (var i = 0; i < files.length; i++) {
                   var f = files[i]; 
                   // assert (f.name.length <= 12)
                   var spaces = getSpaces(13 - f.name.length);
-                  msg += getSpaces(6) + f.name + spaces + f.size + " ko\n";
+                  msg += getSpaces(6) + f.name + spaces + f.size + " " + taskStrings.kBUnit;
                }
 
             }  
          } else if (op == "rm") {
             if (nb != 2) {
-               msg = "La commande rm doit être suivie d'un nom de fichier.\n"
+               msg = taskStrings.rmFollowedByFileName;
             } else {
                var fname = pieces[1];
                if (! isValidName(fname)) {
-                  msg = "Le nom de fichier spécifié est invalide.\n";
+                  msg = taskStrings.invalidFileName;
                } else {
                   var idx = indexOfFile(files, fname);
                   if (idx == -1) {
-                     msg = "Le fichier spécifié n'existe pas. Impossible de le supprimer.\n";
+                     msg = taskStrings.nonexistentFileName;
                   } else {
                      files.splice(idx, 1);
-                     msg = "Le fichier a été supprimé.\n";
+                     msg = taskStrings.fileDeleted;
                   }
                }
             }
          } else if (op == "cp" && !isEasy) {
             if (nb != 3) {
-               msg = "La commande cp doit être suivie de deux noms de fichiers.\n"
+               msg = taskStrings.commandFollowedByTwoFileNames(op);
             } else { 
                var fname1 = pieces[1];
                var fname2 = pieces[2];
                if (! isValidName(fname1)) {
-                  msg = "Le premier nom de fichier spécifié est invalide.\n";
+                  msg = taskStrings.invalidFirstFileName;
                } else if (!isValidName(fname2)) {
-                  msg = "Le second nom de fichier spécifié est invalide.\n";
+                  msg = taskStrings.invalidSecondFileName;
                } else if (fname1 == fname2) {
-                  msg = "Les deux noms fournis doivent être différents\n(majuscules et minuscules sont considérées comme équivalentes).\n";
+                  msg = taskStrings.twoFileNamesMustBeDifferent;
                } else {
                   var idx1 = indexOfFile(files, fname1);
                   if (idx1 == -1) {
-                     msg = "Le premier fichier n'existe pas. Impossible de le copier.\n";
+                     msg = taskStrings.nonexistentFirstFileName + taskStrings.cantCopyIt + "\n";
                   } else {
                      var size = files[idx1].size;
                      var idx2 = indexOfFile(files, fname2);
                      if (idx2 != -1) {
-                        msg = "Il existe déjà un fichier portant ce nom. Impossible de copier.\n";
+                        msg = taskStrings.fileAlreadyExists + taskStrings.cantCopy + "\n";
                       } else {
                         files.push({ name: fname2, size: size });
-                        msg = "Le fichier a été copié.\n";
+                        msg = taskStrings.fileCopied + "\n";
                       }
                   }
                }
             }
          } else if (op == "mv" && !isEasy) {
             if (nb != 3) {
-               msg = "La commande mv doit être suivie de deux noms de fichiers.\n"
+               msg = taskStrings.commandFollowedByTwoFileNames(op);
             } else {
                var fname1 = pieces[1];
                var fname2 = pieces[2];
                if (! isValidName(fname1)) {
-                  msg = "Le premier nom de fichier spécifié est invalide.\n";
+                  msg = taskStrings.invalidFirstFileName;
                } else if (! isValidName(fname2)) {
-                  msg = "Le second nom de fichier spécifié est invalide.\n";
+                  msg = taskStrings.invalidSecondFileName;
                } else if (fname1 == fname2) {
-                  msg = "Les deux noms fournis doivent être différents\n(majuscules et minuscules sont considérées comme équivalentes).\n";
+                  msg = taskStrings.twoFileNamesMustBeDifferent;
                } else {
                   var idx1 = indexOfFile(files, fname1);
                   if (idx1 == -1) {
-                     msg = "Le fichier spécifié n'existe pas. Impossible de le renommer.\n";
+                     msg = taskStrings.nonexistentFirstFileName + taskStrings.cantRenameIt;
                   } else {
                      var idx2 = indexOfFile(files, fname2);
                      if (idx2 != -1) {
-                        msg = "Il existe déjà un fichier portant ce nom. Impossible de renommer.\n";
+                        msg = taskStrings.fileAlreadyExists + taskStrings.cantRename;
                      } else {
                         files[idx1].name = fname2;
-                        msg = "Le fichier a été renommé.\n";
+                        msg = taskStrings.fileCopied;
                      }
                   }
                }
             }
-         } else if (op == "1s") {
-            msg = "Commande non reconnue.\nNotez que 'ls' commence par la lettre 'L' et non par le chiffre '1'.\n";
          } else {
-            msg = "Commande non reconnue.\n";
+            msg = taskStrings.unrecognizedCommand;
+            if (op == "1s") {
+               msg += "\n" + taskStrings.unrecognized1s;
+            }
          }
       }
-      output = "$ " + command + "\n" + msg; // Note: utiliser += pour faire du append
+      output = "$ " + command + "\n" + msg + "\n"; // Note: utiliser += pour faire du append
    };
 
    task.executeInput = function() {
@@ -259,9 +260,9 @@ function initTask() {
          var commands = commandsOfStrAnswer(strAnswer);
          var files = executeCommands(commands);
          if (isFinished(files)) {
-            callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          } else {
-            callback(taskParams.minScore, "Vous n'avez pas obtenu l'état souhaité. <br />Essayez d'autres commandes, ou bien recommencez tout.");
+            callback(taskParams.minScore, taskStrings.failure);
          }
       });
    }

@@ -107,11 +107,11 @@ function initTask () {
       platform.getTaskParams(null, null, function(taskParams) {
          var answer = answerOfStrAnswer(strAnswer);
          if (Beav.Object.eq(answer, task.solution)) {
-            callback(taskParams.maxScore, "Bravo, c'est le bon ordre&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          // } else if (Beav.Object.eq(answer, initState)) {
          //   callback(taskParams.noScore, "Ce n'est pas le bon ordre.");
          } else {
-            callback(taskParams.minScore, "Ce n'est pas le bon ordre.");
+            callback(taskParams.minScore, taskStrings.failure);
          }
       });
    };

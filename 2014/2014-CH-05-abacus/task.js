@@ -241,7 +241,7 @@ function initTask() {
    grader.gradeTask = function(strAnswer, token, callback) {
       platform.getTaskParams(null,null, function(taskParams) {
          if (strAnswer == "") {
-            callback(taskParams.minScore, 'Les boules ne représentent pas la valeur demandée.');
+            callback(taskParams.minScore, taskStrings.ballsIncorrectValue);
             return;
          }
          seed = taskParams.randomSeed;
@@ -249,9 +249,9 @@ function initTask() {
          var value = valueOfState(state);
          var target = getTarget();
          if (value == target) {
-            callback(taskParams.maxScore, "Bravo ! vous avez réussi.");
+            callback(taskParams.maxScore, taskStrings.success);
          } else {
-            callback(taskParams.minScore, "Les boules ne représentent pas la valeur demandée.");
+            callback(taskParams.minScore, taskStrings.ballsIncorrectValue);
          }
       });
    }

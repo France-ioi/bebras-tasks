@@ -43,15 +43,15 @@
      </style>
      <script>
          var taskStrings = {
-            numberOfLetters: "Nombre de lettres inscrites&nbsp;:",
-            clickOnCells: "Cliquez sur les cases pour que Castor y inscrive des lettres.",
-            failure: "Vous n'avez pas trouvé le mot",
+            numberOfLetters: "Number of letters:",
+            clickOnCells: "Click on the boxes to show the letters.",
+            failure: "You did not find the word",
             success: function(nbSteps) {
-               return "Bravo, vous avez trouvé le mot en demandant " + nbSteps + " lettres seulement&nbsp;!";
+               return "Congratulations, you found the word by asking " + nbSteps + " letters only&nbsp;!";
             },
             partialSuccess: function(nbSteps) {
-               return "Vous avez trouvé le mot en demandant " + nbSteps + " lettres.<br /><br />" +
-                  "Recommencez pour essayer de faire mieux.";
+               return "You found the word by asking " + nbSteps + " Letters.<br /><br />" +
+                  "You can do it better. Try again.";
             }
          };
      </script>
@@ -59,17 +59,17 @@
   </head>
   <body>
       <div id="task">
-      <h1>Le défi</h1>
+      <h1>The Challenge</h1>
           <p>
          <img src="castor_small.png" style="float:right;margin-left:1em;height:120px" >
-           Castor vous défie au jeu suivant. Quand vous cliquez sur une case, il y inscrit une lettre parmi <b>C</b>, <b>A</b>, <b>S</b> ou <b>T</b>.
+           Beavers challenges you to the next game. When you click on a box, it draw a letter from <b>C</b>, <b>A</b>, <b>S</b> or <b>T</b>.
           </p>
           <p>
-            Votre but est d'obtenir le mot «&nbsp;<span id="target_pattern" style="font-weight:bold"></span>&nbsp;» en cliquant sur un <b>minimum</b> de cases. 
+            Your goal is to get the word «&nbsp;<span id="target_pattern" style="font-weight:bold"></span>&nbsp;» By clicking on the <b> minimum </ b> number of boxes. 
           </p>
           <p>
-           Castor est obligé de faire apparaître ce mot quelque part, mais attention, il a une stratégie efficace pour vous empêcher de réussir à le trouver facilement&nbsp;!
-           <span class="twolines">La séquence peut se trouver soit sur la première ligne, soit sur la seconde.</span>      
+           Beavers is forced to make this word appear somewhere, but beware, it has an effective strategy to keep you away from succeeding to finding it easily.
+           <span class="twolines">The sequence can be either on the first line or on the second.</span>      
           </p>
           <center>
              <div id="anim"></div>

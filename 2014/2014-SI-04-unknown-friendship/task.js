@@ -118,7 +118,7 @@ function initTask () {
          for (var row = 0; row < 2; row++) {
             var s1 = names[edges[2*col+row][0]];
             var s2 = names[edges[2*col+row][1]];
-            s += "<li>" + s1 + " et " + s2 + "</li>";
+            s += "<li>" + s1 + " " + taskStrings.and + " " + s2 + "</li>";
          }
          s += "</ul></td>";
       }
@@ -291,11 +291,11 @@ function initTask () {
       platform.getTaskParams(null, null, function(taskParams) {
          innerReloadAnswer(strAnswer);
          if (! allPlaced()) {
-            callback(taskParams.noScore, "Placez tous les noms dans les rectangles.");
+            callback(taskParams.noScore, taskStrings.placeNamesOnRectangles);
          } else if (isCorrect()) {
-            callback(taskParams.maxScore, "Bravo, vous avez bien placé les amis&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          } else {
-            callback(taskParams.noScore, "Les amis sont mal placés. Essayez autrement.");
+            callback(taskParams.noScore, taskStrings.failure);
          }
       });
    };

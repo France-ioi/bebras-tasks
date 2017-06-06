@@ -22,8 +22,8 @@
 
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-SP-02-traffic/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "",
           "license": "CC BY-SA 3.0",
           "translators": [
@@ -43,13 +43,13 @@
       </script>
       <script>
          taskStrings = {
-            removeBeavers: "Retirer les castors",
-            arrival: "Arrivée",
-            departure: "Départ",
-            attempt: "Essayer",
-            failureCycle: "Certains castors tournent en rond&nbsp;!",
-            failureIsolatedNodes: "Certains castors ne sont pas arrivés à la maison rouge.",
-            success: "Bravo, les castors sont réunis&nbsp;!"
+            removeBeavers: "Remove Beavers",
+            arrival: "Arrival",
+            departure: "Departure",
+            attempt: "Try",
+            failureCycle: "Some beavers go around in a circle.",
+            failureIsolatedNodes: "Some beavers did not arrive at the red house.",
+            success: "Congratulation, You did it."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -59,12 +59,14 @@
    <body>
       <div id="task">
          <img src="castor_tete.png" style="display:none">
-         <h1>Grande réunion</h1>
+         <h1>Great Meeting</h1>
             <p>
-            Les flèches du diagramme ci-dessous décrivent les chemins que les castors peuvent emprunter pour se déplacer entre leurs maisons. La grille située à côté contient une case blanche pour chaque flèche. Par exemple, la case de la grille située à la ligne&nbsp;<b>A</b> et à la colonne&nbsp;<b>D</b> correspond à la flèche reliant la maison&nbsp;<b>A</b> à la maison&nbsp;<b>D</b>.
+            The arrows in the diagram below describe the paths that beavers can use to move between their homes.
+	    The grid next to it contains a white box for each arrow.
+	    For example, The box of the grid in line&nbsp;<b>A</b> and to the column&nbsp;<b>D</b> Corresponds to the arrow connecting the house&nbsp;<b>A</b> and house&nbsp;<b>D</b>.
             </p>
             <p>
-            Votre objectif est de sélectionner un ensemble de flèches tel que si tous les castors sortent de leur maison et suivent les flèches, alors ils se retrouvent tous dans la maison rouge (marquée&nbsp;<b>L</b>). Cliquez sur les cases blanches pour sélectionner les flèches correspondantes.
+            Your goal is to select a set of arrows such that if all beavers come out of their house and follow the arrows, then find themselves in the red house <b>L</b>. Click on the white boxes to select the corresponding arrows.
             </p>
             <table><tr>
                <td style="width:300px"><div id="graph"></div></td>

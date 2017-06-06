@@ -16,8 +16,8 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-FR-20-shell/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
           "translators": [],
           "license": "",
@@ -29,31 +29,31 @@
       </script>
       <script>
          taskStrings = {
-            lsNotFollowedByText: "La commande ls ne doit pas être suivie par du texte.\n",
-            noFilePresent: "Aucun fichier présent.",
-            kBUnit: "ko",
-            rmFollowedByFileName: "La commande rm doit être suivie d'un nom de fichier.",
-            invalidFileName: "Le nom de fichier spécifié est invalide.",
-            nonexistantFileName: "Le fichier spécifié n'existe pas. Impossible de le supprimer.",
-            fileDeleted: "Le fichier a été supprimé.",
+            lsNotFollowedByText: "The ls command should not be followed by text.\n",
+            noFilePresent: "No files present.",
+            kBUnit: "kB",
+            rmFollowedByFileName: "The rm command must be followed by a filename.",
+            invalidFileName: "The specified file name is invalid.",
+            nonexistentFileName: "The specified file does not exist. Unable to delete it.",
+            fileDeleted: "The file has been deleted.",
             commandFollowedByTwoFileNames: function(command) {
-               return "La commande " + command + " doit être suivie de deux noms de fichiers.";
+               return "The " + command + " command must be followed by two file names..",
             },
-            invalidFirstFileName: "Le premier nom de fichier spécifié est invalide.",
-            invalidSecondFileName: "Le second nom de fichier spécifié est invalide.",
-            twoFileNamesMustBeDifferent: "Les deux noms fournis doivent être différents\n(majuscules et minuscules sont considérées comme équivalentes).",
-            nonexistentFirstFileName: "Le premier fichier n'existe pas.",
-            fileAlreadyExists: "Il existe déjà un fichier portant ce nom.",
-            cantCopyIt: "Impossible de le copier.",
-            cantCopy: "Impossible de copier.",
-            fileCopied: "Le fichier a été copié.",
-            cantRenameIt: "Impossible de le renommer.",
-            cantRename: "Impossible de renommer.",
-            fileRenamed: "Le fichier a été renommé.",
-            unrecognizedCommand: "Commande non reconnue.",
-            unrecognized1s: "Notez que 'ls' commence par la lettre 'L' et non par le chiffre '1'.",
-            success: "Bravo, vous avez réussi&nbsp;!",
-            failure: "Vous n'avez pas obtenu l'état souhaité. <br />Essayez d'autres commandes, ou bien recommencez tout.",
+            invalidFirstFileName: "The first specified file name is invalid.",
+            invalidSecondFileName: "The second specified file name is invalid.",
+            twoFileNamesMustBeDifferent: "The two names provided must be different\n(Uppercase and lowercase are considered equivalent).",
+            nonexistentFirstFileName: "The first file does not exist.",
+            fileAlreadyExists: "There is already a file with this name.",
+            cantCopyIt: "Can not copy it.",
+            cantCopy: "Unable to copy.",
+            fileCopied: "The file has been copied.",
+            cantRenameIt: "Can not rename it.",
+            cantRename: "Unable to Rename.",
+            fileRenamed: "The file has been renamed.",
+            unrecognizedCommand: "Command is not recognized",
+            unrecognized1s: "Note that 'ls' begins with the letter 'L' and not with the digit '1'.",
+            success: "Congratulations, you have succeeded!",
+            failure: "You did not get the required goal. <br />Try again."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -105,35 +105,35 @@
          <h1>Terminal</h1>
 
          <p>
-         Vous disposez d'une application permettant de manipuler des fichiers avec les commandes suivantes&nbsp;:
+         You have an application to edit files with the following commands&nbsp;:
          </p>
          <div class="easy">
             <ul class="commands">
-            <li><span class="inline_shell">ls</span> affiche le nom et la taille de tous les fichiers présents. Par exemple,
-            l'affichage <span class="inline_shell">zora&nbsp;&nbsp;50&nbsp;ko</span> indique qu'il y a un fichier nommé «&nbsp;zora&nbsp;» de taille 50&nbsp;ko. </li>
-            <li><span class="inline_shell">rm</span> permet de supprimer un fichier. Par exemple,
-                <span class="inline_shell">rm&nbsp;titi</span> supprime le fichier nommé «&nbsp;titi&nbsp;».</li>
+            <li><span class="inline_shell">ls</span> Displays the name and size of all files. for example,
+            display <span class="inline_shell">zora&nbsp;&nbsp;50&nbsp;ko</span> indicates that there is a named file «&nbsp;zora&nbsp;» of size 50&nbsp;kB. </li>
+            <li><span class="inline_shell">rm</span> to delete a file. for example,
+                <span class="inline_shell">rm&nbsp;titi</span> deletes the named file «&nbsp;titi&nbsp;».</li>
              </ul>
-            <p>Votre objectif est de trouver les deux fichiers ayant les plus grandes tailles et de <b>supprimer</b> ces deux fichiers et uniquement ceux-là.</p>
+            <p>Your goal is to find the two files with the largest sizes and <b> delete </ b> these two files and only those.</p>
          </div>
          <div class="hard">
             <ul class="commands">
-            <li><span class="inline_shell">ls</span> affiche le nom et la taille (en ko) de tous les fichiers présents.</li>
-            <li><span class="inline_shell">rm</span> permet de supprimer un fichier. Par exemple,
-                <span class="inline_shell">rm&nbsp;titi</span> supprime le fichier nommé «&nbsp;titi&nbsp;».</li>
-            <li><span class="inline_shell">mv</span> permet de renommer un fichier. Par exemple,
-                <span class="inline_shell">mv&nbsp;titi&nbsp;toto</span> renomme le fichier «&nbsp;titi&nbsp;» avec le nom «&nbsp;toto&nbsp;».</li>
-            <li><span class="inline_shell">cp</span> permet de copier un fichier. Par exemple,
-                <span class="inline_shell">cp&nbsp;titi&nbsp;toto</span> crée une copie du fichier «&nbsp;titi&nbsp;» portant le nom «&nbsp;toto&nbsp;».</li>
+            <li><span class="inline_shell">ls</span> Displays the name and size (in KB) of all the files present.</li>
+            <li><span class="inline_shell">rm</span> Delete a file. For example,
+                <span class="inline_shell">rm&nbsp;titi</span> deletes the file named «&nbsp;titi&nbsp;».</li>
+            <li><span class="inline_shell">mv</span> Rename a file. For example,
+                <span class="inline_shell">mv&nbsp;titi&nbsp;toto</span> rename the file «&nbsp;titi&nbsp;» to be «&nbsp;toto&nbsp;».</li>
+            <li><span class="inline_shell">cp</span> Copy a file. for example,
+                <span class="inline_shell">cp&nbsp;titi&nbsp;toto</span> creates a copy of the file «&nbsp;titi&nbsp;» with name «&nbsp;toto&nbsp;».</li>
             </ul>
          
             <table class="objective">
             <tr>
             <td>
-            <span>Vous disposez de deux fichiers&nbsp;:</span>
+            <span>You have two files&nbsp;:</span>
             </td>
             <td>
-            <span style="margin-right:0">Votre objectif est d'<b>échanger les noms</b> des deux fichiers, pour obtenir&nbsp;:</span>
+            <span style="margin-right:0">Your goal is to <b> exchange names </ b> of both files, to get&nbsp;:</span>
             </td>
             <tr>
             <td>
@@ -155,9 +155,9 @@ zora         50 ko
 
          <center>
          <div><textarea class="shell" disabled id="shell_output" rows="8" cols="80" style="overflow-y: scroll"></textarea></div>
-         <div><span>Commande&nbsp;: </span>
+         <div><span>Command&nbsp;: </span>
               <input type="text" id="shell_input" maxlength="50" size="50">
-              <input type="button" onclick="task.executeInput()" value="Exécuter"></div>
+              <input type="button" onclick="task.executeInput()" value="Enter"></div>
          <div><span id="infos"></span></div>
          </center>
 

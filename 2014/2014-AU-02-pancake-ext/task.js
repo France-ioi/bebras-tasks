@@ -109,14 +109,10 @@ function initTask() {
    var updateStatus = function() {
       if (curAnswers.length == 0) {
          $("#cancelLast").attr('disabled', 'disabled');
-         $("#status").html("Cliquez sur une crêpe pour retourner la pile au dessus.");
+         $("#status").html(taskStrings.clickToTurn);
       } else {
          $("#cancelLast").removeAttr('disabled');
-         var plural = "";
-         if (curAnswers.length > 1) {
-            plural = "s";
-         }
-         $("#status").html("Vous avez effectué " + curAnswers.length + " retournement" + plural + ".");
+         $("#status").html(taskStrings.turnsPerformed(curAnswers.length));
       }
    };
 
@@ -161,7 +157,7 @@ function initTask() {
          } else {
             makeInstanceMany();
             $(".many").show();
-            $("#task_title").html("Davantage de crêpes");
+            $("#task_title").html(taskStrings.morePancakes);
          }
 
          nbPancakes = startSizeOfPos.length;
@@ -226,17 +222,14 @@ function initTask() {
          var nbSteps = answers.length;
          if (isSolved(sizeOfPos)) {
             if (nbSteps <= maxScoreNbSteps) {
-               callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
+               callback(taskParams.maxScore, taskStrings.success);
                // avec le nombre minimum de retournements
             } else {
                var score = Math.max(Math.floor(taskParams.maxScore / 2), taskParams.maxScore - (nbSteps - maxScoreNbSteps));
-               var extraMsg = "";
-               if (nbSteps <= 2*maxScoreNbSteps)
-                  extraMsg = " (mais ce n'est pas facile)";
-               callback(score, "Vous avez réussi en " + nbSteps + " retournements. Il est possible de faire mieux" + extraMsg + ".");
+               callback(score, taskStrings.partialSuccess(nbSteps, (nbSteps <= 2 * maxScoreNbSteps)));
             }
          } else {
-            callback(taskParams.noScore, "Les crêpes ne sont pas dans le bon ordre.");
+            callback(taskParams.noScore, taskStrings.incorrectOrder);
          }
       });
    };

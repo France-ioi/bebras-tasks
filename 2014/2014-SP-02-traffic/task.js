@@ -149,7 +149,7 @@ function initTask() {
             beavers[iBeaver].stop();
          }
       }
-      $("#tryOrReset").attr('value', "Retirer les castors");
+      $("#tryOrReset").attr('value', taskStrings.removeBeavers);
    };
 
    var setClick = function(rect, iNodeA, iNodeB) {
@@ -262,8 +262,8 @@ function initTask() {
       paperMatrix = Raphael("matrix", paper2Width, paper2Height);  
       paperMatrix.rect(paper2Margin+cellSide, paper2Margin-cellSide, nbNodes*cellSide, cellSide).attr({"fill": "#CCFFCC"});
       paperMatrix.rect(paper2Margin-cellSide, paper2Margin+cellSide, cellSide, nbNodes*cellSide).attr({"fill": "#CCFFCC"});
-      paperMatrix.text(nbNodes*cellSide / 2 + 70, cellSide-10, "Arrivée").attr(textStyle);
-      paperMatrix.text(cellSide-10, nbNodes*cellSide / 2 + 70, "Départ").attr(textStyle).transform("r 270");
+      paperMatrix.text(nbNodes*cellSide / 2 + 70, cellSide-10, taskStrings.arrival).attr(textStyle);
+      paperMatrix.text(cellSide-10, nbNodes*cellSide / 2 + 70, taskStrings.departure).attr(textStyle).transform("r 270");
 
       for (var iLig = 0; iLig <= nbNodes; iLig++) {
          cells[iLig] = [];
@@ -365,7 +365,7 @@ function initTask() {
    };
 
    var cleanBeavers = function() {
-      $("#tryOrReset").attr('value', "Essayer");
+      $("#tryOrReset").attr('value', taskStrings.attempt);
       for (var iBeaver = 0; iBeaver < beavers.length; iBeaver++) {
          beavers[iBeaver].attr({x:0, y:0, opacity:0});
          beavers[iBeaver].remove();
@@ -401,11 +401,11 @@ function initTask() {
          addSelectedToMatrix(matrix, selected);
          var simulation = pickArrows(matrix); 
          if (simulation.hasCycle) {
-            callback(taskParams.noScore, "Certains castors tournent en rond&nbsp;!");
+            callback(taskParams.noScore, taskStrings.failureCycle);
          } else if (simulation.nbIsolatedNodes > 0) {
-            callback(taskParams.noScore, "Certains castors ne sont pas arrivés à la maison rouge.");
+            callback(taskParams.noScore, taskStrings.failureIsolatedNodes);
          } else {
-            callback(taskParams.maxScore, "Bravo, les castors sont réunis&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          }
       });
    };

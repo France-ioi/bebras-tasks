@@ -62,13 +62,9 @@ function initTask() {
    }
 
    var updateMessage = function() {
-      var plural = "";
-      if (nbSelected > 1) {
-         plural = "s";
-      }
-      var msg = "Cliquez sur les cases pour sélectionner les boîtes.";
+      var msg = taskStrings.clickOnCells;
       if (nbSelected > 0) {
-         msg = nbSelected + " boîte" + plural + " sélectionnée" + plural + ".";
+         msg = taskStrings.boxesSelected(nbSelected);
       }
       $("#result").html(msg);
    }
@@ -193,14 +189,14 @@ function initTask() {
          if (nbSelected == 0) {
             callback(taskParams.noScore, "");         
          } else if (! isCovered(selectedCells)) {
-            callback(taskParams.minScore, "Les boîtes sélectionnées ne permettent pas de déduire le nombre de pièces du cadre noir.");
+            callback(taskParams.minScore, taskStrings.failure);
          } else {
             var score = Math.max(taskParams.minScore + 1, taskParams.maxScore - (nbSelected - nbSelectedMinimum));
-            var msg = "Vous avez réussi en sélectionnant " + nbSelected + " boîtes. ";
+            var msg = taskStrings.boxesSelectedFinal(nbSelected) + " ";
             if (nbSelected == nbSelectedMinimum) {
-               msg += "Bravo ! C'est le minimum possible.";
+               msg += taskStrings.success;
             } else {
-               msg += "Essayez en sélectionnant moins de boîtes.";
+               msg += taskStrings.partialFailure;
             }
             callback(score, msg);
          }

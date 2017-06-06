@@ -254,7 +254,7 @@ function initTask () {
          innerReloadAnswer(strAnswer);
          if (castorPos.length != nbCastors) { 
             // TODO: ce n'est pas censé arriver, si ? on peut virer ce test je pense
-            callback(taskParams.noScore, "Placez tous les castors dans les cases de la grille.");
+            callback(taskParams.noScore, taskStrings.placeAllBeaversOnCells);
             return;
          }
 
@@ -266,11 +266,11 @@ function initTask () {
             correct &= (castorPos[iCastor] == solution[iCastor]);
           }
          if (! allInGrid) {      
-            callback(taskParams.noScore, "Placez tous les castors dans les cases de la grille.");
+            callback(taskParams.noScore, taskStrings.placeAllBeaversOnCells);
          } else if (correct) {
-            callback(taskParams.maxScore, "Bravo, vous avez bien placé les Castors&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          } else {
-            callback(taskParams.minScore, "Les castors sont mal placés.");
+            callback(taskParams.minScore, taskStrings.failure);
          }
       });
    };

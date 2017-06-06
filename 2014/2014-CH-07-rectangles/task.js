@@ -3,13 +3,13 @@ function initTask() {
    var intervalId = -1;
    var side = 6;
    var instructions = [
-      "Prends le crayon rouge", 
-      "Prends le crayon noir",   
-      "Avance d'une case",    
-      "Avance de 2 cases",  
-      "Avance de 3 cases",  
-      "Tourne à gauche",
-      "Tourne à droite"
+      taskStrings.takeRedPencil, 
+      taskStrings.takeBlackPencil,
+      taskStrings.move1Cell,
+      taskStrings.move2Cells,
+      taskStrings.move3Cells,
+      taskStrings.turnLeft,
+      taskStrings.turnRight
       ];
    var solution;
    var targetColors;
@@ -256,7 +256,7 @@ function initTask() {
          intervalId = -1;
       }
       state = states.stopped;
-      $("#tryOrReset").attr('value', "Effacer le dessin");
+      $("#tryOrReset").attr('value', taskStrings.deleteDrawing);
    };
 
    var simulateAll = function(sequence) {
@@ -271,10 +271,10 @@ function initTask() {
       var instrs = simulation.instrs;
       if (simulation.step >= 4 * instrs.length) {
          if (instrs.length == 0) {
-            simulation.message = "Aucune instruction fournie.";
+            simulation.message = taskStrings.noInstructionProvided;
          } else {
             simulation.completed = true;
-            simulation.message = "Exécution terminée.";
+            simulation.message = taskStrings.exercutionOver;
          }
          if (Beav.Object.eq(targetColors, simulation.colors)) {
             simulation.success = true;
@@ -288,7 +288,7 @@ function initTask() {
          var iSequence = simulation.step % instrs.length;
          var instr = instrs[iSequence];
          if (iSequence == 0)
-            simulation.message = "Répétition n°" + (iIteration+1) + ".";
+            simulation.message = taskStrings.repetitionNumber + (iIteration+1) + ".";
          if (instr === null) {
          } else if (instr == 0) {
             robot.color = "#ff0000";
@@ -302,7 +302,7 @@ function initTask() {
                var newx = robot.x + dirs[idDir][0];
                var newy = robot.y + dirs[idDir][1];
                if (newx < 0 || newy < 0 || newx >= side || newy >= side) {
-                  simulation.message = "Le robot est sorti de la zone.";
+                  simulation.message = taskStrings.robotExitsGrid;
                   error = true;
                   break;
                }
@@ -330,7 +330,7 @@ function initTask() {
       stopExecution();
       curSimulation = getSimulationInit([]);
       state = states.initial;
-      $("#tryOrReset").attr('value', "Essayer");
+      $("#tryOrReset").attr('value', taskStrings.attempt);
       updateDisplay();
    };
 
@@ -343,7 +343,7 @@ function initTask() {
       displayHelper.stopShowingResult();
       if (state == states.initial) {
          state = states.animating;
-         $("#tryOrReset").attr('value', "Arrêter");
+         $("#tryOrReset").attr('value', taskStrings.stop);
          executeSlow();
       } else if (state == states.animating) {
          stopExecution();
@@ -369,15 +369,15 @@ function initTask() {
       platform.getTaskParams(null, null, function(taskParams) {
          var sequence = answerOfStrAnswer(strAnswer);
          if (sequence.length == 0) {
-            callback(taskParams.noScore, "Déplacez les instructions dans les cases vides pour construire la séquence.");
+            callback(taskParams.noScore, taskStrings.moveInstructions);
             return;
          }
          var simulation = simulateAll(sequence);
          var finalColors = simulation.colors;
          if (Beav.Object.eq(targetColors, finalColors)) {
-            callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
+            callback(taskParams.maxScore, taskStrings.success);
          } else {
-            callback(taskParams.minScore, "Cette séquence ne produit pas le bon dessin. Essayez autrement.");
+            callback(taskParams.minScore, taskStrings.failure);
          }
       });
    }

@@ -156,11 +156,11 @@ function initTask() {
       platform.getTaskParams(null, null, function(taskParams) {
          var sequence = answerOfStrAnswer(strAnswer);
          if (sequence.length == 0) {
-            callback(taskParams.noScore, "Placez des notes dans les cases bleues pour diriger le robot.");
+            callback(taskParams.noScore, taskStrings.placeNotesOnCells);
          } else if (task.isCorrect(sequence)) {
-            callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
+            callback(taskParams.maxScore, taskStrings.success);
          } else {
-            callback(taskParams.minScore, "Avec ces notes, le robot n'arrivera pas au palais doré.<br /> Castor ne les siffle donc pas, et le robot ne bouge pas. <br />Réessayez avec d'autres notes.");
+            callback(taskParams.minScore, taskStrings.failure);
             // <br> (Le robot ne se déplace pas sur l'image, c'est normal.)
          }
       });

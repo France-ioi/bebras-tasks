@@ -46,15 +46,15 @@
       </script>
       <script>
          var taskStrings = {
-            up: "haut",
-            down: "bas",
-            right: "droite",
-            left: "gauche",
-            availableCommands: "Commandes disponibles",
-            yourProgram: "Votre programme",
-            success: "Bravo, vous avez fait sortir les deux billes&nbsp;!",
-            partialFailure: "Une seule des deux billes est sortie&nbsp;!",
-            failure: "Aucune bille n'est sortie&nbsp;!"
+            up: "Up",
+            down: "Down",
+            right: "Right",
+            left: "Left",
+            availableCommands: "Available commands",
+            yourProgram: "Your program",
+            success: "Congratulations, you did it!",
+            partialFailure: "Only one of the two marbles is out&nbsp;!",
+            failure: "No marble is out!"
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -81,14 +81,14 @@
    </head>
    <body>
       <div id="task">
-         <h1>Deux billes</h1>
+         <h1>The Two Marbles</h1>
          <p>
-         Écrivez un programme permettant de <b>faire sortir les deux billes</b> du labyrinthe. 
-         Chaque commande du programme fait rouler les billes dans une certaine direction.
+         Write a program to <b> get the two marbles </ b> out of the maze. 
+         Each command leads the balls in a certain direction.
          </p>
          <p>      
-         Commencez par exécuter l'exemple ci-dessous pour bien comprendre le fonctionnement. 
-         Faites ensuite glisser les commandes afin de modifier le programme.
+         Begin by following the example to understand how it's works. 
+         Then drag the commands to modify the program.
          </p>
 
          <table>
@@ -101,9 +101,9 @@
                   </div>
                   <!-- Toolbar -->
                   <div id="simuToolbar">
-                     <input type="button" class="play" onclick="task.play()" value="Tout exécuter">
-                     <input type="button" class="step" onclick="task.step()" value="Une étape">
-                     <input type="button" class="restart" onclick="task.resetLaby(true)" value="Remettre à zéro">
+                     <input type="button" class="play" onclick="task.play()" value="Play">
+                     <input type="button" class="step" onclick="task.step()" value="One Step">
+                     <input type="button" class="restart" onclick="task.resetLaby(true)" value="Restart">
                   </div>
                </td>
             </tr>

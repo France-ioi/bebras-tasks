@@ -340,15 +340,15 @@ function initTask() {
          drawLaser(false);
          if (solved) {
             var score = Math.max(taskParams.noScore + 1, taskParams.maxScore - (nbUsed - minReflection)/2);
-            var msg = "Vous avez atteint la cible en " + nbUsed + " miroirs.";
+            var msg = taskStrings.targetReached(nbUsed) + " ";
             if (score >= taskParams.maxScore) {
-               msg += " Bravo ! C'est le minimum possible.";
+               msg += taskStrings.success;
             } else {
-               msg += " Il est possible de faire mieux.";
+               msg += taskStrings.partialSuccess;
             }
             callback(score, msg);
          } else {
-            callback(taskParams.minScore, "Le laser n'atteint pas la cible.");
+            callback(taskParams.minScore, taskStrings.failure);
          }
       });
    };

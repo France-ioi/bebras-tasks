@@ -42,25 +42,25 @@
       </script>
       <script>
          var taskStrings = {
-            clickOnCells: "Cliquez sur les cases pour sélectionner les boîtes.",
+            clickOnCells: "Click on the boxes to select.",
             boxesSelected: function(nbSelected) {
                var plural = "";
                if (nbSelected > 1) {
                   plural = "s";
                }
-               return nbSelected + " boîte" + plural + " sélectionnée" + plural + ".";
+               return nbSelected + " box" + plural + " selected" + plural + ".";
             },
-            failure: "Les boîtes sélectionnées ne permettent pas de déduire le nombre de pièces du cadre noir.",
+            failure: "The selected boxes does not allow to detect the number of pieces in the black frame.",
             boxesSelectedFinal: function(nbSelected) {
                var plural = "";
                if (nbSelected > 1) {
                   plural = "s";
                }
-               return "Vous avez réussi en sélectionnant " + nbSelected + " boîte" + plural + ".";
+               return "Tou have selected " + nbSelected + " box" + plural + ".";
             },
-            success: "Bravo ! C'est le minimum possible.",
-            partialFailure: "Essayez en sélectionnant moins de boîtes.",
-};
+            success: "Congratulations! You did it.",
+            partialFailure: "Try selecting fewer boxes.",
+         };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="solution" type="text/javascript">
@@ -81,17 +81,19 @@
   </head>
   <body>
       <div id="task">
-          <h1>Pièces d'or</h1>
+          <h1>Gold Coins</h1>
           <p>
           <table><tr>
           <td>
              <p>
-             Castor range ses pièces d'or dans des boîtes disposées de manière particulière. Il s'arrange pour que chaque boîte contienne exactement autant de pièces que les deux boîtes situées juste en-dessous d'elle. Par exemple, la boîte verte ci-contre contient le même nombre de pièces que les deux boîtes situées dans le cadre noir.
+             Beaver places his gold coins in boxes arranged in a special way. The Beaver arranges that each box can hold the coins of the two boxes below it. For example, The green box in the image contains the same number of pieces as the two boxes located in the black frame.
              </p>
              <p>
-             Les boîtes ci-dessous sont rangées selon le même principe, sauf que vous n'en voyez pas le contenu car elles sont fermées.
-             <b>Sélectionnez un minimum de boîtes telles que, si on les ouvrait, on pourrait déterminer le nombre total de pièces contenues dans le cadre noir.</b>
-            </p>
+             The boxes below are arranged according to the same principle, except that you do not see the numbers because they are closed.
+             </p>
+<p>
+<b>Select the minimum number of boxes such that if you opened them, you could determine the total number of pieces in the black frame.</b>
+</p>
           </td>
           <td>
           <div id="sample" style="float:right;margin-left: 1em"></div>

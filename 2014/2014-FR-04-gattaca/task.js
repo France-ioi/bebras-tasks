@@ -130,7 +130,7 @@ function initTask() {
       }
       if (display) {
          texts[iLin][iCol].attr({text: letter});
-         $("#status").html("Nombre de lettres inscrites&nbsp;: " + nbSteps + ".");
+         $("#status").html(taskStrings.numberOfLetters + " " + nbSteps + ".");
       }
    }
 
@@ -235,7 +235,7 @@ function initTask() {
          turnCard(card[0], card[1], display);
       }
       if (display) {
-         $("#status").html("Cliquez sur les cases pour que Castor y inscrive des lettres.");
+         $("#status").html(taskStrings.clickOnCells);
       }
    };
 
@@ -248,14 +248,13 @@ function initTask() {
       platform.getTaskParams(null, null, function(taskParams) {
          innerReloadAnswer(strAnswer, false);
          var score = taskParams.minScore;
-         var msg = "Vous n'avez pas trouvé le mot «&nbsp;" + target + "&nbsp;».";
+         var msg = taskStrings.failure + " «&nbsp;" + target + "&nbsp;».";
          if (solved) {
             score = Math.max(taskParams.minScore + 1, Math.min(taskParams.maxScore, taskParams.maxScore - (nbSteps - fullScoreThreshold)));
             if (score == taskParams.maxScore) {
-               msg = "Bravo, vous avez trouvé le mot en demandant " + nbSteps + " lettres seulement&nbsp;!"
+               msg = taskStrings.success(nbSteps);
             } else {
-               msg = "Vous avez trouvé le mot en demandant " + nbSteps + " lettres.<br /><br />" +
-                  "Recommencez pour essayer de faire mieux.";
+               msg = taskStrings.partialSuccess(nbSteps);
             }
          }
          callback(score, msg);

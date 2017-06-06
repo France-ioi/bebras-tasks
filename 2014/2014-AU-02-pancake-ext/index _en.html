@@ -22,7 +22,7 @@
 
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-AU-02-pancake-flipping/",
-          "language": "fr",
+          "language": "en",
           "version": "en.01",
           "authors": "Judith Helgers",
           "license": "CC BY-SA 3.0",
@@ -43,25 +43,31 @@
       </script>
       <script>
          var taskStrings = {
-            clickToTurn: "Cliquez sur une crêpe pour retourner la pile au dessus.",
-            morePancakes: "Davantage de crêpes",
-            success: "Bravo, vous avez réussi&nbsp;!",
-            incorrectOrder: "Les crêpes ne sont pas dans le bon ordre.",
+            clickToTurn: "Click on a pancake to turn.",
+            morePancakes: "More pancakes",
+            success: "Congratulations, you have succeeded&nbsp;!",
+            incorrectOrder: "Pancakes are not in the right order.",
             turnsPerformed: function(nbTurns) {
                var plural = "";
                if (nbTurns > 1) {
                   plural = "s";
                }
-               return "Vous avez effectué " + nbTurns + " retournement" + plural + ".";
+               return "You did " + nbTurns + " turn" + plural + ".";
             },
             partialSuccess: function(nbSteps, notEasy) {
                var extraMsg = "";
                if (notEasy) {
-                  extraMsg = " (mais ce n'est pas facile)";
+                  extraMsg = " (But it is not easy)";
                }
-               "Vous avez réussi en " + nbSteps + " retournements. il est possible de faire mieux " + extraMsg + "."
+               "You have succeeded in " + nbSteps + " turnovers. It is possible to do better" + extraMsg + "."
             }
          }
+      </script>
+      <script>
+         var taskStrings = {
+            ballsIncorrectValue: "The Abacus do not represent the requested value.",
+            success: "Congratulations! you succeeded."
+         };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -76,22 +82,22 @@
   </head>
   <body>
       <div id="task">
-         <h1 id="task_title">Retourner les crêpes</h1>
+         <h1 id="task_title">Pancakes</h1>
          <p>
          <img src="castor_crepes.png" style="float:right; margin-left:1em;width:120px" />
-         <span class="easy_hard">Castor a préparé des crêpes. </span>
-         <span class="many">Castor a préparé beaucoup de crêpes&nbsp;! </span>
-         Maintenant, il souhaite les ranger par taille, 
-         en mettant la plus grande crêpe en bas de la pile.
+         <span class="easy_hard">Castor prepared pancakes. </span>
+         <span class="many">Castor has prepared a lot of pancakes&nbsp;! </span>
+         Now he wants to store them by size, 
+         by putting the biggest pancake down and smallest up.
          </p>
          <p>
-         Cliquez sur une crêpe pour retourner la partie de la pile se situant au-dessus. Moins vous effectuerez de retournements, plus vous aurez de points.
+         Click on a pancake to rotate it and all the pancakes above it upside down. The less turns you make, the more points you get.
          </p>
 
          <center>
          <div id="anim"></div>
 
-         <div style='text-align: right;'><input type="button" id="cancelLast" value="Annuler une étape" onclick="task.cancelLastStep()"></div>
+         <div style='text-align: right;'><input type="button" id="cancelLast" value="Undo" onclick="task.cancelLastStep()"></div>
 
          <div id="status"></div>
          </center>
