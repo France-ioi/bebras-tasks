@@ -148,7 +148,7 @@ function initTask() {
       circles = [];
       bridgeY = space + radius + 3;
       bridge.attr('y', bridgeY);
-      $("#cross_or_retry").text("Essayer");
+      $("#cross_or_retry").text(taskStrings.attempt);
       $("#cross_or_retry").removeAttr('disabled');
       displayHelper.stopShowingResult();
    };
