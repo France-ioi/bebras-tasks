@@ -51,10 +51,10 @@ function initTask() {
 
    var difficulty;
    var texts = [
-      "haut",
-      "droite",
-      "bas",
-      "gauche"
+      taskStrings.up,
+      taskStrings.right,
+      taskStrings.down,
+      taskStrings.left
    ];
    
    var playModes = {
