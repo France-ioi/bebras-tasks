@@ -23,10 +23,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-FR-02-spreading-secret/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -37,11 +37,12 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
-         overlap: "At least two antennas have an overlapping wave range.",
-         missing: "There remains uncovered white cells.",
-         success: "Success!",
-         warning: "Warning: the wave ranges should not overlap." };
+         overlap: "At least two antennas have their waves overlapping.",
+         missing: "There are some blank squares that are not covered.",
+         success: "Congratulations, you have succeeded",
+         warning: "Attention: Waves must not overlap." };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -63,16 +64,16 @@
    </head>
    <body>
       <div id="task">
-         <h1>Antenna layout</h1>
+         <h1>Installation of Antennas</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
            <table id="instructions">
            <tr>
               <td>
                  <p>
-                  Click on the <span class="hard"><b>white and gray</b></span> cells from the grid to place antennas, in such a way that all the white cells get covered by waves.
+                  Click on the boxes <span class="hard"><b>(white and grey)</b></span> of the grid to place antennas, so that all the white cells are covered by waves.
                  </p>
-                <p>The wave ranges associated with the antennas should not overlap. </p>
+                <p>The antenna waves must not overlap. </p>
                 <div id="error_text"></div>
               </td>
               <td>
@@ -81,6 +82,7 @@
               </td>
            </tr>
            </table>
+
 
             <div id="grid_container" style="text-align:center">
                <div id="grid"></div>
@@ -92,8 +94,7 @@
       <div id="solution">
 
          <h2>Solution</h2>
- <!--TODO
-           <div class="easy">
+            <div class="easy">
                <p>On place les antennes à la suite les unes des autres.</p>
                <p><img src="solution_easy_1.png"></p>
                <p>D'autres solutions étaient possibles en plaçant des antennes dans les cases grises. Par exemple&nbsp;</p>
@@ -144,7 +145,6 @@
             C'est une technique très utile pour résoudre de nombreux problèmes,
             notamment pour trouver des solutions dans des jeux comme le Sudoku
             ou le Scrabble.</p>
--->
 
 	  </div> <!-- task-solution -->
    </body>

@@ -18,10 +18,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-FR-15-guess-who/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -32,21 +32,22 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
          elements: { // [yes-message, no-message]
-            "tie": ["a tie", "a tie"], 
-            "glasses": ["glasses", "glasses"],
-            "hat": ["a hat", "a hat"],
-            "hair": ["hair", "hair"],
-            "mouth": ["a mouth", "a mouth"],
-            "nose": ["a nose", "a nose"] },
-         remainingFaces: "There remains men to place into the rectangles.",
-         remainingQuestions: "The remains empty oval slots.",
+            "tie": ["Bow Tie", "Bow Tie"], 
+            "glasses": ["Glasses", "Glasses"],
+            "hat": ["Cap", "Cap"],
+            "hair": ["Hair", "Hair"],
+            "mouth": ["Mouth", "Mouth"],
+            "nose": ["Nose", "Nose"] },
+         remainingFaces: "There are characters to be placed in the rectangles.",
+         remainingQuestions: "There are still empty circles.",
          errorHasNotButShouldHave: function(part) { 
-            return "The man in the red frame should have " + this.elements[part][0] + "."; },
+            return "The red-framed figure should have " + this.elements[part][0] + "."; },
          errorHasButShouldNot: function(part) {
-            return "The man in the red frame should not have " + this.elements[part][1] + "."; },
-         success: "Success!" };
+            return "The character framed in red should not have " + this.elements[part][1] + "."; },
+         success: "Congratulations, you have succeeded" };
 
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -80,27 +81,27 @@
    </head>
    <body>
       <div id="task">
-         <h1>Guess who?</h1>
+         <h1>Who is it?</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p class="easy">
-               Drag the men's faces into the appropriate rectangles from the blue area.
+               Drag the characters to the appropriate rectangles in the blue area.
             </p>
             <p class="medium hard">
-               Drag features from the oval slots and drag men's faces from the rectangles in order to fill the blue rectangle according to the following rules.
+               Drag elements into the circles and the characters into the rectangles, to fill the diagram according to the following rules.
             </p>
 
-            <p id="ellipse_descr" class="easy"> Each oval slot contains a feature used for selection: </p>
-            <p id="ellipse_descr" class="medium hard"> Each oval slot should contain a feature used for selection: </p>
+            <p id="ellipse_descr" class="easy"> Each circle contains an element that differentiates between the characters&nbsp;: </p>
+            <p id="ellipse_descr" class="medium hard"> Each circle must contain an element that differentiates between the characters&nbsp;: </p>
             <ul id="ellipse_descr_ul">
-               <li>below to the left of an oval slot, all men should have that feature.
-               <li>below to the right of an oval slot, all men should not have that feature.
+               <li>Below the left of an circle, all the characters must possess this element.
+               <li>Below the right of an oval, no character must possess this element.
                </ul>
 
             <div id="anim_container">
                <div id="anim"></div>
                <div id="feedback"></div>
-               <input type="button" value="Valider" id="validate"/>
+               <input type="button" value="Validate" id="validate"/>
             </div>
 
             <img src="icon.png" style="display:none">
@@ -109,7 +110,6 @@
       </div><!-- task -->
       <div id="solution">
 
-<!--TODO
          <h2>Solution</h2>
          	<div class="easy">
                <p>La solution est montrée ci-dessous.</p>
@@ -148,7 +148,6 @@
             <p>En revanche, si vous utilisez un arbre de décision avec 3 niveaux de questions, vous pouvez déterminer si le personnage dessiné par Martin se trouve dans votre liste de 8 personnages en posant seulement 6 questions ! En effet, vous pouvez poser les questions en suivant un chemin descendant dans l'arbre, et lorsque vous arrivez à un personnage en bas de l'arbre, il ne restera plus qu'à vérifier si les 3 éléments restants (ceux pour lesquels vous n'avez pas encore posé de question) correspondent bien.</p>
             <p>En résumé, l'utilisation d'un arbre à 3 niveaux permet de réduire le nombre de questions nécessaires (dans le pire cas) de 48 à seulement 6&nbsp;! L'utilisation d'un arbre de décision est encore plus bénéfique lorsqu'on a des bases de données avec des millions d'éléments&nbsp;; dans ce cas, on peut éviter de poser des millions de questions, une trentaine suffira.</p>
             
--->
 
 	  </div> <!-- task-solution -->
    </body>

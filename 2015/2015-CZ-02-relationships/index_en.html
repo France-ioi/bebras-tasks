@@ -22,11 +22,12 @@
 
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-CZ-02-relationships/",
-          "language": "fr",
+          "language": "en",
           "version": "",
           "authors": "",
           "license": "CC BY-SA 3.0",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [
+          ],
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
           "browserSupport": [
@@ -41,10 +42,11 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
-         error: "The beaver at the start of the red arrow is older than the beaver at the end of the arrow.",
-         remains: "There remains labels to be placed.",
-         success: "Success!" };
+         error: "The beaver at the beginning of the red arrow is older than the one at the end of the arrow.",
+         remains: "You still have labels to place.",
+         success: "Congratulations, you have succeeded" };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -69,43 +71,43 @@
   </head>
   <body>
       <div id="task">
-         <h1>Age relationships</h1>
+         <h1>Age Relationships</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
            <p>
-            Place the labels showing the names into the appropriate cells.
+            Drag labels with first names in the right boxes.
             </p>
             <div class="easy medium">
                <p>
-               An arrow should always go from a younger person to an older person.
+               An arrow must always go from a younger person to an older person.
                </p>
             </div>
             <div class="hard">
                <p>
-               An arrow should always go from a younger person to an older person,
-               when both the start cell and the end cell of this arrow contain a label.
+               An arrow must always go from a younger person to an older person but if one of the boxes connected by the arrow is empty, the constraint doesn't apply.
                </p>
-               <p id="remark">Note that one of the cells will remain empty.</p>
+               <p id="remark">Note that one of the boxes will remain empty.</p>
             </div>
             <div id="anim" class="touch"></div>
             <div id="execute_container">
-               <input type="button" value="Valider votre réponse" id="execute"/>
+               <input type="button" value="Validate my answer" id="execute"/>
             </div>
             <img src="icon.png" style="display:none">
          </div>
       </div>
       
       <div id="solution">
-<!--TODO
          <h2>Solution</h2> 
          <div class="easy medium">
             <p>Pour obtenir la solution, on place les personnes une par une par ordre d'âge, intuitivement &laquo; en suivant l'ordre des flèches &raquo;. Plus précisément, on remplit à chaque fois une case vérifiant la propriété suivante : s'il y a des flèches qui arrivent à cette case, alors les cases d'où viennent les flèches sont déjà remplies. </p>
          </div>
          <div class="easy">
             <img src="solution_easy.png">
+            <!--<p> Observez que sur le schéma obtenu, il y a trois flèches entre Julie, Ahmed et Sarah. Elles expriment que  "Julie est plus jeune que Ahmed", "Ahmed est plus jeune que Sarah", et "Julie est plus jeune que Sarah". </p>-->
          </div>
          <div class="medium">
             <img src="solution_medium.png">
+             <!---<p>La relation "est plus jeune que" est transitive.  Si "Julie est plus jeune que Ahmed" et "Ahmed est plus jeune que Sarah", alors, par transitivité, "Julie est plus jeune que Sarah". Certaines flèches du schéma obtenu décrivent les trois propositions.</p>-->
         </div>   
         <div class="hard">      
            <img style="float:right" src="graphe_cycles.png">
@@ -130,6 +132,7 @@
          </div>
 
          <h2>C'est de l'informatique</h2> 
+         <!-- <div class="hard">   -->
          <p>
          Les flèches représentent ici des contraintes d'âges, mais elles pourraient 
          représenter n'importe quel type de relation entre des objets.
@@ -157,7 +160,6 @@
          Un ordinateur est capable de construire un tri topologique
          en quelques secondes, même lorsqu'il y a des milliards de flèches.
          </p>
--->
 	  </div> <!-- task-solution -->
   </body>
 </html>

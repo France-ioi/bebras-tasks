@@ -20,10 +20,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-FR-03-mark-and-shuffle/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -34,17 +34,18 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
-         success: "Success!",
-         emptySlot: "There remains birds in the lower area.",
-         incorrect: "Not all birds are placed in their original slot.<br/> If you don't how to place them, go back to the previous stage.",
-         restart: "Clear all marks",
-         validate: "Validate",
-         shuffle: "Let the bird fly away",
-         backToPrevious: "Go back to previous stage",
-         moveBirds: "Drag the birds back into their original slots.",
-         notDifferent: "Birds need to have distinct marks.",
-         instruction: "Put back all the birds into their original slot in the upper area."
+         success: "Congratulations, you have succeeded",
+         emptySlot: "There are still birds in the bottom area.",
+         incorrect: "You have not delivered all birds to their original place. <br/> If you can not get back to the previous step.",
+         restart: "Clear marks.",
+         validate: "Validate my answer.",
+         shuffle: "Let the birds fly away",
+         backToPrevious: "Back to previous step.",
+         moveBirds: "Move the birds to their original place.",
+         notDifferent: "Birds must have different marks.",
+         instruction: "Return all birds to their original place in the top area."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -59,15 +60,16 @@
    </head>
    <body>
       <div id="task">
-         <h1>Bird marking</h1>
+         <h1>Marking the Birds</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               Click on the cells to draw distinct patterns on the bird legs.
+               Click on the boxes below the birds to draw different patterns on the legs of the birds.
             </p>
             <p>
-               Then, click on the button to let the bird fly away. </p><p>
-               Birds will get shuffled, and your job will be to put them back into their original slot.
+               Then click on the button to let them fly. </p><p>
+               Birds will mix,
+               then you will have to return them to their original place.
             </p>
             <div id="anim_container">
                <div id="anim"></div>
@@ -79,7 +81,6 @@
 
       </div><!-- task -->
       <div id="solution">
-<!--TODO
 
          <h2>Solution</h2>
             <p>Voici une solution, parmi les nombreuses possibles.</p>
@@ -124,7 +125,6 @@
             toutes les combinaisons possibles de marques.
             </p>
             </div>
--->
       
 	  </div> <!-- task-solution -->
    </body>

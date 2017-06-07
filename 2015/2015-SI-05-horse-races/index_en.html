@@ -20,10 +20,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-SI-05-horse-race/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -34,20 +34,21 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
          podium: "Podium",
          pastRaces: "Results of\n previous races:",
          arrival: ["1st", "2nd", "3rd"],
-         launch: "Launch the race",
-         maxRacesReached: "You performed # races, which is the maximum number allowed.\nYou may place horses on the podium, or restart everything.",
-         success: "Success!",
-         successPartial: function(steps, stepsOptimal) { return "You succeeded in " + steps + " races.<br> Try again to deduce the podium in only " + stepsOptimal + " races."; },
-         incorrect: "Your podium is incorrect.",
-         incorrectCannotBeSure: "You have not organized a set of races that allow you to be certain that your podium is correct.",
-         incomplete: "You have not placed horses on the podium.",
+         launch: "Start the Race",
+         maxRacesReached: "You ran # races, which is the maximum allowed.\nYou can place horses on the podium, or start all over again.",
+         success: "Congratulations, you have succeeded",
+         successPartial: function(steps, stepsOptimal) { return "You have succeeded in " + steps + " races.<br> Try to find the fastest 3 horses in only " + stepsOptimal + " races."; },
+         incorrect: "Your podium is not right.",
+         incorrectCannotBeSure: "You have not organized a set of races to make sure your podium is correct.",
+         incomplete: "You did not put horses on the podium.",
 
          prepareRaceText: function(raceSize) {
-            return "Select " + raceSize + " horses in order to\norganize a race.";
+            return "Select " + raceSize + " horses to\norganize a race.";
          }
       };
 
@@ -59,20 +60,20 @@
    <body>
       <div id="task">
          <img src="horse.png" style="display:none">
-         <h1>Horse races</h1>
+         <h1>Horses Race</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
                <span class="easy">Find the fastest horse </span>
-               <span class="medium">Find the <b>2</b> fastest horses </span>
-               <span class="hard">Find the <b>3</b> fastest horses </span>
-                by organizing as few races as possible.
+               <span class="medium">Find the fastest <b>2</b> horses </span>
+               <span class="hard">Find the fastest <b>3</b> horses </span>
+               by organizing the fewest possible races.
             </p>
-            <p>Three horses compete in each race. A given horse always runs at the same speed.</p>
+            <p>Three horses compete in each race. Horses always run with the same speed in all races.</p>
 
-            <p>To organize additional races, click on the desired horses, then launch the race. </p> 
+            <p>To organize a race, select the desired horses, then click on start the race. </p> 
 
-            <p>Note that three races have already been performed.</p>
+            <p>Note that 3 races have already been completed.</p>
  
             <div id="anim"></div>
             <img src="icon.png" style="display:none">
@@ -80,7 +81,6 @@
          </div>
       </div><!-- task -->
       <div id="solution">
-<!--TODO
 
          <h2>Solution</h2>
          
@@ -143,7 +143,6 @@
                </p>
                <p>De même, pour vérifier que l'on peut déduire que le second cheval est correct, il suffit de vérifier que de ce cheval on peut atteindre tous les autres sauf le premier en suivant les flèches. Enfin, de même pour le troisième, à partir duquel on doit atteindre tous les autres sauf le premier et le second cheval.</p>
                <p>Pour vérifier que, à partir d'un cheval, on puisse atteindre tous les autres chevaux en suivant les flèches, nous avons programmé ce que l'on appelle un <b>algorithme de graphe</b>, un outil couramment utilisé en informatique.</p>
--->
 	  </div> <!-- task-solution -->
    </body>
 </html>

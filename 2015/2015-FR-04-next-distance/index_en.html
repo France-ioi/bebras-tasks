@@ -18,10 +18,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-FR-04-next-distance/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -43,11 +43,13 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
-         incorrectExplain: "The cell in the blue frame should not be marked.",
-         missingExplain: "You have forgotten certain cells. Click to select them.",
-         incorrect: "You have forgotten certain cells, or selected cells that shouldn't.",
-         success: "Success!" };
+         incorrectExplain: "The box marked in blue should not be marked.",
+         missingExplain: "click to select the missing boxes.",
+         incorrect: "You have forgotten some boxes or selected extra boxes.",
+         success: "Congratulations, you have succeeded" };
+
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -92,34 +94,34 @@
    </head>
    <body>
       <div id="task">
-         <h1>Next distance</h1>
+         <h1>Distances</h1>
 
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <table id="layout"><tr>
             <td colspan=2 style="height: 125px">
                <p class="easy">
-                  In the grid below, cells that Beaver may reach in <strong>1</strong> step are labeled with a <strong>1</strong>.
+                  In the grid below, the boxes that the Beaver can reach in <strong> 1 </ strong> step are marked with a <strong>1</strong>.
                </p>
                <p class="easy">
-                  Click on the cells that Beaver may reach in <strong>2</strong> steps.
+                  Click on the boxes that the Beaver can reach in <strong> 2 </ strong> steps.
                </p>
                <p class="medium">
-                  In the grid below, cells that Beaver may reach in <strong>4</strong> step are labeled with a <strong>4</strong>.
+                  In the grid below, the boxes that the Beaver can reach in <strong> 4 </ strong> steps are marked with a <strong>4</strong>.
                </p>
                <p class="medium">
-                  Click on the cells that Beaver may reach in <strong>5 steps, but not in fewer</strong> than 5 steps.
+                  Click on the boxes that the Beaver can reach in <strong> 5 steps, and not less </ strong> than 5 steps.
                </p>
                <p class="hard">
-                  In the grid below, cells that Beaver may reach in <strong>5</strong> step are labeled with a <strong>5</strong>.
+                  In the grid below, the boxes that the Beaver can reach in <strong> 5 </ strong> steps are marked with a <strong>5</strong>.
                </p>
                <p class="hard">
-                  Click on the cells that Beaver may reach in <strong>7 steps, but not in fewer</strong> than 7 steps.
+                  Click on the boxes that Castor can reach in <strong> 7 steps, and not less </ strong> than 7 steps.
                </p>
             </td>
             <td rowspan=2 style="width: 200px">
                <div id="example_container">
-                  <p>Example:</p>
+                  <p>Example :</p>
                   <div id="example_grid"></div>
                </div>
             </td>
@@ -141,16 +143,16 @@
          </table>
 
             <div id="execute_container">
-               <input type="button" value="Validate your answer" id="execute"/>
+               <input type="button" value="Validate my answer" id="execute"/>
             </div>
             <img src="castor_tete.png" style="display:none">
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">
-<!--TODO
 
          <h2>Solution</h2>
+
             <p>Voici la solution&nbsp;:<br />
             <div class="easy">
                <img src="solution_easy.png">
@@ -172,7 +174,7 @@
             comment atteindre le point de départ (à distance <b>0</b>) le plus vite
             possible&nbsp;: il suffit de se diriger vers les plus petits numéros.
             </p>
--->
+
 	  </div> <!-- task-solution -->
    </body>
 </html>

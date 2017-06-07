@@ -19,10 +19,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-JP-04-crane-operating/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -33,12 +33,13 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
-         instructions: "Click on the numbered buttons above.",
-         cannotDrop: "This cell is not empty, thus the crane cannot drop a block there.",
-         cannotGrab: "This cell is empty, thus the crane cannot pick up a block there.",
-         success: "Success!",
-         successPartial: function(steps, minSteps) { return "You have reached the target in " + steps + " steps.<br/> Try again to perform no more than " + minSteps + " steps."; } };
+         instructions: "Click on the Grey Numbered buttons above.",
+         cannotDrop: "This box is full, the crane can not drop anything.",
+         cannotGrab: "This box is empty, the crane can not take anything.",
+         success: "Congratulations, you have succeeded",
+         successPartial: function(steps, minSteps) { return "You have achieved the target in " + steps + " steps.<br/> Try to do it in only " + minSteps + " steps."; } };
 
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -124,15 +125,14 @@
    </head>
    <body>
       <div id="task">
-         <h1>Crane operating</h1>
+         <h1>Piloting the Crane</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
                <p>
-                  Operate the magnetic crane by clicking on the numbered buttons. 
-                  <p>Your goal is to place the blocks as shown below.</p>
+                  Pilot the magnet crane by clicking on the grey numbered buttons, to move the blocks to be the Target image.
                </p>
                <p>
-                  The fewer steps you take, the more points you will get.
+                  The fewer steps you make, the more points you get.
                </p>
             <table id="inputs">
                <tr>
@@ -158,14 +158,14 @@
             <p id="feedback">
             </p>
             <!--<p id="instructions">
-               Cliquez sur les boutons pour piloter la grue.
+               Click on the grey buttons to control the crane.
             </p>-->
 
             
             <div id="buttons">
-               <span id="message_counter">Number of steps so far: <span id="step_counter"></span>.</span>
-               <input type="button" id="undo" value="Cancel last step" />
-               <!--<input type="button" id="reset" value="Recommencer" />-->
+               <span id="message_counter">Number of steps: <span id="step_counter"></span>.</span>
+               <input type="button" id="undo" value="Undo" />
+               <!--<input type="button" id="reset" value="Restart" />-->
             </div>
             <img src="magnet.png" style="display:none">           
             <img src="icon.png" style="display:none">
@@ -173,13 +173,13 @@
       </div><!-- task -->
       <div id="solution">
 
-<!--TODO
          <h2>Solution</h2>
             <div class="easy">
                <p>Pour échanger les positions du bloc rouge et du bloc bleu, il faut forcément commencer par en placer un des deux sur la case disponible au milieu. </p>
                <p>Par exemple, en appuyant dans l'ordre sur les boutons numérotés: <b>1 2, 3 1, 2 3</b>, on obtient le résultat souhaité, comme illustré ci-dessous.</p>
                <table width="100%">
-
+               <!--<tr><td>Etape 1</td><td>Etape 2</td><td>Etape 3</td><td>Etape 4</td><td>Etape 5</td><td>Etape 6</td>
+               </tr>-->
                <tr>
                <td><img src="easy_stage1.png" height="130"></td>
                <td><img src="easy_stage2.png" height="130"></td>
@@ -258,7 +258,6 @@
             <p>Dans les deux cas, on se retrouve avec des morceaux d'un même fichier répartis à plusieurs endroits sur le disque dur. Ce phénomène s'appelle la <b>fragmentation</b>. Lorsque la fragmentation est trop importante, cela nuit aux performances du système, car pour lire un fichier en entier, il faut sauter d'un endroit à l'autre du disque, et cela prend du temps.</p>
             <p>Il peut être nécessaire de <b>défragmenter</b> le disque dur. Cette opération consiste à remettre les morceaux d'un même fichier à côté les uns des autres.  Pour réaliser cette opération efficacement, il faut déplacer des morceaux de fichiers de manière astucieuse, afin de minimiser le nombre de déplacement, un peu comme on le fait dans ce sujet.</p>
 
--->
 
 	  </div> <!-- task-solution -->
    </body>

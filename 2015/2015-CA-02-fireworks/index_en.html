@@ -18,10 +18,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-CA-02-fireworks/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -32,22 +32,23 @@
       };
       </script>
       <script type="text/javascript">
-         var taskStrings = {
-            availableWords: "Words available",
+         var stringsLanguage = 'en';
+         var taskStrings = { 
+            availableWords: "Available words",
             clickToAdd: "Click on a word\nto add it",
             clickToRemove: "Click on a word\nto remove it",
             otherSequence: "Other sequence",
             yourSequence: "Your sequence",
             message: "Message",
-            words: ["Dam", "Wood", "Beach", "Stone", "Fruits", "Spring", "Cave"],
-            success: "Success!",
-            already: "You have already found this sequence. Click on words to remove them.",
-            tooLong: "Your word sequence is too long.",
+            words: ["Dam", "Wood", "Beach", "Stone", "Fruits", "Source", "Cave"],
+            success: "Congratulations, you have succeeded",
+            already: "You've already found this sequence. Click on the words to remove them.",
+            tooLong: "Your sequence of words is too long.",
             tooShort: "Your word sequence is too short.",
-            notMatch: "Your word sequence does not fully match the message.",
-            clickLeft: "Click on the words located on the left to make a sequence.",
-            foundSoFar: function(nbCompleted) { return "You have found " + nbCompleted + " sequence" + ((nbCompleted>1) ? "s" : "") + ". Search for another sequence."; },
-            hint: "<br/>Hint: you may use a same word more than once in a sequence." 
+            notMatch: "Your sequence of words does not match the message.",
+            clickLeft: "Click on the words on the left to build a sequence.",
+            foundSoFar: function(nbCompleted) { return "You found " + nbCompleted + " sequence" + ((nbCompleted>1) ? "s" : "") + ". Search for more."; },
+            hint: "<br/>Tip: You can use the same word several times." 
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -62,17 +63,17 @@
    </head>
    <body>
       <div id="task">
-         <h1>Colored signals</h1>
+         <h1>Color Signals</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-            Beaver communicates by sending colored signals.
+            Beavers communicates by sending color signals.
             </p>
             <p class="easy">
-            Find <b>1</b> word sequence that could correspond to the message shown below.
+            Find <b>1</b> sequence of words which correspond to the message given below.
             </p>
             <p class="medium hard">
-            Find <b>3</b> different word sequences that could correspond to the message shown below.
+            Find <b>3</b> sequences of different words which correspond to the message given below.
             </p>
 
             <div id="anim"></div>
@@ -81,10 +82,9 @@
          </div>
      </div><!-- task -->
       <div id="solution">
- <!--TODO
 
          <h2>Solution</h2>
-      
+       
          <div class="easy">        
             <p>Deux solutions étaient possibles. </p>
             <table>
@@ -122,7 +122,6 @@
          Attention&nbsp;: ce qui est &laquo;&nbsp;simple&nbsp;&raquo; pour un ordinateur ne correspond en 
          général pas à ce qui est &laquo;&nbsp;simple&nbsp;&raquo; pour un être humain&nbsp;!
          </p>
--->
 
 	  </div> <!-- task-solution -->
    </body>

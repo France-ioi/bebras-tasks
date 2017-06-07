@@ -19,10 +19,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-FR-07-placing-arrows/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -33,14 +33,15 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
          execute: "Try",
          pause: "Pause",
          resume: "Resume",
-         alreadyObstacle: "This cell already contains an obstacle.",
-         refuseObstacle: "You cannot add an obstacle in that cell.",
-         errorLoop: "The robot turns in cycles, thus it may never reach the exit.",
-         success: "Success!"         
+         alreadyObstacle: "This box already contains an obstacle.",
+         refuseObstacle: "You can not add an obstacle in this box.",
+         errorLoop: "The robot runs in a loop. It will never arrive at the green circle.",
+         success: "Congratulations, you have succeeded"          
          };
 
          /* successPartial: function(obstacles, minObstacles) { return "Vous avez atteint l'objectif en utilisant " + obstacles + " obstacles.<br/> Recommencez pour essayer de n'utiliser que " + minObstacles + " obstacles."; } */ 
@@ -75,14 +76,14 @@
    </head>
    <body>
       <div id="task">
-         <h1>Turning robot</h1>
+         <h1>Robot Turning</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               The blue robot moves forwards if there is no obstacle ahead. Else, it makes a quarter turn to its right.
+               The blue robot moves forward if it has no obstacle in front of it. If the robot found an obstacle, he turns a quarter turn to the right.
             </p>
             <p>
-               Click to add obstacles, in such a way as to make the robot reach the green circle.
+               Click on the white grids to add obstacles, so that the robot can reache the green circle. 
             </p>
             <div id="anim_container">
                <div id="anim"></div>
@@ -97,7 +98,6 @@
       </div><!-- task -->
       <div id="solution">
 
-<!--TODO
          <h2>Solution</h2>
             <div class="easy"> 
                <p>Voici deux solutions possibles. Des variantes fonctionnent également.</p>
@@ -135,8 +135,7 @@
          <h2>C'est de l'informatique !</h2>
             <p>Dans ce sujet, on pouvait simuler l'exécution d'un programme dans sa tête, afin d'éviter de perdre du temps à exécuter le programme de nombreuses fois.</p>
             <p>Arriver à imaginer les étapes qui vont être effectuées est très utile en général pour un programmeur.</p>
- -->
-        
+         
 	  </div> <!-- task-solution -->
    </body>
 </html>

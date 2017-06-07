@@ -18,10 +18,10 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-AT-07-telephone-book/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -32,10 +32,11 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
-         incorrectNumber: function(nbTarget) { return "You should select " + nbTarget + " words."; },
-         incorrect: "You did not select the right words. Try again.",
-         correct: "Success!" };
+         incorrectNumber: function(nbTarget) { return "You must select " + nbTarget + " words."; },
+         incorrect: "You have not selected the right words. Try again.",
+         correct: "Congratulations, you have succeeded." };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -127,36 +128,36 @@
    </head>
    <body>
       <div id="task">
-         <h1>Word selection</h1>
+         <h1>Selection of Words</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <table id="task_description">
                <tr>
                   <td>
                      <p>
-                        A pattern is made of letters<span class="easy"> and question marks</span><span class="medium hard">, question marks, and "triple dots"</span>.
+                        A pattern is formed of letters<span class="easy"> and question marks</span><span class="medium hard">, Question marks and three small dots</span>.
                      </p>
                      <p>
-                        Each symbol <span class="symbol">?</span> stands for exactly one letter (any letter).
+                        Each symbol <span class="symbol">?</span> refers to exactly one letter.
                      </p>
                      <p class="medium hard">
-                        Each symbol <span class="symbol">&#8230;</span> stands for zero, one, or several letters.
+                       Each symbol <span class="symbol">&#8230;</span> means zero, one or more letters.
                      </p>
                   </td>
                   <td>
                      <div class="example_container">
                         <p class="example_title"><strong>Example</strong></p>
-                        <p> Pattern: <strong><span id="pattern_example_0" class="pattern"></span></strong>
+                        <p> Pattern&nbsp;: <strong><span id="pattern_example_0" class="pattern"></span></strong>
                         </p>
-                        <p> Matching words: </p>
+                        <p> Related words&nbsp;: </p>
                         <table id="example0" class="words example"></table>
                      </div>
                   </td>
                   <td>
                      <div class="example_container">
                        <p class="example_title"><strong>Example</strong></p>
-                        <p> Pattern:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
-                        <p> Matching words: </p>
+                        <p> Pattern&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
+                        <p> Related words&nbsp;: </p>
                         <table id="example1" class="words example"></table>
                      </div>
                   </td>
@@ -164,9 +165,9 @@
             </table>
             <br/>
             <div id="pattern_given">
-               Select <span class="hard">all</span> the <span class="easy medium"><b>3</b></span> words that corrrespond
-               to the pattern:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
-               <span class="hard"><br/>You are not getting told the number of matching words.</span>
+               Select <span class="hard">all</span> the <span class="easy medium"><b>3</b></span> words that match
+               the pattern&nbsp;:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
+               <span class="hard"><br/>You are not told how many words match.</span>
             </div>
             <table id="main_words" class="words"></table>
             <img src="icon.png" style="display:none">
@@ -174,7 +175,6 @@
      </div><!-- task -->
       <div id="solution">
 
-<!--TODO
          <h2>Solution</h2>
          
          <div class="easy">
@@ -216,7 +216,7 @@
            complexes que celui ci-dessus.-->
          
 
--->
+
 	  </div> <!-- task-solution -->
   </body>
 </html>

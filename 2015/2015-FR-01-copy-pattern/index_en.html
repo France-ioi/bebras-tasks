@@ -17,37 +17,38 @@
 
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script type="text/javascript">
+         var stringsLanguage = 'en';
          var taskStrings = {
            instructions: [
-                  "1 step right",
-                  "1 step left",
-                  "1 step up",
-                  "1 step down",
-                  "N steps right",
-                  "N steps left",
-                  "N steps up",
-                  "N steps down",
+                  "1 step Right",
+                  "1 step Left",
+                  "1 step Up",
+                  "1 step Down",
+                  "N step Right",
+                  "N step Left",
+                  "N step Up",
+                  "N step Down",
                   "increase N by 1"
                   ],
             resume: "Resume",
             pause: "Pause",
-            success: "Success!",
-            missingInstr: "Add instructions to build your program.",
-            incorrect: "The drawing does not match.<br> Try with a different sequence of instructions.",
-            noInstruction: "No instruction provided.",
+            success: "Congratulations, you have succeeded",
+            missingInstr: "Add instructions to your program.",
+            incorrect: "The drawing does not fit.<br> Try another instructions.",
+            noInstruction: "No instructions provided.",
             completed: "Execution completed.",
             repetitionNumber: "Repetition n°",
-            exitGrid: "You went outside the grid."
+            exitGrid: "You are out of the grid."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-01-track/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Mathias Hiron",
-          "translators": ["Arthur Chargueraud"],
+          "translators": [],
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -126,11 +127,11 @@
    </head>
    <body>
       <div id="task">
-         <h1>Pattern copy</h1>
+         <h1>Reproduce the drawing</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-            To reproduce the target drawing, make a sequence of instructions. <strong>It will be repeated <span class="nbLoops"></span> times.</strong>
+            Try to redraw the pattern in the Objective Pattern by building a sequence of the following instructions. <Strong> It will be repeated <span class = "nbLoops"> </ span> times. </ Strong>
             </p>
             <div id="top-spacing"></div>
             <div style="text-align:center">
@@ -139,12 +140,12 @@
                      <td>
                         <table class='examples valigntop'>
                            <tr>
-                              <td style="text-align:center"><b>Example<br> (sequence gets repeated <span class="nbLoops"></span> times)</b></td>
+                              <td style="text-align:center"><b>Example<br> (The sequence is repeated <span class="nbLoops"></span> times)</b></td>
                            </tr>
                            <tr>
                               <td style="text-align:center">
                                  <table style="margin:auto" id="sample0Text" class="example-text"></table>
-                                 <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="Essayer"></input>
+                                 <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="Try"></input>
                               </td>
                            </tr>
                         </table>
@@ -152,7 +153,7 @@
                      <td>
                         <table class='objectif valigntop'>
                            <tr>
-                              <td style="text-align:center"><b>Target</b></td>
+                              <td style="text-align:center"><b>Objective Pattern</b></td>
                            </tr>
                            <tr>
                               <td>
@@ -169,13 +170,13 @@
                <table class="columns" style="clear: both">
                <tr>
                   <td style="width:170px">
-                     <div class="column_head" style="text-align:center">Take instructions<br /> from here</div>
+                     <div class="column_head" style="text-align:center">Take the<br />instructions here</div>
                   </td>
                   <td style="width:250px">
-                     <div class="column_head" style="text-align:center">Drop instructions<br />there</div>
+                     <div class="column_head" style="text-align:center">Slide the<br />instructions there</div>
                   </td>
                   <td>
-                     <div class="column_head" style="text-align:center">Result of the execution<br/> (sequence gets repeated <span class="nbLoops"></span> times)</div>
+                     <div class="column_head" style="text-align:center">Result of execusion<br/> (The sequence is repeated <span class="nbLoops"></span> times)</div>
                   </td>
                </tr>
                <tr>
@@ -186,9 +187,9 @@
                      <div id="simuButtons" class="buttons" style="text-align:center;padding:10px">
                         <input type="button" id="pause" value="Pause" onclick="task.pause()"/>
                         &nbsp;&nbsp;&nbsp;
-                        <input type="button" id="stop" value="Stop" onclick="task.stop()" />
+                        <input type="button" id="stop" value="Arrêter" onclick="task.stop()" />
                      </div>
-                     <div id="variableInfo" class="medium hard">Current value of N is: <span id="valueS">1</span>.</div>
+                     <div id="variableInfo" class="medium hard">The current value of N is: <span id="valueS">1</span>.</div>
                      <div><span id="message"></span></div>
                      <div id="result"></div>            
                      
@@ -198,7 +199,7 @@
                   <td></td>
                   <td>
                      <div class="buttons" style="text-align: center">
-                        <input id="tryOrReset" type="button" onclick="task.trySequence()" value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Try&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">
+                        <input id="tryOrReset" type="button" onclick="task.trySequence()" value="Try">
                      </div>
                   </td>
                </tr>
@@ -209,7 +210,6 @@
          </div>
       </div><!-- task -->
       <div id="solution">
-<!--TODO
          <h2>Solution</h2> 
          <div class="easy">
             <p>On commence par repérer le motif qui est répété 6 fois. Il est encadré en rouge ci-dessous.</p>
@@ -219,6 +219,7 @@
             <p>On cherche alors les instructions qui correspondent aux déplacements. On obtient alors la solution&nbsp;:</p>
             <p style="text-align:center"><img style="vertical-align:top" src="solution_easy.png" width="150"></p>
          </div>
+<!--1 pas à droite <br />1 pas à droite <br />1 pas en haut <br />1 pas à droite <br />1 pas à droite <br />1 pas en bas <br /></p>-->
          <div class="medium">
             <p>On commence par repérer le motif qui est répété. Les 4 flèches rouges correspondent à la première répétition du motif. Les 4 flèches bleues correspondent à la seconde répétition.</p>
             <p style="text-align:center"><img src="solution_medium_pattern.png" width="200"></p>
@@ -246,6 +247,19 @@
                <img src="solution_hard_pattern_3.png" ></p>
             <p>Notez que dans la troisième solution, seules 6 répétitions sont nécessaires pour compléter le dessin.</p>
          </div>
+         <!--
+            Voici une séquence de déplacements qui permet de dessiner le motif&nbsp;: 
+            <br/>1 pas en bas,  1 pas à droite, 1 pas à gauche, 1 pas à gauche, 1 pas à droite,  (tracé rouge sur le dessin ci-dessous)
+            <br/> 1 pas en bas, 2 pas à droite, 2 pas à gauche, 2 pas à gauche, 2 pas à droite, (tracé bleu sur le dessin ci-dessous)
+            <br/> 1 pas en bas, 3 pas à droite, 3 pas à gauche, 3 pas à gauche, 3 pas à droite, (tracé vert sur le dessin ci-dessous)
+            <br/>etc. </p>
+               <p>On observe que&nbsp;: </p>
+               <ol>
+                     <li>Une séquence de déplacements est répétée 12 fois : en bas,  à droite, à gauche, à gauche, à droite.</li>
+			          <li>Le premier déplacement de la séquence répétée est toujours le même : 1 pas en bas</li>
+			         <li>Le nombre de pas des autres déplacements augmente de 1 à chaque répétition : il faut utiliser les instructions avec N pas et augmenter N de 1 à chaque fin de la séquence</li>
+            </ol></p>
+         -->
 
 	 <h2>C'est de l'informatique !</h2>
        <p>
@@ -264,7 +278,7 @@
        plus intéressants, car plus génériques, que ce que l'on pourrait obtenir sans.
        </p>
 
--->
+
       </div> <!-- task-solution -->
    </body>
 </html>
