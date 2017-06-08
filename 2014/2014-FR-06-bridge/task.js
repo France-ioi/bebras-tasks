@@ -162,7 +162,7 @@ function initTask() {
    };
 
    task.crossOrRetry = function() {
-      if ($("#cross_or_retry").text() == "Essayer") {
+      if ($("#cross_or_retry").text() == taskStrings.attempt) {
          task.checkSolution();
       } else {
          replaceCircles();
