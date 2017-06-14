@@ -17,6 +17,26 @@
       <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
 
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript">
+      var taskStrings = {
+         cmdForward: "A",
+         cmdBackwards: "R",
+         cmdRight: "D",
+         cmdLeft: "G",
+         cmdF1: "F1",
+         cmdF2: "F2",
+         instructionsLabel: "Instructions : ",
+         programLabel: "Programme : ",
+         functionLabel: function(name) { return "Fonction " + name + " : "; },
+         tryLabel: "Essayer",
+         stopLabel: "Arrêter",
+         success: "Bravo, vous avez réussi !",
+         incomplete: "Le robot n'est pas passé sur tous les traits gris.",
+         executionComplete: "Exécution terminée.",
+         outOfZone: "Le robot essaie de se déplacer en dehors des traits gris.",
+         infiniteLoop: function(name) { return "Votre programme tourne en rond : l'exécution de la fonction " + name + " demande d'exécuter à nouveau la fonction " + name + "."; }
+         };
+      </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
@@ -33,21 +53,6 @@
           "fullFeedback": true
       };
       </script>
-      <script type="text/javascript">
-      var taskStrings = {
-         instructionsLabel: "Instructions : ",
-         programLabel: "Programme : ",
-         functionLabel: function(name) { return "Fonction " + name + " : "; },
-         tryLabel: "Essayer",
-         stopLabel: "Arrêter",
-         success: "Bravo, vous avez réussi !",
-         incomplete: "Le robot n'est pas passé sur tous les traits gris.",
-         executionComplete: "Exécution terminée.",
-         outOfZone: "Le robot essaie de se déplacer en dehors des traits gris.",
-         infiniteLoop: function(name) { return "Votre programme tourne en rond : l'exécution de la fonction " + name + " demande d'exécuter à nouveau la fonction " + name + "."; }
-         };
-      </script>
-
       <style>
          #drawing_and_controls {
            border: 1px solid black;
