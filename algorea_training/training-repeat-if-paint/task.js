@@ -10,7 +10,7 @@ function initTask(subTask) {
          paint: { img: "paint.png", side: cellSide, category: "paint", isObstacle: false, hasColor: true, color: "gris", zOrder: 1 },
          marker: { num: 2, img: "marker.png", side: cellSide, category: "marker", isObstacle: false, isMarker: true, zOrder: 0 }
       },
-      maxInstructions: 18,
+      maxInstructions: 10,
       includeBlocks: {
          groupByCategory: false,
          generatedBlocks: {
