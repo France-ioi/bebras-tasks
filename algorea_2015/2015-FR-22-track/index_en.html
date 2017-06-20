@@ -2,7 +2,7 @@
 <html>
    <head>
       <meta charset="utf-8">
-      <title>2015-FR-27-boxes</title>
+      <title>2015-FR-22-track</title>
       <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
       <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
       <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
@@ -20,35 +20,27 @@
       <script>
          var stringsLanguage = 'en';
          var taskStrings = {
-            pickupBox: "Pick up the box",
-            dropBox: "Drop the Box",
-            moveRightOneCell: "Move the box to the right",
-            moveRightUntilEdge: "Go right to the edge",
-            moveRightUtilBox: "Go right to be on a Box",
-            moveRightWhileBox: "Go right as long as you are on a Box",
-            moveLeftOneCell: "Move the box to the left",
-            moveLeftUntilEdge: "Go left to the edge",
-            moveLeftUntilBox: "Go left to be on a Box",
-            moveLeftWhileBox: "Go left as long as you are on a Box",
-            resetBoxes: "Reset the boxes",
-            noInstruction: "No instructions provided.",
-            executionCompleted: "Execution completed.",
+            forward: "Move Forward",
+            turnLeft: "Turn left",
+            turnRight: "Turn right",
+            turnLeftIfNoTrack: "If No Track in front, \nturn left",
+            turnRightIfNoTrack: "If No Track in front, \nturn right",
             repetitionNumber: "Repeat no.",
-            inexistantBox: "The robot tries to pick up a non-existent Box.",
-            alreadyCarryingBox: "The robot tries to pick up a box while it is already carrying one",
-            notCarryingBox: "The robot tries to drop a box but does not carry it",
-            droppingOnBox: "The robot tries to deposit a box on another",
-            exitingGrid: "The robot tries to get out of the grid.",
+            resetTrack: "Resetting",
+            noInstructionProvided: "No instructions provided.",
+            executionCompleted: "Execution completed.",
+            robotMovingBackwards: "The robot tries to retrace his steps.",
+            robotExitingTrack: "The robot tries to get out of the track.",
             attempt: "Try",
             stop: "Stop",
             success: "Congratulations, you did it.",
-            failure: "The robot did not reach the target."
+            failure: "The robot did not go all the way."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
          var json = {
-            "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-27-boxes/",
+            "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-22-track/",
             "language": "en",
             "version": "en.01",
             "authors": "Mathias Hiron",
@@ -75,7 +67,7 @@
          #message {
             text-align: center;
             font-weight: bold;
-            color: red;
+            color: blue;
             padding: 0.5em;
             height: 1em;
          }
@@ -93,43 +85,36 @@
 
    <body>
       <div id="task">
-
-         <h1>Boxes</h1>
+         <h1>Track</h1>
+         <img style="display: none;" src="robot.png"/>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <table><tr>
-		<td><br></br> </td>
-		<td><br></br> </td>
-   
-<td><br></br> </td>
-   <td><br></br> </td>
-               <td><b>Target:</b></td>
-               <td><div id="target"></div></td>
-            </tr></table>
             <p>
-		Your goal is to program the robot, represented by the red rectangle below,
+               Program the robot represented by a green triangle so that it follows the black track to the end.
             </p>
-
-		<p>
-		So that it arranges the boxes as shown on the above Target.
-            	</p>
-
-<p>
-		Drag the Instructions to create a sequence of instructions that the robot will repeat until it finished.
+            <p>
+               Drag the instructions below to create a program.
             </p>
-
-            <div class="contentCentered"><div id="grid"></div><span id="message"></span></div>
+            <p>
+               <b>The robot will repeat this sequence of instructions </ b> until it reaches the end of the track or it exits the track.
+            </p>
             <table class="columns" style="clear: both;">
-               <tr>
-                  <td style="width: 350px;"><div class="column_head">Instructions:</div></td>
-                  <td style="width: 350px;"><div class="column_head contentCentered">Build your sequence to repeat:</div></td>
+               <tr class="contentCentered">
+                  <td style="width: 220px;"><div class="column_head">Instructions</div></td>
+                  <td style="width: 220px;"><div class="column_head">Build your sequence</div></td>
+                  <td style="width: 300px;"><div class="column_head">Result</div></td>
                </tr>
                <tr>
-                  <td colspan="2"><div id="program" class="touch"></div></td>
+                  <td colspan="2">
+                     <div id="program" class="touch"></div>
+                  </td><td>
+                     <div id="drawing" style="margin-top: 1em;"></div>
+                     <div><span id="message"></span></div>
+                  </td>
                </tr>
             </table>
             <div class="buttons contentCentered">
-               <input id="tryOrReset" type="button" onclick="task.tryOrReset();" value="Try"/>
+               <input id="tryOrReset" type="button" value="Try" onclick="task.tryOrReset();"/>
             </div>
          </div>
          <img src="icon.png" style="display: none;"/>
@@ -138,36 +123,30 @@
       <div id="solution">
          <h2>Solution</h2> 
          <ul>
-            <li>Version facile :
-               <ul>
-                  <li>Va à droite jusqu'à être sur une caisse</li>
-                  <li>Ramasse la caisse en dessous de toi</li>
-                  <li>Va à droite jusqu'au bord</li>
-                  <li>Dépose la caisse que tu portes</li>
-               </ul>
-            </li>
-            <li>Version moyenne : 
-               <ul>
-                  <li>Va à droite jusqu'à être sur une caisse</li>
-                  <li>Ramasse la caisse en dessous de toi</li>
-                  <li>Va à droite jusqu'au bord</li>
-                  <li>Va à gauche tant que tu es sur une caisse</li>
-                  <li>Dépose la caisse que tu portes</li>
-                  <li>Va à gauche jusqu'au bord</li>
-               </ul>
-            </li>
-            <li>Version difficile : 
-               <ul>
-                  <li>Avance d'une case à droite</li>
-                  <li>Va à droite jusqu'à être sur une caisse</li>
-                  <li>Ramasse la caisse en dessous de toi</li>
-                  <li>Va à gauche jusqu'à être sur une caisse</li>
-                  <li>Avance d'une case à droite</li>
-                  <li>Avance d'une case à droite</li>
-                  <li>Dépose la caisse que tu portes</li>
-               </ul>
-            </li>
-         </ul>
+         <li>Version facile :
+            <ul>
+               <li>Avance d'une case</li>
+               <li>Avance d'une case</li>
+               <li>Avance d'une case</li>
+               <li>Avance d'une case</li>
+               <li>Pivote vers ta droite</li>
+            </ul>
+         </li>
+         <li>Version moyenne :
+            <ul>
+               <li>Avance d'une case</li>
+               <li>Si pas de piste devant, pivote vers ta droite</li>
+            </ul>
+         </li>
+         <li>Version difficile :
+            <ul>
+               <li>Avance d'une case</li>
+               <li>Si pas de piste devant, pivote vers ta droite</li>
+               <li>Si pas de piste devant, pivote vers ta gauche</li>
+               <li>Si pas de piste devant, pivote vers ta gauche</li>
+            </ul>
+         </li>
+      </ul>
       </div><!-- task-solution -->
    </body>
 </html>

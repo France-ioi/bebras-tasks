@@ -16,7 +16,7 @@ function initTask() {
    var widthColor = 80;
    var radiusColor = 0;
    var color = ["#FF2222", "#597AFF", "#0EE138", "#FFFF00", "#F48A00", "#00FFFF"];
-   var colorLabel = ["R", "B", "V", "J", "O", "T"];
+   var colorLabel = [taskStrings.red, taskStrings.blue, taskStrings.green, taskStrings.yellow, taskStrings.organge, taskStrings.t];
    var selectedColor;
    
    var graph;
@@ -153,20 +153,20 @@ function initTask() {
       
       var message = "";
       if (notColored) {
-         message += "Il vous reste " + nbRestant + " planète(s) à colorier.";
+         message += taskStrings.stillNbPlanets(nbRestant)
       }
       if (!notColored || level == "easy") {
          if (wrongSameColor) {
             if (message != "") {
                message += "<br />";
             }
-            message += "Vous avez colorié de la même couleur des planètes qui ne devraient pas l'être.";
+            message += taskStrings.errorSameColor;
          }
          if (wrongDifferentColor) {
             if (message != "") {
                message += "<br />";
             }
-            message += "Vous avez colorié de deux couleurs différentes des planètes qui devraient être de la même couleur.";
+            message += taskStrings.errorDifferentColor;
          }
       }
       return message;
@@ -338,7 +338,7 @@ function initTask() {
          var message = getMessageForAnswer(answer[curLevel], curLevel, component);
          if (message == "") {
             scores[curLevel] = maxScores[curLevel];
-            messages[curLevel] = "Bravo, vous avez réussi !";
+            messages[curLevel] = taslStrings.success;
          } else {
             scores[curLevel] = 0;
             messages[curLevel] = message;

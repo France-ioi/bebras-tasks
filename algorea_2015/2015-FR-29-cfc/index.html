@@ -17,6 +17,22 @@
       <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
 
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script>
+         var taskStrings = {
+            red: "R",
+            blue: "B",
+            green: "V",
+            yellow: "J",
+            orange: "O",
+            t: "T",
+            stillNbPlanets: function(nbPlanets) {
+               return "Il vous reste " + nbPlanets + " planète(s) à colorier.";
+            },
+            errorSameColor: "Vous avez colorié de la même couleur des planètes qui ne devraient pas l'être.",
+            errorDifferentColor: "Vous avez colorié de deux couleurs différentes des planètes qui devraient être de la même couleur.",
+            success: "Bravo, vous avez réussi !"
+         };
+      </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
