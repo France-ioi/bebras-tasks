@@ -161,17 +161,17 @@ function initTask() {
       for (var iParam = 0; iParam < 5; iParam++) {
          var value = parseInt(rectangle[paramNames[iParam]]);
          if (isNaN(value)) {
-            return "Le paramètre " + (iParam + 1) + " de l'instruction " + (iRect + 1) + " est invalide";
+            return taskStrings.paramInvalidAtInstr(iParam + 1, iRect + 1);
          }
       }
       if ((rectangle.color != 0) && (rectangle.color != 1)) {
-         return "Le paramètre 5 de l'instruction " + (iRect + 1) + " est invalide";
+         return taskStrings.param5Invalid(iRect + 1);
       }
       if (rectangle.x1 > rectangle.x2) {
-         return "La colonne de gauche du rectangle " + (iRect + 1) + " est à droite de sa colonne de droite !";
+         return taskStrings.leftAfterRight(iRect + 1);
       }
       if (rectangle.y1 > rectangle.y2) {
-         return "La ligne du haut du rectangle " + (iRect + 1) + " est en dessous de sa ligne du bas !";
+         return taskStrings.topBelowBottom(iRect + 1);
       }
       return "";
    }
@@ -311,10 +311,10 @@ function initTask() {
          } else {
             var success = isGridSuccess(gridAndMessage.grid, curLevel);
             if (success) {
-               messages[curLevel] = "Bravo, vous avez réussi !";
+               messages[curLevel] = taskStrings.success;
                scores[curLevel] = maxScores[curLevel];
             } else {
-               messages[curLevel] = "Vous n'avez pas reproduit le motif.";
+               messages[curLevel] = taskStrings.failure;
                scores[curLevel] = 0;
             }
          }

@@ -18,27 +18,27 @@
       <script>
          var taskStrings = {
             paramInvalidAtInstr: function(param, instr) {
-               return "Le paramètre " + param + " de l'instruction " + instr + " est invalide";
+               return "The parameter " + param + " of instruction " + instr + " is invalid";;
             },
             param5Invalid: function(instr) {
-               return "Le paramètre 5 de l'instruction " + instr + " est invalide";
+               return "Parameter 5 of the instruction " + instr + " is invalid";
             },
             leftAfterRight: function(instr) {
-               return "La colonne de gauche du rectangle " + instr + " est à droite de sa colonne de droite !";
+               return "The left column of the rectangle " + instr + " is to the right of its right column.";
             },
             topBelowBottom: function(instr) {
-               return "La ligne du haut du rectangle " + instr + " est en dessous de sa ligne du bas !";
+               return "The top line of the rectangle " + instr + " is below its bottom line."
             },
-            success: "Bravo, vous avez réussi !",
-            failure: "Vous n'avez pas reproduit le motif."
-         };
+            success: "Congratulations, you did it.",
+            failure: "You did not reproduce the pattern."
+         }
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-25-rectangles/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Mathias Hiron",
           "translators": [],
           "license": "",
@@ -91,14 +91,18 @@
 
    <body>
       <div id="task">
-         <h1>Fonction rectangle</h1>
+         <h1>Rectangle Function</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               Chaque exemple ci-dessous est formé d'une séquence d'instructions 
-               à exécuter dans l'ordre.
-               Chaque instruction est un appel à la fonction <b>rectangle</b>, qui dessine un rectangle dans la grille située en bas à droite.
+		Each example below is a sequence of instructions to be executed.
+		Each statement is a call to the <b>Rectangle Function</ b>, which draws a rectangle in the grid at the bottom right.
             </p>
+
+		<p>
+		Try the following examples to understand.
+           	</p>
+
             <table class="examples contentCentered" style="margin: auto;">
                <tr>
                   <td><code id="sample0"></code></td>
@@ -106,32 +110,32 @@
                   <td><code id="sample2"></code></td>
                </tr>
                <tr>
-                  <td><input id="button0" type="button" value="Essayer cet exemple" onclick="task.testSample(0);"></div></td>
-                  <td><input id="button1"  type="button" value="Essayer cet exemple" onclick="task.testSample(1);"></div></td>
-                  <td><input id="button2"  type="button" value="Essayer cet exemple" onclick="task.testSample(2);"></div></td>
+                  <td><input id="button0" type="button" value="Try" onclick="task.testSample(0);"></div></td>
+                  <td><input id="button1"  type="button" value="Try" onclick="task.testSample(1);"></div></td>
+                  <td><input id="button2"  type="button" value="Try" onclick="task.testSample(2);"></div></td>
                </tr>
             </table>
             <p>
-               Les 5 nombres entre parenthèses sont les <b>paramètres</b> de la fonction rectangle, et décrivent, dans l'ordre&nbsp;:
+               The 5 numbers in parentheses are the <b> parameters </ b> of the rectangle function, and describe in the following order:
             </p>
             <table class="examples" style="margin: auto;"><tr>
-               <td>sa colonne<br/>de gauche</td>
-               <td>sa ligne<br/>du haut</td>
-               <td>sa colonne<br/>de droite</td>
-               <td>sa ligne<br/>du bas</td>
-               <td>sa couleur :<br/>0 pour du noir,<br/>1 pour du blanc.</td>
+               <td>Left Side</td>
+               <td>Top Line</td>
+               <td>Right Side</td>
+               <td>Bottom Line</td>
+               <td>Rectangle Color: <br/> 0 for black, <br/> 1 for white.</td>
             </tr></table>
             <table class="contentCentered" style="width: 100%; margin-top: .5em;"><tr>
                <td>
-                  <p><b>Motif à obtenir :</b></p>
+                  <p><b>Target:</b></p>
                   <p><div id="target"></div></p></td>
                <td>
-                  <p><b>Résultat du programme :</b></p>
+                  <p><b>Result of the program:</b></p>
                   <p><div id="grid"></div></p>
                </td>
             </tr></table>
             <p>
-               Complétez le programme ci-dessous pour qu'il reproduise le motif de gauche dans la grille de droite&nbsp;:
+Complete the program below to reproduce the Target pattern in the right grid:
             </p>
             <table style="margin: auto;"><tr>
                <td style="vertical-align: top; width: 350px;">
@@ -139,8 +143,8 @@
                   </table>
                </td>
                <td style="vertical-align: top; width: 300px;">
-                  <input type="button" value="Essayer votre programme" onclick="task.tryAnswer();"/>               
-                  <p class="medium hard">Notez que le programme ne peut pas contenir plus de 4 instructions.</p>
+                  <input type="button" value="Try your program" onclick="task.tryAnswer();"/>               
+                  <p class="medium hard">Note that the program can not contain more than 4 instructions.</p>
                </td>
             </tr></table>
          </div>
