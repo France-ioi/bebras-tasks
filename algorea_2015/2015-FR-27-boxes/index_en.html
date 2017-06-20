@@ -19,37 +19,37 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script>
          var taskStrings = {
-            pickupBox: "Ramasse la caisse en dessous de toi",
-            dropBox : "Dépose la caisse que tu portes",
-            moveRightOneCell : "Avance d'une case à droite",
-            moveRightUntilEdge : "Va à droite jusqu'au bord",
-            moveRightUtilBox : "Va à droite jusqu'à être sur une caisse",
-            moveRightWhileBox : "Va à droite tant que tu es sur une caisse", 
-            moveLeftOneCell : "Avance d'une case à gauche",
-            moveLeftUntilEdge : "Va à gauche jusqu'au bord",
-            moveLeftUntilBox : "Va à gauche jusqu'à être sur une caisse",
-            moveLeftWhileBox : "Va à gauche tant que tu es sur une caisse",
-            resetBoxes: "Réinitialiser les caisses",
-            noInstruction: "Aucune instruction fournie.",
-            executionCompleted: "Exécution terminée.",
-            repetitionNumber: "Répétition n°",
-            inexistantBox: "Le robot essaie de ramasser une caisse inexistante",
-            alreadyCarryingBox: "Le robot essaie de ramasser une caisse alors qu'il en transporte déjà une",
-            notCarryingBox: "Le robot essaie de déposer une caisse mais n'en transporte pas",
-            droppingOnBox: "Le robot essaie de déposer une caisse sur une autre",
-            exitingGrid: "Le robot essaie de sortir de la grille.",
-            attempt: "Essayer",
-            stop: "Arrêter",
-            success: "Bravo, vous avez réussi !",
-            failure: "Le robot n'a pas atteint l'objectif.",
+            pickupBox: "Pick up the box",
+            dropBox: "Drop the Box",
+            moveRightOneCell: "Move the box to the right",
+            moveRightUntilEdge: "Go right to the edge",
+            moveRightUtilBox: "Go right to be on a Box",
+            moveRightWhileBox: "Go right as long as you are on a Box",
+            moveLeftOneCell: "Move the box to the left",
+            moveLeftUntilEdge: "Go left to the edge",
+            moveLeftUntilBox: "Go left to be on a Box",
+            moveLeftWhileBox: "Go left as long as you are on a Box",
+            resetBoxes: "Reset the boxes",
+            noInstruction: "No instructions provided.",
+            executionCompleted: "Execution completed.",
+            repetitionNumber: "Repeat no.",
+            inexistantBox: "The robot tries to pick up a non-existent Box.",
+            alreadyCarryingBox: "The robot tries to pick up a box while it is already carrying one",
+            notCarryingBox: "The robot tries to drop a box but does not carry it",
+            droppingOnBox: "The robot tries to deposit a box on another",
+            exitingGrid: "The robot tries to get out of the grid.",
+            attempt: "Try",
+            stop: "Stop",
+            success: "Congratulations, you did it.",
+            failure: "The robot did not reach the target."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
          var json = {
             "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-27-boxes/",
-            "language": "fr",
-            "version": "fr.01",
+            "language": "en",
+            "version": "en.01",
             "authors": "Mathias Hiron",
             "translators": [],
             "license": "",
@@ -93,31 +93,42 @@
    <body>
       <div id="task">
 
-         <h1>Ranger les caisses</h1>
+         <h1>Boxes</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <table><tr>
-               <td><b>Objectif :</b></td>
+		<td><br></br> </td>
+		<td><br></br> </td>
+   
+<td><br></br> </td>
+   <td><br></br> </td>
+               <td><b>Target:</b></td>
                <td><div id="target"></div></td>
             </tr></table>
             <p>
-               Votre objectif est de programmer le robot, représenté par le rectangle rouge ci-dessous,
-               de sorte qu'il range les caisses comme représenté sur l'objectif ci-dessus.
-               Faites glisser les instructions disponibles à gauche pour créer une séquence d'instructions
-               que le robot va répéter jusqu'à ce qu'il ait terminé.
+		Your goal is to program the robot, represented by the red rectangle below,
             </p>
+
+		<p>
+		So that it arranges the boxes as shown on the above Target.
+            	</p>
+
+<p>
+		Drag the Instructions to create a sequence of instructions that the robot will repeat until it finished.
+            </p>
+
             <div class="contentCentered"><div id="grid"></div><span id="message"></span></div>
             <table class="columns" style="clear: both;">
                <tr>
-                  <td style="width: 350px;"><div class="column_head">Choisissez les instructions :</div></td>
-                  <td style="width: 350px;"><div class="column_head contentCentered">Construisez votre séquence à répéter :</div></td>
+                  <td style="width: 350px;"><div class="column_head">Instructions:</div></td>
+                  <td style="width: 350px;"><div class="column_head contentCentered">Build your sequence to repeat:</div></td>
                </tr>
                <tr>
                   <td colspan="2"><div id="program" class="touch"></div></td>
                </tr>
             </table>
             <div class="buttons contentCentered">
-               <input id="tryOrReset" type="button" onclick="task.tryOrReset();" value="Essayer"/>
+               <input id="tryOrReset" type="button" onclick="task.tryOrReset();" value="Try"/>
             </div>
          </div>
          <img src="icon.png" style="display: none;"/>

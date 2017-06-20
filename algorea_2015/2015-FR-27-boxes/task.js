@@ -2,16 +2,16 @@ function initTask() {
    var cellSide = 30;
    var nbLoops = 200;
    var instructions = [
-      "Ramasse la caisse en dessous de toi",
-      "Dépose la caisse que tu portes",
-      "Avance d'une case à droite",
-      "Va à droite jusqu'au bord",
-      "Va à droite jusqu'à être sur une caisse",
-      "Va à droite tant que tu es sur une caisse",
-      "Avance d'une case à gauche",
-      "Va à gauche jusqu'au bord",
-      "Va à gauche jusqu'à être sur une caisse",
-      "Va à gauche tant que tu es sur une caisse"
+      taskStrings.pickupBox,
+      taskStrings.dropBox,
+      taskStrings.moveRightOneCell,
+      taskStrings.moveRightUntilEdge,
+      taskStrings.moveRightUtilBox,
+      taskStrings.moveRightWhileBox,
+      taskStrings.moveLeftOneCell,
+      taskStrings.moveLeftUntilEdge,
+      taskStrings.moveLeftUntilBox,
+      taskStrings.moveLeftWhileBox
    ];
    var curSimulation;
    var dragAndDrop;
@@ -262,17 +262,17 @@ function initTask() {
    var stopExecution = function() {
       DelayedExec.stopAll();
       simuState = simuStates.stopped;
-      $("#tryOrReset").attr('value', "Réinitialiser les caisses");
+      $("#tryOrReset").attr('value', taskStrings.resetBoxes);
    };
 
    var simulateStep = function(simulation, display) {
       var instrs = simulation.instrs;
       if (simulation.step >= nbLoops * instrs.length) {
          if (instrs.length == 0) {
-            throw "Aucune instruction fournie.";
+            throw taskStrings.noInstruction;
          } else {
             simulation.completed = true;
-            simulation.message = "Exécution terminée.";
+            simulation.message = taskStrings.executionCompleted;
          }
       } else {
          var robot = simulation.robot;
@@ -282,13 +282,13 @@ function initTask() {
          var instr = instrs[iSequence];
 
          if (iSequence == 0)
-            simulation.message = "Répétition n°" + (iIteration+1) + ".";
+            simulation.message = taskStrings.repetitionNumber + (iIteration+1) + ".";
          if (instr === null) {
          } else if (instr == 0) {
             if (boxes[robot.col] == 0) {
-               throw "Le robot essaie de ramasser une caisse inexistante";
+               throw taskStrings.inexistantBox;
             } else if (robot.hasBox) {
-               throw "Le robot essaie de ramasser une caisse alors qu'il en transporte déjà une";
+               throw taskStrings.alreadyCarryingBox;
             } else {
                robot.hasBox = true;
                boxes[robot.col] = 0;
@@ -300,9 +300,9 @@ function initTask() {
             }
          } else if (instr == 1) {
             if (!robot.hasBox) {
-               throw "Le robot essaie de déposer une caisse mais n'en transporte pas";
+               throw taskStrings.notCarryingBox;
             } else if (boxes[robot.col] == 1) {
-               throw "Le robot essaie de déposer une caisse sur une autre";
+               throw taskStrings.droppingOnBox;
             } else {
                boxes[robot.col] = 1;
                robot.hasBox = false;
@@ -314,7 +314,7 @@ function initTask() {
             }
          } else if (instr == 2) {
             if (robot.col == nbCols - 1) {
-               throw "Le robot essaie de sortir de la grille.";
+               throw taskStrings.exitingGrid;
             } else {
                robot.col++;
             }
@@ -336,7 +336,7 @@ function initTask() {
             }
          } else if (instr == 6) {
             if (robot.col == 0) {
-               throw "Le robot essaie de sortir de la grille.";
+               throw taskStrings.exitingGrid;
             } else {
                robot.col--;
             }
@@ -381,7 +381,7 @@ function initTask() {
 
       curSimulation = getSimulationInit([], level);
       simuState = simuStates.initial;
-      $("#tryOrReset").attr('value', "Essayer");
+      $("#tryOrReset").attr('value', taskStrings.attempt);
       $("#message").html("");
    };
 
@@ -394,7 +394,7 @@ function initTask() {
       displayHelper.stopShowingResult();
       if (simuState == simuStates.initial) {
          simuState = simuStates.animating;
-         $("#tryOrReset").attr('value', "Arrêter");
+         $("#tryOrReset").attr('value', taskStrings.stop);
          executeSlow();
       } else if (simuState == simuStates.animating) {
          stopExecution();
@@ -460,10 +460,10 @@ function initTask() {
             continue;
          }
          if (simulation.success) {
-            messages[curLevel] = "Bravo, vous avez réussi !";
+            messages[curLevel] = taskStrings.success;
             scores[curLevel] = maxScores[curLevel];
          } else {
-            messages[curLevel] = "Le robot n'a pas atteint l'objectif.";
+            messages[curLevel] = taskStrings.failure;
             scores[curLevel] = 0;
          }
       }
