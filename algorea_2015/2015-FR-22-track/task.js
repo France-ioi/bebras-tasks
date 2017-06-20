@@ -4,12 +4,12 @@ function initTask() {
    var cellSide = 20;
    var nbLoops = 200;
    var instructions = [
-      "Avance d'une case",
-      "Pivote vers ta gauche",
-      "Pivote vers ta droite",
-      "Si pas de piste devant,\npivote vers ta gauche",
-      "Si pas de piste devant,\npivote vers ta droite"
-      ];
+      taskStrings.forward,
+      taskStrings.turnLeft,
+      taskStrings.turnRight,
+      taskStrings.turnLeftIfNoTrack,
+      taskStrings.turnRightIfNoTrack
+   ];
    var allPathSteps = {
       "easy": [0, 0, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0, 0, 0],
       "medium": [-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
@@ -289,17 +289,17 @@ function initTask() {
    var stopExecution = function() {
       DelayedExec.stopAll();
       simuState = simuStates.stopped;
-      $("#tryOrReset").attr('value', "Réinitialiser la piste");
+      $("#tryOrReset").attr('value', taskStrings.resetTrack);
    };
 
    var simulateStep = function(simulation) {
       var instrs = simulation.instrs;
       if (simulation.step >= nbLoops * instrs.length) {
          if (instrs.length == 0) {
-            throw "Aucune instruction fournie.";
+            throw taskStrings.noInstructionProvided;
          } else {
             simulation.completed = true;
-            simulation.message = "Exécution terminée.";
+            simulation.message = taskStrings.executionCompleted;
          }
       } else {
          var robot = simulation.robot;
@@ -320,20 +320,20 @@ function initTask() {
          var movingForward = ((newX == nextLocation.x) && (newY == nextLocation.y));
          var trackAhead = movingBackwards || movingForward;
          if (iSequence == 0)
-            simulation.message = "Répétition n°" + (iIteration+1) + ".";
+            simulation.message = taskStrings.repetitionNumber + (iIteration+1) + ".";
          if (instr === null) {
          } else if (instr == 0) {
             var idDir = robot.idDir;
             if (movingBackwards) {
-               throw "Le robot essaie de revenir sur ses pas.";
+               throw taskStrings.robotMovingBackwards;
             } else if (!movingForward) {
-               throw "Le robot essaie de sortir de la piste.";
+               throw taskStrings.robotExitingTrack;
             } else {
                robot.x = newX;
                robot.y = newY;
                robot.iLocation++;
                if (robot.iLocation == pathLocations.length - 1) {
-                  simulation.message = "Exécution terminée.";
+                  simulation.message = taskStrings.executionCompleted;
                   simulation.success = true;
                   simulation.completed = true;
                }
@@ -351,7 +351,7 @@ function initTask() {
       stopExecution();
       curSimulation = getSimulationInit([], level);
       simuState = simuStates.initial;
-      $("#tryOrReset").attr('value', "Essayer");
+      $("#tryOrReset").attr('value', taskStrings.attempt);
       updateDisplay();
    };
 
@@ -364,7 +364,7 @@ function initTask() {
       displayHelper.stopShowingResult();
       if (simuState == simuStates.initial) {
          simuState = simuStates.animating;
-         $("#tryOrReset").attr('value', "Arrêter");
+         $("#tryOrReset").attr('value', taskStrings.stop);
          executeSlow();
       } else if (simuState == simuStates.animating) {
          stopExecution();
@@ -423,10 +423,10 @@ function initTask() {
             continue;
          }
          if (simulation.success) {
-            messages[curLevel] = "Bravo, vous avez réussi !";
+            messages[curLevel] = taskStrings.success;
             scores[curLevel] = maxScores[curLevel];
          } else {
-            messages[curLevel] = "Le robot n'a pas parcouru toute la piste.";
+            messages[curLevel] = taskStrings.failure;
             scores[curLevel] = 0;
          }
       }
