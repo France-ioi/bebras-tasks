@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2015-FR-29-cfc</title>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script>
+         var stringsLanguage = 'en';
+         var taskStrings = {
+            red: "R",
+            blue: "B",
+            green: "G",
+            yellow: "Y",
+            orange: "O",
+            t: "T",
+            stillNbPlanets: function(nbPlanets) {
+               return "You still have " + nbPlanets + " planets to color.";
+            },
+            errorSameColor: "You have colored the same color of the planets that should not be.",
+            errorDifferentColor: "You have colored two different colors of the planets that should be of the same color.",
+            success: "Congratulations, you did it."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-28-snowflake/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Mathias Hiron, Simon Mauras",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": true
+      };
+      </script>
+      <style>
+         #display {
+           border: 1px solid black;
+         }
+      </style>
+   </head>
+
+   <body> 
+      <div id="task">
+         <h1>Planets</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               	In the illustration below, each circle represents a planet.
+		Each arrow represents a path between two planets.
+               	Note that some paths are two-way and others are one way.
+            </p>
+            <p>
+		Your goal is to color the planets so that :
+            </p>
+            <ul>
+               <li>Two planets have the same color if you can travel between them through a two-way path or through another planets,</li>
+               <li>Two planets have different colors if one of these planets can not travel to the other.</li>
+            </ul>
+            <p>
+               To color a planet, click on the rectangle of the color you want, then click on the planet.
+            </p>
+            <p class="easy">
+		In the easy version, to help you understand, you will be notified as soon as you make a mistake.
+            </p>
+            <div id="display"></div>
+         </div>
+         <img src="icon.png" style="display: none;"/>
+      </div><!-- task -->
+
+      <div id="solution">
+         <h2>Solution</h2> 
+         <p>
+            L'algorithme suivant permet de colorier rapidement toutes les planètes de la bonne couleur.
+         </p>
+         <ul>
+            <li>Pour commencer, on sélectionne la première couleur, on considère une planète au hasard que l'on colorie de cette couleur.</li>
+            <li>
+               Ensuite, on va colorier de la même couleur toutes les planètes avec lesquelles on peut voyager dans les deux sens
+               depuis la planète déjà coloriée. Pour trouver ces planètes, on cherche un <em>cycle</em>,
+               c'est-à-dire un chemin qui part de la planète de départ et qui revient à la planète de départ.
+               Lorsqu'on a trouvé un tel cycle, on peut colorier toutes les planètes de ce cycle de la couleur courante.
+            </li>
+            <li>
+               Ensuite, on passe à la couleur suivante, et on recommence le même processus à partir d'une planète qui n'est pas déjà coloriée.
+               Notez que l'on ne change jamais la couleur d'une planète déjà coloriée. Autrement dit, il faut maintenant trouver des cycles
+               qui passent uniquement par des planètes non encore coloriées.
+            </li>
+            <li>On continue jusqu'à ce que toutes les planètes soient coloriées.</li>
+         </ul>
+         <p>Le déroulement de l'algorithme est illustré sur l'exemple suivant.</p>
+         <img src="sol1.png"/><br/>
+         <img src="sol2.png"/><br/>
+         <img src="sol3.png"/><br/>
+         <img src="sol4.png"/><br/>
+      </div><!-- task-solution -->
+   </body>
+</html>
