@@ -47,7 +47,7 @@ function initTask() {
       var html = "<table class='result'>";
       for (var variable in sampleValues) {
          var value = sampleValues[variable];
-         html += "<tr><td>"  + variable + " vaut ";
+         html += "<tr><td>"  + variable + " " + taskStrings.equals + " ";
          if (isSample) {
             html += value;
          } else {
@@ -58,7 +58,7 @@ function initTask() {
    }
 
    var getQuestions = function(questions, isSample) {
-      var htmlQuestions = "<tr><td></td><td><b>Avant :</b></td><td><b>Programme :</b></td><td><b>Après :</b></td></tr>";
+      var htmlQuestions = "<tr><td></td><td><b>" + taskStrings.before + "</b></td><td><b>" + taskStrings.program + "</b></td><td><b>" + taskStrings.after + "</b></td></tr>";
       for (var iQuestion = 0; iQuestion < questions.length; iQuestion++) {
          var question = questions[iQuestion];
          htmlQuestions += "<tr><td><b>";
@@ -171,11 +171,7 @@ function initTask() {
             }
          }
          scores[curLevel] = Math.round(maxScores[curLevel] * nbSolved / nbQuestions);
-         var plural = "";
-         if (nbSolved > 1) {
-            plural = "s";
-         }
-         messages[curLevel] = "Vous avez " + nbSolved + " question" + plural + " juste" + plural + " sur " + nbQuestions;
+         messages[curLevel] = taskStrings.questionsSolved(nbSolved, nbQuestions);
       };
       if (gradedLevel == null) {
          displayHelper.sendBestScore(callback, scores, messages);

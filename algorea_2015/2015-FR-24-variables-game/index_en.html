@@ -17,16 +17,16 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script>
          var taskStrings = {
-            equals: "vaut",
-            before: "Avant :",
-            program: "Programme :",
-            after: "Après :",
+            equals: "equals",
+            before: "Before:",
+            program: "Program:",
+            after: "After:",
             questionsSolved: function(nbSolved, nbQuestions) {
                var plural = "";
                if (nbSolved > 1) {
                   plural = "s";
                }
-               return "Vous avez " + nbSolved + " question" + plural + " juste" + plural + " sur " + nbQuestions; 
+               return "You have " + nbSolved + " correct answer" + plural + " out of " + nbQuestions;
             }
          };
       </script>
@@ -34,7 +34,7 @@
       <script class="remove" type="text/javascript">
          var json = {
             "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-24-variables-game/",
-            "language": "fr",
+            "language": "en",
             "version": "fr.01",
             "authors": "Mathias Hiron",
             "translators": [],
@@ -110,22 +110,22 @@
 
    <body>
       <div id="task">
-         <h1>Jeu des variables</h1>
+         <h1>Variables</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               Un programme est une séquence d'instructions exécutées les unes après les autres.
-               Dans un programme, on manipule une ou plusieurs <b>variables</b>.
-               Une variable peut être vue comme le nom d'une boîte dans laquelle on stocke un nombre.
+		A program is a sequence of instructions executed one after one.
+		In a program, we create one or more <b> variables </ b>.
+		A variable can be seen as the name of a box in which a number.
             </p>
             <p>
-               Une instruction d'un programme peut modifier le nombre stocké dans une variable.
-               Par exemple, l'instruction « a = a + 1 » ajoute 1 au nombre stocké dans la variable « a ».
-               Commencez par étudier les exemples ci-dessous pour bien comprendre comment fonctionnent les variables.
+               An instruction in a program can change the number stored in a variable.
+               For example, the instruction "a = a + 1" adds 1 to the number stored in variable "a".
+		Study the examples below to understand how variables work.
             </p>
             <table id="samples" class="instructions"></table>
             <p>
-               <b>À vous de jouer ; complétez les cases dans la colonne de droite :</b>
+               <b>It's your turn; Complete the boxes in the right column:</b>
             </p>
             <table id="questions" class="instructions"></table>
          </div>
