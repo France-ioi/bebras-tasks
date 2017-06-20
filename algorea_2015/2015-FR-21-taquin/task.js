@@ -164,7 +164,7 @@ function initTask() {
    var parseAnswer = function(strAnswer) {
       var command = strAnswer.replace(/\s+/g, '').toUpperCase();
       if(command.length > 100) {
-         throw "Le programme est trop long&nbsp;! Vous ne devez pas dépasser 100 caractères.";
+         throw taskStrings.programTooLong;
       }
       return doParse(command);
    };
@@ -196,7 +196,7 @@ function initTask() {
       while(idx > 0) {
         end++;
         if(end == command.length) {
-          throw "Je ne comprends pas votre programme.";
+          throw taskStrings.cantUnderstandProgram;
         }
         if(command.charAt(end) == '(')
           idx++;
@@ -208,19 +208,19 @@ function initTask() {
         return undefined;
       end++;
     }
-    else if(command.charAt(pos) == 'B' || command.charAt(pos) == 'H' ||
-            command.charAt(pos) == 'G' || command.charAt(pos) == 'D') {
+    else if(command.charAt(pos) == taskStrings.down || command.charAt(pos) == taskStrings.up ||
+            command.charAt(pos) == taskStrings.left || command.charAt(pos) == taskStrings.right) {
       end++;
       commandCur = command.charAt(pos);
     } else {
-      throw "Je ne comprends pas votre programme.";
+      throw taskStrings.cantUnderstandProgram;
     }
     var commandNext = doParse(command.substring(end));
     if(commandNext == undefined)
       return undefined;
 
     if(commandCur.length * num + commandNext.length > 2000) {
-      throw "Votre programme mettrait trop de temps à s'exécuter.";
+      throw taskStrings.executionTooLong;
     }
     return new Array(num+1).join(commandCur) + commandNext;
    };
@@ -270,14 +270,14 @@ function initTask() {
       if (sampleRunning) {
          clearGrid();
          executionDelay = 1500;
-         $("#programRan").html("Réinitialisation...");
+         $("#programRan").html(taskStrings.resetting);
          $("#resetButton").attr("disabled", true);
       }
       sampleRunning = true;
       DelayedExec.setTimeout("execute", function() {
          clearGrid();
          $("#resetButton").attr("disabled", false);
-         $("#programRan").html("Programme exécuté : " + strAnswer);
+         $("#programRan").html(taskStrings.programExecuted + " " + strAnswer);
          var pos = 0;
          var subExecuteStep = function() {
             try {
@@ -309,22 +309,22 @@ function initTask() {
    var executeStep = function(letter, display) {
       var oldCol = curCol;
       var oldLin = curLin;
-      if (letter == 'D') {
+      if (letter == taskStrings.right) {
          curCol++;
-      } else if (letter == 'G') {
+      } else if (letter == taskStrings.left) {
          curCol--;
-      } else if (letter == 'B') {
+      } else if (letter == taskStrings.down) {
          curLin++;
-      } else if (letter == 'H') {
+      } else if (letter == taskStrings.up) {
          curLin--;
       }
 
       if ((curCol < 0) || (curCol >= nbCols) || (curLin < 0) || (curLin >= nbLins)) {
-         throw "Votre programme essaie de faire sortir le trou de la grille";
+         throw taskStrings.holeExitingGrid;
       }
 
       if (data[level].cells[curLin][curCol] == -1) {
-         throw "Votre programme essaie de déplacer le trou vers un obstacle";
+         throw taskStrings.holeIntoObstacle;
       }
 
       if ((curLin == linCell1) && (curCol == colCell1)) {
@@ -393,10 +393,10 @@ function initTask() {
             }
          }
          if (success) {
-            messages[curLevel] = "Bravo, vous avez réussi !";
+            messages[curLevel] = taskStrings.success;
             scores[curLevel] = maxScores[curLevel];
          } else if (messages[curLevel] == undefined) {
-            messages[curLevel] = "La pièce 1 est n'est pas en haut à droite.";
+            messages[curLevel] = taskStrings.failure;
             scores[curLevel] = 0;
          }
       }

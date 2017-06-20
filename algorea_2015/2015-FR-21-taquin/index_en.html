@@ -17,27 +17,27 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script>
          var taskStrings = {
-            programTooLong: "Le programme est trop long&nbsp;! Vous ne devez pas dépasser 100 caractères.",
-            cantUnderstandProgram: "Je ne comprends pas votre programme.",
-            executionTooLong: "Votre programme mettrait trop de temps à s'exécuter.",
-            resetting: "Réinitialisation...",
-            programExecuted: "Programme exécuté :",
-            up: "H",
-            down: "B",
-            right: "D",
-            left: "G",
-            holeExitingGrid: "Votre programme essaie de faire sortir le trou de la grille",
-            holeIntoObstacle: "Votre programme essaie de déplacer le trou vers un obstacle",
-            success: "Bravo, vous avez réussi !",
-            failure: "La pièce 1 est n'est pas en haut à droite."
+            programTooLong: "The program is too long. It must not exceed 100 characters.",
+            cantUnderstandProgram: "I do not understand your program.",
+            executionTooLong: "Your program would take too long to run.",
+            resetting: "Resetting...",
+            programExecuted: "Programme executed:",
+            up: "U",
+            down: "D",
+            right: "R",
+            left: "L",
+            holeExitingGrid: "Your program tries to get the hole out of the grid.",
+            holeIntoObstacle: "Your program tries to move the hole to an obstacle.",
+            success: "Congratulations, you did it.",
+            failure: "Cell 1 is not on the top right."
          }
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
          var json = {
             "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-21-taquin/",
-            "language": "fr",
-            "version": "fr.01",
+            "language": "en",
+            "version": "en.01",
             "authors": "Charles Freou",
             "translators": [],
             "license": "",
@@ -68,50 +68,50 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               La grille ci-dessous représente un jeu de taquin. Le jeu comporte des pièces numérotées, et un trou, représenté par la case grise. 
-               À chaque étape, on peut faire glisser vers le trou une pièce se trouvant à côté du trou.
-               Le trou se retrouve ainsi déplacé vers le haut (H), le bas (B), la droite (D) ou la gauche (G).
+               The grids below represent a game of teasing. The game features numbered pieces, and a hole, represented by the gray box. 
+               At each step, a piece next to the hole can be slid towards the hole.
+               The hole is moved Upward by (U), Down by (D), Right by (R) or left by (L).
             </p>
             <p>
-               Pour effectuer une commande plusieurs fois, on peut mettre un nombre devant ; par exemple « 3DH » déplace 3 fois le trou vers la droite, puis une fois vers le haut.
+               To repeat a command several times, you can put a number before it; e.g. "3RU" moves the hole three times to the right, then once up.
             </p>
             <p>
-               Écrivez un programme qui amène la pièce bleue numérotée 1 sur la case située tout en haut à droite de la grille.
-               Pour vous aider, essayez d'abord les programmes ci-dessous en cliquant sur les boutons.
+	    Write a program that brings the blue piece numbered 1 to the box at the top right of the grid.
+               To help you, try the programs below first by clicking on the buttons.
             </p>
             <p class="medium hard">
-               <b>Versions moyenne et difficile :</b> pour exécuter un groupe de commandes plusieurs fois, mettez-le entre parenthèses avec un nombre devant.
-               Par exemple : 3(HB) exécute 3 fois « HB ».
+               <b>Medium and difficult versions :</b> to repeat a group of commands several times, put it in brackets with a number before.
+               For example : 3(UD) execute (UD) for 3 times.
             </p>
             <p class="hard">
-               <b>Version difficile :</b> les cases en rouge sont des obstacles infranchissables.
+               <b>Hard Version :</b> The red boxes are impossible to move.
             </p>
             <table class="examples" style="margin: auto;">
                <tr>
-                  <td class="easy medium"><input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0);" value="H"/></td>
-                  <td class="easy medium"><input type="button" id="sample1" class="exampleButton" onclick="task.executeSample(1);" value="2D"/></td>
-                  <td class="easy medium"><input type="button" id="sample2" class="exampleButton" onclick="task.executeSample(2);" value="HDBG"/></td>
-                  <td class="easy medium"><input type="button" id="sample3" class="exampleButton" onclick="task.executeSample(3);" value="3DHG"/></td>
-                  <td class="medium"><input type="button" id="sample4" class="exampleButton" onclick="task.executeSample(4);" value="3(DHGB)"/></td>
-                  <td class="hard"><input type="button" id="sample5" class="exampleButton" onclick="task.executeSample(5);" value="3(GHDB)"/></td>
-                  <td class="hard"><input type="button" id="sample6" class="exampleButton" onclick="task.executeSample(6);" value="3(2(HB)G)H"/></td>
+                  <td class="easy medium"><input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0);" value="U"/></td>
+                  <td class="easy medium"><input type="button" id="sample1" class="exampleButton" onclick="task.executeSample(1);" value="2R"/></td>
+                  <td class="easy medium"><input type="button" id="sample2" class="exampleButton" onclick="task.executeSample(2);" value="URDL"/></td>
+                  <td class="easy medium"><input type="button" id="sample3" class="exampleButton" onclick="task.executeSample(3);" value="3RUL"/></td>
+                  <td class="medium"><input type="button" id="sample4" class="exampleButton" onclick="task.executeSample(4);" value="3(RULD)"/></td>
+                  <td class="hard"><input type="button" id="sample5" class="exampleButton" onclick="task.executeSample(5);" value="3(LURD)"/></td>
+                  <td class="hard"><input type="button" id="sample6" class="exampleButton" onclick="task.executeSample(6);" value="3(2(UD)L)U"/></td>
                </tr>
             </table>
             <table style="width: 100%; margin-top: 1em;"><tr>
                <td style="width: 200px;">
-                  Votre programme&nbsp;:<br/>
+                  Your program&nbsp;:<br/>
                   <div style="padding: 8px;">
                      <textarea id="answer" cols="50" maxlength="200" style="width: 300px; height: 100px;" onkeydown="task.resetExecution();"></textarea>
                   </div>
                   <div class="contentCentered">
-                     <input class="exampleButton" type="button" value="Essayer" onclick="task.executeAnswer();"/>
+                     <input class="exampleButton" type="button" value="Try" onclick="task.executeAnswer();"/>
                   </div>
                </td>
                <td class="contentCentered">
-                  <div style="padding-bottom: .5em;">Le jeu de taquin&nbsp;:</div>
+                  <div style="padding-bottom: .5em;">The teasing game&nbsp;:</div>
                   <div id="taquin"></div>
                   <p id="programRan" style="width: 400px; word-wrap: break-word;"></p>
-                  <p><input id="resetButton" disabled="true" type="button" value="Réinitialiser" onclick="task.resetExecution();"/></p>
+                  <p><input id="resetButton" disabled="true" type="button" value="Reset" onclick="task.resetExecution();"/></p>
                </td>
             </tr></table>
          </div>
