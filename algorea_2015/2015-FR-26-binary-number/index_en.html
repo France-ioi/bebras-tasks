@@ -17,12 +17,12 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script>
          var taskStrings = {
-            good: "C'est bon !",
-            tooMuch: "C'est trop !",
-            notEnough: "Ce n'est pas assez !",
-            canBeSolvedWithoutValues: "Ce sujet peut être résolu sans voir les valeurs associées aux curseurs.",
-            success: "Bravo, vous avez réussi !",
-            failure: "Vous n'avez pas atteint la valeur demandée."
+            good: "Its good!",
+            tooMuch: "It's too much!",
+            notEnough: "It is not enough!",
+            canBeSolvedWithoutValues: "This task can be solved without seeing the values associated with the cursors.",
+            success: "Congratulations, you did it.",
+            failure: "You have not reached the requested value."
 
          };
       </script>
@@ -30,8 +30,8 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-26-binary-number/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Charguéraud",
           "translators": [],
           "license": "",
@@ -61,15 +61,15 @@
 
    <body>
       <div id="task">
-         <h1>Compteur binaire</h1>
+         <h1>Binary Numbers</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               Cliquez sur les curseurs de sorte à obtenir la valeur : <span id="valueTarget"></span>.
+		Click the sliders to get the value: <span id="valueTarget"></span>.
             </p>
             <div id="abacusTask"></div>
             <p class="contentCentered">
-               Valeur courante&nbsp;: <span id="valueCurrent"></span>.
+               Current value&nbsp;: <span id="valueCurrent"></span>.
                <span id="valueRelative"></span>
             </p>
          </div>

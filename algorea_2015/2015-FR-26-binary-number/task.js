@@ -85,13 +85,13 @@ function initTask() {
          var yCursor = (answer[level][cursor] == 1) ? yCursorTrue : yCursorFalse; 
          objCursors[cursor].attr({y: yCursor});
       }
-      var message = "C'est bon !";
+      var message = taskStrings.good;
       var color = "green";
       if (current > target) {
-         message = "C'est trop !";
+         message = taskStrings.tooMuch;
          color = "black";
       } else if (current < target) {
-         message = "Ce n'est pas assez !";
+         message = taskStrings.notEnough;
          color = "black";
       }
       $("#valueRelative").html(message).css({"color": color});
@@ -120,7 +120,7 @@ function initTask() {
          }
       }
       if (! levelData.showLabels) {
-        paper.text(paperWidth/2, yLabel+20, "Ce sujet peut être résolu sans voir les valeurs associées aux curseurs.")
+        paper.text(paperWidth/2, yLabel+20, taskStrings.canBeSolvedWithoutValues)
            .attr("font-size", labelFontSize);
       }
    };
@@ -195,10 +195,10 @@ function initTask() {
 
       for (var curLevel in data) {
          if (valueOfState(answer[curLevel], curLevel) == data[curLevel].targets[parseInt(taskParams.randomSeed) % data[curLevel].targets.length]) {
-            messages[curLevel] = "Bravo, vous avez réussi !";
+            messages[curLevel] = taskStrings.success;
             scores[curLevel] = maxScores[curLevel];
          } else {
-            messages[curLevel] = "Vous n'avez pas atteint la valeur demandée.";
+            messages[curLevel] = taskStrings.failure;
             scores[curLevel] = 0;
          }
       }
