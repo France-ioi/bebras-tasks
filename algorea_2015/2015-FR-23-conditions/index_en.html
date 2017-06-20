@@ -17,43 +17,43 @@
       <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script>
          var taskStrings = {
-            invalidExpression: "L'expression est invalide. Il semble manquer quelque-chose.",
-            and: "ET",
-            or: "OU",
-            not: "NON",
+            invalidExpression: "The expression is invalid. It seems to be missing something.",
+            and: "AND",
+            or: "OR",
+            not: "NOT",
             invalidExpressionExpectingNumberXY: function(expr) {
-               return "L'expression \"" + expr + "\" est invalide à cet endroit. Il faudrait un nombre, x ou y.";
+               return "The expression \"" + expr + "\" is invalid.";
             },
             invalidParameter: function(param, op) {
-               return "Le paramètre \"" + param + "\" est invalide pour l'opérateur " + op + ".";
+               return "The parameter \"" + param + "\" is invalid for the operator " + op + ".";
             },
             invalidExpression2Params: function(expr, op) {
-               return "L'expression \"" + expr + "\" est invalide : l'opérateur " + op + " ne peut avoir que deux paramètres.";
+               return "The expression \"" + expr + "\" is invalid: the operator " + op + " can only have two parameters.";
             },
             invalidExpression1Param: function(op) {
-               return "L'opérateur " + op + " ne peut avoir qu'un paramètre.";
+               return "The operator " + op + " can only have one parameter.";
             },
-            missingParenthesis: "Il manque une parenthèse",
+            missingParenthesis: "It lacks a parenthesis.",
             parenthesisMissingForOps: function(op1, op2) {
-               return "Pour pouvoir utiliser à la fois des  " + op1 + " et des " + op2 + ", il est nécessaire d'utiliser des parenthèses.";
+               return "To be able to use both  " + op1 + " and " + op2 + ", It is necessary to use parentheses.";
             },
             invalidCharacterAfterExpression: function(character, expr) {
-               return "Caractère non reconnu \"" + character + "\" après \"" + expr + "\".";
+               return "Unrecognized character \"" + character + "\" after \"" + expr + "\".";
             },
-            expressionNotBoolean: "L'expression n'est pas booléenne !",
-            invalidExpressionTokenMissing: "L'expression est invalide. Il semble manquer quelque-chose.",
-            none: "aucune",
-            appliedCondition: "Condition appliquée :",
-            success: "Bravo, vous avez réussi !",
-            failure: "Vous n'avez pas reproduit le motif."
+            expressionNotBoolean: "The expression is not Boolean.",
+            invalidExpressionTokenMissing: "The expression is invalid. It seems to be missing something.",
+            none: " ",
+            appliedCondition: "Applied condition:",
+            success: "Congratulations, you did it.",
+            failure: "You did not reproduce the pattern."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-23-conditions/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Mathias Hiron",
           "translators": [],
           "license": "",
@@ -103,22 +103,22 @@
 
    <body>
       <div id="task">
-         <h1>Motif conditionnel</h1>
+         <h1>Conditions</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               Cliquez sur les boutons ci-dessous pour voir l'effet de chaque condition sur la grille située en bas à droite.
+		Click on the buttons below to see the effect of each condition on the grid called "Applied Conditions".
             </p>
             <table class="examples" style="margin: auto">
                <tr>
                   <td><input id="sample0" type="button" onclick="task.executeSample(0);" value="x < 3"/></td>
                   <td class="easy"><input id="sample1" type="button" onclick="task.executeSample(1);" value="x >= 4"/></td>
                   <td class="medium hard"><input id="sample2" type="button" onclick="task.executeSample(2);" value="y >= 4"/></td>
-                  <td class="easy"><input id="sample3" type="button" onclick="task.executeSample(3);" value="x >= 4 ET x <= 8"/></td>
-                  <td class="easy"><input id="sample4" type="button" onclick="task.executeSample(4);" value="x < 2 OU x > 4"/></td>
-                  <td class="medium hard"><input id="sample5" type="button" onclick="task.executeSample(5);" value="y >= 4 ET x <= 8"/></td>
-                  <td class="medium hard"><input id="sample6" type="button" onclick="task.executeSample(6);" value="x < 2 OU y > 4"/></td>
-                  <td class="medium hard"><input id="sample7" type="button" onclick="task.executeSample(7);" value="x > 7 OU (x < 5 ET y > 4)"/></td>
+                  <td class="easy"><input id="sample3" type="button" onclick="task.executeSample(3);" value="x >= 4 AND x <= 8"/></td>
+                  <td class="easy"><input id="sample4" type="button" onclick="task.executeSample(4);" value="x < 2 OR x > 4"/></td>
+                  <td class="medium hard"><input id="sample5" type="button" onclick="task.executeSample(5);" value="y >= 4 AND x <= 8"/></td>
+                  <td class="medium hard"><input id="sample6" type="button" onclick="task.executeSample(6);" value="x < 2 OR y > 4"/></td>
+                  <td class="medium hard"><input id="sample7" type="button" onclick="task.executeSample(7);" value="x > 7 OR (x < 5 AND y > 4)"/></td>
                </tr>
             </table>
             <!--
@@ -137,15 +137,15 @@
             </table>
             -->
             <p>
-               Écrivez maintenant votre propre condition, de sorte à reproduire dans la grille en bas à droite le motif affiché ci-dessous à gauche.
+               Write your own condition, so that you can reproduce the grid on the left which is called "Target".
             </p>
             <div style="display: inline-block; padding: 8px">
                <input id="expression" type="text" style="width: 650px" onkeydown="task.keydown();"/>
             </div>
-            <button onclick="task.testAnswer()">Essayer</button>
+            <button onclick="task.testAnswer()">Try</button>
             <table class="contentCentered" style="width: 100%; margin: auto;">
                <tr style="vertical-align: top;">
-                  <td><p><b>Motif à obtenir :</b></p></td>
+                  <td><p><b>Target:</b></p></td>
                   <td ><p id="programUsed">&nbsp;<br/>&nbsp;</p></td>
                </tr>
                <tr>

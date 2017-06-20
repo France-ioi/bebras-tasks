@@ -85,7 +85,7 @@ function initTask() {
 
    var nextToken = function() {
       if (iToken >= tokens.length) {
-         throw "L'expression est invalide. Il semble manquer quelque-chose.";
+         throw taskStrings.invalidExpression;
       }
       var token = tokens[iToken];
       iToken++;
@@ -93,28 +93,29 @@ function initTask() {
    };
 
    var expectedTypes = {
-      "OU": "boolean",
-      "ET": "boolean",
-      "NON": "boolean",
       "<=": "number",
       ">=": "number",
       "<": "number",
       ">": "number",
       "==": "number"
    };
+   expectedTypes[taskStrings.or] = "boolean";
+   expectedTypes[taskStrings.and] = "boolean";
+   expectedTypes[taskStrings.not] = "boolean";
+
 
    var opPriorities = {
       "EOF": 1,
       ")": 2,
-      "OU": 3,
-      "ET": 3,
-      "NON": 4,
       "<=": 5,
       ">=": 5,
       "<": 5,
       ">": 5,
       "==": 5
    };
+   opPriorities[taskStrings.or] = 3;
+   opPriorities[taskStrings.and] = 3;
+   opPriorities[taskStrings.not] = 4;
 
    var exprToString = function(expr) {
       if (typeof expr == "object") {
@@ -143,21 +144,21 @@ function initTask() {
          if (expr == "y") {
             return y;
          }
-         throw "L'expression \"" + exprToString(expr) + "\" est invalide à cet endroit. Il faudrait un nombre, x ou y.";
+         throw taskStrings.invalidExpressionExpectingNumberXY(exprToString(expr));
       }
       var valuesParams = [];
       for (var iParam = 0; iParam < expr.params.length; iParam++) {
          var value = evalExpr(expr.params[iParam], x, y);
          valuesParams[iParam] = value;
          if (typeof value != expectedTypes[expr.op]) {
-            throw "Le paramètre \"" + exprToString(expr.params[iParam]) + "\" est invalide pour l'opérateur " + expr.op + ".";
+            throw taskStrings.invalidParameter(exprToString(expr.params[iParam]), expr.op);
          }
       }
       if ((expectedTypes[expr.op] == "number") && (valuesParams.length != 2)) {
-         throw "L'expression \"" + exprToString(expr) + "\" est invalide : l'opérateur " + expr.op + " ne peut avoir que deux paramètres.";
+         throw taskStrings.invalidExpression2Params(exprToString(expr), expr.op);
       }
-      if ((expr.op == "NON") && (valuesParams.length != 1)) {
-         throw "L'opérateur " + expr.op + " ne peut avoir qu'un paramètre.";
+      if ((expr.op == taskStrings.not) && (valuesParams.length != 1)) {
+         throw invalidExpression1Param(expr.op);
       }
       switch (expr.op) {
          case "<":
@@ -170,15 +171,15 @@ function initTask() {
             return (valuesParams[0] >= valuesParams[1]);
          case "==":
             return (valuesParams[0] == valuesParams[1]);
-         case "NON":
+         case taskStrings.not:
             return !valuesParams[0];
-         case "ET":
+         case taskStrings.and:
             var result = true;
             for (var iParam = 0; iParam < valuesParams.length; iParam++) {
                result = result && valuesParams[iParam];
             }
             return result;
-         case "OU":
+         case taskStrings.or:
             var result = false;
             for (var iParam = 0; iParam < valuesParams.length; iParam++) {
                result = result || valuesParams[iParam];
@@ -189,14 +190,14 @@ function initTask() {
 
    var buildTreeSub = function() {
       var token = nextToken();
-      if (token == "NON") {
+      if (token == taskStrings.not) {
          var param = buildTreeSub();
-         return {op:"NON", params:[param], hasParenthesis: false};
+         return {op: taskStrings.not, params:[param], hasParenthesis: false};
       }
       if (token == "(") {
          var expr = buildTree();
          if (nextToken() != ")") {
-            throw "Il manque une parenthèse";
+            throw taskStrings.missingParenthesis;
          }
          if (typeof expr == "object") {
             expr.hasParenthesis = true;
@@ -231,7 +232,7 @@ function initTask() {
             }
          }
          if ((prevOp != null) && (opPriorities[newOp] == opPriorities[prevOp]) && (newOp != prevOp)) {
-            throw "Pour pouvoir utiliser à la fois des  " + newOp + " et des " + prevOp + ", il est nécessaire d'utiliser des parenthèses.";
+            throw taskStrings.parenthesisMissingForOps(newOp, prevOp);
          }
          if ((newOp == ')') || (newOp == 'EOF')) {
             iToken--;
@@ -244,7 +245,7 @@ function initTask() {
    };
 
    var tokenize = function(expression) {
-      var allowedTokens = ["OU", "ET", "<=", ">=", "<", ">", "x", "y", "(", ")"];
+      var allowedTokens = [taskStrings.or, taskStrings.and, "<=", ">=", "<", ">", "x", "y", "(", ")"];
       tokens = [];
       var iLetter = 0;
       while (iLetter < expression.length) {
@@ -273,7 +274,7 @@ function initTask() {
                }
             }
             if (!found) {
-               throw("Caractère non reconnu \"" + expression.charAt(iLetter) + "\" après \"" + expression.substring(0, iLetter)) + "\".";
+               throw(invalidCharacterAfterExpression(expression.charAt(iLetter), expression.substring(0, iLetter)));
             }
          }
       }
@@ -317,7 +318,7 @@ function initTask() {
          for (var x = 0; x < nbCols; x++) {
             var value = evalExpr(expr, x, y);
             if (typeof value != "boolean") {
-               throw "L'expression n'est pas booléenne !";
+               throw taskStrings.expressionNotBoolean;
             }
             results[y][x] = value;
          }
@@ -357,7 +358,7 @@ function initTask() {
       iToken = 0;
       var tree = buildTree();
       if (iToken < tokens.length - 1) {
-         throw "L'expression est invalide. Il semble manquer quelque-chose.";
+         throw taskStrings.invalidExpressionTokenMissing;
       }
       return tree;
    }
@@ -373,13 +374,13 @@ function initTask() {
    }
 
    task.execute = function(answer) {
-      var strCondition = "aucune";
+      var strCondition = taskStrings.none;
       if (answer != "") {
          strCondition = answer;
       } else {
          answer = "x < 0";
       }
-      $("#programUsed").html("<b>Condition appliquée :</b><br/>" + strCondition);
+      $("#programUsed").html("<b>" + taskStrings.appliedCondition + "</b><br/>" + strCondition);
       var expr = parseExpr(answer);
       var grid = evalExprAll(expr);
       fillGrid(1, grid);
@@ -459,10 +460,10 @@ function initTask() {
             continue;
          }
          if (success) {
-            messages[curLevel] = "Bravo, vous avez réussi !";
+            messages[curLevel] = taskStrings.success;
             scores[curLevel] = maxScores[curLevel];
          } else {
-            messages[curLevel] = "Vous n'avez pas reproduit le motif.";
+            messages[curLevel] = taskStrings.failure;
             scores[curLevel] = 0;
          }
       }
