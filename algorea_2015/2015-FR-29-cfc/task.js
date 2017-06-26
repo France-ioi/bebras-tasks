@@ -338,7 +338,7 @@ function initTask() {
          var message = getMessageForAnswer(answer[curLevel], curLevel, component);
          if (message == "") {
             scores[curLevel] = maxScores[curLevel];
-            messages[curLevel] = taslStrings.success;
+            messages[curLevel] = taskStrings.success;
          } else {
             scores[curLevel] = 0;
             messages[curLevel] = message;
