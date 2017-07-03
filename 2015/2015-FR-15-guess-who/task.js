@@ -313,8 +313,8 @@ function initTask() {
             } else if (depth == data[level].depth - 1) {
                textDy += 10;
             }
-            paper.text(xPos - textDx, yPos + textDy , "oui").attr({"font-size":20});
-            paper.text(xPos + textDx, yPos + textDy , "non").attr({"font-size":20});
+            paper.text(xPos - textDx, yPos + textDy , taskStrings.yes).attr({"font-size":20});
+            paper.text(xPos + textDx, yPos + textDy , taskStrings.no).attr({"font-size":20});
             drawEdge(xPos, yPos, xPos - horizontalDiff, newY, depth);
             drawEdge(xPos, yPos, xPos + horizontalDiff, newY, depth);
             drawTreeNode(xPos, yPos, "questions", nodeString);
