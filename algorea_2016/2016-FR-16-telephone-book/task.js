@@ -167,7 +167,7 @@ function initTask() {
          key = dataSpecialChars[level].charAt(iChar);
          keysArr.push({keyCode: key.charCodeAt(0), buttonText: displayPatch(key)});
       }
-      var backspace = {keyCode: Keyboard.BACKSPACE, buttonText: "Effacer une lettre"}; //  "annuler une lettre"
+      var backspace = {keyCode: Keyboard.BACKSPACE, buttonText: taskStrings.backSpace}; //  "annuler une lettre"
       return [keysArr, [backspace]];
    };
 
@@ -280,9 +280,9 @@ function initTask() {
          // TODO: cannot happen now that the keyboard is used
          var badChar = pattern.charAt(badMatch.index);
          if (badChar == " ") {
-            result.message = "Le motif ne doit pas contenir d'espace.";
+            result.message = taskStrings.noSpacesInPattern;
          } else {
-            result.message = "Le motif contient un caractère interdit : " + badChar + ".";
+            result.message = taskStrings.illegalCharacter + " " + badChar + ".";
          }
          return result;
       }

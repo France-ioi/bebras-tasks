@@ -17,8 +17,8 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-16-telephone-book/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Charguéraud, Mathias Hiron", // variant from task telephone book from castor 2015
           "translators": [],
           "license": "",
@@ -31,14 +31,14 @@
       };
       </script>
       <script type="text/javascript">
+       var stringsLanguage = 'en';
       var taskStrings = {
-         buildPattern: "Cliquez sur les boutons avec les lettres pour construire un motif.",
-         success: "Bravo ! Vous avez réussi.",
-         emptySelection: "Votre motif ne sélectionne aucun des mots.",
-         incorrectSelection: "Les mots sélectionnés par votre motif ne correspondent pas à ceux de l'objectif. Cliquez sur le bouton 'Effacer une lettre' pour modifier votre motif.",
-         backSpace: "Effacer une lettre",
-         noSpacesInPattern: "Le motif ne doit pas contenir d'espace.",
-         illegalCharacter: "Le motif contient un caractère interdit :"
+         buildPattern: "Click the buttons with the letters to build a pattern.",
+         success: "Congratulations! You did it.",
+         emptySelection: "Your design does not select any of the words.",
+         incorrectSelection: "The words selected by your pattern do not match those of the lens. Click on the 'Delete a letter' button to modify your design.",
+         backSpace: "Backspace",
+         noSpacesInPattern: "The pattern must not contain any space.",
       };
       </script>
       <script type="text/javascript" src="keyboard.js"></script>
@@ -208,55 +208,55 @@
    </head>
    <body>
       <div id="task">
-         <h1>Motif</h1> <!--Sélection de mots II-->
+         <h1>Pattern</h1> <!--Sélection de mots II-->
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
                <p>
-                  Un motif est formé de lettres<span class="easy" style="display: inline;"> et de points d'interrogation</span><span class="medium hard" style="display: none;">, de points d'interrogation, et de "trois petits points"</span>.
+                  A pattern is formed of letters <span class="easy" style="display: inline;"> and question marks</span><span class="medium hard" style="display: none;">, question marks and "three small points"</span>.
                
-                  Chaque symbole <span class="symbol">?</span> désigne exactement une lettre, n'importe laquelle.
+                  Each <span class="symbol">?</span> refers to exactly one letter.
                <span class="medium hard" style="display: none;">
-                 Chaque symbole <span class="symbol">…</span> désigne zéro, une, ou plusieurs lettres.
+                 Each symbol <span class="symbol">…</span> means zero, one or more letters.
                </span>
                </p>
 
             <p>
-               Utilisez le clavier ci-dessous pour construire un motif qui sélectionne, dans la liste du milieu, les mots qui sont marqués en bleu dans la liste de droite.
+               Use the keyboard below to build a pattern that express the marked words in blue in the right list.
             </p>
 
 
 
             <table class="samples">
                <tr>
-                  <td style="width:15em"><b>Essayez les exemples pour bien comprendre.</b></td>
+                  <td style="width:15em"><b>Try the examples to understand.</b></td>
 
                   <td class="sources" id="example0src">
-                     <div>Exemple 1 :</div>
+                     <div>Example 1 :</div>
                      <div id="example0pattern" class="pattern">a***e</div>
-                     <div><input id="example0" type="button" value="Essayer" /></div>
+                     <div><input id="example0" type="button" value="Try" /></div>
                      </td>
                   <td class="sources" id="example1src">
-                     <div>Exemple 2 :</div>
+                     <div>Example 2 :</div>
                      <div id="example1pattern" class="pattern">a***e</div>
-                     <div><input id="example1" type="button" value="Essayer" /></div>
+                     <div><input id="example1" type="button" value="Try" /></div>
                   </td>
                   <td class="sources" id="example2src">
-                     <div>Exemple 3 :</div>
+                     <div>Example 3 :</div>
                      <div id="example2pattern" class="pattern">a***e</div>
-                     <div><input id="example2" type="button" value="Essayer" /></div>
+                     <div><input id="example2" type="button" value="Try" /></div>
                   </td>
                </tr>
             <table class="table_main">
                <tr class="table_headers">
                   <td>
-                     Clavier
+                     Keyboard
                   </td>
                   <td class="middle_cells">
-                     Mots sélectionnés
+                     Selected Words
                   </td>
                   <td>
-                     Objectif
+                     Target
                   </td>
                </tr>
                <tr>
@@ -267,7 +267,7 @@
                         </div>    
 
                          <div style="margin-top: 1em">
-                            <input type="button" id="try" value="Essayer" style="font-weight: bold; font-size:120%" />
+                            <input type="button" id="try" value="Try" style="font-weight: bold; font-size:120%" />
                         </div>
                      </div>
                   </td>
