@@ -23,7 +23,7 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-19-minmax-variables/",
-          "language": "fr",
+          "language": "en",
           "version": "fr.01",
           "authors": "Arthur Chargueraud",
           "translators": [],
@@ -40,25 +40,25 @@
       <script type="text/javascript">
          var stringsLanguage = 'en';
          var taskStrings = {
-            success: "Bravo, vous avez réussi !",
-            incompleteRow: "Certaines lignes sont incomplètes",
-            emptyResult: function(name) { return "Votre programme n'indique pas le nombre de cailloux à placer dans le trou " + name + "."; },
-            forExample: "Pour : ",
+            success: "Congratulations, you did it.",
+            incompleteRow: "Some lines are incomplete.",
+            emptyResult: function(name) { return "Your program does not indicate the number of stones to be placed in the hole " + name + "."; },
+            forExample: "For: ",
             neverSet: function(name) {
-               return "Problème : votre programme fait référence au trou " + name + " avant de dire combien de cailloux y placer.";
+               return "Problem: Your program refers to the hole " + name + " before saying how many stones to place there.";
             },
             failure: function(level) {
-               var s = "Erreur : votre programme ne place pas toujours dans le trou Z ";
+               var s = "Error: Your program does not always place in the Z-hole.";
                if (level == "easy") {
-                  s += "le plus grand nombre parmi A, B et C";
+                  s += "The largest number among A, B and C";
                } else if (level == "medium") {
-                  s += "le plus petit nombre parmi A, B, C, et D";
+                  s += "The smallest number among A, B, C, and D";
                } else if (level == "hard") {
-                  s += "le deuxième plus grand nombre parmi A, B, et C";
+                  s += "The second largest number among A, B, and C";
                } else {
-                  return "Error: incorrect level";
+                  return "Error: Incorrect level";
                }
-               return s + ", comme le montre l'explication à droite."; 
+               return s + ", as the explanation to the right shows."; 
             }
          };
       </script>
@@ -137,41 +137,41 @@
          <div id="taskContent">
 
            <div>
-              <p class="hard"><strong style="color:red">Attention : cette version est difficile, gardez-la pour la fin si vous ne trouvez pas rapidement.</strong></p>
+              <p class="hard"><strong style="color:red">Attention: this version is difficult, keep it for the end.</strong></p>
               <p>
-              Jenny a mis des cailloux dans des trous, qu'elle a repéré par des lettres.
+              Jenny puts stones in holes, which are marked by letters.
               </p>
               <p>
-              On ne peut pas voir le nombre de cailloux qu'elle a mis dans chaque trou.
+              We can not see the number of stones that she put in each hole.
               </p>
-              <p>Vous aurez besoin de l'instruction <strong class="easy hard">max</strong><strong class="medium">min</strong>, qui fonctionne de la manière suivante :</p>
+              <p>You will need function <strong class="easy hard">max</strong><strong class="medium">min</strong>, which operates in the following way:</p>
               <center><div style="border: solid black 1px; width:650px;padding:5px;text-align:left">
-                 <p><strong>Exemple</strong> si vous pouviez voir le nombre de cailloux :
+                 <p><strong>Example</strong> If you could see the number of stones:
                  <div id="paperExampleA"></div>
                  <p>
-                    <strong style="font-size:1.5em"><span  id="exampleInstruction"></span></strong> place dans le trou
+                    <strong style="font-size:1.5em"><span  id="exampleInstruction"></span></strong> Place in the hole
                     <span class="easy">Y</span>
                     <span class="medium">X</span>
                     <span class="hard">V</span>
-                    <strong>le plus <span class="easy hard">grand</span><span class="medium">petit</span> des deux nombres</strong> de cailloux entre le nombre dans le trou A et le nombre dans le trou B :
+                    <strong>the <span class="easy hard">largest</span><span class="medium">smallest</span> of the two numbers</strong> of stones between the number in the hole A and the number in the hole B :
                  </p>
                  <div id="paperExampleB"></div>
               </div>
               </center>
-              <p class="medium">L'instruction <strong>max</strong> fonctionne de la même manière mais en plaçant <strong>le plus grand</strong> des deux nombres.</p>
-              <p class="hard">L'instruction <strong>min</strong> fonctionne de la même manière mais en plaçant <strong>le plus petit</strong> des deux nombres.</p>
+              <p class="medium">The function <strong>max</strong> works in the same way but by placing <strong>the largest</strong> of the two numbers.</p>
+              <p class="hard">The function <strong>min</strong> works in the same way but by placing <strong>the smallest</strong> of the two numbers.</p>
               <div style="height:40px"></div>
               <p>
-              Construisez une séquence d'instructions qui place dans le trou <strong>Z</strong>,
-              <span class="easy"><strong>le plus grand</strong> nombre parmi <strong>A, B et C</strong>.</span>
-              <span class="medium"><strong>le plus petit</strong> nombre parmi <strong>A, B, C et D</strong>.</span>
-              <span class="hard"><strong>le deuxième plus grand</strong> nombre parmi <strong>A, B et C</strong>.</span>
+              Construct a sequence of functions that places in the hole <strong>Z</strong>,
+              <span class="easy"><strong>the largest</strong> number among <strong>A, B and C</strong>.</span>
+              <span class="medium"><strong>the smallest</strong> number among <strong>A, B, C and D</strong>.</span>
+              <span class="hard"><strong>the second largest</strong> number among <strong>A, B and C</strong>.</span>
               </p>
               <center>
               <div id="paperTarget" style="border: solid black 1px;width:650px;height:70px;padding-left:20px;"></div>
               </center>
               <p>
-                 <strong>Attention :</strong> vos instructions doivent fonctionner quels que soient les nombres de cailloux au départ.
+                 <strong>Attention :</strong> Your functions must work regardless of the number of stones at the start.
               </p>
            </div>
 
