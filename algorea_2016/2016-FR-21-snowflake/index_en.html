@@ -20,30 +20,30 @@
       <script type="text/javascript">
       var stringsLanguage = 'en';
       var taskStrings = {
-         cmdForward: "A",
-         cmdBackwards: "R",
-         cmdRight: "D",
-         cmdLeft: "G",
+         cmdForward: "F",
+         cmdBackwards: "B",
+         cmdRight: "R",
+         cmdLeft: "L",
          cmdF1: "F1",
          cmdF2: "F2",
          instructionsLabel: "Instructions : ",
-         programLabel: "Programme : ",
-         functionLabel: function(name) { return "Fonction " + name + " : "; },
-         tryLabel: "Essayer",
-         stopLabel: "Arrêter",
-         success: "Bravo, vous avez réussi !",
-         incomplete: "Le robot n'est pas passé sur tous les traits gris.",
-         executionComplete: "Exécution terminée.",
-         outOfZone: "Le robot essaie de se déplacer en dehors des traits gris.",
-         infiniteLoop: function(name) { return "Votre programme tourne en rond : l'exécution de la fonction " + name + " demande d'exécuter à nouveau la fonction " + name + "."; }
+         programLabel: "Program : ",
+         functionLabel: function(name) { return "Function " + name + " : "; },
+         tryLabel: "Try",
+         stopLabel: "Stop",
+         success: "Congratulations, you have did it.",
+         incomplete: "The robot has not passed over all the gray lines.",
+         executionComplete: "Execution completed.",
+         outOfZone: "The robot tries to move outside the gray lines.",
+         infiniteLoop: function(name) { return "Your program runs in circles: the execution of the function " + name + " Request to run the function " + name + "again."; }
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-21-snowflake/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Ismael Belghiti, Simon Mauras, Arthur Charguéraud, Mathias Hiron",
           "translators": [],
           "license": "",
@@ -118,41 +118,41 @@
    </head>
    <body> 
       <div id="task">
-         <h1>Flocon</h1>
+         <h1>Snowflake</h1>
          <img style="display:none" src="robot.png" />
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-            Votre objectif est de programmer le robot représenté par le triangle vert, pour qu'il passe au moins une fois sur chacun des traits gris du motif affiché ci-dessous.
-            Vous disposez pour cela des instructions suivantes :
+            Your objective is to program the robot represented by the green triangle, so that it passes at least once on each of the gray lines of the pattern displayed below.
+             Use the following instructions :
             </p>
             <center>
             <table style="width: 600px;text-align:left">
                <tr>
                   <td style="padding-right:50px">
                      <table><tr>
-                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>A</td></tr></table></td>
-                        <td>avancer</td>
+                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>F</td></tr></table></td>
+                        <td>move forward</td>
                      </tr></table>
                   </td>
                   <td style="padding-right:50px">
                      <table><tr>
-                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>R</td></tr></table></td>
-                        <td>reculer</td>
+                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>B</td></tr></table></td>
+                        <td>move backward</td>
                      </tr></table>
                   </td>
                </tr>
                <tr>
                   <td style="padding-right:50px">
                      <table><tr>
-                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>G</td></tr></table></td>
-                        <td>tourner à gauche</td>
+                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>L</td></tr></table></td>
+                        <td>turn left</td>
                      </tr></table>
                   </td>
                   <td style="padding-right:50px">
                      <table><tr>
-                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>D</td></tr></table></td>
-                        <td>tourner à droite</td>
+                        <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>R</td></tr></table></td>
+                        <td>turn right</td>
                      </tr></table>
                   </td>
                </tr>
@@ -160,7 +160,7 @@
                   <td style="padding-right:50px" colspan=2>
                      <table><tr>
                         <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>F1</td></tr></table></td>
-                        <td>exécuter toutes les instructions placées en face de "Fonction F1"</td>
+                        <td>Execute all the instructions placed in front of "Function F1"</td>
                      </tr></table>
                   </td>
                </tr>
@@ -168,27 +168,27 @@
                   <td style="padding-right:50px" colspan=2>
                      <table><tr>
                         <td><table class="exampleProgram instructions" style="display:inline-block;vertical-align:middle"><tr><td>F2</td></tr></table></td>
-                        <td>exécuter toutes les instructions placées en face de "Fonction F2"</td>
+                        <td>Execute all the instructions placed in front of "Function F2"</td>
                      </tr></table>
                   </td>
                </tr>
             </table>
             </center>
             <p>
-            Glissez vos instructions en face de "Programme" <span class="medium">et</span><span class="hard">,</span><span class="medium hard"> "Fonction F1"</span><span class="hard"> et "Fonction F2"</span> en bas de la page, puis cliquez sur "Essayer". 
-            <span class="hard">Attention, dans cette version, le robot <b>tourne de 60 degrés</b> avec les instructions gauche (G) et droite (D).</span>
+            Drag your instructions in the "Program" slots <span class="medium">and</span><span class="hard">,</span><span class="medium hard"> "Function F1"</span><span class="hard"> and "Function F2"</span> at the bottom of the page, then click "Try". 
+            <span class="hard">Caution, in this version, the robot <b>turns 60 degrees</b> with left (G) and right (D).</span>
             </p>
 
             <center>
             <table class="examples">
                <tr>
-                  <td id="try_examples" rowspan="2">Essayez les exemples pour bien comprendre.</td>
+                  <td id="try_examples" rowspan="2">Try the examples to understand.</td>
                   <td style="min-width:200px"><div id="example0"></div></td>
                   <td style="min-width:200px"><div id="example1"></div></td>
                </tr>
                <tr>
-                  <td><center><input id="button0" type="button" onclick="task.loadExample(0)" value="Exemple 1"></center></td>
-                  <td><center><input id="button1" type="button" onclick="task.loadExample(1)" value="Exemple 2"></center></td>
+                  <td><center><input id="button0" type="button" onclick="task.loadExample(0)" value="Example 1"></center></td>
+                  <td><center><input id="button1" type="button" onclick="task.loadExample(1)" value="Example 2"></center></td>
                </tr>
             </table>
             </center>
@@ -199,13 +199,13 @@
                </td>
                <td>
                   <div id="completedMessage"></div>
-                  <input id="resetExecution" type="button" onclick="task.resetExecution()" value="Réinitialiser">
+                  <input id="resetExecution" type="button" onclick="task.resetExecution()" value="Reset">
                </td>
             </tr></table></div>
             <div id="program"></div>
             <div><span id="message"></span></div>
             <center>
-               <input id="tryExecution" type="button" onclick="task.tryExecution()" value="Essayer">
+               <input id="tryExecution" type="button" onclick="task.tryExecution()" value="Try">
             </center>
             <img src="icon.png" style="display:none">
          </div>
