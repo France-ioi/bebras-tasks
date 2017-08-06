@@ -20,8 +20,8 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-18-lemmings/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
           "translators": [],
           "license": "",
@@ -34,16 +34,16 @@
       };
       </script>
       <script type="text/javascript">
-           var stringsLanguage = 'fr';
+           var stringsLanguage = 'en';
            var taskStrings = {
-              success: "Bravo, vous avez réussi !",
-              signHelp: "Cliquez pour poser\n ou retirer un panneau.", 
-              add1ToA: "augmenter A\nde 1",
-              playButton: "Essayer",
+              success: "Congratulations, you did it.",
+              signHelp: "Click to install \n or remove a panel.", 
+              add1ToA: "Increase A\nby 1",
+              playButton: "Try",
               pauseButton: "Pause",
-              shapeLoop: "Un objet est coincé.", 
-              fullBucket: "Un objet est arrivé dans une boite déjà occupée.", 
-              wrongBucket: "Un objet est arrivé au mauvais endroit." 
+              shapeLoop: "Object is stuck.", 
+              fullBucket: "Object arrived in a box already occupied.", 
+              wrongBucket: "Object arrived in the wrong place." 
            };
         </script>
         <script type="text/javascript" src="task.js"></script>
@@ -64,18 +64,18 @@
          <h1>Lemmings</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p class="hard"><strong style="color:red">Attention : cette version est l'une des plus difficiles du concours, gardez-la pour la fin.</strong></p>
+            <p class="hard"><strong style="color:red">Attention: this version is one of the most difficult of the contest, keep it for the end.</strong></p>
             <p>
-               Placez des panneaux sur des plateformes pour faire tomber un objet de la bonne forme dans chaque bac sous lequel est dessiné cette forme.
+               Place the signs on the left on the platform to help the shapes to be dropped in the correct box.
             </p>
             <p>
-                Chaque objet descend en faisant demi-tour dès qu'il rencontre un panneau sur lequel il est dessiné.
+	    Shapes will change its way when it meets a sign with its shape.
             </p>
             <p class="hard">
-               Des panneaux avec des conditions sont également disponibles. Par exemple, le panneau "≤ 4" fait faire demi-tour aux 4 premiers objets qui partent de la plateforme du haut et laisse passer les 4 suivants.
+	    The sign "≤ 4" will affect the direction of the first 4 shapes Only.
             </p>
             <p>
-               Pour placer un panneau, cliquez sur un type de panneau à gauche, puis sur l'extrémité d'une plateforme.
+               To place sign, click on it, then click on the desired place.
             </p>
             
             <div id="anim_container">
@@ -84,7 +84,7 @@
             </div>
             <div id="playback" style="text-align: center">
               <input type="button" id="playPause" value="Play">
-              <input type="button" id="stop" value="Arrêter">
+              <input type="button" id="stop" value="Stop">
             </div>
             <br><br>
             <img src="icon.png" style="display:none">
