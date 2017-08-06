@@ -14,12 +14,12 @@ function initTask() {
       hard: 15
    };
    var instructions = [
-      "Colorier 1 case", // Noircir
-      "Droite",
-      "Gauche",
-      "Haut",
-      "Bas",
-      "Gauche 5 fois"
+      taskStrings.fillOneCell, // Noircir
+      taskStrings.right,
+      taskStrings.left,
+      taskStrings.up,
+      taskStrings.down,
+      taskStrings.left5Times
       ];
    var instructionsAvailable = {
       easy: [0, 1, 2, 3, 4, 5],
@@ -617,10 +617,10 @@ function initTask() {
    task.pause = function() {
       if (simuState == simuStates.animating) {
          simuState = simuStates.paused;
-         $("#pause").val("Continuer");
+         $("#pause").val(taskStrings.continue);
       } else {
          simuState = simuStates.animating;
-         $("#pause").val("Pause");
+         $("#pause").val(taskStrings.pause);
       }
    };
 
