@@ -17,8 +17,8 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/algorea_tasks/2016/2016-FR-20-mobile/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Charguéraud, Mathias Hiron", // inspired from 2015-DE-05
           "translators": [],
           "license": "",
@@ -32,19 +32,19 @@
       };
       </script>
       <script type="text/javascript">
-         var stringsLanguage = 'fr';
+         var stringsLanguage = 'en';
          var taskStrings = {
-            success: "Bravo ! Vous avez réussi.",
-            incorrect: "Votre mobile ne correspond pas à l'objectif. Essayez de le modifier.",
-            instruction: "Écrivez la description du mobile objectif dans le cadre en haut à gauche.",
-            invalidChar: function(charEncoded) { return "Le caractère '" + charEncoded + "' n'est pas autorisé. Utilisez uniquement des chiffres entre 1 et 4, des parenthèses et des espaces." },
-            unusedChars: "Vous avez des caractères en trop à la fin de votre description du mobile.",
-            missingClosingPar: "Une parenthèse fermante est attendue à la position encadrée en rouge. <br/>En effet, les 4 éléments décrivant le mobile ont déjà été fournis.",
-            expecteDigit: "Un chiffre est attendu à la position encadrée en rouge. <br/> En effet, cet élément décrit la longueur d'une branche d'un mobile.",
-            expectedInformation: "Il manque des informations avant la position encadrée en rouge.",
-            digitZero: "Le chiffre '0' n'est pas autorisé.",
-            needSpaces: "Vous devez mettre des espaces entre les chiffres.",
-            incompleteDescr: "La description du mobile n'est pas complète, il manque des caractères."
+            success: "Congratulations! You did it.",
+            incorrect: "Your mobile does not fit the purpose. Try changing it.",
+            instruction: "Write the description of the target mobile in the upper left frame.",
+            invalidChar: function(charEncoded) { return "The character '" + charEncoded + "' is not authorized. Use only numbers between 1 and 4, parentheses and spaces." },
+            unusedChars: "You have extra characters at the end of your mobile description.",
+            missingClosingPar: "A closing parenthesis is expected at the position framed in red. Indeed, the 4 elements describing the mobile have already been provided.",
+            expecteDigit: "A figure is expected at the position framed in red. <br/> Indeed, this element describes the length of a branch of a mobile.",
+            expectedInformation: "It lacks information before the position framed in red.",
+            digitZero: "The digit '0' is not allowed.",
+            needSpaces: "You must put spaces between numbers.",
+            incompleteDescr: "The description of the mobile is not complete, it lacks characters."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -157,13 +157,13 @@
 
             <div class="easy">
                <p>
-                  Castor fabrique des mobiles qui peuvent être décrits par 4 <span class="easy">nombres</span><span class="medium hard">éléments</span> côte à côte :
+                  Beavers manufacture mobiles that can be described by 4 <span class="easy">numbers</span><span class="medium hard">elements</span> :
                   <table style="text-align:center" class="description">
                      <tr>
-                        <td>La longueur de la branche de gauche</td>
-                        <td>Le nombre de boules suspendues à gauche</td>
-                        <td>La longueur de la branche de droite</td>
-                        <td>Le nombre de boules suspendues à droite</td>
+                        <td>The length of the left branch</td>
+                        <td>The number of hanging balls on the left</td>
+                        <td>The length of the right branch</td>
+                        <td>The number of hanging balls on the right</td>
                      </tr>
                   </table>
                <p>
@@ -171,20 +171,20 @@
 
             <div class="medium hard">
                <p>
-                  Castor fabrique des mobiles qui peuvent être décrits par 4 éléments côte à côte :
+                  Beaver manufactures mobiles that can be described by 4 elements side by side :
                   <table style="text-align:center" class="description">
                      <tr>
-                        <td>La longueur de la branche de gauche</td>
-                        <td>La description de <b>l'objet suspendu</b> à gauche</td>
-                        <td>La longueur de la branche de droite</td>
-                        <td>La description de <b>l'objet suspendu</b> à droite</td>
+                        <td>The length of the left branch</td>
+                        <td>The description of <b>the object hanging</b> on the left</td>
+                        <td>The length of the right branch</td>
+                        <td>The description of <b>the object hanging</b> on the right</td>
                      </tr>
                   </table>
                <p>
-                  <b>Les objets suspendus</b> sur chaque branche sont soit des boules, auquel cas on donne leur nombre, soit un autre mobile, dont on donne alors la description <b>entre parenthèses</b>, selon le même principe.
+                  Try the two examples to understand the concept of the description well.
                </p>
                <!--<p class="hard">
-                  Écrivez la description d'un mobile correspondant à l'objectif.
+                  Write the description of a mobile corresponding to the objective.
                </p>-->
             </div>
 
@@ -194,27 +194,27 @@
                   <tr>
                      <td id="user_input_cell">
                         <div id="user_input_container" class="sources">
-                           <p>Entrez au clavier <span class="easy">les 4 nombres qui décrivent<br/> le mobile</span>
-                           <span class="medium hard">la description du<br/> mobile</span> objectif situé en bas à droite&nbsp;:</p>
+                           <p>Enter by the keyboard <span class="easy">the 4 numbers that describe<br/> the mobile</span>
+                           <span class="medium hard">the description of the<br/> mobile in the target area</span>:</p>
                            <textarea id="user_input_text" type="text" cols="38" value="" maxlength="80" rows="4"></textarea>
                            <br/>
                            <div id="control">
                               <span id="mobile_desc"></span>
-                              <span><input id="execute" type="button" value="Essayer" /></span>
+                              <span><input id="execute" type="button" value="Try" /></span>
                            </div>
                         </div>
                      </td>
                      <td id="example0src" class="sources examples">
-                        <p>Exemple&nbsp;:</p>
+                        <p>Example&nbsp;:</p>
                         <span id="example0" class="example_text">1 2 3</span>
                         <br/>
-                        <input id="example0button" type="button" class="example_buttons" value="Essayer" />
+                        <input id="example0button" type="button" class="example_buttons" value="Try" />
                      </td>
                      <td id="example1src" class="sources examples">
-                        <p>Exemple&nbsp;:</p>
+                        <p>Example&nbsp;:</p>
                         <span id="example1" class="example_text">1 2 3</span>
                         <br/>
-                        <input id="example1button" type="button" class="example_buttons" value="Essayer" />
+                        <input id="example1button" type="button" class="example_buttons" value="Try" />
                      </td>
                   </tr>
                </table>
@@ -224,13 +224,13 @@
             <table id="anim_mobiles">
                <tr style="vertical-align:top">
                   <td>
-                     <b>Votre mobile</b><br/><br/>
+                     <b>Your mobile phone</b><br/><br/>
                      <div id="anim_container">
                         <div id="anim"></div>
                      </div>
                   </td>
                   <td>
-                     <b>Objectif</b><br/><br/>
+                     <b>Target</b><br/><br/>
                      <div id="target_container">
                         <div id="target_anim">
                         </div>
