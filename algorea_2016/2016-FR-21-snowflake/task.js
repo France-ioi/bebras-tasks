@@ -3,7 +3,7 @@ function initTask() {
    var instructionsLevel = {
       easy:   [taskStrings.cmdForward, taskStrings.cmdBackwards, taskStrings.cmdRight, taskStrings.cmdLeft],
       medium: [taskStrings.cmdForward, taskStrings.cmdBackwards, taskStrings.cmdRight, taskStrings.cmdLeft, taskStrings.cmdForward, taskStrings.cmdBackwards, taskStrings.cmdRight, taskStrings.cmdF1],
-      hard:   [taskStrings.cmdForward, taskStrings.cmdBackwards, taskStrings.cmdRight, taskStrings.cmdLeft, taskStrings.cmdF1, , taskStrings.cmdF2]
+      hard:   [taskStrings.cmdForward, taskStrings.cmdBackwards, taskStrings.cmdRight, taskStrings.cmdLeft, taskStrings.cmdF1, taskStrings.cmdF2]
    };
    var instructionId;
    var instructionIdLevel = {
