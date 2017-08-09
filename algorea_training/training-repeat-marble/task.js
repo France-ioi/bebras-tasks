@@ -24,37 +24,7 @@ function initTask(subTask) {
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
-      checkEndCondition: function(context, lastTurn) {
-         var solved = true;
-         for (var iRow = 0; iRow < context.tiles.length; iRow++) {
-            var row = subTask.data[subTask.level][subTask.iTestCase].tiles[iRow];
-            for (var iCol = 0; iCol < row.length; iCol++) {
-               var marbles = context.getItems(iRow, iCol, {category: "marble"});
-               var holes = context.getItems(iRow, iCol, {category: "hole"});
-               if (marbles.length != holes.length) {
-                  solved = false;
-               }
-            }
-         }
-         if (solved) {
-            context.success = true;
-            throw("Bravo, vous avez rangé la bille&nbsp;!");
-         }
-         if (lastTurn) {
-            context.success = false;
-            throw("La bille est mal rangée !");
-         }
-      },
-      computeGrade: function(context, message) {
-         var rate = 0;
-         if (context.success) {
-            rate = 1;
-         }
-         return {
-            successRate: rate,
-            message: message
-         };
-      }
+      checkEndCondition: robotEndConditions.checkMarblesInHoles
    };
 
    subTask.data = {

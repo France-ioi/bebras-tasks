@@ -28,28 +28,7 @@ function initTask(subTask) {
       includedCategories: [ ],
       includedBlocks: [],
       checkEndEveryTurn: true,
-      checkEndCondition: function(context, lastTurn) {
-         var robot = context.getRobotItem(context.curRobot);
-         var paints = context.getItems(robot.row, robot.col, {color: "vert"});
-         if (paints.length != 0) {
-            context.success = true;
-            throw("Bravo, le robot a atteint la zone verte !");
-         }
-         if (lastTurn) {
-            context.success = false;
-            throw("Le robot n'a pas atteint la zone verte !");
-         }
-      },
-      computeGrade: function(context, message) {
-         var rate = 0;
-         if (context.success) {
-            rate = 1;
-         }
-         return {
-            successRate: rate,
-            message: message
-         };
-      }
+      checkEndCondition: robotEndConditions.checkReachGreenArea
    };
 
    subTask.data = {

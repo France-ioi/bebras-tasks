@@ -8,7 +8,7 @@ function initTask(subTask) {
       itemTypes: {
          green_robot: { img: "green_robot.png", side: 80, nbStates: 9, isObstacle: true, offsetX: -14, category: "robot", team: 0 },
          obstacle: { num: 2, img: "obstacle.png", side: cellSide, category: "obstacle", isObstacle: true },
-         green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false },
+         green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false, hasColor: true, color: "vert" },
       },
       maxInstructions: 10,
       includeBlocks: {
@@ -34,28 +34,7 @@ function initTask(subTask) {
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
-      checkEndCondition: function(context, lastTurn) {
-         var robot = context.getRobotItem(context.curRobot);
-         var paints = context.getItems(robot.row, robot.col, {category: "paint"});
-         if (paints.length != 0) {
-            context.success = true;
-            throw("Bravo, le robot a atteint la zone verte !");
-         }
-         if (lastTurn) {
-            context.success = false;
-            throw("Le robot n'a pas atteint la zone verte !");
-         }
-      },
-      computeGrade: function(context, message) {
-         var rate = 0;
-         if (context.success) {
-            rate = 1;
-         }
-         return {
-            successRate: rate,
-            message: message
-         };
-      }
+      checkEndCondition: robotEndConditions.checkReachGreenArea
    };
 
    subTask.data = {

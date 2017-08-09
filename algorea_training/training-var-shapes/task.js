@@ -15,8 +15,8 @@ function initTask(subTask) {
          6: { num: 6, side: cellSide, category: "number", value: 6 },
          7: { num: 7, side: cellSide, category: "number", value: 7 },
          8: { num: 8, side: cellSide, category: "number", value: 8 },
-         marker: { num: 9, img: "marker.png", side: cellSide, category: "paint", isObstacle: false, hasColor: true, color: "marker" },
-         paint: { img: "paint.png", side: cellSide, category: "paint", color: "gris" }
+         marker: { num: 9, img: "marker.png", side: cellSide, isMarker: true, category: "marker", isObstacle: false, hasColor: true, color: "marker", zOrder: 0 },
+         paint: { img: "paint.png", side: cellSide, isPaint: true, category: "paint", color: "gris", zOrder: 1 }
       },
       maxInstructions: {
          easy: 15,
@@ -55,34 +55,8 @@ function initTask(subTask) {
             hard: []
          }
       },
-      checkEndEveryTurn: true,
-      checkEndCondition: function(context, lastTurn) {
-         if (lastTurn) {
-            for (var iRow = 0; iRow < context.tiles.length; iRow++) {
-               var row = subTask.data[subTask.level][subTask.iTestCase].tiles[iRow];
-               for (var iCol = 0; iCol < row.length; iCol++) {
-                  var tile = row[iCol];
-                  var paints = context.getItems(iRow, iCol, {color: "gris"});
-                  if ((paints.length > 0) != (tile == 9)) {
-                     context.success = false;
-                     throw("Le robot n'a pas peint les cases exactement comme souhaité.");
-                  }
-               }
-            }
-            context.success = true;
-            throw("Bravo, vous avez reproduit le motif !");
-         }
-      },
-      computeGrade: function(context, message) {
-         var rate = 0;
-         if (context.success) {
-            rate = 1;
-         }
-         return {
-            successRate: rate,
-            message: message
-         };
-      }
+      checkEndEveryTurn: false,
+      checkEndCondition: robotEndConditions.checkMarkersPainted
    };
 
    subTask.data = {

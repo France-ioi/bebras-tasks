@@ -81,16 +81,6 @@ function initTask(subTask) {
             context.success = true;
             throw("Bravo, vous avez inscrit les bons nombres !");
          }
-      },
-      computeGrade: function(context, message) {
-         var rate = 0;
-         if (context.success) {
-            rate = 1;
-         }
-         return {
-            successRate: rate,
-            message: message
-         };
       }
    };
 
