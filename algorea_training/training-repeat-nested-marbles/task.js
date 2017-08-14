@@ -8,7 +8,7 @@ function initTask(subTask) {
       itemTypes: {
          green_robot: { img: "green_robot.png", side: 80, nbStates: 9, isObstacle: true, offsetX: -14, category: "robot", team: 0, zOrder: 2 },
          hole: { num: 2, img: "hole.png", side: cellSide, category: "hole", isObstacle: false, isHole: true, zOrder: 0 },
-         marble: { num: 3, img: "marble.png", side: cellSide, category: "marble", isObstacle: false, isTransportable: true, zOrder: 1 },
+         marble: { num: 3, img: "marble.png", side: cellSide, category: "marble", isObstacle: false, isTransportable: true, zOrder: 1 }
       },
       maxInstructions: 15,
       includeBlocks: {
@@ -20,7 +20,7 @@ function initTask(subTask) {
             includeAll: false,
             wholeCategories: [],
             singleBlocks: ["controls_repeat"]
-         },
+         }
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
@@ -36,7 +36,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 1, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -50,7 +50,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 4, col: 0, dir: 0, type: "green_robot" },
+                  { row: 4, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -66,7 +66,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 6, col: 0, dir: 0, type: "green_robot" },
+                  { row: 6, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ]

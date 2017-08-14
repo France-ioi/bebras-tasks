@@ -28,7 +28,7 @@ function initTask(subTask) {
                medium: ["controls_repeat", "controls_whileUntil", "logic_negate"],
                hard: ["controls_whileUntil", "logic_negate", "controls_repeat"]
             }
-         },
+         }
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
@@ -42,7 +42,7 @@ function initTask(subTask) {
                    [1, 3, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          },
          {
@@ -50,7 +50,7 @@ function initTask(subTask) {
                    [1, 3, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -63,10 +63,10 @@ function initTask(subTask) {
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
-                   [1, 1, 1, 1, 1, 1, 1],
+                   [1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          },
          {
@@ -75,10 +75,10 @@ function initTask(subTask) {
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
                    [1, 3, 1, 1, 2, 1, 1],
-                   [1, 1, 1, 1, 1, 1, 1],
+                   [1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -94,7 +94,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ]

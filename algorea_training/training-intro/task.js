@@ -20,7 +20,7 @@ function initTask(subTask) {
             includeAll: false,
             wholeCategories: [],
             singleBlocks: []
-         },
+         }
       },
       ignoreInvalidMoves: false,
       groupByCategory: false,
@@ -44,7 +44,7 @@ function initTask(subTask) {
                    [2, 2, 2, 2, 2, 2, 2, 2]
                ],
             initItems: [
-                  { row: 4, col: 3, dir: 0, type: "green_robot" },
+                  { row: 4, col: 3, dir: 0, type: "green_robot" }
                ]
          }
       ]

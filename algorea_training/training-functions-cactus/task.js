@@ -50,7 +50,7 @@ function initTask(subTask) {
                    [1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1]
                ],
             initItems: [
-                  { row: 2, col: 0, dir: 0, type: "green_robot" },
+                  { row: 2, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -65,7 +65,7 @@ function initTask(subTask) {
                    [1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1]
                ],
             initItems: [
-                  { row: 5, col: 0, dir: 0, type: "green_robot" },
+                  { row: 5, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -86,7 +86,7 @@ function initTask(subTask) {
                    [1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1]
                ],
             initItems: [
-                  { row: 11, col: 0, dir: 0, type: "green_robot" },
+                  { row: 11, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ]

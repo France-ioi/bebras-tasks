@@ -20,7 +20,7 @@ function initTask(subTask) {
             includeAll: false,
             wholeCategories: [],
             singleBlocks: ["controls_repeat", "controls_if"]
-         },
+         }
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,

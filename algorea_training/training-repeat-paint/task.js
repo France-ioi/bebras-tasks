@@ -20,7 +20,7 @@ function initTask(subTask) {
             includeAll: false,
             wholeCategories: [],
             singleBlocks: ["controls_repeat"]
-         },
+         }
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
@@ -36,7 +36,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 1, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -55,7 +55,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 8, col: 0, dir: 0, type: "green_robot" },
+                  { row: 8, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -71,7 +71,7 @@ function initTask(subTask) {
                    [1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1]
                ],
             initItems: [
-                  { row: 6, col: 0, dir: 0, type: "green_robot" },
+                  { row: 6, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ]

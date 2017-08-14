@@ -8,7 +8,7 @@ function initTask(subTask) {
       itemTypes: {
          green_robot: { img: "green_robot.png", side: 80, nbStates: 9, isObstacle: true, offsetX: -14, category: "robot", team: 0 },
          obstacle: { num: 2, img: "obstacle.png", side: cellSide, category: "obstacle", isObstacle: true },
-         green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false, color: "vert" },
+         green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false, color: "vert" }
       },
       maxInstructions: 16,
       includeBlocks: {
@@ -20,7 +20,7 @@ function initTask(subTask) {
             includeAll: false,
             wholeCategories: [],
             singleBlocks: ["controls_repeat"]
-         },
+         }
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,

@@ -8,7 +8,7 @@ function initTask(subTask) {
       itemTypes: {
          green_robot: { img: "green_robot.png", side: 80, nbStates: 9, isObstacle: true, offsetX: -14, category: "robot", team: 0, zOrder: 2 },
          hole: { num: 2, img: "hole.png", side: cellSide, category: "hole", isObstacle: false, isHole: true, zOrder: 0 },
-         marble: { num: 3, img: "marble.png", side: cellSide, category: "marble", isObstacle: false, isTransportable: true, zOrder: 1 },
+         marble: { num: 3, img: "marble.png", side: cellSide, category: "marble", isObstacle: false, isTransportable: true, zOrder: 1 }
       },
       maxInstructions: 20,
       includeBlocks: {
@@ -36,7 +36,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 1, dir: 0, type: "green_robot" },
+                  { row: 1, col: 1, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -48,7 +48,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 1, dir: 0, type: "green_robot" },
+                  { row: 1, col: 1, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -60,7 +60,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 1, dir: 0, type: "green_robot" },
+                  { row: 1, col: 1, dir: 0, type: "green_robot" }
                ]
          }
       ]

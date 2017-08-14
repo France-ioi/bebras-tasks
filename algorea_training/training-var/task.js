@@ -27,7 +27,7 @@ function initTask(subTask) {
          18: { num: 18, side: cellSide, category: "number", value: 18 },
          19: { num: 19, side: cellSide, category: "number", value: 19 },
          20: { num: 20, side: cellSide, category: "number", value: 20 },
-         paint: { img: "paint.png", side: cellSide, category: "paint", color: "gris" },
+         paint: { img: "paint.png", side: cellSide, category: "paint", color: "gris" }
       },
       maxInstructions: 40,
       includeBlocks: {
@@ -97,7 +97,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 1, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -113,7 +113,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 1, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -129,7 +129,7 @@ function initTask(subTask) {
                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
                ],
             initItems: [
-                  { row: 1, col: 0, dir: 0, type: "green_robot" },
+                  { row: 1, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ]

@@ -24,7 +24,7 @@ function initTask(subTask) {
             hard: true
          },
          generatedBlocks: {
-            robot: ["south", "east", "west", "paint", "paintOnCell", "col"],
+            robot: ["south", "east", "west", "paint", "paintOnCell", "col"]
          },
          standardBlocks: {
             includeAll: false,
@@ -46,19 +46,19 @@ function initTask(subTask) {
          {
             tiles: [
                    [1, 3, 1, 3, 3, 1, 1, 3, 1, 3, 3, 3, 1, 3, 3, 1],
-                   [1, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 1],
+                   [1, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          },
          {
             tiles: [
                    [1, 1, 3, 3, 3, 1, 3, 1, 3, 3, 1, 3, 1, 1, 3, 1],
-                   [1, 1, 2, 2, 2, 1, 2, 1, 2, 2, 1, 2, 1, 1, 2, 1],
+                   [1, 1, 2, 2, 2, 1, 2, 1, 2, 2, 1, 2, 1, 1, 2, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -66,19 +66,19 @@ function initTask(subTask) {
          {
             tiles: [
                    [1, 3, 1, 3, 3, 1, 1, 3, 1, 3, 3, 3, 1, 3, 3, 1],
-                   [1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 1, 2, 1],
+                   [1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 1, 2, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          },
          {
             tiles: [
                    [1, 1, 3, 3, 3, 1, 3, 1, 3, 3, 1, 3, 1, 1, 3, 1],
-                   [1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 2, 1, 1],
+                   [1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 2, 1, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ],
@@ -91,7 +91,7 @@ function initTask(subTask) {
                    [1, 2, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 1, 2, 2, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          },
          {
@@ -102,7 +102,7 @@ function initTask(subTask) {
                    [1, 2, 1, 2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 2, 1, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" },
+                  { row: 0, col: 0, dir: 0, type: "green_robot" }
                ]
          }
       ]

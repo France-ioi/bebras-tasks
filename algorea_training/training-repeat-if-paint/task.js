@@ -25,7 +25,7 @@ function initTask(subTask) {
                medium: [],
                hard: ["controls_if_else"]
             }
-         },
+         }
       },
       ignoreInvalidMoves: false,
       checkEndEveryTurn: false,
