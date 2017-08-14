@@ -376,7 +376,7 @@ function initTask() {
          for (var iItem = 0; iItem < outerInstrs.length; iItem++) {
             instrs.push(outerInstrs[iItem]);
             arrows.push(containersY[1] + iItem * heightLabel);
-            counters.push([ nbInner, (iOuter+1), ]);
+            counters.push([ nbInner, (iOuter+1) ]);
          }
       }
       var simulation = {

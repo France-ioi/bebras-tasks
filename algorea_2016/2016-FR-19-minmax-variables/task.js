@@ -114,7 +114,7 @@ function initTask(subTask) {
          var right1 = $(id_prefix + "right1").val();
          var right2 = $(id_prefix + "right2").val();
          // var left = $(id_prefix + "left").val();
-         answer[row] = [ op, right1, right2 ]; // left, 
+         answer[row] = [ op, right1, right2 ]; // left
       };
    };
 
