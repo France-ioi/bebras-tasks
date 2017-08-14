@@ -7,7 +7,7 @@ function initTask(subTask) {
       showLabels: true,
       maxIterWithoutAction: 2000,
       itemTypes: {
-         green_robot: { img: "green_robot.png", side: 80, nbStates: 9, offsetX: -14, zOrder: 2 },
+         green_robot: { img: "green_robot.png", category: "robot", side: 80, nbStates: 9, offsetX: -14, zOrder: 2 },
          marker: { num: 2, img: "marker.png", side: cellSide, isMarker: true, zOrder: 0 },
          initialPaint: { num: 3, img: "paint.png", side: cellSide, isPaint: true, isMarker: true, zOrder: 1 },
          paint: { img: "paint.png", side: cellSide, isPaint: true, zOrder: 1 }
