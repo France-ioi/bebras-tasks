@@ -17,17 +17,17 @@ function initTask() {
       "easy": {
          nbCursors: 5,
          showLabels: true,
-         targets: [ 11, 13, 19, 21, 22 ],
+         targets: [ 11, 13, 19, 21, 22 ]
          },
       "medium": {
          nbCursors: 10,
          showLabels: true,
-         targets: [ 219, 283, 227, 421, 382 ],
+         targets: [ 219, 283, 227, 421, 382 ]
          }, 
       "hard": {
          nbCursors: 17,
          showLabels: false,
-         targets: [ 49723 ],
+         targets: [ 49723 ]
          }
       };
    var levelData = null;

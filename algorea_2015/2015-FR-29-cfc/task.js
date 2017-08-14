@@ -93,7 +93,7 @@ function initTask() {
                       [2],
                       [3, 14],
                       [9],
-                      [3, 8]] },
+                      [3, 8]] }
    };
    
    task.load = function(views, callback) {      
