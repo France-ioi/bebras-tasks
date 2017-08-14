@@ -6,9 +6,9 @@ function initTask(subTask) {
       cellSide: cellSide,
       actionDelay: 200,
       itemTypes: {
-         green_robot: { img: "green_robot.png", side: 80, nbStates: 9, isObstacle: true, offsetX: -14, category: "robot", team: 0 },
-         obstacle: { num: 2, img: "obstacle.png", side: cellSide, category: "obstacle", isObstacle: true },
-         green: { num: 3, img: "green.png", side: cellSide, category: "paint", isObstacle: false, hasColor: true, color: "vert" }
+         green_robot: { img: "green_robot.png", category: "robot", side: 80, nbStates: 9, offsetX: -14 },
+         obstacle: { num: 2, img: "obstacle.png", side: cellSide, isObstacle: true },
+         green: { num: 3, img: "green.png", side: cellSide, color: "vert" }
       },
       maxInstructions: 6,
       includeBlocks: {

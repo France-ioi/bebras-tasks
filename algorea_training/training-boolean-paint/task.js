@@ -7,9 +7,9 @@ function initTask(subTask) {
       showLabels: true,
       actionDelay: 200,
       itemTypes: {
-         green_robot: { img: "green_robot.png", side: 80, nbStates: 9, isObstacle: true, offsetX: -14, category: "robot", team: 0, zOrder: 2 },
-         paint: { img: "paint.png", side: cellSide, category: "paint", isPaint: true, isObstacle: false, hasColor: true, color: "gris", zOrder: 1 },
-         marker: { num: 2, img: "marker.png", side: cellSide, category: "marker", isMarker: true, isObstacle: false, hasColor: true, color: "marker", zOrder: 0 }
+         green_robot: { img: "green_robot.png", category: "robot", side: 80, nbStates: 9, offsetX: -14, zOrder: 2 },
+         paint: { img: "paint.png", side: cellSide, isPaint: true, zOrder: 1 },
+         marker: { num: 2, img: "marker.png", side: cellSide, isMarker: true, zOrder: 0 }
       },
       maxInstructions: {
          easy: 20,
