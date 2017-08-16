@@ -16,3 +16,14 @@ To update:
 git pull
 git submodule update --recursive
 ```
+
+To update modules to the current version:
+
+```
+cd modules
+git pull
+git checkout master
+cd ..
+git commit
+git push
+```
