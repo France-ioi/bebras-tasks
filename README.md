@@ -24,6 +24,7 @@ cd modules
 git pull
 git checkout master
 cd ..
-git commit
+git add modules/
+git commit -m "update modules"
 git push
 ```
