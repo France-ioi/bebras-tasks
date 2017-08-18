@@ -10,10 +10,8 @@ function initTask(subTask) {
             processing: ["background", "fill", "stroke", "strokeWeight", "rect", "ellipse", "line", "triangle", "quad", "arc", "point"]
          },
          standardBlocks: {
-            includeAll: true,
-            wholeCategories: [],
-            singleBlocks: []
-         },
+            includeAll: true
+         }
       },
       maxInstructions: 100,
       checkEndEveryTurn: false,
@@ -45,7 +43,7 @@ function initTask(subTask) {
    subTask.data = {
       easy: [
          {}
-      ],
+      ]
    };
 
    initBlocklySubTask(subTask);
