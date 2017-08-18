@@ -1,7 +1,7 @@
 function initTask(subTask) {
 
    subTask.gridInfos = {
-      hideSaveOrLoad: true,
+      hideSaveOrLoad: false,
       actionDelay: 200,
 
       includeBlocks: {
