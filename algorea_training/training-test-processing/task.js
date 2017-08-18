@@ -7,7 +7,7 @@ function initTask(subTask) {
       includeBlocks: {
          groupByCategory: true,
          generatedBlocks: {
-            processing: ["background", "fill", "stroke", "strokeWeight", "rect", "ellipse"]
+            processing: ["background", "fill", "stroke", "strokeWeight", "rect", "ellipse", "line", "triangle", "quad", "arc", "point"]
          },
          standardBlocks: {
             includeAll: true,
