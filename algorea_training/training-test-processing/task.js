@@ -17,21 +17,21 @@ function initTask(subTask) {
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {
          var ops = [
-            { func: 'fill', args: [0] },
-            { func: 'ellipse', args: [150, 180, 180, 180] },
-            { func: 'ellipse', args: [70, 70, 100, 100] },
-            { func: 'ellipse', args: [230, 70, 100, 100] }
+            { block: 'fill', values: [0] },
+            { block: 'ellipse', values: [150, 180, 180, 180] },
+            { block: 'ellipse', values: [70, 70, 100, 100] },
+            { block: 'ellipse', values: [230, 70, 100, 100] }
          ];
          if (context.processing.ops.length != ops.length) {
             throw(context.processing.ops.length > ops.length ? strings.drawingIndirect : strings.drawingWrong);
          }
          for (var iOp = 0; iOp < context.processing.ops.length && iOp < ops.length; iOp++) {
             var cOp = context.processing.ops[iOp];
-            if (cOp.func != ops[iOp].func || cOp.args.length != ops[iOp].args.length) {
+            if (cOp.block != ops[iOp].block || cOp.values.length != ops[iOp].values.length) {
                throw(strings.drawingWrong);
             }
-            for (var iArg = 0; iArg < cOp.args.length && iOp < ops[iOp].args.length; iArg++) {
-               if (cOp.args[iArg] != ops[iOp].args[iArg]) {
+            for (var iArg = 0; iArg < cOp.values.length && iOp < ops[iOp].values.length; iArg++) {
+               if (cOp.values[iArg] != ops[iOp].values[iArg]) {
                   throw(strings.drawingWrong);
                }
             }
@@ -42,7 +42,14 @@ function initTask(subTask) {
 
    subTask.data = {
       easy: [
-         {}
+         {
+            initialDrawing: function(processing) {
+               processing.fill(0);
+               processing.ellipse(150, 180, 180, 180);
+               processing.ellipse(70, 70, 100, 100);
+               processing.ellipse(230, 70, 100, 100);
+            }
+         }
       ]
    };
 
