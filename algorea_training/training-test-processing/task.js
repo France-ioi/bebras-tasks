@@ -17,6 +17,14 @@ function initTask(subTask) {
       maxInstructions: 100,
       checkEndEveryTurn: false,
       checkEndCondition: function(context, lastTurn) {
+         var success = context.checkCoveredColors([255, 0, 0], [0, 255, 0])
+         if (!success[0] && !success[1]) {
+            throw(strings.completelyWrong);
+         } else if (!success[0]) {
+            throw(strings.redLeft);
+         } else if (!success[1]) {
+            throw(strings.greenTouched);
+         }
          throw(strings.drawingCorrect);
       }
    };
@@ -25,11 +33,15 @@ function initTask(subTask) {
       easy: [
          {
             initialDrawing: function(processing) {
-               processing.fill(0);
+               processing.noStroke();
+               processing.fill(255, 0, 0);
                processing.ellipse(150, 180, 180, 180);
                processing.ellipse(70, 70, 100, 100);
                processing.ellipse(230, 70, 100, 100);
                processing.fill(255);
+               processing.ellipse(150, 180, 150, 150);
+               processing.fill(0, 255, 0);
+               processing.ellipse(150, 180, 50, 50);
             }
          }
       ]
