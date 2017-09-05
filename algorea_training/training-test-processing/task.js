@@ -16,17 +16,7 @@ function initTask(subTask) {
       },
       maxInstructions: 100,
       checkEndEveryTurn: false,
-      checkEndCondition: function(context, lastTurn) {
-         var success = context.checkCoveredColors([255, 0, 0], [0, 255, 0])
-         if (!success[0] && !success[1]) {
-            throw(strings.completelyWrong);
-         } else if (!success[0]) {
-            throw(strings.redLeft);
-         } else if (!success[1]) {
-            throw(strings.greenTouched);
-         }
-         throw(strings.drawingCorrect);
-      }
+      checkEndCondition: processingEndConditions.checkRedCoveredGreenNotCovered
    };
 
    subTask.data = {
