@@ -5,6 +5,7 @@ function initTask(subTask) {
       actionDelay: 200,
       buttonHideInitialDrawing: true,
       processing3D: true,
+      buttonScaleDrawing: true,
 
       includeBlocks: {
          groupByCategory: true,
@@ -26,7 +27,6 @@ function initTask(subTask) {
             initialDrawing: function(processing) {
                 processing.noStroke();
                 processing.lights();
-                processing.translate(processing.width/2, processing.height/2, 0);
                 processing.pushMatrix();
                 processing.fill(255, 0, 0);
                 processing.sphere(39.9);
