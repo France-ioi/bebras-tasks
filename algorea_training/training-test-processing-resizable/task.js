@@ -17,7 +17,9 @@ function initTask(subTask) {
         },
         maxInstructions: 100,
         checkEndEveryTurn: false,
-        checkEndCondition: processingEndConditions.checkRedCoveredGreenNotCovered
+        //checkEndCondition: processingEndConditions.checkRedCoveredGreenNotCovered
+        checkEndCondition: processingEndConditions.checkAllFiguresConnected
+
     };
 
     subTask.data = {
