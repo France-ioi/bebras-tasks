@@ -17,8 +17,18 @@ function initTask(subTask) {
         },
         maxInstructions: 100,
         checkEndEveryTurn: false,
-        //checkEndCondition: processingEndConditions.checkRedCoveredGreenNotCovered
-        checkEndCondition: processingEndConditions.checkAllFiguresConnected
+
+        checkEndConditionOptions: {
+            checkRedCoveredGreenNotCovered: true,
+            checkAllFiguresConnected: true,
+            checkBackgroundCovered: {
+                threshold: 200,
+                score_lost: 1, // per extra pixel covered
+                initial_score: 100, // initial score
+                min_score: 1 // minimal score value to perform a task
+            }
+        },
+        checkEndCondition: processingEndConditions.checkEndCondition
 
     };
 
