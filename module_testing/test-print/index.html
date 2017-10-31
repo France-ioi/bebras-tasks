@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>training-test-processing</title>
+    <title>test-print</title>
       <script>
         window.stringsLanguage = 'fr';
       </script>
@@ -12,13 +12,13 @@
         importModules([
             'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'beaver-task-2.0', 'jschannel', 'raphaelFactory-1.0', 'delayFactory-1.0', 'simulationFactory-1.0',
             'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1', 'processing-1.4.8', 'blockly-processing']);
-        // set Blockly as default language when none is specified through ?language=
-        importLanguageModules('blockly');
+            'taskStyles-0.1', 'blockly-printer']);
+        // set Python as default language when none is specified through ?language=
+        importLanguageModules('python');
       </script>
       <script class="remove" type="text/javascript">
        var json = {
-          "id": "test-processing",
+          "id": "test-printer",
           "language": "fr",
           "version": "fr.01",
           "authors": "",
@@ -33,6 +33,9 @@
       };
 
       var strings = {
+         moreThan100Moves: "Vous avez cependant fait plus de 100 déplacements.",
+         notAllCellsPainted: "Essaie encore.",
+         outputCorrect: "Bravo ! La sortie est correcte."
       };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -40,14 +43,14 @@
    </head>
    <body onresize="task.displayedSubTask.updateScale()">
       <div id="task">
-        <h1>Dessiner Mickey</h1>
+        <h1>Lire un nombre</h1>
 
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <div id="taskIntro">
-               <p>
-                  Dessiner des formes pour recouvrir entièrement la zone rouge, mais en ne recouvrant pas du tout le disque vert au milieu.
-               </p>
+            <p>
+            Écrivez un programme qui lit un entier puis l'affiche.
+            </p>
             </div>
             <div id="gridContainer"></div>
             <div id="blocklyLibContent"></div>
