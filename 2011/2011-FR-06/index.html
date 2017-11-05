@@ -52,11 +52,15 @@ var pccLength = 9;
  }
 
  var creeTerrain = function () {
+     var html = "";
      for(var row = 0; row < nrows; row++) {
-         $("#terrain-2011-FR-06").append("<tr></tr>");
-         for(var col = 0; col < ncols; col++)
-             $("#terrain-2011-FR-06 tr:eq("+row+")").append("<td></td>");
+         html += "<tr>";
+         for(var col = 0; col < ncols; col++) {
+            html += "<td></td>";
+         }
+         html += "</tr>";
      };
+     $("#terrain-2011-FR-06").append(html);
 
      for(var mur in murs)
          selectCell(murs[mur][0], murs[mur][1]).addClass("wall-2011-FR-06");

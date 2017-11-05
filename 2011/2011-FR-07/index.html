@@ -12,12 +12,7 @@
     <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
     <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
     <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-         <script class="" type="text/javascript">/* images en plus à charger
-  '6.png'
-  '7.png'
-  '8.png'
-  '9.png'
-*/
+         <script class="" type="text/javascript">
  var nrows = 8, ncols = 12;
  var objetsPos = 
      [ [0, 3], [7, 10], [1, 0], [1, 7], [2, 2], [2, 5],
@@ -70,11 +65,15 @@ var selectCell = function (row, col) {
 }
 
 var creeTerrain = function () {
-  for(var row = 0; row < nrows; row++) {
-      $("#terrain-2011-FR-07").append("<tr></tr>");
-      for(var col = 0; col < ncols; col++)
-          $("#terrain-2011-FR-07 tr:eq("+row+")").append("<td></td>");
-  };
+     var html = "";
+     for(var row = 0; row < nrows; row++) {
+         html += "<tr>";
+         for(var col = 0; col < ncols; col++) {
+            html += "<td></td>";
+         }
+         html += "</tr>";
+     };
+     $("#terrain-2011-FR-07").append(html);
 };
 
 var dessine = function () {
@@ -237,6 +236,10 @@ Ecrivez un programme qui permet au robot de passer sur le plus d'objets possible
       </td>
    </tr>
 </table>
+<img src="6.png" style="display:none" />
+<img src="7.png" style="display:none" />
+<img src="8.png" style="display:none" />
+<img src="9.png" style="display:none" />
 
 
 </div><!-- task -->
