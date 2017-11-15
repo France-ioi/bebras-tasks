@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>test-server-modules</title>
+        <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+        <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+        <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+        <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+        <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+        <script class="module" type="text/javascript" src="../../modules/pemFioi/static-task.js" id="http://www.france-ioi.org/modules/pemFioi/static-task.js"></script>
+
+        <!-- Including CryptoJS required libraries -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js"></script>
+
+        <script type="text/javascript" src="../../bebras-server-modules-libs/bebras_tools.js"></script>
+        <script type="text/javascript" src="../../bebras-server-modules-libs/bebras_task_wrapper.js"></script>
+        <script type="text/javascript" src="../../bebras-server-modules-libs/jwt.js"></script>
+
+        <script class="remove" type="text/javascript">
+            var json = {
+                "id": "test-server-modules",
+            };
+        </script>
+        <script type="text/javascript">
+            var stringsLanguage = 'en';
+            var taskStrings = {};
+        </script>
+        <script type="text/javascript" src="task.js"></script>
+        <style>
+            #error {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="task">
+            <h1>test-server-modules</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                <div id="loading">Loading...</div>
+                <div id="task_ready" style="display: none">
+                    <p>
+                        <strong>Task data</strong>
+                        <div id="task_data"></div>
+                    </p>
+                    <p>
+                        <button id="ask_hint_b">Ask hint A</button>
+                        <button id="ask_hint_a">Ask hint B</button>
+                    </p>
+                    <p>
+                        <strong>Hint data</strong>
+                        <div id="hint_data"></div>
+                    </p>
+                    <p>
+                        <strong>Answer</strong>
+                        <input type="text" id="task_answer" value="1"/>
+                    </p>
+                </div>
+                <p>
+                    <div id="error"></div>
+                </p>
+            </div>
+        </div><!-- task -->
+
+        <div id="solution"></div> <!-- task-solution -->
+    </body>
+</html>
