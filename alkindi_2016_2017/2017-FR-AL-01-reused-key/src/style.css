@@ -1,0 +1,145 @@
+#container {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+	width: 800px;
+}
+.taskInstructions {
+    text-align: justify;
+}
+.taskInstructions table.pre {
+    margin: 10px auto;
+}
+.taskInstructions table.pre td {
+    padding: 4px 10px;
+}
+.taskInstructions .list-unstyled {
+    padding-left: 30px;
+}
+.text-bold {
+    font-weight: bold;
+}
+.taskWrapper .taskInstructions {
+    padding-top: 30px;
+    position: relative;
+}
+.topPlainWordContainer {
+    margin: 10px 20px;
+    height: 34px;
+}
+.topPlainWord {
+    font-family: Lucida Console,Monaco,monospace;
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 20px;
+    background-color: #fff;
+    border: 1px solid #777;
+    box-shadow: 3px 2px 3px #ccc;
+    line-height: 27px;
+    letter-spacing: 10px;
+    padding-left: 5px;
+}
+.hintsDialog {
+  width: 50%;
+  max-width: 400px;
+  background: #f0f0f0;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 1;
+}
+.hintsDialog p {
+    margin-bottom: 5px;
+}
+.hintsDialog button + button {
+    margin-left: 10px;
+}
+.keyTable {
+    margin-top: 10px;
+}
+.keyTable span {
+    width: 20px;
+    display: inline-block;
+    margin-right: 2px;
+    text-align: center;
+}
+.keyTable span button {
+    padding: 0;
+    width: 100%;
+    border: none;
+}
+.keyTable .keyValue {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.keyTable .keyValue.is-hint {
+    border: none;
+    cursor: default;
+    font-weight: bold;
+}
+.keyTable .keyValue.is-hint-request {
+    background: #000;
+    color: #fff;
+    font-weight: bold;
+}
+.is-hint-mismatch {
+    background-color: #ff4444 !important;
+}
+
+.ciphersAndPlains {
+    font-family: Lucida Console,Monaco,monospace;
+    font-size: 18px;
+}
+.cipherTable {
+    margin-top: 20px;
+}
+.plainTable {
+    background: #efefef;
+}
+.ciphersAndPlains span {
+    width: 20px;
+    display: inline-block;
+    margin-right: 2px;
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 27px;
+    vertical-align: bottom;
+}
+.cipherTable span {border-bottom: none;}
+.plainTable span {border-top: none;}
+.plainTable .plainChar {
+    background-color: #fff;
+    box-shadow: 3px 2px 3px #ccc;
+    border-top: 1px solid;
+    border-color: #777;
+    background-clip: content-box;
+}
+.plainChar + .plainChar {
+    margin-left: -4px;
+    border-left-color: transparent;
+    width: 24px;
+}
+
+.taskHeader {
+
+}
+.submitBlock, .scoreBlock, .feedbackBlock, .saveBlock {
+    display: inline-block;
+    line-height: 34px;
+    margin: 0 10px 0 0;
+}
+.taskHeader > *:last-child {
+    margin: 0;
+}
+.scoreBlock, .feedbackBlock {
+    background: #f8f8f8;
+    padding: 0 8px;
+}
+.feedbackBlock {
+    cursor: pointer;
+}
