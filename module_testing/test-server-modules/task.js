@@ -8,7 +8,7 @@ function initTask() {
     })
 
 
-    task.onLoad = function() {
+    task.onLoad = function(views, callback) {
         $('#ask_hint_a').click(function() {
             task.askHint({ hint_demo_data: 'a'})
         })
@@ -16,6 +16,13 @@ function initTask() {
         $('#ask_hint_b').click(function() {
             task.askHint({ hint_demo_data: 'b'})
         })
+
+        $('#validate').click(function() {
+            platform.validate('done', function(){
+                alert('done')
+            });
+        })
+        callback()
     }
 
 
