@@ -3,18 +3,17 @@
 function initTask() {
 
     BebrasTaskWrapper(task, {
-        host: 'http://localhost:3000',
-        platform_id: 1
+        host: 'http://localhost:3000'
     })
 
 
     task.onLoad = function(views, callback) {
         $('#ask_hint_a').click(function() {
-            task.askHint({ hint_demo_data: 'a'})
+            task.askHint('a')
         })
 
         $('#ask_hint_b').click(function() {
-            task.askHint({ hint_demo_data: 'b'})
+            task.askHint('b')
         })
 
         $('#validate').click(function() {

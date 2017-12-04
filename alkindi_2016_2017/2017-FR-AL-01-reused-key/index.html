@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <script src="build/vendor.js"></script>
+    <script src="build/bundle.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+    var modulesPath = '../../modules/';
+    importModules(['platform-pr','jschannel']);
+    </script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/static-task.js"></script>
+
+</head>
+<body>
+    <div id="task">
+        <div id="container" class="container"></div>
+    </div>
+
+    <script type="text/javascript">
+        var options = {
+            id: '2017-fr-al-01-reused-key',
+            server_modules: {
+                host: 'http://localhost:3000'
+            }
+        }
+        ReactTask.run(document.getElementById('container'), options)
+    </script>
+</body>

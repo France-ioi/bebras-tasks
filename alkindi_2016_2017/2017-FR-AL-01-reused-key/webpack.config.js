@@ -10,9 +10,9 @@ const config = module.exports = {
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: '/build/',
+    publicPath: 'build/',
     libraryTarget: "var",
-    library: "Task"
+    library: "ReactTask"
   },
   module: {
     loaders: [
@@ -36,11 +36,6 @@ const config = module.exports = {
     extensions: ['', '.js']
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-      }
-    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
@@ -48,7 +43,11 @@ const config = module.exports = {
       filename: "vendor.js",
       minChunks: function (module) { return /node_modules/.test(module.resource); }
     })
-  ]
+  ],
+  externals: {
+    fs: true,
+    mime: true
+  }
 };
 
 if (process.env.NODE_ENV !== 'production') {

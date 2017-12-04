@@ -1,10 +1,10 @@
-
 import React from 'react';
 import {Alert, Button} from 'react-bootstrap';
 import classnames from 'classnames';
 import EpicComponent from 'epic-component';
 
 import {decrypt} from './utils';
+import PropTypes from 'prop-types'
 
 // A button for increasing/decreasing one key number.
 // props: index, direction, onChange
@@ -114,14 +114,14 @@ export const Plain = EpicComponent(self => {
 }, {
   displayName: 'Plain',
   propTypes: {
-    cipherValue: React.PropTypes.string.isRequired,
-    wordCharIndex: React.PropTypes.number.isRequired,
-    wordCipherIndex: React.PropTypes.number,
-    keyWithWord: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    cipherIndex: React.PropTypes.number.isRequired,
-    plainWord: React.PropTypes.string,
-    onHover: React.PropTypes.func.isRequired,
-    onMouseDown: React.PropTypes.func.isRequired
+    cipherValue: PropTypes.string.isRequired,
+    wordCharIndex: PropTypes.number.isRequired,
+    wordCipherIndex: PropTypes.number,
+    keyWithWord: PropTypes.arrayOf(PropTypes.object).isRequired,
+    cipherIndex: PropTypes.number.isRequired,
+    plainWord: PropTypes.string,
+    onHover: PropTypes.func.isRequired,
+    onMouseDown: PropTypes.func.isRequired
   }
 });
 
@@ -158,11 +158,11 @@ export const Workspace = actions => EpicComponent(self => {
   };
 
   const onShowHintRequest = function (keyIndex) {
-    self.props.dispatch({type: actions.showHintRequest, request: {keyIndex}});
+    self.props.dispatch({type: actions.showHintRequest, request: keyIndex});
   };
 
   const onCloseHintRequest = function () {
-    self.props.dispatch({type: actions.showHintRequest, request: null});
+    self.props.dispatch({type: actions.showHintRequest, request: undefined});
   };
 
   const onRequestHint = function () {
@@ -205,7 +205,10 @@ export const Workspace = actions => EpicComponent(self => {
     return (
       /* preventDefault is called because browsers default to a visual dragging of HTML elements */
       <div onMouseMove={preventDefault} className="taskWrapper">
+
+
         {/*<pre>{JSON.stringify(submitAnswer, null, 2)}</pre>*/}
+        {/*
         <div className="taskHeader">
           <div className="submitBlock">
             <Button onClick={onSubmitAnswer} disabled={submitAnswer && submitAnswer.status === 'pending'}>
@@ -234,6 +237,8 @@ export const Workspace = actions => EpicComponent(self => {
           submitAnswer.error === 'too soon'
             ? <Alert bsStyle='warning'>{"Trop de réponses en une minute."}</Alert>
             : <Alert bsStyle='danger'>{"Votre réponse n'a pas pu être prise en compte."}</Alert>)}
+          */}
+
         <div className="taskInstructions">
           {plainWord &&
             <div>
@@ -246,8 +251,10 @@ export const Workspace = actions => EpicComponent(self => {
           <p className="text-bold">Modifier la clé</p>
           <p>Cliquez sur les flèches au-dessus et en dessous des éléments de la clé pour modifier leur valeur. La version
          déchiffrée avec cette clé s'affiche sous chacun des quatre messages.</p>
-          {hintRequest && renderHintRequest()}
+          {hintRequest !== undefined && renderHintRequest()}
         </div>
+
+
         <div className="keyTable">
           <div>
             {keyWithWord.map(function(keyValue, keyIndex) {
@@ -307,15 +314,10 @@ export const Workspace = actions => EpicComponent(self => {
         </p>
       </div>
     }
-    const maximumScore = 150;
-    const hintCost = 20;
     const {task, hintRequest} = self.props;
-    const highestPossibleScore = Math.max(0, maximumScore - Object.keys(task.hints).length * hintCost);
     return (
       <div className="hintsDialog">
         <p><strong>{"Indice demandé : "}</strong>{"Valeur pour la position "}<strong>{hintRequest.keyIndex}</strong></p>
-        <p><strong>{"Coût : "}</strong> {hintCost}</p>
-        <p><strong>{"Score disponible : "}</strong>{highestPossibleScore}</p>
         <p className="text-center">
           <Button onClick={onRequestHint}>{"Valider"}</Button>
           <Button onClick={onCloseHintRequest}>{"Annuler"}</Button>

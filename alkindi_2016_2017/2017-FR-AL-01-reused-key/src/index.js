@@ -1,22 +1,20 @@
+import algoreaReactTask from './algorea_react_task';
 
-import runTask from 'alkindi-task-lib';
-
-import Task from './intro';
+//import Task from './intro';
 import {Workspace} from './views';
 import {generateKeyWithWord, ALPHABET_SIZE} from './utils';
 
-import 'font-awesome/css/font-awesome.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'rc-tooltip/assets/bootstrap.css';
-import './style.css';
+import 'font-awesome/css/font-awesome.css'
+import 'bootstrap/dist/css/bootstrap.css'
+//import 'rc-tooltip/assets/bootstrap.css';
+import './style.css'
 
-export function run (container, options) {
-   runTask(container, options, TaskBundle);
+export function run(container, options) {
+    algoreaReactTask(container, options, TaskBundle)
 };
 
-function TaskBundle (bundle, deps) {
 
-  /*** Start of required task definitions ***/
+function TaskBundle (bundle, deps) {
 
   const workspaceOperations = {
     taskLoaded,
@@ -26,29 +24,37 @@ function TaskBundle (bundle, deps) {
     isWorkspaceReady
   };
 
+
+
   /* The 'init' action sets the workspace operations in the global state. */
-  bundle.addReducer('init', function (state, action) {
-    return {...state, workspaceOperations};
-  });
 
-  /* The 'Task' view displays the task introduction to the contestant. */
-  bundle.defineView('Task', TaskSelector, Task);
-  function TaskSelector (state) {
-    const {task} = state;
-    return {task};
-  }
 
-  /* The 'Workspace' view displays the main task view to the contestant. */
-  bundle.defineView('Workspace', WorkspaceSelector, Workspace(deps));
-  function WorkspaceSelector (state, props) {
-    const {score, task, workspace, hintRequest, submitAnswer} = state;
-    return {score, task, workspace, hintRequest, submitAnswer: submitAnswer || {}};
-  }
+      bundle.addReducer('init', function (state, action) {
+        return taskLoaded({
+            ...state, workspaceOperations
+        })
+        //return {...state, workspaceOperations};
+    })
 
-  /*** End of required task definitions ***/
+  // /* The 'Task' view displays the task introduction to the contestant. */
+  // bundle.defineView('Task', TaskSelector, Task);
+  // function TaskSelector (state) {
+  //   const {task} = state;
+  //   return {task};
+  // }
 
-  /* These are passed to WorkspaceView. */
-  bundle.use('showHintRequest', 'requestHint', 'submitAnswer', 'SaveButton', 'dismissAnswerFeedback');
+  // /* The 'Workspace' view displays the main task view to the contestant. */
+    bundle.defineView('Workspace', WorkspaceSelector, Workspace(deps))
+    function WorkspaceSelector (state, props) {
+        const {task, hints, workspace, hintRequest} = state;
+        return {task, hints, workspace, hintRequest};
+    }
+
+    /*** End of required task definitions ***/
+
+    /* These are passed to WorkspaceView. */
+    bundle.use('showHintRequest', 'requestHint')
+
 
   /* taskInitialized is called to update the global state when the task is first loaded. */
   function taskLoaded (state) {
@@ -58,56 +64,50 @@ function TaskBundle (bundle, deps) {
       key.push(0);
     }
     const dump = {key, wordCharIndex: 0, wordCipherIndex: null};
-    const workspace = updateWorkspace(state.task, dump);
+    const workspace = updateWorkspace(state.task, state.hints, dump);
     return {...state, dump, workspace};
   }
-
-  /* taskUpdated is called to update the global state when the task is updated. */
+/* taskUpdated is called to update the global state when the task is updated. */
   function taskUpdated (state) {
-    const workspace = updateWorkspace(state.task, state.dump);
+    const workspace = updateWorkspace(state.task, state.hints, state.dump);
     /* state.dump could be reconciled with new state.task here */
     return {...state, workspace};
   }
-
-  /* workspaceLoaded is called to update the global state when a workspace dump is loaded. */
+/* workspaceLoaded is called to update the global state when a workspace dump is loaded. */
   function workspaceLoaded (state, dump) {
-    const workspace = updateWorkspace(state.task, dump);
+    const workspace = updateWorkspace(state.task, state.hints, dump);
     return {...state, dump, workspace};
   }
-
-  /* dumpWorkspace is called to build a serializable workspace dump.
+/* dumpWorkspace is called to build a serializable workspace dump.
      It should return the smallest part of the workspace that is needed to
      rebuild it.  */
   function dumpWorkspace (state) {
     const {key, wordCharIndex, wordCipherIndex} = state.workspace;
     return {key, wordCharIndex, wordCipherIndex};
   }
-
-  function isWorkspaceReady (state) {
+function isWorkspaceReady (state) {
     return ('workspace' in state) && ('keyWithWord' in state.workspace);
   }
-
-  /* keyChange {index, direction} updates the key by incrementing/decrementing
+/* keyChange {index, direction} updates the key by incrementing/decrementing
      a value in the key. */
   bundle.defineAction('keyChange', 'Workspace.KeyChange');
   bundle.addReducer('keyChange', function keyChangeReducer (state, action) {
     const {index, direction} = action;
-    let {dump, task} = state;
+    let {dump, task, hints} = state;
     const key = dump.key.slice();
     key[index] = (key[index] + parseInt(direction) + ALPHABET_SIZE) % ALPHABET_SIZE;
     dump = {...dump, key};
-    const workspace = updateWorkspace(task, dump);
+    const workspace = updateWorkspace(task, hints, dump);
     return {...state, dump, workspace};
   });
-
-  /* setPlainWordPosition {cipherIndex, charIndex} updates the key so that the
+/* setPlainWordPosition {cipherIndex, charIndex} updates the key so that the
      plain word appears at a specific position in the deciphered text. */
   bundle.defineAction('setPlainWordPosition', 'Workspace.SetPlainWordPosition');
   bundle.addReducer('setPlainWordPosition', function (state, action) {
     const {cipherIndex, charIndex} = action;
     let {dump} = state;
     dump = {...dump, wordCharIndex: charIndex, wordCipherIndex: cipherIndex};
-    const workspace = updateWorkspace(state.task, dump);
+    const workspace = updateWorkspace(state.task, state.hints, dump);
     return {...state, dump, workspace};
   });
 
@@ -116,12 +116,14 @@ function TaskBundle (bundle, deps) {
 /* Helper function to compute the workspace when the task or workspace has
   changed.  The workspace includes enriched versions of the key including
   hints and the placed plain-text word. */
-function updateWorkspace (task, dump) {
-  const {plainWord, ciphers, hints} = task;
+
+function updateWorkspace (task, hints, dump) {
+  const {plainWord, ciphers} = task;
   const {key, wordCharIndex, wordCipherIndex} = dump;
   // Update the key with hints.
+  hints = hints || {}
   const keyWithHints = key.map(function (value, index) {
-    if (index in hints) {
+     if (index in hints) {
       return {value: hints[index], isHint: true};
     } else {
       return {value: value, isHint: false};
