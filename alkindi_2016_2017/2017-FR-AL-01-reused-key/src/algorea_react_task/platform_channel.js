@@ -1,20 +1,38 @@
-
 import {eventChannel, END, buffers} from 'redux-saga'
 
 export default (target) => {
 
-  return eventChannel(emitter => {
+    return eventChannel(emitter => {
 
-    window.task.getAnswer = function(callback) {
-      return emitter({ type: 'getAnswer', callback })
-    }
+        window.task.load = function(views, callback) {
+            return emitter({ type: 'load', views, callback })
+        }
 
-    window.task.gradeAnswer = function(answer, answer_token, callback, error) {
-      return emitter({ type: 'gradeAnswer', answer, answer_token, callback, error })
-    }
+        window.task.getAnswer = function(callback) {
+            return emitter({ type: 'getAnswer', callback })
+        }
 
-    return () => {}
+        window.task.reloadAnswer = function(answer, callback) {
+            return emitter({ type: 'reloadAnswer', answer, callback })
+        }
 
-  })
+
+        window.task.gradeAnswer = function(answer, answer_token, callback) {
+            return emitter({ type: 'gradeAnswer', answer, answer_token, callback })
+        }
+
+
+        window.task.getState = function(callback) {
+            return emitter({ type: 'getState', callback })
+        }
+
+
+        window.task.reloadState = function(state, callback) {
+            return emitter({ type: 'reloadState', state, callback })
+        }
+
+        return () => {}
+
+    })
 
 }

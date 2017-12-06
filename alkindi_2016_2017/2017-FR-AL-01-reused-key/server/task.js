@@ -5,11 +5,13 @@ const words = require('./words')
 module.exports = {
 
     config: {
-        cache_task_data: true,
+        cache_task_data: false,
     },
 
+
     taskData: (args, callback) => {
-        const rng = seedrandom(args.task.randomSeed);
+        const rng = seedrandom(args.task.random_seed);
+        //const rng = function() { return 0.1 }
         // TODO choose ciphers and plain word.
         var minLength = words[0][0].length;
         var cipherLengths = [
@@ -57,20 +59,10 @@ module.exports = {
             }
             ciphers[iCipher] = newCipher;
         }
-
-        /*
-        // TODO hints.
-
-        const {version} = args.task;
-        const task = {version, ciphers, hints: {}};
-        if (version == 1) {
-            task.plainWord = plainWord;
-        }
-        const full_task = Object.assign({secretKey}, task);
-      */
         callback(null, {
             ciphers,
-            secretKey
+            secretKey,
+            //plainWord
         })
     },
 
@@ -89,10 +81,12 @@ module.exports = {
 
 
     gradeAnswer: (args, task_data, callback) => {
+        //TODO: move JSON.parse to server-modules
         const answer = JSON.parse(args.answer.value) || [] // because Algorea support strings only
+
         let nCorrect = 0;
         task_data.secretKey.forEach(function (value, index) {
-            if (value === answer[index]) {
+            if (value === answer.key[index]) {
                 nCorrect += 1;
             }
         });

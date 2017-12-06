@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Button} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import classnames from 'classnames';
 import EpicComponent from 'epic-component';
 
@@ -134,7 +134,7 @@ export const Workspace = actions => EpicComponent(self => {
   self.state = {dragging: false, dropOutside: false};
 
   const onKeyChange = function (index, direction) {
-    const {key} = self.props.workspace;
+    const {key} = self.props.answer;
     self.props.dispatch({type: actions.keyChange, index, direction});
   };
 
@@ -158,15 +158,16 @@ export const Workspace = actions => EpicComponent(self => {
   };
 
   const onShowHintRequest = function (keyIndex) {
-    self.props.dispatch({type: actions.showHintRequest, request: keyIndex});
+    self.props.dispatch({type: actions.showHintRequest, hintRequest: keyIndex});
   };
 
   const onCloseHintRequest = function () {
-    self.props.dispatch({type: actions.showHintRequest, request: undefined});
+    self.props.dispatch({type: actions.showHintRequest, hintRequest: undefined});
   };
 
   const onRequestHint = function () {
-    self.props.dispatch({type: actions.requestHint, request: self.props.hintRequest});
+    const {hintRequest} = self.props.workspace
+    self.props.dispatch({type: actions.callHintRequest, hintRequest});
   };
 
   const onMouseUp = function() {
@@ -174,15 +175,6 @@ export const Workspace = actions => EpicComponent(self => {
     if(self.state.dropOutside) {
       self.props.dispatch({type: actions.setPlainWordPosition, cipherIndex: null, charIndex: 0});
     }
-  };
-
-  const onSubmitAnswer = function () {
-    const answer = {key: self.props.workspace.keyWithWord.map(c => c.value)};
-    self.props.dispatch({type: actions.submitAnswer, answer});
-  };
-
-  const onDismissAnswerFeedback = function () {
-    self.props.dispatch({type: actions.dismissAnswerFeedback});
   };
 
   const clickDeleteWord = function () {
@@ -198,46 +190,14 @@ export const Workspace = actions => EpicComponent(self => {
   };
 
   self.render = function () {
-    const {task, workspace, score, hintRequest, submitAnswer} = self.props;
-    const {keyWithWord, wordCharIndex, wordCipherIndex} = workspace;
+    const {task, workspace, answer} = self.props;
+    const {keyWithWord, hintRequest} = workspace;
+    const {wordCharIndex, wordCipherIndex} = answer
     const {ciphers, plainWord} = task;
     const wordStartIndex = plainWord ? Math.max(0, Math.min(wordCharIndex, keyWithWord.length - plainWord.length)) : -1;
     return (
       /* preventDefault is called because browsers default to a visual dragging of HTML elements */
       <div onMouseMove={preventDefault} className="taskWrapper">
-
-
-        {/*<pre>{JSON.stringify(submitAnswer, null, 2)}</pre>*/}
-        {/*
-        <div className="taskHeader">
-          <div className="submitBlock">
-            <Button onClick={onSubmitAnswer} disabled={submitAnswer && submitAnswer.status === 'pending'}>
-              {"soumettre la clé"}
-            </Button>
-          </div>
-          {submitAnswer.feedback !== undefined &&
-            <div className="feedbackBlock" onClick={onDismissAnswerFeedback}>
-              {submitAnswer.feedback === true &&
-                <span>
-                  <i className="fa fa-check" style={{color: 'green'}}/>
-                  {" Votre réponse est correcte."}
-                </span>}
-              {submitAnswer.feedback === false &&
-                <span>
-                  <i className="fa fa-close" style={{color: 'red'}}/>
-                  {" Votre réponse est incorrecte."}
-                </span>}
-            </div>}
-          <div className="scoreBlock">
-            {"Score : "}{score === undefined ? '-' : score}
-          </div>
-          {<div className="saveBlock"><actions.SaveButton/></div>}
-        </div>
-        {submitAnswer.status === 'rejected' && (
-          submitAnswer.error === 'too soon'
-            ? <Alert bsStyle='warning'>{"Trop de réponses en une minute."}</Alert>
-            : <Alert bsStyle='danger'>{"Votre réponse n'a pas pu être prise en compte."}</Alert>)}
-          */}
 
         <div className="taskInstructions">
           {plainWord &&
@@ -272,7 +232,7 @@ export const Workspace = actions => EpicComponent(self => {
           <div>
             {keyWithWord.map(function(keyValue, keyIndex) {
               return (
-                <KeyValue key={keyIndex} index={keyIndex} value={keyValue.value} isHint={keyValue.isHint} hintMismatch={keyValue.hintMismatch} hintRequest={hintRequest && (hintRequest.keyIndex === keyIndex)} onRequestHint={onShowHintRequest}/>
+                <KeyValue key={keyIndex} index={keyIndex} value={keyValue.value} isHint={keyValue.isHint} hintMismatch={keyValue.hintMismatch} hintRequest={hintRequest !== undefined && (hintRequest === keyIndex)} onRequestHint={onShowHintRequest}/>
               );
             })}
           </div>
@@ -305,19 +265,10 @@ export const Workspace = actions => EpicComponent(self => {
   };
 
   function renderHintRequest () {
-    const allowHints = true;
-    if (!allowHints) {
-      <div className="hintsDialog">
-        <p><strong>{"Les indices seront bientôt disponibles."}</strong></p>
-        <p className="text-center">
-          <Button onClick={onCloseHintRequest}>{"Annuler"}</Button>
-        </p>
-      </div>
-    }
-    const {task, hintRequest} = self.props;
+    const {hintRequest} = self.props.workspace
     return (
       <div className="hintsDialog">
-        <p><strong>{"Indice demandé : "}</strong>{"Valeur pour la position "}<strong>{hintRequest.keyIndex}</strong></p>
+        <p><strong>{"Indice demandé : "}</strong>{"Valeur pour la position "}<strong>{hintRequest}</strong></p>
         <p className="text-center">
           <Button onClick={onRequestHint}>{"Valider"}</Button>
           <Button onClick={onCloseHintRequest}>{"Annuler"}</Button>

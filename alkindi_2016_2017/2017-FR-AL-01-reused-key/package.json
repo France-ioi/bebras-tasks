@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "array.prototype.fill": "^1.0.2",
+    "bebras-server-modules-libs": "https://github.com/France-ioi/bebras-server-modules-libs.git",
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "epic-component": "^1.1.2",
@@ -41,16 +42,11 @@
     "html5shiv": "^3.7.3",
     "object.assign": "^4.0.4",
     "query-string": "^5.0.1",
-    "rc-tooltip": "^3.4.2",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.2",
-    "react-tabs": "^2.1.1",
     "redux": "^3.6.0",
-    "redux-saga": "^0.14.2",
-    "seedrandom": "^2.4.2",
-    "superagent": "^3.4.1",
-    "bebras-server-modules-libs": "https://github.com/France-ioi/bebras-server-modules-libs.git"
+    "redux-saga": "^0.14.2"
   }
 }

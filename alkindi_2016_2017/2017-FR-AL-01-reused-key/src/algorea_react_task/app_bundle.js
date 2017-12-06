@@ -6,11 +6,10 @@ import Spinner from './ui/spinner'
 
 export default function (bundle, deps) {
 
-    bundle.use('Workspace', 'validateAnswer')
+    bundle.use('Workspace')
 
-    bundle.defineAction('taskInit', 'Task.Init')
-
-    bundle.addReducer('taskInit', function (state, action) {
+    bundle.defineAction('appInit', 'appInit')
+    bundle.addReducer('appInit', function (state, action) {
         const { task_token, options } = action
         return {...state, task_token, options}
     })

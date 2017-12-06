@@ -10,10 +10,10 @@ function getTaskInterface(host) {
 }
 
 
-export function fetchTaskData(host, token) {
+export function fetchTaskData(host, task_token) {
     return new Promise(resolve => {
         getTaskInterface(host).taskData({
-            task: token,
+            task: task_token,
             success: resolve,
             error: (error) => {
                 console.error(error)
@@ -23,10 +23,10 @@ export function fetchTaskData(host, token) {
 }
 
 
-export function fetchTaskHintData(host, token) {
+export function fetchTaskHintData(host, task_token) {
     return new Promise(resolve => {
         getTaskInterface(host).taskHintData({
-            task: token,
+            task: task_token,
             success: resolve,
             error: (error) => {
                 console.error(error)
