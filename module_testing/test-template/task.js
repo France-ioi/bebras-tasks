@@ -7,11 +7,11 @@ function initTask(subTask) {
       includeBlocks: {
          groupByCategory: true,
          generatedBlocks: {
-             example: ["doAction", "doNothing", "readSensor"]
+            template: ["doAction", "doNothing", "readSensor"]
          },
          standardBlocks: {
             includeAll: false,
-            wholeCategories: [ "logic", "loops", "math", "variables"],
+            wholeCategories: ["logic", "loops", "math", "variables"],
             singleBlocks: [],
          },
       },
