@@ -103,10 +103,14 @@ export default function (bundle, deps) {
             }
 
             case 'gradeAnswer': {
-                const host = yield select(state => state.options.server_module.host);
-                const task_token = yield select(state => state.task_token);
-                /* XXX get platform from global state */
-                const task_params = yield call(getTaskParams, window.platform);
+                const {host, task_token, getTaskParams} = yield select(function (state) {
+                    return {
+                        host: state.options.server_module.host,
+                        task_token: state.task_token,
+                        getTaskParams: state.platformAdapter.getTaskParams
+                    };
+                });
+                const task_params = yield call(getTaskParams, null, null);
                 const grading = yield call(gradeAnswer, host, task_token, event.answer_token, task_params);
                 /* XXX do something and eventually call callback? */
                 alert('Score: ' + grading.score);
@@ -114,11 +118,4 @@ export default function (bundle, deps) {
             }
         }
     }
-}
-
-
-function getTaskParams (platform) {
-    return new Promise(resolve => {
-        platform.getTaskParams(null, null, resolve);
-    });
 }
