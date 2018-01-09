@@ -1,4 +1,4 @@
-import {call, put, take, select, takeLatest} from 'redux-saga/effects';
+import {call, put, take, select, takeEvery} from 'redux-saga/effects';
 import {fetchTaskData, gradeAnswer} from './server_module';
 
 import PlatformChannel from './platform_channel';
@@ -44,9 +44,12 @@ export default function (bundle, deps) {
 
 
     bundle.addSaga(function* () {
+        /* TODO: select task from global state */
         const channel = yield call(PlatformChannel, window.task);
-        while(true) {
-            let action = yield take(channel);
+        yield takeEvery(channel, handlePlatformEventSaga);
+    });
+
+    function* handlePlatformEventSaga (action) {
             let callback = action.callback || function(){};
             switch(action.type) {
                 case 'load':
@@ -102,9 +105,7 @@ export default function (bundle, deps) {
                     alert('Score: ' + grading.score);
                     break;
             }
-        }
-
-    });
+    }
 }
 
 
