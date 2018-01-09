@@ -10,7 +10,7 @@ export default function (bundle, deps) {
 
     bundle.defineAction('appInit', 'appInit');
     bundle.addReducer('appInit', function (state, action) {
-        const { task_token, options } = action;
+        const {task_token, options} = action;
         return {...state, task_token, options};
     });
 
@@ -23,8 +23,8 @@ export default function (bundle, deps) {
 
 
     function AppSelector (state) {
-        const { task, workspace } = state;
-        return { task, workspace };
+        const {task, workspace} = state;
+        return {task, workspace};
     }
 
 

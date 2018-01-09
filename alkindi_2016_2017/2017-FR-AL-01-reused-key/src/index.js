@@ -72,7 +72,7 @@ function TaskBundle (bundle, deps) {
     bundle.addReducer('showHintRequest', (state, action) => {
         let {workspace} = state;
         const {hintRequest} = action;
-        workspace = { ...workspace, hintRequest};
+        workspace = {...workspace, hintRequest};
         return {...state, workspace};
     });
 

@@ -11,7 +11,7 @@ export default function (bundle, deps) {
     bundle.defineAction('hintRequestRejected', 'Hint.Request.Rejected');
 
     bundle.addReducer('hintRequestFulfilled', function (state, action) {
-        const { hints } = action;
+        const {hints} = action;
         return {...state, hints};
     });
 

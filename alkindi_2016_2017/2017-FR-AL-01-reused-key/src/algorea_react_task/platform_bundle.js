@@ -12,14 +12,14 @@ export default function (bundle, deps) {
 
     bundle.defineAction('taskData', 'taskData');
     bundle.addReducer('taskData', function (state, action) {
-        let { task } = action;
+        let {task} = action;
         return {...state, task};
     });
 
 
     bundle.defineAction('taskToken', 'taskToken');
     bundle.addReducer('taskToken', function (state, action) {
-        let { task_token } = action;
+        let {task_token} = action;
         return {...state, task_token};
     });
 
@@ -53,8 +53,8 @@ export default function (bundle, deps) {
                     var task_token = yield select(state => state.task_token);
                     var host = yield select(state => state.options.server_module.host);
                     var task = yield call(fetchTaskData, host, task_token);
-                    yield put({ type: deps.taskData, task});
-                    yield put({ type: deps.taskInit });
+                    yield put({type: deps.taskData, task});
+                    yield put({type: deps.taskInit});
                     callback();
                     break;
 
@@ -68,8 +68,8 @@ export default function (bundle, deps) {
                     console.log('reloadState', action.state);
                     try {
                         var hints = JSON.parse(action.state);
-                        yield put({ type: deps.reloadState, hints});
-                        yield put({ type: deps.taskRefresh});
+                        yield put({type: deps.reloadState, hints});
+                        yield put({type: deps.taskRefresh});
                     } catch(e) {
                         console.error(e.message, 'reloadState wrong JSON');
                     }
@@ -86,8 +86,8 @@ export default function (bundle, deps) {
                     console.log('reloadAnswer');
                     try {
                         var answer = JSON.parse(action.answer);
-                        yield put({ type: deps.reloadAnswer, answer});
-                        yield put({ type: deps.taskRefresh});
+                        yield put({type: deps.reloadAnswer, answer});
+                        yield put({type: deps.taskRefresh});
                     } catch(e) {
                         console.error(e.message, 'reloadAnswer wrong JSON');
                     }
