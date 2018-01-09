@@ -1,7 +1,7 @@
 import {call, put, take, select, takeLatest} from 'redux-saga/effects';
 import {fetchTaskData, gradeAnswer} from './server_module';
 
-import platformChannel from './platform_channel';
+import PlatformChannel from './platform_channel';
 
 export default function (bundle, deps) {
 
@@ -44,7 +44,7 @@ export default function (bundle, deps) {
 
 
     bundle.addSaga(function* () {
-        const channel = yield call(platformChannel, window.task);
+        const channel = yield call(PlatformChannel, window.task);
         while(true) {
             let action = yield take(channel);
             let callback = action.callback || function(){};
