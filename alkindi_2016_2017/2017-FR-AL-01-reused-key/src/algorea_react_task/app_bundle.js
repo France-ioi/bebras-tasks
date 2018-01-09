@@ -1,5 +1,5 @@
 import React from 'react';
-import {call, takeEvery} from 'redux-saga/effects';
+import {call, takeEvery, select} from 'redux-saga/effects';
 
 import TaskBar from './ui/task_bar';
 import Spinner from './ui/spinner';
