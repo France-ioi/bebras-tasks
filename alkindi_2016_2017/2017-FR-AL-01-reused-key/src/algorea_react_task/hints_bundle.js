@@ -1,6 +1,6 @@
 import {call, put, take, select, takeEvery} from 'redux-saga/effects';
-import {fetchTaskHintData} from './server_module';
 
+import {fetchTaskHintData} from './server_module';
 
 export default function (bundle, deps) {
 
