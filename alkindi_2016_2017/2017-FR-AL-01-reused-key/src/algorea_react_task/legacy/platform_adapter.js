@@ -13,6 +13,6 @@ export default function (platform) {
         });
     }
 
-    return {validate};
+    return {initWithTask, validate};
 
 }
