@@ -30,7 +30,14 @@ export default (task) => {
             emitter({type: 'reloadState', state, callback});
         };
 
-        return () => {};
+        return () => {
+            task.load = null;
+            task.getAnswer = null;
+            task.reloadAnswer = null;
+            task.gradeAnswer = null;
+            task.getState = null;
+            task.reloadState = null;
+        };
 
     });
 
