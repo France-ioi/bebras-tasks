@@ -2,6 +2,7 @@ import {eventChannel} from 'redux-saga';
 
 export default () => {
 
+    /* XXX no buffering is specified, new messages will be lost if there are no pending takers */
     return eventChannel(emitter => {
 
         window.task.load = function(views, callback) {
