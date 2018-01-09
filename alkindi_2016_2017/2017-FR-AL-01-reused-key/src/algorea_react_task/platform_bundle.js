@@ -58,13 +58,13 @@ export default function (bundle, deps) {
                 const task = yield call(fetchTaskData, host, task_token);
                 yield put({type: deps.taskData, task});
                 yield put({type: deps.taskInit});
-                callback();
+                yield call(callback);
                 break;
 
             case 'getState':
                 const hints = yield select(state => state.hints);
                 console.log('getState', JSON.stringify(hints));
-                callback(JSON.stringify(hints));
+                yield call(callback, JSON.stringify(hints));
                 break;
 
             case 'reloadState':
@@ -76,13 +76,13 @@ export default function (bundle, deps) {
                 } catch(e) {
                     console.error(e.message, 'reloadState wrong JSON');
                 }
-                callback();
+                yield call(callback);
                 break;
 
             case 'getAnswer':
                 const answer = yield select(state => state.answer);
                 console.log('getAnswer', JSON.stringify(answer));
-                callback(JSON.stringify(answer));
+                yield call(callback, JSON.stringify(answer));
                 break;
 
             case 'reloadAnswer':
@@ -94,7 +94,7 @@ export default function (bundle, deps) {
                 } catch(e) {
                     console.error(e.message, 'reloadAnswer wrong JSON');
                 }
-                callback();
+                yield call(callback);
                 break;
 
             case 'gradeAnswer':
@@ -102,6 +102,7 @@ export default function (bundle, deps) {
                 const task_token = yield select(state => state.task_token);
                 const task_params = yield call(getTaskParams);
                 const grading = yield call(gradeAnswer, host, task_token, event.answer_token, task_params);
+                /* XXX do something and eventually call callback? */
                 alert('Score: ' + grading.score);
                 break;
         }
