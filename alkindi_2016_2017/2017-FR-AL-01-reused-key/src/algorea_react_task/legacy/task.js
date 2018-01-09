@@ -2,56 +2,56 @@ export default function () {
 
     return {
 
-        showViews: function (views, success, error) {
+        showViews: function (_views, success, _error) {
             success();
         },
 
-        getViews: function (success, error) {
+        getViews: function (success, _error) {
             success({});
         },
 
-        updateToken: function (token, success, error) {
+        updateToken: function (_token, success, _error) {
             success();
         },
 
-        getHeight: function (success, error) {
+        getHeight: function (success, _error) {
             var d = document;
             var h = Math.max(d.body.offsetHeight, d.documentElement.offsetHeight);
             success(h);
         },
 
-        unload: function (success, error) {
+        unload: function (success, _error) {
             success();
         },
 
-        getState: function (success, error) {
+        getState: function (success, _error) {
             success('');
         },
 
-        getMetaData: function (success, error) {
+        getMetaData: function (success, _error) {
             success({});
         },
 
-        reloadAnswer: function (answer, success, error) {
+        reloadAnswer: function (_answer, success, _error) {
             success();
         },
 
-        reloadState: function (state, success, error) {
+        reloadState: function (_state, success, _error) {
             success();
         },
 
-        getAnswer: function (success, error) {
+        getAnswer: function (success, _error) {
             success('');
         },
 
-        load: function (views, success, error) {
+        load: function (_views, success, _error) {
             success();
         },
 
-        gradeAnswer: function (answer, answerToken, success, error) {
+        gradeAnswer: function (_answer, _answerToken, success, _error) {
             success(0, '');
         }
 
     };
 
-};
+}
