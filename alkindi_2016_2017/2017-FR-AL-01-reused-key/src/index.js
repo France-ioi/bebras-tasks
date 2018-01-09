@@ -8,7 +8,7 @@ import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './style.css';
 
-export function run(container, options) {
+export function run (container, options) {
     algoreaReactTask(container, options, TaskBundle);
 }
 
@@ -47,7 +47,7 @@ function TaskBundle (bundle, deps) {
 
 
     bundle.defineAction('keyChange', 'Workspace.KeyChange');
-    bundle.addReducer('keyChange', function(state, action) {
+    bundle.addReducer('keyChange', function (state, action) {
         const {index, direction} = action;
         let {answer} = state;
         const key = answer.key.slice();
@@ -59,7 +59,7 @@ function TaskBundle (bundle, deps) {
 
 
     bundle.defineAction('setPlainWordPosition', 'Workspace.SetPlainWordPosition');
-    bundle.addReducer('setPlainWordPosition', function(state, action) {
+    bundle.addReducer('setPlainWordPosition', function (state, action) {
         const {cipherIndex, charIndex} = action;
         let {answer} = state;
         answer = {...answer, wordCharIndex: charIndex, wordCipherIndex: cipherIndex};
@@ -89,7 +89,7 @@ function TaskBundle (bundle, deps) {
 
 
 
-function updateWorkspace(state) {
+function updateWorkspace (state) {
     const {plainWord, ciphers} = state.task;
     const {answer, hints} = state;
     const {wordCharIndex, wordCipherIndex} = state.answer;

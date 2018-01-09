@@ -3,7 +3,7 @@ export const ALPHABET_SIZE = 26;
 export const ALPHABET_START = 'A'.charCodeAt(0);
 
 // Auxiliary function to decrypt a cipher string given a key.
-export function decrypt(cipher, key) {
+export function decrypt (cipher, key) {
   var result = "";
   for (var index = 0; index < cipher.length; index++) {
     var letter;
@@ -18,7 +18,7 @@ export function decrypt(cipher, key) {
 }
 
 // Generate a keyWithWord from a key (keyWithWord takes the decrypted word into account).
-export function generateKeyWithWord(key, plainWord, wordCharIndex, cipher) {
+export function generateKeyWithWord (key, plainWord, wordCharIndex, cipher) {
   const keyWithWord = key.slice();
   const wordStartIndex = Math.max(0, Math.min(wordCharIndex, key.length - plainWord.length));
   for (var index = wordStartIndex; index < wordStartIndex + plainWord.length; index++) {

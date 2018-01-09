@@ -44,10 +44,10 @@ export const KeyValue = EpicComponent(self => {
 // A cell containing an encrypted character.
 // props: cipherIndex, charIndex, onHover, onMouseDown, className
 export const CipherChar = EpicComponent(self => {
-  function onHover() {
+  function onHover () {
     self.props.onHover(self.props.cipherIndex, self.props.charIndex);
   }
-  function onMouseDown() {
+  function onMouseDown () {
     self.props.onMouseDown(self.props.cipherIndex, self.props.charIndex);
   }
   self.render = function () {
@@ -59,10 +59,10 @@ export const CipherChar = EpicComponent(self => {
 // A cell containing a decrypted character.
 // props: cipherIndex, charIndex, onHover, onMouseDown, className, hintMismatch.
 export const PlainChar = EpicComponent(self => {
-  function onHover() {
+  function onHover () {
     self.props.onHover(self.props.cipherIndex, self.props.charIndex);
   }
-  function onMouseDown() {
+  function onMouseDown () {
     self.props.onMouseDown(self.props.cipherIndex, self.props.charIndex);
   }
   self.render = function () {
@@ -80,7 +80,7 @@ export const Cipher = EpicComponent(self => {
     const cipherArray = value.split("");
     return (
       <div className="cipherTable">
-        {cipherArray.map(function(charValue, charIndex) {
+        {cipherArray.map(function (charValue, charIndex) {
           return <CipherChar key={charIndex} cipherIndex={index} charIndex={charIndex} value={charValue} onHover={onHover} onMouseDown={onMouseDown} />;
         })}
       </div>
@@ -104,7 +104,7 @@ export const Plain = EpicComponent(self => {
     }
     return (
       <div className="plainTable">
-        {plainArray.map(function(charValue, charIndex) {
+        {plainArray.map(function (charValue, charIndex) {
           const inPlain = wordCipherIndex === cipherIndex && charIndex >= startIndex && charIndex < startIndex + plainWord.length;
           return <PlainChar key={charIndex} className={inPlain && "plainChar"} cipherIndex={cipherIndex} charIndex={charIndex} value={charValue} onMouseDown={onMouseDown} onHover={onHover} hintMismatch={keyWithWord[charIndex].hintMismatch}/>;
         })}
@@ -143,14 +143,14 @@ export const Workspace = actions => EpicComponent(self => {
     self.props.dispatch({type: actions.setPlainWordPosition, cipherIndex, charIndex});
   };
 
-  const onHover = function(cipherIndex, charIndex) {
+  const onHover = function (cipherIndex, charIndex) {
     if (self.state.dragging) {
       self.setState({dropOutside: false});
       self.props.dispatch({type: actions.setPlainWordPosition, cipherIndex, charIndex});
     }
   };
 
-  const onMouseLeave = function() {
+  const onMouseLeave = function () {
     if (self.state.dragging) {
       self.setState({dropOutside: true});
     }
@@ -169,7 +169,7 @@ export const Workspace = actions => EpicComponent(self => {
     self.props.dispatch({type: actions.callHintRequest, hintRequest});
   };
 
-  const onMouseUp = function() {
+  const onMouseUp = function () {
     self.setState({dragging: false});
     if(self.state.dropOutside) {
       self.props.dispatch({type: actions.setPlainWordPosition, cipherIndex: null, charIndex: 0});
@@ -215,7 +215,7 @@ export const Workspace = actions => EpicComponent(self => {
 
         <div className="keyTable">
           <div>
-            {keyWithWord.map(function(keyValue, keyIndex) {
+            {keyWithWord.map(function (keyValue, keyIndex) {
               if (keyValue.inWord) {
                 return <span key={keyIndex}></span>;
               } else {
@@ -228,14 +228,14 @@ export const Workspace = actions => EpicComponent(self => {
             })}
           </div>
           <div>
-            {keyWithWord.map(function(keyValue, keyIndex) {
+            {keyWithWord.map(function (keyValue, keyIndex) {
               return (
                 <KeyValue key={keyIndex} index={keyIndex} value={keyValue.value} isHint={keyValue.isHint} hintMismatch={keyValue.hintMismatch} hintRequest={hintRequest !== undefined && (hintRequest === keyIndex)} onRequestHint={onShowHintRequest}/>
               );
             })}
           </div>
           <div>
-            {keyWithWord.map(function(keyValue, keyIndex) {
+            {keyWithWord.map(function (keyValue, keyIndex) {
               if (keyValue.inWord) {
                 return <span key={keyIndex}></span>;
               } else {
@@ -249,7 +249,7 @@ export const Workspace = actions => EpicComponent(self => {
           </div>
         </div>
         <div className="ciphersAndPlains">
-          {ciphers.map(function(cipherValue, cipherIndex) {
+          {ciphers.map(function (cipherValue, cipherIndex) {
             return (
               <div key={cipherIndex} onMouseLeave={onMouseLeave}>
                 <Cipher index={cipherIndex} value={cipherValue} onHover={onHover} onMouseDown={onMouseDown} />
@@ -275,7 +275,7 @@ export const Workspace = actions => EpicComponent(self => {
     );
   }
 
-  const renderWord = function() {
+  const renderWord = function () {
     const {task, workspace} = self.props;
     const {plainWord} = task;
     const {wordCipherIndex} = workspace;
@@ -287,7 +287,7 @@ export const Workspace = actions => EpicComponent(self => {
     );
   };
 
-  const renderDelete = function() {
+  const renderDelete = function () {
     return <Button className="deleteWordContainer" onClick={clickDeleteWord}>Effacer <i className="fa fa-times" aria-hidden="true"></i></Button>;
   };
 
