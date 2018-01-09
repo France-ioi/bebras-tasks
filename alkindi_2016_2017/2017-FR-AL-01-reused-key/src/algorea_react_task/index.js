@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import link from 'epic-linker';
 import queryString from 'query-string';
+
 import './ui/styles.css';
 
 import makeTask from './legacy/task';
