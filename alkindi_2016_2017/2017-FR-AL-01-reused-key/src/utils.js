@@ -24,7 +24,7 @@ export function generateKeyWithWord(key, plainWord, wordCharIndex, cipher) {
   for (var index = wordStartIndex; index < wordStartIndex + plainWord.length; index++) {
     if (cipher[index] !== ' ') {
       const newValue = (plainWord.charCodeAt(index - wordStartIndex) - cipher.charCodeAt(index) + ALPHABET_SIZE) % ALPHABET_SIZE;
-      const cell = keyWithWord[index] = {...key[index], inWord: true}
+      const cell = keyWithWord[index] = {...key[index], inWord: true};
       if (cell.isHint) {
         if (cell.value !== newValue) {
           cell.hintMismatch = true;

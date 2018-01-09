@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import EpicComponent from 'epic-component';
 
 import {decrypt} from './utils';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 // A button for increasing/decreasing one key number.
 // props: index, direction, onChange
@@ -52,7 +52,7 @@ export const CipherChar = EpicComponent(self => {
   }
   self.render = function () {
     const {className, value} = self.props;
-    return <span className={className} onMouseMove={onHover} onMouseDown={onMouseDown}>{value}</span>
+    return <span className={className} onMouseMove={onHover} onMouseDown={onMouseDown}>{value}</span>;
   };
 }, {displayName: 'CipherChar'});
 
@@ -81,7 +81,7 @@ export const Cipher = EpicComponent(self => {
     return (
       <div className="cipherTable">
         {cipherArray.map(function(charValue, charIndex) {
-          return <CipherChar key={charIndex} cipherIndex={index} charIndex={charIndex} value={charValue} onHover={onHover} onMouseDown={onMouseDown} />
+          return <CipherChar key={charIndex} cipherIndex={index} charIndex={charIndex} value={charValue} onHover={onHover} onMouseDown={onMouseDown} />;
         })}
       </div>
     );
@@ -166,7 +166,7 @@ export const Workspace = actions => EpicComponent(self => {
   };
 
   const onRequestHint = function () {
-    const {hintRequest} = self.props.workspace
+    const {hintRequest} = self.props.workspace;
     self.props.dispatch({type: actions.callHintRequest, hintRequest});
   };
 
@@ -192,7 +192,7 @@ export const Workspace = actions => EpicComponent(self => {
   self.render = function () {
     const {task, workspace, answer} = self.props;
     const {keyWithWord, hintRequest} = workspace;
-    const {wordCharIndex, wordCipherIndex} = answer
+    const {wordCharIndex, wordCipherIndex} = answer;
     const {ciphers, plainWord} = task;
     const wordStartIndex = plainWord ? Math.max(0, Math.min(wordCharIndex, keyWithWord.length - plainWord.length)) : -1;
     return (
@@ -265,7 +265,7 @@ export const Workspace = actions => EpicComponent(self => {
   };
 
   function renderHintRequest () {
-    const {hintRequest} = self.props.workspace
+    const {hintRequest} = self.props.workspace;
     return (
       <div className="hintsDialog">
         <p><strong>{"Indice demandé : "}</strong>{"Valeur pour la position "}<strong>{hintRequest}</strong></p>

@@ -1,56 +1,56 @@
 window.task = {
 
     showViews: function(views, success, error) {
-        success()
+        success();
     },
 
     getViews: function(success, error) {
-        success({})
+        success({});
     },
 
     updateToken: function(token, success, error) {
-        success()
+        success();
     },
 
     getHeight: function(success, error) {
-        var d = document
-        var h = Math.max(d.body.offsetHeight, d.documentElement.offsetHeight)
-        success(h)
+        var d = document;
+        var h = Math.max(d.body.offsetHeight, d.documentElement.offsetHeight);
+        success(h);
     },
 
     unload: function(success, error) {
-        success()
+        success();
     },
 
     getState: function(success, error) {
-        success('')
+        success('');
     },
 
     getMetaData: function(success, error) {
-        success({})
+        success({});
     },
 
     reloadAnswer: function(answer, success, error) {
-        success()
+        success();
     },
 
     reloadState: function(state, success, error) {
-        success()
+        success();
     },
 
     getAnswer: function(success, error) {
-        success('')
+        success('');
     },
 
     load: function(views, success, error) {
-        success()
+        success();
     },
 
     gradeAnswer: function(answer, answerToken, success, error) {
-        success(0, '')
+        success(0, '');
     }
-}
+};
 
 if(platform) {
-    platform.initWithTask(task)
+    platform.initWithTask(task);
 }

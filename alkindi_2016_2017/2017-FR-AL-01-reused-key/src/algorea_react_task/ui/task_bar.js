@@ -1,5 +1,5 @@
-import React from 'react'
-import EpicComponent from 'epic-component'
+import React from 'react';
+import EpicComponent from 'epic-component';
 
 export default EpicComponent(self => {
 
@@ -8,7 +8,7 @@ export default EpicComponent(self => {
          <div className='task-bar'>
             <button type='button' className='btn btn-default' onClick={self.props.onValidate}>Validate</button>
          </div>
-      )
-   }
+      );
+   };
 
-})
+});
