@@ -11,6 +11,7 @@ export default class Task {
         success({});
     }
     updateToken (token, success, _error) {
+        this._store.dispatch({type: this._scope.taskTokenChanged, payload: {token}});
         success();
     }
     getHeight (success, _error) {

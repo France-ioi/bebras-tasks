@@ -17,10 +17,9 @@ export default function (bundle, deps) {
     });
 
 
-    bundle.defineAction('taskToken', 'taskToken');
-    bundle.addReducer('taskToken', function (state, action) {
-        const {task_token} = action;
-        return {...state, task_token};
+    bundle.defineAction('taskTokenChanged', 'Task.Token.Changed');
+    bundle.addReducer('taskTokenChanged', function (state, {payload: {token}}) {
+        return {...state, taskToken: token};
     });
 
 
