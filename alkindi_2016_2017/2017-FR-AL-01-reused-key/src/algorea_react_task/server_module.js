@@ -3,7 +3,7 @@ import tools from 'bebras-server-modules-libs';
 
 var task_interface = null;
 
-function getTaskInterface(host) {
+function getTaskInterface (host) {
     if(!task_interface) {
         task_interface = tools.connect({host}).taskInterface();
     }
@@ -11,7 +11,7 @@ function getTaskInterface(host) {
 }
 
 
-export function fetchTaskData(host, task_token) {
+export function fetchTaskData (host, task_token) {
     return new Promise((resolve, reject) => {
         getTaskInterface(host).taskData({
             task: task_token,
@@ -22,7 +22,7 @@ export function fetchTaskData(host, task_token) {
 }
 
 
-export function fetchTaskHintData(host, task_token) {
+export function fetchTaskHintData (host, task_token) {
     return new Promise((resolve, reject) => {
         getTaskInterface(host).taskHintData({
             task: task_token,
@@ -33,7 +33,7 @@ export function fetchTaskHintData(host, task_token) {
 }
 
 
-export function gradeAnswer(host, token, answer_token, task_params) {
+export function gradeAnswer (host, token, answer_token, task_params) {
     return new Promise((resolve, reject) => {
         getTaskInterface(host).gradeAnswer({
             task: token,

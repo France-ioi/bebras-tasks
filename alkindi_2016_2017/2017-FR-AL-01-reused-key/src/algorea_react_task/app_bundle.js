@@ -15,8 +15,8 @@ export default function (bundle, deps) {
     });
 
 
-    function onValidate() {
-        platform.validate('done', function(){
+    function onValidate () {
+        platform.validate('done', function (){
             alert('done');
         });
     }

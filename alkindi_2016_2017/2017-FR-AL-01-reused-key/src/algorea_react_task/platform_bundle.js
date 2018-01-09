@@ -25,14 +25,14 @@ export default function (bundle, deps) {
 
 
     bundle.defineAction('reloadState', 'reloadState');
-    bundle.addReducer('reloadState', function(state, action) {
+    bundle.addReducer('reloadState', function (state, action) {
         const {hints} = action;
         return {...state, hints};
     });
 
 
     bundle.defineAction('reloadAnswer', 'reloadAnswer');
-    bundle.addReducer('reloadAnswer', function(state, action) {
+    bundle.addReducer('reloadAnswer', function (state, action) {
         const answer = action.answer;
         return {...state, answer};
     });
@@ -50,7 +50,7 @@ export default function (bundle, deps) {
     });
 
     function* handlePlatformEventSaga (event) {
-        let callback = event.callback || function(){};
+        let callback = event.callback || function (){};
         switch(event.type) {
             case 'load':
                 var task_token = yield select(state => state.task_token);
@@ -109,7 +109,7 @@ export default function (bundle, deps) {
 }
 
 
-function getTaskParams() {
+function getTaskParams () {
     return new Promise(resolve => {
         platform.getTaskParams(null, null, resolve);
     });

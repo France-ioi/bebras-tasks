@@ -11,7 +11,7 @@ import AppBundle from './app_bundle';
 import PlatformBundle from './platform_bundle';
 import HintsBundle from './hints_bundle';
 
-export default function(container, options, TaskBundle) {
+export default function (container, options, TaskBundle) {
     const bundles = linkBundles(TaskBundle);
     const query = queryString.parse(location.search);
     startBundles(bundles, query.sToken, options);
@@ -19,7 +19,7 @@ export default function(container, options, TaskBundle) {
 }
 
 
-function linkBundles(TaskBundle) {
+function linkBundles (TaskBundle) {
     return link(function (bundle) {
         bundle.include(AppBundle);
         bundle.include(PlatformBundle);
@@ -29,7 +29,7 @@ function linkBundles(TaskBundle) {
 }
 
 
-function startBundles(bundles, task_token, options) {
+function startBundles (bundles, task_token, options) {
     const {store, scope, start} = bundles;
     options = options || {};
     store.dispatch({type: scope.appInit, task_token, options});
@@ -37,7 +37,7 @@ function startBundles(bundles, task_token, options) {
 }
 
 
-function mountBundles(bundles, container) {
+function mountBundles (bundles, container) {
     const {store, scope} = bundles;
     const App = scope.App;
     ReactDOM.render(<Provider store={store}><App/></Provider>, container);

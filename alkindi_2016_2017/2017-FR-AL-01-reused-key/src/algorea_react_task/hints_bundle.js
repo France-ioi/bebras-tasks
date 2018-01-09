@@ -35,10 +35,10 @@ export default function (bundle, deps) {
     });
 
 
-    function platformAskHint(hint_params) {
+    function platformAskHint (hint_params) {
         return new Promise(resolve => {
             var tmp = window.task.updateToken;
-            window.task.updateToken = function(task_token, callback) {
+            window.task.updateToken = function (task_token, callback) {
                 callback();
                 window.task.updateToken = tmp;
                 resolve(task_token);
