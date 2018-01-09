@@ -12,14 +12,14 @@ export default function (bundle, deps) {
 
     bundle.defineAction('taskData', 'taskData');
     bundle.addReducer('taskData', function (state, action) {
-        let {task} = action;
+        const {task} = action;
         return {...state, task};
     });
 
 
     bundle.defineAction('taskToken', 'taskToken');
     bundle.addReducer('taskToken', function (state, action) {
-        let {task_token} = action;
+        const {task_token} = action;
         return {...state, task_token};
     });
 
@@ -53,16 +53,16 @@ export default function (bundle, deps) {
         let callback = event.callback || function (){};
         switch(event.type) {
             case 'load':
-                var task_token = yield select(state => state.task_token);
-                var host = yield select(state => state.options.server_module.host);
-                var task = yield call(fetchTaskData, host, task_token);
+                const task_token = yield select(state => state.task_token);
+                const host = yield select(state => state.options.server_module.host);
+                const task = yield call(fetchTaskData, host, task_token);
                 yield put({type: deps.taskData, task});
                 yield put({type: deps.taskInit});
                 callback();
                 break;
 
             case 'getState':
-                var hints = yield select(state => state.hints);
+                const hints = yield select(state => state.hints);
                 console.log('getState', JSON.stringify(hints));
                 callback(JSON.stringify(hints));
                 break;
@@ -70,7 +70,7 @@ export default function (bundle, deps) {
             case 'reloadState':
                 console.log('reloadState', event.state);
                 try {
-                    var hints = JSON.parse(event.state);
+                    const hints = JSON.parse(event.state);
                     yield put({type: deps.reloadState, hints});
                     yield put({type: deps.taskRefresh});
                 } catch(e) {
@@ -80,7 +80,7 @@ export default function (bundle, deps) {
                 break;
 
             case 'getAnswer':
-                var answer = yield select(state => state.answer);
+                const answer = yield select(state => state.answer);
                 console.log('getAnswer', JSON.stringify(answer));
                 callback(JSON.stringify(answer));
                 break;
@@ -88,7 +88,7 @@ export default function (bundle, deps) {
             case 'reloadAnswer':
                 console.log('reloadAnswer');
                 try {
-                    var answer = JSON.parse(event.answer);
+                    const answer = JSON.parse(event.answer);
                     yield put({type: deps.reloadAnswer, answer});
                     yield put({type: deps.taskRefresh});
                 } catch(e) {
@@ -98,10 +98,10 @@ export default function (bundle, deps) {
                 break;
 
             case 'gradeAnswer':
-                var host = yield select(state => state.options.server_module.host);
-                var task_token = yield select(state => state.task_token);
-                var task_params = yield call(getTaskParams);
-                var grading = yield call(gradeAnswer, host, task_token, event.answer_token, task_params);
+                const host = yield select(state => state.options.server_module.host);
+                const task_token = yield select(state => state.task_token);
+                const task_params = yield call(getTaskParams);
+                const grading = yield call(gradeAnswer, host, task_token, event.answer_token, task_params);
                 alert('Score: ' + grading.score);
                 break;
         }
