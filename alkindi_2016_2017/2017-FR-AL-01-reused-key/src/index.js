@@ -1,7 +1,6 @@
+import {put, takeEvery} from 'redux-saga/effects';
+
 import algoreaReactTask from './algorea_react_task';
-
-import {call, put, take, select, takeEvery} from 'redux-saga/effects';
-
 import {Workspace} from './views';
 import {generateKeyWithWord, ALPHABET_SIZE} from './utils';
 
@@ -19,7 +18,7 @@ function TaskBundle (bundle, deps) {
     bundle.use('requestHint');
 
     bundle.defineAction('taskInit', 'taskInit');
-    bundle.addReducer('taskInit', function (state, action) {
+    bundle.addReducer('taskInit', function (state, _action) {
         const {ciphers} = state.task;
         const answer = {
             key: [],
@@ -35,13 +34,13 @@ function TaskBundle (bundle, deps) {
 
 
     bundle.defineAction('taskRefresh', 'taskRefresh');
-    bundle.addReducer('taskRefresh', function (state, action) {
+    bundle.addReducer('taskRefresh', function (state, _action) {
         return updateWorkspace(state);
     });
 
 
     bundle.defineView('Workspace', WorkspaceSelector, Workspace(deps));
-    function WorkspaceSelector (state, props) {
+    function WorkspaceSelector (state, _props) {
         const {task, answer, workspace} = state;
         return {task, answer, workspace};
     }
@@ -50,7 +49,7 @@ function TaskBundle (bundle, deps) {
     bundle.defineAction('keyChange', 'Workspace.KeyChange');
     bundle.addReducer('keyChange', function(state, action) {
         const {index, direction} = action;
-        let {task, hints, answer} = state;
+        let {answer} = state;
         const key = answer.key.slice();
         key[index] = (key[index] + parseInt(direction) + ALPHABET_SIZE) % ALPHABET_SIZE;
         answer = {...answer, key};

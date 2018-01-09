@@ -1,6 +1,6 @@
-import {eventChannel, END, buffers} from 'redux-saga';
+import {eventChannel} from 'redux-saga';
 
-export default (target) => {
+export default () => {
 
     return eventChannel(emitter => {
 

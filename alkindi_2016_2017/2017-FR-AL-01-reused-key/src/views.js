@@ -13,7 +13,7 @@ export const KeyButton = EpicComponent(self => {
     self.props.onChange(self.props.index, self.props.direction);
   };
   self.render = function () {
-    const {index, direction} = self.props;
+    const {direction} = self.props;
     const iconClasses = ["fa", direction == "-1" ? "fa-caret-down" : "fa-caret-up"];
     return <Button onClick={onClick}><i className={classnames(iconClasses)} aria-hidden='true'></i></Button>;
   };
@@ -134,7 +134,6 @@ export const Workspace = actions => EpicComponent(self => {
   self.state = {dragging: false, dropOutside: false};
 
   const onKeyChange = function (index, direction) {
-    const {key} = self.props.answer;
     self.props.dispatch({type: actions.keyChange, index, direction});
   };
 
@@ -194,7 +193,6 @@ export const Workspace = actions => EpicComponent(self => {
     const {keyWithWord, hintRequest} = workspace;
     const {wordCharIndex, wordCipherIndex} = answer;
     const {ciphers, plainWord} = task;
-    const wordStartIndex = plainWord ? Math.max(0, Math.min(wordCharIndex, keyWithWord.length - plainWord.length)) : -1;
     return (
       /* preventDefault is called because browsers default to a visual dragging of HTML elements */
       <div onMouseMove={preventDefault} className="taskWrapper">
