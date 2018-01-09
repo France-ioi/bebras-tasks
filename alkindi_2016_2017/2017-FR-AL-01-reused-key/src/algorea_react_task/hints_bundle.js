@@ -20,7 +20,10 @@ export default function (bundle, deps) {
     });
 
     bundle.addSaga(function* () {
-        yield takeEvery(deps.requestHint, function* (action) {
+        yield takeEvery(deps.requestHint, requestHintSaga);
+    });
+
+    function* requestHintSaga (action) {
             const task_token = yield call(platformAskHint, action.request);
             yield put({type: deps.taskToken, task_token});
             const host = yield select(state => state.options.server_module.host);
@@ -31,9 +34,7 @@ export default function (bundle, deps) {
             } else {
                 yield put({type: deps.hintRequestRejected, error: 'server error'});
             }
-        });
-    });
-
+    }
 
     function platformAskHint (hint_params) {
         return new Promise(resolve => {
