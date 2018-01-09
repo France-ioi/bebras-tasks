@@ -51,6 +51,6 @@ window.task = {
     }
 };
 
-if(platform) {
+if (platform) {
     platform.initWithTask(task);
 }

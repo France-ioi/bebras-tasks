@@ -51,7 +51,7 @@ export default function (bundle, deps) {
 
     function* handlePlatformEventSaga (event) {
         let callback = event.callback || function (){};
-        switch(event.type) {
+        switch (event.type) {
             case 'load': {
                 const task_token = yield select(state => state.task_token);
                 const host = yield select(state => state.options.server_module.host);
@@ -75,7 +75,7 @@ export default function (bundle, deps) {
                     const hints = JSON.parse(event.state);
                     yield put({type: deps.reloadState, hints});
                     yield put({type: deps.taskRefresh});
-                } catch(e) {
+                } catch (e) {
                     console.error(e.message, 'reloadState wrong JSON');
                 }
                 yield call(callback);
@@ -95,7 +95,7 @@ export default function (bundle, deps) {
                     const answer = JSON.parse(event.answer);
                     yield put({type: deps.reloadAnswer, answer});
                     yield put({type: deps.taskRefresh});
-                } catch(e) {
+                } catch (e) {
                     console.error(e.message, 'reloadAnswer wrong JSON');
                 }
                 yield call(callback);

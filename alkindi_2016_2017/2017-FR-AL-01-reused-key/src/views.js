@@ -98,7 +98,7 @@ export const Plain = EpicComponent(self => {
     let startIndex;
     if (plainWord && wordCipherIndex === cipherIndex) {
       startIndex = Math.max(0, Math.min(wordCharIndex, cipherValue.length - plainWord.length));
-      for(let index = startIndex; index < startIndex + plainWord.length; index++) {
+      for (let index = startIndex; index < startIndex + plainWord.length; index++) {
         plainArray[index] = plainWord[index - startIndex];
       }
     }
@@ -171,7 +171,7 @@ export const Workspace = actions => EpicComponent(self => {
 
   const onMouseUp = function () {
     self.setState({dragging: false});
-    if(self.state.dropOutside) {
+    if (self.state.dropOutside) {
       self.props.dispatch({type: actions.setPlainWordPosition, cipherIndex: null, charIndex: 0});
     }
   };

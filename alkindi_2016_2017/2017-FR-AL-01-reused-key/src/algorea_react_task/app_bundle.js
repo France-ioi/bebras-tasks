@@ -30,7 +30,7 @@ export default function (bundle, deps) {
 
     bundle.defineView('App', AppSelector, EpicComponent(self => {
         self.render = () => {
-            if(!self.props.task || !self.props.workspace) {
+            if (!self.props.task || !self.props.workspace) {
                 return (<Spinner/>);
             }
             return (

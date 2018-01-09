@@ -25,7 +25,7 @@ export default function (bundle, deps) {
             yield put({type: deps.taskToken, task_token});
             const host = yield select(state => state.options.server_module.host);
             const hints = yield call(fetchTaskHintData, host, task_token);
-            if(hints) {
+            if (hints) {
                 yield put({type: deps.hintRequestFulfilled, hints});
                 yield put({type: deps.taskRefresh});
             } else {

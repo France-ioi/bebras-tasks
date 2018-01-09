@@ -4,7 +4,7 @@ import tools from 'bebras-server-modules-libs';
 var task_interface = null;
 
 function getTaskInterface (host) {
-    if(!task_interface) {
+    if (!task_interface) {
         task_interface = tools.connect({host}).taskInterface();
     }
     return task_interface;

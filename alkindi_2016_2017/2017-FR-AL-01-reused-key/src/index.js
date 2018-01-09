@@ -95,13 +95,13 @@ function updateWorkspace (state) {
     const {wordCharIndex, wordCipherIndex} = state.answer;
     const workspace = {};
     workspace.keyWithHints = answer.key.map(function (value, index) {
-        if(index in hints) {
+        if (index in hints) {
             return {value: hints[index], isHint: true};
         } else {
             return {value: value, isHint: false};
         }
     });
-    if(wordCipherIndex !== null) {
+    if (wordCipherIndex !== null) {
         workspace.keyWithWord = generateKeyWithWord(
             workspace.keyWithHints,
             plainWord,
