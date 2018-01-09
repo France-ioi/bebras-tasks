@@ -6,7 +6,7 @@ import link from 'epic-linker';
 import queryString from 'query-string';
 import './ui/styles.css';
 
-import './legacy/task';
+import makeTask from './legacy/task';
 import AppBundle from './app_bundle';
 import PlatformBundle from './platform_bundle';
 import HintsBundle from './hints_bundle';
@@ -32,6 +32,9 @@ function linkBundles (TaskBundle) {
 function startBundles (bundles, task_token, options) {
     const {store, scope, start} = bundles;
     options = options || {};
+    const task = makeTask();
+    /* let initWithTask set window.task */
+    window.platform.initWithTask(task);
     store.dispatch({type: scope.appInit, task_token, options});
     start();
 }
