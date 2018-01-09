@@ -8,6 +8,7 @@
   "extends": "eslint:recommended",
   "rules": {
     "semi": ["error", "always"],
+    "keyword-spacing": ["error", {"before": true, "after": true}],
     "object-curly-spacing": ["error", "never"],
     "array-bracket-spacing": ["error", "never"],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
