@@ -12,14 +12,14 @@ import PlatformBundle from './platform_bundle';
 import HintsBundle from './hints_bundle';
 
 export default function (container, options, TaskBundle) {
-    const bundles = linkBundles(TaskBundle);
+    const app = linkApp(TaskBundle);
     const query = queryString.parse(location.search);
-    startBundles(bundles, query.sToken, options);
-    container && mountBundles(bundles, container);
+    startApp(app, query.sToken, options);
+    container && mountApp(app, container);
 }
 
 
-function linkBundles (TaskBundle) {
+function linkApp (TaskBundle) {
     return link(function (bundle) {
         bundle.include(AppBundle);
         bundle.include(PlatformBundle);
@@ -29,8 +29,8 @@ function linkBundles (TaskBundle) {
 }
 
 
-function startBundles (bundles, task_token, options) {
-    const {store, scope, start} = bundles;
+function startApp (app, task_token, options) {
+    const {store, scope, start} = app;
     options = options || {};
     const task = makeTask();
     /* let initWithTask set window.task */
@@ -40,8 +40,8 @@ function startBundles (bundles, task_token, options) {
 }
 
 
-function mountBundles (bundles, container) {
-    const {store, scope} = bundles;
+function mountApp (app, container) {
+    const {store, scope} = app;
     const App = scope.App;
     ReactDOM.render(<Provider store={store}><App/></Provider>, container);
 }
