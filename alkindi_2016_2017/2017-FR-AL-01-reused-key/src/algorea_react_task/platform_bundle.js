@@ -52,9 +52,9 @@ export default function (bundle, deps) {
         let callback = event.callback || function (){};
         switch (event.type) {
             case 'load': {
-                const task_token = yield select(state => state.task_token);
+                const taskToken = yield select(state => state.taskToken);
                 const host = yield select(state => state.options.server_module.host);
-                const task = yield call(fetchTaskData, host, task_token);
+                const task = yield call(fetchTaskData, host, taskToken);
                 yield put({type: deps.taskData, task});
                 yield put({type: deps.taskInit});
                 yield call(callback);
@@ -102,15 +102,15 @@ export default function (bundle, deps) {
             }
 
             case 'gradeAnswer': {
-                const {host, task_token, getTaskParams} = yield select(function (state) {
+                const {host, taskToken, getTaskParams} = yield select(function (state) {
                     return {
                         host: state.options.server_module.host,
-                        task_token: state.task_token,
+                        taskToken: state.taskToken,
                         getTaskParams: state.platformAdapter.getTaskParams
                     };
                 });
                 const task_params = yield call(getTaskParams, null, null);
-                const grading = yield call(gradeAnswer, host, task_token, event.answer_token, task_params);
+                const grading = yield call(gradeAnswer, host, taskToken, event.answer_token, task_params);
                 /* XXX do something and eventually call callback? */
                 alert('Score: ' + grading.score);
                 break;

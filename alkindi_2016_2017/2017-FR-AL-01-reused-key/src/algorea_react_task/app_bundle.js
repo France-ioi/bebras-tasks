@@ -9,8 +9,8 @@ export default function (bundle, deps) {
     bundle.use('Workspace');
 
     bundle.defineAction('appInit', 'appInit');
-    bundle.addReducer('appInit', function (state, {payload: {platformAdapter, task, task_token, options}}) {
-        return {...state, platformAdapter, task, task_token, options};
+    bundle.addReducer('appInit', function (state, {payload: {platformAdapter, task, taskToken, options}}) {
+        return {...state, platformAdapter, task, taskToken, options};
     });
 
     bundle.defineAction('platformValidate', 'Platform.Validate');

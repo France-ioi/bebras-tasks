@@ -31,12 +31,12 @@ function linkApp (TaskBundle) {
 }
 
 
-function startApp (app, task_token, options) {
+function startApp (app, taskToken, options) {
     const {store, scope, start} = app;
     options = options || {};
     const platformAdapter = makePlatformAdapter(window.platform);
     const task = new Task(store, scope);
-    store.dispatch({type: scope.appInit, payload: {platformAdapter, task, task_token, options}});
+    store.dispatch({type: scope.appInit, payload: {platformAdapter, task, taskToken, options}});
     start();
 }
 
