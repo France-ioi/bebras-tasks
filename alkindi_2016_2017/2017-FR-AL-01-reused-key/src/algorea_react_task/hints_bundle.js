@@ -4,7 +4,7 @@ import {fetchTaskHintData} from './server_module';
 
 export default function (bundle, deps) {
 
-    bundle.use('taskToken', 'taskRefresh');
+    bundle.use('taskRefresh');
 
     bundle.defineAction('requestHint', 'Hint.Request');
     bundle.defineAction('hintRequestFulfilled', 'Hint.Request.Fulfilled');
@@ -24,10 +24,12 @@ export default function (bundle, deps) {
     });
 
     function* requestHintSaga (action) {
-        const task_token = yield call(platformAskHint, action.request);
-        yield put({type: deps.taskToken, task_token});
+        const {askHint} = yield select(state => state.platformAdapter);
+        yield call(askHint, action.request);
+        /* Once askHint returns, the updated token can be obtained from the store. */
+        const taskToken = yield select(state => state.taskToken);
         const host = yield select(state => state.options.server_module.host);
-        const hints = yield call(fetchTaskHintData, host, task_token);
+        const hints = yield call(fetchTaskHintData, host, taskToken);
         if (hints) {
             yield put({type: deps.hintRequestFulfilled, hints});
             yield put({type: deps.taskRefresh});
@@ -36,15 +38,4 @@ export default function (bundle, deps) {
         }
     }
 
-    function platformAskHint (hint_params) {
-        return new Promise(resolve => {
-            var tmp = window.task.updateToken;
-            window.task.updateToken = function (task_token, callback) {
-                callback();
-                window.task.updateToken = tmp;
-                resolve(task_token);
-            };
-            window.platform.askHint(hint_params);
-        });
-    }
 }
