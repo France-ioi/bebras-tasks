@@ -4,43 +4,40 @@ export default class Task {
         this._store = store;
         this._scope = scope;
     }
-    showViews (_views, success, _error) {
-        success();
+    showViews (views, success, error) {
+        this._store.dispatch({type: this._scope.taskShowViewsEvent, payload: {views, success, error}});
     }
-    getViews (success, _error) {
-        success({});
+    getViews (success, error) {
+        this._store.dispatch({type: this._scope.taskGetViewsEvent, payload: {success, error}});
     }
-    updateToken (token, success, _error) {
-        this._store.dispatch({type: this._scope.taskTokenChanged, payload: {token}});
-        success();
+    updateToken (token, success, error) {
+        this._store.dispatch({type: this._scope.taskUpdateTokenEvent, payload: {token, success, error}});
     }
-    getHeight (success, _error) {
-        var d = document;
-        var h = Math.max(d.body.offsetHeight, d.documentElement.offsetHeight);
-        success(h);
+    getHeight (success, error) {
+        this._store.dispatch({type: this._scope.taskGetHeightEvent, payload: {success, error}});
     }
-    unload (success, _error) {
-        success();
+    unload (success, error) {
+        this._store.dispatch({type: this._scope.taskUnloadEvent, payload: {success, error}});
     }
-    getState (success, _error) {
-        success('');
+    getState (success, error) {
+        this._store.dispatch({type: this._scope.taskGetStateEvent, payload: {success, error}});
     }
-    getMetaData (success, _error) {
-        success({});
+    getMetaData (success, error) {
+        this._store.dispatch({type: this._scope.taskGetMetaDataEvent, payload: {success, error}});
     }
-    reloadAnswer (_answer, success, _error) {
-        success();
+    reloadAnswer (answer, success, error) {
+        this._store.dispatch({type: this._scope.taskReloadAnswerEvent, payload: {answer, success, error}});
     }
-    reloadState (_state, success, _error) {
-        success();
+    reloadState (state, success, error) {
+        this._store.dispatch({type: this._scope.taskReloadStateEvent, payload: {state, success, error}});
     }
-    getAnswer (success, _error) {
-        success('');
+    getAnswer (success, error) {
+        this._store.dispatch({type: this._scope.taskGetAnswerEvent, payload: {success, error}});
     }
-    load (_views, success, _error) {
-        success();
+    load (views, success, error) {
+        this._store.dispatch({type: this._scope.taskLoadEvent, payload: {views, success, error}});
     }
-    gradeAnswer (_answer, _answerToken, success, _error) {
-        success(0, '');
+    gradeAnswer (answer, answerToken, success, error) {
+        this._store.dispatch({type: this._scope.taskGradeAnswerEvent, payload: {answer, answerToken, success, error}});
     }
 }

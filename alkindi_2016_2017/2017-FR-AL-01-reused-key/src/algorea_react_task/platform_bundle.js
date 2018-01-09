@@ -1,120 +1,152 @@
 import {call, put, select, takeEvery} from 'redux-saga/effects';
 import {fetchTaskData, gradeAnswer} from './server_module';
 
-import PlatformChannel from './platform_channel';
-
 export default function (bundle, deps) {
-
 
     bundle.use('taskInit', 'taskRefresh');
 
-
-
-    bundle.defineAction('taskData', 'taskData');
-    bundle.addReducer('taskData', function (state, action) {
-        const {task} = action;
-        return {...state, task};
-    });
-
-
-    bundle.defineAction('taskTokenChanged', 'Task.Token.Changed');
-    bundle.addReducer('taskTokenChanged', function (state, {payload: {token}}) {
-        return {...state, taskToken: token};
-    });
-
-
-    bundle.defineAction('reloadState', 'reloadState');
-    bundle.addReducer('reloadState', function (state, action) {
-        const {hints} = action;
-        return {...state, hints};
-    });
-
-
-    bundle.defineAction('reloadAnswer', 'reloadAnswer');
-    bundle.addReducer('reloadAnswer', function (state, action) {
-        const answer = action.answer;
-        return {...state, answer};
-    });
-
-
-
-
-
-
-
+    /* Action dispatched by calls on window.task */
+    bundle.defineAction('taskShowViewsEvent', 'Task.Event.ShowViews'); /* {views, success, error} */
+    bundle.defineAction('taskGetViewsEvent', 'Task.Event.GetViews'); /* {success, error} */
+    bundle.defineAction('taskUpdateTokenEvent', 'Task.Event.UpdateToken'); /* {token, success, error} */
+    bundle.defineAction('taskGetHeightEvent', 'Task.Event.GetHeight'); /* {success, error} */
+    bundle.defineAction('taskUnloadEvent', 'Task.Event.Unload'); /* {success, error} */
+    bundle.defineAction('taskGetStateEvent', 'Task.Event.GetState'); /* {success, error} */
+    bundle.defineAction('taskGetMetaDataEvent', 'Task.Event.GetMetaData'); /* {success, error} */
+    bundle.defineAction('taskReloadAnswerEvent', 'Task.Event.ReloadAnswer'); /* {answer, success, error} */
+    bundle.defineAction('taskReloadStateEvent', 'Task.Event.ReloadState'); /* {state, success, error} */
+    bundle.defineAction('taskGetAnswerEvent', 'Task.Event.GetAnswer'); /* {success, error} */
+    bundle.defineAction('taskLoadEvent', 'Task.Event.Load'); /* {views, success, error} */
+    bundle.defineAction('taskGradeAnswerEvent', 'Task.Event.GradeAnswer'); /* {answer, answerToken, success, error} */
+    bundle.addReducer('taskUpdateTokenEvent', taskUpdateTokenEventReducer);
     bundle.addSaga(function* () {
-        /* TODO: select task from global state */
-        const channel = yield call(PlatformChannel, window.task);
-        yield takeEvery(channel, handlePlatformEventSaga);
+        yield takeEvery(deps.taskShowViewsEvent, taskShowViewsEventSaga);
+        yield takeEvery(deps.taskGetViewsEvent, taskGetViewsEventSaga);
+        yield takeEvery(deps.taskUpdateTokenEvent, taskUpdateTokenEventSaga);
+        yield takeEvery(deps.taskGetHeightEvent, taskGetHeightEventSaga);
+        yield takeEvery(deps.taskUnloadEvent, taskUnloadEventSaga);
+        yield takeEvery(deps.taskGetStateEvent, taskGetStateEventSaga);
+        yield takeEvery(deps.taskGetMetaDataEvent, taskGetMetaDataEventSaga);
+        yield takeEvery(deps.taskReloadAnswerEvent, taskReloadAnswerEventSaga);
+        yield takeEvery(deps.taskReloadStateEvent, taskReloadStateEventSaga);
+        yield takeEvery(deps.taskGetAnswerEvent, taskGetAnswerEventSaga);
+        yield takeEvery(deps.taskLoadEvent, taskLoadEventSaga);
+        yield takeEvery(deps.taskGradeAnswerEvent, taskGradeAnswerEventSaga);
     });
 
-    function* handlePlatformEventSaga (event) {
-        let callback = event.callback || function (){};
-        switch (event.type) {
-            case 'load': {
-                const taskToken = yield select(state => state.taskToken);
-                const host = yield select(state => state.options.server_module.host);
-                const task = yield call(fetchTaskData, host, taskToken);
-                yield put({type: deps.taskData, task});
-                yield put({type: deps.taskInit});
-                yield call(callback);
-                break;
-            }
+    bundle.defineAction('taskDataLoaded', 'Task.Data.Loaded');
+    bundle.addReducer('taskDataLoaded', taskDataLoadedReducer);
+    function taskDataLoadedReducer (state, {payload: {task}}) {
+        return {...state, task};
+    }
 
-            case 'getState': {
-                const hints = yield select(state => state.hints);
-                console.log('getState', JSON.stringify(hints));
-                yield call(callback, JSON.stringify(hints));
-                break;
-            }
+    bundle.defineAction('taskStateLoaded', 'Task.State.Loaded');
+    bundle.addReducer('taskStateLoaded', taskStateLoadedReducer);
+    function taskStateLoadedReducer (state, {payload: {hints}}) {
+        return {...state, hints};
+    }
 
-            case 'reloadState': {
-                console.log('reloadState', event.state);
-                try {
-                    const hints = JSON.parse(event.state);
-                    yield put({type: deps.reloadState, hints});
-                    yield put({type: deps.taskRefresh});
-                } catch (e) {
-                    console.error(e.message, 'reloadState wrong JSON');
-                }
-                yield call(callback);
-                break;
-            }
+    bundle.defineAction('taskAnswerLoaded', 'Task.Answer.Loaded');
+    bundle.addReducer('taskAnswerLoaded', taskAnswerLoadedReducer);
+    function taskAnswerLoadedReducer (state, {payload: {answer}}) {
+        return {...state, answer};
+    }
 
-            case 'getAnswer': {
-                const answer = yield select(state => state.answer);
-                console.log('getAnswer', JSON.stringify(answer));
-                yield call(callback, JSON.stringify(answer));
-                break;
-            }
+    function* taskShowViewsEventSaga ({payload: {error}}) {
+        yield call(error, 'not implemented');
+    }
 
-            case 'reloadAnswer': {
-                console.log('reloadAnswer');
-                try {
-                    const answer = JSON.parse(event.answer);
-                    yield put({type: deps.reloadAnswer, answer});
-                    yield put({type: deps.taskRefresh});
-                } catch (e) {
-                    console.error(e.message, 'reloadAnswer wrong JSON');
-                }
-                yield call(callback);
-                break;
-            }
+    function* taskGetViewsEventSaga ({payload: {success}}) {
+        yield call(success, {});
+    }
 
-            case 'gradeAnswer': {
-                const {host, taskToken, getTaskParams} = yield select(function (state) {
-                    return {
-                        host: state.options.server_module.host,
-                        taskToken: state.taskToken,
-                        getTaskParams: state.platformAdapter.getTaskParams
-                    };
-                });
-                const task_params = yield call(getTaskParams, null, null);
-                const grading = yield call(gradeAnswer, host, taskToken, event.answer_token, task_params);
-                /* XXX do something and eventually call callback? */
-                alert('Score: ' + grading.score);
-                break;
-            }
+    function taskUpdateTokenEventReducer (state, {payload: {token}}) {
+        return {...state, taskToken: token};
+    }
+    function* taskUpdateTokenEventSaga ({payload: {success}}) {
+        yield call(success);
+    }
+
+    function* taskGetHeightEventSaga ({payload: {success}}) {
+        const d = document;
+        const h = Math.max(d.body.offsetHeight, d.documentElement.offsetHeight);
+        yield call(success, h);
+    }
+
+    function* taskUnloadEventSaga ({payload: {success}}) {
+        /* XXX No action needed? */
+        yield call(success);
+    }
+
+    function* taskGetStateEventSaga ({payload: {success}}) {
+        /* XXX some tasks want to store more of the UI state than just the hints */
+        const hints = yield select(state => state.hints);
+        yield call(success, JSON.stringify(hints));
+    }
+
+    function* taskGetMetaDataEventSaga ({payload: {error}}) {
+        /* TODO: implement */
+        yield call(error, 'not implemented');
+    }
+
+    function* taskReloadAnswerEventSaga ({payload: {answer, success, error}}) {
+        try {
+            answer = JSON.parse(answer);
+            yield put({type: deps.taskAnswerLoaded, payload: {answer}});
+            yield put({type: deps.taskRefresh});
+            yield call(success);
+        } catch (ex) {
+            yield call(error, `bad answer: ${ex.message}`);
         }
     }
+
+    function* taskReloadStateEventSaga ({payload: {state, success, error}}) {
+        try {
+            /* XXX some tasks want to store more of the UI state than just the hints */
+            const hints = JSON.parse(state);
+            yield put({type: deps.reloadState, payload: {hints}});
+            yield put({type: deps.taskRefresh});
+            yield call(success);
+        } catch (ex) {
+            yield call(error, `bad state: ${ex.message}`);
+        }
+    }
+
+    function* taskGetAnswerEventSaga ({payload: {success}}) {
+        const answer = yield select(state => state.answer);
+        yield call(success, JSON.stringify(answer));
+    }
+
+    function* taskLoadEventSaga ({payload: {views, success, error}}) {
+        /* TODO: do something with views */
+        try {
+            const taskToken = yield select(state => state.taskToken);
+            const host = yield select(state => state.options.server_module.host);
+            const task = yield call(fetchTaskData, host, taskToken);
+            yield put({type: deps.taskDataLoaded, payload: {task}});
+            yield put({type: deps.taskInit});
+            yield call(success);
+        } catch (ex) {
+            yield call(error, ex.toString());
+        }
+    }
+
+    function* taskGradeAnswerEventSaga ({payload: {answer, answerToken, success, error}}) {
+        try {
+            const {host, taskToken, getTaskParams} = yield select(function (state) {
+                return {
+                    host: state.options.server_module.host,
+                    taskToken: state.taskToken,
+                    getTaskParams: state.platformAdapter.getTaskParams
+                };
+            });
+            const taskParams = yield call(getTaskParams, null, null);
+            /* XXX Pass answer to gradeAnswer? */
+            const grading = yield call(gradeAnswer, host, taskToken, answerToken, taskParams);
+            yield call(success);
+        } catch (ex) {
+            yield call(error, ex.toString());
+        }
+    }
+
 }
