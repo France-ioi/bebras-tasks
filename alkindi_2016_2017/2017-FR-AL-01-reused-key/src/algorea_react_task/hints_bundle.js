@@ -24,16 +24,16 @@ export default function (bundle, deps) {
     });
 
     function* requestHintSaga (action) {
-            const task_token = yield call(platformAskHint, action.request);
-            yield put({type: deps.taskToken, task_token});
-            const host = yield select(state => state.options.server_module.host);
-            const hints = yield call(fetchTaskHintData, host, task_token);
-            if (hints) {
-                yield put({type: deps.hintRequestFulfilled, hints});
-                yield put({type: deps.taskRefresh});
-            } else {
-                yield put({type: deps.hintRequestRejected, error: 'server error'});
-            }
+        const task_token = yield call(platformAskHint, action.request);
+        yield put({type: deps.taskToken, task_token});
+        const host = yield select(state => state.options.server_module.host);
+        const hints = yield call(fetchTaskHintData, host, task_token);
+        if (hints) {
+            yield put({type: deps.hintRequestFulfilled, hints});
+            yield put({type: deps.taskRefresh});
+        } else {
+            yield put({type: deps.hintRequestRejected, error: 'server error'});
+        }
     }
 
     function platformAskHint (hint_params) {
