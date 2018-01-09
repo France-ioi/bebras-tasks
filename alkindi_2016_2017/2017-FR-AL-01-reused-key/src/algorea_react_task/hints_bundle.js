@@ -1,4 +1,4 @@
-import {call, put, take, select, takeEvery} from 'redux-saga/effects';
+import {call, put, select, takeEvery} from 'redux-saga/effects';
 
 import {fetchTaskHintData} from './server_module';
 
