@@ -1,5 +1,5 @@
 import React from 'react';
-import {call, put, take, select, takeLatest} from 'redux-saga/effects';
+import {call, takeEvery} from 'redux-saga/effects';
 
 import TaskBar from './ui/task_bar';
 import Spinner from './ui/spinner';
@@ -15,17 +15,19 @@ export default function (bundle, deps) {
     });
 
 
-    function onValidate () {
-        platform.validate('done', function (){
-            alert('done');
-        });
+    bundle.defineAction('platformValidate', 'Platform.Validate');
+    bundle.addSaga(function* () {
+        yield takeEvery(deps.platformValidate, platformValidateSaga);
+    });
+    function* platformValidateSaga ({payload: {mode}}) {
+        yield call(platformValidate, mode);
     }
 
 
     function AppSelector (state) {
         const {task, workspace} = state;
-        const {Workspace} = deps;
-        return {task, workspace, Workspace, onValidate};
+        const {Workspace, platformValidate} = deps;
+        return {task, workspace, Workspace, platformValidate};
     }
 
 
@@ -35,15 +37,24 @@ export default function (bundle, deps) {
 
 class App extends React.PureComponent {
     render () {
-        const {task, workspace, Workspace, onValidate} = this.props;
+        const {task, workspace, Workspace} = this.props;
         if (!task || !workspace) {
             return (<Spinner/>);
         }
         return (
             <div>
                 <Workspace/>
-                <TaskBar onValidate={onValidate}/>
+                <TaskBar onValidate={this._validate}/>
             </div>
         );
     }
+    _validate = () => {
+        this.props.dispatch({type: this.props.platformValidate, payload: {mode: 'done'}});
+    };
+}
+
+function platformValidate (mode) {
+    return new Promise((resolve, reject) => {
+        window.platform.validate(mode, resolve, reject);
+    });
 }
