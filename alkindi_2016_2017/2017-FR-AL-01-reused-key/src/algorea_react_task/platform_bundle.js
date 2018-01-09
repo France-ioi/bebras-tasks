@@ -44,7 +44,7 @@ export default function (bundle, deps) {
 
 
     bundle.addSaga(function* () {
-        const channel = yield call(platformChannel);
+        const channel = yield call(platformChannel, window.task);
         while(true) {
             let action = yield take(channel);
             let callback = action.callback || function(){};
