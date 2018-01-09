@@ -52,7 +52,7 @@ export default function (bundle, deps) {
     function* handlePlatformEventSaga (event) {
         let callback = event.callback || function (){};
         switch(event.type) {
-            case 'load':
+            case 'load': {
                 const task_token = yield select(state => state.task_token);
                 const host = yield select(state => state.options.server_module.host);
                 const task = yield call(fetchTaskData, host, task_token);
@@ -60,14 +60,16 @@ export default function (bundle, deps) {
                 yield put({type: deps.taskInit});
                 yield call(callback);
                 break;
+            }
 
-            case 'getState':
+            case 'getState': {
                 const hints = yield select(state => state.hints);
                 console.log('getState', JSON.stringify(hints));
                 yield call(callback, JSON.stringify(hints));
                 break;
+            }
 
-            case 'reloadState':
+            case 'reloadState': {
                 console.log('reloadState', event.state);
                 try {
                     const hints = JSON.parse(event.state);
@@ -78,14 +80,16 @@ export default function (bundle, deps) {
                 }
                 yield call(callback);
                 break;
+            }
 
-            case 'getAnswer':
+            case 'getAnswer': {
                 const answer = yield select(state => state.answer);
                 console.log('getAnswer', JSON.stringify(answer));
                 yield call(callback, JSON.stringify(answer));
                 break;
+            }
 
-            case 'reloadAnswer':
+            case 'reloadAnswer': {
                 console.log('reloadAnswer');
                 try {
                     const answer = JSON.parse(event.answer);
@@ -96,8 +100,9 @@ export default function (bundle, deps) {
                 }
                 yield call(callback);
                 break;
+            }
 
-            case 'gradeAnswer':
+            case 'gradeAnswer': {
                 const host = yield select(state => state.options.server_module.host);
                 const task_token = yield select(state => state.task_token);
                 /* XXX get platform from global state */
@@ -106,6 +111,7 @@ export default function (bundle, deps) {
                 /* XXX do something and eventually call callback? */
                 alert('Score: ' + grading.score);
                 break;
+            }
         }
     }
 }
