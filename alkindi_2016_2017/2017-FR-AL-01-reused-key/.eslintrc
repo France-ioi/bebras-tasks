@@ -8,9 +8,16 @@
   "extends": "eslint:recommended",
   "rules": {
     "semi": ["error", "always"],
+    "object-curly-spacing": ["error", "never"],
+    "array-bracket-spacing": ["error", "never"],
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "react/jsx-uses-react": 2,
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2
   },
-  "plugins": ["react"]
+  "plugins": ["react"],
+  "env": {
+    "browser": true,
+    "es6": true
+  }
 }
