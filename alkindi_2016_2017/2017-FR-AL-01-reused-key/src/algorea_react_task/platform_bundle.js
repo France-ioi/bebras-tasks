@@ -49,9 +49,9 @@ export default function (bundle, deps) {
         yield takeEvery(channel, handlePlatformEventSaga);
     });
 
-    function* handlePlatformEventSaga (action) {
-        let callback = action.callback || function(){};
-        switch(action.type) {
+    function* handlePlatformEventSaga (event) {
+        let callback = event.callback || function(){};
+        switch(event.type) {
             case 'load':
                 var task_token = yield select(state => state.task_token);
                 var host = yield select(state => state.options.server_module.host);
@@ -68,9 +68,9 @@ export default function (bundle, deps) {
                 break;
 
             case 'reloadState':
-                console.log('reloadState', action.state);
+                console.log('reloadState', event.state);
                 try {
-                    var hints = JSON.parse(action.state);
+                    var hints = JSON.parse(event.state);
                     yield put({type: deps.reloadState, hints});
                     yield put({type: deps.taskRefresh});
                 } catch(e) {
@@ -88,7 +88,7 @@ export default function (bundle, deps) {
             case 'reloadAnswer':
                 console.log('reloadAnswer');
                 try {
-                    var answer = JSON.parse(action.answer);
+                    var answer = JSON.parse(event.answer);
                     yield put({type: deps.reloadAnswer, answer});
                     yield put({type: deps.taskRefresh});
                 } catch(e) {
@@ -101,7 +101,7 @@ export default function (bundle, deps) {
                 var host = yield select(state => state.options.server_module.host);
                 var task_token = yield select(state => state.task_token);
                 var task_params = yield call(getTaskParams);
-                var grading = yield call(gradeAnswer, host, task_token, action.answer_token, task_params);
+                var grading = yield call(gradeAnswer, host, task_token, event.answer_token, task_params);
                 alert('Score: ' + grading.score);
                 break;
         }
