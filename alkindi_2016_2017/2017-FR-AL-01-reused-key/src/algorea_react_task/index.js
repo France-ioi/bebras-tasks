@@ -7,7 +7,7 @@ import queryString from 'query-string';
 
 import './ui/styles.css';
 
-import makeTask from './legacy/task';
+import Task from './legacy/task';
 import makePlatformAdapter from './legacy/platform_adapter';
 import AppBundle from './app_bundle';
 import PlatformBundle from './platform_bundle';
@@ -35,7 +35,7 @@ function startApp (app, task_token, options) {
     const {store, scope, start} = app;
     options = options || {};
     const platformAdapter = makePlatformAdapter(window.platform);
-    const task = makeTask();
+    const task = new Task(store, scope);
     store.dispatch({type: scope.appInit, payload: {platformAdapter, task, task_token, options}});
     start();
 }

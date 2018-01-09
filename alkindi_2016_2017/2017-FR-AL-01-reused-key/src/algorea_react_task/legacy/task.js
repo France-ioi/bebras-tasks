@@ -1,69 +1,45 @@
 
-export default function () {
-
-    return {
-        showViews,
-        getViews,
-        updateToken,
-        getHeight,
-        unload,
-        getState,
-        getMetaData,
-        reloadAnswer,
-        reloadState,
-        getAnswer,
-        load,
-        gradeAnswer,
-    };
-
-}
-
-function showViews (_views, success, _error) {
-    success();
-}
-
-function getViews (success, _error) {
-    success({});
-}
-
-function updateToken (_token, success, _error) {
-    success();
-}
-
-function getHeight (success, _error) {
-    var d = document;
-    var h = Math.max(d.body.offsetHeight, d.documentElement.offsetHeight);
-    success(h);
-}
-
-function unload (success, _error) {
-    success();
-}
-
-function getState (success, _error) {
-    success('');
-}
-
-function getMetaData (success, _error) {
-    success({});
-}
-
-function reloadAnswer (_answer, success, _error) {
-    success();
-}
-
-function reloadState (_state, success, _error) {
-    success();
-}
-
-function getAnswer (success, _error) {
-    success('');
-}
-
-function load (_views, success, _error) {
-    success();
-}
-
-function gradeAnswer (_answer, _answerToken, success, _error) {
-    success(0, '');
+export default class Task {
+    constructor (store, scope) {
+        this._store = store;
+        this._scope = scope;
+    }
+    showViews (_views, success, _error) {
+        success();
+    }
+    getViews (success, _error) {
+        success({});
+    }
+    updateToken (token, success, _error) {
+        success();
+    }
+    getHeight (success, _error) {
+        var d = document;
+        var h = Math.max(d.body.offsetHeight, d.documentElement.offsetHeight);
+        success(h);
+    }
+    unload (success, _error) {
+        success();
+    }
+    getState (success, _error) {
+        success('');
+    }
+    getMetaData (success, _error) {
+        success({});
+    }
+    reloadAnswer (_answer, success, _error) {
+        success();
+    }
+    reloadState (_state, success, _error) {
+        success();
+    }
+    getAnswer (success, _error) {
+        success('');
+    }
+    load (_views, success, _error) {
+        success();
+    }
+    gradeAnswer (_answer, _answerToken, success, _error) {
+        success(0, '');
+    }
 }
