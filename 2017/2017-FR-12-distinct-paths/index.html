@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-12</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: "Bravo, vous avez trouvé tous les chemins !",
+            pathDiscovered: function(discoveredPaths, totalPaths) {
+               return "Vous avez trouvé un nouveau chemin. Plus que " + (totalPaths - discoveredPaths) + " à trouver !<br>Vous pouvez repartir du rond noir ou bien modifier la fin du chemin actuel.";
+            },
+            pathExists: "Vous avez déjà trouvé ce chemin.",
+            notCycle: "Ce chemin ne se termine pas au point de départ", // currently not used
+            cycleNotComplete: "Ce cycle ne passe pas par toutes les cases.", // currently not used
+            blockedCell: "Le chemin ne doit passer que par les cases blanches.",
+            notAdjacentToStart: "Cliquez sur une case blanche voisine du rond noir.",
+            notAdjacentToHead: "Cliquez sur une case blanche voisine du rond blanc.",
+            notAllFound: function(discoveredPaths, totalPaths) {
+               if (discoveredPaths == 0) {
+                  return "Vous n'avez pas encore trouvé de chemin passant par toutes les cases blanches.";
+               } else {
+                  return "Vous avez trouvé " + discoveredPaths + " chemins, il en reste " + (totalPaths - discoveredPaths) + " à trouver.";
+               }
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #animContainer {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #discoveredPaths {
+            margin-top: 5px;
+            text-align: center;
+         }
+         #discoveredPaths div {
+            margin: 5px;
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Chemins distincts</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p>Dessinez tous les chemins possibles qui partent du rond noir et passent une fois dans chaque case blanche.</p>
+
+             <p>Glissez ou cliquez sur les cases pour agrandir ou rétrécir le chemin.</p>
+
+               
+               <div id="animContainer">
+                  <div id="anim"></div>
+               </div>
+               <div id="discoveredPaths">
+                  <!--
+                     To be filled with elements of this form, each of which will contain a Raphael paper:
+                     
+                     <div class="discoveredPath"></div>
+                  -->
+               </div>
+               <div id="feedback"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+              <style>
+              #img-easy img, #img-medium img { 
+               width: 120px;
+              }
+              #img-hard img { 
+               width: 180px;
+              }
+              </style>
+
+           <div class="easy" id="img-easy">
+              <p>Pour commencer, soit on part vers la droite, soit on part vers la gauche. Si on part vers la droite, on peut monter, mais on est alors coincé, car il n'existe aucun chemin qui passe par les deux cases marquées d'une croix rouge.</p>
+              <img src="Sol_easy_RU.png">
+              <p>On pourrait également partir à droite, puis aller en haut ou à gauche, mais dans les deux cas on se retrouve également coincé.</p>
+              <img src="Sol_easy_RRa.png">
+              <img src="Sol_easy_RRb.png">
+              <p>Essayons donc de partir tout au début vers la gauche, en avançant tant qu'on n'a pas le choix. On atteint une situation où l'on peut soit descendre, soit aller à droite.</p>
+              <img src="Sol_easy_L.png">
+              <p>Si on descend, il n'y a plus qu'une seule manière de compléter le chemin.</p>
+              <img src="Sol_easy_LD.png">
+              <p>Si au contraire on va à droite, on peut trouver deux chemins possibles, selon que l'on aille d'abord à gauche ou d'abord bien en bas.</p>
+              <img src="Sol_easy_LR.png">
+              <p>En résumé, voici les 3 chemins possibles.</p>
+              <img src="Sol_easy.png" style="width:450px">
+           </div>
+
+           <div class="medium" id="img-medium">
+              <p>Pour commencer, soit on part vers le bas, soit on part vers la droite. Si on part vers le bas, on peut aller à droite, mais on est alors coincé, car il n'existe aucun chemin qui passe par les deux cases marquées d'une croix rouge.</p>
+              <img src="Sol_medium_DR.png">
+              <p>Si on va deux fois vers le bas, on est ensuite obligé de remonter.</p>
+              <img src="Sol_medium_DD.png">
+              <p>À partir de là, on trouve 3 chemins possibles.</p>
+              <img src="Sol_medium_DDX.png" style="width:450px">
+              <p>Repartons du début et essayons maintenat de partir vers la droite. Si l'on va à droite puis en bas, on atteint une situation dans laquelle on est coincé. Ici encore, il n'existe pas de chemin qui passe par les deux cases marquées.</p>
+              <img src="Sol_medium_RD.png">
+              <p>Si l'on va deux fois vers la droite avant de descendre, on est encore coincé.</p>
+              <img src="Sol_medium_RRD.png">
+              <p>Donc, forcément il faut aller trois fois vers la droite. Ensuite, on n'a pas le choix il faut revenir. On arrive à la situation ci-dessous.</p>
+              <img src="Sol_medium_RRR.png">
+              <p>A partir de là, on trouve 2 autres chemins possibles.</p>
+              <img src="Sol_medium_RRRX.png" style="width:300px">
+           </div>
+
+           <div class="hard" id="img-hard">
+              <p>Pour commencer, soit on part vers la gauche, soit on part vers le haut. Étudions d'abord les départs vers la gauche. On va voir qu'aucun d'eux ne mène à une solution.
+              Si l'on va à gauche, puis en haut, on est alors coincé, car il n'existe aucun chemin qui passe par les deux cases marquées d'une croix rouge.</p>
+              <img src="Sol_hard_LU.png">
+              <img src="Sol_hard_LLU.png">
+              <img src="Sol_hard_LLLU.png">
+              <p>Si l'on va 4 fois à gauche, on est obligé de faire le tour et de monter par la gauche. Mais ensuite, quelque soit le chemin que l'on essaie de prendre, on se retrouve coincé.</p>
+              <img src="Sol_hard_LLLL.png">
+              <img src="Sol_hard_LLLLXD.png">
+              <img src="Sol_hard_LLLLXR.png">
+
+              <p>Repartons donc du début et essayons de partir vers le haut. On est obligé de tourner à gauche tout de suite.</p>
+              <img src="Sol_hard_UL.png">
+              <p>Parmi les départs possibles, les trois premiers amènent à des situations coincées, dans lesquelles il n'est pas possible de trouver un chemin passant par toutes les croix rouges.</p>
+              <img src="Sol_hard_ULLD.png">
+              <img src="Sol_hard_ULLL.png">
+              <img src="Sol_hard_ULLU.png">
+              <p>Le seul départ possible est le suivant.</p>
+              <img src="Sol_hard_ULDL.png">
+              <p>En montant, on trouve 3 chemins possibles.</p>
+              <img src="Sol_hard_ULDLUX.png" style="width:550px">
+              <p>En allant à gauche, on trouve les 3 autres chemins possibles.</p>
+              <img src="Sol_hard_ULDLLX.png" style="width:550px">
+
+           </div>
+
+         <h2>C'est de l'informatique !</h2>
+   
+            <p>Ce défi propose de mettre en pratique une <b>exploration exhaustive</b> de chemins, optimisée avec une <b>détection anticipée de branches mortes</b>, ce qui correspond à remarquer à certains moments qu'on va forcément être coincé et qu'il ne sert à rien de continuer.
+
+            <p>De nombreux algorithmes informatiques exploitent cette stratégie, plus connue sous le nom anglais de <b>branch and bound</b>. Cette stratégie s'applique très bien pour trouver rapidement des solutions valides dans des problèmes où le nombre de possibilités est potentiellement gigantesque, mais qu'il est en fait relativement aisé d'évaluer si un début de solution est forcément voué à l'échec.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

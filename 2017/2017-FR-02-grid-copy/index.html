@@ -1,0 +1,311 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-02</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+    <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-02-grid-copy/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi&nbsp;!",
+            patternError: "Vous avez colorié certaines cases en noir alors qu'elles ne contiennent pas de rond. Essayez à nouveau.",
+            patternMissing: "Certaines cases marquées d'un rond n'ont pas encore été coloriées en noir.",
+            pasteLimit: function (limit) { return "Vous avez déjà utilisé le bouton " + limit + " fois, mais vous n'avez pas encore terminé. Essayez autrement, en cliquant sur &quot;Annuler&quot; ou sur &quot;Recommencer&quot;."; },
+            stepCounter: function(count, limit) {
+               return count + " / " + limit;
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #controlsContainer {
+            text-align: center;
+         }
+         #controlsContainer input {
+            min-width: 80px;
+            padding: 10px;
+         }
+         #arrowsTable td {
+            width: 30px;
+            height: 30px;
+         }
+         .controlCell {
+            height: 70px;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         #stepsCount {
+            font-weight: bold;
+         }
+         .stepsCountCell {
+            height: 1.5em;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Copie rapide</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>Coloriez en noir les cases marquées d'un rond, et laissez les autres en blanc.</p>
+            <p>Cliquez d'abord sur le bouton "copier les cases noires", déplacez ensuite le motif copié avec les flèches, puis collez ce motif  une ou plusieurs fois<span class="medium hard">,<strong> avant d'utiliser à nouveau le bouton copier</strong></span>.</p>
+
+            <p><span class="medium hard">Utilisez le bouton <strong>coller au maximum 7 fois</strong>.</span></p>
+        
+            <div id="anim_container">
+               <table>
+                  <tr>
+                     <td>
+                        <div id="anim"></div>
+                     </td>
+                     <td id="controlsContainer">
+                        <table id="controlsTable">
+                        <tr><td class="controlCell">
+                          <input type="button" value="Copier les cases noires" id="copyAll" />
+                        </td></tr>
+                        <tr><td>
+                           <table id="arrowsTable">
+                           <tr>
+                              <td></td>
+                              <td>
+                                 <div id="paper_up"></div>
+                              </td>
+                              <td></td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div id="paper_left"></div>
+                              </td>
+                              <td></td>
+                              <td>
+                                 <div id="paper_right"></div>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 <div id="paper_down"></div>
+                              </td>
+                              <td></td>
+                           </tr>
+                        </table>
+                        </td></tr>
+                        <tr><td class="controlCell">
+                           <input type="button" value="Coller" id="paste" />
+                        </td></tr>
+                        <tr><td class="stepsCountCell">
+                           <div id="stepsCount" class="medium hard"></div>
+                        </td></tr>
+                        <tr><td class="controlCell">
+                           <input type="button" value="Annuler" id="undo" />
+                        </td></tr>
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+               <div id="feedback"></div>
+            </div>
+            <div id="validation"><input type="button" value="Valider" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            <style>
+            .table-sol img {
+               width: 230px;
+            }
+            .table-sol td {
+               width: 240px;
+               padding-bottom: 20px;
+               vertical-align: bottom;
+            }
+            .table-sol p {
+               margin: 0px 0px 5px 0px;
+            }
+            </style>
+        
+            <div class="easy">
+                  <table class="table-sol"><tr>
+               <td>
+                  <p>On copie tout.</p>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <p>On déplace la cible.</p>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <p>On colle.</p>
+                  <img src="Sol_easy_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>On redéplace la cible.</p>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <p>Et on colle à nouveau.</p>
+                  <img src="Sol_easy_5.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="medium hard">
+               
+               <p>Pour faire une opération de copier-coller, on appuie sur "copier les cases noires", puis on déplace la cible avec les flèches, puis on appuie sur coller. Les étapes suivantes de copier-coller permettent d'obtenir le résultat souhaité.</p>
+            
+            </div>
+
+            <div class="medium">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>On copie-colle une case.</p>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <p>Puis une autre.</p>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <p>Et encore une autre.</p>
+                  <img src="Sol_medium_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>On copie-colle maintenant 4 cases d'un coup.</p>
+                  <img src="Sol_medium_4.png">
+               </td>
+               <td>
+                  <p>Puis on colle le même paquet de 4 une seconde fois.</p>
+                  <img src="Sol_medium_5.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>Enfin on copie-colle un gros paquet de 12 cases.</p>
+                  <img src="Sol_medium_6.png">
+               </td>
+               <td>
+                  <p>Puis encore une dernière fois pour terminer.</p>
+                  <img src="Sol_medium_7.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>On part de l'état initial.</p>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <p>On copie-colle d'abord une case.</p>
+                  <img src="Sol_hard_2.png">
+               </td>
+               <td>
+                  <p>Puis deux cases d'un coup.</p>
+                  <img src="Sol_hard_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>On copie-colle ensuite 4 cases d'un coup, terminant une ligne.</p>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <p>On répète maintenant le même processus verticalement.</p>
+                  <img src="Sol_hard_5.png">
+               </td>
+               <td>
+                  <p>En doublant à chaque fois le nombre de cases collées.</p>
+                  <img src="Sol_hard_6.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>À l'avant dernière étape, on a effectué la moitié du travail.</p>
+                  <img src="Sol_hard_7.png">
+               </td>
+               <td>
+                  <p>Un dernier copier-coller de toutes les cases, et c'est fini !</p>
+                  <img src="Sol_hard_8.png">
+               </td>
+               </tr>
+               </table>
+
+               <p>Remarque : il y avait d'autres manières de procéder, on pouvait 
+               par exemple commencer par remplir la première colonne, on bien construire
+               des carrés de plus en plus grands en alternant une croissance sur
+               les lignes et une croissance sur les colonnes.</p>
+            </div>
+
+         <h2>C'est de l'informatique !</h2>
+         <p>
+            La version difficile de ce sujet illustre une technique très utile en algorithmique, par exemple pour calculer des grands nombres, dénommée <b>exponentiation rapide</b>. L'idée est la suivante : si l'on sait facilement doubler la taille d'un objet (que ce soit un nombre, ou une image, etc ...), alors il y a une manière de construire très rapidement un très grand objet. En partant d'un objet initial, on va doubler à chaque fois la taille du dernier objet que l'on a obtenu. 
+         </p>
+         <p>
+           Par exemple, dans le cas des nombres, si l'on sait multiplier par deux facilement, en partant de 1 on peut calculer 2, puis 4, puis 8, puis 16, puis 32, puis 64, etc... En seulement 10 opérations, on va dépasser 1000, et en seulement 30 opérations on va dépasser 1 milliard !            
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

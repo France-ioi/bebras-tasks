@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-08</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'simpleKeyboard-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-08-combine-shapes/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            error: "The shape is not identical to the objective.",
+            syntaxError: "You cannot put this character here.",
+            validationError: "The expression is not valid.",
+            examplesTitle: "Examples",
+            backspace: "Erase"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #error {
+            color: red;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         .sectionContainer {
+            text-align: center;
+            display: inline-block;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .sectionBlock {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .mainDiv {
+            text-align: center;
+         }
+         .sectionTitle {
+            font-size: 20px;
+         }
+         #examplesContainer {
+            border: 1px solid black;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            width: 300px;
+         }
+         .paperDiv {
+            border: 1px solid black;
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #inputContainer {
+            width: 200px;
+         }
+         #keyboardContainer {
+            margin-bottom: 20px;
+            width: 200px;
+         }
+         .keyboard_row {
+            display: block;
+         }
+         .keyboard_button {
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+         }
+         .keyboard_button_8 {
+            width: 80px;
+         }
+         #inputDiv {
+            border: 1px solid black;
+            font-size: 16px;
+            height: 30px;
+            width: 200px;
+            text-align: left;
+            padding-top: 8px;
+         }
+         #descriptionContainer {
+            text-align: left;
+            margin-top: 20px;
+         }
+         .example {
+            margin-top: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Combine shapes</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div class="mainDiv">
+               <div class="sectionContainer">
+                  <div id="descriptionContainer">
+                     <p>
+                        [Description]
+                     </p>
+                  </div>
+                  <br>
+                  <div id="symbolsContainer">
+                     <!-- Automatically filled with divs in this format:
+                        <div class="symbol sectionBlock">
+                           <span class="paperTitle">A</span><br>
+                           <div class="paperDiv" id="paperSymbolA"></div>
+                        </div>
+                     -->
+                  </div>
+               </div>
+               <div class="sectionContainer" id="examplesContainer">
+                  <!-- Filled automatically with the title and divs.
+                     The title is in the format:
+                        <p class="sectionTitle">Examples</p>
+
+                     The divs are in the format:
+                        <div class="example sectionBlock">
+                           <span class="paperTitle">A+B</span><br>
+                           <div class="paperDiv" id="paperExample0"></div>
+                        </div>
+                  -->
+               </div>
+               <br>
+               
+               <br>
+               <div class="sectionContainer" id="controlContainer">
+                  <div id="inputContainer" class="sectionBlock">
+                     <div id="keyboardContainer"></div>
+                     <div id="inputDiv">&nbsp;&nbsp;<span id="input"></span></div>
+                     <!--<input type="text" id="input" value="abc" disabled>-->
+                  </div>
+                  <div class="paperDiv sectionBlock" id="paperUser"></div>
+                  <div class="objectiveContainer sectionBlock">
+                     <span class="sectionTitle">Objective</span><br>
+                     <div class="paperDiv" id="paperTarget"></div>
+                  </div>
+               </div>
+               <br>
+               <span id="error"></span>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+         <h2>C'est de l'informatique !</h2>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

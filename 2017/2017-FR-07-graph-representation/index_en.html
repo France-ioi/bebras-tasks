@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-07</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-07-graph-representation/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            missingVertex: "You did not add all possible situations.",
+            missingEdge: "Some connections are missing.",
+            wrongEdge: "Some connections are wrong.",
+            vertexExists: "This situation already exists.",
+            wrongCell: "Please move the red circle cell next to its current cell.",
+            droppingOnBall: "You can't put two balls in the same place.",
+            dragError: "Drag the red circle to move it."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         #configTable {
+            margin: auto;
+            width: 740px;
+         }
+         #configContainer {
+            padding-left: 40px;
+            text-align: center;
+         }
+         #addSituation {
+            padding: 10px;
+            margin: 10px;
+         }
+         #errorConfig {
+            font-weight: bold;
+            color: red;
+            width: 300px;
+            height: 3em;
+            margin: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Graph representation</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               <span class="easy medium">A red ball is</span><span class="hard">Two red balls are</span> placed on a board made of <span class="hexCount"></span> connected hexagons. You can drag a ball to a cell next to its current cell.
+            </p>
+            <p>
+               Below, we represent <span class="easy">every possible situation of the board, each</span><span class="medium hard">the initial situation of the board</span> in a circle. <span class="medium hard">Add every other situation by clicking the button under the board.</span>
+            </p>
+            <p>
+               If two circles represent situations such that you can go from one to the other in one move of the ball, click on these two circle to connect them with a segment. Click on a segment if you want to remove it.
+            </p>
+            <center><table>
+               <tr>
+                  <td><div id="anim_config"></div></td>
+                  <td>
+                     <div><input type="button" value="Add this situation" id="addSituation" class="medium hard"/></div>
+                     <div id="errorConfig">&nbsp;</div>
+                  </td>
+               </tr>
+            </table></center>
+            <div id="anim_container">
+               <div id="anim_graph"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+         <h2>C'est de l'informatique !</h2>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

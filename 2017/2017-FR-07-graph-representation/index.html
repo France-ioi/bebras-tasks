@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-07</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-07-graph-representation/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            missingVertex: "Il manque des photos. Déplacez la bille rouge sur d'autres cases, puis cliquez sur le bouton pour ajouter une photo.",
+            missingEdge: "Il manque des traits noirs entre certaines photos. Cliquez sur deux photos pour les relier.",
+            shouldAddVertices: "Cliquez maintenant sur les photos pour les relier par des traits, comme expliqué dans l'énoncé.",
+            wrongEdge: "Au moins un trait noir est incorrect. Cliquez dessus pour le retirer.",
+            vertexExists: "Cette photo a déjà été ajoutée. Glissez la bille rouge pour en prendre une autre.",
+            vertexAdded: "La photo a été prise.",
+            wrongCell: "À chaque étape, la bille ne peut être déplacée que vers une case voisine.",
+            droppingOnBall: "Les deux billes ne peuvent pas être placées dans la même case.",
+            dragError: "Faites glisser la bille rouge vers une case voisine.",
+            dropMinimalDistance: "", // Photos cannot be too close to each other // ok to say nothing.
+            edgeExists: "Ces deux photos sont déjà reliées. Cliquez sur un trait pour le retirer.", 
+            needEdges: "<p>Toutes les photos ont été prises. Cliquez sur deux photos pour les relier par un trait selon la règle de l'énoncé.</p><p>Notez que vous pouvez déplacer les photos.</p>"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         #configTable {
+            margin: auto;
+            width: 740px;
+         }
+         #configContainer {
+            padding-left: 40px;
+            text-align: center;
+         }
+         #addSituation {
+            padding: 10px;
+            margin-left: 10px;
+         }
+         #messageConfig {
+            font-weight: bold;
+            color: red;
+            width: 400px;
+            height: 5em;
+            margin: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Photos du jeu</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div style="float:right;text-align:center; margin-left:20px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>Exemple</b></p><p style="margin-top: 0px; margin-bottom: 20px">avec un plateau de 2 cases</p><img src="example.png"></div>
+            <p>
+               Aidez Castor à prendre en photo toutes les positions possibles <span class="easy medium">de la bille rouge. Vous pouvez la déplacer</span><span class="hard">des deux billes rouges. Vous pouvez les déplacer</span> sur le plateau ci-dessous.
+            </p>
+            <p>
+                Ensuite, placez un trait entre deux photos s'il est possible de passer d'une situation à l'autre en déplaçant <span class="easy medium">la</span><span class="hard">une</span> bille d'une case vers une case voisine.
+            </p>
+            <p>
+                Cliquez sur les photos pour les relier par des traits.
+            </p>
+
+            <center><table>
+               <tr>
+                  <td><div id="anim_config"></div></td>
+                  <td>
+                     <div><input type="button" value="Prendre une photo" id="addSituation" /></div>
+                     <div id="messageConfig">&nbsp;</div>
+                  </td>
+               </tr>
+            </table>
+            </center>
+            <div style="font-weight: bold; margin-top: 1em; text-align: center">Photos :</div>
+            <div id="anim_container">
+               <div id="anim_graph"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+           <p class="easy medium">On prend une photo pour chacune des <span class="easy">4</span><span class="medium hard">5</span> positions possibles de la bille. Pour s'y retrouver facilement, on peut disposer les photos dans le cadre gris en fonction de la position de la bille dans chaque photo, comme montré ci-dessous. On peut alors ajouter des traits entre les photos décrivant des positions où la bille n'a bougé que d'une case.</p>
+
+           <p class="hard">On prend une photo pour chacune des 6 configurations possibles des deux billes. Pour s'y retrouver facilement, on peut organiser les photos. Par exemple, on peut faire un première colonne avec les photos ayant une bille dans la case en haut à gauche, et une seconde colonne avec les photos n'ayant pas de bille dans cette case. On peut également trier les photos à l'intérieur de la colonne, en fonction du remplissage des autres cases. On peut alors ajouter les traits corresponds aux déplacements possibles des billes.</p>
+  
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+           
+           <p>Pour être sûr de n'avoir oublié aucun trait, on peut vérifier les traits qui partent de chaque photo. Pour une photo donnée, on compte <span class="easy medium">le nombre de cases blanches qui se trouvent autour de la bille</span><span class="hard">le nombre de cases blanches qui se trouvent autour de la première bille, auquel on additionne le nombre de cases blanches qui se trouvent autour de la seconde bille</span>. <span class="easy medium">Ce nombre</span><span class="hard">Le total</span> doit correspondre au nombre de traits qui sont reliés à cette photo, puisque cela correspond au nombre de déplacements possibles.</p>
+
+         <h2>C'est de l'informatique !</h2>
+
+           <p>Ce sujet illustre comment représenter des situations (photos d'un état) et des transitions (déplacement d'une bille) sous forme d'un <b>graphe</b>, c'est-à-dire un ensemble d'objets dont certains sont reliés entre eux par des traits. Il est très intéressant de ramener un problème à une vision sous forme de graphe, car il existe de nombreux algorithmes très efficaces pour traiter des problèmes exprimés par des graphes.</p>
+
+           <p>Certains problèmes apparaissent naturellement sous forme de graphe, comme par exemple trouver un chemin pour voyager d'une ville à une autre : le graphe est alors constitué des villes et des routes qui les relient. Dans d'autres problèmes, au contraire, le graphe n'est pas vraiment visible à première vue. On parle alors de <b>graphe implicite</b>.
+           <p>L'expertise d'un programmeur consiste à être capable de repérer qu'un problème qui ne ressemble pas du tout à un problème de graphe peut en fait quand même s'exprimer sous forme d'un graphe. Un tel programmeur peut alors, plutôt que de développer un algorithme ad-hoc et inefficace, s'appuyer sur un algorithme de graphe standard et très efficace.</p>
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

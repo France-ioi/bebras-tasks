@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-08</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-08-repeating-pattern/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            collision: "Le robot est rentré dans un mur.",
+            outside: "Le robot est sorti de la grille.",
+            noGoal: "Le robot n'a pas atteint la zone verte.",
+            success: "Bravo, vous avez réussi !",
+            noInstructions: "Glissez des flèches dans les cases blanches situées en dessous.",
+            zoneTooEarly: "Le robot a traversé une ligne bleue avant la dernière instruction de la séquence.",
+            zoneNoExit: "La dernière instruction de la séquence n'a pas fait traverser une ligne bleue au robot.",
+
+            executeButtonPlay: "Essayer",
+            executeButtonPause: "Pause",
+            executeButtonContinue: "Continuer",
+
+            loopText: function(loopTimes) {
+               return loopTimes + "x";
+            }
+
+            /* DEPRECATED BUT KEEP FOR FUTURE USE
+            zone: function(index) {
+               return "Partie " + index; 
+            }*/
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #control {
+            margin-top: 1em;
+            margin-bottom: 3em;
+         }
+         #control input {
+            margin-left: 1em;
+            margin-right: 1em;
+            width: 8em;
+         }
+         .instructionsUsage p {
+            text-align: center;
+            margin-top: 0.2em;
+            margin-bottom: 0em;
+         }
+         #markersUsage {
+            margin-top: 1em;
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Par quatre chemins</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               Programmez le robot pour qu'il atteigne la zone verte située à droite.
+            </p> 
+            <div id="anim_container">
+               <div id="anim1"></div>
+               <div class="instructionsUsage">
+                  <p>
+                     Faites glissez des flèches ci-dessous. Le robot va exécuter la séquence <span id="loopTimes">loopTimes</span> fois.
+                  </p>
+                  <p>
+                     Pour réussir, chaque exécution de la séquence doit se terminer par la traversée
+                     d'une ligne bleue.
+                  </p>
+                  <p id="markersUsage">
+                     Astuce : vous pouvez cliquer sur des cases du labyrinthe pour les marquer.
+                  </p>
+               </div>
+               <div id="anim2"></div>
+                 <div id="control">
+                  <input type="button" id="execute" value="Play"/>
+                  <input type="button" id="stop" value="Arrêter"/>
+                </div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+            <div class="easy">
+               <p><img src="solution_easy.png"></p>
+               <p><img src="sol_easy_arrows.png"></p>
+            </div>   
+            <div class="medium">
+               <p><img src="solution_medium.png"></p>
+               <p><img src="sol_medium_0.png"></p> 
+               <!--<p><img src="sol_medium_path.png"></p>-->
+               <p>Le robot traverse 4 zones, délimitées par les traits bleus.</p>
+               <p>La même séquence de déplacements est utilisée pour traverser chaque zone. Il faut donc que le chemin formé par le déplacement du robot dans la première zone permette d'éviter non seulement les obstacles de cette première zone, mais également les obstacles se trouvant dans les autres zones.</p>
+               <p>Pour nous aider à trouver la bonne séquence de déplacement, on peut marquer les cases à éviter, en cliquant pour poser des blocs noirs. Pour commencer, on place des blocs noirs dans la première zone, de sorte à marquer les positions correspondant aux blocs se trouvant dans la seconde zone.</p>
+               <p><img src="sol_medium_1.png"></p> 
+               <p>On continue de la même manière, en ajoutant des blocs noirs dans la première zone pour reproduire les positions des blocs de la troisième zone.</p>
+               <p><img src="sol_medium_2.png"></p> 
+               <p>Enfin, on ajoute des blocs dans la première zone pour reproduire les positions des blocs de la quatrième zone.</p>
+               <p><img src="sol_medium_3.png"></p> 
+               <p>À ce stade, on observe alors qu'il n'y a qu'un seul chemin possible : celui qui passe par les cases blanches restantes dans la première zone.</p>
+            </div>
+            <div class="hard">
+               <p><img src="solution_hard.png"></p>
+               <p><img src="sol_hard_arrows.png"></p>
+               <p>Pour trouver la solution, on peut tout d'abord remarquer, en observant de près le passage de la première à la second zone, qu'on va être obligé de se décaler d'une ligne d'une zone à l'autre (les zones étant séparées par les traits bleus). On met des blocs noirs aux endroits par lesquels on est obligé de passer :</p>
+               <p><img src="sol_hard_path_1.png"></p> 
+               <p>En observant en détails la seconde zone, on peut compléter des éléments du chemin.</p>
+               <p><img src="sol_hard_path_2.png"></p> 
+               <p>Il n'y a alors plus qu'à vérifier que la séquence trouvée peut bien être répétée 4 fois.</p>
+               <p><img src="sol_hard_path_3.png"></p> 
+            </div>
+         
+         
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Dans ce sujet, il s'agit de <strong>programmer</strong> le robot, à l'aide d'une courte séquence d'<strong>instructions</strong> que le robot va répéter.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

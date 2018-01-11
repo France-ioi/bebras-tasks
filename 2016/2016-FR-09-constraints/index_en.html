@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-EN-09</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-09-constraints/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Eslam Wageed",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you did it.",
+            wrong: function(attr, level) { 
+               var base = "The two framed objects touch ";
+               if (attr == "shape") {
+                  return base + "While they have the same form.";
+               } else if (attr == "fill") {
+                  return base + "While they have the same color.";
+               } else if (attr == "size") {
+                  if (level == "hard") {
+                     return base + "By a corner while they are the same size.";
+                  } else {
+                     return base + "While they have the same size.";
+                  }
+               }
+               return "ERROR";
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #control {
+            text-align: center;
+         }
+         .constraints li {
+            padding-bottom: 0.5em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Good Neighbors</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p class="easy">
+               Rearrange the objects so that two identical objects are NEVER side by side.
+            </p>
+            <div class="medium">
+               <p>
+               Rearrange the objects so that:
+               </p>
+               <ul class="constraints">
+                  <li>Two circles or two squares are never side by side ;</li>
+                  <li>Two small objects or two big objects are never side by side.</li>
+               </ul>
+            </div>
+            <div class="hard">
+               <p>
+                  Rearrange the objects in the grid so that:
+                  <ul class="constraints">
+                     <li>Two cirlces or two squares never touch <strong>By one side</strong>;</li>
+                     <li>Two small objects or two big objects never touch <strong>By a corner</strong> (diagonally).</li>
+                  </ul>
+               </p>
+            </div>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <div id="control">
+                <input type="button" id="execute" value="Check My Answer"/>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+<style>
+.solutionInstanceMismatch {
+   font-style: italic;
+}
+</style>
+<p class="solutionInstanceMismatch">Remarque : les données de la correction ne correspondent pas forcément à celles de votre sujet.</p>
+
+            <div class="easy">
+               <p>Pour résoudre cette version, il suffit de placer un carré bleu dans une case sur deux. </p>
+               <p><img src="sol_easy.png"></p>
+            </div>   
+            <div class="medium">
+               <p>Au début, on ne sait pas forcément par quoi commencer. Ce qui est sûr, c'est que ça ne sert à rien de placer le grand hexagone dans les 4 premières cases. En effet, s'il y avait une solution avec l'hexagone dans la première moitié, alors il y aurait une solution symétrique avec l'hexagone dans la seconde moitié (en prenant les formes de droite à gauche à la place de les prendre de gauche à droite).</p>
+               <p>Essayons donc, par exemple, de commencer par un petit rond, et de voir ce qu'il se passe. Si l'on ne met pas l'hexagone dans la première moitié, alors après le petit rond on est obligé de mettre un grand carré, puis à nouveau un petit rond, puis un grand carré.</p>
+               <p><img src="sol_medium_1.png"></p>
+               <p>On est alors coincé, car aucune des formes restantes ne permet de continuer :</p>
+               <p><img src="sol_medium_1a.png"> (deux grands de suites)</p> 
+               <p><img src="sol_medium_1b.png"> (deux grands de suites)</p> 
+               <p><img src="sol_medium_1c.png"> (deux carrés de suites).</p> 
+               <p>Si on avait commencé par un petit carré, on aurait été coincé de la même manière.</p>
+               <p>Du coup, on en conclut qu'il faut forcément commencer par une grande forme. En commençant par un grand carré, on continue avec un petit rond, puis un grand carré, puis un petit rond, et là on est obligé de mettre l'hexagone au milieu. Ensuite, il n'y a pas le choix pour continuer : on est obligé de mettre un petit rond, puis un grand carré, puis un petit rond, puis un grand carré.</p>
+               <p><img src="sol_medium_2.png"></p> 
+               <p>Si au contraire on avait commencé par un grand cercle, on aurait alors obtenu la situation symétrique :</p>
+               <p><img src="sol_medium_3.png"></p> 
+
+            </div>
+            <div class="hard">
+               <p>Voici une solution (il y a d'autres solutions, symétriques de celle-ci) :</p>
+               <p><img src="sol_hard.png"></p>
+               <p>Pour comprendre comment aboutir à cette solution, imaginons pour commencer qu'il n'y ait que des grandes formes, et qu'on n'ait que la première règle, qui dit que deux ronds ou deux carrés ne se touchent jamais par un côté. Si l'on commence par un carré dans le coin en haut à gauche, alors on est obligé de compléter la première ligne en alternant des ronds et des carrés. Sur la deuxième ligne, il faut alors commencer par un rond, puis de nouveau alterner entre carrés et ronds. Au final, on obtiendrait :</p>
+               <p><img src="sol_hard_1.png"></p>
+               <p>Reprenons maintenant des petites formes, mais en restant sur le principe qu'il faut forcément alterner les ronds et les carrés pour continuer à respecter la première règle. La seconde règle dit que deux petits objets ou deux gros objets ne doivent jamais se toucher par un coin. Il faut donc, sur chaque diagonale, alterner entre des petites formes et des grandes formes. Donc, si l'on commence sur la première ligne avec des grandes formes, il faut placer des petites formes sur la deuxième ligne, puis des grandes sur la troisième, etc... comme illustré ci-dessous.</p>
+               <p><img src="sol_hard_2.png"></p>
+               <p>Lorsqu'on complète toutes les diagonales en alternant petites et grandes formes, tout en conservant le fait que sur chaque ligne et sur chaque colonne on alterne entre carrés et ronds, on obtient au final la solution présentée plus haut.</p>
+            </div>
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Lorsqu'on résoud ce sujet à la main, on peut étudier attentivement les contraintes et essayer d'en déduire des idées de comment construire la solution. Mais comment un programme (dénué d'intelligence) pourrait-il s'y prendre pour trouver la solution ?</p>
+            
+            <p>Une manière naïve consiste à essayer toutes les rangements (permutations) possibles des formes dans les différentes cases, et ensuite tester pour chaque configuration obtenue si elle vérifie les contraintes. C'est ce qu'on appelle l'approche <strong>brute-force</strong>.</p>
+            
+            <p>Cette approche brute-force fonctionne très bien sur la version facile et la version moyenne du sujet, et, moyen un petit temps d'attente, permettrait également tout juste de résoudre la version difficile. En revanche, s'il y avait plus de pièces à ranger, cette méthode se révèlerait totalement inefficace, et ne permettrait pas de trouver la solution en un temps raisonnable.</p>
+
+            <p>Une meilleure manière de s'y prendre consiste à écrire un programme qui va poser les pièces une par une (en essayant les différentes possibilités), et en s'arrêtant dès qu'une des contraintes n'est plus satisfaite. Dans ce cas, le programme revient en arrière et considère d'autres choix. Cette méthode appellée <strong>backtracking</strong>, est utilisée dans de nombreux programmes informatiques.</p>
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-13</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-13-checksum/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            rowNames: [
+               "Luke",
+               "Sarah",
+               "Kim",
+               "Paul",
+               "Ahmed",
+               "Tom",
+               "Total"
+            ],
+            colNames: [
+               "Rouge",
+               "Jaune",
+               "Vert",
+               "Bleu",
+               "Marron",
+               "Total"
+            ],
+            errorLabel: function(userSum) {
+               return "Actuellement,\nle total est " + userSum + ".";
+            },
+            success: "Bravo, vous avez réussi !",
+            wrong: "Il reste des erreurs dans la grille. Essayez de les corriger.",
+            wrongCount: function(used, target) {
+               return "Vous avez corrigé la grille en plaçant " + used + " nombres. Essayez autrement pour ne placer que " + target + " nombres.";
+            },
+            invalidDrop: "Les nombres ne peuvent être placés que sur des cases blanches."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0m;
+            margin-bottom: 0em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Bons totaux</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+
+            <p>Il y a 
+            <span class="easy">une erreur</span><span class="medium">deux erreurs</span><span class="hard">cinq erreurs</span> dans le tableau.
+            Lorsque la somme des cases blanches d'une ligne ou d'une colonne n'est pas bonne, le total actuel est indiqué en rouge à côté du total que l'on devrait avoir.</p>
+
+            <p>
+            <span class="easy">Pour corriger l'erreur, glissez un nombre <strong>dans une case blanche</strong></span><span class="medium">Pour corriger les erreurs, glissez des nombres <strong>dans deux cases blanches</strong></span><span class="hard">Pour corriger les erreurs, glissez des nombres <strong>dans cinq cases blanches</strong></span>.</p>
+
+            <p class="hard">Note : si vous corrigez la grille en utilisant 6 nombres à la place de 5, vous obtiendrez la moitié des points.</p>
+
+            <div id="anim_container">
+               <div id="feedback"></div>
+               <div id="anim"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+            <div class="easy">
+               <p>Il y a une ligne et une colonne dont les totaux sont à corriger. Comme on ne peut modifier qu'un seul nombre, c'est forcément celui à l'intersection de cette ligne et de cette colonne. Pour faire passer les totaux de 7 à 6, il faut ainsi remplacer le 3 par un 2.</p>
+               <p><img src="sol_easy.png"></p>
+            </div>   
+            <div class="medium">
+               <p>Il y a deux lignes et deux colonnes dont les totaux sont à corriger. Comme on ne peut modifier que deux cases, il faut agir sur deux des quatres cases qui  se trouvent aux intersections de ces lignes et de ces colonnes.</p>
+               <p>Pour réparer la ligne Ahmed, on ne peut pas faire diminuer la valeur de la case avec le 0 (ligne Ahmed, colonne Jaune). Il faut donc forcément corriger la case avec le 1 (ligne Ahmed, colonne Bleu), en y plaçant un zéro.</p>
+               <p>Il reste alors une seule operation pour corriger la ligne Sarah et la colonne jaune, ce que l'on ne peut faire qu'en modifiant la case contenant le 1 (ligne Sarah, colonne Jaune), en y plaçant un 2.</p>
+               <p><img src="sol_medium.png"></p>
+            </div>
+            <div class="hard">
+               <p>Il y a trois lignes et une colonne à corriger. Pour corriger les lignes, il y a de nombreuses possibilités. Pour corriger la colonne  Jaune, en revanche, il y a moins de possibilités, donc on va commencer par là.</p>
+               <p>Pour passer d'un total de 9 à un total de 5 sur la colonne Jaune, il faut enlever 4 unités. Comme aucune case ne contient un chiffre de 4 ou plus, cela veut dire qu'il faut obligatoirement modifier deux cases.</p>
+               <p>Si l'on répare la colonne Jaune en modifiant deux cases sans faire attention, on se retrouve dans une situation où il reste 4 lignes à réparer, comme par exemple la situation ci-dessous. Or, vu qu'on a déjà utilisé 2 modifications, on ne peut plus en faire que 3, donc on ne pourra pas réussir.</p>
+               <p><img src="sol_hard_3_bad.png"></p>
+               <p>Pour réussir, il faut forcément réparer une ligne en même temps que l'on répare la colonne Jaune. Il n'y a qu'une seule manière de faire : placer un 1 comme montré ci-dessous :</p>
+               <p><img src="sol_hard_1_1.png"></p>
+               <p>Ensuite, on répare la colonne Jaune comme on peut. On est obligé de casser le total d'une autre ligne, il n'y a pas le choix. Une première façon de faire est montrée ci-dessous :</p>
+               <p><img src="sol_hard_1_2.png"></p>
+               <p>À ce stade, il faut réparer trois lignes. Pour ne pas casser les totaux des colonnes, il faut effectuer toutes les modifications sur une même colonne. Seule la dernière colonne permet cela. En y plaçant les nombres appropriés, on obtient ainsi une première solution :</p>
+               <p><img src="sol_hard_1_3.png"></p>
+               <p>Une second solution consiste à corriger la colonne Jaune en plaçant un 0 sur la première ligne :</p>
+               <p><img src="sol_hard_2_2.png"></p>
+               <p>À ce stade, il n'y a plus aucun choix possible, on est également contraint de travailler sur la dernière colonne pour pouvoir réparer les trois lignes avec trois modifications. On obtient ainsi la seconde solution :</p>
+               <p><img src="sol_hard_2_3.png"></p>
+            </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>On imagine souvent que lorsqu'on écrit des nombres dans un fichier sur son ordinateur, alors les nombres de ce fichier resteront inchangés jusqu'à la prochaine fois qu'on ouvrira le fichier. En fait, on aimerait bien que ça soit le cas. Mais qu'est ce qui nous le garantit ?</p>
+
+            <p>Le fichier est sauvegardé d'abord dans la mémoire "vive" de l'ordinateur, puis est acheminé par de minuscules fils électriques. L'information peut alors être stockée sur un disque dur, en utilisant des propriétés magnétiques (en gros, des aimants miniatures). Si le fichier passe par le réseau, il transitera sans doute par une fibre optique, où des rayons lumineux transporteront l'information sur des milliers de kilomètres. Qui peut alors garantir qu'aucun des chiffres du fichier ne sera jamais modifié ?</p>
+
+            <p>En fait, personne ne peut le garantir vraiment. Les processus physiques mis en jeu sont à des échelles si petites qu'il peut y avoir une infime probabilité que tout un coup un 0 soit transformé en un 1, ou inversement. En particulier, des rayons cosmiques produit par le soleil peuvent apporter un petit sursaut d'énergie localement et transformer un 0 en un 1. On pourrait croire à une blague du premier avril, mais non, ce sont des phénomènes réels étudiés depuis les années 70.</p>
+            
+            <p>Ces phénomènes sont très très rares, mais comme on manipule chaque seconde des milliards de 0 et de 1, au final il est assez probable d'avoir plusieurs chiffres modifiés chaque année sur son ordinateur personnel. Heureusement,  des techniques spécifiques ont été développées pour pouvoir corriger automatiquement ce type d'erreurs aléatoires. Mais comment est-ce possible ?</p>
+
+            <p>Ce sujet illustre justement une méthode permettant de mettre en place un <strong>code correcteur d'erreurs</strong>. L'idée est que lorsqu'on a des informations (le contenu des cases blanches du tableau du sujet) on peut avoir envie de stocker un peu plus d'information (la valeur du total de chaque ligne et colonne), de sorte que si jamais une donnée du tableau se retrouvait modifiée par erreur, alors on serait capable non seulement de détecter qu'il y a une erreur, mais également de corriger l'erreur.</p>
+            
+            <p>Dans le cas du tableau dont a stocké les lignes et les colonnes, si on a 1, 2 ou 3 cases modifiées, alors on est toujours capable de retrouver quelles étaient les valeurs d'origine. Par contre, au delà de 3 modifications erronées en même temps, on ne sait pas forcément corriger les données. Heureusement,  la probabilité d'avoir une modification aléatoire est très très faible, et la probabilité d'avoir 4 modifications en mêmes temps est encore petite. On peut donc espérer que cela n'arrive presque jamais, et même que, le jour où cela arrive, ça tombe sur des chiffres qui ne sont pas importants. Par exemple,  qui serait capable de remarquer un changement de la couleur d'un pixel affiché pendant une fraction de seconde au milieu d'un film ?</p>
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-13</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-13-search-substring/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            empty: "Sélectionnez un morceau pour chercher s'il existe dans la bibliothèque.", 
+            partial: "Vous pouvez trouver le morceau le plus long en faisant moins d'essais", 
+            wrong: "<p>Vous n'avez pas trouvé le plus long morceau qui existe dans la bibliothèque, continuez.</p><p>Vous pouvez aussi recommencer. Le contenu de la bibliothèque changera, donc le plus long morceau aussi.</p>", 
+            selectFirstLine: "<p>Cliquez sur la première ligne<br/>du morceau à chercher.</p>",
+            selectSecondLine: "<p>Cliquez maintenant<br/>sur la <b>dernière ligne</b><br/>du morceau à chercher.</p>",
+            searchResult: function(found, isLongest, level) {
+               var result = "Résultat : ";
+               if(found) {
+                  if(isLongest) {
+                     result += "<span class=\"answer answerYesLongest\">Vous avez trouvé !</span>";
+                     if (level != "easy") {
+                        result += "et c'est le plus long. "
+                     }
+                     result += "</p>";
+                     return result;
+                  }
+                  else {
+                     if (level != "easy") {
+                        result += "<span class=\"answer answerYes\">OUI</span>";
+                     } else {
+                        result = "";
+                     }
+                     result += "<p>Ce morceau existe dans un livre ";
+                     if (level == "easy") {
+                        result += "mais ne contient pas 3 lignes.</p>";
+                     } else {
+                        result += "mais n'est pas<br/>le plus long.</p>";
+                     }
+                  }
+               }
+               else {
+                  result += "<span class=\"answer answerNo\">NON</span><p>Ce morceau n'est dans aucun livre de la bibliothèque.</p>";
+               }
+               result += "<p>Faites une autre recherche.</p>";
+               return result;
+            },
+            history: function(numSearches, longestSub, level) {
+               var string = "";
+               if (level == "hard") {
+                  string = "Nombre d'essais : " + numSearches;
+               }
+               return string;
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .longestSub {
+            border: 1px solid gray;
+            color: gray;
+         }
+         .answer {
+            font-weight: bold;
+         }
+         .answerYesLongest {
+            color: green
+         }
+         .answerYes {
+            color: orange;
+         }
+         .answerNo {
+            color: red;
+         }
+         .mainTable {
+            width: 770px;
+            margin: auto;
+         }
+         .resultDiv, .wordsDiv, .word {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .resultDiv {
+            width: 240px;
+         }
+         #currentSearch {
+            width: 240px;
+         }
+         .resultDivCell {
+            vertical-align: top;
+            text-align: center;
+         }
+         .wordsDivCell {
+            vertical-align: top;
+            width: 200px;
+         }
+         .word {
+            border: 1px solid black;
+            padding: 4px 8px 4px 8px;
+            cursor: default;
+         }
+         .selectedWord {
+            background: cyan;
+         }
+         .wordFoundLongest {
+            background: #00FF00;
+         }
+         .wordFound {
+            background: orange;
+         }
+         .wordNotFound {
+            background: #FF1010;
+         }
+         .search {
+            vertical-align: top;
+         }
+         .search div {
+            width:6px;
+            vertical-align: middle;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Poésie</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p class="hard" id="enemyWarning"></p>
+            <p>
+            Il y a 10 ans, Agnès Rivière a écrit un poème. Depuis, des extraits ont été cités dans des livres.</p>
+            <p class="easy">Avec l'outil de recherche, trouvez quel morceau <b>de trois lignes</b> existe dans un livre de la bibliothèque.</p>
+            <p class="medium hard">Trouvez le morceau <b>le plus long en nombre de lignes consécutives</b>, qui existe dans un livre de la bibliothèque.</p>
+            <div class="hard">
+               <p>Vous pouvez faire <b>au maximum <span id="maxAttempts"></span> recherches</b>.</p>
+               <!--<p>Remarque : chaque ligne individuelle est au moins dans un livre.</p>-->
+            </div>
+            <table class="mainTable">
+               <tr>
+                  <p>Voici le poème :</p>
+                  <td class="wordsDivCell">
+                     <div class="wordsDiv">
+                        <!-- To be filled with elements in the format:
+                           <div class="word" id="word_0">Word</div>
+                        -->
+                     </div>
+                  </td>
+                  <td class="search"><div id="test0"></div></td>
+                  <td class="search"><div id="test1"></div></td>
+                  <td class="search"><div id="test2"></div></td>
+                  <td class="search"><div id="test3"></div></td>
+                  <td class="search"><div id="test4"></div></td>
+                  <td class="search"><div id="test5"></div></td>
+                  <td class="search"><div id="test6"></div></td>
+                  <td class="search"><div id="test7"></div></td>
+                  <td class="search"><div id="test8"></div></td>
+                  <td class="search"><div id="test9"></div></td>
+                  <td class="search"><div id="test10"></div></td>
+                  <td class="search"><div id="test11"></div></td>
+                  <td class="search"><div id="test12"></div></td>
+                  <td class="search"><div id="test13"></div></td>
+                  <td class="search"><div id="test14"></div></td>
+                  <td class="search"><div id="test15"></div></td>
+                  <td class="search"><div id="test16"></div></td>
+                  <td class="search"><div id="test17"></div></td>
+                  <td class="resultDivCell">
+                     <table cellspacing=0>
+                     <tr><td style="border: solid black 1px;vertical-align:middle;background:lightgray;width:230px">
+                     <div style="height:40px;padding-top:5px">
+                     <b>Outil de recherche<br/>dans la bibliothèque</b>
+                     </div>
+                     </td></tr>
+                     <tr><td style="border: solid black 1px;">
+                        <div class="resultDiv" style="position:relative;">
+                           <div id="currentSearch" style="height:150px;margin-top:20px;"></div>
+                           <div class="hard" id="history" style="height:30px;"></div>
+                           <div class="hard" style="background:#FFA0A0;bottom:0px;width:100%;"><div style="padding:5px">Si vous recommencez tout, la bibliothèque changera.</div></div>
+                        </div>
+                     </td></tr>
+                     <tr><td>
+                        <input type="button" id="hideSearches" class="easy medium" style="margin-top:5px" value="Cacher les recherches" />
+                     </td></tr>
+                     </table>
+                  </td>
+               </tr>
+            </table>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+           <div class="easy">
+              <p>On cherche un morceau de longueur 3. Il y a 4 morceaux possibles. On peut les tester dans l'ordre, en considérant les lignes 1 à 3, puise 2 à 4, puis 3 à 5, puis 4 à 6.</p>
+              <img src="Sol_easy_1.png">
+              <p>Vu qu'on a testé tous les morceaux possibles, on finit forcément par trouver le bon. Notez que l'ordinateur fait en sorte que ça soit toujours le dernier fragment que l'on teste qui soit le bon.</p>
+            
+           </div>
+
+           <div class="medium">
+              <p>On cherche le plus long morceau du poême qui a été copié. Une méthode simple consiste à tester tous les morceaux possibles, sans réfléchir. Ainsi, on peut tester tous les morceaux de longueur 1. Il y en a 8 différents.</p>
+              <img src="Sol_medium_1.png">
+              <p>Puis on teste tous les morceaux de longueur 2. Il y en a 7 différents.</p>
+              <img src="Sol_medium_2.png">
+              <p>Puis on continue, en testant les 6 morceaux de longueur 3, les 5 morceaux de longueur 4, et les 4 morceaux de longueur 5. On arrive à la situation suivante.</p>
+              <img src="Sol_medium_3.png">
+              <p>Il reste alors 3 morceaux de longueur 6, et 2 morceaux de longueur 7, et un morceau de longueur 8. On continue, et un peu avant d'avoir tout terminé, l'ordinateur nous indique que l'on a trouvé le bon morceau.</p>
+              <p>Remarque : une solution plus efficace est décrite dans la version 4 étoiles de ce défi.</p>
+           </div>
+
+           <div class="hard">
+              <p>Afin de développer une stratégie méthodique et efficace pour trouver le plus long morceau ayant été cité, commençons par quelques observations.</p>
+              <ul>
+              <li>Si on a trouvé un morceau d'une certaine taille ayant été cité (trait dessiné en orange), alors dans la suite on ne cherchera que des morceaux strictement plus longs. En effet, l'objectif est de trouver le morceau cité le plus long.</li>
+              <li>Si on a trouvé un morceau n'étant pas cité (trait dessiné en rouge), alors dans la suite il est inutile de chercher des morceaux qui commencent à la même position. En effet, si un morceau englobe un morceau non cité, le morceau englobant est forcément lui aussi non cité.</li>
+              </ul>
+              <p>On va exploiter ces deux observations en procédant de la manière suivante.
+              <ul>
+              <li>On commence avec la première ligne du poême toute seule, c'est à dire un morceau de longueur 1 tout au début du poême.</li>
+              <li>On essaie d'agrandir ce morceau partant de la première ligne, tant que l'ordinateur nous indique que le morceau a été cité. Dès que ce n'est plus le cas, il n'est plus utile de chercher des morceaux commençant à la première ligne, on passe donc à des morceaux commençant à la seconde ligne.</li>
+              <li>Lorsque l'on passe à l'étude des morceaux commençant à la seconde ligne, on peut commencer directement par une longueur égale à une unité de plus que la longueur du plus grand trait orange (morceau ayant déjà été cité). Autrement dit, lorsqu'on décale la position du début d'une case, on décale également la position de la fin d'une case, de sorte à conserver la taille des morceaux que l'on était en train de tester.</li>
+              </ul>
+              <p>On répète le principe suivant, en agrandissant la longueur du segment commençant à la deuxième ligne, jusqu'à ce que l'on obtienne une réponse négative (trait rouge). On passe alors à la troisième ligne, en décalant le début et aussi la fin du segment. On continue ainsi de suite, jusqu'à ce qu'on ait trouvé le segment le plus long.</p>
+              <img src="Sol_hard_1.png">
+              <p>On peut analyser cet algorithme pour démontrer qu'il permet toujours de trouver la réponse en au plus 12 tests. À chaque étape, soit on fait avancer la position de la fin, soit on fait avancer la position du début et de la fin. Comme la position de la fin avance d'une ligne à chaque fois, et qu'il n'y a que 12 lignes en tout, on est certain de pouvoir résoudre le sujet en 12 tests, quelle que soit la stratégie de l'ordinateur.</p>
+           </div>
+
+         <h2>C'est de l'informatique !</h2>
+      
+            <p>Ce défi illustre un principe commun à de nombreux algorithmes, nommé le principe de la <b>fenêtre glissante</b>. Ce principe peut s'appliquer lorsqu'on a une séquence d'éléments, et qu'on cherche un sous-ensemble d'éléments consécutifs (c'est-à-dire à la suite les uns des autres) ayant une propriété particulière.</p>
+
+            <p>La <b>fenêtre</b> décrit le sous-ensemble "en cours". La fenêtre peut être décalée d'un cran, en avançant à la fois la position du début et de la fin de la fenêtre, comme par exemple dans la version 2 étoiles de ce défi, où la fenêtre contient toujours 3 éléments. Il est également possible de faire avancer indépendamment le début et la fin de la fenêtre, comme par exemple dans la version 4 étoiles de ce sujet.</p>
+
+            <p>Ce qui rend les algorithmes basés sur des fenêtre glissantes efficaces est que la position du début et la position de la fin de la fenêtre ne peuvent que avancer, jamais reculer. </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

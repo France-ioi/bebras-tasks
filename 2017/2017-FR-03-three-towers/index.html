@@ -1,0 +1,253 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-03</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'crane-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+    <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-03-three-towers/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi&nbsp;!",
+            error: "La résultat obtenu ne correspond pas à l'objectif.", // not displayed
+            partial: function(steps, stepsOptimal, level) { 
+               var s = "Vous avez réussi en " + steps + " étapes. Vous pouvez recommencer pour essayer de ranger les blocs en seulement " + stepsOptimal + " étapes.";
+               if (level == 'hard') {
+                  s += "<br> Attention, ce n'est vraiment pas facile !";
+               }
+               return s;
+            },
+            pickupError: "Il n'y a pas de bloc au-dessus de ce bouton.",
+            blockClick: "Cliquez sur les boutons gris pour piloter la grue." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0em;
+            margin-bottom: 0.5em;
+            text-align: center;
+            font-weight: bold; 
+            color: #CC8844;
+         }
+         #target_anim_container {
+            border: solid 1px black;
+            text-align: center;
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 14px;
+         }
+         #target_cell {
+            padding-left: 80px;
+         }
+         #animTable {
+            margin: auto;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 15px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         .targetNumber {
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Tour infernale</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>Placez les blocs comme sur l'objectif. Cliquez sur les boutons avec les lettres pour piloter la grue aimantée.</p>
+
+            <p>Réussissez en <span id="nbStepsPartial" class="targetNumber"></span> étapes<span class="medium hard"> pour avoir des points, et en <span id="nbStepsOptimal" class="targetNumber"></span> étapes pour avoir tous les points<span class="hard"> (difficile !)</span></span>.
+             </p>
+            <table id="animTable">
+               <tr>
+                  <td>
+                     <div id="anim_container">
+                        <div id="anim"></div>
+                        <div id="feedback">
+                           Feedback
+                        </div>
+                     </div>
+                     <div id="buttons">
+                        <span>Nombre d'étapes&nbsp;: <span id="stepCounter"></span>.</span>
+                        <input type="button" id="undo" value="Annuler la dernière étape" />
+                     </div>
+                  </td>
+                  <td id="target_cell">
+                     <div id="target_anim_container">
+                        Objectif&nbsp;:
+                        <br><br>
+                        <div id="target_anim"></div>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            <img src="icon.png" style="display:none">
+            <img src="magnet.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            <style>
+            .table-sol img {
+               width: 80%;
+            }
+            .table-sol td {
+               width: 120px;
+               vertical-align: top;
+            }
+            </style>
+        
+            <div class="easy">
+               <p>On fait passer les blocs numéro 3 et numéro 2 par la pile du milieu.</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_3.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_5.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="medium">
+               <p>On utilie les deux piles du milieu pour faire transiter les quatre blocs du haut, afin de libérer le bloc numéro 1. On fait attention de faciliter le travail de rangement final, en mettant toujous un bloc plus petit sur un bloc plus grand : le bloc 2 sur le 3, et le bloc 4 sur le 5. Ceci permet de rendre ces blocs accessibles dans le bon ordre pour les placer plus tard directement sur la dernière pile.</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_3.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_4.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_5.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+               <table class="table-sol" style="float:right;margin-left:20px"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_b.png">
+               </td>
+               </tr></table>
+               <p>Pour pouvoir déplacer le bloc 1 vers la dernière pile, il faut retirer les blocs 5, 4 et 7 de ces deux piles. <p>Si on les place directement sur les deux piles du milieu, on va empiler des blocs sur les blocs 2 et 3, et il faudra tous les retirer ensuite pour pouvoir placer ces deux blocs sur la dernière pile.
+               <p style="clear:both">
+               <table class="table-sol" style="float:left"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_c.png">
+               </td>
+               </tr></table>
+               <p>Pour éviter ces nombreux déplacements futurs, il faut anticiper et par exemple préparer l'accès rapide aux blocs 2 et 3 et dans le bon ordre. On va donc retirer le bloc 6, pour pouvoir déplacer le bloc 2 sur le bloc 3.
+               <p>Il faut décider entre mettre le bloc 6 au dessus du 5 ou bien au dessus du 7.
+               <p style="clear:both;margin-top:20px;">Il est nettement plus intéressant de mettre le bloc 6 au dessus du bloc 5, car on pourra ensuite placer les blocs 7, 6, 5 et 4 sur la pile C, dans cet ordre. Cela permettra leur transfert rapide, plus tard, vers la dernière pile.
+               <p>Voici les étapes clés de la séquence complète :
+               <center><table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_2.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_5.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_6.png">
+               </td>
+               </tr>
+               </table></center>
+
+               <p>Une autre approche consistait à commencer par déplacer le bloc 3 sur la pile C, pour pouvoir faire une place pour les blocs 7, 5 et 4 et les y placer dans l'ordre. La suite se trouve assez facilement.
+            </div>            
+
+         <h2>C'est de l'informatique !</h2>
+            
+            <p>Ce sujet fait intervenir ce qu'on appelle en information la notion <b>d'heuristique</b>. Au début, on ne sait pas trop dans quelle direction partir, mais on peut estimer que certains coups sont meilleurs que d'autres. Par exemple, il vaut mieux éviter de déposer un cube ayant un certain numéro au-dessus d'un cube ayant un numéro plus petit.
+            </p>
+            <p>Certains programmes informatiques utilisent des algorithmes <b>heuristique</b> : plutôt que d'explorer toutes les possibilités dans n'importe quel ordre, on va faire en priorité des "bons choix", par exemple ici on va en priorité déposer des cubes sur des piles ne contenant que des cubes de numéro supérieurs, lorsque c'est possible. 
+            </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

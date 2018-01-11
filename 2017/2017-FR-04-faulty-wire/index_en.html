@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-04</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0',
+            'visual-graph-1.0', 'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-04-faulty-wire/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            deductionError: "The wire you chose is not necessarily faulty.",
+            emptyError: "You must mark the faulty wire.",
+            partial: "You could use fewer steps.",
+            damagedText: "damaged",
+            lightOnText: "light is on",
+            lightOffText: "light is off"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         #exampleTable {
+            margin: auto;
+            margin-top: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Faulty wire</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <table id="exampleTable">
+               <tr>
+                  <td>
+                     <div id="exampleAnim0"></div>
+                  </td>
+                  <td>
+                     <div id="exampleAnim1"></div>
+                  </td>
+                  <td>
+                     <div id="exampleAnim2"></div>
+                  </td>
+               </tr>
+            </table>
+            <p>
+            One of the connectors below is damaged. Find out which one by placing the 2 wires  at different locations and see if the lightbulb turns on or not, like in the example above.</p>
+            <p>Click on the damaged connector when you think you found it.</p>
+            <p>To get 100% of the points, connect the wires in <span id="descriptionSteps">5</span> different positions at most.</p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <div id="buttons">
+               <span>Number of steps: <span id="stepCounter"></span>.</span>
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="lightoff.png" style="display:none">
+            <img src="lighton.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            
+
+         <!--
+         <h2>C'est de l'informatique !</h2>
+            
+           -->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

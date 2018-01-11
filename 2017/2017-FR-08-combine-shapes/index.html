@@ -1,0 +1,298 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-08</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'simpleKeyboard-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-08-combine-shapes/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            error: "Votre combinaison de formes n'est pas identique à l'objectif.",
+            syntaxErrorShape: "Vous ne pouvez pas placer de forme à cet endroit, utilisez un autre bouton.",
+            syntaxError: function(symbol) {
+               return "Vous ne pouvez pas placer de \"" + symbol + "\" à cet endroit, utilisez un autre bouton.";
+            },
+            examplesTitle: "Exemples",
+            backspace: "Effacer"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #error {
+            color: red;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         .sectionContainer {
+            text-align: center;
+            vertical-align: top;
+            display: inline-block;
+            padding-bottom: 10px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .sectionBlock {
+            vertical-align: bottom;
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .mainDiv {
+            text-align: center;
+         }
+         .exampleTitle {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         .targetTitle {
+            margin-bottom: 0.5em;
+         }
+         .exampleTitle, .targetTitle {
+            font-size: 16px;
+            font-weight: bold;
+         }
+         #examplesContainer {
+            border: 1px solid black;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            width: 320px;
+         }
+         .paperDiv {
+            border: 1px solid black;
+            display: inline-block;
+            margin-left: 2px;
+            margin-right: 2px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .symbolButton {
+            background: #F2F2F2;
+         }
+         #inputContainer {
+            width: 230px;
+         }
+         #keyboardContainer {
+            margin-top: 5px;
+            margin-bottom: 20px;
+            width: 220px;
+         }
+         .keyboard_row {
+            display: block;
+         }
+         .keyboard_button {
+            width: 40px;
+            margin: 5px;
+            padding: 9px;
+         }
+         .keyboard_button_8 {
+            width: 80px;
+         }
+         #inputDiv {
+            border: 2px solid black;
+            font-size: 16px;
+            min-height: 30px;
+            width: 220px;
+            text-align: left;
+            padding-top: 8px;
+         }
+         #descriptionContainer {
+            text-align: left;
+            margin-top: 20px;
+            margin-right: 20px;
+         }
+         #leftContainer {
+            padding: 0px;
+            margin: 0px;
+            width: 440px;
+         }
+         .example {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-left: 3px;
+            margin-right: 3px;
+         }
+         #inputContainer {
+            margin-right: 10px;
+            margin-bottom: 20px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Dessin combiné</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div class="mainDiv">
+               <div class="sectionContainer" id="leftContainer">
+                  <div id="descriptionContainer">
+                     <p>
+                        Castor peut créer des dessins en combinant trois formes.
+                     </p>
+                     <p>
+                        Étudiez les exemples pour comprendre comment il fait.
+                     </p>
+                     <p>
+                        Ensuite, reproduisez l'objectif en utilisant les boutons gris.
+                     </p>
+                  </div>
+               </div>
+               <div class="sectionContainer" id="examplesContainer">
+                  <div class="exampleTitle">Exemples</div>
+                  <div id="examples"></div>
+                  <!-- Filled automatically with divs of the form.
+                        <div class="example sectionBlock">
+                           <span class="paperTitle">A+B</span><br>
+                           <div class="paperDiv" id="paperExample0"></div>
+                        </div>
+                  -->
+               </div>
+               
+               <div class="sectionContainer" id="controlContainer">
+                  <div id="inputContainer" class="sectionBlock">
+                     <div id="symbolsContainer">
+                        <!-- Automatically filled with divs in this format:
+                           <div class="symbol sectionBlock">
+                              <span class="paperTitle">A</span><br>
+                              <div class="paperDiv" id="paperSymbolA"></div>
+                           </div>
+                        -->
+                     </div>
+                     <div id="keyboardContainer"></div>
+                     <div id="inputDiv">&nbsp;&nbsp;<span id="input"></span></div>
+                     <!--<input type="text" id="input" value="abc" disabled>-->
+                  </div>
+                  <div class="paperDiv sectionBlock" id="paperUser"></div>
+                  <div class="objectiveContainer sectionBlock">
+                     <div class="targetTitle">Objectif</div>
+                     <div class="paperDiv" id="paperTarget"></div>
+                  </div>
+               </div>
+               <br>
+               <span id="error"></span>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+            <div class="easy">
+            <p>L'objectif ressemble à la forme B, dont on a retiré le centre. Grâce aux exemples, on remarque que l'opération "-" permet de retirer une forme à une autre. On va donc commencer par la forme B, et retirer la forme A, ce qui donne la solution :
+            <p><b>B -A</b>
+            </div>
+   
+            <div class="medium">
+            <p>L'objectif ressemble à la forme B, dont on a retiré le centre, avant de lui ajouter une partie de la forme C.
+            <p>On commence donc par prendre la forme B et lui retirer la forme carrée A :
+            <center>
+               <b>B -A</b><br/>
+               <img src="sol_medium_1.png" style="width:100px">
+            </center>
+            <p>On a alors envie de lui ajouter la forme C :
+            <center>
+               <b>B -A +C</b><br/>
+               <img src="sol_medium_2.png" style="width:100px">
+            </center>
+            <p>Il reste cependant à supprimer le haut et le bas de cette forme C. Pour cela, on peut appliquer #B pour ne garder que la partie qui est à l'intérieur de cette forme, et obtenir :
+            <center>
+               <b>B -A +C #B</b><br/>
+               <img src="sol_medium_3.png" style="width:100px">
+            </center>
+            </div>
+
+            <div class="hard">Il existe plusieurs solutions, par exemple&nbsp;:
+            <p>L'objectif ressemble à une superposition de B et C, dont on a retiré l'extérieur et le centre.
+            <p>On peut commencer par superposer B et C&nbsp;:
+            <center>
+               <b>B +C</b><br/>
+               <img src="sol_hard_1.png" style="width:100px">
+            </center>
+            <p>On veut ensuite retirer l'extérieur et le centre. Retirer l'extérieur est facile : on restreint la résultat à l'intérieur d'un carré A en appliquant #A&nbsp;:
+            <center>
+               <b>B +C #A</b><br/>
+               <img src="sol_hard_2.png" style="width:100px">
+            </center>
+            <p>Il reste à retirer la forme au centre, mais on ne dispose pas de ce type de forme. On voit cependant dans l'exemple en bas et au milieu, <b>A + (B #C)</b>, que <b>B #C</b> correspond à la forme que l'on veut retirer. Cela donne&nbsp;:
+            <center>
+            <table style="text-align:center;width:400px"><tr>
+            <td>
+               <b>B +C #A</b><br/>
+               <img src="sol_hard_2.png" style="width:100px">
+            </td>
+            <td>
+               <b>B #C</b><br/>
+               <img src="sol_hard_4.png" style="width:100px">
+            </td>
+            <td>
+               <b>B +C #A -(B #C)</b><br/>
+               <img src="sol_hard_3.png" style="width:100px">
+            </td>
+            </tr>
+            </table>
+            </center>
+            <p>L'expression <b>B +C #A -(B #C)</b> produit donc l'objectif. Il existe d'autres manières de l'obtenir, par exemple&nbsp;:
+            <ul>
+               <li><p><b>B +C -(B #C) #A</b> : la même approche mais on retire le centre avant de retirer l'extérieur</li></p>
+               <li><p><b>C -B #A +(B -C #A)</b> : on prend d'une part C auquel on retire le centre et l'extérieur,<br/> ce qui donne <b>C -B #A</b>, et on ajoute B auquel on retire le centre et l'extérieur, qui donne <b>B -C #A</b>.</p></li>
+            </ul>
+            </div>
+
+         <h2>C'est de l'informatique !</h2>
+            
+            <p>Les logiciels permettant de réaliser des images informatique sont capables d'effectuer des opérations de superposition (ici noté <b>+</b>), de soustraction (ici noté <b>-</b>), ou de restriction à une zone (ici noté <b>#</b>).</p>
+
+            <p>Ces opérations sur les images sont très faciles à programmer. Par exemple, pour faire <b>A +B</b>, il suffit, pour chaque pixel (petit point) de l'image <b>A</b>, de regarder la couleur du pixel correspondant dans l'image <b>B</b>. Si le second est blanc (transparent), alors on conserve le pixel de l'image <b>A</b>, sinon on utilise la couleur du pixel de l'image <b>B</b>. En appliquant ce raisonnement sur tous les pixels de l'image, on obtient le résultat de la superposition de l'image <b>B</b> sur l'image <b>A</b>.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-EN-05</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-05-red-and-blue/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Eslam Wageed",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            tooFew: "You still have one or more circles to mark in blue.",
+            tooManyEasy: "You have marked some circles that can not connect you to the red circle.",
+            tooMany: "You have some circles that do not allow you to join the red circles.",
+            wrong: "Circles are not colored correctly.",
+            close: "You're almost there! Less than 3 circles are colored wrong.",
+            cannotSelect: "You can not select the red circles.",
+            success: "Congratulations, you did it."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #control, #control table {
+            text-align: center;
+            margin: 20px auto;
+         }
+         #control table td {
+            width: 120px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Points of Departure</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+             <p>Which circles can connect you  <span class="easy"  style="font-weight:bold">to the Red Circle</span> <span class="medium hard" style="font-weight:bold">to the Red Circles</span> by following the arrows? Click on the cirles to mark it Blue.</p>
+            
+             <p class="hard">Hint: Click on the arrows <strong>to color them</strong> for a better view.</p>
+            
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+            <div class="easy">
+               <p>Une manière naïve de résoudre le sujet est de se demander, pour chaque cercle, s'il existe un chemin permettant d'aller au cercle rouge.</p>
+               <p>Une manière plus astucieuse de résoudre le sujet consiste à partir du cercle rouge, et à remonter les flèches à l'envers, en coloriant en bleu tous les cercles que l'on peut atteindre ainsi.</p>
+               <p><img src="sol_easy.png"></p>
+            </div>   
+            <div class="medium">
+               <p>Une manière naïve de résoudre le sujet est de se demander, pour chaque cercle, s'il existe un chemin permettant d'aller à chacun des deux cercles rouges.</p>
+               <p>Une manière plus astucieuse de résoudre le sujet consiste à d'abord repérer que, pour pouvoir rejoindre les deux cercles rouges, il faut forcément passer par le cercle central (le cercle bleu du milieu). Ensuite, il suffit de remonter les flèches à l'envers en partant de ce cercle bleu central, en coloriant en bleu tous les cercles que l'on peut atteindre ainsi.</p>
+               <p><img src="sol_medium.png"></p>
+            </div>
+            <div class="hard">
+               <p>On peut simplifier le problème en étudiant la structure générale de la figure. Si l'on enlève les cercles du milieu qui ne servent à rien, et si l'on "compresse" les groupes de 4 noeuds situés sur chacun des 4 bords, on se ramène à un petit problème sur lequel il est relativement aisé d'identifier les cercles qui permettent d'accéder aux 4 noeuds rouges.</p>
+               <p><img src="sol_hard_a.png"></p>
+               <p>Les chemins noirs de la figure simplifiée ci-dessus correspondent aux chemins coloriés en verts sur la figure d'origine ci-dessous :</p>
+               <p><img src="sol_hard_y.png"></p>
+
+               <p>On peut alors revenir au problème de départ, et se demander quels sont les cercles qu'il reste à colorier en bleu. On peut faire l'observation suivante :  si une flèche part d'un cercle gris et pour rejoindre un cercle bleu, alors on peut colorier le cercle gris en bleu. En effet, de ce cercle gris on peut aller au cercle bleu en utilisant cette flèche, puis ensuite du cercle bleu on peut aller à tous les cercles rouges (puisque c'est la propriété des cercles bleus).</p> 
+               <p>Du coup, on va répéter l'opération suivante : pour chaque cercle gris, regarder s'il y a une flèche vers un cercle bleu. Si oui, on colorie le cercle gris en bleu (et on peut aussi colorier la flèche correspondante en vert). Sinon, on cherche un autre cercle gris. On répète le processus jusqu'à ce qu'on ne puisse plus rien colorier en bleu. On a alors terminé.</p>
+               <p><img src="sol_hard_2.png"></p>
+               <!---<p>Comment peut-on être certain d'avoir terminé (sans appuyer sur le bouton "essayer") ? On peut remarquer que si d'un cercle on peut rejoindre les 4 cercles rouges, alors en particulier on peut rejoindre le cercle rouge en haut à gauche, et donc on peut rejoindre le cercle bleu en haut à gauche. Du coup, on sait que depuis tout cercle bleu, il existe un chemin vers le cercle bleu en haut à gauche. Or, s'il existe un tel chemin, alors forcément avec la méthode décrite ci-dessous, on a du colorier en bleu tous les cercles de ce chemin. En conclusion : avec la méthode que l'on a appliqué, tous les cercles qui permettent de rejoindre les 4 cercles rouges ont été coloriés en bleu.</p>-->
+            </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Les cercles et les flèches représentent une structure très fréquente en information, appelée <strong>graphe</strong>. Des graphes peuvent décrire des structures concrètes, comme par exemple des réseaux routiers ou des réseaux informatiques. Ils peuvent également décrire des structures abstraites, comme par exemple, un réseau social sur lequel chaque cercle représente une personne et chaque flèche représente le fait qu'une personne suit le fil d'actualité d'une autre personne.</p>
+
+            <p>La question que posait ce sujet porte sur la propriété <strong>d'accessibilité</strong> : quels sont les cercles à partir desquels on peut accéder à un ensemble d'autres cercles. Il existe des algorithmes très performants permettant à des ordinateurs de répondre de manière entièrement automatique à cette question et de traiter des cas avec des milliards de cercles et de flèches.</p>
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

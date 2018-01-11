@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-05</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi&nbsp;!",
+            error: "Les formes ne correspondent pas au code.",
+            removeShape: "Supprimer",
+            dragAttempt: "Cliquez sur une forme, puis cliquez sur l'emplacement où vous souhaitez la déposer." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #taskDescription p {
+            text-align: left;
+         }
+         .exampleWrapper {
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid black;
+         }
+         .exampleContainer {
+            padding-left: 15px;
+         }
+         .exampleTitle {
+            font-weight: bold;
+            padding: 10px;
+         }
+         #animContainer {
+            text-align: center;
+         }
+         #animContainer div {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0px 10px 0px 0px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #animContainer {
+            margin-top: 1em;
+         }
+         .drawAreaDiv {
+            border: 3px solid black;
+         }
+         .drawAreaDivExample {
+            vertical-align: center;
+         }
+         #anim {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         .configString {
+            font-weight: bold;
+            font-size: 1.5em;
+            text-align: center;
+         }
+         #taskDescription td {
+            vertical-align: top;
+         }
+         .hint {
+            font-weight: bold;
+            color: green;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Langage de formes</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <table><tr><td style="vertical-align:center">
+               Le code <span class="configString" id="configString_example0">A</span> <br class="hard"/>décrit le dessin :</td><td><span id="exampleAnim0" class="drawAreaDivExample"></span>
+            </td><td>.</td></tr></table>
+            <table class="medium"><tr><td style="vertical-align:center">
+               Le code <span class="configString" id="configString_example1">A</span> décrit le dessin :</td><td><span id="exampleAnim1" class="drawAreaDivExample"></span>
+            </td><td>.</td></tr></table>
+            <div id="animContainer">
+               <div>
+                  <div id="buttonsAnim"></div>
+               </div>
+               <div id="targetWrapper">
+                  <p>À votre tour, créez le dessin décrit par le code :</p>
+                  <span class="configString" id="configString_main">A</span><br/>
+                  <div id="anim" class="drawAreaDiv"></div>
+                  <p>
+                  <span class="hint">Cliquez sur l'emplacement souhaité.</span>&nbsp;
+                  </p>
+               </div>
+           </div>
+           <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+           <p>Tout d'abord, il faut déduire la correspondance entre les lettres et les formes. </p>
+           <ul>
+               <li>Un A correspond à un triangle vert.</li>
+               <li>Un X correspond à un carré rose.</li>
+               <li>Un O correspond à un rond bleu.</li>
+           </ul>
+   
+           <p class="medium">Une lettre suivie d'un texte entre parenthèses correspond à une grande forme contenant des formes plus petites. Les lettres entre les parenthèses correspondent aux petites formes à l'intérieur. Ces formes sont données dans l'ordre suivant&nbsp;: celle d'en haut au milieu, puis celle d'en bas à gauche, puis celle d'en bas à droite.</p>
+          
+           <p class="hard">Les parenthèses peuvent être imbriquées, c'est-à-dire placées les unes à l'intérieur des autres, ce qui permet d'avoir des grandes formes qui contiennent des formes de taille moyenne, et ces formes moyennes contiennent des petites formes.</p>
+            
+           <p class="hard">Notez que des parenthèses ne contiennent pas forcément trois formes. Elles peuvent en contenir moins, par exemple une seule comme dans le code <b>A(X)</b>, ou bien aucune comme dans le code <b>O()</b>.<p>
+
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+
+
+         <h2>C'est de l'informatique !</h2>
+            
+          <p>Ce sujet illustre une méthode très utilisée notamment en informatique : l'utilisation d'un <b>langage textuel avec des imbrications</b>, afin de représenter une <b>structure arborescente</b>. Les imbrications sont par exemple matérialisées par des parenthsèses. Une structure arborescente apparaît dès qu'on a des éléments qui contiennent d'autres éléments, eux-mêmes pouvant contenir d'autres éléments et ainsi de suite.</p>
+
+          <p>Toutes les pages web sur internet sont représentées de manière <b>arborescente</b>, avec des boîtes imbriquées les unes dans les autres, jusqu'à des boîtes qui contiennent des mots ou bien des images. La plupart des navigateurs modernes permettent de visualiser très facilement la structure de la page. Pour tester cela, ouvrez votre page web préférée, par exemple la page d'un moteur de recherche, et cliquez avec le bouton sur un morceau de texte ou une image, et cherchez dans le menu qui s'affiche le menu <b>Inspecter l'élément</b>. Un outil de visualisation s'affichera, permettant de contrôler l'affichage de l'arbre des éléments. N'hésitez pas à cliquer un peu partout sur cet affichage pour comprendre ce qu'il représente.</p>
+
+          <p>Voici un exemple de telle visualisation obtenue sur le site <a href="http://www.france-ioi.org">France-ioi</a>.</p>
+          <img src="its_info.png" style="border:1px solid black"/>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

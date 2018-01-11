@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-11</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0', 'visual-graph-1.0',
+            'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-11-graph-isomorphism/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            vertexError: "Chaque disque bleu doit être placé sur un disque en filigrane.",
+            edgeError: "La tige rouge n'est pas placée comme sur l'objectif."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #animContainer {
+            text-align: center;
+            margin: auto;
+            padding-top: 0.5em;
+         }
+         .anim {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         .paperTitle {
+            font-size: 18px;
+            font-weight: bold;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Constellation</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>Déplacez les ronds bleus de gauche pour obtenir exactement la figure de droite. </p>
+
+             <table id="animContainer">
+                <tr>
+                   <td></td>
+                   <td class="paperTitle">Objectif</td>
+                </tr>
+                <tr>
+                   <td>
+                     <div class="anim" id="animUser"></div>
+                  </td>
+                  <td>
+                     <div class="anim" id="animTarget"></div>
+                  </td>
+                </tr>
+            </table>
+            <div id="validation"><input type="button" value="Valider" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+           <div class="easy medium">On peut repérer qu'il y a exactement un rond accroché par un seul trait. On peut placer ce rond, ainsi que le rond voisin auquel il est relié. On obtient l'état suivant.</div>
+
+           <div class="easy">
+              <img style="width: 250px" src="Sol_easy_1.png">
+              <p>On peut alors compléter la figure en plaçant les ronds restants.</p>
+           </div>
+
+           <div class="medium">
+              <img style="width: 250px" src="Sol_medium_1.png">
+              <p>On peut alors progresser en plaçant les trois ronds voisins.</p>
+              <img style="width: 250px" src="Sol_medium_2.png">
+              <p>Et de là, on peut placer les quatre derniers ronds et compléter ainsi la figure.</p>
+           </div>
+
+           <div class="hard" id="img-hard">
+              <style>
+              #img-hard img { 
+               width: 250px;
+               border: 1px solid gray;
+               padding: 3px;
+               margin: 3px 13px 3px 13px;
+              }
+              </style>
+              <p>On peut commencer par compter le nombre de traits qui partent de chaque rond, dans la figure rouge. Il y a 4 ronds qui ont 4 voisins, et tous les autres ont 3 voisins. Ceux qui ont 4 voisins forment une chaîne, c'est-à-dire qu'ils sont reliés entre eux l'un après l'autre.</p>
+              <img src="Sol_hard_0.png">
+              <p>Pour y voir plus clair, on peut trier les ronds bleus, en faisant un groupe en haut avec les ronds ayant 3 voisins, et un groupe en bas avec les ronds ayant 4 voisins. On essaye autant que possible de trouver un ordre pour les ronds qui permet de "déméler" les noeuds.</p>
+              <img src="Sol_hard_1.png">
+              <p>Pour placer les 4 ronds ayant 4 voisins, il n'y a que deux possibiltés : soit on commence par placer en haut le rond de bleu gauche, soit celui de droite. Essayons d'abord de placer celui de droite, par exemple.</p>
+              <img src="Sol_hard_2.png">
+              <p>Mais là, on a un problème. Lorsqu'on essaie placer un rond ayant 3 voisins, par exemple celui qui était tout en haut à droite, on se retrouve coincé, car ce rond bleu ne correspond à aucun rond rouge.</p>
+              <img src="Sol_hard_3.png">
+              <p>C'est donc qu'on s'est trompé. Revenons en arrière, et plaçons les 4 ronds ayant 4 voisins dans l'autre sens. On peut alors trouver une place pour le rond ayant 3 voisins.</p>
+              <img src="Sol_hard_4.png">
+              <img src="Sol_hard_5.png">
+              <p>On peut maintenant placer les autres ronds et compléter la figure.</p>
+              <img src="Sol_hard_6.png">
+              <img src="Sol_hard_7.png">
+           </div>
+
+         <h2>C'est de l'informatique !</h2>
+   
+            <p>Ce défi illustre le problème de faire correspondre un <b>graphe</b>, c'est-à-dire un ensemble de ronds dont certains sont reliés par des traits, avec un autre graphe ayant la même structure.</p>
+
+            <p>Ce problème, connu sous le nom d'<b>isomorphisme de graphe</b>,
+            est particulièrement difficile : il n'existe aucun algorithme capable de résoudre efficacement ce problème pour des graphes quelconques.</p>
+
+            <p>Néanmoins, pour des graphes particuliers, comme par exemple ceux que l'on a considéré ici, il existe de nombreuses astuces permettant de mettre un graphe en correspondance avec un autre sans y passer des heures. Il est possible de programmer de telles astuces, comme par exemple celle décrite ici, qui consiste à étudier le nombre de voisins de chaque rond.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    <script>
+       var stringsLanguage = 'fr';
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            patternError: "La case marquée en rouge n'est pas coloriée correctement.",
+            suboptimal: "Pas mal ! Réessayez en moins d'étapes.",
+            steps: function(count, limit) {
+               return "Nombre d'étapes : " + count; 
+            },
+            success: "Bravo, vous avez réussi !",
+            drag: "Pour inverser une zone, glissez d'un coin à l'autre du rectangle en gardant appuyé.",
+            moveLimit: "Vous avez effectué trop d'étapes. Essayez autrement. Vous pouvez annuler des étapes ou bien tout recommencer."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #anim_container table {
+            margin: 0px auto;
+         }
+         .gridTitle {
+            width: 90px;
+            text-align: left;
+            font-size: 20px;
+         }
+         #feedback {
+            width: 170px;
+            height: 7em;
+            margin-top: 0em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #control, #control table {
+            text-align: center;
+            margin: 20px auto;
+         }
+         #control table td {
+         }
+         #control input {
+            margin: 0 10px;
+            width: 9em;
+            padding: 2px 0px 2px 0px;
+         }
+         #solutionImages img {
+            height: 200px;
+         }
+      </style>
+   </head>
+   <body>
+
+
+      <div id="task">
+         <h1>Rectangles inversés</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               Reproduisez le motif dans la grille du bas.
+            </p>
+             <p>Vous pouvez inverser la couleur d'une zone rectangulaire : glissez d'un coin à l'autre en restant appuyé.</p> 
+            </p>
+            <p class="easy">
+               Il est possible de réussir <strong>en inversant seulement 2 zones</strong>.
+            </p>   
+            <p class="medium">
+               Essayez de réussir <strong>en inversant seulement 5 zones</strong>.
+            </p>
+            <p class="hard">
+               Il est possible de réussir <strong>en inversant seulement 4 zones</strong>.
+            </p>
+
+         <div id="anim_container">
+               <table>
+                  <tr>
+                     <td class="gridTitle">
+                        Objectif :
+                     </td>
+                     <td>
+                        <div id="anim1"></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="gridTitle">
+                        Votre<br/>dessin :
+                     </td>
+                     <td>
+                        <div id="anim2"></div>
+                     </td>
+                     <td>
+                        <div id="control">
+                           <p id="feedback"></p>
+                           <p>
+                              <span id="steps"></span>
+                           </p>
+                           <input type="button" value="Annuler une étape" id="undo" />
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+               <div><input type="button" value="Valider" id="execute" /></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+         <div id="solutionImages">
+            <div class="easy">
+               <img src="solution_easy_step0.png">
+               <img src="solution_easy_step1.png">
+               <img src="solution_easy_step2.png">
+            </div>   
+            <div class="medium">
+               <img src="solution_medium_step0.png">
+               <img src="solution_medium_step1.png">
+               <img src="solution_medium_step2.png">
+               <img src="solution_medium_step3.png">
+               <img src="solution_medium_step4.png">
+               <img src="solution_medium_step5.png">
+            </div>
+            <div class="hard">
+               <img src="solution_hard_step0.png">
+               <img src="solution_hard_step1.png">
+               <img src="solution_hard_step2.png">
+               <img src="solution_hard_step3.png">
+               <img src="solution_hard_step4.png">
+            </div>
+         </div>
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Pour décrire une image en noir et blanc sur un ordinateur, on utilise typiquement des 1 pour représenter les cases noires et des 0 pour représenter les cases blanches.</p>
+
+            <p>L'opération utilisée ici consiste à inverser la couleur d'un ensemble de cases. Pour programmer cette opération d'inversion, on demande donc à l'ordinateur de remplacer, pour chaque case de la zone sélectionnée, un 0 par un 1, ou un 1 par un 0.</p>
+
+            <p>En une seule seconde, un ordinateur moderne est capable d'effectuer plus de 100 milliard d'opérations d'inversion !</p>
+
+            <p>Et après cela, l'ordinateur n'est même pas fatigué, il peut continuer à travailler à ce rythme effréné pendant des années...</p>
+               
+            <!--LATER: on peut parler de compression-->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

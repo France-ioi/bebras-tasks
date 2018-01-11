@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-07</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": ["Arthur Charguéraud"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'en';
+      var taskStrings = {
+            wrong: "Your final result does not match the target pattern.",
+            success: "Success!",
+
+            titleProgram: "Your program:",
+            titleResult: "Result after each step:",
+
+            start: "1. Begin with ",
+            rulePrefix: function(index) {
+               return "" + (index + 2) + ". Replace each";
+            },
+            ruleInfix: "with",
+            ruleSuffix: "Result:",
+            target: "Target pattern:"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #solution img {
+            border-top: solid black 1px;
+            border-bottom: solid black 1px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Replacements</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Drag the shapes below into the gray cells in order to build a program that produces the target pattern.<br/>
+            <p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+<!--
+<style>
+.solutionInstanceMismatch {
+   font-style: italic;
+}
+</style>
+<p class="solutionInstanceMismatch">Remarque : les données de la correction ne correspondent pas forcément à celles de votre sujet, mais le principe reste le même.</p>
+
+            <div class="easy">
+               <p>On remarque que le résultat souhaité est composé de trois fois la même paire de formes : un losange puis une étoile.</p>
+               <p>On peut donc choisir une forme, n'importe laquelle, par exemple le rond rouge, et en poser 3 copies à la suite. Ensuite, on remplace chaque copie de cette forme par un losange suivi d'une étoile. </p>
+               <p><img src="sol_easy.png"></p>
+            </div>   
+            <div class="medium">
+               <p>Une approche efficace est de partir de la fin : on remarque que le résultat est composé de deux paires (hexagone, triangle) identiques, puis d'un hexagone. Comme le dernier remplacement remplace une forme par une paire, on peut en déduire qu'à l'étape précédente, une même forme, par exemple un rond, devait prendre la place des deux paires (hexagone, triangle). La dernière étape ressemble donc à ceci :<p>
+               <p><img src="sol_medium_1.png"></p> 
+               <p>Pour les opérations du début, on peut commencer par une forme quelconque (par exemple un losange), puis la remplacer par le motif souhaité pour la fin de la seconde étape (rond, rond, hexagone) :</p>
+               <p><img src="sol_medium.png"></p> 
+            </div>
+            <div class="hard">
+               <p>Observons le résultat souhaité : il est constitué d'un bloc de trois formes (étoile, rond, triangle), suivi de deux hexagones, et enfin suivi du même bloc de trois formes qu'au début (étoile, rond, triangle).</p>
+               <p>On pourrait essayer, à l'étape 3, de remplacer une forme par deux hexagones. Cependant, si l'on part sur cette voie, il ne restera pas assez d'étapes pour construire la séquence restante :</p>
+               <p><img src="sol_hard_0.png"></p>
+               <p>On est donc obligé d'effectuer des opérations qui remplacent plusieurs formes d'un coup. En fait, ce que l'on aimerait faire, c'est pouvoir remplacer une forme directement par une séquence de trois formes (étoile, rond, triangle). Si on avait la possibilité de remplacer une forme par trois, on pourrait faire :</p>
+               <p><img src="sol_hard_2.png"></p>
+               <p>On n'a pas la possibilité de remplacer d'un coup un losange par trois formes (étoile, rond, triangle). Néanmoins, on peut obtenir un effet similaire en s'y prenant en deux étapes : d'abord on remplace les losanges par une étoile suivi d'un losange, puis on remplace les nouveaux losanges par un rond suivi d'un triangle. Ceci nous donne la solution suivante :</p>
+               <p><img src="sol_hard.png"></p>
+            </div>
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Ce sujet exploite le mécanisme de <strong>chercher-remplacer</strong>, et permet de réfléchir à ce qu'il se passe lorsqu'on effectue plusieurs opérations de chercher-remplacer à la suite.</p>
+
+            <p>Le chercher-remplacer est très utile en informatique, en particulier dans les outils de traitement de texte.</p>
+
+-->
+	  </div> <!-- task-solution -->
+   </body>
+</html>

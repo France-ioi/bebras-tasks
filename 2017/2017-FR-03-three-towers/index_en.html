@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-03</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'crane-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-03-three-towers/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            error: "The blocks don't match the objective.",
+            partial: function(steps, stepsOptimal) { return "You have succeeded in " + steps + " steps. You can start over to try to solve with only " + stepsOptimal + " steps.<br> Note, it's not easy!"; }, // TODO better translation from French?
+            pickupError: "You must choose a column with<br>a block to pick up.",
+            blockClick: "Click on the buttons to move the crane."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0em;
+            margin-bottom: 0.5em;
+            text-align: center;
+            font-weight: bold; 
+            color: #CC8844;
+         }
+         #target_anim_container {
+            border: solid 1px black;
+            text-align: center;
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 14px;
+         }
+         #target_cell {
+            padding-left: 80px;
+         }
+         #animTable {
+            margin: auto;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Three towers</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               [Description]
+            </p>
+            <table id="animTable">
+               <tr>
+                  <td>
+                     <div id="anim_container">
+                        <div id="anim"></div>
+                        <div id="feedback">
+                           Feedback
+                        </div>
+                     </div>
+                     <div id="buttons">
+                        <span>Number of steps: <span id="stepCounter"></span>.</span>
+                        <input type="button" id="undo" value="Undo last step" />
+                     </div>
+                  </td>
+                  <td id="target_cell">
+                     <div id="target_anim_container">
+                        Objective:
+                        <br><br>
+                        <div id="target_anim"></div>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            <img src="icon.png" style="display:none">
+            <img src="magnet.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            
+
+         <!--
+         <h2>C'est de l'informatique !</h2>
+            
+           -->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

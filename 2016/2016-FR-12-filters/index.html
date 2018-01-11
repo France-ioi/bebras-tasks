@@ -1,0 +1,495 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-12</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-12-filters/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      /* Note for translateors: for hard version, make sure to pick names for the items in such a way that sorting by name does not accidentally sort items by price. */
+
+      var taskStrings = {
+            columns: {
+               image: "Image",
+               name: "Nom",
+               type: "Type",
+               color: "Couleur",
+               price: "Prix"
+            },
+            properties: {
+               name: {
+                  orange: "Orange",
+                  brocoli: "Brocoli",
+                  rose: "Rose",
+                  carrot: "Carotte",
+                  cucumber: "Concombre",
+                  radish: "Radis",
+                  apple: "Pomme",
+                  tulip: "Tulipe",
+                  banana: "Banane",
+                  kiwi: "Kiwi",
+                  blackberry: "Mûre",
+                  eggplant: "Aubergine"
+               },
+               type: {
+                  fruit: "Fruit",
+                  vegetable: "Légume",
+                  flower: "Fleur"
+               },
+               color: {
+                  orange: "Orange",
+                  green: "Vert",
+                  red: "Rouge",
+                  yellow: "Jaune",
+                  black: "Noir"
+               }
+            },
+            columnWidth: {
+                "image": 55,
+                "name": 85,
+                "type": 85,
+                "color": 65,
+                "price": 55
+                },
+            priceOf: function(cost) { return cost + "€"; },
+            success: "Bravo, vous avez réussi !",
+            wrong: "La liste que vous avez obtenue ne contient pas les mêmes éléments et dans le même ordre que la liste souhaitée. Essayez autrement.",
+            empty: "Aucun élément ne correspond." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         table {
+            border: 0px;
+         }
+         #mainDiv, #mainTable {
+            width: 100%;
+         }
+         #controllersDiv {
+            width: 760px;
+            margin: auto;
+         }
+         .mainTableCell {
+            vertical-align: top;
+         }
+         .titles {
+            font-size: 20px;
+            padding-top: 7px;
+            padding-bottom: 10px;
+         }
+         .mainTableTitle {
+            text-align: center;
+         }
+         .itemTable {
+            margin: 0 auto auto auto;
+            border-collapse: collapse;
+         }
+         .itemTable td {
+            border: 1px solid black;
+            text-align: center;
+            height: 30px;
+            width: 50px;
+         }
+         .itemTable img {
+            max-height: 28px;
+            max-width: 40px;
+         }
+         .itemTable tr:first-child td {
+            font-weight: bold;
+         }
+         .conditionals {
+            margin: 0px 20px 0px 20px;
+         }
+         select {
+            margin: 5px;
+            height: 32px;
+            font-size: 18px;
+            min-width: 60px;
+         }
+         #messageEmpty {
+            text-align: center;
+            width: 100%;
+         }
+         .solutionFilter {
+            font-weight: bold;
+            margin-top: 0.4em;
+            margin-bottom: 1.0em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Sélection végétale</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Sélectionnez parmi les éléments de la liste de gauche ceux qui apparaissent dans la liste de droite<span class="easy">.</span><span class="medium hard">,<br/> et mettez les dans le bon ordre.</span>
+            </p>
+            <p>
+               Utilisez les listes déroulantes ci-dessous pour obtenir le résultat souhaité.
+            </p>
+            <div id="controllersDiv">
+               <table>
+                  <tr>
+                     <td>
+                        <div class="easy">
+                           <table>
+                              <tr>
+                                 <td>
+                                    Le type est
+                                 </td>
+                                 <td>
+                                    <select id="easy-type" class="controller property-type">
+                                       <option value="_empty"></option>
+                                    </select>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    La couleur est
+                                 </td>
+                                 <td>
+                                    <select id="easy-color" class="controller property-color">
+                                       <option value="_empty"></option>
+                                    </select>
+                                 </td>
+                             </tr>
+                           </table>
+                        </div>
+                        <div class="medium">
+                           <table>
+                              <tr>
+                                 <td>
+                                    Le type
+                                 </td>
+                                 <td>
+                                    <select id="medium-type-comp" class="controller">
+                                       <option value="_empty"></option>
+                                       <option value="equal">est</option>
+                                       <option value="unequal">n'est pas</option>
+                                    </select>
+                                    <select id="medium-type" class="controller property-type">
+                                       <option value="_empty"></option>
+                                    </select>
+                                 </td>
+                                 <td></td>
+                                 <td></td>
+                               </tr>
+                              <tr>
+                                 <td>
+                                    La couleur
+                                 </td>
+                                 <td>
+                                    <select id="medium-color-comp" class="controller">
+                                       <option value="_empty"></option>
+                                       <option value="equal">est</option>
+                                       <option value="unequal">n'est pas</option>
+                                    </select>
+                                    <select id="medium-color" class="controller property-color">
+                                       <option value="_empty"></option>
+                                    </select>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    Le prix
+                                 </td>
+                                 <td>
+                                    <select id="medium-price-comp" class="controller">
+                                       <option value="_empty"></option>
+                                       <option value="lower_equal">est au plus</option>
+                                       <option value="greater_equal">est au moins</option>
+                                    </select>
+                                    <select id="medium-price" class="controller property-price">
+                                       <option value="_empty"></option>
+                                       <option value="1">1€</option>
+                                       <option value="2">2€</option>
+                                       <option value="3">3€</option>
+                                       <option value="4">4€</option>
+                                       <option value="5">5€</option>
+                                       <option value="6">6€</option>
+                                       <option value="7">7€</option>
+                                       <option value="8">8€</option>
+                                       <option value="9">9€</option>
+                                       <option value="10">10€</option>
+                                    </select>
+                                 </td>
+                             </tr>
+                              <tr>
+                                 <td>Trier</td>
+                                 <td colspan="5">
+                                    <select id="medium-sorting" class="controller sorting">
+                                    <option value="_empty"></option>
+                                    <option value="color">selon la couleur, par ordre alphabétique</option>
+                                    <option value="name">selon le nom, par ordre alphabétique</option>
+                                    <option value="type">selon le type, par ordre alphabétique</option>
+                                    <option value="price">selon le prix, du plus petit au plus grand</option>
+                                    </select>
+                                 </td>
+                              </tr>
+                           </table>
+                        </div>
+                        <div class="hard">
+                           <table>
+                              <tr>
+                                 <td>
+                                    <table>
+                                       <tr>
+                                          <td>
+                                             Le type
+                                          </td>
+                                          <td>
+                                             <select id="hard-type-comp1" class="controller">
+                                                <option value="_empty"></option>
+                                                <option value="equal">est</option>
+                                                <option value="unequal">n'est pas</option>
+                                             </select>
+                                             <select id="hard-type1" class="controller property-type">
+                                                <option value="_empty"></option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                             <select id="hard-type-cond" class="controller conditionals">
+                                                <option value="and">et</option>
+                                                <option value="or">ou</option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                             Le type
+                                          </td>
+                                          <td>
+                                             <select id="hard-type-comp2" class="controller">
+                                                <option value="_empty"></option>
+                                                <option value="equal">est</option>
+                                                <option value="unequal">n'est pas</option>
+                                             </select>
+                                             <select id="hard-type2" class="controller property-type">
+                                                <option value="_empty"></option>
+                                             </select>
+                                          </td>
+                                       </tr>
+                                       <tr>
+                                          <td>
+                                             La&nbsp;couleur
+                                          </td>
+                                          <td>
+                                             <select id="hard-color-comp1" class="controller">
+                                                <option value="_empty"></option>
+                                                <option value="equal">est</option>
+                                                <option value="unequal">n'est pas</option>
+                                             </select>
+                                             <select id="hard-color1" class="controller property-color">
+                                                <option value="_empty"></option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                             <select id="hard-color-cond" class="controller conditionals">
+                                                <option value="and">et</option>
+                                                <option value="or">ou</option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                             La&nbsp;couleur
+                                          </td>
+                                          <td>
+                                             <select id="hard-color-comp2" class="controller">
+                                                <option value="_empty"></option>
+                                                <option value="equal">est</option>
+                                                <option value="unequal">n'est pas</option>
+                                             </select>
+                                             <select id="hard-color2" class="controller property-color">
+                                                <option value="_empty"></option>
+                                             </select>
+                                          </td>
+                                       </tr>
+                                       <tr>
+                                          <td>
+                                             Le prix
+                                          </td>
+                                          <td>
+                                             <select id="hard-price-comp1" class="controller">
+                                                <option value="_empty"></option>
+                                                <option value="lower_equal">est au plus</option>
+                                                <option value="greater_equal">est au moins</option>
+                                             </select>
+                                             <select id="hard-price1" class="controller property-price">
+                                                <option value="_empty"></option>
+                                                <option value="1">1€</option>
+                                                <option value="2">2€</option>
+                                                <option value="3">3€</option>
+                                                <option value="4">4€</option>
+                                                <option value="5">5€</option>
+                                                <option value="6">6€</option>
+                                                <option value="7">7€</option>
+                                                <option value="8">8€</option>
+                                                <option value="9">9€</option>
+                                                <option value="10">10€</option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                             <select id="hard-price-cond" class="controller conditionals">
+                                                <option value="and">et</option>
+                                                <option value="or">ou</option>
+                                             </select>
+                                          </td>
+                                          <td>
+                                             Le prix
+                                          </td>
+                                          <td>
+                                             <select id="hard-price-comp2" class="controller">
+                                                <option value="_empty"></option>
+                                                <option value="lower_equal">est au plus</option>
+                                                <option value="greater_equal">est au moins</option>
+                                             </select>
+                                             <select id="hard-price2" class="controller property-price">
+                                                <option value="_empty"></option>
+                                                <option value="1">1€</option>
+                                                <option value="2">2€</option>
+                                                <option value="3">3€</option>
+                                                <option value="4">4€</option>
+                                                <option value="5">5€</option>
+                                                <option value="6">6€</option>
+                                                <option value="7">7€</option>
+                                                <option value="8">8€</option>
+                                                <option value="9">9€</option>
+                                                <option value="10">10€</option>
+                                             </select>
+                                          </td>
+                                       </tr>
+                                       <tr>
+                                           <td>
+                                             Trier
+                                           </td>
+                                           <td colspan="5">
+                                             <select id="hard-sorting" class="controller sorting">
+                                                <option value="_empty"></option>
+                                                   <option value="color">selon la couleur, par ordre alphabétique</option>
+                                                   <option value="name">selon le nom, par ordre alphabétique</option>
+                                                   <option value="type">selon le type, par ordre alphabétique</option>
+                                                   <option value="price">selon le prix, du plus petit au plus grand</option>
+                                             </select>
+                                          </td>
+                                       </tr>
+                                    </table>
+                                 </td>
+                              </tr>
+                           </table>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div id="mainDiv">
+               <table id="mainTable">
+                  <tr>
+                     <td class="mainTableTitle titles">Votre liste :</td>
+                     <td class="mainTableTitle titles">Liste souhaitée :</td>
+                  </tr>
+                  <tr>
+                     <td class="mainTableCell">
+                        <table id="resultTable" class="itemTable">
+                        </table>
+                     </td>
+                     <td class="mainTableCell">
+                        <table id="targetTable" class="itemTable">
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <img id="orange_image" src="orange.png" style="display:none">
+            <img id="brocoli_image"  src="brocoli.png" style="display:none">
+            <img id="rose_image"  src="rose.png" style="display:none">
+            <img id="carrot_image"  src="carrot.png" style="display:none">
+            <img id="cucumber_image" src="cucumber.png" style="display:none">
+            <img id="radish_image" src="radish.png" style="display:none">
+            <img id="apple_image" src="apple.png" style="display:none">
+            <img id="tulip_image" src="tulip.png" style="display:none">
+            <img id="banana_image" src="banana.png" style="display:none">
+            <img id="kiwi_image" src="kiwi.png" style="display:none">
+            <img id="eggplant_image" src="eggplant.png" style="display:none">
+            <img id="blackberry_image" src="blackberry.png" style="display:none">
+            <img id="icon_image" src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+            <div class="easy">
+               <p>Dans la liste souhaitée, on a uniquement des légumes verts. On les sélectionne ainsi :</p>
+               <ol>
+               <li><p class="solutionFilter">Le type est Légume.</p></li>
+               <li><p class="solutionFilter">La couleur est Vert.</p></li>
+               </ol>
+            </div>   
+            <div class="medium">
+               <p>On peut construire la liste souhaitée étape par étape :</p>
+               <ol>
+               <li>On veut sélectionner des fruits et une fleur. On va donc éliminer le troisième type d'éléments :
+               <p class="solutionFilter">Le type n'est pas Légume.</p></li>
+               <li>On veut sélectionner des éléments jaune et rouge. On peut donc éliminer les éléments oranges et verts. Comme il n'y a pas d'éléments verts restant dans la liste, on va seulement éliminer les éléments oranges :
+               <p class="solutionFilter">La couleur n'est pas Orange.</p></li>
+               <li>Il reste alors à éliminer la Tulipe, ce que l'on peut faire en demandant à limiter le prix, par exemple :
+               <p class="solutionFilter">Le prix est au plus 6€.</p></li>
+               <li>Enfin, on met les éléments dans le bon ordre :
+               <p class="solutionFilter">Trier selon le nom, par ordre alphabétique.</p></li>
+               </ol>
+            </div>
+            <div class="hard">
+               <p>On peut construire la liste souhaitée étape par étape :</p>
+               <ol>
+               <li>On veut sélectionner des légumes et des fruits, donc :
+               <p class="solutionFilter">"Le type est Fruit" ou "Le type est Légume".</p></li>
+               <li>On veut sélectionner des éléments rouge, vert ou noir. On peut donc éliminer le jaune et l'orange :
+               <p class="solutionFilter">"La couleur n'est pas jaune" et "La couleur n'est pas orange".</p></li>
+               <li>Il reste alors à éliminer l'aubergine (6€) et le concombre (5€), ce que l'on peut faire par exemple en demandant à ce que le prix soit inférieur à 4€ ou bien supérieur à 7€ :
+               <p class="solutionFilter">"Le prix est au plus 4€" ou "Le prix est au moins 7€".</p></li>
+               <li>Enfin, on met les éléments dans le bon ordre :
+               <p class="solutionFilter">Trier selon le prix, du plus petit au plus grand.</p></li>
+               </ol>
+               <p>D'autres solutions étaient possibles.</p>
+            </div>
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Ce sujet illustre la manière dont on effectue une <strong>requête</strong> pour sélectionner certains éléments parmi une <strong>base de données</strong> contenant les descriptions d'un ensemble d'éléments.</p>
+
+            <p>Des bases de données, on en trouve partout aujourd'hui, et certaines contiennent des centaines de millions d'éléments. Par exemple, l'ensemble de toutes les réponses des participants au concours Castor est stocké dans une base de données. Cette base permet non seulement d'afficher les résultats pour un participant particulier, mais également de calculer le score de chaque participant, le nombre de participants de chaque niveau dans chaque établissement, ou dans chaque académie, ou encore de faire des statistiques sur les sujets qui ont été le mieux réussis, etc.</p>
+            
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

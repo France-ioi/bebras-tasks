@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-10</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            emptyError: "Faites glisser des cartes grises dans les cases blanches.",
+            mismatchError: "Les lumières obtenues ne correspondent pas. Réfléchissez bien puis essayez autrement.",
+            fullError: "Toutes les cases sont utilisées. Retirez des cartes pour pouvoir en place d'autres."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         .wrapper {
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .anim {
+         }
+         .animTitle {
+            font-weight: bold;
+            padding: 10px;
+         }
+         .animBuilding {
+            border: 1px solid black;
+         }
+         #animDrag {
+            margin-top: 20px;
+         }
+         #control {
+            margin-top: 1em;
+            margin-bottom: 1em;
+         }
+         #control input {
+            margin-left: 1em;
+            margin-right: 1em;
+            width: 8em;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Lumières d'immeuble</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p>Allumez les lumières comme dans l'objectif. Pour cela, glissez des cartes dans les cases blanches pour former une séquence d'instructions, puis exécutez-la.</p>
+             <p>Chaque carte <span class="medium hard">sauf la dernière</span> permet d'allumer toutes les lumières d'une ligne ou d'une colonne.</p>
+             <p class="medium hard"><b>La dernière carte permet d'inverser toutes les cases.</b></p>
+            
+            <div id="anim_container">
+               <div class="wrapper">
+                  <div class="animTitle">État courant</div>
+                  <div class="anim animBuilding" id="animUser"></div>
+               </div>
+               <div class="wrapper">
+                  <div class="animTitle">Objectif</div>
+                  <div class="anim animBuilding" id="animTarget"></div>
+               </div>
+               <br>
+               <div id="animDrag"></div>
+               <div id="feedback"></div>
+               <div id="control">
+                  <input type="button" id="execute" value="Exécuter"/>
+                  <input type="button" id="stop" value="Arrêter"/>
+               </div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+         <br>
+         <center><span id="error"></span></center>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+           <div class="easy">
+              <p>Pour reproduire le motif, il fallait allumer les colonnes B et C, ainsi que les lignes 3 et 4. L'ordre n'importait pas. On pouvait donc écrire le programme suivant :
+              <p>
+              <img src="Sol_easy_1.png">
+           </div>
+
+           <div class="medium">
+              <p>Au départ, toutes les lumières sont déjà allumées. La seule carte qui peut avoir un effet est la dernière. On commence donc par elle pour tout éteindre.
+              <p>Ensuite, il y a deux stratégies possibles.</p>
+              <p>(1) On allume toutes les cases qui sont allumées dans l'objectif, puis on éteint celles qu'on a allumé en trop.</p>
+              <p>On commence donc par allumer les colonnes A et D. Il faut alors éteindre les lignes 5 et 2. Pour cela, on inverse tout, on allume les lignes 5 et 2, puis on inverse tout de nouveau.
+              <p>
+              <img src="Sol_medium_1.png">
+              <p>(2) On allume toute les cases qui sont éteintes dans l'objectif, puis on inverse toutes les lumières.</p>
+              <img src="Sol_medium_2.png">
+           </div>
+
+           <div class="hard">
+              <p>Il y a de nombreuses solutions possibles.</p>
+              <p>Une première solution consiste en les étapes suivantes :
+              <ul>
+               <li>Éteindre la seule case allumée qui ne l'est pas dans l'objectif, sur la ligne 2 :<br/>inverser tout, allumer la ligne 2, inverser tout.
+               <li>Allumer toutes les cases qui le sont dans l'objectif :<br/>allumer les colonnes A et D, la lignes 5.
+               <li>Éteindre toutes les cases que l'on a allumé en trop :<br/>inverser tout, allumer les lignes 0, 1 et 6, inverser tout.
+               </ul>
+              </p>
+              <p>
+              <img src="Sol_hard_1.png">
+              <p>Voici ci-dessous la solution la plus courte. </p>
+              <img src="Sol_hard_2.png">
+           </div>
+
+         <h2>C'est de l'informatique !</h2>
+   
+            <p>Dans ce sujet, chaque case de l'immeuble est allumée ou éteinte. De manière similaire, la mémoire d'un ordinateur est constituée de <b>bits</b> dont la valeur est soit <b>0</b> soit <b>1</b>. Tous les nombres, toutes les images, tous les textes, et tous les programmes sont décrits uniquement avec des bits, c'est-à-dire avec des longues suites de <b>0</b> et des <b>1</b>.</p>
+
+            <p>Au coeur de l'ordinateur se trouve un <b>processeur</b> qui est capable de manipuler très efficacement des paquets de bits, typiquement des paquets de <b>64</b> bits. Par exemple, le processeur dispose d'une opération "inverser tous les bits", qui prend un paquet de 64 bits, et une fraction de seconde, remplace tous les <b>0</b> par des <b>1</b> et tous les <b>1</b> par des <b>0</b>. Un ordinateur est capable d'effectuer plus de deux milliards de telles opérations sur des paquets de 64 bits en une seconde, manipulant ainsi plus de 100 milliards de bits en une seule seconde !</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

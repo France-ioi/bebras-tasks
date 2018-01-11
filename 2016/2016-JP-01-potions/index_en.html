@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-JP-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelButton-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelButton-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-JP-01-potions/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, and authors from Japanese Bebras team",
+          "translators": "Eslam Wageed",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            names: {
+               curlyWhiskers: "Curly Mustaches",
+               whiteEyes: "White Eyes",
+               bigTeeth: "Big Teeth",
+               bigEars: "Big Ears",
+               blackTeeth: "Black Teeth",
+               whiteNose: "White Nose",
+               blackEars: "Black Ears",
+               whiteSkin: "White Skin"
+            },
+
+            success: "Congratulations. You did it.",
+            wrong: "Wrong Answer. Try again.",
+            wrongHard: function(correct, total) {
+               return "You have correctly identified " + correct + " of " + total + " potions. Now try to identify a larger number. Click on the button to mix the potions and start all over again";
+            },
+            wrongLogic: "You placed the beaver framed in red in the wrong place.",
+
+            drinkButton: function(beavers) {
+               return "Let the Beavers\nDrink";
+            },
+            reshuffleButton: "Mix Potions\nand start over",
+
+            noDrink: "Beaver\nbefore Drinking\nthe potions.",
+            emptyExperiment: "Give at least one potion to each Beaver.",
+            answerTooEarly: "Let the Beavers drink first.",
+            cupsTooLate: "Before you can change the potions, click on the button to mix them and start again." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+         }
+         #anim {
+            display: inline-block;
+         }
+         #drinkingInstruction {
+            margin-left: 170px;
+         }
+         #experimentCups {
+         }
+         .usageInstructions {
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         #solution li {
+            padding-bottom: 0.5em;
+         }
+         #solInfo {
+            border-collapse: collapse;
+         }
+         #solInfo td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Magic Potions</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               Beavers found <span class="totalCups">X</span> magic potions.
+               Each potion changes one thing in the Beaver face.
+            </p>
+            <p id="drinkingInstruction" class="easy medium">The next 3 Beavers drank <span class="experimentCups">X</span> potions each. Their faces changed as shown:
+            </p>
+            <p class="hard">
+               Three Beavers have the potions, find the effect of each potion. 
+            </p>
+            <p class="hard">
+               Drag potions to Beavers then press"Let the Beavers Drink".
+            </p>
+            <p class="hard">
+                  <strong>Attention:</strong> If you try again after the Beavers drunk the potions, the potions will be mixed.
+            </p>
+            <div id="anim_container">
+               <div id="anim1"></div>
+               <div id="feedback"></div>
+               <div class="usageInstructions">
+                  <p>
+                  The beavers below drank a potion each.
+                  Drag each beaver under the potion he had drunk.
+                  </p>
+                  <p class="hard">
+                  <strong>Attention :</strong> If you are not sure of your answer, do not fill out randomly, it is better to leave it empty.
+                  </p>
+               </div>
+               <div id="anim2"></div>
+            </div>
+            <div id="validation"><input type="button" value="Check My Answer" id="execute" /></div>
+
+            <img id="bigEars_image" src="bigEars.png" style="display:none">
+            <img id="bigTeeth_image" src="bigTeeth.png" style="display:none">
+            <img id="blackEars_image" src="blackEars.png" style="display:none">
+            <img id="blackTeeth_image" src="blackTeeth.png" style="display:none">
+            <img id="curlyWhiskers_image" src="curlyWhiskers.png" style="display:none">
+            <img id="whiteEyes_image" src="whiteEyes.png" style="display:none">
+            <img id="whiteNose_image" src="whiteNose.png" style="display:none">
+            <img id="whiteSkin_image" src="whiteSkin.png" style="display:none">
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

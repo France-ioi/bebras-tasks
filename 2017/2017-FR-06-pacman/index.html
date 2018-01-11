@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-06</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-06-pacman/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi&nbsp;!",
+            error: "Castor a été attrapé par un fantôme. Vous pouvez recommencer ou annuler les dernières étapes.", //&quot;Recommencer&quot;
+            undoOption: "Annuler la dernière étape",
+            restartOption: "Recommencer",
+            partial: "Castor a été attrapé ! Vous obtenez une partie des points.<br> Vous pouvez recommencer ou annuler les dernières étapes.",
+            // DEPRECATD invalid: "Castor ne peut pas se déplacer sur une case grise.",
+            livesLeft: function(lives) {
+               return "Vies :<br>" + lives;
+            },
+            livesFeedback: function(livesLost, livesLeft) {
+               return "";
+               //return "Castor a perdu " + livesLost + " vie(s). Il lui reste " + livesLeft + " vie(s).";
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #controlsContainer {
+            text-align: center;
+            padding-left: 20px;
+         }
+         #controlsContainer input {
+            min-width: 80px;
+            padding: 10px;
+         }
+         #arrowsTable td {
+            width: 30px;
+            height: 30px;
+         }
+         .livesStatus {
+            margin-top: 30px;
+            font-size: 24px;
+            display: none;
+         }
+         #restart {
+            padding: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Fantôme</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p class="hard" id="difficultyWarning"></p>
+             <p>
+               Emmenez Castor au point jaune sans qu'il se fasse attraper par <span class="easy medium">le fantôme</span><span class="hard">les fantômes</span>. </p>
+             <p>Vous pouvez déplacer Castor avec les flèches du clavier ou bien en cliquant sur la grille.
+             </p>
+             <p class="easy medium">
+               Observez que le fantôme se déplace toujours selon la même stratégie. Profitez-en pour le coincer !
+             </p>
+             <p class="hard">
+               Observez que les fantômes se déplacent toujours selon la même stratégie.  Profitez-en pour les coincer !
+             </p>
+
+             <div id="anim_container">
+               <table>
+                  <tr>
+                     <td>
+                        <div id="anim"></div>
+                     </td>
+                     <td id="controlsContainer">
+                        <input type="button" id="undo" value="Annuler la dernière étape" />
+                        <br>
+                        <div class="livesStatus"></span>
+                     </td>
+                  </tr>
+               </table>
+               <div id="feedback"></div>
+               <input type="button" id="restart" value="Recommencer" />
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+            <img id="image_ghost1" src="ghost1.png" style="display:none">
+            <img id="image_ghost2" src="ghost2.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+   
+            <style>
+            .table-sol img {
+               width: 240px;
+            }
+            .table-sol td {
+               width: 250px;
+               padding-bottom: 20px;
+               vertical-align: bottom;
+            }
+            .table-sol p {
+               margin: 0px 0px 5px 0px;
+            }
+            </style>
+        
+            <div class="easy">
+                  <table class="table-sol"><tr>
+               <td>
+                  <p>Le but est de piéger le fantôme.</p>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <p>On l'attire d'abord vers la droite.</p>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <p>Puis on repart vers la gauche.</p>
+                  <img src="Sol_easy_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>On peut alors descendre.</p>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <p>Et on a gagné !</p>
+                  <img src="Sol_easy_5.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="medium">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>Le but est de piéger le fantôme.</p>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <p>On l'attire d'abord vers la droite.</p>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <p>Puis on repart vers la gauche.</p>
+                  <img src="Sol_medium_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>En on peut ensuite descendre.</p>
+                  <img src="Sol_medium_4.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>On attire les deux fantômes.</p>
+                  <img src="Sol_hard_0.png">
+               </td>
+               <td>
+                  <p>Vers des coins.</p>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <p>Comme ça ils sont coincés.</p>
+                  <img src="Sol_hard_2.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>On descend sur le bord gauche.</p>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <p>Puis on remonte juste à temps.</p>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <p>On attire le fantôme vers la droite.</p>
+                  <img src="Sol_hard_5.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>On repart alors vers la gauche.</p>
+                  <img src="Sol_hard_6.png">
+               </td>
+               <td>
+                  <p>Ensuite on peut descendre.</p>
+                  <img src="Sol_hard_7.png">
+               </td>
+               <td>
+                  <p>Et rejoindre la sortie.</p>
+                  <img src="Sol_hard_8.png">
+               </td>
+               </tr>
+               </table>
+
+            </div>            
+
+         <h2>C'est de l'informatique !</h2>
+            
+            <p>Dans ce sujet, il fallait faire de la <b>rétro-ingénierie</b> (revers engineering, en anglais), afin de déduire le comportement de déplacement d'un fantôme. Un fantôme se dirige toujours dans la direction de Castor. C'est une manière plutôt efficace en général d'atteindre sa cible, sauf bien sûr lorsqu'il y a des obstacles. Dans ce sujet, il fallait justement exploiter les obstacles pour arriver à coincer le fantôme et ensuite pouvoir le prendre de vitesse.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

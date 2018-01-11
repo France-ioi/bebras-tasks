@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-03</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-03-balanced-trees/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            edgesCount: "Nombre de flèches ajoutées ",
+            verticesLeftCount: "Nombre de cercles inaccessibles ",
+            reachError: "Castor ne peut pas atteindre le cercle rouge.",
+            numError: "Vous avez déjà utilisé le nombre maximum de flèches.",
+            degreeError: "Attention : trop de flèches partent d'un même cercle.",
+            depthError: "Attention : le chemin rouge est trop long.",
+            existsError: "Il y a déjà une flèche entre ces deux cercles. Vous pouvez cliquer dessus pour la supprimer.",
+            removeError: "Vous ne pouvez pas supprimer cette flèche.",   // DEPRECATED
+            congratulations: "Bravo, vous avez réussi !"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #control, #control table {
+            text-align: center;
+         }
+         #control table td {
+            width: 340px;
+         }
+         #control table td span {
+            font-size: 20px;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         .constraints li {
+            padding-bottom: 0.5em; 
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Chemins de Castor</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Ajoutez <strong><span class="easy medium">6</span><span class="hard">14</span></strong> flèches au diagramme pour que :
+               <ul class="constraints">
+                  <li>Castor puisse aller à tous les autres cercles.</li>
+                  <li span class="medium">Castor passe au maximum <strong>par deux flèches</strong> pour aller à un cercle.</li>
+                  <li span class="hard">Castor passe au maximum <strong>par trois flèches</strong> pour aller à un cercle.</li>
+                  <li class="medium hard">Chaque cercle a au maximum deux flèches qui en partent.</li>
+                 </ul>
+            </p>
+            <p>
+               Cliquez sur deux cercles pour ajouter une flèche.
+               Cliquez sur une flèche pour la supprimer.
+            </p>
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <div id="control">
+               <table>
+                  <tr>
+                     <td>
+                        <span id="edges"></span>
+                     </td>
+                     <td>
+                        <span id="verticesLeft"></span>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <div id="validation"><input type="button" value="Valider" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            <div class="easy">
+            <p>Il y a beaucoup de solutions possibles. En voici par exemple deux :</p>
+            <p>
+               <img src="sol_easy_1.png">
+               <img src="sol_easy_2.png">
+            </p>
+            </div>   
+            <div class="medium">
+            <p>Il y a beaucoup de solutions possibles. En voici par exemple deux :</p>
+            <p>
+               <img src="sol_medium_1.png">
+               <img src="sol_medium_2.png">
+            </p>
+            </div>
+            <div class="hard">
+            <p>Il y a beaucoup de solutions possibles. En voici une :</p>
+            <p>
+               <img src="sol_hard_1.png">
+            </p>
+            </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Ces questions introduisent une notion fondamentale en informatique : <strong>les arbres binaires</strong>.</p>
+
+            <p>Il s'agit d'une structure dans laquelle, en partant d'un cercle
+            appelé la racine le d'arbre (et placé en général tout en haut du schéma), 
+            on peut rejoindre tous les autres cercles en suivant des chemins où à chaque 
+            étape on a exactement deux directions possibles.</p>
+            <p>La solution que nous proposons pour la version simple n’est pas un arbre binaire. En revanche, c’est le cas des solutions des 2 versions plus difficiles, car les règles proposées obligent à dessiner un arbre binaire</p>
+            <p>Regardez l'arbre représenté dans la solution de la version difficile.
+            En partant de la racine (le cercle avec castor), on peut atteindre les 14 autres cercles en suivant 3 flèches ou moins.</p>
+
+            <p>Si on avait le droit de suivre 4 flèches, on pourrait atteindre 30 cercles différents. En gros, à chaque fois que l'on rajoute une flèche, on peut atteindre environ deux fois plus de cercles.</p>
+
+            <p>Cettre structure d'arbre est très utilisée en informatique, car elle permet de ranger des données selon une certaine logique et ensuite d'accéder très rapidement à toutes ces données.</p>
+
+           <!--LATER: on peut dessiner un bel arbre binaire équilibré-->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

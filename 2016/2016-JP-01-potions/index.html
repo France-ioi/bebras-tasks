@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-JP-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelButton-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelButton-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-JP-01-potions/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, and authors from Japanese Bebras team",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            names: {
+               curlyWhiskers: "Moustaches frisées",
+               whiteEyes: "Yeux blancs",
+               bigTeeth: "Grandes dents",
+               bigEars: "Grandes oreilles",
+               blackTeeth: "Dents noires",
+               whiteNose: "Nez blanc",
+               blackEars: "Oreilles noires",
+               whiteSkin: "Peau blanche"
+            },
+
+            success: "Bravo, vous avez réussi !",
+            wrong: "Votre réponse comporte des erreurs. Essayez autrement.",
+            wrongHard: function(correct, total) {
+               return "Vous avez correctement identifié " + correct + " des " + total + " potions. Essayez maintenant d'en identifier un plus grand nombre. Cliquez sur le bouton pour mélanger les potions et tout recommencer.";
+            },
+            wrongLogic: "Vous avez placé le castor encadré en rouge, alors que vous ne pouvez pas être certain que c'est forcément cette potion qu'il a bue.",
+
+            drinkButton: function(beavers) {
+               return "Faire boire\nles Castors";
+            },
+            reshuffleButton: "Mélanger les potions\net recommencer",
+
+            noDrink: "Tête d'un\ncastor qui\nne boit pas.",
+            emptyExperiment: "Donnez au moins une potion à chaque Castor.",
+            answerTooEarly: "Faites d'abord boire les castors.",
+            cupsTooLate: "Avant de pouvoir changer les potions, cliquez sur le bouton pour les mélanger et recommencer." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+         }
+         #anim {
+            display: inline-block;
+         }
+         #drinkingInstruction {
+            margin-left: 170px;
+         }
+         #experimentCups {
+         }
+         .usageInstructions {
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         #solution li {
+            padding-bottom: 0.5em;
+         }
+         #solInfo {
+            border-collapse: collapse;
+         }
+         #solInfo td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Potions magiques</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               Les castors ont trouvé <span class="totalCups">X</span> potions magiques.
+               Chaque potion modifie un aspect des castors qui la boivent.
+            </p>
+            <p id="drinkingInstruction" class="easy medium">Trois castors ont bu <span class="experimentCups">X</span> potions chacun. Ils ont changé comme ceci :
+            </p>
+            <p class="hard">
+               Faites boire des potions à trois castors pour pouvoir déduire quelle potion correspond à chaque lettre. 
+            </p>
+            <p class="hard">
+               Glissez au-dessus de chaque castor ce que vous souhaitez lui faire boire.
+            </p>
+            <p class="hard">
+                  <strong>Attention :</strong> une fois que les castors ont bu, si vous réessayez, les potions seront mélangées.
+            </p>
+            <div id="anim_container">
+               <div id="anim1"></div>
+               <div id="feedback"></div>
+               <div class="usageInstructions">
+                  <p>
+                  Les castors ci-dessous ont bu une potion chacun.
+                  Glissez chaque castor sous la potion qu'il a bue.
+                  </p>
+                  <p class="hard">
+                  <strong>Attention :</strong> si vous n'êtes pas sûr de vous, ne remplissez pas au hasard, mais laissez des cases vides.
+                  </p>
+               </div>
+               <div id="anim2"></div>
+            </div>
+            <div id="validation"><input type="button" value="Valider" id="execute" /></div>
+
+            <img id="bigEars_image" src="bigEars.png" style="display:none">
+            <img id="bigTeeth_image" src="bigTeeth.png" style="display:none">
+            <img id="blackEars_image" src="blackEars.png" style="display:none">
+            <img id="blackTeeth_image" src="blackTeeth.png" style="display:none">
+            <img id="curlyWhiskers_image" src="curlyWhiskers.png" style="display:none">
+            <img id="whiteEyes_image" src="whiteEyes.png" style="display:none">
+            <img id="whiteNose_image" src="whiteNose.png" style="display:none">
+            <img id="whiteSkin_image" src="whiteSkin.png" style="display:none">
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+<style>
+.solutionInstanceMismatch {
+   font-style: italic;
+}
+</style>
+<p class="solutionInstanceMismatch">Remarque : les données de la correction ne correspondent pas forcément à celles de votre sujet.</p>
+
+            <div class="easy">
+               <ul>
+               <li>La potion B a été bue par les castors 1 et 2. Leur point commun est d'avoir les moustaches frisées : c'est donc l'effet de la potion B.</li>
+               <li>La potion C a été bue par les castors 2 et 3. Leur point commun est d'avoir des grandes oreilles : c'est donc l'effet de la potion C.</li>
+               <li>La potion A n'a été bue que par le castor 1. C'est le seul castor avoir des grandes dents : c'est donc l'effet de la potion A.</li>
+               <li>La potion D n'a été bue que par le castor 3. C'est le seul castor avoir les dents noires : c'est donc l'effet de la potion D.</li>
+               </ul>
+               <p><img src="sol_easy.png"></p>
+            </div>   
+            <div class="medium">
+               <ul>
+               <li>La potion A a été bue par les castors 1 et 2. Leur point commun est d'avoir des grandes dents : c'est donc l'effet de la potion A.</li>
+               <li>De même, on déduit que la potion D bue par les castors 2 et 3 donne les grandes oreilles.</li>
+               <li>De même, on déduit que la potion C bue par les castors 1 et 3 donne les dents noires.</li>
+               <li>La potion B n'a été bue que par le castor 1. C'est le seul castor avoir les moustaches frisées : c'est donc l'effet de la potion B.</li>
+               <li>De même, on déduit que la potion E bue uniquement par le castor 2 donne les oreilles noires.</li>
+               <li>De même, on déduit que la potion F bue uniquement par le castor 3 donne la peau blanche.</li>
+               </ul> 
+               <p><img src="sol_medium.png"></p>
+
+            </div>
+            <div class="hard">
+               <p>Pour distinguer les effets des potions, on va les distribuer aux castors de sorte que :</p>
+               <ul>
+               <li>Certaines potions ne sont bues que par un seul castor. </li>
+               <li>Certaines potions sont bues par exactement deux castors.</li>
+               <li>Une potion sera bue par les trois castors.</li>
+               <li>Une potion ne sera bue par aucun castor.</li>
+               </ul>
+               <p>Commençons par distribuer les potions bues par un seul castor et choisissons les potions A, B et C&nbsp;:</p>
+               <p><img src="sol_hard_1.png"></p>
+               <p>Distribuons ensuite des potions bues par deux castors : la potion D pour les castors 1 et 2, la potion E pour les castors 2 et 3, et la potion F pour les castors 1 et 3.</p>
+               <p><img src="sol_hard_2.png"></p>
+               <p>Distribuons ensuite la potion G à tous les castors. La potion H n'est distribuée à personne.
+               Faisons alors boire les castors.</p>
+               <p><img src="sol_hard_3.png"></p>
+               <p>Pour identifier les effets, le plus rapide est de commencer par les effets en commun à plusieurs castors.</p>
+               <ul>
+               <li>Les trois castors ont en commun des grandes dents : c'est donc l'effet de la potion G. </li>
+               <li>Les castors 1 et 2 ont en commun les grandes oreilles : c'est donc l'effet de la potion D.</li>
+               <li>Les castors 2 et 3 ont en commun la peau blanche : c'est donc l'effet de la potion E.</li>
+               <li>Les castors 1 et 3 ont en commun les oreilles noires : c'est donc l'effet de la potion F.</li>
+               <li>Le castor 1 est le seul à avoir les dents noires : c'est donc l'effet de la potion A.</li>
+               <li>Le castor 2 est le seul à avoir les moustaches frisées : c'est donc l'effet de la potion B.</li>
+               <li>Le castor 3 est le seul à avoir le nez blanc : c'est donc l'effet de la potion C.</li>
+               <li>L'effet des yeux blancs n'a été vu sur aucun castor : c'est donc l'effet de la potion H.</li>
+               </ul>
+               <p><img src="sol_hard_4.png"></p>
+            </div>  
+         
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Dans la version difficile de ce sujet, on propose de répartir des potions sur 3 castors, de sorte à pouvoir identifier chaque potion. Pour construire une solution, on peut procéder en remplissant un tableau : chaque ligne correspond à une potion, chaque colonne correspond à un castor, et dans chaque case à l'intérieur du tableau, on note 1 si le castor de la colonne boit la potion sur la ligne, et 0 pour indiquer le contraire.
+            </p>
+            <p>L'objectif est d'être capable d'identifier les potions, ce qui revient à dire que toutes les lignes du tableau doivent être différentes. Une possibilité est de remplir les lignes comme montré ci-dessous.</p>
+
+            <p><table id="solInfo">
+            <tr>
+               <td></td>
+               <td>Castor n°1</td>
+               <td>Castor n°2</td>
+               <td>Castor n°3</td>
+            </tr>
+            <tr>
+               <td>Potion A</td>
+               <td>0</td>
+               <td>0</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Potion B</td>
+               <td>0</td>
+               <td>0</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Potion C</td>
+               <td>0</td>
+               <td>1</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Potion D</td>
+               <td>0</td>
+               <td>1</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Potion E</td>
+               <td>1</td>
+               <td>0</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Potion F</td>
+               <td>1</td>
+               <td>0</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Potion G</td>
+               <td>1</td>
+               <td>1</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Potion H</td>
+               <td>1</td>
+               <td>1</td>
+               <td>1</td>
+            </tr>
+            </table></p>
+
+            <p>Bien sûr, on aurait pu mettre les lignes dans un ordre différent. Mais toutes les solutions correspondent forcément à un certain mélange de ces lignes.</p>
+
+            <p>Les lignes du tableau ci-dessus correspondent à la <strong>numérotation binaire</strong> : c'est ainsi que les ordinateurs représentent les nombres.</p>
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

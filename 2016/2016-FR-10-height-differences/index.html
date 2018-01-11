@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-10</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-10-height-differences/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            wrong: function(diff) { return "Le total des différences est de " + diff + ". Vous pouvez faire mieux avec d'autres couples."; },
+            teamNames: ["Castors\nbleus", "Castor\njaunes"],
+            difference: "Différence :",
+            total: "Total des différences :"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Différence de taille</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Chaque Castor bleu veut danser avec un Castor jaune. Changez l'ordre des castors bleus et l'ordre des castors jaunes pour créer des couples ayant le plus possible la même taille.
+            </p>
+            <p>Le total des différences doit être aussi petit que possible.</p>
+            <div id="anim_consinon tainer">
+               <div id="anim"></div>
+            </div>
+            <img src="blue.png" style="display:none">
+            <img src="yellow.png" style="display:none">
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+<style>
+.solutionInstanceMismatch {
+   font-style: italic;
+}
+</style>
+<p class="solutionInstanceMismatch">Remarque : les données de la correction ne correspondent pas forcément à celles de votre sujet.</p>
+
+            <p>En associant le plus grand castor bleu avec le plus grand castor jaune, puis le second plus grand castor bleu avec le second castor bleu, etc... jusqu'au plus petit castor bleu avec le plus petit castor jaune, on obtient la meilleure configuration. </p>
+            <div class="easy">
+               <p><img src="sol_easy_1.png"></p>
+            </div>   
+            <p>Une manière très efficace d'associer les castors de cette manière est de trier tous les castors bleus par taille, puis tous les castors jaunes de la même manière. On obtient alors automatiquement des associations qui donnent le meilleur résultat possible.</p>
+            <div class="easy">
+               <p><img src="sol_easy_2.png"></p>
+            </div>   
+            <div class="medium">
+               <p></p>
+               <p><img src="sol_medium.png"></p>
+            </div>
+            <div class="hard">
+               <p></p>
+               <p><img src="sol_hard.png"></p>
+            </div>
+            <p>D'autres configurations permettent d'obtenir le même total des différences, mais celle qui consiste à trier les castors permet de résoudre à coup sûr le sujet de manière très simple.</p>
+
+            <!-- TODO: démontrer pourquoi ça marche, en montrant que si on a une paire croisée, alors on fait pareil ou mieux en la décroisant. -->
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>On essaie ici d'<strong>optimiser</strong> une certaine mesure, calculée selon la manière dont on range des éléments (ici, des castors).</p>
+
+            <p>Dans ce sujet, à chaque fois que l'on voit qu'on a deux paires de castors (deux castors bleus associés à deux castors jaunes), et qu'on pourrait diminuer la somme des différences en recomposant les deux paires (en mettant le premier castor bleu avec le second castor jaune, et le second castor bleu avec le premier castor jaune), on a intérêt à faire ce changement. Lorsqu'il n'y a plus aucune possibilité pour recomposer une paire de la sorte en améliorant le résultat, alors on a forcément obtenu une configuration optimale (c'est-à-dire la meilleure possible).</p>
+
+            <p>Comme dans ce sujet, il existe de nombreuses situations en informatique où l'on peut partir d'une configuration arbitraire, et ensuite l'améliorer petit à petit, jusqu'à <strong>converger</strong> vers une configuration optimale. Autrement dit, on peut converger vers le maximum global en effectuant une succession de petites améliorations locales.</p>
+
+     </div> <!-- task-solution -->
+   </body>
+</html>

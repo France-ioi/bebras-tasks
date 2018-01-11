@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-04</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0',
+            'visual-graph-1.0', 'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-04-faulty-wire/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            found: "", // empty when using automatic validation
+            notFound: "Trouvez le morceau du tuyau contenant le tas de graines, et faites passer Castor dedans.",
+            noSeeds: "Castor n'a pas trouvé de graines sur son chemin. Cherchez ailleurs.",
+            noPath: "Cliquez sur deux trappes situées sur un même tuyau.",
+            /*
+            testLimit: function (limit) { return "Vous avez déjà fait " + limit + " tests, mais vous n'avez pas encore trouvé les graines. Essayez autrement, en cliquant sur &quot;Recommencer&quot;."; },
+            */
+            seedsInPath: function(pathLength) { return "<p>Castor a vu des graines dans l'un des " + pathLength + " morceaux de tuyaux.</p><p>Continuez pour trouver où exactement.</p>"; },
+            partial: function(userSteps, optimalSteps, hasPoints) {
+               var pointsMessage;
+               if (!hasPoints) {
+                  pointsMessage = "C'est trop pour obtenir des points.";
+               } else {
+                  pointsMessage = "Cela vous donne une partie des points.";
+               }
+               return "<p>Vous avez trouvé le tas de graines en " + userSteps + " étapes.</p><p>" + pointsMessage + "</p><p>Recommencez pour trouver en moins d'étapes.</p><p>Attention, le tas de graines va changer de place.</p>";
+            },
+            obstructedPathText: ""
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         #exampleTable {
+            margin: auto;
+         }
+         #exampleTitle {
+            text-align: center;
+            font-weight: bold;
+         }
+         #exampleDescr {
+            text-align: center;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         #exampleFrame {
+            border: 1px solid black;
+            padding: 5px;
+            margin: 15px 0px 0px 0px;
+         }
+         .animWithSep {
+            border-right: 1px dashed gray;
+            padding-right: 10px;
+         }
+         #feedback {
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         .stepsMessage {
+            font-size: 18px;
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Graines cachées</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="enemyWarning"></p>
+            <div style="float:right; padding: 5px; margin-left: 25px; margin-bottom: 10px; border: 1px solid black"><img src="seeds.png" style="height:55px"></div>
+            <p>Castor a perdu son tas de graines dans un morceau de tuyau.</p>
+            <p style="font-weight: bold">Trouvez où se trouvent les graines en faisant le moins de tests possible.</p>
+            <p >Pour faire un test, cliquez sur deux trappes noires. Castor traversera tous les tuyaux entre ces trappes et vous dira s'il a trouvé des graines en chemin.</p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <div id="feedback"></div>
+            <div id="buttons">
+               <span class="stepsMessage">Nombre de tests : <span id="stepCounter"></span>.</span>
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+         </div>
+      </div><!-- task -->
+
+      <div id="solution">
+
+         <h2>Solution</h2>
+           
+           <div class="easy">
+              <p>Pour trouver les graines à coup sûr en 4 tests, on peut commencer par tester deux tuyaux complets. On saura alors dans quel tuyau de deux morceaux de long se trouvent les graines.</p> 
+              <ul>
+              <li>
+                  <p><strong>Étape 1</strong> : Commençons par n'importe quel tuyau, par exemple le premier en haut.</p>
+                  <p><img src="Sol_easy_1.png"></p>
+                  <p>Résultat : les graines n'y sont pas.</p>
+              </li>
+              <li>   
+                  <p><strong>Étape 2</strong> : Essayons sur un autre tuyau, par exemple celui de gauche. </p>
+                  <p><img src="Sol_easy_2.png"></p>
+                  <p>Résultat : les graines n'y sont pas.</p>
+              </li>
+              <li>
+                  <p><strong>Étape 3</strong> : Les graines sont donc forcément dans le troisème tuyau. Il n'est pas nécessaire de le tester en entier. Il suffit de tester l'un des deux morceaux. Soit on trouvera les graines dans ce morceau-là, soit elles seront forcément dans l'autre morceaux.</p>
+                  <p><img src="Sol_easy_3.png"></p>
+                  <p>Résultat : les graines ne sont pas dans le morceau de gauche. Elles sont donc forcément à droite.</li>
+              <li>
+                  <p><strong>Étape 4</strong> : Envoyons Castor chercher les graines là où elles se trouvent forcément.</p>
+                  <p><img src="Sol_easy_4.png"></p>
+                  <p>Et c'est gagné !</p>
+              </li>
+              </ul>
+           </div>
+
+           <div class="medium">
+              <p>Pour trouver les graines à coup sûr en 5 tests, on va essayer d'éliminer un maximum de morceaux possibles à chaque étape.</p> 
+              <ul>
+              <li>
+                  <p><strong>Étape 1</strong> : Commençons par faire traverser à Castor la moitié des morceaux de tuyau.</p>
+                  <p><img src="Sol_medium_1.png"></p>
+                  <p>Résultat : les graines n'y sont pas. Cette zone est noircie dans la suite.</p>
+                  <p>Remarque : si Castor ne traverse pas exactement la moitié des morceaux de tuyau, mais un peu plus ou un peu moins, l'ordinateur fait en sorte que les graines se retrouvent toujours dans la partie la plus grande.</p>
+              </li>
+              <li>   
+                  <p><strong>Étape 2</strong> : De la même manière, envoyons Castor explorer la moitié des morceaux où les graines peuvent encore se trouver. </p>
+                  <p><img src="Sol_medium_2.png"></p>
+                  <p>Résultat : les graines se trouvent dans cette partie. On peut donc noircir les autres morceaux dans la suite, puisque les graines ne s'y trouvent pas.</p>
+              </li>
+              <li>
+                  <p><strong>Étape 3</strong> : Il ne reste plus que 4 morceaux possibles. En appliquant toujours la même méthode, envoyons Castor explorer deux de ces tuyaux.</p>
+                  <p><img src="Sol_medium_3.png"></p>
+                  <p>Résultat : les graines ne sont pas dans les deux morceaux de gauche. Elles sont donc forcément à droite.</li>
+              <li>
+                  <p><strong>Étape 4</strong> : Essayons un des deux morceaux qui restent.</p>
+                  <p><img src="Sol_medium_4.png"></p>
+                  <p>Résultat : les graines ne sont pas dans ce morceau là.</p>
+              </li>
+              <li>
+                  <p><strong>Étape 5</strong> : Envoyons Castor chercher les graines là où elles se trouvent forcément.</p>
+                  <p><img src="Sol_medium_5.png"></p>
+                  <p>Et c'est gagné !</p>
+              </li>
+              </ul>
+           </div>
+
+
+          <div class="hard">
+              <p>Pour trouver les graines à coup sûr en 5 tests, on va essayer d'éliminer un maximum de morceaux possibles à chaque étape.</p> 
+              <ul>
+              <li>
+                  <p><strong>Étape 1</strong> : La plus longue traversée que l'on peut faire faire à Castor au début consiste à traverser les 6 morceaux du dessus.</p>
+                  <p><img src="Sol_hard_1.png"></p>
+                  <p>Résultat : les graines n'y sont pas. Cette zone est noircie dans la suite.</p>
+              </li>
+              <li>   
+                  <p><strong>Étape 2</strong> : Parmi les morceaux qui restent, on peut au maximum en traverser 4 en une seule fois. Par exemple en procédant comme montré ci-dessous. </p>
+                  <p><img src="Sol_hard_2.png"></p>
+                  <p>Résultat : les graines n'y sont pas. Cette zone est noircie dans la suite.</p>
+              </li>
+              <li>
+                  <p><strong>Étape 3</strong> : Il ne reste plus que 4 morceaux possibles. Pour faire efficace, on peut envoyer Castor explorer deux de ces tuyaux d'un coup. Pour cela, on doit faire passer Castor dans des morceaux de tuyaux où l'on sait déjà que les graines ne sont pas; ce n'est pas un problème.</p>
+                  <p><img src="Sol_hard_3.png"></p>
+                  <p>Résultat : les graines ne sont pas dans les deux morceaux de droite. Elles sont donc forcément dans l'un des deux morceaux de gauche.</li>
+              <li>
+                  <p><strong>Étape 4</strong> : Essayons un des deux morceaux qui restent.</p>
+                  <p><img src="Sol_hard_4.png"></p>
+                  <p>Résultat : les graines ne sont pas dans ce morceau là.</p>
+              </li>
+              <li>
+                  <p><strong>Étape 5</strong> : Envoyons Castor chercher les graines là où elles se trouvent forcément.</p>
+                  <p><img src="Sol_hard_5.png"></p>
+                  <p>Et c'est gagné !</p>
+              </li>
+              </ul>
+          </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+         <p>Ce sujet illustre la notion de <b>recherche dichotomique</b>, qui permet de trouver rapidement un objet caché dans un grand nombre d'endroits possibles. L'idée est de diviser l'ensemble des possibilités en deux parties de tailles égales, et de déterminer si l'objet que l'on cherche se trouve dans la première moitié ou bien dans la seconde. Une fois que l'on sait, on se ramène au problème de départ, à savoir chercher un objet dans un ensemble d'endroits possibles, sauf que maintenant il y a deux fois moins de possibilités.</p>
+         <p> En répétant ce processus, on divise par deux à chaque fois le nombre de possibilités restantes. On arrive ainsi très rapidement à ne plus avoir qu'une seule possibilité. On a alors localisé l'objet cherché.</p>
+
+
+	   </div> <!-- task-solution -->
+       
+   </body>
+</html>

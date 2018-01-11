@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-06</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-06-pacman/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            error: "You were caught by a ghost. Click restart to try again.",
+            invalid: "You clicked on a block square."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #controlsContainer {
+            text-align: center;
+         }
+         #controlsContainer input {
+            min-width: 80px;
+            padding: 10px;
+         }
+         #arrowsTable td {
+            width: 30px;
+            height: 30px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Pacman</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p>[Description]</p>
+
+             <div id="anim_container">
+               <table>
+                  <tr>
+                     <td>
+                        <div id="anim"></div>
+                     </td>
+                     <td id="controlsContainer">
+                        <table id="arrowsTable">
+                           <tr>
+                              <td></td>
+                              <td>
+                                 <div id="paper_up"></div>
+                              </td>
+                              <td></td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div id="paper_left"></div>
+                              </td>
+                              <td></td>
+                              <td>
+                                 <div id="paper_right"></div>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 <div id="paper_down"></div>
+                              </td>
+                              <td></td>
+                           </tr>
+                        </table>
+                        <br>
+                        <input type="button" id="undo" value="Undo last step" />
+                     </td>
+                  </tr>
+               </table>
+               <div id="feedback"></div>
+               <input type="button" id="restart" value="Restart" />
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+            <img id="image_ghost1" src="ghost1.png" style="display:none">
+            <img id="image_ghost2" src="ghost2.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            
+
+         <!--
+         <h2>C'est de l'informatique !</h2>
+            
+           -->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

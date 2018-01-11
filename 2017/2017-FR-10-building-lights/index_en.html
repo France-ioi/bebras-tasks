@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-10</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            emptyError: "Your sequence of actions is empty.",
+            mismatchError: "The buildings don't match."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         .anim {
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .animBuilding {
+            border: 1px solid black;
+         }
+         #animDrag {
+            margin-top: 20px;
+         }
+         #control {
+            margin-top: 1em;
+            margin-bottom: 1em;
+         }
+         #control input {
+            margin-left: 1em;
+            margin-right: 1em;
+            width: 8em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Building lights</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>Turn on the lights as in the objective. </p>
+             <p>Select instruction cards you need, put them in the white cases and click on the execute button. </p>
+             <p>For instance, the A card turns on all the lights on the A column, the 0 card turns on all the lights on the 0 line.</p>
+            <div id="anim_container">
+               <div class="anim animBuilding" id="animUser"></div>
+               <div class="anim animBuilding" id="animTarget"></div>
+               <br>
+               <div class="anim" id="animDrag"></div>
+               <div id="control">
+                  <input type="button" id="execute" value="Execute"/>
+                  <input type="button" id="stop" value="Stop"/>
+               </div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+         <br>
+         <center><span id="error"></span></center>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+         <h2>C'est de l'informatique !</h2>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
