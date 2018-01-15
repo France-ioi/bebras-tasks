@@ -85,6 +85,13 @@ function TaskBundle (bundle, deps) {
         });
     });
 
+    if (process.env.NODE_ENV === 'development') {
+        bundle.addEarlyReducer(function (state, action) {
+            console.log('ACTION', action.type, action);
+            return state;
+        });
+    }
+
 }
 
 
