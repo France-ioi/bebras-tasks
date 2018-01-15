@@ -2,10 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const SRC = path.resolve(__dirname, "src");
 
+const isDev = process.env.NODE_ENV !== 'production';
+
 const config = module.exports = {
   entry: {
-    vendor: [],
-    index: ['./src/index.js']
+    index: './src/index.js'
   },
   output: {
     path: path.join(__dirname, 'build'),
@@ -15,42 +16,48 @@ const config = module.exports = {
     library: "ReactTask"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         include: SRC,
-        loader: 'babel'
+        use: [
+          {loader: 'babel-loader', options: {babelrc: true}}
+        ]
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: [
+          {loader: 'style-loader', options: {sourceMap: isDev}},
+          {loader: 'css-loader', options: {modules: false}},
+        ]
       },
       {
-        test: /\.(eot|svg|ttf|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
-        loader: 'file?name=fonts/[name].[ext]'
+        test: /fonts\/.*\.(eot|ttf|svg|woff(2)?)(\?v=\d+\.\d+\.\d+)?/,
+        use: [
+          {loader: 'file-loader', options: {name: 'fonts/[name].[ext]'}}
+        ]
       }
     ]
   },
   resolve: {
-    root: path.resolve(__dirname, "node_modules"),
-    extensions: ['', '.js']
+    extensions: ['.js']
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       filename: "vendor.js",
       minChunks: function (module) { return /node_modules/.test(module.resource); }
     })
   ],
-  externals: {
+  externals: { /* TODO: clean this up by not having a dual browser/node module */
     fs: true,
     mime: true
   }
 };
 
-if (process.env.NODE_ENV !== 'production') {
+if (isDev) {
   config.devtool = 'inline-source-map';
 } else {
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
