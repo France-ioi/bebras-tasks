@@ -57,7 +57,8 @@ export default function (bundle, deps) {
     }
 
     function* taskGetViewsEventSaga ({payload: {success}}) {
-        yield call(success, {});
+        /* XXX only the 'task' view is declared */
+        yield call(success, {'task': {}});
     }
 
     function taskUpdateTokenEventReducer (state, {payload: {token}}) {
