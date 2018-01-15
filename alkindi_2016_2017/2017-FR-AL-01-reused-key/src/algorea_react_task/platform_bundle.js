@@ -1,5 +1,4 @@
 import {call, put, select, takeEvery} from 'redux-saga/effects';
-import {fetchTaskData, gradeAnswer} from './server_module';
 
 export default function (bundle, deps) {
 
@@ -121,9 +120,8 @@ export default function (bundle, deps) {
     function* taskLoadEventSaga ({payload: {views, success, error}}) {
         /* TODO: do something with views */
         try {
-            const taskToken = yield select(state => state.taskToken);
-            const host = yield select(state => state.options.server_module.host);
-            const task = yield call(fetchTaskData, host, taskToken);
+            const {taskToken, serverTools} = yield select(state => state);
+            const task = yield call(serverTools, 'tasks', 'taskData', {task: taskToken});
             yield put({type: deps.taskDataLoaded, payload: {task}});
             yield put({type: deps.taskInit});
             yield call(success);
@@ -134,16 +132,16 @@ export default function (bundle, deps) {
 
     function* taskGradeAnswerEventSaga ({payload: {answer, answerToken, success, error}}) {
         try {
-            const {host, taskToken, getTaskParams} = yield select(function (state) {
-                return {
-                    host: state.options.server_module.host,
-                    taskToken: state.taskToken,
-                    getTaskParams: state.platformAdapter.getTaskParams
-                };
+            const {taskToken, platformAdapter: {getTaskParams}, serverTools} = yield select(state => state);
+            const {minScore, maxScore, noScore} = yield call(getTaskParams, null, null);
+            const grading = yield call(serverTools, 'tasks', 'gradeAnswer', {
+                task: taskToken,
+                answer,
+                answerToken,
+                min_score: minScore,
+                max_score: maxScore,
+                no_score: noScore
             });
-            const taskParams = yield call(getTaskParams, null, null);
-            /* XXX Pass answer to gradeAnswer? */
-            const grading = yield call(gradeAnswer, host, taskToken, answerToken, taskParams);
             yield call(success);
         } catch (ex) {
             yield call(error, ex.toString());

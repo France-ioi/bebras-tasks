@@ -9,8 +9,8 @@ export default function (bundle, deps) {
     bundle.use('Workspace');
 
     bundle.defineAction('appInit', 'App.Init');
-    bundle.addReducer('appInit', function (state, {payload: {platformAdapter, task, taskToken, options}}) {
-        return {...state, platformAdapter, task, taskToken, options};
+    bundle.addReducer('appInit', function (state, {payload: {platformAdapter, task, taskToken, serverTools, options}}) {
+        return {...state, platformAdapter, task, taskToken, serverTools, options};
     });
 
     bundle.defineAction('appInitFailed', 'App.Init.Failed');
