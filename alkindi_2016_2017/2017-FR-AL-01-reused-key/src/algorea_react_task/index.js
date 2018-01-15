@@ -37,8 +37,8 @@ function startApp (app, taskToken, options) {
     options = options || {};
     const platformAdapter = makePlatformAdapter(window.platform);
     const task = new Task(store, scope);
-    store.dispatch({type: scope.appInit, payload: {platformAdapter, task, taskToken, options}});
     start();
+    store.dispatch({type: scope.appInit, payload: {platformAdapter, task, taskToken, options}});
 }
 
 
