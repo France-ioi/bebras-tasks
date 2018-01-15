@@ -40,9 +40,9 @@ export default function (bundle, deps) {
     }
 
     function AppSelector (state) {
-        const {task, workspace} = state;
+        const {task, workspace, fatalError} = state;
         const {Workspace, platformValidate} = deps;
-        return {task, workspace, Workspace, platformValidate};
+        return {task, workspace, Workspace, platformValidate, fatalError};
     }
     bundle.defineView('App', AppSelector, App);
 
@@ -50,7 +50,15 @@ export default function (bundle, deps) {
 
 class App extends React.PureComponent {
     render () {
-        const {task, workspace, Workspace} = this.props;
+        const {task, workspace, Workspace, fatalError} = this.props;
+        if (fatalError) {
+            return (
+                <div>
+                    <h1>{"A fatal error has occurred"}</h1>
+                    <p>{fatalError}</p>
+                </div>
+            );
+        }
         if (!task || !workspace) {
             return (<Spinner/>);
         }
