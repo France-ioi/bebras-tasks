@@ -18,6 +18,7 @@ export default function (container, options, TaskBundle) {
     const query = queryString.parse(location.search);
     startApp(app, query.sToken, options);
     container && mountApp(app, container);
+    return app;
 }
 
 

@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './style.css';
 
 export function run (container, options) {
-    algoreaReactTask(container, options, TaskBundle);
+    return algoreaReactTask(container, options, TaskBundle);
 }
 
 
