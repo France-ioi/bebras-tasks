@@ -1,5 +1,5 @@
 import React from 'react';
-import {call, takeEvery, select} from 'redux-saga/effects';
+import {call, takeEvery, select, put} from 'redux-saga/effects';
 
 import TaskBar from './ui/task_bar';
 import Spinner from './ui/spinner';
@@ -13,6 +13,11 @@ export default function (bundle, deps) {
         return {...state, platformAdapter, task, taskToken, options};
     });
 
+    bundle.defineAction('appInitFailed', 'App.Init.Failed');
+    bundle.addReducer('appInitFailed', function (state, {payload: {message}}) {
+        return {...state, fatalError: message};
+    });
+
     bundle.defineAction('platformValidate', 'Platform.Validate');
 
     bundle.addSaga(function* () {
@@ -21,8 +26,11 @@ export default function (bundle, deps) {
     });
 
     function* appInitSaga ({payload: {platformAdapter, task}}) {
-        /* TODO: error handling, wrap in try/catch block */
-        yield call(platformAdapter.initWithTask, task);
+        try {
+            yield call(platformAdapter.initWithTask, task);
+        } catch (ex) {
+            yield put({type: deps.appInitFailed, payload: {message: ex.toString()}});
+        }
     }
 
     function* platformValidateSaga ({payload: {mode}}) {
