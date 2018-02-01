@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-06</title>
+    <title>2017-EN-06</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -20,9 +20,9 @@
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-06-pacman/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif",
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -34,9 +34,19 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Congratulations, you have succeeded!",
-            error: "You were caught by a ghost. Click restart to try again.",
-            invalid: "You clicked on a block square."
+            success: "Congratulations, you have succeeded&nbsp;!",
+            error: "Beaver was caught by a ghost. You can restart or cancel the last steps.", //&quot;Recommencer&quot;
+            undoOption: "Cancel the last step",
+            restartOption: "Restart",
+            partial: "Beaver has been caught! You get some of the points. <br> You can start again or cancel the last steps.",
+            // DEPRECATD invalid: "Castor ne peut pas se déplacer sur une case grise.",
+            livesLeft: function(lives) {
+               return "lives :<br>" + lives;
+            },
+            livesFeedback: function(livesLost, livesLeft) {
+               return "";
+               //return "Castor a perdu " + livesLost + " vie(s). Il lui reste " + livesLeft + " vie(s).";
+            }
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -51,7 +61,7 @@
             display: inline-block;
          }
          #feedback {
-            height: 1em;
+            height: 2em;
             margin-top: 0.5em;
             margin-bottom: 0.1em;
             text-align: center;
@@ -60,6 +70,7 @@
          }
          #controlsContainer {
             text-align: center;
+            padding-left: 20px;
          }
          #controlsContainer input {
             min-width: 80px;
@@ -69,15 +80,33 @@
             width: 30px;
             height: 30px;
          }
+         .livesStatus {
+            margin-top: 30px;
+            font-size: 24px;
+            display: none;
+         }
+         #restart {
+            padding: 10px;
+         }
       </style>
    </head>
    <body>
 
       <div id="task">
-         <h1>Pacman</h1>
+         <h1>Ghost</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p>[Description]</p>
+             <p class="hard" id="difficultyWarning"></p>
+             <p>
+               Move the Beaver to the yellow dot without getting caught by <span class="easy medium">the ghost</span><span class="hard">the ghosts</span>. </p>
+             <p>You can move the Beaver with the arrow keys or by clicking on the grid.
+             </p>
+             <p class="easy medium">
+               Observe that the ghost always moves using the same strategy. Try to avoid it !
+             </p>
+             <p class="hard">
+               Observe that ghosts always moves using the same strategy. Try to avoid them !
+             </p>
 
              <div id="anim_container">
                <table>
@@ -86,33 +115,9 @@
                         <div id="anim"></div>
                      </td>
                      <td id="controlsContainer">
-                        <table id="arrowsTable">
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_up"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                           <tr>
-                              <td>
-                                 <div id="paper_left"></div>
-                              </td>
-                              <td></td>
-                              <td>
-                                 <div id="paper_right"></div>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_down"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                        </table>
+                        <input type="button" id="undo" value="Undo" />
                         <br>
-                        <input type="button" id="undo" value="Undo last step" />
+                        <div class="livesStatus"></span>
                      </td>
                   </tr>
                </table>
@@ -129,12 +134,125 @@
 
          <h2>Solution</h2>
    
-            
+   
+            <style>
+            .table-sol img {
+               width: 240px;
+            }
+            .table-sol td {
+               width: 250px;
+               padding-bottom: 20px;
+               vertical-align: bottom;
+            }
+            .table-sol p {
+               margin: 0px 0px 5px 0px;
+            }
+            </style>
+        
+            <div class="easy">
+                  <table class="table-sol"><tr>
+               <td>
+                  <p>The goal is to trap the ghost.</p>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <p>It is first moved to the right.</p>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <p>Then we go back to the left.</p>
+                  <img src="Sol_easy_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>We can then go down.</p>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <p>And we won !</p>
+                  <img src="Sol_easy_5.png">
+               </td>
+               </tr>
+               </table>
+            </div>
 
-         <!--
-         <h2>C'est de l'informatique !</h2>
+            <div class="medium">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>The goal is to trap the ghost.</p>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <p>It is first moved to the right.</p>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <p>Then we go back to the left.</p>
+                  <img src="Sol_medium_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>Then we can go down.</p>
+                  <img src="Sol_medium_4.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>We attract the two ghosts.</p>
+                  <img src="Sol_hard_0.png">
+               </td>
+               <td>
+                  <p>Towards corners.</p>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <p>That way they're stuck.</p>
+                  <img src="Sol_hard_2.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>We go down on the left edge.</p>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <p>Then we go back just in time.</p>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <p>We draw the ghost to the right.</p>
+                  <img src="Sol_hard_5.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>We left the ghost to the left.</p>
+                  <img src="Sol_hard_6.png">
+               </td>
+               <td>
+                  <p>Then we can go down.</p>
+                  <img src="Sol_hard_7.png">
+               </td>
+               <td>
+                  <p>And get to the yellow dot.</p>
+                  <img src="Sol_hard_8.png">
+               </td>
+               </tr>
+               </table>
+
+            </div>            
+
+         <h2>It's computer science !</h2>
             
-           -->
+            <p>In this topic, it was necessary to do <b> reverse engineering </b>, in order to deduce the displacement behavior of a ghost. A ghost is still heading in the direction of Castor. It's a pretty good way to reach your target, except of course when there are obstacles. In this subject, it was precisely necessary to exploit the obstacles in order to manage to catch the ghost and then to be able to pick up speed. </P>
 
 	  </div> <!-- task-solution -->
    </body>

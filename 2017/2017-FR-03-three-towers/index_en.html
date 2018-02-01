@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-03</title>
+    <title>2017-EN-03</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -16,13 +16,13 @@
             'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
             'taskStyles-0.1']);
     </script>
-      <script class="remove" type="text/javascript">
+    <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-03-three-towers/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif",
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -34,11 +34,17 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Congratulations, you have succeeded!",
-            error: "The blocks don't match the objective.",
-            partial: function(steps, stepsOptimal) { return "You have succeeded in " + steps + " steps. You can start over to try to solve with only " + stepsOptimal + " steps.<br> Note, it's not easy!"; }, // TODO better translation from French?
-            pickupError: "You must choose a column with<br>a block to pick up.",
-            blockClick: "Click on the buttons to move the crane."
+            success: "Congratulations, you have succeeded&nbsp;!",
+            error: "The result is not correct.", // not displayed
+            partial: function(steps, stepsOptimal, level) { 
+               var s = "You have succeeded in " + steps + " steps. You can start again to try to store the blocks in just " + stepsOptimal + " steps.";
+               if (level == 'hard') {
+                  s += "<br> Attention, it's really not easy !";
+               }
+               return s;
+            },
+            pickupError: "There is no block above this button.",
+            blockClick: "Click on the gray buttons to control the crane." 
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -76,22 +82,26 @@
          }
          #buttons {
             margin-bottom: 20px;
-            margin-top: 35px;
+            margin-top: 15px;
             text-align: center;
          }
          #buttons input {
             margin-left: 1em;
          }
+         .targetNumber {
+            font-weight: bold;
+         }
       </style>
    </head>
    <body>
       <div id="task">
-         <h1>Three towers</h1>
+         <h1>The Three Towers</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>
-               [Description]
-            </p>
+            <p>Arrange the blocks to be as shown in the objective figure. Click on the grey buttons to let the magnetized crane lift or drop a block.</p>
+
+            <p>Arrange the blocks in <span id="nbStepsPartial" class="targetNumber"></span> steps<span class="medium hard"> to get a score, and in <span id="nbStepsOptimal" class="targetNumber"></span> steps to get the full score<span class="hard"></span></span>.
+             </p>
             <table id="animTable">
                <tr>
                   <td>
@@ -102,13 +112,13 @@
                         </div>
                      </div>
                      <div id="buttons">
-                        <span>Number of steps: <span id="stepCounter"></span>.</span>
-                        <input type="button" id="undo" value="Undo last step" />
+                        <span>Number of steps&nbsp;: <span id="stepCounter"></span>.</span>
+                        <input type="button" id="undo" value="Undo the last step" />
                      </div>
                   </td>
                   <td id="target_cell">
                      <div id="target_anim_container">
-                        Objective:
+                        Objective Figure
                         <br><br>
                         <div id="target_anim"></div>
                      </div>
@@ -123,12 +133,120 @@
 
          <h2>Solution</h2>
    
-            
+            <style>
+            .table-sol img {
+               width: 80%;
+            }
+            .table-sol td {
+               width: 120px;
+               vertical-align: top;
+            }
+            </style>
+        
+            <div class="easy">
+               <p>Blocks number 3 and 2 are passed through the middle stack.</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_3.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_5.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
 
-         <!--
-         <h2>C'est de l'informatique !</h2>
+            <div class="medium">
+               <p>The two middle stacks are used to pass through the top four blocks in order to free block number 1. Care is taken to facilitate the final stowage work, always putting a smaller block on a larger block: the block 2 on the 3, and the block 4 on the 5. This makes these blocks accessible in the right order to place them later directly on the last stack.</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_3.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_4.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_5.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+               <table class="table-sol" style="float:right;margin-left:20px"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_b.png">
+               </td>
+               </tr></table>
+               <p>In order to move block 1 to the last stack, blocks 5, 4 and 7 must be removed from these two batteries. <p> If we put them directly on the two middle piles, we will stack blocks on blocks 2 and 3, and then we will have to remove all blocks to put these two blocks on the last stack.
+               <p style="clear:both">
+               <table class="table-sol" style="float:left"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_c.png">
+               </td>
+               </tr></table>
+               <p>To avoid these many future displacements, it is necessary to anticipate and for example prepare the fast access to blocks 2 and 3 and in the right order. We will therefore remove the block 6, to be able to move the block 2 on the block 3.
+               <p>You have to decide between putting block 6 above 5 or above 7.
+               <p style="clear:both;margin-top:20px;">It is much more interesting to put the block 6 above the block 5, because we can then place the blocks 7, 6, 5 and 4 on the stack C, in that order. This will allow their quick transfer later to the last stack.
+               <p>Here are the key steps in the complete sequence :
+               <center><table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_2.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_5.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_6.png">
+               </td>
+               </tr>
+               </table></center>
+
+               <p>Another approach was to first move block 3 on stack C, to make room for blocks 7, 5 and 4 and place them in order. The suite is pretty easy.
+            </div>            
+
+         <h2>It's computer science !</h2>
             
-           -->
+            <p>This subject involves what is called in information the notion <b> of heuristic </b>. At first, we do not know in which direction to go, but we can estimate that some shots are better than others. For example, it is better to avoid depositing a cube with a certain number above a cube with a smaller number.
+            </p>
+            <p>Some computer programs use heuristic <b> algorithms </b>: rather than exploring all possibilities in any order, we will make "good choices" first, for example here we will first drop cubes on piles containing only higher number cubes, where possible.
+            </p>
 
 	  </div> <!-- task-solution -->
    </body>

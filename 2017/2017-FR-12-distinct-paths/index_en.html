@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-12</title>
+    <title>2017-EN-12</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -20,9 +20,9 @@
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif",
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -34,15 +34,23 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Congratulations, you found all the paths!",
+            unknown: "?",
+            success: "Congratulations, you have found all the paths !",
             pathDiscovered: function(discoveredPaths, totalPaths) {
-               return "You found a new path! " + (totalPaths - discoveredPaths) + " more to find!";
+               return "You have found a new path. More than " + (totalPaths - discoveredPaths) + " to find! <br> You can start from the black circle or modify the end of the current path.";
             },
-            pathExists: "You already found this path.",
-            notCycle: "This path does not end at the starting point.",
-            cycleNotComplete: "This cycle does not go through all cells.",
+            pathExists: "You have already found this path.",
+            notCycle: "This path does not end at the starting point", // currently not used
+            cycleNotComplete: "This cycle does not go through all the boxes.", // currently not used
+            blockedCell: "The path should only go through the white boxes.",
+            notAdjacentToStart: "Click on a white box next to the black circle.",
+            notAdjacentToHead: "Click on a white box next to the white circle.",
             notAllFound: function(discoveredPaths, totalPaths) {
-               return "You found " + discoveredPaths + ", there are " + (totalPaths - discoveredPaths) + " more to find.";
+               if (discoveredPaths == 0) {
+                  return "You have not yet found a way through all the white boxes.";
+               } else {
+                  return "You found " + discoveredPaths + " paths, there are still " + (totalPaths - discoveredPaths) + " to find.";
+               }
             }
          };
       </script>
@@ -55,7 +63,7 @@
             display: inline-block;
          }
          #feedback {
-            height: 1em;
+            height: 2em;
             margin-top: 0.5em;
             margin-bottom: 0.1em;
             text-align: center;
@@ -63,12 +71,11 @@
             color: red; 
          }
          #discoveredPaths {
-            margin-top: 10px;
+            margin-top: 5px;
             text-align: center;
          }
          #discoveredPaths div {
-            margin-left: 5px;
-            margin-right: 5px;
+            margin: 5px;
             display: inline-block;
             *zoom: 1; /*IE6/7*/
             *display: inline; /*IE6/7*/
@@ -78,19 +85,13 @@
    <body>
 
       <div id="task">
-         <h1>Distinct paths</h1>
+         <h1>Separate paths</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p>Draw all possible paths that start from the bottom left corner and go through all cells exactly once. Drag your finger to draw the paths.</p>
+             <p>Draw all the possible paths that start from the black circle and pass once in each white box.</p>
 
-             <!--<p><i>In the middle the animation shows the grid. Used cells are colored in green. One cell contains a centered small black circle to indicate that this is the starting point. When touching an empty cell adjacent to the current end, it extends the path to this cell; when touching a cell that already contains part of the path, it shrinks the path back to that cell..</i></p>
+             <p>Drag or click on the boxes to extend or reduce the path.</p>
 
-             <p><i>Below the animation there is a list of pictures, initially filled with a question mark, and progressively filled (from left to right) with the distinct paths being found. Use two rows if more than 4 possible paths (?). This allows the user to know which paths he has already found, and to know how many remain.</i></p>
-           
-             <p><i>When a new complete path is constructed, if it is a previously found one, the feedback message is shown "path already found" and that path in the bottom area is highlighted with a red border. Else, if it is new, the new path is added to the bottom area, and a message is displayed "new path found, X more to find!". If all paths are found, the message is "new path found; you found them all!", then the user may click on "validate".</i></p>
-
-             <p><i>Easy instance: 2 lines, 3 columns, 3 distinct paths. Medium instance: 3 lines, 3 columns, 8 distinct paths. Hard instance: 4 lines, 4 columns, and the additional constraint that the path must end on the starting point (i.e. making a closed path) 6 distinct paths. In the hard instance, there should be a specific feedback message "you covered all cells but did not end on the starting point; try differently". After one second, touching the initial cell again restarts a fresh path.</i></p>
--->
                
                <div id="animContainer">
                   <div id="anim"></div>
@@ -111,12 +112,79 @@
 
          <h2>Solution</h2>
    
-            
+              <style>
+              #img-easy img, #img-medium img { 
+               width: 120px;
+              }
+              #img-hard img { 
+               width: 180px;
+              }
+              </style>
 
-         <!--
-         <h2>C'est de l'informatique !</h2>
-            
-           -->
+           <div class="easy" id="img-easy">
+              <p>To begin, either we go to the right, or we go to the left. If we go to the right, we can climb, but we are stuck, because there is no path that passes through the two boxes marked with a red cross.</p>
+              <img src="Sol_easy_RU.png">
+              <p>We could also go right, then go up or left, but in both cases we are also stuck.</p>
+              <img src="Sol_easy_RRa.png">
+              <img src="Sol_easy_RRb.png">
+              <p>Let's try to start from the beginning to the left, moving forward as long as we have no choice. We reach a situation where we can either go down or go to the right.</p>
+              <img src="Sol_easy_L.png">
+              <p>If we go down, there is only one way to complete the path.</p>
+              <img src="Sol_easy_LD.png">
+              <p>If instead we go to the right, we can find two possible paths, depending on whether we go first to the left or first well down.</p>
+              <img src="Sol_easy_LR.png">
+              <p>In summary, here are the 3 possible paths.</p>
+              <img src="Sol_easy.png" style="width:450px">
+           </div>
+
+           <div class="medium" id="img-medium">
+              <p>To start, either we go down, or we go to the right. If we go down, we can go right, but we are stuck, because there is no path through the two boxes marked with a red cross.</p>
+              <img src="Sol_medium_DR.png">
+              <p>If you go down twice, then you have to go back up.</p>
+              <img src="Sol_medium_DD.png">
+              <p>From there, there are 3 possible paths.</p>
+              <img src="Sol_medium_DDX.png" style="width:450px">
+              <p>Let's start from the beginning and try now to go to the right. If we go right then down, we reach a situation in which we are stuck. Here again, there is no path that passes through the two marked boxes.</p>
+              <img src="Sol_medium_RD.png">
+              <p>If you go twice to the right before going down, you're still stuck.</p>
+              <img src="Sol_medium_RRD.png">
+              <p>So, you have to go three times to the right. Then we have no choice we must come back. We arrive at the situation below.</p>
+              <img src="Sol_medium_RRR.png">
+              <p>From there, there are 2 other possible paths.</p>
+              <img src="Sol_medium_RRRX.png" style="width:300px">
+           </div>
+
+           <div class="hard" id="img-hard">
+              <p>To start, either we go to the left or we go up. Let's first look at departures to the left. We will see that none of them leads to a solution.
+               If we go to the left, then to the top, we are stuck because there is no path through the two boxes marked with a red cross.</p>
+              <img src="Sol_hard_LU.png">
+              <img src="Sol_hard_LLU.png">
+              <img src="Sol_hard_LLLU.png">
+              <p>If you go 4 times to the left, you have to go around and go up on the left. But then, whatever the path that we try to take, we find ourselves stuck.</p>
+              <img src="Sol_hard_LLLL.png">
+              <img src="Sol_hard_LLLLXD.png">
+              <img src="Sol_hard_LLLLXR.png">
+
+              <p>Let's start from the beginning and try to go upwards. We have to turn left immediately.</p>
+              <img src="Sol_hard_UL.png">
+              <p>Among the possible starts, the first three lead to stuck situations, in which it is not possible to find a path through all the red crosses.</p>
+              <img src="Sol_hard_ULLD.png">
+              <img src="Sol_hard_ULLL.png">
+              <img src="Sol_hard_ULLU.png">
+              <p>The only possible departure is the following.</p>
+              <img src="Sol_hard_ULDL.png">
+              <p>When climbing, there are 3 possible paths.</p>
+              <img src="Sol_hard_ULDLUX.png" style="width:550px">
+              <p>Going left, there are the other 3 possible paths.</p>
+              <img src="Sol_hard_ULDLLX.png" style="width:550px">
+
+           </div>
+
+         <h2>It's computer science !</h2>
+   
+            <p>This challenge proposes to practice a <b> exhaustive exploration </b> of paths, optimized with an <b> early detection of dead branches </b>, which corresponds to noticing at certain moments that we will inevitably be stuck and there is no point in continuing.
+
+            <p>Many computer algorithms exploit this strategy, better known as <b> branch and bound </b>. This strategy applies very well to quickly find valid solutions in problems where the number of possibilities is potentially gigantic, but it is in fact relatively easy to evaluate if a beginning of solution is inevitably doomed to failure.</p>
 
 	  </div> <!-- task-solution -->
    </body>
