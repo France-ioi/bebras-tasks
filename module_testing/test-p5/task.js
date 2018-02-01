@@ -6,7 +6,7 @@ function initTask(subTask) {
         buttonScaleDrawing: false,
 
         includeBlocks: {
-            groupByCategory: false,
+            groupByCategory: true,
             generatedBlocks: {
                 p5: [
                     'playSignal',
@@ -16,7 +16,7 @@ function initTask(subTask) {
                 ]
             },
             standardBlocks: {
-                includeAll: false
+                includeAll: true
             }
         },
         maxInstructions: 100,
