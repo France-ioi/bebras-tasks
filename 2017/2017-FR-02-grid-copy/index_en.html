@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-02</title>
+    <title>2017-EN-02</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -35,9 +35,10 @@
       <script type="text/javascript">
       var taskStrings = {
             success: "Congratulations, you have succeeded!",
-            patternError: "The drawn pattern doesn't match the target pattern.",
-            pasteLimit: "You reached the paste limit, press undo or restart.",
-            stepCounter: function(count, limit) {
+            patternError: "You have colored some black boxes while they do not contain a circle.",
+            patternMissing: "Some boxes marked with a circle have not yet been colored in black.",
+            pasteLimit: function (limit) { return "You have used the Paste button for " + limit + " times, but you have not finished yet."; },
+	    stepCounter: function(count, limit) {
                return count + " / " + limit;
             }
          };
@@ -84,13 +85,12 @@
    <body>
 
       <div id="task">
-         <h1>Grid copy</h1>
+         <h1>Fast Copying</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p>Use the buttons on the right and paint the marked cells of the grid. </p>
-             <p>Try and find out what each button does.</p>
-             <p class="medium hard">Use the past button no more than 7 times for each attempt.</p>
-        
+             <p>Paint the white boxes containing a circle with black, and leave the other boxes in white.</p>
+             <p>First click on the <b>"Copy Black Boxes"</b> button, then move the copied pattern with the arrows, then paste this pattern as needed with the <b>"Paste Pattern"</b> button<span class="medium hard">,<strong> before using the "Copy Black Boxes" button again</strong></span>.</p>
+        <p class="medium hard"><strong>You can use the "Paste Pattern" button for 7 times only.</strong></p>
              <div id="anim_container">
                <table>
                   <tr>
@@ -98,7 +98,7 @@
                         <div id="anim"></div>
                      </td>
                      <td id="controlsContainer">
-                        <input type="button" value="Copy all" id="copyAll" />
+                        <input type="button" value="Copy Black Boxes" id="copyAll" />
                         <br><br>
                         <table id="arrowsTable">
                            <tr>
@@ -127,7 +127,7 @@
                         </table>
                         <br>
                         <p>
-                           <input type="button" value="Paste" id="paste" />
+                           <input type="button" value="Paste Pattern" id="paste" />
                            <br><br>
                            <span id="stepsCount" class="medium hard"></span>
                            <br><br>

@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-07</title>
+    <title>2017-EN-07</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -21,9 +21,9 @@
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-07-graph-representation/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif,
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -35,14 +35,19 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Congratulations, you have succeeded!",
-            missingVertex: "You did not add all possible situations.",
-            missingEdge: "Some connections are missing.",
-            wrongEdge: "Some connections are wrong.",
-            vertexExists: "This situation already exists.",
-            wrongCell: "Please move the red circle cell next to its current cell.",
-            droppingOnBall: "You can't put two balls in the same place.",
-            dragError: "Drag the red circle to move it."
+            success: "Congratulations, you have succeeded !",
+            missingVertex: "There are missing photos. Move the red ball to other cells, then click the button to add a photo.",
+            missingEdge: "There are missing black lines between some photos. Click on two photos to link them.",
+            shouldAddVertices: "Now click on the photos to link them by lines, as explained in the statement.",
+            wrongEdge: "At least one black line is incorrect. Click on it to remove it.",
+            vertexExists: "This photo has already been added. Drag the red ball to take another.",
+            vertexAdded: "The picture was taken.",
+            wrongCell: "At each step, the ball can only be moved to a neighboring cell.",
+            droppingOnBall: "The two balls can not be placed in the same cell.",
+            dragError: "Drag the red ball to a nearby cell.",
+            dropMinimalDistance: "", // Photos cannot be too close to each other // ok to say nothing.
+            edgeExists: "The two photos are already connected. Click on the line to remove it.", 
+            needEdges: "All photos were taken. Click on two photos to link them by a line according to the rule of the statement. Note that you can move the photos on the grey board."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -53,14 +58,6 @@
          }
          #anim {
             display: inline-block;
-         }
-         #feedback {
-            height: 1em;
-            margin-top: 0.5em;
-            margin-bottom: 0.1em;
-            text-align: center;
-            font-weight: bold;
-            color: red; 
          }
          #validation {
             margin-top: 1em;
@@ -79,13 +76,13 @@
          }
          #addSituation {
             padding: 10px;
-            margin: 10px;
+            margin-left: 10px;
          }
-         #errorConfig {
+         #messageConfig {
             font-weight: bold;
             color: red;
-            width: 300px;
-            height: 3em;
+            width: 400px;
+            height: 5em;
             margin: 10px;
          }
       </style>
@@ -93,27 +90,34 @@
    <body>
 
       <div id="task">
-         <h1>Graph representation</h1>
+         <h1>Photos Game</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>
-               <span class="easy medium">A red ball is</span><span class="hard">Two red balls are</span> placed on a board made of <span class="hexCount"></span> connected hexagons. You can drag a ball to a cell next to its current cell.
+            <div style="float:right;text-align:center; margin-left:20px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>Example</b></p><p style="margin-top: 0px; margin-bottom: 20px">with a board of 2 cells</p><img src="example.png"></div>
+            <p>Help the beaver to take pictures of all possible positions <span class="easy medium">of the red ball.</span><span class="hard">of the two red balls.</span>
+            </p>
+            <p>You can do this by moving <span class="easy medium">the ball</span><span class="hard">the balls</span> from one cell to a neighboring cell then click the "Take a Picture" button.
             </p>
             <p>
-               Below, we represent <span class="easy">every possible situation of the board, each</span><span class="medium hard">the initial situation of the board</span> in a circle. <span class="medium hard">Add every other situation by clicking the button under the board.</span>
+You will find all the taken photos on the grey area below. Draw a line between any two photos if it is possible to move the red ball from one cell to another cell. 
+
             </p>
             <p>
-               If two circles represent situations such that you can go from one to the other in one move of the ball, click on these two circle to connect them with a segment. Click on a segment if you want to remove it.
+                Click on the photos to link them with lines.
             </p>
+
+
             <center><table>
                <tr>
                   <td><div id="anim_config"></div></td>
                   <td>
-                     <div><input type="button" value="Add this situation" id="addSituation" class="medium hard"/></div>
-                     <div id="errorConfig">&nbsp;</div>
+                     <div><input type="button" value="Take a Picture" id="addSituation" /></div>
+                     <div id="messageConfig">&nbsp;</div>
                   </td>
                </tr>
-            </table></center>
+            </table>
+            </center>
+            <div style="font-weight: bold; margin-top: 1em; text-align: center">Photos:</div>
             <div id="anim_container">
                <div id="anim_graph"></div>
             </div>
@@ -123,7 +127,26 @@
       <div id="solution">
 
          <h2>Solution</h2>
-         <h2>C'est de l'informatique !</h2>
+   
+           <p class="easy medium">We take a picture for each of <span class="easy">4</span><span class="medium hard">5</span> possible positions of the ball. To find your way easily, you can arrange the photos in the gray frame depending on the position of the ball in each photo, as shown below. We can then add lines between the photos describing positions where the ball has moved only one square.</p>
+
+           <p class="hard">We take a picture for each of the 6 possible configurations of the two marbles. To find your way easily, we can organize the photos. For example, we can make a first column with the photos having a ball in the box at the top left, and a second column with the photos having no ball in this box. You can also sort the photos inside the column, according to the filling of the other boxes. We can then add the features corresponding to the possible displacements of the balls.</p>
+  
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+           
+           <p>To be sure you have not forgotten any features, you can check the lines that start from each photo. For a given photo, we count <span class="easy medium">the number of white squares around the ball</span><span class="hard">the number of white boxes around the first ball, to which is added the number of white boxes around the second ball</span>. <span class="easy medium">This number</span><span class="hard">Total</span> must correspond to the number of lines that are connected to this photo, since this corresponds to the number of possible displacements.</p>
+
+         <h2>It's computer science !</h2>
+
+           <p>This topic illustrates how to represent situations (photos of a state) and transitions (displacement of a marble) in the form of a <b>graph</b>, that is to say, a set of objects, some of which are connected to each other by lines. It is very interesting to reduce a problem to a graphical view, because there are many very efficient algorithms for dealing with problems expressed by graphs.</p>
+
+           <p>Some problems naturally appear as a graph, such as finding a way to travel from one city to another: the graph is then made up of the cities and roads that connect them. In other problems, on the contrary, the graph is not really visible at first glance. We then speak of <b> implicit graph</b>.
+           <p>The expertise of a programmer is to be able to detect that a problem that does not look like a graph problem can still be expressed as a graph. Such a programmer can then, instead of developing an ad-hoc and inefficient algorithm, rely on a standard and highly efficient graphing algorithm.</p>
+
 
 	  </div> <!-- task-solution -->
    </body>

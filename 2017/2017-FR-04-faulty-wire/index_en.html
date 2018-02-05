@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-04</title>
+    <title>2017-EN-04</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -21,9 +21,9 @@
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-04-faulty-wire/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif,
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -35,13 +35,25 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Congratulations, you have succeeded!",
-            deductionError: "The wire you chose is not necessarily faulty.",
-            emptyError: "You must mark the faulty wire.",
-            partial: "You could use fewer steps.",
-            damagedText: "damaged",
-            lightOnText: "light is on",
-            lightOffText: "light is off"
+            success: "Congratulations, you have succeeded !",
+            found: "", // empty when using automatic validation
+            notFound: "Find the piece of pipe containing the pile of seeds, and pass Beaver in it.",
+            noSeeds: "Beaver did not find seeds on his way. Look elsewhere.",
+            noPath: "Click on two hatches on the same pipe.",
+            /*
+            testLimit: function (limit) { return "Vous avez déjà fait " + limit + " tests, mais vous n'avez pas encore trouvé les graines. Essayez autrement, en cliquant sur &quot;Recommencer&quot;."; },
+            */
+            seedsInPath: function(pathLength) { return "<p>Beaver saw seeds in one of " + pathLength + " pieces of pipes.</p><p>Continue to find where exactly.</p>"; },
+            partial: function(userSteps, optimalSteps, hasPoints) {
+               var pointsMessage;
+               if (!hasPoints) {
+                  pointsMessage = "It's too much to get points.";
+               } else {
+                  pointsMessage = "This gives you some of the points.";
+               }
+               return "<p>You have found the pile of seeds in " + userSteps + " steps.</p><p>" + pointsMessage + "</p><p>Repeat to find fewer steps.</p><p>Be careful, the pile of seeds will change places.</p>";
+            },
+            obstructedPathText: ""
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -62,54 +74,159 @@
          }
          #exampleTable {
             margin: auto;
-            margin-top: 20px;
+         }
+         #exampleTitle {
+            text-align: center;
+            font-weight: bold;
+         }
+         #exampleDescr {
+            text-align: center;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         #exampleFrame {
+            border: 1px solid black;
+            padding: 5px;
+            margin: 15px 0px 0px 0px;
+         }
+         .animWithSep {
+            border-right: 1px dashed gray;
+            padding-right: 10px;
+         }
+         #feedback {
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         .stepsMessage {
+            font-size: 18px;
+            font-weight: bold;
          }
       </style>
    </head>
    <body>
       <div id="task">
-         <h1>Faulty wire</h1>
+         <h1>Hidden Seeds</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <table id="exampleTable">
-               <tr>
-                  <td>
-                     <div id="exampleAnim0"></div>
-                  </td>
-                  <td>
-                     <div id="exampleAnim1"></div>
-                  </td>
-                  <td>
-                     <div id="exampleAnim2"></div>
-                  </td>
-               </tr>
-            </table>
-            <p>
-            One of the connectors below is damaged. Find out which one by placing the 2 wires  at different locations and see if the lightbulb turns on or not, like in the example above.</p>
-            <p>Click on the damaged connector when you think you found it.</p>
-            <p>To get 100% of the points, connect the wires in <span id="descriptionSteps">5</span> different positions at most.</p>
+            <p id="enemyWarning"></p>
+            <div style="float:right; padding: 5px; margin-left: 25px; margin-bottom: 10px; border: 1px solid black"><img src="seeds.png" style="height:55px"></div>
+            <p>A Beaver lost his seeds in one of the pipe sections.</p>
+            <p style="font-weight: bold">Find where the seeds are by doing as few searches as possible.</p>
+            <p >To search, click on two black covers. The Beaver will cross all the pipes between these covers and will tell you if he finds seeds in these pipes or not.</p>
             <div id="anim_container">
                <div id="anim"></div>
             </div>
+            <div id="feedback"></div>
             <div id="buttons">
-               <span>Number of steps: <span id="stepCounter"></span>.</span>
+               <span class="stepsMessage">Number of Searches: <span id="stepCounter"></span>.</span>
             </div>
             <img src="icon.png" style="display:none">
-            <img src="lightoff.png" style="display:none">
-            <img src="lighton.png" style="display:none">
+            <img src="castor.png" style="display:none">
          </div>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>Solution</h2>
-   
-            
+           
+           <div class="easy">
+              <p>To find the seeds for sure in 4 searches, you can start by searching two complete tubes. We will know in which pipe two pieces long are the seeds.</p> 
+              <ul>
+              <li>
+                  <p><strong>Step 1</strong>: Let's start with any pipe, for example the first one up.</p>
+                  <p><img src="Sol_easy_1.png"></p>
+                  <p>Result: the seeds are not there.</p>
+              </li>
+              <li>   
+                  <p><strong>Step 2</strong>: Let's try another pipe, for example the one on the left. </p>
+                  <p><img src="Sol_easy_2.png"></p>
+                  <p>Result: the seeds are not there.</p>
+              </li>
+              <li>
+                  <p><strong>Step 3</strong> : The seeds are therefore inevitably in the third pipe. It is not necessary to search it in its entirety. Just search one of the two pieces. Either we will find the seeds in this piece, or they will necessarily be in the other pieces.</p>
+                  <p><img src="Sol_easy_3.png"></p>
+                  <p>Result: the seeds are not in the left piece. They are therefore necessarily right.</li>
+              <li>
+                  <p><strong>Step 4</strong> : Let Beaver look for the seeds where they are necessarily.</p>
+                  <p><img src="Sol_easy_4.png"></p>
+                  <p>And it's won!</p>
+              </li>
+              </ul>
+           </div>
 
-         <!--
-         <h2>C'est de l'informatique !</h2>
-            
-           -->
+           <div class="medium">
+              <p>To find the seeds for sure in 5 searches, we will try to eliminate a maximum of possible pieces at each step.</p> 
+              <ul>
+              <li>
+                  <p><strong>Step 1</strong> : Let's start by having Beaver cross half of the pieces of pipe.</p>
+                  <p><img src="Sol_medium_1.png"></p>
+                  <p>Result: the seeds are not there. This area is blackened in the sequel.</p>
+                  <p>Note: If Beaver does not exactly cross half of the pieces of pipe, but a little more or a little less, the computer makes sure that the seeds are always in the largest part.</p>
+              </li>
+              <li>   
+                  <p><strong>Step 2</strong> : In the same way, let Beaver explore half of the pieces where the seeds can still be found. </p>
+                  <p><img src="Sol_medium_2.png"></p>
+                  <p>Result: the seeds are in this part. We can blacken the other pieces in the following, since the seeds are not there.</p>
+              </li>
+              <li>
+                  <p><strong>Step 3</strong> : There are only 4 pieces left. By always applying the same method, let Beaver explore two of these pipes.</p>
+                  <p><img src="Sol_medium_3.png"></p>
+                  <p>Result: the seeds are not in the two left pieces. They are therefore necessarily right.</li>
+              <li>
+                  <p><strong>Step 4</strong> : Let's try one of the two pieces that remain.</p>
+                  <p><img src="Sol_medium_4.png"></p>
+                  <p>Result: the seeds are not in this piece there.</p>
+              </li>
+              <li>
+                  <p><strong>Step 5</strong> : Let Beaver look for the seeds where they are necessarily.</p>
+                  <p><img src="Sol_medium_5.png"></p>
+                  <p>And it's won!</p>
+              </li>
+              </ul>
+           </div>
 
-	  </div> <!-- task-solution -->
+
+          <div class="hard">
+              <p>To find the seeds for sure in 5 searches, we will try to eliminate a maximum of possible pieces at each step.</p> 
+              <ul>
+              <li>
+                  <p><strong>Step 1</strong> : The longest crossing that can be made to Beaver at the beginning consists in crossing the 6 pieces of the top.</p>
+                  <p><img src="Sol_hard_1.png"></p>
+                  <p>Result: the seeds are not there. This area is blackened in the sequel.</p>
+              </li>
+              <li>   
+                  <p><strong>Step 2</strong> : Of the remaining pieces, up to 4 can be crossed at one time. For example, proceeding as shown below. </p>
+                  <p><img src="Sol_hard_2.png"></p>
+                  <p>Result: the seeds are not there. This area is blackened in the sequel.</p>
+              </li>
+              <li>
+                  <p><strong>Step 3</strong> : There are only 4 pieces left. To make it effective, Beaver can be sent to explore two of these pipes at once. For this, we must pass Beaver in pieces of pipes where we already know that the seeds are not; this is not a problem.</p>
+                  <p><img src="Sol_hard_3.png"></p>
+                  <p>Result: the seeds are not in the two pieces on the right. They are therefore necessarily in one of the two left pieces.</li>
+              <li>
+                  <p><strong>Step 4</strong> : Let's try one of the two pieces that remain.</p>
+                  <p><img src="Sol_hard_4.png"></p>
+                  <p>Result: the seeds are not in this piece.</p>
+              </li>
+              <li>
+                  <p><strong>Step 5</strong> : Let Beaver look for the seeds where they are necessarily.</p>
+                  <p><img src="Sol_hard_5.png"></p>
+                  <p>And it's won !</p>
+              </li>
+              </ul>
+          </div>
+
+
+         <h2>It's computer science !</h2>
+
+         <p>This topic presents the notion of <b> dichotomous research</b>, which makes it possible to quickly find a hidden object in a large number of possible places. The idea is to divide the whole of the possibilities into two parts of equal sizes, and to determine if the object that one seeks is in the first half or in the second. Once we know, we come back to the original problem of finding an object in a set of possible places, except that now there are half the possibilities.</p>
+         <p> By repeating this process, the number of remaining possibilities is halved each time. We thus arrive very quickly to have only one possibility. We then located the object sought.</p>
+
+
+	   </div> <!-- task-solution -->
+       
    </body>
 </html>

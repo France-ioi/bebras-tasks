@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-05</title>
+    <title>2017-EN-05</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -20,9 +20,9 @@
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif",
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -34,24 +34,28 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Congratulations, you have succeeded!",
-            error: "The shapes don't match the string.",
-            removeShape: "Remove\na shape",
-            dragAttempt: "Click on a shape button, then click on the selected position."
+            success: "Congratulations, you have succeeded&nbsp;!",
+            error: "The shapes do not match the code.",
+            removeShape: "Remove",
+            dragAttempt: "Click on a shape and click on the location where you want to drop it." 
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-         #exampleWrapper {
+         #taskDescription p {
+            text-align: left;
+         }
+         .exampleWrapper {
             text-align: center;
             margin-top: 20px;
+            border: 1px solid black;
          }
          .exampleContainer {
-            padding-left: 20px;
-            padding-right: 20px;
-            display: inline-block;
-            *zoom: 1; /*IE6/7*/
-            *display: inline; /*IE6/7*/
+            padding-left: 15px;
+         }
+         .exampleTitle {
+            font-weight: bold;
+            padding: 10px;
          }
          #animContainer {
             text-align: center;
@@ -59,13 +63,18 @@
          #animContainer div {
             display: inline-block;
             vertical-align: middle;
-            margin: 0 10px;
+            margin: 0px 10px 0px 0px;
             *zoom: 1; /*IE6/7*/
             *display: inline; /*IE6/7*/
          }
+         #animContainer {
+            margin-top: 1em;
+         }
          .drawAreaDiv {
-            border: 2px solid black;
-            padding-top: 2px;
+            border: 3px solid black;
+         }
+         .drawAreaDivExample {
+            vertical-align: center;
          }
          #anim {
             display: inline-block;
@@ -81,49 +90,79 @@
             margin-left: 1em;
          }
          .configString {
+            font-weight: bold;
+            font-size: 1.5em;
             text-align: center;
+         }
+         #taskDescription td {
+            vertical-align: top;
+         }
+         .hint {
+            font-weight: bold;
+            color: green;
          }
       </style>
    </head>
-  <body>
-    <div id="task">
-      <h1>Draw shapes</h1>
-      <div id="tabsContainer"></div>
-      <div id="taskContent">
-        <p>[Description]</p>
-        <div id="exampleWrapper">
-          <div class="exampleContainer" id="exampleContainer0">
-            <p class="configString" id="configString_example0">A</p>
-            <div id="exampleAnim0" class="drawAreaDiv"></div>
-          </div>
-          <div class="exampleContainer" id="exampleContainer1">
-            <p class="configString" id="configString_example1">A</p>
-            <div id="exampleAnim1" class="drawAreaDiv"></div>
-          </div>
-          <div class="exampleContainer" id="exampleContainer2">
-            <p class="configString" id="configString_example2">A</p>
-            <div id="exampleAnim2" class="drawAreaDiv"></div>
-          </div>
-        </div>
-        <div id="animContainer">
-          <div>
-            <p class="configString">&nbsp;</p>
-            <div id="buttonsAnim"></div>
-          </div>
-          <div>
-            <p class="configString" id="configString_main">A</p>
-            <div id="anim" class="drawAreaDiv"></div>
+   <body>
+      <div id="task">
+         <h1>Shape language</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <table><tr><td style="vertical-align:center">
+              The code <span class="configString" id="configString_example0">A</span> <br class="hard"/>describes this drawing:</td><td><span id="exampleAnim0" class="drawAreaDivExample"></span>
+            </td><td>.</td></tr></table>
+            <table class="medium"><tr><td style="vertical-align:center">
+               The code <span class="configString" id="configString_example1">A</span> describes this drawing:</td><td><span id="exampleAnim1" class="drawAreaDivExample"></span>
+            </td><td>.</td></tr></table>
+            <div id="animContainer">
+               <div>
+                  <div id="buttonsAnim"></div>
+               </div>
+               <div id="targetWrapper">
+                  <p>Similarly, create the drawing described by the code:</p>
+                  <span class="configString" id="configString_main">A</span><br/>
+                  <div id="anim" class="drawAreaDiv"></div>
+                  <p>
+                  <span class="hint">Click on the desired location.</span>&nbsp;
+                  </p>
+               </div>
            </div>
-        </div>
-        <img src="icon.png" style="display:none">
-      </div>
-    </div><!-- task -->
-    <div id="solution">
-      <h2>Solution</h2>
+           <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
 
-       <!--
-       <h2>C'est de l'informatique !</h2>
-         -->
-    </div> <!-- task-solution -->
-  </body>
+         <h2>Solution</h2>
+   
+           <p>First, we must deduce the correspondence between letters and forms. </p>
+           <ul>
+               <li>An A corresponds to a green triangle.</li>
+               <li>An X is a pink square.</li>
+               <li>An O is a blue circle.</li>
+           </ul>
+   
+           <p class="medium">A letter followed by a text in parentheses is a large form containing smaller shapes. The letters between the brackets correspond to the small shapes inside. These forms are given in the following order: the one from above in the middle, then the one from below on the left, then the one from below to the right.</p>
+          
+           <p class="hard">Parentheses can be nested, that is, placed inside each other, which allows for large shapes that contain medium-sized shapes, and these medium shapes contain small shapes.</p>
+            
+           <p class="hard">Note that parentheses do not necessarily contain three shapes. They may contain less, for example only one as in the code <b>A(X)</b>, or none like in the code <b>O()</b>.<p>
+
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+
+
+         <h2>It's computer science !</h2>
+            
+          <p>This topic illustrates a method widely used in particular in computer science: the use of a <b> textual language with nestings </b>, to represent a <b> tree structure </b>. The nestings are for example materialized by brackets. A tree structure appears as soon as you have elements that contain other elements, which can contain other elements, and so on. </P>
+
+          <p>All web pages on the internet are represented <b> tree </b>, with boxes nested within each other, to boxes that contain words or images. Most modern browsers make it easy to visualize the structure of the page. To test this, open your favorite web page, such as a search engine page, and click the button on a piece of text or an image, and look in the menu that appears for the <b> Inspect menu. the </b>. A visualization tool will appear, allowing you to control the display of the element tree. Feel free to click everywhere on this display to understand what it represents.</p>
+
+          <p>Here is an example of such visualization obtained on the site <a href="http://www.france-ioi.org">France-ioi</a>.</p>
+          <img src="its_info.png" style="border:1px solid black"/>
+
+	  </div> <!-- task-solution -->
+   </body>
 </html>

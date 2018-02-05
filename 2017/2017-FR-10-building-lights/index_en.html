@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-10</title>
+    <title>2017-EN-10</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -20,9 +20,9 @@
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif,
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -34,9 +34,10 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Congratulations, you have succeeded!",
-            emptyError: "Your sequence of actions is empty.",
-            mismatchError: "The buildings don't match."
+            success: "Congratulations, you have succeeded !",
+            emptyError: "Drag the grey cards into the white boxes.",
+            mismatchError: "The lights do not match, think carefully and try again.",
+            fullError: "All boxes are used, remove cards to be able to place others."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -45,12 +46,18 @@
             text-align: center;
             padding-top: 15px;
          }
-         .anim {
+         .wrapper {
             display: inline-block;
             margin-left: 5px;
             margin-right: 5px;
             *zoom: 1; /*IE6/7*/
             *display: inline; /*IE6/7*/
+         }
+         .anim {
+         }
+         .animTitle {
+            font-weight: bold;
+            padding: 10px;
          }
          .animBuilding {
             border: 1px solid black;
@@ -67,6 +74,14 @@
             margin-right: 1em;
             width: 8em;
          }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
       </style>
    </head>
    <body>
@@ -74,16 +89,24 @@
          <h1>Building lights</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>Turn on the lights as in the objective. </p>
-             <p>Select instruction cards you need, put them in the white cases and click on the execute button. </p>
-             <p>For instance, the A card turns on all the lights on the A column, the 0 card turns on all the lights on the 0 line.</p>
+             <p>Turn on the building lights as in the objective figure. To do this, drag the grey cards into the white boxes to form a sequence of instructions, then run it.</p>
+             <p>Each card <span class="medium hard">except the last</span> turns on all lights in a row or column.</p>
+             <p class="medium hard"><b>The last card allows you to invert all the boxes.</b></p>
+            
             <div id="anim_container">
-               <div class="anim animBuilding" id="animUser"></div>
-               <div class="anim animBuilding" id="animTarget"></div>
+               <div class="wrapper">
+                  <div class="animTitle">The Building</div>
+                  <div class="anim animBuilding" id="animUser"></div>
+               </div>
+               <div class="wrapper">
+                  <div class="animTitle">Objective Figure</div>
+                  <div class="anim animBuilding" id="animTarget"></div>
+               </div>
                <br>
-               <div class="anim" id="animDrag"></div>
+               <div id="animDrag"></div>
+               <div id="feedback"></div>
                <div id="control">
-                  <input type="button" id="execute" value="Execute"/>
+                  <input type="button" id="execute" value="Run"/>
                   <input type="button" id="stop" value="Stop"/>
                </div>
             </div>
@@ -96,7 +119,43 @@
 
          <h2>Solution</h2>
    
-         <h2>C'est de l'informatique !</h2>
+           <div class="easy">
+              <p>To reproduce the pattern, it was necessary to turn on the columns B and C, as well as the lines 3 and 4. The order did not matter. So we could write the following program :
+              <p>
+              <img src="Sol_easy_1.png">
+           </div>
+
+           <div class="medium">
+              <p> Initially, all the lights are already on. The only card that can have an effect is the last one. So we start with it to extinguish everything.
+              <p>Then there are two possible strategies.</p>
+              <p>(1) We turn on all the boxes that are lighted in the objective figure, then turn off the ones we lighted too.</p>
+              <p>We start by turning on the columns A and D. We must then turn off the lines 5 and 2. For this, we reverse everything, we turn on the lines 5 and 2, then we reverse everything again.
+              <p>
+              <img src="Sol_medium_1.png">
+              <p>(2) We turn on all the boxes that are off in the objective figure, then we turn all the lights.</p>
+              <img src="Sol_medium_2.png">
+           </div>
+
+           <div class="hard">
+              <p>There are many possible solutions.</p>
+              <p>A first solution consists of the following steps:
+              <ul>
+               <li>Turn off the only lighted box that is not lighted in the objective figure, on line 2: <br/> reverse everything, turn on line 2, reverse everything.
+               <li>Turn on all the boxes that are in the objective: <br/> turn on columns A and D, lines 5.
+               <li>Turn off all the boxes that have been turned on too :<br/>reverse all, turn on the lines 0, 1 and 6, reverse all.
+               </ul>
+              </p>
+              <p>
+              <img src="Sol_hard_1.png">
+              <p>Below is the shortest solution. </p>
+              <img src="Sol_hard_2.png">
+           </div>
+
+         <h2>It's computer science !</h2>
+   
+           <p> In this topic, each box of the building is on or off. Similarly, a computer's memory consists of <b> bits </b> whose value is either <b> 0 </b> or <b> 1 </b>. All numbers, all images, all texts, and all programs are described only with bits, that is, with long sequences of <b> 0 </b> and <b> 1 </b>. </p>
+
+            <p> At the heart of the computer is a <b> processor </b> that is able to handle bit packets, typically <b> 64 </b> bits, very efficiently. For example, the processor has a "reverse all bits" operation, which takes a 64-bit packet, and a fraction of a second, replaces all <b> 0 </b> with <b> 1 </b> and all <b> 1 </b> with <b> 0 </b>. A computer can perform more than two billion such operations on 64-bit packets in one second, manipulating over 100 billion bits in a single second !</p>
 
 	  </div> <!-- task-solution -->
    </body>

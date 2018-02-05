@@ -2,7 +2,7 @@
 <html>
    <head>
     <meta charset="utf-8">
-    <title>2017-FR-11</title>
+    <title>2017-EN-11</title>
     <script>
         window.stringsLanguage = 'en';
     </script>
@@ -21,9 +21,9 @@
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-11-graph-isomorphism/",
           "language": "en",
-          "version": "en.01",
+          "version": "fr.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
-          "translators": [],
+          "translators": "Mohamed El-Sherif",
           "license": "",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -36,8 +36,8 @@
       <script type="text/javascript">
       var taskStrings = {
             success: "Congratulations, you have succeeded!",
-            vertexError: "You must place all blue circles on the red ones.",
-            edgeError: "The highlighted line does not match the target."
+            vertexError: "Each blue circle must be placed on a dotted placeholder.",
+            edgeError: "The shapes are still different. The red line is not placed well."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -45,6 +45,7 @@
          #animContainer {
             text-align: center;
             margin: auto;
+            padding-top: 0.5em;
          }
          .anim {
             display: inline-block;
@@ -61,6 +62,7 @@
          }
          .paperTitle {
             font-size: 18px;
+            font-weight: bold;
          }
          #validation {
             margin-top: 1em;
@@ -77,11 +79,12 @@
          <h1>Constellation</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>Move the circles of the figure on the left to match the target figure on the right. </p>
+            <p>Move the blue circles on the left to be exactly like the objective figure on the right. </p>
+
              <table id="animContainer">
                 <tr>
                    <td></td>
-                   <td class="paperTitle">Target:</td>
+                   <td class="paperTitle">Objective</td>
                 </tr>
                 <tr>
                    <td>
@@ -99,13 +102,54 @@
       <div id="solution">
 
          <h2>Solution</h2>
-   
-            
 
-         <!--
-         <h2>C'est de l'informatique !</h2>
-            
-           -->
+           <div class="easy medium">We can see that there is exactly one circle hanging by a single line. This circle can be placed, as well as the adjacent circle to which it is connected. The following state is obtained.</div>
+
+           <div class="easy">
+              <img style="width: 250px" src="Sol_easy_1.png">
+              <p>We can then complete the figure by placing the remaining circles.</p>
+           </div>
+
+           <div class="medium">
+              <img style="width: 250px" src="Sol_medium_1.png">
+              <p>We can then progress by placing the three circle neighbors.</p>
+              <img style="width: 250px" src="Sol_medium_2.png">
+              <p>And from there, we can place the last four circles and thus complete the figure.</p>
+           </div>
+
+           <div class="hard" id="img-hard">
+              <style>
+              #img-hard img { 
+               width: 250px;
+               border: 1px solid gray;
+               padding: 3px;
+               margin: 3px 13px 3px 13px;
+              }
+              </style>
+              <p>We can start by counting the number of lines that start from each circle, in the red figure. There are 4 circles that have 4 neighbors, and all the others have 3 neighbors. Those who have 4 neighbors form a chain, that is, they are interconnected one after the other.</p>
+              <img src="Sol_hard_0.png">
+              <p>To see more clearly, we can sort the blue circles, making a group at the top with the circles having 3 neighbors, and a group at the bottom with the circles having 4 neighbors. We try as much as possible to find an order for the circles which allows to "unravel" the nodes.</p>
+              <img src="Sol_hard_1.png">
+              <p>To place the 4 circles with 4 neighbors, there are only two possibilties: either we start by placing up the circle of blue left, or that of right. Let's first try to put the one on the right, for example.</p>
+              <img src="Sol_hard_2.png">
+              <p>But here we have a problem. When we try to place a circle with 3 neighbors, for example the one that was at the top right, we get stuck because this blue circle does not correspond to any red circle.</p>
+              <img src="Sol_hard_3.png">
+              <p>So we were wrong. Let's go back, and place the 4 circles with 4 neighbors in the other direction. We can then find a place for the circle having 3 neighbors.</p>
+              <img src="Sol_hard_4.png">
+              <img src="Sol_hard_5.png">
+              <p>We can now place the other circles and complete the figure.</p>
+              <img src="Sol_hard_6.png">
+              <img src="Sol_hard_7.png">
+           </div>
+
+         <h2>It's computer science !</h2>
+   
+            <p>This challenge illustrates the problem of matching a <b> graph </b>, that is, a set of circles, some of which are connected by lines, with another graph with the same structure. </P>
+
+             <p>This problem, known as <b> graph isomorphism </b>,
+             is particularly difficult: there is no algorithm that can effectively solve this problem for any graph. </p>
+
+             <p>Nevertheless, for particular graphs, such as those considered here, there are many tips for mapping one graph to another without spending hours. It is possible to program such tricks, as for example the one described here, which consists in studying the number of neighbors of each circle. </P>
 
 	  </div> <!-- task-solution -->
    </body>
