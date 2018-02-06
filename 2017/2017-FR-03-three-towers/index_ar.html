@@ -1,0 +1,255 @@
+<!doctype html>
+<html dir="rtl">
+   <head>
+    <meta charset="utf-8">
+    <title>2017-Ar-03</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'crane-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+    <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-03-three-towers/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت. لقد نجحت",
+            error: "الشكل النهائي مختلف عن الهدف المطلوب", // not displayed
+            partial: function(steps, stepsOptimal, level) { 
+               var s = "لقد قمت بحلها في " + steps + " خطوات. يمكنك حلها في " + stepsOptimal + " خطوات";
+               if (level == 'hard') {
+                  s += "<br> تحذير. المسألة ليست سهلة";
+               }
+               return s;
+            },
+            pickupError: "لا يوجد صندوق فوق هذا الزر",
+            blockClick: "انقر على الأزرار الرمادية لتحريك الرافعة" 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0em;
+            margin-bottom: 0.5em;
+            text-align: center;
+            font-weight: bold; 
+            color: #CC8844;
+         }
+         #target_anim_container {
+            border: solid 1px black;
+            text-align: center;
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 14px;
+         }
+         #target_cell {
+            padding-left: 80px;
+         }
+         #animTable {
+            margin: auto;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 15px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         .targetNumber {
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>الأبراج الثلاثة</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>رتب الصناديق لتصبح كما هو موضح بالشكل المطلوب</p>
+            <p>اضغط على الأزرار الرمادية لتحريك الرافعة الممغنطة لرفع أو إنزال الصناديق</p>
+
+            <p>يمكنك حلها في <span id="nbStepsPartial" class="targetNumber"></span> خطوات<span class="medium hard"> للحصول على نقاط, و في <span id="nbStepsOptimal" class="targetNumber"></span> خطوات للحصول على الدرجة النهائية<span class="hard"> (درجة الصعوبة عالية)</span></span>.
+             </p>
+            <table id="animTable">
+               <tr>
+                  <td>
+                     <div id="anim_container">
+                        <div id="anim"></div>
+                        <div id="feedback">
+                           Feedback
+                        </div>
+                     </div>
+                     <div id="buttons">
+                        <span>عدد الخطوات: <span id="stepCounter"></span></span>
+                        <input type="button" id="undo" value="ارجع خطوة للخلف" />
+                     </div>
+                  </td>
+                  <td id="target_cell">
+                     <div id="target_anim_container">
+                        الشكل المطلوب
+                        <br><br>
+                        <div id="target_anim"></div>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            <img src="icon.png" style="display:none">
+            <img src="magnet.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            <style>
+            .table-sol img {
+               width: 80%;
+            }
+            .table-sol td {
+               width: 120px;
+               vertical-align: top;
+            }
+            </style>
+        
+            <div class="easy">
+               <p>يتم وضع الصندوق 3 و 2 في المكان الأوسط</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_3.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_5.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="medium">
+               <p>تستخدم المكانين الأوسطين لوضع 4 صناديق لتحرير الصندوق رقم 1. يجب وضع الصناديق الصغير فوق الصناديق الكبير مثل وضع 2 على 3 ووضع 4 على 5 وذلك لتسهيل وضعهم في المرحلة الأخيرة</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_3.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_4.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_5.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+               <table class="table-sol" style="float:right;margin-left:20px"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_b.png">
+               </td>
+               </tr></table>
+               <p>من أجل تحريك الصندوق 1 إلى أخر مكان يجب إزاحة الصناديق 5 و 4 و 7.
+لو وضعناهم مباشرة على الصناديق الوسطى سوف نحجب صندوق 2 و3 وسنضطر إلى إزاحتهم مرة أخرى.
+               <p style="clear:both">
+               <table class="table-sol" style="float:left"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_c.png">
+               </td>
+               </tr></table>
+               <p>To avoid these many future displacements, it is necessary to anticipate and for example prepare the fast access to blocks 2 and 3 and in the right order. We will therefore remove the block 6, to be able to move the block 2 on the block 3.
+               <p>You have to decide between putting block 6 above 5 or above 7.
+               <p style="clear:both;margin-top:20px;">It is much more interesting to put the block 6 above the block 5, because we can then place the blocks 7, 6, 5 and 4 on the stack C, in that order. This will allow their quick transfer later to the last stack.
+               <p>Here are the key steps in the complete sequence :
+               <center><table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_2.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_5.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_6.png">
+               </td>
+               </tr>
+               </table></center>
+
+               <p>Another approach was to first move block 3 on stack C, to make room for blocks 7, 5 and 4 and place them in order. The suite is pretty easy.
+            </div>            
+
+         <h2>It's computer science !</h2>
+            
+            <p>This subject involves what is called in information the notion <b> of heuristic </b>. At first, we do not know in which direction to go, but we can estimate that some shots are better than others. For example, it is better to avoid depositing a cube with a certain number above a cube with a smaller number.
+            </p>
+            <p>Some computer programs use heuristic <b> algorithms </b>: rather than exploring all possibilities in any order, we will make "good choices" first, for example here we will first drop cubes on piles containing only higher number cubes, where possible.
+            </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
