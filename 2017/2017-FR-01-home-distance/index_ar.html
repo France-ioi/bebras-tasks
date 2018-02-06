@@ -1,0 +1,151 @@
+<!doctype html>
+<html dir="rtl">
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-01</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-01-home-distance/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Eslam Wageed",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت، الإجابة صحيحة",
+            existsError: "هاتان الشجرتان متصلتان بالفعل. انقر على الطريق لإزالته",
+            distanceError: "الرقم المكتوب في الشجرة المحاطة باللون الأحمر يختلف عن عدد الطرق الحمراء التي تبدأ من العلم",
+            unconnectedError: "الشجرة المحاطة باللون الأحمر ليست متصلة بالعلم. أضف طرق"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+#anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         .constraints li {
+            padding-bottom: 0.5em; 
+         }
+         #taskContent {
+            text-align: left;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>طريق الأشجار</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+
+            <div align="right">
+	    <p>يرغب القندس في بناء طرق بين الأشجار</p>
+<p>قواعد اللعبة: الرقم المكتوب على الشجرة يدل على عدد الطرق التي يجب أن تمد بين الشجرة وبين العلم. انظر إلى المثال.</p>
+            <p>لإضافة طريق بين شجرتين، انقر على الشجرتين ولإزالة طريق، انقر عليه</p>
+            </div>
+
+
+
+            <div style="float:center; padding: 5px; margin-left: 0px; margin-bottom: 10px; border: 1px solid black; text-align:center; width: 270px ">
+               <div style="font-weight: bold; margin: 10px;">مثال</div>
+               <div style="margin: 0; padding: 0" id="exampleAnim">
+               </div>
+            </div>
+
+
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <div id="validation"><input type="button" value="تحقق من الإجابة" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+            <img src="start.png" style="display:none">
+         </div>
+      </div>
+      <!-- task -->
+      <div id="solution">
+
+         <h2>الحل</h2>
+
+            <div class="easy">
+
+               <p>الحل:</p>
+               <p><img style="width:250px" src="Sol_easy_11.png"></p>
+               <p>
+في الشكل الأعلى، إذا اضفنا رقم 1 لأول شجرة غير مرقمة وأضفنا رقم 4 لثاني شجرة غير مرقمة فسوف نجد أن العدد المكتوب على الشجرة هو عدد الطرق التي تسبق الشجرة حتى تصل إلى العلم</p>
+               <p>لاحظ أن هناك أيضا حل أخر، كما هو مبين في الشكل بالأسفل</p>
+               <p><img style="width:250px" src="Sol_easy_12.png"></p>
+
+            </div>
+
+            <div class="medium">
+
+               <p>الحل:</p>
+               <p><img  style="width:280px" src="Sol_medium_01.png"></p>
+               <p>للاحظ أن هناك أيضا حلول أخرى</p>
+               <p><img  style="width:280px" src="Sol_medium_02.png"></p>
+
+            </div>
+
+            <div class="hard">
+
+               <p>الحل:</p>
+               <p><img  style="width:400px" src="Sol_hard_01.png"></p>
+               <p>للاحظ أن هناك أيضا حلول أخرى</p>
+               <p><img  style="width:400px" src="Sol_hard_02.png"></p>
+
+            </div>
+
+
+         <h2>It's computer science !</h2>
+         <p>
+            This topic illustrates a concept widely used in computer science: the notion of <b>distance in a graph</b>. Starting from a starting point, we try to reach all the green circles following the black lines. The goal is to number each round with its <b>smaller distance</b> possible at the starting point.
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

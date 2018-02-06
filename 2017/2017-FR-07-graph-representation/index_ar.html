@@ -1,0 +1,157 @@
+<!doctype html>
+<html dir="rtl">
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-07</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-07-graph-representation/",
+          "language": "en",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif,
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت. لقد نجحت",
+            missingVertex: "هناك صور مفقودة. حرك الكرة الحمراء إلى صناديق أخرى، ثم انقر على الزر لإضافة صورة.",
+            missingEdge: "هناك خطوط سوداء مفقودة بين بعض الصور. انقر على صورتين لربطهما.",
+            shouldAddVertices: "الآن انقر على الصور لربطها بالخطوط، كما هو موضح.",
+            wrongEdge: "خط أسود واحد على الأقل غير صحيح. انقر عليه لإزالته.",
+            vertexExists: "تمت إضافة هذه الصورة من قبل. حرك الكرة الحمراء لاتخاذ صورة أخرى.",
+            vertexAdded: "تم إلتقاط الصورة.",
+            wrongCell: "لا يمكن نقل الكرة إلا إلى مربع مجاور.",
+            droppingOnBall: "لا يمكن وضع الكرتين في نفس المربع.",
+            dragError: "اسحب الكرة الحمراء إلى مربع المجاور.",
+            dropMinimalDistance: "", // Photos cannot be too close to each other // ok to say nothing.
+            edgeExists: "هناك صورتان متصلتان بالفعل. انقر على خط لإزالته.", 
+            needEdges: "<p>تم التقاط جميع أوضاع الصور. انقر على صورتين لربطها بواسطة خط وفقا لقواعد اللعبة.</p><p>لاحظ أنه يمكنك تحريك الصور داخل المربع الرمادي.</p>"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         #configTable {
+            margin: auto;
+            width: 740px;
+         }
+         #configContainer {
+            padding-left: 40px;
+            text-align: center;
+         }
+         #addSituation {
+            padding: 10px;
+            margin-left: 10px;
+         }
+         #messageConfig {
+            font-weight: bold;
+            color: red;
+            width: 400px;
+            height: 5em;
+            margin: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>لعبة الصور</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div style="float:left;text-align:center; margin-right:10px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>مثال</b></p><p style="margin-top: 0px; margin-bottom: 20px">يوجد وضعان للكرة</p><img src="example.png"></div>
+            <p>
+               ساعد القندس لالتقاط صور لجميع الأوضاع الممكنة
+
+ <span class="easy medium">للكرة الحمراء.</span><span class="hard">للكرتان الحمراوتان.</span>
+
+</p>
+            <p>
+يمكنك تحريك <span class="easy medium">الكرة الحمراء</span><span class="hard">الكرتان الحمراوتان</span>  على اللوحة السوداء بالاسفل ثم اضغط على زر التقط صورة.
+            </p>
+            <p>
+ستجد أن جميع الصور الملتقطة موجودة على اللوحة الرمادية بالأسفل، ارسم خط بين أي صورتين إذا كان من الممكن إنتقال الكرة الحمراء بينهم.
+
+            </p>
+            <p>
+                انقر على الصور الملتقطة لربطها بالخطوط.
+            </p>
+
+            <center><table>
+               <tr>
+                  <td><div id="anim_config"></div></td>
+                  <td>
+                     <div><input type="button" value="التقط صورة" id="addSituation" /></div>
+                     <div id="messageConfig">&nbsp;</div>
+                  </td>
+               </tr>
+            </table>
+            </center>
+            <div style="font-weight: bold; margin-top: 1em; text-align: center">الصور الملتقطة:</div>
+            <div id="anim_container">
+               <div id="anim_graph"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+           <p class="easy medium">We take a picture for each of <span class="easy">4</span><span class="medium hard">5</span> possible positions of the ball. To find your way easily, you can arrange the photos in the gray frame depending on the position of the ball in each photo, as shown below. We can then add lines between the photos describing positions where the ball has moved only one square.</p>
+
+           <p class="hard">We take a picture for each of the 6 possible configurations of the two marbles. To find your way easily, we can organize the photos. For example, we can make a first column with the photos having a ball in the box at the top left, and a second column with the photos having no ball in this box. You can also sort the photos inside the column, according to the filling of the other boxes. We can then add the features corresponding to the possible displacements of the balls.</p>
+  
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+           
+           <p>To be sure you have not forgotten any features, you can check the lines that start from each photo. For a given photo, we count <span class="easy medium">the number of white squares around the ball</span><span class="hard">the number of white boxes around the first ball, to which is added the number of white boxes around the second ball</span>. <span class="easy medium">This number</span><span class="hard">Total</span> must correspond to the number of lines that are connected to this photo, since this corresponds to the number of possible displacements.</p>
+
+         <h2>It's computer science !</h2>
+
+           <p>This topic illustrates how to represent situations (photos of a state) and transitions (displacement of a marble) in the form of a <b>graph</b>, that is to say, a set of objects, some of which are connected to each other by lines. It is very interesting to reduce a problem to a graphical view, because there are many very efficient algorithms for dealing with problems expressed by graphs.</p>
+
+           <p>Some problems naturally appear as a graph, such as finding a way to travel from one city to another: the graph is then made up of the cities and roads that connect them. In other problems, on the contrary, the graph is not really visible at first glance. We then speak of <b> implicit graph</b>.
+           <p>The expertise of a programmer is to be able to detect that a problem that does not look like a graph problem can still be expressed as a graph. Such a programmer can then, instead of developing an ad-hoc and inefficient algorithm, rely on a standard and highly efficient graphing algorithm.</p>
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
