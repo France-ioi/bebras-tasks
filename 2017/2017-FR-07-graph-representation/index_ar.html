@@ -89,43 +89,45 @@
    </head>
    <body>
 
-      <div id="task" style="direction: rtl">
-         <h1>لعبة الصور</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <div style="float:left;text-align:center; margin-right:10px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>مثال</b></p><p style="margin-top: 0px; margin-bottom: 20px">يوجد وضعان للكرة</p><img src="example.png"></div>
-            <p>
-               ساعد القندس لالتقاط صور لجميع الأوضاع الممكنة
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>لعبة الصور</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <div style="float:left;text-align:center; margin-right:10px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>مثال</b></p><p style="margin-top: 0px; margin-bottom: 20px">يوجد وضعان للكرة</p><img src="example.png"></div>
+               <p>
+                  ساعد القندس لالتقاط صور لجميع الأوضاع الممكنة
 
- <span class="easy medium">للكرة الحمراء.</span><span class="hard">للكرتان الحمراوتان.</span>
+    <span class="easy medium">للكرة الحمراء.</span><span class="hard">للكرتان الحمراوتان.</span>
 
-</p>
-            <p>
-يمكنك تحريك <span class="easy medium">الكرة الحمراء</span><span class="hard">الكرتان الحمراوتان</span>  على اللوحة السوداء بالاسفل ثم اضغط على زر التقط صورة.
-            </p>
-            <p>
-ستجد أن جميع الصور الملتقطة موجودة على اللوحة الرمادية بالأسفل، ارسم خط بين أي صورتين إذا كان من الممكن إنتقال الكرة الحمراء بينهم.
+   </p>
+               <p>
+   يمكنك تحريك <span class="easy medium">الكرة الحمراء</span><span class="hard">الكرتان الحمراوتان</span>  على اللوحة السوداء بالاسفل ثم اضغط على زر التقط صورة.
+               </p>
+               <p>
+   ستجد أن جميع الصور الملتقطة موجودة على اللوحة الرمادية بالأسفل، ارسم خط بين أي صورتين إذا كان من الممكن إنتقال الكرة الحمراء بينهم.
 
-            </p>
-            <p>
-                انقر على الصور الملتقطة لربطها بالخطوط.
-            </p>
+               </p>
+               <p>
+                   انقر على الصور الملتقطة لربطها بالخطوط.
+               </p>
 
-            <center><table>
-               <tr>
-                  <td><div id="anim_config"></div></td>
-                  <td>
-                     <div><input type="button" value="التقط صورة" id="addSituation" /></div>
-                     <div id="messageConfig">&nbsp;</div>
-                  </td>
-               </tr>
-            </table>
-            </center>
-            <div style="font-weight: bold; margin-top: 1em; text-align: center">الصور الملتقطة:</div>
-            <div id="anim_container">
-               <div id="anim_graph"></div>
+               <center><table>
+                  <tr>
+                     <td><div id="anim_config"></div></td>
+                     <td>
+                        <div><input type="button" value="التقط صورة" id="addSituation" /></div>
+                        <div id="messageConfig">&nbsp;</div>
+                     </td>
+                  </tr>
+               </table>
+               </center>
+               <div style="font-weight: bold; margin-top: 1em; text-align: center">الصور الملتقطة:</div>
+               <div id="anim_container">
+                  <div id="anim_graph"></div>
+               </div>
+               <img src="icon.png" style="display:none">
             </div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

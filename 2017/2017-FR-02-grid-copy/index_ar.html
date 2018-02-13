@@ -84,64 +84,66 @@
    </head>
    <body>
 
-      <div id="task" style="direction: rtl">
-         <h1>النسخ السريع</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-                         <p>لون المربعات التي تحمل دائرة باللون الأسود، واترك المربعات الأخرى باللون الأبيض</p>
-            <p>قم بالضغط على زر <b>"إنسخ المربعات السوداء"</b>, ثم حرك الشكل المنسوخ بالأسهم الرمادية, ثم اضغط "الصق  الشكل" لتتم عملية التلوين. إذا ضغط بعد ذلك على "إنسخ المربعات السوداء" سوف ينسخ جميع المربعات السوداء.</p>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>النسخ السريع</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                            <p>لون المربعات التي تحمل دائرة باللون الأسود، واترك المربعات الأخرى باللون الأبيض</p>
+               <p>قم بالضغط على زر <b>"إنسخ المربعات السوداء"</b>, ثم حرك الشكل المنسوخ بالأسهم الرمادية, ثم اضغط "الصق  الشكل" لتتم عملية التلوين. إذا ضغط بعد ذلك على "إنسخ المربعات السوداء" سوف ينسخ جميع المربعات السوداء.</p>
 
-            <p><span class="medium hard"><b>تستطيع إستخدام زر "الصق  الشكل" 7 مرات فقط</b></span></p>
+               <p><span class="medium hard"><b>تستطيع إستخدام زر "الصق  الشكل" 7 مرات فقط</b></span></p>
 
-             <div id="anim_container">
-               <table>
-                  <tr>
-                     <td>
-                        <div id="anim"></div>
-                     </td>
-                     <td id="controlsContainer">
-                        <input type="button" value="إنسخ المربعات السوداء" id="copyAll" />
-                        <br><br>
-                        <table id="arrowsTable">
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_up"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                           <tr>
-                              <td>
-                                 <div id="paper_right"></div>
-                              </td>
-                              <td></td>
-                              <td>
-                                 <div id="paper_left"></div>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_down"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                        </table>
-                        <br>
-                        <p>
-                           <input type="button" value="الصق الشكل" id="paste" />
+                <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <input type="button" value="إنسخ المربعات السوداء" id="copyAll" />
                            <br><br>
-                           <span id="stepsCount" class="medium hard"></span>
-                           <br><br>
-                           <input type="button" value="Undo" id="خطوة للوراء" class="medium hard" />
-                        </p>
-                     </td>
-                  </tr>
-               </table>
-               <div id="feedback"></div>
+                           <table id="arrowsTable">
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_up"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <div id="paper_right"></div>
+                                 </td>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_left"></div>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_down"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                           </table>
+                           <br>
+                           <p>
+                              <input type="button" value="الصق الشكل" id="paste" />
+                              <br><br>
+                              <span id="stepsCount" class="medium hard"></span>
+                              <br><br>
+                              <input type="button" value="Undo" id="خطوة للوراء" class="medium hard" />
+                           </p>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+               </div>
+               <div id="validation"><input type="button" value="تحقق من الإجابة" id="execute" /></div>
+               <img src="icon.png" style="display:none">
             </div>
-            <div id="validation"><input type="button" value="تحقق من الإجابة" id="execute" /></div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

@@ -85,35 +85,37 @@
       </style>
    </head>
    <body>
-      <div id="task" style="direction: rtl">
-         <h1>إنارة المبنى</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-             <p>قم بإنارة المبنى كما هو موضح بالشكل المطلوب. لإنارة صف أو عمود, قم بوضع الكارت الخاص به داخل الفتحات البيضاء بالأسفل. ثم قم بالتشغيل.</p>
-             <p>كل كارت <span class="medium hard">عدا الأخير</span> سوف يضيئ الصف أو العمود المكتوب عليه.</p>
-             <p class="medium hard"><b>الكارت الأخير سوف يقوم بعكس التيار الكهربي ليطفئ اللمبات المضيئة والعكس.</b></p>
-            
-            <div id="anim_container">
-               <div class="wrapper">
-                  <div class="animTitle">المبنى</div>
-                  <div class="anim animBuilding" id="animUser"></div>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>إنارة المبنى</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                <p>قم بإنارة المبنى كما هو موضح بالشكل المطلوب. لإنارة صف أو عمود, قم بوضع الكارت الخاص به داخل الفتحات البيضاء بالأسفل. ثم قم بالتشغيل.</p>
+                <p>كل كارت <span class="medium hard">عدا الأخير</span> سوف يضيئ الصف أو العمود المكتوب عليه.</p>
+                <p class="medium hard"><b>الكارت الأخير سوف يقوم بعكس التيار الكهربي ليطفئ اللمبات المضيئة والعكس.</b></p>
+               
+               <div id="anim_container">
+                  <div class="wrapper">
+                     <div class="animTitle">المبنى</div>
+                     <div class="anim animBuilding" id="animUser"></div>
+                  </div>
+                  <div class="wrapper">
+                     <div class="animTitle">الشكل المطلوب</div>
+                     <div class="anim animBuilding" id="animTarget"></div>
+                  </div>
+                  <br>
+                  <div id="animDrag"></div>
+                  <div id="feedback"></div>
+                  <div id="control">
+                     <input type="button" id="execute" value="ابدأ الإنارة"/>
+                     <input type="button" id="stop" value="توقف"/>
+                  </div>
                </div>
-               <div class="wrapper">
-                  <div class="animTitle">الشكل المطلوب</div>
-                  <div class="anim animBuilding" id="animTarget"></div>
-               </div>
-               <br>
-               <div id="animDrag"></div>
-               <div id="feedback"></div>
-               <div id="control">
-                  <input type="button" id="execute" value="ابدأ الإنارة"/>
-                  <input type="button" id="stop" value="توقف"/>
-               </div>
+               <img src="icon.png" style="display:none">
             </div>
-            <img src="icon.png" style="display:none">
-         </div>
-         <br>
-         <center><span id="error"></span></center>
+            <br>
+            <center><span id="error"></span></center>
+            </div>
       </div><!-- task -->
       <div id="solution">
 

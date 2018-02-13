@@ -84,28 +84,30 @@
    </head>
    <body>
 
-      <div id="task" style="direction: rtl">
-         <h1>المسارات</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-             <p>ارسم جميع المسارات التي تبدأ من الكرة السوداء وتمر بكل المربعات البيضاء مرة واحدة فقط.</p>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>المسارات</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                <p>ارسم جميع المسارات التي تبدأ من الكرة السوداء وتمر بكل المربعات البيضاء مرة واحدة فقط.</p>
 
-             <p>اضغط على المربع الأبيض المجاور للكرة لمد أو قص المسار.</p>
+                <p>اضغط على المربع الأبيض المجاور للكرة لمد أو قص المسار.</p>
 
-               
-               <div id="animContainer">
-                  <div id="anim"></div>
+                  
+                  <div id="animContainer">
+                     <div id="anim"></div>
+                  </div>
+                  <div id="discoveredPaths">
+                     <!--
+                        To be filled with elements of this form, each of which will contain a Raphael paper:
+                        
+                        <div class="discoveredPath"></div>
+                     -->
+                  </div>
+                  <div id="feedback"></div>
                </div>
-               <div id="discoveredPaths">
-                  <!--
-                     To be filled with elements of this form, each of which will contain a Raphael paper:
-                     
-                     <div class="discoveredPath"></div>
-                  -->
-               </div>
-               <div id="feedback"></div>
+               <img src="icon.png" style="display:none">
             </div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

@@ -94,40 +94,42 @@
       </style>
    </head>
    <body>
-      <div id="task" style="direction: rtl">
-         <h1>الأبراج الثلاثة</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <p>رتب الصناديق لتصبح كما هو موضح بالشكل المطلوب</p>
-            <p>اضغط على الأزرار الرمادية لتحريك الرافعة الممغنطة لرفع أو إنزال الصناديق</p>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>الأبراج الثلاثة</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <p>رتب الصناديق لتصبح كما هو موضح بالشكل المطلوب</p>
+               <p>اضغط على الأزرار الرمادية لتحريك الرافعة الممغنطة لرفع أو إنزال الصناديق</p>
 
-            <p>يمكنك حلها في <span id="nbStepsPartial" class="targetNumber"></span> خطوات<span class="medium hard"> للحصول على نقاط, و في <span id="nbStepsOptimal" class="targetNumber"></span> خطوات للحصول على الدرجة النهائية<span class="hard"> (درجة الصعوبة عالية)</span></span>.
-             </p>
-            <table id="animTable">
-               <tr>
-                  <td>
-                     <div id="anim_container">
-                        <div id="anim"></div>
-                        <div id="feedback">
-                           Feedback
+               <p>يمكنك حلها في <span id="nbStepsPartial" class="targetNumber"></span> خطوات<span class="medium hard"> للحصول على نقاط, و في <span id="nbStepsOptimal" class="targetNumber"></span> خطوات للحصول على الدرجة النهائية<span class="hard"> (درجة الصعوبة عالية)</span></span>.
+                </p>
+               <table id="animTable">
+                  <tr>
+                     <td>
+                        <div id="anim_container">
+                           <div id="anim"></div>
+                           <div id="feedback">
+                              Feedback
+                           </div>
                         </div>
-                     </div>
-                     <div id="buttons">
-                        <span>عدد الخطوات: <span id="stepCounter"></span></span>
-                        <input type="button" id="undo" value="ارجع خطوة للخلف" />
-                     </div>
-                  </td>
-                  <td id="target_cell">
-                     <div id="target_anim_container">
-                        الشكل المطلوب
-                        <br><br>
-                        <div id="target_anim"></div>
-                     </div>
-                  </td>
-               </tr>
-            </table>
-            <img src="icon.png" style="display:none">
-            <img src="magnet.png" style="display:none">
+                        <div id="buttons">
+                           <span>عدد الخطوات: <span id="stepCounter"></span></span>
+                           <input type="button" id="undo" value="ارجع خطوة للخلف" />
+                        </div>
+                     </td>
+                     <td id="target_cell">
+                        <div id="target_anim_container">
+                           الشكل المطلوب
+                           <br><br>
+                           <div id="target_anim"></div>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+               <img src="icon.png" style="display:none">
+               <img src="magnet.png" style="display:none">
+            </div>
          </div>
       </div><!-- task -->
       <div id="solution">

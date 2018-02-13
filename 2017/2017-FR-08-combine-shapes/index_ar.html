@@ -167,59 +167,61 @@
    </head>
    <body>
 
-      <div id="task" style="direction: rtl">
-         <h1>دمج الأشكال</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <div class="mainDiv">
-               <div class="sectionContainer" id="leftContainer">
-                  <div id="descriptionContainer">
-                     <p align="right">
-                        يمكن للقندس عمل أشكال من خلال الدمج بين الأشكال الثلاثة التي بالأسفل. 
-                     </p>
-<p align="right">
-إنظر إلى الأمثلة لفهم كيف يفعل ذلك ثم قم برسم الشكل المطلوب باستخدام الأشكال الثلاثة والعلامات التي بالأسفل.                       
-                     </p>                     
-<p>
-                       
-                     </p>
-                  </div>
-               </div>
-               <div class="sectionContainer" id="examplesContainer">
-                  <div class="exampleTitle">أمثلة</div>
-                  <div id="examples"></div>
-                  <!-- Filled automatically with divs of the form.
-                        <div class="example sectionBlock">
-                           <span class="paperTitle">A+B</span><br>
-                           <div class="paperDiv" id="paperExample0"></div>
-                        </div>
-                  -->
-               </div>
-               
-               <div class="sectionContainer" id="controlContainer">
-                  <div id="inputContainer" class="sectionBlock">
-                     <div id="symbolsContainer">
-                        <!-- Automatically filled with divs in this format:
-                           <div class="symbol sectionBlock">
-                              <span class="paperTitle">A</span><br>
-                              <div class="paperDiv" id="paperSymbolA"></div>
-                           </div>
-                        -->
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>دمج الأشكال</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <div class="mainDiv">
+                  <div class="sectionContainer" id="leftContainer">
+                     <div id="descriptionContainer">
+                        <p align="right">
+                           يمكن للقندس عمل أشكال من خلال الدمج بين الأشكال الثلاثة التي بالأسفل. 
+                        </p>
+   <p align="right">
+   إنظر إلى الأمثلة لفهم كيف يفعل ذلك ثم قم برسم الشكل المطلوب باستخدام الأشكال الثلاثة والعلامات التي بالأسفل.                       
+                        </p>                     
+   <p>
+                          
+                        </p>
                      </div>
-                     <div id="keyboardContainer"></div>
-                     <div id="inputDiv">&nbsp;&nbsp;<span id="input"></span></div>
-                     <!--<input type="text" id="input" value="abc" disabled>-->
                   </div>
-                  <div class="paperDiv sectionBlock" id="paperUser"></div>
-                  <div class="objectiveContainer sectionBlock">
-                     <div class="targetTitle">الشكل المطلوب</div>
-                     <div class="paperDiv" id="paperTarget"></div>
+                  <div class="sectionContainer" id="examplesContainer">
+                     <div class="exampleTitle">أمثلة</div>
+                     <div id="examples"></div>
+                     <!-- Filled automatically with divs of the form.
+                           <div class="example sectionBlock">
+                              <span class="paperTitle">A+B</span><br>
+                              <div class="paperDiv" id="paperExample0"></div>
+                           </div>
+                     -->
                   </div>
+                  
+                  <div class="sectionContainer" id="controlContainer">
+                     <div id="inputContainer" class="sectionBlock">
+                        <div id="symbolsContainer">
+                           <!-- Automatically filled with divs in this format:
+                              <div class="symbol sectionBlock">
+                                 <span class="paperTitle">A</span><br>
+                                 <div class="paperDiv" id="paperSymbolA"></div>
+                              </div>
+                           -->
+                        </div>
+                        <div id="keyboardContainer"></div>
+                        <div id="inputDiv">&nbsp;&nbsp;<span id="input"></span></div>
+                        <!--<input type="text" id="input" value="abc" disabled>-->
+                     </div>
+                     <div class="paperDiv sectionBlock" id="paperUser"></div>
+                     <div class="objectiveContainer sectionBlock">
+                        <div class="targetTitle">الشكل المطلوب</div>
+                        <div class="paperDiv" id="paperTarget"></div>
+                     </div>
+                  </div>
+                  <br>
+                  <span id="error"></span>
                </div>
-               <br>
-               <span id="error"></span>
+               <img src="icon.png" style="display:none">
             </div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

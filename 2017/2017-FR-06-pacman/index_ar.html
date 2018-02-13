@@ -92,41 +92,43 @@
    </head>
    <body>
 
-      <div id="task" style="direction: rtl">
-         <h1>الأشباح</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-             <p class="hard" id="difficultyWarning"></p>
-             <p>حرك القندس إلى النقطة الصفراء بدون أن يلحقه 
-<span class="easy medium">الشبح</span><span class="hard">الشبحان</span>. </p>
-             <p>يمكنك تحريك القندس بالأسهم أو بالضغط على المربعات</p>
-             <p class="easy medium">
-               لاحظ أن حركة الشبح معتمدة على حركة القندس. حاول أن تتفاداه
-             </p>
-             <p class="hard">
-                              لاحظ أن حركة الشبحان معتمدة على حركة القندس. حاول أن تتفادهما
-             </p>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>الأشباح</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                <p class="hard" id="difficultyWarning"></p>
+                <p>حرك القندس إلى النقطة الصفراء بدون أن يلحقه 
+   <span class="easy medium">الشبح</span><span class="hard">الشبحان</span>. </p>
+                <p>يمكنك تحريك القندس بالأسهم أو بالضغط على المربعات</p>
+                <p class="easy medium">
+                  لاحظ أن حركة الشبح معتمدة على حركة القندس. حاول أن تتفاداه
+                </p>
+                <p class="hard">
+                                 لاحظ أن حركة الشبحان معتمدة على حركة القندس. حاول أن تتفادهما
+                </p>
 
-             <div id="anim_container">
-               <table>
-                  <tr>
-                     <td>
-                        <div id="anim"></div>
-                     </td>
-                     <td id="controlsContainer">
-                        <input type="button" id="undo" value="ارجع خطوة للخلف" />
-                        <br>
-                        <div class="livesStatus"></span>
-                     </td>
-                  </tr>
-               </table>
-               <div id="feedback"></div>
-               <input type="button" id="restart" value="ابدأ مرة أخرى" />
+                <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <input type="button" id="undo" value="ارجع خطوة للخلف" />
+                           <br>
+                           <div class="livesStatus"></span>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+                  <input type="button" id="restart" value="ابدأ مرة أخرى" />
+               </div>
+               <img src="icon.png" style="display:none">
+               <img src="castor.png" style="display:none">
+               <img id="image_ghost1" src="ghost1.png" style="display:none">
+               <img id="image_ghost2" src="ghost2.png" style="display:none">
             </div>
-            <img src="icon.png" style="display:none">
-            <img src="castor.png" style="display:none">
-            <img id="image_ghost1" src="ghost1.png" style="display:none">
-            <img id="image_ghost2" src="ghost2.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">
