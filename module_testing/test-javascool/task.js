@@ -5,6 +5,7 @@ function initTask(subTask) {
         actionDelay: 200,
         buttonScaleDrawing: false,
 
+        conceptViewer: true,
         includeBlocks: {
             groupByCategory: false,
             generatedBlocks: {
@@ -13,6 +14,9 @@ function initTask(subTask) {
                     'addString',
                     'addLine',
                     'addCircle',
+                    'waitForClick',
+                    'getX',
+                    'getY',
                     'reset',
                     'resetSize'
                 ]
