@@ -4,6 +4,7 @@ function initTask(subTask) {
         hideSaveOrLoad: false,
         actionDelay: 200,
         buttonScaleDrawing: false,
+        conceptViewer: true,
 
         includeBlocks: {
             groupByCategory: true,
