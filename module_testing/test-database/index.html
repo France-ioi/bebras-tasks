@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>test-p5</title>
+        <title>test-database</title>
         <script>
             window.stringsLanguage = 'fr';
         </script>
@@ -15,13 +15,13 @@
                 'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
                 'taskStyles-0.1',
                 'files_repository', 'blocks_helper',
-                'p5', 'p5.sound', 'player_p5', 'blockly_p5'
+                'database', 'blockly_database', 'database_css'
             ]);
             importLanguageModules('blockly');
         </script>
         <script class="remove" type="text/javascript">
             var json = {
-                "id": "test-p5",
+                "id": "test-database",
                 "language": "fr",
                 "version": "fr.01",
                 "authors": "",
@@ -43,11 +43,16 @@
 
     <body onresize="task.displayedSubTask.updateScale()">
         <div id="task">
-            <h1>test-p5</h1>
+            <h1>test-database</h1>
             <div id="tabsContainer"></div>
             <div id="taskContent">
-            <div id="gridContainer"></div>
-            <div id="blocklyLibContent"></div>
+                <div id="taskIntro">
+                    Example:<br>
+                    <img src="img/example.png"/>
+                </div>
+                <div id="gridContainer"></div>
+                <div id="blocklyLibContent"></div>
+             </div>
         </div>
     </body>
 </html>
