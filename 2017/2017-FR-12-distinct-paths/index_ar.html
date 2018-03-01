@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-12</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: "أحسنت. لقد وجدت جميع المسارات.",
+            pathDiscovered: function(discoveredPaths, totalPaths) {
+               return "لقد وجدت مسار. ما زال لديك " + (totalPaths - discoveredPaths) + "  مسار لتجدهم. <br> يمكنك البدء من الكرة.";
+            },
+            pathExists: "لقد وجدت هذا المسار من قبل.",
+            notCycle: "This path does not end at the starting point", // currently not used
+            cycleNotComplete: "This cycle does not go through all the boxes.", // currently not used
+            blockedCell: "يجب أن يمر المسار بالمربعات البيضاء فقط.",
+            notAdjacentToStart: "اضغط على المربع الأبيض المجاور للكرة السوداء.",
+            notAdjacentToHead: "اضغط على المربع الأبيض المجاور للكرة البيضاء.",
+            notAllFound: function(discoveredPaths, totalPaths) {
+               if (discoveredPaths == 0) {
+                  return "لم تجد مسار يمر بكل المربعات البيضاء.";
+               } else {
+                  return "لقد وجدت " + discoveredPaths + " مسارات, ما زال لديك " + (totalPaths - discoveredPaths) + " مسارات لتجدهم.";
+               }
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #animContainer {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #discoveredPaths {
+            margin-top: 5px;
+            text-align: center;
+         }
+         #discoveredPaths div {
+            margin: 5px;
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>المسارات</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                <p>ارسم جميع المسارات التي تبدأ من الكرة السوداء وتمر بكل المربعات البيضاء مرة واحدة فقط.</p>
+
+                <p>اضغط على المربع الأبيض المجاور للكرة لمد أو قص المسار.</p>
+
+                  
+                  <div id="animContainer">
+                     <div id="anim"></div>
+                  </div>
+                  <div id="discoveredPaths">
+                     <!--
+                        To be filled with elements of this form, each of which will contain a Raphael paper:
+                        
+                        <div class="discoveredPath"></div>
+                     -->
+                  </div>
+                  <div id="feedback"></div>
+               </div>
+               <img src="icon.png" style="display:none">
+            </div>
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+              <style>
+              #img-easy img, #img-medium img { 
+               width: 120px;
+              }
+              #img-hard img { 
+               width: 180px;
+              }
+              </style>
+
+           <div class="easy" id="img-easy">
+              <p>To begin, either we go to the right, or we go to the left. If we go to the right, we can climb, but we are stuck, because there is no path that passes through the two boxes marked with a red cross.</p>
+              <img src="Sol_easy_RU.png">
+              <p>We could also go right, then go up or left, but in both cases we are also stuck.</p>
+              <img src="Sol_easy_RRa.png">
+              <img src="Sol_easy_RRb.png">
+              <p>Let's try to start from the beginning to the left, moving forward as long as we have no choice. We reach a situation where we can either go down or go to the right.</p>
+              <img src="Sol_easy_L.png">
+              <p>If we go down, there is only one way to complete the path.</p>
+              <img src="Sol_easy_LD.png">
+              <p>If instead we go to the right, we can find two possible paths, depending on whether we go first to the left or first well down.</p>
+              <img src="Sol_easy_LR.png">
+              <p>In summary, here are the 3 possible paths.</p>
+              <img src="Sol_easy.png" style="width:450px">
+           </div>
+
+           <div class="medium" id="img-medium">
+              <p>To start, either we go down, or we go to the right. If we go down, we can go right, but we are stuck, because there is no path through the two boxes marked with a red cross.</p>
+              <img src="Sol_medium_DR.png">
+              <p>If you go down twice, then you have to go back up.</p>
+              <img src="Sol_medium_DD.png">
+              <p>From there, there are 3 possible paths.</p>
+              <img src="Sol_medium_DDX.png" style="width:450px">
+              <p>Let's start from the beginning and try now to go to the right. If we go right then down, we reach a situation in which we are stuck. Here again, there is no path that passes through the two marked boxes.</p>
+              <img src="Sol_medium_RD.png">
+              <p>If you go twice to the right before going down, you're still stuck.</p>
+              <img src="Sol_medium_RRD.png">
+              <p>So, you have to go three times to the right. Then we have no choice we must come back. We arrive at the situation below.</p>
+              <img src="Sol_medium_RRR.png">
+              <p>From there, there are 2 other possible paths.</p>
+              <img src="Sol_medium_RRRX.png" style="width:300px">
+           </div>
+
+           <div class="hard" id="img-hard">
+              <p>To start, either we go to the left or we go up. Let's first look at departures to the left. We will see that none of them leads to a solution.
+               If we go to the left, then to the top, we are stuck because there is no path through the two boxes marked with a red cross.</p>
+              <img src="Sol_hard_LU.png">
+              <img src="Sol_hard_LLU.png">
+              <img src="Sol_hard_LLLU.png">
+              <p>If you go 4 times to the left, you have to go around and go up on the left. But then, whatever the path that we try to take, we find ourselves stuck.</p>
+              <img src="Sol_hard_LLLL.png">
+              <img src="Sol_hard_LLLLXD.png">
+              <img src="Sol_hard_LLLLXR.png">
+
+              <p>Let's start from the beginning and try to go upwards. We have to turn left immediately.</p>
+              <img src="Sol_hard_UL.png">
+              <p>Among the possible starts, the first three lead to stuck situations, in which it is not possible to find a path through all the red crosses.</p>
+              <img src="Sol_hard_ULLD.png">
+              <img src="Sol_hard_ULLL.png">
+              <img src="Sol_hard_ULLU.png">
+              <p>The only possible departure is the following.</p>
+              <img src="Sol_hard_ULDL.png">
+              <p>When climbing, there are 3 possible paths.</p>
+              <img src="Sol_hard_ULDLUX.png" style="width:550px">
+              <p>Going left, there are the other 3 possible paths.</p>
+              <img src="Sol_hard_ULDLLX.png" style="width:550px">
+
+           </div>
+
+         <h2>It's computer science !</h2>
+   
+            <p>This challenge proposes to practice a <b> exhaustive exploration </b> of paths, optimized with an <b> early detection of dead branches </b>, which corresponds to noticing at certain moments that we will inevitably be stuck and there is no point in continuing.
+
+            <p>Many computer algorithms exploit this strategy, better known as <b> branch and bound </b>. This strategy applies very well to quickly find valid solutions in problems where the number of possibilities is potentially gigantic, but it is in fact relatively easy to evaluate if a beginning of solution is inevitably doomed to failure.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

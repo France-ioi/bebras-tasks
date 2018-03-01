@@ -4,6 +4,8 @@ function initTask(subTask) {
         hideSaveOrLoad: false,
         actionDelay: 200,
         buttonScaleDrawing: false,
+        conceptViewer: true,
+        hideValidate: true,
 
         includeBlocks: {
             groupByCategory: false,
@@ -13,6 +15,9 @@ function initTask(subTask) {
                     'addString',
                     'addLine',
                     'addCircle',
+                    'waitForClick',
+                    'getX',
+                    'getY',
                     'reset',
                     'resetSize'
                 ]

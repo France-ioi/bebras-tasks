@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-02</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-02-grid-copy/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت. الإجابة صحيحة",
+            patternError: "لقد قمت بتلوين بعض المربعات في حين أنها لا تحتوي على دائرة. حاول ثانية.",
+            patternMissing: "لم يتم تلوين بعض المربعات التي تحمل علامة دائرة",
+            pasteLimit: function (limit) { return "لقد استخدمت زر النسخ " + limit + " مرات ولم تحقق المطلوب. حاول مرة أخرى."; },
+	    stepCounter: function(count, limit) {
+               return count + " / " + limit;
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #controlsContainer {
+            text-align: center;
+         }
+         #controlsContainer input {
+            min-width: 80px;
+            padding: 10px;
+         }
+         #arrowsTable td {
+            width: 30px;
+            height: 30px;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>النسخ السريع</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                            <p>لون المربعات التي تحمل دائرة باللون الأسود، واترك المربعات الأخرى باللون الأبيض</p>
+               <p>قم بالضغط على زر <b>"إنسخ المربعات السوداء"</b>, ثم حرك الشكل المنسوخ بالأسهم الرمادية, ثم اضغط "الصق  الشكل" لتتم عملية التلوين. إذا ضغط بعد ذلك على "إنسخ المربعات السوداء" سوف ينسخ جميع المربعات السوداء.</p>
+
+               <p><span class="medium hard"><b>تستطيع إستخدام زر "الصق  الشكل" 7 مرات فقط</b></span></p>
+
+                <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <input type="button" value="إنسخ المربعات السوداء" id="copyAll" />
+                           <br><br>
+                           <table id="arrowsTable">
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_up"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <div id="paper_right"></div>
+                                 </td>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_left"></div>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_down"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                           </table>
+                           <br>
+                           <p>
+                              <input type="button" value="الصق الشكل" id="paste" />
+                              <br><br>
+                              <span id="stepsCount" class="medium hard"></span>
+                              <br><br>
+                              <input type="button" value="Undo" id="خطوة للوراء" class="medium hard" />
+                           </p>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+               </div>
+               <div id="validation"><input type="button" value="تحقق من الإجابة" id="execute" /></div>
+               <img src="icon.png" style="display:none">
+            </div>
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+            
+
+         <!--
+         <h2>C'est de l'informatique !</h2>
+            
+           -->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-05</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت. إجابة صحيحة",
+            error: "الشكل لا يمثل الكود المكتوب",
+            removeShape: "مسح",
+            dragAttempt: "انقر على الشكل ثم انقر على المكان الذي تريد وضعه فيه" 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #taskDescription p {
+            text-align: left;
+         }
+         .exampleWrapper {
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid black;
+         }
+         .exampleContainer {
+            padding-left: 15px;
+         }
+         .exampleTitle {
+            font-weight: bold;
+            padding: 10px;
+         }
+         #animContainer {
+            text-align: center;
+         }
+         #animContainer div {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0px 10px 0px 0px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #animContainer {
+            margin-top: 1em;
+         }
+         .drawAreaDiv {
+            border: 3px solid black;
+         }
+         .drawAreaDivExample {
+            vertical-align: center;
+         }
+         #anim {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         .configString {
+            font-weight: bold;
+            font-size: 1.5em;
+            text-align: center;
+         }
+         #taskDescription td {
+            vertical-align: top;
+         }
+         .hint {
+            font-weight: bold;
+            color: green;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>لغة الأشكال</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <table><tr><td style="vertical-align:center">
+                 الكود <span class="configString" id="configString_example0">A</span> <br class="hard"/>يمثل الرسم التالي:</td><td><span id="exampleAnim0" class="drawAreaDivExample"></span>
+               </td><td>.</td></tr></table>
+               <table class="medium"><tr><td style="vertical-align:center">
+                  الكود <span class="configString" id="configString_example1">A</span> يمثل الرسم التالي:</td><td><span id="exampleAnim1" class="drawAreaDivExample"></span>
+               </td><td>.</td></tr></table>
+               <div id="animContainer">
+                  <div>
+                     <div id="buttonsAnim"></div>
+                  </div>
+                  <div id="targetWrapper">
+                     <p>حاول بالمثل رسم الكود التالي:</p>
+                     <span class="configString" id="configString_main">A</span><br/>
+                     <div id="anim" class="drawAreaDiv"></div>
+                     <p>
+                     <span class="hint">انقر على المكان المطلوب وضع الشكل فيه</span>&nbsp;
+                     </p>
+                  </div>
+              </div>
+              <img src="icon.png" style="display:none">
+            </div>
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>الحل</h2>
+   
+           <p>أولاً يجب علينا فهم العلاقة بين الأشكال والحروف</p>
+           <ul>
+               <li>الحرف A يعادل المثلث الأخضر</li>
+               <li>الحرف X يعادل المربع الوردي</li>
+               <li>الحرف O يعادل الدائرة الزرقاء</li>
+           </ul>
+   
+           <p class="medium">الحرف الذي يليه أحرف بين قوسين يعني أنه شكل كبير يحتوي على أشكال أصغر. الحروف بين الأقواس تتوافق مع الأشكال الصغيرة داخل الشكل الكبير. وتعطى هذه الأشكال الترتيب التالي: شكل في الوسط، ثم شكل أسفل على اليسار، ثم شكل أسفل إلى اليمين</p>
+          
+           <p class="hard">يمكن تداخل الأقواس، أي وضعها داخل بعضها البعض، والذي يسمح للأشكال الكبيرة التي تحتوي على أشكال متوسطة الحجم، وهذه الأشكال المتوسطة تحتوي على أشكال صغيرة</p>
+            
+           <p class="hard">لاحظ أن الأقواس لا تحتوي بالضرورة على ثلاثة أشكال. قد تحتوي على أقل أو لا شيء<p>
+
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+
+
+         <h2>It's computer science !</h2>
+            
+          <p>This topic illustrates a method widely used in particular in computer science: the use of a <b> textual language with nestings </b>, to represent a <b> tree structure </b>. The nestings are for example materialized by brackets. A tree structure appears as soon as you have elements that contain other elements, which can contain other elements, and so on. </P>
+
+          <p>All web pages on the internet are represented <b> tree </b>, with boxes nested within each other, to boxes that contain words or images. Most modern browsers make it easy to visualize the structure of the page. To test this, open your favorite web page, such as a search engine page, and click the button on a piece of text or an image, and look in the menu that appears for the <b> Inspect menu. the </b>. A visualization tool will appear, allowing you to control the display of the element tree. Feel free to click everywhere on this display to understand what it represents.</p>
+   </body>
+</html>

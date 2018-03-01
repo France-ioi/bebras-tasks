@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-06</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-06-pacman/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت. إجابة صحيحة",
+            error: "لقد تم الإيقاع. حاول مرة أخرى أو ارجع خطوة للوراء", //&quot;Recommencer&quot;
+            undoOption: "ارجع خطوة للخلف",
+            restartOption: "إعادة المحاولة",
+            partial: "لقد امسك بك وحصلت على بضع نقاط. حاول مرة أخرى أو ارجع خطوة للوراء",
+            // DEPRECATD invalid: "Castor ne peut pas se déplacer sur une case grise.",
+            livesLeft: function(lives) {
+               return "عدد المحاولات:<br>" + lives;
+            },
+            livesFeedback: function(livesLost, livesLeft) {
+               return "";
+               //return "Castor a perdu " + livesLost + " vie(s). Il lui reste " + livesLeft + " vie(s).";
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #controlsContainer {
+            text-align: center;
+            padding-left: 20px;
+         }
+         #controlsContainer input {
+            min-width: 80px;
+            padding: 10px;
+         }
+         #arrowsTable td {
+            width: 30px;
+            height: 30px;
+         }
+         .livesStatus {
+            margin-top: 30px;
+            font-size: 24px;
+            display: none;
+         }
+         #restart {
+            padding: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>الأشباح</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                <p class="hard" id="difficultyWarning"></p>
+                <p>حرك القندس إلى النقطة الصفراء بدون أن يلحقه 
+   <span class="easy medium">الشبح</span><span class="hard">الشبحان</span>. </p>
+                <p>يمكنك تحريك القندس بالأسهم أو بالضغط على المربعات</p>
+                <p class="easy medium">
+                  لاحظ أن حركة الشبح معتمدة على حركة القندس. حاول أن تتفاداه
+                </p>
+                <p class="hard">
+                                 لاحظ أن حركة الشبحان معتمدة على حركة القندس. حاول أن تتفادهما
+                </p>
+
+                <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <input type="button" id="undo" value="ارجع خطوة للخلف" />
+                           <br>
+                           <div class="livesStatus"></span>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+                  <input type="button" id="restart" value="ابدأ مرة أخرى" />
+               </div>
+               <img src="icon.png" style="display:none">
+               <img src="castor.png" style="display:none">
+               <img id="image_ghost1" src="ghost1.png" style="display:none">
+               <img id="image_ghost2" src="ghost2.png" style="display:none">
+            </div>
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>الحل</h2>
+   
+   
+            <style>
+            .table-sol img {
+               width: 240px;
+            }
+            .table-sol td {
+               width: 250px;
+               padding-bottom: 20px;
+               vertical-align: bottom;
+            }
+            .table-sol p {
+               margin: 0px 0px 5px 0px;
+            }
+            </style>
+        
+            <div class="easy">
+                  <table class="table-sol"><tr>
+               <td>
+                  <p>الهدف هو عمل فخ للشبح</p>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <p>أولا نذهب إلى اليمين</p>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <p>ثم نرجع مرة أخرى لليسار</p>
+                  <img src="Sol_easy_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>ثم ننزل للأسفل</p>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <p>ثم نفوز</p>
+                  <img src="Sol_easy_5.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="medium">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>الهدف هو عمل فخ للشبح</p>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <p>أولا نذهب إلى اليمين</p>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <p>ثم نرجع مرة أخرى لليسار</p>
+                  <img src="Sol_medium_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>ثم ننزل للأسفل</p>
+                  <img src="Sol_medium_4.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>نبدأ في جذب الشبحان</p>
+                  <img src="Sol_hard_0.png">
+               </td>
+               <td>
+                  <p>إلى الأركان</p>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <p>هما الأن عالقان</p>
+                  <img src="Sol_hard_2.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>ثم ننزل إلى الأسفل من الجانب الأيسر</p>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <p>ثم نرجع مرة أخرى</p>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <p>ثم نستدرج الشبح إلى اليمين</p>
+                  <img src="Sol_hard_5.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>وبذلك تركنا الشبح عالق في اليسار</p>
+                  <img src="Sol_hard_6.png">
+               </td>
+               <td>
+                  <p>ثم نذهب للأسفل</p>
+                  <img src="Sol_hard_7.png">
+               </td>
+               <td>
+                  <p>ثم إلى النقطة الصفراء</p>
+                  <img src="Sol_hard_8.png">
+               </td>
+               </tr>
+               </table>
+
+            </div>            
+
+         <h2>It's computer science !</h2>
+            
+            <p>In this topic, it was necessary to do <b> reverse engineering </b>, in order to deduce the displacement behavior of a ghost. A ghost is still heading in the direction of Castor. It's a pretty good way to reach your target, except of course when there are obstacles. In this subject, it was precisely necessary to exploit the obstacles in order to manage to catch the ghost and then to be able to pick up speed. </P>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

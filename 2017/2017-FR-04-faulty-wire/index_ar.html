@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-04</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0',
+            'visual-graph-1.0', 'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-04-faulty-wire/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت. لقد وجدت البذور.",
+            found: "", // empty when using automatic validation
+            notFound: "أوجد الأنبوب الملئ بالبذور ثم مرر القندس من خلاله.",
+            noSeeds: "لم يجد القندس البذور في طريقة. ابحث في مكان أخر.",
+            noPath: "اضعط على فتحتان نفس الأنبوبة.",
+            /*
+            testLimit: function (limit) { return "Vous avez déjà fait " + limit + " tests, mais vous n'avez pas encore trouvé les graines. Essayez autrement, en cliquant sur &quot;Recommencer&quot;."; },
+            */
+            seedsInPath: function(pathLength) { return "<p>لقد رأى القندس البذور في  " + pathLength + " جزء من الأنبوبة.</p><p>اكمل البحث لتجد مكان البذور.</p>"; },
+            partial: function(userSteps, optimalSteps, hasPoints) {
+               var pointsMessage;
+               if (!hasPoints) {
+                  pointsMessage = "لن تحصل على أي نقاط.";
+               } else {
+                  pointsMessage = "لقد حصلت على بعض النقاط.";
+               }
+               return "<p>لقد وجدت البذور في " + userSteps + " خطوات</p><p>" + pointsMessage + "</p><p>اعد المحاولة لتجدها في خطوات اقل.</p><p>ولكن اعلم أن مكان البذور سوف يتغير.</p>";
+            },
+            obstructedPathText: ""
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         #exampleTable {
+            margin: auto;
+         }
+         #exampleTitle {
+            text-align: center;
+            font-weight: bold;
+         }
+         #exampleDescr {
+            text-align: center;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         #exampleFrame {
+            border: 1px solid black;
+            padding: 5px;
+            margin: 15px 0px 0px 0px;
+         }
+         .animWithSep {
+            border-right: 1px dashed gray;
+            padding-right: 10px;
+         }
+         #feedback {
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         .stepsMessage {
+            font-size: 18px;
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>البحث عن البذور</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <p id="enemyWarning"></p>
+               <div style="float:left; padding: 5px; margin-left: 25px; margin-bottom: 10px; border: 1px solid black"><img src="seeds.png" style="height:55px"></div>
+               <p> فقد القندس حفنة من البذور في أحد قطاعات الأنابيب التالية.</p>
+               <p style="font-weight: bold">اوجد البذور في اقل عدد مرات بحث ممكنة.</p>
+               <p >للبحث، اضغط على الغطاء الأسود للأنبوب ثم اضغط على غطاء أخر وسوف يقوم القندس بالبحث في الأنابيب الواصلة بين الغطائين وسيخبرك إذا وجد البذور في تلك القطاعات أم لا.</p>
+               <div id="anim_container">
+                  <div id="anim"></div>
+               </div>
+               <div id="feedback"></div>
+               <div id="buttons">
+                  <span class="stepsMessage">عدد مرات البحث:<span id="stepCounter"></span>.</span>
+               </div>
+               <img src="icon.png" style="display:none">
+               <img src="castor.png" style="display:none">
+            </div>
+         </div>
+      </div><!-- task -->
+
+      <div id="solution">
+
+         <h2>Solution</h2>
+           
+           <div class="easy">
+              <p>To find the seeds for sure in 4 searches, you can start by searching two complete tubes. We will know in which pipe two pieces long are the seeds.</p> 
+              <ul>
+              <li>
+                  <p><strong>Step 1</strong>: Let's start with any pipe, for example the first one up.</p>
+                  <p><img src="Sol_easy_1.png"></p>
+                  <p>Result: the seeds are not there.</p>
+              </li>
+              <li>   
+                  <p><strong>Step 2</strong>: Let's try another pipe, for example the one on the left. </p>
+                  <p><img src="Sol_easy_2.png"></p>
+                  <p>Result: the seeds are not there.</p>
+              </li>
+              <li>
+                  <p><strong>Step 3</strong> : The seeds are therefore inevitably in the third pipe. It is not necessary to search it in its entirety. Just search one of the two pieces. Either we will find the seeds in this piece, or they will necessarily be in the other pieces.</p>
+                  <p><img src="Sol_easy_3.png"></p>
+                  <p>Result: the seeds are not in the left piece. They are therefore necessarily right.</li>
+              <li>
+                  <p><strong>Step 4</strong> : Let Beaver look for the seeds where they are necessarily.</p>
+                  <p><img src="Sol_easy_4.png"></p>
+                  <p>And it's won!</p>
+              </li>
+              </ul>
+           </div>
+
+           <div class="medium">
+              <p>To find the seeds for sure in 5 searches, we will try to eliminate a maximum of possible pieces at each step.</p> 
+              <ul>
+              <li>
+                  <p><strong>Step 1</strong> : Let's start by having Beaver cross half of the pieces of pipe.</p>
+                  <p><img src="Sol_medium_1.png"></p>
+                  <p>Result: the seeds are not there. This area is blackened in the sequel.</p>
+                  <p>Note: If Beaver does not exactly cross half of the pieces of pipe, but a little more or a little less, the computer makes sure that the seeds are always in the largest part.</p>
+              </li>
+              <li>   
+                  <p><strong>Step 2</strong> : In the same way, let Beaver explore half of the pieces where the seeds can still be found. </p>
+                  <p><img src="Sol_medium_2.png"></p>
+                  <p>Result: the seeds are in this part. We can blacken the other pieces in the following, since the seeds are not there.</p>
+              </li>
+              <li>
+                  <p><strong>Step 3</strong> : There are only 4 pieces left. By always applying the same method, let Beaver explore two of these pipes.</p>
+                  <p><img src="Sol_medium_3.png"></p>
+                  <p>Result: the seeds are not in the two left pieces. They are therefore necessarily right.</li>
+              <li>
+                  <p><strong>Step 4</strong> : Let's try one of the two pieces that remain.</p>
+                  <p><img src="Sol_medium_4.png"></p>
+                  <p>Result: the seeds are not in this piece there.</p>
+              </li>
+              <li>
+                  <p><strong>Step 5</strong> : Let Beaver look for the seeds where they are necessarily.</p>
+                  <p><img src="Sol_medium_5.png"></p>
+                  <p>And it's won!</p>
+              </li>
+              </ul>
+           </div>
+
+
+          <div class="hard">
+              <p>To find the seeds for sure in 5 searches, we will try to eliminate a maximum of possible pieces at each step.</p> 
+              <ul>
+              <li>
+                  <p><strong>Step 1</strong> : The longest crossing that can be made to Beaver at the beginning consists in crossing the 6 pieces of the top.</p>
+                  <p><img src="Sol_hard_1.png"></p>
+                  <p>Result: the seeds are not there. This area is blackened in the sequel.</p>
+              </li>
+              <li>   
+                  <p><strong>Step 2</strong> : Of the remaining pieces, up to 4 can be crossed at one time. For example, proceeding as shown below. </p>
+                  <p><img src="Sol_hard_2.png"></p>
+                  <p>Result: the seeds are not there. This area is blackened in the sequel.</p>
+              </li>
+              <li>
+                  <p><strong>Step 3</strong> : There are only 4 pieces left. To make it effective, Beaver can be sent to explore two of these pipes at once. For this, we must pass Beaver in pieces of pipes where we already know that the seeds are not; this is not a problem.</p>
+                  <p><img src="Sol_hard_3.png"></p>
+                  <p>Result: the seeds are not in the two pieces on the right. They are therefore necessarily in one of the two left pieces.</li>
+              <li>
+                  <p><strong>Step 4</strong> : Let's try one of the two pieces that remain.</p>
+                  <p><img src="Sol_hard_4.png"></p>
+                  <p>Result: the seeds are not in this piece.</p>
+              </li>
+              <li>
+                  <p><strong>Step 5</strong> : Let Beaver look for the seeds where they are necessarily.</p>
+                  <p><img src="Sol_hard_5.png"></p>
+                  <p>And it's won !</p>
+              </li>
+              </ul>
+          </div>
+
+
+         <h2>It's computer science !</h2>
+
+         <p>This topic presents the notion of <b> dichotomous research</b>, which makes it possible to quickly find a hidden object in a large number of possible places. The idea is to divide the whole of the possibilities into two parts of equal sizes, and to determine if the object that one seeks is in the first half or in the second. Once we know, we come back to the original problem of finding an object in a set of possible places, except that now there are half the possibilities.</p>
+         <p> By repeating this process, the number of remaining possibilities is halved each time. We thus arrive very quickly to have only one possibility. We then located the object sought.</p>
+
+
+	   </div> <!-- task-solution -->
+       
+   </body>
+</html>

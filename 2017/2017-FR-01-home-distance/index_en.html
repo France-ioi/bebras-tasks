@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-EN-01</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-01-home-distance/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            existsError: "These two trees are already connected. Click on the road to remove it.",
+            distanceError: "The number in the tree surrounded by red is different from the number of red roads starting from the flag.",
+            unconnectedError: "The tree surrounded in red is not connected to the flag. Add roads."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         .constraints li {
+            padding-bottom: 0.5em; 
+         }
+         #taskContent {
+            text-align: left;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Trees Roads</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+
+            <div style="float:right; padding: 5px; margin-left: 25px; margin-bottom: 10px; border: 1px solid black; text-align:center; width: 270px ">
+               <div style="font-weight: bold; margin: 10px;">Example</div>
+               <div style="margin: 0; padding: 0" id="exampleAnim">
+               </div>
+            </div>
+
+            <p>A beaver wants to build roads between the trees.</p>
+
+            <p><b>Game rule: the number on a tree indicates the number of roads between the tree and the flag. Look at the example.</b></p>
+
+            <p>To add a road, click on two trees. To remove a road, click on it.</p>
+
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <div id="validation"><input type="button" value="Validate" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+            <img src="start.png" style="display:none">
+         </div>
+      </div>
+      <!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+            <div class="easy">
+
+               <p>Here is a solution :</p>
+               <p><img style="width:250px" src="Sol_easy_11.png"></p>
+               <p>In the shown drawing, If we add <b>1</b> to the first unnumbered tree, and add <b>4</b> to the second unnumbered tree then we find each number on a tree indicates the number of roads between it and the flag.</p>
+               <p>Note that there was also another possibility, shown below.</p>
+               <p><img style="width:250px" src="Sol_easy_12.png"></p>
+
+            </div>
+
+            <div class="medium">
+
+               <p>Here is a solution :</p>
+               <p><img  style="width:280px" src="Sol_medium_01.png"></p>
+               <p>Note that there were also other possibilities. Here is another one.</p>
+               <p><img  style="width:280px" src="Sol_medium_02.png"></p>
+
+            </div>
+
+            <div class="hard">
+
+               <p>Here is a solution :</p>
+               <p><img  style="width:400px" src="Sol_hard_01.png"></p>
+               <p>Note that there were also other possibilities. Here is another one.</p>
+               <p><img  style="width:400px" src="Sol_hard_02.png"></p>
+
+            </div>
+
+
+         <h2>It's computer science !</h2>
+         <p>
+            This topic illustrates a concept widely used in computer science: the notion of <b>distance in a graph</b>. Starting from a starting point, we try to reach all the green circles following the black lines. The goal is to number each round with its <b>smaller distance</b> possible at the starting point.
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

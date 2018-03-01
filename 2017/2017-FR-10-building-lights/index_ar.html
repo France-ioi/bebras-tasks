@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-AR-10</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Mohamed El-Sherif",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "أحسنت. إجابة صحيحة.",
+            emptyError: "اسحب كارت رمادي إلى الفتحات البيضاء.",
+            mismatchError: "الألوان غير متطابقة. فكر مرة أخرى.",
+            fullError: "جميع الفتحات مشغولة. اسحب كارت ليمكنك وضع أخر."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         .wrapper {
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .anim {
+         }
+         .animTitle {
+            font-weight: bold;
+            padding: 10px;
+         }
+         .animBuilding {
+            border: 1px solid black;
+         }
+         #animDrag {
+            margin-top: 20px;
+         }
+         #control {
+            margin-top: 1em;
+            margin-bottom: 1em;
+         }
+         #control input {
+            margin-left: 1em;
+            margin-right: 1em;
+            width: 8em;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <div style="direction: rtl">
+            <h1>إنارة المبنى</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                <p>قم بإنارة المبنى كما هو موضح بالشكل المطلوب. لإنارة صف أو عمود, قم بوضع الكارت الخاص به داخل الفتحات البيضاء بالأسفل. ثم قم بالتشغيل.</p>
+                <p>كل كارت <span class="medium hard">عدا الأخير</span> سوف يضيئ الصف أو العمود المكتوب عليه.</p>
+                <p class="medium hard"><b>الكارت الأخير سوف يقوم بعكس التيار الكهربي ليطفئ اللمبات المضيئة والعكس.</b></p>
+               
+               <div id="anim_container">
+                  <div class="wrapper">
+                     <div class="animTitle">المبنى</div>
+                     <div class="anim animBuilding" id="animUser"></div>
+                  </div>
+                  <div class="wrapper">
+                     <div class="animTitle">الشكل المطلوب</div>
+                     <div class="anim animBuilding" id="animTarget"></div>
+                  </div>
+                  <br>
+                  <div id="animDrag"></div>
+                  <div id="feedback"></div>
+                  <div id="control">
+                     <input type="button" id="execute" value="ابدأ الإنارة"/>
+                     <input type="button" id="stop" value="توقف"/>
+                  </div>
+               </div>
+               <img src="icon.png" style="display:none">
+            </div>
+            <br>
+            <center><span id="error"></span></center>
+            </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+           <div class="easy">
+              <p>To reproduce the pattern, it was necessary to turn on the columns B and C, as well as the lines 3 and 4. The order did not matter. So we could write the following program :
+              <p>
+              <img src="Sol_easy_1.png">
+           </div>
+
+           <div class="medium">
+              <p> Initially, all the lights are already on. The only card that can have an effect is the last one. So we start with it to extinguish everything.
+              <p>Then there are two possible strategies.</p>
+              <p>(1) We turn on all the boxes that are lighted in the objective figure, then turn off the ones we lighted too.</p>
+              <p>We start by turning on the columns A and D. We must then turn off the lines 5 and 2. For this, we reverse everything, we turn on the lines 5 and 2, then we reverse everything again.
+              <p>
+              <img src="Sol_medium_1.png">
+              <p>(2) We turn on all the boxes that are off in the objective figure, then we turn all the lights.</p>
+              <img src="Sol_medium_2.png">
+           </div>
+
+           <div class="hard">
+              <p>There are many possible solutions.</p>
+              <p>A first solution consists of the following steps:
+              <ul>
+               <li>Turn off the only lighted box that is not lighted in the objective figure, on line 2: <br/> reverse everything, turn on line 2, reverse everything.
+               <li>Turn on all the boxes that are in the objective: <br/> turn on columns A and D, lines 5.
+               <li>Turn off all the boxes that have been turned on too :<br/>reverse all, turn on the lines 0, 1 and 6, reverse all.
+               </ul>
+              </p>
+              <p>
+              <img src="Sol_hard_1.png">
+              <p>Below is the shortest solution. </p>
+              <img src="Sol_hard_2.png">
+           </div>
+
+         <h2>It's computer science !</h2>
+   
+           <p> In this topic, each box of the building is on or off. Similarly, a computer's memory consists of <b> bits </b> whose value is either <b> 0 </b> or <b> 1 </b>. All numbers, all images, all texts, and all programs are described only with bits, that is, with long sequences of <b> 0 </b> and <b> 1 </b>. </p>
+
+            <p> At the heart of the computer is a <b> processor </b> that is able to handle bit packets, typically <b> 64 </b> bits, very efficiently. For example, the processor has a "reverse all bits" operation, which takes a 64-bit packet, and a fraction of a second, replaces all <b> 0 </b> with <b> 1 </b> and all <b> 1 </b> with <b> 0 </b>. A computer can perform more than two billion such operations on 64-bit packets in one second, manipulating over 100 billion bits in a single second !</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
