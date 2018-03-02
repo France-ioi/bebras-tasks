@@ -4,6 +4,7 @@ function initTask(subTask) {
         hideSaveOrLoad: false,
         actionDelay: 200,
         buttonScaleDrawing: false,
+        hideValidate: true,
 
         includeBlocks: {
             groupByCategory: true,
@@ -31,7 +32,7 @@ function initTask(subTask) {
                 includeAll: true
             }
         },
-        maxInstructions: 100,
+        maxInstructions: 0,
         checkEndEveryTurn: false,
         checkEndCondition: function(context, lastTurn) {
             // subTask.data.easy.tables
