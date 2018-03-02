@@ -32,7 +32,7 @@ function initTask(subTask) {
                 wholeCategories: ["logic", "loops", "math", "texts", "lists", "dicts", "variables", "functions"]
             }
         },
-        maxInstructions: 0,
+        maxInstructions: 100,
         checkEndEveryTurn: false,
         checkEndCondition: function(context, lastTurn) {
             // subTask.data.easy.tables
