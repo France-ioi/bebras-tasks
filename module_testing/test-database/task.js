@@ -62,7 +62,7 @@ function initTask(subTask) {
             [ 1, 'img/apple.jpg', 'apple', '2018-01-01' ],
             [ 2, 'img/banana.jpg', 'banana', '2019-01-01' ],
             [ 3, 'img/kiwi.jpg', 'kiwi', '2020-01-01' ],
-            [ 4, null, 'null_image_here_null_image_here_null_image_here_null_image_here', '2021-01-01' ],
+            //[ 4, null, 'null_image_here_null_image_here_null_image_here_null_image_here', '2021-01-01' ],
         ]
     }
 
