@@ -62,6 +62,7 @@ function initTask(subTask) {
         ]
     }
 
+
     var valid_table = {
         columnNames: [
             'id', 'image', 'name', 'date'
@@ -77,11 +78,42 @@ function initTask(subTask) {
     }
 
 
+
+    var test_table2 = {
+        columnNames: [
+            'city', 'lat', 'lng'
+        ],
+        columnTypes: [
+            'string', 'number', 'number'
+        ],
+        records: [
+            ["Dunkerque", 51.069360, 2.376571],
+            ["Calais", 50.979622, 1.855583],
+            ["Lille", 50.650582, 3.056121]
+        ]
+    }
+
+
+    var valid_table2 = {
+        columnNames: [
+            'city', 'lat', 'lng'
+        ],
+        columnTypes: [
+            'string', 'number', 'number'
+        ],
+        records: [
+            ["Dunkerque", 51.069360, 2.376571],
+            ["Calais", 50.979622, 1.855583]
+        ]
+    }
+
     subTask.data = {
         easy: [{
             tables: {
                 test_table: test_table,
-                valid_table: valid_table
+                valid_table: valid_table,
+                test_table2: test_table2,
+                valid_table2: valid_table2
             }
         }]
     }
