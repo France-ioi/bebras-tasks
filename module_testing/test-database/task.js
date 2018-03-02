@@ -29,7 +29,7 @@ function initTask(subTask) {
                 ]
             },
             standardBlocks: {
-                includeAll: true
+                wholeCategories: ["logic", "loops", "math", "texts", "lists", "dicts", "variables", "functions"]
             }
         },
         maxInstructions: 0,
