@@ -21,6 +21,7 @@ function initTask(subTask) {
                     'getRecords',
                     'selectByColumn',
                     'selectByFunction',
+                    'selectTopRows',
                     'sortByColumn',
                     'sortByFunction',
                     'selectColumns',
@@ -36,17 +37,12 @@ function initTask(subTask) {
         checkEndEveryTurn: false,
         checkEndCondition: function(context, lastTurn) {
             // subTask.data.easy.tables
-
-            /*
             if(context.expectTable('valid_table')) {
                 context.success = true;
                 throw(strings.complete);
             }
-            */
         },
         databaseConfig: {
-            render_row_height: '20px',
-            render_max_rows: 10,
             pin_file: 'img/pin.png',
             pin_file_mistake: 'img/pin2.png',
             map_file: 'img/carteDeFrance.png',
