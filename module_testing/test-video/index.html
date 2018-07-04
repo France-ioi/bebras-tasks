@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>taskVideo</title>
+        <script>
+            window.stringsLanguage = 'en';
+        </script>
+        <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+        <script class="remove" type="text/javascript">
+            var modulesPath = '../../modules';
+            importModules([
+                'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+                'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+                'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+                'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+                'taskStyles-0.1',
+                'taskVideo', 'taskVideoPlayer', 'taskVideo_css']);
+        </script>
+        <script class="remove" type="text/javascript">
+            var json = {
+                "id": "taskVideo",
+                "language": "en",
+                "version": "en.01",
+                "authors": "dev",
+                "translators": [],
+                "license": "",
+                "taskPathPrefix": "",
+                "modulesPathPrefix": "",
+                "browserSupport": [],
+                "fullFeedback": true,
+                "acceptedAnswers": [],
+                "usesRandomSeed": false
+            };
+        </script>
+        <script type="text/javascript">
+            var taskStrings = {
+                message: function(viewed) {
+                    return 'Viewed sections: ' + 
+                        (viewed.length > 0 ? '[' + viewed.join(',') + ']' : 'none')
+                }
+            };
+        </script>
+        <script type="text/javascript" src="task.js"></script>
+   </head>
+   <body>
+        <div id="task">
+            <h1>taskVideo demo</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">Loading...</div>
+        </div>
+    </body>
+</html>
