@@ -10,9 +10,9 @@
         <script class="remove" type="text/javascript">
             var modulesPath = '../../modules';
             importModules([
-                'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
-                'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-                'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+                'jquery-1.7.1', 'raphael-2.1', 'JSON-js', 'jschannel',
+                'beav-1.0', 'beaver-task-2.0', 'raphaelFactory-1.0',
+                'delayFactory-1.0', 'simulationFactory-1.0',
                 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
                 'taskStyles-0.1',
                 'taskVideo', 'taskVideoPlayer', 'taskVideo_css']);
@@ -36,7 +36,7 @@
         <script type="text/javascript">
             var taskStrings = {
                 message: function(viewed) {
-                    return 'Viewed sections: ' + 
+                    return 'Viewed sections: ' +
                         (viewed.length > 0 ? '[' + viewed.join(',') + ']' : 'none')
                 }
             };
