@@ -23,7 +23,7 @@ standaloneAddContents({
     { code: "2013-FR-15",
       title: "Arroser la plante" },
     { code: "2013-SI-01",
-      title: "Élève absent</a>" },
+      title: "Élève absent" },
     { code: "2013-FR-08",
       title: "Parasols" },
     { code: "2013-SE-02",
