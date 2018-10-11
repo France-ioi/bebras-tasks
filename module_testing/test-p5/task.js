@@ -14,7 +14,8 @@ function initTask(subTask) {
                     'playSignal',
                     'playRecord',
                     'playStop',
-                    'sleep'
+                    'sleep',
+                    'echo'
                 ]
             },
             standardBlocks: {

@@ -18,7 +18,8 @@ function initTask(subTask) {
                     'getLatitude',
                     'getLongitude',
                     'getNeighbors',
-                    'shortestPath'
+                    'shortestPath',
+                    'echo'
                 ]
             },
             standardBlocks: {
