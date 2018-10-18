@@ -4,7 +4,6 @@ function initTask(subTask) {
         hideSaveOrLoad: false,
         actionDelay: 200,
         buttonScaleDrawing: false,
-        hideValidate: true,
 
         includeBlocks: {
             groupByCategory: true,
@@ -33,14 +32,10 @@ function initTask(subTask) {
                 wholeCategories: ["logic", "loops", "math", "texts", "lists", "dicts", "variables", "functions"]
             }
         },
-        maxInstructions: 0,
+        maxInstructions: 100,
         checkEndEveryTurn: false,
         checkEndCondition: function(context, lastTurn) {
-            // subTask.data.easy.tables
-            if(context.expectTable('valid_table')) {
-                context.success = true;
-                throw(strings.complete);
-            }
+            context.expectTable('valid_table');
         },
         databaseConfig: {
             pin_file: 'img/pin.png',

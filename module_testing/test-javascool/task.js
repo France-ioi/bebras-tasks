@@ -29,8 +29,8 @@ function initTask(subTask) {
         maxInstructions: 100,
         checkEndEveryTurn: false,
         checkEndCondition: function(context, lastTurn) {
-            context.success = true;
-            throw(strings.complete);
+            context.success = false;
+            //throw(strings.complete);
         }
     }
 
