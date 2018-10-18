@@ -1,0 +1,190 @@
+<!doctype html>
+<html dir="rtl" lang="ar">
+   <head>
+    <meta charset="utf-8">
+    <title>2016-AR-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    <script>
+       var stringsLanguage = 'ar';
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Eslam Wageed",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            patternError: "الدائرة الحمراء ليست ملونة كما يجب",
+            suboptimal: "يمكنك حلها في خطوات أقل",
+            steps: function(count, limit) {
+               return "عدد الخطوات: " + count; 
+            },
+            success: "إجابة صحيح .. ممتاز",
+            drag: "لتلوين المربعات باللون الاسود اضغط على زر الفأرة الأيسر ثم حرك الفأرة", 
+            moveLimit: "لقد وصلت لأكبر عدد من الخطوات. يمكنك إزالة بعض الخطوات أو البدء من البداية"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #anim_container table {
+            margin: 0px auto;
+         }
+         .gridTitle {
+            width: 90px;
+            text-align: left;
+            font-size: 20px;
+         }
+         #feedback {
+            width: 170px;
+            height: 7em;
+            margin-top: 0em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #control, #control table {
+            text-align: center;
+            margin: 20px auto;
+         }
+         #control table td {
+         }
+         #control input {
+            margin: 0 10px;
+            width: 9em;
+            padding: 2px 0px 2px 0px;
+         }
+         #solutionImages img {
+            height: 200px;
+         }
+      </style>
+   </head>
+   <body>
+
+
+      <div id="task">
+         <h1>الكلمات المتقاطعة</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               حاول رسم الشكل التالي (الهدف) إلى الشكل الذي يليه (رسمتك)
+            </p>
+             <p>للتلوين قم الضغط على زر الفأرة الأيسر وحرك الفأرة ليقوم بالتلوين ولمسح التلوين قم بتكرار العملية على المربعات الملونة بالأسود</p> 
+            </p>
+            <p class="easy">
+		يمكنك اتمامها في خطوتين فقط
+            </p>   
+            <p class="medium">
+		حاول إتماها في أقل من 6 خطوات
+            </p>
+            <p class="hard">
+               يمكنك اتمامها في 4 خطوات فقط
+            </p>
+
+         <div id="anim_container">
+               <table>
+                  <tr>
+                     <td class="gridTitle">
+                        الهدف:
+                     </td>
+                     <td>
+                        <div id="anim1"></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="gridTitle">
+                        رسمتك:
+                     </td>
+                     <td>
+                        <div id="anim2"></div>
+                     </td>
+                     <td>
+                        <div id="control">
+                           <p id="feedback"></p>
+                           <p>
+                              <span id="steps"></span>
+                           </p>
+                           <input type="button" value="ارجع خطوة للوراء" id="undo" />
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+               <div><input type="button" value="تحقق من الإجابة" id="execute" /></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+
+      <div id="solution">
+
+         <h2>Solution</h2>
+         <div id="solutionImages">
+            <div class="easy">
+               <img src="solution_easy_step0.png">
+               <img src="solution_easy_step1.png">
+               <img src="solution_easy_step2.png">
+            </div>   
+            <div class="medium">
+               <img src="solution_medium_step0.png">
+               <img src="solution_medium_step1.png">
+               <img src="solution_medium_step2.png">
+               <img src="solution_medium_step3.png">
+               <img src="solution_medium_step4.png">
+               <img src="solution_medium_step5.png">
+            </div>
+            <div class="hard">
+               <img src="solution_hard_step0.png">
+               <img src="solution_hard_step1.png">
+               <img src="solution_hard_step2.png">
+               <img src="solution_hard_step3.png">
+               <img src="solution_hard_step4.png">
+            </div>
+         </div>
+         <h2>It's infromatics!</h2>
+
+            <p>In computers, black and white images are typically described using digits "1" and "0", for a black pixel and a white pixel, respectively. (A pixel corresponds to a single cell in the grid that represents the image.)</p>
+
+            <p>The operation involved in this task consists if toggling the filling of a set of cells. To implement this operation on a computer, we ask it to replace each 0 by a 1 and each 1 by a 0, for all the cells in the desired area.</p>
+
+            <p>In a single second, a modern computer is able to execute more than a hundred billion such toggle operations!</p>
+
+            <p>And, after a second work, the computer does not even get tired :) Tireless, it is able to continue its job at such daunting speed for years on...</p>
+               
+	  </div> <!-- task-solution -->
+   </body>
+</html>
