@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-EN-11</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelButton-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelButton-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-11-encoded-image/",
+          "language": "sv",
+          "version": "sv.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Pär Söderhjelm",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            userGrid: "Din bild:",
+            targetGrid: "Mål:",
+            undo: "Ångra",
+            success: "Grattis, du klarade det.",
+            partial: "Bilden är inte färgad som den ska. Försök igen.",
+            hint: "Tips: Det är möjligt att aldrig använda noll."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Komprimerad bild</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               Finn den sekvens av tal som representerar bilden "Mål". 
+            </p>
+            <p>Klicka på knapparna för att lägga till tal och förstå deras effekt på din bild.</p>
+            <p class="medium"><strong>Tips: Det är möjligt att lösa den utan att använda noll.</strong></p>
+            <p class="hard"><strong>Tips: Färgen på en ruta påverkas av färgen på rutan ovanför den.</strong></p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+                  <i>Lösningen är under uppbyggnad. Vi ber om ursäkt för detta.</i>
+
+            <div class="easy">
+<!--
+               <p>On place un 0 pour représenter une case blanche, et un 1 pour représenter une case grisée.</p>
+-->
+               <p><img src="sol_easy.png"></p>
+            </div>   
+            <div class="medium">
+<!--
+               <p>Pour décrire la figure, on indique le nombre de cases blanches à remplir depuis le début, puis le nombre de cases grisées à remplir ensuite, puis le nombre de cases blanches à remplir ensuite, etc... en avançant ainsi jusqu'à la fin. Par exemple, la séquence "4 3 2" permet d'afficher 4 cases blanches, suivies de 3 cases grisées, suivies de 2 cases blanches.</p>
+               <p>La suite de chiffres décrivant l'image souhaitée est ainsi :</p>
+-->
+               <p><img src="sol_medium.png"></p>
+<!--
+               <p>Observez qu'on continue sur la ligne suivante quand le nombre de cases à dessiner dépasse le nombre de cases restantes sur la ligne courante. C'est ce qui se passe par exemple au début, avec "2 2 3" : la troisième case blanche associée se trouve alors placée sur la deuxième ligne.</p>
+-->
+            </div>
+            <div class="hard">
+<!--
+               <p>Pour décrire la figure, on indique le nombre de cases qui sont d'une couleur différente de celles de la ligne du dessus, puis le nombre de cases qui sont de la même couleur que celles de la ligne du dessus, puis le nombre de cases qui sont d'une couleur différente de celles de la ligne du dessus, etc.</p>
+               <p>La suite de chiffres décrivant l'image souhaitée est ainsi :</p>
+-->
+               <p><img src="sol_hard.png"></p>
+<!--
+               <p>Remarque : à un moment, on a 17 cases de suite où à chaque fois la case est de la même couleur que celle de la case située au-dessus d'elle. Comme on ne dispose pas du nombre 17, on est obligé d'utiliser deux chiffres dont la somme vaut 17, en les séparant par un 0, ce que l'on peut obtenir soit en écrivant "9 0 8", soit en écrivant "8 0 9". </p>
+               <p>Astuce : pour cette version, il est en fait possible de résoudre le sujet sans rien comprendre à ce que représentent les chiffres. La stratégie est la suivante : essayer, de manière répétée, de placer le plus grand chiffre possible qui permet de ne pas faire d'erreur de coloriage. Ainsi, on commence par 9, on voit que ça dessine des cases de la mauvaise couleur, donc on le retire et on essaie le 8 à la place, puis le 7, puis le 6, etc... jusqu'au 3. Comme le chiffre 3 ne dessine que des cases de la bonne couleur, on le laisse. On passe alors au chiffre suivant, en repartant du 9, et ainsi de suite, jusqu'à ce que toutes les cases aient la bonne couleur. Certes, c'est un peu fastidieux, mais ça fonctionne à tous les coups !</p>
+-->
+
+            </div>
+<!--
+         <h2>C'est de l'informatique !</h2>
+
+            <p>La version facile de ce sujet illustre un <strong>encodage</strong> de base d'une image en noir et blanc en informatique, avec un 0 pour chaque case blanche, et un 1 pour chaque noire.</p>
+
+            <p>La version moyenne de ce sujet illustre une technique de <strong>compression d'image</strong>. La compression permet de décrire une image en utilisant une plus petite quantité d'information. Ici, la méthode pour comprimer les données exploite la propriété que l'image n'est pas aléatoire : on a souvent des longues successions de 0, ou bien des longues successions de 1. </p>
+
+            <p>Ainsi, par exemple plutôt que d'écrire "00000000000011111111" on peut écrire juste "12,8", pour dire qu'on met 12 fois 0 à la suite, puis 8 fois 1. Cette méthode de compression, appelée encodage RLE, était utilisée dans les fax, moyen privilégié pour envoyer des images avant l'avènement d'internet.</p>
+            
+            <p>La version difficile de ce sujet illustre une technique avancée de compression d'image, et suggère que la manière dont on décrit une case peut dépendre de la couleur de la case voisine (ici, la case du dessus). Ce type de méthode est utilisé notamment dans les méthodes modernes de compression d'image, comme par exemple dans le format PNG, très répandu sur internet.</p>
+
+-->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

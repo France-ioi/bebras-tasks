@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-07</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "sv",
+          "version": "sv.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": ["Pär Söderhjelm"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'sv';  //Currently causes code to crash
+      var taskStrings = {
+            wrong: "Ditt slutresultat matchar inte målet.",
+            success: "Grattis, du klarade det.",
+
+            titleProgram: "Ditt program:",
+            titleResult: "Resultat efter varje steg:",
+
+            start: "1. Börja med ",
+            rulePrefix: function(index) {
+               return "" + (index + 2) + ". Ersätt varje ";
+            },
+            ruleInfix: "med",
+            ruleSuffix: "Resultat:",
+            target: "Mål:"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #solution img {
+            border-top: solid black 1px;
+            border-bottom: solid black 1px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Ersättning</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Dra formerna in i de grå cellerna för att
+               bygga ett "program" som producerar målet.<br/>
+            <p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+<style>
+.solutionInstanceMismatch {
+   font-style: italic;
+}
+</style>
+<p class="solutionInstanceMismatch"> Obs! Bilderna motsvarar inte nödvändigtvis dem i din egen lösning, men principen förblir densamma. Vi ber om ursäkt för att texten i bilderna är på franska.</p>
+
+            <div class = "easy">
+               <p> Observera att det önskade resultatet består av tre upprepningar av samma par av former: en romb och en stjärna. </p>
+               <p> Vi kan välja en form, någon, till exempel den röda cirkeln, och sätta tre kopior i rad. I nästa steg, ersätt varje kopia av denna form med en romb följt av en stjärna. </P>
+               <p> <img src = "sol_easy.png"> </p>
+            </Div>
+            <div class = "medium">
+               <p> Ett bra tillvägagångssätt är att börja från slutet: vi ser att slutresultatet består av två identiska par (sexhörning, triangel), och sedan en sexhörning. Eftersom den sista ersättningen ersätter en form med ett par, inser vi att vi måste låta två identiska former, exempelvis cirklar, ersättas med de två paren (sexhörning, triangel). Det sista steget ser alltså ut så här: <p>
+               <p> <img src = "sol_medium_1.png"> </p>
+               <p> I det föregående steget kan vi börja med vilken form som helst (till exempel en romb), och sedan ersätta den med önskat mönster inför det sista steget (rund, rund, sexhörning): </p>
+               <p> <img src = "sol_medium.png"> </p>
+            </Div>
+            <div class = "hard">
+               <p> Låt oss observera det önskade resultatet: det består av ett block med tre former (stjärna, cirkel, triangel) följt av två sexhörningar och slutligen följt av samma sekvens av tre former som i början (stjärna, cirkel, triangel). </p>
+               <p> Man kan försöka, i steg 3, att ersätta en form med två sexhörningar. Men om vi börjar på den vägen kommer det inte att finnas tillräckligt med steg: </p>
+               <p> <img src = "sol_hard_0.png"> </p>
+               <p> Vi är därför tvungna att utföra steg som ersätter flera former samtidigt. Faktum är att det vi egentligen vill göra är att ersätta en form direkt med en sekvens av <strong>tre</strong> former (stjärna, cirkel, triangel). Om vi ​​hade möjlighet att göra det, kunde vi enkelt lösa problemet: </p>
+               <p> <img src = "sol_hard_2.png"> </p>
+               <p> Men vi kan faktiskt få en liknande effekt genom att dela upp den i två steg: det första ersätter varje romb med en stjärna följd av en romb, och det andra ersätter sedan de <strong>nya</strong> romberna med en cirkel följd av en triangel. Detta ger oss följande lösning: </p>
+               <p> <img src = "sol_hard.png"> </p>
+            </Div>
+
+         <h2> Det är datavetenskap! </h2>
+
+            <p> Denna uppgift använder mekanismen <strong> sök och ersätt </strong> och låter dig tänka på vad som händer när du utför flera sök-ersättningsoperationer i rad. </p>
+
+            <p> Sök och ersätt är mycket användbart, särskilt i ordbehandlingsprogram. </p>
+            
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

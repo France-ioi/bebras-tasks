@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-EN-05</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-05-red-and-blue/",
+          "language": "sv",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Pär Söderhjelm",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            tooFew: "Det finns fortfarande minst en cirkel kvar att markera.",
+            tooManyEasy: "Du har markerat någon cirkel som inte kan ta dig till den röda cirkeln.",
+            tooMany: "Du har markerat någon cirkel som inte kan ta dig till de röda cirklarna.",
+            wrong: "Cirklarna är inte korrekt färgade.",
+            close: "Du är nästan färdig! Mindre än tre cirklar har fel färg.",
+            cannotSelect: "Du kan inte välja de röda cirklarna.",
+            success: "Grattis, du klarade det."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #control, #control table {
+            text-align: center;
+            margin: 20px auto;
+         }
+         #control table td {
+            width: 120px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Startpunkter</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+             <p>Från vilka cirklar kan du komma till  
+             <span class="easy"  style="font-weight:bold">den röda cirkeln</span> 
+             <span class="medium" style="font-weight:bold">båda de röda cirklarna</span>
+             <span class="hard" style="font-weight:bold">alla de röda cirklarna</span> 
+             genom att följa pilarna. Klicka på cirklarna för att markera dem med blå färg.</p>
+            
+             <p class="hard">Tips: Klicka på pilarna för att färga dem medan du löser uppgiften.</p>
+            
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+
+ <div class = "easy">
+               <p> Ett naivt sätt att lösa uppgiften är att testa för varje cirkel om det finns ett sätt att gå till den röda cirkeln. </p>
+               <P> Ett smartare sätt att lösa uppgiften är at utgå från den röda cirkeln och följa pilarna i omvänd riktning </P>
+               <p> <img src = "sol_easy.png"> </p>
+            </Div>
+            <div class = "medium">
+               <p> Ett naivt sätt att lösa ämnet är att testa för varje cirkel om det finns ett sätt att gå till var och en av de två röda cirklarna. </ p>
+               <P> Ett smartare sätt att lösa problemet är att först inse att man med nödvändighet måste passera genom mittcirkeln (den blå cirkeln i mitten). Därefter följer du bara pilarna i omvänd riktning från denna centrala cirkel. </ P>
+               <p> <img src = "sol_medium.png"> </p>
+            </div>
+            <div class = "hard">
+               <p> Vi kan förenkla problemet genom att studera den allmänna strukturen i figuren. Om de cirklar i mitten avlägsnas som är värdelösa, och om vi "komprimerar" grupper om 4 noder belägna på var och en av de fyra kanterna, så reduceras ursprungsproblemet till ett såpass litet problem att det är relativt lätt att identifiera cirklarna som ger tillgång till de 4 röda noderna. </p>
+               <p> <img src = "sol_hard_a.png"> </p>
+               <p> De svarta pilarna i den förenklade figuren ovan motsvarar de gröna vägarna i den ursprungliga bilden nedan: </p>
+               <p> <img src = "sol_hard_y.png"> </p>
+
+               <p> Vi kan sedan återvända till ursprungsproblemet och fråga vilka cirklar som återstår att färga blåa. Vi kan då, precis som i de lättare versionerna, följa pilarna i omvänd riktning från de blåmarkerade cirklarna. För om en pil börjar från en ofärgad cirkel och pekar på en blå cirkel, så kan vi även färga den ofärgade cirkeln blå, eftersom vi kan gå från denna till den blå cirkeln med hjälp av pilen och därifrån vidare till alla röda cirklar (det var ju därför vi hade färgat den blå). </P>
+                       <p> Med andra ord upprepar vi alltså följande procedur: För varje ofärgad cirkel letar vi efter en pil till en blå cirkel. Om så är fallet färgar vi den cirkeln blå (och vi kan också färga motsvarande pil grön). Annars letar vi efter en annan grå cirkel. Vi upprepar processen tills vi inte längre kan färga någon cirkel, och då avslutar vi. </P>
+               <p> <img src = "sol_hard_2.png"> </p>
+            </div>
+
+
+         <h2> Det är datavetenskap! </h2>
+
+            <p> Cirklar och pilar representerar en mycket frekvent struktur i datavetenskap, kallad <strong> graf </strong>. Grafer kan beskriva konkreta strukturer, såsom vägnät eller datornät. De kan också beskriva abstrakta strukturer, som ett socialt nätverk där varje cirkel representerar en person och varje pil representerar det faktum att någon följer någon annans nyhetsflöde. </P>
+
+            <p> Den här uppgiften handlar om egenskapen <strong> nåbarhet </strong>: vilka är de cirklar från vilka du kan nå en uppsättning andra cirklar. Det finns effektiva algoritmer som tillåter datorer att fullt ut svara på denna fråga och behandla fall med miljarder cirklar och pilar. </P>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

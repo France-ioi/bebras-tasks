@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-01</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    <script>
+       var stringsLanguage = 'sv';
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
+          "language": "sv",
+          "version": "sv.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": ["Pär Söderhjelm"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            patternError: "Den röda cellen är felmålad.",
+            suboptimal: "Bra gjort. Försök igen att lösa den med färre steg.",
+            steps: function(count, limit) {
+               return "Antal steg : " + count; 
+            },
+            success: "Grattis, du klarade det.",
+            drag: "För att måla celler, dra musen från ena hörnet till det andra.", // drag your mouse or finger 
+            moveLimit: "Du har nått det maximala antalet steg. Försök igen! Du kan ångra steg för steg eller starta om helt."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #anim_container table {
+            margin: 0px auto;
+         }
+         .gridTitle {
+            width: 90px;
+            text-align: left;
+            font-size: 20px;
+         }
+         #feedback {
+            width: 170px;
+            height: 7em;
+            margin-top: 0em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #control, #control table {
+            text-align: center;
+            margin: 20px auto;
+         }
+         #control table td {
+         }
+         #control input {
+            margin: 0 10px;
+            width: 9em;
+            padding: 2px 0px 2px 0px;
+         }
+         #solutionImages img {
+            height: 200px;
+         }
+      </style>
+   </head>
+   <body>
+
+
+      <div id="task">
+         <h1>Måla rektanglar</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               Måla formen i "Mål"-rutnätet i "Din Figur"-rutnätet.
+            </p>
+             <p>Du kan ändra färg (svart/vit) på cellerna i en rektangel genom att dra musen från ett hörn till det motsatta hörnet.</p> 
+            </p>
+            <p class="easy">
+               Den här versionen av uppgiften kan lösas på <strong>bara 2 steg</strong>.
+            </p>   
+            <p class="medium">
+               Den här versionen av uppgiften kan lösas på <strong>5 steg</strong>.
+            </p>
+            <p class="hard">
+               Den här versionen av uppgiften kan lösas på <strong>bara 4 steg</strong>.
+            </p>
+
+         <div id="anim_container">
+               <table>
+                  <tr>
+                     <td class="gridTitle">
+                        Mål:
+                     </td>
+                     <td>
+                        <div id="anim1"></div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td class="gridTitle">
+                        Din<br/>Figur:
+                     </td>
+                     <td>
+                        <div id="anim2"></div>
+                     </td>
+                     <td>
+                        <div id="control">
+                           <p id="feedback"></p>
+                           <p>
+                              <span id="steps"></span>
+                           </p>
+                           <input type="button" value="Ångra ett steg" id="undo" />
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+               <div><input type="button" value="Kontrollera mitt svar" id="execute" /></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+         <div id="solutionImages">
+            <div class="easy">
+               <img src="solution_easy_step0.png">
+               <img src="solution_easy_step1.png">
+               <img src="solution_easy_step2.png">
+            </div>   
+            <div class="medium">
+               <img src="solution_medium_step0.png">
+               <img src="solution_medium_step1.png">
+               <img src="solution_medium_step2.png">
+               <img src="solution_medium_step3.png">
+               <img src="solution_medium_step4.png">
+               <img src="solution_medium_step5.png">
+            </div>
+            <div class="hard">
+               <img src="solution_hard_step0.png">
+               <img src="solution_hard_step1.png">
+               <img src="solution_hard_step2.png">
+               <img src="solution_hard_step3.png">
+               <img src="solution_hard_step4.png">
+            </div>
+         </div>
+         <h2>Det är datavetenskap!</h2>
+
+            <p>I datorer beskrivs oftast svartvita bilder med siffrorna "1" och "0", för en svart pixel respektive en vit pixel. (En pixel är en cell i det rutnät som representerar bilden.)</p>
+
+            <p>Operationen som den här uppgiften handlar om består av att växla färgen på varje cell i ett visst område. För att implementera den operationen på den dator ber vi den ersätta varje nolla
+            med en etta och varje etta med en nolla, för alla cellerna i det önskade området.</p>
+
+            <p>På en enda sekund kan en modern dator exekvera mer än hundra miljarder sådana växel-operationer!</p>
+
+            <p>Och, efter en sekunds arbete är datorn inte ens trött :) Outtröttlig kan den fortsätta sitt jobb med denna skrämmande hastighet i flera år i sträck.</p>
+               
+	  </div> <!-- task-solution -->
+   </body>
+</html>

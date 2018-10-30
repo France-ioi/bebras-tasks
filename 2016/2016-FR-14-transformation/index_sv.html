@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-EN-14</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-14-transformation/",
+          "language": "sv",
+          "version": "sv.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Pär Söderhjelm",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Grattis, du klarade det.",
+            wrong: "Formen som rödmarkerats är inte på rätt plats."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #control {
+            text-align: center;
+            margin-top: 3px;
+         }
+         #stepCounter {
+            text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Formernas dans</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>Lägg till pilar för att flytta varje form inom det vita området så att den hamnar mitt framför motsvarande form i det grå området.<br>
+            Formerna  följer <strong>
+				<span class="easy">den första pilen</span>
+				<span class="medium">två pilar efter varandra</span>
+				<span class="hard">tre pilar efter varandra</span>
+				</strong>.</p>
+            <p>Klicka på två former för att rita en pil. Klicka på en pil för att ta bort den.</p>          
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <div id="stepCounter" class="medium hard"></div>
+            <div id="control">
+               <input type="button" value="Testa" id="execute" />
+               <br><br>
+               <input type="button" value="Återställ startläget" id="resetSim" />
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+                 <i>Lösningen är under uppbyggnad. Vi ber om ursäkt för detta.</i>
+
+<!--
+<style>
+.solutionInstanceMismatch {
+   font-style: italic;
+}
+</style>
+<p class="solutionInstanceMismatch">Remarque : les données de la correction ne correspondent pas forcément à celles de votre sujet.</p>
+-->
+
+            <div class="easy">
+<!--
+               <p>Pour chaque forme dans la zone blanche, on pose une flèche allant de cette forme à la forme identique se trouvant dans la zone grise. </p>
+-->
+               <p><img src="sol_easy.png"></p>
+            </div>   
+            <div class="medium">
+<!--
+               <p>Choisissons une forme au hasard, par exemple l'étoile, et posons deux flèches qui se suivent de sorte à amener l'étoile à sa place finale. Pour la première flèche, on part de l'étoile, et on peut aller vers n'importe quelle autre position que la position finale. Pour la seconde flèche, on repart du point d'arrivée de la première flèche, et on va jusqu'à la position finale de l'étoile. Ainsi :</p>
+               <p><img src="sol_medium_1.png"></p>
+               <p>Regardons maintenant ce qu'il va se passer pour le triangle, qui se trouve à l'arrivée de la première flèche. Lors de son premier déplacement, le triangle va se déplacer vers la position finale de l'étoile. Lors de son second déplacement, il faut alors que le triangle rejoigne sa position définitive. Donc, on n'a pas le choix, on ajoute la flèche correspondante :</p>
+               <p><img src="sol_medium_2.png"></p>
+               <p>Il reste alors trois autres formes, pour lesquelles on peut ajouter 3 flèches en procédant exactement de la même manière. Par exemple, prenons le rond orange, on le dirige d'abord avec une première flèche vers une autre position que la position finale du rond orange, puis on le dirige vers sa position finale à l'aide d'une seconde flèche. On complète alors avec la dernière flèche manquante.</p>
+-->
+               <p><img src="sol_medium_3.png"></p>
+
+            </div>
+            <div class="hard">
+<!--
+               <p>Pour commencer, on va repérer où chaque forme doit arriver à la fin. Dessinons en vert les flèches correspondantes.</p>
+               <p><img src="sol_hard_1.png"></p>
+               <p>On observe qu'il y a 3 groupes de 3 formes. Regardons par exemple le groupe de droite, avec les deux étoiles et le carré troué. Si on essaie de mettre 3 flèches uniquement à l'intérieur de se groupe pour faire tourner les formes dans un sens ou dans l'autre, on ne pourra pas obtenir une solution qui marche. En effet, après avoir effectué 3 déplacements, chaque forme se retrouvera à sa place initiale.</p>
+               <p>Donc, il faut utiliser des flèches qui font passer les formes d'un groupe à l'autre. Considérons par exemple l'étoile jaune. Il faut d'abord l'emmener dans un autre groupe, par exemple le groupe de l'hexagone bleu, puis dans le troisième groupe, celui du triangle bleu clair, et enfin en troisième déplacement on pourra amener l'étoile jaune à sa position finale.</p>
+               <p><img src="sol_hard_2.png"></p>
+               <p>Une fois ces flèches posées, il n'y a plus qu'une seule manière possible de compléter les autres flèches pour que toutes les formes arrivent à leur place finale. Reprenons le dessin, et concentrons nous sur l'hexagone bleu, car pour cette forme les deux premiers déplacements sont déjà imposés.</p>
+               <p><img src="sol_hard_3.png"></p>
+               <p>On n'a donc pas le choix, il faut que le troisième déplacement de l'hexagone bleu l'amène à sa destination finale.</p>
+               <p><img src="sol_hard_4.png"></p>
+               <p>De la même manière, il faut ensuite emmener le triangle bleu clair à sa destination finale. Puis l'étoile à quatre branche. </p>
+               <p><img src="sol_hard_5.png"></p>
+               <p>On continue de la même manière, en amenant le sablier rouge, puis le H tourné, puis le carré troué a leur place. Il ne reste alors plus qu'à vérifier que le rond orange et le losange vert arrivent bien à leur place. </p>
+-->
+               <p><img src="sol_hard_6.png"></p>
+
+            </div>
+
+<!--
+         <h2>C'est de l'informatique !</h2>
+              <p>Ce sujet illustre la notion de <strong>permutation</strong>, qui consiste à diriger chaque élément à la place d'un autre. Même si l'on ne s'en rend pas compte, les permutations se trouvent un peu partout autour de nous. Par exemple, lorsqu'on mélange un jeu de carte, on effectue une permutation de l'ordre des cartes.</p>
+              <p>La notion de permutation est à la base une notion des mathématiques. De nombreux programmes informatiques s'appuient sur les propriétés mathématiques des permutations pour pouvoir modéliser efficacement des scénarios de la vie réelle.</p>
+-->
+             
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

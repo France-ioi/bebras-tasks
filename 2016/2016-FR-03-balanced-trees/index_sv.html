@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-03</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-03-balanced-trees/",
+          "language": "sv",
+          "version": "sv.01",
+          "authors": "Mathias Hiron",
+          "translators": ["Pär Söderhjelm"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            edgesCount: "Tillagda pilar",
+            verticesLeftCount: "Okopplade cirklar",
+            reachError: "Den markerade cirkeln är inte kopplad till bävercirkeln.",
+            numError: "För många pilar.",
+            degreeError: "Den markerade cirkeln har för många pilar.",
+            depthError: "Den röda vägen är för lång.",
+            existsError: "Det finns redan en pil mellan dessa cirklar.",
+            removeError: "Kan inte ta bort den här pilen.",
+            congratulations: "Grattis, du klarade det."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #control, #control table {
+            text-align: center;
+            margin: 20px auto;
+         }
+         #control table td {
+            width: 180px;
+         }
+         #control table td span {
+            font-size: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Cirklar och pilar</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Rita <span class="easy medium">6</span><span class="hard">14</span> pilar i figuren nedan, så att:
+               <ul>
+                  <li>Bävern kan gå till varje cirkel genom att följa <span class="easy">pilarna</span><span class="medium"> högst två pilar</span><span class="hard"> högst tre pilar</span>.</li>
+                  <li class="medium hard">Det får inte starta mer än två pilar från samma cirkel.</li>
+               </ul>
+            </p>
+            <p>
+               Klicka på två cirklar för att rita en pil mellan dem.
+            </p>
+            <p>
+               Klicka på en pil för att ta bort den.
+            </p>
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <div id="control">
+               <table>
+                  <tr>
+                     <td>
+                        <span id="edges"></span>
+                     </td>
+                     <td>
+                        <span id="verticesLeft"></span>
+                     </td>
+                     <td>
+                        <input type="button" value="Try" id="execute" />
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+            <div class="easy">
+            <p>Det finns många möjliga lösningar. Här ser du till exempel två:</p>
+            <p>
+               <img src="sol_easy_1.png">
+               <img src="sol_easy_2.png">
+            </p>
+            </div>   
+            <div class="medium">
+            <p>Det finns många möjliga lösningar. Här ser du till exempel två:</p>
+            <p>
+               <img src="sol_medium_1.png">
+               <img src="sol_medium_2.png">
+            </p>
+            </div>
+            <div class="hard">
+            <p>Det finns många möjliga lösningar. Här ser du till exempel en:</p>
+            <p>
+               <img src="sol_hard_1.png">
+            </p>
+            </div>
+
+         <h2>Det är datavetenskap</h2>
+<p> Denna uppgift presenterar ett viktigt begrepp i datavetenskap: <strong> binära träd </strong>. </p>
+
+            <p> Det är en datastruktur där vi, från en cirkel
+            kallad roten (som brukar placeras i toppen av figuren),
+            kan gå till alla andra cirklar genom att följa rutter där vi i varje steg har exakt två möjliga riktningar. </p>
+            <p> Lösningen vi föreslår för den enkla versionen är inte ett binärt träd. Å andra sidan är det fallet med lösningarna i de två svåra versionerna, eftersom de föreslagna reglerna tvingar oss att rita ett binärt träd. </ P>
+            <p> Titta på det träd som representeras i lösningen av den svåra versionen.
+            Från roten (cirkeln med bäver) kan du nå de andra 14 cirklarna genom att följa högst 3 pilar. </P>
+
+            <p> Om vi ​​hade tillåtits att följa fyra pilar kunde vi ha nått 30 olika cirklar. Faktum är att varje gång vi ökar antalet tillåtna steg med ett så kan vi nå ungefär dubbelt så många cirklar. </P>
+
+            <p> Denna trädstruktur används i stor utsträckning inom datavetenskap, eftersom den tillåter att lagra data enligt en viss logik och sedan få tillgång till alla dessa data mycket snabbt. </p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>
