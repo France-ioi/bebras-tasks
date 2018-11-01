@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-03</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         var stringsLanguage = 'fi';
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-03-balanced-trees/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Mathias Hiron",
+          "translators": ["Timo Poranen, Heikki Hyyrö"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            edgesCount: "Lisättyjä nuolia",
+            verticesLeftCount: "Yhdistämättömiä ympyröitä",
+            reachError: "Merkitty ympyrä ei ole yhdistetty ympyrään jossa on majavan kuva.",
+            numError: "Liian monta nuolta.",
+            degreeError: "Merkitystä ympyrästä lähtee liian monta nuolta.",
+            depthError: "Punaisella merkitty reitti on liian pitkä.",
+            existsError: "Näiden ympyröiden välillä on jo nuoli.",
+            removeError: "Nuolta ei voi ottaa pois.",
+            congratulations: "Onnittelut, teit sen!"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #control, #control table {
+            text-align: center;
+            margin: 20px auto;
+         }
+         #control table td {
+            width: 180px;
+         }
+         #control table td span {
+            font-size: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Ympyrät ja nuolet</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Lisää kuvioon <span class="easy medium">6</span><span class="hard">14</span> nuolta siten, että:
+               <ul>
+                  <li>Majava voi kulkea mihin tahansa ympyrään seuraamalla nuolia <span class="easy">nuolia</span><span class="medium">korkeintaan kahta nuolta</span><span class="hard"> korkeintaan kolmea nuolta</span>.</li>
+                  <li class="medium hard">Ympyrästä ei lähde kuin korkeintaan kaksi nuolta.</li>
+               </ul>
+            </p>
+            <p>
+               Klikkaa kahta ympyrää lisätäksesi niiden välille nuolen.
+            </p>
+            <p>
+               Klikkaa nuolta poistaaksesi se.
+            </p>
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <div id="control">
+               <table>
+                  <tr>
+                     <td>
+                        <span id="edges"></span>
+                     </td>
+                     <td>
+                        <span id="verticesLeft"></span>
+                     </td>
+                     <td>
+                        <input type="button" value="Kokeile" id="execute" />
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+            <div class="easy">
+            <p>Mahdollisia ratkaisuja on useita. Tässä on kaksi esimerkkiä:</p>
+            <p>
+               <img src="sol_easy_1.png">
+               <img src="sol_easy_2.png">
+            </p>
+            </div>   
+            <div class="medium">
+            <p>Mahdollisia ratkaisuja on useita. Tässä on kaksi esimerkkiä:</p>
+            <p>
+               <img src="sol_medium_1.png">
+               <img src="sol_medium_2.png">
+            </p>
+            </div>
+            <div class="hard">
+            <p>Mahdollisia ratkaisuja on useita. Tässä on yksi mahdollinen ratkaisu:</p>
+            <p>
+               <img src="sol_hard_1.png">
+            </p>
+            </div>
+
+         <h2>Tämä on tietojenkäsittelyä</h2>
+            <p> Tässä tehtävässä tutustuttiin <strong> binääripuihin</strong>. </p>
+
+            <p> Binääripuu on tietorakenne, jossa on juurisolmu (piirretään yleensä kuvan yläosaan) ja jossa jokaisesta solmusta lähtee korkeintaan kaksi kaarta lapsisolmuihin (vasen ja oikea).</p>
+            <p> Kun binääripuu on "tasapainoinen", löytyy juurisolmusta aina lyhyt reitti mihin tahansa muuhun solmuun. Esimerkiksi tehtävässä, missä sinun piti lisätä 14 kaarta, tuli reitin pituudeksi juurisolmusta muihin solmuihin korkeintaan kolmen kaaren mittaiseksi.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

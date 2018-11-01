@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2016-FR-07</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": ["Timo Poranen, Heikki Hyyrö"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';  //Currently causes code to crash
+      var taskStrings = {
+            wrong: "Lopputuloksesi ei täsmää tavoitteen kanssa.",
+            success: "Onnittelut, teit sen!",
+
+            titleProgram: "Ohjelmasi:",
+            titleResult: "Tulos vaiheen jälkeen:",
+
+            start: "1. aloita ",
+            rulePrefix: function(index) {
+               return "" + (index + 2) + ". Korvaa jokainen ";
+            },
+            ruleInfix: "kuvioilla",
+            ruleSuffix: "Tulos:",
+            target: "Tavoite:"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #solution img {
+            border-top: solid black 1px;
+            border-bottom: solid black 1px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Korvaaminen</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Raahaa alla olevat kuviot harmaisiin lokeroihin muodostaaksesi "ohjelman", joka tuottaa tavoitteena olevat kuviot.<br/>
+            <p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+<style>
+.solutionInstanceMismatch {
+   font-style: italic;
+}
+</style>
+<p class="solutionInstanceMismatch"> Obs! Bilderna motsvarar inte nödvändigtvis dem i din egen lösning, men principen förblir densamma. Vi ber om ursäkt för att texten i bilderna är på franska.</p>
+
+            <div class = "easy">
+               <p> <img src = "sol_easy.png"> </p>
+            </Div>
+            <div class = "medium">
+               <p> <img src = "sol_medium_1.png"> </p>
+               <p> <img src = "sol_medium.png"> </p>
+            </Div>
+            <div class = "hard">
+               <p> <img src = "sol_hard_0.png"> </p>
+               <p> <img src = "sol_hard_2.png"> </p>
+               <p> <img src = "sol_hard.png"> </p>
+            </Div>
+
+         <h2> Tämä on tietojenkäsittelyä! </h2>
+
+            <p> Tässä tehtävässä tutustuttiin haku- ja korvaustoimintoihin.</p>
+            
+
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
