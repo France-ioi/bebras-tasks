@@ -85,36 +85,51 @@
       <div id="solution">
 
          <h2>Lösning</h2>
-                  <i>Lösningen är under uppbyggnad. Vi ber om ursäkt för detta.</i>
+                 
 
             <div class="easy">
-<!--
-               <p>On place un 0 pour représenter une case blanche, et un 1 pour représenter une case grisée.</p>
--->
+               <p>Vi placerar en nolla för att representera en vit ruta, och en etta för att representera en grå ruta.</p>
                <p><img src="sol_easy.png"></p>
             </div>   
             <div class="medium">
+				
+<p> För att beskriva figuren anger vi antalet vita rutor att lägga ut från början, sedan antalet grå rutor att lägga ut, sedan antalet vita lådor som ska läggas ut, o.s.v. ända tills figuren är färdig. Sekvensen "4 3 2" visar till exempel 4 vita rutor, följda av 3 grå rutor, följda av 2 vita rutor. </p>
+               <p> Talföljden som beskriver den önskade bilden är följande: </p>
 <!--
                <p>Pour décrire la figure, on indique le nombre de cases blanches à remplir depuis le début, puis le nombre de cases grisées à remplir ensuite, puis le nombre de cases blanches à remplir ensuite, etc... en avançant ainsi jusqu'à la fin. Par exemple, la séquence "4 3 2" permet d'afficher 4 cases blanches, suivies de 3 cases grisées, suivies de 2 cases blanches.</p>
                <p>La suite de chiffres décrivant l'image souhaitée est ainsi :</p>
 -->
                <p><img src="sol_medium.png"></p>
+               <p> Observera att vi fortsätter på nästa rad när antalet rutor som ska läggas ut överstiger antalet rutor kvar på den aktuella raden. Detta är vad som händer exempelvis i början där vi har sekvensen "2 2 3": den tredje vita rutan placeras i början av andra raden. </p>				
 <!--
                <p>Observez qu'on continue sur la ligne suivante quand le nombre de cases à dessiner dépasse le nombre de cases restantes sur la ligne courante. C'est ce qui se passe par exemple au début, avec "2 2 3" : la troisième case blanche associée se trouve alors placée sur la deuxième ligne.</p>
 -->
             </div>
             <div class="hard">
+			<p> För att beskriva figuren, ange antalet rutor som har en <i>annan</i> färg än den ovanstående raden, sedan antalet rutor som har <i>samma</i> färg som den ovanstående raden, sedan antalet rutor som har <i>annan</i> färg än den ovanstående raden, och så vidare. </p>
 <!--
                <p>Pour décrire la figure, on indique le nombre de cases qui sont d'une couleur différente de celles de la ligne du dessus, puis le nombre de cases qui sont de la même couleur que celles de la ligne du dessus, puis le nombre de cases qui sont d'une couleur différente de celles de la ligne du dessus, etc.</p>
                <p>La suite de chiffres décrivant l'image souhaitée est ainsi :</p>
 -->
+				<p> Talföljden som beskriver den önskade bilden är följande: </p>
                <p><img src="sol_hard.png"></p>
+             <p> Observera att vid en tidpunkt har vi 17 rutor i rad, som alla har samma färg som den i raden ovanför. Eftersom vi inte kan skriva talet 17 måste vi använda två tal, vars summa är 17, och separera dem med en nolla (som innebär 0 stycken av motsatt färg). Alltså antingen "9 0 8" eller "8 0 9". </p>
+             
+               <p> Tips: det är faktiskt möjligt att lösa den här versionen  av uppgiften utan att förstå något om vad siffrorna representerar. Strategin blir då att upprepade gånger försöka placera det största möjliga talet som inte introducerar någon felaktig ruta. Så vi börjar med 9 och ser att det ger rutor med fel färg, så vi tar bort det och försöker med 8 istället, sedan 7, 6, etc. Eftersom talet 3 endast ger rutor med rätt färg, får det stå kvar. Sedan tar vi nästa siffra, börjar återigen försöka med 9, och så vidare tills alla rutor har rätt färg. Visserligen är det lite arbetsamt, men det fungerar varje gång! </p>
 <!--
                <p>Remarque : à un moment, on a 17 cases de suite où à chaque fois la case est de la même couleur que celle de la case située au-dessus d'elle. Comme on ne dispose pas du nombre 17, on est obligé d'utiliser deux chiffres dont la somme vaut 17, en les séparant par un 0, ce que l'on peut obtenir soit en écrivant "9 0 8", soit en écrivant "8 0 9". </p>
                <p>Astuce : pour cette version, il est en fait possible de résoudre le sujet sans rien comprendre à ce que représentent les chiffres. La stratégie est la suivante : essayer, de manière répétée, de placer le plus grand chiffre possible qui permet de ne pas faire d'erreur de coloriage. Ainsi, on commence par 9, on voit que ça dessine des cases de la mauvaise couleur, donc on le retire et on essaie le 8 à la place, puis le 7, puis le 6, etc... jusqu'au 3. Comme le chiffre 3 ne dessine que des cases de la bonne couleur, on le laisse. On passe alors au chiffre suivant, en repartant du 9, et ainsi de suite, jusqu'à ce que toutes les cases aient la bonne couleur. Certes, c'est un peu fastidieux, mais ça fonctionne à tous les coups !</p>
 -->
 
             </div>
+            <h2>Det är datavetenskap</h2>
+            <p> Den enkla versionen av denna uppgift illustrerar en grundläggande <strong>kodning</strong> av en svartvit datorbild med 0 för varje vit ruta och 1 för varje svart. </p>
+
+            <p> Den mellersta versionen av denna uppgift illustrerar en teknik för <strong>bildkomprimering</strong>. Komprimering gör det möjligt att beskriva en bild med en mindre mängd information. Här utnyttjas egenskapen att bilden inte är slumpmässig: vi har ofta långa följder av 0 eller långa följder av 1. </p>
+
+            <p> Så, till exempel istället för att skriva "00000000000011111111" kan vi skriva bara "12.8" för att säga att vi sätter 12 stycken 0 i rad, sedan 8 stycken 1. Denna komprimeringsmetod, kallad RLE-kodning, användes bl.a. i fax, som var ett sätt att skicka bilder över telefonnätet innan internet fanns. </p>
+            
+            <p> Den svåra versionen av denna uppgift illustrerar en avancerad teknik för bildkomprimering, där en rutas beskrivning kan bero på en närliggande rutas färg (i det här fallet rutan ovanför). Denna princip används i moderna metoder för bildkomprimering, som till exempel i PNG-formatet, som används ofta på internet. </p>
 <!--
          <h2>C'est de l'informatique !</h2>
 

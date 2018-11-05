@@ -32,7 +32,7 @@
       </script>
       <script class="remove" type="text/javascript">
        var json = {
-          "id": "http://castor-informatique.fr/tasks/2016/2016-JP-01-potions/",
+          "id": "http://castor-informatique.fr/tasks/2016/2016-JP-01-Drycks/",
           "language": "en",
           "version": "en.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, and authors from Japanese Bebras team",
@@ -62,7 +62,7 @@
             success: "Grattis, du klarade det.",
             wrong: "Fel svar. Försök igen.",
             wrongHard: function(correct, total) {
-               return "Du har identifierat " + correct + " av " + total + " trolldrycker. Försök nu att identifiera fler. Klicka på knappen för att blanda dem och börja om."; //Needed? "Click on the button to mix the potions and start all over again"
+               return "Du har identifierat " + correct + " av " + total + " trolldrycker. Försök nu att identifiera fler. Klicka på knappen för att blanda dem och börja om."; //Needed? "Click on the button to mix the Drycks and start all over again"
             },
             wrongLogic: "Du placerade den rödmarkerade bävern på fel plats.",
 
@@ -169,8 +169,125 @@
          </div>
       </div><!-- task -->
       <div id="solution">
-         <h2>Lösning</h2>
-                 <i>Lösningen är under uppbyggnad. Vi ber om ursäkt för detta.</i>
+         <h2>Lösning</h2>                 
+                 
+                 <div class = "easy">
+               <ul>
+               <li> Dryck B dracks av bävrarna 1 och 2. Deras likhet är att ha krulliga morrhår, så det måste vara effekten av dryck B. </li>
+               <li> Dryck C dracks av bävrarna 2 och 3. Deras likhet är att ha stora öron, så detta är effekten av dryck C. </li>
+               <li> Dryck A dracks bara av bäver 1. Detta är den enda bävern med stora tänder, så detta är effekten av dryck A. </li>
+               <li> Dryck D dracks bara av bäver 3. Detta är den enda bävern med svarta tänder, så detta är effekten av dryck D. </li>
+               </ul>
+               <p> <img src = "sol_easy.png"> </p>
+            </div>
+            <div class = "medium">
+               <ul>
+               <li> Dryck A dracks av bävrarna 1 och 2. Deras likhet är att ha stora tänder, så det är effekten av dryck A. </li>
+               <li> På samma sätt drar vi slutsatsen att dryck D ger de stora öronen på bävrarna 2 och 3. </li>
+               <li> På samma sätt drar vi slutsatsen att dryck C ger de svarta tänderna på bävrarna 1 och 3. </li>
+               <li> Dryck B dracks bara av bäver 1. Det här är den enda bävern som har krulliga morrhår, så det är effekten av dryck B. </li>
+               <li> På samma sätt drar vi slutsatsen att dryck E, som bara dracks av bäver 2, ger svarta öron. </li>
+               <li> På samma sätt drar vi slutsatsen att dryck F, som bara dracks av bäver 3, ger vit päls. </li>
+               </ul>
+               <p> <img src = "sol_medium.png"> </p>
+
+            </div>
+            <div class = "hard">
+
+<p>För att skilja effekterna av trolldryckerna kommer vi att fördela dem till bävrarna så att: </p>
+               <ul>
+               <li> Vissa drycker bara kommer drickas av en bäver. </Li>
+               <li> Vissa drycker kommer drickas av exakt två bävrar. </li>
+               <li> En dryck kommer att drickas av alla tre bävrarna. </li>
+               <li> En dryck kommer inte att drickas av någon bäver. </li>
+               </ul>
+               <p> Låt oss börja med dryckerna som ska drickas av en enda bäver och välj dryck A, B och C till de olika bävrarna: </p>
+               <p> <img src = "sol_hard_1.png"> </p>
+               <p> Fördela sedan dryckerna som ska drickas av två bävrar: dryck D till bäver 1 och 2, dryck E till bäver 2 och 3 och dryck F till bäver 1 och 3. </p>
+               <p> <img src = "sol_hard_2.png"> </p>
+               <p> Fördela sedan dryck G till alla bävrar. Dryck H ges inte till någon.</p>
+               <p><strong>Låt sedan bävrarna dricka!</strong> Observera att effekten av trolldryckerna i din version av uppgiften kan vara annorlunda än i lösningen nedan, men principen för att särskilja trolldryckerna är densamma.</p>
+</p>
+               <p> <img src = "sol_hard_3.png"> </p>
+               <p> För att identifiera effekterna, är det snabbaste att börja med effekterna som är gemensamma för flera bävrar. </p>
+               <ul>
+               <li> De tre bävrarna har stora tänder gemensamt, så det är effekten av dryck G. </li>
+               <li> Bävrarna 1 och 2 har stora öron gemensamt, så det är effekten av dryck D. </li>
+               <li> Bävrarna 2 och 3 har den vita pälsen gemensamt: så det är effekten av dryck E. </li>
+               <li> Bävrarna 1 och 3 har svarta öron gemensamt, så det är effekten av dryck F. </li>
+               <li> Bäver 1 är den enda med svarta tänder, så det är effekten av dryck A. </li>
+               <li> Bäver 2 är den enda med krulliga morrhår, så det är effekten av dryck B. </li>
+               <li> Bäver 3 är den enda med vit nos, så det är effekten av dryck C. </li>
+               <li> Vita ögon finns inte på någon bäver, så det måste vara är effekten av dryck H. </li>
+               </ul>
+               <p> <img src = "sol_hard_4.png"> </p>
+            </div>
+         
+         <h2> Det är datavetenskap! </h2>
+
+            <p> I den svåra versionen av denna uppgift vill vi fördela dryckerna på tre bävrar, så att vi kan identifiera varje dryck. För att bygga en lösning kan vi göra en tabell: varje rad motsvarar en dryck, varje kolumn motsvarar en bäver, och i varje ruta inuti tabellen noterar vi 1 om bävern dricker drycken på den raden och 0 om den inte dricker.
+            </P>
+            <p> Målet är att kunna identifiera dryckerna, vilket innebär att alla rader i tabellen måste vara olika. En möjlighet är att fylla i raderna enligt nedan. </P>
+            <p><table id="solInfo">
+            <tr>
+               <td></td>
+               <td>Bäver 1</td>
+               <td>Bäver 2</td>
+               <td>Bäver 3</td>
+            </tr>
+            <tr>
+               <td>Dryck A</td>
+               <td>0</td>
+               <td>0</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Dryck B</td>
+               <td>0</td>
+               <td>0</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Dryck C</td>
+               <td>0</td>
+               <td>1</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Dryck D</td>
+               <td>0</td>
+               <td>1</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Dryck E</td>
+               <td>1</td>
+               <td>0</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Dryck F</td>
+               <td>1</td>
+               <td>0</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Dryck G</td>
+               <td>1</td>
+               <td>1</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Dryck H</td>
+               <td>1</td>
+               <td>1</td>
+               <td>1</td>
+            </tr>
+            </table></p>
+<p> Naturligtvis kunde vi ha lagt raderna i en annan ordning. Men alla lösningar motsvarar nödvändigtvis en viss ordning av dessa rader. </p>
+
+             <p> Raderna i tabellen ovan motsvarar de <strong>binära talen</strong> från 0 till 7. </p>
 	  </div> <!-- task-solution -->
+	  
    </body>
 </html>

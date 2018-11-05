@@ -110,7 +110,7 @@
                Hitta de felaktiga talen och dra de korrekta talen in i de vita cellerna för att rätta till felen.
             </p>
             <p class="hard">
-               Följande tabell innehåller 3 fel.
+               Följande tabell innehåller 5 fel.
                <br>
                De grå rutorna innehåller vad summorna <strong>ska</strong> bli.
                <br>
@@ -126,13 +126,50 @@
       <div id="solution">
 
          <h2>Lösning</h2>
-                 <i>Lösningen är under uppbyggnad. Vi ber om ursäkt för detta.</i>
-<!--
-         <h2>C'est de l'informatique !</h2>
-            <p>Dans ce sujet, on pouvait simuler l'exécution d'un programme dans sa tête, afin d'éviter de perdre du temps à exécuter le programme de nombreuses fois.</p>
-            <p>Arriver à imaginer les étapes qui vont être effectuées est très utile en général pour un programmeur.</p>
--->
+                  <i>Lösningen är under uppbyggnad. Vi ber om ursäkt för att namnen på raderna och kolumnerna i lösningsfigurerna är annorlunda mot uppgiften, men siffrorna är desamma så det går att följa lösningen ändå.</i>
 
+ <div class = "easy">
+               <p> Det finns en rad och en kolumn vars summor ska korrigeras. Eftersom endast <strong>ett</strong> tal är fel, är det nödvändigtvis det som ligger vid korsningen av denna rad och denna kolumn. För att ändra summan från 7 till 6 måste du ersätta 3 med 2. </p>
+               <p> <img src = "sol_easy.png"> </p>
+            </div>
+            <div class = "medium">
+               <p> Det finns två rader och två kolumner vars summor ska korrigeras. Eftersom du bara kan ändra <strong>två</strong> rutor måste du ändra på två av de fyra rutorna vid korsningarna mellan dessa rader och kolumner. </p>
+               <p> För att reparera Afrika-raden kan vi inte minska värdet på rutan med 0 (Afrika-raden, Gul-kolumnen). Det är därför nödvändigt att korrigera rutan med 1 (Afrika-raden, Blå-kolumnen) genom att byta ut den mot 0. </p>
+               <p> Det finns då bara en operation kvar för att korrigera både Europa-raden och Gul-kolumnen. Detta kan bara göras genom att ändra rutan som innehåller 1 (Europa-raden, Gul-kolumnen) till 2. </p>
+               <p> <img src = "sol_medium.png"> </p>
+            </div>
+            <div class = "hard">
+               <p> Det finns tre rader och en kolumn som ska korrigeras. För att rätta till raderna finns det många möjligheter. För att korrigera Gul-kolumnen finns det dock färre möjligheter, så vi börjar där. </p>
+               <p> För att ändra från totalt 9 till totalt 5 i Gul-kolumnen måste 4 enheter tas bort. Eftersom ingen ruta innehåller 4 eller mer betyder det att du måste ändra två rutor. </p>
+               <p> Om vi ​​reparerar den gula kolumnen genom att ändra två rutor utan att vara uppmärksamma, befinner vi oss i en situation där det finns 4 rader kvar att reparera, till exempel läget nedan. Men eftersom vi redan har använt 2 ändringar kan vi bara göra 3 till, så vi kan inte lyckas. </p>
+               <p> <img src = "sol_hard_3_bad.png"> </p>
+               <p> För att lyckas måste du reparera en rad samtidigt som du reparerar Gul-kolumnen. Det finns bara ett sätt att göra det: sätt dit talet 1 enligt nedan: </p>
+               <p> <img src = "sol_hard_1_1.png"> </p>
+               <p> Sedan reparerar vi Gul-kolumnen färdigt. Vi har då inget annat val än att förstöra en annan rad. Ett första sätt att göra de sakerna visas nedan: </p>
+               <p> <img src = "sol_hard_1_2.png"> </p>
+               <p> Vid denna punkt måste tre rader repareras. För att undvika att kolumnerna förstörs måste du göra alla ändringar i samma kolumn. Endast den sista kolumnen tillåter detta. Genom att placera lämpliga tal får vi en första lösning: </p>
+               <p> <img src = "sol_hard_1_3.png"> </p>
+               <p> En andra lösning är att korrigera Gul-kolumnen genom att placera 0 på första raden: </p>
+               <p> <img src = "sol_hard_2_2.png"> </p>
+               <p> Efter detta finns bara en möjlighet, vi är tvungna att arbeta i den sista kolumnen för att reparera de tre raderna med tre ändringar. Vi får således den andra lösningen: </p>
+               <p> <img src = "sol_hard_2_3.png"> </p>
+            </div>
+
+
+         <h2> Det är datavetenskap! </h2>
+
+
+
+            <p> Man föreställer sig ofta att när man skriver siffror i en fil på sin dator, förblir siffrorna oförändrade tills nästa gång man öppnar filen. Faktum är att vi skulle vilja ha det så. Men vad garanterar det? </p>
+
+            <p> Filen sparas först i datorns RAM-minne och dirigeras sedan genom små elektriska ledningar. Informationen kan sedan lagras på en hårddisk med hjälp av magnetism (i princip miniatyrmagneter). Om filen går igenom nätverket kommer den troligen att passera genom en optisk fiber, där ljusstrålar kommer att bära information över tusentals kilometer. Vem kan garantera att ingen av siffrorna i filen någonsin kommer att ändras? </p>
+
+            <p> I själva verket kan ingen verkligen garantera det. De involverade fysiska processerna är så känsliga att det finns en, visserligen mycket liten, sannolikhet att plötsligt en nolla omvandlas till en etta eller vice versa. Speciellt kan kosmisk strålning som produceras av solen medföra en litet lokalt spänningsfall och därmed förvandla 0 till 1. Man skulle kunna tro att det är ett aprilskämt, men det här är verkliga fenomen som studerats sedan 70-talet . </p>
+            
+            <p> Dessa fenomen är verkligen sällsynta, men när vi manipulerar miljarder nollor och ettor, blir det till slut sannolikt att några siffror ändras varje år på din persondator. 
+
+             <p>Den här uppgiften illustrerar konceptet <strong>kontrollsumma</strong> som är ett sätt man använder för att upptäcka när något blivit fel i en datamängd och kanske även korrigera det. Om man förutom att lagra själva datan i en tabell även lagrar summan av raderna och kolumnerna på en separat plats, så kan man lätt kontrollera att summorna fortfarande stämmer efter exempelvis en dataöverföring.</p>
+ 
 	  </div> <!-- task-solution -->
    </body>
 </html>

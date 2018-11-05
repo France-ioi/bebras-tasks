@@ -393,7 +393,7 @@
                                        </tr>
                                        <tr>
                                            <td>
-                                             Sort
+                                             Sortera
                                            </td>
                                            <td colspan="5">
                                              <select id="hard-sorting" class="controller sorting">
@@ -450,52 +450,46 @@
       <div id="solution">
 
          <h2>Lösning</h2>
-                 <i>Lösningen är under uppbyggnad. Vi ber om ursäkt för detta.</i>
-<!--
-            <div class="easy">
-               <p>Dans la liste souhaitée, on a uniquement des légumes verts. On les sélectionne ainsi :</p>
-               <ol>
-               <li><p class="solutionFilter">Le type est Légume.</p></li>
-               <li><p class="solutionFilter">La couleur est Vert.</p></li>
-               </ol>
-            </div>   
-            <div class="medium">
-               <p>On peut construire la liste souhaitée étape par étape :</p>
-               <ol>
-               <li>On veut sélectionner des fruits et une fleur. On va donc éliminer le troisième type d'éléments :
-               <p class="solutionFilter">Le type n'est pas Légume.</p></li>
-               <li>On veut sélectionner des éléments jaune et rouge. On peut donc éliminer les éléments oranges et verts. Comme il n'y a pas d'éléments verts restant dans la liste, on va seulement éliminer les éléments oranges :
-               <p class="solutionFilter">La couleur n'est pas Orange.</p></li>
-               <li>Il reste alors à éliminer la Tulipe, ce que l'on peut faire en demandant à limiter le prix, par exemple :
-               <p class="solutionFilter">Le prix est au plus 6€.</p></li>
-               <li>Enfin, on met les éléments dans le bon ordre :
-               <p class="solutionFilter">Trier selon le nom, par ordre alphabétique.</p></li>
-               </ol>
-            </div>
-            <div class="hard">
-               <p>On peut construire la liste souhaitée étape par étape :</p>
-               <ol>
-               <li>On veut sélectionner des légumes et des fruits, donc :
-               <p class="solutionFilter">"Le type est Fruit" ou "Le type est Légume".</p></li>
-               <li>On veut sélectionner des éléments rouge, vert ou noir. On peut donc éliminer le jaune et l'orange :
-               <p class="solutionFilter">"La couleur n'est pas jaune" et "La couleur n'est pas orange".</p></li>
-               <li>Il reste alors à éliminer l'aubergine (6€) et le concombre (5€), ce que l'on peut faire par exemple en demandant à ce que le prix soit inférieur à 4€ ou bien supérieur à 7€ :
-               <p class="solutionFilter">"Le prix est au plus 4€" ou "Le prix est au moins 7€".</p></li>
-               <li>Enfin, on met les éléments dans le bon ordre :
-               <p class="solutionFilter">Trier selon le prix, du plus petit au plus grand.</p></li>
-               </ol>
-               <p>D'autres solutions étaient possibles.</p>
-            </div>
--->
+<div class = "easy">
+               <p> På den önskade listan har vi bara gröna grönsaker. De är valda enligt följande: </p>
+               <ol>
+               <li> <p class = "solutionFilter"> Typen är grönsak. </p> </li>
+               <li> <p class = "solutionFilter"> Färgen är grön. </p> </li>
+               </ol>
+            </Div>
+            <div class = "medium">
+               <p> Vi kan bygga den önskade listan steg för steg: </p>
+               <ol>
+               <li> Vi vill välja frukter och en blomma. Vi kommer att eliminera den tredje typen av element:
+               <p class = "solutionFilter"> Typen är inte grönsak. </p> </li>
+               <li> Vi vill välja gula och röda varor. Vi kan eliminera de orangea och gröna. Eftersom det inte finns några gröna varor kvar i listan eliminerar vi bara de orangea:
+               <p class = "solutionFilter"> Färgen är inte orange. </p> </li>
+               <li> Det återstår att eliminera tulpanen, vilket kan göras genom att begränsa priset, till exempel:
+               <p class = "solutionFilter"> Priset är högst 6 kr. </p> </li>
+               <li> Slutligen lägger vi elementen i rätt ordning:
+               <p class = "solutionFilter"> Sortera enligt namn, alfabetisk ordning. </p> </li>
+               </ol>
+            </div>
+            <div class = "hard">
+               <p> Vi kan bygga den önskade listan steg för steg: </p>
+               <ol>
+               <li> Vi vill välja grönsaker och frukter, så:
+               <p class = "solutionFilter"> "Typen är frukt" eller "Typen är grönsak". </p> </li>
+               <li> Vi vill välja röda, gröna eller svarta varor. Vi kan eliminera de gula och orangea:
+               <p class = "solutionFilter"> "Färgen är inte gul" och "Färgen är inte orange". </p> </li>
+               <li> Det återstår fortfarande att eliminera aubergine (6 kr) och gurka (5 kr), vilket kan göras till exempel genom att begära att priset är högst 4 kr eller minst 7 kr:
+               <p class = "solutionFilter"> "Priset är högst 4 kr" eller "Priset är minst 7 kr". </p> </li>
+               <li> Slutligen lägger vi elementen i rätt ordning:
+               <p class = "solutionFilter"> Sortera enligt pris, från minsta till största. </p> </li>
+               </ol>
+               <p> Andra lösningar är möjliga. </p>
+            </div>
+         <h2> Det är datavetenskap! </h2>
 
-<!--
-         <h2>C'est de l'informatique !</h2>
+            <p> Detta ämne illustrerar hur man <strong>frågar</strong> för att välja objekt från en <strong>databas</strong> som innehåller beskrivningar av en uppsättning artiklar. </p>
 
-            <p>Ce sujet illustre la manière dont on effectue une <strong>requête</strong> pour sélectionner certains éléments parmi une <strong>base de données</strong> contenant les descriptions d'un ensemble d'éléments.</p>
+            <p> Databaser finns överallt idag, och en del innehåller hundratals miljoner poster. Till exempel lagras alla svar från deltagarna i Bävertävlingen i en databas. Genom att ställa "frågor" i denna databas kan man exempelvis få veta antalet deltagare i varje årskurs eller från en viss skola, eller skapa annan intressant statistik. </p>
 
-            <p>Des bases de données, on en trouve partout aujourd'hui, et certaines contiennent des centaines de millions d'éléments. Par exemple, l'ensemble de toutes les réponses des participants au concours Castor est stocké dans une base de données. Cette base permet non seulement d'afficher les résultats pour un participant particulier, mais également de calculer le score de chaque participant, le nombre de participants de chaque niveau dans chaque établissement, ou dans chaque académie, ou encore de faire des statistiques sur les sujets qui ont été le mieux réussis, etc.</p>
-            
--->
 
 	  </div> <!-- task-solution -->
    </body>
