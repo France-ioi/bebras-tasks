@@ -66,8 +66,9 @@
             },
             success: "Grattis, du klarade det.",
             wrong: "Åtminstone en av summorna är fel.",
-            wrongCount: function(count) {
-               return "Du måste byta ut exakt " + count + " tal";
+
+            wrongCount: function(used, target) {
+               return "Du har ändrat " + used + " tal. Försök igen, det ska räcka att ändra " + target + " tal.";
             },
             invalidDrop: "Du kan bara dra siffror till de vita cellerna."
          };
@@ -81,8 +82,9 @@
             display: inline-block;
          }
          #feedback {
-            margin-top: 0.5em;
-            margin-bottom: 0.3em;
+            height: 1em;
+            margin-top: 0m;
+            margin-bottom: 0em;
             text-align: center;
             font-weight: bold;
             color: #CC8844;

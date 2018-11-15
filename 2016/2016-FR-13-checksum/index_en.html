@@ -66,8 +66,9 @@
             },
             success: "Congratulations, you did it.",
             wrong: "At least one of the sums is wrong.",
-            wrongCount: function(count) {
-               return "You must place exactly " + count + " strip(s)";
+
+            wrongCount: function(used, target) {
+               return "You have corrected " + used + " numbers. Please try again to make only " + target + " corrections.";
             },
             invalidDrop: "You can only drop digits on the white cells."
          };
