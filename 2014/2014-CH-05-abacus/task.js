@@ -1,70 +1,127 @@
-function initTask() {
+function initTask(subTask) {
+   var state = {};
+   var level;
+   var answer = null;
+   var data = {
+      easy: {
+         targets: [
+            54029, 
+            24590,
+            29045,
+            50945,
+            40495
+         ],
+         nbDigits: 5,
+         nbUnitBalls: 9,
+         nbFiveBalls: 0,
+         heightSep: 0
+      },
+      medium: {
+         targets: [
+            54029, 
+            24590,
+            29045,
+            50945,
+            40495
+         ],
+         nbDigits: 5,
+         nbUnitBalls: 9,
+         nbFiveBalls: 0,
+         heightSep: 0
+      },
+      hard: {
+         targets: [ // at least a 5 a 0 and a 6/7/8 and a 9, but not on the sides, and first digit less than 5
+            1859071,
+            2806951,
+            4958067,
+            1978054,
+            4497508,
+            3458096,
+            2459058,
+            3809654,
+            1058293
+         ],
+         nbDigits: 7,
+         nbUnitBalls: 5,
+         nbFiveBalls: 2,
+         heightSep: 100
+      }
+   };
    var seed;
-   var difficulty;
    var animateBalls = false;
    var paperWidth = 400;
    var paperHeight = 300;
-   var heightSep = 100;
    var radiusX = 14;
    var radiusY = 11;
-   var nbDigits = 7;
-   var nbUnitBalls = 5;
-   var nbFiveBalls = 2;
-   var targets = [ // at least a 5 a 0 and a 6/7/8 and a 9, but not on the sides, and first digit less than 5
-      1859071,
-      2806951,
-      4958067,
-      1978054,
-      4497508,
-      3458096,
-      2459058,
-      3809654,
-      1058293
-      ];
-   var makeInstanceEasy = function() {
-      targets = [
-         54029, 
-         24590,
-         29045,
-         50945,
-         40495
-         ];
-      nbDigits = 5;
-      nbUnitBalls = 9;
-      nbFiveBalls = 0;
-      heightSep = 0;
-   };
-
+   var targets;
    var target;
+   var nbDigits;
+   var nbUnitBalls;
+   var nbFiveBalls;
+   var heightSep;
    var animTask;  // { id, paper, balls, state }
    var animSolution;
+
+   subTask.loadLevel = function(curLevel) {
+      level = curLevel;
+      targets = data[level].targets;
+      nbDigits = data[level].nbDigits;
+      nbUnitBalls = data[level].nbUnitBalls;
+      nbFiveBalls = data[level].nbFiveBalls;
+      heightSep = data[level].heightSep;
+      seed = subTask.taskParams.randomSeed;
+      target = getTarget();
+   };
+
+   subTask.getStateObject = function() {
+      return state;
+   };
+
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+   };
+
+   subTask.resetDisplay = function() {
+      $("#valueTarget").html(stringOfValue(target));
+      animTask = drawAbacus("abacusTask", true); 
+      updateDisplay(false);
+      $("#solutionTarget").html(stringOfValue(target));
+      animSolution = drawAbacus("abacusSolution", false);
+      updateBalls(animSolution, true, true);
+   };
+
+   subTask.getAnswerObject = function() {
+      return answer;
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      var defaultAnswer = getInitState();
+      return defaultAnswer;
+   };
+
+   subTask.unloadLevel = function(callback) {
+      if (animateBalls) {
+         stopAnimation();
+      }
+      callback();
+   };
+
+   function getResultAndMessage() {
+      var value = valueOfState(answer);
+      var result = { successRate: 1, message: taskStrings.success };
+      if(value != target){
+         result = { successRate: 0, message: taskStrings.ballsIncorrectValue };
+      }
+      return result;
+   }
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
 
    var getTarget = function() {
       var id = seed % targets.length;
       return targets[id];
-   };
-
-   task.load = function(views, callback) {
-      platform.getTaskParams(null, null, function(taskParams) {
-         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
-         seed = taskParams.randomSeed;
-         if (difficulty == "easy") {
-            makeInstanceEasy();
-         }
-         $("." + difficulty).show();
-
-         target = getTarget();
-         $("#valueTarget").html(stringOfValue(target));     
-         animTask = drawAbacus("abacusTask", true);
-         updateDisplay();
-         if (views.solution) {
-            $("#solutionTarget").html(stringOfValue(target));
-            animSolution = drawAbacus("abacusSolution", false);
-            animSolution.state = getSolutionState(target);
-            updateBalls(animSolution, true);
-         }
-         callback();
-      });
    };
 
    var getInitState = function() {
@@ -72,7 +129,7 @@ function initTask() {
    };
 
    var getSolutionState = function() {
-      if (difficulty == "easy") {
+      if (level == "easy") {
          return Beav.Array.init(nbDigits, function(i) { 
             var d = Math.floor(target / Math.pow(10, nbDigits-1-i)) % 10;
             return [d, 0]; 
@@ -86,19 +143,6 @@ function initTask() {
          });
       }
    }
-
-   task.reloadAnswer = function(strAnswer, callback) {
-      animTask.state = getInitState();
-      if (strAnswer != "") {
-         animTask.state = $.parseJSON(strAnswer);
-      }
-      updateDisplay();
-      callback();
-   };
-
-   task.getAnswer = function(callback) {
-      callback(JSON.stringify(animTask.state));
-   };
 
    var stringOfValue = function(value) {
       if (value == 0) {
@@ -131,7 +175,7 @@ function initTask() {
    };
 
    var drawAbacus = function(objectID, interactive) {
-      var paper = Raphael(objectID, paperWidth, paperHeight);   
+      var paper = subTask.raphaelFactory.create(objectID,objectID,paperWidth,paperHeight);  
       paper.clear();
       for (var digit = 0; digit < nbDigits; digit++) {
          Beav.Raphael.lineRelative(paper, xDigit(digit), 0, 0, paperHeight)
@@ -157,7 +201,7 @@ function initTask() {
             balls[digit][zone].push(elem);
          }
       }
-      return { id: objectID, paper: paper, balls: balls, state: getInitState() };
+      return { id: objectID, paper: paper, balls: balls };
    };
 
    var clickHandler = function(digit, zone, id) {
@@ -165,17 +209,12 @@ function initTask() {
    };
 
    var toggleAt = function(digit, zone, id) {
-      animTask.state[digit][zone] = (animTask.state[digit][zone] > id) ? id : id+1;
-      updateDisplay();
+      answer[digit][zone] = (answer[digit][zone] > id) ? id : id+1;
+      updateDisplay(false);
       displayHelper.stopShowingResult();
-      /* // automatic validation deactivated:
-      if (valueOfState(animTask.state) == target) {
-         platform.validate("done");
-      } 
-      */
    };
 
-   var updateBalls = function(anim, skipAnimation) {
+   var updateBalls = function(anim, skipAnimation, solution) {
       var r = radiusY;
       var y;
       var zone;
@@ -183,6 +222,7 @@ function initTask() {
       var sp = 2.2;
       var mg = 1.3;
       var speed = 0;
+      var state = (!solution) ? answer : getSolutionState(target);
       if (animateBalls) {
          speed = 800;
       }
@@ -196,7 +236,7 @@ function initTask() {
       for (var digit = 0; digit < nbDigits; digit++) {
          zone = 0;
          for (var id = 0; id < nbUnitBalls; id++) {
-            if (id < anim.state[digit][zone]) {
+            if (id < state[digit][zone]) {
                y = heightSep + wd + id * sp * r + mg * r;
             } else {
                y = paperHeight - 2 * wd - (nbUnitBalls - 1 - id) * (sp * r) - mg * r; 
@@ -205,7 +245,7 @@ function initTask() {
          }
          zone = 1;
          for (var id = 0; id < nbFiveBalls; id++) {
-            if (id < anim.state[digit][zone]) {
+            if (id < state[digit][zone]) {
                y = heightSep - wd - id * (sp * r) - mg * r;
             } else {
                y = 2 * wd + (nbFiveBalls - 1 - id) * sp * r + mg * r;
@@ -214,13 +254,6 @@ function initTask() {
          }
       }
    }
-
-   task.unload = function(callback) {
-      if (animateBalls) {
-         stopAnimation();
-      }
-      callback();
-   };
 
    var stopAnimation = function() {
       for (var digit = 0; digit < nbDigits; digit++) {
@@ -232,28 +265,11 @@ function initTask() {
       }
    };
 
-   var updateDisplay = function() {
-      var current = valueOfState(animTask.state);
+   var updateDisplay = function(solution) {
+      var current = valueOfState(answer);
       $("#valueCurrent").html(stringOfValue(current));
-      updateBalls(animTask, false);
+      updateBalls(animTask,false,solution);
    };
-
-   grader.gradeTask = function(strAnswer, token, callback) {
-      platform.getTaskParams(null,null, function(taskParams) {
-         if (strAnswer == "") {
-            callback(taskParams.minScore, taskStrings.ballsIncorrectValue);
-            return;
-         }
-         seed = taskParams.randomSeed;
-         var state = $.parseJSON(strAnswer);
-         var value = valueOfState(state);
-         var target = getTarget();
-         if (value == target) {
-            callback(taskParams.maxScore, taskStrings.success);
-         } else {
-            callback(taskParams.minScore, taskStrings.ballsIncorrectValue);
-         }
-      });
-   }
 }
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
