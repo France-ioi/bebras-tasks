@@ -17,19 +17,6 @@ function initTask(subTask) {
          heightSep: 0
       },
       medium: {
-         targets: [
-            54029, 
-            24590,
-            29045,
-            50945,
-            40495
-         ],
-         nbDigits: 5,
-         nbUnitBalls: 9,
-         nbFiveBalls: 0,
-         heightSep: 0
-      },
-      hard: {
          targets: [ // at least a 5 a 0 and a 6/7/8 and a 9, but not on the sides, and first digit less than 5
             1859071,
             2806951,
@@ -40,6 +27,23 @@ function initTask(subTask) {
             2459058,
             3809654,
             1058293
+         ],
+         nbDigits: 7,
+         nbUnitBalls: 5,
+         nbFiveBalls: 2,
+         heightSep: 100
+      },
+      hard: {
+         targets: [ // at least a 5 a 0 and a 6/7/8 and a 9, but not on the sides, and first digit less than 5
+            185907134,
+            280695113,
+            495806711,
+            197805471,
+            449750847,
+            345809684,
+            245905868,
+            380965486,
+            105829348
          ],
          nbDigits: 7,
          nbUnitBalls: 5,
@@ -85,9 +89,11 @@ function initTask(subTask) {
       $("#valueTarget").html(stringOfValue(target));
       animTask = drawAbacus("abacusTask", true); 
       updateDisplay(false);
-      $("#solutionTarget").html(stringOfValue(target));
-      animSolution = drawAbacus("abacusSolution", false);
-      updateBalls(animSolution, true, true);
+      if($("#abacusSolution").length > 0){
+         $("#solutionTarget").html(stringOfValue(target));
+         animSolution = drawAbacus("abacusSolution", false);
+         updateBalls(animSolution, true, true);
+      }
    };
 
    subTask.getAnswerObject = function() {
@@ -134,9 +140,10 @@ function initTask(subTask) {
             var d = Math.floor(target / Math.pow(10, nbDigits-1-i)) % 10;
             return [d, 0]; 
          });         
-      } else { // hard
+      } else{ 
+         var base = (level == "hard") ? 16 : 10;
          return Beav.Array.init(nbDigits, function(i) { 
-            var d = Math.floor(target / Math.pow(10, nbDigits-1-i)) % 10;
+            var d = Math.floor(target / Math.pow(base, nbDigits-1-i)) % base;
             var a = d % 5;
             var b = Math.floor(d / 5);
             return [a, b]; 
@@ -163,8 +170,9 @@ function initTask(subTask) {
 
    var valueOfState = function(state) {
       var value = 0;
+      var base = (level == "hard") ? 16 : 10;
       for (var digit = 0; digit < nbDigits; digit++) {
-         var pow = Math.pow(10, nbDigits - 1 - digit);
+         var pow = Math.pow(base, nbDigits - 1 - digit);
          value += (state[digit][0] + 5 * state[digit][1]) * pow;
       }
       return value;

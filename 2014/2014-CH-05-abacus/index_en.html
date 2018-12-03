@@ -3,24 +3,40 @@
    <head>
       <meta charset="utf-8">
       <title>2014-CH-05</title>
-    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+           window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+         var json = {
+         "id": "",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+         };
+      </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-CH-05-abacus/",
-          "language": "en",
-          "version": "en.01",
+          "language": "fr",
+          "version": "fr.01",
           "authors": "Arthur Chargueraud",
           "translators": [],
           "license": "",
@@ -60,16 +76,23 @@
    </head>
    <body>
       <div id="task">
-         <h1>Abacus</h1>
+         <h1>Boulier</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">  
+               <div class="consigne">
+                  <p>Position the blue balls to get the value <span id="valueTarget"></span>.</p>
+                  <p>Click on the blue balls to understand what they represent.</p>
+               </div>
+            </div> 
+            <div id="zone_2"> 
+               <center>
+                  <p>Current value&nbsp;: <span id="valueCurrent"></span>.</p>
+                  <div id='abacusTask'></div>
+               </center>
+            </div>
+         </div>
          <img src="icon.png" style="display:none" >
-
-         <p>Position the blue balls to get the value <span id="valueTarget"></span>.</p>
-         <p>Click on the blue balls to understand what they represent.</p>
-
-         <center>
-         <p>Current value&nbsp;: <span id="valueCurrent"></span>.</p>
-         <div id='abacusTask'></div>
-         </center>
       </div><!-- task -->
       <div id="solution">
       <!--
