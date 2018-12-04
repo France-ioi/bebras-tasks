@@ -5,7 +5,7 @@ function initTask(subTask) {
    var data = {
       easy: {
          initFiles: [
-            { name: "bibi", size: "90" },
+            { name: "bibi", size: "90" }
             ],
          endFiles: [
             { name: "baba", size: "90" },
