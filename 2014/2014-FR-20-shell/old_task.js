@@ -1,99 +1,72 @@
-function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         initFiles: [
-            { name: "bibi", size: "90" },
-            ],
-         endFiles: [
-            { name: "baba", size: "90" },
-            { name: "bibi", size: "90" }
-            ]
-      },
-      medium: {
-         initFiles: [
+function initTask() {
+   var difficulty;
+   var isEasy;
+   var curFiles;
+   var inputs;
+   var output;
+
+   task.load = function(views, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         isEasy = (difficulty == "easy"); 
+         $("." + difficulty).show();
+
+         $("#shell_input").keyup(function (e) {
+             if (e.keyCode == 13) { // touche entrée
+                 task.executeInput();
+             }
+         });
+         task.reloadAnswer("", callback);
+      });
+   };
+
+   var commandsOfStrAnswer = function(strAnswer) {
+      if (strAnswer == "") { 
+         return [];
+      }
+      return $.parseJSON(strAnswer);
+   };
+
+   task.reloadAnswer = function(strAnswer, callback) {
+      output = "";
+      inputs = commandsOfStrAnswer(strAnswer);
+      curFiles = executeCommands(inputs);
+      updateDisplay();
+      callback();
+   };
+
+   task.getAnswer = function(callback) {
+      callback(JSON.stringify(inputs));
+   };
+
+   var getInitFiles = function() {
+      if (isEasy)  {
+         return [
             { name: "bibi", size: "90" },
             { name: "momo", size: "30" },
             { name: "toto", size: "70" },
             { name: "zora", size: "50" }
-            ],
-         endFiles: [
-            { name: "momo", size: "30" },
-            { name: "zora", size: "50" }
-            ]
-      },
-      hard: {
-         initFiles: [
+            ];
+      } else {
+         return [
             { name: "momo", size: "50" },
             { name: "zora", size: "90" }
-            ],
-         endFiles: [
+            ];
+      }
+   };
+
+   var getEndFiles = function() {
+      if (isEasy) {
+         return [
+            { name: "momo", size: "30" },
+            { name: "zora", size: "50" }
+            ];
+      } else {
+         return [
             { name: "momo", size: "90" },
             { name: "zora", size: "50" }
-            ]
+            ];
       }
-   };
-   var curFiles;
-   var output = "";
-
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      curFiles = JSON.parse(JSON.stringify(data[level].initFiles));
-   };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-         curFiles = executeCommands(answer);
-      }
-   };
-
-   subTask.resetDisplay = function() {
-      initHandlers();
-      updateDisplay();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = [];
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result = { successRate: 1, message: taskStrings.success };
-      var files = executeCommands(answer,true);
-         if (!isFinished(files)) {
-            result = { successRate: 0, message: taskStrings.failure };
-         }
-      return result;
-   }
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
-
-   function initHandlers() {
-      $("#shell_input").off("keyup");
-      $("#shell_input").keyup(function (e) {
-          if (e.keyCode == 13) { // touche entrée
-              executeInput();
-          }
-      });
-      $("#execute").off("click");
-      $("#execute").click(executeInput);
    };
 
    var isValidName = function(fname) {
@@ -119,8 +92,8 @@ function initTask(subTask) {
          });
    };
 
-   var executeCommands = function(commands,final) {
-      var files = (final) ? JSON.parse(JSON.stringify(data[level].initFiles)) : curFiles;
+   var executeCommands = function(commands) {
+      var files = getInitFiles();
       for (var i = 0; i < commands.length; i++) {
          executeCommand(files, commands[i]);
       }
@@ -146,8 +119,7 @@ function initTask(subTask) {
                   var f = files[i]; 
                   // assert (f.name.length <= 12)
                   var spaces = getSpaces(13 - f.name.length);
-                  msg += getSpaces(3) + f.name + spaces + f.size + " " + taskStrings.kBUnit;
-                  msg += "\n";
+                  msg += getSpaces(6) + f.name + spaces + f.size + " " + taskStrings.kBUnit;
                }
 
             }  
@@ -168,7 +140,7 @@ function initTask(subTask) {
                   }
                }
             }
-         } else if (op == "cp" && level != "medium") {
+         } else if (op == "cp" && !isEasy) {
             if (nb != 3) {
                msg = taskStrings.commandFollowedByTwoFileNames(op);
             } else { 
@@ -196,7 +168,7 @@ function initTask(subTask) {
                   }
                }
             }
-         } else if (op == "mv" && level == "hard") {
+         } else if (op == "mv" && !isEasy) {
             if (nb != 3) {
                msg = taskStrings.commandFollowedByTwoFileNames(op);
             } else {
@@ -233,11 +205,11 @@ function initTask(subTask) {
       output = "$ " + command + "\n" + msg + "\n"; // Note: utiliser += pour faire du append
    };
 
-   function executeInput() {
+   task.executeInput = function() {
       var command = $("#shell_input").val();
       command = command.toLowerCase();
       $("#shell_input").val("");
-      answer.push(command);
+      inputs.push(command);
       executeCommand(curFiles, command);
       updateDisplay();
       if (isFinished(curFiles)) {
@@ -245,6 +217,16 @@ function initTask(subTask) {
       }
       $("#shell_input").focus();
    };
+
+   /*
+   task.validate = function() {
+      if (isFinished(curFiles)) {
+         platform.validate("done");
+      } else {
+         displayHelper.validate("stay");
+      }
+   };
+   */
 
    var updateDisplay = function() {
       var shell = $("#shell_output");
@@ -260,7 +242,7 @@ function initTask(subTask) {
    var isFinished = function(files) {
       sortFiles(files);
       var a = files;
-      var b = data[level].endFiles;
+      var b = getEndFiles();
       if (a.length != b.length) {
          return false;
       }
@@ -271,6 +253,17 @@ function initTask(subTask) {
       }
       return true;
    };
+
+   grader.gradeTask = function(strAnswer, token, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         var commands = commandsOfStrAnswer(strAnswer);
+         var files = executeCommands(commands);
+         if (isFinished(files)) {
+            callback(taskParams.maxScore, taskStrings.success);
+         } else {
+            callback(taskParams.minScore, taskStrings.failure);
+         }
+      });
+   }
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+initTask();
