@@ -3,24 +3,22 @@
    <head>
       <meta charset="utf-8">
       <title>2014-FR-20</title>
-      <script>
-         window.stringsLanguage = 'fr';
-      </script>
-      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
       <script class="remove" type="text/javascript">
-         var modulesPath = '../../modules';
-         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
-            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
-      </script>
-      <script class="remove" type="text/javascript">
-         var json = {
+       var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-FR-20-shell/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
           "translators": [],
           "license": "",
@@ -28,7 +26,7 @@
           "modulesPathPrefix": "",
           "browserSupport": [],
           "fullFeedback": true
-         };
+      };
       </script>
       <script>
          var stringsLanguage = 'en';
@@ -62,127 +60,117 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-         body * {
-            box-sizing: content-box;
-         }
-         .shell, .inline_shell, #shell_input {
-             font-size: 1.2em;  /* line-height: 120%; */
-             font-family: monospace;
-             line-height: 140%;
-         }
-         .shell,.inline_shell {
-             color: white;
-             background: black;
-         }
-         .shell {
-             padding: 5px;
-             margin-left: 1em;
-             margin-right: 1em;
-         }
-         .inline_shell {
+      .shell, .inline_shell, #shell_input {
+          font-size: 1.2em;  /* line-height: 120%; */
+          font-family: monospace;
+          line-height: 140%;
+      }
+      .shell,.inline_shell {
+          color: white;
+          background: black;
+      }
+      .shell {
+          padding: 5px;
+          margin-left: 1em;
+          margin-right: 1em;
+       }
+       .inline_shell {
           padding: 3px;
-         }
-         .commands {
+       }
+       .commands {
           margin-top: 0.5em;
           margin-bottom: 0.5em;
-         }
-         .commands li {
+       }
+       .commands li {
           padding-bottom: 0.4em;
           line-height: 150%;
-         }
-         .objective {
+       }
+       .objective {
           width: 100%;
-          margin-top: 1em; 
-         }
-         .objective .shell {
-            display: block;
-            max-width: 300px;
-            margin: auto;
-         }
-         .objective .file_name {
-            margin: 0 2em;
-         }
-         .easy, .hard {
+          border-collapse: collapse;
+       }
+       .objective td {
+          vertical-align: top;
+          width: 50%;
+       }
+       .objective span {
+          margin: 0em 0.6em 0em 0.6em;
+          display: block;
+       }
+       .easy, .hard {
           display: none;
-         }
-         #shell_output {
-            width: 740px;
-            margin: 15px;
-         }
-         #input_line {
-            margin-left: 15px;
-         }
-         #shell_input {
-            width: 60%;
-         }
-         #execute {
-            width: 9em;
-         }
+       }
       </style>
    </head>
    <body>
       <div id="task">
+         <img src="icon.png" style="display:none" >
          <h1>Terminal</h1>
-         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
-         <div id="taskContent">        <!-- will contain the content of the task --> 
-            <div id="zone_1">  
-               <div class="consigne">
-                  <p>
-                  You have an application to edit files with the following commands&nbsp;:
-                  </p>
-                  <div class="easy medium">
-                     <ul class="commands">
-                     <li><span class="inline_shell">ls</span> Display the name and size of all files. For example,
-                        display <span class="inline_shell">zora&nbsp;&nbsp;50&nbsp;ko</span> indicates that there is a named file «&nbsp;zora&nbsp;» of size 50&nbsp;kB. </li>
-                     <li class="medium"><span class="inline_shell">rm</span> Delete a file. For example,
-                        <span class="inline_shell">rm&nbsp;titi</span> deletes the named file «&nbsp;titi&nbsp;».</li>
-                     <li class="easy"><span class="inline_shell">cp</span> Copy a file. for example,
-                        <span class="inline_shell">cp&nbsp;titi&nbsp;toto</span> creates a copy of the file «&nbsp;titi&nbsp;» with name «&nbsp;toto&nbsp;».</li>
-                      </ul>
-                     <p class="easy">Your goal is to create a copy of a file with the name «&nbsp;baba&nbsp;».</p>
-                     <p class="medium">Your goal is to find the two files with the largest sizes and <b> delete </b> these two files and only those.</p>
-                  </div>
-                  <div class="hard">
-                     <ul class="commands">
-                     <li><span class="inline_shell">ls</span> Display the name and size (in KB) of all the files present.</li>
-                     <li><span class="inline_shell">rm</span> Delete a file. For example,
-                        <span class="inline_shell">rm&nbsp;titi</span> deletes the file named «&nbsp;titi&nbsp;».</li>
-                     <li><span class="inline_shell">mv</span> Rename a file. For example,
-                        <span class="inline_shell">mv&nbsp;titi&nbsp;toto</span> rename the file «&nbsp;titi&nbsp;» to be «&nbsp;toto&nbsp;».</li>
-                     <li><span class="inline_shell">cp</span> Copy a file. for example,
-                        <span class="inline_shell">cp&nbsp;titi&nbsp;toto</span> creates a copy of the file «&nbsp;titi&nbsp;» with name «&nbsp;toto&nbsp;».</li>
-                     </ul>
-                     <div class="objective">
-                        <p>You have two files&nbsp;:</p>
-                        <p class="shell">
-                           <span class="file_name">momo</span> 50 ko<br/>
-                           <span class="file_name">zora</span> 90 ko
-                        </p>
-                        <p>Your goal is to <b> exchange names </b> of both files, to get&nbsp;:</p>
-                        <p class="shell">
-                           <span class="file_name">momo</span> 90 ko<br/>
-                           <span class="file_name">zora</span> 50 ko
-                        </p>
-                     </div>
-                     
-                  </div>
-               </div>
-            </div>
-            <div id="zone_2">
-               <textarea class="shell" disabled id="shell_output" rows="8" style="overflow-y: scroll"></textarea>
-               <div id="input_line"><span>Command&nbsp;: </span>
-                    <input type="text" id="shell_input" maxlength="50">
-                    <input type="button" value="Exécuter" id="execute"></div>
-               <div><span id="infos"></span></div>
-            </div>
+
+         <p>
+         You have an application to edit files with the following commands&nbsp;:
+         </p>
+         <div class="easy">
+            <ul class="commands">
+            <li><span class="inline_shell">ls</span> Displays the name and size of all files. for example,
+            display <span class="inline_shell">zora&nbsp;&nbsp;50&nbsp;ko</span> indicates that there is a named file «&nbsp;zora&nbsp;» of size 50&nbsp;kB. </li>
+            <li><span class="inline_shell">rm</span> to delete a file. for example,
+                <span class="inline_shell">rm&nbsp;titi</span> deletes the named file «&nbsp;titi&nbsp;».</li>
+             </ul>
+            <p>Your goal is to find the two files with the largest sizes and <b> delete </b> these two files and only those.</p>
          </div>
-         <img src="icon.png" style="display:none">
+         <div class="hard">
+            <ul class="commands">
+            <li><span class="inline_shell">ls</span> Displays the name and size (in KB) of all the files present.</li>
+            <li><span class="inline_shell">rm</span> Delete a file. For example,
+                <span class="inline_shell">rm&nbsp;titi</span> deletes the file named «&nbsp;titi&nbsp;».</li>
+            <li><span class="inline_shell">mv</span> Rename a file. For example,
+                <span class="inline_shell">mv&nbsp;titi&nbsp;toto</span> rename the file «&nbsp;titi&nbsp;» to be «&nbsp;toto&nbsp;».</li>
+            <li><span class="inline_shell">cp</span> Copy a file. for example,
+                <span class="inline_shell">cp&nbsp;titi&nbsp;toto</span> creates a copy of the file «&nbsp;titi&nbsp;» with name «&nbsp;toto&nbsp;».</li>
+            </ul>
+         
+            <table class="objective">
+            <tr>
+            <td>
+            <span>You have two files&nbsp;:</span>
+            </td>
+            <td>
+            <span style="margin-right:0">Your goal is to <b> exchange names </b> of both files, to get&nbsp;:</span>
+            </td>
+            <tr>
+            <td>
+<pre class="shell">
+momo         50 ko
+zora         90 ko
+</pre>
+            </td>
+            <td>
+<pre class="shell">
+momo         90 ko
+zora         50 ko
+</pre>
+            </td>
+            </tr>
+            </table>
+         </div>
+
+
+         <center>
+         <div><textarea class="shell" disabled id="shell_output" rows="8" cols="80" style="overflow-y: scroll"></textarea></div>
+         <div><span>Command&nbsp;: </span>
+              <input type="text" id="shell_input" maxlength="50" size="50">
+              <input type="button" onclick="task.executeInput()" value="Enter"></div>
+         <div><span id="infos"></span></div>
+         </center>
+
+
       </div><!-- task -->
       <div id="solution">
-
+<!--
          <h2>Solution</h2>
 
-      <!-- <div class="medium">
+      <div class="easy">
          <p>Il faut tout d'abord découvrir combien de fichiers existent et quels sont leurs tailles. La commande <span class="inline_shell">ls</span> le permet.</p>
 <pre class="shell">
 $ ls
@@ -254,8 +242,8 @@ $ ls
          <p>
          Les interfaces en «&nbsp;ligne de commande&nbsp;» existent toujours dans les systèmes actuels, même si elles sont souvent cachées<!-- et réservées aux utilisateurs avancés-->. Dans certains cas, l'interface en ligne de commande permet d'effectuer des opérations complexes plus rapidement qu'avec une interface graphique. Surtout, les actions effectuées en ligne de commande peuvent être facilement effectuées de nouveau de manière automatique, ce qui permet de «&nbsp;programmer&nbsp;» des manipulations de fichiers.
          </p>
-
-     </div> --> <!-- task-solution -->
+-->
+	  </div> <!-- task-solution -->
    </body>
 </html>
  
