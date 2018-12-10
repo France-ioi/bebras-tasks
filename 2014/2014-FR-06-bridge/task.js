@@ -1,8 +1,26 @@
-function initTask() {
-   var difficulty;
+function initTask(subTask) {
+   var state = {};
+   var level;
+   var answer = null;
+   var data = {
+      easy: {
+         maxWeight: 6,
+         weights: [ 5, 4, 1, 2],
+         solution: [2, 4, 1, 5]
+      },
+      medium: {
+         maxWeight: 10,
+         weights: [3, 6, 7, 4, 9, 2, 1, 8],
+         solution: [4, 6, 3, 7, 2, 8, 1, 9]
+      },
+      hard: {
+         maxWeight: 14,
+         weights: [2, 6, 12, 1, 9, 11, 5, 3, 13, 8, 4, 10],
+         solution: [6, 8, 5, 9, 4, 10, 3, 11, 2, 12, 1, 13]
+      }
+   };
    var paper;
    var dragAndDrop;
-   var weighted_circles; // TODO: n'a pas l'air de servir à quoi que ce soit
    var weights; 
    var maxWeight;
    var colors = ["#FFFF00", "#00FFFF", "#FF00FF", "#8080FF", "#FF8080", "#00FF00", "#FFFFFF", "#A0A0A0", "#FF8080", "#00FF00", "#FFFFFF", "#A0A0A0"];
@@ -13,25 +31,71 @@ function initTask() {
    var circles = [];
    var radius = 20;
    var space = radius * 2 + 4;
-   var fontSize = 20; // 14;
+   var fontSize = 20;
    var timeoutId;
+
+   subTask.loadLevel = function(curLevel) {
+      level = curLevel;
+      weights = JSON.parse(JSON.stringify(data[level].weights));
+      nbBalls = weights.length;
+      maxWeight = data[level].maxWeight;
+      nbSpacesAfter = nbBalls / 2;
+   };
+
+   subTask.getStateObject = function() {
+      return state;
+   };
+
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+      if(answer){
+      }
+   };
+
+   subTask.resetDisplay = function() {
+      drawBridge();
+      replaceCircles();
+      initButton();
+      displayHelper.hideValidateButton = true;
+   };
+
+   subTask.getAnswerObject = function() {
+      return answer;
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      var defaultAnswer = getInitAnswer();
+      return defaultAnswer;
+   };
+
+   subTask.unloadLevel = function(callback) {
+      stopAnimation();
+      callback();
+   };
+
+   function getResultAndMessage() {
+      var result;
+      var nbBallsCrossing = getNbBallsCrossing(answer);
+      if (nbBallsCrossing == nbBalls) {
+         result = { successRate: 1, message: taskStrings.success };
+      } else {
+         result = { successRate: 0, message: taskStrings.failure };
+      }
+      return result;
+   }
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+
+   function initButton() {
+      $("#cross_or_retry").off("click");
+      $("#cross_or_retry").click(crossOrRetry);
+   };
 
    var getObject = function(id) {
       var circle = paper.circle(0, 0, radius).attr('fill', colors[id]);
-         // circle = paper.image("log. png", -radius, -radius, 2*radius, 2*radius);
-      var text = paper.text(0, 0, weights[id] /*+ "\nkg"*/ ).attr({'font-size' : fontSize, 'font-weight' : 'bold'});
-       $(text.node).css({
-         "-webkit-touch-callout": "none",
-         "-webkit-user-select": "none",
-         "-khtml-user-select": "none",
-         "-moz-user-select": "none",
-         "-ms-user-select": "none",
-         "user-select": "none",
-         "cursor" : "default"
-      });
-      weighted_circles[id] = paper.set();
-      weighted_circles[id].push(circle, text);
-      weighted_circles[id].weight = weights[id];
+      var text = paper.text(0, 0, weights[id]).attr({'font-size' : fontSize, 'font-weight' : 'bold'});
       return [circle, text];
    };
 
@@ -39,12 +103,12 @@ function initTask() {
       return Beav.Array.init(nbBalls, function(iBall) { return iBall; });
    };
 
-   var strAnswerToAnswer = function(strAnswer) {
-      if (strAnswer != "") {
-         return $.parseJSON(strAnswer);
-      }
-      return getInitAnswer();
-   };
+   // var strAnswerToAnswer = function(strAnswer) {
+   //    if (strAnswer != "") {
+   //       return $.parseJSON(strAnswer);
+   //    }
+   //    return getInitAnswer();
+   // };
 
    var getNbBallsCrossing = function(answer) {
       for (var iBall = nbBalls - 2; iBall >= 0; iBall--) {
@@ -55,41 +119,8 @@ function initTask() {
       return nbBalls;
    };
 
-   task.load = function(views, callback) {
-      displayHelper.hideValidateButton = true;
-      platform.getTaskParams(null, null, function(taskParams) {
-         var difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
-         if (difficulty == "easy") {
-            $(".easy").show();
-            maxWeight = 10;
-            weights = [3, 6, 7, 4, 9, 2, 1, 8];
-         } else {
-            $(".hard").show();
-            maxWeight = 14;
-            weights = [2, 6, 12, 1, 9, 11, 5, 3, 13, 8, 4, 10];
-         }
-
-         if (taskParams.initState == "solution") {
-            weights = task.solutions[difficulty];
-         } 
-         
-         nbBalls = weights.length;
-         nbSpacesAfter = nbBalls / 2;
-         if (views.solution) {
-            var solution = task.solutions[difficulty];
-            $("#textSolution").html(solution.join(", "));
-         }
-
-         drawBridge();
-         lastAnswer = getInitAnswer();
-         task.reloadAnswer("", callback);
-      });
-   }
-
-
    var drawBridge = function() {
-      paper = Raphael("anim", 740, space * 2 + 2 * radius);
-      weighted_circles = new Array();
+      paper = subTask.raphaelFactory.create("anim","anim",740, space * 2 + 2 * radius);
       
       dragAndDrop = DragAndDropSystem({
          paper : paper,
@@ -101,7 +132,7 @@ function initTask() {
          },
          drop : function(srcCont, srcPos, dstCont, dstPos, type)
          {
-            lastAnswer = dragAndDrop.getObjects('seq');
+            answer = dragAndDrop.getObjects('seq');
          },
          over : function(srcCont, srcPos, dstCont, dstPos)
          {
@@ -127,10 +158,6 @@ function initTask() {
       paper.text((nbBalls + 1) * space, space * 2 + radius, "Max " + maxWeight + " kg").attr({'font-size': fontSize, 'font-weight':'bold'});
    };
 
-   task.getAnswer = function(callback) {
-      callback(JSON.stringify(lastAnswer));
-   };
-   
    var replaceCircles = function() {
       var objects = dragAndDrop.getObjects('seq');
       for (var i = 0; i < objects.length; i++) {
@@ -139,7 +166,7 @@ function initTask() {
          }
       }
       for (var i = 0; i < nbBalls; i++) {
-         dragAndDrop.insertObject('seq',i, {ident : lastAnswer[i], elements : getObject(lastAnswer[i])});
+         dragAndDrop.insertObject('seq',i, {ident : answer[i], elements : getObject(answer[i])});
       }
       for (var iCircle = 0; iCircle < circles.length; iCircle++) {
          circles[iCircle][0].remove();
@@ -153,45 +180,46 @@ function initTask() {
       displayHelper.stopShowingResult();
    };
 
-   task.reloadAnswer = function(strAnswer, callback) {      
-      stopAnimation();
-      var answer = strAnswerToAnswer(strAnswer);
-      lastAnswer = answer;
-      replaceCircles();
-      callback();
-   };
+   // task.reloadAnswer = function(strAnswer, callback) {      
+   //    stopAnimation();
+   //    var answer = strAnswerToAnswer(strAnswer);
+   //    lastAnswer = answer;
+   //    replaceCircles();
+   //    callback();
+   // };
 
-   task.crossOrRetry = function() {
+   crossOrRetry = function() {
       if ($("#cross_or_retry").text() == taskStrings.attempt) {
-         task.checkSolution();
+         checkSolution();
       } else {
          replaceCircles();
       }
    };
 
-   task.unload = function(callback) {
-      stopAnimation();
-      callback();
-   };
+   // task.unload = function(callback) {
+   //    stopAnimation();
+   //    callback();
+   // };
 
    var stopAnimation = function() {
       if (timeoutId != -1) {
          clearTimeout(timeoutId);
       }
-      bridge.stop();
+      if(bridge) {
+         bridge.stop();
+      }
       for (var iCircle = 0; iCircle < circles.length; iCircle++) {
          circles[iCircle][0].stop();
          circles[iCircle][1].stop();
       }
    };
 
-   task.checkSolution = function() {
+   function checkSolution() {
       if (circles.length > 0) { // TODO: est-ce censé arriver ?
          return;
       }
       $("#cross_or_retry").attr('disabled', 'disabled');
       var answer = dragAndDrop.getObjects('seq');
-      lastAnswer = answer;
       circles = [];
       for (var i = 0; i < nbBalls; i++) {
          dragAndDrop.removeObject('seq', i);
@@ -231,18 +259,6 @@ function initTask() {
          }
       }, time);
    };
-
-   grader.gradeTask = function(strAnswer, token, callback) {
-      platform.getTaskParams(null, null, function(taskParams) {
-         var answer = strAnswerToAnswer(strAnswer);
-         var nbBallsCrossing = getNbBallsCrossing(answer);
-         if (nbBallsCrossing == nbBalls) {
-            callback(taskParams.maxScore, taskStrings.success);
-         } else {
-            callback(taskParams.noScore, taskStrings.failure);
-         }
-      });
-   }
 }
-
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
