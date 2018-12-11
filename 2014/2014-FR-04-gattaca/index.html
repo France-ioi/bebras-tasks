@@ -3,21 +3,19 @@
    <head>
       <meta charset="utf-8">
       <title>2014-FR-04</title>
-      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
-
-      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
-
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'drag_lib-2.0']);
+      </script>
       <script class="remove" type="text/javascript">
 
        var json = {
@@ -39,10 +37,7 @@
           "status": "test"
       };
       </script>
-     <style>
-         .twolines { display:none; }
-     </style>
-     <script>
+      <script>
          var taskStrings = {
             numberOfLetters: "Nombre de lettres inscrites&nbsp;:",
             clickOnCells: "Cliquez sur les cases pour que Castor y inscrive des lettres.",
@@ -55,27 +50,39 @@
                   "Recommencez pour essayer de faire mieux.";
             }
          };
-     </script>
-     <script type="text/javascript" src="task.js"></script>
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .twolines { display:none; }
+      </style>
   </head>
-  <body>
+   <body>
       <div id="task">
       <h1>Le défi</h1>
-          <p>
-         <img src="castor_small.png" style="float:right;margin-left:1em;height:120px" >
-           Castor vous défie au jeu suivant. Quand vous cliquez sur une case, il y inscrit une lettre parmi <b>C</b>, <b>A</b>, <b>S</b> ou <b>T</b>.
-          </p>
-          <p>
-            Votre but est d'obtenir le mot «&nbsp;<span id="target_pattern" style="font-weight:bold"></span>&nbsp;» en cliquant sur un <b>minimum</b> de cases. 
-          </p>
-          <p>
-           Castor est obligé de faire apparaître ce mot quelque part, mais attention, il a une stratégie efficace pour vous empêcher de réussir à le trouver facilement&nbsp;!
-           <span class="twolines">La séquence peut se trouver soit sur la première ligne, soit sur la seconde.</span>      
-          </p>
-          <center>
-             <div id="anim"></div>
-             <b><div id="status" style="margin-bottom:0.8em"></div></b>
-          </center>
+      <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+      <div id="taskContent">        <!-- will contain the content of the task --> 
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+               <img src="castor_small.png" style="float:right;margin-left:1em;height:120px" >
+               Castor vous défie au jeu suivant. Quand vous cliquez sur une case, il y inscrit une lettre parmi <b>C</b>, <b>A</b>, <b>S</b> ou <b>T</b>.
+               </p>
+               <p>
+               Votre but est d'obtenir le mot «&nbsp;<span id="target_pattern" style="font-weight:bold"></span>&nbsp;» en cliquant sur un <b>minimum</b> de cases. 
+               </p>
+               <p>
+               Castor est obligé de faire apparaître ce mot quelque part, mais attention, il a une stratégie efficace pour vous empêcher de réussir à le trouver facilement&nbsp;!
+               <span class="hard">La séquence peut se trouver soit sur la première ligne, soit sur la seconde.</span>      
+               </p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <center>
+               <div id="anim"></div>
+               <b><div id="status" style="margin-bottom:0.8em"></div></b>
+            </center>
+         </div>
+         <img src="icon.png" style="display:none">
       </div><!-- task -->
       <div id="solution">
           <h2>Solution</h2>
@@ -120,5 +127,5 @@
              Le problème consistant à trouver un mot dans un texte a des applications bien au-delà des logiciels de traitement de textes. Par exemple, une séquence d'ADN peut être vue comme une très long texte (avec des milliards de lettres), écrit avec seulement 4 lettres différentes (A, C, G, et T). Un gène particulier correspond à un très long mot. Déterminer si un fragment d'ADN contient ou non un gène donné revient à déterminer si un mot apparaît dans un texte.
              </p>
       </div>
-  </body>
+   </body>
 </html>

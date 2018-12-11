@@ -1,36 +1,163 @@
 // [note: pour la version facile : tac gact]
-function initTask() {
+function initTask(subTask) {
+   var state = {};
+   var level;
+   var answer = null;
+   var data = {
+      easy: {
+         nbColumns: 20,
+         nbLines: 1,
+         target: "CATS",
+         fullScoreThreshold: 10
+      },
+      medium: {
+         nbColumns: 30,
+         nbLines: 1,
+         target: "CATS",
+         fullScoreThreshold: 14
+      },
+      hard: {
+         nbColumns: 30,
+         nbLines: 2,
+         target: "SATTACA",
+         fullScoreThreshold: 20,
+        
+      }
+   };
    var cellWidth = 24;
    var cellHeight = 40;
    var margin = 10;
-   var nbSteps;
+   var nbSteps = 0;
    var minNbSteps = 10000;
-   var letters;
-   var startImpossible;
-   var nbSetLettersForStart;
+   var startImpossible = [[], [], []];;
+   var nbSetLettersForStart = [[], [], []];
    var nbPossibleStarts;
    var paper;
    var texts;
    var cells = [];
    var texts = [];
-   var solved;
+   var solved = false;
    var alphabetLetters = ['A', 'C', 'T', 'S'];
    var fullScoreThreshold;
    var nbColumns;
    var nbLines;
    var target;
-   var difficulty;
-   var turnedCards = [];
+   var randGen;
 
-   var seed = 1;
+   subTask.loadLevel = function(curLevel) {
+      level = curLevel;
+      target = data[level].target;
+      nbLines = data[level].nbLines;
+      nbColumns = data[level].nbColumns;
+      fullScoreThreshold = data[level].fullScoreThreshold;
+      nbPossibleStarts = nbLines * (nbColumns - target.length + 1);
+      randGen = new RandomGenerator(subTask.taskParams.randomSeed);
+   };
+
+   subTask.getStateObject = function() {
+      return state;
+   };
+
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+      if(answer){
+         randGen.reset(answer.seed);
+      }
+   };
+
+   subTask.resetDisplay = function() {
+      $("#target_pattern").html(target);
+      $("#status").html(taskStrings.clickOnCells);
+      initPaper();
+      for (var lin = 0; lin < nbLines; lin++) {
+         for (var col = 0; col < nbColumns; col++) {
+            nbSetLettersForStart[lin][col] = 0;
+            texts[lin][col].attr({text: ' '});// an empty string wouldn't work on ie8
+            cells[lin][col].attr({fill: '#ffffff'});
+         }
+      }
+      for (var iCard = 0; iCard < answer.turnedCards.length; iCard++) {
+         card = answer.turnedCards[iCard];
+         turnCard(card[0], card[1], true);
+      }
+   };
+
+   subTask.getAnswerObject = function() {
+      return answer;
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      var defaultAnswer = {"turnedCards": [], "letters": [[], [], []], "seed": randGen.nextInt(0,1000) };
+      return defaultAnswer;
+   };
+
+   subTask.unloadLevel = function(callback) {
+      callback();
+   };
+
+   function getResultAndMessage() {
+      var result;
+      var success = checkResult();
+      var nbSteps = answer.turnedCards.length;
+      if (success) {
+         if (nbSteps <= fullScoreThreshold) {
+            result = { successRate: 1, message: taskStrings.success(nbSteps) };
+         } else {
+            result = { successRate: 0.5, message: taskStrings.partialSuccess(nbSteps) };
+         }
+      }else{
+         result = { successRate: 0, message: taskStrings.failure + " «&nbsp;" + target + "&nbsp;»." };
+      }
+      return result;
+   }
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+   
+   function initPaper() {
+      paper = subTask.raphaelFactory.create("anim","anim",nbColumns * cellWidth + 2, nbLines * cellHeight + 2 * margin);
+      for (var iLin = 0; iLin < nbLines; iLin++) {
+         cells[iLin] = [];
+         texts[iLin] = [];
+         for (var iCol = 0; iCol < nbColumns; iCol++) {
+            var x = iCol * cellWidth + 2;
+            var y = margin + iLin * cellHeight + 2;
+            var rect = paper.rect(x, y, cellWidth - 2, cellHeight - 2);
+            cells[iLin].push(rect);
+            rect.attr({'stroke': 'black', 'fill': 'white'});
+            var text = paper.text(x + cellWidth / 2, y + cellHeight / 2, "");
+            text.attr({"font-size": 20, "font-weight": "bold"});
+            texts[iLin].push(text);
+            cells[iLin][iCol].click(setClick(iLin,iCol));
+         }
+      }
+   };
+
+   var setClick = function(iLin, iCol) {
+      return function() {
+         if (solved) {
+            return;
+         }
+         if (texts[iLin][iCol].attr("text") != " ") {
+            return;
+         }
+         displayHelper.stopShowingResult();
+         turnCard(iLin, iCol, true);
+         answer.turnedCards.push([iLin, iCol]);
+         if (solved) {
+            platform.validate("done");
+         }
+      }
+   };
+
    function random() {
-       var x = Math.sin(seed++) * 10000;
-       return x - Math.floor(x);
+       return randGen.nextReal();
    }
 
    var getLetter = function(iLin, iCol) {
-      if (letters[iLin][iCol] != undefined) {
-         return letters[iLin][iCol];
+      if (answer.letters[iLin][iCol]) {
+         return answer.letters[iLin][iCol];
       }
       var nbStartsRemovedByLetter = [];
       var isTargetForcedByLetter = [];
@@ -77,7 +204,7 @@ function initTask() {
          maxLetter = 3;
       }
       var letter = alphabetLetters[sortedILetters[Math.min(3, Math.floor(random() * 3) + minLetter)]];
-      letters[iLin][iCol] = letter;
+      answer.letters[iLin][iCol] = letter;
       if (nbPossibleStarts == 1) {
          return letter;
       }
@@ -87,22 +214,23 @@ function initTask() {
                nbPossibleStarts--;
          }
       }
-      //updateDebug();
       return letter;
    };
 
-   var checkSolved = function(iLin, iCol) {
+   var checkSolved = function(iLin, iCol, display) {
       for (var start = Math.max(0, iCol - target.length - 1); start <= Math.min(iCol, nbColumns - target.length); start++) {
          var isFound = true;
          for (var iLetter = 0; iLetter < target.length; iLetter++) {
-            if (letters[iLin][start + iLetter] != target.charAt(iLetter)) {
+            if (answer.letters[iLin][start + iLetter] != target.charAt(iLetter)) {
                isFound = false;
                break;
             }
          }
          if (isFound) {
-            for (var iLetter = 0; iLetter < target.length; iLetter++) {
-               cells[iLin][start + iLetter].attr({fill: '#80FF80'});
+            if(display){
+               for (var iLetter = 0; iLetter < target.length; iLetter++) {
+                  cells[iLin][start + iLetter].attr({fill: '#80FF80'});
+               }   
             }
             return true;
          }
@@ -110,138 +238,25 @@ function initTask() {
       return false;
    };
 
-   var updateDebug = function() {
-      for (var iLin = 0; iLin < nbLines; iLin++) {
-         for (var iCol = 0; iCol < nbColumns - target.length + 1; iCol++) {
-            if (startImpossible[iLin][iCol]) {
-               cells[iLin][iCol].attr({stroke: '#ff0000'});
-            } else {
-               cells[iLin][iCol].attr({stroke: '#008000'});
-            }
-         }
-      }
-   };
-
    var turnCard = function(iLin, iCol, display) {
       var letter = getLetter(iLin, iCol);
       nbSteps++;
-      if (checkSolved(iLin, iCol)) {
+      if (checkSolved(iLin, iCol,true)) {
          solved = true;
       }
       if (display) {
          texts[iLin][iCol].attr({text: letter});
          $("#status").html(taskStrings.numberOfLetters + " " + nbSteps + ".");
       }
-   }
-
-   var setClick = function(rect, iLin, iCol) {
-      rect.node.onclick = function() {
-         if (solved) {
-            return;
-         }
-         if (texts[iLin][iCol].attr("text") != " ") {
-            return;
-         }
-         displayHelper.stopShowingResult();
-         turnCard(iLin, iCol, true);
-         turnedCards.push([iLin, iCol]);
-         if (solved) {
-            platform.validate("done");
-         }
-      }
    };
 
-   task.load = function(views, callback) {
-      platform.getTaskParams(null, null, function(taskParams) {
-         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
-         // LATER: vérifier que difficulty est easy ou hard
-         if (difficulty == "debug") {
-             nbColumns = 8;
-             nbLines = 1;
-             target = "CATS";
-             fullScoreThreshold = 5;
-         } else if (difficulty == "easy") {
-             nbColumns = 20;
-             nbLines = 1;
-             target = "CATS";
-             fullScoreThreshold = 10;
-          } else if (difficulty == "very_hard") { 
-             target = "SATTACA";
-             nbLines = 2;
-             fullScoreThreshold = 22;
-             $(".twolines").show();
-         } else  { // hard
-             nbColumns = 30;
-             nbLines = 1;
-             target = "CATS";
-             fullScoreThreshold = 14;
-         }
-         $("#target_pattern").html(target);
-         $("#anim").css({height: 20 + nbLines * (cellHeight + margin)});
-
-         paper = Raphael(document.getElementById('anim'), nbColumns * cellWidth + 2, nbLines * cellHeight + 2 * margin);
-
-         for (var iLin = 0; iLin < nbLines; iLin++) {
-            cells[iLin] = [];
-            texts[iLin] = [];
-            for (var iCol = 0; iCol < nbColumns; iCol++) {
-               var x = iCol * cellWidth + 2;
-               var y = margin + iLin * cellHeight + 2;
-               var rect = paper.rect(x, y, cellWidth - 2, cellHeight - 2);
-               cells[iLin].push(rect);
-               rect.attr({'stroke': 'black', 'fill': 'white'});
-               var text = paper.text(x + cellWidth / 2, y + cellHeight / 2, "");
-               text.attr({"font-size": 20, "font-weight": "bold"});
-               texts[iLin].push(text);
-               setClick(rect, iLin, iCol);
-               setClick(text, iLin, iCol);
-            }
-         }
-         task.reloadAnswer("", callback);
-      });
-   };
-
-   task.getAnswer = function(callback) {
-      callback(JSON.stringify({startSeed: startSeed, turnedCards: turnedCards}));
-   };
-
-   innerReloadAnswer = function(strAnswer, display) {
-      solved = false;
-      nbSteps = 0;
-      letters = [[], [], []];
-      startImpossible = [[], [], []];
-      nbSetLettersForStart = [[], [], []];
-      turnedCards = [];
-      for (var lin = 0; lin < nbLines; lin++) {
-         for (var col = 0; col < nbColumns; col++) {
-            nbSetLettersForStart[lin][col] = 0;
-            if (display) {
-               texts[lin][col].attr({text: ' '});// an empty string wouldn't work on ie8
-               cells[lin][col].attr({fill: '#ffffff'});
-            }
+   function checkResult() {
+      for(var iCard = 0; iCard < answer.turnedCards.length; iCard++){
+         if(checkSolved(answer.turnedCards[iCard][0],answer.turnedCards[iCard][1], false)){
+            return true;
          }
       }
-      nbPossibleStarts = nbLines * (nbColumns - target.length + 1);
-      if (strAnswer != "") {
-         var answer = $.parseJSON(strAnswer);
-         turnedCards = answer.turnedCards;
-         startSeed = answer.startSeed;
-      } else {
-         startSeed = Math.floor(Math.random() * 100);
-      }
-      seed = startSeed;
-      for (var iCard = 0; iCard < turnedCards.length; iCard++) {
-         card = turnedCards[iCard];
-         turnCard(card[0], card[1], display);
-      }
-      if (display) {
-         $("#status").html(taskStrings.clickOnCells);
-      }
-   };
-
-   task.reloadAnswer = function(strAnswer, callback) {
-      innerReloadAnswer(strAnswer, true);
-      callback();
+      return false;
    };
 
    grader.gradeTask = function(strAnswer, token, callback) {
@@ -261,5 +276,5 @@ function initTask() {
       });
    };
 }
-
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
