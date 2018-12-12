@@ -1,150 +1,44 @@
-function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         mirrors: [ // note : & signifie \
-            "..............&",
-            "/............./",
-            "&..............",
-            "./..../.......&",
-            "...............",
-            "......&....././",
-            "...............",
-            ".&............&",
-            "...............",
-            "............&.."
-         ],
-         minReflection: 5
-      },
-      medium: {
-         mirrors: [ // note : & signifie \
-            "...&..&../.................&..",
-            "............../...............",
-            "./........../............../..",
-            "..............................",
-            "../...........................",
-            "/................&......&.....",
-            "..............................",
-            ".........................../..",
-            "..&......&.....&..............",
-            "......./..../.........../.....",
-            "..............................",
-            "...............&..............",
-            ".......&........./&......&.../",
-            "&../../.......................",
-            "........&..........&.....&...."
-         ],
-         minReflection: 14
-      },
-      hard: {
-         mirrors: [ // note : & signifie \
-            "..&/......................&...",
-            "..../.....................&..&",
-            "/./.&............&............",
-            "...&..&............/....&.....",
-            "./........&...................",
-            ".../.............../..........",
-            "../............./.......&..../",
-            "&........./...................",
-            "/../...................../....",
-            ".............&........&.......",
-            ".../...................&......",
-            "............................&.",
-            "&...................../.......",
-            "...&../.........&........../.&",
-            "../......./..&.........&&...&.",
-            ".&....................../.&/&."
-         ],
-         minReflection: 18
-      }
-   };
-   var nbSteps = 0;
-   var extraMirror = null;
-   var laserPath = null;
-   var mirrorsObjects = null;
+function initTask() {
+   var nbSteps;
+   var extraCol;
+   var extraLig;
+   var extraMirror;
+   var laserPath;
+   var mirrorsObjects;
    var status;
    var nbUsed;
    var paper;
-   var paperWidth;
-   var paperHeight;
-   var nbColumns;
-   var nbLines;
+   var nbColumns = 30;
+   var nbLines = 15;
    var cellWidth = 24;
    var cellHeight = 24;
    var margin = 10;
-   var minReflection;
+   var minReflection = 14;
    var x1 = margin;
-   var x2;
+   var x2 = margin + nbColumns * cellWidth;
    var y1 = margin;
-   var y2;
+   var y2 = margin + nbLines * cellHeight;
    var mainRect = null;
    var solved = false;
-   var mirrors;
+   var mirrors = [ // note : & signifie \
+      "...&..&../.................&..",
+      "............../...............",
+      "./........../............../..",
+      "..............................",
+      "../...........................",
+      "/................&......&.....",
+      "..............................",
+      ".........................../..",
+      "..&......&.....&..............",
+      "......./..../.........../.....",
+      "..............................",
+      "...............&..............",
+      ".......&........./&......&.../",
+      "&../../.......................",
+      "........&..........&.....&...."
+   ];
    var cells = [];
    var rects = [];
-
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      mirrors = data[level].mirrors;
-      minReflection = data[level].minReflection;
-      nbColumns = mirrors[0].length;
-      nbLines = mirrors.length;
-      x2 = x1 + nbColumns * cellWidth;
-      y2 = y1 + nbLines * cellHeight;
-
-   };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-      }
-   };
-
-   subTask.resetDisplay = function() {
-      paperWidth = nbColumns * cellWidth + 2 * margin;
-      paperHeight = nbLines * cellHeight + 2 * margin;
-      paper = subTask.raphaelFactory.create("anim","anim",paperWidth,paperHeight);
-      drawAll();
-      drawExtraMirror();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = [ -1, -1 ];
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result;
-      var success = drawLaser(false);
-      if (success) {
-         if (nbUsed <= minReflection) {
-            result = { successRate: 1, message: taskStrings.targetReached(nbUsed)+" "+taskStrings.success };
-         } else {
-            result = { successRate: 0.5, message: taskStrings.targetReached(nbUsed)+" "+taskStrings.partialSuccess };
-         }
-      }else{
-         result = { successRate: 0, message: taskStrings.failure };
-      }
-      return result;
-   }
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
 
    function isIE () {
      var myNav = navigator.userAgent.toLowerCase();
@@ -154,17 +48,17 @@ function initTask(subTask) {
 
    var setClickNonIE = function(rect, iLig, iCol) {
       rect.node.onclick = function() {
-         if ((iLig == answer[1]) && (iCol == answer[0])) {
+         if ((iLig == extraLig) && (iCol == extraCol)) {
             extraMirror.remove();
-            answer[1] = -1;
-            answer[0] = -1;
+            extraLig = -1;
+            extraCol = -1;
          } else if (mirrors[iLig][iCol] != "."
              || (iLig == 0 && iCol == 0)
              || (iLig == nbLines-1 && iCol == nbColumns-1)) {
             return;         
          } else {
-             answer[1] = iLig;
-             answer[0] = iCol;
+             extraLig = iLig;
+             extraCol = iCol;
          }
          drawExtraMirror();
          drawLaser(true);
@@ -208,12 +102,12 @@ function initTask(subTask) {
             (mirrors[iLig].charAt(iCol) != '.')) {
             return;
          }
-         if ((iLig == answer[1]) && (iCol == answer[0])) {
-            answer[1] = -1;
-            answer[0] = -1;
+         if ((iLig == extraLig) && (iCol == extraCol)) {
+            extraLig = -1;
+            extraCol = -1;
          } else {
-            answer[1] = iLig;
-            answer[0] = iCol;
+            extraLig = iLig;
+            extraCol = iCol;
          }
          drawExtraMirror();
          drawLaser(true);
@@ -228,8 +122,8 @@ function initTask(subTask) {
        if (extraMirror != null) {
          extraMirror.remove();
        }
-       if ((answer[1] != -1) && (answer[0] != -1)) {
-         extraMirror = drawMirror(answer[1], answer[0], '&', '#0000ff');
+       if ((extraLig != -1) && (extraCol != -1)) {
+         extraMirror = drawMirror(extraLig, extraCol, '&', '#0000ff');
        }
    };
 
@@ -275,7 +169,7 @@ function initTask(subTask) {
       solved = false;
       while ((lig >= 0) && (lig < nbLines) && (col >= 0) && (col < nbColumns)) {
          var mirror = mirrors[lig].charAt(col);
-         if ((lig == answer[1]) && (col == answer[0])) {
+         if ((lig == extraLig) && (col == extraCol)) {
             mirror = '&';
          }
          if (mirror != '.') {
@@ -305,8 +199,6 @@ function initTask(subTask) {
          } else {
             displayHelper.validate('stay');
          }
-      }else{
-         return solved;
       }
    };
 
@@ -353,8 +245,10 @@ function initTask(subTask) {
                rect.attr({'fill': '#ffffff', 'opacity': 0});
                if ((iCol == nbColumns-1) && (iLig == nbLines-1)){
                   rect.attr({'fill': '#808080', 'opacity': 0.6})	;
+                   //rect.attr({'fill': 'green', 'opacity': 0.3});
                }
                if ((iCol == 0) && (iLig == 0)){
+                  // rect.attr({'fill': 'black', 'opacity': 1});
                   paper.image("castor_tete.png", x, y, cellWidth-1, cellHeight-1);
                }
                cells[iLig].push(rect);
@@ -399,6 +293,65 @@ function initTask(subTask) {
       mainRect.attr({'fill': '#ffffff', 'opacity': 0, 'stroke': '#808080'});
       setClickIE(mainRect);
    };
+
+   task.load = function(views, callback) {
+      nbSteps = 0;   
+      extraCol = -1;
+      extraLig = -1;
+      extraMirror = null;
+      laserPath = null;
+      mirrorsObjects = null;
+      var paperWidth = nbColumns * cellWidth + 2 * margin;
+      var paperHeight = nbLines * cellHeight + 2 * margin;
+      paper = Raphael('anim', paperWidth, paperHeight);
+      if (paperWidth > 750) {
+         // console.log("Paper width is too large for the page.");
+      }
+      drawAll();
+      callback();
+   };
+
+   task.getAnswer = function(callback) {
+      callback(JSON.stringify([extraCol, extraLig]));
+   };
+
+   task.reloadAnswer = function(strAnswer, callback) {
+      innerReloadAnswer(strAnswer);
+      drawExtraMirror();
+      drawLaser(true);
+      if (isIE()) {
+         drawMainRect();
+      }
+      callback();
+   };
+
+   var innerReloadAnswer = function(strAnswer) {
+      var answer = [-1, -1];
+      if (strAnswer != "") {
+         answer = $.parseJSON(strAnswer);
+      }
+      extraCol = answer[0];
+      extraLig = answer[1];
+   };
+
+   grader.gradeTask = function(strAnswer, token, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         innerReloadAnswer(strAnswer);
+         drawLaser(false);
+         if (solved) {
+            var score = Math.max(taskParams.noScore + 1, taskParams.maxScore - (nbUsed - minReflection)/2);
+            var msg = taskStrings.targetReached(nbUsed) + " ";
+            if (score >= taskParams.maxScore) {
+               msg += taskStrings.success;
+            } else {
+               msg += taskStrings.partialSuccess;
+            }
+            callback(score, msg);
+         } else {
+            callback(taskParams.minScore, taskStrings.failure);
+         }
+      });
+   };
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+
+initTask();

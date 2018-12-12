@@ -1,42 +1,46 @@
 <!DOCTYPE html>
 <html>
    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
       <title>2014-FR-05-laser</title>
-      <script>
-         window.stringsLanguage = 'fr';
-      </script>
-      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+
       <script class="remove" type="text/javascript">
-         var modulesPath = '../../modules';
-         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
-            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'drag_lib-2.0']);
-      </script>
-      <script class="remove" type="text/javascript">
-         var json = {
-             "id": "http://castor-informatique.fr/tasks/2014/2014-FR-05-laser/",
-             "language": "en",
-             "version": "en.01",
-             "authors": "Mathias Hiron, Eljakim Schrijvers",
-             "license": "CC BY-SA 3.0",
-             "translators": [
-             ],
-             "taskPathPrefix": "",
-             "modulesPathPrefix": "",
-             "browserSupport": [
-             ],
-             "acceptedAnswers": [
-             ],
-             "difficulty": {"2": "hard", "3": "medium", "4": "easy"},
-             "categories": {ALG : true, PUZ : true},
-             "answerType": "Interactive, click on a grid",
-             "fullFeedback": true,
-             "status": "test"
-         };
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-FR-05-laser/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Mathias Hiron, Eljakim Schrijvers",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"2": "hard", "3": "medium", "4": "easy"},
+          "categories": {ALG : true, PUZ : true},
+          "answerType": "Interactive, click on a grid",
+          "fullFeedback": true,
+          "status": "test"
+      };
       </script>
       <script>
          taskStrings = {
@@ -52,34 +56,21 @@
       <style>
       </style>
     
-   </head>
-   <body>
+  </head>
+  <body>
       <div id="task">
-         <h1>Laser</h1>
-         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
-         <div id="taskContent">        <!-- will contain the content of the task --> 
-            <div id="zone_1">
-               <div class="consigne">
-                  <p>
-                  Le dessin ci-dessous montre une pièce dans laquelle sont placés des miroirs. Castor fait partir un rayon laser depuis un coin. Le laser se reflète dans les miroirs qu'il rencontre.
-                  </p>
-                  <p>
-                  Castor souhaite ajouter un miroir de sorte que le laser <b>atteigne le coin gris</b>. De plus, il souhaite que le laser se reflète dans <b>le moins de miroirs possible</b>. Cliquez sur le dessin pour placer ce nouveau miroir. Notez que vous ne pouvez pas choisir l'orientation du miroir.
-                  </p>
-               </div>
-            </div>
-            <div id="zone_2">
-               <center>
-                  <div id="anim"></div>
-               </center>
-            </div>
-         </div>
-         <img src="icon.png" style="display:none">
          <img src="castor_tete.png" style="display:none">
+         <h1>Laser</h1>
+         <p>
+         Le dessin ci-dessous montre une pièce dans laquelle sont placés des miroirs. Castor fait partir un rayon laser depuis un coin. Le laser se reflète dans les miroirs qu'il rencontre.
+         </p>
+         <p>
+         Castor souhaite ajouter un miroir de sorte que le laser <b>atteigne le coin gris</b>. De plus, il souhaite que le laser se reflète dans <b>le moins de miroirs possible</b>. Cliquez sur le dessin pour placer ce nouveau miroir. Notez que vous ne pouvez pas choisir l'orientation du miroir.
+         </p>
+         <div id="anim"></div>
       </div><!-- task -->
       <div id="solution">
           <h2>Solution</h2>
-          
             <p>
             Pour trouver la position du miroir, il fallait trouver une stratégie.
             </p>
