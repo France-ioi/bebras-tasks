@@ -2,42 +2,37 @@
 <html>
    <head>
       <meta charset="utf-8">
-      <title>2014-SI-02</title>
-    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="remove" type="text/javascript">
-       var json = {
-          "id": "http://castor-informatique.fr/tasks/2014/2014-SI-02-alien-languages/",
-          "language": "en",
-          "version": "en.01",
-          "authors": "Arthur Chargueraud",
-          "translators": [],
-          "license": "",
-          "taskPathPrefix": "",
-          "modulesPathPrefix": "",
-          "browserSupport": [],
-          "fullFeedback" : true,
-          "acceptedAnswers": []
-      };
+      <title>2014-SI-02-alien-language</title>
+      <script>
+         window.stringsLanguage = 'en';
       </script>
-      <script class="task" type="text/javascript"> 
-         task.solutions = [
-            [ 3, 2, 2, 1, 0, 1, 2 ],
-            [ 1, 0, 1, 2, 2, 3, 2 ] ];
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+      </script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/2014/2014-SI-02-alien-languages/",
+            "language": "en",
+            "version": "en.01",
+            "authors": "Arthur Chargueraud",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback" : true,
+            "acceptedAnswers": []
+         };
       </script>
       <script>
-         var stringsLanguage = 'en';
          var taskStrings = {
             placeNotesOnCells: "Place the notes in the blue boxes to direct the robot.",
             success: "Congratulations, you did it.",
@@ -46,31 +41,43 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-         #programming {
-            /* border: 1px solid black; */
-            height: 130px;
-            width: 512px;
-         }
-         #textSolution0, #textSolution1 {
+         #textSolution0, #textSolution1, #prefix {
             font-weight: bold;
          }
+         #maze {
+            display: block;
+            margin: 1em;
+         };
       </style>
    </head>
    <body>
       <div id="task">
          <img src="icon.png" style="display:none" >
          <h1>Alien Language</h1>
-         <p>
-         <img src="maze.png" style="float:right; margin-left:1em; width:234px" />
-         When Beavers arrived on Pluto, they found a robot can be directed by whistling.
-         When the Beavers whistled «&nbsp;<b>Mi, Mi, La, La, Si</b>&nbsp;», The robot moved from the Beaver box to its current position on the map.
-         </p>
-         <p>
-         Beavers now wants the robot to continues his way to the strange golden palace. 
-	 Write down the note that Beaver should whistle.
-         </p>
-         <div id="programming" class="touch"></div>
-
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  When Beavers arrived on Pluto, they found a robot can be directed by whistling.
+                  When the Beavers whistled «&nbsp;<span id="prefix"></span>&nbsp;», The robot moved from the Beaver box to its current position on the map.
+                  </p>
+                  <p>
+                  Beavers now wants the robot to continues his way to the strange golden palace. 
+         	 Write down the note that Beaver should whistle.
+                  </p>
+                  </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <img src="maze_easy.png" id="maze" class="easy" />
+                  <img src="maze_medium.png" id="maze" class="medium" />
+                  <img src="maze_hard.png" id="maze" class="hard" />
+                  <div id="programming" class="touch"></div>
+               </center>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
       </div><!-- task -->
       <div id="solution">
 <!--
