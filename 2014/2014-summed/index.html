@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2014-summed</title>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": true
+      };
+      </script>
+      <script>
+         var taskStrings = {
+            placeBeavers: "Cliquez sur les cases où se trouvent les 5 castors.",
+            success: "Bravo, vous avez bien placé les castors&nbsp;!",
+            failure: "Les castors ne sont pas à la bonne place. Essayez encore.",
+            missing: function(nb,size) {
+               if(!size){
+                  var sizeText = "";
+               }else if(size == "small"){
+                  var sizeText = " petits";
+               }else if(size == "big"){
+                  var sizeText = " grands";
+               }
+               return "Vous devez placer exactement " + nb + sizeText + " castors."
+            },
+            grid : "Grille :",
+            positions: "Positions :",
+            newGrid: "Nouvelle grille :",
+            newPositions: "Nouvelles positions :"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .maps {
+            margin-left: 0.3em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+         }
+         .maps td {
+            vertical-align: center;
+            text-align: left;
+            padding-right: 0.2em;
+            padding-bottom: 1em;
+         }
+         .legend {
+            width: 5em;
+            color: gray;
+         }
+         #table1_hard, #table2_hard {
+            margin-right: 2em; 
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         
+         <h1>Position secrète</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                    <span class="easy medium">Des <span class="medium">petits castors et des grands</span> castors se trouvent à certaines positions le long d'un chemin.</span>
+                    Afin de se protéger des espions, les castors utilisent une grille de nombres pour décrire leurs positions.
+                  </p>
+                  <p class="easy medium">
+                  Les castors ont maintenant complètement changé de position. Vous avez récupéré la grille de nombres correspondante. Pouvez-vous retrouver la nouvelle position des <span class="hard">petits et des grands</span> castors&nbsp;?
+                  </p>
+                  <p class="hard">Vous avez récupéré la grille décrivant là où les 5 castors habiteront l'année prochaine.
+                  Pouvez-vous reconstruire la carte correspondante&nbsp;?</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <table class="maps easy medium">
+                  <tr><td>
+                     <div class="legend">Grille&nbsp;:</div>
+                  </td><td>
+                     <div id="table1" class="table"></div>
+                  </td></tr>
+                  <tr><td>
+                     <div class="legend">Positions&nbsp;:</div>
+                  </td><td>
+                     <div id="map1" class="map"></div>
+                  </td></tr>
+                  </table>
+               <table class="maps easy medium">
+                  <tr><td>
+                     <div class="legend">Nouvelle grille&nbsp;:</div>
+                  </td><td>
+                     <div id="table2" class="table"></div>
+                  </td></tr>
+                  <tr><td>
+                     <div class="legend">Nouvelles positions&nbsp;:</div>
+                  </td><td>
+                     <div id="map2" class="map"></div>
+                  </td></tr>
+               </table>
+               <center>
+                  <table class="maps hard"><tr><td>
+                     <div class="legend"><!--Grille--></div>
+                     <div id="table1_hard" class="table"></div>
+                     </td><td>
+                     <div class="legend"><!--Carte--></div>
+                     <div id="map1_hard" class="map"></div>
+                     </td></tr>
+                  </table>
+               </center>
+               <center>
+                  <table class="maps hard"><tr><td>
+                     <div class="legend"><!--Nouvelle grille--></div>
+                     <div id="table2_hard" class="table"></div>
+                     </td><td>
+                     <div class="legend"><!--Nouvelle carte--></div>
+                     <div id="map2_hard" class="map"></div>
+                     </td></tr>     
+                  </table>
+               </center>
+               
+               <p>
+               <span class="easy">Cliquez dans les cases ci-dessus pour placer ou retirer des castors. </span>
+               <span class="medium">Cliquez une ou plusieurs fois dans les cases ci-dessus pour y placer des petits et des grands castors. </span>
+               <span class="hard">Cliquez sur la carte ci-dessus pour y placer les castors.</span>
+               </p>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         <img src="beaver.png" style="display:none">
+         <img src="beaver_small.png" style="display:none">
+         <img src="castor_tete_original.png" style="display:none" />
+         <img src="bg_map_claire.png" style="display:none" />
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+         <h2>C'est de l'informatique !</h2>
+
+         <p>
+         La grille de nombres présentée dans ce sujet correspond à un «&nbsp;tableau cumulatif&nbsp;». En effet, chaque case compte le nombre cumulé  <span class="easy"> de castors que l'on a vus jusqu'à une position donnée.</span> <span class="hard"> de grands castors que l'on a vus jusqu'à une position donnée moins le nombre de petits castors que l'on a vus jusqu'à cette même position. Supposons pour commencer qu'il n'y ait que des grands castors.</span> 
+         </p>
+         <p>
+         Un tableau cumulatif est très utile car il permet de déterminer extrêmement efficacement le nombre de castors qui se trouvent entre deux positions données. Il suffit pour cela de faire une simple soustraction. Par exemple, pour compter le nombre de castors dans la zone rouge ci-dessous, il suffit de prendre le nombre de castors situés à gauche de la fin de la zone, et de soustraire le nombre de castors situés à gauche du début de la zone&nbsp;: 4 - 1 = 3 castors.
+         </p>
+         <center><img src="cumul.png" /></center>
+         <p>
+         Bien sûr, sur un exemple aussi simple, on voit bien qu'il y a 3 castors dans la zone considérée. Mais le principe du tableau cumulatif marche tout aussi bien lorsqu'on a des millions de castors répartis sur des millions de cases, voire même des milliards de castors répartis sur des milliards de cases. On peut alors compter le nombre de castors contenus dans n'importe quelle zone sans avoir besoin de regarder toutes les cases de la zone une par une&nbsp: une simple soustraction suffit&nbsp;!
+         </p>
+         <p class="hard">
+         Dans le cas où l'on a aussi des petits castors, le tableau cumulatif permet de déterminer, sur n'importe quelle zone, combien il y a de grands castors de plus que de petits castors. On peut donc, entre autres, utiliser ce tableau pour déterminer si, dans une zone donnée, il y a autant de petits castors que de grands castors&nbsp;: c'est le cas lorsque la case située juste avant le début de la zone contient un nombre égal à la dernière case de la zone.
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 
