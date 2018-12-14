@@ -1,44 +1,130 @@
-function initTask() {
-   var difficulty;
+function initTask(subTask) {
+   var state = {};
+   var level;
+   var answer = null;
+   var data = {
+      easy: {
+         startSizeOfPos: [1, 2, 0, 4, 3],
+         maxScoreNbSteps: 4,
+         firstPancakeY: 80,
+         pancakeMinWidth: 180,
+         pancakeExtraWidth: 60
+      },
+      medium: {
+         startSizeOfPos: [2, 1, 3, 0, 5, 4],
+         maxScoreNbSteps: 5,
+         firstPancakeY: 80,
+         pancakeMinWidth: 180,
+         pancakeExtraWidth: 60
+      },
+      hard: {
+         startSizeOfPos: [2, 5, 10, 1, 7, 9, 0, 6, 11, 3, 8, 4],
+         maxScoreNbSteps: 15,
+         firstPancakeY: 60,
+         pancakeMinWidth: 50,
+         pancakeExtraWidth: 55
+      }
+   };
    var pancakeHeight = 20;
-   var pancakeMinWidth = 180;
-   var pancakeExtraWidth = 60;
+   var pancakeMinWidth;
+   var pancakeExtraWidth;
    var margin = 10;
-   var firstPancakeY = 80;
+   var firstPancakeY;
    var paperWidth = 750;
-   var paperHeight = 250;
+   var paperHeight;
 
-   var startSizeOfPos = [2, 1, 3, 0, 5, 4];
-   var maxScoreNbSteps = 5;
-   var makeInstanceEasy = function() {
-      startSizeOfPos = [1, 2, 0, 4, 3];
-      maxScoreNbSteps = 4;
-   };
-   var makeInstanceMany = function() {
-      startSizeOfPos = [2, 5, 10, 1, 7, 9, 0, 6, 11, 3, 8, 4];
-      maxScoreNbSteps = 15;
-      firstPancakeY = 60;
-      paperHeight = firstPancakeY + startSizeOfPos.length * pancakeHeight + 30;
-      pancakeMinWidth = 50;
-      pancakeExtraWidth = 55;
-   };
+   var startSizeOfPos;
+   var maxScoreNbSteps;
 
    var nbPancakes;
-   var centerX;
+   var centerX = paperWidth / 2;
    var paper;
 
-   var curAnswers = [];
    var curSizeOfPos;     
   
    var rectOfSize = []; 
    var animTime = 700;
    var animating = false;
 
-   var stopAnimation = function() {
-      for (var pos = 0; pos < nbPancakes; pos++) {
-         var rect = rectOfPos(pos);
-         rect.stop();
+   subTask.loadLevel = function(curLevel) {
+      level = curLevel;
+      startSizeOfPos = JSON.parse(JSON.stringify(data[level].startSizeOfPos));
+      maxScoreNbSteps = data[level].maxScoreNbSteps;
+      firstPancakeY = data[level].firstPancakeY;
+      pancakeMinWidth = data[level].pancakeMinWidth;
+      pancakeExtraWidth = data[level].pancakeExtraWidth;
+      paperHeight = firstPancakeY + startSizeOfPos.length * pancakeHeight + 30;
+      nbPancakes = startSizeOfPos.length;
+      curSizeOfPos = startSizeOfPos.slice(0);
+   };
+
+   subTask.getStateObject = function() {
+      return state;
+   };
+
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+      if(answer){
+         curSizeOfPos = playFromStart(answer);
       }
+   };
+
+   subTask.resetDisplay = function() {
+      initPaper();
+      placePancakes();
+      updateStatus();
+   };
+
+   subTask.getAnswerObject = function() {
+      return answer;
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      var defaultAnswer = [];
+      return defaultAnswer;
+   };
+
+   subTask.unloadLevel = function(callback) {
+      stopAnimation();
+      callback();
+   };
+
+   function getResultAndMessage() {
+      var result;
+      var sizeOfPos = playFromStart(answer);
+      var nbSteps = answer.length;
+      if (isSolved(sizeOfPos)) {
+         if (nbSteps <= maxScoreNbSteps) {
+            result = { successRate: 1, message: taskStrings.success };
+            // avec le nombre minimum de retournements
+         } else {
+            var message = taskStrings.almost(nbSteps);
+            if (nbSteps <= 2*maxScoreNbSteps){
+               message += taskStrings.almost_2;
+            }
+            result = { successRate: 0.5, message: message };
+         }
+      } else {
+         result = { successRate: 0, message: taskStrings.failure };
+      }
+      return result;
+   };
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+
+   function initPaper() {
+      paper = subTask.raphaelFactory.create("anim","anim",paperWidth, paperHeight);
+      createPancakes(); 
+   };
+
+   var stopAnimation = function() {
+      // for (var pos = 0; pos < nbPancakes; pos++) {
+      //    var rect = rectOfPos(pos);
+      //    rect.stop();
+      // }
+      subTask.raphaelFactory.stopAnimate("flipAnim");
       animating = false;
    }
 
@@ -55,26 +141,27 @@ function initTask() {
       return rectOfSize[curSizeOfPos[pos]];
    };
 
-   var setClick = function(rect, sizePancake) {
-      rect.node.onclick = function(event) {
+   function flip(sizePancake) {
+      return function() {
          if (animating) {
             return;
          }
          placePancakes();
          var posFlipped = curPosOfSize(sizePancake);
-         curAnswers.push(posFlipped);
+         answer.push(posFlipped);
          flipPancake(curSizeOfPos, posFlipped);
          displayFlipPancake(posFlipped);
          updateStatus();
          if (isSolved(curSizeOfPos)) {
             platform.validate("done");
          }
-      }
+      };
    };
 
    var rotateRect = function(rect, centerY, callback) {
       rect.toFront();
-      rect.animate({"transform": "r180," + centerX + "," + centerY }, animTime, callback);
+      var flipAnim = new Raphael.animation({"transform": "r180," + centerX + "," + centerY },animTime,callback);
+      subTask.raphaelFactory.animate("flipAnim",rect,flipAnim);
    };
 
    var isSolved = function(sizeOfPos) {
@@ -107,16 +194,12 @@ function initTask() {
    };
 
    var updateStatus = function() {
-      if (curAnswers.length == 0) {
+      if (answer.length == 0) {
          $("#cancelLast").attr('disabled', 'disabled');
-         $("#status").html("Cliquez sur une crêpe pour retourner la pile au dessus.");
+         $("#status").html(taskStrings.click);
       } else {
          $("#cancelLast").removeAttr('disabled');
-         var plural = "";
-         if (curAnswers.length > 1) {
-            plural = "s";
-         }
-         $("#status").html("Vous avez effectué " + curAnswers.length + " retournement" + plural + ".");
+         $("#status").html(taskStrings.status(answer.length));
       }
    };
 
@@ -131,7 +214,7 @@ function initTask() {
          var rect = paper.rect(centerX - width / 2, heightOfPos(pos), width, pancakeHeight, 5);
          rect.attr({'fill': '#D09657'});
          rectOfSize[size] = rect;
-         setClick(rect, size);
+         rect.click(flip(size));
       }
    };
 
@@ -145,62 +228,6 @@ function initTask() {
       }
    };
 
-   task.load = function(views, callback) {
-      platform.getTaskParams(null, null, function(taskParams) {
-         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
-         // LATER: check difficulty is easy or hard
-
-         if (difficulty == "easy" || difficulty == "hard") {
-            $(".easy_hard").show();
-            if (difficulty == "easy") {
-               $(".easy").show();
-               makeInstanceEasy();
-            } else {
-               $(".hard").show();
-            }
-         } else {
-            makeInstanceMany();
-            $(".many").show();
-            $("#task_title").html("Davantage de crêpes");
-         }
-
-         nbPancakes = startSizeOfPos.length;
-         if (paperWidth < margin * 2 + pancakeMinWidth + pancakeExtraWidth * nbPancakes) {
-            // console.log("Error: paperWidth is too small.");
-         }
-         centerX = paperWidth / 2;
-         paper = Raphael('anim', paperWidth, paperHeight); // pancakeHeight * nbPancakes
-         curSizeOfPos = startSizeOfPos.slice(0);
-         createPancakes(); 
-         task.reloadAnswer("", callback);
-      });
-   };
-
-   task.unload = function(callback) {
-      stopAnimation();
-      callback();
-   };
-
-   task.getAnswer = function(callback) {
-      callback(JSON.stringify(curAnswers));
-   };
-
-   var answersFromStrAnswer = function(strAnswer) {
-      var answers = [];
-      if (strAnswer != "") {
-         answers = $.parseJSON(strAnswer);
-      }
-      return answers;
-   };
-
-   task.reloadAnswer = function(strAnswer, callback) {
-      curAnswers = answersFromStrAnswer(strAnswer);
-      curSizeOfPos = playFromStart(curAnswers);
-      placePancakes();
-      updateStatus();
-      callback();
-   };
-
    var playFromStart = function(answers) {
       var sizeOfPos = startSizeOfPos.slice(0);
       for (var iFlip = 0; iFlip < answers.length; iFlip++) {
@@ -211,35 +238,13 @@ function initTask() {
 
    task.cancelLastStep = function() {
       stopAnimation();
-      if (curAnswers.length >= 0) {
-         curAnswers.pop();
+      if (answer.length > 0) {
+         answer.pop();
       }
-      curSizeOfPos = playFromStart(curAnswers);
+      curSizeOfPos = playFromStart(answer);
       placePancakes();
       updateStatus();
    };
-
-   grader.gradeTask = function(strAnswer, token, callback) {
-      platform.getTaskParams(null, null, function(taskParams) {
-         var answers = answersFromStrAnswer(strAnswer);
-         var sizeOfPos = playFromStart(answers);
-         var nbSteps = answers.length;
-         if (isSolved(sizeOfPos)) {
-            if (nbSteps <= maxScoreNbSteps) {
-               callback(taskParams.maxScore, "Bravo, vous avez réussi&nbsp;!");
-               // avec le nombre minimum de retournements
-            } else {
-               var score = Math.max(Math.floor(taskParams.maxScore / 2), taskParams.maxScore - (nbSteps - maxScoreNbSteps));
-               var extraMsg = "";
-               if (nbSteps <= 2*maxScoreNbSteps)
-                  extraMsg = " (mais ce n'est pas facile)";
-               callback(score, "Vous avez réussi en " + nbSteps + " retournements. Il est possible de faire mieux" + extraMsg + ".");
-            }
-         } else {
-            callback(taskParams.noScore, "Les crêpes ne sont pas dans le bon ordre.");
-         }
-      });
-   };
 }
-
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();

@@ -1,93 +1,81 @@
 <!DOCTYPE html>
 <html>
    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
       <title>2014-AU-02-pancake-flipping</title>
-      <script>
-         window.stringsLanguage = 'fr';
-      </script>
-      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+       <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+
       <script class="remove" type="text/javascript">
-         var modulesPath = '../../modules';
-         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
-            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
-      </script>
-      <script class="remove" type="text/javascript">
-         var json = {
-            "id": "http://castor-informatique.fr/tasks/2014/2014-AU-02-pancake-flipping/",
-            "language": "fr",
-            "version": "en.01",
-            "authors": "Judith Helgers",
-            "license": "CC BY-SA 3.0",
-            "translators": [
-            ],
-            "taskPathPrefix": "",
-            "modulesPathPrefix": "",
-            "browserSupport": [
-            ],
-            "acceptedAnswers": [
-            ],
-            "difficulty": {"2": "hard", "3": "medium", "4": "easy"},
-            "categories": {ALG : true, PUZ : true},
-            "answerType": "Interactive, click on rectangles",
-            "fullFeedback": true,
-            "status": "evaluation"
-            };
-      </script>
-      <script>
-         var taskStrings = {
-            success: "Bravo, vous avez réussi&nbsp;!",
-            failure: "Les crêpes ne sont pas dans le bon ordre.",
-            almost: function(nb) {
-               return "Vous avez réussi en " + nb + " retournements. Il est possible de faire mieux";
-            },
-            almost_2: " (mais ce n'est pas facile)",
-            click: "Cliquez sur une crêpe pour retourner la pile au dessus.",
-            status: function(nb) {
-               var plural = (nb > 1) ? "s" : "";
-               return "Vous avez effectué " + nb + " retournement" + plural + ".";
-            }
-            
-         };
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2014/2014-AU-02-pancake-flipping/",
+          "language": "fr",
+          "version": "en.01",
+          "authors": "Judith Helgers",
+          "license": "CC BY-SA 3.0",
+          "translators": [
+          ],
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"2": "hard", "3": "medium", "4": "easy"},
+          "categories": {ALG : true, PUZ : true},
+          "answerType": "Interactive, click on rectangles",
+          "fullFeedback": true,
+          "status": "evaluation"
+      };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
+      .easy, .hard, .many, .easy_hard {
+         display: none;
+      }
+      /* use: 
+           <div class="easy_hard">
+           <div class="many">
+      */
       </style>
   </head>
   <body>
       <div id="task">
          <h1 id="task_title">Retourner les crêpes</h1>
-         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
-         <div id="taskContent">        <!-- will contain the content of the task --> 
-            <div id="zone_1">
-               <div class="consigne">
-                  <p>
-                  <img src="castor_crepes.png" style="float:right; margin-left:1em;width:120px" />
-                  <span class="easy_hard">Castor a préparé des crêpes. </span>
-                  <span class="many">Castor a préparé beaucoup de crêpes&nbsp;! </span>
-                  Maintenant, il souhaite les ranger par taille, 
-                  en mettant la plus grande crêpe en bas de la pile.
-                  </p>
-                  <p>
-                  Cliquez sur une crêpe pour retourner la partie de la pile se situant au-dessus. Moins vous effectuerez de retournements, plus vous aurez de points.
-                  </p>
-               </div>
-            </div>
-            <div id="zone_2">
-               <center>
-                  <div id="anim"></div>
+         <p>
+         <img src="castor_crepes.png" style="float:right; margin-left:1em;width:120px" />
+         <span class="easy_hard">Castor a préparé des crêpes. </span>
+         <span class="many">Castor a préparé beaucoup de crêpes&nbsp;! </span>
+         Maintenant, il souhaite les ranger par taille, 
+         en mettant la plus grande crêpe en bas de la pile.
+         </p>
+         <p>
+         Cliquez sur une crêpe pour retourner la partie de la pile se situant au-dessus. Moins vous effectuerez de retournements, plus vous aurez de points.
+         </p>
 
-                  <div style='text-align: right;'><input type="button" id="cancelLast" value="Annuler une étape" onclick="task.cancelLastStep()"></div>
+         <center>
+         <div id="anim"></div>
 
-                  <div id="status"></div>
-               </center>
-            </div>
-         </div>
-         <img src="icon.png" style="display:none">
+         <div style='text-align: right;'><input type="button" id="cancelLast" value="Annuler une étape" onclick="task.cancelLastStep()"></div>
+
+         <div id="status"></div>
+         </center>
+
+
       </div>
       <div id="solution">
           <h2>Solution</h2>
