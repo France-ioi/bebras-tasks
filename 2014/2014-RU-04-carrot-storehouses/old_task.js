@@ -1,34 +1,8 @@
-function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         nbColumns: 16,
-         nbLines: 5,
-         colStart: 0,
-         colEnd: 10,
-         nbSelectedMinimum: 2
-      },
-      medium: {
-         nbColumns: 16,
-         nbLines: 5,
-         colStart: 1,
-         colEnd: 15,
-         nbSelectedMinimum: 3
-      },
-      hard: {
-         nbColumns: 32,
-         nbLines: 6,
-         colStart: 13,
-         colEnd: 31,
-         nbSelectedMinimum: 4
-      }
-   };
-   var nbSelectedMinimum;
-   var nbColumns;
+function initTask() {
+   var nbSelectedMinimum = 4;
+   var nbColumns = 32;
    var nbCells = 2*nbColumns - 1;
-   var nbLines;
+   var nbLines = 6;
    var cellWidth = 24;
    var cellHeight = 40;
    var margin = 2;
@@ -36,85 +10,11 @@ function initTask(subTask) {
    var cells = [];
    var texts = [];
    var isCellSelected = [];
+   var seed = 1;
    var nbSelected = 0;
-   var colStart;
-   var colEnd;
+   var colStart = 13;
+   var colEnd = 31;
    var selectedColor = '#80FF80';
-
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      nbColumns = data[level].nbColumns;
-      nbLines = data[level].nbLines;
-      nbSelectedMinimum = data[level].nbSelectedMinimum;
-      colStart = data[level].colStart;
-      colEnd = data[level].colEnd;
-      initCellSpan();
-   };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-      }
-   };
-
-   subTask.resetDisplay = function() {
-      buildTree('sample', 3, 4, 0, 2, "sample");
-      buildTree('anim', nbLines, nbColumns, colStart, colEnd, "task");
-      for (var iCell = 0; iCell < answer.length; iCell++) {
-         setCellSelected(answer[iCell], true, true);
-      }
-      updateMessage();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = [];
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result;
-      var nbSelected = answer.length;
-      if (nbSelected == 0) {
-         result = { successRate: 0, message: taskStrings.clickOnCells }; 
-      } else if (! isCovered(answer)) {
-         result = { successRate: 0, message: taskStrings.failure }; 
-      } else {
-         if (nbSelected <= nbSelectedMinimum) {
-            result = { successRate: 1, message: taskStrings.boxesSelectedFinal(nbSelected)+taskStrings.success }; 
-         } else {
-            result = { successRate: 0, message: taskStrings.boxesSelectedFinal(nbSelected)+taskStrings.partialFailure };  
-         }
-      }
-      return result;
-   };
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
-
-   function initCellSpan() {
-      var cellID = 1;
-      var cellColumns = nbColumns;
-      for (var iLin = 0; iLin < nbLines; iLin++) {
-         for (var iCol = 0; iCol < nbColumns; iCol += cellColumns) {
-            cellSpan[cellID] = [iCol, iCol+cellColumns];
-            cellID++;
-         }
-         cellColumns /= 2;
-      }
-   };
 
    var isCovered = function(selectedCells) {
       var visited = Beav.Array.init(nbColumns+1, function(col) { return false; });
@@ -144,15 +44,11 @@ function initTask(subTask) {
             cells[cellID].attr({'fill': selectedColor});
          }
          deltaSelected = 1;
-         if($.inArray(cellID,answer) == -1) {
-            answer.push(cellID);
-         }
       } else {
          if (display) {
             cells[cellID].attr({'fill': 'white'});
          }
          deltaSelected = -1;
-         answer.splice($.inArray(cellID, answer),1);
       }
       if (isCellSelected[cellID] == selected) {
          deltaSelected = 0;
@@ -192,7 +88,7 @@ function initTask(subTask) {
    var buildTree = function(divID, lines, cols, selStart, selEnd, type) {
       // type = "sample", or "task" or "solutionHalf" or "solutionFull"
       var sampleValues = [0, 16, 5, 11, 1, 4, 3, 8];
-      var paper = subTask.raphaelFactory.create(divID,divID,cols * cellWidth + 2, lines * cellHeight + 2 * margin);
+      var paper = Raphael(divID, cols * cellWidth + 2, lines * cellHeight + 2 * margin);
       var cellColumns = cols;
       var cellID = 1;
       for (var iLin = 0; iLin < lines; iLin++) {
@@ -222,6 +118,7 @@ function initTask(subTask) {
                }
             }
             rect.attr({'stroke': 'black', 'fill': fill});
+            cellSpan[cellID] = [iCol, iCol+cellColumns];
             cellID++;
          }
          cellColumns /= 2;
@@ -233,6 +130,19 @@ function initTask(subTask) {
       bigRect.attr({'stroke': 'black', 'stroke-width': 4});
    }
 
+   task.load = function(views, callback) {
+      buildTree('sample', 3, 4, 0, 2, "sample");
+      buildTree('anim', nbLines, nbColumns, colStart, colEnd, "task");
+      if (views.solution) {
+         setTimeout(function(){ // timeout as workaround for raphael
+            buildTree('animSolutionHalf', nbLines, nbColumns, colStart, colEnd, "solutionHalf");
+            // buildTree('animSolutionFull', nbLines, nbColumns, colStart, colEnd, "solutionFull");
+         });
+      }
+      updateMessage();
+      callback();
+   };
+
    var getSelectedCells = function() {
       var selectedCells = [];
       for (var iCell = 1; iCell <= nbCells; iCell++) {
@@ -243,6 +153,55 @@ function initTask(subTask) {
       return selectedCells;
    };
 
+   task.getAnswer = function(callback) {
+      callback(JSON.stringify(getSelectedCells()));
+   };
+
+   var selectedCellsOfStrAnswer = function(strAnswer) {
+      var answer = [];
+      if (strAnswer != "") {
+         answer = $.parseJSON(strAnswer);
+      }
+      return answer;
+   };
+
+   var innerReloadAnswer = function(strAnswer, display) {
+      var selectedCells = selectedCellsOfStrAnswer(strAnswer);
+      for (var cellID = 1; cellID <= nbCells; cellID++) {
+         if (isCellSelected[cellID]) {
+            setCellSelected(cellID, false, true);
+         }
+      }
+      for (var iCell = 0; iCell < selectedCells.length; iCell++) {
+         setCellSelected(selectedCells[iCell], true, true);
+      }
+   }
+
+   task.reloadAnswer = function(strAnswer, callback) {
+      innerReloadAnswer(strAnswer, true);
+      callback();
+   };
+
+   grader.gradeTask = function(strAnswer, token, callback) {
+      var selectedCells = selectedCellsOfStrAnswer(strAnswer);
+      taskParams = platform.getTaskParams(null, null, function(taskParams) {
+         var nbSelected = selectedCells.length;
+         if (nbSelected == 0) {
+            callback(taskParams.noScore, "");         
+         } else if (! isCovered(selectedCells)) {
+            callback(taskParams.minScore, taskStrings.failure);
+         } else {
+            var score = Math.max(taskParams.minScore + 1, taskParams.maxScore - (nbSelected - nbSelectedMinimum));
+            var msg = taskStrings.boxesSelectedFinal(nbSelected) + " ";
+            if (nbSelected == nbSelectedMinimum) {
+               msg += taskStrings.success;
+            } else {
+               msg += taskStrings.partialFailure;
+            }
+            callback(score, msg);
+         }
+      });
+   };
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+
+initTask();
