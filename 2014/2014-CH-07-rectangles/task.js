@@ -16,7 +16,6 @@ function initTask(subTask) {
          simulationSpeed: 300
       }
    };
-   var intervalId = -1;
    var side = 6;
    var instructions = [
       taskStrings.takeRedPencil, 
@@ -49,6 +48,7 @@ function initTask(subTask) {
    subTask.loadLevel = function(curLevel) {
       level = curLevel;
       solution = data[level].solution;
+      simulationSpeed = data[level].simulationSpeed;
    };
 
    subTask.getStateObject = function() {
@@ -280,10 +280,7 @@ function initTask(subTask) {
    };
 
    var stopExecution = function() {
-      if (intervalId != -1) {
-         clearInterval(intervalId);
-         intervalId = -1;
-      }
+      subTask.delayFactory.destroy("draw");
       answer.state = states.stopped;
       $("#tryOrReset").attr('value', taskStrings.deleteDrawing);
    };
@@ -383,15 +380,13 @@ function initTask(subTask) {
 
    var executeSlow = function() {
       curSimulation.instrs = getSequence();
-      if (intervalId == -1) {
-         intervalId = setInterval(function() { 
-            simulateStep(curSimulation);
-            updateDisplay();
-            if (curSimulation.completed) {
-               platform.validate("done");
-            }
-         }, simulationSpeed);
-      }
+      subTask.delayFactory.createInterval("draw",function(){
+         simulateStep(curSimulation);
+         updateDisplay();
+         if (curSimulation.completed) {
+            platform.validate("done");
+         }
+      },simulationSpeed);
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
