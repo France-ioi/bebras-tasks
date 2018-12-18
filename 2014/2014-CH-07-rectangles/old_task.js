@@ -1,21 +1,5 @@
-function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         solution: [ 0, 2, 1, 3, 6 ],
-         simulationSpeed: 400
-      },
-      medium: {
-         solution: [ 1, 4, 0, 2, 5, 2, 5, 2, 5, 2 ],
-         simulationSpeed: 300
-      },
-      hard: {
-         solution: [ 2, 6, 2, 5, 0, 2, 1, 5, 2, 6, 2, 6 ],
-         simulationSpeed: 300
-      }
-   };
+function initTask() {
+   var difficulty;
    var intervalId = -1;
    var side = 6;
    var instructions = [
@@ -39,79 +23,50 @@ function initTask(subTask) {
    var height = 300;
    var widthLabel = 180;
    var heightLabel = (height - 16) / maxSequenceLength;
+   var simulationSpeeds = { easy: 400, hard: 300 };
    var simulationSpeed; 
    var paper;
    var states = {
       initial: 0,
       animating: 1,
       stopped: 2 };
+   var state = states.initial;
 
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      solution = data[level].solution;
-   };
+   task.load = function(views, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: vérifier que difficulty est easy ou hard
+         solution = task.solutions[difficulty];
+         simulationSpeed = simulationSpeeds[difficulty];
 
-   subTask.getStateObject = function() {
-      return state;
-   };
+         var dimension1 = 150;
+         drawing1 = buildGrid("drawing1", dimension1);
+         var solSimulation = simulateAll(solution);
+         updateGrid(drawing1, solSimulation.colors);
+         targetColors = solSimulation.colors;
 
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-      }
-   };
+         var dimension2 = 200;
+         drawing2 = buildGrid("drawing2", dimension2);
+         var robotSize = 15;
+         drawing2.robot = drawing2.paper.image("robot.png", 0, 0, robotSize, robotSize);
+         drawing2.robot.size = robotSize;
 
-   subTask.resetDisplay = function() {
-      var dimension1 = 150;
-      drawing1 = buildGrid("drawing1", dimension1);
-      var solSimulation = simulateAll(solution);
-      updateGrid(drawing1, solSimulation.colors);
-      targetColors = solSimulation.colors;
+         buildInstructions();
+         clearDisplay();
 
-      var dimension2 = 200;
-      drawing2 = buildGrid("drawing2", dimension2);
-      var robotSize = 15;
-      drawing2.robot = drawing2.paper.image("robot.png", 0, 0, robotSize, robotSize);
-      drawing2.robot.size = robotSize;
+         if (views.solution) {
+            $.each(task.solutions[difficulty], function(iStep, iInstr) {
+              $("#textSolution").append("<li>" + instructions[iInstr] + "</li>");
+            });
+         }
 
-      buildInstructions();
-      reloadAnswer();
-      $("#tryOrReset").off("click");
-      $("#tryOrReset").click(tryOrReset);
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = { "seq": [], "state": states.initial };
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result;
-      if (answer.seq.length == 0) {
-         result = { successRate: 0, message: taskStrings.moveInstructions };
-      }
-      var simulation = simulateAll(answer.seq);
-      var finalColors = simulation.colors;
-      var solSimulation = simulateAll(solution);
-      targetColors = solSimulation.colors;
-      if (Beav.Object.eq(targetColors, finalColors)) {
-         result = { successRate: 1, message: taskStrings.success };
-      } else {
-         result = { successRate: 0, message: taskStrings.failure };
-      }
-      return result;
-   }
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
+         if (taskParams.showSolutionOnLoad == 1) {
+            task.reloadAnswer(JSON.stringify(solution), callback);
+            return;
+         } 
+         
+         callback();
+      });
    };
 
    var getInstructionObject = function(iInstr) {
@@ -132,13 +87,12 @@ function initTask(subTask) {
    }
 
    var buildInstructions = function() {
-      paper = subTask.raphaelFactory.create("programming","programming",width, height);
+      paper = Raphael("programming", width, height);
       dragAndDrop = DragAndDropSystem({
          paper : paper,
          drop: function(srcCont, srcPos, dstCont, dstPos, dropType) {
-            answer.seq = dragAndDrop.getObjects('seq');
             displayHelper.stopShowingResult();
-            if (answer.state != states.initial) {
+            if (state != states.initial) {
                clearDisplay();
             }
          },
@@ -196,21 +150,33 @@ function initTask(subTask) {
       return paper;
    };
 
-   var reloadAnswer = function() {
-      while ((answer.seq.length > 0) && (answer.seq[answer.seq.length - 1] == null)) {
-         answer.seq.pop();
+   var answerOfStrAnswer = function(strAnswer) {
+      if (strAnswer == "") {
+         return [];
+      }
+      return $.parseJSON(strAnswer);
+   };
+
+   task.reloadAnswer = function(strAnswer, callback) {
+      clearDisplay();
+      var sequence = answerOfStrAnswer(strAnswer);
+      while ((sequence.length > 0) && (sequence[sequence.length - 1] == null)) {
+         sequence.pop();
       }
       dragAndDrop.removeAllObjects('seq');
-      dragAndDrop.insertObjects('seq', 0, $.map(answer.seq, function(iInstr) {
+      dragAndDrop.insertObjects('seq', 0, $.map(sequence, function(iInstr) {
          return { ident : iInstr, elements: getInstructionObject(iInstr) }; })
       );
-      if(answer.state != states.initial) {
-         curSimulation = simulateAll(answer.seq);
-         stopExecution();
-      }else{
-         clearDisplay();
-      }      
+      curSimulation = simulateAll(sequence);
       updateDisplay();
+      if (sequence.length > 0) {
+         stopExecution();
+      }
+      callback();
+   };
+
+   task.getAnswer = function(callback) {               
+      callback(JSON.stringify(dragAndDrop.getObjects('seq')));
    };
 
    var getSize = function(dimension) {
@@ -225,7 +191,7 @@ function initTask(subTask) {
    };
 
    var buildGrid = function(name, dimension) {
-      var paper = subTask.raphaelFactory.create(name,name,dimension,dimension);
+      var paper = Raphael(name, dimension, dimension); 
       var size = getSize(dimension);
       var segments = Beav.Matrix.init(side, side, function(x,y) {
          var corner = getCorner(dimension, x, y);
@@ -279,12 +245,17 @@ function initTask(subTask) {
          success: false };
    };
 
+   task.unload = function(callback) {
+      stopExecution();
+      callback();
+   };
+
    var stopExecution = function() {
       if (intervalId != -1) {
          clearInterval(intervalId);
          intervalId = -1;
       }
-      answer.state = states.stopped;
+      state = states.stopped;
       $("#tryOrReset").attr('value', taskStrings.deleteDrawing);
    };
 
@@ -303,12 +274,12 @@ function initTask(subTask) {
             simulation.message = taskStrings.noInstructionProvided;
          } else {
             simulation.completed = true;
-            simulation.message = taskStrings.executionOver;
+            simulation.message = taskStrings.exercutionOver;
          }
          if (Beav.Object.eq(targetColors, simulation.colors)) {
             simulation.success = true;
          }
-         stopExecution();
+         stopExecution();         
       } else {
          var colors = simulation.colors;
          var robot = simulation.robot;
@@ -358,25 +329,25 @@ function initTask(subTask) {
    var clearDisplay = function() {
       stopExecution();
       curSimulation = getSimulationInit([]);
-      answer.state = states.initial;
+      state = states.initial;
       $("#tryOrReset").attr('value', taskStrings.attempt);
       updateDisplay();
    };
 
    var getSequence = function() {
-      var sequence = answer.seq;
+      var sequence = dragAndDrop.getObjects('seq');
       return $.grep(sequence, function(i) { return i !== null; });
    };
 
-   function tryOrReset() {
+   task.tryOrReset = function() {
       displayHelper.stopShowingResult();
-      if (answer.state == states.initial) {
-         answer.state = states.animating;
+      if (state == states.initial) {
+         state = states.animating;
          $("#tryOrReset").attr('value', taskStrings.stop);
          executeSlow();
-      } else if (answer.state == states.animating) {
+      } else if (state == states.animating) {
          stopExecution();
-      } else if (answer.state == states.stopped) {
+      } else if (state == states.stopped) {
          clearDisplay();
       } 
    }
@@ -393,6 +364,22 @@ function initTask(subTask) {
          }, simulationSpeed);
       }
    };
+
+   grader.gradeTask = function(strAnswer, token, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         var sequence = answerOfStrAnswer(strAnswer);
+         if (sequence.length == 0) {
+            callback(taskParams.noScore, taskStrings.moveInstructions);
+            return;
+         }
+         var simulation = simulateAll(sequence);
+         var finalColors = simulation.colors;
+         if (Beav.Object.eq(targetColors, finalColors)) {
+            callback(taskParams.maxScore, taskStrings.success);
+         } else {
+            callback(taskParams.minScore, taskStrings.failure);
+         }
+      });
+   }
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+initTask();
