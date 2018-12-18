@@ -3,19 +3,20 @@
    <head>
       <meta charset="utf-8">
       <title>2014-CH-07</title>
-    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', //'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+      </script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-CH-07-rectangles/",
@@ -54,20 +55,13 @@
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
-      <script class="task" type="text/javascript">
-         // Note: needed for displaying the task! 
-         task.solutions = {
-            easy: [ 0, 2, 1, 3, 6 ],
-            hard: [ 1, 4, 0, 2, 5, 2, 5, 2, 5, 2 ]
-            // harder: [ 2, 6, 2, 5, 0, 2, 1, 5, 2, 6, 2, 6 ]
-            };
-      </script>
       <style>
          #drawing1, #drawing2 {
             margin-left: 1em;
          }
          #drawing1 {
             margin-top: -0.5em;
+            float: right;
          }
          #drawing2 {
          }
@@ -75,6 +69,9 @@
             /*border: 1px solid black;*/
             height: 300px;
             width: 440px;
+         }
+         .columns{
+            margin-top: 1em;
          }
          .columns td {
             vertical-align: top;
@@ -103,42 +100,47 @@
    </head>
    <body>
       <div id="task">
+         <h1>Robot Drawing</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  <div id="drawing1"></div>
+                  You have a robot. This robot can move and draw black or red lines.
+                  </p>
+                  <p>         
+                  Program the robot to draw the target image.
+                  </p>
+                  <p>
+                  The robot is represented by the green triangle.
+                  </p>
+                  <p>Drag the instructions below to Build your program. </p>
+                  <p><b>Your Program will repeat itself 4 times.</b></p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <table class="columns" style="clear: both">
+               <tr>
+               <td style="width:220px"><div class="column_head">Instructions</div></td>
+               <td style="width:220px"><div class="column_head">Build your Program</div></td>
+               <td style="width:250px"><div class="column_head">Result after 4 repetitions</div></td>
+               </tr>
+               <tr>
+               <td colspan="2">
+                  <div id="programming" class="touch"></div>
+               </td><td>
+                  <div id="drawing2" style="margin-top: 1em"></div>
+                  <div><span id="message"></span></div>
+               </td></tr></table>
+       
+               <div class="buttons" style="text-align: center">
+                  <input id="tryOrReset" type="button" value="Essayer">
+               </div>
+            </div>
+         </div>
          <img src="icon.png" style="display:none" >
          <img src="robot.png" style="display:none">
-         <h1>Robot Drawing</h1>
-         <p>
-         <div style="float: right; margin-top:-1.5em"><div id="drawing1"></div></div>
-         You have a robot. This robot can move and draw black or red lines.
-         </p>
-<p>         
-Program the robot to draw the target image.
-</p>
-         <p>
-         The robot is represented by the green triangle.
-         </p>
-         <p>
-         Drag the instructions below to Build your program. </p>
-         <p>
-         <b> Your Program will repeat itself 4 times. </ b></p>
-         
-         <table class="columns" style="clear: both">
-         <tr>
-         <td style="width:220px"><div class="column_head">Instructions</div></td>
-         <td style="width:220px"><div class="column_head">Build your Program</div></td>
-         <td style="width:250px"><div class="column_head">Result after 4 repetitions</div></td>
-         </tr>
-         <tr>
-         <td colspan="2">
-            <div id="programming" class="touch"></div>
-         </td><td>
-            <div id="drawing2" style="margin-top: 1em"></div>
-            <div><span id="message"></span></div>
-         </td></tr></table>
- 
-         <div class="buttons" style="text-align: center">
-            <input id="tryOrReset" type="button" onclick="task.tryOrReset()" value="Essayer">
-         </div>
-   
       </div><!-- task -->
       <div id="solution">
 <!--
