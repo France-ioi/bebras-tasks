@@ -1,52 +1,4 @@
-function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         walls: [
-            "##########",
-            "#.#......#",
-            "#........#",
-            "###..#...#",
-            "#....#...#",
-            "#.......##",
-            "#........#",
-            "#.#.......",
-            "##########" ],
-         startPos: [[1,1],[7,1]],
-         solution: [ 0, 1, 2, 1, 2, 3, 2, 1 ] 
-      },
-      medium: {
-         walls: [
-            "##########",
-            "#.#......#",
-            "#........#",
-            "###..#...#",
-            "#....#...#",
-            "#.......##",
-            "#........#",
-            "#.#..#....",
-            "##########" ],
-         startPos: [[1,1],[7,1]],
-         solution: [ 0, 1, 0, 1, 2, 1, 2, 3, 2, 1, 2, 1 ] 
-      },
-      hard: {
-         walls: [
-            "##########",
-            "#.#.....##",
-            "#........#",
-            "#.#..#...#",
-            "#....#...#",
-            "#......###",
-            "##.......#",
-            "##.#.#.#..",
-            "##########" ],
-         startPos: [[1,1],[5,1]],
-         solution: [ 1, 0, 3, 2, 1, 2, 1, 0, 3, 2, 1, 2, 1 ] 
-      }
-   };
-
+function initTask() {
    var borderSize = 2;
    var movingTime = 300;
    var speedFactor = 2;
@@ -55,13 +7,37 @@ function initTask(subTask) {
    var nbMarbles = 2;
    var nbLines = 9
    var nbColumns = 10;
-   var walls;
-   var startPos;
+   var walls = [
+      "##########",
+      "#.#......#",
+      "#........#",
+      "###..#...#",
+      "#....#...#",
+      "#.......##",
+      "#........#",
+      "#.#..#....",
+      "##########"];
+   var makeWallsEasy = function() {
+      walls[7] = "#.#.......";
+   };
+   var startPos = [[1,1],[7,1]];
    var margin = 10;
    var animTime = 300;
    var animDelay = 600;
    var marbles = [];
+   
+   // state:
    var curSimulation;
+   var initSimulation = function() {
+      var pos = [[0,0],[0,0]];
+      for (var iMarble = 0; iMarble < nbMarbles; iMarble++) {
+         pos[iMarble] = [startPos[iMarble][0], startPos[iMarble][1]];
+      }
+      return {
+         pos: pos,
+         iArrivee: [0, 0],
+         nbArrivees: 0 };
+   };
 
    var paperLaby;  
    var paperWidth = 380;
@@ -73,6 +49,7 @@ function initTask(subTask) {
    var nbRec = 0;
    var curStep = 0;
 
+   var difficulty;
    var texts = [
       taskStrings.up,
       taskStrings.right,
@@ -87,88 +64,12 @@ function initTask(subTask) {
       stepByStep: 3
    };
    var playMode = 0;
-
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      walls = data[level].walls;
-      startPos = data[level].startPos;
+   var playInterval = null;
+   var defaultAnswers = { 
+      hard: [0, 2, 1, 3, 0],
+      easy: [0, 2, 1, 3, 0]
    };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-      }
-   };
-
-   subTask.resetDisplay = function() {
-      curSimulation = initSimulation();
-      createLaby();
-      drawLaby();
-      initButtons();
-      reloadAnswer();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = [0, 2, 1, 3, 0];
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      stopAnimation();
-      if(dragAndDrop) {
-         dragAndDrop.disable();
-      }
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result;
-      var simulation = initSimulation();
-      var iStep = 0;
-      var nbSteps = 0;
-      while ((iStep < answer.length) && (answer[iStep] != null)) {
-         updateMarblesPos(simulation, answer[iStep], false);
-         iStep++;
-      }
-      if (simulation.nbArrivees == 2) {
-         result = { successRate: 1, message: taskStrings.success };
-      } else if (simulation.nbArrivees == 1) {
-         result = { successRate: 0.5, message: taskStrings.partialFailure };
-      } else {
-         result = { successRate: 0, message: taskStrings.failure };
-      }
-      return result;
-   }
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
-
-   function initSimulation() {
-      var pos = [[0,0],[0,0]];
-      for (var iMarble = 0; iMarble < nbMarbles; iMarble++) {
-         pos[iMarble] = [startPos[iMarble][0], startPos[iMarble][1]];
-      }
-      return {
-         pos: pos,
-         iArrivee: [0, 0],
-         nbArrivees: 0 };
-   };
-
-   function initButtons() {
-      $("#play, #step, #restart").off("click");
-      $("#play").click(play);
-      $("#step").click(step);
-      $("#restart").click(resetLaby);
-   };
+   var defaultAnswer;
 
    var updateMarblesPos = function(simulation, dir, updateDisplay) {
       var pos = simulation.pos;
@@ -193,7 +94,7 @@ function initTask(subTask) {
          
             col = newCol;
             lin = newLin;
-            if (col == nbColumns-1) { // La bille sort
+            if (col == nbColumns-1) { // La billes sort
                simulation.iArrivee[iMarble] = 2 - simulation.nbArrivees;
                simulation.nbArrivees++;
                if (updateDisplay) {
@@ -214,14 +115,24 @@ function initTask(subTask) {
       }
    };
 
+   task.unload = function(callback) {
+      stopAnimation();
+      if(dragAndDrop) {
+         dragAndDrop.disable();
+      }
+      callback();
+   };
+
    var stopAnimation = function() {
-      subTask.delayFactory.destroy("play");
+      if (playInterval != null) {
+         playInterval = clearInterval(playInterval);
+      }
       for (var iMarble = 0; iMarble < nbMarbles; iMarble++) {
-         subTask.raphaelFactory.destroy("anim"+iMarble);
+         marbles[iMarble].stop();
       }
    };
 
-   function resetLaby() {
+   task.resetLaby = function() {
       playMode = playModes.stopped;
       stopAnimation();
       displayHelper.stopShowingResult();
@@ -252,8 +163,8 @@ function initTask(subTask) {
             $(".step").attr('disabled', 'disabled');
          }
       }
-      if (playMode != playModes.playing){
-         subTask.delayFactory.destroy("play");
+      if ((playInterval != null) && (playMode != playModes.playing)) {
+         playInterval = clearInterval(playInterval);
       }
       if (validate) {
          if (curSimulation.nbArrivees == 2) {
@@ -264,24 +175,26 @@ function initTask(subTask) {
       }
    }
 
-   function step() {
+   task.step = function() {
       if (playMode != playModes.stepByStep) {
-         resetLaby();   
+         task.resetLaby();   
       }
       $(".play").attr('disabled', 'disabled');
       playMode = playModes.stepByStep;
       executeStep();
    }
 
-   function play() {
+   task.play = function() {
       if (playMode == playModes.stop) {
          executeStep();
       } else {
-         resetLaby();
+         task.resetLaby();
       }
       $(".play, .step").attr('disabled', 'disabled');
       playMode = playModes.playing;
-      subTask.delayFactory.createInterval("play",executeStep, animDelay);
+      playInterval = setInterval(function() {
+         executeStep();
+      }, animDelay);
    }
 
    var animMarble = function(iMarble) {
@@ -293,7 +206,7 @@ function initTask(subTask) {
          anim = Raphael.animation({'cx' : centreX, 'cy' : centreY}, animTime);
       else
          anim = Raphael.animation({'cx' : centreX, 'cy' : centreY}, animTime, 'bounce');
-      subTask.raphaelFactory.animate("anim"+iMarble,marbles[iMarble],anim);
+      marbles[iMarble].animate(anim);
    };
 
 
@@ -316,7 +229,7 @@ function initTask(subTask) {
    };
 
    var createLaby = function() {
-      paperLaby = subTask.raphaelFactory.create("laby","laby", (nbColumns + 2) * cellSize + 2 * margin, nbLines * cellSize + 2 * margin);
+      paperLaby = Raphael("laby", (nbColumns + 2) * cellSize + 2 * margin, nbLines * cellSize + 2 * margin);
 
       //Quadrillage
       var setRectGrille = paperLaby.set();
@@ -344,8 +257,33 @@ function initTask(subTask) {
       }
    }
 
+   task.load = function(views, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: la fonction ci-dessus doit vérifier que difficulty est easy ou hard.
+         defaultAnswer = defaultAnswers[difficulty];
+         if (difficulty == "easy") {
+            makeWallsEasy();
+         }
+
+         if (taskParams.initState == "solution") {
+            defaultAnswer = task.solution;
+         } 
+
+         if (views.solution) {
+            var labels = $.map(task.solution, function(iInstr) {return texts[iInstr];});
+            $("#textSolution").html(labels.join(", "));
+         }
+
+         curSimulation = initSimulation();
+         createLaby();
+         drawLaby();
+         task.reloadAnswer("", callback);
+      });
+   }
+
    var drawLaby = function() {
-      paper = subTask.raphaelFactory.create("anim","anim",paperWidth, paperHeight);
+      paper = Raphael('anim', paperWidth, paperHeight);
 
       paper.text(paperWidth / 4, 15, taskStrings.availableCommands).attr({'font-size':16, 'font-weight': 'bold'});
       paper.text(3 * paperWidth / 4, 15, taskStrings.yourProgram).attr({'font-size':16, 'font-weight': 'bold'});
@@ -379,7 +317,6 @@ function initTask(subTask) {
             return false;
          },
          drop : function(srcContId, srcPos, dstContId, dstPos, type) {
-            answer = dragAndDrop.getObjects('seq');
             if (dstContId == 'seq') {
                nbRec++;
             }
@@ -390,7 +327,7 @@ function initTask(subTask) {
                return;
             }
             if (dstPos < curStep) {
-               resetLaby();
+               task.resetLaby();
             } else if (playMode == playModes.stepByStep) {
                $(".step").removeAttr('disabled');
             }
@@ -433,7 +370,11 @@ function initTask(subTask) {
       }
    };
 
-   var reloadAnswer = function() {
+   task.reloadAnswer = function(strAnswer, callback) {
+      var answer = defaultAnswer;
+      if (strAnswer != "") {
+         answer = $.parseJSON(strAnswer);
+      }
       var prg = dragAndDrop.getObjects('seq');
       for (var iObject = 0; iObject < prg.length; iObject++) {
          if (prg[iObject] != null) {
@@ -449,9 +390,36 @@ function initTask(subTask) {
             nbRec++;
          }
       }
-      resetLaby();
+      task.resetLaby();
+      callback();
    };
 
+   task.getAnswer = function(callback) {
+      callback(JSON.stringify(dragAndDrop.getObjects('seq')));
+   };
+
+   grader.gradeTask = function(strAnswer, token, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         var answer = defaultAnswer;
+         if (strAnswer != "") {
+            answer = $.parseJSON(strAnswer);
+         }
+         var simulation = initSimulation();
+         var iStep = 0;
+         var nbSteps = 0;
+         while ((iStep < answer.length) && (answer[iStep] != null)) {
+            updateMarblesPos(simulation, answer[iStep], false);
+            iStep++;
+         }
+         if (simulation.nbArrivees == 2) {
+            callback(taskParams.maxScore, taskStrings.success);
+         } else if (simulation.nbArrivees == 1) {
+            callback(taskParams.minScore, taskStrings.partialFailure);
+         } else {
+            callback(taskParams.minScore, taskStrings.failure); 
+         }
+      });
+   };
 };
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+
+initTask();

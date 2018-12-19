@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html>
    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
       <title>2014-FR-08-maze</title>
-      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-2.0.js" id="http://castor-informatique.fr/tasks/modules/drag_lib-2.0.js"></script>
-
-      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
       <script class="remove" type="text/javascript">
-
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+      </script>
+      <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-FR-08-maze/",
           "language": "en",
@@ -41,10 +38,6 @@
           "status": "test"
       };
       </script>
-      <script class="solution" type="text/javascript">
-      // Not needed for task or grading
-      task.solution = [0, 1, 0, 1, 2, 1, 2, 3, 2, 1, 2, 1];
-      </script>
       <script>
          var taskStrings = {
             up: "haut",
@@ -60,55 +53,61 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-      #laby {
-         text-align:center;
-      }
-      #laby > table {
-         background:white;
-         padding:5px;
-         margin:auto;
-      }
-      #simuToolbar {
-         /*text-align:center;*/
-      }
-      .instruction {
-         border: solid black 1px;
-         text-align: center;
-      }
-      #textSolution {
-         font-weight: bold;
-       }
+         #laby {
+            text-align:center;
+         }
+         #laby > table {
+            background:white;
+            padding:5px;
+            margin:auto;
+         }
+         .instruction {
+            border: solid black 1px;
+            text-align: center;
+         }
+         #textSolution {
+            font-weight: bold;
+          }
       </style>
    </head>
    <body>
       <div id="task">
          <h1>Deux billes</h1>
-         <p>
-         Écrivez un programme permettant de <b>faire sortir les deux billes</b> du labyrinthe. 
-         Chaque commande du programme fait rouler les billes dans une certaine direction.
-         </p>
-         <p>      
-         Commencez par exécuter l'exemple ci-dessous pour bien comprendre le fonctionnement. 
-         Faites ensuite glisser les commandes afin de modifier le programme.
-         </p>
-
-         <table>
-            <tr>
-               <td style="vertical-align:top; width:380px">
-                  <div id="anim" class="touch"></div>
-               </td>
-               <td style="vertical-align:top; width:380px">
-                  <div id="laby" style="margin-left:0.8em">
-                  </div>
-                  <!-- Toolbar -->
-                  <div id="simuToolbar">
-                     <input type="button" class="play" onclick="task.play()" value="Tout exécuter">
-                     <input type="button" class="step" onclick="task.step()" value="Une étape">
-                     <input type="button" class="restart" onclick="task.resetLaby(true)" value="Remettre à zéro">
-                  </div>
-               </td>
-            </tr>
-         </table>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  Écrivez un programme permettant de <b>faire sortir les deux billes</b> du labyrinthe. 
+                  Chaque commande du programme fait rouler les billes dans une certaine direction.
+                  </p>
+                  <p>      
+                  Commencez par exécuter l'exemple ci-dessous pour bien comprendre le fonctionnement. 
+                  Faites ensuite glisser les commandes afin de modifier le programme.
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <table>
+                  <tr>
+                     <td style="vertical-align:top; width:380px">
+                        <div id="anim" class="touch"></div>
+                     </td>
+                     <td style="vertical-align:top; width:380px">
+                        <div id="laby" style="margin-left:0.8em">
+                        </div>
+                        <!-- Toolbar -->
+                        <div id="simuToolbar">
+                           <input type="button" id="play" value="Tout exécuter">
+                           <input type="button" id="step" value="Une étape">
+                           <input type="button" id="restart" value="Remettre à zéro">
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none"> 
       </div>
       <div id="solution">
        <h2>Solution</h2>
