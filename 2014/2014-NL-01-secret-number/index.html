@@ -3,19 +3,20 @@
    <head>
       <meta charset="utf-8">
       <title>2014-NL-01</title>
-    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/base64/jquery.base64.min.js" id="jquery.base64.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+      </script>
+      <script class="module" type="text/javascript" src="../../modules/ext/base64/jquery.base64.min.js" id="jquery.base64.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-NL-01-secret-number/",
@@ -32,94 +33,113 @@
           "usesRandomSeed": true
       };
       </script>
+      <script>
+         var taskStrings = {
+            empty: "Tapez des mots dans les boîtes ci-dessus.",
+            success: "Bravo, vous avez réussi&nbsp;!",
+            failure: "Vous n'avez pas trouvé de mot.",
+            remaining: function(nb) {
+               var plural = (nb > 1) ? "s" : "";
+               return "Il vous reste " + nb + " mot" + plural + " à trouver.";
+            },
+            wrong: "Mot incorrect.",
+            good: "C'est bon&nbsp;!"
+         };
+      </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-      .secret_scheme, .query, .answer {
-          font-size: 1.2em; 
-      }
-      .secret_scheme { 
-          border-collapse: collapse;
-      }
-      .secret_scheme td {
-          border: 2px solid black; 
-          width: 1em;
-          padding: 0.2em;
-          text-align: center;
-      }
-      .secret_table td {
-          padding-bottom: 0.5em;
-          /* border: 1px solid black; */
-      }
-      .query { 
-      }
-      .answer { 
-      }
-      .feedback, .restart {
-         display: none;
-      }
-      .feedback_col {
-         width: 7em;
-       }
-      .restart_col {
-         width: 7em;
-       }
+         .secret_scheme, .query, .answer {
+             font-size: 1.2em; 
+         }
+         .secret_scheme { 
+             border-collapse: collapse;
+             margin: 1em;
+         }
+         .secret_scheme td {
+             border: 2px solid black; 
+             width: 1em;
+             padding: 0.2em;
+             text-align: center;
+         }
+         .secret_table td {
+             padding-bottom: 0.5em;
+         }
+         .query { 
+         }
+         .answer { 
+         }
+         .feedback, .restart {
+            display: none;
+         }
+         .feedback_col {
+            width: 7em;
+          }
+         .restart_col {
+            width: 7em;
+          }
       </style>
    </head>
    <body>
       <div id="task">
-         <img src="icon.png" style="display:none" >
          <h1>Retenir un code</h1>
-         <p>
-         Castor a un code secret à 4 chiffres. Plutôt que de retenir les chiffres, Castor préfère
-         retenir un mot. 
-         </p>
-         <p>Il utilise la grille suivante, qui montre, pour chaque chiffre, quelles sont les
-         lettres correspondantes.
-         </p>
-         <center>
-         <table class="secret_scheme">
-         <tr> <th>1</th><th>2</th> <th>3</th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>8</th> <th>9</th> <th>0</th> </tr>
-         <tr> <td>A</td> <td>B</td> <td>C</td> <td>D</td> <td>E</td> <td>F</td> <td>G</td> <td>H</td> <td>I</td> <td>J</td> </tr>
-         <tr> <td>K</td> <td>L</td> <td>M</td> <td>N</td> <td>O</td> <td>P</td> <td>Q</td> <td>R</td> <td>S</td> <td>T</td> </tr>
-         <tr> <td>U</td> <td>V</td> <td>W</td> <td>X</td> <td>Y</td> <td>Z</td> <td> </td> <td> </td> <td> </td> <td> </td> </tr>               
-         </table>
-         </center>
-         <p>
-         Par exemple, Castor a simplement besoin de se souvenir du mot <b>SURF</b> pour retrouver son code <b>9186</b>.
-         </p>
-         <p>
-         Pour <b><span id="nb_to_find_text"></span> des codes</b> ci-dessous, trouvez un mot français que Castor peut utiliser pour s'en souvenir.
-         </p>
-         <center>
-         <table class="secret_table">
-         <tr id="secret" style="display:none">
-         <td><span class="query"></span></td>
-         <td><input type="text" class="answer" maxlength="4" size="5"></td>
-         <td class="feedback_col"><span class="feedback"></span></td>
-         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
-         </tr>
-         <tr id="secret_0">
-         <td><span class="query"></span></td>
-         <td><input type="text" class="answer" maxlength="4" size="5"></td>
-         <td class="feedback_col"><span class="feedback"></span></td>
-         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
-         </tr>
-         <tr id="secret_1">
-         <td><span class="query"></span></td>
-         <td><input type="text" class="answer" maxlength="4" size="5"></td>
-         <td class="feedback_col"><span class="feedback"></span></td>
-         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
-         </tr>
-         <tr id="secret_2">
-         <td><span class="query"></span></td>
-         <td><input type="text" class="answer" maxlength="4" size="5"></td>
-         <td class="feedback_col"><span class="feedback"></span></td>
-         <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
-         </tr>
-         </table>
-         <div><span id="success"></span></div>
-         </center>
-
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  Castor a un code secret à 4 chiffres. Plutôt que de retenir les chiffres, Castor préfère
+                  retenir un mot. 
+                  </p>
+                  <p>Il utilise la grille suivante, qui montre, pour chaque chiffre, quelles sont les
+                  lettres correspondantes.
+                  </p>
+                  <p>
+                  Par exemple, Castor a simplement besoin de se souvenir du mot <b>SURF</b> pour retrouver son code <b>9186</b>.
+                  </p>
+                  <p>
+                  Pour <b><span id="nb_to_find_text"></span> des codes</b> ci-dessous, trouvez un mot français que Castor peut utiliser pour s'en souvenir.
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <table class="secret_scheme">
+                     <tr> <th>1</th><th>2</th> <th>3</th> <th>4</th> <th>5</th> <th>6</th> <th>7</th> <th>8</th> <th>9</th> <th>0</th> </tr>
+                     <tr> <td>A</td> <td>B</td> <td>C</td> <td>D</td> <td>E</td> <td>F</td> <td>G</td> <td>H</td> <td>I</td> <td>J</td> </tr>
+                     <tr> <td>K</td> <td>L</td> <td>M</td> <td>N</td> <td>O</td> <td>P</td> <td>Q</td> <td>R</td> <td>S</td> <td>T</td> </tr>
+                     <tr> <td>U</td> <td>V</td> <td>W</td> <td>X</td> <td>Y</td> <td>Z</td> <td> </td> <td> </td> <td> </td> <td> </td> </tr>               
+                  </table>
+                  <table class="secret_table">
+                     <tr id="secret" style="display:none">
+                     <td><span class="query"></span></td>
+                     <td><input type="text" class="answer" maxlength="4" size="5"></td>
+                     <td class="feedback_col"><span class="feedback"></span></td>
+                     <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+                     </tr>
+                     <tr id="secret_0">
+                     <td><span class="query"></span></td>
+                     <td><input type="text" class="answer" maxlength="4" size="5"></td>
+                     <td class="feedback_col"><span class="feedback"></span></td>
+                     <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+                     </tr>
+                     <tr id="secret_1">
+                     <td><span class="query"></span></td>
+                     <td><input type="text" class="answer" maxlength="4" size="5"></td>
+                     <td class="feedback_col"><span class="feedback"></span></td>
+                     <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+                     </tr>
+                     <tr id="secret_2">
+                     <td><span class="query"></span></td>
+                     <td><input type="text" class="answer" maxlength="4" size="5"></td>
+                     <td class="feedback_col"><span class="feedback"></span></td>
+                     <td class="restart_col"><input class="restart" type="button" value="Réessayer"></span></td>
+                     </tr>
+                  </table>
+                  <div><span id="success"></span></div>
+               </center>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none" >
       </div><!-- task -->
       <div id="solution">
 
