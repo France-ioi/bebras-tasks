@@ -195,6 +195,9 @@ function initTask (subTask) {
                      platform.validate("done");
                   } 
                   */
+                  for (var iCastor = 0; iCastor < nbNodes; iCastor++){
+                     initDragDrop(castors[iCastor]);   // bug fix IE8
+                  }
                   return;
                }
             }
@@ -207,7 +210,12 @@ function initTask (subTask) {
             platform.validate("done");
          }
          */
+         for (var iCastor = 0; iCastor < nbNodes; iCastor++){
+            initDragDrop(castors[iCastor]);   // bug fix IE8
+         }
+         
       };
+      b.undrag();
       b.drag(drag_move, drag_start, drag_end);
    };
   
