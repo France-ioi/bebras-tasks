@@ -1,18 +1,4 @@
-function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         
-      },
-      medium: {
-         
-      },
-      hard: {
-         
-      }
-   };
+function initTask() {
    var names = [
       "Julien", 
       "Paul",   
@@ -24,7 +10,6 @@ function initTask(subTask) {
    ];
    // var initNames = [ 0, 1, 2, 3, 4, 5, 6 ];
    var initNames = [ 3, 2, 4, 0, 1, 5, 6 ];
-   var solution = [ 1, 5, 6, 3, 4, 2, 0 ]; 
    var noScoreNames = initNames;
    var nbNames = names.length;
    var width = 220;
@@ -36,53 +21,21 @@ function initTask(subTask) {
    var nameDefs;
    var paper;
 
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-   };
+   task.load = function(views, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         if (taskParams.initState == "solution") {
+            initNames = task.solution;
+         } 
 
-   subTask.getStateObject = function() {
-      return state;
-   };
+         if (views.solution) {
+            var labels = $.map(task.solution, function(pos) {return names[pos]; });
+            $("#textSolution").html(labels.join(", "));
+         }
 
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-      }
-   };
-
-   subTask.resetDisplay = function() {
-      drawPaper();
-      reloadAnswer();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = initNames.slice(0);
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result;
-      if (Beav.Object.eq(answer, noScoreNames)) {
-         result = { successRate: 0, message: taskStrings.moveNames };
-      }else if (Beav.Object.eq(answer, solution)) {
-         result = { successRate: 1, message: taskStrings.success };
-      } else {
-         result = { successRate: 0, message: taskStrings.failure };
-      }
-      return result;
+         drawPaper();
+         callback();
+      });
    }
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
 
    var getNameObject = function(iName) {
       var label = paper.rect(-widthLabel/2, -heightLabel/2, widthLabel, heightLabel, heightLabel/5)
@@ -102,12 +55,11 @@ function initTask(subTask) {
    }
    
    var drawPaper = function() {
-      paper = subTask.raphaelFactory.create("anim","anim",width, height);
+      paper = Raphael("anim", width, height);
       dragAndDrop = DragAndDropSystem({
          paper : paper,
          drop : function(srcContId, srcPos, dstContId, dstPos, type) {
             displayHelper.stopShowingResult();
-            answer = dragAndDrop.getObjects('seq');
          },
          actionIfDropped : function(srcCont, srcPos, dstCont, dstPos, dropType) {
             return (dstCont != null)
@@ -139,13 +91,41 @@ function initTask(subTask) {
       }
    };
 
-   var reloadAnswer = function() {
+   var answerOfStrAnswer = function(strAnswer) {
+      if (strAnswer == "") {
+         return initNames.slice(0);
+      }
+      return $.parseJSON(strAnswer);
+   };
+
+   task.reloadAnswer = function(strAnswer, callback) {
+      sequence = answerOfStrAnswer(strAnswer);
       dragAndDrop.removeAllObjects('seq');
-      dragAndDrop.insertObjects('seq', 0, $.map(answer, function(iName) {
+      dragAndDrop.insertObjects('seq', 0, $.map(sequence, function(iName) {
          return { ident : iName, elements: getNameObject(iName) };
          }
       ));
+      callback();
    };
+
+   task.getAnswer = function(callback) {
+      callback(JSON.stringify(dragAndDrop.getObjects('seq')));
+   };
+
+   grader.gradeTask = function(strAnswer, token, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         var sequence = answerOfStrAnswer(strAnswer);
+         if (Beav.Object.eq(sequence, noScoreNames)) {
+            callback(taskParams.noScore, "Déplacez les noms pour les mettre dans le bon ordre.");
+            return;
+         }
+         if (Beav.Object.eq(sequence, task.solution)) {
+            callback(taskParams.maxScore, "Bravo ! Vous avez réussi.");
+         } else {
+            callback(taskParams.minScore, "Ce n'est pas le bon ordre. Essayez avec une autre séquence.");
+         }
+      });
+   }
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+
+initTask(); 

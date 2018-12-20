@@ -3,22 +3,19 @@
    <head>
       <meta charset="utf-8">
       <title>2014-CA-02-shout-your-name</title>
-      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
-
-      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
-
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+      </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-CA-02-shout-your-name/",
@@ -34,63 +31,75 @@
           "acceptedAnswers": []
       };
       </script>
-      <script class="task" type="text/javascript">
-         task.solution = [ 1, 5, 6, 3, 4, 2, 0 ]; 
+      <script>
+         var taskStrings = {
+            moveNames: "Déplacez les noms pour les mettre dans le bon ordre.",
+            success: "Bravo ! Vous avez réussi.",
+            failure: "Ce n'est pas le bon ordre. Essayez avec une autre séquence."
+         };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-      .task-columns td {
-         vertical-align: top;
-      }
-      .task-columns li {
-         margin-top: 0.5em;
-      }
-      .task-columns li li {
-         margin-top: 0.2em;
-      }
+         #tree {
+            font-family:courier, monospace; 
+            border: 1px solid black; 
+            padding: 1em; 
+            margin: 2em;
+            width: 230px;
+            float: left;
+         }
+         #order {
+            margin: 1em;
+            text-align: center;
+         }
       </style>
    </head>
    <body>
       <div id="task">
-         <table class="task-columns" style="margin-top: -1em"><tr><td>
-            <p>
-            Le diagramme ci-contre représente l'arbre généalogique de Julien,
-            avec Paul et Émilie (les parents de Julien), César et Hélène
-            (les parents d'Émilie), ainsi que Rodolf et Yasmine (les parents de César).
-            </p>
-            <p>
-            Toutes ces personnes se retrouvent pour une réunion de famille.
-            Chaque personne va donner un petit discours, selon le rituel suivant.
-            </p>
-            <p>
-            Lorsqu'une personne reçoit une tape sur l'épaule&nbsp;:
-            </p>
-            <ul>
-            <li>Si ses parents sont absents&nbsp;:
-                <ol>
-                <li>elle prononce son discours.</li>
-                </ol>
-            </li>
-            <li>Sinon, si ses parents sont présents&nbsp;:
-               <ol>
-               <li> elle tape sur l'épaule de son père,</li>
-               <li> elle attend la fin du discours de son père,</li>
-               <li> elle tape sur l'épaule de sa mère,</li>
-               <li> elle attend la fin du discours de sa mère,</li>
-                <li> elle prononce son propre discours.</li>
-               </ol>
-            </li>
-            </ul>
-            <p>
-            Pour démarrer le rituel, Julien se tape lui-même sur l'épaule.
-            </p>
-            <p>
-            Votre objectif est de retrouver dans quel ordre les personnes réunies ont fait leurs discours.
-            </p>
- 
-         </td>
-         <td>
-            <pre style="font-family:courier, monospace; border: 1px solid black; padding: 0.5em; margin: 0.2em">
+         <h1>Les discours</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+         <!-- <table class="task-columns" style="margin-top: -1em"><tr><td> -->
+                  <p>
+                  Le diagramme ci-contre représente l'arbre généalogique de Julien,
+                  avec Paul et Émilie (les parents de Julien), César et Hélène
+                  (les parents d'Émilie), ainsi que Rodolf et Yasmine (les parents de César).
+                  </p>
+                  <p>
+                  Toutes ces personnes se retrouvent pour une réunion de famille.
+                  Chaque personne va donner un petit discours, selon le rituel suivant.
+                  </p>
+                  <p>
+                  Lorsqu'une personne reçoit une tape sur l'épaule&nbsp;:
+                  </p>
+                  <ul>
+                  <li>Si ses parents sont absents&nbsp;:
+                      <ol>
+                      <li>elle prononce son discours.</li>
+                      </ol>
+                  </li>
+                  <li>Sinon, si ses parents sont présents&nbsp;:
+                     <ol>
+                     <li> elle tape sur l'épaule de son père,</li>
+                     <li> elle attend la fin du discours de son père,</li>
+                     <li> elle tape sur l'épaule de sa mère,</li>
+                     <li> elle attend la fin du discours de sa mère,</li>
+                      <li> elle prononce son propre discours.</li>
+                     </ol>
+                  </li>
+                  </ul>
+                  <p>
+                  Pour démarrer le rituel, Julien se tape lui-même sur l'épaule.
+                  </p>
+                  <p>
+                  Votre objectif est de retrouver dans quel ordre les personnes réunies ont fait leurs discours.
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+<pre id="tree">
  Rodolf     Yasmine
       \     /  
        César      Hélène
@@ -98,12 +107,18 @@
 Paul        Émilie
     \      /
      Julien
-</pre>
-            <p style="margin-top: 1.5em; margin-left: 2.4em">
-              <b>Ordre des discours&nbsp;:</b>
-            </p>
-            <div id='anim'></div>
-         </td></tr></table>
+</pre>   
+               <div id="order">
+                  <p>
+                    <b>Ordre des discours&nbsp;:</b>
+                  </p>
+                  <div id='anim'></div>
+               </div>
+               
+            </div>
+         </div>
+         <img src="icon.png" style="display:none" > 
+
       </div><!-- task -->
       <div id="solution">
 
