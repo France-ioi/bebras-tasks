@@ -1,52 +1,153 @@
-function initTask () {
-   var difficulty;
-   var castors;
-   var castorPos;
-   var containers;
-   var nbCastors = 5;
-   var animWidth = 700;
-   var animHeight = 350;
-   var tailleLettreCastor = 20;
+function initTask (subTask) {
+   var state = {};
+   var level;
+   var answer = null;
+   var data = {
+      easy: {
+         graph: { "vertexInfo": { "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{} },
+                  "edgeInfo": { "53":{}, "03":{}, "54":{}, "12":{}, "41":{}, "52":{}, "51":{}, "23":{} },
+                  "edgeVertices": { "53": ["5","3"], "03": ["0","3"], "54": ["5","4"], "12": ["1","2"], 
+                                    "41": ["4","1"], "52": ["5","2"], "51": ["5","1"], "23": ["2","3"] },
+                  "directed": false },
+         vertexPos: { 
+            "0":{ "x": 200, "y": 110 }, 
+            "1":{ "x": 550, "y": 200 }, 
+            "2":{ "x": 560, "y": 70 }, 
+            "3":{ "x": 380, "y": 40 }, 
+            "4":{ "x": 170, "y": 210 }, 
+            "5":{ "x": 370, "y": 140 } }, 
+         animHeight: 270
+      },
+      medium: {
+         graph: { "vertexInfo": { "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{} },
+                  "edgeInfo": { "53":{}, "03":{}, "54":{}, "12":{}, "41":{}, "52":{}, "51":{}, "76":{}, "63":{}, "27":{} },
+                  "edgeVertices": { "53": ["5","3"], "03": ["0","3"], "54": ["5","4"], "12": ["1","2"], 
+                                    "41": ["4","1"], "52": ["5","2"], "51": ["5","1"], "76": ["7","6"],
+                                    "63": ["6","3"], "27": ["2","7"] },
+                  "directed": false },
+         vertexPos: { 
+            "0":{ "x": 200, "y": 160 }, 
+            "1":{ "x": 550, "y": 250 }, 
+            "2":{ "x": 560, "y": 120 }, 
+            "3":{ "x": 380, "y": 90 }, 
+            "4":{ "x": 170, "y": 260 }, 
+            "5":{ "x": 370, "y": 190 },
+            "6":{ "x": 170, "y": 20 },
+            "7":{ "x": 510, "y": 30 } }, 
+         animHeight: 350
+      },
+      hard: {
+         graph: { "vertexInfo": { "0":{}, "1":{}, "2":{}, "3":{}, "4":{}, "5":{}, "6":{}, "7":{} },
+                  "edgeInfo": { "53":{}, "03":{}, "54":{}, "12":{}, "41":{}, "52":{}, "51":{}, "76":{}, "63":{}, "27":{}, "04":{} },
+                  "edgeVertices": { "53": ["5","3"], "03": ["0","3"], "54": ["5","4"], "12": ["1","2"], 
+                                    "41": ["4","1"], "52": ["5","2"], "51": ["5","1"], "76": ["7","6"],
+                                    "63": ["6","3"], "27": ["2","7"], "04": ["0","4"] },
+                  "directed": false },
+         vertexPos: { 
+            "0":{ "x": 200, "y": 160 }, 
+            "1":{ "x": 550, "y": 250 }, 
+            "2":{ "x": 560, "y": 120 }, 
+            "3":{ "x": 380, "y": 90 }, 
+            "4":{ "x": 170, "y": 260 }, 
+            "5":{ "x": 370, "y": 190 },
+            "6":{ "x": 170, "y": 20 },
+            "7":{ "x": 510, "y": 30 } }, 
+         animHeight: 350
+      }
+   };
+   var graph;
+   var vGraph;
    var cellHeight = 40;
    var cellWidth = 80;
+   var edgeAttr = {'stroke': 'black', 'stroke-width': 3};
+   var vertexAttr = {'width': cellWidth, 'height': cellHeight, 'fill': '#E0E0F8', 'opacity':1}
+   var castors;
+   var containers = [[],[]];
+   var nbCastors = 5;
+   var animWidth = 700;
+   var animHeight;
+   var tailleLettreCastor = 20;
    var beaverInCell = [[], []];
 
    // note: in "easy" mode, only 6 first nodes are considered
    var names = ["Anna", "Bob", "Julie", "Léa", "Marc", "Paul", "Théo", "Yann"];
-   var positions = [
-      [200, 160],
-      [550, 250],
-      [560, 120],
-      [380, 90],
-      [170, 260],
-      [370, 190],
-      [170, 20], // only in hard
-      [510, 30]  // only in hard (see load function)
-      ]
-   var edges = [
-      [5, 3],
-      [0, 3],
-      [5, 4],
-      [1, 2],
-      [4, 1],
-      [5, 2],
-      [5, 1],
-      [2, 3], // only in easy
-      [7, 6], // only in hard
-      [6, 3], // only in hard
-      [2, 7] // only in hard (see load function)
-   ];
+   var positions;
+   var edges;
    var nbNodes;
    var nbEdges;
    var dxText = cellWidth / 2;
    var dyText = cellHeight / 2;
+   var randGen;
+
+   subTask.loadLevel = function(curLevel) {
+      level = curLevel;
+      graph = Graph.fromJSON(JSON.stringify(data[level].graph));
+      nbNodes = graph.getVerticesCount();
+      nbEdges = graph.getEdgesCount();
+      animHeight = data[level].animHeight;
+      randGen = new RandomGenerator(subTask.taskParams.randomSeed + level.charCodeAt(0));
+      randGen.shuffle(names);
+   };
+
+   subTask.getStateObject = function() {
+      return state;
+   };
+
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+      if(answer){
+         randGen.reset(answer.seed);
+      }
+   };
+
+   subTask.resetDisplay = function() {
+      writeNames();
+      drawPaper();
+      reloadAnswer();
+   };
+
+   subTask.getAnswerObject = function() {
+      return answer;
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      var defaultAnswer = { "pos": [], "seed": randGen.nextInt(0,1000) };
+      for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
+         defaultAnswer.pos[iCastor] = [0, iCastor];
+      }
+      return defaultAnswer;
+   };
+
+   subTask.unloadLevel = function(callback) {
+      stopAnimation();
+      callback();
+   };
+
+   function getResultAndMessage() {
+      var result;
+      innerReloadAnswer();
+      if (! allPlaced()) {
+         result = { successRate: 0, message: taskStrings.placeNamesOnRectangles };
+      } else if (isCorrect()) {
+         result = { successRate: 1, message: taskStrings.success };
+      } else {
+         result = { successRate: 0, message: taskStrings.failure };
+      }
+      return result;
+   }
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
   
    var animToContainer = function(castor, container) {
       var x = container.attrs.x;
       var y = container.attrs.y;
-      castor.r.animate({x : x, y : y}, 100);
-      castor.t.animate({x : x + dxText, y : y + dyText}, 100);
-      castor.b.animate({x : x, y : y}, 100);
+      var animR = Raphael.animation({x : x, y : y}, 100);
+      var animT = Raphael.animation({x : x + dxText, y : y + dyText}, 100);
+      subTask.raphaelFactory.animate("animR",castor.r,animR);
+      subTask.raphaelFactory.animate("animT",castor.t,animT);
+      subTask.raphaelFactory.animate("animB",castor.b,animR);
    };
 
    var initDragDrop = function(castor) {
@@ -81,12 +182,12 @@ function initTask () {
                   if (beaverInCell[objType][iObject] != -1) {
                      var iCastor = beaverInCell[objType][iObject];
                      beaverInCell[0][iCastor] = iCastor;
-                     castorPos[iCastor] = [0, iCastor];
+                     answer.pos[iCastor] = [0, iCastor];
                      animToContainer(castors[iCastor], containers[0][iCastor]);
                   }
                   beaverInCell[objType][iObject] = r.id;
-                  beaverInCell[castorPos[r.id][0]][castorPos[r.id][1]] = -1;
-                  castorPos[r.id] = [objType, iObject];
+                  beaverInCell[answer.pos[r.id][0]][answer.pos[r.id][1]] = -1;
+                  answer.pos[r.id] = [objType, iObject];
                   animToContainer(castor, container);
                   displayHelper.stopShowingResult();
                   /* // automatic validation deactivated:
@@ -98,8 +199,8 @@ function initTask () {
                }
             }
          }
-         beaverInCell[castorPos[r.id][0]][castorPos[r.id][1]] = -1;
-         castorPos[r.id] = [0, r.id];
+         beaverInCell[answer.pos[r.id][0]][answer.pos[r.id][1]] = -1;
+         answer.pos[r.id] = [0, r.id];
          animToContainer(castor, containers[0][r.id]);
          /* // automatic validation deactivated:
          if (isCorrect()) {
@@ -111,77 +212,22 @@ function initTask () {
    };
   
    var writeNames = function() {
-      var s = "<table><tr>";
-      // assumes an even number of edges
-      for (var col = 0; col < edges.length/2; col++) {
-         s += "<td><ul>";
-         for (var row = 0; row < 2; row++) {
-            var s1 = names[edges[2*col+row][0]];
-            var s2 = names[edges[2*col+row][1]];
-            s += "<li>" + s1 + " " + taskStrings.and + " " + s2 + "</li>";
-         }
-         s += "</ul></td>";
+      var list = "<ul>";
+      var edges = graph.getAllEdges();
+      for(var iEdge in edges){
+         var vertices = graph.getEdgeVertices(edges[iEdge]);
+         var name1 = names[vertices[0]];
+         var name2 = names[vertices[1]];
+         list += "<li>"+name1+" "+taskStrings.and+" "+name2+"</li>";
       }
-      s += "</tr></table>";
-      $("#relations").html(s);
-   };
-
-   task.load = function(views, callback) {
-      platform.getTaskParams(null, null, function(taskParams) {
-         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
-         // LATER: vérifier que difficulty est easy ou hard
-         $("." + difficulty).show();
-            
-         if (difficulty == "easy") {
-            nbNodes = names.length - 2;
-            nbEdges = edges.length - 3;
-            names = names.slice(0, nbNodes);
-            positions = positions.slice(0, nbNodes);
-            edges = edges.slice(0, nbEdges);
-            for (var i = 0; i < positions.length; i++) {
-               positions[i][1] -= 50;
-            }
-            animHeight -= 80;
-         } else if (difficulty == "hard") {
-            edges.splice(7, 1);
-         }
-         nbNodes = names.length;
-         nbEdges = edges.length;
-
-         var seed = taskParams.randomSeed;
-         Beav.Array.shuffle(names, seed);
-
-         writeNames();
-         drawPaper();
-
-         if (views.solution) {
-            setTimeout(function(){ // timeout as workaround for raphael
-               var paperSolution = Raphael('animSolution', animWidth, animHeight);
-               drawEdges(paperSolution);
-               for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-                  var x = positions[iCastor][0];
-                  var y = positions[iCastor][1];
-                  paperSolution.rect(x, y, cellWidth, cellHeight).attr({"stroke": "black ", "fill": '#E0E0F8'});
-                  paperSolution.text(x + cellWidth/2, y + cellHeight/2, names[iCastor]).attr("font-size", tailleLettreCastor);
-               }
-            });
-         }
-         callback();
-      });
-   };
-
-   task.unload = function(callback) {
-      stopAnimation();
-      callback();
+      list += "</ul>";
+      $("#relations").html(list);
    };
 
    var stopAnimation = function() {
-      for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-         var castor = castors[iCastor];
-         castor.r.stop();
-         castor.t.stop();
-         castor.b.stop();
-      }
+      subTask.raphaelFactory.destroy("animR");
+      subTask.raphaelFactory.destroy("animT");
+      subTask.raphaelFactory.destroy("animB");
    };
 
    var drawEdges = function(paper) {
@@ -198,17 +244,16 @@ function initTask () {
    };
 
    var drawPaper = function() {
-      paper = Raphael('anim', animWidth, animHeight);
-      //paper.rect(0, 0, animWidth, animHeight);
-      drawEdges(paper);
-
-      containers = [[],[]];
-      for (var iLin = 0; iLin < nbNodes; iLin++) {
-         containers[1][iLin] = paper.rect(positions[iLin][0], positions[iLin][1], cellWidth, cellHeight).attr({'fill' : '#F2F2FF'});
-      }
+      paper = subTask.raphaelFactory.create("anim","anim",animWidth, animHeight);
+      
+      var graphDrawer = new SimpleGraphDrawer(vertexAttr,edgeAttr);
+      graphDrawer.setDrawVertex(drawVertex);
+      graphDrawer.setDrawEdge(drawEdge);
+      vGraph = new VisualGraph("vGraph", paper, graph, graphDrawer, true);
+      initVertexPos();
+      vGraph.redraw();
       
       castors = [];
-      castorPos = [];
       for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
          var x = 20;
          var y = iCastor*cellHeight + 15;
@@ -231,33 +276,52 @@ function initTask () {
          });
          castors[iCastor] = {r:r, t:t, b:b};
          initDragDrop(castors[iCastor]);
-         castorPos[iCastor] = [0, iCastor];
       }
    };
 
-   var innerReloadAnswer = function(strAnswer) {
-      castorPos = [];
-      if (strAnswer == "") {
-         for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-            castorPos[iCastor] = [0, iCastor];
-         }
+   function initVertexPos() {
+      for(var id in data[level].vertexPos){
+         var posX = data[level].vertexPos[id].x;
+         var posY = data[level].vertexPos[id].y;
+         vGraph.setVertexVisualInfo(id,{"x":posX,"y":posY});
       }
-      else {
-         castorPos = $.parseJSON(strAnswer);
-      }
+   };
+
+   function drawVertex(id,info,visualInfo) {
+      var pos = this._getVertexPosition(visualInfo);
+      this.originalPositions[id] = pos;
+
+      var vertex = this.paper.rect(pos.x,pos.y).attr(this.circleAttr);
+      containers[1][id] = vertex;
+      
+      return [vertex];
+   };
+
+   function drawEdge(id, vertex1, vertex2, vertex1Info, vertex2Info, vertex1VisualInfo, vertex2VisualInfo, edgeInfo, edgeVisualInfo) {
+      var x1 = vertex1VisualInfo.x + cellWidth/2;
+      var y1 = vertex1VisualInfo.y + cellHeight/2;
+      var x2 = vertex2VisualInfo.x + cellWidth/2;
+      var y2 = vertex2VisualInfo.y + cellHeight/2;
+      var path = "M"+x1+" "+y1+"L"+x2+" "+y2;
+      var edge = this.paper.path(path).attr(this.lineAttr).toBack();
+      edge.attr(edgeVisualInfo);
+      return [edge];
+   };
+
+   var innerReloadAnswer = function() {
       for (var iType = 0; iType < 2; iType++) {
          for (var iBeaver = 0; iBeaver < nbNodes; iBeaver++) {
             beaverInCell[iType][iBeaver] = -1;
          }
       }
       for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-         beaverInCell[castorPos[iCastor][0]][castorPos[iCastor][1]] = iCastor;
+         beaverInCell[answer.pos[iCastor][0]][answer.pos[iCastor][1]] = iCastor;
       }
    };
 
    var allPlaced = function() {
       for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-         if (castorPos[iCastor][0] != 1) {
+         if (answer.pos[iCastor][0] != 1) {
             return false;
          }
       }
@@ -266,40 +330,24 @@ function initTask () {
 
    var isCorrect = function() {
       for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-         if ((castorPos[iCastor][0] != 1) || (castorPos[iCastor][1] != iCastor)) {
+         if ((answer.pos[iCastor][0] != 1) || (answer.pos[iCastor][1] != iCastor)) {
             return false;
          }
       }
       return true;
    };
 
-   task.reloadAnswer = function(strAnswer, callback) { 
-      innerReloadAnswer(strAnswer);
+   var reloadAnswer = function() { 
+      innerReloadAnswer();
       
       for (var iCastor = 0; iCastor < nbNodes; iCastor++) {
-         var container = containers[castorPos[iCastor][0]][castorPos[iCastor][1]];
-         animToContainer(castors[iCastor], container);
+         var container = containers[answer.pos[iCastor][0]][answer.pos[iCastor][1]];
+         castors[iCastor].r.attr({"x":container.attrs.x,"y":container.attrs.y});
+         castors[iCastor].t.attr({"x":container.attrs.x+dxText,"y":container.attrs.y+dyText});
+         castors[iCastor].b.attr({"x":container.attrs.x,"y":container.attrs.y});
       }
-      callback();
    };
         
-   task.getAnswer = function(callback) {
-      callback(JSON.stringify(castorPos));
-   };
-
-   grader.gradeTask = function(strAnswer, token, callback) {
-      platform.getTaskParams(null, null, function(taskParams) {
-         innerReloadAnswer(strAnswer);
-         if (! allPlaced()) {
-            callback(taskParams.noScore, taskStrings.placeNamesOnRectangles);
-         } else if (isCorrect()) {
-            callback(taskParams.maxScore, taskStrings.success);
-         } else {
-            callback(taskParams.noScore, taskStrings.failure);
-         }
-      });
-   };
-    
 };
-
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
