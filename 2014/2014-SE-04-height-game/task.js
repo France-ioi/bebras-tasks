@@ -30,6 +30,7 @@ function initTask (subTask) {
    var dxText;
    var dyText;
    var beaverInCell = [];
+   var solution;
 
    subTask.loadLevel = function(curLevel) {
       level = curLevel;
@@ -154,6 +155,9 @@ function initTask (subTask) {
                var dropContainer = containers[i];
                if (dropContainer.isPointInside(r.attrs.x + r.attrs.width/2, r.attrs.y + r.attrs.height/2)) {
                   if (i == origCell) {
+                     for(var iCastor = 0; iCastor < nbCastors; iCastor++){ // IE8 bug fix
+                        initDragDrop(castors[iCastor]);
+                     }
                      return;
                   }
                   if (beaverInCell[i] != -1) {
@@ -170,6 +174,9 @@ function initTask (subTask) {
                   answer[r.id] = i;
                   animToContainer(castor, dropContainer);
                   displayHelper.stopShowingResult();
+                  for(var iCastor = 0; iCastor < nbCastors; iCastor++){ // IE8 bug fix
+                     initDragDrop(castors[iCastor]);
+                  }
                   return;
                }
             }
@@ -180,6 +187,9 @@ function initTask (subTask) {
          beaverInCell[returnPos] = r.id;
          answer[r.id] = returnPos;
          animToContainer(castor, returnContainer);
+         for(var iCastor = 0; iCastor < nbCastors; iCastor++){ // IE8 bug fix
+            initDragDrop(castors[iCastor]);
+         }
       }
       b.drag(drag_move, drag_start, drag_end);
    }
