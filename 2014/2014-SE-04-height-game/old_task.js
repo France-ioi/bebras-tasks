@@ -1,22 +1,7 @@
-function initTask (subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         nbCastors: 3,
-         solution: [8, 1, 3]
-      },
-      medium: {
-         nbCastors: 4,
-         solution: [9, 7, 2, 12] 
-      },
-      hard: {
-         nbCastors: 5,
-         solution: [18, 21, 7, 4, 10]
-      }
-   };
+function initTask () {
+   var difficulty;
    var castors;
+   var castorPos;
    var containers;
    var nbCastors;
    var nbCells;
@@ -30,97 +15,13 @@ function initTask (subTask) {
    var dxText;
    var dyText;
    var beaverInCell = [];
-
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      nbCastors = data[level].nbCastors;
-      solution = data[level].solution;
-      nbCells = nbCastors * nbCastors;
-   };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-         innerReloadAnswer();
-      }
-   };
-
-   subTask.resetDisplay = function() {
-      initDim();
-      drawPaper();
-      reloadAnswer();
-      drawSolution();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = [];
-      for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
-         defaultAnswer[iCastor] = nbCells + iCastor;
-      }
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      stopAnimation();
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result;
-      if (answer.length != nbCastors) { 
-         result = { successRate: 0, message: taskStrings.placeAllBeaversOnCells }; 
-      }else{
-         var correct = true;
-         var allInGrid = true;
-         for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
-            allInGrid &= (answer[iCastor] < nbCells);
-            correct &= (answer[iCastor] == solution[iCastor]);
-          }
-         if (! allInGrid) {   
-            result = { successRate: 0, message: taskStrings.placeAllBeaversOnCells };
-         } else if (correct) {
-            result = { successRate: 1, message: taskStrings.success };
-         } else {
-            result = { successRate: 0, message: taskStrings.failure };
-         }
-      }
-      return result;
-   };
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
-
-   function initDim() {
-      cellSide = Math.min(1000, (animHeight-2*yMargin)/nbCastors);
-      if (Beav.Navigator.isIE8()) {
-         dxText = cellSide / 2;
-         dyText = cellSide / 2;
-         width = cellSide;
-      } else {
-         width = cellSide*150/220;
-         dxText = width + 5;
-         dyText = 3*cellSide/4;
-      }
-      xGrid = 170 + cellSide;
-   };
   
    var animToContainer = function(castor, container) {
       var x = container.attrs.x;
       var y = container.attrs.y;
-      var anim1 = new Raphael.animation({x : x, y : y, 'transform' : ''}, 100);
-      var anim2 = new Raphael.animation({x : x + dxText, y : y + dyText, 'transform' : ''}, 100);
-      subTask.raphaelFactory.animate("anim1r",castor.r,anim1);
-      subTask.raphaelFactory.animate("anim1b",castor.b,anim1);
-      subTask.raphaelFactory.animate("anim2",castor.t,anim2);
+      castor.r.animate({x : x, y : y, 'transform' : ''}, 100);
+      castor.t.animate({x : x + dxText, y : y + dyText, 'transform' : ''}, 100);
+      castor.b.animate({x : x, y : y, 'transform' : ''}, 100);
    }
 
    var initDragDrop = function(castor) {
@@ -147,8 +48,8 @@ function initTask (subTask) {
       }
      
       var drag_end = function () {
-         var origContainer = containers[answer[r.id]];
-         var origCell = answer[r.id];
+         var origContainer = containers[castorPos[r.id]];
+         var origCell = castorPos[r.id];
          for (var i=0; i < nbCells + nbCastors; i++) {
             if (i < nbCastors*nbCastors || i == nbCastors*nbCastors+r.id) {
                var dropContainer = containers[i];
@@ -161,13 +62,13 @@ function initTask (subTask) {
                      var returnPos = nbCells + iCastor;
                      var returnContainer = containers[returnPos];
                      beaverInCell[returnPos] = iCastor;
-                     answer[iCastor] = returnPos;
+                     castorPos[iCastor] = returnPos;
                      animToContainer(castors[iCastor], returnContainer);
                   }
            
                   beaverInCell[i] = r.id;
                   beaverInCell[origCell] = -1;
-                  answer[r.id] = i;
+                  castorPos[r.id] = i;
                   animToContainer(castor, dropContainer);
                   displayHelper.stopShowingResult();
                   return;
@@ -178,20 +79,64 @@ function initTask (subTask) {
          var returnPos = nbCells + r.id;
          var returnContainer = containers[returnPos];
          beaverInCell[returnPos] = r.id;
-         answer[r.id] = returnPos;
+         castorPos[r.id] = returnPos;
          animToContainer(castor, returnContainer);
       }
       b.drag(drag_move, drag_start, drag_end);
+      //t.drag(drag_move, drag_start, drag_end);
    }
   
+   task.load = function(views, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         difficulty = taskParams.options.difficulty ? taskParams.options.difficulty : "hard";
+         // LATER: vérifier que difficulty est easy ou hard
+         $("." + difficulty).show();
+
+         if (difficulty == "easy") {
+            nbCastors = 3;
+         } else {// hard
+            nbCastors = 5;
+         }
+
+         nbCells = nbCastors * nbCastors;
+         cellSide = Math.min(1000, (animHeight-2*yMargin)/nbCastors);
+         if (isIE() && (isIE() <= 8)) {
+            dxText = cellSide / 2;
+            dyText = cellSide / 2;
+            width = cellSide;
+         } else {
+            width = cellSide*150/220;
+            dxText = width + 5;
+            dyText = 3*cellSide/4;
+         }
+         xGrid = 170 + cellSide;
+
+         drawPaper();
+         if (views.solution) {
+            setTimeout(function(){ // timeout as workaround for raphael          
+               drawSolution();
+            });
+         }
+         callback();
+      });
+   };
+
+   task.unload = function(callback) {
+      stopAnimation();
+      callback();
+   };
+
    var stopAnimation = function() {
-      subTask.raphaelFactory.stopAnimate("anim1r");
-      subTask.raphaelFactory.stopAnimate("anim1b");
-      subTask.raphaelFactory.stopAnimate("anim2");
+      for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
+         var castor = castors[iCastor];
+         castor.r.stop();
+         castor.t.stop();
+         castor.b.stop();
+      }
    };
 
    var drawSolution = function() {
-      var paperSolution = subTask.raphaelFactory.create('animSolution','animSolution', animHeight, animHeight)
+      var paperSolution = Raphael('animSolution', animHeight, animHeight); // square
       paperSolution.rect(0, 0, animHeight, animHeight).attr('fill','#D5F2FE');;
       for (var iLin = 0; iLin < nbCastors; iLin++) {
          for (var iCol = 0; iCol < nbCastors; iCol++) {
@@ -200,7 +145,7 @@ function initTask (subTask) {
             paperSolution.rect(x, y, cellSide, cellSide);
             var iCastor = -1;
             var iCell = iLin * nbCastors + iCol;
-            $.each(solution, function(iCastorX, iCellX) {
+            $.each(task.solutions[difficulty], function(iCastorX, iCellX) {
                if (iCell == iCellX) {
                   iCastor = iCastorX;
                }
@@ -213,11 +158,16 @@ function initTask (subTask) {
       }
    };
 
+   function isIE () {
+     var myNav = navigator.userAgent.toLowerCase();
+     return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+   }
+
    var drawCastor = function(paper, iCastor, x, y) {
       var r;
       var t;
       var name = String.fromCharCode(65+iCastor);
-      if (Beav.Navigator.isIE8()) {
+      if (isIE() && (isIE() <= 8)) {
          r = paper.rect(x, y, cellSide, cellSide).attr('fill', '#C0C0C0');
          t = paper.text(x + dxText, y + dyText, name).attr({"font-size": 24, "font-weight": "bold"});
       } else {
@@ -229,7 +179,7 @@ function initTask (subTask) {
    }
 
    var drawPaper = function() {
-      paper = subTask.raphaelFactory.create('anim','anim', animWidth, animHeight);
+      paper = Raphael('anim', animWidth, animHeight);
       paper.rect(0, 0, animWidth, animHeight).attr('fill','#D5F2FE');;
       paper.image("montagne.png", 1, animHeight-301, 100, 300);
       
@@ -242,6 +192,7 @@ function initTask (subTask) {
       }
       
       castors = [];
+      castorPos = [];
       for (var iCastor=0; iCastor < nbCastors; iCastor++) {
          var x = 115;
          var y = iCastor*cellSide + yMargin;
@@ -262,30 +213,68 @@ function initTask (subTask) {
          r.id = iCastor;
          castors[iCastor] = castorElems;
          initDragDrop(castors[iCastor]);
+         castorPos[iCastor] = nbCastors*nbCastors + iCastor;
       }
    };
 
-   var innerReloadAnswer = function() {
+   var innerReloadAnswer = function(strAnswer) {
+      castorPos = [];
+      if (strAnswer == "") {
+         for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
+            castorPos[iCastor] = nbCells + iCastor;
+         }
+      }
+      else {
+         castorPos = $.parseJSON(strAnswer);
+      }      
       for (var iContainer = 0; iContainer < nbCells + nbCastors; iContainer++) {
          beaverInCell[iContainer] = -1;
       }
       for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
-         beaverInCell[answer[iCastor]] = iCastor;
+         beaverInCell[castorPos[iCastor]] = iCastor;
       }
    }
     
-   var reloadAnswer = function() { 
+   task.reloadAnswer = function(strAnswer, callback) { 
+      innerReloadAnswer(strAnswer);
+      
       for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
-         var container = containers[answer[iCastor]];
-         var castor = castors[iCastor];
-         var x = container.attrs.x;
-         var y = container.attrs.y;
-         castor.r.attr({"x": x, "y": y});
-         castor.b.attr({"x": x, "y": y});
-         castor.t.attr({"x": x+dxText, "y": y+dyText});
+         var container = containers[castorPos[iCastor]];
+         animToContainer(castors[iCastor], container);
       }
+      callback();
    };
-};
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+        
+   task.getAnswer = function(callback) {
+      callback(JSON.stringify(castorPos));
+   };
 
+   grader.gradeTask = function(strAnswer, token, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         innerReloadAnswer(strAnswer);
+         if (castorPos.length != nbCastors) { 
+            // TODO: ce n'est pas censé arriver, si ? on peut virer ce test je pense
+            callback(taskParams.noScore, taskStrings.placeAllBeaversOnCells);
+            return;
+         }
+
+         var solution = task.solutions[difficulty];
+         var correct = true;
+         var allInGrid = true;
+         for (var iCastor = 0; iCastor < nbCastors; iCastor++) {
+            allInGrid &= (castorPos[iCastor] < nbCells);
+            correct &= (castorPos[iCastor] == solution[iCastor]);
+          }
+         if (! allInGrid) {      
+            callback(taskParams.noScore, taskStrings.placeAllBeaversOnCells);
+         } else if (correct) {
+            callback(taskParams.maxScore, taskStrings.success);
+         } else {
+            callback(taskParams.minScore, taskStrings.failure);
+         }
+      });
+   };
+    
+};
+
+initTask();

@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
       <title>2014-SE-04-height-game</title>
-      <script>
-         window.stringsLanguage = 'fr';
-      </script>
-      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
       <script class="remove" type="text/javascript">
-         var modulesPath = '../../modules';
-         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
-            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
-      </script>
-      <script class="remove" type="text/javascript">
+
        var json = {
           "id": "http://castor-informatique.fr/tasks/2014/2014-SE-04-height-game/",
           "language": "fr",
@@ -38,6 +42,11 @@
           "status": "test"
       };
       </script>
+      <script class="task" type="text/javascript"> 
+         task.solutions = {
+            hard: [18, 21, 7, 4, 10],
+            easy: [8, 1, 3] };
+      </script>
       <script>
          var taskStrings = {
             placeAllBeaversOnCells: "Placez tous les castors dans les cases de la grille.",
@@ -47,72 +56,68 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-         .easy, .hard {
-            display: none;
-         }
-         .solution_table {
-            border-collapse: collapse;
-            margin: 0.5em;
-            margin-left: 3em;
-            display: block;
-         }
-         .solution_panels > tbody > tr > td {
-            vertical-align: top;
-            width: 50%;
-         }
-         .solution_table td {
-            border: 2px solid black;
-            width: 25px;
-            text-align: center;
-         }
+      .easy, .hard {
+         display: none;
+      }
+      .solution_table {
+         border-collapse: collapse;
+         margin: 0.5em;
+         margin-left: 3em;
+         display: block;
+      }
+      .solution_panels > tbody > tr > td {
+         vertical-align: top;
+         width: 50%;
+      }
+      .solution_table td {
+         border: 2px solid black;
+         width: 25px;
+         text-align: center;
+      }
       </style>
   </head>
   <body>
       <div id="task">
-         
-         <h1>Parapente</h1>
-         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
-         <div id="taskContent">        <!-- will contain the content of the task --> 
-            <div id="zone_1">
-               <div class="consigne">
-                  <p>
-                  <span class="easy">Trois</span><span class="easy">Quatre</span><span class="easy">Cinq</span> castors font du parapente.
-                  Un castor peut voler plus haut qu'un autre castor.<br/>
-                  Un castor peut aussi se trouver devant un autre castor, c'est-à-dire plus loin de la falaise.
-                  </p>
-                  <p style="margin-bottom: 0.5em;">
-                  Les castors vous transmettent par radio des informations sur leur position dans le ciel.
-                  </p>
-                  <ul class="easy" style="margin-top: 0.5em;">
-                    <li><b>Castor A</b>&nbsp;: «&nbsp;Je me trouve devant les deux autres castors.&nbsp;»</li>
-                    <li><b>Castor B</b>&nbsp;: «&nbsp;Il n'y a pas de castor plus haut que moi&nbsp;; et il y a un castor derrière moi.&nbsp;»</li>
-                    <li><b>Castor C</b>&nbsp;: «&nbsp;Un castor se trouve plus haut que moi et un autre se trouve plus bas que moi.&nbsp;»</li>
-                  </ul>
-                  <ul class="medium" style="margin-top: 0.5em;">
-                    <li><b>Castor A</b>&nbsp;: «&nbsp;Il y a 2 castors plus haut que moi et un autre plus bas que moi.&nbsp;»</li>
-                    <li><b>Castor B</b>&nbsp;: «&nbsp;Il n'y a pas de castor devant moi.&nbsp;»</li>
-                    <li><b>Castor C</b>&nbsp;: «&nbsp;Il y a 3 castors plus bas que moi: un devant et deux derrière.&nbsp;»</li>
-                    <li><b>Castor D</b>&nbsp;: «&nbsp;Il y a 3 castors devant moi aucun plus bas que moi.&nbsp;»</li>
-                  </ul>
-                  <ul class="hard" style="margin-top: 0.5em;">
-                    <li><b>Castor A</b>&nbsp;: «&nbsp;Il y a 3 castors plus haut que moi&nbsp;: 1 devant moi, et 2 derrière moi.&nbsp;»</li>
-                    <li><b>Castor B</b>&nbsp;: «&nbsp;Il y a 4 castors plus haut que moi&nbsp;: 3 devant moi, et 1 derrière moi.&nbsp;»</li>
-                    <li><b>Castor C</b>&nbsp;: «&nbsp;Il n'y a que 1 castor plus haut que moi, et il est devant moi.&nbsp;»</li>
-                    <li><b>Castor D</b>&nbsp;: «&nbsp;Il n'y a pas de castor plus haut que moi.&nbsp;»</li>
-                    <li><b>Castor E</b>&nbsp;: «&nbsp;Il n'y a que 2 castors plus haut que moi, et les deux sont devant moi.&nbsp;»</li>
-                  </ul>
-                  <p>
-                  Pouvez-vous retrouver la position des castors dans le ciel&nbsp;?
-                  </p>
-               </div>
-            </div>
-            <div id="zone_2">
-               <center><div id="anim" class="touch" style="margin-bottom: 0.5em"></div></center>
-            </div>
-         </div>
-         <img src="icon.png" style="display:none" > 
-         <img src="castor2.png" style="display:none">
-         <img src="montagne.png" style="display:none"> 
+          <img src="castor2.png" style="display:none">
+          <img src="montagne.png" style="display:none">
+          <h1>Parapente</h1>
+          <div class="easy">
+             <p>
+               Trois castors font du parapente.
+               Un castor peut voler plus haut qu'un autre castor.<br/>
+               Un castor peut aussi se trouver devant un autre castor, c'est-à-dire plus loin de la falaise.
+             </p>
+             <p style="margin-bottom: 0.5em;">
+               Les castors vous transmettent par radio des informations sur leur position dans le ciel.
+             </p>
+               <ul style="margin-top: 0.5em;">
+                 <li><b>Castor A</b>&nbsp;: «&nbsp;Je me trouve devant les deux autres castors.&nbsp;»</li>
+                 <li><b>Castor B</b>&nbsp;: «&nbsp;Il n'y a pas de castor plus haut que moi&nbsp;; et il y a un castor derrière moi.&nbsp;»</li>
+                 <li><b>Castor C</b>&nbsp;: «&nbsp;Un castor se trouve plus haut que moi et un autre se trouve plus bas que moi.&nbsp;»</li>
+               </ul>
+          </div>
+          <div class="hard">
+             <p>
+               Cinq castors font du parapente.
+               Un castor peut voler plus haut qu'un autre castor.<br/>
+               Un castor peut aussi se trouver devant un autre castor, c'est-à-dire plus loin de la falaise.
+             </p>
+             <p style="margin-bottom: 0.5em;">
+               Les castors vous transmettent par radio des informations sur leur position dans le ciel.
+             </p>
+               <ul style="margin-top: 0.5em;">
+                 <li><b>Castor A</b>&nbsp;: «&nbsp;Il y a 3 castors plus haut que moi&nbsp;: 1 devant moi, et 2 derrière moi.&nbsp;»</li>
+                 <li><b>Castor B</b>&nbsp;: «&nbsp;Il y a 4 castors plus haut que moi&nbsp;: 3 devant moi, et 1 derrière moi.&nbsp;»</li>
+                 <li><b>Castor C</b>&nbsp;: «&nbsp;Il n'y a que 1 castor plus haut que moi, et il est devant moi.&nbsp;»</li>
+                 <li><b>Castor D</b>&nbsp;: «&nbsp;Il n'y a pas de castor plus haut que moi.&nbsp;»</li>
+                 <li><b>Castor E</b>&nbsp;: «&nbsp;Il n'y a que 2 castors plus haut que moi, et les deux sont devant moi.&nbsp;»</li>
+               </ul>
+          </div>
+          <p>
+          Pouvez-vous retrouver la position des castors dans le ciel&nbsp;?
+          </p>
+
+          <center><div id="anim" class="touch" style="margin-bottom: 0.5em"></div></center>
      </div>
 
       <div id="solution">
