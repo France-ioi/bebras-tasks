@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
       <title>2014-SE-04-height-game</title>
-      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js"></script>
-
-      <link class="module" rel="stylesheet" type="text/css" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script>
+         window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+      </script>
       <script class="remove" type="text/javascript">
 
        var json = {
@@ -42,13 +39,7 @@
           "status": "test"
       };
       </script>
-      <script class="task" type="text/javascript"> 
-         task.solutions = {
-            hard: [18, 21, 7, 4, 10],
-            easy: [8, 1, 3] };
-      </script>
       <script>
-         var stringsLanguage = 'en';
          var taskStrings = {
             placeAllBeaversOnCells: "Place all beavers in the grid boxes.",
             success: "Congratulations, you did it.",
@@ -57,71 +48,72 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-      .easy, .hard {
-         display: none;
-      }
-      .solution_table {
-         border-collapse: collapse;
-         margin: 0.5em;
-         margin-left: 3em;
-         display: block;
-      }
-      .solution_panels > tbody > tr > td {
-         vertical-align: top;
-         width: 50%;
-      }
-      .solution_table td {
-         border: 2px solid black;
-         width: 25px;
-         text-align: center;
-      }
+         .easy, .hard {
+            display: none;
+         }
+         .solution_table {
+            border-collapse: collapse;
+            margin: 0.5em;
+            margin-left: 3em;
+            display: block;
+         }
+         .solution_panels > tbody > tr > td {
+            vertical-align: top;
+            width: 50%;
+         }
+         .solution_table td {
+            border: 2px solid black;
+            width: 25px;
+            text-align: center;
+         }
       </style>
   </head>
   <body>
       <div id="task">
-         <img src="icon.png" style="display:none" >
-          <img src="castor2.png" style="display:none">
-          <img src="montagne.png" style="display:none">
-          <h1>Paragliding</h1>
-          <div class="easy">
-             <p>
-               Three beavers are making paragliding.
-               A beaver can fly higher than the other beavers.<br/>
-               A beaver may also be in front of other beavers.
-             </p>
-             <p style="margin-bottom: 0.5em;">
-	     Beavers transmit radio information about their position in the sky.
-             </p>
-               <ul style="margin-top: 0.5em;">
-                 <li><b>Beaver A</b>&nbsp;: «&nbsp;I am in front of two beavers.&nbsp;»</li>
-                 <li><b>Beaver B</b>&nbsp;: «&nbsp;There is no beaver higher than me&nbsp;; and there is a beaver behind me.&nbsp;»</li>
-                 <li><b>Beaver C</b>&nbsp;: «&nbsp;One beaver is higher than me and another one is lower than me.&nbsp;»</li>
-               </ul>
-          </div>
-          <div class="hard">
-             <p>
-               Five beavers make paragliding.
-               A beaver can fly higher than the other beavers.<br/>
-               A beaver may also be in front of other beavers.
-             </p>
-             <p style="margin-bottom: 0.5em;">
-	     Beavers transmit radio information about their position in the sky.
-             </p>
-               <ul style="margin-top: 0.5em;">
-                 <li><b>Beaver A</b>&nbsp;: «&nbsp;There are 3 beavers higher than me&nbsp;: 1 in front of me, and 2 behind me.&nbsp;»</li>
-                 <li><b>Beaver B</b>&nbsp;: «&nbsp;There are 4 beavers higher than me&nbsp;: 3 in front of me, and 1 behind me.&nbsp;»</li>
-                 <li><b>Beaver C</b>&nbsp;: «&nbsp;There is only one beaver higher than me, and it is before me.&nbsp;»</li>
-                 <li><b>Beaver D</b>&nbsp;: «&nbsp;There is no beaver higher than me.&nbsp;»</li>
-                 <li><b>Beaver E</b>&nbsp;: «&nbsp;There are only 2 beavers higher than me, and the two are in front of me.&nbsp;»</li>
-               </ul>
-          </div>
-          <p>
-	  Can you find the position of the beavers in the sky?&nbsp;?
-          </p>
-
-          <center><div id="anim" class="touch" style="margin-bottom: 0.5em"></div></center>
-     </div>
-
+         <h1>Paragliding</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  <span class="easy">Three</span><span class="easy">Four</span><span class="easy">Five</span> beavers are making paragliding.
+                  A beaver can fly higher than the other beavers.<br/>
+                  A beaver may also be in front of other beavers.
+                  </p>
+                  <p style="margin-bottom: 0.5em;">
+                  Beavers transmit radio information about their position in the sky.
+                  </p>
+                  <ul class="easy" style="margin-top: 0.5em;">
+                    <li><b>Castor A</b>&nbsp;: «&nbsp;I am in front of two beavers.&nbsp;»</li>
+                    <li><b>Castor B</b>&nbsp;: «&nbsp;There is no beaver higher than me&nbsp;; and there is a beaver behind me.&nbsp;»</li>
+                    <li><b>Castor C</b>&nbsp;: «&nbsp;One beaver is higher than me and another one is lower than me.&nbsp;»</li>
+                  </ul>
+                  <ul class="medium" style="margin-top: 0.5em;">
+                    <li><b>Castor A</b>&nbsp;: «&nbsp;There are 2 beavers higher than me and 1 lower than me.&nbsp;»</li>
+                    <li><b>Castor B</b>&nbsp;: «&nbsp;There is no beaver in front of me.&nbsp;»</li>
+                    <li><b>Castor C</b>&nbsp;: «&nbsp;There are 3 beavers lower than me: 1 in front of me and 2 behind me..&nbsp;»</li>
+                    <li><b>Castor D</b>&nbsp;: «&nbsp;There are 3 beavers in front of me and no beaver lower than me.&nbsp;»</li>
+                  </ul>
+                  <ul class="hard" style="margin-top: 0.5em;">
+                    <li><b>Beaver A</b>&nbsp;: «&nbsp;There are 3 beavers higher than me&nbsp;: 1 in front of me, and 2 behind me.&nbsp;»</li>
+                    <li><b>Beaver B</b>&nbsp;: «&nbsp;There are 4 beavers higher than me&nbsp;: 3 in front of me, and 1 behind me.&nbsp;»</li>
+                    <li><b>Beaver C</b>&nbsp;: «&nbsp;There is only one beaver higher than me, and it is before me.&nbsp;»</li>
+                    <li><b>Beaver D</b>&nbsp;: «&nbsp;There is no beaver higher than me.&nbsp;»</li>
+                    <li><b>Beaver E</b>&nbsp;: «&nbsp;There are only 2 beavers higher than me, and the two are in front of me.&nbsp;»</li>
+                  </ul>
+                  <p>
+                  Can you find the position of the beavers in the sky&nbsp;?
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center><div id="anim" class="touch" style="margin-bottom: 0.5em"></div></center>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none" > 
+         <img src="castor2.png" style="display:none">
+         <img src="montagne.png" style="display:none">
+      </div>  
       <div id="solution">
 <!--
           <h2>Solution</h2>
