@@ -7,19 +7,29 @@
       <script type="text/javascript" src="../../modules/ext/jquery/2.1/jquery.min.js"></script>
       <script type="text/javascript">
          $(function(){
-            $("#text").html(test(Math.random,1500,2000,true));
+            // $("#text").html(test(Math.random,1500,2000,true));
+            init();
          })
       </script>
       <style type="text/css">
-         #text {
+         #text, #form {
             width: 50%;
-            margin: auto;
+            margin: 1em auto;
+         }
+         #text {
             word-break: break-all;
+            border: 1px solid black;
+            min-height: 600px;
+            padding: 0 1em;
             /*letter-spacing: 0.5em;*/
+         }
+         #form label, #form select {
+            margin-right: 1em; 
          }
       </style>
    </head>
    <body>
+      <div id="form"></div>
       <div id="text"></div>
    </body>
 </html>
