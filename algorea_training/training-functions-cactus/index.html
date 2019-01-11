@@ -6,13 +6,14 @@
       <script>
       window.stringsLanguage = 'fr';
       </script>
-      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.0.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
       <script class="remove" type="text/javascript">
         var modulesPath = '../../modules/'
         importModules([
             'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'beaver-task-2.0', 'jschannel', 'raphaelFactory-1.0', 'delayFactory-1.0', 'simulationFactory-1.0',
             'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'conceptDisplay-1.0', 'conceptViewer-1.0', 'conceptViewer_css-1.0',
+            'taskStyles-mobileFirst', 'blockly-robot-1.0']);
         // set Blockly as default language when none is specified through ?language=
         importLanguageModules('blockly');
       </script>
@@ -45,18 +46,19 @@
          <div id="tabsContainer"></div>
          <div id="taskContent" style="text-align:left;position:relative">
             <div id="taskIntro">
-               <p>
+               <p class="short">
                   Programmez le robot pour qu'il peigne toutes les cases marquées.
                </p>
-               <div class="easy medium">
-                  <p>
-                  Pour y arriver sans utiliser trop de blocs, vous devrez créer une fonction. Créer une fonction revient à créer votre propre bloc, que vous pourrez ensuite utiliser à divers endroits de votre programme.
-                  </p>
-                  <p>
-                     Voici un exemple de fonction, qui peint deux cases l'une au dessus de l'autre puis revient à sa position de départ :
-                  </p>
-                  <img data-lang="blockly" src="function_blockly.png" style="height:140px"/>
-                  <img data-lang="scratch" src="function_scratch.png" style="height:200px"/>
+               <div class="long">
+                  <div class="easy medium">
+                     <p>
+                     Pour y arriver sans utiliser trop de blocs, vous devrez créer une fonction. Créer une fonction revient à créer votre propre bloc, que vous pourrez ensuite utiliser à divers endroits de votre programme.
+                     </p>
+                     <p>
+                        Voici un exemple de fonction, qui peint deux cases l'une au dessus de l'autre puis revient à sa position de départ :
+                     </p>
+                     <img data-lang="blockly" src="function_blockly.png" style="height:140px"/>
+                     <img data-lang="scratch" src="function_scratch.png" style="height:200px"/>
 <pre data-lang="python">
 def cactus():
    peindre()
@@ -64,11 +66,11 @@ def cactus():
    peindre()
    bas()
 </pre>
-                  <p>
-                     Et voici un exemple de programme qui utilise cette fonction, et son résultat :
-                  </p>
-                  <img data-lang="blockly" src="use_function_blockly.png" style="height:150px" />
-                  <img data-lang="scratch" src="use_function_scratch.png" style="height:220px" />
+                     <p>
+                        Et voici un exemple de programme qui utilise cette fonction, et son résultat :
+                     </p>
+                     <img data-lang="blockly" src="use_function_blockly.png" style="height:150px" />
+                     <img data-lang="scratch" src="use_function_scratch.png" style="height:220px" />
 <pre data-lang="python">
 droite()
 cactus()
@@ -76,18 +78,19 @@ droite()
 droite()
 cactus()
 </pre>
-                  <img src="result_function.png" style="height:80px" /> 
+                     <img src="result_function.png" style="height:80px" /> 
 
-               </div>
-               <div class="medium">
-                  <p>
-                     Pour ne pas dépasser le nombre de blocs autorisés, vous devrez également utiliser des blocs de répétition.
-                  </p>
-               </div>
-               <div class="hard">
-                  <p class="hard">
-                  Dans cette version, pensez à utiliser plusieurs fonctions pour économiser des blocs ! <span data-lang="blockly scratch">Vous pouvez glisser un nouveau bloc de définition de fonction et lui donner un autre nom que celui de la première fonction.</span>
-                  </p>
+                  </div>
+                  <div class="medium">
+                     <p>
+                        Pour ne pas dépasser le nombre de blocs autorisés, vous devrez également utiliser des blocs de répétition.
+                     </p>
+                  </div>
+                  <div class="hard">
+                     <p class="hard">
+                     Dans cette version, pensez à utiliser plusieurs fonctions pour économiser des blocs ! <span data-lang="blockly scratch">Vous pouvez glisser un nouveau bloc de définition de fonction et lui donner un autre nom que celui de la première fonction.</span>
+                     </p>
+                  </div>
                </div>
             </div>
             <div id="gridContainer"></div>
