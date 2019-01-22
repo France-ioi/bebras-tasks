@@ -21,15 +21,34 @@
             border: 1px solid black;
             min-height: 600px;
             padding: 0.5em 1em;
-            /*letter-spacing: 0.5em;*/
          }
          #form label, #form select {
             margin-right: 1em; 
          }
+         #freq {
+            overflow-x: auto;
+         }
+         table {
+            border-collapse: collapse;
+            width: 100%;
+         }
+         th, td {
+            padding: 0.5em;
+            border-left: 1px solid black;
+         }
+         tr:nth-child(even) {
+            background-color: silver;
+         }
+         th:first-child, td:first-child {
+            font-weight: bold;
+            border: none;
+         }
+
       </style>
    </head>
    <body>
       <div id="form"></div>
+      <div id="freq"></div>
       <div id="text"></div>
    </body>
 </html>
