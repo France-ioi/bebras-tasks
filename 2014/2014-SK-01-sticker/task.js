@@ -73,6 +73,7 @@ function initTask (subTask) {
    var initState;
    var solution;
    var stickerImages = ["easy0.png", "easy1.png", "easy2.png", "easy3.png","fish_3.png", "aquarium_plant.png"];
+   var labels = ["Algues \nvertes", "Cailloux", "Poisson \nrouge", "Castor", "Poisson \nblanc", "Algues \nrouges"];   // IE8
 
    subTask.loadLevel = function(curLevel) {
       level = curLevel;
@@ -125,7 +126,7 @@ function initTask (subTask) {
 
    function getResultAndMessage() {
       var result;
-      if (answer.length < vertices.length || answer.includes(null)) {
+      if (answer.length < vertices.length || answerIncludesNull()) {
          result = { successRate: 0, message: taskStrings.missingStickers };
       } else if(Beav.Object.eq(answer, solution)){
          result = { successRate: 1, message: taskStrings.success };
@@ -140,7 +141,6 @@ function initTask (subTask) {
    };
 
    var drawSticker = function(iSticker) {
-      var labels = ["Algues", "Cailloux", "Poisson", "Castor"];
       var margin = 5;
       var sticker;
       if (Beav.Navigator.isIE8()) {
@@ -281,6 +281,14 @@ function initTask (subTask) {
       else {
          return ["M", x2 - w, y2 - h, "L", x1 + w, y1 + h];
       }
+   };
+
+   function answerIncludesNull() {  // because includes doesn't work with IE8
+      for(var iPlace = 0; iPlace < answer.length; iPlace++){
+         if(answer[iPlace] === null)
+            return true;
+      }
+      return false;
    };
   
 };
