@@ -41,7 +41,8 @@
       <script>
          var taskStrings = {
             success: "Bravo, You did it.",
-            failure: "This is not the right order."
+            failure: "This is not the right order.",
+            missingStickers: "You haven't placed all the stickers."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -50,6 +51,13 @@
          border: 1px solid gray;
          margin: 1em;
       }
+      .aquarium {
+            display: block; 
+            width:400px;
+            height:400px;
+            margin: 1em auto;
+
+         }
       </style>
  
    </head>
@@ -63,12 +71,14 @@
                   <p>
                   A Beaver has decorated his aquarium with stickers.
                   Find in which order Beaver pasted the stickers,
-                  and drag them in that order.
+                  and drag them in the graph.
                   </p>
+                  <img class="aquarium easy" src="full_easy.png" />
+                  <img class="aquarium medium" src="full_medium.png" />
+                  <img class="aquarium hard" src="full_hard.png" />
                </div>
             </div>
             <div id="zone_2">
-               <img src="full_easy.png" style="width:400px;height:400px; margin-left:1em" />
                <div id="anim" class="touch"></div>
             </div>
          </div>
