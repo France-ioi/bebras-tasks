@@ -169,8 +169,6 @@ function initTask (subTask) {
             return true;
          },
          actionIfEjected : function(refElement, previousContainerId, previousPos) {
-            // var srcObjects = dragAndDrop.getObjects('src');
-            // console.log(srcObjects);
             return {dstCont: 'src',dstPos: 0,dropType:'insert'};
          }
       });
@@ -199,10 +197,9 @@ function initTask (subTask) {
    function initGraph() {
       var graphDrawer = new SimpleGraphDrawer(vertexAttr,edgeAttr);
       graphDrawer.setDrawVertex(drawVertex);
-      graphDrawer.setDrawEdge(drawEdge);  // because default edge drawer doesn't work with ellipse
+      graphDrawer.setDrawEdge(drawEdge);  
       vGraph = new VisualGraph("vGraph", paper, graph, graphDrawer, true);
       initVertexPos();
-      // redrawGraph();
       vGraph.redraw();
    };
 
@@ -283,7 +280,7 @@ function initTask (subTask) {
       }
    };
 
-   function answerIncludesNull() {  // because includes doesn't work with IE8
+   function answerIncludesNull() {  // because Array.includes doesn't work with IE8
       for(var iPlace = 0; iPlace < answer.length; iPlace++){
          if(answer[iPlace] === null)
             return true;
