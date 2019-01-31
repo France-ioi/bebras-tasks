@@ -1,0 +1,27 @@
+question {
+    display: block;
+    margin: 20px 0;
+}
+
+answer {
+    display: block;
+}
+
+answer.selected {
+    background: #AABBFF;
+}
+
+answer .error {
+}
+
+answer .error-message {
+    color: #993333;
+}
+
+solution {
+    display: block;
+}
+
+answer-group {
+    display: block;
+}
