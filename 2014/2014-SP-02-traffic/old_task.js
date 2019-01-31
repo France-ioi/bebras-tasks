@@ -1,111 +1,47 @@
-function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
-   var data = {
-      easy: {
-         initMatrix: [ // 1 means possible, 2 means selected
-            [0, 1, 1, 1, 0, 0, 0, 0, 0 ], //A
-            [0, 0, 1, 0, 0, 0, 0, 0, 0 ], //B
-            [0, 0, 0, 0, 0, 1, 1, 0, 0 ], //C
-            [0, 0, 0, 0, 0, 0, 0, 1, 0 ], //D
-            [1, 0, 0, 1, 0, 0, 0, 0, 0 ], //E
-            [1, 0, 0, 1, 0, 0, 0, 0, 1 ], //F
-            [0, 0, 0, 0, 0, 0, 0, 0, 1 ], //G
-            [0, 0, 0, 0, 1, 0, 0, 0, 1 ], //H
-            [0, 0, 1, 0, 0, 0, 0, 0, 0 ]  //I
-         ],
-         nodes: [
-           [152,18],
-           [33,44],
-           [38, 140],
-           [205, 200],
-           [280, 120],
-           [140, 220],
-           [40, 330],
-           [251, 305],
-           [160, 360]
-         ]   
-      },
-      medium: {
-         initMatrix: [ // 1 means possible, 2 means selected
-            [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-            [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
-            [1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1],
-            [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0]
-         ],
-         nodes: [
-           [152,18],
-           [33,44],
-           [120,103],
-           [210,110],
-           [38, 140],
-           [205, 200],
-           [280, 120],
-           [72, 230],
-           [140, 220],
-           [40, 330],
-           [251, 305],
-           [160, 360]
-         ]
-
-      },
-      hard: {
-         initMatrix: [ // 1 means possible, 2 means selected
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],  //A
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  //B
-            [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0],  //C
-            [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],  //D
-            [0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],  //E
-            [0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0],  //F
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],  //G
-            [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0],  //H
-            [0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1],  //I
-            [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0],  //J
-            [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],  //K
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0]   //L
-         ],
-         nodes: [
-           [152,18],
-           [33,44],
-           [120,103],
-           [210,110],
-           [38, 140],
-           [205, 200],
-           [280, 120],
-           [72, 230],
-           [140, 220],
-           [40, 330],
-           [251, 305],
-           [160, 360]
-         ]
-
-      }
-   };
+function initTask() {
    var radius = 15;
    var names = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"];
    var fontSize = 14;
    var textStyle = {'font-size' : fontSize, 'font-weight' : 'bold'};
-   var nodes;
-   var nbNodes;
-   var iNodeTarget;
+   var nodes = [
+     [152,18],
+     [33,44],
+     [120,103],
+     [210,110],
+     [38, 140],
+     [205, 200],
+     [280, 120],
+     [72, 230],
+     [140, 220],
+     [40, 330],
+     [251, 305],
+     [160, 360]
+   ];
+   var nbNodes = nodes.length;
+   var iNodeTarget = nbNodes - 1;
 
+   var initMatrix = [ // 1 means possible, 2 means selected
+      [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+      [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
+      [1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1],
+      [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+      [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0]
+   ];
    var cells = [];
    var edges;
    var paperGraph;
    var paperMatrix;
    var cellSide = 30;
    var paper2Margin = cellSide+5;
-   var paper2Width; 
-   var paper2Height;
+   var paper2Width = paper2Margin + (nbNodes + 1) * cellSide + 5; 
+   var paper2Height = paper2Margin + (nbNodes + 1) * cellSide + 5;
    var paper1Width = 300;
    var paper1Height = 400;
    var dash = ".";
@@ -115,83 +51,10 @@ function initTask(subTask) {
    var beavers = [];
    var animating = false;
    var beaverShowing = false;
+   var curTimeout = null;
 
    var curMatrix;
-
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      curMatrix = Beav.Matrix.copy(data[level].initMatrix);
-      nodes = data[level].nodes;
-      nbNodes = nodes.length;
-      iNodeTarget = nbNodes - 1;
-      paper2Width = paper2Margin + (nbNodes + 1) * cellSide + 5; 
-      paper2Height = paper2Margin + (nbNodes + 1) * cellSide + 5;
-   };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer){
-         stopExecution();
-         cleanBeavers();
-         addSelectedToMatrix(curMatrix, answer);
-      }
-   };
-
-   subTask.resetDisplay = function() {
-      displayHelper.hideValidateButton = true;
-      paperGraph = subTask.raphaelFactory.create("graph","graph", paper1Width, paper1Height);
-      drawEdges();
-      for (var iNodeA = 0; iNodeA < nbNodes; iNodeA++) {
-        var cx = nodes[iNodeA][0];
-        var cy = nodes[iNodeA][1];
-        var color = "white";
-        if (iNodeA == iNodeTarget) {
-           color = "#FF6666";
-        }
-        var node = paperGraph.circle(cx, cy, radius)
-          .attr({"stroke-width": 2, stroke: "black", fill: color});
-        paperGraph.text(cx, cy, names[iNodeA]).attr(textStyle);
-      }
-      drawMatrix();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = [];
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      stopExecution();
-      callback();
-   };
-
-   function getResultAndMessage() {
-      var result;
-      var selected = answer;
-      var matrix = Beav.Matrix.copy(data[level].initMatrix);
-      addSelectedToMatrix(matrix, selected);
-      var simulation = pickArrows(matrix); 
-      if (simulation.hasCycle) {
-         result = { successRate: 0, message: taskStrings.failureCycle };
-      } else if (simulation.nbIsolatedNodes > 0) {
-         result = { successRate: 0, message: taskStrings.failureIsolatedNodes };
-      } else {
-         result = { successRate: 1, message: taskStrings.success };
-      }
-      return result;
-   };
-
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
+   var curSelected;
 
    var pickArrows = function(matrix) {
       var nbIsolatedNodes = 0;
@@ -245,6 +108,7 @@ function initTask(subTask) {
          var x = nodes[iNode][0] - r;
          var y = nodes[iNode][1] - r;
          beavers[iNode] = paperGraph.image("castor_tete.png", x, y, r * 2, r * 2);
+           // circle(nodes[iNode][0], nodes[iNode][1], r).attr({fill:'red'});
          curLocation[iNode] = iNode;
       }
       var nbSteps = 0;
@@ -257,15 +121,15 @@ function initTask(subTask) {
                curLocation[iBeaver] = destNode;
                var x = nodes[destNode][0] - r;
                var y = nodes[destNode][1] - r;
-               var anim = new Raphael.animation({x:x, y:y, 'transform' : ''}, animTime, '');
-               subTask.raphaelFactory.animate("moveBeaver"+iBeaver,beavers[iBeaver],anim);  
+               var anim = Raphael.animation({x:x, y:y, 'transform' : ''}, animTime, '');
+               beavers[iBeaver].animate(anim);
                hasChanged = true;
             }
          }
          nbSteps++;
          var maxNbSteps = nbNodes-1;
          if ((nbSteps < maxNbSteps) && hasChanged) {
-            subTask.delayFactory.create("delay",moveStep, delayTime);
+            curTimeout = setTimeout(moveStep, delayTime);
          } else {
             stopExecution();
             callback(simulation);
@@ -275,34 +139,36 @@ function initTask(subTask) {
    };
 
    var stopExecution = function() {
-      subTask.delayFactory.destroy("delay");
+      if (curTimeout != null) {
+         clearTimeout(curTimeout);
+         curTimeout = null;
+      }
       animating = false;
       for (var iBeaver = 0; iBeaver < nbNodes; iBeaver++) {
          if (beavers[iBeaver] != undefined) {
-            subTask.raphaelFactory.stopAnimate("moveBeaver"+iBeaver);
+            beavers[iBeaver].stop();
          }
       }
       $("#tryOrReset").attr('value', taskStrings.removeBeavers);
    };
 
    var setClick = function(rect, iNodeA, iNodeB) {
-      rect.unclick();
-      rect.click(function(event) {
+      rect.node.onclick = function(event) {
          if (beaverShowing && !animating) {
             cleanBeavers();
          }
          var newStatus = 3 - curMatrix[iNodeA][iNodeB];
          if (newStatus == 1) {
-            answer = $.grep(answer, function(edge) {
+            curSelected = $.grep(curSelected, function(edge) {
                return ((edge[0] != iNodeA) || (edge[1] != iNodeB));
             });
          } else {
-            answer.push([iNodeA, iNodeB]);
+            curSelected.push([iNodeA, iNodeB]);
          }
          curMatrix[iNodeA][iNodeB] = newStatus;
          updateDisplayEdge(iNodeA, iNodeB);
          displayHelper.stopShowingResult();
-      });
+      };
    };
 
    var updateDisplayEdges = function() {
@@ -393,7 +259,7 @@ function initTask(subTask) {
    };
 
    var drawMatrix = function() {
-      paperMatrix = subTask.raphaelFactory.create("matrix","matrix", paper2Width, paper2Height);  
+      paperMatrix = Raphael("matrix", paper2Width, paper2Height);  
       paperMatrix.rect(paper2Margin+cellSide, paper2Margin-cellSide, nbNodes*cellSide, cellSide).attr({"fill": "#CCFFCC"});
       paperMatrix.rect(paper2Margin-cellSide, paper2Margin+cellSide, cellSide, nbNodes*cellSide).attr({"fill": "#CCFFCC"});
       paperMatrix.text(nbNodes*cellSide / 2 + 70, cellSide-10, taskStrings.arrival).attr(textStyle);
@@ -439,6 +305,58 @@ function initTask(subTask) {
       }
    };
 
+   task.load = function(views, callback) {
+      if (paper1Width > 300 || paper2Width >= 440) {
+         // console.log("Paper width too large for space reserved in html file.");
+      }
+      displayHelper.hideValidateButton = true;
+      curMatrix = Beav.Matrix.copy(initMatrix);
+      curSelected = [];
+
+      paperGraph = Raphael("graph", paper1Width, paper1Height);
+      drawEdges();
+      for (var iNodeA = 0; iNodeA < nbNodes; iNodeA++) {
+        var cx = nodes[iNodeA][0];
+        var cy = nodes[iNodeA][1];
+        var color = "white";
+        if (iNodeA == iNodeTarget) {
+           color = "#FF6666";
+        }
+        var node = paperGraph.circle(cx, cy, radius)
+          .attr({"stroke-width": 2, stroke: "black", fill: color});
+        paperGraph.text(cx, cy, names[iNodeA]).attr(textStyle);
+      }
+      drawMatrix();
+      callback();
+   };
+
+   task.unload = function(callback) {
+      stopExecution();
+      callback();
+   };
+
+   task.getAnswer = function(callback) {
+      callback(JSON.stringify(curSelected));
+   };
+
+   task.reloadAnswer = function(strAnswer, callback) {
+      stopExecution();
+      cleanBeavers();
+      curSelected = selectedOfStrAnswer(strAnswer);
+      curMatrix = Beav.Matrix.copy(initMatrix);
+      addSelectedToMatrix(curMatrix, curSelected);
+      updateDisplayEdges();
+      callback();
+   };
+
+   var selectedOfStrAnswer = function(strAnswer) {
+      var selected = [];
+      if (strAnswer != "") {
+         selected = $.parseJSON(strAnswer);
+      }
+      return selected;
+   };
+
    var addSelectedToMatrix = function(matrix, selected) {
       for (var iEdge = 0; iEdge < selected.length; iEdge++) {
          var edge = selected[iEdge];
@@ -468,14 +386,29 @@ function initTask(subTask) {
          $("#tryOrReset").attr('value', "Arrêter");
          playBeavers(function(simulation) {
             if ((simulation.hasCycle) || (simulation.nbIsolatedNodes > 0)) {
-               var result = getResultAndMessage();
-               displayHelper.showPopupMessage(result.message, "blanket");
+               displayHelper.validate("stay");
             } else {
                platform.validate("done");
             }
          });
       }
    };
+
+   grader.gradeTask = function(strAnswer, token, callback) {
+      platform.getTaskParams(null, null, function(taskParams) {
+         var selected = selectedOfStrAnswer(strAnswer);
+         var matrix = Beav.Matrix.copy(initMatrix);
+         addSelectedToMatrix(matrix, selected);
+         var simulation = pickArrows(matrix); 
+         if (simulation.hasCycle) {
+            callback(taskParams.noScore, taskStrings.failureCycle);
+         } else if (simulation.nbIsolatedNodes > 0) {
+            callback(taskParams.noScore, taskStrings.failureIsolatedNodes);
+         } else {
+            callback(taskParams.maxScore, taskStrings.success);
+         }
+      });
+   };
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+
+initTask();

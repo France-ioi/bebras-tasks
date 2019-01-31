@@ -41,7 +41,8 @@
       <script>
          var taskStrings = {
             success: "Bravo, c'est le bon ordre&nbsp;!",
-            failure: "Ce n'est pas le bon ordre."
+            failure: "Ce n'est pas le bon ordre.",
+            missingStickers: "Vous n'avez pas placé tous les autocollants."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -49,6 +50,13 @@
          #textSolution img {
             border: 1px solid gray;
             margin: 1em;
+         }
+         .aquarium {
+            display: block; 
+            width:400px;
+            height:400px;
+            margin: 1em auto;
+
          }
       </style>
  
@@ -63,24 +71,17 @@
                   <p>
                   Castor a décoré son aquarium avec des autocollants.
                   Trouvez dans quel ordre Castor a collé les autocollants,
-                  et faites-les glisser dans cet ordre.
+                  et faites-les glisser sur le schéma.
                   </p>
+                  <img class="aquarium easy" src="full_easy.png" />
+                  <img class="aquarium medium" src="full_medium.png" />
+                  <img class="aquarium hard" src="full_hard.png" />
                </div>
             </div>
             <div id="zone_2">
-               <img src="full_easy.png" style="width:400px;height:400px; margin-left:1em" />
                <div id="anim" class="touch"></div>
             </div>
          </div>
-          <!-- <table>
-          <tr><td>
-             
-          </td>
-          <td>
-             <div id="anim" class="touch"></div>
-          </td>
-          </tr>
-          </table> -->
           <img src="icon.png" style="display:none"> 
           <img src="easy0.png" style="display:none" />
           <img src="easy1.png" style="display:none" />
