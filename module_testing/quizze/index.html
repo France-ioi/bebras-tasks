@@ -40,55 +40,60 @@
     </head>
     <body>
         <div id="task" style="display: none">
-            task
+            <div class="intro">
+                <p class="dropcap">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h2 class="introTitle">Objectif</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="taskContent">
+                <question type="single">
+                    <statement>
+                        question 0 (single choice)
+                    </statement>
+                    <solution>
+                        correct answer is 0
+                    </solution>
+                    <answer>
+                        answer 0
+                    </answer>
+                    <answer>
+                        answer 1
+                    </answer>
+                    <answer>
+                        answer 2
+                    </answer>
+                </question>
 
-            <question type="single">
-                <statement>
-                    question 0 (single choice)
-                </statement>
-                <solution>
-                    correct answer is 0
-                </solution>
-                <answer>
-                    answer 0
-                </answer>
-                <answer>
-                    answer 1
-                </answer>
-                <answer>
-                    answer 2
-                </answer>
-            </question>
+                <question type="multiple">
+                    <statement>
+                        question 1 (multiple choice)
+                    </statement>
+                    <solution>
+                        correct answer is 1 and 2
+                    </solution>
+                    <answer>
+                        answer 0
+                    </answer>
+                    <answer>
+                        answer 1
+                    </answer>
+                    <answer>
+                        answer 2
+                    </answer>
+                </question>
 
-            <question type="multiple">
-                <statement>
-                    question 1 (multiple choice)
-                </statement>
-                <solution>
-                    correct answer is 1 and 2
-                </solution>
-                <answer>
-                    answer 0
-                </answer>
-                <answer>
-                    answer 1
-                </answer>
-                <answer>
-                    answer 2
-                </answer>
-            </question>
-
-            <question type="input">
-                <statement>
-                    question 2 (form)
-                </statement>
-                <solution>
-                    correct answer is "2"
-                </solution>
-                <answer>
-                    <input type="text" validator="\S"/>
-                </answer>
-            </question>
+                <question type="input">
+                    <statement>
+                        question 2 (form)
+                    </statement>
+                    <solution>
+                        correct answer is "2"
+                    </solution>
+                    <answer>
+                        <input type="text" validator="\S" placeholder="Entrez votre réponse…" />
+                    </answer>
+                </question>
+            </div>
 
         </div>
 
