@@ -1,21 +1,20 @@
 <!doctype html>
 <html>
    <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
       <title>2013-FR-15</title>
-      <script>
-         window.stringsLanguage = 'fr';
-      </script>
-      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
-      <script class="remove" type="text/javascript">
-         var modulesPath = '../../modules';
-         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
-            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
-      </script>
+      <script class="module" type="text/javascript" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
       <script type="text/javascript" src="2013-FR-15-WCan.js"></script>
       <script type="text/javascript" src="2013-FR-15-closed-tap.js"></script>
       <script type="text/javascript" src="2013-FR-15-tap.js"></script>
@@ -23,7 +22,9 @@
       <script type="text/javascript" src="2013-FR-15-robot.js"></script>
       <script type="text/javascript" src="2013-FR-15-robot-with-can.js"></script>
       <script type="text/javascript" src="2013-FR-15-robot-with-full-can.js"></script>
+      <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
       <script class="remove" type="text/javascript">
+
        var json = {
           "id": "http://castor-informatique.fr/tasks/2013/2013-FR-15/",
           "language": "fr",
@@ -40,21 +41,7 @@
           ]
       };
       </script>
-      <script>
-         var taskStrings = {
-            success: "Bravo, vous avez réussi !",
-            failure: "Ce n'est pas le bon ordre.",
-            move: function(amount,direction) {
-               var dir = (direction === "R") ? "droite" : "gauche";
-               return "Se déplacer de " + amount + " cases vers la " + dir;
-            },
-            takeWateringCan: "Prendre l'arrosoir",
-            openTap: "Ouvrir le robinet",
-            closeTap: "Fermer le robinet",
-            wait: "Attendre 3 secondes",
-            pour: "Verser le contenu de l'arrosoir"
-         };
-      </script>
+      <!-- put task css here -->
       <style class="">
          #animationcontainer_2013_FR_15 {
            -moz-user-select: none;
@@ -80,54 +67,52 @@
            width: 60px;
            height: 60px;
          }
-         #play {
-            margin: 1em;
-         }
-         #squares {
-            margin: auto;
-         }
       </style>
-      <script src="task.js"></script>
-   </head>
-   <body>
+      <script src="2013-FR-15_task.js"></script>
+    </style>
+  </head>
+  <body>
       <div id="task">
           <h1>Arroser la plante</h1>
-          <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
-         <div id="taskContent">        <!-- will contain the content of the task --> 
-            <div id="zone_1">
-               <div class="consigne">
-                  <p>Glissez les instructions dans le bon ordre pour que le robot de la 4ème case arrose la plante et ne laisse pas couler le robinet.</p> 
-               </div>
-            </div>
-            <div id="zone_2">
-               <div id="play"></div>
-                
-               <table>
-                  <tr>
-                    <td width="150">&nbsp;</td>
-                    <td>
-                      <div id="anim" class="touch"></div>
-                    </td>
-                    <td>
-                      <div id="buttons_2013_FR_15">
-                        <input type="button" id="execute" value="Exécuter" onclick="task.execute()"/>
-                        <input type="button" value="Arrêter" onclick="task.reset_play()"/>
-                        <div id="error"></div>
-                        <div id="success"></div>
-                      </div>
-                    </td>
-                  </tr>
-               </table>
+          <table>
+            <tr id="play">
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+              <td class="cell">&nbsp;</td>
+            </tr>
+          </table>
+          <p>Glissez les instructions dans le bon ordre pour que le robot de la 4ème case arrose la plante et ne laisse pas couler le robinet.</p>			
+          <table>
+            <tr>
+              <td width="150">&nbsp;</td>
+              <td>
+				    <div id="anim" style="width:320px;height:290px" class="touch"></div>
+              </td>
+              <td>
+                <div id="buttons_2013_FR_15">
+                  <input type="button" id="execute" value="Exécuter" onclick="task.execute()"/>
+                  <input type="button" value="Arrêter" onclick="task.reset_play()"/>
+                  <div id="error"></div>
+                  <div id="success"></div>
+                </div>
+              </td>
+          </tr>
+			 </table>
 
-               <center>
-                  <span id="cancel_2013_FR_15" style="display:none">
-                    <span style="color:blue;font-weight:bold">Votre réponse a été enregistrée. </span>
-                    <br/>
-                    <input type="button" value="Annuler la réponse enregistrée" onclick="nm_2013_FR_15.cancel()">
-                  </span>
-               </center>
-            </div>
-         </div>
+          <center>
+            <span id="cancel_2013_FR_15" style="display:none">
+              <span style="color:blue;font-weight:bold">Votre réponse a été enregistrée. </span>
+              <br/>
+              <input type="button" value="Annuler la réponse enregistrée" onclick="nm_2013_FR_15.cancel()">
+            </span>
+          </center>
       </div><!-- task -->
       <div id="solution">
           <h2>Solution</h2>
