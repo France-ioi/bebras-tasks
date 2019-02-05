@@ -127,7 +127,7 @@ function Quizze(params) {
                 var valid = reg.test(el.val());
                 input.toggleClass('error', !valid);
                 var msg = input.closest('answer').find('.error-message');
-                !valid && !msg.length && input.closest('answer').append('<div class="error-message">Wrong format</div>')
+                !valid && !msg.length && input.closest('answer').append('<div class="error-message"><i class="fas fa-bell icon"></i>Wrong format</div>')
                 valid && msg && msg.remove();
             });
         }
