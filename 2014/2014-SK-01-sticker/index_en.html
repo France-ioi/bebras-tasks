@@ -14,7 +14,7 @@
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
             'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0','graph-mouse-1.0']);
       </script>
       <script class="remove" type="text/javascript">
        var json = {
@@ -42,10 +42,14 @@
          var taskStrings = {
             success: "Bravo, You did it.",
             failure: "This is not the right order.",
-            missingStickers: "You haven't placed all the stickers."
+            missingStickers: "You haven't placed all the stickers.",
+            missingEdge: "There is not enough arrows.",
+            noEdge: "Click on the stickers to link them with arrows.",
+            tooManyEdges: "There are too many arrows.",
+            wrongEdge: "One of the arrows is not at the right place."
          };
       </script>
-      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="task_v2.js"></script>
       <style>
       #textSolution img {
          border: 1px solid gray;
@@ -71,7 +75,8 @@
                   <p>
                   A Beaver has decorated his aquarium with stickers.
                   Find in which order Beaver pasted the stickers,
-                  and drag them in the graph.
+                  <span class="easy medium">and drag them in the graph.</span>
+                  <span class="hard">and link them in that order. Click on the stickers to link them with arrows.</span>
                   </p>
                   <img class="aquarium easy" src="full_easy.png" />
                   <img class="aquarium medium" src="full_medium.png" />
