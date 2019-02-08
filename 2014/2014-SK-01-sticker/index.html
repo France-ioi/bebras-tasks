@@ -14,7 +14,7 @@
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
             'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0']);
+            'miniPlatform', 'taskStyles-0.1','graph-1.0','visual-graph-1.0','graph-mouse-1.0']);
       </script>
       <script class="remove" type="text/javascript">
        var json = {
@@ -42,10 +42,14 @@
          var taskStrings = {
             success: "Bravo, c'est le bon ordre&nbsp;!",
             failure: "Ce n'est pas le bon ordre.",
-            missingStickers: "Vous n'avez pas placé tous les autocollants."
+            missingStickers: "Vous n'avez pas placé tous les autocollants.",
+            missingEdge: "Vous n'avez pas placé suffisamment de flèches.",
+            noEdge: "Cliquez sur les images pour les relier par des fèches.",
+            tooManyEdges: "Vous avez placé trop de flèches.",
+            wrongEdge: "Une des flèches est mal placée."
          };
       </script>
-      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="task_v2.js"></script>
       <style>
          #textSolution img {
             border: 1px solid gray;
@@ -71,7 +75,8 @@
                   <p>
                   Castor a décoré son aquarium avec des autocollants.
                   Trouvez dans quel ordre Castor a collé les autocollants,
-                  et faites-les glisser sur le schéma.
+                  <span class="easy medium">et faites-les glisser sur le schéma.</span>
+                  <span class="hard">et reliez les images dans cet ordre. Cliquez sur les images pour les relier par des flèches.</span>
                   </p>
                   <img class="aquarium easy" src="full_easy.png" />
                   <img class="aquarium medium" src="full_medium.png" />
