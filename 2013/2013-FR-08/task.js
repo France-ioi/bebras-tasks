@@ -9,7 +9,7 @@ function initTask(subTask) {
             [265, 80],
             [470, 120]
          ],
-         beachLimit: [ 250, 395 ],
+         beachLimit: [ 255, 390 ],
          para_attr: [
             ["#ff7f27", 200, 50],
             ["#b5e61d", 100, 40],
