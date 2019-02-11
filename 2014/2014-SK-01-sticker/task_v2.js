@@ -139,8 +139,8 @@ function initTask (subTask) {
          }
       }else{
          initGraphHard();
-         displayHelper.customValidate = checkResult;
       }
+      displayHelper.customValidate = checkResult;
    };
 
    subTask.getAnswerObject = function() {
