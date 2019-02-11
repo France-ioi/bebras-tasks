@@ -1,16 +1,15 @@
 const grader = require('grader');
+const data = require('data');
 
 exports.handler = async (event) => {
     let answer = JSON.parse(event.body)
-    let score = grader.grade(answer)
-
+    let result = grader.grade(data, answer)
     const response = {
         statusCode: 200,
-        body: JSON.stringify({ score }),
+        body: JSON.stringify(result),
         headers: {
             'Access-Control-Allow-Origin': '*'
         }
     };
-
     return response;
 };

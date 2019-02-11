@@ -1,6 +1,5 @@
 task.load = function(views, taskLoadCallback) {
     platform.getTaskParams(null, null, function(taskParams) {
-        console.log(taskParams)
         var q = Quizze({
             parent: $('#task'),
             shuffle_questions: 0, //true,
@@ -12,10 +11,10 @@ task.load = function(views, taskLoadCallback) {
         // test
         /*
         q.setAnswer([
-            2,
-            [1,2],
+            1,
+            [0,2],
             'test'
-        ])
+        ]);
         */
 
 
@@ -47,20 +46,20 @@ task.load = function(views, taskLoadCallback) {
 
 
         // grade
-        function gradeByScript(url, answer, callback) {
-            if(window.QuizzeGrader) {
-                callback(window.QuizzeGrader.grade(answer));
+        function gradeByData(url, answer, callback) {
+            if(window.QuizzeGrader.data) {
+                callback(window.QuizzeGrader.grade(window.QuizzeGrader.data, answer));
                 return;
             }
             $.getScript(url)
                 .done(function(script, textStatus ) {
-                    if(window.QuizzeGrader)  {
-                        callback(window.QuizzeGrader.grade(answer));
+                    if(window.QuizzeGrader.data)  {
+                        callback(window.QuizzeGrader.grade(window.QuizzeGrader.data, answer));
                     } else {
-                        console.error('QuizzeGrader not found in ' + url);
+                        console.error('QuizzeGrader data not found in ' + url);
                     }
                 }).fail(function( jqxhr, settings, exception ) {
-                    console.error('Can\'t load grader script: ' + url);
+                    console.error('Can\'t load grader data: ' + url);
                 });
         }
 
@@ -72,7 +71,7 @@ task.load = function(views, taskLoadCallback) {
                 data: JSON.stringify(answer),
                 crossDomain: true
             }).done(function(data) {
-                callback(data.score);
+                callback(data);
             }).fail(function(jqxhr, settings, exception ) {
                 console.error('Grader url not responding: ' + url);
             });
@@ -81,13 +80,14 @@ task.load = function(views, taskLoadCallback) {
 
 
         task.gradeAnswer= function(answer, answer_token, callback) {
-            function onGrade(score) {
+            function onGrade(result) {
                 var d = taskParams.maxScore - taskParams.minScore;
-                var final_score = taskParams.minScore + Math.round(d * score);
+                var final_score = taskParams.minScore + Math.round(d * result.score);
+                q.showMistakes(result.mistakes);
                 callback(final_score, 'Your score is ' + final_score, null);
             }
-            if(json.graderScript) {
-                gradeByScript(json.graderScript, answer, onGrade);
+            if(json.graderData) {
+                gradeByData(json.graderData, answer, onGrade);
             } else if(json.graderUrl) {
                 gradeByUrl(json.graderUrl, answer, onGrade);
             }

@@ -57,7 +57,7 @@ function Quizze(params) {
             $(this).attr('answer-index', i);
         })
         answers.click(function() {
-            parent.find('answer').removeClass('selected');
+            parent.find('answer').removeClass('selected mistake');
             $(this).addClass('selected');
         });
         if(params.shuffle_answers) {
@@ -74,6 +74,14 @@ function Quizze(params) {
                 if(!isNaN(value)) {
                     parent.find('answer[answer-index=' + value + ']').addClass('selected');
                 }
+            },
+
+            showMistakes: function(mistakes) {
+                if(mistakes === null) {
+                    parent.find('answer').removeClass('mistake');
+                } else {
+                    parent.find('answer.selected').addClass('mistake');
+                }
             }
         }
 
@@ -87,6 +95,7 @@ function Quizze(params) {
             $(this).attr('answer-index', i);
         })
         answers.click(function() {
+            answers.removeClass('mistake');
             $(this).toggleClass('selected');
         });
         if(params.shuffle_answers) {
@@ -108,6 +117,16 @@ function Quizze(params) {
                     var idx = parseInt(el.attr('answer-index'), 10);
                     el.toggleClass('selected', values.indexOf(idx) !== -1);
                 });
+            },
+
+            showMistakes: function(mistakes) {
+                if(mistakes === null) {
+                    parent.find('answer').removeClass('mistake');
+                } else {
+                    for(var i=0; i<mistakes.length; i++) {
+                        parent.find('answer[answer-index=' + mistakes[i] + ']').addClass('mistake');
+                    }
+                }
             }
         }
 
@@ -123,6 +142,7 @@ function Quizze(params) {
         if(validator) {
             var reg = new RegExp(validator);
             input.on('change', function() {
+                parent.find('answer').removeClass('mistake');
                 var el = $(this);
                 var valid = reg.test(el.val());
                 input.toggleClass('error', !valid);
@@ -139,6 +159,14 @@ function Quizze(params) {
 
             setAnswer: function(value) {
                 input.val(value)
+            },
+
+            showMistakes: function(mistakes) {
+                if(mistakes === null) {
+                    parent.find('answer').removeClass('mistake');
+                } else {
+                    parent.find('answer').addClass('mistake');
+                }
             }
         }
 
@@ -204,6 +232,12 @@ function Quizze(params) {
             params.parent.find('solution').toggle(visible);
             if (visible) {
                 $('#task').toggleClass('displaySolution');
+            }
+        },
+
+        showMistakes: function(mistakes) {
+            for(var i=0; i<questions.length; i++) {
+                questions[i].showMistakes(mistakes[i]);
             }
         }
 
