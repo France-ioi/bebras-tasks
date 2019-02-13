@@ -3,45 +3,53 @@
    <head>
       <meta charset="utf-8">
       <title>2013-FR-01</title>
-      <script>
-         window.stringsLanguage = 'fr';
-      </script>
-      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script type="text/javascript" src="old_task.js"></script>
       <script class="remove" type="text/javascript">
-         var modulesPath = '../../modules';
-         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
-            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-            'miniPlatform', 'taskStyles-0.1','graph-1.0','visual-graph-1.0','graph-mouse-1.0']);
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-01/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [
+          ],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": []
+      };
       </script>
-      <script class="remove" type="text/javascript">
-         var json = {
-            "id": "http://castor-informatique.fr/tasks/2013/2013-FR-01/",
-            "language": "fr",
-            "version": "fr.01",
-            "authors": "Arthur Charguéraud",
-            "translators": [
-            ],
-            "license": "CC BY-SA 3.0",
-            "taskPathPrefix": "",
-            "modulesPathPrefix": "",
-            "browserSupport": [
-            ],
-            "acceptedAnswers": []
-         };
+      <script class="grader" type="text/javascript">
+      grader.gradeTask = function(answer, answerToken, callback) {
+         platform.getTaskParams(null, null, function(taskParams) {
+            answer = parseJsonAnswer(answer);
+            var score = taskParams.minScore;
+            var wrong = false;
+            for (var iArea = 0; iArea < 19; iArea++) {
+               if (answer[iArea] == 0) {
+                  wrong = true;
+                  break;
+               }
+            }
+            if (! wrong && checkNeighbors(answer)) {
+               score = taskParams.maxScore;
+            }
+            callback(score, '');
+         });
+      };
       </script>
-      <script>
-         var taskStrings = {
-            success: "Bravo ! Vous avez tout colorié correctement.",
-            whitePiece: "Vous n'avez pas colorié tous les morceaux.",
-            sameColor: "Des morceaux qui se touchent ont la même couleur !",
-            dontForget: "N'oubliez pas de colorier le contour du vitrail !",
-            warning: "Attention : des morceaux qui se touchent ont la même couleur !"
-         };
-      </script>
-      <script src="task.js"></script>
       <style class="">
          #patch0, #patch1, #patch2, #patch3, #patch4 {
             width:40px;
@@ -59,52 +67,89 @@
             font-weight: bold;
             font-size: 1.1em;
          }
-         .marginTop {
-            margin-top: 1em;
-         }
-         #error, #success {
-            display: inline-block;
-            height: 1em;
-         }
       </style>
       <script class="" type="text/javascript">
-         
+         var currentColor = 0;
+         var colors = ["white", "yellow", "#FF6060", "#60FF60", "#6060FF"];
+         var colorsLetters = ['', 'J', 'R', 'V', 'B'];
+         var nbPiecesToColor;
+         var selectedColors = [];
+
+         task.load = function(views, callback) {
+            loadCircle('circle');
+            nbPiecesToColor = 19;
+
+            for (var iPatch = 0; iPatch < 5; iPatch++) {               
+               setMouseDown(iPatch);
+            }
+            selectPatch(1);
+            callback();
+         };
+
+         task.getAnswer= function(callback) {
+            callback(JSON.stringify(selectedColors));
+         };
+
+         task.reloadAnswer= function(strAnswer, callback) {
+            var answer = parseJsonAnswer(strAnswer);
+            var savedCurrentColor = currentColor;
+            for (var iArea = 0; iArea < 19; iArea++) {
+               currentColor = answer[iArea];
+               clickArea(iArea, true);
+            }
+            currentColor = savedCurrentColor;
+            callback();
+         };
+
+         function setMouseDown(selectedPatch) {
+            $("#patch" + selectedPatch).css("background-color", colors[selectedPatch]);
+            $("#patch" + selectedPatch).mousedown(function() { selectPatch(selectedPatch) });
+         }
+
+         function selectPatch(selectedPatch) {
+            for (var iPatch = 0; iPatch < 5; iPatch++) {
+               $("#patch" + iPatch).css("border", "solid #E0E0E0 4px");
+            }
+            $("#patch" + selectedPatch).css("border", "solid black 4px");
+            currentColor = selectedPatch;
+         }
+         function parseJsonAnswer(strAnswer) {
+            var answer = [];
+            for (var iArea = 0; iArea < 19; iArea++) {
+               answer[iArea] = 0;
+            }
+            if (strAnswer != "") {
+               answer = $.parseJSON(strAnswer);
+            }
+            return answer;
+         }
       </script>
    </head>
    <body>
       <div id="task">
          <h1>Vitrail coloré</h1>
-         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
-         <div id="taskContent">        <!-- will contain the content of the task --> 
-            <div id="zone_1">
-               <div class="consigne">
-                  <p>
-                  Castor souhaite peindre le grand vitrail de son salon de telle sorte que deux morceaux qui se touchent n'aient pas la même couleur. Aucun morceau ne doit rester blanc, y compris le contour.</p>
-                  <p>
-                  Aidez Castor à trouver comment il pourrait peindre son vitrail. Cliquez sur un carré de couleur sur le côté, puis cliquez sur les morceaux que vous souhaitez colorier de cette couleur.
-                  </p>
-               </div>
-            </div>
-            <div id="zone_2">
-               <center class="marginTop">
-                  <p>
-                  Il vous reste <span id="nbPiecesToColor">19</span> morceaux à colorier.<br/> <span id="error"></span><span id="success"></span>
-                  </p>
-               <table><tr><td>
-               <div id='circle'></div>
-               </td><td style="vertical-align:top">
-                  <table class="patches">
-                     <tr><td>Choisissez une couleur&nbsp;:</td></tr>
-                     <tr><td><div id="patch0"></div></td></tr>
-                     <tr><td><div id="patch1"><div class="patchText">J</div></div></td></tr>
-                     <tr><td><div id="patch2"><div class="patchText">R</div></div></td></tr>
-                     <tr><td><div id="patch3"><div class="patchText">V</div></div></td></tr>
-                     <tr><td><div id="patch4"><div class="patchText">B</div></div></td></tr>
-                  </table>
-               </td></tr></table>
-               </center>
-            </div>
-         </div>
+         <p>
+         Castor souhaite peindre le grand vitrail de son salon de telle sorte que deux morceaux qui se touchent n'aient pas la même couleur. Aucun morceau ne doit rester blanc, y compris le contour.
+         <p>
+         Aidez Castor à trouver comment il pourrait peindre son vitrail. Cliquez sur un carré de couleur sur le côté, puis cliquez sur les morceaux que vous souhaitez colorier de cette couleur.
+         </p>
+         <p>
+         Il vous reste <span id="nbPiecesToColor">19</span> morceaux à colorier. <span id="error"></span><span id="success"></span>
+         </p>
+         <center>
+         <table><tr><td>
+         <div id='circle'></div>
+         </td><td style="vertical-align:top">
+            <table class="patches">
+               <tr><td>Choisissez une couleur&nbsp;:</td></tr>
+               <tr><td><div id="patch0"></div></td></tr>
+               <tr><td><div id="patch1"><div class="patchText">J</div></div></td></tr>
+               <tr><td><div id="patch2"><div class="patchText">R</div></div></td></tr>
+               <tr><td><div id="patch3"><div class="patchText">V</div></div></td></tr>
+               <tr><td><div id="patch4"><div class="patchText">B</div></div></td></tr>
+            </table>
+         </td></tr></table>
+         </center>
       </div><!-- task -->
       <div id="solution">
          <h2>Solution</h2>
