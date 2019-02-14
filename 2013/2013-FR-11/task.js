@@ -251,7 +251,7 @@ function initTask(subTask) {
 
    function vertexToggle(id,selected) {
       $('#error').html("");
-      if(!pair.includes(id)){
+      if(!inArray(pair,id)){
          pair.push(id);
       }else{
          pair = [];
@@ -323,7 +323,7 @@ function initTask(subTask) {
       for(var iAnswer = 0; iAnswer < answer.length; iAnswer++){
          var vIds = answer[iAnswer].split("_");
          for(var i = 0; i < 2; i++){
-            if(!vertices.includes(vIds[i])){
+            if(!inArray(vertices,vIds[i])){
                vertices.push(vIds[i]);
             }
          }
@@ -340,6 +340,15 @@ function initTask(subTask) {
 
    function updateMessage() {
       $('#message').html(taskStrings.numberOfLines(answer.length));
+   }
+
+   function inArray(array,value) {  // IE8-9 bug fix
+      for(var i = 0; i < array.length; i++){
+         if(array[i] === value){
+            return true;
+         }
+      }
+      return false;
    }
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
