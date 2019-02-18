@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-12</title>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0','visual-graph-1.0','graph-mouse-1.0']);
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-12a/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud, Luc Baille, Mahdi Miled",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": []
+      };
+      </script>
+      <script>
+         var taskStrings = {
+            success: "Bravo ! Vous avez le maximum d'invités possible.",
+            click: "Cliquez sur les ronds pour sélectionner des invités.",
+            neighbors: "Certains invités se connaissent.",
+            notEnough: "Le nombre d'invités est insuffisant pour organiser la fête.",
+            warning: "Attention : certains invités se connaissent.",
+            numberOfGuests: function(nb) {
+               return "Nombre d'invités sélectionnés : <b>" + nb + "</b>."
+            },
+            partialSuccess: function(nb) {
+               return "Vous avez " + nb + " invités, mais il est possible d'en avoir plus."
+            }
+            
+         };
+      </script>
+      <style class="">
+         #graph_task {
+            margin: 1em 0;
+         }
+         #error, #success {
+            display: inline-block;
+            height: 1em;
+         }
+      </style>
+      <script src="task.js"></script>
+      <script class="solution" type="text/javascript" src="solution.js"></script>
+   </head>
+   <body>
+      <div id="task">
+      	<h1>Choix des invités</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+               	<p>
+               	Julie veut organiser une petite fête avec un maximum de personnes qui ne se connaissent pas les unes les autres.
+               	</p>
+               	<p>Sur le diagramme, chaque personne est représentée par un rond, et les personnes qui se connaissent sont reliées par un trait.
+               	</p>
+               	<p>
+               	Aide Julie à choisir un maximum de personnes qui ne se connaissent pas les unes les autres, en cliquant sur les ronds pour les sélectionner ou les désélectionner.
+               	</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center> 
+                  <div id='graph_task'></div>
+                  <div id='buttons_2013_FR_12'>
+                     <div id='info'></div>
+                     <div><span id='error'></span><span id='success'></span></div><br/>
+                  </div>
+               </center>
+            </div>
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <div id="solutionContent"></div>
+      </div> <!-- task-solution -->
+   </body>
+
+</html>
