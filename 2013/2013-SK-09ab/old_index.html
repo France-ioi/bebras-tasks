@@ -1,0 +1,445 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-SK-09ab</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script class="module" type="text/javascript" src="../../modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="module" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-SK-09ab/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": []
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+      </style>
+      <script class="grader" type="text/javascript">
+      grader.gradeTask = function(answer, answerToken, callback) {
+            platform.getTaskParams(null, null, function(taskParams) {
+               var score = task.gradeTask(taskParams.randomSeed, answer, taskParams.minScore, taskParams.maxScore);
+               callback(score, '');
+            });
+      }
+      </script>
+      <script class="" type="text/javascript">
+         var FOND = 0,
+            IMAGE = 1,
+            TEXT = 2;
+
+         // Dimension
+
+         var largeurBoite = 60,
+            hauteurBoite = 60;
+         var largeurPaper = 500,
+            hauteurPaper = 300;
+         var nbMax = 6;
+         var posSimX = largeurPaper / 2,
+            posSimY = 260;
+
+         var paper;
+         var dragAndDrop;
+         var contSeq;
+         var source = new Array();
+         var enCoursDeSimulation = false;
+
+         // pos_rel_cercle
+         var centre_cerc =
+            [
+               [0, 0],
+               [-2 * largeurBoite / 6, 2 * largeurBoite / 6],
+               [2 * largeurBoite / 6, -2 * largeurBoite / 6],
+               [-2 * largeurBoite / 6, 0],
+               [2 * largeurBoite / 6, 0],
+               [-2 * largeurBoite / 6, -2 * largeurBoite / 6],
+               [2 * largeurBoite / 6, 2 * largeurBoite / 6]
+            ];
+         var cerclesDe = [
+            [0],
+            [1, 2],
+            [3, 4],
+            [],
+            [1, 2, 3, 4, 5, 6]
+         ];
+
+         task.load = function(views, callback) {
+            paper_six = Raphael('dice_six', 3 * largeurBoite / 2, 3 * hauteurBoite / 2);
+            iDe = 4;
+            var r = paper_six.rect(-largeurBoite / 2, -hauteurBoite / 2, largeurBoite, hauteurBoite, 8).attr('fill', 'white');
+            var ar_elem = [r];
+            for (var iCerc = 0; iCerc < cerclesDe[iDe].length; iCerc++) {
+               var rel_cx = centre_cerc[cerclesDe[iDe][iCerc]][0];
+               var rel_cy = centre_cerc[cerclesDe[iDe][iCerc]][1];
+               ar_elem.push(paper_six.circle(rel_cx, rel_cy, largeurBoite / 10)
+                  .attr('fill', '#0B0B61').attr('stroke-width', 0));
+            }
+            component(3 * largeurBoite / 4, 3 * hauteurBoite / 4, ar_elem);
+
+            paper = Raphael('anim', largeurPaper, hauteurPaper);
+            paper.rect(0, 0, largeurPaper, hauteurPaper);
+
+            //DragAndDropSystem
+            dragAndDrop = DragAndDropSystem({
+               paper: paper,
+               canBeTaken: function(srcCont, srcPos) {
+                  return !enCoursDeSimulation;
+               },
+               actionIfDropped: function(srcCont, srcPos, dstCont, dstPos, dropType) {
+                  if (dstCont == 'seq') {
+                     var maxiPos = stackSize();
+                     if (srcCont == 'seq')
+                        maxiPos--;
+                     if (dstPos <= maxiPos)
+                        return true;
+                     if (maxiPos < nbMax)
+                        return action(dstCont, maxiPos, 'insert');
+                  }
+                  return dstCont == null;
+               },
+               drop: function(srcCont, srcPos, dstCont, dstPos, dropType) {
+                  enleverSimulation();
+               }
+            });
+
+            contSeq = dragAndDrop.addContainer({
+               ident: 'seq',
+               cx: largeurPaper / 2,
+               cy: 150,
+               widthPlace: largeurBoite,
+               heightPlace: hauteurBoite,
+               nbPlaces: nbMax,
+               dropMode: 'insertBefore',
+               dragDisplayMode: 'preview'
+            });
+            for (iSource = 0; iSource < 4; iSource++) {
+               var elem = getObject(iSource);
+               source[iSource] = dragAndDrop.addContainer({
+                  ident: iSource,
+                  cx: (1 + iSource) * largeurPaper / 5,
+                  cy: 50,
+                  widthPlace: largeurBoite,
+                  heightPlace: hauteurBoite,
+                  type: 'source',
+                  sourceElemArray: elem,
+                  placeBackgroundArray: []
+               });
+            }
+            callback();
+         };
+         
+         task.reloadAnswer= function(strAnswer, callback) {
+            var answer = parseJsonAnswer(strAnswer);
+            var current = dragAndDrop.getObjects('seq');
+            for (var i = 0; i < nbMax; i++) {
+               if (current[i] != null) {
+                  dragAndDrop.removeObject('seq', i);
+               }
+            }
+            for (var i = 0; i < nbMax; i++) {
+               if (answer[i] != null) {
+                  dragAndDrop.insertObject('seq', i, {
+                     ident: answer[i],
+                     elements: getObject(answer[i])
+                  });
+               }
+            }
+            callback();
+         };
+
+         task.getAnswer= function(callback) {
+            callback(JSON.stringify(dragAndDrop.getObjects('seq')));
+         };
+         
+         task.gradeTask= function(randomSeed, strAnswer, minScore, maxScore) {
+            function emptyPattern() {
+               return [
+                  [0, 0, 0],
+                  [0, 0, 0],
+                  [0, 0, 0]
+               ];
+            }
+
+            function rotatePattern(pattern) {
+               var newPattern = emptyPattern();
+               for (var lin = 0; lin < 3; lin++) {
+                  for (var col = 0; col < 3; col++) {
+                     newPattern[lin][col] = pattern[col][2 - lin];
+                  }
+               }
+               return newPattern;
+            }
+
+            function addPatterns(pattern1, pattern2) {
+               var newPattern = emptyPattern();
+               for (var lin = 0; lin < 3; lin++) {
+                  for (var col = 0; col < 3; col++) {
+                     newPattern[lin][col] = pattern1[lin][col] | pattern2[lin][col];
+                  }
+               }
+               return newPattern;
+            }
+
+            function patternsEqual(pattern1, pattern2) {
+               for (var lin = 0; lin < 3; lin++) {
+                  for (var col = 0; col < 3; col++) {
+                     if (pattern1[lin][col] != pattern2[lin][col]) {
+                        return false;
+                     }
+                  }
+               }
+               return true;
+            }
+
+            var patterns = [
+               [
+                  [0, 0, 0],
+                  [0, 1, 0],
+                  [0, 0, 0]
+               ],
+               [
+                  [0, 0, 1],
+                  [0, 0, 0],
+                  [1, 0, 0]
+               ],
+               [
+                  [0, 0, 0],
+                  [1, 0, 1],
+                  [0, 0, 0]
+               ]
+            ];
+            var targetPattern = [
+               [1, 0, 1],
+               [1, 0, 1],
+               [1, 0, 1]
+            ];
+            var curPattern = emptyPattern();
+            var answer = parseJsonAnswer(strAnswer);
+            for (var iStep = 0; iStep < answer.length; iStep++) {
+               var step = answer[iStep];
+               if (step == null) {
+                  break;
+               }
+               if (step == 3) {
+                  curPattern = rotatePattern(curPattern);
+               } else {
+                  curPattern = addPatterns(curPattern, patterns[step]);
+               }
+            }
+            if (patternsEqual(curPattern, targetPattern)) {
+               return maxScore;
+            }
+            return minScore;
+         };
+
+         function getObject(iSource) {
+            var r = paper.rect(-largeurBoite / 2, -hauteurBoite / 2, largeurBoite, hauteurBoite, 8).attr('fill', 'white');
+            var ar_elem = [r];
+            if (iSource < 3) {
+               iDe = iSource;
+               for (var iCerc = 0; iCerc < cerclesDe[iDe].length; iCerc++) {
+                  var rel_cx = centre_cerc[cerclesDe[iDe][iCerc]][0];
+                  var rel_cy = centre_cerc[cerclesDe[iDe][iCerc]][1];
+                  ar_elem.push(paper.circle(rel_cx, rel_cy, largeurBoite / 10)
+                     .attr('fill', '#0B0B61').attr('stroke-width', 0));
+               }
+            } else {
+               //ar_elem.push(paper.circle(0,0, 2*largeurBoite/5));
+               //ar_elem.push(paper.rect(0,-largeurBoite/3,6*largeurBoite/7,2*largeurBoite/3)
+               //	   .attr('stroke','#F0000').attr('fill','yellow'));
+               var l = 2 * largeurBoite / 7;
+
+               ar_elem.push(paper.path('M ' + l + ' ' + (-l) + ' S 0 ' + (-3 * l / 2) + ' ' + (-l) + ' ' + (-l))
+                  .attr({
+                     'arrow-end': 'classic-midium-long',
+                     'stroke-width': '2'
+                  }));
+               ar_elem.push(paper.text(0, 0, '90').attr('font-size', 30));
+            }
+            return ar_elem;
+         }
+
+         //simulation
+         var tempsTour = 1000;
+         var delayDem = 400;
+         var images = new Array();
+         var nbImages = 0;
+         var fond = null;
+
+         function stackSize() {
+            var objects = dragAndDrop.getObjects('seq');
+            var size = 0;
+            while ((size < objects.length) && (objects[size] != null)) {
+               size++;
+            }
+            return size;
+         }
+
+         function simuler() {
+            if (enCoursDeSimulation) {
+               return;
+            }
+
+            enCoursDeSimulation = true;
+            var contenu = dragAndDrop.getObjects('seq');
+            var taillePile = stackSize();
+
+            if (fond == null)
+               fond = paper.rect(posSimX - largeurBoite / 2, posSimY - hauteurBoite / 2, largeurBoite, hauteurBoite, 8).attr('fill', 'white');
+            fond.attr('transform', '');
+
+            for (var i = 0; i < nbImages; i++)
+               images[i].remove();
+
+            nbImages = 0;
+
+            var angle = new Array();
+            for (var i = 0; i < taillePile; i++) {
+               var centre = contSeq.placeCenter(i);
+               var rectAct = paper.rect(centre[0] - largeurBoite / 2, centre[1] - hauteurBoite / 2, largeurBoite, hauteurBoite);
+               rectAct.attr({
+                  'stroke': 'red',
+                  'stroke-width': '4',
+                  'opacity': '0'
+               });
+               var animAct1 = Raphael.animation({
+                  'opacity': '1'
+               }, 0, '');
+               rectAct.animate(animAct1.delay(i * tempsTour + delayDem));
+               var animAct2 = Raphael.animation({
+                  'opacity': '0'
+               }, 0, '');
+               rectAct.animate(animAct2.delay((i + 1) * tempsTour + delayDem));
+
+               var iAct = contenu[i];
+               if (iAct != 3) {
+                  angle[nbImages] = 0;
+                  images[nbImages] = paper.set();
+                  iDe = iAct;
+                  for (var iCerc = 0; iCerc < cerclesDe[iDe].length; iCerc++) {
+                     var rel_cx = centre_cerc[cerclesDe[iDe][iCerc]][0];
+                     var rel_cy = centre_cerc[cerclesDe[iDe][iCerc]][1];
+                     images[nbImages].push(paper.circle(posSimX + rel_cx, posSimY + rel_cy, largeurBoite / 10)
+                        .attr('fill', '#0B0B61').attr('stroke-width', 0));
+                  }
+
+                  images[nbImages].attr('opacity', '0');
+                  var anim = Raphael.animation({
+                     'opacity': '1'
+                  }, tempsTour / 2, '');
+                  images[nbImages].animate(anim.delay(i * tempsTour + tempsTour / 4 + delayDem));
+                  nbImages++;
+               } else {
+                  var animFond = Raphael.animation({
+                     'transform': 'r-90,' + posSimX + ',' + posSimY
+                  }, 2 * tempsTour / 3, '');
+                  fond.animate(animFond.delay(i * tempsTour + tempsTour / 4 + delayDem));
+                  for (var iIm = 0; iIm < nbImages; iIm++) {
+                     angle[iIm] -= 90;
+                     var anim = Raphael.animation({
+                        'transform': 'r' + angle[iIm] + ',' + posSimX + ',' + posSimY
+                     }, 2 * tempsTour / 3, '');
+                     images[iIm].animate(anim.delay(i * tempsTour + tempsTour / 4 + delayDem));
+                     images[iIm].attr('transform', 'r' + angle[iIm] + ',' + posSimX + ',' + posSimY);
+                  }
+               }
+            }
+
+            for (var iIm = 0; iIm < nbImages; iIm++)
+               images[iIm].attr('transform', '');
+            fond.attr('transform', '');
+
+            paper.circle(0, 0, 0).animate({
+               cx: 0
+            }, tempsTour * taillePile, '', function() {
+               var strAnswer = JSON.stringify(dragAndDrop.getObjects('seq'));
+               $("#success").html("");
+               if (task.gradeTask(0, strAnswer, 0, 1) == 1) {
+                  $("#success").html("Bravo, vous avez réussi !");
+                  platform.validate("done", function(){});
+               }
+               enCoursDeSimulation = false;
+            });
+         }
+
+         function enleverSimulation() {
+            if (fond != null)
+               fond.remove();
+            fond = null;
+            for (var i = 0; i < nbImages; i++)
+               images[i].remove();
+            nbImages = 0;
+         }
+
+         function parseJsonAnswer(strAnswer) {
+            var answer = [];
+            if (strAnswer != "") {
+               answer = $.parseJSON(strAnswer);
+            }
+            return answer;
+         }   
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Dessiner un dé</h1>
+         <p style="margin-bottom:0em">On dispose de quatre commandes permettant de dessiner des points dans un carré ou de faire tourner le carré d'un quart de tour. Trouvez une suite de commandes permettant d'obtenir six points disposés comme ci-dessous. 
+         </p>
+         <table><tr><td style="vertical-align:top">
+            <div style="margin:0" id="dice_six"></div>
+            <p>Faites glisser des commandes dans les cases bleues décrivant la séquence.</p>
+            <p>Vous pouvez faire autant d'essais que vous le souhaitez.</p>
+         </td><td>
+            <center>
+               <div id="anim" style="width:500px;height:300px" class="touch"></div>
+               <button onclick="simuler();" style="position:relative; top:-120px">Exécuter la séquence</button>
+            </center>
+         </td></tr></table>
+         <center>
+            <div id="success"></div>
+         </center>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         <p>
+         La plus courte séquence qui convient est&nbsp;:
+         </p>
+         <div>
+         <img src="2013-SK-09a_draw_2.png" width="60" />
+         <img src="2013-SK-09a_turn90.png" width="60" />
+         <img src="2013-SK-09a_draw_2.png" width="60" />
+         <img src="2013-SK-09a_draw_2A.png" width="60" />
+         </div>
+         <h2>C'est de l'informatique</h2>
+         <p>
+         Ces quatre commandes très simples permettent de réaliser
+         de nombreux dessins différents. On peut voir ces commandes comme formant 
+         un langage de programmation très simple, où l'on donnerait des
+         ordres à un robot pour aboutir à la pièce demandée. 
+         </p>
+         <p>Une application particulière de l'informatique 
+         correspond à ce qu'on appelle l'<i>informatique
+         industrielle</i>, qui utilise des instructions relativement
+         simples pour programmer des robots industriels, tels que
+         les robots utilisés pour construire des voitures.
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>
