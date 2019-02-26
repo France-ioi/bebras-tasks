@@ -3,20 +3,19 @@
    <head>
       <meta charset="utf-8">
       <title>2013-SK-01</title>
-    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" src="../../modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="module" type="text/javascript" src="../../modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="stdAnswerTypes module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
-    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="module" type="text/javascript" src="../../modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-      <script type="text/javascript" src="2013-SK-01-task.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0','visual-graph-1.0','graph-mouse-1.0']);
+      </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2013/2013-SK-01/",
@@ -31,54 +30,53 @@
           "acceptedAnswers": ["3"]
       };
       </script>
-      <!-- put task css here -->
+      <script src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            click: "Cliquez sur les arbres de la forêt pour les sélectionner.",
+            notEnoughTrees: "Vous n'avez pas sélectionné assez d'arbres.",
+            tooManyTrees: "Vous avez sélectionné trop d'arbres.",
+            wrongTree: "Un des arbres sélectionné ne correspond pas.",
+            wrongPath: "Cette séquence d'arbres ne corerspond pas à un chemin allant de l'entrée à la sortie de la forêt.",
+            clickButton: "Cliquez sur le bouton gris pour choisir un arbre.",
+            missingTrees: "La séquence d'arbre est incomplète."
+         };
+      </script>
       <style class="">
-         #tree1, #tree2, #tree3, #tree4, #tree5, #tree6 {
-            border: solid black 1px;
+         #path {
+            margin-top: 1em;
          }
       </style>
-      <script class="task" type="text/javascript">
-         stdAnsTypes.genTaskMultipleChoices(2, [
-              "<table><tr><td><span id='tree_5_a'></span></td><td><span id='tree_4_a'></span></td><td><span id='tree_2_a'></span></td><td><span id='tree_1_a'></span></td><td><span id='tree_4_b'></span></td><td><span id='tree_3_a'></span></td><td><span id='tree_1_b'></span></td><td><span id='tree_4_c'></span></td></tr></table>",
-              "<table><tr><td><span id='tree_5_b'></span></td><td><span id='tree_1_c'></td><td></span><span id='tree_2_b'></span></td><td><span id='tree_6_a'></span></td><td><span id='tree_4_d'></span></td><td><span id='tree_1_d'></span></td><td><span id='tree_5_c'></span></td><td><span id='tree_4_e'></span></td></tr></table>",
-              "<table><tr><td><span id='tree_5_d'></span></td><td><span id='tree_1_e'></span></td><td><span id='tree_2_c'></span></td><td><span id='tree_6_b'></span></td><td><span id='tree_4_f'></span></td><td><span id='tree_4_g'></span></td><td><span id='tree_5_e'></span></td><td><span id='tree_4_h'></span></td></tr></table>",
-              "<table><tr><td><span id='tree_5_f'></span></td><td><span id='tree_4_i'></span></td><td><span id='tree_4_j'></span></td><td><span id='tree_6_c'></span></td><td><span id='tree_1_f'></span></td><td><span id='tree_2_d'></span></td><td><span id='tree_5_g'></span></td><td><span id='tree_4_k'></span></td></tr></table>"
-            ], "added", "#answers_2013-SK-01");
-      </script>
-      <script class="task" type="text/javascript">
-         var taskViewLoaded = false;
-         var solutionViewLoaded = false;
-         task.hackShowViews = function(views) {
-            if (views.task && !taskViewLoaded) {
-               loadGraph('graph');
-               taskViewLoaded = true;
-               for (var iTree = 0; iTree < 6; iTree++) {
-                  var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'];
-                  for (var iLetter = 0; iLetter < letters.length; iLetter++) {
-                     var id = "tree_" + (iTree + 1) + "_" + letters[iLetter];
-                     if ($("#" + id).length > 0) {
-                        loadTree(iTree, id);
-                     }
-                  }
-               }
-            }
-         }
-      </script>
    </head>
    <body>
       <div id="task">
          <h1>Promenade en forêt</h1>
-         
-         <p>Boris s'est promené dans la forêt représentée ci-dessous.</p>
-         <center><div id="graph"></div></center>
-         
-         <p>
-         Il a dessiné les arbres qu'il a rencontrés au fur et à mesure de sa promenade.
-         Une seule des propositions ci-dessous peut correspondre à son dessin. Laquelle&nbsp;?
-         </p>
-
-         <div class="reponses" id="answers_2013-SK-01">
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Boris s'est promené dans la forêt représentée ci-dessous.</p>
+                  <p>
+                  Il a dessiné les arbres qu'il a rencontrés au fur et à mesure de sa promenade<span class="easy">. Retracez son parcours en cliquant sur les arbres de la forêt.</span><span class="medium">, mais il en a oublié un. Trouvez l'arbre manquant en cliquant sur le bouton.</span><span class="hard">, mais il en a oublié trois. Trouvez les arbres manquants en cliquant sur les boutons.</span>
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <div id="path"></div>
+                  <div id="graph"></div>
+               </center>
+            </div>
          </div>
+         <img src="icon.png" style="display:none">
+         <img src="tree_1.png" id="tree_1" style="display:none">
+         <img src="tree_2.png" id="tree_2" style="display:none">
+         <img src="tree_3.png" id="tree_3" style="display:none">
+         <img src="tree_4.png" id="tree_4" style="display:none">
+         <img src="tree_5.png" id="tree_5" style="display:none">
+         <img src="tree_6.png" id="tree_6" style="display:none">
+         <img src="arrow.png" id="arrow" style="display:none">
       </div><!-- task -->
       <div id="solution">
          <h2>La solution</h2>
