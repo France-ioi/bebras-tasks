@@ -149,7 +149,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
           <div id="task_icons"></div> \
         </div> \
         <div class="layout_table_wrapper"> \
-         <iframe id="iframe" src="../demo_files/presentation.html" frameborder="0"></iframe> \
+         <iframe id="iframe" src="../../demo_files/presentation.html" frameborder="0"></iframe> \
         </div> \
         \
         <div id="header_sep_bottom"></div>  \
