@@ -5,7 +5,7 @@ function initTask(subTask) {
 
    var defaultVisualGraph = '{"vertexVisualInfo":{"v_0":{"x":64,"y":92},"v_1":{"x":169,"y":100},"v_2":{"x":212,"y":197},"v_3":{"x":113,"y":290}},"edgeVisualInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{}},"minGraph":{"vertexInfo":{"v_0":{},"v_1":{},"v_2":{},"v_3":{}},"edgeInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{}},"edgeVertices":{"e_0":["v_0","v_3"],"e_1":["v_3","v_2"],"e_2":["v_2","v_1"],"e_3":["v_2","v_0"]},"directed":true}}';
    var defaultCircleAttr = '{"r": 20, "fill": "#AA0000", "stroke": "black", "stroke-width": 1}';
-   var defaultLineAttr = '{"stroke-width": 4, "arrow-end": "long-classic-wide"}';
+   var defaultLineAttr = '{"stroke-width": 4, "arrow-end": "long-classic-wide", "radius-ratio": 1, "sweep": 0, "large-arc": 0}';
 
    var paperWidth = 750;
    var paperHeight = 500;
