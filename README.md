@@ -20,11 +20,11 @@ git submodule update --recursive
 To update modules to the current version:
 
 ```
-cd modules
-git pull
+cd _common/modules
 git checkout master
-cd ..
-git add modules/
+git pull
+cd ../..
+git add _common/modules/
 git commit -m "update modules"
 git push
 ```
