@@ -10,9 +10,8 @@
         <script class="remove" type="text/javascript">
             var modulesPath = '../../../_common/modules';
             importModules([
-                'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'beaver-task-2.0', 'jschannel',
-                'raphaelFactory-1.0', 'delayFactory-1.0', 'simulationFactory-1.0',
-                'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
+                'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'jschannel',
+                'platform-pr', 'installationAPI.01', 'miniPlatform',
                 'taskVideo', 'taskVideoPlayer', 'taskVideo_css',
                 'taskStyles-0.1']);
         </script>
@@ -33,20 +32,37 @@
             };
         </script>
         <script type="text/javascript">
-            var taskStrings = {
-                message: function(viewed) {
-                    return 'Viewed sections: ' +
-                        (viewed.length > 0 ? '[' + viewed.join(',') + ']' : 'none')
-                }
-            };
+var videoData = {
+    video_id: "XN5NXT0g1lg",
+    sections: [
+        {
+            title: 'Section 1',
+            description: 'Description text 1',
+            parts: 4,
+            start: 0,
+            end: 7.5
+        },
+        {
+            title: 'Section 2',
+            description: 'Description text 2',
+            start: 7.5,
+            end: 15
+        }
+    ],
+    show_viewed: true,
+    youtube: {
+        rel: 0,
+        autoplay: 0
+    }
+};
         </script>
-        <script type="text/javascript" src="task.js"></script>
    </head>
    <body>
         <div id="task">
             <h1>taskVideo demo</h1>
-            <div id="tabsContainer"></div>
+            <div>Some text before the video area.</div>
             <div id="taskContent">Loading...</div>
+            <div>Some text after the video area.</div>
         </div>
     </body>
 </html>
