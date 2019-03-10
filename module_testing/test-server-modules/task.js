@@ -3,7 +3,8 @@
 function initTask() {
 
     BebrasTaskWrapper(task, {
-        host: 'http://localhost:3000'
+        host: 'http://localhost:3101',
+        fetch_task_data: true
     })
 
 
