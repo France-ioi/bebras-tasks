@@ -1,0 +1,11 @@
+answer {
+    display: block;
+}
+
+answer.selected {
+    background: #9999FF;
+}
+
+answer.mistake {
+    background: #FF9999;
+}

@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-07</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-07-placing-arrows/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         alreadyObstacle: "Cette case contient déjà un obstacle.",
+         refuseObstacle: "Vous ne pouvez pas ajouter d'obstacle dans cette case.",
+         errorLoop: "Le robot tourne en boucle. Il n'arrivera donc jamais à la sortie.",
+         success: "Bravo, vous avez réussi !"
+         };
+
+         /* successPartial: function(obstacles, minObstacles) { return "Vous avez atteint l'objectif en utilisant " + obstacles + " obstacles.<br/> Recommencez pour essayer de n'utiliser que " + minObstacles + " obstacles."; } */
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold;
+            color: #CC8844;
+         }
+         #instructions {
+            margin-top: 1em;
+            margin-bottom: 2em;
+         }
+         #instructions input {
+            /* padding: 0.3em; */
+            margin-left: 1em;
+            margin-right: 1em;
+            width: 8em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Robot qui tourne</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Le robot bleu avance s'il n'a pas d'obstacle devant lui. Sinon, il tourne d'un quart de tour à droite.
+            </p>
+            <p>
+               Cliquez pour ajouter des obstacles, afin que le robot atteigne le rond vert.
+            </p>
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+               <div id="instructions">
+                  <input type="button" id="execute" value="Essayer"/>
+                  <input type="button" id="stop" value="Arrêter"/>
+                  </div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+            <div class="easy">
+               <p>Voici deux solutions possibles. Des variantes fonctionnent également.</p>
+               <table>
+                  <tr>
+                  <td><img src="solution_easy_2.png" width="350" style="margin-right:2em"></td>
+                  <td><img src="solution_easy.png" width="350"></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="medium">
+              <p>Voici une solution possible. Des variantes fonctionnent également.</p>
+              <p><img src="solution_medium.png" width="350"></p>
+            </div>
+            <div class="hard">
+               <p>Voici la solution.</p>
+               <p><img src="solution_hard.png" width="350"></p>
+               </div>
+             <div>
+               <p>Le robot ne sait que tourner vers la droite.
+               Il n'est donc pas facile de le faire tourner  vers la gauche. C'est
+               pourtant ce qu'on a besoin de faire à certains points de son parcours.
+               La solution est alors de lui faire faire un tour complet
+               sur lui-même, en l'obligeant à tourner 3 fois sur sa droite.
+               </p>
+               </div>
+               <div class="hard">
+               <p>
+               Pour cela, dans cet exemple, on doit placer un bloc forçant le robot à tourner trois fois sur lui-même. Cependant, cela ne suffit pas, il faut aussi placer ce bloc de telle sorte que le robot fasse un demi tour assez ample pour ne pas être bloqué au tournant suivant. Ainsi, dans la solution ci-dessous le robot va bien vers sa gauche en bas, mais ensuite son chemin est trop près du mur&nbsp;: on ne pourra pas poser d'autre bloc pour lui faire changer de direction et le faire remonter vers le haut.
+                <p><img src="solution_hard_bad.png" width="350"></p>
+ 				<p>Il n'y a donc qu'une seule solution&nbsp;: suivre la stratégie illustrée sur l'image la première image.</p>
+				</p>
+
+            </div>
+         <h2>C'est de l'informatique !</h2>
+            <p>Dans ce sujet, on pouvait simuler l'exécution d'un programme dans sa tête, afin d'éviter de perdre du temps à exécuter le programme de nombreuses fois.</p>
+            <p>Arriver à imaginer les étapes qui vont être effectuées est très utile en général pour un programmeur.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
