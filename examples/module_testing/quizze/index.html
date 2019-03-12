@@ -51,155 +51,31 @@
                 <h2 class="title">Objectif</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
+
             <div class="taskContent">
                 <!-- Default question single display -->
                 <question type="single">
-                    <statement>
-                        question 0 (single choice default layout)
-                    </statement>
-                    <div class="answers">
-                        <answer class="correct">
-                            <div class="answer-block">
-                                <span class="answer-label">
-                                    answer 0<br>
-                                    text<br>
-                                    text<br>
-                                    text
-                                </span>
-                                <span class="answer-code">A</span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 1</span>
-                                <span class="answer-code">B</span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 2</span>
-                                <span class="answer-code">C</span>
-                            </div>
-                        </answer>
-                    </div>
-                    <solution>
-                        <div class="title">La solution</div>
-                        correct answer is 0
-                    </solution>
+                    <statement>question 0 (single choice default layout)</statement>
+                    <answer>answer 0</answer>
+                    <answer>answer 1</answer>
+                    <answer>answer 2</answer>
+                    <solution>correct answer is 0</solution>
                 </question>
 
-                <!-- Horizontal question single layout -->
-                <!--
-                <question type="single" class="horizontal">
-                    <statement>
-                        question 0 (single choice horizontal layout)
-                    </statement>
-                    <div class="answers">
-                        <answer class="correct">
-                            <div class="answer-block">
-                                <span class="answer-label">
-                                    answer 0
-                                </span>
-                                <span class="answer-code">A</span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 1</span>
-                                <span class="answer-code">B</span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 2</span>
-                                <span class="answer-code">C</span>
-                            </div>
-                        </answer>
-                    </div>
-                    <solution>
-                        <div class="title">La solution</div>
-                        correct answer is 0
-                    </solution>
-                </question>
-                -->
-
-                <!-- Default question multiple display -->
                 <question type="multiple">
-                    <statement>
-                        question 1 (multiple choice default layout)
-                    </statement>
-                    <div class="answers">
-                        <answer class="correct">
-                            <div class="answer-block">
-                                <span class="answer-label">answer 0</span>
-                                <span class="answer-switch"><span class="cursor"></span></span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 1</span>
-                                <span class="answer-switch"><span class="cursor"></span></span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 2</span>
-                                <span class="answer-switch"><span class="cursor"></span></span>
-                            </div>
-                        </answer>
-                    </div>
-                    <solution>
-                        <div class="title">La solution</div>
-                        correct answer is 1 and 2
-                    </solution>
+                    <statement>question 1 (multiple choice default layout)</statement>
+                    <answer>answer 0</answer>
+                    <answer>answer 1</answer>
+                    <answer>answer 2</answer>
+                    <solution>correct answer is 1 and 2</solution>
                 </question>
-
-                <!-- Horizontal question multiple layout -->
-                <!--
-                <question type="multiple" class="horizontal">
-                    <statement>
-                        question 1 (multiple choice horizontal layout)
-                    </statement>
-                    <div class="answers">
-                        <answer class="correct">
-                            <div class="answer-block">
-                                <span class="answer-label">answer 0</span>
-                                <span class="answer-switch"><span class="cursor"></span></span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 1</span>
-                                <span class="answer-switch"><span class="cursor"></span></span>
-                            </div>
-                        </answer>
-                        <answer>
-                            <div class="answer-block">
-                                <span class="answer-label">answer 2</span>
-                                <span class="answer-switch"><span class="cursor"></span></span>
-                            </div>
-                        </answer>
-                    </div>
-                    <solution>
-                        <div class="title">La solution</div>
-                        correct answer is 1 and 2
-                    </solution>
-                </question>
-                -->
 
                 <question type="input">
-                    <statement>
-                        question 2 (form)
-                    </statement>
-                    <div class="answers">
-                        <answer>
-                            <input type="text" validator="\S" placeholder="Entrez votre réponse…" />
-                        </answer>
-                    </div>
-                    <solution>
-                        <div class="title">La solution</div>
-                        correct answer is "2"
-                    </solution>
+                    <statement>question 2 (form)</statement>
+                    <answer>
+                        <input type="text" validator="\S" placeholder="Entrez votre réponse…" />
+                    </answer>
+                    <solution>correct answer is "2"</solution>
                 </question>
             </div>
 
