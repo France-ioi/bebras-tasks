@@ -3,9 +3,46 @@ function initTask(subTask) {
    var level;
    var answer = null;
 
-   var defaultVisualGraph = '{"vertexVisualInfo":{"v_0":{"x":64,"y":92},"v_1":{"x":169,"y":100},"v_2":{"x":212,"y":197},"v_3":{"x":113,"y":290}},"edgeVisualInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{}},"minGraph":{"vertexInfo":{"v_0":{},"v_1":{},"v_2":{},"v_3":{}},"edgeInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{}},"edgeVertices":{"e_0":["v_0","v_3"],"e_1":["v_3","v_2"],"e_2":["v_2","v_1"],"e_3":["v_2","v_0"]},"directed":true}}';
-   var defaultCircleAttr = '{"r": 20, "fill": "#AA0000", "stroke": "black", "stroke-width": 1}';
-   var defaultLineAttr = '{"stroke-width": 4, "arrow-end": "long-classic-wide", "radius-ratio": 1, "sweep": 0, "large-arc": 0}';
+   var defaultVisualGraphJSON = {
+      "vertexVisualInfo": {
+         "v_0":{"x":64,"y":92},
+         "v_1":{"x":169,"y":100},
+         "v_2":{"x":212,"y":197},
+         "v_3":{"x":113,"y":290} },
+      "edgeVisualInfo": {
+         "e_0":{},
+         "e_1":{},
+         "e_2":{},
+         "e_3":{} },
+      "minGraph": {
+         "vertexInfo": {
+            "v_0":{label:"v_0"},
+            "v_1":{label:"v_1"},
+            "v_2":{label:"v_2"},
+            "v_3":{label:"v_3"} },
+         "edgeInfo": {
+            "e_0":{label:"e_0"},
+            "e_1":{label:"e_1"},
+            "e_2":{label:"e_2"},
+            "e_3":{label:"e_3"} },
+         "edgeVertices": {
+            "e_0":["v_0","v_3"],
+            "e_1":["v_3","v_2"],
+            "e_2":["v_2","v_1"],
+            "e_3":["v_2","v_0"]},
+         "directed":true } 
+      };
+   var defaultCircleAttr = {
+      "r": 20, 
+      "fill": "#AA0000", 
+      "stroke": "black", 
+      "stroke-width": 1
+   };
+   var defaultLineAttr = {
+      "stroke": "black",
+      "stroke-width": 4, 
+      "arrow-end": "long-classic-wide" 
+   };
 
    var paperWidth = 750;
    var paperHeight = 500;
@@ -15,7 +52,9 @@ function initTask(subTask) {
    var visualGraph;
    var graphMouse;
    var graphDrawer;
+   var graphEditor;
    var vertexDragger;
+   var vertexDragAndConnect;
    var vertexCreator;
    var edgeCreator;
    var elementRemover;
@@ -25,7 +64,7 @@ function initTask(subTask) {
    var dragInitialMouse;
    var keepProportions;
 
-   var mode = "dragVertex";
+   var mode = "graphEditor";
    var showGrid = true;
    var gridSize = 32;
    var grid;
@@ -86,9 +125,9 @@ function initTask(subTask) {
 
    subTask.getDefaultAnswerObject = function() {
       return {
-         visual_json: [defaultVisualGraph],
-         circleAttr: defaultCircleAttr,
-         lineAttr: defaultLineAttr
+         visual_json: [JSON.stringify(defaultVisualGraphJSON)],
+         circleAttr: JSON.stringify(defaultCircleAttr),
+         lineAttr: JSON.stringify(defaultLineAttr)
       };
    };
 
@@ -120,8 +159,9 @@ function initTask(subTask) {
       });
       $("#snapToGrid").change(function() {
          snapToGrid = this.checked;
-         if(mode === "dragVertex") {
-            vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
+         if(mode === "graphEditor") {
+            // vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
+            // graphEditor.vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
          }
       });
       $("#keepProportions").change(function() {
@@ -168,9 +208,9 @@ function initTask(subTask) {
    var changeMode = function(newMode) {
       mode = newMode;
       disableAllMouse();
-      if(mode == 'dragVertex') {
-         vertexDragger.setEnabled(true);
-         vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
+      if(mode == 'graphEditor') {
+         graphEditor.setEnabled(true);
+         // vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
       }
       else if(mode == 'dragGraph') {
          enableGraphDrag();
@@ -178,15 +218,15 @@ function initTask(subTask) {
       else if(mode == 'scaleGraph') {
          enableScaleDrag();
       }
-      else if(mode == 'createVertex') {
-         vertexCreator.setEnabled(true);
-      }
-      else if(mode == 'deleteElements') {
-         elementRemover.setEnabled(true);
-      }
-      else if(mode == "createEdge") {
-         edgeCreator.setEnabled(true);
-      }
+      // else if(mode == 'createVertex') {
+      //    vertexCreator.setEnabled(true);
+      // }
+      // else if(mode == 'deleteElements') {
+      //    elementRemover.setEnabled(true);
+      // }
+      // else if(mode == "createEdge") {
+      //    edgeCreator.setEnabled(true);
+      // }
    };
 
    var updateDirected = function(directed) {
@@ -237,13 +277,21 @@ function initTask(subTask) {
    };
 
    var disableAllMouse = function() {
-      if(!vertexDragger) {
+      // if(!vertexDragger) {
+      //    return;
+      // }
+      // if(!vertexDragAndConnect){
+      //    return;
+      // }
+      // vertexDragAndConnect.setEnabled(false);
+      if(!graphEditor){
          return;
       }
-      vertexDragger.setEnabled(false);
-      vertexCreator.setEnabled(false);
-      elementRemover.setEnabled(false);
-      edgeCreator.setEnabled(false);
+      graphEditor.setEnabled(false);
+      // vertexDragger.setEnabled(false);
+      // vertexCreator.setEnabled(false);
+      // elementRemover.setEnabled(false);
+      // edgeCreator.setEnabled(false);
       disableOverlayDrag();
    };
 
@@ -356,8 +404,7 @@ function initTask(subTask) {
       var attr;
       if(selected) {
          attr = selectedCircleAttr;
-      }
-      else {
+      }else{
          attr = circleAttr;
       }
       visualGraph.getRaphaelsFromID(id)[0].attr(attr);
@@ -367,7 +414,8 @@ function initTask(subTask) {
       while(graph.isEdge("e_" + edgeGuid)) {
          edgeGuid++;
       }
-      graph.addEdge("e_" + edgeGuid, id1, id2);
+      var edgeID = "e_" + edgeGuid;
+      graph.addEdge(edgeID, id1, id2,{label:edgeID});
       onVisualGraphChange();
    };
 
@@ -375,37 +423,78 @@ function initTask(subTask) {
       while(graph.isVertex("v_" + vertexGuid)) {
          vertexGuid++;
       }
+      var vertexId = "v_" + vertexGuid;
       var point = {x: x, y: y};
-      visualGraph.setVertexVisualInfo("v_" + vertexGuid, point);
-      graph.addVertex("v_" + vertexGuid);
+      visualGraph.setVertexVisualInfo(vertexId, point);
+      graph.addVertex(vertexId,{label:vertexId});
       onVisualGraphChange();
+      return vertexId;
    };
+
+   // function setVertexLabel(id,label) {
+   //    var info = graph.getVertexInfo(id);
+   //    info["label"] = label;
+   //    graph.setVertexInfo(id,info);
+   // };
 
    var fromJSON = function() {
       if(visualGraph) {
          disableAllMouse();
          visualGraph.remove();
       }
-      graphDrawer = new SimpleGraphDrawer(circleAttr, lineAttr, vertexDrawer, true);
+      graphDrawer = new SimpleGraphDrawer(circleAttr, lineAttr, null, true);
+      graphDrawer.setVertexLabelAttr(vertexTextAttr);
       visualGraph = VisualGraph.fromJSON($("#visual_json").val(), "visual", paper, null, graphDrawer, true);
       graph = visualGraph.graph;
       graphMouse = new GraphMouse("mouse", graph, visualGraph);
       $("#directed").prop('checked', graph.directed);
       initVisuals();
-      changeMode(mode);
+      // changeMode(mode);
    };
 
+   // function()
+
    var initVisuals = function() {
-      vertexDragger = new VertexDragger({
-         id: "dragger",
+      // vertexDragger = new VertexDragger({
+      //    id: "dragger",
+      //    visualGraph: visualGraph,
+      //    graphMouse: graphMouse,
+      //    callback: onVisualGraphChange,
+      //    enabled: true
+      // });
+      // vertexDragAndConnect = new VertexDragAndConnect({
+      //    id: "dragAndConnect",
+      //    paper: paper,
+      //    graph: graph,
+      //    visualGraph: visualGraph,
+      //    graphMouse: graphMouse,
+      //    dragThreshold: circleAttr.r,
+      //    onVertexSelect: vertexSelector,
+      //    onPairSelect: createEdge,
+      //    enabled: true
+      // })
+      // vertexCreator = new PaperMouseEvent("anim", paper, "dblclick", createVertex, true);
+      // elementRemover = new ElementRemover("remover", graph, visualGraph, graphMouse, onVisualGraphChange, true, true, false);
+      // edgeCreator = new EdgeCreator("edgeCreator", "anim", paper, graph, visualGraph, graphMouse, vertexSelector, createEdge, true);
+      // console.log(paper);
+      var settings = {
+         id: "graphEditor",
+         paper: paper,
+         graph: graph,
+         paperElementID: "anim",
          visualGraph: visualGraph,
          graphMouse: graphMouse,
+         dragThreshold: circleAttr.r,
+         edgeThreshold: 10,
+         vertexLabelAttr: vertexTextAttr,
+         onPairSelect: createEdge,
+         createVertex: createVertex,
+         vertexAttr: circleAttr,
+         onDragEnd: onVisualGraphChange,
          callback: onVisualGraphChange,
          enabled: true
-      });
-      vertexCreator = new PaperMouseEvent("anim", paper, "mousedown", createVertex, false);
-      elementRemover = new ElementRemover("remover", graph, visualGraph, graphMouse, onVisualGraphChange, true, true, false);
-      edgeCreator = new EdgeCreator("edgeCreator", "anim", paper, graph, visualGraph, graphMouse, vertexSelector, createEdge, false);
+      };
+      graphEditor = new GraphEditor(settings);
    };
 
    var updateJSON = function(updateAnswer) {
@@ -420,11 +509,11 @@ function initTask(subTask) {
       }
    };
 
-   var vertexDrawer = function(id, info, x, y) {
-      var text = paper.text(x, y, id).attr(vertexTextAttr);
-      text[0].style.cursor = "default";
-      return [text];
-   };
+   // var vertexDrawer = function(id, info, x, y) {
+   //    var text = paper.text(x, y, id).attr(vertexTextAttr);
+   //    text[0].style.cursor = "default";
+   //    return [text];
+   // };
 
    subTask.getGrade = function(callback) {
       callback({
