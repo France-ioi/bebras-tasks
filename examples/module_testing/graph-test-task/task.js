@@ -53,11 +53,6 @@ function initTask(subTask) {
    var graphMouse;
    var graphDrawer;
    var graphEditor;
-   var vertexDragger;
-   var vertexDragAndConnect;
-   var vertexCreator;
-   var edgeCreator;
-   var elementRemover;
    var snapToGrid;
    var dragOverlay;
    var dragInitialPositions;
@@ -160,7 +155,6 @@ function initTask(subTask) {
       $("#snapToGrid").change(function() {
          snapToGrid = this.checked;
          if(mode === "graphEditor") {
-            // vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
             // graphEditor.vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
          }
       });
@@ -210,7 +204,6 @@ function initTask(subTask) {
       disableAllMouse();
       if(mode == 'graphEditor') {
          graphEditor.setEnabled(true);
-         // vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
       }
       else if(mode == 'dragGraph') {
          enableGraphDrag();
@@ -218,15 +211,6 @@ function initTask(subTask) {
       else if(mode == 'scaleGraph') {
          enableScaleDrag();
       }
-      // else if(mode == 'createVertex') {
-      //    vertexCreator.setEnabled(true);
-      // }
-      // else if(mode == 'deleteElements') {
-      //    elementRemover.setEnabled(true);
-      // }
-      // else if(mode == "createEdge") {
-      //    edgeCreator.setEnabled(true);
-      // }
    };
 
    var updateDirected = function(directed) {
@@ -250,9 +234,9 @@ function initTask(subTask) {
       gridSize = size;
       updateGridVisibility(showGrid);
       
-      if(mode === "dragVertex" && snapToGrid) {
-         vertexDragger.setGridEnabled(true, gridSize, gridSize);
-      }
+      // if(mode === "dragVertex" && snapToGrid) {
+      //    vertexDragger.setGridEnabled(true, gridSize, gridSize);
+      // }
       // TODO: keep track of the value in JSON?
    };
 
@@ -277,21 +261,10 @@ function initTask(subTask) {
    };
 
    var disableAllMouse = function() {
-      // if(!vertexDragger) {
-      //    return;
-      // }
-      // if(!vertexDragAndConnect){
-      //    return;
-      // }
-      // vertexDragAndConnect.setEnabled(false);
       if(!graphEditor){
          return;
       }
       graphEditor.setEnabled(false);
-      // vertexDragger.setEnabled(false);
-      // vertexCreator.setEnabled(false);
-      // elementRemover.setEnabled(false);
-      // edgeCreator.setEnabled(false);
       disableOverlayDrag();
    };
 
@@ -431,12 +404,6 @@ function initTask(subTask) {
       return vertexId;
    };
 
-   // function setVertexLabel(id,label) {
-   //    var info = graph.getVertexInfo(id);
-   //    info["label"] = label;
-   //    graph.setVertexInfo(id,info);
-   // };
-
    var fromJSON = function() {
       if(visualGraph) {
          disableAllMouse();
@@ -452,31 +419,7 @@ function initTask(subTask) {
       // changeMode(mode);
    };
 
-   // function()
-
    var initVisuals = function() {
-      // vertexDragger = new VertexDragger({
-      //    id: "dragger",
-      //    visualGraph: visualGraph,
-      //    graphMouse: graphMouse,
-      //    callback: onVisualGraphChange,
-      //    enabled: true
-      // });
-      // vertexDragAndConnect = new VertexDragAndConnect({
-      //    id: "dragAndConnect",
-      //    paper: paper,
-      //    graph: graph,
-      //    visualGraph: visualGraph,
-      //    graphMouse: graphMouse,
-      //    dragThreshold: circleAttr.r,
-      //    onVertexSelect: vertexSelector,
-      //    onPairSelect: createEdge,
-      //    enabled: true
-      // })
-      // vertexCreator = new PaperMouseEvent("anim", paper, "dblclick", createVertex, true);
-      // elementRemover = new ElementRemover("remover", graph, visualGraph, graphMouse, onVisualGraphChange, true, true, false);
-      // edgeCreator = new EdgeCreator("edgeCreator", "anim", paper, graph, visualGraph, graphMouse, vertexSelector, createEdge, true);
-      // console.log(paper);
       var settings = {
          id: "graphEditor",
          paper: paper,
@@ -489,7 +432,6 @@ function initTask(subTask) {
          vertexLabelAttr: vertexTextAttr,
          onPairSelect: createEdge,
          createVertex: createVertex,
-         vertexAttr: circleAttr,
          onDragEnd: onVisualGraphChange,
          callback: onVisualGraphChange,
          enabled: true
@@ -508,12 +450,6 @@ function initTask(subTask) {
          $("#undo").attr("disabled", false);
       }
    };
-
-   // var vertexDrawer = function(id, info, x, y) {
-   //    var text = paper.text(x, y, id).attr(vertexTextAttr);
-   //    text[0].style.cursor = "default";
-   //    return [text];
-   // };
 
    subTask.getGrade = function(callback) {
       callback({
