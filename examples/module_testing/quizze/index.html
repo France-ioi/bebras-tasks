@@ -44,7 +44,6 @@
             </div>
 
             <div class="taskContent">
-                <!-- Default question single display -->
                 <question type="single">
                     <statement>question 0 (single choice default layout)</statement>
                     <answer>answer 0</answer>
@@ -60,18 +59,23 @@
                     <answer>answer 2</answer>
                     <solution>correct answer is 1 and 2</solution>
                 </question>
-
                 <question type="input">
-                    <statement>question 2 (form)</statement>
-                    <answer>
-                        <input type="text" validator="\S" placeholder="Entrez votre réponse…" />
-                    </answer>
-                    <solution>correct answer is "2"</solution>
+                    <statement>question 2 (input string)</statement>
+                    <answer format="string"></answer>
+                    <solution>correct answer is "A"</solution>
+                </question>
+                <question type="input">
+                    <statement>question 3 (input number)</statement>
+                    <answer format="number"></answer>
+                    <solution>correct answer is 2</solution>
+                </question>
+                <question type="input">
+                    <statement>question 4 (input with regexp)</statement>
+                    <answer format="regexp" validator=".+"></answer>
+                    <solution>correct answer is any non empty string</solution>
                 </question>
             </div>
-
         </div>
-
         <div id="solution" style="display: none">
             solution
         </div>
