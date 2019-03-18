@@ -392,17 +392,17 @@ function initTask(subTask) {
       onVisualGraphChange();
    };
 
-   var createVertex = function(x, y) {
-      while(graph.isVertex("v_" + vertexGuid)) {
-         vertexGuid++;
-      }
-      var vertexId = "v_" + vertexGuid;
-      var point = {x: x, y: y};
-      visualGraph.setVertexVisualInfo(vertexId, point);
-      graph.addVertex(vertexId,{label:vertexId});
-      onVisualGraphChange();
-      return vertexId;
-   };
+   // var createVertex = function(x, y) {
+   //    while(graph.isVertex("v_" + vertexGuid)) {
+   //       vertexGuid++;
+   //    }
+   //    var vertexId = "v_" + vertexGuid;
+   //    var point = {x: x, y: y};
+   //    visualGraph.setVertexVisualInfo(vertexId, point);
+   //    graph.addVertex(vertexId,{label:vertexId});
+   //    onVisualGraphChange();
+   //    return vertexId;
+   // };
 
    var fromJSON = function() {
       if(visualGraph) {
@@ -431,7 +431,7 @@ function initTask(subTask) {
          edgeThreshold: 10,
          vertexLabelAttr: vertexTextAttr,
          onPairSelect: createEdge,
-         createVertex: createVertex,
+         // createVertex: createVertex,
          onDragEnd: onVisualGraphChange,
          callback: onVisualGraphChange,
          enabled: true
