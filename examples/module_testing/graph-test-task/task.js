@@ -78,7 +78,7 @@ function initTask(subTask) {
    var gridLineAttr = {
       stroke: "black",
       opacity: 0.5,
-      "strok-width": 1
+      "stroke-width": 1
    };
 
    var vertexTextAttr = {
@@ -383,14 +383,14 @@ function initTask(subTask) {
       visualGraph.getRaphaelsFromID(id)[0].attr(attr);
    };
 
-   var createEdge = function(id1, id2) {
-      while(graph.isEdge("e_" + edgeGuid)) {
-         edgeGuid++;
-      }
-      var edgeID = "e_" + edgeGuid;
-      graph.addEdge(edgeID, id1, id2,{label:edgeID});
-      onVisualGraphChange();
-   };
+   // var createEdge = function(id1, id2) {
+   //    while(graph.isEdge("e_" + edgeGuid)) {
+   //       edgeGuid++;
+   //    }
+   //    var edgeID = "e_" + edgeGuid;
+   //    graph.addEdge(edgeID, id1, id2,{label:edgeID});
+   //    onVisualGraphChange();
+   // };
 
    // var createVertex = function(x, y) {
    //    while(graph.isVertex("v_" + vertexGuid)) {
@@ -427,10 +427,10 @@ function initTask(subTask) {
          paperElementID: "anim",
          visualGraph: visualGraph,
          graphMouse: graphMouse,
-         dragThreshold: circleAttr.r,
-         edgeThreshold: 10,
+         dragThreshold: 0,
+         edgeThreshold: 20,
          vertexLabelAttr: vertexTextAttr,
-         onPairSelect: createEdge,
+         // onPairSelect: createEdge,
          // createVertex: createVertex,
          onDragEnd: onVisualGraphChange,
          callback: onVisualGraphChange,
