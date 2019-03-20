@@ -429,6 +429,12 @@ function initTask(subTask) {
          graphMouse: graphMouse,
          dragThreshold: 0,
          edgeThreshold: 20,
+         dragLimits: {
+            minX: circleAttr.r,
+            maxX: paperWidth - circleAttr.r,
+            minY: circleAttr.r,
+            maxY: paperHeight - circleAttr.r
+         },
          vertexLabelAttr: vertexTextAttr,
          // onPairSelect: createEdge,
          // createVertex: createVertex,
