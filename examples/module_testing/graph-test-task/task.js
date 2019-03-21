@@ -155,11 +155,12 @@ function initTask(subTask) {
       $("#createVertex").off("change");
       $("#createVertex").change(function(){
          graphEditor.vertexCreator.setEnabled(this.checked);
-      });
-      $("#removeVertex").off("change");
-      $("#removeVertex").change(function(){
          graphEditor.removeVertexEnabled = this.checked;
       });
+      // $("#removeVertex").off("change");
+      // $("#removeVertex").change(function(){
+      //    graphEditor.removeVertexEnabled = this.checked;
+      // });
       $("#dragVertex").off("change");
       $("#dragVertex").change(function(){
          graphEditor.setVertexDragEnabled(this.checked);
@@ -167,11 +168,12 @@ function initTask(subTask) {
       $("#createEdge").off("change");
       $("#createEdge").change(function(){
          graphEditor.createEdgeEnabled = this.checked;
-      });
-      $("#removeEdge").off("change");
-      $("#removeEdge").change(function(){
          graphEditor.removeEdgeEnabled = this.checked;
       });
+      // $("#removeEdge").off("change");
+      // $("#removeEdge").change(function(){
+      //    graphEditor.removeEdgeEnabled = this.checked;
+      // });
       $("#dragEdge").off("change");
       $("#dragEdge").change(function(){
          graphEditor.arcDragger.setEnabled(this.checked);
