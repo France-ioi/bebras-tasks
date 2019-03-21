@@ -79,7 +79,7 @@
    </head>
    <body>
       <div id="task">
-         <h1>Robot qui tourne</h1>
+         <h1>Graph Editor</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <div id="anim_container">
@@ -97,7 +97,7 @@
                <table id="controls">
                   <tr>
                      <td>
-                        Mode:
+                        Options:
                      </td>
                      <td>
                         Visual Graph JSON:
@@ -132,6 +132,57 @@
                            <input type="radio" name="mode" id="deleteElements">Delete elements
                         </label>
                         <br> -->
+                        
+                        <label>
+                           <input type="checkbox" id="createVertex" checked>Create vertices (dblclick)
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="removeVertex" checked>Remove vertices 
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="createEdge" checked>Create edges
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="removeEdge" checked>Remove edges 
+                        </label>
+                        <br>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="dragVertex" checked>Drag vertices
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="dragEdge" checked>Drag edges 
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="dragGraph" checked>Drag graph
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="scaleGraph" checked>Scale graph (shift + drag)
+                        </label>
+                        <br>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="multipleEdges" checked>Multiple edges 
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="loop" checked>Loops 
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="editVertexLabel" checked>Edit vertex label 
+                        </label>
+                        <br>
+                        <label>
+                           <input type="checkbox" id="editEdgeLabel" checked>Edit edge label
+                        </label>
+                        <br>
                         <br>
                         <label>
                            <input type="checkbox" id="snapToGrid">Snap to grid
@@ -141,12 +192,12 @@
                            <input type="checkbox" id="useGrid" checked>Grid size
                         </label>
                          <input type="textbox" id="gridSize" style="width: 3em" value="32">
-                         <br><br><br>
+                         <br><br>
                         <label>
                            <input type="checkbox" id="directed">Directed
                         </label>
                      <td>
-                        <textarea id="visual_json" rows="15" cols="65"></textarea>
+                        <textarea id="visual_json" rows="25" cols="75"></textarea>
                      </td>
                   </tr>
                   <tr>

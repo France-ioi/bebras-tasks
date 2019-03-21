@@ -152,15 +152,63 @@ function initTask(subTask) {
       $("#directed").change(function() {
          updateDirected(this.checked);
       });
+      $("#createVertex").off("change");
+      $("#createVertex").change(function(){
+         graphEditor.vertexCreator.setEnabled(this.checked);
+      });
+      $("#removeVertex").off("change");
+      $("#removeVertex").change(function(){
+         graphEditor.removeVertexEnabled = this.checked;
+      });
+      $("#dragVertex").off("change");
+      $("#dragVertex").change(function(){
+         graphEditor.setVertexDragEnabled(this.checked);
+      });
+      $("#createEdge").off("change");
+      $("#createEdge").change(function(){
+         graphEditor.createEdgeEnabled = this.checked;
+      });
+      $("#removeEdge").off("change");
+      $("#removeEdge").change(function(){
+         graphEditor.removeEdgeEnabled = this.checked;
+      });
+      $("#dragEdge").off("change");
+      $("#dragEdge").change(function(){
+         graphEditor.arcDragger.setEnabled(this.checked);
+      });
+      $("#multipleEdges").off("change");
+      $("#multipleEdges").change(function(){
+         graphEditor.multipleEdgesEnabled = this.checked;
+      });
+      $("#loop").off("change");
+      $("#loop").change(function(){
+         graphEditor.loopEnabled = this.checked;
+      });
+      $("#editVertexLabel").off("change");
+      $("#editVertexLabel").change(function(){
+         graphEditor.editVertexLabelEnabled = this.checked;
+      });
+      $("#editEdgeLabel").off("change");
+      $("#editEdgeLabel").change(function(){
+         graphEditor.editEdgeLabelEnabled = this.checked;
+      });
+      $("#dragGraph").off("change");
+      $("#dragGraph").change(function(){
+         graphEditor.graphDragger.dragEnabled = this.checked;
+      });
+      $("#scaleGraph").off("change");
+      $("#scaleGraph").change(function(){
+         graphEditor.graphDragger.scaleEnabled = this.checked;
+      });
       $("#snapToGrid").change(function() {
          snapToGrid = this.checked;
          if(mode === "graphEditor") {
-            graphEditor.vertexDragAndConnect.setGridEnabled(snapToGrid, gridSize, gridSize);
+            graphEditor.setGridEnabled(snapToGrid, gridSize, gridSize);
          }
       });
-      $("#keepProportions").change(function() {
-         keepProportions = this.checked;
-      });
+      // $("#keepProportions").change(function() {
+      //    keepProportions = this.checked;
+      // });
       $("#useGrid").unbind('change');
       $("#useGrid").change(function() {
          updateGridVisibility(this.checked);
@@ -235,7 +283,7 @@ function initTask(subTask) {
       updateGridVisibility(showGrid);
       
       if(snapToGrid) {
-         graphEditor.vertexDragAndConnect.setGridEnabled(true, gridSize, gridSize);
+         graphEditor.setGridEnabled(true, gridSize, gridSize);
       }
       // TODO: keep track of the value in JSON?
    };
