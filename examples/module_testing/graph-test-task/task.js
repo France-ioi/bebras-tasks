@@ -140,10 +140,10 @@ function initTask(subTask) {
    };
 
    var initHandlers = function() {
-      $('input[type=radio][name=mode]').unbind('change');
-      $('input[type=radio][name=mode]').change(function() {
-         changeMode(this.id);
-      });
+      // $('input[type=radio][name=mode]').unbind('change');
+      // $('input[type=radio][name=mode]').change(function() {
+      //    changeMode(this.id);
+      // });
       $("#pretty").unbind('change');
       $("#pretty").change(updateJSON);
       $("#import").unbind('click');
@@ -155,7 +155,7 @@ function initTask(subTask) {
       $("#snapToGrid").change(function() {
          snapToGrid = this.checked;
          if(mode === "graphEditor") {
-            // graphEditor.vertexDragger.setGridEnabled(snapToGrid, gridSize, gridSize);
+            graphEditor.vertexDragAndConnect.setGridEnabled(snapToGrid, gridSize, gridSize);
          }
       });
       $("#keepProportions").change(function() {
@@ -234,9 +234,9 @@ function initTask(subTask) {
       gridSize = size;
       updateGridVisibility(showGrid);
       
-      // if(mode === "dragVertex" && snapToGrid) {
-      //    vertexDragger.setGridEnabled(true, gridSize, gridSize);
-      // }
+      if(snapToGrid) {
+         graphEditor.vertexDragAndConnect.setGridEnabled(true, gridSize, gridSize);
+      }
       // TODO: keep track of the value in JSON?
    };
 
@@ -373,15 +373,15 @@ function initTask(subTask) {
       };
    };
 
-   var vertexSelector = function(id, selected) {
-      var attr;
-      if(selected) {
-         attr = selectedCircleAttr;
-      }else{
-         attr = circleAttr;
-      }
-      visualGraph.getRaphaelsFromID(id)[0].attr(attr);
-   };
+   // var vertexSelector = function(id, selected) {
+   //    var attr;
+   //    if(selected) {
+   //       attr = selectedCircleAttr;
+   //    }else{
+   //       attr = circleAttr;
+   //    }
+   //    visualGraph.getRaphaelsFromID(id)[0].attr(attr);
+   // };
 
    // var createEdge = function(id1, id2) {
    //    while(graph.isEdge("e_" + edgeGuid)) {
