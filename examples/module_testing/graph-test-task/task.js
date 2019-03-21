@@ -106,7 +106,7 @@ function initTask(subTask) {
       applyAttr();
       fromJSON();
       updateJSON(false);
-      changeMode(mode);
+      // changeMode(mode);
       updateGridVisibility(showGrid);
       updateInfo();
    };
@@ -202,9 +202,9 @@ function initTask(subTask) {
       });
       $("#snapToGrid").change(function() {
          snapToGrid = this.checked;
-         if(mode === "graphEditor") {
-            graphEditor.setGridEnabled(snapToGrid, gridSize, gridSize);
-         }
+         // if(mode === "graphEditor") {
+         graphEditor.setGridEnabled(snapToGrid, gridSize, gridSize);
+         // }
       });
       // $("#keepProportions").change(function() {
       //    keepProportions = this.checked;
@@ -243,23 +243,25 @@ function initTask(subTask) {
          graphDrawer.setCircleAttr(circleAttr);
          graphDrawer.setLineAttr(lineAttr);
          visualGraph.redraw();
-         changeMode(mode);
+         // changeMode(mode);
+         disableAllMouse();
+         graphEditor.setEnabled(true);
       }
    };
 
-   var changeMode = function(newMode) {
-      mode = newMode;
-      disableAllMouse();
-      if(mode == 'graphEditor') {
-         graphEditor.setEnabled(true);
-      }
-      else if(mode == 'dragGraph') {
-         enableGraphDrag();
-      }
-      else if(mode == 'scaleGraph') {
-         enableScaleDrag();
-      }
-   };
+   // var changeMode = function(newMode) {
+   //    mode = newMode;
+   //    disableAllMouse();
+   //    if(mode == 'graphEditor') {
+   //       graphEditor.setEnabled(true);
+   //    }
+   //    else if(mode == 'dragGraph') {
+   //       enableGraphDrag();
+   //    }
+   //    else if(mode == 'scaleGraph') {
+   //       enableScaleDrag();
+   //    }
+   // };
 
    var updateDirected = function(directed) {
       graph.directed = directed;
@@ -313,7 +315,7 @@ function initTask(subTask) {
          return;
       }
       graphEditor.setEnabled(false);
-      disableOverlayDrag();
+      // disableOverlayDrag();
    };
 
    var initPaper = function() {
@@ -325,60 +327,60 @@ function initTask(subTask) {
       }).hide();
    };
 
-   var enableGraphDrag = function() {
-      dragOverlay.drag(onGraphDragMove, onOverlayDragStart, onOverlayDragEnd);
-      dragOverlay.toFront().show();
-   };
+   // var enableGraphDrag = function() {
+   //    dragOverlay.drag(onGraphDragMove, onOverlayDragStart, onOverlayDragEnd);
+   //    dragOverlay.toFront().show();
+   // };
 
-   var enableScaleDrag = function() {
-      dragOverlay.drag(onScaleDragMove, onOverlayDragStart, onOverlayDragEnd);
-      dragOverlay.toFront().show();
-   };
+   // var enableScaleDrag = function() {
+   //    dragOverlay.drag(onScaleDragMove, onOverlayDragStart, onOverlayDragEnd);
+   //    dragOverlay.toFront().show();
+   // };
 
-   var disableOverlayDrag = function() {
-      dragOverlay.undrag();
-      dragOverlay.hide();
-   };
+   // var disableOverlayDrag = function() {
+   //    dragOverlay.undrag();
+   //    dragOverlay.hide();
+   // };
 
-   var onOverlayDragStart = function(x, y, event) {
-      dragInitialMouse = {
-         x: event.offsetX,
-         y: event.offsetY
-      };
-      dragInitialPositions = $.map(graph.getAllVertices(), function(id) {
-         return {
-            id: id,
-            position: graphDrawer.getVertexPosition(id)
-         };
-      });
-   };
+   // var onOverlayDragStart = function(x, y, event) {
+   //    dragInitialMouse = {
+   //       x: event.offsetX,
+   //       y: event.offsetY
+   //    };
+   //    dragInitialPositions = $.map(graph.getAllVertices(), function(id) {
+   //       return {
+   //          id: id,
+   //          position: graphDrawer.getVertexPosition(id)
+   //       };
+   //    });
+   // };
 
-   var onGraphDragMove = function(dx, dy) {
-      if(snapToGrid) {
-         dx -= (dx % gridSize);
-         dy -= (dy % gridSize);
-      }
-      $.each(dragInitialPositions, function(index, element) {
-         graphDrawer.moveVertex(element.id, element.position.x + dx, element.position.y + dy);
-      });
-   };
+   // var onGraphDragMove = function(dx, dy) {
+   //    if(snapToGrid) {
+   //       dx -= (dx % gridSize);
+   //       dy -= (dy % gridSize);
+   //    }
+   //    $.each(dragInitialPositions, function(index, element) {
+   //       graphDrawer.moveVertex(element.id, element.position.x + dx, element.position.y + dy);
+   //    });
+   // };
 
-   var onScaleDragMove = function(dx, dy) {
-      var endX = dragInitialMouse.x + dx;
-      var endY = dragInitialMouse.y + dy;
-      var ratioX = endX / dragInitialMouse.x;
-      var ratioY = endY / dragInitialMouse.y;
-      if(keepProportions) {
-         ratioY = ratioX;
-      }
-      $.each(dragInitialPositions, function(index, element) {
-         graphDrawer.moveVertex(element.id, element.position.x * ratioX, element.position.y * ratioY);
-      });
-   };
+   // var onScaleDragMove = function(dx, dy) {
+   //    var endX = dragInitialMouse.x + dx;
+   //    var endY = dragInitialMouse.y + dy;
+   //    var ratioX = endX / dragInitialMouse.x;
+   //    var ratioY = endY / dragInitialMouse.y;
+   //    if(keepProportions) {
+   //       ratioY = ratioX;
+   //    }
+   //    $.each(dragInitialPositions, function(index, element) {
+   //       graphDrawer.moveVertex(element.id, element.position.x * ratioX, element.position.y * ratioY);
+   //    });
+   // };
 
-   var onOverlayDragEnd = function() {
-      onVisualGraphChange();
-   };
+   // var onOverlayDragEnd = function() {
+   //    onVisualGraphChange();
+   // };
 
    var onVisualGraphChange = function() {
       updateJSON(true);
