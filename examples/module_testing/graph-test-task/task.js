@@ -59,7 +59,6 @@ function initTask(subTask) {
    var dragInitialMouse;
    var keepProportions;
 
-   var mode = "graphEditor";
    var showGrid = true;
    var gridSize = 32;
    var grid;
@@ -106,7 +105,6 @@ function initTask(subTask) {
       applyAttr();
       fromJSON();
       updateJSON(false);
-      // changeMode(mode);
       updateGridVisibility(showGrid);
       updateInfo();
    };
@@ -140,10 +138,6 @@ function initTask(subTask) {
    };
 
    var initHandlers = function() {
-      // $('input[type=radio][name=mode]').unbind('change');
-      // $('input[type=radio][name=mode]').change(function() {
-      //    changeMode(this.id);
-      // });
       $("#pretty").unbind('change');
       $("#pretty").change(updateJSON);
       $("#import").unbind('click');
@@ -157,10 +151,6 @@ function initTask(subTask) {
          graphEditor.vertexCreator.setEnabled(this.checked);
          graphEditor.removeVertexEnabled = this.checked;
       });
-      // $("#removeVertex").off("change");
-      // $("#removeVertex").change(function(){
-      //    graphEditor.removeVertexEnabled = this.checked;
-      // });
       $("#dragVertex").off("change");
       $("#dragVertex").change(function(){
          graphEditor.setVertexDragEnabled(this.checked);
@@ -170,10 +160,6 @@ function initTask(subTask) {
          graphEditor.createEdgeEnabled = this.checked;
          graphEditor.removeEdgeEnabled = this.checked;
       });
-      // $("#removeEdge").off("change");
-      // $("#removeEdge").change(function(){
-      //    graphEditor.removeEdgeEnabled = this.checked;
-      // });
       $("#dragEdge").off("change");
       $("#dragEdge").change(function(){
          graphEditor.arcDragger.setEnabled(this.checked);
@@ -204,13 +190,8 @@ function initTask(subTask) {
       });
       $("#snapToGrid").change(function() {
          snapToGrid = this.checked;
-         // if(mode === "graphEditor") {
          graphEditor.setGridEnabled(snapToGrid, gridSize, gridSize);
-         // }
       });
-      // $("#keepProportions").change(function() {
-      //    keepProportions = this.checked;
-      // });
       $("#useGrid").unbind('change');
       $("#useGrid").change(function() {
          updateGridVisibility(this.checked);
@@ -245,25 +226,10 @@ function initTask(subTask) {
          graphDrawer.setCircleAttr(circleAttr);
          graphDrawer.setLineAttr(lineAttr);
          visualGraph.redraw();
-         // changeMode(mode);
          disableAllMouse();
          graphEditor.setEnabled(true);
       }
    };
-
-   // var changeMode = function(newMode) {
-   //    mode = newMode;
-   //    disableAllMouse();
-   //    if(mode == 'graphEditor') {
-   //       graphEditor.setEnabled(true);
-   //    }
-   //    else if(mode == 'dragGraph') {
-   //       enableGraphDrag();
-   //    }
-   //    else if(mode == 'scaleGraph') {
-   //       enableScaleDrag();
-   //    }
-   // };
 
    var updateDirected = function(directed) {
       graph.directed = directed;
@@ -317,7 +283,6 @@ function initTask(subTask) {
          return;
       }
       graphEditor.setEnabled(false);
-      // disableOverlayDrag();
    };
 
    var initPaper = function() {
@@ -328,61 +293,6 @@ function initTask(subTask) {
          opacity: 0
       }).hide();
    };
-
-   // var enableGraphDrag = function() {
-   //    dragOverlay.drag(onGraphDragMove, onOverlayDragStart, onOverlayDragEnd);
-   //    dragOverlay.toFront().show();
-   // };
-
-   // var enableScaleDrag = function() {
-   //    dragOverlay.drag(onScaleDragMove, onOverlayDragStart, onOverlayDragEnd);
-   //    dragOverlay.toFront().show();
-   // };
-
-   // var disableOverlayDrag = function() {
-   //    dragOverlay.undrag();
-   //    dragOverlay.hide();
-   // };
-
-   // var onOverlayDragStart = function(x, y, event) {
-   //    dragInitialMouse = {
-   //       x: event.offsetX,
-   //       y: event.offsetY
-   //    };
-   //    dragInitialPositions = $.map(graph.getAllVertices(), function(id) {
-   //       return {
-   //          id: id,
-   //          position: graphDrawer.getVertexPosition(id)
-   //       };
-   //    });
-   // };
-
-   // var onGraphDragMove = function(dx, dy) {
-   //    if(snapToGrid) {
-   //       dx -= (dx % gridSize);
-   //       dy -= (dy % gridSize);
-   //    }
-   //    $.each(dragInitialPositions, function(index, element) {
-   //       graphDrawer.moveVertex(element.id, element.position.x + dx, element.position.y + dy);
-   //    });
-   // };
-
-   // var onScaleDragMove = function(dx, dy) {
-   //    var endX = dragInitialMouse.x + dx;
-   //    var endY = dragInitialMouse.y + dy;
-   //    var ratioX = endX / dragInitialMouse.x;
-   //    var ratioY = endY / dragInitialMouse.y;
-   //    if(keepProportions) {
-   //       ratioY = ratioX;
-   //    }
-   //    $.each(dragInitialPositions, function(index, element) {
-   //       graphDrawer.moveVertex(element.id, element.position.x * ratioX, element.position.y * ratioY);
-   //    });
-   // };
-
-   // var onOverlayDragEnd = function() {
-   //    onVisualGraphChange();
-   // };
 
    var onVisualGraphChange = function() {
       updateJSON(true);
@@ -425,37 +335,6 @@ function initTask(subTask) {
       };
    };
 
-   // var vertexSelector = function(id, selected) {
-   //    var attr;
-   //    if(selected) {
-   //       attr = selectedCircleAttr;
-   //    }else{
-   //       attr = circleAttr;
-   //    }
-   //    visualGraph.getRaphaelsFromID(id)[0].attr(attr);
-   // };
-
-   // var createEdge = function(id1, id2) {
-   //    while(graph.isEdge("e_" + edgeGuid)) {
-   //       edgeGuid++;
-   //    }
-   //    var edgeID = "e_" + edgeGuid;
-   //    graph.addEdge(edgeID, id1, id2,{label:edgeID});
-   //    onVisualGraphChange();
-   // };
-
-   // var createVertex = function(x, y) {
-   //    while(graph.isVertex("v_" + vertexGuid)) {
-   //       vertexGuid++;
-   //    }
-   //    var vertexId = "v_" + vertexGuid;
-   //    var point = {x: x, y: y};
-   //    visualGraph.setVertexVisualInfo(vertexId, point);
-   //    graph.addVertex(vertexId,{label:vertexId});
-   //    onVisualGraphChange();
-   //    return vertexId;
-   // };
-
    var fromJSON = function() {
       if(visualGraph) {
          disableAllMouse();
@@ -468,7 +347,6 @@ function initTask(subTask) {
       graphMouse = new GraphMouse("mouse", graph, visualGraph);
       $("#directed").prop('checked', graph.directed);
       initVisuals();
-      // changeMode(mode);
    };
 
    var initVisuals = function() {
@@ -488,8 +366,6 @@ function initTask(subTask) {
             maxY: paperHeight - circleAttr.r
          },
          vertexLabelAttr: vertexTextAttr,
-         // onPairSelect: createEdge,
-         // createVertex: createVertex,
          onDragEnd: onVisualGraphChange,
          callback: onVisualGraphChange,
          enabled: true
