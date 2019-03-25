@@ -150,55 +150,68 @@ function initTask(subTask) {
       $("#createVertex").change(function(){
          graphEditor.vertexCreator.setEnabled(this.checked);
          graphEditor.removeVertexEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#dragVertex").off("change");
       $("#dragVertex").change(function(){
          graphEditor.setVertexDragEnabled(this.checked);
+         updateOptionsJSON();
       });
       $("#createEdge").off("change");
       $("#createEdge").change(function(){
          graphEditor.createEdgeEnabled = this.checked;
          graphEditor.removeEdgeEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#dragEdge").off("change");
       $("#dragEdge").change(function(){
          graphEditor.arcDragger.setEnabled(this.checked);
+         updateOptionsJSON();
       });
       $("#multipleEdges").off("change");
       $("#multipleEdges").change(function(){
          graphEditor.multipleEdgesEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#loop").off("change");
       $("#loop").change(function(){
          graphEditor.loopEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#editVertexLabel").off("change");
       $("#editVertexLabel").change(function(){
          graphEditor.editVertexLabelEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#editEdgeLabel").off("change");
       $("#editEdgeLabel").change(function(){
          graphEditor.editEdgeLabelEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#dragGraph").off("change");
       $("#dragGraph").change(function(){
          graphEditor.graphDragger.dragEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#scaleGraph").off("change");
       $("#scaleGraph").change(function(){
          graphEditor.graphDragger.scaleEnabled = this.checked;
+         updateOptionsJSON();
       });
       $("#snapToGrid").change(function() {
          snapToGrid = this.checked;
          graphEditor.setGridEnabled(snapToGrid, gridSize, gridSize);
+         updateOptionsJSON();
       });
       $("#useGrid").unbind('change');
       $("#useGrid").change(function() {
          updateGridVisibility(this.checked);
+         updateOptionsJSON();
       });
       $("#gridSize").unbind('change');
       $("#gridSize").change(function() {
          updateGridSize(this.value);
+         updateOptionsJSON();
       });
       $("#apply_attr").unbind('click');
       $("#apply_attr").click(applyAttr);
@@ -374,6 +387,7 @@ function initTask(subTask) {
    };
 
    var updateJSON = function(updateAnswer) {
+      updateOptionsJSON();
       var visualJSON = visualGraph.toJSON();
       if($("#pretty").is(":checked")) {
          visualJSON = JSON.stringify(JSON.parse(visualJSON), null, 2);
@@ -383,6 +397,34 @@ function initTask(subTask) {
          answer.visual_json.push(visualJSON);
          $("#undo").attr("disabled", false);
       }
+   };
+
+   var updateOptionsJSON = function() {
+      var optionsJSON = optionsToJSON();
+      if($("#pretty").is(":checked")) {
+         optionsJSON = JSON.stringify(JSON.parse(optionsJSON), null, 2);
+      }
+      $("#options_json").val(optionsJSON);
+   };
+
+
+   function optionsToJSON() {
+      var obj = {
+         createVertex:$("#createVertex").is(":checked"),
+         createEdge:$("#createEdge").is(":checked"),
+         dragVertex:$("#dragVertex").is(":checked"),
+         dragEdge:$("#dragEdge").is(":checked"),
+         dragGraph:$("#dragGraph").is(":checked"),
+         scaleGraph:$("#scaleGraph").is(":checked"),
+         multipleEdges:$("#multipleEdges").is(":checked"),
+         loop:$("#loop").is(":checked"),
+         editVertexLabel:$("#editVertexLabel").is(":checked"),
+         editEdgeLabel:$("#editEdgeLabel").is(":checked"),
+         snapToGrid:$("#snapToGrid").is(":checked"),
+         useGrid:$("#useGrid").is(":checked"),
+         gridSize:$("#gridSize").val()
+      };
+      return JSON.stringify(obj);
    };
 
    subTask.getGrade = function(callback) {

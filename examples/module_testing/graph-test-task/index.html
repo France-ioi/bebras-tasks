@@ -75,6 +75,9 @@
             width: 240px;
             padding: 5px;
          }
+         #json_controls > * {
+            margin: 0 1em;
+         }
       </style>
    </head>
    <body>
@@ -102,53 +105,21 @@
                      <td>
                         Visual Graph JSON:
                      </td>
+                     <td>
+                        Options JSON:
+                     </td>
                   </tr>
                   <tr>
                      <td>
-<!--                         <label>
-                           <input type="radio" name="mode" id="graphEditor" checked>Graph editor
-                        </label>
-                        <br>
-                        <label>
-                           <input type="radio" name="mode" id="dragGraph">Drag graph
-                        </label>
-                        <br>
-                        <label>
-                           <input type="radio" name="mode" id="scaleGraph">Scale
-                        </label>
-                        <label>
-                           <input type="checkbox" id="keepProportions">Proportionally
-                        </label>
-                        <br> -->
-<!--                         <label>
-                           <input type="radio" name="mode" id="createVertex">Create vertices
-                        </label>
-                        <br> -->
-<!--                         <label>
-                           <input type="radio" name="mode" id="createEdge">Create edges
-                        </label>
-                        <br> -->
-<!--                         <label>
-                           <input type="radio" name="mode" id="deleteElements">Delete elements
-                        </label>
-                        <br> -->
                         
                         <label>
                            <input type="checkbox" id="createVertex" checked>Create/remove vertices
                         </label>
                         <br>
-  <!--                       <label>
-                           <input type="checkbox" id="removeVertex" checked>Remove vertices 
-                        </label>
-                        <br> -->
                         <label>
                            <input type="checkbox" id="createEdge" checked>Create/remove edges
                         </label>
                         <br>
-<!--                         <label>
-                           <input type="checkbox" id="removeEdge" checked>Remove edges 
-                        </label>
-                        <br> -->
                         <br>
                         <label>
                            <input type="checkbox" id="dragVertex" checked>Drag vertices
@@ -197,16 +168,19 @@
                            <input type="checkbox" id="directed">Directed
                         </label>
                      <td>
-                        <textarea id="visual_json" rows="23" cols="75"></textarea>
+                        <textarea id="visual_json" rows="23" cols="45"></textarea>
+                     </td>
+                     <td>
+                        <textarea id="options_json" rows="23" cols="30"></textarea>
                      </td>
                   </tr>
                   <tr>
                      <td>
                      </td>
-                     <td colspan="2" style="text-align: center">
+                     <td colspan=2 style="text-align: center" id="json_controls">
                         <label><input type="checkbox" id="pretty" checked>Pretty print</label>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="button" id="import" value="Import from JSON" style="width: 300px">
+                        <label><input type="checkbox" id="json_visual_graph" checked>Visual Graph JSON</label>
+                        <input type="button" id="import" value="Import from JSON" style="width: 200px">
                      </td>
                   </tr>
                </table>
