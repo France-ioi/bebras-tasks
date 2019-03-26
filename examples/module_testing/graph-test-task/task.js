@@ -370,7 +370,7 @@ function initTask(subTask) {
          paperElementID: "anim",
          visualGraph: visualGraph,
          graphMouse: graphMouse,
-         dragThreshold: 0,
+         dragThreshold: 10,
          edgeThreshold: 20,
          dragLimits: {
             minX: circleAttr.r,
