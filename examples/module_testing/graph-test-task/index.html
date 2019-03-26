@@ -58,9 +58,19 @@
          #controls {
             text-align: left;
             border-collapse: collapse;
+            width: 100%;
          }
          #controls td {
             border: 1px solid black;
+         }
+         #controls .col1 {
+            width: 25%;
+         }
+         #controls .col2 {
+            width: 40%;
+         }
+         #controls .col3 {
+            width: 35%;
          }
          #infoTable {
             width: 100%;
@@ -78,11 +88,16 @@
          #json_controls > * {
             margin: 0 1em;
          }
+         #visual_json, #options_json {
+            width: 97%;
+            height: 350px;
+            resize: none;
+         }
       </style>
    </head>
    <body>
       <div id="task">
-         <h1>Graph Editor</h1>
+         <h1>Test Automata</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <div id="anim_container">
@@ -99,19 +114,18 @@
                </table>
                <table id="controls">
                   <tr>
-                     <td>
+                     <td class="col1">
                         Options:
                      </td>
-                     <td>
+                     <td class="col2">
                         Visual Graph JSON:
                      </td>
-                     <td>
+                     <td class="col3">
                         Options JSON:
                      </td>
                   </tr>
                   <tr>
                      <td>
-                        
                         <label>
                            <input type="checkbox" id="createVertex" checked>Create/remove vertices
                         </label>
@@ -168,10 +182,12 @@
                            <input type="checkbox" id="directed">Directed
                         </label>
                      <td>
-                        <textarea id="visual_json" rows="23" cols="45"></textarea>
+                        <!-- <textarea id="visual_json" rows="23" cols="45"></textarea> -->
+                        <textarea id="visual_json"></textarea>
                      </td>
                      <td>
-                        <textarea id="options_json" rows="23" cols="30"></textarea>
+                        <!-- <textarea id="options_json" rows="23" cols="30"></textarea> -->
+                        <textarea id="options_json"></textarea>
                      </td>
                   </tr>
                   <tr>
