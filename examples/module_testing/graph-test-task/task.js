@@ -148,8 +148,16 @@ function initTask(subTask) {
       });
       $("#createVertex").off("change");
       $("#createVertex").change(function(){
-         graphEditor.vertexCreator.setEnabled(this.checked);
-         graphEditor.removeVertexEnabled = this.checked;
+         // graphEditor.vertexCreator.setEnabled(this.checked);
+         // graphEditor.removeVertexEnabled = this.checked;
+         graphEditor.setCreateVertexEnabled(this.checked);
+         updateOptionsJSON();
+      });
+      $("#createEdge").off("change");
+      $("#createEdge").change(function(){
+         // graphEditor.createEdgeEnabled = this.checked;
+         // graphEditor.removeEdgeEnabled = this.checked;
+         graphEditor.setCreateEdgeEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#dragVertex").off("change");
@@ -157,45 +165,40 @@ function initTask(subTask) {
          graphEditor.setVertexDragEnabled(this.checked);
          updateOptionsJSON();
       });
-      $("#createEdge").off("change");
-      $("#createEdge").change(function(){
-         graphEditor.createEdgeEnabled = this.checked;
-         graphEditor.removeEdgeEnabled = this.checked;
-         updateOptionsJSON();
-      });
       $("#dragEdge").off("change");
       $("#dragEdge").change(function(){
-         graphEditor.arcDragger.setEnabled(this.checked);
+         // graphEditor.arcDragger.setEnabled(this.checked);
+         graphEditor.setEdgeDragEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#multipleEdges").off("change");
       $("#multipleEdges").change(function(){
-         graphEditor.multipleEdgesEnabled = this.checked;
+         graphEditor.setMultipleEdgesEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#loop").off("change");
       $("#loop").change(function(){
-         graphEditor.loopEnabled = this.checked;
+         graphEditor.setLoopEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#editVertexLabel").off("change");
       $("#editVertexLabel").change(function(){
-         graphEditor.editVertexLabelEnabled = this.checked;
+         graphEditor.setEditVertexLabelEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#editEdgeLabel").off("change");
       $("#editEdgeLabel").change(function(){
-         graphEditor.editEdgeLabelEnabled = this.checked;
+         graphEditor.setEditEdgeLabelEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#dragGraph").off("change");
       $("#dragGraph").change(function(){
-         graphEditor.graphDragger.dragEnabled = this.checked;
+         graphEditor.setDragGraphEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#scaleGraph").off("change");
       $("#scaleGraph").change(function(){
-         graphEditor.graphDragger.scaleEnabled = this.checked;
+         graphEditor.setScaleGraphEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#snapToGrid").change(function() {
