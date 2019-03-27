@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+     <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+    <title>2018-FR-15-marbles-sequence</title>
+    <script>
+      window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+        'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "",
+        "language": "ar",
+        "version": "ar.01",
+        "authors": "",
+        "translators": "Eslam Wageed",
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+         objective: "الهدف",
+         undo: "الغاء",
+         success: ".أحسنت، الإجابة صحيحة",
+         errorWrongMarble: " المحاطة بالأحمر لا تنطبق مع الهدف",
+         errorMissingMarble: "لم تكمل بعد ينقصك جواهر ان لم  تجد حل حاول بطريقة أخرى"
+       };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+      #displayHelper_graderMessage {
+        margin-bottom: 1em;
+        min-height: 1em;
+        text-align: center;
+        font-weight: bold;
+        color: red;
+      }
+      #paper {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="task">
+      <h1>جواهر ملونة</h1>
+      <div id="tabsContainer"></div>    <!-- will contain the versions tabs -->
+      <div id="taskContent">          <!-- will contain the content of the task -->
+        <div id="zone_1">
+          <div class="consigne">
+            <p>انقر على الأزرار لإسقاط الجواهر واحدة بواحدة حتى بلوغ الهدف </p>
+          </div>
+        </div>
+        <div id="zone_2">
+          <div id="paper"></div>
+          <div id="objective"></div>
+        </div>
+      </div>
+      <img src="icon.png" style="display:none">
+    </div><!-- #task -->
+    <div id="solution">
+      <h2>Solution</h2>
+      <!-- description of the solution -->
+      <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+    </div>
+  </body>
+</html>

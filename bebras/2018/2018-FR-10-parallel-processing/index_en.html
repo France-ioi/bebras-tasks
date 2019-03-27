@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-FR-10-parallel-processing</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+    
+    <script type="text/javascript">
+        var taskStrings = {
+            moveForward: "Move forward",
+            moveForwardIf: "Move forward if there is no robot in the cell ahead",
+            turnLeft: "Turn left",
+            turnRight: "Turn right",
+            ifRobAhead: "If a robot is in the cell ahead, go to step 3",
+            ifRob2Ahead: "If a robot is in one of the 2 cells ahead, go to step 3",
+            ifWhiteCell: "If the robot is on a white cell, go to step 1",
+            end: "End of the program",
+            execute: "Execute this step\n for robot ",
+            failureNoCrash: "Robot 1 didn't crash into robot 2. Try a different way.",
+            failureSwapped: "Robot 2 crashed into robot 1, but we want the other way round. Try again.",
+            failureEndNoCrash: "All the robots have finished, but robot 1 didn't crash into robot 2. Try again.",
+            failureEndNoStuck: "All the robots have finished, but we want them to be stuck. Try again.",
+            success: "Congratulations, you have succeeded!",
+            cellForward: "Went from step 2 to 3\n after moving forward\nby one cell.",
+            cellReachEnd: "Went from step 3 to 4\n after moving foward\nby one cell.",
+            cell2AheadNotFree: "Went from step 1 to 3 because\none of the two cells ahead\nof the robot is occupied.",
+            cellAheadNotFreeMedium: "Went from step 1 to 3\nbecause the cell ahead \n of the robot is occupied.",
+            cellAheadNotFreeHard: "Went from step 3 to 4\nbecause the robot is\non a green cell.",
+            cellAheadFree: "Went from step 1 to 2\nbecause the cell ahead of\nthe robot is free.",
+            cellAheadFreeForward: "Went from step 2 to 3\nafter moving forward\nbecause the cell was free.",
+            cell2AheadFree: "Went from step 1 to 2\nbecause the two cells\nahead of the robot are free.",
+            onWhiteCell: "Went from 3 to 1 because\nthe robot is on\na white cell.",
+            robotNotStuck: function(rob){
+                return "Robot "+rob+" can still move.";
+            },
+            undo: "Undo"            
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+        #annuler {
+            display: block;
+            margin: auto;
+            width: 9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+
+    <div id="task">
+        <h1>Parallel Processing</h1>
+        <div id="tabsContainer"></div>
+        <div id="taskContent">
+            <div id="zone_1">
+                <div class="consigne">
+                    <p>
+                       The grid contains <span class="easy medium">2</span><span class="hard">4</span> robots represented by arrows.
+                    </p>
+                    <p>
+                       <span class="easy">Each robot is controlled by a program.</span>
+                       <span class="medium hard">The robots are all controlled by the same program.</span>
+                    </p>
+
+                    <p class="easy medium">
+                       Execute the instructions of the robots, and make robot 1 crash into robot 2.
+                    </p>
+                    <p class="hard">
+                        Execute the instructions of the robots to get to a situation where <b>all the robots are stuck</b> before reaching the green cells.
+                    </p>
+
+                    <p>
+                       To do this, click on the gray buttons in the order of your choice.
+                    </p>
+                </div>
+            </div>
+            <div id="zone_2">
+                <div id="paper"></div>
+            </div> 
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>Solution</h2>
+
+        <h2>It's infromatics!</h2>
+    </div>
+    <!-- task-solution -->
+</body>
+
+</html>

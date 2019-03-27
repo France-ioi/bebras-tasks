@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-FR-05-treasure</title>
+    <script>
+      window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+        'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+        'taskStyles-0.1'
+      ]);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+        "language": "fr",
+        "version": "fr.01",
+        "authors": "Arthur Charguéraud, Mathias Hiron",
+        "translators": ["Arthur Charguéraud"],
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+        error: function(level) {
+               var walls = "de murs";
+               if (level == "hard") {
+                  walls = "d'épaisseur totale de murs";
+               }
+               return "Vous avez découvert toutes les pièces, mais il était possible de réussir en cassant moins " + walls + ". Essayez de recommencer."
+            },
+            success: "Bravo, vous avez réussi !",
+            notFinished: "Vous n'avez pas encore découvert toutes les pièce !",
+            feedbackHard: "Épaisseur totale </br>des murs cassés : ",
+            feedbackEasyMedium: "Nombre de murs cassés : "
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style type="text/css">
+         #anim { 
+            width: 500px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 20px;
+         }
+         #result {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin-left:20px; 
+         }
+         #nb_walls {
+            font-size: 2.5em;
+            font-weight: bold;
+         }      
+         .exampleImage {
+            vertical-align:bottom;
+            height:28px; /* should be equal to hallwayWidth in task.js */
+         }
+      </style>
+    <link rel="stylesheet" href="../style_responsive.css" />
+  </head>
+
+  <body>
+    <div id="task">
+      <h1>Effort minimal</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+        <div id="zone_1">
+          <div class="consigne">
+            <p>
+               Des pièces rondes sont reliées par des couloirs qui sont parfois bouchés par des murs.
+            </p>
+            <div class="easy medium">
+               <p>Voici par exemple un couloir bouché par trois murs&nbsp;:</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example.png"></p>
+            </div>
+            <div class="hard">
+               <p>Voici par exemple un couloir bouché par un mur d'épaisseur 12 unités&nbsp;:</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example_hard.png"></p>
+            </div>
+            <p>Cassez le moins possible <span class="easy medium">de murs</span><span class="hard">d'épaisseur totale de murs</span>  pour découvrir toutes les pièces.</p>
+            <p>Pour casser <span class="easy medium">tous les murs d'un couloir</span><span class="hard">un mur</span>, cliquez sur le couloir.</p>
+          </div>
+        </div>
+        <div id="zone_2">
+         <div id="anim"></div>
+          <p id="result"></p>
+        </div>
+
+        <img src="icon.png" style="display:none">
+        <img id="treasure" src="treasure.png" style="display:none">
+      </div>
+    </div><!-- #task -->
+
+    <div id="solution">
+
+          <h2>Solution</h2>
+
+          <div class="easy">
+           <p>I varje steg väljer man att rasera väggarna i den korridor som har minst antal väggar, av dem som leder till rum som man ännu inte kan besöka.</p>
+           <p>I exemplet här nedan bör man alltså börja med korridoren längst ner till höger.</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>À chaque étape, on choisit de casser le mur qui comporte le moins de briques, parmi les murs qui permettent d'accéder à une nouvelle pièce.</p>
+           <p>Par exemple, dans la partie ci-dessous, le prochain mur à casser est celui constitué d'une seule brique.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>À chaque étape, on choisit de casser le mur le moins épais, parmi les murs qui permettent d'accéder à une nouvelle pièce.</p>
+           <p>Par exemple, dans la partie ci-dessous, le prochain mur à casser est un des murs d'épaisseur 13.</p>
+           <img src="sol_hard.png">
+         </div>
+
+
+      <h2>C'est de l'informatique !</h2>
+
+    </div> <!-- task-solution -->
+  </body>
+</html>

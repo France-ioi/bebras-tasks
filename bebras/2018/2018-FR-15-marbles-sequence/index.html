@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-FR-15-marbles-sequence</title>
+    <script>
+      window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+        'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "",
+        "language": "fr",
+        "version": "fr.01",
+        "authors": "",
+        "translators": [],
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+         objective: "Objectif",
+         undo: "Annuler",
+         success: "Bravo, vous avez réussi !",
+         errorWrongMarble: "La bille entourée en rouge est différente de l'objectif.",
+         errorMissingMarble: "Vous n'avez pas terminé, il manque des perles.<br/>Si vous êtes bloqué, essayez autrement."
+       };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+      #displayHelper_graderMessage {
+        margin-bottom: 1em;
+        min-height: 1em;
+        text-align: center;
+        font-weight: bold;
+        color: red;
+      }
+      #paper {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="task">
+      <h1>Perles colorées</h1>
+      <div id="tabsContainer"></div>    <!-- will contain the versions tabs -->
+      <div id="taskContent">          <!-- will contain the content of the task -->
+        <div id="zone_1">
+          <div class="consigne">
+            <p>Cliquez sur les boutons pour faire tomber des perles une par une jusqu'à atteindre l'objectif.</p>
+          </div>
+        </div>
+        <div id="zone_2">
+          <div id="paper"></div>
+          <div id="objective"></div>
+        </div>
+      </div>
+      <img src="icon.png" style="display:none">
+    </div><!-- #task -->
+    <div id="solution">
+      <h2>Solution</h2>
+
+      
+         <div class="easy">
+           <p>Il faut commencer par faire tomber une bille <b>A</b> et une bille <b>B</b>. Si l'on prend ces billes sur la première ligne, alors on se retrouve coincé, car on n'a pas de bille <b>C</b> à disposition pour continuer.</p>
+           <img src="sol_easy_1.png">
+           <p>Il faut donc commencer par prendre les billes <b>A</b> et <b>B</b> sur la seconde ligne. On peut alors prendre la bille <b>C</b> qui se trouve également sur la seconde ligne.</p>
+           <img src="sol_easy_2.png">
+           <p>Ensuite, pour terminer le premier groupe de 5 billes de l'objectif, il reste à prendre deux billes <b>A</b> et <b>B</b>, que l'on peut prendre sur la première ligne.</p>
+           <img src="sol_easy_3.png">
+           <p>En résumé, une solution consiste à cliquer sur les boutons <b>2, 2, 2, 1, 1</b>, en répétant cette séquence 3 fois en tout.</p>
+           <p>Il y avait également une autre solution : 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 1, 1.</p>
+         </div>
+
+         <div class="medium">
+           <p>L'objectif est constitué de 3 groupes identiques, chacun formé de la même séquence de 6 billes, avec un <b>A</b>, un <b>B</b>, deux <b>C</b>, un <b>D</b>, et un <b>E</b>. On peut justement trouver ces 6 billes en prenant les 3 premières billes de la ligne <b>2</b> et les 3 premières billes de la ligne <b>3</b>.</p>
+           <p>Il faut faire attention à faire tomber ces billes dans le bon ordre pour ne pas être coincé. Après le <b>A</b> et le <b>B</b>, il faut choisir de faire tomber le <b>C</b> de la ligne <b>3</b>, afin de débloquer un <b>D</b> dont on a besoin juste après.</p>
+           <img src="sol_medium_1.png">
+           <p>Ensuite, pour terminer le premier groupe de 6 billes de l'objectif, il reste à prendre deux billes <b>D</b>, <b>C</b> et <b>E</b> restantes sur les lignes <b>2</b> et <b>3</b>.</p>
+           <img src="sol_medium_2.png">
+           <p>En résumé, une solution consiste à cliquer sur les boutons <b>2, 2, 3, 3, 2, 3</b>, en répétant cette séquence 3 fois en tout.</p>
+           <p>Il y avait également une autre solution : 1, 1, 3, 3, 1, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2, 3.</p>
+         </div>
+
+         <div class="hard">
+           <p>L'objectif est constitué de 2 groupes identiques, chacun formé de la même séquence de 7 billes <b>A</b>, puis 2 billes <b>B</b>, puis 3 billes <b>C</b>.</p>
+           <p>Pour faire tomber 3 billes <b>C</b> à la suite, il faut avoir débloqué ces billes sur 3 lignes différentes. Ces 3 lignes doivent contenir en tout 2 billes <b>B</b>. Cela signifie qu'il faut forcément utiliser une ligne ne contenant pas de <b>B</b>. Il n'y a que la ligne <b>5</b> qui convient pour cela.</p>
+           <p>Pour déterminer les deux autres lignes à utiliser, il faut trouver où prendre les 7 billes <b>A</b>. Sachant que la ligne <b>5</b> va nous fournir 3 billes <b>A</b>, il reste donc 4 billes <b>A</b> à faire tomber en provenance de deux autres lignes. Il n'y a qu'une seule solution pour cela, c'est d'utiliser les lignes <b>1</b> et <b>3</b>.</p>
+           <p>En résumé, on commence par faire tomber toutes les billes <b>A</b> en tête des lignes <b>1</b>, <b>3</b> et <b>5</b>.</p>
+           <img src="sol_hard_1.png">
+           <p>Puis, on fait tomber les billes <b>B</b> des lignes <b>1</b> et <b>3</b>.</p>
+           <img src="sol_hard_2.png">
+           <p>Enfin, on fait tomber les billes <b>C</b> des lignes <b>1</b>, <b>3</b>, et <b>5</b>.</p>
+           <img src="sol_hard_3.png">
+           <p>Au final, la solution consiste à cliquer sur les boutons : <b>1, 1, 3, 3, 5, 5, 5, 1, 3, 1, 3, 5</b>, et de répéter cette séquence 2 fois en tout.</p>
+
+
+      <!-- description of the solution -->
+      <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+    </div>
+  </body>
+</html>

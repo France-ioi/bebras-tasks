@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+     <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+    <meta charset="utf-8">
+    <title>2018-FR-06-encoded-path</title>
+    <script>
+      window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+        'taskStyles-0.1'
+      ]);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+        "language": "ar",
+        "version": "ar.01",
+        "authors": "Arthur Charguéraud, Mathias Hiron",
+        "translators": Eslam Wageed[],
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: ".أحسنت، الإجابة صحيحة",
+            partialSuccess: "لقد نجحتم في رسم الجزأ الأول من المسار",
+            willGetPoints: " وحصلتم على نقاط .أكمل",
+            secondPartIncorrect: ".ولاكن الجزأ تثني خطأ ,",
+            failure: "اجبتك مختلف عن الهدف",
+            notAdjacentToHead: ".اسحب أو انقر على خانات بيضاء مجاورة للقرص الأبيض ",
+            continuePath: "أمكمل المسار لرأيت الباقي ",
+            yourTarget: "هدفك",
+            yourSequence: "مسارك",
+            masked: "مخفي"
+         };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+      #animContainer {
+        text-align: center;
+      }
+      #anim {
+        display: inline-block;
+      }
+      #displayHelper_graderMessage {
+        min-height: 1em;
+        font-size: 18px;
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
+        text-align: center;
+        font-weight: bold;
+        color: red; 
+      }
+      #discoveredPaths {
+        margin-top: 5px;
+        text-align: center;
+      }
+      #discoveredPaths div {
+        margin: 5px;
+        display: inline-block;
+        *zoom: 1; /*IE6/7*/
+        *display: inline; /*IE6/7*/
+      }
+      .tablePath td {
+        padding-right: 10px;
+        padding-bottom: 10px;
+        height: 22px;
+      }
+      #comment {
+        font-weight: bold;
+        font-size: 18px;
+        color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="task">
+      <h1>طريق مشفّر </h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+        <div id="zone_1">
+          <div class="consigne">
+            <p> .كل طريق في الشبكة يتحول إلى سلسلة من الأرقام </p>
+            <p>.جد إلى أي مسار يؤدّي كل رقم ثمّ ارسم الطريق الموصل إلى الهدف</p>
+            <p>اسحب أو انقر على الخانات لكي تنشئ المسار الصحيح ، انطلاقا من القرص الأبيض</p>
+          </div>
+        </div>
+
+        <div id="zone_2">
+          <div id="animContainer">
+            <div id="anim"></div>
+            <br/><br/>
+            <div id="codes"></div>
+          </div>
+          <div style="height:30px">
+            <span id="comment"></span>
+          </div>
+          <div id="displayHelper_graderMessage"></div>
+        </div>
+        <img src="icon.png" style="display:none">
+      </div>
+    </div><!-- task -->
+
+    <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+    </div> <!-- task-solution -->
+  </body>
+</html>

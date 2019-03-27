@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+     <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>    
+    <title>2018-AR-05-treasure</title>
+    <script>
+      window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+        'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+        'taskStyles-0.1'
+      ]);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+        "language": "ar",
+        "version": "ar.01",
+        "authors": "Arthur Charguéraud, Mathias Hiron",
+        "translators": "Eslam Wageed",
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+        error: function(level) {
+               var walls = "من الجدران";
+               if (level == "hard") {
+                  walls = "السمك الكلي لجدران";
+               }
+               return "لقد اكتشفت كل القطع ، ولكن كان من الممكن أن تنجح عن طريق كسر عدد أقل " + walls + ". حاول أن تبدأ مرة أخرى"
+            },
+            success: ".أحسنت، الإجابة صحيحة",
+            notFinished: "! لم تكتشف كل القطع حتى الآن",
+            feedbackHard: "السمك الكلي</br> :لجدران المكسورة",
+            feedbackEasyMedium: ": عدد الجدران المكسورة "
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style type="text/css">
+         #anim { 
+            width: 500px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 20px;
+         }
+         #result {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin-left:20px; 
+         }
+         #nb_walls {
+            font-size: 2.5em;
+            font-weight: bold;
+         }      
+         .exampleImage {
+            vertical-align:bottom;
+            height:28px; /* should be equal to hallwayWidth in task.js */
+         }
+      </style>
+    <link rel="stylesheet" href="../style_responsive.css" />
+  </head>
+
+  <body>
+    <div id="task">
+      <h1>بأقل جهد</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+        <div id="zone_1">
+          <div class="consigne">
+            <p>
+               .هناك قطع دائرية متصلة بممرات في بعض الأحيان مسدودة بجدران
+            </p>
+            <div class="easy medium">
+               <p>: إليك مثلا ممرا مسدودا بواسطة 3 جدران&nbsp;</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example.png"></p>
+            </div>
+            <div class="hard">
+               <p>:	إليك مثلا ممرا مسدودا بواسطة جدار سمكه 12 وحدة&nbsp;</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example_hard.png"></p>
+            </div>
+            <p> اكسر أقل ما يمكن <span class="easy medium"> من الجدران </span><span class="hard"> من سمك الكلي  للجدران </span> لإكتشاف جميع القطع المخفية</p>
+            <p> لكسر <span class="easy medium"> كل جدران الممر </span><span class="hard"> جدار </span> انقر على الممر </p>
+          </div>
+        </div>
+        <div id="zone_2">
+         <div id="anim"></div>
+          <p id="result"></p>
+        </div>
+
+        <img src="icon.png" style="display:none">
+        <img id="treasure" src="treasure.png" style="display:none">
+      </div>
+    </div><!-- #task -->
+
+    <div id="solution">
+      <h2>Solution</h2>
+    </div>
+  </body>
+</html>

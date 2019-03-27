@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-HU-07-arrows</title>
+      <script>
+           window.stringsLanguage = 'fi';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "fi",
+            "version": "fi.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            errorWhiteArrow: "Punaisella taustalla on merkitty nuoli, joka pitää vielä värittää.",
+            errorWrongArrow: function(arrowColor, nbPointedArrows, nbRequiredArrows) {
+               return "Punaisella taustalla merkityn nuolen pitäisi osoittaa " + nbRequiredArrows + " " + arrowColor + "seen nuoleen. Nyt se osoittaa " + nbPointedArrows + " " + arrowColor + "seen nuoleen.";
+            },
+            blue: "sini",
+            yellow: "keltai",
+            fixedArrow: "Keskellä olevaa nuolta ei voi muuttaa.",
+            blueSymbol: "S",
+            yellowSymbol: "K",
+            undo: "Peru askel"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         ul {
+            list-style-type: none;
+         }
+         #feedback {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            min-height: 2em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         li
+         {
+            margin-bottom: 5px;
+         }
+         li * {
+            display: inline-block;
+         }
+         .instruction_arrow {
+            position:relative;
+            top:15px;
+         }
+         ul {
+            position:relative;
+            top:-15px;
+         }
+         #instructions {
+            margin-left: 1em;
+         }
+         #instructions td {
+            vertical-align: top;
+            padding-bottom: 1em;
+            padding-right: 0.5em;
+         }
+         .very_hard {
+            display: none;
+         }
+         .largeScreen #example1 {
+            display:none;
+         }
+         #example2 {
+            display:none;
+         }
+         .largeScreen #example2 {
+            display:block;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Nuolet</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">
+               <div class="consigne">
+                  <div id="example1" style="float:right"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Esimerkki</b><br/><img src="example_fi.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                   <p>Väritä ruudukon kukin nuoli keltaiseksi tai siniseksi niin, että kunkin nuolen osalta pätee <span class="easy medium very_hard">seuraava sääntö</span><span class="hard">seuraavat kaksi sääntöä</span>:</p>
+                  <p class="easy medium very_hard"><span style="font-weight:bold">Nuolen osoittamassa suunnassa on täsmälleen <span class="easy medium">yksi sen kanssa samanvärinen nuoli</span><span class="very_hard">kaksi sen kanssa samanväristä nuolta</span>.</span></p>
+                  <table id="instructions" class="hard">
+                     <tr>
+                        <td><span id="instructions_blue" class="instruction_arrow"></span></td>
+                        <td><br/>Sinisen nuolen osoittamassa suunnassa on täsmälleen <b>kaksi muuta</b> sinistä nuolta.</td>
+                     </tr>
+                     <tr>
+                        <td><span id="instructions_yellow" class="instruction_arrow"></span></td>
+                        <td><br/>Keltaisen nuolen osoittamassa suunnassa on täsmälleen <b>yksi muu</b> keltainen nuoli.</td>
+                     </tr>
+                  </table>
+                  <p>Nuolen värin voi vaihtaa klikkaamalla sitä.</p>                  
+                  <div id="example2"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Esimerkki</b><br/><img src="example_fi.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                  <div style="clear:both"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center style="clear:both"><table>
+                  <tr>
+                  <td><div id="grid"></div></td>
+                  </tr>
+               </table></center>
+            </div>
+         </div>
+         <div id="feedback"></div>
+         <!-- a list of hidden images that are part of the task (not its solution
+           but are not already present as elements in the task html. This
+           always includes icon.png -->
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+         <!-- description of the solution -->
+         <h2>It's informatics!</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+

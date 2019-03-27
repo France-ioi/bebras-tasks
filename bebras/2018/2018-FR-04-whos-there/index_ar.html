@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+  <head>
+     <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>  
+    <meta charset="utf-8"></meta>
+    <title>2018-AR-04-whos-there</title>
+    <script>
+     window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+        'taskStyles-0.1', 'randomGenerator-1.0'
+      ]);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+        "language": "ar",
+        "version": "ar.01",
+        "authors": "Arthur Charguéraud, Mathias Hiron",
+        "translators": "Eslam Wageed",
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript"> 
+      var shapeGroup = function (isPair, isFirst) {
+         var s = "3 ";
+         s += (isFirst) ? "" : "جديدة ";
+         s += (isPair) ? "أزواج من " : "";
+         s += "أشكال";
+         return s;
+      }
+      var taskStrings = {
+            start: "بداية",
+            restart: "البدء من جديد",
+            inHouse: "دخول",
+            outHouse: "خروج",
+            clickGroup: function (isPair, isFirst) {
+               return "انقر هنا بمجرد أن يحتوي المنزل على " + shapeGroup(isPair, isFirst) + " متطابق"; 
+               },
+            resume: function (isPair, isFirst) {
+               return "  هذا جيد! انقر هنا لمتابعة البحث على" + shapeGroup(isPair, isFirst) + " متطابق"; 
+               },
+            errorWrong: function (isPair, isFirst) {
+               return "لا يحتوي المنزل على " + shapeGroup(isPair, isFirst) + " متطابقة"; 
+               },
+            errorMiss: function (isPair, isFirst) { 
+               return "فاتك مجموعة من " + shapeGroup(isPair, isFirst) + " متطابقة"; 
+               },
+            shapeInHouse: ":فيما يلي الأشكال الموجودة حاليًا في المنزل",
+            shapeList: ":فيما يلي الأشكال التي يمكن أن تدخل المنزل",
+            shapeListInPairs: ":فيما يلي الأشكال التي يمكن أن تظهر في الأزواج التي ستدخل المنزل",     
+            suboptimal: ".لم تشكل ثلاث مجموعات",
+            drawInCanvas: ".للتذكير ، ارسم النقاط أو الخطوط هنا", // one line only, otherwise it causes a bug
+            success: ".تهانينا ، لقد نجحت",
+            partial: ".لقد حصلت على جزأ من النقاط",
+            failure: "لم تحصل على نقاط"
+         };
+    </script>
+    <script type="text/javascript" src="raphael.sketchpad.js"></script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+      .bold {
+        font-weight: bold;
+      }
+      #canvas {
+        width: 600px;
+        margin: auto;
+        border: 1px solid black;
+      }
+      #canvasButtons {
+        text-align: center;
+        margin: 20px 0;
+      }
+      #canvasButtons button {
+        padding: 5px 20px;
+      } 
+      #valider {
+        display: block;
+        margin: auto;
+        width: 9em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="editor"></div>
+
+    <div id="task">
+      <h1>الثلاثيات</h1>
+      <div id="tabsContainer"></div>
+
+      <div id="taskContent">
+        <div id="zone_1">
+          <div class="consigne">
+            <p>عنذ الضغط على الزر الرمادي الكبير ، فإنّ أشكالا سوف تدخل إلى  المنزل<span class="medium bold">أو تخرج منه</span>, <span class="easy medium">. واحدا تلوى الآخر </span> <span class="hard bold"> مثنى مثنى </span></p>
+            <p>ولكي تتذكرهم يمكنك اضافة نقط أو خطوط داخل الإطار الموجود في الأسفل </p> 
+            <p>في كلّ مرة تحصل على 3 <span class="hard bold">أزواج</span><span class="easy medium">أشكال</span>  متطابقة داخل المنزل ، اضغط على الزر الرمادي الكبير</p>  
+          </div>
+        </div>
+        <div id="zone_2">
+          <div id="housePaper"></div>
+          <div id="shapeListPaper"></div>
+          <div id="canvas"></div>
+          <div id="canvasButtons">
+            <button type="button" class="btn btn-default" id="undoTagButton">إلغاء</button>
+            <button type="button" class="btn btn-default" id="redoTagButton">إستعادة</button>
+          </div>
+        </div>
+      </div>
+      <img id="shape1" src="1.png" style="display:none">
+      <img id="shape2" src="2.png" style="display:none">
+      <img id="shape3" src="3.png" style="display:none">
+      <img id="shape4" src="4.png" style="display:none">
+      <img id="shape5" src="5.png" style="display:none">
+      <!-- <img id="house" src="house.png" style="display:none"> -->
+      <img id="arrow" src="arrow.png" style="display:none">
+      <img src="icon.png" style="display:none">
+    </div>
+    <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's infromatics!</h2>
+    </div>
+    <!-- task-solution -->
+  </body>
+
+</html>

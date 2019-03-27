@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-17-weights</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            scaleInstEasy : "Drag two blue circles\nbelow",
+            scaleInstElse : "Drag a blue circle\nand a yellow square below",
+            drag : "You may drag the shapes here \nto re-organize them as you wish.",
+            heavier : "heavier",
+            lighter : "lighter",
+            heavierInstr : "...heavier",
+            lighterInstr : "lighter...",
+            sameWeight : "same weight",
+            pentOnLeftPan : "Squares only fit on\n the right scale-pan",
+            circleOnRightPan : "Circles only fit on\n the left scale-pan",
+            success: "Congratulations, you have succeeded!",
+            emptyAnswer: "Please fill in all gray circles",
+            wrongAnswer : "The weights of the red circles are now displayed. They are in the wrong order. Click on the restart button. The weights will be shuffled.",
+            tooManyComp : "That's good, you found the correct order. You may restart to try again but using the scale a smaller number of times. The weights will be shuffled.",
+            comparisons : function(nbComparisons) { 
+               if (nbComparisons == 1) {
+                  return "1 comparison:";
+               } else {
+                  return nbComparisons + " comparisons:"; } }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="scale.js"></script>
+      <style>
+            #displayHelper_graderMessage {
+               margin-top: 1em;
+               margin-bottom: 1em;
+               text-align: center;
+               font-weight: bold;
+               color: red;
+            }
+            #paper {
+               margin-top: 20px;
+            }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Asymetrical scale</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>The blue circles below all have distinct weights.
+                  <span class="medium hard"><br/>For each blue circle, there is exactly one of the yellow squares that has the same weight.</span></p>
+                  <p>The scale allows you to compare the weight of<span class="easy">two blue circles</span><span class="medium hard">a blue circle and a yellow square</span>.</p>
+                  <p>Place the blue circles into the gray circles, by increasing order of weight.</p>
+                  <p class="hard"><b>Use the scale as few times as possible.</b> To get a full score, use the scale at most 16 times.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         <img id="circle" src="circle.png" style="display:none">
+         <img id="square" src="square.png" style="display:none">
+      </div>
+      <div id="solution">
+            <h2>Solution</h2>
+         <!-- description of the solution -->
+            <h2>C'est de l'informatique !</h2>
+         <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+
+</html>

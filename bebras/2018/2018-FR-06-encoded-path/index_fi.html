@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+   <head>
+   <meta charset="utf-8">
+   <title>2018-FR-06-encoded-path</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1'
+            ]);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": ["Timo Poranen, Heikki Hyyrö"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: "Onnittelut, ratkaisit tämän version!",
+            partialSuccess: "Olet saanut toistettua alkuosan tavoitteesta",
+            willGetPoints: " ja saat pisteitä. Jatka.",
+            secondPartIncorrect: ", mutta loppuosa on väärin",
+            failure: "Reittiäsi vastaava lukujono ei täsmää tavoitteen kanssa.",
+            notAdjacentToHead: "Raahaa valkoista ympyrää tai klikkaa sen vieressä olevia ruutuja.",
+            continuePath: "Täydennä reittisi, jotta näet lukujonon loppuosan",
+            yourTarget: "Tavoitteesi:",
+            yourSequence: "Lukujonosi:",
+            masked: "Peitetty"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+        #animContainer {
+          text-align: center;
+        }
+        #anim {
+          display: inline-block;
+        }
+        #displayHelper_graderMessage {
+          min-height: 1em;
+          font-size: 18px;
+          margin-top: 0.2em;
+          margin-bottom: 0.2em;
+          text-align: center;
+          font-weight: bold;
+          color: red; 
+        }
+        #discoveredPaths {
+          margin-top: 5px;
+          text-align: center;
+        }
+        #discoveredPaths div {
+          margin: 5px;
+          display: inline-block;
+          *zoom: 1; /*IE6/7*/
+          *display: inline; /*IE6/7*/
+        }
+        .tablePath td {
+          padding-right: 10px;
+          padding-bottom: 10px;
+          height: 22px;
+        }
+        #comment {
+          font-weight: bold;
+          font-size: 18px;
+          color: orange;
+        }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Koodatut reitit</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Ruudukossa kulkeva reitti voidaan koodata lukujonona.</p>
+                  <p>Selvitä reitin erilaisia askeltyyppejä vastaavat lukuarvot, ja muodosta sen jälkeen reitti, joka vastaa tavoitetta.</p>
+                  <p>Raahaa tai klikkaa ruutuja jatkaaksesi tai peruuttaaksesi valkoiseen pisteeseen päättyvää reittiä.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="animContainer">
+                  <div id="anim"></div>
+                  <br/><br/>
+                  <div id="codes"></div>
+               </div>
+               <div style="height:30px">
+                  <span id="comment"></span>
+               </div>
+               <div id="displayHelper_graderMessage"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+   
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+   
+
+     </div> <!-- task-solution -->
+   </body>
+</html>

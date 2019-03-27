@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-14-sort-columns</title>
+      <script>
+           window.stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "sv",
+            "version": "sv.01",
+            "authors": "",
+            "translators": ["Staffan Söderhjelm"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "Mål",
+            sort : "sortera",
+            nSortText : function(nSort) {
+               return "Antal gjorda steg: " + nSort;
+            },
+            trick : "Tips: Lösningen hittas enklast om man bara \ntittar på bollarna i Mål-bilden.",
+            success: "Bravo, du har klarat denna nivå!",
+            wrongAnswer: "Kolumnen markerad med rött finns inte på sin rätta plats.",
+            tooManySort : "Du har sorterat kolumnerna korrekt. Börja nu om och försök klara det i bara tre steg."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #feedback {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            min-height: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #paper {
+            margin-top: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Sortera kolumner</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">   <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id=zone_1>    
+               <div class=consigne>
+                  <p>När man klickar på en "sortera"-knapp ändras ordningen på kolumnerna.
+                  <span class="easy">På raden för den klickade knappen placeras de små bollarna till vänster om de större.</span>
+                  <span class="medium">På raden för den klickade knappen placeras bollarna i storleksordning från de minsta till vänster till de största till höger.</span>
+                  <span class="hard">På raden för den klickade knappen placeras bollarna i stigande ordning från vänster enligt siffrorna på dem.</span>
+                        Utöver detta ändras kolumnernas läge så lite som möjligt.</p>
+                  <p>Du ska sortera kolumnerna i den ordning som visas i Mål-bilden till höger genom att klicka på knapparna.</p>
+                  <p class="medium hard">För att få poäng måste sorteringen ske i bara tre steg.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <div id="feedback"></div>
+         <!-- a list of hidden images that are part of the task (not its solution
+           but are not already present as elements in the task html. This
+           always includes icon.png -->
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Lösning</h2>
+            <div class="easy">
+              <p>Vi utnyttjar tipset att man bara ska titta på bollarna i Mål-bilden.</p>
+              <p>Den sista sorteringen placerar de små bollarna till vänster om de stora och måste alltså ha skett för rad <b>c</b>, <b>e</b>, eller <b>f</b>. Anta t.ex. att <b>c</b> är den sista sorteringen.</p>
+              <img src="sol_easy_1sv.png">
+              <p>På så sätt har kolumn <b>D</b> hamnat längst till höger. I de två tidigare stegen måste kolumn <b>A</b>, <b>B</b>, och <b>C</b> ha hamnat rätt. Man kan t.ex. försäkra sig att kolumn <b>A</b> hamnar till vänster genom att i näst sista steget sortera rad <b>e</b>.</p>
+              <img src="sol_easy_2sv.png">
+              <p>För att få kolumn <b>B</b> till vänster om kolumn <b>C</b> kan man sortera rad <b>f</b>.</p>
+              <img src="sol_easy_3sv.png">
+              <p>Lösningen erhålla alltså genom att man sorterar rad <b>f, e, c</b> (i den ordningen).</p>
+              <p>Det finns många andra lösningar, t.ex. <b>b, f, e</b>, eller <b>d, c, f</b>, eller <b>e, c, f</b>, etc...</p>
+            </div>
+
+            <div class="medium">
+              <p>Vi utnyttjar tipset att man bara ska titta på bollarna i Mål-bilden.</p>
+              <p>Den sista sorteringen placerar de små bollarna till vänster om de stora och måste alltså ha skett för rad <b>c</b> eller rad <b>e</b>. Anta t.ex. att <b>c</b> är den sista sorteringen.</p>
+              <img src="sol_medium_1sv.png">
+              <p>På så sätt hamnar kolumn <b>A</b> korrekt längst till vänster. I de två tidigare stegen måste dels kolumn <b>B</b> ha hamnat till vänster om kolumn <b>C</b>, och dels även kolumnerna <b>D</b>, <b>E</b> och <b>F</b> i rätt ordning. </p>
+              <p>För att få <b>B</b> till vänster om <b>C</b> finns det bara ett sätt, att sortera rad <b>a</b> i steg ett eller två.</p>
+              <img src="sol_medium_2sv.png">
+              <p>Återstår att få kolumnerna <b>D</b>, <b>E</b> och <b>F</b> i rätt ordning. Rad <b>e</b> är den enda som kan lägga kolumn <b>D</b> till vänster om kolumn <b>E</b>. Detta måste man göra efter sorteringen av rad <b>a</b> som lagt <b>E</b> och <b>F</b> i rätt ordning.</p>
+              <img src="sol_medium_3sv.png">
+              <p>En lösning är alltså att sortera raderna <b>a, e, c</b> (i den ordningen).</p>
+              <p>Det finns en ytterligare lösning. Om man väljer att sluta med rad <b>e</b> finner man med liknande resonemang som ovan lösningen <b>a, c, e</b>.</p>
+
+            </div>
+
+            <div class="hard">
+              <p> Vi utnyttjar tipset att man bara ska titta på bollarna i Mål-bilden.</p>
+              <p>Den sista sorteringen ordnar bollarna i nummerordning, och måste alltså ha skett för rad <b>d</b>.</p>
+              <img src="sol_hard_1sv.png">
+              <p>Denna sortering av rad <b>d</b> ger tre grupper av kolumner : un grupp till vänster bildad av <b>A</b>, <b>B</b> och <b>C</b>, en grupp i mitten bildad av <b>D</b>, <b>E</b> och <b>F</b>, och en grupp till höger bildad av kolunerna <b>G</b> och <b>H</b>. Ordningen inom grupperna måste dock ha skapats i tidigare steg.</p>
+              <p>Man kan få kolumnerna <b>A</b>, <b>B</b> och <b>C</b> i rätt ordning i ett steg, genom att sortera rad <b>f</b>. Denna sortering placerar också kolumnerna <b>G</b> och <b>H</b> i rätt ordning.</p>
+              <img src="sol_hard_2sv.png">
+              <p>Återstår alltså att sortera gruppen i mitten, kolumnerna <b>D</b>, <b>E</b> och <b>F</b>. Sorteingen av rad <b>f</b> placerar <b>D</b> till vänster om <b>E</b> och <b>F</b>, som man vill ha det. Däremot måste man ytterligare hitta ett sätt att placera <b>E</b> till vänster om <b>F</b>. Om man ser på siffrorna i kolumn <b>E</b> och <b>F</b> ser man att bara en sortering av rad <b>g</b> placerar <b>E</b> till vänster om <b>F</b>.</p>
+              <img src="sol_hard_3sv.png">
+              <p>Lösningen är alltså att sortera raderna <b>g, f, d</b> (i den ordningen).</p>
+              <img src="sol_hard_4sv.png">
+           </div>
+
+
+      <!-- description of the solution -->
+         <h2>Det är datavetenskap!</h2>
+      <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+

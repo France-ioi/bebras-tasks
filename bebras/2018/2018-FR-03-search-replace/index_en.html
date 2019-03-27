@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-FR-03-search-replace</title>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0', 'raphaelButton-1.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": ["Arthur Charguéraud"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+    var taskStrings = {
+          error: "Le current sequence doesn't exactly match the objective.",
+          success: "Success!",
+          before: "Replace",
+          after: "with",
+          replacedShape : function(nbReplaced, sameShape) {
+            if (sameShape) {
+               return "Replacing a shape with the same shape doesn't change the current sequence."
+            } else if (nbReplaced == 0) {
+               return "The sequence doesn't change because the first shape you selected is not present in it.";
+            } else if (nbReplaced == 1) {
+               return "A replacement has been done."
+            } else {
+               return nbReplaced + " replacements have been done."
+            }
+          },
+          undo: "Undo one step"
+       };
+      </script>
+      <script type="text/javascript" src="shape-paths.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         body * {
+            box-sizing: content-box;
+         }
+        #solution img {
+            border-top: solid black 1px;
+            border-bottom: solid black 1px;
+         }
+         #firstShape, #lastShape {
+           display: inline-block;
+           vertical-align: middle;
+           padding: 5px;
+           width: 30px;
+           height: 30px;
+         }
+         #taskContent {
+         }
+         .shape {
+           margin: 5px;
+         }
+         #undoBtnContainer {
+           text-align: center;
+           margin: 15px 0;
+         }
+         #taskProcess {
+           position: relative;
+           margin-top: 30px;
+         }
+         #taskProcess span {
+           vertical-align: middle;
+           display: inline-block;
+           height: 100%;
+           line-height: 40px;
+         }
+         .shapes {
+            margin-bottom: 5px;
+            text-align: center;
+         }
+         #topBar {
+          margin-top: 20px; 
+          text-align: center;
+         }
+         #topBar * {
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+         }
+         #allShapes {
+            width: 500px;
+         }
+         #beforeAfter {
+            margin-top: 2em; 
+            padding: 0.5em;
+            float: left;
+         }
+         #originFrame, #targetFrame {
+            margin-top: 1em; 
+            padding: 0.5em;
+            width: 80%;
+            float: right;
+         }
+         #targetFrame {
+            border: 2px solid green;
+         }
+         #originFrame {
+            border: 2px solid #AAAAFF;
+         }
+         #comment {
+            color: green;
+            min-height: 1.5em;
+            text-align: center;
+         }
+         .areaTitle {
+            text-align: center;
+         }
+         .instructions {
+            margin-left: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Replacements</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+          <div id="zone_1">
+            <div class="consigne">
+            <p>
+            Make the current sequence identical to the target by doing replacements.
+            </p>
+            <p>
+            Tou can replace a shape with another by selecting these twho shapes among the gray buttons.
+            </p>
+            <p>
+            If you are stuck, you can undo some steps.
+            </p>
+            </div>
+          </div>
+          <div id="zone_2">
+          <p class="instructions">Select two shapes below:</p>
+            <div id="topBar">
+              <div class="shapes" id="allShapes"></div>
+              <input type="button" id="undo">
+            </div>
+            <div class="shapes" id="beforeAfter"></div>
+            <div id="comment"></div>
+            <div id="originFrame">
+               <div class="areaTitle">Current sequence:</div>
+               <div class="shapes" id="originShapes"></div>
+            </div>
+            <div id="targetFrame">
+               <div class="areaTitle">Objective:</div>
+               <div class="shapes" id="targetShapes"></div>
+            </div>
+        </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+        <h2>Solution</h2>
+      </div>
+    </body>
+</html>

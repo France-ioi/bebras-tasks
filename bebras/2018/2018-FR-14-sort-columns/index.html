@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-14-sort-columns</title>
+      <script>
+           window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "Objectif",
+            sort : "trier",
+            nSortText : function(nSort) {
+               return "Nombre de tris effectués : " + nSort;
+            },
+            trick : "Astuce : la solution se trouve plus facilement\nen étudiant uniquement les boules de l'objectif.",
+            success: "Bravo, vous avez réussi !",
+            wrongAnswer: "La colonne encadrée en rouge ne se trouve pas au bon endroit.",
+            tooManySort : "Vous avez correctement rangé les colonnes. Recommencez maintenant pour essayez de réussir en seulement 3 étapes."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #paper {
+            margin-top: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Ranger les tiges</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">   <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id=zone_1>    
+               <div class=consigne>
+                  <p>Cliquer sur un bouton "trier" change <b>l'ordre des tiges</b>.
+                  <span class="easy">Sur la ligne du bouton cliqué, les petites boules sont placées à gauche des grandes boules.</span>
+                  <span class="medium">Sur la ligne du bouton cliqué, les boules sont rangées des plus petites à gauche aux plus grandes à droite.</span>
+                  <span class="hard">Sur la ligne du bouton cliqué, les boules sont rangées dans l'ordre croissant de leur numéro.</span>
+                  </p>
+                  <p>Lors de cette opération, chaque tige est déplacée le moins possible.</p>
+                  <p>Cliquez sur les boutons pour remettre les tiges dans l'ordre, comme indiqué sur l'objectif.</p>
+                  <p class="medium hard">Réussir en 3 étapes permet d'obtenir tous les points.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+
+            <div class="easy">
+              <p>Rappelons l'astuce indiquée dans le sujet : la solution se trouve plus facilement en étudiant uniquement les boules de l'objectif.</p>
+              <p>La dernière étape de tri doit placer des petites boules à gauche et des grandes boules à droite. La dernière étape doit donc être <b>c</b>, <b>e</b>, ou <b>f</b>. Supposons par exemple que <b>c</b> soit la dernière étape.</p>
+              <img src="sol_easy_1.png">
+              <p>Ainsi, la tige <b>D</b> sera placée tout à gauche. Il faudra aux étapes précédentes s'assurer que les tiges <b>A</b>, <b>B</b>, et <b>C</b> soient triées dans le bon ordre. Par exemple, on peut s'assurer que la tige <b>A</b> soit à gauche en triant la ligne <b>e</b> à l'avant-dernière étape.</p>
+              <img src="sol_easy_2.png">
+              <p>Pour ce qui est de placer la tige <b>B</b> à gauche de la tige <b>C</b>, on peut pour cela commencer par trier selon la ligne <b>f</b>.</p>
+              <img src="sol_easy_3.png">
+              <p>En résumé, une solution consiste à trier les lignes <b>f, e, c</b> (dans cet ordre).</p>
+              <p>Il y avait de nombreuses autres solutions, par exemple <b>b, f, e</b>, ou <b>d, c, f</b>, ou encore <b>e, c, f</b>, etc...</p>
+            </div>
+
+            <div class="medium">
+              <p>Rappelons l'astuce indiquée dans le sujet : la solution se trouve plus facilement en étudiant uniquement les boules de l'objectif.</p>
+              <p>La dernière étape de tri doit ranger les boules des plus petites à gauches aux plus grandes à droite. La dernière étape doit donc être un tri de la ligne <b>c</b> ou bien de la ligne <b>e</b>. Supposons par exemple que <b>c</b> soit la dernière étape.</p>
+              <img src="sol_medium_1.png">
+              <p>Ainsi, la tige <b>A</b> sera placée tout à droite. Il faudra aux étapes précédentes s'assurer d'une part que la tige <b>B</b> soit à gauche de la tige <b>C</b>, et d'autre part que les tiges <b>D</b>, <b>E</b> et <b>F</b> soit placés dans le bon ordre. </p>
+              <p>Pour placer <b>B</b> à gauche de <b>C</b>, il n'y a qu'une seule possibilité, c'est de trier selon la ligne <b>a</b> à un moment avant la dernière étape.</p>
+              <img src="sol_medium_2.png">
+              <p>Il reste à mettre les tiges <b>D</b>, <b>E</b> et <b>F</b> dans le bon ordre. La ligne <b>e</b> est la seule qui permet de placer la tige <b>D</b> à gauche de la tige <b>E</b>. Pour ce qui est de placer la tige <b>E</b> à gauche de la tige <b>F</b>, cela peut être fait au préalable par le tri de la ligne <b>a</b>, que l'on a déjà prévu d'effectuer.</p>
+              <img src="sol_medium_3.png">
+              <p>En résumé, une solution consiste à trier les lignes <b>a, e, c</b> (dans cet ordre).</p>
+              <p>Il y avait une autre solution : si l'on choisit de terminer par la ligne <b>e</b>, en appliquant un raisonnement similaire, on trouve la solution <b>a, c, e</b>.</p>
+
+            </div>
+
+            <div class="hard">
+              <p>Rappelons l'astuce indiquée dans le sujet : la solution se trouve plus facilement en étudiant uniquement les boules de l'objectif.</p>
+              <p>La dernière étape de tri doit ranger les boules dans l'ordre croissant des numéros. La dernière étape est donc forcément un tri de la ligne <b>d</b>.</p>
+              <img src="sol_hard_1.png">
+              <p>Le tri de la ligne <b>d</b> va ranger les tiges selon 3 groupes : un groupe à gauche formé des tiges <b>A</b>, <b>B</b> et <b>C</b>, un groupe au milieu formé des tiges <b>D</b>, <b>E</b> et <b>F</b>, et un groupe à droite formé des tiges <b>G</b> et <b>H</b>. En revanche, à l'intérieur de chaque groupe, les tiges ne seront pas forcément dans le bon ordre.</p>
+              <p>On peut mettre les tiges <b>A</b>, <b>B</b> et <b>C</b> dans le bon ordre en une seule étape, en triant à l'avant-dernière étape selon la ligne <b>f</b>. Trier selon cette ligne permet en même temps de placer les tiges <b>G</b> et <b>H</b> dans le bon ordre.</p>
+              <img src="sol_hard_2.png">
+              <p>Il reste donc à trier le groupe du milieu, formé des tiges <b>D</b>, <b>E</b> et <b>F</b>. Le tri de la ligne <b>f</b> que l'on a prévu d'effectuer permet de placer <b>D</b> à gauche de <b>E</b> et <b>F</b>, comme on le souhaite. Par contre, il faut encore trouver un moyen de placer <b>E</b> à gauche de <b>F</b>. Si l'on compare les numéros sur les tiges <b>E</b> et <b>F</b>, on peut voir que la ligne <b>g</b> est la seule qui permette de placer <b>E</b> à gauche de <b>F</b>.</p>
+              <img src="sol_hard_3.png">
+              <p>En résumé, la solution consiste à trier les lignes <b>g, f, d</b> (dans cet ordre).</p>
+              <img src="sol_hard_4.png">
+           </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+</html>
+

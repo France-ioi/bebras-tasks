@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+         <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+     <title>2018-FR-10-parallel-processing</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "ar",
+            "version": "ar.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": "Eslam Wageed",
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+
+    <script type="text/javascript">
+        var taskStrings = {
+            moveForward: "تقدم",
+            moveForwardIf: "ادا كانة الخانة أمام الروبوت فرغة تقدم",
+            turnLeft: "در الى اليسار",
+            turnRight: "در الى اليمين",
+            ifRobAhead: "إذا كان المربع أمام الروبوت مشغولًا ، انتقال إلى الخطوة 3",
+            ifRob2Ahead: "إذا كان أحد المربعين أمام الروبوت مشغولا انتقل إلى الخطوة 3",
+            ifWhiteCell: "إذا كان الروبوت في مربع أبيض ، فانتقل إلى الخطوة 1",
+            end: "نهايت البرنامج",
+            execute: "نفذ هذه التعليمة للروبوت                         ",
+            failureNoCrash: "الروبوت 1 لم يُدهس من طرف الروبوت 2 حاول بطريقة أخرى ",
+            failureSwapped: "لقد تحطم روبوت 2 في روبوت 1  لكننا نرغب في عكس ذلك  جرّب غير ذلك",
+            failureEndNoCrash: "انتهت جميع الروبوتات ولكن الروبوت 1 لم يتحطم في الروبوت 2 حاول غير ذلك",
+            failureEndNoStuck: "انتهت جميع الروبوتات لكننا نريد أن يتم حظرها  حاول غير ذلك",
+            success: "تهانينا ، لقد نجحت",
+            cellForward: "انتقل من 2 إلى 3 بعد تقدم مربع واحد",
+            cellReachEnd: "انتقل من 3 إلى 4 بعد تقدم مربع واحد",
+            cell2AheadNotFree: "نتقل من 1 إلى 3 لأن واحدة من الخانتين أمام الروبوت مشغولة",
+            cellAheadNotFreeMedium: "انتقل من 1 إلى 3 لأن الخانة أمام الروبوت مشغولة",
+            cellAheadNotFreeHard: " انتقل من 3 إلى 4 لأن الروبوت في خانة خضراء",
+            cellAheadFree: "انتقل من 1 إلى 2 لأن الخانة الموجودة أمام الروبوت شاغرة",
+            cellAheadFreeForward: "انتقل من 2 إلى 3 بعد التقدم لأن الخانة كانت شاغرة",
+            cell2AheadFree: "انتقل من 1 إلى 2 لأن الخانتين أمام الروبوت شاغرتين.",
+            onWhiteCell: "انتقل من 3 إلى 1 لأن الروبوت في خانة بيضاء",
+            robotNotStuck: function(rob){
+                return "مازال يستطيع التقدم "+rob+" الروبوت.";
+            },
+            undo: "إلغاء"
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+     #annuler {
+        display: block;
+        margin: auto;
+        width: 9em;
+     }
+
+</style>
+</head>
+
+<body>
+<div id="editor"></div>
+
+    <div id="task">
+        <h1>عمل منافس</h1>
+        <div id="tabsContainer"></div>
+        <div id="taskContent">
+            <div id="zone_1">
+                <div class="consigne">
+                    <p>
+                     الشبكة تحتوي على  <span class="easy medium">2</span><span class="hard">4</span> .روبوت ممثلا بواسطة سهام تحتوي على أرقام
+                    </p>
+                    <p>
+                       <span class="easy">يتحكم برنامج بكل روبوت</span>
+                       <span class="medium hard">برمج الروبوتات بحيث يصطدم الروبوت 1 بالروبوت 2</span>
+                    </p>
+
+                    <p class="easy medium">
+                       برمج الروبوتات بحيث يصطدم الروبوت 1 بالروبوت 2
+                    </p>
+                    <p class="hard">
+                        برمج الروبوتات حتى نتوصل إلى موقف أين يكون طريق كل روبوت مسدود قبل الوصول إلى المربعات الخضراء
+                    </p>
+
+                    <p>
+                        من أجل ذلك، إضغط على الأزرار الرمادية في أي ترتيب تريد
+                    </p>
+                </div>
+            </div>
+            <div id="zone_2">
+                <div id="paper"></div>
+            </div>
+            <!-- <input type="button" value="Annuler" id="annuler" /> -->
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>الحل</h2>
+
+        <h2>It's infromatics!</h2>
+    </div>
+    <!-- task-solution -->
+</body>
+
+</html>

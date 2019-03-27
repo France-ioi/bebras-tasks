@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-HU-07-arrows</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            errorWhiteArrow: "In the red cell is an arrow that still needs to be colored.",
+            errorWrongArrow: function(arrowColor, nbPointedArrows, nbRequiredArrows) {
+               var pluralRequired = "";
+               if (nbRequiredArrows > 1) {
+                  pluralRequired = "s";
+               }
+               var pluralPointed = "";
+               if (nbPointedArrows > 1) {
+                  pluralPointed = "s";
+               }
+               return "In the red cell is a " + arrowColor + " arrow that should point towards " + nbRequiredArrows + " " + arrowColor + " arrow" + pluralRequired + " " + ",<br/> but that currently points towards " + nbPointedArrows + " " + arrowColor + " flèche" + pluralPointed + ".";
+            },
+            blue: "blue",
+            yellow: "yellow",
+            fixedArrow: "The arrow in the center can't be changed",
+            blueSymbol: "B",
+            yellowSymbol: "Y",
+            undo: "Undo"            
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         ul {
+            list-style-type: none;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         li
+         {
+            margin-bottom: 5px;
+         }
+         li * {
+            display: inline-block;
+         }
+         .instruction_arrow {
+            position:relative;
+            top:15px;
+         }
+         ul {
+            position:relative;
+            top:-15px;
+         }
+         #instructions {
+            margin-left: 1em;
+         }
+         #instructions td {
+            vertical-align: top;
+            padding-bottom: 1em;
+            padding-right: 0.5em;
+         }
+         .very_hard {
+            display: none;
+         }
+         .largeScreen #example1 {
+            display:none;
+         }
+         #example2 {
+            display:none;
+         }
+         .largeScreen #example2 {
+            display:block;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Arrows</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">
+               <div class="consigne">
+                  <div id="example1" style="float:right"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Example</b><br/><img src="example.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                   <p>Color all the arrows in the grid yellow and blue, while satisfying <span class="easy medium very_hard">the following rule</span><span class="hard">the two following rules</span>:</p>
+                  <p class="easy medium very_hard"><span style="font-weight:bold">In the direction pointed by the arrow, there is precisely <span class="easy medium">one arrow</span><span class="very_hard">two arrows</span> of the same color.</span></p>
+                  <table id="instructions" class="hard">
+                     <tr>
+                        <td><span id="instructions_blue" class="instruction_arrow"></span></td>
+                        <td><br/> A blue arrow indicates that there are precisely <b>two other</b> blue arrows in that direction.</td>
+                     </tr>
+                     <tr>
+                        <td><span id="instructions_yellow" class="instruction_arrow"></span></td>
+                        <td><br/> A yellow arrow indicates that there is precisely <b>one other</b> yellow arrow in that direction.</td>
+                     </tr>
+                  </table>
+                  <p>Click on an arrow to change its color.</p>                  
+                  <div id="example2"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Example</b><br/><img src="example.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                  <div style="clear:both"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center style="clear:both"><table>
+                  <tr>
+                  <td><div id="grid"></div></td>
+                  </tr>
+               </table></center>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+         <!-- description of the solution -->
+         <h2>It's informatics!</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+</html>
+

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+     <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+      <title>2018-FR-14-sort-columns</title>
+      <script>
+           window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "ar",
+            "version": "ar.01",
+            "authors": "",
+            "translators": "Eslam Wageed",
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "الهدف",
+            sort : "رتب",
+            nSortText : function(nSort) {
+               return nSort + " :عدد الترتيبات التي قمت بها";
+            },
+            trick : "نصيحة يمكن العثور على الحل بسهولة أكبر من خلال دراسة كرات الهدف فقط,,,,,,,,,,,,",
+            success: "أحسنت، الإجابة صحيحة",
+            wrongAnswer: "العمود المؤطر باللون الأحمر ليس في المكان المناسب.",
+            tooManySort : "لقد رتبت الأعمدة بشكل صحيح. ابدأ الآن في محاولة النجاح في 3 خطوات فقط."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #paper {
+            margin-top: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>ترتيب الأعمدة</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">   <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id=zone_1>    
+               <div class=consigne>
+                 <p>انقر على الزر "فرز" لتغيير <strong>ترتيب الأعمدة </strong>. 
+					 <span class="easy">على السّطر الكريات الصّغيرة تنتقل إلى يسار الكريات الكبيرة</span>
+					 <span class="medium">على سطر الزر المضغوط , الكريات مرتبة من الأصغر على اليسار الى الأكبر على اليمين</span>
+					 <span class="hard">على سطر الزر المضغوط، الكريات مرتبة تصاعديا حسب أرقامها
+					 </span> 
+				 </p>
+                 <p>خلال هذه العملية، يتحرك كل عمود بأقل ما يمكن</p>
+                  <p>أنقر على الأزرار لإعادة ترتيب الأعمدة كما هو مبين على الهدف</p>
+                  <p class="medium hard">.نجاحك في 3 مراحل يسمح لك بالحصول على جميع النقاط </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+      <!-- description of the solution -->
+         <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+</html>
+

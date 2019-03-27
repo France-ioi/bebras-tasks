@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-17-weights</title>
+      <script>
+           window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            scaleInstEasy : "Glissez deux ronds bleus\nci-dessus.",
+            scaleInstElse : "Glissez un rond bleu et\nun carré jaune ci-dessus.",
+            drag : "Vous pouvez glisser les formes ici\npour les réorganiser comme vous voulez.",
+            heavier : "plus\nlourd",
+            lighter : "plus\nléger",
+            heavierInstr : "...plus lourd",
+            lighterInstr : "plus léger...",
+            sameWeight : "même poids",
+            pentOnLeftPan : "Les carrés ne peuvent\n être placés que\n sur le plateau droit\n de la balance.",
+            circleOnRightPan : "Les cercles ne peuvent\n être placés que\n sur le plateau gauche\n de la balance.",
+            success: "Bravo, vous avez réussi !",
+            emptyAnswer: "Vous devez remplir tous les cercles gris.",
+            wrongAnswer : "Les poids des ronds bleus sont maintenant affichés. Ils ne sont pas dans le bon ordre. Cliquez sur le bouton recommencer. (Les poids seront mélangés).",
+            tooManyComp : "C'est bien, vous avez trouvé le bon ordre. Si vous le souhaitez, vous pouvez recommencer pour essayer de réussir en utilisant moins de fois la balance. (Les poids seront mélangés).",
+            comparisons : function(nbComparisons) { 
+               if (nbComparisons == 1) {
+                  return "1 comparaison :";
+               } else {
+                  return nbComparisons + " comparaisons :"; } }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="scale.js"></script>
+      <style>
+            #displayHelper_graderMessage {
+               margin-top: 1em;
+               margin-bottom: 1em;
+               text-align: center;
+               font-weight: bold;
+               color: red;
+            }
+            #paper {
+               margin-top: 20px;
+            }
+            .bold {
+               font-weight: bold;
+            }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Balance asymétrique</h1>
+         <div id="tabsContainer"></div>    <!-- will contain the versions tabs -->
+         <div id="taskContent">          <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Les ronds bleus ont des poids différents.
+                  <span class="medium hard"><br/>Pour chaque rond bleu, il y a exactement un des carrés jaunes qui a le même poids.</span></p>
+                  <p>La balance vous permet de comparer le poids <span class="easy">de deux ronds bleus</span><span class="medium hard">d'un rond bleu et d'un carré jaune</span>.</p>
+                  <p>Rangez les ronds bleus dans les cercles gris par ordre de poids.</p>
+                  <p class="hard"><b>Utilisez la balance le moins de fois possible.</b> Pour obtenir le score maximal, faites 16 pesées ou moins.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+            <img src="icon.png" style="display:none">
+            <img id="circle" src="circle.png" style="display:none">
+            <img id="square" src="square.png" style="display:none">
+      </div>
+      <div id="solution">
+            <h2>Solution</h2>
+         <div class="easy">
+           <p>Prenons le poids <b>A</b>, et comparons-le aux deux autres poids. Cela nous permettra de savoir dans quel cercle gris ranger le poids <b>A</b>. Il y a trois cas possibles.
+           <ol>
+           <li><p>Si <b>A</b> est plus léger que <b>B</b> et <b>C</b>, alors <b>A</b> ira dans le cercle gris tout à gauche, car c'est le plus léger. Il ne reste alors plus qu'à comparer <b>B</b> et <b>C</b> pour savoir dans quel ordre les ranger.</p></li>
+           <li><p>Si <b>A</b> est plus lourd que <b>B</b> et <b>C</b>, alors <b>A</b> ira dans le cercle gris tout à droite, car c'est le plus lourd. Il reste alors plus qu'à comparer <b>B</b> et <b>C</b> pour savoir dans quel ordre les ranger.</p></li>
+           <li><p>Si <b>A</b> est plus léger que l'un des autres poids, alors <b>A</b> ira dans le cercle gris du milieu. Le poids plus léger que <b>A</b> ira à sa gauche, et le poids plus lourd que <b>A</b> ira à sa droite.</p></li>
+           </ol>
+           </p>
+         </div>
+
+         <div class="medium">
+           <p>Prenons le rond <b>A</b>, et comparons-le aux 4 poids carrés. Cela nous permettra de savoir dans quel cercle gris ranger le poids <b>A</b>. 
+           Il y a 4 cas possibles.
+           <ol>
+           <li><p>Si <b>A</b> est égal à un poids carré, et plus léger que les 3 autres, alors <b>A</b> ira dans le cercle gris tout à gauche.</p></li>
+           <li><p>Si <b>A</b> est égal à un poids carré, est plus léger que 2 autres carrés, et plus lourd que un autre carré, alors <b>A</b> ira dans le deuxième cercle gris.</p></li>
+           <li><p>Si <b>A</b> est égal à un poids carré, est plus léger que un autre carré, et plus lourd que deux autres carrés, alors <b>A</b> ira dans le troisième cercle gris.</p></li>
+           <li><p>Si <b>A</b> est égal à un poids carré, et plus lourd que les 3 autres, alors <b>A</b> ira dans le cercle gris tout à droite.</p></li>
+           </ol>
+           </p>
+
+           <p>Dans la suite, supposons que <b>E</b> est le carré qui a le même poids que <b>A</b>. Une fois que l'on a rangé <b>A</b> à sa place, il reste à ranger les autres poids ronds. 
+           <ul>
+           <li><p>Si on était dans le cas <b>1</b> ou <b>4</b> décrit ci-dessus, alors le problème consistant à ranger les trois ronds restant (c'est-à-dire <b>B</b>, <b>C</b>, <b>D</b>) à l'aide des trois carrés dont le poids est différent de <b>A</b> (c'est-à-dire <b>F</b>, <b>G</b>, <b>H</b>) est exactement le même problème que celui qu'on avait au départ, simplement on a plus que 3 ronds et 3 carrés à la place d'en avoir 4 de chaque. On peut donc procéder de la même manière, en comparant <b>B</b> avec les 3 carrés, afin de déterminer sa position.</p></li>
+           <li><p>Si on était dans le cas <b>2</b>, on connaît un carré qui est le seul plus lourd que <b>A</b>. Il suffit de comparer ce carré avec les ronds <b>B</b>, <b>C</b>, et <b>D</b> afin de déterminer lequel de ces ronds a le même poids que ce carré. On saura alors que ce rond est le poids le plus lourd, à placer dans le cercle gris tout à droite.</p></li>
+           <li><p>De même, si on était dans le cas <b>3</b>, on connaît un carré qui est le seul plus léger que <b>A</b>.  Il suffit de comparer ce carré avec les ronds <b>B</b>, <b>C</b>, et <b>D</b> afin de déterminer lequel de ces ronds a le même poids que ce carré. On saura alors que ce rond est le poids le plus léger, à placer dans le cercle gris tout à gauche.</p></li>
+           </ul>
+           
+           <p>Une fois l'une de ces étapes ci-dessus réalisée, on se retrouve dans une situation où l'on n'a plus que 2 ronds et 2 carrés à ranger. En comparant l'un de ces ronds aux deux autres carrés, on peut en déduire si le rond considéré est le plus léger ou le plus lourd des deux ronds restants. Cela suffit à ranger les deux derniers ronds à leur place.</p>
+         </div>
+
+         <div class="hard">
+           <p>On procède de la même manière que dans la version 3 étoiles, simplement en effectuant davantage d'étapes.</p>
+
+         </div>
+
+            <h2>C'est de l'informatique !</h2>
+         <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+
+</html>

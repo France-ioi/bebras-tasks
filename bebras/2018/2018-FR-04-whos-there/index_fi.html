@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+   <head>
+      <meta charset="utf-8"></meta>
+      <title>2018-FR-04-whos-there</title>
+      <script>
+         window.stringsLanguage = 'fi';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+            ]);
+      </script>
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "fi",
+            "version": "fi.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": ["Timo Poranen, Heikki Hyyrö"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+         };
+      </script>
+      <script type="text/javascript">
+        var shapeGroup = function (isPair, isFirst) {
+         var s = "3 ";
+         s += (isFirst) ? "" : "uutta ";
+         s += "keskenään\nsamanlaista ";
+         s += (isPair) ? "kuvioparia" : "kuviota";
+         return s;
+      }
+         var taskStrings = {
+            start: "Aloita",
+            restart: "Aloita uudelleen",
+            inHouse: "Sisäänkäynti",
+            outHouse: "Uloskäynti",
+            clickGroup: function (isPair, isFirst) {
+               return "Klikkaa tätä aina, kun\ntalossa on " + shapeGroup(isPair, isFirst); 
+               },
+            resume: function (isPair, isFirst) {
+               return "Hyvin menee toistaiseksi!\nKlikkaa tätä jatkaaksesi\nja etsi " + shapeGroup(isPair, isFirst); 
+               },
+            errorWrong: function (isPair, isFirst) {
+               return "Talossa ei ole " + shapeGroup(isPair, isFirst) + "."; 
+               },
+            errorMiss: function (isPair, isFirst) { 
+               return "Sinulta puuttui ryhmä, jossa on " + shapeGroup(isPair, isFirst) + "."; 
+               },
+            shapeInHouse: "Nämä kuviot ovat nyt talossa:",
+            shapeList: "Tässä on lista erilaisista kuvioista, jotka voivat siirtyä taloon:",
+            shapeListInPairs: "Tässä on lista erilaisista kuvioista, joista muodostuvia pareja voi siirtyä taloon:",
+            suboptimal: "Et löytänyt kolmea ryhmää.",
+            drawInCanvas: "Piirrä tähän muistiinpanoja",
+            success: "Onnittelut, ratkaisit tämän version!",
+            partial: "Saat hieman pisteitä.",
+            failure: "Et saa pisteitä."
+         };
+      </script>
+      <script type="text/javascript" src="raphael.sketchpad.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .bold {
+           font-weight: bold;
+         }
+         #canvas {
+           width: 600px;
+           margin: auto;
+           border: 1px solid black;
+         }
+         #canvasButtons {
+           text-align: center;
+           margin: 20px 0;
+         }
+         #canvasButtons button {
+           padding: 5px 20px;
+         } 
+         #feedback {
+           margin-top: 1em;
+           margin-bottom: 1em;
+           min-height: 1em;
+           text-align: center;
+           font-weight: bold;
+           color: red;
+         }
+         #valider {
+           display: block;
+           margin: auto;
+           width: 9em;
+         }
+      </style>
+   </head>
+
+   <body>
+      <div id="editor"></div>
+
+      <div id="task">
+         <h1>Kuka siellä</h1>
+         <div id="tabsContainer"></div>
+
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Kun klikkaat isoa harmaata "Aloita"-nappia, alkaa kuvioita siirtyä taloon <span class="medium bold"> tai lähteä talosta</span> <span class="easy medium">yksi kerrallaan</span><span class="hard">pareittain</span>.</p>
+                  <p>Piirrä talon alla olevaan kenttään muistiinpanoja (esim. pisteitä, viivoja tms.) auttaaksesi muistamista.</p>
+                  <p>Alussa talo on tyhjä.</p>
+                  <p>Klikkaa isoa harmaata nappia aina, kun talossa on 3 keskenään samanlaista <span class="hard bold">kuvioparia</span><span class="easy medium">kuviota</span>.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="housePaper"></div>
+               <div id="shapeListPaper"></div>
+               <div id="canvas"></div>
+               <div id="canvasButtons">
+                  <button type="button" class="btn btn-default" id="undoTagButton">Peruuta</button>
+                  <button type="button" class="btn btn-default" id="redoTagButton">Uudelleen</button>
+               </div>
+            </div>
+         </div>
+         <img id="shape1" src="1.png" style="display:none">
+         <img id="shape2" src="2.png" style="display:none">
+         <img id="shape3" src="3.png" style="display:none">
+         <img id="shape4" src="4.png" style="display:none">
+         <img id="shape5" src="5.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+         <img id="arrow" src="arrow.png" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Ratkaisu</h2>
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+      </div>
+      <!-- task-solution -->
+   </body>
+
+</html>

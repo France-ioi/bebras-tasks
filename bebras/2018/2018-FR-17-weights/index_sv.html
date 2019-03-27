@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-17-weights</title>
+      <script>
+           window.stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+             var json = {
+            "id": "",
+            "language": "sv",
+            "version": "sv.01",
+            "authors": "",
+            "translators": ["Staffan Söderhjelm"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            scaleInstEasy : "Flytta hit två blå cirklar \nför att väga dem.",
+            scaleInstElse : "Flytta hit en blå cirkel och \nen gul kvadrat.",
+            drag : "Du kan flytta formerna hit \noch ändra ordningen som du vill.",
+            heavier : "tyngre",
+            lighter : "lättare",
+            heavierInstr : "...tyngre",
+            lighterInstr : "lättare...",
+            sameWeight : "samma vikt",
+            pentOnLeftPan : "Kvadraterna kan bara\nplaceras på höger sida\nav vågen.",
+            circleOnRightPan : "Cirklarna kan bara\nplaceras på vänster sida\n av vågen.",
+            success: "Bravo, du har klarat denna nivå!",
+            emptyAnswer: "Du måste fylla alla de grå cirklarna.",
+            wrongAnswer : "Vikterna är inte i rätt ordning. Klicka på 'Börja Om'-knappen. (Vikterna blandas på nytt).",
+            tooManyComp : "Bra, du har ordnat dem i rätt ordning. Om du vill, kan du börja om för att försöka klara det på färre vägningar. (Vikterna blandas på nytt).",
+            comparisons : function(nbComparisons) { 
+               if (nbComparisons == 1) {
+                  return "1 jämförelse :";
+               } else {
+                  return nbComparisons + " jämförelser :"; } }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="scale.js"></script>
+      <style>
+            #feedback {
+               margin-top: 1em;
+               margin-bottom: 1em;
+               min-height: 2em;
+               text-align: center;
+               font-weight: bold;
+               color: red;
+            }
+            #paper {
+               margin-top: 20px;
+            }
+            .bold {
+               font-weight: bold;
+            }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Asymmetrisk våg</h1>
+         <div id="tabsContainer"></div>    <!-- will contain the versions tabs -->
+         <div id="taskContent">          <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Alla de blå cirklarna har olika vikt.
+                  <span class="medium hard"><br/>För varje blå cirkel finns en gul kvadrat med exakt samma vikt.</span></p>
+                  <p>Med balansvågen kan du jämföra vikterna <span class="easy">för två blå cirklar</span><span class="medium hard">för en blå cirkel och en gul kvadrat</span>.</p>
+                  <p>Ordna de blå cirklarna i viktordning i de grå cirklarna!</p>
+                  <p class="hard"><b>Använd vågen så få gånger som möjligt.</b> För att få full poäng, använd vågen högst 16 gånger.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <div id="feedback"></div>
+         <!-- a list of hidden images that are part of the task (not its solution
+           but are not already present as elements in the task html. This
+           always includes icon.png -->
+            <img src="icon.png" style="display:none">
+            <img id="circle" src="circle.png" style="display:none">
+            <img id="square" src="square.png" style="display:none">
+      </div>
+      <div id="solution">
+            <h2>Lösning</h2>
+          <div class="easy">
+           <p>Vi använder balansvågen för att jämföra vikten <b>A</b> först med <b>B</b> och sedan med <b>C</b>. Det finns tre möjliga alternativ:
+           <ol>
+           <li><p>Om <b>A</b> är lättare än både <b>B</b> och <b>C</b>, så måste <b>A</b> placeras i den grå cirkeln längst till vänster, eftersom den är lättast. Sedan är det bara att jämföra <b>B</b> och <b>C</b> för att veta hur de ska ordnas.</p></li>
+           <li><p>Om <b>A</b> är tyngre än både <b>B</b> och <b>C</b>, så måste <b>A</b> placeras i den grå cirkeln längst till höger, eftersom den är tyngst. Sedan är det åter bara att jämföra <b>B</b> och <b>C</b> för att veta hur de ska ordnas.</p></li>
+           <li><p>Om <b>A</b> är lättare än än bara en av de andra vikterna så måste <b>A</b> placeras i den mittersta grå cirkeln. Den vikt som är lättare än <b>A</b> placeras till vänster och den som är tyngre än <b>A</b> till höger.</p></li>
+           </ol>
+           </p>
+         </div>
+
+         <div class="medium">
+           <p>Vi jämför först cirkeln <b>A</b> med var och en av de kvadratiska vikterna. Det låter oss avgöra i vilken grå cirkel <b>A</b> ska placeras. 
+           <b>A</b> väger jämnt med en av de fyra, säg <b>E </b>, men sedan finns det fyra möjligheter:
+           <ol>
+           <li><p>Om <b>A</b> är lättare än alla de tre övriga så måste A vara lättast, så <b>A</b> placeras i den grå cirkeln längst till vänster.</p></li>
+           <li><p>Om <b>A</b> är lättare än två av de övriga och tyngre än en, så måste <b>A</b> placeras i den andra grå cirkeln.</p></li>
+           <li><p>Om <b>A</b> är lättare än en av de två övriga, men tyngre än två, så placeras <b>A</b> i den tredje grå cirkeln.</p></li>
+           <li><p>Om <b>A</b> är tyngre än alla de tre övriga så måste <b>A</b> vara tyngst, placeras i den fjärde grå cirkeln längst till höger.</p></li>
+           </ol>
+           </p>
+
+           <p>När nu <b>A</b> är inplacerat på sin plats, kan vi gå vidare med en cirkel till. </p>
+           <ul>
+           <li><p>I fallen <b>1</b> och <b>4</b> beskrivna här ovan, består problemet i att rangordna cirklarna (<b>B</b>, <b>C</b>, <b>D</b>) med hjälp av de tre kvadratiska vikterna (<b>F</b>, <b>G</b>, <b>H</b>). Det är samma problem som vi hade från början, bara att vi nu har bara tre runda och tre kvadratiska vikter i stället för fyra av varje. Man jämför på samma sätt <b>B</b> med de tre kvadraterna, och ser om den är lättare än två, tyngre än två, eller ligger i mitten. <b>B</b> kan nu placeras in på sin plats.</p></li>
+           <li><p>I fallet <b>2</b> vet man vilken kvadrat som är den enda som är tyngre än <b>A</b>. Man jämför denna med <b>B</b>, <b>C</b>, och <b>D</b> för att se vilken av dem som har samma vikt. Man vet då att denna är den tyngsta, som ska placeras längst till höger.</p></li>
+           <li><p>Likaså, i fallet <b>3</b>, vet man vilken kvadrat som är den enda som är lättare än <b>A</b>.  Man jämför denna med <b>B</b>, <b>C</b>, och <b>D</b> för att se vilken av dem som har samma vikt. Man vet då att denna är den lättaste, som ska placeras längst till vänster.</p></li>
+           </ul>
+           
+           <p>När man fullbordat dessa steg har man bara två cirklar kvar att rangordna. Man jämför en av cirklarna med var och en av kvadraterna och kan så avgöra om den är den lättare eller den tyngre. På så sätt kan man placera in de två sista cirklarna på sina rätta platser i de grå cirklarna.</p>
+         </div>
+
+         <div class="hard">
+           <p>I princip gör man på liknande sätt som i problemet med 3 stjärnor, men det gäller att systematiskt utnyttja allt man får veta. Första steget är att jämföra <b>A</b> med var och en av de kvadratiska vikterna. På detta sätt kan man placera in <b>A</b> på rätt plats, och har sedan fem cirklar och fem kvadratiska vikter att arbeta vidare med. På samma ger fem nya vägningar rätt plats för <b>B</b>, och man har fyra cirklar och fyra vikter kvar. I nästa steg blir det fyra kvar, sedan tre och till sist bara två. Man kan alltså alltid finna lösningen med 6+5+4+3+2=20 vägningar, men uppgiften var att göra det med högst 16. Knepet är att utnyttja att en av kvadraterna väger lika mycket som den cirkel man testar. Beroende på <b>A</b>:s plats blir det (minst) en vägning mindre i varje steg efter det första, och går alltså att göra på 16 vägningar.</p>
+
+         </div>
+<!-- description of the solution -->
+            <h2>Det är datavetenskap!</h2>
+         <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+

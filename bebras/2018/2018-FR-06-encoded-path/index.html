@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-FR-06-encoded-path</title>
+    <script>
+      window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+        'taskStyles-0.1'
+      ]);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+        "language": "fr",
+        "version": "fr.01",
+        "authors": "Arthur Charguéraud, Mathias Hiron",
+        "translators": [],
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: "Bravo, vous avez réussi !",
+            partialSuccess: "Vous avez reproduit la première partie de l'objectif",
+            willGetPoints: " et obtiendrez des points. Continuez.",
+            secondPartIncorrect: ", mais la deuxième partie est incorrecte",
+            failure: "Votre séquence est différente de l'objectif.",
+            notAdjacentToHead: "Glissez ou cliquez sur une case blanche voisine du rond blanc.",
+            continuePath: "Complétez votre chemin pour voir le reste de la séquence.",
+            yourTarget: "Votre objectif :",
+            yourSequence: "Votre séquence :",
+            masked: "Masqué"
+         };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+      #animContainer {
+        text-align: center;
+      }
+      #anim {
+        display: inline-block;
+      }
+      #displayHelper_graderMessage {
+        min-height: 1em;
+        font-size: 18px;
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
+        text-align: center;
+        font-weight: bold;
+        color: red; 
+      }
+      #discoveredPaths {
+        margin-top: 5px;
+        text-align: center;
+      }
+      #discoveredPaths div {
+        margin: 5px;
+        display: inline-block;
+        *zoom: 1; /*IE6/7*/
+        *display: inline; /*IE6/7*/
+      }
+      .tablePath td {
+        padding-right: 10px;
+        padding-bottom: 10px;
+        height: 22px;
+      }
+      #comment {
+        font-weight: bold;
+        font-size: 18px;
+        color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="task">
+      <h1>Chemin encodé</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+        <div id="zone_1">
+          <div class="consigne">
+            <p>Un chemin dans la grille peut être transformé en une séquence de chiffres.</p>
+
+            <p>Trouvez à quel déplacement correspond chaque chiffre, puis dessinez un chemin pour obtenir l'objectif.</p>
+
+            <p>Glissez ou cliquez sur les cases pour construire votre chemin en partant du rond blanc.</p>
+          </div>
+        </div>
+
+        <div id="zone_2">
+          <div id="animContainer">
+            <div id="anim"></div>
+            <br/><br/>
+            <div id="codes"></div>
+          </div>
+          <div style="height:30px">
+            <span id="comment"></span>
+          </div>
+          <div id="displayHelper_graderMessage"></div>
+        </div>
+        <img src="icon.png" style="display:none">
+      </div>
+    </div><!-- task -->
+
+    <div id="solution">
+      <h2>Solution</h2>
+
+
+          <div class="easy">
+           <p>Le chemin est transformé en une séquence de chiffres de la manière suivante :</p>
+           <ul>
+           <li>Un <b>0</b> indique que le chemin progresse d'une case vers la droite.</li>
+           <li>Un <b>1</b> indique que le chemin change de ligne, soit en montant s'il se trouve sur la rangée du bas, soit en descendant s'il se trouve sur la rangée du haut.</li>
+           </ul>
+           <p>Par exemple, la séquence <b>0 1 0 0 1 0 1</b> correspond aux déplacements <b>droite, bas, droite, droite, haut, droite, bas</b>.</p>
+           <p>Le chemin complet correspondant à la séquence objectif est : </p>
+           <img src="sol_easy.png">
+         </div>
+
+         <div class="medium">
+           <p>Le chemin est transformé en une séquence de chiffres de la manière suivante :</p>
+           <ul>
+           <li>Un <b>0</b> indique que le chemin progresse d'une case vers le haut.</li>
+           <li>Un <b>1</b> indique que le chemin progresse d'une case vers la droite.</li>
+           <li>Un <b>2</b> indique que le chemin progresse d'une case vers le bas.</li>
+           <li>Un <b>3</b> indique que le chemin progresse d'une case vers la gauche.</li>
+           </ul>
+           <p>Par exemple, la séquence <b>1 2 3 2 1 1 0</b> correspond aux déplacements <b>droite, bas, gauche, bas, droite, droite, haut</b>.</p>
+           <p>Le chemin complet correspondant à la séquence objectif est : </p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Le chemin est transformé en une séquence de chiffres de la manière suivante :</p>
+           <ul>
+           <li>Un <b>0</b> indique que le chemin progresse tout droit devant lui.</li>
+           <li>Un <b>1</b> indique que le chemin tourne vers la droite (à angle droit).</li>
+           <li>Un <b>2</b> indique que le chemin tourne vers la gauche (à angle droit).</li>
+           </ul>
+           <p>Par exemple, la séquence <b>0 0 1 0 2 2 0</b> correspond aux déplacements <b>avance, avance, droite, avance, gauche, gauche, avance</b>.</p>
+           <p>Le chemin complet correspondant à la séquence objectif est : </p>
+           <img src="sol_hard.png">
+         </div>
+
+
+      <h2>C'est de l'informatique !</h2>
+    </div> <!-- task-solution -->
+  </body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-FR-09-graph-of-shapes</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1_M.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script>
+      window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+        'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0']);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "",
+        "language": "fr",
+        "version": "fr.01",
+        "authors": "",
+        "translators": [],
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var instructions = "<br/> Cliquez sur les carrés pour modifier les formes.";
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            errorArrivedEarly: "Castor est arrivé à la maison trop tôt, il reste des formes dans la liste d'instructions." + instructions,
+            errorOneNotGood: "La forme dessinée sur la flèche devant Castor ne correspond pas à la forme de l'instruction suivante." + instructions,
+            errorSeveralNotGood: "Aucune des formes sur les flèches devant Castor ne correspond à la forme de l'instruction suivante." + instructions,
+            errorMultiplePath: "Castor se trouve devant plusieurs flèches qui correspondent à la forme de l'instruction suivante. Castor ne sait pas où aller." + instructions,
+            instructions: "Instructions :",
+            tryButton: "Commencer",
+            stopButton: "Arrêter",
+            validateAnswer: "Essayer",
+            mustFillAll: "Il reste des carrés gris. Cliquez dessus pour y mettre des formes."
+         };
+    </script>
+    <script type="text/javascript" src="shape-paths.js"></script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+         #graph path, #graph rect
+         {
+            cursor: pointer;
+         }
+         #graph {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+    </style>
+  </head>
+  <body>
+    <div id="task">
+      <h1>Chemin décoré</h1>
+      <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+      <div id="taskContent"> 
+        <div id="zone_1">       <!-- will contain the content of the task -->
+          <div class="consigne">
+            <p>Cliquez sur tous les carrés gris pour y mettre des formes.</p>
+
+            <p>Castor suivra les flèches du parcours selon les instructions décrites par la suite de formes affichée en bas.</p>
+
+            <p>Attention, à aucun moment Castor ne doit avoir deux flèches avec la même forme devant lui.</p>
+
+            <p style="margin-bottom:0.3em">L'objectif est que Castor arrive à la maison après avoir suivi toute la séquence d'instructions, et pas avant.</p>
+          </div>
+        </div>
+        <div id="zone_2">
+          <div id="graph"></div>
+          <div id="topBar"></div>
+        </div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img id="castor" src="castor.png" style="display:none">
+      <img id="house" src="house.png" style="display:none">
+    </div><!-- #task-->
+
+    <div id="solution">
+      <h2>Solution</h2>
+
+
+         <div class="easy">
+           <p>Les instructions comportent 5 formes. Il faut donc faire passer Castor par le chemin du haut, qui comporte 5 flèches, et pas par le chemin du bas qui ne comporte que 4 flèches.</p>
+           <p>Sur le chemin du haut, on place dans les flèches les formes correspondants aux instructions, dans l'ordre.</p>
+           <img src="sol_easy_1.png">
+           <p>Pour les cases du chemin du bas, on peut les compléter avec n'importe quelle forme, il faut juste éviter de placer un rond sur le chemin du bas juste après la première bifurcation, car cela entrerait en conflit avec le rond utilisé sur le chemin du haut. Par exemple, si l'on met des triangles en bas, on obtient la solution suivante :</p>
+           <img src="sol_easy_2.png">
+         </div>
+
+         <div class="medium">
+           <p>Dans le parcours, il y a deux "boucles" : une qui monte vers le haut et une qui descend vers le bas. Si l'on essaie d'utiliser la boucle du bas d'abord, on se retrouve tout de suite coincé.</p>
+           <img src="sol_medium_1.png">
+           <p>En effet, le triangle suivant dans les instructions va forcer Castor à rentrer une deuxième fois dans la boucle du bas, mais ensuite les formes rencontrées ne correspondent plus aux instructions.</p>
+
+           <p>Il faut donc faire partir Castor d'abord dans la boucle du haut :</p>
+           <img src="sol_medium_2.png">
+           <p>Ensuite, on emmène Castor dans la boucle du bas. Castor remontra alors faire encore un tour dans la boucle du haut, avant de ressortir en suivant le rond final.</p>
+           <img src="sol_medium_3.png">
+         </div>
+
+         <div class="hard">
+           <p>Dans les instructions à suivre, un motif se répète 2 fois (étoile, triangle, triangle, étoile), puis on a une étoile, et un autre motif qui se répète 2 fois (rond, rond, triangle). Commençons par placer le premier motif sur la "boucle" formée de 4 flèches.</p>
+           <img src="sol_hard_1.png">
+           <p>On complète ensuite avec la boucle formée de 3 flèches, située en haut à droite. Quant à la boucle située en haut à gauche, on peut remplir les cases avec n'importe quelles formes, il faut juste éviter de mettre une étoile sur la première flèche de cette boucle. Voici une solution :</p>
+           <img src="sol_hard_2.png">
+         </div>
+
+
+
+      <!-- description of the solution -->
+      <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-HU-07-arrows</title>
+      <script>
+           window.stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "sv",
+            "version": "sv.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, du har klarat denna nivå!",
+            errorWhiteArrow: "I den röda rutan finns en ofärgad pil.",
+            errorWrongArrow: function(arrowColor, nbPointedArrows, nbRequiredArrows) {
+               var pluralRequired = "";
+               if (nbRequiredArrows > 1) {
+                  pluralRequired = "ar";
+               }
+               var pluralPointed = "";
+               if (nbPointedArrows > 1) {
+                  pluralPointed = "ar";
+               }
+               return "I den röda rutan finns en " + arrowColor + " pil, som ska peka på " + nbRequiredArrows + " " + arrowColor + " pil" + pluralRequired + "."      },
+            blue: "blå",
+            yellow: "gul",
+            fixedArrow: "Pilen i mitten kan inte ändras.",
+            blueSymbol: "B",
+            yellowSymbol: "G",
+            undo: "Ångra"            
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         ul {
+            list-style-type: none;
+         }
+         #feedback {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            min-height: 2em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         li
+         {
+            margin-bottom: 5px;
+         }
+         li * {
+            display: inline-block;
+         }
+         .instruction_arrow {
+            position:relative;
+            top:15px;
+         }
+         ul {
+            position:relative;
+            top:-15px;
+         }
+         #instructions {
+            margin-left: 1em;
+         }
+         #instructions td {
+            vertical-align: top;
+            padding-bottom: 1em;
+            padding-right: 0.5em;
+         }
+         .very_hard {
+            display: none;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Pekande pilar</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">
+               <div class="consigne">
+                  <div class="easy medium" style="float:right;text-align:center;margin-top:5px;"><b>Exempel</b><br/><img src="example_sv.png" style="height:200px;margin-left:20px;margin-top:5px"></div>
+                  <p>Färga pilarna i rutnätet blå och gula så att följande <span class="easy medium very_hard">regel uppfylls</span><span class="hard">två regler uppfylls</span> :</p>
+                  <p class="easy medium very_hard"><span style="font-weight:bold">I pilens riktning ska finnas exakt <span class="easy medium">en pil</span><span class="very_hard">två pilar</span> av samma färg.</span></p>
+                  <table id="instructions" class="hard">
+                     <tr>
+                        <td><span id="instructions_blue" class="instruction_arrow"></span></td>
+                        <td><br/> En blå pil betyder att det finnas <b>exakt två andra blå pilar</b> i denna rikting.</td>
+                     </tr>
+                     <tr>
+                        <td><span id="instructions_yellow" class="instruction_arrow"></span></td>
+                        <td><br/> En gul pil betyder att det finnas <b>exakt en annan gul pil </b> i denna riktning.</td>
+                     </tr>
+                  </table>
+                  <p>Klicka på en pil för att ändra dess färg.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center style="clear:both"><table>
+               <tr>
+               <td><div id="grid"></div></td>
+               </tr>
+               </table></center>
+            </div>
+         </div>
+         <div id="feedback"></div>
+         <!-- a list of hidden images that are part of the task (not its solution
+           but are not already present as elements in the task html. This
+           always includes icon.png -->
+            <img src="icon.png" style="display:none">
+         </div>
+         <div id="solution">
+            <h2>Lösning</h2>
+         
+         <div class="easy">
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_easy_1.png"></td>
+               <td>Den första pilen indikerar att man ska placera en blå pil till höger.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_2.png"></td>
+               <td>Pilen som man adderade indikerar att man också ska placera en blå pil under den.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_3.png"></td>
+               <td>Pilen som man adderade nere i hörnet pekar redan på en blå pil, så man måste då göra pilen i övre högra hörnet gul.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_4sv.png"></td>
+               <td>Pilen mitt i översta raden pekar mot en gul pil, och måste därför själv vara gul.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_5sv.png"></td>
+               <td>Den högra pilen i översta raden pekar redan mot en gul pil. För att den inte ska peka mot två måste den översta vänstra pilen vara blå.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_6sv.png"></td>
+               <td>Pilen mitt i den vänstra kolumnen pekar mot en blå pil, och den måste därför själv vara blå.</td>
+            </tr>
+               <td><img src="sol_easy_7sv.png"></td>
+               <td>Den översta blå pilen i den vänstra kolumnen pekar mot en blå pil närmast under. Den understa pilen i vänstra kolumnen måste därför vara gul.</td>
+            </tr>
+               <td><img src="sol_easy_8sv.png"></td>
+               <td>Den understa gula pilen i vänstra kolumnen måste peka mot en gul pil. Man måste placera en i den sista tomma rutan i nedersta raden.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_easy_9sv.png"></td>
+               <td>Därmed är lösningen klar!</td>
+            </tr>
+            </table>
+         </div>
+
+         <div class="medium">
+            <p>Innan vi börjar kan vi konstatera att problemet är "symmetriskt" med avseende på färgerna gul och blå. Om man har en lösning och sedan byter alla gula pilar mot blå, och alla blå mot gula, så är det fortfarande en lösning. Från denna anmärkning kan man konstatera att man kan börja med en pil av godtycklig färg utan att behöva riskera att det visar dig vara ett dåligt val. </p>
+            <p>I fortsättningen börjar vi alltid med att placera ut en blå pil. </p>
+            <p>Vi testar olika sätt att börja, och hoppas hitta en som "tvingar" oss fortsätta att lägga ut pilar så att vi aldrig behöver tveka.</p>
+            <p><b>Första försöket.</b> Antag först att vi börjar genom att fylla den översta raden. Det finns två olika sätt att fylla den enligt reglerna:
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_b1sv.png"></td>
+               <td>Första sättet.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_b2sv.png"></td>
+               <td>Andra sättet.</td>
+            </tr>
+            </table>
+            <p>Eftersom det finns två möjligheter kan man inte vara säker på vilken det är bäst att utgå från. Låt oss försöka på ett annat sätt.</p>
+
+            <p><b>Andra försöket.</b> Antag nu att börjar genom att fylla den nedersta raden. Även där finns det två sätt som båda uppfyller reglerna :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_c1sv.png"></td>
+               <td>Första sättet.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_c2sv.png"></td>
+               <td>Andra sättet.</td>
+            </tr>
+            </table>
+            <p>Eftersom det finns två möjligheter kan man inte heller här vara säker på vilken det är bäst att utgå från. Låt oss försöka på ett tredje sätt.</p>
+
+            <p><b>Tredje försöket.</b> Antag nu att vi börjar genom att fylla i den stigande diagonalen, vilket är intressant eftersom den innehåller två pilar som pekar mot varandra. 
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_d1sv.png"></td>
+               <td>Låt oss som vanligt börja med en blå pil.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_d2.png"></td>
+               <td>Om man sedan ovanför till höger försöker lägga en andra blå pil tar det stopp: Den tredje pilen i diagonalen kan varken vara blå eller gul, eftersom den pekar mot två blå pilar.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_1sv.png"></td>
+               <td>Eftersom den andra pilen alltså inte kan vara blå, måste den vara gul. Likaså måste den tredje vara blå, eftersom den första blå pilen i hörnet måste peka mot en annan blå pil.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_2sv.png"></td>
+               <td>Den gula pilen mitt i digaonalen tvingar fram två andra gula pilar.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_3sv.png"></td>
+               <td>I kolumnen till höger kan pilen i mitten inte vara gul, eftersom den pekar mot minst två gula pilar. Den måste därför vara blå.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_4sv.png"></td>
+               <td>Den senast tillagda blå pilen tvingar oss att lägga till ytterligare två blå pilar.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_5sv.png"></td>
+               <td>På nedersta raden kan den andra pilen inte vara blå, eftersom den tredje då skulle peka mot två blå pilar. Den andra pilen måste alltså vara gul.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_6sv.png"></td>
+               <td>Denna senast tillagda gula pil tvingar fram två nya gula pilar.</td>
+            </tr>
+               <td><img src="sol_medium_7.png"></td>
+               <td>Den sista pilen måste vara blå, eftersom pilen i övre högra hörnet bara får peka på en gul pil. <br/><br/><b>Här har vi lösningen!</b></td>
+            </tr>
+
+            </table>
+
+
+         </div>
+
+         <div class="hard">
+            <p>I detta fall är problemet inte symmetriskt, dvs bara en färg på första pilen kan vara rätt. Det är klokt att börja med att försöka fylla en rad med många "begränsningar", t.ex. pilar som pekar mot varandra. Låt oss se på den stigande diagonalen, där pilen nederst till vänster kan vara gul eller blå.</p>
+
+            <p><b>Första försöket.</b> Vi testar först med att göra den gul:
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_b1sv.png"></td>
+               <td>Pilen ett steg ovanför till höger kan inte också vara gul, eftersom ytterligare nästa pil då pekar mot två gula rutor. Den andra pilen måste alltså vara blå.<br/><br/> Den tredje pilen på diagonalen pekar mot en gul och en blå pil, och måste alltså vara gul. </td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b2sv.png"></td>
+               <td>Den blå pilen pekar mot två andra pilar som då också måste vara blå.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b3sv.png"></td>
+               <td>Den blå pil som pekar snett ner åt höger, kräver på samma sätt två ytterligare blå pilar.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b4sv.png"></td>
+               <td>I detta läge blir det stopp, eftersom den inramade blå pilen inte kan peka mot två blå pilar.</td>
+            </tr>
+            </table>
+
+            <p><b>Andra försöket.</b> Eftersom pilen nederst till vänster inte kan vara gul måste den alltså vara blå.
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_0.png"></td>
+               <td>Låt oss alltså börja så.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_c2sv.png"></td>
+               <td>Om den tredje pilen längs diagonalen görs gul blir det åter stopp: Man tvingas göra den andra pilen gul, och sedan finns det inte plats för två blå för den första i hörnet att peka på.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_1sv.png"></td>
+               <td>Den tredje pilen ska alltså vara blå.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_2sv.png"></td>
+               <td>Och eftersom den ska peka mot två blå pilar måste den andra alltså göras blå.<br/><br/> Sedan, för att undvika att nedre vänstra pilen pekar mot tre blå pilar, så måste den i övre högra hörnet göras gul.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_3sv.png"></td>
+               <td>Den andra blå pilen kräver två nya blå pilar.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_4sv.png"></td>
+               <td>En av dessa kräver ytterligare två,</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_5sv.png"></td>
+               <td>och för att det ska stämma kan man lägga dit ytterligare två blå pilar.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_6sv.png"></td>
+               <td>Tredje raden kan inte ha fyra blå pilar, dvs den längst till höger måste vara gul.<br/><br/>
+               Eftersom den redan pekar mot en annan gul pil måste den högraste pilen i andra raden vara blå.</td>
+            </tr>
+               <td><img src="sol_hard_7sv.png"></td>
+               <td>Denna pekar redan mot två blå pilar, så den första pilen i andra raden måste vara gul.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_8sv.png"></td>
+               <td>De två motriktade pilarna i nedersta raden måste alltså vara gula,</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_9sv.png"></td>
+               <td>liksom den allra sista pilen längst uppe till vänster. <br/><br/><b> Här har vi nu en komplett lösning!</b></td>
+            </tr>
+
+            </table>
+
+
+
+
+
+
+
+<!-- description of the solution -->
+            <h2>Det är datavetenskap!</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+

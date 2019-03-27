@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-FR-10-parallel-processing</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+
+    <script type="text/javascript">
+        var taskStrings = {
+            moveForward: "Avancer",
+            moveForwardIf: "Si la case devant le robot est libre, avancer",
+            turnLeft: "Tourner à gauche",
+            turnRight: "Tourner à droite",
+            ifRobAhead: "Si la case devant le robot est occupée,\n aller à l'étape 3",
+            ifRob2Ahead: "Si l'une des deux cases devant le robot\n est occupée, aller à l'étape 3",
+            ifWhiteCell: "Si le robot se trouve sur une case blanche,\n aller à l'étape 1",
+            end: "Fin du programme",
+            execute: "Exécutez\n cette instruction\n pour le robot",
+            failureNoCrash: "Le robot 1 ne s'est pas écrasé dans le robot 2. Essayez autrement.",
+            failureSwapped: "Le robot 2 s'est écrasé dans le robot 1, mais on voudrait le contraire. Essayez autrement.",
+            failureEndNoCrash: "Tous les robots ont terminé, mais le robot 1 ne s'est pas écrasé dans le robot 2. Essayez autrement.",
+            failureEndNoStuck: "Tous les robots ont terminé, mais on voudrait qu'ils soient bloqués. Essayez autrement.",
+            success: "Bravo, vous avez réussi !",
+            cellForward: "Est passé de 2 à 3\n après avoir avancé\nd'une case.",
+            cellReachEnd: "Est passé de 3 à 4\n après avoir avancé\nd'une case.",
+            cell2AheadNotFree: "Est passé de 1 à 3 car\nune des 2 cases devant\nle robot est occupée.",
+            cellAheadNotFreeMedium: "Est passé de 1 à 3 car\nla case devant le robot\n est occupée.",
+            cellAheadNotFreeHard: "Est passé de 3 à 4 car\nle robot est\n sur une case verte.",
+            cellAheadFree: "Est passé de 1 à 2 car\nla case devant le\nrobot est libre.",
+            cellAheadFreeForward: "Est passé de 2 à 3\naprès avoir avancé car\nla case était libre.",
+            cell2AheadFree: "Est passé de 1 à 2 car\nles deux cases devant\nle robot sont libres.",
+            onWhiteCell: "Est passé de 3 à 1 car\nle robot se trouve sur\nune case blanche.",
+            robotNotStuck: function(rob){
+                return "Le robot "+rob+" peut encore avancer.";
+            },
+            undo: "Annuler"
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+     #annuler {
+        display: block;
+        margin: auto;
+        width: 9em;
+     }
+
+</style>
+</head>
+
+<body>
+<div id="editor"></div>
+
+    <div id="task">
+        <h1>Travail concurrent</h1>
+        <div id="tabsContainer"></div>
+        <div id="taskContent">
+            <div id="zone_1">
+                <div class="consigne">
+                    <p>
+                       La grille contient <span class="easy medium">2</span><span class="hard">4</span> robots, représentés par des flèches avec des numéros.
+                    </p>
+                    <p>
+                       <span class="easy">Chaque robot est contrôlé par un programme.</span>
+                       <span class="medium hard">Les robots sont tous contrôlés par le même programme.</span>
+                    </p>
+
+                    <p class="easy medium">
+                       Exécutez les instructions des robots afin d'amener le robot 1 à s'écraser dans le robot 2.
+                    </p>
+                    <p class="hard">
+                        Exécutez les instructions des robots afin d'atteindre une situation où <b>tous les
+                        robots sont bloqués</b> avant d'atteindre les cases vertes.
+                    </p>
+
+                    <p>
+                       Pour cela, cliquez sur les boutons gris dans l'ordre que vous souhaitez.
+                    </p>
+                </div>
+            </div>
+            <div id="zone_2">
+                <div id="paper"></div>
+            </div>
+            <!-- <input type="button" value="Annuler" id="annuler" /> -->
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>Solution</h2>
+
+         <div class="easy">
+           <p>La collision entre le robot <b>1</b> et le robot <b>2</b> ne peut avoir lieu que sur l'intersection de leurs trajectoires.</p>
+           <img src="sol_easy_1.png">
+           <p>On commence donc par faire avancer le robot <b>2</b> jusqu'à ce point de collision. Puis on fait avancer le robot <b>1</b> jusqu'à ce qu'il s'écrase dans le robot <b>2</b>.</p>
+           <img src="sol_easy_2.png">
+           <p>En résumé, pour résoudre le sujet, il faut cliquer successivement sur les boutons : <b>2, 2, 1, 1, 1, 1, 1</b>.</p>
+         </div>
+
+         <div class="medium">
+           <p>Si on amène d'abord le robot <b>2</b> jusqu'au point de collision des deux robots, puis qu'on avance le robot <b>1</b>, alors celui-ci va se retrouver bloqué devant le robot <b>2</b> et refusera d'avancer. En effet, l'instruction à l'étape 1 indique que s'il y a un robot devant il faut aller à l'étape 3, et l'exécution de l'étape 3 ramène à l'étape 1.</p>
+           <img src="sol_medium_0.png" style="width:650px">
+
+           <p>Il faut donc procéder autrement. On amène d'abord le robot <b>1</b> jusqu'au point de collision. On exécute l'instruction de l'étape 1 à un moment où le robot <b>1</b> n'a rien devant lui. Ainsi, le robot <b>1</b> est prêt à exécuter l'étape 2, qui consiste à avancer sans se poser de questions. </p>
+           <img src="sol_medium_1.png" style="width:650px">
+            
+           <p>On peut alors amener le robot <b>2</b> au point de collision, puis exécuter une étape pour le robot <b>1</b> afin de le faire avancer sur le robot <b>2</b>.</p>
+           <img src="sol_medium_2.png" style="width:650px"> 
+           
+           <p>En résumé, pour résoudre le sujet, il faut cliquer successivement sur les boutons : <b>1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>Pour coincer les robots, il faut mettre tous les robots dans une position où ils ne sont plus qu'à une seule case de la position dans laquelle il vont se retrouver coincés les uns par les autres, et mettre tous leurs programmes à l'étape 2.</p>
+           <p>En exécutant le bon nombre d'étapes indépendamment pour chaque robot, on peut atteindre cette situation :</p>
+           <img src="sol_hard_1.png" style="width:650px">
+           <p>À partir de là, il ne reste plus qu'à exécuter une étape pour chaque robot, et ils se retrouvent tous coincés.</p>
+           <img src="sol_hard_2.png" style="width:215px">
+           <p>En résumé, pour résoudre le sujet, il faut cliquer successivement sur les boutons : <b>1, 1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 1, 2, 3, 4</b>.</p>
+         </div>
+
+
+        <h2>C'est de l'informatique !</h2>
+    </div>
+    <!-- task-solution -->
+</body>
+
+</html>

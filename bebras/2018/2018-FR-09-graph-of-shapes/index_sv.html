@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-09-graph-of-shapes</title>
+      <script>
+           window.stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "sv",
+            "version": "sv.01",
+            "authors": "",
+            "translators": ["Fredrik Jansson"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var instructions = "<br/> Klicka på rutorna för att ändra figurer.";
+         var taskStrings = {
+             success: "Bravo, du klarade det!",
+             errorArrivedEarly: "Bert Bäver har kommit hem för tidigt. Det finns figurer kvar i listan med instruktioner." + instructions,
+             errorOneNotGood: "Figuren i pilen framför Bert Bäver är inte samma som nästa figur i instruktionerna." + instructions,
+             errorSeveralNotGood: "Ingen av figurerna i pilarna framför Bert Bäver är samma som nästa figur i instruktionerna." + instructions,
+             errorMultiplePath: "Flera pilar framför Bert Bäver har samma figurer som nästa figur i instruktionerna. Bert Bäver vet inte vart han ska gå." + instructions,
+             instructions: "Instruktioner :",
+             tryButton: "Starta",
+             stopButton: "Stoppa",
+             validateAnswer: "Testa",
+             mustFillAll: "Det finns fortfarande gråa rutor kvar. Klicka på dem för att fylla dem med figurer. "
+         };
+      </script>
+      <script type="text/javascript" src="shape-paths.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #graph path, #graph rect
+         {
+            cursor: pointer;
+         }
+         #graph {
+            text-align: center;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Dekorerad väg</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">       
+               <div class="consigne">
+            <p>Klicka på alla gråa rutor för att fylla dem med figurer.</p>
+            <p>Bert Bäver kommer att följa pilarna på kartan enligt instruktionerna, som är en följd av figurer.</p>
+            <p style="margin-bottom:0.3em">Målet för Bert Bäver är att nå huset när han har följt den sista instruktionen, men inte innan dess.</p>
+            </div>
+            </div>
+            <div id="zone_2">
+               <div id="graph"></div>
+               <div id="topBar"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         <img id="castor" src="castor.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Lösning</h2>
+         
+
+         <div class="easy">
+           <p>Instruktionerna består av fem olika figurer. Bert Bäver måste alltså använda den övre vägen, med fem pilar, och inte den undre med bara 4 pilar.</p>
+           <p>På den övre vägen placerar man de fem figurerna på var sin pil, i rätt ordning.</p>
+           <img src="sol_easy_1.png">
+           <p>I rutorna på den undre vägen kan man lägga vilka figurer som helst, bara man ser till att inte placera en grön cirkel precis efter första vägkorsningen, eftersom det då blir oklart vilken väg Bert Bäver ska välja. Detta är t.ex en lösning:</p>
+           <img src="sol_easy_2.png">
+         </div>
+
+         <div class="medium">
+           <p>På denna väg finns två "öglor": en uppåt och en neråt. Om man försöker använda den nedre öglan först, får man problem.</p>
+           <img src="sol_medium_1.png">
+           <p>Nästa triangel enligt instruktionerna tvingar Bert Bäver att gå in i samma ögla en andra gång, men efter ett tag stämmer inte instruktionerna längre.</p>
+
+           <p>Man måste alltså leda Bert Bäver genom den övre öglan först:</p>
+           <img src="sol_medium_2.png">
+           <p>Sedan kan han gå via den undre öglan och göra ytterligare ett varv i den övre innan han når målet.</p>
+           <img src="sol_medium_3.png">
+         </div>
+
+         <div class="hard">
+           <p>I instruktionerna finns en delsekvens som upprepas två gånger (stjärna, triangel, triangel, stjärna), sedan följer en ensam stjärna innan en ny upprepning två gånger av sekvensen (cirkel, cirkel, triangel). Vi börjar med att lägga den första sekvensen på den nedre "öglan" av fyra pilar.</p>
+           <img src="sol_hard_1.png">
+           <p>Man kan fortsätta genom att lägga nästa upprepade sekvens längs de tre pilarna upptill till höger. Bert Bäver kan nu gå två varv i vardera öglan innan han via en stjärna når målet. Öglan uppe till vänster används inte alls, utan där kan man lägga vilka figurer man vill, bara de inte leder till missförstånd. Här är en exempellösning:</p>
+           <img src="sol_hard_2.png">
+         </div>
+
+
+
+      <!-- description of the solution -->
+         <h2>Det är datavetenskap!</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+</html>
+

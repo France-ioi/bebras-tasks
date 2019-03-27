@@ -1,0 +1,524 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-AR-01-recursive-split</title>
+         <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "ar",
+            "version": "ar.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": "Eslam Wageed",
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+
+    <script type="text/javascript">
+        var taskStrings = {
+            success: ".أحسنت، الإجابة صحيحة",
+            almost: ".لا تتطابق النتيجة تمامًا مع الهدف ، ولكنك لا تزال تحصل على نقاط",
+            error: ". لا تتطابق النتيجة تمامًا مع الهدف ",
+            };
+    </script>
+
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+
+    /* Layout */
+    /* screen < 1100px : 1 seule colonne; */
+        /*==================
+            Generic elements
+        ==================*/
+        .head-title {
+            text-align: center;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0px;
+        }
+        .img-arrow {
+            width: 60px;
+            height: 50px;
+            display: block;
+            margin: 40px 0 40px 0;
+        }
+        /* grid */
+        .situation {
+            width: 210px;
+            height: 210px;
+        }
+
+        .situation > div {
+            height: 100%;
+        }
+        #result .situation {
+            position: relative;
+            float: left;
+        }
+        .background-0 {
+            background-color: white;
+        }
+
+        .background-1 {
+            background-color: #99FF99;
+        }
+
+        .background-2 {
+            background-color: #3333FF;
+        }
+        
+        /*==================
+            Animation / question elements
+        ==================*/
+        #anim_container table {
+            margin: auto;
+         }
+        #anim_container {
+            margin-top: 20px;
+            position: relative;
+        }
+        #anim_container:after {
+            content: " ";
+            display: table;
+            clear: both;
+        }
+
+        /* Transformation rules */
+        .transformation-area {
+            float: left;
+            position: relative;
+            display: table;
+            margin-right: 150px;
+            margin-bottom: 20px;
+        }
+        .transformation {
+            margin: 10px 10px 10px 10px;
+            display: table;
+            position: relative;
+        }
+        .transformation .before,
+        .transformation .middle-arrow,
+        .transformation .after,
+        .transformation .transformation-text {
+            display: table-cell;
+            vertical-align: top;
+        }
+        .transformation .before {
+            width: 100px;
+            height: auto;
+            position: relative;
+        }
+        .transformation .before > div {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            border: 1px solid black;
+            display: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        .transformation .after .column-wrapper {
+            width: 100px;
+            height: auto;
+            position: relative;
+        }
+        .transformation .after .column-wrapper > div {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            z-index: 2;
+            position: relative;
+        }
+        .transformation .after table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+
+        .transformation .after table td,
+        .transformation .after table th {
+            border: 1px solid black;
+            width: 50%;
+            height: 50%;
+        }
+        .transformation .title {
+            position: relative;
+            top: 0px;
+            left: 0;
+            margin-top: 0px;
+            /*top: 10px;*/
+            width: 100%;
+        }
+        .transformation-text span {
+            color: red;
+            text-align: left;
+            padding-left: 10px;
+            position: absolute;
+            width: 180px;
+        }
+        .easy.transformation-text span {
+            top: 175px;
+        }
+        .medium.transformation-text span, .hard.transformation-text span {
+            top: 135px;
+        }
+        .transformation-bracket {
+           position: relative;
+           width: 10px;
+           margin-left: 5px;
+           border-right: 2px solid green;
+           border-top: 2px solid green;
+           border-bottom: 2px solid green;
+        }
+        .easy.transformation-bracket {
+           top: 115px;
+           height: 174px;
+        }
+        .medium.transformation-bracket, .hard.transformation-bracket {
+           top: 23px;
+           height: 266px;
+        }
+
+        /* Goal */
+        .grid-container {
+            /*float: left;*/
+            /*margin-bottom: 54px;  same as .transformation-area */
+            position: absolute;
+            right: 60px;
+            top: 0px;
+            box-sizing: border-box;
+        }
+        #objective {
+           margin-top: 10px;
+        }
+        #objective table {
+            border-collapse: collapse;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            border: none;
+            table-layout: fixed;
+        }
+        #objective table td,
+        #objective table th {
+            border: 1px solid black;
+            width: 25%;
+            height: 25%;
+        }
+        #objective.hard_table table td,
+        #objective.hard_table table th {
+            width: 12.5%;
+            height: 12.5%;
+        }
+
+        /*==================
+            Result
+        ==================*/
+
+        #result {
+            padding-bottom: 40px;
+        }
+        .result-area {
+            display: table;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .result-area > div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .sub-title {
+            position: absolute;
+            text-align: center;
+            height: 20px;
+            top: -30px;
+            left: 0;
+            right: 0;
+        }
+        .masked {
+            position: absolute;
+            text-align: center;
+            height: 20px;
+            top: 80px;
+            left: 0;
+            right: 0;
+            color: gray;
+        }
+        .result-title {
+            display: block;
+            position: absolute;
+            height: 20px;
+            top: -55px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+
+        .initial-situation {
+            position: relative;
+            width: 210px;
+            height: 210px;
+            border: 1px solid;
+            float: left;
+        }
+        .after1-situation table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+        .after1-situation table td,
+        .after1-situation table th {
+            border: 1px solid black;
+            width: 50%;
+            height: 50%;
+        }
+        .after2-situation table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+        .after2-situation table td,
+        .after2-situation table th {
+            border: 1px solid black;
+            width: 25%;
+            height: 25%;
+        }
+        .after3-situation table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+        .after3-situation table td,
+        .after3-situation table th {
+            border: 1px solid black;
+            width: 12.5%;
+            height: 12.5%;
+        }
+        .situation-hidden {
+            width: 45%;
+            border: 1px solid;
+            border-top: 1px dashed;
+            border-bottom: 1px dashed;
+            float: left;
+            position: relative;
+        }
+        .situation-hidden + .situation-hidden {
+            margin-left: 5%;
+        }
+        .situation-hidden .sub-title {
+            margin-top: -14px;
+        }
+        .hard.transformation {
+            margin-bottom: 23px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="task">
+        <h1>تلوين متكرر</h1>
+
+        <div id="tabsContainer"></div>
+
+        <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                   .نبدأ بمربع أبيض ، نلونه حسب القواعد التي يمكنك تغييرها 
+                  </p>
+                  <p class="easy medium">
+                    .لون أولا هذا المربع حسب 4 مربعات خضراء أو زرقاء 
+                  </p>
+                  <p class="easy medium" >
+                      لوّن بعد ذلك كلّ مربع من هذه المربعات حسب 4 مربعات أصغر,<span class="easy">بالأبيض</span> الأخضر أو الأزرق
+                  </p>
+                  <p class="hard">
+                     .نلون أولا الأبيض إلى 4 مربعات بيضاء ، خضراء أو زرقاء
+                  </p>                  
+                  <p class="hard">
+                     .نلون بعد ذلك كلّا من المربعات إلى 4 مربعات أصغر بيضاء ، خضراء أو زرقاء
+                  </p>                  
+                 <p class="hard">
+                     .نلون بعد ذلك كلّا من المربعات الصغيرة  إلى 4 مربعات أصغر بيضاء ، خضراء أو زرقاء
+                  </p>                  
+                  <p>
+                     .يمكن تغيير قواعد التلوين للحصول على الهدف
+                  </p>
+               </div>
+            </div>
+
+            <div id="zone_2">
+                <div id="anim_container">
+                    <div class="transformation-area">
+                        <span class="head-title">قواعد التلوين </span>
+
+                        <div class="easy medium transformation">
+                            <div class="before">
+                                <span class="title">قبل</span>
+                                <div class="background-0"></div>
+                                <div class="background-1"></div>
+                                <div class="background-2"></div>
+                            </div>
+                            <div class="middle-arrow">
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                            </div>
+                            <div class="after">
+                                <span class="title">بعد</span>
+                                <div class="column-wrapper">
+                                    <div class="option-1"></div>
+                                    <div class="option-2"></div>
+                                    <div class="option-3"></div>
+                                </div>
+                            </div>
+                            <div class="easy transformation-bracket"></div>
+                            <div class="medium transformation-bracket"></div>
+                            <div class="easy transformation-text"><span>انقر هنا</span></div>
+                            <div class="medium transformation-text"><span>انقر هنا</span></div>
+                        </div>
+
+                        <div class="hard transformation">
+                            <div class="before">
+                                <span class="title">قبل</span>
+                                <div class="background-0"></div>
+                                <div class="background-1"></div>
+                                <div class="background-2"></div>
+                            </div>
+                            <div class="middle-arrow">
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                            </div>
+                            <div class="after">
+                                <span class="title">بعد</span>
+                                <div class="column-wrapper">
+                                    <div class="option-1"></div>
+                                    <div class="option-2"></div>
+                                    <div class="option-3"></div>
+                                </div>
+                            </div>
+                            <div class="hard transformation-bracket"></div>
+                            <div class="hard transformation-text"><span>انقر هنا</span></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <span class="head-title">الهدف</span>
+                        <div id="objective" class="situation"></div>
+                    </div>
+                </div>
+
+                <div id="result">
+                    <div class="result-area">
+                    <!-- Initial state -->
+                        <div class="initial-situation">
+                            <span class="sub-title">
+                                مربع أبيض للإنطلاق
+                            </span>
+                        </div>
+                        <div class="middle-arrow">
+                            <img src="arrow.jpg" class="img-arrow" />
+                        </div>
+                        <!-- State after 1 transformation -->
+                        <div class="situation easy medium">
+                            <span class="sub-title">
+                                بعد التلوين الأول
+                            </span>
+                            <div class="after1-situation"></div>
+                        </div>
+                        <div class="hard">
+                            <div class="situation">
+                                <div class="situation-hidden">
+                                    <span class="sub-title">
+                                        بعد تلوين واحد
+                                    </span>
+                                    <span class="masked">
+                                        رسم مخفي 
+                                    </span>
+                                </div>
+
+                                <div class="situation-hidden">
+                                    <span class="sub-title">
+                                        بعد تلوينيين إثنين
+                                    </span>
+                                    <span class="masked">
+                                        رسم مخفي
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="middle-arrow">
+                            <img src="arrow.jpg" class="img-arrow" />
+                        </div>
+                        <!-- Final state -->
+                        <div class="situation easy medium">
+                            <span class="result-title">
+                                النتيجة
+                            </span>
+                            <span class="sub-title">
+                                نتيجة بعد التلوين الثاني
+                            </span>
+                            <div class="after2-situation"></div>
+                        </div>
+
+                        <div class="situation hard">
+                            <span class="result-title">
+                                النتيجة
+                            </span>
+                            <span class="sub-title">
+                                نتيجة بعد التلوين الثالث
+                            </span>
+                            <div class="after3-situation"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+    <!-- task -->
+
+    <div id="solution">
+        <h2>Solution</h2>
+
+        <h2>It's infromatics!</h2>
+
+    </div>
+
+    <!-- task-solution -->
+</body>
+
+</html>

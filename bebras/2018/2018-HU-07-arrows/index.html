@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-HU-07-arrows</title>
+      <script>
+           window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            errorWhiteArrow: "Dans la case rouge se trouve une flèche qui n'est pas coloriée.",
+            errorWrongArrow: function(arrowColor, nbPointedArrows, nbRequiredArrows) {
+               var pluralRequired = "";
+               if (nbRequiredArrows > 1) {
+                  pluralRequired = "s";
+               }
+               var pluralPointed = "";
+               if (nbPointedArrows > 1) {
+                  pluralPointed = "s";
+               }
+               return "Dans la case rouge se trouve une flèche " + arrowColor + " qui devrait pointer en direction de " + nbRequiredArrows + " flèche" + pluralRequired + " " + arrowColor + pluralRequired + ",<br/> mais qui pointe en direction de " + nbPointedArrows + " flèche" + pluralPointed + " " + arrowColor + pluralPointed + ".";
+            },
+            blue: "bleue",
+            yellow: "jaune",
+            fixedArrow: "La flèche centrale ne peut pas être modifiée.",
+            blueSymbol: "B",
+            yellowSymbol: "J",
+            undo: "Annuler"            
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         ul {
+            list-style-type: none;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         li
+         {
+            margin-bottom: 5px;
+         }
+         li * {
+            display: inline-block;
+         }
+         .instruction_arrow {
+            position:relative;
+            top:15px;
+         }
+         ul {
+            position:relative;
+            top:-15px;
+         }
+         #instructions {
+            margin-left: 1em;
+         }
+         #instructions td {
+            vertical-align: top;
+            padding-bottom: 1em;
+            padding-right: 0.5em;
+         }
+         .very_hard {
+            display: none;
+         }
+         .largeScreen #example1 {
+            display:none;
+         }
+         #example2 {
+            display:none;
+         }
+         .largeScreen #example2 {
+            display:block;
+         }
+         #solution td {
+            text-align: left;
+         }
+
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Flèches indicatrices</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">
+               <div class="consigne">
+                  <div id="example1" style="float:right"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Exemple</b><br/><img src="example.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                  <p>Coloriez toutes les flèches de la grille en bleu et jaune, en respectant <span class="easy medium very_hard">la règle suivante</span><span class="hard">les deux règles suivantes</span> :</p>
+                  <p class="easy medium very_hard"><span style="font-weight:bold">Dans la direction pointée par une flèche, il y a exactement <span class="easy medium">une flèche</span><span class="very_hard">deux flèches</span> de la même couleur.</span></p>
+                  <table id="instructions" class="hard">
+                     <tr>
+                        <td><span id="instructions_blue" class="instruction_arrow"></span></td>
+                        <td><br/> Une flèche bleue indique qu'il y a exactement <b>deux autres flèches</b> bleues dans cette direction.</td>
+                     </tr>
+                     <tr>
+                        <td><span id="instructions_yellow" class="instruction_arrow"></span></td>
+                        <td><br/> Une flèche jaune indique qu'il y a exactement <b>une autre flèche </b> jaune dans cette direction.</td>
+                     </tr>
+                  </table>
+                  <p>Cliquez sur une flèche pour changer sa couleur.</p>
+                  <div id="example2"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Exemple</b><br/><img src="example.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                  <div style="clear:both"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center style="clear:both"><table>
+               <tr>
+               <td><div id="grid"></div></td>
+               </tr>
+               </table></center>
+            </div>
+         </div>
+            <img src="icon.png" style="display:none">
+         </div>
+         <div id="solution">
+            <h2>Solution</h2>
+         <!-- description of the solution -->
+
+         <div class="easy">
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_easy_1.png"></td>
+               <td>La flèche donnée au départ indique qu'il faut placer une flèche bleue à sa droite.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_2.png"></td>
+               <td>La flèche que l'on vient d'ajouter indique qu'il faut placer une flèche bleue en-dessous.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_3.png"></td>
+               <td>Dans la colonne de droite, la flèche bleue que l'on vient d'ajouter dans le coin en bas pointe vers la flèche bleue juste au-dessus. Il y a donc déjà une flèche bleue dans sa direction. Pour éviter d'en avoir une deuxième, il faut forcément placer une flèche jaune en haut de cette colonne.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_4.png"></td>
+               <td>La flèche au milieu de la rangée du haut pointe vers une flèche jaune. Il faut donc que cette flèche soit jaune.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_5.png"></td>
+               <td>Sur la rangée du haut, la flèche jaune tout à droite pointe déjà vers une flèche jaune, celle du milieu. Pour éviter qu'elle ne pointe vers deux flèches jaunes, il faut forcément placer une flèche bleue tout en haut à gauche.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_6.png"></td>
+               <td>La flèche au milieu de la colonne de gauche pointe vers une flèche bleue. Il faut donc que cette flèche soit bleue.</td>
+            </tr>
+               <td><img src="sol_easy_7.png"></td>
+               <td>Dans la colonne de gauche, la flèche bleue d'en haut pointe vers la flèche bleue juste en-dessous. Il y a donc déjà une flèche bleue dans sa direction. Pour éviter d'en avoir une deuxième, il faut forcément placer une flèche jaune en bas de cette colonne.</td>
+            </tr>
+               <td><img src="sol_easy_8.png"></td>
+               <td>La flèche jaune en bas à gauche doit pointer vers une flèche jaune. Il faut donc en placer une dans la case restante de la rangée du bas.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_easy_9.png"></td>
+               <td>C'est fini !</td>
+            </tr>
+            </table>
+         </div>
+
+         <div class="medium">
+            <p>Avant de commencer, on peut remarquer que le problème est "symétrique" entre les couleurs jaune et bleue, dans le sens où si l'on a une solution au problème, alors en changeant toutes les flèches bleues par des flèches jaunes et toutes les flèches jaunes par des flèches bleues, on obtient une autre solution. De cette remarque, on peut déduire que l'on est libre de choisir comme on veut la couleur de la première flèche que l'on pose : ça ne peut pas être un mauvais choix qui nous empêcherait d'aboutir à une solution. </p>
+            <p>Dans la suite, on va toujours commencer par placer une flèche bleue. </p>
+            <p>On va essayer différents départs possibles, dans le but d'en trouver un qui nous "oblige" à poser des flèches de certaines couleurs. Ainsi, on pourra progresser dans le coloriage des flèches sans jamais se tromper.</p>
+            <p><b>Première tentative.</b> Supposons d'abord que l'on commence par remplir la première rangée. Il y a deux manières différentes de la remplir tout en respectant les règles de coloriage :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_b1.png"></td>
+               <td>Une première manière.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_b2.png"></td>
+               <td>Une seconde manière.</td>
+            </tr>
+            </table>
+            <p>Vu qu'il y a deux possibilités, on ne peut pas être sûr de laquelle prendre. Essayons autrement.</p>
+
+            <p><b>Deuxième tentative.</b> Supposons maintenant que l'on commence par remplir la dernière rangée. Là encore, il y a deux manières différentes de la remplir tout en respectant les règles de coloriage :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_c1.png"></td>
+               <td>Une première manière.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_c2.png"></td>
+               <td>Une seconde manière.</td>
+            </tr>
+            </table>
+            <p>Vu qu'il y a deux possibilités, on ne peut pas être sûr de laquelle prendre. Essayons une troisième approche.</p>
+
+            <p><b>Troisième tentative.</b> Supposons maintenant que l'on commence par remplir la diagonale montante, qui est intéressante car elle comporte également deux flèches qui pointent l'une vers l'autre. 
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_d1.png"></td>
+               <td>Commençons, comme expliqué précédemment, par poser une flèche bleue.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_d2.png"></td>
+               <td>Si on pose une deuxième flèche bleue, on est coincé, car la troisième case de la diagonale ne peut être ni jaune, ni bleue, car la flèche qu'elle contient pointe vers deux flèches bleues.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_1.png"></td>
+               <td>On en déduit que la seconde flèche doit être jaune (puisqu'elle ne peut pas être bleue), puis que la troisième doit être bleue (puisque la flèche bleue du coin doit pointer vers une autre flèche bleue).</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_2.png"></td>
+               <td>La flèche jaune du milieu impose deux autres flèches jaunes.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_3.png"></td>
+               <td>Dans la colonne de droite, la flèche du milieu ne peut pas être jaune, car elle pointe vers au moins deux flèches jaunes. On la colorie donc en bleu.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_4.png"></td>
+               <td>La dernière flèche bleue ajoutée impose deux nouvelles flèches bleues.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_5.png"></td>
+               <td>Sur la rangée du bas, la seconde flèche ne peut pas être bleue, sinon la troisième flèche pointerait vers deux flèches bleues. Donc la seconde flèche est à colorier en jaune.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_6.png"></td>
+               <td>L'ajout de cette flèche jaune impose deux nouvelles flèches jaunes.</td>
+            </tr>
+               <td><img src="sol_medium_7.png"></td>
+               <td>La dernière flèche doit être bleue, pour que la flèche située dans le coin en haut à droite pointe vers une seule flèche jaune. <br/><br/>C'est fini !</td>
+            </tr>
+
+            </table>
+
+
+         </div>
+
+         <div class="hard">
+            <p>Il est judicieux de commencer par chercher à remplir une ligne avec le maximum de "contraintes", comme par exemple des flèches qui se pointent les unes vers les autres. Étudions par exemple la diagonale montante. La case en bas à gauche peut être jaune ou bleue.</p>
+
+            <p><b>Première tentative.</b> Essayons de colorier la case en bas à gauche en jaune :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_b1.png"></td>
+               <td>Si la case suivante dans la direction de la flèche jaune était également jaune, on serait coincé pour la flèche suivante, car il nous faudrait une flèche <b>2J</b>, or on n'en n'a pas. Donc la case suivante est bleue.<br/><br/> La flèche suivante sur la diagonale pointe vers une flèche jaune et une flèche bleue, il faut donc la colorier <b>1J</b> (car <b>2B</b> n'est pas valide, et on n'a pas de flèche <b>1B</b>). </td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b2.png"></td>
+               <td>La flèche <b>2B</b> nous impose deux flèches bleues.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b3.png"></td>
+               <td>La flèche <b>2B</b> du milieu nous impose deux autres flèches bleues.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b4.png"></td>
+               <td>À ce stade, on est coincé, car la flèche <b>2B</b> encadrée en rouge ne peut pas pointer vers deux flèches bleues.</td>
+            </tr>
+            </table>
+
+            <p><b>Deuxième tentative.</b> Comme la flèche en bas à gauche ne peut pas être jaune, elle doit donc être bleue.
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_0.png"></td>
+               <td>Commençons donc avec un coin bleu.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_c2.png"></td>
+               <td>Si la troisième flèche de la diagonale montante était jaune, alors on serait coincé, car il faudrait mettre une flèche jaune sur la case située entre les deux flèches colorées, et on ne pourrait plus alors placer deux flèches bleues sur la diagonale comme l'indique la flèche <b>2B</b> du coin de départ.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_1.png"></td>
+               <td>On en déduit que la troisième flèche doit être bleue.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_2.png"></td>
+               <td>Cette seconde flèche bleue doit pointer vers deux flèches bleues, donc on colorie en bleue la flèche du milieu.<br/><br/> Ensuite, pour éviter que la flèche du coin en bas à gauche pointe vers trois flèches bleues, il faut colorier en jaune la flèche du coin en haut à droite.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_3.png"></td>
+               <td>La deuxième flèche <b>2B</b> impose deux nouvelles flèches bleues.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_4.png"></td>
+               <td>Une de ces nouvelles flèches impose encore deux nouvelles flèches bleues.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_5.png"></td>
+               <td>On en déduit encore deux flèches bleues supplémentaires.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_6.png"></td>
+               <td>Sur la troisième rangée, pour éviter d'avoir trois flèches bleues, il faut que la flèche tout à droite soit jaune.<br/><br/>
+               Cette flèche <b>1J</b> pointe déjà vers une autre flèche jaune, il faut donc mettre une flèche bleue dans le trou de la colonne de droite.</td>
+            </tr>
+               <td><img src="sol_hard_7.png"></td>
+               <td>La flèche <b>2B</b> ajoutée pointe déjà vers deux flèches bleues, il faut donc compléter la seconde rangée avec une flèche jaune.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_8.png"></td>
+               <td>L'ajout de cette flèche jaune impose deux nouvelles flèches jaunes.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_9.png"></td>
+               <td>La dernière flèche doit être jaune, pour que la flèche du coin en bas à droite pointe vers seulement deux flèches bleues. <br/><br/>C'est fini !</td>
+            </tr>
+
+            </table>
+
+
+
+
+
+
+
+
+
+            <h2>C'est de l'informatique !</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+
+</html>

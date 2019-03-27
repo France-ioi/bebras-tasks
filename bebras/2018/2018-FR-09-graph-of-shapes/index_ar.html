@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+         <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+    <title>2018-AR-09-graph-of-shapes</title>
+    <link class="module" rel="stylesheet" href="../../modules/pemFioi/taskStyles-0.1_M.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script>
+      window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+        'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0']);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "",
+        "language": "ar",
+        "version": "ar.01",
+        "authors": "",
+        "translators": "Eslam Wageed",
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var instructions = "<br/> .انقر على كل المربعات الرمادية لوضع الأشكال";
+         var taskStrings = {
+            success: ".أحسنت، الإجابة صحيحة",
+            errorArrivedEarly: ".وصل أحمد الى المنزل في وقت قريب جدا ، لا تزال هناك أشكال في قائمة التعليمات" + instructions,
+            errorOneNotGood: ".لا يتطابق الشكل المرسوم على السهم الموجود أمام أحمد مع شكل التعليمة التالية" + instructions,
+            errorSeveralNotGood: ".لا يتطابق أي من الأشكال الموجودة على الأسهم أمام أحمد مع شكل التعليمات" + instructions,
+            errorMultiplePath: "أحمد أمام العديد من الأسهم التي تتوافق مع شكل التعليمة التالية. أحمد لا يعرف إلى أين يذهبون" + instructions,
+            instructions: ":التعليمات",
+            tryButton: "ابدأ",
+            stopButton: "توقف",
+            validateAnswer: "جرب",
+            mustFillAll: ".تبقى مربعات رمادية. اضغط عليها لوضع الأشكال"
+         };
+    </script>
+    <script type="text/javascript" src="shape-paths.js"></script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+         #graph path, #graph rect
+         {
+            cursor: pointer;
+         }
+         #graph {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+    </style>
+  </head>
+  <body>
+    <div id="task">
+      <h1>مسار مزخرف</h1>
+      <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+      <div id="taskContent"> 
+        <div id="zone_1">       <!-- will contain the content of the task -->
+          <div class="consigne">
+            <p> .انقر على كل المربعات الرمادية لوضع الأشكال</p>
+            <p>احمد يتبع السّهام الموجودة داخل المسار حسب التعليمات المبينة بواسطة سلسلة الأشكال المعروضة أسفله</p>
+            <p>.حذاري! لا يمكن لأحمد أن يجد أمامه سهمين لنفس الشكل </p>
+            <p style="margin-bottom:0.3em">.الهدف هو وصول أحمد إلى المنزل بعد أن يتبع سلسلة التعليمات و ليس قبل ذلك</p>
+          </div>
+        </div>
+        <div id="zone_2">
+          <div id="graph"></div>
+          <div id="topBar"></div>
+        </div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img id="castor" src="castor.png" style="display:none">
+      <img id="house" src="house.png" style="display:none">
+    </div><!-- #task-->
+
+    <div id="solution">
+      <h2>Solution</h2>
+      <!-- description of the solution -->
+      <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+    </div>
+  </body>
+</html>

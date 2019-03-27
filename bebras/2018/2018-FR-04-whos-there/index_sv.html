@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+
+   <head>
+      <meta charset="utf-8"></meta>
+      <title>2018-FR-04-whos-there</title>
+      <script>
+         window.stringsLanguage = 'sv';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+            ]);
+      </script>
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "sv",
+            "version": "sv.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": ["Fredrik Jansson"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+         };
+      </script>
+      <script type="text/javascript">
+       var shapeGroup = function (isPair, isFirst) {
+         var s = "3 ";
+         s += (isFirst) ? "" : "nya identiska ";
+         s += (isPair) ? "pairs of " : "";
+         s += "figurer";
+         return s;
+      }
+      var taskStrings = {
+            start: "Starta",
+            restart: "Starta om",
+            inHouse: "Ingång",
+            outHouse: "Utgång",
+            clickGroup: function (isPair, isFirst) {
+               return "Klicka här när huset innehåller\n " + shapeGroup(isPair, isFirst); 
+               },
+            resume: function (isPair, isFirst) {
+               return "Det är bra! Klicka här för att fortsätta\noch hitta " + shapeGroup(isPair, isFirst); 
+               },
+            errorWrong: function (isPair, isFirst) {
+               return "Huset innehållet inte " + shapeGroup(isPair, isFirst) + "."; 
+               },
+            errorMiss: function (isPair, isFirst) { 
+               return "Du missade en grupp av " + shapeGroup(isPair, isFirst) + "."; 
+               },
+            shapeInHouse: "Här är figurerna som just nu är i huset:",
+            shapeList: "Här är figurerna som kan komma in i huset:",
+            shapeListInPairs: "Här är listan på de olika figurerna som kan komma in i huset:",
+            suboptimal: "Du hittade inte tre grupper.",
+            drawInCanvas: "För att få hjälp att komma ihåg, rita prickar eller linjer här.",
+            success: "Bravo",
+            partial: "Du har fått några poäng.",
+            failure: "Du har inte fått poäng."
+         };
+      </script>
+      <script type="text/javascript" src="raphael.sketchpad.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .bold {
+           font-weight: bold;
+         }
+         #canvas {
+           width: 600px;
+           margin: auto;
+           border: 1px solid black;
+         }
+         #canvasButtons {
+           text-align: center;
+           margin: 20px 0;
+         }
+         #canvasButtons button {
+           padding: 5px 20px;
+         } 
+         #valider {
+           display: block;
+           margin: auto;
+           width: 9em;
+         }
+      </style>
+   </head>
+
+   <body>
+      <div id="editor"></div>
+
+      <div id="task">
+         <h1>Vem där?</h1>
+         <div id="tabsContainer"></div>
+
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <!-- <p id="difficultyWarning" class="hard"></p> -->
+		  <p>När du klickar på den stora grå knappen så kommer figurer att gå in i <span class="medium bold"> eller lämna</span> huset, <span class="easy medium"> en i taget</span><span class="hard"> i par</span>.</p>
+                  <p>Som hjälp för minnet kan du rita prickar eller linjer i ritytan.</p> 
+                  <p>I början är huset tomt.</p>
+                  <p>Varje gång det är 3 lika <span class="hard bold">par av figurer</span><span class="easy medium">figurer</span> i huset, klicka på den stora grå knappen.
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="housePaper"></div>
+               <div id="shapeListPaper"></div>
+               <div id="canvas"></div>
+               <div id="canvasButtons">
+ <!--                 <button type="button" class="btn btn-default" id="undoTagButton">Undo</button>
+                  <button type="button" class="btn btn-default" id="redoTagButton">Redo</button>   -->
+               </div>
+            </div>
+         </div>
+         <img id="shape1" src="1.png" style="display:none">
+         <img id="shape2" src="2.png" style="display:none">
+         <img id="shape3" src="3.png" style="display:none">
+         <img id="shape4" src="4.png" style="display:none">
+         <img id="shape5" src="5.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+         <img id="arrow" src="arrow.png" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Lösning</h2>
+           <div class="easy">
+           <p>För varje figur som går in i huset kan man rita en prick under motsvarande bild.</p>
+           <p>Det kan t.ex. se ut så här:</p>
+           <img src="sol_easy1.png">
+           <p>och betyder att man har sett 1 romb, 3 kvadrater, 1 triangel, 3 sexhörningar och 2 stjärnor gå in i huset.</p>
+          </div>
+
+         <div class="medium">
+           <p>För varje figur som går in i huset kan man rita en prick under motsvarande bild. För varje figur som lämnar huset kan man sedan stryka ett streck över pricken.</p>
+           <p>Det kan t.ex. se ut så här: </p>
+           <img src="sol_medium1.png">
+           <p>Tolkningen är att man har sett 2 romber gå in, varav en gått ut igen, att man sett 4 kvadrater gå in varav 2 gått ut igen, att man sett 4 trianglar gå in varav 3 gått ut igen, och att man har sett 4 sexhörningar gå in utan att någon av dem kom ut igen.</p>
+         </div>
+
+         <div class="hard">
+           <p>För att notera par av former som går in i huset finns det flera sätt. Här föjer tre användbara metoder.</p>
+           <p><b>Metod 1.</b> Här tecknar man innan man börjar bilder av alla möjliga par. Detta tar lite tid, eftersom man måste rita 6x2 figurer, men sedan är det mycket enkelt att markera varje par som går in i huset med en prick. Det kan se ut så här :</p>
+           <img src="sol_hard3.png">
+           <p><b>Metod 2.</b> Här kan man teckna bara 3 figurer i en lodrät rad för att få en "matris" där man kan markera paren. Det kan se ut så här:</p>
+           <img src="sol_hard2.png">
+           <p><b>Metod 3.</b> Här behövs ingen förberedelse, utan man försöker markera paren som går in i huset genom streck mellan motsvarande figurer. Det kan se ut så här, där ett kort streck förstås betyder ett par av två lika figurer:</p>
+           <img src="sol_hard1.png">
+           <p>Denna metod kräver lite mer omsorg än de övriga för att snabbt bestämma när huset innehåller precis tre identiska par. </p>
+
+         </div>
+<h2>Det är datavetenskap!</h2>
+      </div>
+      <!-- task-solution -->
+   </body>
+
+</html>

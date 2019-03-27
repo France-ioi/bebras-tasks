@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+   <head>
+   <meta charset="utf-8">
+   <title>2018-FR-06-encoded-path</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1'
+            ]);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+          "language": "sv",
+          "version": "sv.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": ["Fredrik Jansson"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: "Grattis, du klarade det!",
+            partialSuccess: "Du har klarat första delen av talföljden",
+            willGetPoints: " och kommer att få poäng. Fortsätt.",
+            secondPartIncorrect: ", men den andra delen är fel",
+            failure: "Din väg motsvarar inte den önskade vägen.",
+            notAdjacentToHead: "Dra eller klicka på en vit ruta bredvid den vita ringen.",
+            continuePath: "Gör färdigt din väg för att se slutet på talföljden",
+            yourTarget: "Önskad talföljd:",
+            yourSequence: "Din talföljd:",
+            masked: "Dold"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+        #animContainer {
+          text-align: center;
+        }
+        #anim {
+          display: inline-block;
+        }
+        #displayHelper_graderMessage {
+          min-height: 1em;
+          font-size: 18px;
+          margin-top: 0.2em;
+          margin-bottom: 0.2em;
+          text-align: center;
+          font-weight: bold;
+          color: red; 
+        }
+        #discoveredPaths {
+          margin-top: 5px;
+          text-align: center;
+        }
+        #discoveredPaths div {
+          margin: 5px;
+          display: inline-block;
+          *zoom: 1; /*IE6/7*/
+          *display: inline; /*IE6/7*/
+        }
+        .tablePath td {
+          padding-right: 10px;
+          padding-bottom: 10px;
+          height: 22px;
+        }
+        #comment {
+          font-weight: bold;
+          font-size: 18px;
+          color: orange;
+        }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Kodade vägar</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>En väg i rutnätet kan kodas som en följd av tal.</p>
+
+                  <p>Prova dig fram för att förstå vad de olika talen betyder, och rita ut vägen som ger den önskade talföljden.</p>
+
+                  <p>Dra eller klicka på rutorna för att utöka eller minska vägen.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="animContainer">
+                  <div id="anim"></div>
+                  <br/><br/>
+                  <div id="codes"></div>
+               </div>
+               <div style="height:30px">
+                  <span id="comment"></span>
+               </div>
+               <div id="displayHelper_graderMessage"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Lösning</h2>
+    <div class="easy">
+           <p>Vägen beskrivs som en sekvens av siffror enligt följande:</p>
+           <ul>
+           <li>Siffran <b>0</b> betyder att vägen fortsätter en ruta åt höger.</li>
+           <li>Siffran <b>1</b> betyder att vägen byter rad, uppåt om man är på nedre raden, eller neråt, om man är på övre raden.</li>
+           </ul>
+           <p>Sekvensen <b>0 1 0 0 1 0 1</b> motsvarar t.ex. förflyttningar åt <b>höger, ner, höger, höger, upp, höger, ner</b>.</p>
+           <p>Den väg som beskrivs av den önskade talföljden ser ut så här: </p>
+           <img src="sol_easy.png">
+         </div>
+
+         <div class="medium">
+           <p>Vägen beskrivs som en sekvens av siffror på följande sätt:</p>
+           <ul>
+           <li>Siffran <b>0</b> betyder att vägen fortsätter en ruta uppåt.</li>
+           <li>Siffran <b>1</b> betyder att vägen fortsätter en ruta åt höger.</li>
+           <li>Siffran <b>2</b> betyder att vägen fortsätter en ruta neråt.</li>
+           <li>Siffran <b>3</b> betyder att vägen fortsätter en ruta åt vänster.</li>
+           </ul>
+           <p>Sekvensen <b>1 2 3 2 1 1 0</b> motsvarar t.ex. förflyttningar åt <b>höger, ner, vänster, ner, höger, höger, upp</b>.</p>
+           <p>Den väg som beskrivs av den önskade talföljden ser ut så här: </p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Vägen beskrivs som en serie siffror på följande sätt:</p>
+           <ul>
+           <li>Siffran <b>0</b> betyder att vägen fortsätter en ruta framåt i sin gamla riktning.</li>
+           <li>Siffran <b>1</b> betyder att vägen svänger (i rät vinkel) åt höger jämfört med sin gamla riktning.</li>
+           <li>Siffran <b>2</b> betyder att vägen svänger (i rät vinkel) åt vänster jämfört med sin gamla riktning.</li>
+           </ul>
+           <p>Sekvensen <b>0 0 1 0 2 2 0</b> motsvarar t.ex. instruktionerna <b>gå framåt, gå framåt, sväng höger, gå framåt, sväng vänster, sväng vänster, gå framåt</b>.</p>
+           <p>Den väg som beskrivs av den önskade talföljden ser ut så här: </p>
+           <img src="sol_hard.png">
+         </div>
+
+
+
+         <h2>Det är datavetenskap!</h2>
+   
+
+     </div> <!-- task-solution -->
+   </body>
+</html>

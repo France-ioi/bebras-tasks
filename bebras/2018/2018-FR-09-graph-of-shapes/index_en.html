@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-09-graph-of-shapes</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var instructions = "<br/> Click on the squares to change the shapes.";
+         var taskStrings = {
+             success: "Congratulations, you have succeeded!",
+             errorArrivedEarly: "Beaver has arrived home too early, shapes remain in the instructions list." + instructions,
+             errorOneNotGood: "The shape on the arrow in front of Beaver doesn't match the shape of the next instruction." + instructions,
+             errorSeveralNotGood: "None of the shapes of the arrows in front of Beaver match the shape of the next instruction." + instructions,
+             errorMultiplePath: "Several arrows in front of Beaver have the same shape as the next instruction. Beaver doesn't know where to go." + instructions,
+             instructions: "Instructions :",
+             tryButton: "Start",
+             stopButton: "Stop",
+             validateAnswer: "Try",
+             mustFillAll: "There are still grey squares left. Click on them to fill them with a shape."
+         };
+      </script>
+      <script type="text/javascript" src="shape-paths.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #graph path, #graph rect
+         {
+            cursor: pointer;
+         }
+         #graph {
+            text-align: center;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Decorated path</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">       
+               <div class="consigne">
+            <p>Click on all the gray squares to place shapes in them.</p>
+            <p>Beaver will follow arrows of the map according to instructions described as the sequence of shapes shown below.</p>
+            <p>Beaver should at no time be facing two arrows with the same shape.</p>
+            <p style="margin-bottom:0.3em">The goal is for Beaver to reach the house after following the whole sequence of instructions, but not before.</p>
+            </div>
+            </div>
+            <div id="zone_2">
+               <div id="graph"></div>
+               <div id="topBar"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         <img id="castor" src="castor.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+         <!-- description of the solution -->
+         <h2>C'est de l'informatique !</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+</html>
+

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-FR-10-parallel-processing</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "fi",
+            "version": "fi.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+    
+    <script type="text/javascript">
+        var taskStrings = {
+            moveForward: "Liiku eteenpäin",
+            moveForwardIf: "Liiku eteenpäin, jos edessä\nolevassa ruudussa ei ole robottia",
+            turnLeft: "Käänny vasempaan",
+            turnRight: "Käänny oikeaan",
+            ifRobAhead: "Jos edessä olevassa ruudussa on\nrobotti, siirry askeleeseen 3",
+            ifRob2Ahead: "Jos jommassa kummassa edessä olevista\nkahdesta ruudusta on robotti, siirry askeleeseen 3",
+            ifWhiteCell: "Jos robotti on valkeassa ruudussa,\nsiirry askeleeseen 1",
+            end: "Ohjelman loppu",
+            execute: "Suorita tämä askel\n robotille ",
+            failureNoCrash: "Robotti 1 ei törmännyt robottiin 2. Yritä uudelleen.",
+            failureSwapped: "Robotti 2 törmäsi robottiin 1, kun pitäisi tapahtua päinvastoin. Yritä uudelleen.",
+            failureEndNoCrash: "Kaikki robotit suorittivat ohjelmansa loppuun, mutta robotti 1 ei törmännyt robottiin 2. Yritä uudelleen.",
+            failureEndNoStuck: "Kaikki robotit suorittivat ohjelmansa loppuun, kun niiden olisi sen sijaan pitänyt jäädä jumiin. Yritä uudelleen.",
+            success: "Onnittelut, ratkaisit tämän version!",
+            cellForward: "Robotti liikkui eteenpäin\nja ohjelma eteni\naskeleesta 2 \u27a1 3.",
+            cellReachEnd: "Robotti liikkui eteenpäin\nja ohjelma eteni\naskeleesta 3 \u27a1 4.",
+            cell2AheadNotFree: "Edessä ei kahta\nvapaata ruutua: ohjelma\nsiirtyi askeleesta 1 \u27a1 3.",
+            cellAheadNotFreeMedium: "Edessä olevassa ruudussa\non robotti: ohjelma siirtyi\naskeleesta 1 \u27a1 3.",
+            cellAheadNotFreeHard: "Robotti on vihreässä\nruudussa: ohjelma eteni\naskeleesta 3 \u27a1 4.",
+            cellAheadNotFree: "Edessä olevassa\nruudussa on robotti",
+            cellAheadFree: "Edessä oleva ruutu on\nvapaa: ohjelma eteni\naskeleesta 1 \u27a1 2.",
+            cellAheadFreeForward: "Robotti liikkui eteenpäin\nja ohjelma eteni\naskeleesta 2 \u27a1 3.",
+            cell2AheadFree: "Edessä 2 vapaata\nruutua: ohjelma eteni\naskeleesta 1 \u27a1 2.",
+            onWhiteCell: "Robotti on valkeassa\nruudussa: ohjelma siirtyi\naskeleesta 3 \u27a1 1.",
+            robotNotStuck: function(rob){
+                return "Robotti "+rob+" voi vielä liikkua eteenpäin.";
+            },
+            undo: "Peru askel"   
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+        #annuler {
+            display: block;
+            margin: auto;
+            width: 9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+
+    <div id="task">
+        <h1>Rinnakkaiset prosessit</h1>
+        <div id="tabsContainer"></div>
+        <div id="taskContent">
+            <div id="zone_1">
+                <div class="consigne">
+                    <p>
+                       Ruudukossa on <span class="easy medium">2</span><span class="hard">4</span> robottia, jotka on esitetty nuolina.
+                    </p>
+                    <p>
+                       <span class="easy">Kumpaakin robottia ohjataan omalla ohjelmalla.</span>
+                       <span class="medium hard">Robotteja ohjataan samalla ohjelmalla.</span>
+                    </p>
+                    <p class="easy medium">
+                        Suorita ohjelmia askel kerrallaan niin, että robotti 1 törmää robottiin 2.
+                    </p>
+                    <p class="hard">
+                        Suorita ohjelmia askel kerrallaan niin, että <b></b>kukin robotti jää jumiin</b> kesken ohjelmansa suorituksen, pääsemättä vihreään ruutuun.
+                    </p>
+                    <p>
+                      Ratkaise tehtävä klikkailemalla oikealla olevia isoja harmaita nappeja haluamassasi järjestyksessä.
+                    </p>
+                </div>
+            </div>
+            <div id="zone_2">
+                <div id="paper"></div>
+            </div>
+<!--            <input type="button" value="Peru" id="annuler" /> -->
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>Solution</h2>
+
+        <h2>It's infromatics!</h2>
+    </div>
+    <!-- task-solution -->
+</body>
+
+</html>

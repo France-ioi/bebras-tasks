@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-09-graph-of-shapes</title>
+      <script>
+           window.stringsLanguage = 'fi';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "fi",
+            "version": "fi.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var instructions = "<br/>Voit muuttaa harmaiden neliöiden kuvioita klikkaamalla niitä.";
+         var taskStrings = {
+             success: "Onnittelut, ratkaisit tämän version!",
+             errorArrivedEarly: "Majava saapui perille liian aikaisin: ohjelistassa on vielä käyttämättömiä kuvioita." + instructions,
+             errorOneNotGood: "Majavan edessä oleva kuvio ei täsmää ohjelistan seuraavan kuvion kanssa." + instructions,
+             errorSeveralNotGood: "Mikään Majavan edessä oleva kuvio ei täsmää ohjelistan seuraavan kuvion kanssa." + instructions,
+             errorDefault: "Majavan seuraavan mahdollisen etenemisnuolen kuvio ei täsmää ohjelistan seuraavan kuvion kanssa.",
+             errorMultiplePath: "Majavalla on enemmän kuin yksi mahdollinen etenemisnuoli, joiden kuvio täsmää ohjelistan seuraavan kuvion kanssa: Majava ei tiedä, mitä nuolta pitkin niistä pitäisi edetä." + instructions,
+             instructions: "Ohjelista:",
+             tryButton: "Kokeile",
+             stopButton: "Peru",
+             validateAnswer: "Tarkista vastaus",
+             mustFillAll: "Ainakin yksi harmaa neliö on vielä tyhjä. Aseta jokaiseen kuvio klikkaamalla neliöitä."
+         };
+      </script>
+      <script type="text/javascript" src="shape-paths.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #graph path, #graph rect
+         {
+            cursor: pointer;
+         }
+         #graph {
+            text-align: center;
+         }
+         #feedback {
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            min-height: 3em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Kuvioreitti</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">       
+               <div class="consigne">
+                  <p>Aseta jokaiseen harmaaseen neliöön jokin kuvio klikkailemalla neliöitä.</p>
+                  <p>Majava kulkee ohjelistan kuvioita vastaavista etenemisnuolista koostuvan reitin.</p>
+                  <p style="margin-bottom:0.3em">Tavoite on saada Majava saapumaan kotitaloonsa, kun hän on askeltanut ohjelistan mukaisen reitin loppuun asti.</p> 
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="graph"></div>
+               <div id="topBar"></div>
+               <div id="feedback"></div>
+            </div>
+         </div>
+         <!-- a list of hidden images that are part of the task (not its solution
+         but are not already present as elements in the task html. This
+         always includes icon.png -->
+         <img src="icon.png" style="display:none">
+         <img id="castor" src="castor.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+         <!-- description of the solution -->
+         <h2>C'est de l'informatique !</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+

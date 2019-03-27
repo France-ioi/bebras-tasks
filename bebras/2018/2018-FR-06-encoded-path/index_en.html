@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+   <head>
+   <meta charset="utf-8">
+   <title>2018-FR-06-encoded-path</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1'
+            ]);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: "Congratulations, you have succeeded!",
+            partialSuccess: "You have reproduced the first part of the objective",
+            willGetPoints: " and will get points. Continue.",
+            secondPartIncorrect: ", but the second part is wrong",
+            failure: "The code of your path is different from the target.",
+            notAdjacentToHead: "Drag or click on a white cell next to the white dot.",
+            continuePath: "Complete your path to see the end of the sequence",
+            yourTarget: "Your objective:",
+            yourSequence: "Your sequence:",
+            masked: "Masked"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+        #animContainer {
+          text-align: center;
+        }
+        #anim {
+          display: inline-block;
+        }
+        #displayHelper_graderMessage {
+          min-height: 1em;
+          font-size: 18px;
+          margin-top: 0.2em;
+          margin-bottom: 0.2em;
+          text-align: center;
+          font-weight: bold;
+          color: red; 
+        }
+        #discoveredPaths {
+          margin-top: 5px;
+          text-align: center;
+        }
+        #discoveredPaths div {
+          margin: 5px;
+          display: inline-block;
+          *zoom: 1; /*IE6/7*/
+          *display: inline; /*IE6/7*/
+        }
+        .tablePath td {
+          padding-right: 10px;
+          padding-bottom: 10px;
+          height: 22px;
+        }
+        #comment {
+          font-weight: bold;
+          font-size: 18px;
+          color: orange;
+        }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Encoded paths</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>A path in the grid below can be encoded as a sequence of digits.</p>
+
+                  <p>Find out the value associated with each type of move, then draw path that corresponds to the objective.</p>
+
+                  <p>Drag or click on cells to build your path starting from the white dot.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="animContainer">
+                  <div id="anim"></div>
+                  <br/><br/>
+                  <div id="codes"></div>
+               </div>
+               <div style="height:30px">
+                  <span id="comment"></span>
+               </div>
+               <div id="displayHelper_graderMessage"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+
+         <h2>It's informatics!</h2>
+   
+
+     </div> <!-- task-solution -->
+   </body>
+</html>

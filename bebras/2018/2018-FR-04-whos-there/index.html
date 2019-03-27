@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="utf-8"></meta>
+    <title>2018-FR-04-whos-there</title>
+    <script>
+     window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+        'taskStyles-0.1', 'randomGenerator-1.0'
+      ]);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+        "language": "fr",
+        "version": "fr.01",
+        "authors": "Arthur Charguéraud, Mathias Hiron",
+        "translators": [],
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript"> 
+      var shapeGroup = function (isPair, isFirst) {
+         var s = "3 ";
+         s += (isFirst) ? "" : "nouvelles ";
+         s += (isPair) ? "paires de " : "";
+         s += "formes";
+         return s;
+      }
+      var taskStrings = {
+            start: "Commencer",
+            restart: "Recommencer",
+            inHouse: "Entrée",
+            outHouse: "Sortie",
+            clickGroup: function (isPair, isFirst) {
+               return "Cliquez ici dès que la maison\n contient " + shapeGroup(isPair, isFirst) + " identiques"; 
+               },
+            resume: function (isPair, isFirst) {
+               return "C'est bien ! Cliquez ici pour continuer\net trouver " + shapeGroup(isPair, isFirst) + " identiques"; 
+               },
+            errorWrong: function (isPair, isFirst) {
+               return "La maison ne contient pas " + shapeGroup(isPair, isFirst) + " identiques."; 
+               },
+            errorMiss: function (isPair, isFirst) { 
+               return "Vous avez manqué un groupe de " + shapeGroup(isPair, isFirst) + " identiques."; 
+               },
+            shapeInHouse: "Voici les formes actuellement dans la maison :",
+            shapeList: "Voici les formes qui peuvent entrer dans la maison :",
+            shapeListInPairs: "Voici les formes pouvant apparaître dans les paires qui entreront dans la maison :",
+            suboptimal: "Vous n'avez pas formé trois groupes.",
+            drawInCanvas: "Pour vous souvenir, dessinez des points ou des traits ici.", // one line only, otherwise it causes a bug
+            success: "Bravo, vous avez réussi !",
+            partial: "Vous obtenez une partie des points.",
+            failure: "Vous n'obtenez pas de points."
+         };
+    </script>
+    <script type="text/javascript" src="raphael.sketchpad.js"></script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+      .bold {
+        font-weight: bold;
+      }
+      #canvas {
+        width: 600px;
+        margin: auto;
+        border: 1px solid black;
+      }
+      #canvasButtons {
+        text-align: center;
+        margin: 20px 0;
+      }
+      #canvasButtons button {
+        padding: 5px 20px;
+      } 
+      #valider {
+        display: block;
+        margin: auto;
+        width: 9em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="editor"></div>
+
+    <div id="task">
+      <h1>Triades</h1>
+      <div id="tabsContainer"></div>
+
+      <div id="taskContent">
+        <div id="zone_1">
+          <div class="consigne">
+            <p>Quand vous cliquerez sur le gros bouton gris, des formes vont entrer dans la maison<span class="medium bold"> ou en sortir</span>, <span class="easy medium">une par une</span><span class="hard bold">deux par deux</span>.</p>
+            <p>Pour vous en souvenir, ajoutez des points ou des traits dans le cadre du bas.</p> 
+            <p>À chaque fois que 3 <span class="hard bold">paires</span><span class="easy medium">formes</span> identiques sont dans la maison, cliquez sur le gros bouton gris.</p>  
+          </div>
+        </div>
+        <div id="zone_2">
+          <div id="housePaper"></div>
+          <div id="shapeListPaper"></div>
+          <div id="canvas"></div>
+          <div id="canvasButtons">
+            <button type="button" class="btn btn-default" id="undoTagButton">Annuler</button>
+            <button type="button" class="btn btn-default" id="redoTagButton">Rétablir</button>
+          </div>
+        </div>
+      </div>
+      <img id="shape1" src="1.png" style="display:none">
+      <img id="shape2" src="2.png" style="display:none">
+      <img id="shape3" src="3.png" style="display:none">
+      <img id="shape4" src="4.png" style="display:none">
+      <img id="shape5" src="5.png" style="display:none">
+      <!-- <img id="house" src="house.png" style="display:none"> -->
+      <img id="arrow" src="arrow.png" style="display:none">
+      <img src="icon.png" style="display:none">
+    </div>
+    <div id="solution">
+      <h2>Solution</h2>
+
+
+          <div class="easy">
+           <p>Pour chaque forme qui entre dans la maison, on peut dessiner un point en-dessous de la forme correspondante.</p>
+           <p>Par exemple, au cours d'une partie, on peut obtenir le dessin ci-dessous.</p>
+           <img src="sol_easy1.png">
+           <p>Ce dessin indique que l'on a vu entrer 1 losange, 3 carrés, 1 triangle, 3 hexagones, et 2 étoiles.</p>
+          </div>
+
+         <div class="medium">
+           <p>Pour chaque forme qui entre dans la maison, on peut dessiner un point en-dessous de la forme correspondante. Pour chaque forme qui sort de la maison, on peut masquer le point par un trait.</p>
+           <p>Par exemple, au cours d'une partie, on peut obtenir le dessin ci-dessous. </p>
+           <img src="sol_medium1.png">
+           <p>Ce dessin indique que l'on a vu entrer 2 losanges dont 1 est ressorti, qu'on a vu rentrer 4 carrés dont 2 sont ressortis, qu'on a vu rentrer 4 triangles dont 3 sont ressortis, et qu'on a vu rentrer 4 hexagones sans qu'aucun ne soit ressorti.</p>
+         </div>
+
+         <div class="hard">
+           <p>Pour noter les paires de formes qui rentrent dans la maison, plusieurs méthodes sont possibles, dont les trois suivantes :</p>
+           <p><b>La première méthode</b> consiste à dessiner, avant de commencer, toutes les paires possibles. Cela prend un peu de temps car il faut dessiner 12 formes, mais ensuite c'est très facile. Il suffit d'ajouter un point pour chaque paire de forme qui entre dans la maison. Voici un exemple :</p>
+           <img src="sol_hard3.png">
+           <p><b>La deuxième méthode</b> est encore plus efficace, car elle ne requiert de dessiner que 3 formes. On commence par dessiner les trois formes possibles sur la gauche. Lorsqu'une paire de forme arrive, on repère la ligne correspondant à la première forme, la colonne correspondant à la seconde forme, et on y dessine un point. Voici un exemple :</p>
+           <img src="sol_hard2.png">
+           <p><b>La troisième méthode</b> ne requiert aucun dessin préalable. L'idée est d'utiliser des traits. Pour chaque paire de forme qui entre dans la maison, on trace un trait reliant les deux formes qui constitue la paire. Voici un exemple :</p>
+           <img src="sol_hard1.png">
+           <p>Cette représentation requiert néanmoins un peu plus de soin que les autres pour bien s'organiser pendant la partie, afin d'être capable de détecter le moment où la maison contient 3 paires identiques. </p>
+
+         </div>
+
+
+      <h2>C'est de l'informatique !</h2>
+    </div>
+    <!-- task-solution -->
+  </body>
+
+</html>

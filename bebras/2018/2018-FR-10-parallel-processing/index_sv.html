@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-FR-10-parallel-processing</title>
+    <script>
+        window.stringsLanguage = 'sv';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "sv",
+            "version": "sv.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": [Staffan Söderhjelm],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+    
+    <script type="text/javascript">
+        var taskStrings = {
+            moveForward: "Gå ett steg framåt",
+            moveForwardIf: "Om rutan framför roboten är tom, gå ett steg framåt",
+            turnLeft: "Sväng vänster",
+            turnRight: "Sväng höger",
+            ifRobAhead: "Om rutan framför roboten är upptagen,\n gå till programsteg 3",
+            ifRob2Ahead: "Om en av de två rutorna framför roboten är upptagen, \n gå till programsteg 3",
+            ifWhiteCell: "Om roboten står på en vit ruta,\n gå till programsteg 1",
+            end: "Slut på programmet",
+            execute: "Utför \n denna instruktion \n för roboten",
+            failureNoCrash: "Robot 1 har inte kört in i Robot 2.",
+            failureSwapped: "Robot 2 har kört in i Robot 1, men det skulle vara tvärtom. Försök på ett annat sätt.",
+            failureEndNoCrash: "Alla robotarna har stoppat, men Robot 1 har inte kört in i Robot 2.",
+            failureEndNoStuck: "Alla robotarna har stoppat, och man ser att de är blockerade.",
+            success: "Bravo, du har klarat denna nivå!",
+            cellForward: "Gick från programsteg 2 till 3 \n efter att ha gått en ruta framåt.",
+            cellReachEnd: "Gick från programsteg 3 till 4 \n efter att ha \n gått en ruta framåt.",
+            cell2AheadNotFree: "Gick från programsteg 1 till 3 \n eftersom en av de två rutorna framför \n roboten är upptagen.",
+            cellAheadNotFreeMedium: "Gick från programsteg 1 till 3 \n eftersom rutan framför \n roboten är upptagen.",
+            cellAheadNotFreeHard: "Gick från programsteg 3 till 4 eftersom \n roboten är på en grön ruta.",
+            cellAheadFree: "Gick från programsteg 1 till 2\n eftersom rutan framför roboten \n är ledig.",
+            cellAheadFreeForward: "Gick från programsteg 2 till 3\n efter ett steg framåt till en ledig ruta.",
+            cell2AheadFree: "Gick från programsteg 1 till 2\n eftersom de två rutorna \n framför roboten är lediga.",
+            onWhiteCell: "Gick från programsteg 3 till 1 \n eftersom roboten står på en vit ruta.",
+            robotNotStuck: function(rob){
+                return "Robot "+rob+" kan fortfarande röra sig.";
+            },
+            undo: "Ångra"            
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+        #annuler {
+            display: block;
+            margin: auto;
+            width: 9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+
+    <div id="task">
+        <h1>Parallella processer</h1>
+        <div id="tabsContainer"></div>
+        <div id="taskContent">
+            <div id="zone_1">
+                <div class="consigne">
+                    <p>
+                       Rutnätet innehåller <span class="easy medium">2</span><span class="hard">4</span> robotar beskrivna av pilar med nummer.
+                    </p>
+                    <p>
+                       <span class="easy">Robotarna kontrolleras av varsitt program.</span>
+                       <span class="medium">Robotarna kontrolleras båda av samma program.</span>
+					   <span class="hard">Robotarna kontrolleras alla av samma program.</span>
+                    </p>
+
+                    <p class="easy medium">
+                       Utför instruktioner för vardera roboten som gör att Robot 1 kör in i Robot 2.
+                    </p>
+                    <p class="hard">
+                        Utför instruktioner för de olika robotarna tills ett läge nås när <b>alla robotarna är blockerade</b> innan någon har nått en grön ruta.
+                    </p>
+
+                    <p>
+                       För att uppnå detta, klicka på de grå knapparna i valfri ordning.
+                    </p>
+                </div>
+            </div>
+            <div id="zone_2">
+                <div id="paper"></div>
+            </div> 
+            <input type="button" value="Undo" id="annuler" />
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>Lösning</h2>
+ <div class="easy">
+           <p>Kollisionen mellan robot <b>1</b> och robot <b>2</b> kan bara ske där deras vägar korsas.</p>
+           <img src="sol_easy_1.png">
+           <p>Man börjar med att föra robot <b>2</b> till kollisionsplatsen. Sedan stegar man fram robot <b>1</b> tills den kör in i robot <b>2</b>.</p>
+           <img src="sol_easy_2sv.png">
+           <p>För att lösa uppgiften kan man alltså successivt trycka på knapparna: <b>2, 2, 1, 1, 1, 1, 1</b>.</p>
+         </div>
+
+         <div class="medium">
+           <p>Om man för robot <b>2</b> till kollisionsplatsen mellan robotarna och sedan för dit robot <b>1</b> kommer denna att blockeras av robot <b>2</b> och vägra flytta sig. Instruktionen i steg 1 säger att om det finns en robot framför ska man gå till steg 3, som säger att man ska gå tillbaka till steg 1, i en oändlig loop.</p>
+           <img src="sol_medium_0sv.png" style="width:650px">
+
+           <p>Man måste alltså göra på något annat sätt. Man för först robot <b>1</b> till rutan innan kollisionsplatsen. Man utför instruktionen i steg 1 innan robot <b>1</b> har något framför sig. På så sätt är robot <b>1</b> färdig att utföra steg 2, dvs ta ett steg framåt, utan att fråga efter något villkor. </p>
+           <img src="sol_medium_1sv.png" style="width:650px">
+            
+           <p>Man kan sedan föra robot <b>2</b> till kollisionsplatsen och så till sist utföra steg 2 för robot <b>1</b> så att den kör in i robot <b>2</b>.</p>
+           <img src="sol_medium_2sv.png" style="width:650px"> 
+           
+           <p>En lösning är alltså att successivt klicka på knapparna: <b>1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>För att komma till ett låst läge måste man föra alla robotarna till en position precis innan de blockeras av varandra, samt ha alla vid programsteg 2.</p>
+           <p>Genom att uföra en korrekt serie steg för varje robot för sig, kan man nå följande läge :</p>
+           <img src="sol_hard_1sv.png" style="width:650px">
+           <p>Därefter är det bara att utföra ett ytterligare steg 2 för var och en av robotarna, vilket ger följande helt låsta läge.</p>
+           <img src="sol_hard_2.png" style="width:215px">
+           <p>Lösningen är alltså att successivt klicka på knapparna: <b>1, 1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 1, 2, 3, 4</b>.</p>
+         </div>
+
+
+        <h2>Det är datavetenskap!</h2>
+    </div>
+    <!-- task-solution -->
+</body>
+
+</html>

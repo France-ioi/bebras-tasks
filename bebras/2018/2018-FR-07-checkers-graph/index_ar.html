@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-ar-07-checkers-graph</title>
+     <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+    <script>
+      window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+       var modulesPath = '../../modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+        'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+    </script>
+    <script class="remove" type="text/javascript">
+       var json = {
+        "id": "",
+        "language": "ar",
+        "version": "ar.01",
+        "authors": "",
+        "translators": "Eslam Wageed",
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+            success: ".أحسنت، الإجابة صحيحة",
+             errorWrongEdge: "الخط الأحمر على مخططك غير موجود على الهدف",
+             errorMissingEdge: "الخط الأحمر الموجود في الهدف غير موجود في مخططك",
+             connectTokens: function(srcToken, dstToken, direction) {
+                if (direction == "vertical") {
+                  return "أن الاثنين موجودان على نفس العمود " + srcToken + " مع " + dstToken + " نربط";
+                } else {
+                  return "لأن الاثنين موجودان على نفس السطر " + srcToken + " مع " + dstToken + " نربط ";
+                }
+             /*
+                var message = "لأن الاثنين موجودان على نفس " + srcToken + " مع " + dstToken + "نربط ";
+                if (direction == "vertical") {
+                  message = "العمود " + message;
+                } else {
+                  message = "السطر " + message;
+                }
+                return message;
+                */
+             },
+             connexionsInBlue: "كل هذه القريصات ملونة بالأزرق على المخطط",
+             noConnexions: function(srcToken) {
+               return " بأي شيء لأنه وحيد في السطر و العمود  " + srcToken + " لا نربط "
+             }
+         };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+         #board
+         {
+            width : 450px;
+            margin: 10px 10px;
+         }
+         #board, #graphContainer
+         {
+            display: inline-block;
+            vertical-align: top;
+         }
+         #target
+         {
+            margin-bottom: 15px;
+         }
+         #graphContainer
+         {
+            width: 200px;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+         }
+         .graphTitle {
+            margin-bottom: 0.5em;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #layoutTable {
+          margin-top: 2px;
+         }
+         #layoutTable td {
+            vertical-align: top
+         }
+         td#layoutTableFirstCol {
+            width: 480px;
+         }
+         #message {
+            color: green;
+         }
+    </style>
+  </head>
+  <body>
+    <div id="task">
+      <h1>هجمات متشابكة</h1>
+      <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+      <div id="taskContent"> 
+        <div id="zone_1"> 
+          <div class="consigne">      <!-- will contain the content of the task -->
+            <p>حرّك قريصات الشبكة ليأخذ مخططك نفس خطوط الهدف .</p>
+            <p>.كل قريصتين من الشبكة موجودتين في نفس السّطر أو نفس العمود مرتبطتين بخط</p>
+          </div>
+        </div>
+        <div id="zone_2">
+          <table id="layoutTable">
+            <tr><td id="layoutTableFirstCol">
+               <div id="board"></div>
+               <div id="message"></div>
+            </td><td>  
+               <div id="graphContainer">
+                  <div class="graphTitle">:الهدف</div>
+                  <div id="target"></div>
+                  <div class="graphTitle">:مخططك</div>
+                  <div id="current"></div>
+               </div>
+            </td></tr></table>
+        </div>
+      </div>
+      <img src="icon.png" style="display:none">
+    </div><!-- #task -->
+
+    <div id="solution">
+      <h2>Solution</h2>
+      <!-- description of the solution -->
+      <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+    </div>
+  </body>
+</html>

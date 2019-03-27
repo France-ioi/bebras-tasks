@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-FR-15-marbles-sequence</title>
+    <script>
+      window.stringsLanguage = 'sv';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+      var modulesPath = '../../modules';
+      importModules([
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+        'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+        'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+        'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+    </script>
+    <script class="remove" type="text/javascript">
+      var json = {
+        "id": "",
+        "language": "sv",
+        "version": "sv.01",
+        "authors": "",
+        "translators": [Staffan Söderhjelm],
+        "license": "",
+        "taskPathPrefix": "",
+        "modulesPathPrefix": "",
+        "browserSupport": [],
+        "fullFeedback": true,
+        "acceptedAnswers": [],
+        "usesRandomSeed": false
+      };
+    </script>
+    <script type="text/javascript">
+      var taskStrings = {
+         objective: "Mönster",
+         undo: "Ångra",
+         success: "Bravo, du har klarat denna nivå!",
+         errorWrongMarble: "Kulan med röd ram stämmer inte med mönstret.",
+         errorMissingMarble: "Du är inte färdig, det fattas kulor.<br/>Om du inte kan komma vidare, försök på ett annat sätt."
+       };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+      #feedback {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        min-height: 1em;
+        text-align: center;
+        font-weight: bold;
+        color: red;
+      }
+      #paper {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="task">
+      <h1>Pärlmönster</h1>
+      <div id="tabsContainer"></div>    <!-- will contain the versions tabs -->
+      <div id="taskContent">          <!-- will contain the content of the task -->
+        <!-- <p id="difficultyWarning" class="hard"></p> -->
+        <div id="zone_1">
+          <div class="consigne">
+            <p>Klicka på knapparna för att låta pärlorna falla en och en tills de bildar det visade mönstret.</p>
+          </div>
+        </div>
+        <div id="zone_2">
+          <div id="paper"></div>
+          <div id="objective"></div>
+        </div>
+      </div>
+      <div id="feedback"></div>
+      <!-- <input type="button" value="Valider" id="valider" /> -->
+      <!-- a list of hidden images that are part of the task (not its solution
+      but are not already present as elements in the task html. This
+      always includes icon.png -->
+      <img src="icon.png" style="display:none">
+    </div><!-- #task -->
+    <div id="solution">
+      <h2>Lösning</h2>
+       <div class="easy">
+           <p>Man måste börja med att låta en pärla <b>A</b> och en pärla <b>B</b> falla. Om man tar båda från första raden kommer man inte vidare, eftersom det sedan inte finns en pärla <b>C</b> till hands.</p>
+           <img src="sol_easy_1.png">
+           <p>Man måste alltså börja med att ta pärla <b>A</b> och pärla <b>B</b> från andra raden. Då kan man fortsätta med en pärla <b>C</b> som också finns på andra raden.</p>
+           <img src="sol_easy_2.png">
+           <p>Sedan, för att avsluta den första gruppen av fem pärlor, kan man ta en pärla <b>A</b> och en pärla <b>B</b> från första raden. Eftersom kvarvarande kulor ligger likadant som från början kan man upprepa samma tryckningar två gånger till, tills man har de tre 5-grupperna.</p>
+           <img src="sol_easy_3.png">
+           <p>En lösning är alltså att klicka på knapparna <b>2, 2, 2, 1, 1</b> och att upprepa detta 3 gånger totalt.</p>
+           <p>Andra lösningar kan skapas genom att byta plats på <b>1, 1</b> och <b>2, 2</b> när det går, t.ex. så här:
+<b> 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 1, 1.</b></p>
+         </div>
+
+         <div class="medium">
+           <p>Målet består av tre identiska grupper, var och en bildad av samma sekvens av sex pärlor, innehållande ett <b>A</b>, ett <b>B</b>, två <b>C</b>, ett <b>D</b>, och ett <b>E</b>. Man kan finna dessa sex kulor genom att ta de tre första från rad <b>2</b> och de tre första från rad <b>3</b>.</p>
+           <p>Man måste dock låta pärlorna falla i rätt ordning för att inte köra fast. Efter <b>A</b> och <b>B</b> måste man låta <b>C</b> från rad <b>3</b> falla, för att frigöra ett <b>D</b> som man sedan behöver.</p>
+           <img src="sol_medium_1.png">
+           <p>Sedan, för att fullborda den första gruppen av sex pärlor, kan man ta pärlorna <b>D</b>, <b>C</b> och <b>E</b> från raderna <b>3</b>, <b>2</b> och <b>3</b>. Nu ligger kvarvarande kulor i samma mönster som från början, så att man kan upprepa samma knapptryckningar två gånger till.</p>
+           <img src="sol_medium_2.png">
+           <p>En lösning är alltså att klicka på knapparna <b>2, 2, 3, 3, 2, 3</b>, och att upprepa detta tre gånger totalt.</p>
+           <p>Det finns också en andra lösning: 1, 1, 3, 3, 1, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2, 3.</p>
+         </div>
+
+         <div class="hard">
+           <p>Målet består av två identiska grupper, var och en bestående av samma sekvens av sju pärlor <b>A</b>, följt av två pärlor <b>B</b> och tre pärlor <b>C</b>.</p>
+           <p>För att få en grupp med tre pärlor <b>C</b> måste man frigöra dem från tre olika rader. Detta får inte heller frigöra mer än två pärlor <b>B</b>, vilket innebär att man är tvungen att använda en rad som inte innehåller något <b>B</b>. Bara rad <b>5</b> stämmer in på detta.</p>
+           <p>För att bestämma vilka två andra rader man ska använda, måste man se hur man får ihop sju pärlor <b>A</b>. Eftersom rad <b>5</b> ger oss tre pärlor <b>A</b>, återstår fyra som ska komma från de två andra raderna. Det finns bara ett sätt att göra detta, nämligen att använda raderna <b>1</b> och <b>3</b>.</p>
+           <p>Lösningen är alltså att börja med alla pärlorna <b>A</b> i början av rad <b>1</b>, <b>3</b> och <b>5</b>.</p>
+           <img src="sol_hard_1.png">
+           <p>Sedan tar man pärlorna <b>B</b> på rad <b>1</b> och rad <b>3</b>.</p>
+           <img src="sol_hard_2.png">
+           <p>och till sist pärlorna <b>C</b> från rad <b>1</b>, <b>3</b>, och <b>5</b>. Nu ligger kvarvarande kulor i samma mönster som från början, så man kan upprepa samma knapptryckningar en gång till.</p>
+           <img src="sol_hard_3.png">
+           <p>Lösningen består alltså i att klicka på knapparna i ordning : <b>1, 1, 3, 3, 5, 5, 5, 1, 3, 1, 3, 5</b>, upprepat 2 gånger.</p>
+         </div>        
+
+      <h2>Det är datavetenskap !</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+    </div>
+  </body>
+</html>

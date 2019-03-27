@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-14-sort-columns</title>
+      <script>
+           window.stringsLanguage = 'fi';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "fi",
+            "version": "fi.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "Tavoite",
+            sort : "Järjestä",
+            nSortText : function(nSort) {
+               return "Järjestyskertojen lukumäärä: " + nSort;
+            },
+            trick : "Ehdotus: ratkaisu voi löytyä helpommin,\njos keskityt vain tavoitteen palleroihin.",
+            success: "Onnittelut, ratkaisit tämän version!",
+            wrongAnswer: "Punaisella korostettu sarake on väärässä kohdassa.",
+            tooManySort : "Onnistuit järjestämään sarakkeet oikein, mutta käyttäen yli 3 järjestyskertaa. Yritä ratkaista tehtävä vain 3 järjestyskerralla."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #feedback {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            min-height: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #paper {
+            margin-top: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Sarakkeiden järjestys</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id=zone_1>    
+               <div class=consigne>
+                  <p>"Järjestä"-napin klikkaaminen muuttaa <b>sarakkeiden järjestystä</b> niin, että klikatun napin rivin <span class="easy">pienet pallurat siirtyvät isojen palluroiden vasemmalla puolelle</span><span class="medium">pallurat tulevat kasvavaan kokojärjestykseen (pienemmät vasemmalle, isommat oikealle)</span><span class="hard">luvut tulevat kasvavaan järjestykseen</span>.</p>
+                  <p>Yksittäisen järjestämisen yhteydessä kutakin saraketta siirretään mahdollisimman vähän.</p>
+                  <p>Asettele sarakkeet samaan järjestykseen kuin tavoitekuvassa klikkailemalla "Järjestä"-nappeja.</p>
+                  <p class="medium hard">Saat tästä versiosta täydet pisteet, jos pääset tavoitteeseen käyttämällä korkeintaan 3 järjestyskertaa.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <div id="feedback"></div>
+         <!-- a list of hidden images that are part of the task (not its solution
+           but are not already present as elements in the task html. This
+           always includes icon.png -->
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+      <!-- description of the solution -->
+         <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+

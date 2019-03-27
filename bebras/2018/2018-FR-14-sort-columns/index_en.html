@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-FR-14-sort-columns</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "Objective",
+            sort : "sort",
+            nSortText : function(nSort) {
+               return "Number of sortings: " + nSort;
+            },
+            trick : "Suggestion: the solution is easier to find\nby focusing only on the spheres in the objective.",
+            success: "Congratulations, you have succeeded!",
+            wrongAnswer: "The column highlighted in red is not in the correct location.",
+            tooManySort : "You managed to sort the columns correctly. Start again and try to solve it using only 3 buttons."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #paper {
+            margin-top: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Sort Columns</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id=zone_1>    
+               <div class=consigne>
+                  <p>Clicking on a "sort" button changes the <b>order of the columns</b> so that
+                  <span class="easy">On the row of the clicked button, the small spheres are placed to the left of the big spheres.</span>
+                  <span class="medium">On the row of the clicked button, the spheres are sorted from the smallest on the left, to the biggest on the right.</span>
+                  <span class="hard">On the row of the clicked button, the spheres are sorted by increasing order.</span>
+                  </p>
+                  <p>During this operation, each column is moved as little as possible.</p>
+                  <p>Click on the buttons to place the columns in the correct order, as shown on the objective.</p>
+                  <p class="medium hard">To obtain a full score, do this in 3 steps.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+      <!-- description of the solution -->
+         <h2>C'est de l'informatique !</h2>
+      <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+</html>
+

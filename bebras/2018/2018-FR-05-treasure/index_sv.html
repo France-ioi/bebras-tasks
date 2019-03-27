@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2018-FR-05-treasure</title>
+    <script>
+        window.stringsLanguage = 'sv';
+    </script>
+    <script class="remove" type="text/javascript" src="../../modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "sv",
+          "version": "sv.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": ["Fredrik Jansson"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            error: function(level) {
+               var walls = "färre raserade väggar";
+               if (level == "hard") {
+                  walls = "färre raserade väggar";
+               }
+               return "Du har hittat skatten, men det var möjligt att göra det med " + walls + ". Försök igen! Observera att skatten nu kan finnas i ett annat rum."
+            },
+            success: "Grattis, du klarade det!",
+            notFinished: "Du har inte hittat skatten än!",
+            feedbackHard: "Antal</br> raserade väggar: ",
+            feedbackEasyMedium: "Antal raserade väggar: "
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style type="text/css">
+         #anim { 
+            width: 500px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 20px;
+         }
+         #result {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin-left:20px; 
+         }
+         #nb_walls {
+            font-size: 2.5em;
+            font-weight: bold;
+         }        
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Minsta ansträngning</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+            <p>
+	       Runda rum är anslutna med korridorer som ibland är blockerade med väggar.
+            </p>
+            <div class="easy medium">
+               <p>Som exempel så visas här en korridor som är blockerad av tre väggar:</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example.png"></p>
+            </div>
+            <div class="hard">
+               <p>Här är ett exempel på en korridor som är blockerad av 12 väggar:</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example_hard.png"></p>
+            </div>
+            <p>Rasera det minsta möjliga antalet <span class="easy medium"> väggar</span><span class="hard">väggar</span> för att visa rummen och hitta skatten.</p>
+            <p>För att rasera väggarna i en korridor, klicka på korridoren.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="anim"></div>
+               <p id="result"></p>
+            </div>
+            <img src="icon.png" style="display:none">
+            <img id="treasure" src="treasure.png" style="display:none">
+         </div>
+      </div>
+      <div id="solution">
+         <h2>Lösning</h2>
+		       
+          <div class="easy">
+           <p>I varje steg väljer man att rasera väggarna i den korridor som har minst antal väggar, av dem som leder till rum som man ännu inte kan besöka.</p>
+           <p>I exemplet här nedan bör man alltså börja med korridoren längst ner till höger.</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>I varje steg väljer man att rasera väggarna i den korridor som har minst antal väggar, av dem som leder till rum som man ännu inte kan besöka.</p>
+           <p>I exemplet här nedan bör man alltså börja med den korridor som bara har en vägg.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>I varje steg väljer man att rasera väggarna i den korridor som har minst antal väggar, av dem som leder till rum som man ännu inte kan besöka.</p>
+           <p>I exemplet här nedan bör man alltså börja med en av de korridorer som har 13 väggar.</p>
+           <img src="sol_hard.png">
+         </div>
+
+
+      </div>
+    </body>
+</html>
