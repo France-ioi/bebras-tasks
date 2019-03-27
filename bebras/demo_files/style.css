@@ -1,0 +1,669 @@
+/**************************************************************************/
+/* The CSS reset
+   http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	/*vertical-align: baseline; 
+     --> TODO: Arthur: j'ai enlevé ça pour l'instant, car ça fait bugger les tableaux avec des images dedans */
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/**************************************************************************/
+/* Body */
+
+body {
+	background-color:#FFFFFF;
+   font-family:"Trebuchet MS", Arial, Verdana;
+	font-size:15px;
+	color:#555555;
+	text-align:justify;
+}
+
+/* A trick to force the presence of a vertical scroll bar on all pages, so 
+   that when moving from a page to another the page does not move sideways */
+html, body {
+  height: 100%;
+  margin-bottom: 1px;
+}
+
+/**************************************************************************/
+/* Titles */
+
+h1 {
+   padding-top: 15px;
+   padding-bottom: 5px;
+   margin-bottom: 10px;
+}
+
+/**************************************************************************/
+/* Links */
+
+a {
+	color:#4D87CE;
+	font-weight:bold;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#2a65ad;
+}
+
+/**************************************************************************/
+/* Lists */
+
+ol,ul {
+   list-style: disc;
+   margin-left: 3em;
+}
+
+li {
+   padding-top: 3px;
+	line-height: 17px;
+	text-align: left;
+	margin-left: 4px;
+}
+
+/**************************************************************************/
+/* Menu */
+
+#menu {
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #94AE62;
+	margin-bottom: 50px;
+	color: #FFFFFF;  /* TODO: redondant ? */
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-variant: small-caps;
+	background-image: url(img/menu.jpg);
+}
+
+#menu a {
+	color: #FFFFFF;
+	text-decoration: none;
+	padding: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+#menu a:hover {
+	border-bottom: 1px solid #ffffff;
+	border-left: 1px solid #728d40;
+	border-right: 1px solid #e9ffb7;
+	padding-left: 9px;
+	padding-right: 9px;
+	color: #000000;
+	background-color: #FFFFFF;  /* TODO: redondant ? */
+}
+
+.menu-logo {
+	display:block;
+   text-align: center;
+}
+
+.menu-selected-item {
+   background: #DDD;
+}
+
+#sidebar {
+	width:160px;
+	float:right;
+	font-size:95%;
+	color:#6C534A;
+	text-align:left;
+}
+
+#sidebar h1 {
+	font-family:"Century Gothic", "Trebuchet MS", "Arial Narrow", Arial, sans-serif;  
+	font-size: 11px;
+	font-size:20px; 
+	text-transform:uppercase;
+	font-weight:normal;
+	border-bottom:1px solid #eeeeee;
+	color:#728c40;
+	text-align:right;
+}
+
+#actu {
+    font-size:11px; 
+    padding-top: 2ex;
+    padding-left:0ex; 
+    color:#736451;
+}
+
+#actudate {
+    text-align: right;
+    font-size:10px; 
+    padding-top:2px; 
+    padding-bottom:14px; 
+}
+
+.submenu {
+   margin-bottom: 1em;
+}
+
+.submenu a {
+	display:block;
+	width:100%;
+	background-position:right;
+	background-repeat:no-repeat;
+	padding:5px;
+	padding-right:0;
+}
+
+.submenu a:hover {
+	background-color:#eeeeee;
+	background-repeat:repeat-y;
+}
+
+
+/**************************************************************************/
+/* Header */
+
+#header {
+	width: 770px;
+	margin: 0 auto 0 auto;
+	margin-bottom: 20px;
+}
+
+#header h1 {
+	font-family: "Century Gothic", "Trebuchet MS", "Arial Narrow", Arial, sans-serif; 
+	font-size: 40px;
+	text-transform: uppercase;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	padding-top: 30px;
+	color: #736451;
+	padding-bottom: 5px;
+	text-align: left;
+}
+
+#header h2 {
+	font-family: "Century Gothic", "Trebuchet MS", "Arial Narrow", Arial, sans-serif;
+	font-size: 15px;
+	text-transform: uppercase;
+	text-align: right;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	color: #000000;
+	border-bottom: 1px solid #eeeeee;
+}
+
+/**************************************************************************/
+/* Footer */
+
+/* Currently, the footer is not used, but it might come back */
+
+#footer {
+	width:100%;
+	background-color:#b6cf84;
+	border-top:1px solid #d8efa6;
+	border-bottom:5px solid #94ae62;
+	padding-top:5px;
+	padding-bottom:5px;
+	color:#FFFFFF;
+   position: fixed; 
+   bottom: 0px; 
+}
+
+#footer a {
+	color:#FFFFFF; /*006600;*/
+}
+
+#footer a:hover {
+	color:#009900;
+}
+
+/**************************************************************************/
+/* Content */
+
+#content {
+	width:770px;
+	margin:0 auto 0 auto;
+	text-align:justify;
+}
+
+#mainbar {
+	margin-right:185px;
+	padding-right:35px;
+	background-position:top right;
+	background-repeat:no-repeat;
+}
+
+#mainbar h1 {
+	font-family:"Century Gothic", "Trebuchet MS", "Arial Narrow", Arial, sans-serif; 
+	font-size:25px;
+	text-transform:uppercase;
+	font-weight:normal;
+	border-bottom:1px solid #eeeeee;
+	color:#728c40;
+   padding-top: 1em;
+}
+
+.mainbarstyle p {
+	padding:5px;
+	line-height:20px;
+}
+
+#mainbar .articleimg {
+	float:right;
+	padding:5px;
+	border:0px solid #eeeeee;
+	margin-left:20px;
+	margin-top:0px;
+	margin-bottom:0px;
+}
+
+/**************************************************************************/
+/* Page: common */
+
+.logo-img {
+	float:center;
+	border:0px solid #eeeeee;
+}
+
+.plateforme-button  {
+   margin: 0.5em 0.5em 1em 0.5em;
+   padding: 0.5em;
+   font-weight: bold;
+   width: auto;
+}
+
+/**************************************************************************/
+/* Page: index */
+
+.index-important {
+   font-weight: bold;
+}
+
+.question-frame {
+   width: 720px;
+   height: 700px;
+ }
+
+#index-tabs ul {
+   background: #DDD;
+   margin: 0em;
+   padding: 0em;
+   height: 35px; /* TODO: bug sur "auto" à réparer */
+ 	font-size: 100%;
+}
+
+/* Note: pour changer les liens des onglets
+#tabs .ui-state-default a, #tabs .ui-state-default a:link, #tabs .ui-state-default a:visited {
+   color: #00ff00;
+} */
+
+#index-tabs .ui-state-active a, #index-tabs .ui-state-active a:link, #index-tabs .ui-state-active a:visited {
+   color: #728C40; /*#A00000;*/
+}
+
+#index-tabs h1 {
+   text-align: center;
+   color: black;
+   margin: 0em;
+   padding: 0em;
+   padding-bottom: 0.5em;
+   border: none;
+   font-size: x-large;
+   text-transform: none;
+}
+
+/**************************************************************************/
+/* Page: resultats */
+
+.results-table td {
+   padding: 0.5em;
+   vertical-align: top;
+}
+
+.results-table-title {
+   text-align: center;
+   font-weight: bold;
+   text-decoration: underline;
+}
+
+.login-results {
+   padding-left: 0em;  
+   text-align: center;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+}
+
+.login-results input {
+   font-weight: bold;
+   padding: 0.5em;
+}
+
+.resultats-summary li {
+   padding-top: 0.2em;
+   padding-bottom: 0.5em;
+}
+
+.resultats-important {
+   font-weight: bold;
+}
+
+.resultats-graphiques table table td {
+   border: solid 2px gray;
+   padding: 2px;
+}
+
+table.resultats-histo {
+   margin-top: 1em;
+   margin-bottom: 1em;
+   margin-left: 2em;
+}
+
+.resultats-histo td {
+   border-collapse: collapse;
+   border: 1px solid black;
+   vertical-align: top;
+   padding: 0.5em;
+   line-height: 150%;
+   text-align: center;
+   font-weight: bold;
+}
+
+.useful-links li {
+  padding-top: 0.5em;  
+}
+
+#map_etablissements {
+   height: 130px;
+   width: 750px;
+   border: 1px solid gray;
+}
+
+/**************************************************************************/
+/* Page: manuel */
+
+#manuel h2 {
+   font-weight: bold;
+   padding-top: 0.5em;
+}
+#manuel p {
+   padding-bottom: 0em;
+   padding-left: 1em;
+}
+
+/**************************************************************************/
+/* Page: organisation */
+
+table.orga-table {
+   margin: 1em;
+}
+
+.orga-table td {
+   border-collapse: collapse;
+   border: 1px solid black;
+   vertical-align: top;
+   padding: 0.5em;
+   line-height: 150%;
+   font-weight: bold;
+   text-align: left;
+}
+
+.partenaires-table td {
+   width: 25%;
+   text-align: center;
+   margin: 0em;
+}
+
+/**************************************************************************/
+/* Page: info légales */
+
+/* currently not used: */
+.infos-legales-importantes {
+   background: #FFDDDD;
+   border: solid 1px black;
+   margin: 1em;
+   font-weight: bold;
+}
+
+
+/**************************************************************************/
+/* DEPRECATED */
+
+/*
+
+form#paiement {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 4px solid #728c40;
+  border-radius: 5px;
+  padding: 20px;
+  width: 400px;
+}
+
+form#paiement fieldset {
+  border: none;
+  margin-bottom: 10px;
+}
+
+form#paiement fieldset:last-of-type {
+  margin-bottom: 0;
+}
+
+form#paiement legend {
+  color: #728c40;
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+form#paiement ol li {
+  border-color: #728c40;
+  border-style: solid;
+  border-width: 2px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  line-height: 30px;
+  list-style: none;
+  padding: 5px 10px;
+  margin-bottom: 2px;
+}
+form#paiement ol ol li {
+  background: none;
+  border: none;
+  float: left;
+}
+
+form#paiement label {
+  float: left;
+  font-size: 13px;
+  width: 110px;
+}
+form#paiement fieldset fieldset label {
+  background:none no-repeat left 50%;
+  line-height: 20px;
+  padding: 0 0 0 30px;
+  width: auto;
+}
+form#paiement label[for=visa] {
+  background-image: url(visa.gif);
+}
+form#paiement label[for=amex] {
+  background-image: url(amex.gif);
+}
+form#paiement label[for=mastercard] {
+  background-image: url(mastercard.gif);
+}
+form#paiement fieldset fieldset label:hover {
+  cursor: pointer;
+}
+
+
+form#paiement input:not([type=radio]),
+form#paiement textarea {
+  background: #ffffff;
+  border: none;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  font: italic 13px Georgia, "Times New Roman", Times, serif;
+  outline: none;
+  padding: 5px;
+  width: 100px;
+}
+form#paiement input:not([type=submit]):focus,
+form#paiement textarea:focus {
+  background: #eaeaea;
+}
+form#paiement input[type=radio] {
+  float: left;
+  margin-right: 5px;
+}
+
+form#paiement button {
+  background: #384313;
+  border: none;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -khtml-border-radius: 20px;
+  border-radius: 20px;
+  color: #ffffff;
+  display: block;
+  font: 18px Georgia, "Times New Roman", Times, serif;
+  letter-spacing: 1px;
+  margin: auto;
+  padding: 7px 25px;
+  text-shadow: 0 1px 1px #000000;
+  text-transform: uppercase;
+}
+form#paiement button:hover {
+  background: #1e2506;
+  cursor: pointer;
+}
+*/
+
+/**************************************************************************/
+/* DEPRECATED */
+
+
+/*
+input {
+	background-color:#FFFFFF;
+	padding:3px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	color:#ffffff;
+	border:1px solid #728c40;
+	background-color:#94ae62;
+	margin-bottom:2px;
+}
+input[type=submit] {
+	background-color:#FFFFFF;
+	padding:3px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:10px;
+	color:#666666;
+	border:1px solid #728c40;
+	margin-bottom:2px;
+}
+*/
+
+/*
+ul {
+	list-style-image:url(img/li.gif);
+	list-style-position: outside;
+}
+
+.introduction {
+	font-family:Helvetica, Arial, sans-serif;
+	line-height:20px;
+	font-size:12px;
+	color:#99B198;
+	text-indent:25px;
+	background-image:url(img/desc.jpg);
+	background-position:bottom left;
+	padding-left:0;
+	padding-right:200px;
+	padding-bottom:35px;
+	padding-top:0;
+	background-repeat:no-repeat;
+}
+.clearer {
+	clear:both;
+}
+
+
+.submenu2 {
+    padding-top:50px;
+    text-align:center;
+}
+
+.submenu2 h1 {
+	font-size:16px;
+}
+
+.submenu2 a {   
+	display:block;
+	width:100%;
+	background-image:url(img/submenua.gif);
+	background-position:right;
+	background-repeat:no-repeat;
+	padding:5px;
+	padding-right:0;
+}
+
+.mytab { 
+   font-size:12px;
+ }
+
+.main_castor_img {
+	padding:0px;
+	margin-left:10px;
+}
+.main_castor_img_table {
+   vertical-align: middle;
+}
+*/
