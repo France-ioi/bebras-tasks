@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2018-EN-05-treasure</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": ["Arthur Charguéraud"], "Mohamed El-Sherif", "Eslam Wageed", 
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            error: function(level) {
+               var walls = "fewer broken walls";
+               if (level == "hard") {
+                  walls = "a lower total broken thickness of walls";
+               }
+               return "You have found the treasure, but it was possible to do it with " + walls + ". Try again. Be careful, the treasure might be in a different room."
+            },
+            success: "Congratulations, you succeeded!",
+            notFinished: "You haven't found the treasure yet!",
+            feedbackHard: "Total thickness</br> of walls broken: ",
+            feedbackEasyMedium: "Number of walls broken: "
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style type="text/css">
+         #anim { 
+            width: 500px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 20px;
+         }
+         #result {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin-left:20px; 
+         }
+         #nb_walls {
+            font-size: 2.5em;
+            font-weight: bold;
+         }        
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Break the Walls</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+            <p>
+               Rounded rooms are connected with hallways that are sometimes blocked by walls.
+            </p>
+            <div class="easy medium">
+               <p>For example, here is a hallway blocked by three walls:</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example.png"></p>
+            </div>
+            <div class="hard">
+               <p>Here is an example of a hallway blocked by a wall of thickness 12 units:</p>
+               <p style="text-align: center;"><img class="exampleImage" src="example_hard.png"></p>
+            </div>
+            <p>Break the smallest possible <span class="easy medium">number of walls</span><span class="hard">total wall thickness</span> to discover the rooms and find the treasure.</p>
+            <p>To break <span class="easy medium">all the walls of a hallway</span><span class="hard">a wall</span>, click on the hallway.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="anim"></div>
+               <p id="result"></p>
+            </div>
+            <img src="icon.png" style="display:none">
+            <img id="treasure" src="treasure.png" style="display:none">
+         </div>
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+		 
+		 <div class="easy">
+           <p>In each step you choose to destroy the walls of the corridor that has the least number of walls, of those that lead to rooms that you cannot yet visit.</p>
+           <p>In the example below you should therefore start with the corridor at the bottom right.</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>At each step, we choose to break the wall that has the least amount of bricks, among the walls that allow access to a new room.</p>
+           <p>For example, in the part below, the next wall to break is that consisting of a single brick.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>At each step, we choose to break the least thick wall, among the walls that allow access to a new room.</p>
+           <p>For example, in the part below, the next wall to break is one of the thick walls 13.</p>
+           <img src="sol_hard.png">
+         </div>
+		 
+      </div>
+    </body>
+</html>
