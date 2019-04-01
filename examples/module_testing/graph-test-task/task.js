@@ -367,7 +367,7 @@ function initTask(subTask) {
 
    var initVisuals = function() {
       var settings = {
-         id: "graphEditor",
+         // id: "graphEditor",
          paper: paper,
          graph: graph,
          paperElementID: "anim",
