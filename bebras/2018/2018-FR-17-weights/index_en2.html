@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-EN-17-weights</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"], 
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            scaleInstEasy : "Drag two blue circles\nbelow",
+            scaleInstElse : "Drag a blue circle\nand a yellow square below",
+            drag : "You may drag the shapes here \nto re-organize them as you wish.",
+            heavier : "heavier",
+            lighter : "lighter",
+            heavierInstr : "...heavier",
+            lighterInstr : "lighter...",
+            sameWeight : "same weight",
+            pentOnLeftPan : "Squares only fit on\n the right scale-pan",
+            circleOnRightPan : "Circles only fit on\n the left scale-pan",
+            success: "Congratulations, you have succeeded!",
+            emptyAnswer: "Please fill in all gray circles",
+            wrongAnswer : "The weights of the red circles are now displayed. They are in the wrong order. Click on the restart button. The weights will be shuffled.",
+            tooManyComp : "That's good, you found the correct order. You may restart to try again but using the scale a smaller number of times. The weights will be shuffled.",
+            comparisons : function(nbComparisons) { 
+               if (nbComparisons == 1) {
+                  return "1 comparison:";
+               } else {
+                  return nbComparisons + " comparisons:"; } }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="scale.js"></script>
+      <style>
+            #displayHelper_graderMessage {
+               margin-top: 1em;
+               margin-bottom: 1em;
+               text-align: center;
+               font-weight: bold;
+               color: red;
+            }
+            #paper {
+               margin-top: 20px;
+            }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Scale</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>The blue circles have different weights.
+                  <span class="medium hard"><br/>Each blue circle has exactly one yellow square that has the same weight.</span></p>
+                  <p>Use the scale on the right to compare the weight of<span class="easy"> two blue circles</span><span class="medium hard"> a blue circle and a yellow square</span>.</p>
+                  <p>Sort the blue circles into the gray circles from the lighter to the heavier.</p>
+                  <p class="hard"><b>Use the scale as few times as possible.</b> To get a full score, use the scale at most 16 times.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         <img id="circle" src="circle.png" style="display:none">
+         <img id="square" src="square.png" style="display:none">
+      </div>
+      <div id="solution">
+            <h2>Solution</h2>
+         <!-- description of the solution -->
+		 
+		 <div class="easy">
+           <p>Take the weight <b>A</b>, and compare it to the other two weights. This will allow us to know in which gray circle to put the weight <b>A</b>. There are three possible cases.
+           <ol>
+           <li><p>If <b>A</b> is lighter than <b>B</b> and <b>C</b>, alors <b>A</b> will go in the gray circle to the left, because it is the lightest. It only remains then to compare <b>B</b> and <b>C</b> to know in which order to put them away.</p></li>
+           <li><p>If <b>A</b> is heavier than <b>B</b> and <b>C</b>, so <b>A</b> will go into the gray circle on the far right because it is the heaviest. It remains then more than to compare <b>B</b> and <b>C</b> to know in which order to put them away.</p></li>
+           <li><p>If <b>A</b> is lighter than any of the other weights, so <b>A</b> will go into the middle gray circle. The lighter weight than <b>A</b> will go to his left, and the heavier weight than <b>A</b> will go to his right.</p></li>
+           </ol>
+           </p>
+         </div>
+
+         <div class="medium">
+           <p>Take the round <b>A</b>, and compare it to the 4 square weights. This will allow us to know in which gray circle to put the weight <b>A</b>.
+            There are 4 possible cases.
+           <ol>
+           <li><p>If <b>A</b> is equal to a square weight, and lighter than the other 3, then <b>A</b> will go into the gray circle to the left.</p></li>
+           <li><p>If <b>A</b> is equal to a square weight, is lighter than 2 other squares, and heavier than another square, then <b>A</b> will go into the second gray circle.</p></li>
+           <li><p>If <b>A</b> is equal to a square weight, is lighter than another square, and heavier than two other squares, then <b>A</b> will go into the third gray circle.</p></li>
+           <li><p>If <b>A</b> is equal to a square weight, and heavier than the other 3, then <b>A</b> will go into the gray circle all the way to the right.</p></li>
+           </ol>
+           </p>
+
+           <p>In the following, suppose that <b>E</b> is the square that has the same weight as <b>A</b>. Once you've put <b>A</b> in its place, you have to put away the other round weights. 
+           <ul>
+           <li><p>If we were in the <b>1</b> or <b>4</b> case described above, then the problem of storing the remaining three rounds (i.e. <b>B</b>, <b>C</b>, <b>D</b>) using the three squares whose weight is different from <b>A</b> (that is, say <b>F</b>, <b>G</b>, <b>H</b>) is exactly the same problem we had at the beginning, we just have more than 3 circles and 3 squares instead of having 4 of each. We can proceed in the same way, by comparing <b>B</b> with the 3 squares, in order to determine its position.</p></li>
+           <li><p>If we were in the <b> 2 </ b> case, we know a square that is the only one heavier than <b>A</b>. Just compare this square with the rounds <b>B</b>, <b>C</b>, and <b>D </b> to determine which of these rounds has the same weight as this square . We will know that this round is the heaviest weight, to be placed in the gray circle on the far right.</p></li>
+           <li><p>Similarly, if we were in the <b>3</b> case, we know a square that is the only lighter than <b>A</b>. Just compare this square with the rounds <b>B</b>, <b>C</b>, and <b> D </b> to determine which of these rounds has the same weight as this square . We will know that this round is the lightest weight, to be placed in the gray circle on the left.</p></li>
+           </ul>
+           
+           <p>Once one of these steps above, we are in a situation where we have more than 2 rounds and 2 squares to put away. By comparing one of these circles to the other two squares, we can deduce whether the round considered is the lightest or heaviest of the two remaining rounds. That's enough to put the last two circles in their place.</p>
+         </div>
+
+         <div class="hard">
+           <p>We proceed in the same way as in the 3-star version, simply by performing more steps.</p>
+
+         </div>
+		 
+            <h2>It's computer science !</h2>
+         <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+
+</html>
