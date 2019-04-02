@@ -177,6 +177,14 @@ function initTask(subTask) {
       $("#editEdgeLabel").change(function(){
          automata.setEditEdgeLabelEnabled(this.checked);
       });
+      $("#defaultVertexLabel").off("change");
+      $("#defaultVertexLabel").change(function(){
+         automata.setDefaultVertexLabelEnabled(this.checked);
+      });
+      $("#defaultEdgeLabel").off("change");
+      $("#defaultEdgeLabel").change(function(){
+         automata.setDefaultEdgeLabelEnabled(this.checked);
+      });
    };
 
    function updateAutomata() {
