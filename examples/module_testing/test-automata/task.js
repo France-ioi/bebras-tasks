@@ -14,14 +14,14 @@ function initTask(subTask) {
    var endID = "v_5";
 
    var defaultCircleAttr = {
-      "r": 10, 
-      "fill": "black", 
+      "r": 15, 
+      "fill": "white", 
       "stroke": "black", 
       "stroke-width": 1
    };
    var defaultLineAttr = {
       "stroke": "black",
-      "stroke-width": 4, 
+      "stroke-width": 2, 
       "arrow-end": "long-classic-wide" 
    };
    var seqLettersAttr = {
