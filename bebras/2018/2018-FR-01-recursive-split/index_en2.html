@@ -1,0 +1,549 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-EN-01-recursive-split</title>
+
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "en",
+            "version": "fr.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": ["Mohamed El-Sherif","Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+
+    <script type="text/javascript">
+        var taskStrings = {
+            success: "Congratulations, you have successfully completed this level!",
+            almost: "The result doesn't match the objective precisely, but you still get some points.",
+            error: "The result doesn't match the objective."
+        };
+    </script>
+
+    <script type="text/javascript" src="task.js"></script>
+
+    <style>
+        
+    /* Layout */
+    /* screen < 1100px : 1 seule colonne; */
+        /*==================
+            Generic elements
+        ==================*/
+        .head-title {
+            text-align: center;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 30px;
+        }
+        .img-arrow {
+            width: 40px;
+            height: 50px;
+            display: block;
+            margin: 25px 0 40px 0;
+        }
+        /* grid */
+        .situation {
+            width: 210px;
+            height: 210px;
+        }
+
+        .situation > div {
+            height: 100%;
+        }
+        #result .situation {
+            position: relative;
+            float: left;
+        }
+        .background-0 {
+            background-color: white;
+        }
+
+        .background-1 {
+            background-color: #99FF99;
+        }
+
+        .background-2 {
+            background-color: #3333FF;
+        }
+        
+        /*==================
+            Animation / question elements
+        ==================*/
+        #anim_container {
+            margin-top: 24px;
+            position: relative;
+        }
+        #anim_container:after {
+            content: " ";
+            display: table;
+            clear: both;
+        }
+
+        /* Transformation rules */
+        .transformation-area {
+            float: left;
+            position: relative;
+            display: table;
+            margin-right: 150px;
+            margin-bottom: 54px;
+        }
+        .transformation {
+            margin: 30px 10px 10px 10px;
+            display: table;
+            position: relative;
+        }
+        .transformation .before,
+        .transformation .middle-arrow,
+        .transformation .after,
+        .transformation .transformation-text {
+            display: table-cell;
+            vertical-align: top;
+        }
+        .transformation .before {
+            width: 100px;
+            height: auto;
+            position: relative;
+        }
+        .transformation .before > div {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            border: 1px solid black;
+            display: absolute;
+            left: 10px;
+            top: 10px;
+        }
+        .transformation .after .column-wrapper {
+            width: 100px;
+            height: auto;
+            position: relative;
+        }
+        .transformation .after .column-wrapper > div {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            z-index: 2;
+            position: relative;
+        }
+        .transformation .after table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+
+        .transformation .after table td,
+        .transformation .after table th {
+            border: 1px solid black;
+            width: 50%;
+            height: 50%;
+        }
+        .transformation .title {
+            position: relative;
+            top: 0px;
+            left: 0;
+            margin-top: 0px;
+            /*top: 10px;*/
+            width: 100%;
+        }
+        .transformation-text span {
+            color: red;
+            text-align: left;
+            padding-left: 10px;
+            position: absolute;
+            width: 180px;
+        }
+        .easy.transformation-text span {
+            top: 175px;
+        }
+        .medium.transformation-text span, .hard.transformation-text span {
+            top: 135px;
+        }
+        .transformation-bracket {
+           position: relative;
+           width: 10px;
+           margin-left: 5px;
+           border-right: 2px solid green;
+           border-top: 2px solid green;
+           border-bottom: 2px solid green;
+        }
+        .easy.transformation-bracket {
+           top: 115px;
+           height: 174px;
+        }
+        .medium.transformation-bracket, .hard.transformation-bracket {
+           top: 23px;
+           height: 266px;
+        }
+
+        /* Goal */
+        .grid-container {
+            /*float: left;*/
+            /*margin-bottom: 54px;  same as .transformation-area */
+            position: absolute;
+            right: 60px;
+            top: 0px;
+            box-sizing: border-box;
+        }
+        #objective {
+           margin-top: 10px;
+        }
+        #objective table {
+            border-collapse: collapse;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+            border: none;
+            table-layout: fixed;
+        }
+        #objective table td,
+        #objective table th {
+            border: 1px solid black;
+            width: 25%;
+            height: 25%;
+        }
+        #objective.hard_table table td,
+        #objective.hard_table table th {
+            width: 12.5%;
+            height: 12.5%;
+        }
+
+        /*==================
+            Result
+        ==================*/
+
+        #result {
+            padding-bottom: 40px;
+        }
+        .result-area {
+            display: table;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .result-area > div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .sub-title {
+            position: absolute;
+            text-align: center;
+            height: 20px;
+            top: -30px;
+            left: 0;
+            right: 0;
+        }
+        .result-title {
+            display: block;
+            position: absolute;
+            height: 20px;
+            top: -55px;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+        }
+
+        .initial-situation {
+            position: relative;
+            width: 210px;
+            height: 210px;
+            border: 1px solid;
+            float: left;
+        }
+        .after1-situation table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+        .after1-situation table td,
+        .after1-situation table th {
+            border: 1px solid black;
+            width: 50%;
+            height: 50%;
+        }
+        .after2-situation table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+        .after2-situation table td,
+        .after2-situation table th {
+            border: 1px solid black;
+            width: 25%;
+            height: 25%;
+        }
+        .after3-situation table {
+            border-collapse: collapse;
+            width: 100%;
+            height: 100%;
+        }
+        .after3-situation table td,
+        .after3-situation table th {
+            border: 1px solid black;
+            width: 12.5%;
+            height: 12.5%;
+        }
+        .situation-hidden {
+            width: 45%;
+            border: 1px solid;
+            border-top: 1px dashed;
+            border-bottom: 1px dashed;
+            float: left;
+            position: relative;
+        }
+        .situation-hidden + .situation-hidden {
+            margin-left: 5%;
+        }
+        .situation-hidden .sub-title {
+            margin-top: -25px;
+        }
+        .hard.transformation {
+            margin-bottom: 23px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="task">
+        <h1>Painting Rules</h1>
+
+        <div id="tabsContainer"></div>
+
+        <div id="taskContent">
+            <p id="difficultyWarning" class="hard"></p>
+
+            <div id="zone_1">
+                <div class="consigne">
+                  <p>
+                     If a Beaver has a white square, he will divide and paint it as shown in the Painting Rules.
+                  </p>
+                  <p class="easy medium">
+                     The Beaver divided the white square into 4 small squares then paint it to blue and green.
+                  </p>
+                  <p class="easy medium">
+                     Then the Beaver will divide each square into 4 smaller squares, then paint it with <span class="easy">white, </span>green or blue.
+                  </p>
+                  <p class="hard">
+                     He will start with a white square, and color it into 4 smaller squares, white, green or blue.
+                  </p>                  
+                  <p class="hard">
+                     Then color each of these squares into 4 smaller squares, white, greeen or blue.
+                  </p>                  
+                 <p class="hard">
+                     Then color each of these smaller squares into 4 even smaller squares, white, green or blue.
+                  </p>                  
+                  <p>
+                     Guess the Painting Rules for the Green and Blue Squares by clicking on the white squares beside them in order to make the Result Grid as the Objective Grid.
+                  </p>
+                </div>
+            </div>
+
+            <div id="zone_2">
+                <div id="anim_container">
+                    <div class="transformation-area">
+                        <span class="head-title">Painting Rules</span>
+
+                        <div class="easy medium transformation">
+                            <div class="before">
+                                <span class="title">Before</span>
+                                <div class="background-0"></div>
+                                <div class="background-1"></div>
+                                <div class="background-2"></div>
+                            </div>
+                            <div class="middle-arrow">
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                            </div>
+                            <div class="after">
+                                <span class="title">After</span>
+                                <div class="column-wrapper">
+                                    <div class="option-1"></div>
+                                    <div class="option-2"></div>
+                                    <div class="option-3"></div>
+                                </div>
+                            </div>
+                            <div class="easy transformation-bracket"></div>
+                            <div class="medium transformation-bracket"></div>
+                            <div class="easy transformation-text"><span>Click on the Squares to Change the colors.</span></div>
+                            <div class="medium transformation-text"><span>Click on the Squares to Change the colors.</span></div>
+                        </div>
+
+                        <div class="hard transformation">
+                            <div class="before">
+                                <span class="title">Before</span>
+                                <div class="background-0"></div>
+                                <div class="background-1"></div>
+                                <div class="background-2"></div>
+                            </div>
+                            <div class="middle-arrow">
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                                <img src="arrow.jpg" class="img-arrow" />
+                            </div>
+                            <div class="after">
+                                <span class="title">After</span>
+                                <div class="column-wrapper">
+                                    <div class="option-1"></div>
+                                    <div class="option-2"></div>
+                                    <div class="option-3"></div>
+                                </div>
+                            </div>
+                            <div class="hard transformation-bracket"></div>
+                            <div class="hard transformation-text"><span>Click on the Squares to change the colors.</span></div>
+                        </div>
+                    </div>
+
+                    <div class="grid-container">
+                        <span class="head-title">Objective Grid</span>
+                        <div id="objective" class="situation"></div>
+                    </div>
+                </div>
+
+                <div id="result">
+                    <div class="result-area">
+                    <!-- Initial state -->
+                        <div class="initial-situation">
+                            <span class="sub-title">
+                                Initial Square 
+                            </span>
+                        </div>
+                        <div class="middle-arrow">
+                            <img src="arrow.jpg" class="img-arrow" />
+                        </div>
+                        <!-- State after 1 transformation -->
+                        <div class="situation easy medium">
+                            <span class="sub-title">
+                                After the First Painting
+                            </span>
+                            <div class="after1-situation"></div>
+                        </div>
+                        <div class="hard">
+                            <div class="situation">
+                                <div class="situation-hidden">
+                                    <span class="sub-title">
+                                        Painting is Hidden
+                                    </span>
+                                </div>
+
+                                <div class="situation-hidden">
+                                    <span class="sub-title">
+                                        Painting is Hidden
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="middle-arrow">
+                            <img src="arrow.jpg" class="img-arrow" />
+                        </div>
+                        <!-- Final state -->
+                        <div class="situation easy medium">
+                            <span class="result-title">
+                                Result Grid
+                            </span>
+                            <span class="sub-title">
+                                After the second Painting
+                            </span>
+                            <div class="after2-situation"></div>
+                        </div>
+
+                        <div class="situation hard">
+                            <span class="result-title">
+                                Result
+                            </span>
+                            <span class="sub-title">
+                                After the third Painting
+                            </span>
+                            <div class="after3-situation"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>Solution</h2>
+
+         <div class="easy">
+           <p>After the first coloring, the two boxes on the right half are colored green. To get the objective after the second coloring step, the coloring rule for a green square must match the pattern repeated twice on the right half of the objective. So let's fix the following coloring rule:</p>
+           <img src="sol_easy_1.png">
+           <p>We then obtain the first half of the result :</p>
+           <img src="sol_easy_2.png" style="width:600px">
+           <p>In the same way, we can define the coloring rule of a blue box, by copying the repeating pattern twice on the left half of the objective. </p>
+           <p>In summary, we obtain the desired result with the following rules: </p>
+           <img src="sol_easy_3.png">
+         </div>
+
+         <div class="medium">
+           <p>In the first step, we color a white square in 4 green or blue squares. To choose the color of the boxes, we must take into account the reasons visible in the objective: the top quarter on the left is identical to the quarter on the bottom right, and likewise the top quarter on the right is identical to the quarter at the bottom to the left. You have to reflect these symmetries in the coloring rule for a white square, for example like this :</p>
+           <img src="sol_medium_1.png">
+           <p>We then obtain :</p>
+           <img src="sol_medium_2.png" style="width:600px">
+           <p>It remains to determine the rules for the second coloring step. The coloring rule for the green boxes must be used to obtain the pattern appearing in the top right quarter and the quarter bottom left of the objective.</p>
+           <img src="sol_medium_3.png">
+           <p>We then obtain :</p>
+           <img src="sol_medium_4.png" style="width:600px">
+           <p>The coloring rule for the blue boxes must be used to obtain the pattern appearing in the other two quarters of the objective.</p>
+           <p>In summary, you can get the objective with the following rules :</p>
+           <img src="sol_medium_5.png">
+           <p>Note that we can also succeed by inverting the colors in the first step; here is the alternative solution:</p>
+           <img src="sol_medium_6.png">
+
+         </div>
+
+         <div class="hard">
+           <p>Observe the patterns formed by all squares of 4 squares that appear in the objective.</p>
+           <img src="sol_hard_0.png">
+           <p>We see that there are 3 different types of patterns :</p>
+           <img src="sol_hard_1.png">
+           <p>It will inevitably be necessary to use these reasons like rules of coloring. It remains to be seen which will correspond to each color.</p>
+           <p>To find the pattern that corresponds to the coloring rule for white, cut the objective into 4 squares (16 squares each) :</p>
+           <img src="sol_hard_2.png">
+           <p>We can then observe that the two squares of the top are identical, while the two squares of the bottom both have different patterns.</p>
+           <p>We deduce that the rule of coloring white is, among the 3 patterns identified above, the one with the two upper squares of the same color.</p>
+           <img src="sol_hard_3.png">
+           <p>Once we have found the first step, we have to use the other two patterns identified as coloring rules for green and blue. There are only two possibilities, which can be tested very quickly (or else we can think, but it takes more time here!).</p>
+           <p>In summary, the solution is :</p>
+           <img src="sol_hard_4.png">
+         </div>
+
+        <h2>It's informatics!</h2>
+
+    </div>
+
+    <!-- task-solution -->
+</body>
+
+</html>

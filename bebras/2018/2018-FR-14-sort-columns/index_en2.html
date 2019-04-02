@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-EN-14-sort-columns</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "Objective",
+            sort : "sort",
+            nSortText : function(nSort) {
+               return "Number of sortings: " + nSort;
+            },
+            trick : "Suggestion: the solution is easier to find\nby focusing only on the spheres in the objective.",
+            success: "Congratulations, you have succeeded!",
+            wrongAnswer: "The column highlighted in red is not in the correct location.",
+            tooManySort : "You managed to sort the columns correctly. Start again and try to solve it using only 3 buttons."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #paper {
+            margin-top: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Sort Columns</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id=zone_1>    
+               <div class=consigne>
+                  <p>When you Click on a "Sort" button the <b>order of the columns</b> will be changed. So that
+                  <span class="easy">the small circles will be placed to the left of the big circles on the row of the clicked button.</span>
+                  <span class="medium">the circles are sorted from the smallest on the left to the biggest on the right On the row of the clicked button,.</span>
+                  <span class="hard">the circles are sorted by increasing order on the row of the clicked button.</span>
+                  </p>
+                  <p>Click on the Sort buttons to sort the columns as shown in the Objective Diagram.</p>
+                  <p class="medium hard">To obtain a full score, do this in 3 steps.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+      <!-- description of the solution -->
+	  
+	  <div class="easy">
+              <p>Recall the tip in the subject: the solution is more easily by studying only the spheres of the goal. </P>
+               <p> The last sorting step should place small spheres on the left and large spheres on the right. The last step must be <b> c </b>, <b> e </b>, or <b> f </b>. For example, suppose that <b> c </b> is the last step. </P>
+              <img src="sol_easy_1.png">
+              <p>Thus, the column <b> D </b> will be placed on the far left. It will be necessary in the previous steps to ensure that the rods <b> A </b>, <b> B </ b>, and <b> C </b> are sorted in the correct order. For example, we can ensure that the column <b> A </b> is left by sorting the line <b> e </b> at the penultimate step.</p>
+              <img src="sol_easy_2.png">
+              <p>To place the column <b> B </b> to the left of the column <b> C </b>, you can start by sorting according to the line <b>f</b>.</p>
+              <img src="sol_easy_3.png">
+              <p>In summary, one solution is to sort the lines <b>f, e, c</b> (in this order).</p>
+              <p>There were many other solutions, for example <b>b, f, e</b>, ou <b>d, c, f</b>, or <b>e, c, f</b>, etc...</p>
+            </div>
+
+            <div class="medium">
+              <p>Recall the tip in the subject: the solution is more easily by studying only the spheres of the goal. </P>
+               <p> The last sorting step is to arrange the spheres from the smaller to the left to the larger ones to the right. The last step must be a sort of the line <b> c </b> or the line <b> e </b>. Suppose for example that <b> c </b> is the last step.</p>
+              <img src="sol_medium_1.png">
+              <p>Thus, the column <b> A </b> will be placed on the far right. It will be necessary in the preceding steps to ensure on the one hand that the rod <b> B </b> is to the left of the rod <b> C </b>, and on the other hand that the rods <b> D </b>, <b> E </b> and <b> F </b> are placed in the correct order. </P>
+               <p> To place <b> B </b> to the left of <b> C </b>, there is only one possibility, it is to sort according to the line <b> a </b> at a time before the last step.</p>
+              <img src="sol_medium_2.png">
+              <p>It remains to put the rods <b> D </b>, <b> E </b> and <b> F </b> in the right order. The line <b> e </b> is the only one that places the column <b> D </b> to the left of the column <b> E </b>. To place the column <b> E </b> to the left of the column <b> F </b>, this can be done beforehand by sorting the line <b> a </b> , which we have already planned to perform. </p>
+              <img src="sol_medium_3.png">
+              <p>In summary, one solution is to sort the lines <b> a, e, c </b> (in that order).</p>
+              <p>There was another solution: if we choose to end with the line <b> e </b>, applying a similar reasoning, we find the solution <b>a, c, e</b>.</p>
+
+            </div>
+
+            <div class="hard">
+              <p>Recall the tip indicated in the subject: the solution is more easily by studying only the spheres of the lens.</p>
+              <p>The last sorting step should arrange the spheres in ascending order of numbers. The last step is therefore necessarily a sort of the line <b>d</b>.</p>
+              <img src="sol_hard_1.png">
+              <p>Sorting the line <b> d </b> will arrange the columns in 3 groups: a group on the left formed columns <b>A</b>, <b>B</b> et <b>C</b>, a group in the middle formed of the columns <b> D </b>, <b> E </b> and <b> F </b>, and a group on the right formed of the columns <b> G </b> and <b> H </b>. On the other hand, inside each group, the columns will not necessarily be in the right order.</p>
+              <p>The rods <b> A </b>, <b> B </b> and <b> C </b> can be placed in the correct order in one step, sorting in the penultimate step according to the line <b> f </b>. Sorting along this line allows you to place the <b> G </b> and <b> H </b> columns in the same order at the same time.</p>
+              <img src="sol_hard_2.png">
+              <p>It remains to sort the middle group, formed of rods <b> D </b>, <b> E </b> and <b> F </b>. Sorting the <b> f </b> line that you plan to perform allows <b> D </b> to be placed to the left of <b> E </b> and <b> F </b> as desired. However, there is still a way to place <b> E </b> to the left of <b> F </b>. If we compare the numbers on the rods <b> E </b> and <b> F </b>, we can see that the line <b> g </b> is the only one that allows to place <b> E </b> to the left of <b>F</b>.</p>
+              <img src="sol_hard_3.png">
+              <p>In short, the solution is to sort the lines <b> g, f, d </b> (in that order).</p>
+              <img src="sol_hard_4.png">
+           </div>
+	  
+         <h2>It's computer science !</h2>
+      <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+</html>
+

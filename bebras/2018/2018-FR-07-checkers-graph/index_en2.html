@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-EN-07-checkers-graph</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+             success: "Congratulations, you have succeeded!",
+             errorWrongEdge: "The connexion marked in red should not be there.",
+             errorMissingEdge: "The connexion marked in red is missing in the current situation.",
+             connectTokens: function(srcToken, dstToken, direction) {
+                var message = srcToken + " is linked to " + dstToken + " because it is on the same ";
+                if (direction == "vertical") {
+                  message += "column.";
+                } else {
+                  message += "row.";
+                }
+                return message;
+             },
+             connexionsInBlue: "These tokens are colored in blue in the diagram.",
+             noConnexions: function(srcToken) {
+               return "No token on the same row or column as " + srcToken + ", so we don't add connexions."
+             }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #board
+         {
+            width : 450px;
+            margin: 10px 10px;
+         }
+         #board, #graphContainer
+         {
+            display: inline-block;
+            vertical-align: top;
+         }
+         #target
+         {
+            margin-bottom: 15px;
+         }
+         #graphContainer
+         {
+            width: 200px;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+         }
+         .graphTitle {
+            margin-bottom: 0.5em;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #layoutTable {
+          margin-top: 20px;
+         }
+         #layoutTable td {
+            vertical-align: top
+         }
+         td#layoutTableFirstCol {
+            width: 480px;
+         }
+         #message {
+            color: green;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Checker's graph</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1"> 
+               <div class="consigne">
+            <p>A line will connect a circles, If they are in the same row or column.</p>
+            <p>Drag the circles on the grid to make "Your Diagram" the same as the "Objective Diagram".</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <table id="layoutTable">
+                  <tr><td id="layoutTableFirstCol">
+                     <div id="board"></div>
+                     <div id="message"></div>
+                  </td><td>  
+                  <div id="graphContainer">
+                     <div class="graphTitle">Objective Diagram</div>
+                     <div id="target"></div>
+                     <div class="graphTitle">Your Diagram</div>
+                     <div id="current"></div>
+                  </div>
+               </td></tr></table>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div><!-- #task -->
+      <div id="solution">
+         <h2>Solution</h2>
+      <!-- description of the solution -->
+	  
+	  <div class="easy">
+           <p>To connect <b>A</b> and <b>B</b>, put these tokens on the same line.</p>
+           <img src="sol_easy_1.png">
+           <p>To connect <b>B</b> and <b>C</b>, we must place <b>C</b> on the same line or on the same column as <b>B</b>.</p>
+           <p>But if we place <b>C</b> on the same line as <b>B</b>, so we get a line between <b>A</b> and <b>C</b> that we do not want to have.</p>
+           <img src="sol_easy_2.png">
+           <p>So we have to place <b>C</b> on the same column as <b>B</b>. For example as well :</p>
+           <img src="sol_easy_3.png">
+           <p>It remains to place <b>D</b>. So that <b>D</b> be connected to <b>C</b>, more than <b>D</b> is not connected to <b>B</b> Into <b>A</b>, we must place <b>D</b> on the same line as  <b>C</b>, while avoiding the column of <b>A</b>. Here is a solution :</p>
+           <img src="sol_easy_4.png">
+           <p>There are many other solutions, here is another example :</p>
+           <img src="sol_easy_5.png">
+         </div>
+
+         <div class="medium">
+           <p>To connect <b>A</b> and <b>B</b> and <b>C</b> all three of them, put these tokens on the same line.</p>
+           <img src="sol_medium_1.png">
+           <p>Then, To connect <b>D</b> to <b>B</b>, but without linking <b>D</b> to <b>A</b> or to <b>C</b>, we must place <b>D</b> on the same column as <b>B</b>.</p>
+           <img src="sol_medium_2.png">
+           <p>Finally, To connect <b>E</b> to <b>C</b> and <b>D</b>, we must place <b>E</b> on the same column as <b>C</b> and on the same line as <b>D</b>.</p>
+           <img src="sol_medium_3.png">
+         </div>
+
+         <div class="hard">
+           <p>An effective method is to focus on the "triangles" that are formed in the objective design. Indeed, a triangle linking 3 tokens indicates that these 3 tokens are on the same line or the same column.</p>
+           <p>To connect <b>A</b> and <b>D</b> and <b>G</b> all three of them, put these tokens on the same line. Then, To connect <b>D</b> and <b>C</b> and <b>F</b> all three of them, let's put these chips on the column of <b>D</b>.</p>
+           <img src="sol_hard_1.png">
+           <p>To connect <b>H</b> and <b>E</b> and <b>C</b> all three of them, we place <b>H</b> and <b>E</b> on the line of <b>C</b>, while avoiding the columns already used. </p>
+           <img src="sol_hard_2.png">
+           <p>Finally, To connect <b>B</b> to <b>E</b> and to <b>F</b>, we must place <b>B</b> to both on the same column as <b>E</b> and on the same line as <b>F</b>.</p>
+           <img src="sol_hard_3.png">
+         </div>
+	  
+         <h2>It's informatics&nbsp;!</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+   </div>
+   </body>
+</html>
+

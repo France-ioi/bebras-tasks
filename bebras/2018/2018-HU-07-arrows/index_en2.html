@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2018-EN-07-arrows</title>
+      <script>
+           window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "en",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Congratulations, you have succeeded!",
+            errorWhiteArrow: "In the red cell is an arrow that still needs to be colored.",
+            errorWrongArrow: function(arrowColor, nbPointedArrows, nbRequiredArrows) {
+               var pluralRequired = "";
+               if (nbRequiredArrows > 1) {
+                  pluralRequired = "s";
+               }
+               var pluralPointed = "";
+               if (nbPointedArrows > 1) {
+                  pluralPointed = "s";
+               }
+               return "In the red cell is a " + arrowColor + " arrow that should point towards " + nbRequiredArrows + " " + arrowColor + " arrow" + pluralRequired + " " + ",<br/> but that currently points towards " + nbPointedArrows + " " + arrowColor + " flèche" + pluralPointed + ".";
+            },
+            blue: "blue",
+            yellow: "yellow",
+            fixedArrow: "The arrow in the center can't be changed",
+            blueSymbol: "B",
+            yellowSymbol: "Y",
+            undo: "Undo"            
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         ul {
+            list-style-type: none;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         li
+         {
+            margin-bottom: 5px;
+         }
+         li * {
+            display: inline-block;
+         }
+         .instruction_arrow {
+            position:relative;
+            top:15px;
+         }
+         ul {
+            position:relative;
+            top:-15px;
+         }
+         #instructions {
+            margin-left: 1em;
+         }
+         #instructions td {
+            vertical-align: top;
+            padding-bottom: 1em;
+            padding-right: 0.5em;
+         }
+         .very_hard {
+            display: none;
+         }
+         .largeScreen #example1 {
+            display:none;
+         }
+         #example2 {
+            display:none;
+         }
+         .largeScreen #example2 {
+            display:block;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Pointing Arrows</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">
+               <div class="consigne">
+                  <div id="example1" style="float:right"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Example</b><br/><img src="example_en.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                   <p>Colorize all the arrows in the grid by yellow or blue according to <span class="easy medium very_hard">the following rule</span><span class="hard">the two following rules</span>:</p>
+                  <p class="easy medium very_hard"><span style="font-weight:bold">The arrow must find <span class="easy medium">one arrow</span><span class="very_hard">two arrows</span> of the same color in his direction.</span></p>
+                  <table id="instructions" class="hard">
+                     <tr>
+                        <td><span id="instructions_blue" class="instruction_arrow"></span></td>
+                        <td><br/> The blue arrow must find <b>two blue arrows</b> in his direction.</td>
+                     </tr>
+                     <tr>
+                        <td><span id="instructions_yellow" class="instruction_arrow"></span></td>
+                        <td><br/> The yellow arrow must find <b>one yellow arrow</b> in his direction.</td>
+                     </tr>
+                  </table>
+                  <p>Click on an arrow to change its color.</p>                  
+                  <div id="example2"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>Example</b><br/><img src="example_en.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                  <div style="clear:both"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center style="clear:both"><table>
+                  <tr>
+                  <td><div id="grid"></div></td>
+                  </tr>
+               </table></center>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+         <!-- description of the solution -->
+		 
+		 <div class="easy">
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_easy_1.png"></td>
+               <td>The arrow given at the beginning indicates that it is necessary to place a blue arrow on its right.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_2.png"></td>
+               <td>The arrow just added indicates that you need to place a blue arrow underneath.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_3.png"></td>
+               <td>In the right column, the blue arrow just added in the bottom corner points to the blue arrow just above. So there is already a blue arrow in his direction. To avoid having a second, it is necessary to place a yellow arrow at the top of this column.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_4.png"></td>
+               <td>The arrow in the middle of the top row points to a yellow arrow. This arrow must be yellow.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_5.png"></td>
+               <td>On the top row, the right yellow arrow already points to a yellow arrow, the middle one. To avoid it pointing to two yellow arrows, you must necessarily place a blue arrow at the top left.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_6.png"></td>
+               <td>The arrow in the middle of the left column points to a blue arrow. This arrow must be blue.</td>
+            </tr>
+               <td><img src="sol_easy_7.png"></td>
+               <td>In the left column, the blue arrow from above points to the blue arrow just below. So there is already a blue arrow in his direction. To avoid having a second, it is necessary to place a yellow arrow at the bottom of this column.</td>
+            </tr>
+               <td><img src="sol_easy_8.png"></td>
+               <td>The yellow arrow at the bottom left should point to a yellow arrow. You must place one in the remaining box of the bottom row.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_easy_9.png"></td>
+               <td>It's finished !</td>
+            </tr>
+            </table>
+         </div>
+
+         <div class="medium">
+            <p>Before starting, we can notice that the problem is "symmetrical" between the yellow and blue colors, in the sense that if we have a solution to the problem, then by changing all the blue arrows by yellow arrows and all the arrows yellow with blue arrows, we obtain another solution. From this remark, we can deduce that we are free to choose as we want the color of the first arrow we put: it can not be a bad choice that would prevent us from reaching a solution. </p>
+            <p>In the following, we will always start by placing a blue arrow. </p>
+            <p>We will try different starts, in order to find one that "forces" us to pose arrows of certain colors. Thus, we can progress in coloring arrows without ever being wrong.</p>
+            <p><b>First attempt.</b> Let's first assume that we first fill the first row. There are two different ways to fill it while respecting the coloring rules :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_b1.png"></td>
+               <td>A first way.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_b2.png"></td>
+               <td>A second way.</td>
+            </tr>
+            </table>
+            <p>Since there are two possibilities, we can not be sure which one to take. Let's try otherwise.</p>
+
+            <p><b>Second try.</B> Now suppose we start filling the last row. Again, there are two different ways to fill it while respecting the coloring rules :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_c1.png"></td>
+               <td>A first way.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_c2.png"></td>
+               <td>A second way.</td>
+            </tr>
+            </table>
+            <p>Since there are two possibilities, we can not be sure which one to take. Let's try a third approach.</p>
+
+            <p><b>Third attempt.</b> Suppose now that we start by filling the diagonal rising, which is interesting because it also has two arrows pointing to each other.
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_d1.png"></td>
+               <td>Let's start, as previously explained, by putting a blue arrow.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_d2.png"></td>
+               <td>If we put a second blue arrow, we are stuck, because the third box of the diagonal can not be yellow or blue, because the arrow it contains points to two blue arrows.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_1.png"></td>
+               <td>We deduce that the second arrow must be yellow (since it can not be blue), then the third must be blue (since the blue arrow of the corner must point to another blue arrow).</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_2.png"></td>
+               <td>The yellow arrow in the middle imposes two more yellow arrows.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_3.png"></td>
+               <td>In the right column, the middle arrow can not be yellow because it points to at least two yellow arrows. It is therefore colored in blue.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_4.png"></td>
+               <td>The last added blue arrow imposes two new blue arrows.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_5.png"></td>
+               <td>On the bottom row, the second arrow can not be blue, otherwise the third arrow would point to two blue arrows. So the second arrow is to be colored in yellow.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_6.png"></td>
+               <td>The addition of this yellow arrow imposes two new yellow arrows.</td>
+            </tr>
+               <td><img src="sol_medium_7.png"></td>
+               <td>The last arrow must be blue, so that the arrow in the top right corner points to a single yellow arrow. <br/><br/>It's finished !</td>
+            </tr>
+
+            </table>
+
+
+         </div>
+
+         <div class="hard">
+            <p>It is wise to start by trying to fill a line with the maximum of "constraints", such as arrows pointing to each other. For example, let's study the rising diagonal. The box at the bottom left can be yellow or blue.</p>
+
+            <p><b>First attempt.</b> Let's try to color the bottom left box in yellow :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_b1.png"></td>
+               <td>If the next box in the direction of the yellow arrow was also yellow, we would be stuck for the next arrow because we would need an arrow <b>2J</b>, but we do not have any. So the next box is blue.<br/><br/> The next arrow on the diagonal points to a yellow arrow and a blue arrow, so color it <b>1J</b> (because <b> 2B </ b> is invalid, and we have no <b>1B</b> arrow). </td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b2.png"></td>
+               <td>The arrow <b>2B</b> we impose two blue arrows.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b3.png"></td>
+               <td>The arrow <b>2B</b> from the middle imposes on us two more blue arrows.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b4.png"></td>
+               <td>At this point, we are stuck because the arrow <b>2B</b> framed in red can not point to two blue arrows.</td>
+            </tr>
+            </table>
+
+            <p><b>Second attempt.</b> Since the arrow at the bottom left can not be yellow, it must be blue.
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_0.png"></td>
+               <td>So let's start with a blue corner.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_c2.png"></td>
+               <td>If the third arrow of the rising diagonal was yellow, then we would be stuck, because we should put a yellow arrow on the box between the two colored arrows, and we could not then place two blue arrows on the diagonal as indicated the arrow <b>2B</b> of the starting corner.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_1.png"></td>
+               <td>We deduce that the third arrow must be blue.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_2.png"></td>
+               <td>This second blue arrow must point to two blue arrows, so the middle arrow is colored in blue.<br/><br/> Then, to avoid that the arrow of the bottom left corner points to three blue arrows, you must color in yellow the arrow of the corner at the top right.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_3.png"></td>
+               <td>The second arrow <b>2B</b> imposes two new blue arrows.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_4.png"></td>
+               <td>One of these new arrows still requires two new blue arrows.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_5.png"></td>
+               <td>We deduce two more blue arrows.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_6.png"></td>
+               <td>In the third row, to avoid having three blue arrows, the arrow on the far right should be yellow.<br/><br/>
+               This arrow <b>1J</b> already pointed to another yellow arrow, you must put a blue arrow in the hole of the right column.</td>
+            </tr>
+               <td><img src="sol_hard_7.png"></td>
+               <td>The arrow <b>2B</b> added already points to two blue arrows, so you have to complete the second row with a yellow arrow.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_8.png"></td>
+               <td>The addition of this yellow arrow imposes two new yellow arrows.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_9.png"></td>
+               <td>The last arrow must be yellow, so that the arrow in the bottom right corner points to only two blue arrows. <br/><br/>It's finished !</td>
+            </tr>
+
+            </table>
+		 
+         <h2>It's informatics!</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+</html>
+

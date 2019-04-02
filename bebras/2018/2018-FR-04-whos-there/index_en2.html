@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+
+   <head>
+      <meta charset="utf-8"></meta>
+      <title>2018-EN-04-whos-there</title>
+      <script>
+         window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+            ]);
+      </script>
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+         };
+      </script>
+      <script type="text/javascript">
+       var shapeGroup = function (isPair, isFirst) {
+         var s = "3 ";
+         s += (isFirst) ? "" : "new similar ";
+         s += (isPair) ? "pairs of " : "";
+         s += "shapes";
+         return s;
+      }
+      var taskStrings = {
+            start: "Start",
+            restart: "Restart",
+            inHouse: "Entrance",
+            outHouse: "Exit",
+            clickGroup: function (isPair, isFirst) {
+               return "Click here as soon as the house\n contains " + shapeGroup(isPair, isFirst) + " similar"; 
+               },
+            resume: function (isPair, isFirst) {
+               return "Good Job. Click here to continue\n finding " + shapeGroup(isPair, isFirst) + " similar"; 
+               },
+            errorWrong: function (isPair, isFirst) {
+               return "The house doesn't contain " + shapeGroup(isPair, isFirst) + " similar"; 
+               },
+            errorMiss: function (isPair, isFirst) { 
+               return "You missed a group of " + shapeGroup(isPair, isFirst) + " similar"; 
+               },
+            shapeInHouse: "Here are the shapes that are currently in the house:",
+            shapeList: "Here are the shapes that can enter the house:",
+            shapeListInPairs: "Here is a list of different shapes that may enter the house:",
+            suboptimal: "You didn't find three groups.",
+            drawInCanvas: "To help you remember, add dots or lines here.", // one line only, otherwise it causes a bug
+            success: "Success!",
+            partial: "You receive some of the points.",
+            failure: "You receive no points."
+         };
+      </script>
+      <script type="text/javascript" src="raphael.sketchpad.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .bold {
+           font-weight: bold;
+         }
+         #canvas {
+           width: 600px;
+           margin: auto;
+           border: 1px solid black;
+         }
+         #canvasButtons {
+           text-align: center;
+           margin: 20px 0;
+         }
+         #canvasButtons button {
+           padding: 5px 20px;
+         } 
+         #valider {
+           display: block;
+           margin: auto;
+           width: 9em;
+         }
+      </style>
+   </head>
+
+   <body>
+      <div id="editor"></div>
+
+      <div id="task">
+         <h1>Who's there</h1>
+         <div id="tabsContainer"></div>
+
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Click on the big "Start" button to let the shapes enter<span class="medium bold"> or leave</span> the house, <span class="easy medium">one by one</span><span class="hard">as pairs</span>.</p>
+                  <p>You can use the empty box below to draw dots or lines to remind yourself about what is going on.</p> 
+                  <p>At the beginning, the house is empty.</p>
+                  <p>Click on the Big Gray Button when 3 similar <span class="hard bold">pairs of shapes</span><span class="easy medium">shapes</span> are in the house to get a score. Detect it 3 times to get the full score.
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="housePaper"></div>
+               <div id="shapeListPaper"></div>
+               <div id="canvas"></div>
+               <div id="canvasButtons">
+                  <button type="button" class="btn btn-default" id="undoTagButton">Undo</button>
+                  <button type="button" class="btn btn-default" id="redoTagButton">Redo</button>
+               </div>
+            </div>
+         </div>
+         <img id="shape1" src="1.png" style="display:none">
+         <img id="shape2" src="2.png" style="display:none">
+         <img id="shape3" src="3.png" style="display:none">
+         <img id="shape4" src="4.png" style="display:none">
+         <img id="shape5" src="5.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+         <img id="arrow" src="arrow.png" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>Solution</h2>
+		 
+		 <div class="easy">
+           <p>For each shape that enters the house, one can draw a point below the corresponding shape.</p>
+           <p>For example, during a game, you can get the drawing below.</p>
+           <img src="sol_easy1.png">
+           <p>This drawing indicates that we have seen 1 diamond, 3 squares, 1 triangle, 3 hexagons, and 2 stars.</p>
+          </div>
+
+         <div class="medium">
+           <p>For each shape that enters the house, one can draw a point below the corresponding shape. For each shape that comes out of the house, you can hide the point with a line.</p>
+           <p>For example, during a game, you can get the drawing below. </p>
+           <img src="sol_medium1.png">
+           <p>This drawing indicates that we saw two diamonds enter one of which 1 came out, we saw 4 squares of which 2 came out, we saw 4 triangles of which 3 came out, and we saw 4 hexes, none of which came out.</p>
+         </div>
+
+         <div class="hard">
+           <p>To note the pairs of shapes that enter the house, several methods are possible, including the following three :</p>
+           <p><b>The first method</b> is to draw, before starting, all possible pairs. It takes a little time because you have to draw 12 shapes, but then it's very easy. Just add one point for each pair of shape that enters the house. Here is an example :</p>
+           <img src="sol_hard3.png">
+           <p><b>The second method</b> is even more effective because it only requires drawing 3 shapes. We begin by drawing the three possible shapes on the left. When a pair of shapes arrives, we find the line corresponding to the first form, the column corresponding to the second form, and we draw a point. Here is an example :</p>
+           <img src="sol_hard2.png">
+           <p><b>The third method</b> does not require any prior drawing. The idea is to use traits. For each pair of shapes that enter the house, draw a line connecting the two forms that constitutes the pair. Here is an example :</p>
+           <img src="sol_hard1.png">
+           <p>However, this representation requires a little more care than others to be well organized during the game, in order to be able to detect when the house contains 3 identical pairs. </p>
+
+         </div>
+
+		 
+         <h2>It's infromatics!</h2>
+      </div>
+      <!-- task-solution -->
+   </body>
+
+</html>

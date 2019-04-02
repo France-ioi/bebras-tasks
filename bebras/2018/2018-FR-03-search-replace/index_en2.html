@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2018-EN-03-search-replace</title>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0', 'raphaelButton-1.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": ["Arthur Charguéraud","Mohamed El-Sherif","Eslam Wageed"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+    var taskStrings = {
+          error: "The current sequence doesn't exactly match the objective.",
+          success: "Success!",
+          before: "Replace",
+          after: "with",
+          replacedShape : function(nbReplaced, sameShape) {
+            if (sameShape) {
+               return "Replacing a shape with the same shape doesn't change the current sequence."
+            } else if (nbReplaced == 0) {
+               return "The sequence doesn't change because the first shape you selected is not present in it.";
+            } else if (nbReplaced == 1) {
+               return "A replacement has been done."
+            } else {
+               return nbReplaced + " replacements have been done."
+            }
+          },
+          undo: "Undo"
+       };
+      </script>
+      <script type="text/javascript" src="shape-paths.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         body * {
+            box-sizing: content-box;
+         }
+        #solution img {
+            border-top: solid black 1px;
+            border-bottom: solid black 1px;
+         }
+         #firstShape, #lastShape {
+           display: inline-block;
+           vertical-align: middle;
+           padding: 5px;
+           width: 30px;
+           height: 30px;
+         }
+         #taskContent {
+         }
+         .shape {
+           margin: 5px;
+         }
+         #undoBtnContainer {
+           text-align: center;
+           margin: 15px 0;
+         }
+         #taskProcess {
+           position: relative;
+           margin-top: 30px;
+         }
+         #taskProcess span {
+           vertical-align: middle;
+           display: inline-block;
+           height: 100%;
+           line-height: 40px;
+         }
+         .shapes {
+            margin-bottom: 5px;
+            text-align: center;
+         }
+         #topBar {
+          margin-top: 20px; 
+          text-align: center;
+         }
+         #topBar * {
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+         }
+         #allShapes {
+            width: 500px;
+         }
+         #beforeAfter {
+            margin-top: 2em; 
+            padding: 0.5em;
+            float: left;
+         }
+         #originFrame, #targetFrame {
+            margin-top: 1em; 
+            padding: 0.5em;
+            width: 80%;
+            float: right;
+         }
+         #targetFrame {
+            border: 2px solid green;
+         }
+         #originFrame {
+            border: 2px solid #AAAAFF;
+         }
+         #comment {
+            color: green;
+            min-height: 1.5em;
+            text-align: center;
+         }
+         .areaTitle {
+            text-align: center;
+         }
+         .instructions {
+            margin-left: 20px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Replacements</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+          <div id="zone_1">
+            <div class="consigne">
+            <p>
+		Help the Beaver to make the shapes in the "Current Shapes Box" identical to the shapes in the "Target Shapes Box" by doing some replacements.
+            </p>
+            <p>
+		Everytime you need to make a replacement choose two shapes from the gray buttons to be replaced.
+            </p>
+            <p>
+            You can use the "Undo" button to get back a step.
+            </p>
+            </div>
+          </div>
+          <div id="zone_2">
+          <p class="instructions">Select two shapes from below:</p>
+            <div id="topBar">
+              <div class="shapes" id="allShapes"></div>
+              <input type="button" id="undo">
+            </div>
+            <div class="shapes" id="beforeAfter"></div>
+            <div id="comment"></div>
+            <div id="originFrame">
+               <div class="areaTitle">Current Shapes Box</div>
+               <div class="shapes" id="originShapes"></div>
+            </div>
+            <div id="targetFrame">
+               <div class="areaTitle">Target Shapes Box</div>
+               <div class="shapes" id="targetShapes"></div>
+            </div>
+        </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+	      <h2>Solution</h2>
+		  <div class="easy">
+           <p>Here are the replacements to perform :</p>
+           <img src="sol_easy_repl1.png" style="margin-right:3em">
+           <img src="sol_easy_repl2.png" style="margin-right:3em">
+           <img src="sol_easy_repl3.png">
+           <p>These replacements transform the drawing step by step as follows :</p>
+           <img src="sol_easy_step0.png"><br/>
+           <img src="sol_easy_step1.png"><br/>
+           <img src="sol_easy_step2.png"><br/>
+           <img src="sol_easy_step3.png">
+         </div>
+
+         <div class="medium">
+           <p>Let's start by replacing the square with the inverted triangle, then the square with the  :</p>
+           <img src="sol_medium_repl1.png" style="margin-right:3em">
+           <img src="sol_medium_repl2.png">
+           <p>These replacements transform the drawing step by step as follows :</p>
+           <img src="sol_medium_step0.png"><br/>
+           <img src="sol_medium_step1.png" style="margin-left:7px"><br/>
+           <img src="sol_medium_step2.png" style="margin-left:2px">
+           <p>At this point, it remains to replace the star with the triangle, and the triangle with the star, as shown below :</p>
+           <img src="sol_medium_step2b.png">
+           <p>To exchange these two forms, it is necessary to involve a third form, for example a rhombus. We make 3 replacements :</p>
+           <img src="sol_medium_repl3.png" style="margin-right:3em">
+           <img src="sol_medium_repl4.png" style="margin-right:3em">
+           <img src="sol_medium_repl5.png">
+           <p>These replacements transform the drawing step by step to the desired result :</p>
+           <img src="sol_medium_step2.png" style="margin-left:2px"><br/>
+           <img src="sol_medium_step3.png"><br/>
+           <img src="sol_medium_step4.png" style="margin-left:4px"><br/>
+           <img src="sol_medium_step5.png" style="margin-left:4px">
+         </div>
+
+         <div class="hard">
+           <p>Let's look at the substitutions to be made starting from the yellow star. The star must be replaced by a green square. The green square must be replaced by a red diamond. And you have to replace the red diamond with the yellow star.</p>
+           <img src="sol_hard_step0.png">
+           <p>To make these substitutions, it is necessary to involve an additional form, which does not appear in the initial drawing: the cross. The following replacements are made :</p>
+           <img src="sol_hard_repl2.png" style="width: 360px">
+           <p>We then obtain the intermediate result shown below :</p>
+           <img src="sol_hard_step1.png">
+           <p>Now compare this drawing to the desired goal, which is :</p>
+           <img src="sol_hard_step2.png">
+           <p>To achieve this goal, replace the blue triangle with the inverted pink triangle, replace the inverted triangle with the circle, and replace the circle with the blue triangle.</p>
+           <p>Here again, it is necessary to use another form to make the replacements. You can use the cross, and make the following replacements :</p>
+           <img src="sol_hard_repl1.png">
+         </div>
+
+      </div>
+    </body>
+</html>
