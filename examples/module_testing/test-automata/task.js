@@ -196,6 +196,12 @@ function initTask(subTask) {
    function validation() {
       automata.resetAnimation();
       automata.try(handleResult);
+      var res = automata.compareWithTarget();
+      var html = "Automata equivalent to target: "+res.equivalent+"<br>";
+      html += "Unused vertices: "+res.unusedVertices+"<br>";
+      // console.log(res.minNFA);
+      // console.log(res.minTarget);
+      $("#result").html(html);
    };
 
    function handleResult(result) {
@@ -206,6 +212,7 @@ function initTask(subTask) {
    };
 
    function resetCallback() {
+      $("#result").empty();
       $("#feedback").empty();
    };
 }
