@@ -6,35 +6,28 @@
         <script>
             window.stringsLanguage = 'en';
             var quizze_settings = {"graderUrl":"http://localhost:3000/quizze","shuffle_questions":true,"shuffle_answers":false,"mathjax":true};
+            var task_data_info = {"markdown":true};
         </script>
         <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
         <script class="remove" type="text/javascript">
             var modulesPath = '../../../_common/modules/';
-            (function(task_data_info) {
-                var modules = [
-                    'jquery-1.7.1',
-                    'JSON-js',
-                    'raphael-2.2.1',
-                    'jschannel',
-                    'platform-pr',
-                    'installationAPI.01',
-                    'miniPlatform',
-                    'quizze_styles',
-                    'quizze_ui',
-                    'quizze_task',
-                    'quizze_grader'
-                ]
-                if(task_data_info.markdown) {
-                    modules = modules.concat([
-                        'showdown',
-                        'showdownConvert'
-                    ]);
-                }
-                if(quizze_settings.mathjax) {
-                    modules.push('mathjax');
-                }
-                importModules(modules);
-            })({"markdown":true})
+            var modules = [
+                'jquery-1.7.1',
+                'JSON-js',
+                'raphael-2.2.1',
+                'jschannel',
+                'platform-pr',
+                'installationAPI.01',
+                'miniPlatform',
+                'quizze_styles',
+                'quizze_ui',
+                'quizze_task',
+                'quizze_grader'
+            ]
+            task_data_info.markdown && modules.push('showdown');
+            quizze_settings.mathjax && modules.push('mathjax');
+            (task_data_info.markdown || quizze_settings.mathjax) && modules.push('post_processor');
+            importModules(modules);
         </script>
         <script class="remove" type="text/javascript">
             var json = {
@@ -45,11 +38,6 @@
                 "version": "fr.01",
                 "translators": []
             };
-        </script>
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-                tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
-            });
         </script>
         <script class="remove" type="text/javascript" src="grader_data.js"></script>
     </head>
@@ -66,7 +54,6 @@
 
 ## header2
 
-<div>
 
 $$
 \begin{array}{c|lcr}
@@ -111,11 +98,10 @@ n/2,  & \text{if $n$ is even} \\
 3n+1, & \text{if $n$ is odd}
 \end{cases}
 $$
-</div>
 
-```
-ergwergwergwergwe
-```
+
+test text ergwergwergwergwe
+
 
                 </div>
             </div>
