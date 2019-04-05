@@ -3,30 +3,25 @@
    <head>
       <meta charset="utf-8">
       <title>Test Automata</title>
-      <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css">
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0',
+            'graph-1.0',/*'visual-graph-1.1','graph-mouse-1.1',*/ 'grid-1.0'
+         ]);
+      </script>
       <script class="module" type="text/javascript" src="../../../_common/modules/ext/dfa-lib-master/index.js"></script>
-
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-2.0.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js"></script>
-
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/graph-1.0.js"></script>
       <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
       <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/graph-mouse-1.1.js"></script>
       <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/automata-1.0.js"></script>
-
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
-      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-      <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
 
       <script class="remove" type="text/javascript">
          var json = {
@@ -45,6 +40,11 @@
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Congratulations, you succeeded !"
+         };
+      </script>
       <style>
          #anim,#options {
             border: 1px solid black;
@@ -59,6 +59,13 @@
             width: 55%;
             float: right;
          }
+         #regex {
+            text-align: center;
+            font-style: italic;
+         }
+         #graph {
+            margin-top: 1em;
+         }
       </style>
    </head>
    <body>
@@ -66,61 +73,69 @@
          <h1>Test Automata</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <div id="graph"></div>
-            <div id="sequence"></div>
-            <div id="alphabet"></div>
-            <div id="result"></div>
-            <div id="feedback"></div>
-            <div id="options">
-               <h3>Options:</h3>
-               <label>
-                  <input type="checkbox" id="createVertex">Create/remove vertices
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="createEdge">Create/remove edges
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="dragVertex">Drag vertices
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="dragEdge">Drag edges 
-               </label>
-               <br>
-               <br>
-               <label>
-                  <input type="checkbox" id="editVertexLabel">Edit vertex label 
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="editEdgeLabel" checked>Edit edge label
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="defaultVertexLabel">Default label for new vertices
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="defaultEdgeLabel">Default label for new edges
-               </label>
-               <br>
-               <br>
-               <label>
-                  <input type="checkbox" id="multipleEdges">Multiple edges 
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="loop">Loops 
-               </label>
-               <br>
-               <label>
-                  <input type="checkbox" id="terminal">Set terminal vertices 
-               </label>
-               <br>
-               
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Créez un automate qui correspond à cette expression régulière:</p>
+                  <div id="regex"></div>
+               </div>
             </div>
+            <div id="zone_2">
+               <div id="graph"></div>
+               <div id="sequence"></div>
+               <div id="alphabet"></div>
+               <div id="result"></div>
+               <div id="feedback"></div>
+               <div id="options">
+                  <h3>Options:</h3>
+                  <label>
+                     <input type="checkbox" id="createVertex">Create/remove vertices
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="createEdge">Create/remove edges
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="dragVertex">Drag vertices
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="dragEdge">Drag edges 
+                  </label>
+                  <br>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="editVertexLabel">Edit vertex label 
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="editEdgeLabel" checked>Edit edge label
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="defaultVertexLabel">Label for new vertices
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="defaultEdgeLabel">Label for new edges
+                  </label>
+                  <br>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="multipleEdges">Multiple edges 
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="loop">Loops 
+                  </label>
+                  <br>
+                  <label>
+                     <input type="checkbox" id="terminal">Set terminal vertices 
+                  </label>
+                  <br>
+               </div>
+            </div>
+
          </div>
       </div><!-- task -->
       <div id="solution">
