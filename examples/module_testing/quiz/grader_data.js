@@ -1,4 +1,4 @@
-window.QuizzeGrader.data = [
+window.QuizGrader.data = [
     0,
     [1, 2],
     "A",

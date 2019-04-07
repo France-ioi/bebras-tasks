@@ -5,13 +5,13 @@
         <title>Test</title>
         <script>
             window.stringsLanguage = 'en';
-            var quizze_settings = {"graderUrl":"http://localhost:3000/quizze","shuffle_questions":true,"shuffle_answers":false,"mathjax":true};
+            var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","shuffle_questions":true,"shuffle_answers":false,"mathjax":true};
             var task_data_info = {"markdown":true};
         </script>
         <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
         <script class="remove" type="text/javascript">
             var json = {
-                "id": "test-quizze",
+                "id": "test-quiz",
                 "license": "",
                 "authors": [],
                 "language": "en",
@@ -27,14 +27,14 @@
                 'platform-pr',
                 'installationAPI.01',
                 'miniPlatform',
-                'quizze_styles',
-                'quizze_ui',
-                'quizze_task',
-                'quizze_grader'
+                'quiz_styles',
+                'quiz_ui',
+                'quiz_task',
+                'quiz_grader'
             ]
             task_data_info.markdown && modules.push('showdown');
-            quizze_settings.mathjax && modules.push('mathjax');
-            (task_data_info.markdown || quizze_settings.mathjax) && modules.push('post_processor');
+            quiz_settings.mathjax && modules.push('mathjax');
+            (task_data_info.markdown || quiz_settings.mathjax) && modules.push('post_processor');
             importModules(modules);
         </script>
         <script class="remove" type="text/javascript" src="grader_data.js"></script>
@@ -48,6 +48,11 @@
                 <div class="markdown">
 # header
 
+qustion 1: <ref qustion="1"/>
+qustion 2 answer 2: <ref qustion="2" answer="2"/>
+</div>
+
+<!--
 *italic text* **bold text**
 
 ## header2
@@ -99,9 +104,8 @@ $$
 
 
 test text ergwergwergwergwe
-
-
                 </div>
+                -->
             </div>
 
             <div class="taskContent">
