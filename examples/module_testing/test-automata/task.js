@@ -14,7 +14,7 @@ function initTask(subTask) {
             "edgeVisualInfo":{
                "e_0":{},"e_1":{},"e_2":{}},
             "minGraph":{
-               "vertexInfo":{"v_0":{"terminal":true},"v_1":{},"v_2":{},"v_3":{"terminal":true}},
+               "vertexInfo":{"v_0":{"initial":true},"v_1":{},"v_2":{},"v_3":{"terminal":true}},
                "edgeInfo":{"e_0":{"label":"A"},"e_1":{"label":"B"},"e_2":{"label":"C"}},
                "edgeVertices":{"e_0":["v_0","v_1"],"e_1":["v_1","v_2"],"e_2":["v_2","v_3"]},
             "directed":true}
@@ -33,7 +33,7 @@ function initTask(subTask) {
          vGraph: {
             "vertexVisualInfo":{"v_0":{"x":64,"y":128},"v_1":{"x":192,"y":128},"v_2":{"x":320,"y":128},"v_3":{"x":448,"y":128},"v_4":{"x":576,"y":128},"v_5":{"x":704,"y":128},"v_6":{"x":320,"y":224},"v_7":{"x":448,"y":224}},
             "edgeVisualInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{},"e_4":{},"e_5":{},"e_6":{},"e_7":{}},
-            "minGraph":{"vertexInfo":{"v_0":{"terminal":true},"v_1":{},"v_2":{},"v_3":{},"v_4":{},"v_5":{"terminal":true},"v_6":{},"v_7":{}},
+            "minGraph":{"vertexInfo":{"v_0":{"initial":true},"v_1":{},"v_2":{},"v_3":{},"v_4":{},"v_5":{"terminal":true},"v_6":{},"v_7":{}},
             "edgeInfo":{"e_0":{"label":"A"},"e_1":{"label":"B"},"e_2":{"label":"C"},"e_3":{"label":"D"},"e_4":{"label":"E"},"e_5":{"label":"F"},"e_6":{"label":"G"},"e_7":{"label":"H"}},
             "edgeVertices":{"e_0":["v_0","v_1"],"e_1":["v_1","v_2"],"e_2":["v_2","v_3"],"e_3":["v_3","v_4"],"e_4":["v_4","v_5"],"e_5":["v_1","v_6"],"e_6":["v_6","v_7"],"e_7":["v_7","v_4"]},
             "directed":true}
@@ -55,7 +55,7 @@ function initTask(subTask) {
          vGraph: {
             "vertexVisualInfo":{"v_0":{"x":64,"y":128},"v_1":{"x":192,"y":128},"v_2":{"x":320,"y":128},"v_3":{"x":448,"y":128},"v_4":{"x":576,"y":128},"v_5":{"x":704,"y":128},"v_6":{"x":320,"y":224},"v_7":{"x":448,"y":224}},
             "edgeVisualInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{},"e_4":{},"e_5":{},"e_6":{},"e_7":{}},
-            "minGraph":{"vertexInfo":{"v_0":{"terminal":true},"v_1":{},"v_2":{},"v_3":{},"v_4":{},"v_5":{"terminal":true},"v_6":{},"v_7":{}},
+            "minGraph":{"vertexInfo":{"v_0":{"initial":true},"v_1":{},"v_2":{},"v_3":{},"v_4":{},"v_5":{"terminal":true},"v_6":{},"v_7":{}},
             "edgeInfo":{"e_0":{"label":"A"},"e_1":{"label":"B"},"e_2":{"label":"C"},"e_3":{"label":"D"},"e_4":{"label":"E"},"e_5":{"label":"F"},"e_6":{"label":"G"},"e_7":{"label":"H"}},
             "edgeVertices":{"e_0":["v_0","v_1"],"e_1":["v_1","v_2"],"e_2":["v_2","v_3"],"e_3":["v_3","v_4"],"e_4":["v_4","v_5"],"e_5":["v_1","v_6"],"e_6":["v_6","v_7"],"e_7":["v_7","v_4"]},
             "directed":true}
@@ -76,8 +76,6 @@ function initTask(subTask) {
 
    var vGraph;
    var regex;
-   // var startID = "v_0";
-   // var endID = "v_5";
 
    var defaultCircleAttr = {
       "r": 15, 
@@ -94,39 +92,23 @@ function initTask(subTask) {
       "font-family": "monospace",
       "font-size": 20
    };
-   // var sequence = ["E","M","I","L","E"];
    var alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
-   var paperWidth = 750;
+   var paperWidth = 770;
    var paperHeight;
    var margin = 10;
 
    var graphPaper;
    var seqPaper;
    var graph;
-   // var visualGraph;
-   // var graphMouse;
-   // var graphDrawer;
    var automata;
-   // var graphEditor;
-   // var snapToGrid;
+
    var targetNFA;
 
    var selectedCircleAttr = {
       stroke: "blue",
       "stroke-width": 6
    };
-
-   // var gridLineAttr = {
-   //    stroke: "black",
-   //    opacity: 0.5,
-   //    "stroke-width": 1
-   // };
-
-   // var vertexTextAttr = {
-   //    "font-size": 16,
-   //    "fill": "white"
-   // };
 
    subTask.loadLevel = function(curLevel) {
       level = curLevel;
@@ -150,11 +132,9 @@ function initTask(subTask) {
    subTask.resetDisplay = function() {
       $("#regex").text(regex);
       initPaper();
-      // initAlphabet();
       initAutomata();
       initHandlers();
       updateAutomata();
-      
    };
 
    subTask.getAnswerObject = function() {
@@ -171,6 +151,7 @@ function initTask(subTask) {
          automata.stopAnimation();
          automata.setEnabled(false);
       }
+      resetCallback();
       callback();
    };
 
@@ -182,8 +163,8 @@ function initTask(subTask) {
 
    function initPaper() {
       graphPaper = subTask.raphaelFactory.create("graph", "graph", paperWidth, paperHeight);
-      graphPaper.rect(0,0,paperWidth,paperHeight);
-      sequencePaper = subTask.raphaelFactory.create("sequence","sequence",paperWidth/2,50);
+      graphPaper.rect(1,1,paperWidth-2,paperHeight-2);
+      sequencePaper = subTask.raphaelFactory.create("sequence","sequence",paperWidth,50);
    };
 
    function initAlphabet() {
@@ -201,8 +182,6 @@ function initTask(subTask) {
          graphPaper: graphPaper,
          graphPaperElementID: "graph",
          visualGraphJSON: JSON.stringify(vGraph),
-         // startID: startID,
-         // endID: endID,
          circleAttr: defaultCircleAttr,
          edgeAttr: defaultLineAttr,
          sequencePaper: sequencePaper,
@@ -306,7 +285,7 @@ function initTask(subTask) {
    };
 
    function resetCallback() {
-      $("#result").empty();
+      // $("#result").empty();
       $("#feedback").empty();
    };
 

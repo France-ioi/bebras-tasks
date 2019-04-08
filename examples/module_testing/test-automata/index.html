@@ -52,12 +52,15 @@
          }
          #options {
             padding: 1em;
-            width: 250px;
+            width: 200px;
          }
-         #sequence,#feedback,#alphabet,#result {
+         #sequence {
+            margin: 1em 0;
+         }
+         #feedback,#alphabet,#result {
             margin: 1em;
-            width: 55%;
-            float: right;
+            /*width: 60%;*/
+            /*float: right;*/
          }
          #regex {
             text-align: center;
@@ -83,57 +86,19 @@
                <div id="graph"></div>
                <div id="sequence"></div>
                <div id="alphabet"></div>
-               <div id="result"></div>
+               <!-- <div id="result"></div> -->
                <div id="feedback"></div>
-               <div id="options">
-                  <h3>Options:</h3>
+               <!-- <div id="options"> -->
+<!--                   <h3>Options:</h3>
                   <label>
-                     <input type="checkbox" id="createVertex">Create/remove vertices
+                     <input type="checkbox" id="defaultEdgeLabel" checked>Label for new edges
                   </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="createEdge">Create/remove edges
+                  <br> -->
+<!--                   <label>
+                     <input type="checkbox" id="doubleCircleForTerminal" checked>Double circle for terminal vertices
                   </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="dragVertex">Drag vertices
-                  </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="dragEdge">Drag edges 
-                  </label>
-                  <br>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="editVertexLabel">Edit vertex label 
-                  </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="editEdgeLabel" checked>Edit edge label
-                  </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="defaultVertexLabel">Label for new vertices
-                  </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="defaultEdgeLabel">Label for new edges
-                  </label>
-                  <br>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="multipleEdges">Multiple edges 
-                  </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="loop">Loops 
-                  </label>
-                  <br>
-                  <label>
-                     <input type="checkbox" id="terminal">Set terminal vertices 
-                  </label>
-                  <br>
-               </div>
+                  <br> -->
+               <!-- </div> -->
             </div>
 
          </div>
