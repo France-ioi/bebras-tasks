@@ -5,7 +5,7 @@
         <title>Test</title>
         <script>
             window.stringsLanguage = 'en';
-            var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","shuffle_questions":true,"shuffle_answers":false,"mathjax":true};
+            var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","shuffle_questions":true,"shuffle_answers":true,"mathjax":true};
             var task_data_info = {"markdown":true};
         </script>
         <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
@@ -47,9 +47,6 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                 <div class="markdown">
 # header
-
-qustion 1: <ref qustion="1"/>
-qustion 2 answer 2: <ref qustion="2" answer="2"/>
 </div>
 
 <!--
@@ -110,18 +107,19 @@ test text ergwergwergwergwe
 
             <div class="taskContent">
                 <question type="single">
-                    <statement>question 0 (single choice default layout)</statement>
-                    <answer>answer 0</answer>
+                    <statement>question 1 (single choice default layout)</statement>
                     <answer>answer 1</answer>
                     <answer>answer 2</answer>
-                    <solution>correct answer is 0</solution>
+                    <answer>answer 3</answer>
+                    <answer>answer 4</answer>
+                    <solution>correct answer is 1</solution>
                 </question>
                 <question type="multiple">
-                    <statement>question 1 (multiple choice default layout)</statement>
-                    <answer>answer 0</answer>
+                    <statement>question 2 (multiple choice default layout)</statement>
                     <answer>answer 1</answer>
                     <answer>answer 2</answer>
-                    <solution>correct answer is 1 and 2</solution>
+                    <answer>answer 3</answer>
+                    <solution>correct answer is 2 and 3</solution>
                 </question>
                 <question type="input">
                     <statement>question 2 (input string)</statement>
@@ -141,7 +139,15 @@ test text ergwergwergwergwe
             </div>
         </div>
         <div id="solution" class="remove" style="display: none">
-            solution
+            <h1>solution</h1>
+            <p>
+                question 1 (single choice default layout) real N: <ref question="1"/>
+            </p>
+            <p>
+                question 2 (multiple choice default layout)/answer 2 real N: <ref question="2" answer="2"/>
+            </p>
+
+
         </div>
    </body>
 </html>
