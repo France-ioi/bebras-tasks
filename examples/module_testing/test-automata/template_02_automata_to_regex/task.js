@@ -126,7 +126,7 @@ function initTask(subTask) {
    subTask.reloadAnswerObject = function(answerObj) {
       answer = answerObj;
       if(answer)
-         vGraph = JSON.parse(answer);
+         $("#input_regex").val(answer);
    };
 
    subTask.resetDisplay = function() {
@@ -193,8 +193,9 @@ function initTask(subTask) {
    };
 
    function validation() {
+      saveAnswer();
       automata.resetAnimation();
-      var regex = $("#input_regex").val();
+      var regex = answer;
       var error = automata.regexToNFA(regex);
       if(error){
          $("#feedback").text(error);
@@ -233,7 +234,7 @@ function initTask(subTask) {
    };
 
    function saveAnswer() {
-      answer = automata.visualGraph.toJSON();
+      answer = $("#input_regex").val();
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
