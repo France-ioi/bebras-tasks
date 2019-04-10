@@ -6,9 +6,9 @@
       <script>
          window.stringsLanguage = 'fr';
       </script>
-      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript" src="../../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
       <script class="remove" type="text/javascript">
-         var modulesPath = '../../../_common/modules';
+         var modulesPath = '../../../../_common/modules';
          importModules([
             'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
@@ -18,10 +18,10 @@
             'graph-1.0',/*'visual-graph-1.1','graph-mouse-1.1',*/ 'grid-1.0'
          ]);
       </script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/dfa-lib-master/index.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/graph-mouse-1.1.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/automata-1.0.js"></script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/ext/dfa-lib-master/index.js"></script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/pemFioi/graph-mouse-1.1.js"></script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/pemFioi/automata-1.0.js"></script>
 
       <script class="remove" type="text/javascript">
          var json = {
@@ -46,25 +46,22 @@
          };
       </script>
       <style>
-         #anim,#options {
+         #anim {
             border: 1px solid black;
             margin-top: 1em;
-         }
-         #options {
-            padding: 1em;
-            width: 200px;
          }
          #sequence {
             margin: 1em 0;
          }
-         #feedback,#alphabet,#result {
+         #feedback {
             margin: 1em;
             /*width: 60%;*/
             /*float: right;*/
          }
          #regex {
             text-align: center;
-            font-style: italic;
+            /*font-style: italic;*/
+            margin: 1em auto;
          }
          #graph {
             margin-top: 1em;
@@ -78,27 +75,18 @@
          <div id="taskContent">
             <div id="zone_1">
                <div class="consigne">
-                  <p>Créez un automate qui correspond à cette expression régulière:</p>
-                  <div id="regex"></div>
+                  <p>Ecrivez l'expression régulière correspondant à cet automate.</p>
                </div>
             </div>
             <div id="zone_2">
                <div id="graph"></div>
                <div id="sequence"></div>
-               <div id="alphabet"></div>
-               <!-- <div id="result"></div> -->
+               <div id="regex">
+                  <h3>Regex:</h3>
+                  <input id="input_regex">
+               </div>
+               
                <div id="feedback"></div>
-               <!-- <div id="options"> -->
-<!--                   <h3>Options:</h3>
-                  <label>
-                     <input type="checkbox" id="defaultEdgeLabel" checked>Label for new edges
-                  </label>
-                  <br> -->
-<!--                   <label>
-                     <input type="checkbox" id="doubleCircleForTerminal" checked>Double circle for terminal vertices
-                  </label>
-                  <br> -->
-               <!-- </div> -->
             </div>
 
          </div>

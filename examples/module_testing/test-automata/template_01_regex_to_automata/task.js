@@ -133,8 +133,8 @@ function initTask(subTask) {
       $("#regex").text(regex);
       initPaper();
       initAutomata();
-      initHandlers();
-      updateAutomata();
+      // initHandlers();
+      // updateAutomata();
    };
 
    subTask.getAnswerObject = function() {
@@ -196,58 +196,58 @@ function initTask(subTask) {
       automata = new Automata(settings);
    };
 
-   var initHandlers = function() {
-      $("#createVertex").off("change");
-      $("#createVertex").change(function(){
-         automata.setCreateVertexEnabled(this.checked);
-      });
-      $("#createEdge").off("change");
-      $("#createEdge").change(function(){
-         automata.setCreateEdgeEnabled(this.checked);
-      });
-      $("#dragVertex").off("change");
-      $("#dragVertex").change(function(){
-         automata.setVertexDragEnabled(this.checked);
-      });
-      $("#dragEdge").off("change");
-      $("#dragEdge").change(function(){
-         automata.setEdgeDragEnabled(this.checked);
-      });
-      $("#multipleEdges").off("change");
-      $("#multipleEdges").change(function(){
-         automata.setMultipleEdgesEnabled(this.checked);
-      });
-      $("#loop").off("change");
-      $("#loop").change(function(){
-         automata.setLoopEnabled(this.checked);
-      });
-      $("#terminal").off("change");
-      $("#terminal").change(function(){
-         automata.setTerminalEnabled(this.checked);
-      });
-      $("#editVertexLabel").off("change");
-      $("#editVertexLabel").change(function(){
-         automata.setEditVertexLabelEnabled(this.checked);
-      });
-      $("#editEdgeLabel").off("change");
-      $("#editEdgeLabel").change(function(){
-         automata.setEditEdgeLabelEnabled(this.checked);
-      });
-      $("#defaultVertexLabel").off("change");
-      $("#defaultVertexLabel").change(function(){
-         automata.setDefaultVertexLabelEnabled(this.checked);
-      });
-      $("#defaultEdgeLabel").off("change");
-      $("#defaultEdgeLabel").change(function(){
-         automata.setDefaultEdgeLabelEnabled(this.checked);
-      });
-   };
+   // var initHandlers = function() {
+   //    $("#createVertex").off("change");
+   //    $("#createVertex").change(function(){
+   //       automata.setCreateVertexEnabled(this.checked);
+   //    });
+   //    $("#createEdge").off("change");
+   //    $("#createEdge").change(function(){
+   //       automata.setCreateEdgeEnabled(this.checked);
+   //    });
+   //    $("#dragVertex").off("change");
+   //    $("#dragVertex").change(function(){
+   //       automata.setVertexDragEnabled(this.checked);
+   //    });
+   //    $("#dragEdge").off("change");
+   //    $("#dragEdge").change(function(){
+   //       automata.setEdgeDragEnabled(this.checked);
+   //    });
+   //    $("#multipleEdges").off("change");
+   //    $("#multipleEdges").change(function(){
+   //       automata.setMultipleEdgesEnabled(this.checked);
+   //    });
+   //    $("#loop").off("change");
+   //    $("#loop").change(function(){
+   //       automata.setLoopEnabled(this.checked);
+   //    });
+   //    $("#terminal").off("change");
+   //    $("#terminal").change(function(){
+   //       automata.setTerminalEnabled(this.checked);
+   //    });
+   //    $("#editVertexLabel").off("change");
+   //    $("#editVertexLabel").change(function(){
+   //       automata.setEditVertexLabelEnabled(this.checked);
+   //    });
+   //    $("#editEdgeLabel").off("change");
+   //    $("#editEdgeLabel").change(function(){
+   //       automata.setEditEdgeLabelEnabled(this.checked);
+   //    });
+   //    $("#defaultVertexLabel").off("change");
+   //    $("#defaultVertexLabel").change(function(){
+   //       automata.setDefaultVertexLabelEnabled(this.checked);
+   //    });
+   //    $("#defaultEdgeLabel").off("change");
+   //    $("#defaultEdgeLabel").change(function(){
+   //       automata.setDefaultEdgeLabelEnabled(this.checked);
+   //    });
+   // };
 
-   function updateAutomata() {
-      $("#options input").each(function(){
-         $(this).trigger("change");
-      })
-   };
+   // function updateAutomata() {
+   //    $("#options input").each(function(){
+   //       $(this).trigger("change");
+   //    })
+   // };
 
    function validation() {
       automata.resetAnimation();
