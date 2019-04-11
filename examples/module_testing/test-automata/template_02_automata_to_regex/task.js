@@ -4,7 +4,6 @@ function initTask(subTask) {
    var answer = null;
    var data = {
       easy: {
-         // regex: '(A|B)C',
          vGraph: {
             "vertexVisualInfo":{"v_0":{"x":224,"y":128},"v_2":{"x":384,"y":128},"v_1":{"x":544,"y":128}},
             "edgeVisualInfo":{"e_1":{"sweep":1,"large-arc":0,"radius-ratio":0.53},"e_3":{},"e_0":{"sweep":0,"large-arc":0,"radius-ratio":0.53}},
@@ -15,17 +14,9 @@ function initTask(subTask) {
                "directed":true
             }
          },
-         transitionTable: {
-            "s0":{"A":["s1"],"B":["s1"]},
-            "s1":{"C":["s2"]},
-            "s2":{}
-         },
-         start: "s0",
-         end: "s2",
          paperHeight: 270
       },
       medium: {
-         // regex: 'A+B[C-E]{3}',
          vGraph: {
             "vertexVisualInfo":{"v_0":{"x":96,"y":128},"v_2":{"x":192,"y":128},"v_5":{"x":672,"y":128},"v_1":{"x":288,"y":128},"v_3":{"x":416,"y":128},"v_4":{"x":544,"y":128}},
             "edgeVisualInfo":{"e_1":{"sweep":1,"large-arc":0,"radius-ratio":0},"e_0":{"angle":89.6948823410121,"radius-ratio":1.5},"e_2":{"radius-ratio":0,"sweep":0,"large-arc":0},"e_3":{},"e_4":{"radius-ratio":0,"sweep":0,"large-arc":0},"e_5":{"radius-ratio":0,"sweep":0,"large-arc":0},"e_6":{"sweep":0,"large-arc":0,"radius-ratio":0.51},"e_7":{"sweep":0,"large-arc":0,"radius-ratio":0.51},"e_8":{"sweep":0,"large-arc":0,"radius-ratio":0.51},"e_9":{"sweep":1,"large-arc":0,"radius-ratio":0.52},"e_10":{"sweep":1,"large-arc":0,"radius-ratio":0.52},"e_11":{"sweep":1,"large-arc":0,"radius-ratio":0.52}},
@@ -36,20 +27,9 @@ function initTask(subTask) {
                "directed":true
             }
          },
-         transitionTable: {
-            "s0":{"A":["s0","s1"]},
-            "s1":{"B":["s2"]},
-            "s2":{"C":["s3"],"D":["s3"],"E":["s3"]},
-            "s3":{"C":["s4"],"D":["s4"],"E":["s4"]},
-            "s4":{"C":["s5"],"D":["s5"],"E":["s5"]},
-            "s5":{}
-         },
-         start: "s0",
-         end: "s5",
          paperHeight: 300
       },
       hard: {
-         // regex: 'A(B?|FG)[CH][DE]*',
          vGraph: {
             "vertexVisualInfo":{"v_0":{"x":128,"y":128},"v_1":{"x":384,"y":128},"v_2":{"x":256,"y":128},"v_3":{"x":192,"y":256},"v_4":{"x":512,"y":128},"v_5":{"x":640,"y":128}},
             "edgeVisualInfo":{"e_0":{"radius-ratio":0.51,"sweep":1,"large-arc":0},"e_1":{"sweep":1,"large-arc":0,"radius-ratio":0},"e_2":{"radius-ratio":0,"sweep":0,"large-arc":0},"e_3":{},"e_4":{},"e_5":{"sweep":1,"large-arc":0,"radius-ratio":0.51},"e_6":{"angle":90.26286209784908,"radius-ratio":1.5},"e_7":{"angle":-88.69127686273137,"radius-ratio":1.5},"e_8":{},"e_9":{}},
@@ -60,16 +40,6 @@ function initTask(subTask) {
                "directed":true
             }
          },
-         transitionTable: {
-            "s0":{"A":["s1"]},
-            "s1":{"B":["s3"],"F":["s2"],"":["s3"]},
-            "s2":{"G":["s3"]},
-            "s3":{"C":["s4"],"H":["s4"]},
-            "s4":{"D":["s4"],"E":["s4"],"":["s5"]},
-            "s5":{}
-         },
-         start: "s0",
-         end: "s5",
          paperHeight: 350
       }
    };
@@ -103,7 +73,6 @@ function initTask(subTask) {
    var graph;
    var automata;
 
-   var targetNFA;
 
    var selectedCircleAttr = {
       stroke: "blue",
@@ -114,8 +83,6 @@ function initTask(subTask) {
       level = curLevel;
       displayHelper.customValidate = validation;
       vGraph = JSON.parse(JSON.stringify(data[level].vGraph));
-      // regex = data[level].regex;
-      // targetNFA = new NFA(alphabet,data[level].transitionTable,[data[level].start],[data[level].end]);
       paperHeight = data[level].paperHeight;
    };
 
@@ -132,8 +99,6 @@ function initTask(subTask) {
    subTask.resetDisplay = function() {
       initPaper();
       initAutomata();
-      // initRegex();
-      // updateAutomata();
    };
 
    subTask.getAnswerObject = function() {
@@ -167,12 +132,9 @@ function initTask(subTask) {
       sequencePaper = subTask.raphaelFactory.create("sequence","sequence",paperWidth,50);
    };
 
-   // function initRegex() {
-   //    // $("#alphabet").append(text);
-   // };
-
    function initAutomata() {
       var settings = {
+         mode: 2,
          subTask: subTask,
          graphPaper: graphPaper,
          graphPaperElementID: "graph",
@@ -180,12 +142,10 @@ function initTask(subTask) {
          circleAttr: defaultCircleAttr,
          edgeAttr: defaultLineAttr,
          sequencePaper: sequencePaper,
-         // sequence: sequence,
          seqLettersAttr: seqLettersAttr,
          resetCallback: resetCallback,
          callback: saveAnswer,
          alphabet: alphabet,
-         // targetNFA: targetNFA,
          enabled: true
       };
       automata = new Automata(settings);
@@ -194,30 +154,11 @@ function initTask(subTask) {
 
    function validation() {
       saveAnswer();
-      automata.resetAnimation();
-      var regex = answer;
-      var error = automata.regexToNFA(regex);
-      if(error){
-         $("#feedback").text(error);
-         return;
-      }
-      var res = automata.compareWithTarget();
+      var res = automata.validate(answer);
       if(res.error){
          $("#feedback").text(res.error);
-         return;
-      }
-      if(res.equivalent){
-         displayHelper.validate("stay");
       }else{
-         if(res["e_c"][0]){
-            automata.setSequence(res["e_c"][0]);
-            var text = "The following string is accepted by the automata but doesn't match the regex:<br>"+res["e_c"][0];
-         }else{
-            automata.setSequence(res["e_c"][1]);
-            var text = "The following string is not accepted by the automata but matches the regex:<br>"+res["e_c"][1];
-         }
-         automata.run();
-         $("#feedback").html(text);
+         displayHelper.validate("stay");
       }
    };
 
