@@ -178,6 +178,7 @@ function initTask(subTask) {
 
    function initAutomata() {
       var settings = {
+         mode: 1,
          subTask: subTask,
          graphPaper: graphPaper,
          graphPaperElementID: "graph",
@@ -196,84 +197,13 @@ function initTask(subTask) {
       automata = new Automata(settings);
    };
 
-   // var initHandlers = function() {
-   //    $("#createVertex").off("change");
-   //    $("#createVertex").change(function(){
-   //       automata.setCreateVertexEnabled(this.checked);
-   //    });
-   //    $("#createEdge").off("change");
-   //    $("#createEdge").change(function(){
-   //       automata.setCreateEdgeEnabled(this.checked);
-   //    });
-   //    $("#dragVertex").off("change");
-   //    $("#dragVertex").change(function(){
-   //       automata.setVertexDragEnabled(this.checked);
-   //    });
-   //    $("#dragEdge").off("change");
-   //    $("#dragEdge").change(function(){
-   //       automata.setEdgeDragEnabled(this.checked);
-   //    });
-   //    $("#multipleEdges").off("change");
-   //    $("#multipleEdges").change(function(){
-   //       automata.setMultipleEdgesEnabled(this.checked);
-   //    });
-   //    $("#loop").off("change");
-   //    $("#loop").change(function(){
-   //       automata.setLoopEnabled(this.checked);
-   //    });
-   //    $("#terminal").off("change");
-   //    $("#terminal").change(function(){
-   //       automata.setTerminalEnabled(this.checked);
-   //    });
-   //    $("#editVertexLabel").off("change");
-   //    $("#editVertexLabel").change(function(){
-   //       automata.setEditVertexLabelEnabled(this.checked);
-   //    });
-   //    $("#editEdgeLabel").off("change");
-   //    $("#editEdgeLabel").change(function(){
-   //       automata.setEditEdgeLabelEnabled(this.checked);
-   //    });
-   //    $("#defaultVertexLabel").off("change");
-   //    $("#defaultVertexLabel").change(function(){
-   //       automata.setDefaultVertexLabelEnabled(this.checked);
-   //    });
-   //    $("#defaultEdgeLabel").off("change");
-   //    $("#defaultEdgeLabel").change(function(){
-   //       automata.setDefaultEdgeLabelEnabled(this.checked);
-   //    });
-   // };
-
-   // function updateAutomata() {
-   //    $("#options input").each(function(){
-   //       $(this).trigger("change");
-   //    })
-   // };
 
    function validation() {
-      automata.resetAnimation();
-      // automata.try(handleResult);
-      var res = automata.compareWithTarget();
+      var res = automata.validate();
       if(res.error){
          $("#feedback").text(res.error);
-         return;
-      }
-      // var html = "Automata equivalent to target: "+res.equivalent+"<br>";
-      // html += "Unused vertices: "+res.unusedVertices+"<br>";
-      // console.log(res.minNFA);
-      // console.log(res.minTarget);
-      // $("#result").html(html);
-      if(res.equivalent){
-         displayHelper.validate("stay");
       }else{
-         if(res["e_c"][0]){
-            automata.setSequence(res["e_c"][0]);
-            var text = "The following string is accepted by the automata but doesn't match the regex:<br>"+res["e_c"][0];
-         }else{
-            automata.setSequence(res["e_c"][1]);
-            var text = "The following string is not accepted by the automata but matches the regex:<br>"+res["e_c"][1];
-         }
-         automata.run();
-         $("#feedback").html(text);
+         displayHelper.validate("stay");
       }
    };
 
