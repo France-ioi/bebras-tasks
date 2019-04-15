@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Test Automata 06</title>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0',
+            'graph-1.0',/*'visual-graph-1.1','graph-mouse-1.1',*/ 'grid-1.0'
+         ]);
+      </script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/ext/dfa-lib-master/index.js"></script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/pemFioi/graph-mouse-1.1.js"></script>
+      <script class="module" type="text/javascript" src="../../../../_common/modules/pemFioi/automata-1.0.js"></script>
+
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "",
+            "language": "",
+            "version": "",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Congratulations, you succeeded !"
+         };
+      </script>
+      <style>
+         #anim {
+            border: 1px solid black;
+            margin-top: 1em;
+         }
+         #sequence {
+            margin: 1em 0;
+         }
+         #feedback {
+            margin: 1em;
+         }
+         #list {
+            text-align: center;
+            font-style: italic;
+         }
+/*         #word {
+            text-align: center;
+            margin: 1em auto;
+         }
+         #word * {
+            display: inline-block;
+            margin: 0 0.5em;
+         }
+         #regex {
+            text-align: center;
+            font-style: italic;
+         }*/
+         #graph {
+            margin-top: 1em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>List of words</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Créez un automate ne possédant pas plus de <span id="nbStates"></span> états qui accepte cette liste de mots et rien d'autre :</p>
+                  <div id="list"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="graph"></div>
+               <div id="sequence"></div>
+<!--                <div id="regex">
+                  <h3>Regex:</h3>
+                  <input id="input_regex">
+               </div> -->
+               
+               <div id="feedback"></div>
+            </div>
+
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+      <h2>Solution</h2>
+
+
+     </div> <!-- task-solution -->
+   </body>
+</html>
