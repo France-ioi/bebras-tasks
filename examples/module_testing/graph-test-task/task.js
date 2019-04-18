@@ -3,40 +3,57 @@ function initTask(subTask) {
    var level;
    var answer = null;
 
+   // var defaultVisualGraphJSON = {
+   //    "vertexVisualInfo": {
+   //       "v_0":{"x":64,"y":92},
+   //       "v_1":{"x":169,"y":100},
+   //       "v_2":{"x":212,"y":197},
+   //       "v_3":{"x":113,"y":290} },
+   //    "edgeVisualInfo": {
+   //       "e_0":{},
+   //       "e_1":{},
+   //       "e_2":{},
+   //       "e_3":{} },
+   //    "minGraph": {
+   //       "vertexInfo": {
+   //          "v_0":{label:"v_0",content:"test, virgule\nTEST, VIRGULE\nAAAAAAAAAAAAA\ntest\ntest"},
+   //          "v_1":{label:"v_1",content:"test, virgule\ntest"},
+   //          "v_2":{label:"v_2"},
+   //          "v_3":{label:"v_3"} },
+   //       "edgeInfo": {
+   //          "e_0":{label:"e_0"},
+   //          "e_1":{label:"e_1"},
+   //          "e_2":{label:"e_2"},
+   //          "e_3":{label:"e_3"} },
+   //       "edgeVertices": {
+   //          "e_0":["v_0","v_3"],
+   //          "e_1":["v_3","v_2"],
+   //          "e_2":["v_2","v_1"],
+   //          "e_3":["v_2","v_0"]},
+   //       "directed":true } 
+   //    };
    var defaultVisualGraphJSON = {
       "vertexVisualInfo": {
-         "v_0":{"x":64,"y":92},
-         "v_1":{"x":169,"y":100},
-         "v_2":{"x":212,"y":197},
-         "v_3":{"x":113,"y":290} },
+         "v_0":{"x":250,"y":250},
+         "v_1":{"x":550,"y":250} },
       "edgeVisualInfo": {
-         "e_0":{},
-         "e_1":{},
-         "e_2":{},
-         "e_3":{} },
+         "e_0":{} },
       "minGraph": {
          "vertexInfo": {
-            "v_0":{label:"v_0"},
-            "v_1":{label:"v_1"},
-            "v_2":{label:"v_2"},
-            "v_3":{label:"v_3"} },
+            "v_0":{label:"v_0",content:"test, virgule\nTEST, VIRGULE\nAAAAAAAAAAAAA\ntest\ntest"},
+            "v_1":{label:"v_1",content:"test, virgule\ntest"} },
          "edgeInfo": {
-            "e_0":{label:"e_0"},
-            "e_1":{label:"e_1"},
-            "e_2":{label:"e_2"},
-            "e_3":{label:"e_3"} },
+            "e_0":{label:"e_0"} },
          "edgeVertices": {
-            "e_0":["v_0","v_3"],
-            "e_1":["v_3","v_2"],
-            "e_2":["v_2","v_1"],
-            "e_3":["v_2","v_0"]},
+            "e_0":["v_0","v_1"]},
          "directed":true } 
       };
    var defaultCircleAttr = {
       "r": 20, 
       "fill": "#AA0000", 
       "stroke": "black", 
-      "stroke-width": 1
+      "stroke-width": 1,
+      "opacity": 0.5
    };
    var defaultLineAttr = {
       "stroke": "black",
@@ -215,6 +232,17 @@ function initTask(subTask) {
       $("#gridSize").change(function() {
          updateGridSize(this.value);
          updateOptionsJSON();
+      });
+      $("#tableMode").unbind('change');
+      $("#tableMode").change(function() {
+         var vertices = graph.getAllVertices();
+         for(var vertex of vertices){
+            var vInfo = visualGraph.getVertexVisualInfo(vertex);
+            vInfo.tableMode = this.checked;
+         }
+         onVisualGraphChange();
+         updateOptionsJSON();
+         fromJSON();
       });
       $("#apply_attr").unbind('click');
       $("#apply_attr").click(applyAttr);
