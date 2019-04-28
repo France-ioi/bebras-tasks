@@ -4,6 +4,9 @@ window.QuizGrader.data = [
     "A",
     2,
     function(val) {
-        return val.length > 0;
+        return {
+            valid: val.length > 0,
+            message: 'Test message'
+        }
     }
 ]
