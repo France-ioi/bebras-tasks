@@ -5,7 +5,7 @@ window.QuizGrader.data = [
     2,
     function(val) {
         return {
-            valid: val.length > 0,
+            score: val.length <= 10 ? val.length / 10 : 0,
             message: 'Test message'
         }
     }
