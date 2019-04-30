@@ -235,14 +235,10 @@ function initTask(subTask) {
       });
       $("#tableMode").unbind('change');
       $("#tableMode").change(function() {
-         var vertices = graph.getAllVertices();
-         for(var vertex of vertices){
-            var vInfo = visualGraph.getVertexVisualInfo(vertex);
-            vInfo.tableMode = this.checked;
-         }
+         graphEditor.setTableMode(this.checked);
          onVisualGraphChange();
          updateOptionsJSON();
-         fromJSON();
+         // fromJSON();
       });
       $("#apply_attr").unbind('click');
       $("#apply_attr").click(applyAttr);
