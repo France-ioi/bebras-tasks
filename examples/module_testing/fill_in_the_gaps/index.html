@@ -1,0 +1,82 @@
+<DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>Fill-in the Gaps</title>
+   <script type="text/javascript" src="../../../_common/modules/ext/jquery/2.1/jquery.min.js"></script>
+   <script type="text/javascript" src="../../../_common/modules/pemFioi/fill_in_the_gaps-1.0.js"></script>
+   <script type="text/javascript">
+      var words = [ "word1", "word2", "word3", "word4", "word5", "word6", "word7", "word8", "word9", "word10" ];
+      var validEntry = [
+         [0,2],
+         [1,2,3],
+         [2,4],
+         [3,4,5],
+         [4],
+         [5,0,1],
+         [6],
+         [7,4],
+         [8],
+         [9]
+      ];
+   </script>
+   <script type="text/javascript">
+      $(function(){
+         var html = $("#text").html();
+         var fitg = new FillInTheGaps({
+            html: html,
+            divID: "text",
+            words: words,
+            validEntry: validEntry,
+            dragCallback: resetFeedback
+         })
+
+         function resetFeedback() {
+            $("#feedback").empty();
+         };
+
+         $("#validate").off("click");
+         $("#validate").click(function(){
+            var error = fitg.validation(1);
+            if(error){
+               $("#feedback").text(error);
+            }else{
+               alert("Success!");
+            }
+         });
+      });
+   </script>
+   <style>
+      #text p {
+         padding: 1em;
+         text-align: justify;
+         line-height: 2em;
+      }
+      #validate {
+         padding: 0.5em 2em;
+         cursor: pointer;
+         margin-left: 50%;
+         transform: translateX(-50%);
+      }
+      #feedback {
+         height: 2em;
+         color: red;
+         text-align: center;
+         font-family: sans-serif;
+         font-weight: bold;
+      }
+   </style>
+</head>
+<body>
+   <div id="instructions">
+      
+   </div>
+   <div id="text">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, <span id="gap_0"></span> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua <span id="gap_1"></span>. Ut enim ad minim veniam, <span id="gap_2"></span> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, <span id="gap_3"></span> sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, <span id="gap_4"></span> totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo <span id="gap_5"></span>. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, <span id="gap_6"></span> consectetur, adipisci velit, <span id="gap_7"></span> sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, <span id="gap_8"></span> nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, <span id="gap_9"></span> vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
+   </div>
+   <div id="feedback"></div>
+   <button id="validate">Valider</button>
+</body>
+</html>
