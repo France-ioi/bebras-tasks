@@ -186,6 +186,7 @@ function initTask(subTask) {
       answer.visual_json[answer.visual_json.length - 1] = $("#visual_json").val();
       answer.circleAttr = $("#circleAttr").val();
       answer.lineAttr = $("#lineAttr").val();
+      answer.vertexTextAttr = $("#vertexTextAttr").val();
       return answer;
    };
 
@@ -193,7 +194,8 @@ function initTask(subTask) {
       return {
          visual_json: [JSON.stringify(defaultVisualGraphJSON)],
          circleAttr: JSON.stringify(defaultCircleAttr),
-         lineAttr: JSON.stringify(defaultLineAttr)
+         lineAttr: JSON.stringify(defaultLineAttr),
+         vertexTextAttr: JSON.stringify(vertexTextAttr)
       };
    };
 
@@ -208,6 +210,7 @@ function initTask(subTask) {
       $("#visual_json").val(answer.visual_json[answer.visual_json.length - 1]);
       $("#circleAttr").val(JSON.stringify(JSON.parse(answer.circleAttr), null, 2));
       $("#lineAttr").val(JSON.stringify(JSON.parse(answer.lineAttr), null, 2));
+      $("#vertexTextAttr").val(JSON.stringify(JSON.parse(answer.vertexTextAttr), null, 2));
    };
 
    var initHandlers = function() {
@@ -318,9 +321,11 @@ function initTask(subTask) {
    var applyAttr = function() {
       circleAttr = JSON.parse($("#circleAttr").val());
       lineAttr = JSON.parse($("#lineAttr").val());
+      vertexTextAttr = JSON.parse($("#vertexTextAttr").val());
       if(visualGraph) {
          graphDrawer.setCircleAttr(circleAttr);
          graphDrawer.setLineAttr(lineAttr);
+         graphDrawer.setVertexLabelAttr(vertexTextAttr);
          visualGraph.redraw();
          disableAllMouse();
          graphEditor.setEnabled(true);
