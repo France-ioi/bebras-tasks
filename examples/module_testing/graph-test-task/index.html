@@ -93,6 +93,12 @@
             height: 350px;
             resize: none;
          }
+/*         #textAlignLabel {
+            margin-left: 1em;
+            font-style: italic;
+            font-size: 90%;
+            visibility: hidden;
+         }*/
       </style>
    </head>
    <body>
@@ -181,7 +187,16 @@
                         <label>
                            <input type="checkbox" id="tableMode">Table mode
                         </label>
-                        <br> 
+                        <br>
+<!--                         <label id="textAlignLabel">
+                           Text align
+                           <select id="textAlign">
+                              <option>center</option>
+                              <option>left</option>
+                              <option>right</option>
+                           </select>
+                        </label>
+                        <br>  -->
                          <br>
                         <label>
                            <input type="checkbox" id="directed">Directed
@@ -218,13 +233,18 @@
                         <textarea id="lineAttr" rows="8" cols="20"></textarea>
                      </td>
                      <td>
-                        Vertex text attr:
+                        Vertex label attr:
                         <br>
-                        <textarea id="vertexTextAttr" rows="8" cols="20"></textarea>
+                        <textarea id="vertexLabelAttr" rows="8" cols="20"></textarea>
+                     </td>
+                     <td>
+                        Vertex content attr:
+                        <br>
+                        <textarea id="vertexContentAttr" rows="8" cols="20"></textarea>
                      </td>
                   </tr>
                   <tr>
-                     <td colspan="3">
+                     <td colspan="4">
                         <input type="button" id="apply_attr" value="Apply">
                      </td>
                   </tr>
