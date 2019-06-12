@@ -251,11 +251,9 @@ function initTask(subTask) {
    };
 
    subTask.unloadLevel = function(callback) {
-      // if(automata){
-      //    automata.stopAnimation();
-      //    automata.setEnabled(false);
-      // }
-      // resetCallback();
+      if(lrParser){
+         lrParser.pauseSimulation();
+      }
       callback();
    };
 
