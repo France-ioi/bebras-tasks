@@ -252,7 +252,7 @@ function initTask(subTask) {
 
    subTask.unloadLevel = function(callback) {
       if(lrParser){
-         lrParser.pauseSimulation();
+         lrParser.pauseSimulation(null,true);
       }
       callback();
    };
