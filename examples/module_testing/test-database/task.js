@@ -25,7 +25,9 @@ function initTask(subTask) {
                     'sortByFunction',
                     'selectColumns',
                     'updateWhere',
-                    'insertRecord'
+                    'insertRecord',
+                    'printConsole',
+                    'displayTableOnGraph'
                 ]
             },
             standardBlocks: {
