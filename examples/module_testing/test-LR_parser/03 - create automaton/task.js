@@ -22,8 +22,8 @@ function initTask(subTask) {
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' → .S $"},
-                  "v_1":{"label":"1","content":"S' → S. $","terminal":true}
+                  "v_0":{"label":"0","content":"S' -> . S $"},
+                  "v_1":{"label":"1","content":"S' -> S . $","terminal":true}
                },
                "edgeInfo":{
                   "e_0":{"label":"S"}
@@ -76,17 +76,17 @@ function initTask(subTask) {
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' → .S $\nS → .E * c\nE → .E * B\nE → .E + B\nE → .B \nB → .a \nB → .b"},
-                  "v_1":{"label":"1","content":"S → E. * c\nE → E. * B\nE → E. + B"},
-                  "v_2":{"label":"2","content":"E → B."},
-                  "v_3":{"label":"3","content":"B → a."},
-                  "v_4":{"label":"4","content":"B → b."},
-                  "v_5":{"label":"5","content":"S → E * .c\nE → E * .B\nB → .a\nB → .b"},
-                  "v_6":{"label":"6","content":"E → E + .B\nB → .a\nB → .b"},
-                  "v_7":{"label":"8","content":"E → E * B."},
-                  "v_8":{"label":"9","content":"E → E + B."},
-                  "v_9":{"label":"7","content":"S → E * c.","terminal":false},
-                  "v_10":{"label":"10","terminal":true,"content":"S' → S. $"}
+                  "v_0":{"label":"0","content":"S' 🡒 🞄 S $\nS 🡒 🞄 E * c\nE 🡒 🞄 E * B\nE 🡒 🞄 E + B\nE 🡒 🞄 B \nB 🡒 🞄 a \nB 🡒 🞄 b"},
+                  "v_1":{"label":"1","content":"S 🡒 E 🞄 * c\nE 🡒 E 🞄 * B\nE 🡒 E 🞄 + B"},
+                  "v_2":{"label":"2","content":"E 🡒 B🞄"},
+                  "v_3":{"label":"3","content":"B 🡒 a🞄"},
+                  "v_4":{"label":"4","content":"B 🡒 b🞄"},
+                  "v_5":{"label":"5","content":"S 🡒 E * 🞄c\nE 🡒 E * 🞄B\nB 🡒 🞄a\nB 🡒 🞄b"},
+                  "v_6":{"label":"6","content":"E 🡒 E + 🞄B\nB 🡒 🞄a\nB 🡒 🞄b"},
+                  "v_7":{"label":"8","content":"E 🡒 E * B🞄"},
+                  "v_8":{"label":"9","content":"E 🡒 E + B🞄"},
+                  "v_9":{"label":"7","content":"S 🡒 E * c🞄","terminal":false},
+                  "v_10":{"label":"10","terminal":true,"content":"S' 🡒 S🞄 $"}
                },
                "edgeInfo":{
                   "e_0":{"label":"E"},"e_1":{"label":"B"},"e_2":{"label":"a"},"e_3":{"label":"b"},"e_4":{"label":"*"},"e_5":{"label":"+"},
@@ -143,17 +143,17 @@ function initTask(subTask) {
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' → .S $\nS → .E * c\nE → .E * B\nE → .E + B\nE → .B \nB → .a \nB → .b"},
-                  "v_1":{"label":"1","content":"S → E. * c\nE → E. * B\nE → E. + B"},
-                  "v_2":{"label":"2","content":"E → B."},
-                  "v_3":{"label":"3","content":"B → a."},
-                  "v_4":{"label":"4","content":"B → b."},
-                  "v_5":{"label":"5","content":"S → E * .c\nE → E * .B\nB → .a\nB → .b"},
-                  "v_6":{"label":"6","content":"E → E + .B\nB → .a\nB → .b"},
-                  "v_7":{"label":"8","content":"E → E * B."},
-                  "v_8":{"label":"9","content":"E → E + B."},
-                  "v_9":{"label":"7","content":"S → E * c.","terminal":false},
-                  "v_10":{"label":"10","terminal":true,"content":"S' → S. $"}
+                  "v_0":{"label":"0","content":"S' 🡒 🞄S $\nS 🡒 🞄E * c\nE 🡒 🞄E * B\nE 🡒 🞄E + B\nE 🡒 🞄B \nB 🡒 🞄a \nB 🡒 🞄b"},
+                  "v_1":{"label":"1","content":"S 🡒 E🞄 * c\nE 🡒 E🞄 * B\nE 🡒 E🞄 + B"},
+                  "v_2":{"label":"2","content":"E 🡒 B🞄"},
+                  "v_3":{"label":"3","content":"B 🡒 a🞄"},
+                  "v_4":{"label":"4","content":"B 🡒 b🞄"},
+                  "v_5":{"label":"5","content":"S 🡒 E * 🞄c\nE 🡒 E * 🞄B\nB 🡒 🞄a\nB 🡒 🞄b"},
+                  "v_6":{"label":"6","content":"E 🡒 E + 🞄B\nB 🡒 🞄a\nB 🡒 🞄b"},
+                  "v_7":{"label":"8","content":"E 🡒 E * B🞄"},
+                  "v_8":{"label":"9","content":"E 🡒 E + B🞄"},
+                  "v_9":{"label":"7","content":"S 🡒 E * c🞄","terminal":false},
+                  "v_10":{"label":"10","terminal":true,"content":"S' 🡒 S🞄 $"}
                },
                "edgeInfo":{
                   "e_0":{"label":"E"},"e_1":{"label":"B"},"e_2":{"label":"a"},"e_3":{"label":"b"},"e_4":{"label":"*"},"e_5":{"label":"+"},
@@ -177,7 +177,7 @@ function initTask(subTask) {
 
    var paperHeight = 500;
    var paperWidth = 770;
-   var graph;
+   var graph; 
    var visualGraph;
    var visualGraphJSON;
    var graphDrawer;
