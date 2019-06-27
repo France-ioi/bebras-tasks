@@ -23,7 +23,7 @@ function initTask(subTask) {
             "minGraph":{
                "vertexInfo":{
                   "v_0":{"label":"0","content":"S' -> . S $"},
-                  "v_1":{"label":"1","content":"S' -> S . $","terminal":true}
+                  "v_1":{"label":"10","content":"S' -> S . $","terminal":true}
                },
                "edgeInfo":{
                   "e_0":{"label":"S"}
