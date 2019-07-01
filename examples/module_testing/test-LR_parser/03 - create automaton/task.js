@@ -14,8 +14,8 @@ function initTask(subTask) {
          input: "a + b * c",
          visualGraphJSON: {
             "vertexVisualInfo":{
-               "v_0":{"x":224,"y":224,"tableMode":true},
-               "v_1":{"x":544,"y":224,"tableMode":true}
+               "v_0":{"x":224,"y":180,"tableMode":true},
+               "v_1":{"x":544,"y":180,"tableMode":true}
             },
             "edgeVisualInfo":{
                "e_0":{"sweep":0,"large-arc":0,"radius-ratio":0}
@@ -33,7 +33,8 @@ function initTask(subTask) {
                },
                "directed":true
             }
-         }
+         },
+         paperHeight: 410
       },
       medium: {
          rules: [ 
@@ -100,7 +101,8 @@ function initTask(subTask) {
                },
                "directed":true
             }
-         }
+         },
+         paperHeight: 500
       },
       hard: {
          rules: [ 
@@ -167,7 +169,8 @@ function initTask(subTask) {
                },
                "directed":true
             }
-         }
+         },
+         paperHeight: 500
       }
    };
 
@@ -175,7 +178,7 @@ function initTask(subTask) {
    var input;
    var lrParser;
 
-   var paperHeight = 500;
+   var paperHeight;
    var paperWidth = 770;
    var graph; 
    var visualGraph;
@@ -189,6 +192,7 @@ function initTask(subTask) {
       level = curLevel;
       rules = data[level].rules.slice();
       input = data[level].input;
+      paperHeight = data[level].paperHeight;
 
       visualGraphJSON = JSON.stringify(data[level].visualGraphJSON);
    };
