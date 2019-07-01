@@ -220,7 +220,7 @@ function initTask(subTask) {
 
    subTask.getDefaultAnswerObject = function() {
       var defaultAnswer = {
-         visualGraphJSON: visualGraphJSON
+         visualGraphJSON: [visualGraphJSON]
       };
       return defaultAnswer;
    };
