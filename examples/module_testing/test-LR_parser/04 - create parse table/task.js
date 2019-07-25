@@ -89,66 +89,59 @@ function initTask(subTask) {
             "E -> E + B",
             "E -> B",
             "B -> a",
-            "B -> b" ],
-         input: "a + b * c",
+            "B -> ''" ],
+         input: "a + * c",
          visualGraphJSON: {
             "vertexVisualInfo":{
-               "v_0":{"x":113,"y":113,"tableMode":true},
-               "v_1":{"x":216,"y":350,"tableMode":true},
-               "v_2":{"x":322,"y":60.046875,"tableMode":true},
-               "v_3":{"x":285,"y":234.046875,"tableMode":true},
-               "v_4":{"x":487,"y":57.046875,"tableMode":true},
-               "v_5":{"x":461,"y":243.046875,"tableMode":true},
-               "v_6":{"x":437,"y":421.046875,"tableMode":true},
-               "v_7":{"x":664,"y":253.046875,"tableMode":true},
-               "v_8":{"x":665,"y":420.046875,"tableMode":true},
-               "v_9":{"x":655,"y":65.046875,"tableMode":true},
-               "v_10":{"x":73,"y":434.046875,"tableMode":true}
+               "v_0":{"x":110,"y":90,"tableMode":true},
+               "v_1":{"x":252,"y":289,"tableMode":true},
+               "v_2":{"x":282,"y":57.046875,"tableMode":true},
+               "v_3":{"x":282,"y":180.046875,"tableMode":true},
+               "v_5":{"x":468,"y":76.046875,"tableMode":true},
+               "v_6":{"x":480,"y":280.046875,"tableMode":true},
+               "v_7":{"x":654,"y":175.046875,"tableMode":true},
+               "v_8":{"x":654,"y":293.046875,"tableMode":true},
+               "v_9":{"x":652,"y":57.046875,"tableMode":true},
+               "v_10":{"x":78,"y":294.046875,"tableMode":true}
             },
             "edgeVisualInfo":{
                "e_0":{"radius-ratio":2.16,"sweep":0,"large-arc":0},
                "e_1":{"sweep":0,"large-arc":0,"radius-ratio":0},
                "e_2":{"sweep":0,"large-arc":0,"radius-ratio":1.07},
-               "e_3":{"sweep":0,"large-arc":0,"radius-ratio":0.99},
                "e_4":{"sweep":0,"large-arc":0,"radius-ratio":2.58},
                "e_5":{"sweep":0,"large-arc":0,"radius-ratio":1.04},
                "e_6":{"sweep":0,"large-arc":0,"radius-ratio":0.68},
                "e_7":{"sweep":0,"large-arc":0,"radius-ratio":2.31},
-               "e_8":{"sweep":0,"large-arc":0,"radius-ratio":4.02},
                "e_9":{"sweep":0,"large-arc":0,"radius-ratio":0},
                "e_10":{"sweep":1,"large-arc":0,"radius-ratio":1.01},
-               "e_11":{"sweep":0,"large-arc":0,"radius-ratio":0.7},
                "e_12":{"sweep":0,"large-arc":0,"radius-ratio":2.5},
                "e_13":{"sweep":0,"large-arc":0,"radius-ratio":2}
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .a \nB -> .b"},
+                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .a \nB -> ."},
                   "v_1":{"label":"1","content":"S -> E. * c\nE -> E.* B\nE -> E.+ B"},
                   "v_2":{"label":"2","content":"E -> B."},
                   "v_3":{"label":"3","content":"B -> a."},
-                  "v_4":{"label":"4","content":"B -> b."},
-                  "v_5":{"label":"5","content":"S -> E * .c\nE -> E *.B\nB -> .a\nB -> .b"},
-                  "v_6":{"label":"6","content":"E -> E +.B\nB -> .a\nB -> .b"},
-                  "v_7":{"label":"8","content":"E -> E * B."},
-                  "v_8":{"label":"9","content":"E -> E + B."},
-                  "v_9":{"label":"7","content":"S -> E * c.","terminal":false},
-                  "v_10":{"label":"10","terminal":true,"content":"S' -> S. $"}
+                  "v_5":{"label":"4","content":"S -> E * .c\nE -> E *.B\nB -> .a\nB -> ."},
+                  "v_6":{"label":"5","content":"E -> E +.B\nB -> .a\nB -> ."},
+                  "v_7":{"label":"7","content":"E -> E * B."},
+                  "v_8":{"label":"8","content":"E -> E + B."},
+                  "v_9":{"label":"6","content":"S -> E * c.","terminal":false},
+                  "v_10":{"label":"9","terminal":true,"content":"S' -> S. $"}
                },
                "edgeInfo":{
-                  "e_0":{"label":"E"},"e_1":{"label":"B"},"e_2":{"label":"a"},"e_3":{"label":"b"},"e_4":{"label":"*"},"e_5":{"label":"+"},
-                  "e_6":{"label":"B"},"e_7":{"label":"a"},"e_8":{"label":"b"},"e_9":{"label":"B"},"e_10":{"label":"a"},"e_11":{"label":"b"},
-                  "e_12":{"label":"c"},"e_13":{"label":"S"}
+                  "e_0":{"label":"E"},"e_1":{"label":"B"},"e_2":{"label":"a"},"e_4":{"label":"*"},"e_5":{"label":"+"},"e_6":{"label":"B"},"e_7":{"label":"a"},"e_9":{"label":"B"},
+                  "e_10":{"label":"a"},"e_12":{"label":"c"},"e_13":{"label":"S"}
                },
                "edgeVertices":{
-                  "e_0":["v_0","v_1"],"e_1":["v_0","v_2"],"e_2":["v_0","v_3"],"e_3":["v_0","v_4"],"e_4":["v_1","v_5"],"e_5":["v_1","v_6"],
-                  "e_6":["v_5","v_7"],"e_7":["v_5","v_3"],"e_8":["v_5","v_4"],"e_9":["v_6","v_8"],"e_10":["v_6","v_3"],"e_11":["v_6","v_4"],
-                  "e_12":["v_5","v_9"],"e_13":["v_0","v_10"]
+                  "e_0":["v_0","v_1"],"e_1":["v_0","v_2"],"e_2":["v_0","v_3"],"e_4":["v_1","v_5"],"e_5":["v_1","v_6"],"e_6":["v_5","v_7"],"e_7":["v_5","v_3"],
+                  "e_9":["v_6","v_8"],"e_10":["v_6","v_3"],"e_12":["v_5","v_9"],"e_13":["v_0","v_10"]
                },
                "directed":true
             }
          },
-         paperHeight: 500
+         paperHeight: 370
       },
       hard: {
          rules: [ 
@@ -156,67 +149,60 @@ function initTask(subTask) {
             "E -> E * B",
             "E -> E + B",
             "E -> B",
-            "B -> a",
+            "B -> ''",
             "B -> b" ],
-         input: "a + b * c",
+         input: "+ b * c",
          visualGraphJSON: {
             "vertexVisualInfo":{
-               "v_0":{"x":113,"y":113,"tableMode":true},
-               "v_1":{"x":216,"y":350,"tableMode":true},
-               "v_2":{"x":322,"y":60.046875,"tableMode":true},
-               "v_3":{"x":285,"y":234.046875,"tableMode":true},
-               "v_4":{"x":487,"y":57.046875,"tableMode":true},
-               "v_5":{"x":461,"y":243.046875,"tableMode":true},
-               "v_6":{"x":437,"y":421.046875,"tableMode":true},
-               "v_7":{"x":664,"y":253.046875,"tableMode":true},
-               "v_8":{"x":665,"y":420.046875,"tableMode":true},
-               "v_9":{"x":655,"y":65.046875,"tableMode":true},
-               "v_10":{"x":73,"y":434.046875,"tableMode":true}
+               "v_0":{"x":107,"y":99,"tableMode":true},
+               "v_1":{"x":221,"y":286,"tableMode":true},
+               "v_2":{"x":287,"y":64.046875,"tableMode":true},
+               "v_3":{"x":283,"y":163.046875,"tableMode":true},
+               "v_5":{"x":453,"y":80.046875,"tableMode":true},
+               "v_6":{"x":460,"y":261.046875,"tableMode":true},
+               "v_7":{"x":652,"y":167.046875,"tableMode":true},
+               "v_8":{"x":646,"y":284.046875,"tableMode":true},
+               "v_9":{"x":652,"y":62.046875,"tableMode":true},
+               "v_10":{"x":78,"y":300.046875,"tableMode":true}
             },
             "edgeVisualInfo":{
                "e_0":{"radius-ratio":2.16,"sweep":0,"large-arc":0},
                "e_1":{"sweep":0,"large-arc":0,"radius-ratio":0},
                "e_2":{"sweep":0,"large-arc":0,"radius-ratio":1.07},
-               "e_3":{"sweep":0,"large-arc":0,"radius-ratio":0.99},
                "e_4":{"sweep":0,"large-arc":0,"radius-ratio":2.58},
                "e_5":{"sweep":0,"large-arc":0,"radius-ratio":1.04},
                "e_6":{"sweep":0,"large-arc":0,"radius-ratio":0.68},
                "e_7":{"sweep":0,"large-arc":0,"radius-ratio":2.31},
-               "e_8":{"sweep":0,"large-arc":0,"radius-ratio":4.02},
                "e_9":{"sweep":0,"large-arc":0,"radius-ratio":0},
                "e_10":{"sweep":1,"large-arc":0,"radius-ratio":1.01},
-               "e_11":{"sweep":0,"large-arc":0,"radius-ratio":0.7},
                "e_12":{"sweep":0,"large-arc":0,"radius-ratio":2.5},
-               "e_13":{"sweep":0,"large-arc":0,"radius-ratio":2}
+               "e_13":{"sweep":0,"large-arc":0,"radius-ratio":0.87}
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .a \nB -> .b"},
+                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .\nB -> .b"},
                   "v_1":{"label":"1","content":"S -> E. * c\nE -> E.* B\nE -> E.+ B"},
                   "v_2":{"label":"2","content":"E -> B."},
-                  "v_3":{"label":"3","content":"B -> a."},
-                  "v_4":{"label":"4","content":"B -> b."},
-                  "v_5":{"label":"5","content":"S -> E * .c\nE -> E *.B\nB -> .a\nB -> .b"},
-                  "v_6":{"label":"6","content":"E -> E +.B\nB -> .a\nB -> .b"},
-                  "v_7":{"label":"8","content":"E -> E * B."},
-                  "v_8":{"label":"9","content":"E -> E + B."},
-                  "v_9":{"label":"7","content":"S -> E * c.","terminal":false},
-                  "v_10":{"label":"10","terminal":true,"content":"S' -> S. $"}
+                  "v_3":{"label":"3","content":"B -> b."},
+                  "v_5":{"label":"4","content":"S -> E * .c\nE -> E *.B\nB -> .\nB -> .b"},
+                  "v_6":{"label":"5","content":"E -> E +.B\nB -> .\nB -> .b"},
+                  "v_7":{"label":"7","content":"E -> E * B."},
+                  "v_8":{"label":"8","content":"E -> E + B."},
+                  "v_9":{"label":"6","content":"S -> E * c.","terminal":false},
+                  "v_10":{"label":"9","terminal":true,"content":"S' -> S. $"}
                },
                "edgeInfo":{
-                  "e_0":{"label":"E"},"e_1":{"label":"B"},"e_2":{"label":"a"},"e_3":{"label":"b"},"e_4":{"label":"*"},"e_5":{"label":"+"},
-                  "e_6":{"label":"B"},"e_7":{"label":"a"},"e_8":{"label":"b"},"e_9":{"label":"B"},"e_10":{"label":"a"},"e_11":{"label":"b"},
-                  "e_12":{"label":"c"},"e_13":{"label":"S"}
+                  "e_0":{"label":"E"},"e_1":{"label":"B"},"e_2":{"label":"b","selected":false},"e_4":{"label":"*"},"e_5":{"label":"+"},
+                  "e_6":{"label":"B"},"e_7":{"label":"b"},"e_9":{"label":"B"},"e_10":{"label":"b"},"e_12":{"label":"c"},"e_13":{"label":"S"}
                },
                "edgeVertices":{
-                  "e_0":["v_0","v_1"],"e_1":["v_0","v_2"],"e_2":["v_0","v_3"],"e_3":["v_0","v_4"],"e_4":["v_1","v_5"],"e_5":["v_1","v_6"],
-                  "e_6":["v_5","v_7"],"e_7":["v_5","v_3"],"e_8":["v_5","v_4"],"e_9":["v_6","v_8"],"e_10":["v_6","v_3"],"e_11":["v_6","v_4"],
-                  "e_12":["v_5","v_9"],"e_13":["v_0","v_10"]
+                  "e_0":["v_0","v_1"],"e_1":["v_0","v_2"],"e_2":["v_0","v_3"],"e_4":["v_1","v_5"],"e_5":["v_1","v_6"],"e_6":["v_5","v_7"],
+                  "e_7":["v_5","v_3"],"e_9":["v_6","v_8"],"e_10":["v_6","v_3"],"e_12":["v_5","v_9"],"e_13":["v_0","v_10"]
                },
                "directed":true
             }
          },
-         paperHeight: 500
+         paperHeight: 360
       }
    };
 
