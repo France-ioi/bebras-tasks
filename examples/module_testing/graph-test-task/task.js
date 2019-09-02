@@ -350,6 +350,17 @@ function initTask(subTask) {
    var updateDirected = function(directed) {
       graph.directed = directed;
       updateJSON();
+      if(!directed){
+         var lineAttr = JSON.parse($("#lineAttr").val());
+         lineAttr["arrow-end"] = "none";
+         graphDrawer.setLineAttr(lineAttr);
+      }else{
+         var lineAttr = JSON.parse($("#lineAttr").val());
+         graphDrawer.setLineAttr(lineAttr);
+      }
+      visualGraph.redraw();
+      graphEditor.updateHandlers();
+      
    };
 
    var updateGridVisibility = function(show) {
