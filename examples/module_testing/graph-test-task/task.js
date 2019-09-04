@@ -277,7 +277,7 @@ function initTask(subTask) {
       });
       $("#dragGraph").off("change");
       $("#dragGraph").change(function(){
-         graphEditor.setDragGraphEnabled(this.checked);
+         graphEditor.setGraphDragEnabled(this.checked);
          updateOptionsJSON();
       });
       $("#scaleGraph").off("change");
