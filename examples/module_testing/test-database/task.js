@@ -11,6 +11,7 @@ function initTask(subTask) {
                 database: [
                     'loadTable',
                     'loadTableFromCsv',
+                    'loadTableFromCsvWithTypes',
                     'joinTables',
                     'displayTable',
                     'unionTables',
