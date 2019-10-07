@@ -47,7 +47,10 @@ function initTask(subTask) {
             map_lng_left: -4.85,
             map_lng_right: 9.65,
             map_lat_top: 51.6,
-            map_lat_bottom: 41.7
+            map_lat_bottom: 41.7,
+            //disable_csv_import: true,
+            //calculate_hash: true,
+            strict_types: true
         },
         example: {
            blockly: '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="robot_start" id="7].xKgsd)es/lp`gMaa6" deletable="false" movable="false" editable="false" x="0" y="0"><next><block type="variables_set" id="1@PSOoPoyip2+8PkX7CU"><field name="VAR">testTable</field><value name="VALUE"><block type="loadTableFromCsv" id="IbS=W{_;wCRDMAx_RN}J"><value name="PARAM_0"><shadow type="text" id="s-deWk2cy/rlDAD-ZajW"><field name="TEXT">1</field></shadow></value><value name="PARAM_1"><shadow type="math_number" id=")H:LCPk*e]lmU}oWc+I4"><field name="NUM">1</field></shadow><block type="lists_create_with" id="hm_#53Wfo80tP(FkscP5"><mutation items="6"></mutation><value name="ADD0"><block type="text" id="C+vla|xRN*Zfp1kO0q#O"><field name="TEXT">string</field></block></value><value name="ADD1"><block type="text" id="tJi.A?G|l(~,e}C?[Hb,"><field name="TEXT">number</field></block></value><value name="ADD2"><block type="text" id="iC6]RtDQ;f}4ZoL}+LG2"><field name="TEXT">number</field></block></value><value name="ADD3"><block type="text" id="424~3]7F~eDj1!1yd3@."><field name="TEXT">number</field></block></value><value name="ADD4"><block type="text" id="8/KWa=B-fcSM0br,Jx4v"><field name="TEXT">number</field></block></value><value name="ADD5"><block type="text" id="PiTF_W.Rc]_{l|_1t-Uw"><field name="TEXT">number</field></block></value></block></value></block></value><next><block type="displayTable" id="?jL`FJm`gVT1Gbtk]eOj"><value name="PARAM_0"><block type="variables_get" id="8kxnzpZMG|:Lr7g[NpTp"><field name="VAR">testTable</field></block></value></block></next></block></next></block></xml>'
