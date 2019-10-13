@@ -145,7 +145,7 @@ function initTask(subTask) {
         easy: [{
             tables: {
                 valid_table3: {
-                    public: false,
+                    public: true, // false,
                     data: valid_table3
                 }
             }
@@ -153,7 +153,7 @@ function initTask(subTask) {
         medium: [{
             tables: {
                 valid_table3: {
-                    public: false,
+                    public: true, // false,
                     data: valid_table3
                 }
             }
