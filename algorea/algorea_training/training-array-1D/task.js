@@ -1,17 +1,7 @@
 function initTask(subTask) {
-   var cellSide = 60;
-
    subTask.gridInfos = {
-      cellSide: cellSide,
-      actionDelay: 200,
+      contextType: "paint",
       showLabels: true,
-      maxIterWithoutAction: 2000,
-      itemTypes: {
-         green_robot: { img: "green_robot.png", category: "robot", side: 80, nbStates: 9, offsetX: -14, zOrder: 2 },
-         marker: { num: 2, img: "marker.png", side: cellSide, isMarker: true, zOrder: 0 },
-         initialPaint: { num: 3, img: "paint.png", side: cellSide, isPaint: true, isMarker: true, zOrder: 1 },
-         paint: { img: "paint.png", side: cellSide, isPaint: true, zOrder: 1 }
-      },
       maxInstructions: {
          easy: 40,
          medium: 30,
@@ -24,7 +14,7 @@ function initTask(subTask) {
             hard: true
          },
          generatedBlocks: {
-            robot: ["south", "east", "west", "paint", "paintOnCell", "col"]
+            robot: ["south", "east", "west", "dropObject", "onContainer", "col"]
          },
          standardBlocks: {
             includeAll: false,
@@ -36,73 +26,71 @@ function initTask(subTask) {
                hard: ["lists_create_with_empty", "math_arithmetic"]
             }
          }
-      },
-      checkEndEveryTurn: false,
-      checkEndCondition: robotEndConditions.checkMarkersPainted
+      }
    };
 
    subTask.data = {
       easy: [
          {
             tiles: [
-                   [1, 3, 1, 3, 3, 1, 1, 3, 1, 3, 3, 3, 1, 3, 3, 1],
-                   [1, 2, 1, 2, 2, 1, 1, 2, 1, 2, 2, 2, 1, 2, 2, 1]
+                   [1, 4, 1, 4, 4, 1, 1, 4, 1, 4, 4, 4, 1, 4, 4, 1],
+                   [1, 3, 4, 3, 3, 4, 4, 3, 4, 3, 3, 3, 4, 3, 3, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" }
+                  { row: 0, col: 0, type: "red_robot" }
                ]
          },
          {
             tiles: [
-                   [1, 1, 3, 3, 3, 1, 3, 1, 3, 3, 1, 3, 1, 1, 3, 1],
-                   [1, 1, 2, 2, 2, 1, 2, 1, 2, 2, 1, 2, 1, 1, 2, 1]
+                   [1, 1, 4, 4, 4, 1, 4, 1, 4, 4, 1, 4, 1, 1, 4, 1],
+                   [1, 4, 3, 3, 3, 4, 3, 4, 3, 3, 4, 3, 4, 4, 3, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" }
+                  { row: 0, col: 0, type: "red_robot" }
                ]
          }
       ],
       medium: [
          {
             tiles: [
-                   [1, 3, 1, 3, 3, 1, 1, 3, 1, 3, 3, 3, 1, 3, 3, 1],
-                   [1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 1, 2, 2, 1, 2, 1]
+                   [1, 4, 1, 4, 4, 1, 1, 4, 1, 4, 4, 4, 1, 4, 4, 1],
+                   [1, 3, 3, 4, 3, 3, 3, 4, 3, 4, 4, 3, 3, 4, 3, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" }
+                  { row: 0, col: 0, type: "red_robot" }
                ]
          },
          {
             tiles: [
-                   [1, 1, 3, 3, 3, 1, 3, 1, 3, 3, 1, 3, 1, 1, 3, 1],
-                   [1, 2, 1, 1, 2, 1, 2, 2, 1, 2, 1, 2, 2, 2, 1, 1]
+                   [1, 1, 4, 4, 4, 1, 4, 1, 4, 4, 1, 4, 1, 1, 4, 1],
+                   [1, 3, 4, 4, 3, 4, 3, 3, 4, 3, 4, 3, 3, 3, 4, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" }
+                  { row: 0, col: 0, type: "red_robot" }
                ]
          }
       ],
       hard: [
          {
             tiles: [
-                   [1, 3, 1, 3, 3, 3, 1, 1, 1, 1, 3, 1, 1, 3, 3, 1],
-                   [1, 3, 3, 1, 3, 1, 1, 1, 3, 1, 3, 1, 3, 1, 3, 1],
-                   [1, 3, 1, 3, 1, 1, 3, 1, 3, 3, 3, 1, 1, 3, 1, 1],
-                   [1, 2, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 1, 2, 2, 1]
+                   [1, 4, 1, 4, 4, 4, 1, 1, 1, 1, 4, 1, 1, 4, 4, 1],
+                   [1, 4, 4, 1, 4, 1, 1, 1, 4, 1, 4, 1, 4, 1, 4, 1],
+                   [1, 4, 1, 4, 1, 1, 4, 1, 4, 4, 4, 1, 1, 4, 1, 1],
+                   [1, 3, 4, 3, 3, 4, 4, 4, 3, 4, 3, 4, 4, 3, 3, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" }
+                  { row: 0, col: 0, type: "red_robot" }
                ]
          },
          {
             tiles: [
-                   [1, 1, 1, 1, 3, 1, 1, 3, 3, 3, 1, 3, 3, 3, 1, 1],
-                   [1, 3, 1, 3, 1, 3, 1, 3, 3, 3, 1, 3, 1, 1, 1, 1],
-                   [1, 3, 3, 3, 1, 1, 3, 1, 3, 1, 3, 1, 1, 3, 1, 1],
-                   [1, 2, 1, 2, 1, 1, 1, 2, 2, 2, 1, 2, 1, 2, 1, 1]
+                   [1, 1, 1, 1, 4, 1, 1, 4, 4, 4, 1, 4, 4, 4, 1, 1],
+                   [1, 4, 1, 4, 1, 4, 1, 4, 4, 4, 1, 4, 1, 1, 1, 1],
+                   [1, 4, 4, 4, 1, 1, 4, 1, 4, 1, 4, 1, 1, 4, 1, 1],
+                   [1, 3, 4, 3, 4, 4, 4, 3, 3, 3, 4, 3, 4, 3, 4, 1]
                ],
             initItems: [
-                  { row: 0, col: 0, dir: 0, type: "green_robot" }
+                  { row: 0, col: 0, type: "red_robot" }
                ]
          }
       ]
