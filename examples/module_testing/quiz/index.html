@@ -5,7 +5,7 @@
         <title>Test</title>
         <script>
             var stringsLanguage = 'en';
-            var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","shuffle_questions":false,"shuffle_answers":false,"mathjax":true,"display_partial_feedback":true};
+            var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","shuffle_questions":false,"shuffle_answers":true,"mathjax":true,"display_partial_feedback":true};
             var task_data_info = {"markdown":true};
             var quiz_question_types = {"input":true,"single":true,"multiple":true,"fill_gaps":true};
         </script>
@@ -36,19 +36,19 @@
             <div class="taskContent">
                 <question type="single">
                     <statement>question 1 (single choice default layout)</statement>
+                    <solution>correct answer is 4</solution>
                     <answer>answer 1</answer>
                     <answer>answer 2</answer>
                     <answer>answer 3</answer>
                     <answer>answer 4</answer>
-                    <solution>correct answer is 4</solution>
                 </question>
                 <question type="multiple">
                     <statement>question 2 (multiple choice default layout)</statement>
+                    <solution>correct answer is 2 and 4</solution>
                     <answer>answer 1</answer>
                     <answer>answer 2</answer>
                     <answer>answer 3</answer>
                     <answer>answer 4</answer>
-                    <solution>correct answer is 2 and 4</solution>
                 </question>
                 <!--
                 <question type="input">
@@ -76,8 +76,8 @@
                 </question>
                 <question type="input">
                     <statement>question 4 (input with regexp)</statement>
-                    <answer format="regexp" validator=".+"></answer>
                     <solution>correct answer is any non empty string</solution>
+                    <answer format="regexp" validator=".+"></answer>
                 </question>
             </div>
         </div>
