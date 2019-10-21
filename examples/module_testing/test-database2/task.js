@@ -41,6 +41,8 @@ function initTask(subTask) {
             context.expectTable('valid_table3');
         },
         databaseConfig: {
+            width: 200,
+            height: 200,
             pin_file: 'img/pin.png',
             pin_file_mistake: 'img/pin2.png',
             map_file: 'img/carteDeFrance.png',

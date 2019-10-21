@@ -2,22 +2,52 @@
 window.Quiz.grader.data = [
     0,
     [1, 2],
-    "A",
-    2,
+    {
+        strict: true,
+        value: ['ipsum', 'amet']
+    },
     function(val) {
-        return {
-            score: val.length <= 10 ? val.length / 10 : 0,
-            message: 'Test message'
+        if(val != '') {
+            return {
+                score: 0,
+                message: 'Grader msg: value must be non empty string'
+            }
         }
+        return 1;
     }
 ]
 */
 
+
 window.Quiz.grader.data = [
-    0,
-    [1, 2],
+    {
+        messages: [
+            'Grader msg: question 1, wrong answer idx 0',
+            'Grader msg: question 1, wrong answer idx 1',
+            'Grader msg: question 1, wrong answer idx 2',
+            null
+        ],
+        value: 3
+    },
+    {
+        messages: [
+            'Grader msg: question 2, wrong answer idx 0',
+            null,
+            'Grader msg: question 2, wrong answer idx 2'
+        ],
+        value: [1, 3]
+    },
     {
         strict: true,
         value: ['ipsum', 'amet']
+    },
+    function(val) {
+        if(val == '') {
+            return {
+                score: 0,
+                message: 'Grader msg: value must be non empty string'
+            }
+        }
+        return 1;
     }
 ]
