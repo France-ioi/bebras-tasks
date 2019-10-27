@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+   <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <script>
+            var stringsLanguage = 'en';
+            var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","shuffle_questions":false,"shuffle_answers":true,"mathjax":true,"display_partial_feedback":true};
+            var task_data_info = {"markdown":true};
+            var quiz_question_types = {"input":true,"single":true,"multiple":true,"fill_gaps":true};
+        </script>
+        <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
+        <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/quiz/loader.js"></script>
+        <script class="remove" type="text/javascript">
+            var json = {
+                "id": "test-quiz",
+                "license": "",
+                "authors": [],
+                "language": "en",
+                "version": "fr.01",
+                "translators": []
+            };
+            var modulesPath = '../../../_common/modules';
+            loadQuizModules();
+        </script>
+        <script class="remove" type="text/javascript" src="grader_data.js"></script>
+    </head>
+    <body>
+        <div id="task" style="display: none">
+            <div class="intro">
+                <p class="dropcap">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h2 class="title">Objectif</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
+            <div class="taskContent">
+                <!--
+                <question type="single">
+                    <statement>question 1 (single choice default layout)</statement>
+                    <solution>correct answer is 4</solution>
+                    <answer>answer 1</answer>
+                    <answer>answer 2</answer>
+                    <answer>answer 3</answer>
+                    <answer>answer 4</answer>
+                </question>
+                <question type="multiple">
+                    <statement>question 2 (multiple choice default layout)</statement>
+                    <solution>correct answer is 2 and 4</solution>
+                    <answer>answer 1</answer>
+                    <answer>answer 2</answer>
+                    <answer>answer 3</answer>
+                    <answer>answer 4</answer>
+                </question>
+                -->
+                <!--
+                <question type="input">
+                    <statement>question 2 (input string)</statement>
+                    <answer format="string"></answer>
+                    <solution>correct answer is "A"</solution>
+                </question>
+                <question type="input">
+                    <statement>question 3 (input number)</statement>
+                    <answer format="number"></answer>
+                    <solution>correct answer is 2</solution>
+                </question>
+                <question type="input">
+                    <statement>question 4 (input with regexp)</statement>
+                    <answer format="regexp" validator=".+"></answer>
+                    <solution>correct answer is any non empty string</solution>
+                </question>
+                -->
+
+                <!--
+                <question type="fill_gaps">
+                    <statement><p>Fill gaps</p></statement>
+                    <answer>incorrect</answer>
+                    <answer>ipsum</answer>
+                    <answer>amet</answer>
+                    <div class="fill-gaps-text"><p>Lorem&#xA0;<span class="placeholder noneditable">&#xA0;</span> dolor sit <span class="placeholder noneditable">&#xA0;</span>, consectetur adipiscing elit. Aliquam ac fringilla dolor. Nullam odio nisi, ornare in dapibus a, eleifend non dolor. Nullam pretium augue ut quam convallis suscipit. Etiam in ultricies justo. Ut vel risus a augue porttitor sagittis. Donec nec consequat dolor. Morbi imperdiet est nec dui porttitor, vel tristique arcu iaculis. Mauris vehicula nibh et lectus elementum, non ultricies mauris congue. Praesent consectetur tristique nisi quis commodo. Curabitur a elit rutrum, mattis purus non, rutrum orci. Cras at congue ligula.</p></div>
+                </question>
+                -->
+
+                <question-group>
+                    <question type="input">
+                        <statement>question 1 version 1</statement>
+                        <solution>correct answer is 1</solution>
+                        <answer format="regexp"></answer>
+                    </question>
+                    <question type="input">
+                        <statement>question 1 version 2</statement>
+                        <solution>correct answer is 2</solution>
+                        <answer format="regexp"></answer>
+                    </question>
+                    <question type="input">
+                        <statement>question 1 version 3</statement>
+                        <solution>correct answer is 3</solution>
+                        <answer format="regexp"></answer>
+                    </question>
+                </question-group>
+                <question-group>
+                    <question type="input">
+                        <statement>question 2 version A</statement>
+                        <solution>correct answer is 'a'</solution>
+                        <answer format="regexp"></answer>
+                    </question>
+                    <question type="input">
+                        <statement>question 2 version B</statement>
+                        <solution>correct answer is 'b'</solution>
+                        <answer format="regexp"></answer>
+                    </question>
+                    <question type="input">
+                        <statement>question 2 version C</statement>
+                        <solution>correct answer is 'c'</solution>
+                        <answer format="regexp"></answer>
+                    </question>
+                </question-group>
+            </div>
+        </div>
+        <div id="solution" class="remove" style="display: none">
+            <h1>solution</h1>
+            <!--
+            <p>
+                question 1 (single choice default layout) real N: <ref question="1"/>
+                <p>
+                    question 2 (multiple choice default layout)/answer 2 real N: <ref question="2" answer="2"/>
+                </p>
+            </p>
+            -->
+        </div>
+   </body>
+</html>
