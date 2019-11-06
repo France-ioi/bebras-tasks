@@ -32,7 +32,8 @@ function initTask(subTask) {
                 ]
             },
             standardBlocks: {
-                wholeCategories: ["logic", "loops", "math", "texts", "lists", "dicts", "variables", "functions"]
+                wholeCategories: ["logic", "loops", "math", "texts", "lists", "dicts", "variables", "functions"],
+                includeAll: true
             }
         },
         maxInstructions: 100,
