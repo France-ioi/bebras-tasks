@@ -1,6 +1,15 @@
 function initTask(subTask) {
 
     subTask.gridInfos = {
+        //blocksLanguage: 'fr',
+
+        /*
+        blocksLanguage: {
+            python: 'fr',
+            blockly: 'fr'
+        },
+        */
+
         hideSaveOrLoad: false,
         actionDelay: 200,
         buttonScaleDrawing: false,
