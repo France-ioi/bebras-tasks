@@ -38,7 +38,7 @@ function initTask(subTask) {
         maxInstructions: 100,
         checkEndEveryTurn: false,
         checkEndCondition: function(context, lastTurn) {
-            context.expectTable('valid_table3');
+            context.expectTable('valid_table_map');
         },
         databaseConfig: {
             width: 200,
@@ -143,24 +143,34 @@ function initTask(subTask) {
         ]
     }
 
+
+    var valid_table_map = {
+        columnNames: [
+            'lng', 'name', 'lat'
+        ],
+        columnTypes: [
+            'string', 'number', 'number'
+        ],
+        records: [
+            [0,'P1',46],
+            [8,'P2',50]
+        ]
+    }
+
     subTask.data = {
         easy: [{
             tables: {
                 valid_table3: {
                     public: true, // false,
                     data: valid_table3
-                }
-            }
-        }],
-        medium: [{
-            tables: {
-                valid_table3: {
+                },
+                valid_table_map: {
                     public: true, // false,
-                    data: valid_table3
+                    data: valid_table_map
                 }
             }
         }]
     }
     initBlocklySubTask(subTask)
 }
-initWrapper(initTask, ['easy', 'medium'])
+initWrapper(initTask, ['easy'])
