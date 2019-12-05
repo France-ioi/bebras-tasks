@@ -145,6 +145,7 @@ function initTask(subTask) {
 
 
     var valid_table_map = {
+        // columns names are important for grader, reference table must have "name", "lng" and "lat" columns
         columnNames: [
             'lng', 'name', 'lat'
         ],
