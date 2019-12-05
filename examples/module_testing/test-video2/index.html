@@ -17,7 +17,7 @@
         </script>
         <script class="remove" type="text/javascript">
             var json = {
-                "id": "Logique/mathinfoly_lafourcade_1",
+                "id": "Logique/mathinfoly_lafourcade_2",
                 "language": "fr",
                 "version": "fr.01",
                 "authors": ["Pascal Lafourcade : cours", "Christophe Stoltz, Prometea : captation", "Barbara Arsenault : montage", "Association Plaisir Maths : organisation", "Association France-ioi : commanditaire"],
@@ -30,125 +30,136 @@
         </script>
         <script type="text/javascript">
 var videoData = {
-    video_id: "Nhy5FK0uan0",
+    video_id: "ZcsnBdUrIAk",
     sections: [
         {
-            title: "Objectif du projet, création des équipes.",
-            description: "Par équipes de 5, choisir un jeu à modéliser, en générant l'entrée d'un solveur SAT avec le langage de son choix.",
+            title: "Objectifs",
+            description: "Comment fonctionne un SAT-solver, algorithme DPLL, notations et formalisation de la logique de 1er ordre",
             parts: 4,
-            start: 0
+            start: '0:32'
         },
         {
-            title: "Exemple de projet : problème des pigeons",
-            description: "{Énoncé du problème|6:22} &mdash; " +
-                         "{Comment le modéliser en logique|7:57}",
+            title: "Théorème de Gödel",
+            description: "{Machine de Turing|1:23} &mdash; " +
+                         "{Problèmes indécidables|2:05} &mdash; " +
+                         "{Machine qui répond vrai ou faux sans se tromper|2:49} &mdash; " +
+                         "{Exemple où la machine ne peut pas répondre|3:30} &mdash; " +
+                         "{Théorème de Gödel|6:04} &mdash; " +
+                         "{Anecdote de Don Quichotte|6:41}",
             parts: 4,
-            start: '6:22'
+            start: '0:48'
         },
         {
-            title: "Les étapes de la modélisation à la résolution",
-            description: "{Résumé des étapes|12:46} &mdash; "+
-                         "{Notion d'extension: transformer la modélisation|13:45} &mdash; " +
-                         "{format DiMacs (CNF) et principes des SAT-solvers|18:05}",
+            title: "Algorithme de Davis et Putnam (DPLL)",
+            description: "{Historique, auteurs|8:47} &mdash; " +
+                         "{Objectif : déterminer si un ensemble de clauses est satisfiable|9:14} &mdash; " +
+                         "{Deux transformations : préserver le sens puis la satisfiabilité|10:09} &mdash; " +
+                         "{Branch and bound|13:35} &mdash; " +
+                         "{Choix des variables à affecter|15:01} &mdash; " +
+                         "{Exploration des branches|15:37} &mdash; " +
+                         "{Solution différentes|16:02}",
             parts: 4,
-            start: '12:46'
+            start: '8:18'
         },
         {
-            title: "Liste de problèmes (jeux) possibles, constitution des équipes",
-            description: "{Faciles : n reines, tout noir tout blanc|21:18} &mdash; " +
-                         "{Moyens : sudoku, coloration de graphe, norinori, futoshiki, dosun-fuwari, squaro, hanji|23:07} &mdash; " +
-                         "{Difficiles : tetravez, takuzu, hashiwokakero|25:21} &mdash; " +
-                         "{Suite des cours|27:07} &mdash; " +
-                         "{Solvers 3-SAT|28:54} &mdash; " +
-                         "{Équipes|29:20} &mdash; " +
-                         "{Coloration de graphes, Rubik's Cube, Chemins eulériens, Pentominos|32:30}",
+            title: "DPLL : Supprimer clauses contenant des littéraux isolés",
+            description: "{Littéral isolé|17:32} &mdash; " +
+                         "{Lemme : satisfiabilité préservée|19:17} &mdash; " +
+                         "{Exemple|19:59} &mdash; " +
+                         "{Question : clause et forme normale|22:17} &mdash; " +
+                         "{Correction du Lemme|23:15} &mdash; " +
+                         "{Correction de l'exemple|24:19} &mdash; " +
+                         "{Application du Lemme|24:33} &mdash; " +
+                         "{Pourquoi on peut les supprimer|25:24} &mdash; " +
+                         "{Question / éclaircissement|26:09} &mdash; " +
+                         "{Suite de l'application|27:45} &mdash; " +
+                         "{Critère intéressant car syntaxique|28:38}",
             parts: 4,
-            start: '21:04'
+            start: '17:10'
         },
         {
-            title: "Introduction à la logique, notion de raisonnement",
-            description: "{Introduction à la logique|36:25} &mdash; " +
-                         "{Notion de raisonnement|38:33} &mdash; " +
-                         "{Exemple du cheval cher, sémantique, contradiction|39:14}",
+            title: "DPLL : Résolution unitaire",
+            description: "{Définition : clause unitaire|29:12} &mdash; " +
+                         "{Lemme associé : clauses unitaires|30:19} &mdash; " +
+                         "{Exercice 1|34:10} &mdash;" +
+                         "{Exercice 2|37:40} &mdash; " +
+                         "{Exercice 3|38:44} &mdash; " +
+                         "{Lemme : suppression des clauses valides|41:05}",
             parts: 4,
-            start: '36:25'
+            start: '28:52'
         },
         {
-            title: "Historique de la logique",
-            description: "{George Boule : logique symbolique, règles de raisonnement, théorie de la démonstration|41:38} &mdash; " +
-                         "{Bertrand Russel : paradoxes, formalisation des maths|43:23} &mdash; " +
-                         "{Kürt Godel : théorème d'incomplétude|43:59} &mdash; " +
-                         "{Alonzo Church : lambda calcul|45:13}",
+            title: "DPLL : Algorithme",
+            description: "{Suppression des clauses valides|43:08} &mdash; " +
+                         "{Appliquer sur les clauses non valides|43:32} &mdash; " +
+                         "{Renvoyer faux si contradiction|44:03} &mdash; " +
+                         "{Renvoyer vrai si ensemble vide|44:25} &mdash; " +
+                         "{Retirer les clauses qui en contiennent une autre|44:40} &mdash; " +
+                         "{Résolution unitaire|45:40} &mdash; " +
+                         "{Si modèle modifié, recommencer|46:17} &mdash; " +
+                         "{Choisir une variable et appliquer DPLL pour chaque affectation|46:35} &mdash; " +
+                         "{Vraie question : quelle variable choisir|47:17} &mdash; " +
+                         "{Compétition de SAT-solvers|47:59} &mdash; " +
+                         "{Question sur le 4e point|49:00}",
             parts: 4,
-            start: '41:38'
+            start: '42:52'
         },
         {
-            title: "Exemples d'applications",
-            description: "{Vérification, preuve automatique|45:57} &mdash; " +
-                         "{Prolog|47:55}",
+            title: "DPLL : Exemple 1",
+            description: "{Exemple|49:15} &mdash; " +
+                         "{Choisir la variable a|50:14} &mdash; " +
+                         "{Branche a = 0|51:07} &mdash; " +
+                         "{Enlever la clause qui contient b|51:44} &mdash; " +
+                         "{Résolution unitaire|51:56} &mdash; " +
+                         "{Branche a = 1|52:27} &mdash; " +
+                         "{|0:00}",
             parts: 4,
-            start: '45:57'
+            start: '49:15'
         },
         {
-            title: "Opérateurs, définitions, exemple",
-            description: "{Négation, et, ou, implique, équivalent|48:59} &mdash; " +
-                         "{Exemple à modéliser|49:35} &mdash; " +
-                         "{Taille d'une formule|51:40} &mdash; " +
-                         "{Priorités des opérateurs|53:23} &mdash; " +
-                         "{Assignation d'une formule|54:25} &mdash; " +
-                         "{Valeur d'une formule|57:12}",
+            title: "DPLL : Observations",
+            description: "{Pourquoi il se termine|53:32} &mdash; " +
+                         "{Montrer qu'il est correct|53:45} &mdash; " +
+                         "{Conclusion: vous pouvez le programmer|54:03} &mdash; " +
+                         "{Question : quand utilise-t-on les litéraux isolés ?|54:21} &mdash; " +
+                         "{Correction : litéraux isolés|55:10}",
             parts: 4,
-            start: '48:59'
+            start: '53:20'
         },
         {
-            title: "Table de vérité",
-            description: "{Notion de table de vérité|1:00:19} &mdash; " +
-                         "{Exemple de question|1:02:43} &mdash; " +
-                         "{Taille de la table|1:03:22} &mdash; " +
-                         "{Équivalence de deux formules|1:03:54}",
+            title: "DPLL : Exemple 2",
+            description: "{Exemple|58:25} &mdash; " +
+                         "{Branche s = 0|59:55} &mdash; " +
+                         "{Réduction, Élimination|1:00:16}",
             parts: 4,
-            start: '1:00:15'
+            start: '58:25'
         },
         {
-            title: "Vocabulaire",
-            description: "{Formule valide / tautologie|1:04:09} &mdash; " +
-                         "{Modèle et contre-modèle|1:05:27} &mdash; " +
-                         "{Formule satisfiable ou insatisfiable|1:07:33} &mdash; " +
-                         "{Formule valide ou invalide selon le modèle|1:08:42}",
+            title: "Logique du premier ordre",
+            description: "{Deux nouveaux symboles : il existe et quel que soit|01:01:49} &mdash; " +
+                         "{Domaine|1:02:17} &mdash; " +
+                         "{Termes, relations, formules|01:03:08} &mdash; " +
+                         "{Exemple : terme père(x), relation frère(x,y), formule|01:04:02}",
             parts: 4,
-            start: '1:04:09'
+            start: '01:01:23'
         },
         {
-            title: "Résoudre par simplification : sémantique, lois, proriétés",
-            description: "{Formulations équivalentes|1:09:08} &mdash; " +
-                         "{Résoudre par simplification|1:11:20} &mdash; " +
-                         "{Propriétés du ou (conjonction) : associatif/commutatif/idempotent|1:11:38} &mdash; " +
-                         "{Propriétés du et (disjonction): distributivité,neutralité,absorbtion|1:12:00} &mdash; " +
-                         "{Loi de la négation / tiers exclu|1:15:03} &mdash; " +
-                         "{Loi de De Morgan|1:15:53} &mdash; " +
-                         "{Loi de simplification|1:16:19}",
+            title: "Exercices",
+            description: "{Exercices : phrases à traduire|01:06:20}<br/>" +
+                         "{Exercice 1 : il y a des gens qui s'aiment|01:08:37} &mdash; " +
+                         "{Domaine à définir, prédicats à lister|01:09:30} &mdash; " +
+                         "{Spécifier x != y ?|1:10:09} &mdash; " +
+                         "{SAT-Solveurs modulo théorie équationnelle SMT|1:11:43}<br/>" +
+                         "{Exercice 2 : si deux personnes s'aiment elles sont conjointes|01:12:03} &mdash; " +
+                         "{Corrigé|1:12:44} &mdash;" +
+                         "{Exercice 3 : On ne peut pas aimer deux personnes à la fois|01:14:40}<br/>" +
+                         "{Question : y plutôt que z|1:15:54} &mdash; " +
+                         "{Que faire pour le projet|01:16:48} &mdash; " +
+                         "{Question : proposition alternative|01:17:21} &mdash; " +
+                         "{Question : définition de l'égalité|01:18:25}",
             parts: 4,
-            start: '1:09:08'
+            start: '01:06:20'
         },
-        {
-            title: "Quelques définitions",
-            description: "Littéral, Monome, Clause, Formes normales disjonctive et conjonctive",
-            parts: 4,
-            start: '1:17:18'
-        },
-        {
-            title: "Passer en forme normale conjonctive",
-            description: "Forme à donner en entrée des solveurs SAT",
-            parts: 4,
-            start: '1:20:16'
-        },
-        {
-            title: "Questions",
-            description: "Notation triple égal dans les lois, symbole \"a pour conséquence\", utilité de l'algèbre de Boule",
-            parts: 4,
-            start: '1:23:04'
-        },
-
 
     ],
     show_viewed: true,
@@ -161,25 +172,14 @@ var videoData = {
    </head>
    <body>
         <div id="task">
-            <h1>Logique, par Pascal Lafourcade, partie 1</h1>
+            <h1>Introduction à la logique, par Pascal Lafourcade, partie 2</h1>
             <div>
-                <p>Conférence 1 de <a href="http://www.mathinfoly.org/" target="_blank">Mathinfoly</a> 2019, par Pascal Lafourcade</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac est interdum lorem congue vulputate non id augue. Fusce tempus leo a nisl suscipit, vitae condimentum ipsum gravida. Vivamus ultricies vulputate mi, eu egestas purus consectetur at. Aenean hendrerit augue gravida rutrum cursus. Etiam a libero quis tortor maximus ultrices. Fusce sit amet leo nec magna hendrerit suscipit. Maecenas euismod mi a mauris lacinia ultrices. Nulla velit lacus, fringilla sed ullamcorper non, tincidunt sed lacus. Morbi at eleifend turpis, eu pulvinar ex.</p>
+                <p>Conférence 2 de <a href="http://www.mathinfoly.org/" target="_blank">Mathinfoly</a> 2019, par Pascal Lafourcade</p>
             </div>
             <div id="taskContent">Loading...</div>
 
             <div>
                 <p>Vidéo en licence Creative Commons CC-BY-SA 3.0</p>
-                <p>Nulla a sem in ante mollis condimentum. Morbi egestas semper ex, a volutpat sapien finibus molestie. In tempus sagittis magna, viverra condimentum metus molestie quis. Nullam ex justo, euismod sed lacinia quis, lobortis ut mauris. Sed mollis placerat malesuada. Ut ut ex magna. Nullam sit amet dapibus magna, non laoreet enim. Donec sit amet tortor sagittis, porttitor nisi non, vulputate sapien. Proin molestie arcu vitae ante bibendum, id ornare nunc dictum. Fusce interdum erat quis tellus mollis condimentum. Pellentesque ac libero odio. Morbi congue rhoncus augue, nec gravida augue tristique eu. Ut vel tellus placerat, blandit lectus non, tempor mauris. Sed pulvinar erat eget urna rhoncus, dignissim aliquam ligula finibus.</p>
-                <p>Aliquam sed aliquam neque, vitae blandit lectus. Donec dictum, massa eu fringilla finibus, nisl lorem iaculis augue, at rutrum libero neque vitae turpis. Quisque at suscipit massa, et lobortis metus. Pellentesque id rhoncus ante, quis dictum sem. Curabitur dignissim odio quis viverra varius. Aliquam pulvinar luctus imperdiet. In ac justo orci. Aenean molestie eros ac arcu feugiat tempus. Vivamus vel pulvinar neque, id consequat lorem. Proin vel condimentum dui. Integer massa diam, pellentesque vel erat quis, hendrerit vulputate nulla. In erat libero, mollis ullamcorper neque vel, venenatis varius dui. Vestibulum a mollis lectus. Duis nisl lacus, molestie nec condimentum vel, laoreet sed est. Curabitur egestas, sapien in sollicitudin pellentesque, eros tortor gravida odio, a dictum purus nibh a enim.</p>
-                <p>Cras lacinia viverra ipsum in aliquet. Duis efficitur magna pretium sagittis feugiat. Mauris porttitor mi id porta rhoncus. Duis ligula mi, dapibus non mauris sed, aliquam posuere nunc. Etiam lorem mauris, posuere sed velit eu, vestibulum interdum sem. Proin accumsan arcu eget orci convallis lobortis. Vivamus ac augue at tellus rutrum laoreet. Suspendisse dictum elit in egestas tempus. Fusce mollis facilisis metus quis tristique. Praesent hendrerit varius sapien ut maximus. Nam eget dictum dolor, eget dictum elit. Etiam interdum a nunc non mollis. Nulla ornare lectus laoreet fringilla scelerisque. Praesent finibus tellus malesuada vestibulum tincidunt.</p>
-                <p>In sit amet vestibulum nisl, vel aliquam nulla. Nam eu porttitor metus. Sed iaculis eleifend nisl, eu consequat ex dictum luctus. Curabitur quis libero est. Vestibulum quam dui, posuere non faucibus non, pellentesque vel nisi. In vitae rutrum arcu, ut rutrum lectus. Nam vestibulum euismod mauris, sed consectetur nulla bibendum venenatis. Pellentesque viverra justo ipsum, sit amet bibendum mauris lacinia sed. Etiam turpis eros, vestibulum luctus posuere condimentum, congue nec purus. Morbi sed nisl egestas, fermentum lacus eget, porttitor ante. Praesent semper consequat elit aliquet venenatis. Donec elementum lectus at turpis fringilla, vitae fringilla lectus ullamcorper. Aenean eget nisi sit amet quam dapibus finibus vel at eros. Nunc at suscipit diam.</p>
-                <p>Aenean a aliquet felis. Nunc id massa orci. Phasellus a lectus convallis, sagittis nulla et, volutpat risus. Mauris eu dui euismod est luctus vestibulum eget sed orci. Proin eleifend, velit eu lobortis vehicula, erat lorem mollis sem, quis maximus nunc magna a velit. Nullam vitae enim malesuada, consectetur erat id, ullamcorper libero. Vestibulum auctor nunc tellus, in hendrerit lacus fringilla in. Nullam vitae feugiat leo. Nam a nisl et turpis congue blandit sed et ligula. Suspendisse placerat efficitur tortor in mollis. Mauris in purus nisi. Vestibulum lacinia lacus quis vestibulum vestibulum. Fusce eu gravida lectus. Nunc rhoncus justo sit amet libero facilisis, a pulvinar orci hendrerit. Maecenas pellentesque est quis ligula maximus semper. Fusce sit amet urna turpis.</p>
-                <p>In hac habitasse platea dictumst. Fusce quis ultricies orci, nec pharetra sem. Etiam tristique sollicitudin justo, sit amet fringilla enim eleifend ac. Sed vehicula eros id mattis laoreet. Nulla sapien risus, congue vitae metus nec, sodales blandit erat. Nulla nulla mi, euismod vitae quam quis, interdum commodo dui. Quisque lobortis leo in nibh suscipit tincidunt. Curabitur aliquam facilisis lobortis. Vestibulum congue risus ipsum, eu cursus mauris convallis consectetur. Cras ultricies nisi quam. Etiam eget dictum nunc. Ut non finibus ex, ac pharetra nunc. Ut vestibulum dictum nisl, vel porttitor lectus tristique ac.</p>
-                <p>Integer in lectus pharetra, tincidunt quam id, fermentum orci. In sed vehicula purus, in dictum mauris. Vivamus tincidunt nec magna vel maximus. Nunc vitae quam odio. Nam a finibus ipsum. Vivamus velit est, lobortis vel augue sit amet, aliquet lacinia elit. Maecenas feugiat facilisis quam, a porttitor ex efficitur in. Pellentesque tincidunt risus nunc, in rutrum odio volutpat ac. Nunc a justo vel turpis facilisis iaculis. Ut finibus quam vel maximus ornare. Fusce tristique aliquet bibendum.</p>
-                <p>Fusce eu varius neque. Integer vehicula dapibus sem, eget mollis metus tempor ut. Vivamus faucibus rhoncus fringilla. Morbi felis lectus, viverra at risus ut, luctus volutpat nibh. Nullam malesuada quis purus sed placerat. Etiam eu tincidunt felis. Sed libero ipsum, pellentesque sed dignissim ac, placerat ac massa. Donec ut sem interdum, viverra tortor vitae, efficitur arcu. Mauris luctus commodo fringilla. Suspendisse sit amet luctus risus. Nam aliquam dictum mauris sed eleifend. Praesent ut lacus sed neque lacinia tempus eu quis nulla. Donec a nisl at nisl mollis tincidunt. Quisque luctus erat at magna posuere tristique. Nam augue eros, finibus sit amet ultrices vel, dictum vel quam.</p>
-                <p>Duis tortor arcu, faucibus ornare ornare sit amet, pulvinar nec quam. Praesent consectetur lorem purus, ac sollicitudin odio egestas at. Quisque nec consectetur risus, vitae pellentesque tortor. Pellentesque elit leo, faucibus eget tempus a, molestie eget mauris. Phasellus fringilla quam vel ultrices dignissim. Morbi vitae sodales neque, ut venenatis dolor. In hac habitasse platea dictumst. Maecenas vitae diam consectetur, fringilla neque et, fermentum turpis. Pellentesque sit amet nibh commodo, viverra neque quis, efficitur neque. Phasellus hendrerit, libero id pretium eleifend, nunc tellus imperdiet lacus, ut tincidunt magna turpis ac felis. Vestibulum vestibulum leo ligula, nec ultrices lorem posuere sit amet.</p>
-                <p>Aliquam venenatis consequat purus, id viverra lectus laoreet at. Fusce mattis eget ante egestas finibus. Vestibulum porta libero ut lacinia rhoncus. Duis a faucibus turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras elementum purus at luctus iaculis. Etiam dapibus, risus nec faucibus tempus, justo lorem tristique enim, id tempor ipsum arcu a ipsum. Nunc ipsum eros, pulvinar sit amet diam nec, pharetra sagittis sapien.</p>
             </div>
         </div>
     </body>
