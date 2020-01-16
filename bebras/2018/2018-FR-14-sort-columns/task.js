@@ -71,14 +71,23 @@ function initTask(subTask) {
       big : colWidth/2
    };
    var ballAttr = [
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,255,0)-rgb(190,190,0)" },
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,204,0)-rgb(190,153,0)" },
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,153,0)-rgb(190,114,0)" },
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,102,0)-rgb(190,76,0)" },
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,51,0)-rgb(190,38,0)" },
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(204,0,0)-rgb(153,0,0)" },
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(153,0,0)-rgb(114,0,0)" },
-      { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(102,0,0)-rgb(76,0,0)" }
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,255,0)-rgb(190,190,0)" },
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,204,0)-rgb(190,153,0)" },
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,153,0)-rgb(190,114,0)" },
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,102,0)-rgb(190,76,0)" },
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(255,51,0)-rgb(190,38,0)" },
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(204,0,0)-rgb(153,0,0)" },
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(153,0,0)-rgb(114,0,0)" },
+      // { "stroke" : "black", "stroke-width" : 1, "fill" : "r(0.3, 0.3)rgb(102,0,0)-rgb(76,0,0)" }
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(255,255,0)" },
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(255,204,0)" },
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(255,153,0)" },
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(255,102,0)" },
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(255,51,0)" },
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(204,0,0)" },
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(153,0,0)" },
+      { "stroke" : "black", "stroke-width" : 1, "fill" : "rgb(102,0,0)" }
+
    ];
    var errorFrameAttr = {
       "stroke" : "red",
