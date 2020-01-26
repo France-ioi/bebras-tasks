@@ -1,0 +1,174 @@
+<!-- error messages is not translated-->
+<!doctype html>
+<html dir="rtl" lan="ar">
+
+   <head>
+      <meta charset="utf-8"></meta>
+      <title>2018-AR-04-whos-there</title>
+      <script>
+         window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+            ]);
+      </script>
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "ar",
+            "version": "fr.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+         };
+      </script>
+      <script type="text/javascript">
+       var shapeGroup = function (isPair, isFirst) {
+           if(isPair) return "٣ أزواج متشابهه   ";
+           return "٣ اشكال متشابهه";
+      }
+      var taskStrings = {
+            start: "ابدأ",
+            restart: "إعادة المحاولة",
+            inHouse: "دخول",
+            outHouse: "خروج",
+            clickGroup: function (isPair, isFirst) {
+               return  "اضغط هنا حينما يحتوي المنزل علي "+shapeGroup(isPair, isFirst);
+               },
+            resume: function (isPair, isFirst) {
+               return "عمل رائع. اضغط هنا للبحث عن  " + shapeGroup(isPair, isFirst) + " جديدة"+" ";
+               },
+            errorWrong: function (isPair, isFirst) {
+               return "المنزل لا يحتوي علي  " + shapeGroup(isPair, isFirst);
+               },
+            errorMiss: function (isPair, isFirst) { 
+               return "لقد فاتتك مجموعة من  " + shapeGroup(isPair, isFirst);
+               },
+            shapeInHouse: "هذه هي الاشكال الموجوده حاليا بالمنزل:",
+            shapeList: "فیما یلي الأشكال التي یمكن أن تدخل المنزل:",
+            shapeListInPairs: "فيما يلي الاشكال التي يمكن ان يحتوي عليها الزوج الداخل للمنزل:",
+            suboptimal: "لم تحصل علي ثلاث مجموعات",
+            drawInCanvas: "لمساعدتك على التذكر، یمكنك إضافة نقاط أو خطوط هنا.", // one line only, otherwise it causes a bug
+            success: "تهانينا!",
+            partial: "لقد حصلت علي بعض النقاط.",
+            failure: "لما تحصل علي اي نقاط"
+         };
+      var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="raphael.sketchpad.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .bold {
+           font-weight: bold;
+         }
+         #canvas {
+           width: 600px;
+           margin: auto;
+           border: 1px solid black;
+         }
+         #canvasButtons {
+           text-align: center;
+           margin: 20px 0;
+         }
+         #canvasButtons button {
+           padding: 5px 20px;
+         } 
+         #valider {
+           display: block;
+           margin: auto;
+           width: 9em;
+         }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+      </style>
+   </head>
+
+   <body>
+      <div id="editor"></div>
+
+      <div id="task">
+         <h1>من هناك</h1>
+         <div id="tabsContainer"></div>
+
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>انقر على الزر الكبیر "ابدأ" للسماح للأشكال بدخول المنزل <span class="medium bold">  بالدخول أو الخروج من</span>  <span class="easy medium">واحدا تلو الآخر</span><span class="hard">كأزواج ثنائیة</span>.</p>
+                  <p>یمكنك استخدام المربع الفارغ أدناه لرسم نقاط أو خطوط لتذكیر نفسك بما یجري.</p>
+                  <p>في البدایة، سیكون المنزل فارغ.</p>
+                  <p>انقر على الزر الرمادي الكبیر عندما یكون هناك ٣ <span class="hard bold">أزواج متماثلة</span><span class="easy medium">أشكال متماثلة</span> في المنزل للحصول على درجة. قم بهذه العمليه
+٣ مرات للحصول على الدرجة كاملة.
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="housePaper"></div>
+               <div id="shapeListPaper"></div>
+               <div id="canvas"></div>
+               <div id="canvasButtons">
+                  <button type="button" class="btn btn-default" id="undoTagButton">تراجع</button>
+                  <button type="button" class="btn btn-default" id="redoTagButton">إلغاء التراجع</button>
+               </div>
+            </div>
+         </div>
+         <img id="shape1" src="1.png" style="display:none">
+         <img id="shape2" src="2.png" style="display:none">
+         <img id="shape3" src="3.png" style="display:none">
+         <img id="shape4" src="4.png" style="display:none">
+         <img id="shape5" src="5.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+         <img id="arrow" src="arrow.png" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>الحل</h2>
+		 
+		 <div class="easy">
+           <p>لكل شكل یدخل المنزل، یمكن أن ترسم نقطة أسفل الشكل المطابق.</p>
+           <p>على سبیل المثال، اثناء اللعبة، یمكنك الحصول على الرسم أدناه.</p>
+           <img src="sol_easy1.png">
+           <p>یشیر هذا الرسم إلى أننا شاهدنا معینا واحدا، و ٣ مربعات، ومثلثا واحدا، و ٣ أشكال سداسیة ونجمتین.</p>
+          </div>
+
+         <div class="medium">
+           <p>لكل شكل یدخل المنزل، یمكن أن ترسم نقطة أسفل الشكل المطابق لكل شكل یدخل المنزل، یمكن للمرء أن یرسم نقطة أسفل الشكل المطابق. و لكل شكل یخرج من المنزل، یمكنك إخفاء النقطة بخط.</p>
+           <p>على سبیل المثال، اثناء اللعبة، یمكنك الحصول على الرسم أدناه. </p>
+           <img src="sol_medium1.png">
+           <p>یشیر هذا الرسم إلى أننا شاهدنا اثنین من شكل المعین یدخلان و یخرج واحدا منهم، ورأینا دخول ٤ مربعات و خروج اثنین
+           منهم ، ورأینا دخول أربع مثلثات و خروج ثلاثة منها، ورأینا أربعة أشكال سداسیة لم یخرج أي منها.</p>
+         </div>
+
+         <div class="hard">
+           <p>لملاحظة أزواج الأشكال التي تدخل المنزل، هناك عدة طرق ممكنة، بما في ذلك الطرق الثلاثة التالیة:</p>
+           <p><b>الطریقة الأولى:</b> هي رسم جمیع الأزواج الممكنة قبل البدء. یستغرق الأمر بعض الوقت لأنك یجب أن ترسم ١٢ شكلا، ولكن بعد ذلك یصبح الأمر سهلا للغایة. فقط ستعمل على إضافة نقطة واحدة لكل زوج من الشكل الذي یدخل المنزل. هنا مثال لذلك:</p>
+           <img src="sol_hard3.png">
+               <p><b>الطریقة الثانیة:</b>  أكثر فاعلیة لأنها تتطلب فقط رسم ٣ أشكال. نبدأ برسم الأشكال الثلاثة الممكنة على الیسار. عندما یصل زوج من الأشكال، نبحث عن السطر المقابل للنموذج الأول، والعمود المقابل للنموذج الثاني، ونرسم نقطة. هنا مثال لذلك :</p>
+           <img src="sol_hard2.png">
+               <p><b>الطریقة الثالثة: </b>لا تتطلب أي رسم مسبق. والفكرة هي استخدام الصفات. لكل زوج من الأشكال التي تدخل المنزل، ارسم خطا یربط بین النموذجین اللذین یشكلان الزوج. هنا مثال لذلك :</p>
+           <img src="sol_hard1.png">
+           <p>ومع ذلك، فإن هذا التمثیل یتطلب عنایة أكثر من الآخرین لیكون منظما جیدا خلال اللعبة، حتى یكون قادرا على الاكتشاف عندما یحتوي المنزل على ٣ أزواج متطابقة. </p>
+
+         </div>
+
+		 
+         <h2>إنها المعلوماتیة !</h2>
+      </div>
+      <!-- task-solution -->
+   </body>
+
+</html>

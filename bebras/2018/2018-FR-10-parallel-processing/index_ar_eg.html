@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-AR-10-parallel-processing</title>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "ar",
+            "version": "fr.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+    
+    <script type="text/javascript">
+        var taskStrings = {
+            moveForward: "التحرك للامام",
+            moveForwardIf: "تحرك للأمام اذا كانت الخليه الاماميه فارغه",
+            turnLeft: "الدوران لليسار",
+            turnRight: "الدوران لليمين",
+            ifRobAhead: "إذا وجد روبوت في الخليه الاماميه، اذهب للعملية 3",
+            ifRob2Ahead: "إذا وجد روبوت في اي من الخليتين الاماميتين، اذهب للعملية 3",
+            ifWhiteCell: "إذاكان الروبوت في خليه بيضاء، اذهب للعملية 1 ",
+            end: "نهاية البرنامج",
+            execute: "تنفيذ العملية للروبوت  ",
+            failureNoCrash: "لم یصطدم الروبوت 1 بالروبوت 2. جرب طریقة مختلفة.",
+            failureSwapped: "روبوت 2 اصطدم بروبوت 1، ولكننا نريد ان يصطدم روبوت 1 بروبوت 2",
+            failureEndNoCrash: "كل الروبوتات قد انهت برامجها، ولكن ربوت 1 لم يصطدم بروبوت 2. حاول مرة أخري",
+            failureEndNoStuck: "كل الروبوتات قد انهت برامجها، لكننا نريدهم ان يكونوا عالقين. حاول مرة أخري",
+            success: "تهانينا، لقد نجحت !",
+            cellForward: "من العملية 2 لـ 3 بعد التحرك للأمام مرة",
+            cellReachEnd: "من العملية 3 لـ 4 بعد التحرك للأمام مرة",
+            cell2AheadNotFree: "من العملية 1 لـ 3 لعدم فراغ الخليتين الأماميتين",
+            cellAheadNotFreeMedium: "من العملية 1 لـ 3 لعدم فراغ الخلية الأمامية",
+            cellAheadNotFreeHard: "من العملية 3 لـ 4 لانه في خلية خضراء",
+            cellAheadFree: "من العملية 1 لـ 2 بعد التحرك للأمام مرة",
+            cellAheadFreeForward: "من العملية 2 لـ 3 بعد التحرك للأمام مرة",
+            cell2AheadFree: "من العملية 1 لـ 2 لفراغ الخليتين الاماميتين ",
+            onWhiteCell: "من العملية 3 لـ 1 لانه في خلية بيضاء",
+            robotNotStuck: function(rob){
+                return "لا یزال بإمكان روبوت "+rob+" التحرك";
+            },
+            undo: "تراجع"
+        };
+        var enableRtl = true;
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+        #annuler {
+            display: block;
+            margin: auto;
+            width: 9em;
+        }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+    </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+
+    <div id="task">
+        <h1>اصطدام الروبوتات</h1>
+        <div id="tabsContainer"></div>
+        <div id="taskContent">
+            <div id="zone_1">
+                <div class="consigne">
+                    <p>
+                    <span class="easy medium">یملك القندس روبورتین متمثلين بواسطة الأسهم الرمادیة</span>
+                    <span class="hard">یملك القندس أربعة روبوتات ممثلة بواسطة الأسهم الرمادیة</span>
+                    </p>
+                    <p>
+                    <span class="easy">یتم التحكم في كل روبوت بواسطة برنامج منفصل.</span>
+                       <span class="medium hard">یتم التحكم فيهم بواسطة نفس البرنامج.</span>
+                    </p>
+
+                    <p class="easy medium">
+                      قم بتشغیل التعلیمات للروبوتين لجعل الروبوت الأول یصطدم بالروبوت الثاني.
+                    </p>
+                    <p class="hard">
+                    قم بتشغیل تعلیمات الروبوتات بنفسك لجعل <b> جمیع الروبوتات عالقة</b> قبل الوصول إلى الخلایا الخضراء
+                    </p>
+
+                    <p>
+                       انقر على الأزرار الرمادیة لتنفیذ التعلیمات على الروبوت.
+                    </p>
+                </div>
+            </div>
+            <div id="zone_2">
+                <div id="paper"></div>
+            </div> 
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>الحل</h2>
+		
+		<div class="easy">
+           <p>لا یمكن أن یحدث التصادم بین الروبوت <b> 1 </b>  والروبوت<b> 2 </b> إلا عند تقاطع مساراتهما.</p>
+           <img src="sol_easy_1.png">
+           <p>نبدأ بتحریك الروبوت  <b>2</b>  حتى نقطة الاصطدام . ثم ننقل الروبوت <b>1</b> حتى یصطدم بالروبوت <b>2</b>.</p>
+           <img src="sol_easy_2_ar_eg.png">
+           <p>الخلاصة، لحل المسالة، یجب علیك تنفيذ عمليات الروبوتات علي هذا النحو : <b>1، 1، 1، 1، 2، 2، 1</b>.</p>
+         </div>
+
+         <div class="medium">
+           <p>إذا أحضرنا الروبوت رقم <b>2</b>  أولا إلى نقطة تصادم الروبوتین، ثم تقدم الروبوت <b>1</b>، فسیتم تعلیق هذا الروبوت أمام الروبوت <b>2</b> ولن یتحرك للأمام. حیث تشیر التعلیمات الموجودة في العملية 1 إلى أنه في حالة وجود روبوت أمامه، انتقل إلى العملية 3،  ویعود تنفیذ العملية 3 إلى العملية 1..</p>
+           <img src="sol_medium_0_ar_eg.png" style="width:650px">
+
+           <p>لذلك یجب علینا المضي قدًما بشكل مختلف. أحضر أولا الروبوت <b>1</b>  إلى نقطة التصادم. ننفذ تعلیمات العملية 1 في وقت لا يحتوي فيه الروبوت <b>1</b>  على شيء أمامه. لذلك، فإن الروبوت <b>1</b>  جاهز لأداء العملية 2، والتي تتكون من المضي قدًما دون طرح أي أسئلة </p>
+           <img src="sol_medium_1_ar_eg.png" style="width:650px">
+            
+           <p>یمكننا بعد ذلك إحضار الروبوت  <b>2</b> عند نقطة التصادم، ثم إجراء عملية للروبوت <b>1</b> من أجل دفعه إلى الروبوت <b>2</b>.</p>
+           <img src="sol_medium_2_ar_eg.png" style="width:650px">
+           
+           <p>الخلاصة، لحل المساله ، یجب أن تنقر بالتتابع على الأزرار: <b>1، 1، 1، 1، 1، 1، 1، 2، 2، 2، 2، 2، 1</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>لحصار الروبوتات، یجب علیك وضع جمیع الروبوتات في موضع یبعد فقط مربع واحد عن الموضع الذي سیعلقون فیه مع
+           بعضهم، ووضع جمیع برامجهم على العملية 2.</p>
+           <p>یمكن الوصول إلى هذا الموقف من خلال تنفیذ العدد الصحیح من الخطوات بشكل مستقل لكل روبوت:</p>
+           <img src="sol_hard_1_ar_eg.png" style="width:650px">
+           <p>من هناك، كل ما علیك فعله هو تنفیذ خطوة واحدة لكل روبوت، و سیصبح جمیعهم عالقون</p>
+           <img src="sol_hard_2.png" style="width:215px">
+               <p>الخلاصة، لحل المسالة، یجب علیك تنفيذ عمليات الروبوتات علي هذا النحو:  <b>1، 1، 1، 1، 2، 3، 3، 3، 3، 4، 4، 4، 4، 4، 4، 4، 1، 2، 3، 4</b>.</p>
+         </div>		
+
+        <h2>انها المعلوماتیة!</h2>
+    </div>
+    <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lan="en" dir="rtl">
+   <head>
+      <meta charset="utf-8">
+      <title>2018-AR-07-checkers-graph</title>
+      <script>
+           window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "ar",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+             success: "تهانينا! لقد نجحت!",
+             errorWrongEdge: "لاتوجد أي ملاحظات باللون الأحمر.",
+             errorMissingEdge: "العلاقة الموضوعة باللون الأحمر مفقودة في الوضع الحالي.",
+             connectTokens: function(srcToken, dstToken, direction) {
+                var message = srcToken + " متصلة بـ " + dstToken + " لأنها علي نفس ";
+                if (direction == "vertical") {
+                  message += "العمود.";
+                } else {
+                  message += "السطر.";
+                }
+                return message;
+             },
+             connexionsInBlue: "هذه الرموز ملونة بالأزرق علي المحطط.",
+             noConnexions: function(srcToken) {
+               return "لا يوجد اي رمز علي نفس الصف او العمود " + srcToken + "، ولذلك، لا يوجد اي خطوط واصلة بينه وبين اي رمز"
+             }
+         };
+         var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #board
+         {
+            width : 450px;
+            margin: 10px 10px;
+         }
+         #board, #graphContainer
+         {
+            display: inline-block;
+            vertical-align: top;
+         }
+         #target
+         {
+            margin-bottom: 15px;
+         }
+         #graphContainer
+         {
+            width: 200px;
+            margin: auto;
+            text-align: center;
+            font-size: 18px;
+         }
+         .graphTitle {
+            margin-bottom: 0.5em;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #layoutTable {
+          margin-top: 20px;
+         }
+         #layoutTable td {
+            vertical-align: top
+         }
+         td#layoutTableFirstCol {
+            width: 480px;
+         }
+         #message {
+            color: green;
+         }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>لعبة الداما</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1"> 
+               <div class="consigne">
+            <p>سیقوم الخط بتوصیل الدوائر، اذا كانت في نفس الصف أو العمود.</p>
+            <p>اسحب الدوائر الموجودة على الشبكة لجعل "مخططك" مطابق "للمخطط الهدف".</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <table id="layoutTable">
+                  <tr><td id="layoutTableFirstCol">
+                     <div id="board"></div>
+                     <div id="message"></div>
+                  </td><td>  
+                      <div id="graphContainer" style = "position:relative; left:80px;">
+                     <div class="graphTitle">للمخطط الهدف</div>
+                     <div id="target"></div>
+                     <div class="graphTitle">مخططك</div>
+                     <div id="current"></div>
+                  </div>
+               </td>
+                 </tr></table>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div><!-- #task -->
+      <div id="solution">
+         <h2>الحل</h2>
+      <!-- description of the solution -->
+	  
+	  <div class="easy">
+           <p>لتوصیل <b>A</b>بـ <b>B</b>،  قم بوضع هذه الرموز على نفس الخط.</p>
+           <img src="sol_easy_1.png">
+           <p>لتوصیل <b>B </b>بـ  <b>C</b>,یجب أن نضع <b>C</b> على نفس السطر أو على نفس العمود الذي یوجد علیه <b>B</b>.</p>
+           <p>لكن إذا وضعنا <b>C</b> على نفس سطر <b>B</b>, فسنحصل على خط لا نرغب به بین <b>A</b> و <b>C</b></p>
+           <img src="sol_easy_2.png">
+           <p>لذلك یجب علینا وضع <b>C</b> في نفس العمود الواقع علیه <b>B</b>. على سبیل المثال :</p>
+           <img src="sol_easy_3.png">
+           <p>یتبقى علینا أن نختار موضع لـ<b>D</b>.  و حتى یتم توصیل <b>D</b> بـ <b>C</b>، وبما أن <b>D</b> غیر متصله بـ <b>B</b> و <b>A</b>، یجب أن نضع <b>D</b> على نفس السطر مع  <b>C</b>، مع الابتعاد عن عمود <b>A</b>. هنا الحل :</p>
+           <img src="sol_easy_4.png">
+           <p>توجد عدة حلول أخرى، وهذا أحد الحلول:</p>
+           <img src="sol_easy_5.png">
+         </div>
+
+         <div class="medium">
+           <p>لتوصیل <b>A</b> و <b>B</b> و <b>C</b>  یجب أن نضعهم جمیعا على نفس السطر.</p>
+           <img src="sol_medium_1.png">
+           <p>بعد ذلك، لتوصیل <b>D</b> إلى <b>B</b>، بدون أن نربط <b>D</b> مع <b>A</b> أو <b>C</b>،  یجب أن نضع  <b>D</b>  في نفس عمود <b>B</b>.</p>
+           <img src="sol_medium_2.png">
+           <p>أخیراً،  لتوصیل <b>E</b> إلى <b>C</b> و <b>D</b>, یجب أن نضع <b>E</b> في نفس عمود <b>C</b> وعلى نفس سطر <b>D</b>.</p>
+           <img src="sol_medium_3.png">
+         </div>
+
+         <div class="hard">
+           <p>الطریقة الفعالة للحل هنا هي التركیز على "المثلثات" التي تتشكل في المخطط الهدف، حیث أن المثلث الذي یربط بین 3 رموز یشیر إلى أن هذه الرموز الثلاثة موجودة على نفس الخط أو في العمود نفسه.</p>
+           <p>لتوصیل الرموز <b>A</b> و <b>D</b> و <b>G</b>  ثلاثتهم سویا،  نضعهم نفس الخط (السطر) . وبعد ذلك، لربط  <b>D</b> و <b>C</b> و <b>F</b> معا، نضعهم في عمود <b>D</b>.</p>
+           <img src="sol_hard_1.png">
+           <p>لتوصیل الرموز <b>H</b> و <b>E</b> و <b>C</b> ثلاثتهم سویا ، نضع <b>H</b> و <b>E</b> على خط (سطر) <b>C</b>، مع تجنب الأعمدة المستخدمة.</p>
+           <img src="sol_hard_2.png">
+           <p>أخیرا، لتوصیل <b>B</b> إلى <b>E</b> و إلى <b>F</b>، یجب أن نضع <b>B</b> على حد سواء في نفس عمود <b>E</b> وعلى نفس سطر <b>F</b>.</p>
+           <img src="sol_hard_3.png">
+         </div>
+	  
+         <h2>إنها المعلوماتیة &nbsp;!</h2>
+      <!-- explanations on why this task is about informatics -->
+      <img src="icon.png" style="display:none">
+   </div>
+   </body>
+</html>
+

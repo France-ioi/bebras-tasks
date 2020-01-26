@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html dir="rtl" lan="en">
+   <head>
+      <meta charset="utf-8">
+      <title>2018-AR-07-arrows</title>
+      <script>
+           window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "ar",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "تهانينا، لقد نججت!",
+            errorWhiteArrow: "في الخلية الحمراء سهم لا يزال بحاجة إلى تلوينه.",
+            errorWrongArrow: function(arrowColor, nbPointedArrows, nbRequiredArrows) {
+                debugger;
+                var ret="في الخليه الحمراء يوجد سهم "+arrowColor+" من المفترض أن يشير إلى "+nbRequiredArrows;
+                if(nbRequiredArrows > 1) {
+                    ret +=" أسهم ";
+                    if(nbRequiredArrows=="أصفر") ret+="صفراء.";
+                    else ret+=".زرقاء";
+                }
+                else {
+                    ret+=" سهم ";
+                    ret+=arrowColor+".";
+                }
+                ret+="<br>";
+                ret+="ولكنه حاليا يشير إلى "+nbPointedArrows;
+                if(nbPointedArrows > 1) {
+                    ret +=" أسهم ";
+                    if(arrowColor=="أصفر") ret+="صفراء";
+                    else ret+="زرقاء";
+                }
+                else {
+                    ret+=" سهم ";
+                    ret+=arrowColor;
+                }
+                return ret;
+            },
+            blue: "أزرق",
+            yellow: "أصفر",
+            fixedArrow: "لا يمكن تغيير السهم الذي بالمنتصف",
+            blueSymbol: "B",
+            yellowSymbol: "J",
+            undo: "تراجع"            
+         };
+         var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         ul {
+            list-style-type: none;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         li
+         {
+            margin-bottom: 5px;
+         }
+         li * {
+            display: inline-block;
+         }
+         .instruction_arrow {
+            position:relative;
+            top:15px;
+         }
+         ul {
+            position:relative;
+            top:-15px;
+         }
+         #instructions {
+            margin-left: 1em;
+         }
+         #instructions td {
+            vertical-align: top;
+            padding-bottom: 1em;
+            padding-right: 0.5em;
+         }
+         .very_hard {
+            display: none;
+         }
+         .largeScreen #example1 {
+            display:none;
+         }
+         #example2 {
+            display:none;
+         }
+         .largeScreen #example2 {
+            display:block;
+         }
+         .largeScreen #zone_1,
+         .largeScreen #zone_2
+         {
+            float: right;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>الأسهم الموجهه</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">
+               <div class="consigne">
+                  <div id="example1" style="float:right"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>مثال</b><br/><img src="example_ar_eg.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                   <p>لون جمیع الأسهم في الشبكة باللون الأصفر أو الأزرق وفقا <span class="easy medium very_hard"> للقاعدة التالیة</span><span class="hard">للقواعد التالیة</span>:</p>
+                   <p class="easy medium very_hard"><span style="font-weight:bold">يجب أن یشیر السهم إلى <span class="easy medium">سهم واحد فقط </span><span class="very_hard">سهمين</span> من نفس اللون.</span></p>
+                  <table id="instructions" class="hard">
+                     <tr>
+                        <td><span id="instructions_blue" class="instruction_arrow"></span></td>
+                        <td><br><br> يجب أن يشير السهم الأزرق إلى سهمين أزرقان فقط. </td>
+                     </tr>
+                     <tr>
+                        <td><span id="instructions_yellow" class="instruction_arrow"></span></td>
+                        <td><br><br> يجب أن يشير السهم الأصفر إلى سهم أصفر واحد فقط. </td>
+                     </tr>
+                  </table>
+                  <p>انقر على السهم لتغییر لونه.</p>
+                  <div id="example2"><div class="easy medium" style="text-align:center;margin-top:5px;"><b>مثال</b><br/><img src="example_ar_eg.png" style="height:200px;margin-left:20px;margin-top:5px"></div></div>
+                  <div style="clear:both"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <center style="clear:both"><table>
+                  <tr>
+                  <td><div id="grid"></div></td>
+                  </tr>
+               </table></center>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>الحل</h2>
+         <!-- description of the solution -->
+		 
+		 <div class="easy">
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_easy_1.png"></td>
+               <td>یشیر السهم المعطى في البدایة إلى أنه من الضروري وضع سهم أزرق على یمینه.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_2.png"></td>
+               <td>یشیر السهم الذي تمت إضافته للتو إلى أنك بحاجة إلى وضع سهم أزرق أسفله.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_3.png"></td>
+               <td>في العمود الأیمن، یشیر السهم الأزرق الذي تم إضافته للتو في الزاویة السفلیة إلى السهم الأزرق الموجود أعلاه. وبالتالي هناك بالفعل سهم أزرق في اتجاهه. لتجنب وجود سهم ثاني في نفس الاتجاه یجب وضع سهم أصفر في الجزء العلوي من هذا العمود.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_4.png"></td>
+               <td>یشیر السهم الموجود في منتصف الصف العلوي إلى سهم أصفر، وبالتالي یجب أن یكون هذا السهم أصفر.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_5.png"></td>
+               <td>في الصف العلوي ، یشیر السهم الأصفر الأیمن إلى سهم أصفر آخر، وهو السهم الأوسط، ولتجنب الإشارة إلى سهمین أصفرین ، یجب وضع سهم أزرق في یسار هذا الصف.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_easy_6.png"></td>
+               <td>یشیر السهم الموجود في منتصف العمود الأیسر إلى سهم أزرق. وبالتالي یجب أن یكون هذا السهم أزرق.</td>
+            </tr>
+               <td><img src="sol_easy_7.png"></td>
+               <td>في العمود الأیسر، یشیر السهم الأزرق في الأعلى إلى سهم أزرق آخر، وهو السهم الموجود في الوسط، و لتجنب الإشارة الى سهمین أزرقین ، یجب وضع سهم أصفر في أسفل هذا العمود.</td>
+            </tr>
+               <td><img src="sol_easy_8.png"></td>
+               <td>یجب أن یشیر السهم الأصفر في أسفل الیسار إلى سهم أصفر آخر، ولذلك یجب وضع سهم أصفر في المربع المتبقي من الصف السفلي.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_easy_9.png"></td>
+               <td>اكتمل الحل !</td>
+            </tr>
+            </table>
+         </div>
+
+         <div class="medium">
+            <p>قبل أن نبدأ یمكن ملاحظة أن هذه المسألة متناظرة بین اللونین الأزرق والأصفر، بمعنى أنه لو كان لدینا حل صحیح ثم غیرنا جمیع الأسهم الصفراء بأسهم زرقاء والعكس فسنحصل على حل صحیح آخر، ولذلك فلنا الحریة في تحدید لون السهم الأول الذي نبدأ به. </p>
+            <p>في ما یلي ، سنبدأ دائًما بوضع سهم أزرق. </p>
+            <p>سوف نجرب بدایات مختلفة حتى نصل إلى طریقة نضمن فیها التقدم في تلوین الأسهم دون خطأ.</p>
+            <p><b>في المحاولة الاولى.</b> ​لنفترض أننا سنحاول ملئ الصف الأول وسنجد أن هناك طریقتین مختلفتین لإتمام ذلك وفق القواعد:
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_b1.png"></td>
+               <td>الطریقة الأولى.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_b2.png"></td>
+               <td>الطریقة الثانیة.</td>
+            </tr>
+            </table>
+            <p>نظًرا لوجود احتمالین لا یمكننا التأكد من أیهما الصحیح فسوف نجرب بدایة أخرى.</p>
+
+            <p><b>في المحاولة الثانیة.</B> سنحاول ملئ الصف الأخیر وسنجد أن هناك طریقتین مختلفتین لإتمام ذلك وفق القواعد :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_c1.png"></td>
+               <td>الطریقة الأولى.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_medium_c2.png"></td>
+               <td>الطریقة الثانیة.</td>
+            </tr>
+            </table>
+            <p>نظًرا لوجود احتمالین لا یمكننا التأكد من أیهما الصحیح فسوف نجرب بدایة أخرى.</p>
+
+            <p><b>في المحاولة الثالثة.</b>  سنحاول ملئ القطر، وسنجد فیه ثلاثة أسهم منها إثنان یشیران لبعض.
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_medium_d1.png"></td>
+               <td>لنبدأ ، كما أوضحنا سابقا ، بوضع سهم أزرق.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_d2.png"></td>
+               <td>لا یمكن وضع سهم أزرق في المربع الأوسط من القطر، لأن السهم الأخیر في القطر لا یمكن أن یشیر إلى سهمین أزرقین.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_1.png"></td>
+               <td>نستنتج أن السهم الأوسط في القطر یجب أن یكون أصفر (لأنه لا یمكن أن یكون أزرق) ، ولذلك یجب أن یكون السهم الثالث أزرق (لأن السهم الأزرق في الزاویة یجب أن یشیر إلى سهم أزرق آخر).</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_2.png"></td>
+               <td>السهم الأصفر في الوسط یساعد في استنتاج موقع سهمین أصفرین إضافیین.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_3.png"></td>
+               <td>لا یمكن أن یكون لون السهم الأوسط في العمود الأیمن أصفًرا، لأنه یشیر إلى سهمین أصفرین وبذلك فلونه أزرق.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_4.png"></td>
+               <td>السهم الأزرق الذي تم اضافته مؤخرا یساعد على استنتاج موقع سهمین أزرقین إضافیین.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_5.png"></td>
+               <td>لا یمكن أن یكون لون السهم الثاني (من على اليسار) في الصف الأخیر أزرقا، لأن السهم الثاني (من على اليمين) في نفس الصف یشیر إلى سهم واحد أزرق،
+وبذلك فلونه أصفر.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_medium_6.png"></td>
+               <td>السهم الأصفر الأخیر یساعد على استنتاج موقع سهمین أصفرین إضافیین.</td>
+            </tr>
+               <td><img src="sol_medium_7.png"></td>
+               <td>یجب أن یكون السهم الأخیر باللون الأزرق لأن السهم الموجود في یمین الصف الأول یشیر إلى سهم واحد أصفر فقط. <br/><br/>اكتمل الحل !</td>
+            </tr>
+
+            </table>
+
+
+         </div>
+
+         <div class="hard">
+            <p>من الحكمة أن تبدأ بخط من المربعات (التي تحتوي على الأسهم) بحيث یملك الخط أقصى عدد من القیود، مثل الأسهم التي تشیر إلى بعضها، على سبیل المثال سندرس أحد
+الأقطار الرئیسیة، وسنبدأ بوضع سهم أزرق أو أصفر في الزاویة الیسرى في الأسفل.</p>
+
+            <p><b>في المحاولة الأولى.</b>  سنبدأ بتلوین السهم في الزاویة الیسري في الأسفل باللون الأصفر :
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_b1.png"></td>
+               <td>اذا كان المربع التالي في القطر يحتوي على سهم اصفر، ففي المربع الذي يليهم في نفس القطر لن نجد سهم مناسب يشير إلى سهمين أصفرين لذلك، سيكون لون السهم أزرق في المربع التالي.<br/><br/> وبالتالي في المربع الذي يليهم ستكون إشارته إلى سهمين أزرق و أصفر ولأنه ليس لدينا سهم يشير الي سهم أزرق واحد سنلونه باللون الأصفر. </td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b2.png"></td>
+               <td>السهم الأزرق یساعد على استنتاج موقع سهمین إضافیین جدیدین.</td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b3.png"></td>
+               <td>السهم الأزرق الموجود في العمود الثاني من الیسار والذي یشیر إلى الزاویة الیمنى في الأسفل یساعد على استنتاج موقع سهمین إضافیین. </td>
+            </tr>
+            </tr>
+               <td><img src="sol_hard_b4.png"></td>
+               <td>في هذه الحاله السهم الأزرق المظلل بالأحمر لا يمكنه أن يشير إلى سهمين أزرقين (لأن أحدهما أصفر بالفعل).</td>
+            </tr>
+            </table>
+
+            <p><b>في المحاولة الثانیة.</b> سنبدأ من الزاویة الیسرى في الأسفل مرة أخرى ولكن بوضع سهم أزرق بدلا من الأصفر..
+            <table style="width: 700px">
+            <tr>
+               <td><img src="sol_hard_0.png"></td>
+               <td>لنبدأ بزاويه زرقاء.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_c2.png"></td>
+               <td>اذا كان السهم الذي يلي السهمين الأزرق و الأبيض في نفس القطر أصفر فستواجهنا مشكلة، لأننا يجب ان نلون السهم الذي بينهما باللون الاصفر، وبذلك لن نستطيع ان نجعل السهم الأزرق في الزاويه يشير إلى سهمين أزرقين .</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_1.png"></td>
+               <td>لذلك سنلونه باللون الأزرق ولأنه يجب أن يشير إلى سهمين أزرقين، سنلون السهم الذي في المنتصف باللون الأزرق.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_2.png"></td>
+               <td>يشير السهم الأزرق الجديد الي سهمين غير ملونين، سنلونهم باللون الأزرق.<br/><br/>اذا كان لون السهم الذي في الزاويه العليا على اليمين باللون الازرق فسيكون السهم في الزاويه الأخري مشير إلى ثلاث أسهم زرقاء، لذلك سنلونه باللون الأصفر.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_3.png"></td>
+               <td>السهم الأزرق في الصف الثاني (من أعلى لأسفل) والعمود الثالث (من اليمين لليسار) يشير إلى سهمين غير ملونين، سنلونهم باللون الأزرق. </td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_4.png"></td>
+                              <td>السهم الأزرق في الصف الثالث (من أعلى لأسفل) والعمود الثاني (من اليمين لليسار) يشير إلى سهمين احدهم غير ملون، سنلونه باللون الأزرق. </td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_5.png"></td>
+               <td>السهم الأزرق في الصف الثالث (من أعلى لأسفل) والعمود الرابع (من اليمين لليسار) يشير إلى سهمين أزرقين وسهم غير ملون، اذا لوناه للأزرق فسيشير ألي ثلاث أسهم من اللون الأزرق، لذلك سنلونه باللون الأصفر. <br><br>نكرر هذه العملية مع بقية الأسهم الزرقاء التي ينطبق عليها نفس الحالة، السهم الأزرق في الصف الأول و العمود الثالت و السهم الأزرق في الزاويه السفلى على اليمين.</td>
+            </tr>
+            <tr>
+               <td><img src="sol_hard_6.png"></td>
+               <td>السهم الأصفر في الزاويه الأعلى علي اليسار لا يشير إلى سهم أصفر، لذلك سنلون السهم الغير ملون باللون الأصفر، نكرر نفس العملية مع السهم الأصفر في الصف السفلي.<br><br>السهم الغير ملون في الصف الثاني علي اليمين يشير إلى سهمين أزرقين، لذلك نلونه باللون الأزرق.</td>
+            </tr>
+               <td><img src="sol_hard_9.png"></td>
+               <td>اكتمل الحل !</td>
+            </tr>
+            </table>
+		 
+         <h2>انها المعلوماتية !</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+</html>
+

@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"></meta>
+
+    <title>2018-EN-10-parallel-processing</title>
+    <script>
+        window.stringsLanguage = 'en';
+    </script>
+
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0'
+        ]);
+    </script>
+
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "Arthur Charguéraud, Mathias Hiron",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+        };
+    </script>
+    
+    <script type="text/javascript">
+        var taskStrings = {
+            moveForward: "Move forward",
+            moveForwardIf: "Move forward if there is no robot in the cell ahead",
+            turnLeft: "Turn left",
+            turnRight: "Turn right",
+            ifRobAhead: "If a robot is in the cell ahead, go to step 3",
+            ifRob2Ahead: "If a robot is in one of the 2 cells ahead, go to step 3",
+            ifWhiteCell: "If the robot is on a white cell, go to step 1",
+            end: "End of the program",
+            execute: "Execute this step\n for robot ",
+            failureNoCrash: "Robot 1 didn't crash into robot 2. Try a different way.",
+            failureSwapped: "Robot 2 crashed into robot 1, but we want the other way round. Try again.",
+            failureEndNoCrash: "All the robots have finished, but robot 1 didn't crash into robot 2. Try again.",
+            failureEndNoStuck: "All the robots have finished, but we want them to be stuck. Try again.",
+            success: "Congratulations, you have succeeded!",
+            cellForward: "Went from step 2 to 3\n after moving forward\nby one cell.",
+            cellReachEnd: "Went from step 3 to 4\n after moving foward\nby one cell.",
+            cell2AheadNotFree: "Went from step 1 to 3 because\none of the two cells ahead\nof the robot is occupied.",
+            cellAheadNotFreeMedium: "Went from step 1 to 3\nbecause the cell ahead \n of the robot is occupied.",
+            cellAheadNotFreeHard: "Went from step 3 to 4\nbecause the robot is\non a green cell.",
+            cellAheadFree: "Went from step 1 to 2\nbecause the cell ahead of\nthe robot is free.",
+            cellAheadFreeForward: "Went from step 2 to 3\nafter moving forward\nbecause the cell was free.",
+            cell2AheadFree: "Went from step 1 to 2\nbecause the two cells\nahead of the robot are free.",
+            onWhiteCell: "Went from 3 to 1 because\nthe robot is on\na white cell.",
+            robotNotStuck: function(rob){
+                return "Robot "+rob+" can still move.";
+            },
+            undo: "Undo"            
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+    <style>
+        #annuler {
+            display: block;
+            margin: auto;
+            width: 9em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="editor"></div>
+
+    <div id="task">
+        <h1>Crashing Robots</h1>
+        <div id="tabsContainer"></div>
+        <div id="taskContent">
+            <div id="zone_1">
+                <div class="consigne">
+                    <p>
+                       The Beaver has <span class="easy medium">2</span><span class="hard">4</span> robots represented by the gray arrows.
+                    </p>
+                    <p>
+                       <span class="easy">Each robot is controlled by a seprate program.</span>
+                       <span class="medium hard">The two robots are controlled by the same program.</span>
+                    </p>
+
+                    <p class="easy medium">
+                       Run the instructions of the robots by yourself to make robot 1 crash into robot 2.
+                    </p>
+                    <p class="hard">
+                        Run the instructions of the robots by yourself to make <b>all the robots are stuck</b> before reaching the green cells.
+                    </p>
+
+                    <p>
+                       Click on the Gray Buttons to run the instruction on the robot.
+                    </p>
+                </div>
+            </div>
+            <div id="zone_2">
+                <div id="paper"></div>
+            </div> 
+        </div>
+        <img src="icon.png" style="display:none">
+    </div>
+
+    <!-- task -->
+
+    <div id="solution">
+        <h2>Solution</h2>
+		
+		<div class="easy">
+           <p>The collision between the robot <b>1</b> and the robot <b>2</b> can only take place on the intersection of their trajectories.</p>
+           <img src="sol_easy_1.png">
+           <p>We start by moving the robot <b>2</b> until this point of collision. Then we move the robot <b>1</b> until it crashes into the robot <b>2</b>.</p>
+           <img src="sol_easy_2.png">
+           <p>In summary, to solve the subject, you have to click successively on the buttons : <b>2, 2, 1, 1, 1, 1, 1</b>.</p>
+         </div>
+
+         <div class="medium">
+           <p>If we bring the robot first <b>2</b> to the point of collision of the two robots, then advance the robot <b>1</b>, then this one will be stuck in front of the robot <b>2</b> and will not move forward. Indeed, the instruction in step 1 indicates that if there is a robot in front of it go to step 3, and the execution of step 3 returns to step 1.</p>
+           <img src="sol_medium_0.png" style="width:650px">
+
+           <p>We must therefore proceed differently. First bring the robot <b>1</b> to the point of collision. We execute the instruction of step 1 at a time when the robot <b>1</b> has nothing in front of him. So, the robot <b>1</b> is ready to perform Step 2, which consists of moving forward without asking any questions. </p>
+           <img src="sol_medium_1.png" style="width:650px">
+            
+           <p>We can then bring the robot <b>2</b> at the collision point, then perform a step for the robot <b>1</b> in order to advance it on the robot <b>2</b>.</p>
+           <img src="sol_medium_2.png" style="width:650px"> 
+           
+           <p>In summary, to solve the subject, you have to click successively on the buttons : <b>1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>To trap the robots, you have to put all the robots in a position where they are only one box away from the position in which they will get stuck by each other, and put all their programs to the stage 2.</p>
+           <p>By executing the right number of steps independently for each robot, one can reach this situation :</p>
+           <img src="sol_hard_1.png" style="width:650px">
+           <p>From there, all you have to do is execute one step for each robot, and they are all stuck.</p>
+           <img src="sol_hard_2.png" style="width:215px">
+           <p>In summary, to solve the subject, you have to click successively on the buttons : <b>1, 1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 1, 2, 3, 4</b>.</p>
+         </div>		
+
+        <h2>It's infromatics!</h2>
+    </div>
+    <!-- task-solution -->
+</body>
+
+</html>

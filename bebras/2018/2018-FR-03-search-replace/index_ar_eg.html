@@ -1,0 +1,233 @@
+<!doctype html>
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="utf-8">
+    <title>2018-AR-03-search-replace</title>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script>
+        window.stringsLanguage = 'ar';
+    </script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0', 'raphaelButton-1.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
+          "language": "ar",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron",
+          "translators": ["Arthur Charguéraud","Mohamed El-Sherif","Eslam Wageed"],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+    var taskStrings = {
+          error: "الأشكال الحالية لا تتطابق مع الأشكال المستهدفة.",
+          success: "تهانينا!",
+          before: "المستبدل",
+          after: "المكافئ",
+          replacedShape : function(nbReplaced, sameShape) {
+            if (sameShape) {
+               return "."+"تغيير شكل بنفس الشكل لن يحدث أي تغيير"
+            } else if (nbReplaced == 0) {
+               return "."+"المتتالية لن تتغير لإنك اخترت شكل غير موجود بها";
+            } else if (nbReplaced == 1) {
+               return "."+"تم التبديل"
+            } else {
+               return "."+"تم ابدالهم"+nbReplaced
+            }
+          },
+          undo: "تراجع"
+       };
+      var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="shape-paths.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         body * {
+            box-sizing: content-box;
+         }
+        #solution img {
+            border-top: solid black 1px;
+            border-bottom: solid black 1px;
+         }
+         #firstShape, #lastShape {
+           display: inline-block;
+           vertical-align: middle;
+           padding: 5px;
+           width: 30px;
+           height: 30px;
+         }
+         #taskContent {
+         }
+         .shape {
+           margin: 5px;
+         }
+         #undoBtnContainer {
+           text-align: center;
+           margin: 15px 0;
+         }
+         #taskProcess {
+           position: relative;
+           margin-top: 30px;
+         }
+         #taskProcess span {
+           vertical-align: middle;
+           display: inline-block;
+           height: 100%;
+           line-height: 40px;
+         }
+         .shapes {
+            margin-bottom: 5px;
+            text-align: center;
+         }
+         #topBar {
+          margin-top: 20px; 
+          text-align: center;
+         }
+         #topBar * {
+          display: inline-block;
+          vertical-align: middle;
+          text-align: center;
+         }
+         #allShapes {
+            width: 500px;
+         }
+         #beforeAfter {
+            margin-top: 2em; 
+            padding: 0.5em;
+            float: left;
+         }
+         #originFrame, #targetFrame {
+            margin-top: 1em; 
+            padding: 0.5em;
+            width: 80%;
+            float: right;
+         }
+         #targetFrame {
+            border: 2px solid green;
+         }
+         #originFrame {
+            border: 2px solid #AAAAFF;
+         }
+         #comment {
+            color: green;
+            min-height: 1.5em;
+            text-align: center;
+         }
+         .areaTitle {
+            text-align: center;
+         }
+         .instructions {
+            margin-left: 20px;
+         }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>التبدیلات</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+          <div id="zone_1">
+            <div class="consigne">
+            <p>
+		ساعد القندس  في جعل الأشكال الموجودة في "الأشكال الحالیة" مطابقة للأشكال الموجودة في "الأشكال المستهدفة" عن طریق القیام ببعض الاستبدالات.
+            </p>
+            <p>
+		في كل مرة تحتاج إلى إجراء استبدال، قم باختیار شكلین من الأزرار الرمادیة لیتم استبدالهم.
+            </p>
+            <p>
+            یمكنك استخدام زر "تراجع" للعودة خطوة واحدة.
+            </p>
+            </div>
+          </div>
+          <div id="zone_2">
+          <p class="instructions">إختر شكلین مما یلي أدناه:</p>
+            <div id="topBar">
+              <div class="shapes" id="allShapes"></div>
+              <input type="button" id="undo">
+            </div>
+            <div class="shapes" id="beforeAfter"></div>
+            <div id="comment"></div>
+            <div id="originFrame">
+               <div class="areaTitle"> الأشكال الحالیة</div>
+               <div class="shapes" id="originShapes"></div>
+            </div>
+            <div id="targetFrame">
+               <div class="areaTitle"> الأشكال المستهدفة</div>
+               <div class="shapes" id="targetShapes"></div>
+            </div>
+        </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+	      <h2>الحل</h2>
+		  <div class="easy">
+           <p>فیما یلي تطبیق التبدیل:</p>
+           <img src="sol_easy_repl1_ar_eg.png" style="margin-right:3em">
+           <img src="sol_easy_repl2_ar_eg.png" style="margin-right:3em">
+           <img src="sol_easy_repl3_ar_eg.png">
+           <p>تقوم هذه الاستبدالات بتحویل الرسم خطوة بخطوة كما یلي:</p>
+           <img src="sol_easy_step0.png"><br/>
+           <img src="sol_easy_step1.png"><br/>
+           <img src="sol_easy_step2.png"><br/>
+           <img src="sol_easy_step3.png">
+         </div>
+
+         <div class="medium">
+           <p>لنبدأ باستبدال المربع بالمثلث المقلوب، ثم الدائرة بالمربع:</p>
+           <img src="sol_medium_repl1_ar_eg.png" style="margin-right:3em">
+           <img src="sol_medium_repl2_ar_eg.png">
+           <p>تقوم هذه الاستبدالات بتحویل الرسم خطوة بخطوة كما یلي:</p>
+           <img src="sol_medium_step0.png"><br/>
+           <img src="sol_medium_step1.png" style="margin-left:7px"><br/>
+           <img src="sol_medium_step2.png" style="margin-left:2px">
+           <p>في هذه المرحلة، یبقى استبدال النجمة بالمثلث، والمثلث بالنجمة، كما هو موضح أدناه:</p>
+           <img src="sol_medium_step2b.png">
+           <p>لتبادل هذان الشكلان، من الضروري إشراك شكل ثالث، على سبيل المثال المعين. ونقوم بثلاث تبديلات: </p>
+           <img src="sol_medium_repl3_ar_eg.png" style="margin-right:3em">
+           <img src="sol_medium_repl4_ar_eg.png" style="margin-right:3em">
+           <img src="sol_medium_repl5_ar_eg.png">
+           <p>تحول هذه الاستبدالات الرسم خطوة بخطوة إلى النتیجة المرجوة:</p>
+           <img src="sol_medium_step2.png" style="margin-left:2px"><br/>
+           <img src="sol_medium_step3.png"><br/>
+           <img src="sol_medium_step4.png" style="margin-left:4px"><br/>
+           <img src="sol_medium_step5.png" style="margin-left:4px">
+         </div>
+
+         <div class="hard">
+           <p>لنلق نظرة على البدائل التي یجب أن نجریها ابتداء من النجمة الصفراء. یجب استبدال النجمة بمربع أخضر. یجب استبدال
+           المربع الأخضر بالمعين الأحمر. وعلیك استبدال بالمعين الأحمر بالنجمة الصفراء.</p>
+           <img src="sol_hard_step0.png">
+           <p>لإجراء هذه الاستبدالات، من الضروري تضمین نموذج إضافي، والذي لا یظهر في الرسم الأولي: النجمة الخضراء. یتم إجراء الاستبدالات التالیة:</p>
+           <img src="sol_hard_repl2_ar_eg.png" style="width: 360px">
+           <p>ثم نحصل على النتیجة المتوسطة الموضحة أدناه:</p>
+           <img src="sol_hard_step1.png">
+           <p>قارن الآن هذا الرسم بالهدف المرغوب، وهو:</p>
+           <img src="sol_hard_step2.png">
+           <p>لتحقیق هذا الهدف، استبدل المثلث الأزرق بالمثلث الوردي المقلوب، واستبدل المثلث المقلوب بالدائرة، واستبدل الدائرة بالمثلث الأزرق.</p>
+           <p>هنا مرة أخرى، من الضروري استخدام نموذج آخر لعمل التبدیلات. یمكنك استخدام النجمة الخضراء، و عمل التبدیلات التاليه :</p>
+           <img src="sol_hard_repl1_ar_eg.png">
+         </div>
+
+      </div>
+    </body>
+</html>

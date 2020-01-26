@@ -188,6 +188,11 @@ function initTask(subTask) {
       initPaperGrid();
       displayCodes();
       showFeedback(null);
+      if (typeof(enableRtl) != "undefined") {
+         $("body").attr("dir", "rtl");
+         $(".largeScreen #zone_1").css("float", "right");
+         $(".largeScreen #zone_2").css("float", "right");
+      }
    };
 
    subTask.getAnswerObject = function() {
@@ -817,12 +822,16 @@ function initTask(subTask) {
    function displayCodes() {
       subTask.raphaelFactory.destroy("codes");
       var paper = subTask.raphaelFactory.create("codes", "codes", paperCodesAttr.width, paperCodesAttr.height);
-      paper.text(0, targetPathY, taskStrings.yourTarget).attr(gridParams.labelAttr);
+      var xLabel = 0;
+      if (typeof(enableRtl) == "undefined") {
+         xLabel = paper.width;
+      }
+      paper.text(xLabel, targetPathY, taskStrings.yourTarget).attr(gridParams.labelAttr);
       var targetPath = data[level].target;
       for (var iStep = 0; iStep < targetPath.length; iStep++) {
          paper.text(pathStartX + iStep * stepWidth, targetPathY, targetPath[iStep]).attr(gridParams.digitAttr);
       }
-      paper.text(0, encodedPathY, taskStrings.yourSequence).attr(gridParams.labelAttr);
+      paper.text(xLabel, encodedPathY, taskStrings.yourSequence).attr(gridParams.labelAttr);
       var encodedPath = getEncodedPath(answer.currentPath);
       var maxShownLength = data[level].shownEncodingLength;
       var shownLength = Math.min(encodedPath.length, maxShownLength);

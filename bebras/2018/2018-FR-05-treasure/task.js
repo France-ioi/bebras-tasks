@@ -125,6 +125,11 @@ function initTask(subTask) {
         paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, height);
         draw();
         updateFeedback();
+        if (typeof(enableRtl) != "undefined") {
+           $("body").attr("dir", "rtl");
+           $(".largeScreen #zone_1").css("float", "right");
+           $(".largeScreen #zone_2").css("float", "right");
+        }
     };
     
     function draw() {

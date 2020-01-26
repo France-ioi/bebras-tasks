@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+   <head>
+      <meta charset="utf-8">
+      <title>2018-AR-09-graph-of-shapes</title>
+      <script>
+           window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "ar",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var instructions = "<br/> اضغط علي المربعات لتغيير الأشكال.";
+         var taskStrings = {
+             success: "تهانينا!! لقد نجحت!",
+             errorArrivedEarly: "وصل القندس إلي المنزل مبكراً، وتبقٌى اشكال في الأرشادات." + instructions,
+             errorOneNotGood: "الشكل علي السهم أمام القندس لا يتطابق مع الشكل التالي في الأرشادات." + instructions,
+             errorSeveralNotGood: "لا يتطابق الشكل اللذي علي السهم أمام القندس مع الشكل التالي في الأرشادات." + instructions,
+             errorMultiplePath: "هناك عدة أسهم أمام القندس تتطابق مع الشكل التالي في الأرشادات. القندس لا يعرف أين يذهب." + instructions,
+             instructions: "الخطوات:",
+             tryButton: "البداية",
+             stopButton: "توقف",
+             validateAnswer: "حاول",
+             mustFillAll: "لاتزال هناك مربعات رمادیة متبقیة. تحقق منها لملئها بالشكل المناسب."
+         };
+         var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="shape-paths.js"></script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #graph path, #graph rect
+         {
+            cursor: pointer;
+         }
+         #graph {
+            text-align: center;
+         }
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>المسار المزخرف</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">       
+               <div class="consigne">
+            <p>.یرید القندس الوصول إلى منزله، و سیصل من خلال إتباعه عدة خطوات. كل خطوة لها شكل ذو زخرفة معینة</p>
+            <p>یتبع القندس الأسهم للوصول إلى المنزل، لكن علیه أن یستخدم جمیع الأشكال في الخطوات.</p>
+            <p>لكن لا ینبغي أن یجد القندس في أي تقاطع أشكالاً مماثلة.</p>
+            <p style="margin-bottom:0.3em">انقر على الخطوات الرمادیة لتغییر الشكل. ساعد القندس على اختیار المسار الصحیح لإكمال جمیع الخطوات للعودة إلى المنزل.</p>
+            </div>
+            </div>
+            <div id="zone_2">
+               <div id="graph"></div>
+               <div id="topBar"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         <img id="castor" src="castor.png" style="display:none">
+         <img id="house" src="house.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>الحل</h2>
+         <!-- description of the solution -->
+		 
+		 <div class="easy">
+           <p>تتكون التعلیمات من 5 أشكال. لذلك یجب أن یعبر القندس خلال المسار العلوي، الذي یحتوي على 5 أسهم، ولیس المسار السفلي الذي یحتوي على 4 أسهم فقط.</p>
+           <p>في الطریق إلى الأعلى، نضع في الأسهم الأشكال المقابلة للتعلیمات، بالترتیب</p>
+           <img src="sol_easy_1.png">
+           <p>بالنسبة إلى مربعات المسار السفلي، یمكننا إكمالها بأي شكل، فقط تجنب وضع دائرة على الطریق الأسفل بعد التقاطع الأول مباشرة، لأن هذا یتعارض مع الأشكال المستخدمة في الطریق الأعلى. على سبیل المثال، إذا وضعنا المثلثات في لأسفل، فسوف نحصل على الإجابة التالیة:</p>
+           <img src="sol_easy_2.png">
+         </div>
+
+         <div class="medium">
+             <p>هناك "مساران واحد يرتفع وأخر ينخفض. إذا حاولنا استخدام المسار السفلی أولا، فسوف نعلق على الفور.</p>
+           <img src="sol_medium_1.png">
+           <p>بالتأكید، المثلث التالي في التعلیمات سوف یجبر القندس على الدخول مرة ثانیة في المسار السفلی، ولكن النماذج (الأشكال) التي صادفتها لم تعد تتوافق مع التعلیمات.</p>
+
+           <p>لذلك یجب أن نترك القندس یذهب أولا الـي المسار العلوی:</p>
+           <img src="sol_medium_2.png">
+           <p>ثم ناخذ القندس الى المسار السفلی. سیذهب القندس بعد ذلك إلى جولة أخرى في المسار العلوی، قبل الخروج مرة أخرى بعد الجولة الأخیرة.</p>
+           <img src="sol_medium_3.png">
+         </div>
+
+         <div class="hard">
+           <p>في الإرشادات التالیة، یتم تكرار النمط مرتین (نجمة ، مثلث ، مثلث ، نجمة)، ثم لدینا نجمة، ونمط آخر یعید نفسه مرتین (دائرة ، دائرة، مثلث). لنبدأ بوضع النمط الأول على "الحلقة" التي تتكون من 4 أسهم.</p>
+           <img src="sol_hard_1.png">
+           <p>ثم أكمل الحلقة اللتي تتكون من 3 أسهم، تقع في أعلى الیمین. بالنسبة للحلقة في الجزء العلوي الأیسر، یمكننا ملء المربعات بأي شكل، فقط تجنب وضع نجمة على السهم الأول من هذه الحلقة. هنا الحل:</p>
+           <img src="sol_hard_2.png">
+         </div>
+		 
+         <h2>إنه علم الحاسوب!</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+</html>
+

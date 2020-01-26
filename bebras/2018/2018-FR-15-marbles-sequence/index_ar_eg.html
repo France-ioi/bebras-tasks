@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lan="ar" dir="rtl">
+   <head>
+      <meta charset="utf-8">
+      <title>2018-AR-15-marbles-sequence</title>
+      <script>
+           window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "ar",
+            "version": "en.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "الهدف",
+            undo : "تراجع",
+            success: "تهانینا، لقد نجحت!",
+            errorWrongMarble: "الكرة المحاطة باللون الأحمر تختلف عن الهدف.",
+            errorMissingMarble : "لم تنتهي بعد. توجد كرات  مفقودة.<br/>ذا علقت، جرب طریقة أخرى."
+         };
+         var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+            #displayHelper_graderMessage {
+               margin-top: 1em;
+               margin-bottom: 1em;
+               text-align: center;
+               font-weight: bold;
+               color: red;
+            }
+            #paper {
+               margin-top: 20px;
+            }
+            .largeScreen #zone_1,
+            .largeScreen #zone_2
+            {
+               float: right;
+            }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>الكرات الرخامیة</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>اضغط على الأزرار الرمادية لجعل الكرات تسقط واحدة تلو الأخرى حتى تصنع نفس المتتابعة الظاهرة في الهدف.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+               <div id="objective"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         </div>
+         <div id="solution">
+            <h2>الحل</h2>
+			
+			<div class="easy">
+			<p> إذا نظرنا إلي الهدف، سنجد انه يبدأ بكرة <b> A </b> وكرة <b> B </b>. إذا اسقطنا هاتان الكرتان من أول صف، سنجد نفسنا عالقين، لأنه لايوجد كرة عليها حرف <b> C </b> في الصف الأول. </p>
+			<img src="sol_easy_1.png">
+           <p> لذلك يجب عليك البدأ بأخذ هاتين الكرتين <b> A </b> و <b> B </b> من الصف الثاني. لتتمكن من أخد الكرة <b> C </b> اللتي إيضاً في الصف الثاني. </p>
+           <img src="sol_easy_2.png">
+           <p> لتتمكن من انهاء اول مجموعة في الهدف، اللتي تحتوي علي 5 كرات، يتبقي لك أن تأخذ كرة <b> A </b> و كرة <b> B </b>. يمكنك أخذها من الصف الأول. </p>
+           <img src="sol_easy_3.png">
+           <p> الخلاصة، يوجد حل وهو الضغط علي الازرار <b> 2، 2، 2، 1، 1 </b>، مع تكرار هذه المتسلسلة. </p>
+           <p> يوجد حل اخر وهو: 2، 2، 2، 2، 2، 1، 1، 2، 2، 2، 1، 1، 2، 1، 1. </p>
+		   </div>
+
+         <div class="medium">
+           <p> الهدف يتكون من ثلاث مجموعات متشابهة متكونة من نفس المتسلسلة اللتي تحتوي علي 6 كرات، كرة <b> A </b>، وكرة <b> B </b>، وكرتان <b> C </b>، وكرة <b> D </b>، وكرة <b> E </b>. يمكنك الوصول لهذه الكرات عن طريق أخذ اول 3 كرات من الصف الثاني، و اول 3 كرات من الصف الثالث. </p>
+           <p> يجب ان تتأكد من إسقاط الكرات بترتيب صحيح حتي لا تعلق. بعد <b> A </b> و <b> B </b>من الصف الثاني، يجب عليك إسقاط <b> C </b> من الصف الثالث، لتتمكن من أخذ <b> D </b> اللتي ستحتاجها في الخطوة القادمة. </p>
+           <img src="sol_medium_1.png">
+           <p> للأنتهاء من المجموعة الأولى المتكونة من 6 كرات، يتبقي ان تأخذ كرتان <b> C </b>، <b> D </b> من الصف الثالث والثاني. وكرة <b> E </b> من الصف الثالث </p>
+           <img src="sol_medium_2.png">
+           <p> الخلاصة، يوجد حل وهو الضغط علي الازرار <b> 2، 2، 3، 3، 2، 3 </b>، مع تكرار هذه المتسلسلة. </p>
+           <p> يوجد حل اخر وهو: 1، 1، 3، 3، 1، 3، 2، 2، 3، 3، 2، 3، 2، 2، 3، 3، 2، 3. </ p >
+		   </div>
+
+         <div class="hard">
+           <p> يتكون الهدف من مجموعتين متطابقتين، تتكون كل منهما بنفس التسلسل المكون من 7 كرات <b> A </b> ،ثم  كراتان <b> B </b> ،ثم 3 كرات <b> C </b>. </ p>
+           <p> لإسقاط 3 كرات <b> C </b> على التوالي، يجب عليك ان تجد هذه الكرات في 3 صفوف مختلفة. يجب أن تحتوي هذه الصفوف الثلاثة على كرتان <b> B </b> . هذا يعني أنه يجب عليك استخدام صف لا يحتوي على <b> B </b>. فقط الصف <b> 5 </b> هوا المناسب لهذا. </p>
+		   <p> لتحديد الصفين الآخرين اللذين ستستخدمهما، عليك أن تجد المكان الذي ستأخذ منه 7 الكرات <b> A </b>. مع العلم أن الصف <b> 5 </b> سيوفر لنا 3 كرات <b> A </b> ، لذلك تبقى هناك 4 كرات <b> A </b> يجب اخذهم من صفين آخرين. يوجد حل واحد فقط لذلك، وهو استخدام الصفوف <b> 1 </b> و <b> 3 </b>. </p>
+
+			<p> باختصار ، نبدأ بإسقاط جميع الكرات <b> A </b> على رأس الصفوف<b> 1 </b> و <b> 3 </b> و <b> 5 </b>. </p> 
+									<img src="sol_hard_1.png">
+
+           <p> ثم، تقوم بإسقاط الكرات <b> B </b> من الصفوف<b> 1 </b> و <b> 3 </b>. </p>
+           <img src="sol_hard_2.png">
+           <p> أخيرًا، قم بأسقاط الكرات <b> C </b> من الصفوف<b> 1 </b> و <b> 3 </b> و <b> 5 </b>. </p>
+           <img src="sol_hard_3.png">
+           <p> في النهاية، يكمن الحل في الضغط فوق الأزرار: <b> 1 ،1 ،3 ،3 ،5 ،5 ،5 ،1 ،3 ،1 ،3 ،5 </b> ،وكرر هذا تسلسل  مراتان.</p>
+		   
+         <!-- description of the solution -->
+            <h2>إنه علم الحاسوب  !</h2>
+         <!-- explanations on why this task is about informatics -->
+         <img src="icon.png" style="display:none">
+      </div>
+   </body>
+
+</html>

@@ -102,6 +102,11 @@ function initTask(subTask) {
       initGrid();
       initUndo();
       hideFeedBack();
+      if (typeof(enableRtl) != "undefined") {
+         $("body").attr("dir", "rtl");
+         $(".largeScreen #zone_1").css("float", "right");
+         $(".largeScreen #zone_2").css("float", "right");
+      }
    };
 
    subTask.getAnswerObject = function() {

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html dir="rtl" lan="ar">
+   <head>
+      <meta charset="utf-8">
+      <title>2018-AR-17-weights</title>
+      <script>
+           window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "ar",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"], 
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            scaleInstEasy : "أسحب دائرتان وضعهما علي الميزان",
+            scaleInstElse : "اسحب دائرة زرقاء و مربع أصفر هنا",
+            drag : "یمكنك سحب الأشكال هنا لإعادة تنظیمها كما تشاء",
+            heavier : "أثقل",
+            lighter : "أخف",
+            heavierInstr : "أثقل...",
+            lighterInstr : "...أخف",
+            sameWeight : "متساويين في الوزن",
+            pentOnLeftPan : "المربعات توضع علي اللوح الأيمن",
+            circleOnRightPan : "الدوائر توضع علي اللوح الأيسر",
+            success: "تهانينا!! لقد نجحت!",
+            emptyAnswer: "يرجى ملء جميع الدوائر الرمادية",
+            wrongAnswer : "لقد تم عرض أوزان الدوائر الزرقاء. إنها بترتيب خاطئ، ابدأ من جديد وحاول مرة أخرى",
+            tooManyComp : "هذا جيد ، لقد عثرت على الترتيب الصحيح. يمكنك إعادة التشغيل للمحاولة مرة أخرى ولكن باستخدام الميزان عدد أقل من المرات.",
+            comparisons : function(nbComparisons) { 
+               if (nbComparisons == 1) {
+                  return "عدد المقارانات : 1";
+               } else {
+                  return "عدد المقارانات: " + nbComparisons ; } }
+         };
+         var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="scale.js"></script>
+      <style>
+            #displayHelper_graderMessage {
+               margin-top: 1em;
+               margin-bottom: 1em;
+               text-align: center;
+               font-weight: bold;
+               color: red;
+            }
+            #paper {
+               margin-top: 20px;
+            }
+            .largeScreen #zone_1,
+            .largeScreen #zone_2
+            {
+               float: right;
+            }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Scale</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>الدوائر الزرقاء لها أوزان مختلفة.
+                  <span class="medium hard"><br/>لكل دائرة زرقاء یوجد مربع أصفر له نفس الوزن.</span></p>
+                  <p>استخدم المیزان الموجود على الیمین لمقارنة وزن<span class="easy"> دائرتین زرقاء.</span><span class="medium hard"> دائرة زرقاء و مربع أصفر.</span>.</p>
+                  <p>رتب الدوائر الزرقاء داخل الدوائر الرمادیة من الأخف إلى الأثقل وزنا.</p>
+                  <p class="hard"><b>استعمل المیزان أقل عدد ممكن من المرات.</b> (16 مرة على الأكثر) لتحصل على النقاط الكاملة.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+         <img id="circle" src="circle.png" style="display:none">
+         <img id="square" src="square.png" style="display:none">
+      </div>
+      <div id="solution">
+            <h2>الحل</h2>
+         <!-- description of the solution -->
+		 
+		 <div class="easy">
+           <p>قارن وزن الدائرة<b> A </b>مع الأوزان الأخرى، هذا سیسمح لك بمعرفة الدائرة الرمادیة المناسبة لوضع الوزن  <b> A</b> حیث توجد ثلاث حالات ممكنة.
+           <ol>
+           <li><p>إذا كانت الدائرة <b>A</b> أخف من <b>B</b> و <b>C</b>،  فسنضعها في الدائرة الرمادیة على أقصي الیسار، بسبب أنها الأخف، ویبقى فقط مقارنة الدائرتین <b>B</b> و <b>C</b> لمعرفة كیف سیكون ترتیبهما.</p></li>
+           <li><p>إذا كانت الدائرة <b>A</b>  أثقل من <b>B</b> و <b>C</b>، فسنضعها في الدائرة الرمادیة على أقصي الیمین، بسبب أنها الأثقل، ویبقى فقط مقارنة الدائرتین <b>B</b> و <b>C</b>  لمعرفة كیف سیكون ترتیبهما.</p></li>
+           <li><p>إذا كانت الدائرة <b>A</b> أخف من أحد الأوزان وأثقل من الوزن الآخر فإنها ستكون في الدائرة الرمادیة الوسطى، والوزن الأخف منها على الیسار، و الوزن الأثقل منها على الیمین. </p></li>
+           </ol>
+           </p>
+         </div>
+
+         <div class="medium">
+           <p>قارن وزن الدائرة <b>A</b>، مع أوزان المربعات الأربعة، هذا سیسمح لك بمعرفة الدائرة الرمادیة المناسبة لوضع الوزن <b>A</b> حيث توجد أربع حالات ممكنة.
+           <ol>
+           <li><p>إذا كان وزن الدائرة <b>A</b> یساوي وزن أحد المربعات وأقل من أوزان الثلاثة الأخرى، فإنها ستكون في الدائرة الرمادیة على الیسار، لأنها الأخف. </p></li>
+           <li><p>إذا كان وزن الدائرة <b>A</b>  یساوي وزن أحد المربعات وأقل من وزن مربعین آخرین وأثقل من وزن مربع آخر، فإن <b>A</b> ستكون في الدائرة الرمادیة الثانیة من الیسار.</p></li>
+           <li><p>إذا كان وزن الدائرة <b>A</b> تساوي وزن أحد المربعات وأقل من وزن مربع واحد وأثقل من وزن مربعین آخرین، فإن <b>A</b> ستكون في الدائرة الرمادیة الثالثة من الیسار.</p></li>
+           <li><p>إذا كان وزن الدائرة <b>A</b>  یساوي وزن أحد المربعات وأثقل من أوزان الثلاثة الأخرى، فإنها ستكون في الدائرة الرمادیة على الیمین، لأنها الأثقل. </p></li>
+           </ol>
+           </p>
+
+           <p>في ما یلي افترض أن المربع <b>E</b> یساوي الدائرة <b>A</b>.  بمجرد وضع  <b>A</b>  في مكانها يمكننا أن نضع الدوائر الأخرى في أماكنها.
+           <ul>
+           <li><p>في الحالتین <b>1</b> أو <b>4</b>  الموضحة في الأعلى، یمكن ترتیب الدوائر الزرقاء المتبقیة (<b>B</b>، <b>C</b>، <b>D</b>)  باستعمال المربعات الصفراء المختلفة في الوزن عن الدائرة <b>A</b> (والتي هي، علي سبيل المثال <b>F</b>، <b>G</b>، <b>H</b>) وذلك بنفس الطریقة مرة أخرى ولكن بثلاث دوائر وثلاثة مربعات، بدلا من 4 من كل منها، حیث نبدأ بمقارنة <b>B</b> مع المربعات الثلاث لتحدید موقعها.</p></li>
+           <li><p>في الحالة  <b> 2 </ b> نحن نعرف مربعا واحدا فقط أثقل من الدائرة <b>A</b>.  وبمقارنة هذا المربع بالدوائر <b>B</b>، <b>C</b> و <b>D </b> سنحدد الدائرة الأثقل، وبذلك ستكون في الدائرة الرمادیة على أقصى الیمین. </p></li>
+           <li><p>في الحالة <b>3</b>  نحن نعرف مربعا واحدا فقط أقل وزنا من الدائرة <b>A</b>. وبمقارنة هذا المربع بالدوائر <b>B</b>، <b>C</b> و <b> D </b> سنحدد الدائرة الأقل وزنا، وبذلك ستكون في الدائرة الرمادیة على أقصى الیسار.</p></li>
+           </ul>
+           
+           <p>بعد أي من الخطوات السابقة سیتبقى لنا دائرتین ومربعین، وبمقارنة إحدى هذه الدوائر بالمربعین الآخرین، یمكننا استنتاج ما إذا كانت هي الأقل وزنا أو الأثقل. وهذا یكفي لوضع الدائرتین الأخیرتین في مكانهما.</p>
+         </div>
+
+         <div class="hard">
+           <p>ننفذ بنفس الطریقة في مستوى الثلاث نجوم ولكن بإجراء خطوات أكثر.</p>
+
+         </div>
+		 
+            <h2>إنه علم الحاسوب  !</h2>
+         <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+
+</html>

@@ -1,0 +1,141 @@
+<!--line 118 is not translated-->
+<!DOCTYPE html>
+<html lan="en" dir="rtl">
+   <head>
+      <meta charset="utf-8">
+      <title>2018-AR-14-sort-columns</title>
+      <script>
+           window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+       </script>
+       <script class="remove" type="text/javascript">
+            var json = {
+            "id": "",
+            "language": "ar",
+            "version": "en.01",
+            "authors": "",
+            "translators": ["Mohamed El-Sherif", "Eslam Wageed"],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+            };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = {
+            objective : "الهدف",
+            sort : "رتب",
+            nSortText : function(nSort) {
+               return "عدد الترتيبات: " + nSort;
+            },
+            trick : "اااااقتراح: یكون إيجاد الحل أسهل عند التركیز فقط على الدوائر في الهدف",
+            success: "تهانینا، لقد نجحت!",
+            wrongAnswer: "العمود المظلل باللون الأحمر لیس في المكان الصحیح.",
+            tooManySort : "لقد قمت بترتیب الأعمدة بشكل صحیح. ابدأ مرة أخرى و حاول حل المسألة في ٣ خطواط فقط."
+         };
+         var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #displayHelper_graderMessage {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         #paper {
+            margin-top: 20px;
+         }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>ترتیب الأعمدة</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task -->
+            <p id="difficultyWarning" class="hard"></p>
+            <div id=zone_1>    
+               <div class=consigne>
+                   <p>عند الضغط على زر "رتب" <b> يتغير </b> ترتیب الأعمدة، بحیث
+                  <span class="easy"> توضع الدوائرالصغيرة على یسار الدوائر الكبيرة في الصف الذي تم ضغط الزر فیه. </span>
+                  <span class="medium"> توضع الدوائر الأصغر على الیسار و الأكبر على الیمين في الصف الذي تم ضغط الزر فيه.</span>
+                  <span class="hard"> ترتب الدوائر تصاعديا في الصف الذي تم ضغط الزر فيه .</span>
+                  </p>
+                  <p>اضغط على أزرار الترتیب لكي تقوم بترتیب الأعمدة لتصبح كالشكل الظاهر في الهدف.</p>
+                  <p class="medium hard">للحصول على الدرجة الكاملة، افعل ذلك في 3 خطوات فقط.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+            </div>
+         </div>
+         <img src="icon.png" style="display:none">
+      </div>
+      <div id="solution">
+         <h2>الحل</h2>
+      <!-- description of the solution -->
+	  
+	  <div class="easy">
+              <p>تذكر النصیحة أسفل الهدف: الحل یصبح أكثر سهولة عن طریق دراسة الدوائر الظاهرة في الهدف فقط. </P>
+               <p>​في خطوة الترتیب الأخيرة يجب أن تضع الكرات الصغيرة على الیسار و الكرات الكبيرة على الیمين. الخطوة الأخيرة يجب أن تكون<b> c </b>أو <b> e </b> أو <b> f </b>. على سبیل المثال، افترض أن تكون <b> c </b> الخطوة الأخيرة. </P>
+              <img src="sol_easy_1_ar_eg.png">
+              <p>و بالتالي، سیتم وضع العمود <b> D </b> ​في أقصى اليسار، وسیكون من الضروري في
+              الخطوات السابقة التأكد من أن الأعمدة <b> A </b>، <b> B </ b>، <b> C </b>  </b>مرتبة في الأماكن الصحیحة. على سبیل المثال، نستطیع أن نضمن أن یكون موضع العمود <b> A </b> في أقصى اليسار عن طریق ترتیب الصف <b> e </b> في الخطوة قبل الأخيرة.</p>
+              <img src="sol_easy_2_ar_eg.png">
+              <p>لوضع العمود <b> B </b> على یسار العمود <b> C </b>،  رتب الصف <b>f</b>.</p>
+              <img src="sol_easy_3_ar_eg.png">
+              <p>الخلاصة، أحد الحلول هي أن ترتب الصفوف <b>f ثم e ثم c</b> (بهذا الترتیب).</p>
+              <p>یوجد هناك عدة حلول أخرى، على سبیل المثال <b>b ثم f ثم e</b>، أو <b>d ثم c ثم f</b>، أو <b>e ثم c ثم f</b>، الخ...</p>
+            </div>
+
+            <div class="medium">
+              <p>تذكر النصیحة أسفل الهدف: الحل یصبح أكثر سهولة عن طریق دراسة الدوائر الظاهرة في الهدف فقط. </P>
+               <p> في خطوة الترتیب الأخيرة ​تنظم الكرات من الأصغر على الیسار إلى الأكبر على الیمين. الخطوة الأخيرة يجب أن تكون ترتیب الصف <b> c </b> أو الصف <b> e </b>. افرض على سبیل المثال أن ترتیب الصف <b> c </b> هو آخر خطوة.</p>
+              <img src="sol_medium_1_ar_eg.png">
+                  <p>و بالتالي، سوف یتم وضع العمود<b> A </b> في أقصى الیمين . سوف یكون من الضروري في الخطوات التالیة التأكد من أن: <b> B </b> یكون على یسار <b> C </b>, و الأعمدة <b> D </b>, <b> E </b> , <b> F </b> تقع في المواضع الصحیحة. </P>
+               <p> لوضع العمود <b> B </b> على یسار العمود <b> C </b>,  یوجد هناك احتمالیة واحدة فقط  لفعل ذلك، و هي أن تقوم بالترتیب معتمداً على الصف <b> a </b> في كل مرة قبل الخطوة الأخيرة.</p>
+              <img src="sol_medium_2_ar_eg.png">
+              <p>یتبقى وضع الأعمدة <b> D </b>, <b> E </b> , <b> F </b> في الترتیب الصحیح. الصف <b> e </b> هو الصف  الوحید الذي یضع العمود <b> D </b> على یسار العمود <b> E </b>. و لوضع العمود <b> E </b>  على یسار العمود <b> F </b>, يمكن عمل ذلك مسبقاً عن طریق ترتیب الصف <b> a </b> , و هو ماخططنا مسبقاً لتنفیذه. </p>
+              <img src="sol_medium_3_ar_eg.png">
+              <p>الخلاصة، أحد الحلول هي أن ترتب الصفوف <b> c, e, a </b> (بهذا الترتیب).</p>
+              <p>یوجد هناك حل آخر: إذا اخترنا أن ننهي بترتیب الصف <b> e </b>,  بتطبیق منطق مشابه لما سبق، سنجد الحل <b> a, c, e </b>.</p>
+
+            </div>
+
+            <div class="hard">
+                
+				<p>تذكر النصیحة أسفل الهدف: الحل یصبح أكثر سهولة عن طریق دراسة الدوائر الظاهرة في الهدف فقط. </P>              
+              <p>في خطوة الترتیب الأخيرة يجب أن تنظم الكرات بشكل تصاعدي للأرقام. وبالتالي من الضروري أن تكون الخطوة الأخيرة   هي ترتیب الصف <b>d</b>.</p>
+              <img src="sol_hard_1_ar_eg.png">
+                  <p>ترتیب الصف<b> d </b> سوف ینظم الأعمدة في 3 مجموعات: مجموعة على الیسار مكونة من الأعمدة <b>A</b> ، <b>B</b> ، <b>C</b>  مجموعة في الوسط مكونة من الأعمدة  <b> D </b>، <b> E </b> ، <b> F </b> ومجموعة على الیمين مكونة من العمودین <b> G </b> ، <b> H </b>. هذا لا یعني بالضرورة أن تكون الأعمدة مرتبة بشكل صحیح داخل كل مجموعة.</p>
+              <p>يمكن وضع الأعمدة <b> A </b>، <b> B </b> ، <b> C </b> في الترتیب الصحیح في خطوة واحدة و هي ترتيب الصف <b> f</b>. في الخطوة قبل الأخيرة. الترتیب عبر هذا الصف یسمح لك بوضع العمودین<b> G </b> ، <b> H </b> في نفس الترتیب في نفس الوقت.</p>
+              <img src="sol_hard_2_ar_eg.png">
+              <p>يتبقي لك ترتيب المجموعه الوسطى المكونه من الأعمده  <b> D </b>، <b> E </b> ، <b> F </b>. ترتيب الصف <b> f </b> الذي تنوي عمله في الخطوة قبل الأخيرة یسمح بوضع العمود <b> D </b> علي يسار العمودين <b> E </b> ، <b> F </b> ​ومع ذلك ، لا یزال هناك طریقة لوضع <b> E </b> على يسار  <b> F </b>. إذا قمنا بمقارنة الأرقام في العمودین <b> E </b> , <b> F </b> نستطیع أن نرى أن الصف <b> g </b> هو الصف الوحید الذي یسمح بوضع العمود <b> E </b> على یسار العمود<b> F</b>.</p>
+              <img src="sol_hard_3_ar_eg.png">
+              <p>بالمختصر، الحل هو ترتیب الصفوف <b> d ، f ، g </b> (بهذا الترتیب).</p>
+              <img src="sol_hard_4_ar_eg.png">
+           </div>
+	  
+         <h2>إنه علم الحاسوب !</h2>
+      <!-- explanations on why this task is about informatics -->
+      </div>
+   </body>
+</html>

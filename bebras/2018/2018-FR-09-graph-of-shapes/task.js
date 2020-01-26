@@ -152,6 +152,11 @@ function initTask(subTask) {
       hideFeedBack();
       displayHelper.setValidateString(taskStrings.validateAnswer);
       displayHelper.customValidate = animation;
+      if (typeof(enableRtl) != "undefined") {
+         $("body").attr("dir", "rtl");
+         $(".largeScreen #zone_1").css("float", "right");
+         $(".largeScreen #zone_2").css("float", "right");
+      }
    };
    
    subTask.getAnswerObject = function() {
