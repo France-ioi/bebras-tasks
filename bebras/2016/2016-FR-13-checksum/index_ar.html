@@ -2,7 +2,7 @@
 <html dir="rtl" lang="ar">
    <head>
     <meta charset="utf-8">
-    <title>2016-AR-03</title>
+    <title>2016-AR-13</title>
     <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
     <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
@@ -10,6 +10,7 @@
 
     <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
 
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
@@ -17,10 +18,6 @@
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
 
     <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
     <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
@@ -32,7 +29,7 @@
       </script>
       <script class="remove" type="text/javascript">
        var json = {
-          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-03-balanced-trees/",
+          "id": "http://castor-informatique.fr/tasks/2016/2016-FR-13-checksum/",
           "language": "ar",
           "version": "ar.01",
           "authors": "Mathias Hiron",
@@ -47,16 +44,33 @@
       };
       </script>
       <script type="text/javascript">
-      var taskStrings = {
-            edgesCount: "الأسهم المضافة",
-            verticesLeftCount: "الدوائر التي لم تتصل بعد",
-            reachError: "الدائرة المضائة غير متصلة بالدائرة الخضراء",
-            numError: "أسهم اكثر من اللازم",
-            degreeError: "اسهم اكثر من اللازم من الدائرة المضائة",
-            depthError: "تنبيه: المسار الأحمر أطول من اللازم",
-            existsError: "يوجد سهم بين هذه الدوائر",
-            removeError: "لا يمكن حذف هذا السهم",
-            congratulations: "مبروك. لقد وصلت جميع الدوائر"
+         var taskStrings = {
+            rowNames: [
+               "اسيا",
+               "اوروبا",
+               "أمريكا الشمالية",
+               "أمريكا الجنوبية",
+               "افريقيا",
+               "أوقيانوسيا",
+               "المجموع المتوقع"
+            ],
+            colNames: [
+               "احمر",
+               "اصفر",
+               "اخضر",
+               "ازرق",
+               "بني",
+               "المجموع"
+            ],
+            errorLabel: function(userSum) {
+               return "مجموع خاطئ" + "(" + userSum + ")";
+            },
+            success: "مبروك. إجابتك صحيحة",
+            wrong: "واحد على الأقل من المجاميع خطأ",
+            wrongCount: function(count) {
+               return "يجب عليك وضع بالضبط " + count + " شريط";
+            },
+            invalidDrop: "يمكنك إسقاط أرقام فقط على الخلايا البيضاء"
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -68,66 +82,39 @@
             display: inline-block;
          }
          #feedback {
-            height: 1em;
-            margin-top: 0.3em;
+            margin-top: 0.5em;
             margin-bottom: 0.3em;
             text-align: center;
             font-weight: bold;
             color: #CC8844;
          }
-         #control, #control table {
-            text-align: center;
-            margin: 20px auto;
-         }
-         #control table td {
-            width: 180px;
-         }
-         #control table td span {
-            font-size: 20px;
-         }
       </style>
    </head>
    <body>
       <div id="task">
-         <h1>الدوائر والأسهم</h1>
+         <h1>المجموع الممتاز</h1>
          <div id="tabsContainer"></div>
-<div id="taskContent">
-            <p>
-               اضف <span class="easy medium">5</span><span class="hard">13</span> أسهم للشكل التالي بحيث
-               <ul>
-                  <li>نستطيع الوصل إلى اي دائرة من دائرة القندس بتتبع<span class="easy"> الأسهم </span><span class="medium"> سهمين أو أقل </span><span class="hard"> ثلاث أسهم أو أقل </span>.</li>
-                  <li class="medium hard">لا يوجد أكثر من سهمين بالدائرة الواحدة</li>
-               </ul>
+         <div id="taskContent">
+            <p class="easy">
+               خطأ واحد يظهر في المربعات التالية
+               <br>
+               أوجد هذا الخطأ وصححه بإدراج الأرقام الصحيحة في الخلايا البيضاء.
             </p>
-
-
-            <p>
-               اضغط على دائرتين للتوصيل بينهم
+            <p class="medium">
+               يوجد المربعات التالية خطآن.
+               <br>
+               أوجدهما وصححهما بإدراج الأرقام الصحيحة في الخلايا البيضاء.
             </p>
-            <p>
-               اضغط على السهم لحذفه
+            <p class="hard">
+               يوجد بالمربعات التالية ثلاثة أخطاء
+               <br>
+               أوجدهم وصحههم بإدراج الأرقام الصحيحة في الخلايا البيضاء.
             </p>
             <div id="anim_container">
                <div id="anim"></div>
                <div id="feedback"></div>
             </div>
-            <div id="control">
-               <table>
-                  <tr>
-                     <td>
-                        <span id="edges"></span>
-                     </td>
-                     <td>
-                        <span id="verticesLeft"></span>
-                     </td>
-                     <td>
-                        <input type="button" value="Essayer" id="execute" />
-                     </td>
-                  </tr>
-               </table>
-            </div>
             <img src="icon.png" style="display:none">
-            <img src="castor.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">
