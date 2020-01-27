@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-04-next-distance</title>
+    <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', "jschannel"
+      ]);
+   </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-04-next-distance/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false,
+          "tests": [
+            {
+               "answer": '{"easy":[[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false]],"medium":[[false,true,false,false,false,true,false],[true,false,false,false,true,false,true],[false,false,false,false,false,false,false],[true,false,false,false,false,false,false],[false,false,false,false,false,false,false],[true,false,false,false,false,false,true],[false,true,false,true,false,true,false]],"hard":[[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false]]}',
+               "scoreOutOf100": 75
+            },
+            {
+               "answer": '{"easy":[[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false]],"medium":[[false,true,false,false,false,true,false],[true,false,false,false,true,false,true],[false,false,false,false,false,false,false],[true,false,false,false,false,false,false],[false,false,false,false,false,false,false],[true,false,false,false,false,false,true],[false,true,false,true,false,true,false]],"hard":[[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false]]}',
+               "scoreOutOf100": 75,
+               "reload": true
+            }
+          ]
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         incorrectExplain: "La case encadrée en bleu ne devrait pas être marquée.",
+         missingExplain: "Continuer à cliquer pour sélectionner les cases manquantes.",
+         incorrect: "Vous avez oublié des cases ou bien sélectionné des cases en trop.",
+         success: "Bravo, vous avez réussi !" };
+
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #grid_container {
+            margin-left: 0.5em;
+            padding-top: 0.5em;
+         }
+         #grid {
+            margin: 20px auto;
+         }
+         #example_grid {
+            margin: 10px;
+         }
+         #example_container {
+            text-align: center;
+            border: 1px solid black;
+            margin: auto;
+         }
+         #example_container p {
+            font-weight: bold;
+            margin: 0em;
+            margin-top: 0.5em;
+         }
+         #execute_container {
+            margin-top: 0.5em;
+            text-align: center;
+         }
+         #feedback {
+            margin-top: 1em;
+            color: red;
+            font-weight: bold;
+         } 
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Éloignement</h1>
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p class="easy">
+                     Dans la grille ci-dessous, les cases que Castor peut atteindre en <strong>1</strong> pas sont marquées avec un <strong>1</strong>.
+                  </p>
+                  <p class="easy">
+                     Cliquez sur les cases que Castor peut atteindre en <strong>2</strong> pas.
+                  </p>
+                  <p class="medium">
+                     Dans la grille ci-dessous, les cases que Castor peut atteindre en <strong>4</strong> pas sont marquées avec un <strong>4</strong>.
+                  </p>
+                  <p class="medium">
+                     Cliquez sur les cases que Castor peut atteindre en <strong>5 pas, et pas moins</strong> que 5 pas.
+                  </p>
+                  <p class="hard">
+                     Dans la grille ci-dessous, les cases que Castor peut atteindre en <strong>5</strong> pas sont marquées avec un <strong>5</strong>.
+                  </p>
+                  <p class="hard">
+                     Cliquez sur les cases que Castor peut atteindre en <strong>7 pas, et pas moins</strong> que 7 pas.
+                  </p>
+                  <div id="example_container">
+                     <p>Exemple :</p>
+                     <div id="example_grid"></div>
+                  </div>
+               </div>
+            </div>
+
+            <div id="zone_2">
+                  <div id="grid"></div>
+                  <div id="execute_container">
+                     <input type="button" value="Valider votre réponse" id="execute"/>
+                  </div>
+                  <div id="feedback"></div>
+            </div>
+            
+            <img src="castor_tete.png" style="display:none">
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+
+            <p>Voici la solution&nbsp;:<br />
+            <div class="easy">
+               <img src="solution_easy.png">
+            </div>
+            <div class="medium">
+               <img src="solution_medium.png">
+               <p>La case encadrée de rouge n'est pas marquée car elle est située à 3 pas de Castor et non 5.
+            </div>
+            <div class="hard">
+               <img src="solution_hard.png">
+            </div>
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>On peut généraliser le principe montré dans le sujet.
+            On commence par marquer toutes les cases à distance <b>1</b> du point
+            de départ, puis toutes les cases à distances <b>2</b>, puis <b>3</b>, etc.
+            Une fois les cases marquées, on peut facilement trouver pour chaque case,
+            comment atteindre le point de départ (à distance <b>0</b>) le plus vite
+            possible&nbsp;: il suffit de se diriger vers les plus petits numéros.
+            </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
