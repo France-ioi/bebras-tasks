@@ -1,27 +1,26 @@
 <!doctype html>
 <html>
    <head>
-   <meta charset="utf-8">
-   <title>2015-FR-04-next-distance</title>
-   <script>
-      window.stringsLanguage = 'en';
-   </script>
-   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
-   <script class="remove" type="text/javascript">
-      var modulesPath = '../../../_common/modules';
-      importModules([
-         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
-         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', "jschannel"
-      ]);
-   </script>
+    <meta charset="utf-8">
+    <title>2015-FR-04</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-FR-04-next-distance/",
-          "language": "fr",
-          "version": "fr.01",
+          "language": "en",
+          "version": "en.01",
           "authors": "Arthur Chargueraud",
           "translators": [],
           "license": "CC BY-SA 3.0",
@@ -44,8 +43,8 @@
           ]
       };
       </script>
-    
       <script type="text/javascript">
+         var stringsLanguage = 'en';
       var taskStrings = {
          incorrectExplain: "The box marked in blue should not be marked.",
          missingExplain: "click to select the missing boxes.",
@@ -60,7 +59,9 @@
             padding-top: 0.5em;
          }
          #grid {
-            margin: 20px auto;
+           /* border: 1px solid black; */
+           margin: 0px auto;
+           display: inline-block;
          }
          #example_grid {
             margin: 10px;
@@ -68,7 +69,8 @@
          #example_container {
             text-align: center;
             border: 1px solid black;
-            margin: auto;
+            margin-left: 1em;
+            margin-top: 0.5em;
          }
          #example_container p {
             font-weight: bold;
@@ -80,10 +82,15 @@
             text-align: center;
          }
          #feedback {
-            margin-top: 1em;
+            margin-left: 0.5em;
+            margin-top: 0em;
             color: red;
             font-weight: bold;
          } 
+         #layout td {
+            /* border: 1px solid black; */
+            vertical-align: top;
+         }
       </style>
    </head>
    <body>
@@ -92,41 +99,53 @@
 
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <div id="zone_1">
-               <div class="consigne">
-                  <p class="easy">
-                     In the grid below, the boxes that the Beaver can reach in <strong> 1 </strong> step are marked with a <strong>1</strong>.
-                  </p>
-                  <p class="easy">
-                     Click on the boxes that the Beaver can reach in <strong> 2 </strong> steps.
-                  </p>
-                  <p class="medium">
-                     In the grid below, the boxes that the Beaver can reach in <strong> 4 </strong> steps are marked with a <strong>4</strong>.
-                  </p>
-                  <p class="medium">
-                     Click on the boxes that the Beaver can reach in <strong> 5 steps, and not less </strong> than 5 steps.
-                  </p>
-                  <p class="hard">
-                     In the grid below, the boxes that the Beaver can reach in <strong> 5 </strong> steps are marked with a <strong>5</strong>.
-                  </p>
-                  <p class="hard">
-                     Click on the boxes that Castor can reach in <strong> 7 steps, and not less </strong> than 7 steps.
-                  </p>
-                  <div id="example_container">
-                     <p>Example :</p>
-                     <div id="example_grid"></div>
-                  </div>
+            <table id="layout"><tr>
+            <td colspan=2 style="height: 125px">
+               <p class="easy">
+                  In the grid below, the boxes that the Beaver can reach in <strong> 1 </ strong> step are marked with a <strong>1</strong>.
+               </p>
+               <p class="easy">
+                  Click on the boxes that the Beaver can reach in <strong> 2 </ strong> steps.
+               </p>
+               <p class="medium">
+                  In the grid below, the boxes that the Beaver can reach in <strong> 4 </ strong> steps are marked with a <strong>4</strong>.
+               </p>
+               <p class="medium">
+                  Click on the boxes that the Beaver can reach in <strong> 5 steps, and not less </ strong> than 5 steps.
+               </p>
+               <p class="hard">
+                  In the grid below, the boxes that the Beaver can reach in <strong> 5 </ strong> steps are marked with a <strong>5</strong>.
+               </p>
+               <p class="hard">
+                  Click on the boxes that Castor can reach in <strong> 7 steps, and not less </ strong> than 7 steps.
+               </p>
+            </td>
+            <td rowspan=2 style="width: 200px">
+               <div id="example_container">
+                  <p>Example :</p>
+                  <div id="example_grid"></div>
                </div>
-            </div>
-
-            <div id="zone_2">
-               <div id="grid"></div>
-               <div id="execute_container">
-                  <input type="button" value="Validate my answer" id="execute"/>
+            </td>
+         </tr>
+         <tr>
+            <td rowspan=2 style="text-align: center; width: 400px">
+               <div id="grid_container">
+                  <div id="grid"></div>
                </div>
+            </td>
+            <td></td>
+         </tr>
+         <tr>
+            <td colspan=2>
                <div id="feedback"></div>
+               <!---<div id="displayHelper_graderMessage"></div>-->
+            </td>
+         </tr>
+         </table>
+
+            <div id="execute_container">
+               <input type="button" value="Validate my answer" id="execute"/>
             </div>
-            
             <img src="castor_tete.png" style="display:none">
             <img src="icon.png" style="display:none">
          </div>
