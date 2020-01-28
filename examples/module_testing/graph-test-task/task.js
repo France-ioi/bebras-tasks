@@ -276,6 +276,16 @@ function initTask(subTask) {
          graphEditor.setEditEdgeLabelEnabled(this.checked);
          updateOptionsJSON();
       });
+      $("#defaultVertexLabel").off("change");
+      $("#defaultVertexLabel").change(function(){
+         graphEditor.setDefaultVertexLabelEnabled(this.checked);
+         updateOptionsJSON();
+      });
+      $("#defaultEdgeLabel").off("change");
+      $("#defaultEdgeLabel").change(function(){
+         graphEditor.setDefaultEdgeLabelEnabled(this.checked);
+         updateOptionsJSON();
+      });
       $("#dragGraph").off("change");
       $("#dragGraph").change(function(){
          graphEditor.setGraphDragEnabled(this.checked);
@@ -304,14 +314,8 @@ function initTask(subTask) {
       $("#tableMode").unbind('change');
       $("#tableMode").change(function() {
          graphEditor.setTableMode(this.checked);
-         // if(this.checked){
-         //    $("#textAlignLabel").css("visibility","visible");
-         // }else{
-         //    $("#textAlignLabel").css("visibility","hidden");
-         // }
          onVisualGraphChange();
          updateOptionsJSON();
-         // fromJSON();
       });
       $("#apply_attr").unbind('click');
       $("#apply_attr").click(applyAttr);
@@ -543,7 +547,9 @@ function initTask(subTask) {
          snapToGrid:$("#snapToGrid").is(":checked"),
          useGrid:$("#useGrid").is(":checked"),
          gridSize:$("#gridSize").val(),
-         tableMode: $("#tableMode").is(":checked")
+         tableMode: $("#tableMode").is(":checked"),
+         defaultVertexLabel: $("#defaultVertexLabel").is(":checked"),
+         defaultEdgeLabel: $("#defaultEdgeLabel").is(":checked")
       };
       return JSON.stringify(obj);
    };
@@ -600,6 +606,12 @@ function initTask(subTask) {
                break;
             case "tableMode":
                graphEditor.setTableMode(checked);
+               break;
+            case "defaultVertexLabel":
+               graphEditor.setDefaultVertexLabelEnabled(checked);
+               break;
+            case "defaultEdgeLabel":
+               graphEditor.setDefaultEdgeLabelEnabled(checked);
          }
       }
    };
