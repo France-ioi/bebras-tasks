@@ -350,6 +350,10 @@ function initTask(subTask) {
    var updateDirected = function(directed) {
       graph.directed = directed;
       updateJSON();
+      updateDirectedDisplay(directed);
+   };
+
+   var updateDirectedDisplay = function(directed) {
       if(!directed){
          var lineAttr = JSON.parse($("#lineAttr").val());
          lineAttr["arrow-end"] = "none";
@@ -360,7 +364,6 @@ function initTask(subTask) {
       }
       visualGraph.redraw();
       graphEditor.updateHandlers();
-      
    };
 
    var updateGridVisibility = function(show) {
@@ -475,6 +478,7 @@ function initTask(subTask) {
       graphMouse = new GraphMouse("mouse", graph, visualGraph);
       $("#directed").prop('checked', graph.directed);
       initVisuals();
+      updateDirectedDisplay(graph.directed);
    };
 
    var initVisuals = function() {
