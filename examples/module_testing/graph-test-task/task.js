@@ -182,6 +182,7 @@ function initTask(subTask) {
       initHandlers();
       applyAttr();
       fromJSON();
+      optionsFromJSON();
       updateJSON(false);
       updateGridVisibility(showGrid);
       updateInfo();
@@ -544,6 +545,55 @@ function initTask(subTask) {
          gridSize:$("#gridSize").val()
       };
       return JSON.stringify(obj);
+   };
+
+   function optionsFromJSON() {
+      var optionsJSON = JSON.parse($("#options_json").val());
+      for(var option in optionsJSON){
+         var checked = optionsJSON[option];
+         switch(option){
+            case "createVertex":
+               graphEditor.setCreateVertexEnabled(checked);
+               break;
+            case "createEdge":
+               graphEditor.setCreateEdgeEnabled(checked);
+               break;
+            case "dragVertex":
+               graphEditor.setVertexDragEnabled(checked);
+               break;
+            case "dragEdge":
+               graphEditor.setEdgeDragEnabled(checked);
+               break;
+            case "dragGraph":
+               graphEditor.setGraphDragEnabled(checked);
+               break;
+            case "scaleGraph":
+               graphEditor.setScaleGraphEnabled(checked);
+               break;
+            case "multipleEdges":
+               graphEditor.setMultipleEdgesEnabled(checked);
+               break;
+            case "loop":
+               graphEditor.setLoopEnabled(checked);
+               break;
+            case "editVertexLabel":
+               graphEditor.setEditVertexLabelEnabled(checked);
+               break;
+            case "editEdgeLabel":
+               graphEditor.setEditEdgeLabelEnabled(checked);
+               break;
+            case "snapToGrid":
+               snapToGrid = checked;
+               graphEditor.setGridEnabled(snapToGrid, gridSize, gridSize);
+               break;
+            case "useGrid":
+               updateGridVisibility(checked);
+               break;
+            case "gridSize":
+               var val = checked;
+               updateGridSize(val);
+         }
+      }
    };
 
    subTask.getGrade = function(callback) {
