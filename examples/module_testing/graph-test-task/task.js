@@ -542,13 +542,18 @@ function initTask(subTask) {
          editEdgeLabel:$("#editEdgeLabel").is(":checked"),
          snapToGrid:$("#snapToGrid").is(":checked"),
          useGrid:$("#useGrid").is(":checked"),
-         gridSize:$("#gridSize").val()
+         gridSize:$("#gridSize").val(),
+         tableMode: $("#tableMode").is(":checked")
       };
       return JSON.stringify(obj);
    };
 
    function optionsFromJSON() {
-      var optionsJSON = JSON.parse($("#options_json").val());
+      var text = $("#options_json").val();
+      if(!text){
+         return
+      }
+      var optionsJSON = JSON.parse(text);
       for(var option in optionsJSON){
          var checked = optionsJSON[option];
          switch(option){
@@ -592,7 +597,9 @@ function initTask(subTask) {
             case "gridSize":
                var val = checked;
                updateGridSize(val);
-         }
+               break;
+            case "tableMode":
+               graphEditor.setTableMode(checked);
       }
    };
 
