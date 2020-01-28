@@ -600,6 +600,7 @@ function initTask(subTask) {
                break;
             case "tableMode":
                graphEditor.setTableMode(checked);
+         }
       }
    };
 
