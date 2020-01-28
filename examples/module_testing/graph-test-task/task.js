@@ -311,10 +311,15 @@ function initTask(subTask) {
          updateGridSize(this.value);
          updateOptionsJSON();
       });
-      $("#tableMode").unbind('change');
-      $("#tableMode").change(function() {
-         graphEditor.setTableMode(this.checked);
+      $("#globalTableMode").unbind('change');
+      $("#globalTableMode").change(function() {
+         graphEditor.setGlobalTableMode(this.checked);
          onVisualGraphChange();
+         updateOptionsJSON();
+      });
+      $("#localTableMode").unbind('change');
+      $("#localTableMode").change(function() {
+         graphEditor.setLocalTableMode(this.checked);
          updateOptionsJSON();
       });
       $("#apply_attr").unbind('click');
@@ -547,7 +552,8 @@ function initTask(subTask) {
          snapToGrid:$("#snapToGrid").is(":checked"),
          useGrid:$("#useGrid").is(":checked"),
          gridSize:$("#gridSize").val(),
-         tableMode: $("#tableMode").is(":checked"),
+         globalTableMode: $("#globalTableMode").is(":checked"),
+         localTableMode: $("#localTableMode").is(":checked"),
          defaultVertexLabel: $("#defaultVertexLabel").is(":checked"),
          defaultEdgeLabel: $("#defaultEdgeLabel").is(":checked")
       };
@@ -604,8 +610,11 @@ function initTask(subTask) {
                var val = checked;
                updateGridSize(val);
                break;
-            case "tableMode":
-               graphEditor.setTableMode(checked);
+            case "globalTableMode":
+               graphEditor.setGlobalTableMode(checked);
+               break;
+            case "localTableMode":
+               graphEditor.setLocalTableMode(checked);
                break;
             case "defaultVertexLabel":
                graphEditor.setDefaultVertexLabelEnabled(checked);
