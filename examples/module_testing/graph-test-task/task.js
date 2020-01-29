@@ -313,7 +313,7 @@ function initTask(subTask) {
       });
       $("#globalTableMode").unbind('change');
       $("#globalTableMode").change(function() {
-         graphEditor.setGlobalTableMode(this.checked);
+         graphEditor.setTableMode(this.checked);
          onVisualGraphChange();
          updateOptionsJSON();
       });
@@ -611,7 +611,7 @@ function initTask(subTask) {
                updateGridSize(val);
                break;
             case "globalTableMode":
-               graphEditor.setGlobalTableMode(checked);
+               graphEditor.setTableMode(checked);
                break;
             case "localTableMode":
                graphEditor.setLocalTableMode(checked);
