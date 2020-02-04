@@ -1,5 +1,6 @@
 function initTask(subTask) {
    var state = {};
+   var rtl = false;
    var level;
    var answer = null;
    var bank = ["diamond", "circle", "triangle", "hexagon", "star"];
@@ -121,6 +122,9 @@ function initTask(subTask) {
    subTask.loadLevel = function(curLevel) {
       level = curLevel;
       initPermutation();
+      if (typeof(enableRtl) != "undefined") {
+         rtl = true;
+      }
    };
 
    subTask.getStateObject = function() {
@@ -216,12 +220,19 @@ function initTask(subTask) {
    };
 
    var initStart = function() {
-      var start = paper.text(textParams.ruleX, textParams.startY, taskStrings.start).attr(textParams.attr);
+      var textX = textParams.ruleX;
+      if (rtl) {
+         textX = paper.width - textX;
+      }
+      var start = paper.text(textX, textParams.startY, taskStrings.start).attr(textParams.attr);
       var leftX = textParams.ruleX + start.getBBox().width + textParams.textShapePadX;
 
       var array = data[level].start;
       var arrayWidth = array.length * shapeParams.cellDiameter;
       var centerX = leftX + arrayWidth / 2;
+      if (rtl) {
+         centerX = paper.width-centerX;
+      }
       createShapeArray(array, centerX, shapeParams.startCenterY, "start");
       ruleMaxX = leftX + arrayWidth + textParams.textSuffixPadX;
    };
@@ -249,41 +260,65 @@ function initTask(subTask) {
       // Prefix.
       var leftX = textParams.ruleX;
       var centerY = textParams.startY + textParams.ruleYSpacing * (iRule + 1);
-      var prefix = paper.text(leftX, centerY, taskStrings.rulePrefix(iRule)).attr(textParams.attr);
+      var textX = leftX;
+      if (rtl) {
+         textX = paper.width - textX;
+      }
+      var prefix = paper.text(textX, centerY, taskStrings.rulePrefix(iRule)).attr(textParams.attr);
       leftX += prefix.getBBox().width + textParams.textShapePadX;
 
       // Old pattern.
       var array = data[level].rules[iRule].oldPattern;
       var arrayWidth = array.length * shapeParams.cellDiameter;
       var centerX = leftX + arrayWidth / 2;
+      if (rtl) {
+         centerX = paper.width - centerX;
+      }
       createShapeArray(array, centerX, centerY, "rule_" + iRule + "_old");
       leftX += arrayWidth + textParams.textShapePadX;
 
       // Infix.
-      var infix = paper.text(leftX, centerY, taskStrings.ruleInfix).attr(textParams.attr);
+      if (rtl) {
+         textX = paper.width - leftX;
+      }
+      var infix = paper.text(textX, centerY, taskStrings.ruleInfix).attr(textParams.attr);
       leftX += infix.getBBox().width + textParams.textShapePadX;
 
       // New pattern.
       array = data[level].rules[iRule].newPattern;
       arrayWidth = array.length * shapeParams.cellDiameter;
       centerX = leftX + arrayWidth / 2;
-      createShapeArray(array, centerX, centerY, "rule_" + iRule + "_new");
+      var shapesCenterX = centerX;
+      if (rtl) {
+         shapesCenterX = paper.width - centerX;
+      }
+      createShapeArray(array, shapesCenterX, centerY, "rule_" + iRule + "_new");
       ruleMaxX = Math.max(ruleMaxX, centerX + arrayWidth / 2 + textParams.textSuffixPadX);
    };
 
    var initResults = function() {
       var textObject;
+      var textX = ruleMaxX;
+      if (rtl) {
+         textX = paper.width - ruleMaxX;
+      }
       for(var row = 0; row < data[level].rules.length + 1; row++) {
-         textObject = paper.text(ruleMaxX, textParams.startY + row * textParams.ruleYSpacing, taskStrings.ruleSuffix).attr(textParams.attr);
+         textObject = paper.text(textX, textParams.startY + row * textParams.ruleYSpacing, taskStrings.ruleSuffix).attr(textParams.attr);
       }
       resultsX = ruleMaxX + textObject.getBBox().width + textParams.textShapePadX;
    };
 
    var initTarget = function() {
-      paper.text(resultsX - textParams.textShapePadX, textParams.targetY, taskStrings.target).attr(textParams.attr).attr(textParams.targetAttr);
+      var textX = resultsX - textParams.textShapePadX;
+      if (rtl) {
+         textX = paper.width - textX;
+      }
+      paper.text(textX, textParams.targetY, taskStrings.target).attr(textParams.attr).attr(textParams.targetAttr);
 
       var targetCenterX = resultsX + (levelTarget.length * shapeParams.shapeSpacing / 2);
-
+      if (rtl) {
+         targetCenterX = paper.width - targetCenterX;
+      }
       createShapeArray(levelTarget, targetCenterX, textParams.targetY, "target");
    };
 
@@ -449,7 +484,13 @@ function initTask(subTask) {
 
          var pattern = allResults[iResult];
          for(var iShape = 0, offScreen = false; iShape < pattern.length && !offScreen; iShape++) {
-            var centerX = resultsX + iShape * shapeParams.shapeSpacing + shapeParams.shapeSpacing / 2;
+            var centerX;
+            if (!rtl) {
+               centerX = resultsX + (iShape + 0.5) * shapeParams.shapeSpacing;
+            } else {
+               centerX = (paper.width-resultsX) - (pattern.length-iShape - 0.5) * shapeParams.shapeSpacing;
+            }
+            
             var shapeSet;
 
             // If the right edge of this shape is off screen, or if there is another shape

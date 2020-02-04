@@ -52,14 +52,15 @@
             titleProgram: "برنامجك:",
             titleResult: "الناتج بعد كل خطوة:",
 
-            start: "ابدأ بـــ: ",
+            start: "1. ابدأ بالشكل التالي",
             rulePrefix: function(index) {
-               return "" + (index + 2) + " بدل كل ";
+               return "" + (index + 2) + ". ثم بدل كل ";
             },
-            ruleInfix: "بدل الشكل بـــ",
-            ruleSuffix: "الناتج",
-            target: "الشكل المطلوب :"
+            ruleInfix: "بالتسلسل التالي",
+            ruleSuffix: "الناتج >>>",
+            target: "الشكل المطلوب:"
          };
+      var enableRtl = true;
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -81,7 +82,7 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p>
-               ضع الأشكال التالية داخل المربعات للحصول على الشكل النهائي بالرسمة<br/>
+               ضع الأشكال التالية داخل المربعات الرمادية للحصول على الشكل المطلوب بالأسفل.<br/>
             <p>
             <div id="anim_container">
                <div id="anim"></div>
