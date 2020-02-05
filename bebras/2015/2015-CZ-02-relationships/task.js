@@ -21,12 +21,7 @@ function initTask () {
    var beaverInCell = [[], []];
    var selectedCastor;
 
-   var names = {
-      easy: ["Julie\n8 ans", "Ahmed\n11 ans", "Sarah\n12 ans", "Kim\n14 ans", "Léa\n15 ans"],
-      medium: ["Julie\n8 ans", "Ahmed\n11 ans", "Sarah\n12 ans", "Kim\n14 ans", "Léa\n15 ans",  "Lise\n16 ans", "Théo\n17 ans", "Yann\n20 ans"],
-      hard: ["Julie\n8 ans", "Ahmed\n11 ans", "Sarah\n12 ans", "Kim\n14 ans", "Léa\n15 ans", "Lise\n16 ans", "Théo\n17 ans"] 
-        // Anna Paul
-   };
+   var names = taskStrings.names;
    var positions = {
       easy: [
          [150, 120],

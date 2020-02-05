@@ -1,0 +1,154 @@
+<!doctype html>
+<html dir="rtl">
+   <head>
+    <meta charset="utf-8">
+    <title>2015-AR-15</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-15-guess-who/",
+          "language": "ar",
+          "version": "en.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         elements: { // [yes-message, no-message]
+            "tie": ["Bow Tie", "ربطة العنق"], 
+            "glasses": ["Glasses", "النظارة"],
+            "hat": ["Cap", "القبعة"],
+            "hair": ["Hair", "الشعر"],
+            "mouth": ["Mouth", "الفم"],
+            "nose": ["Nose", "الأنف"] },
+         remainingFaces: "يجب وضع    الشخصيات في المستطيلات.",
+         remainingQuestions: "لا تزال هناك دوائر فارغة.",
+         errorHasNotButShouldHave: function(part) { 
+            return "The red-framed figure should have " + this.elements[part][0] + "."; },
+         errorHasButShouldNot: function(part) {
+            return "الشخصية المحددة بالاحمر لا يجب ان ترتدي " + this.elements[part][1] + "."; },
+         success: "أحسنت إجابة صحيحة" };
+
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #ellipse_descr {
+            margin-bottom: 0em;
+           padding-bottom: 0em;
+         }
+         #ellipse_descr_ul {
+            margin-top: 0.2em;
+         }
+         #validate {
+            width: 9em;
+            margin: 16px;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0em;
+            text-align: center;
+            font-weight: bold; 
+            color: #CC8844;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Who is it?</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p class="easy">
+ضع الشخصيات داخل المستطيلات المناسبة في المنطقة الزرقاء.
+                           </p>
+            <p class="medium hard">
+
+               ضع العناصر داخل الدوائر والشخصيات داخل المستطيلات لملئ الشكل طبقا للقواعد الاتيه:.
+            </p>
+
+            <p id="ellipse_descr" class="easy"> كل دائرة تحتوي علي عنصر يفرق بين الشخصيات &nbsp;: </p>
+            <p id="ellipse_descr" class="medium hard"> كل دائرة تحتوي علي عنصر يفرق بين الشخصيات&nbsp;: </p>
+            <ul id="ellipse_descr_ul">
+               <li>اسفل يسار الشكل البيضاوي لن تحصل اي شخصية علي هذا العنصر.
+               <li>أسفل يمين  الشكل البيضاوي ، يجب ألا تمتلك أي شخصية هذا العنصر.
+               </ul>
+
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+               <input type="button" value="Validate" id="validate"/>
+            </div>
+
+            <img src="icon.png" style="display:none">
+         </div>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+         	<div class="easy">
+               <p>La solution est montrée ci-dessous.</p>
+               <p><img src="solution_easy.png" width="500"></p>
+               <p>Vérifions que les personnages sont effectivement bien placés. 
+               <ul>
+               <li>Le premier personnage a un noeud papillon, et il a des lunettes.</li>
+               <li>Le deuxième personnage a un noeud papillon mais il n'a <strong>pas</strong> de lunettes.</li>
+               <li>Le troisième personnage n'a <strong>pas</strong> de noeud papillon, mais il a un bonnet.</li>
+               <li>Le quatrième personnage n'a <strong>pas</strong> de noeud papillon, et il n'a <strong>pas</strong> de bonnet.</li>
+               </ul></p>
+         	</div>
+            <div class="medium">
+               <p>Une solution valide est&nbsp;:</p>
+               <p><img src="solution_medium.png" width="500"></p>
+               <p>L'ovale tout en haut doit forcément contenir des lunettes. En effet, c'est le seul élément qui divise les personnages en deux groupes égaux&nbsp;: deux personnages ont des lunettes et deux n'en n'ont pas.</p>
+               <p>L'ovale en dessous à gauche doit forcément contenir les cheveux, car c'est le seul élément qui permet de distinguer les deux personnages portant des lunettes.</p>
+               <p>L'ovale de droite peut lui contenir soit un bonnet, soit un noeud papillon, car ces éléments permettent de distinguer les deux personnages qui n'ont pas de lunettes.</p>
+            </div>
+		    <div class="hard">
+            <p>Une solution valide est&nbsp;:</p>
+            <img src="solution_hard.png" width="600">
+            <p>L'ovale tout en haut doit forcément contenir un élément qui divise les personnages en deux groupes égaux&nbsp;: <b>4</b> personnages ayant cette élément, et <b>4</b> personnages ne l'ayant pas. On a donc a priori le choix entre&nbsp;: la bouche, le noeud papillon, les lunettes ou les cheveux.</p>
+            <p>Supposons que l'on mette la bouche. Pour pouvoir compléter la suite, il faut trouver un élément qui sépare en <b>2</b> groupes de <b>2</b>  les personnages ayant une bouche, et un élément qui sépare en <b>2</b>  groupes de <b>2</b>  les personnages qui n'ont pas de bouche. </p>
+            <p>Pour ceux qui ont une bouche (ci-dessous à gauche), on peut utiliser le bonnet pour faire deux groupes de deux.</p>
+            <p><img src="solution_bad_mouth.png" width="300">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src="solution_bad_no_mouth.png" width="300"></p>
+            <p>Pour les personnages qui n'ont pas de bouche (ci-dessus à droite), c'est problématique. Il y en a 3 avec un bonnet, 3 avec des cheveux, 1 avec des lunettes, 1 avec un nez, 0 avec un noeud papillon. Donc aucun élément ne permet de faire deux groupes de deux.</p>
+            <p>On conclut que ce ne peut pas être la bouche dans le premier ovale tout en haut. En essayant de même avec les autres éléments, on finit par trouver (au bout d'un certain temps !) qu'il faut mettre les cheveux tout en haut.      
+          </div>
+         
+         <h2>C'est de l'informatique !</h2>
+            <p>Ce sujet illustre la notion d'<b>arbre de décision</b>. Ce type d'arbre permet d'identifier très rapidement des éléments, ici des personnages. Voyons à travers un exemple à quoi peut servir ce type d'arbre.</p>
+            <p>Supposons que votre ami Martin ait dessiné un personnage en utilisant 6 éléments possibles, et que vous souhaitiez savoir si son personnage est dans une liste de 8 personnages que vous avez sous les yeux. Si vous procédez naivement, dans le pire cas vous devrez poser, pour chacun des 8 personnages, jusqu'à 6 questions (une par élément), ce qui fait au total 48 questions.</p>
+            <p>En revanche, si vous utilisez un arbre de décision avec 3 niveaux de questions, vous pouvez déterminer si le personnage dessiné par Martin se trouve dans votre liste de 8 personnages en posant seulement 6 questions ! En effet, vous pouvez poser les questions en suivant un chemin descendant dans l'arbre, et lorsque vous arrivez à un personnage en bas de l'arbre, il ne restera plus qu'à vérifier si les 3 éléments restants (ceux pour lesquels vous n'avez pas encore posé de question) correspondent bien.</p>
+            <p>En résumé, l'utilisation d'un arbre à 3 niveaux permet de réduire le nombre de questions nécessaires (dans le pire cas) de 48 à seulement 6&nbsp;! L'utilisation d'un arbre de décision est encore plus bénéfique lorsqu'on a des bases de données avec des millions d'éléments&nbsp;; dans ce cas, on peut éviter de poser des millions de questions, une trentaine suffira.</p>
+            
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

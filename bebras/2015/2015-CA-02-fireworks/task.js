@@ -190,6 +190,27 @@ function initTask() {
       medium: 0,
       hard: 0
    };
+   if (typeof(enableRtl) != "undefined") {
+      var screenWidth = 740;
+      textParams.bankTitleAttr.x = screenWidth - textParams.bankTitleAttr.x;
+      textParams.bankTextAttr.x = screenWidth - textParams.bankTextAttr.x;
+      textParams.targetTitleAttr.x = 535;//screenWidth - textParams.targetTitleAttr.x;
+      textParams.userSentenceTitle.x = screenWidth - textParams.userSentenceTitle.x;
+      textParams.userSentenceText.x = screenWidth - textParams.userSentenceText.x;
+      textParams.otherSequence1.x = 110; //screenWidth - textParams.otherSequence1.x;
+      textParams.otherSequence2.x = 260; //screenWidth - textParams.otherSequence2.x;
+      textParams.equalSign.x = 495; //screenWidth - textParams.equalSign.x;
+      textParams.equalSign.y = 150;
+      bankParams.xPos = 610;
+      currentSentenceParams.xPos = 345;
+      otherSentenceParams.xPosById = [200, 55];
+      targetParams.xPos = 526;
+      targetParams.borderAttr.x = 520 - marginBorder;
+      targetParams.userBorderAttr.x = 345 - marginBorder;
+      labelParams.star.leftPadding = 90;
+      labelParams.xText = 50;
+   }
+
 
    task.load = function(views, callback) {
       platform.getTaskParams("randomSeed", null, function(randomSeed) {
@@ -205,7 +226,7 @@ function initTask() {
 
          // FOR DEBUG (display a locked hard version):
          // $("#tab_hard").addClass("lockedLevel");
-
+         
          callback();
       });
    };

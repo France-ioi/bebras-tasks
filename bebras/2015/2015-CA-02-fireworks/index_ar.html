@@ -1,0 +1,129 @@
+<!doctype html>
+
+<html dir="rtl">
+   <head>
+    <meta charset="utf-8">
+    <title>2015-CA-02</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-CA-02-fireworks/",
+          "language": "ar",
+          "version": "en.01",
+          "authors": "Arthur Chargueraud",
+          "translators": "Rola Hessi",
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var taskStrings = { 
+            availableWords: "الكلمات المتاحة",
+            clickToAdd: "اضغط علي الكلمة \nلاضافتها",
+            clickToRemove: "اضغط علي الكلمة\nلازالتها",
+            otherSequence: "ترتيب اخر",
+            yourSequence: "ترتيب كلماتك",
+            message: "الرسالة",
+            words: ["سد", "خشب", "شاطئ", "حجر", "فواكة", "ماء", "كهف"],
+            success: "احسنت إجابة صحيحة",
+            already: "لقد وجدت تلك المتتالية من قبل. اضغط على الكلمة لإزالتها",
+            tooLong: "ترتيب كلماتك أطول من المطلوب",
+            tooShort: "ترتيب كلماتك أقل من المطلوب",
+            notMatch: "ترتيب كلماتك غير مطابق للرسالة",
+            clickLeft: "اضغط على الكلمات التى على اليسار لبناء متتالية",
+            foundSoFar: function(nbCompleted) { return "لقد وجدت عدد " + nbCompleted + " متتالية" + ((nbCompleted>1) ? " " : "") + ". ابحث عن المزيد"; },
+            hint: "<br/>يمكنك استخدام الكلمة الواحدة اكثر من مرة" 
+         };
+         var enableRtl = true;
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #clear_current {
+         margin-bottom: 1em;
+      }
+      #clear_current_container {
+         text-align: center;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>إشارات الألوان</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+            يتواصل القنادس عن طريق إرسال إشارات بالألوان
+            </p>
+            <p class="easy">
+            أوجد متتالية واحدة من الكلمات المتاحة لتطابق الرسالة بالأسفل
+            </p>
+            <p class="medium hard">
+أوجد 3 متتاليات من كلمات مختلفة لتطابق الرسالة بالأسفل
+            </p>
+
+            <div id="anim"></div>
+            <div id="clear_current_container"><input type="button" id="clear_current" value="امسح المتتالية" /></div>
+            <img src="icon.png" style="display:none">
+         </div>
+     </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+       
+         <div class="easy">        
+            <p>Deux solutions étaient possibles. </p>
+            <table>
+            <tr>
+            <td><b>Solution 1 :</b></td>
+            <td><b>Solution 2 :</b></td>
+            </tr>
+            <tr>
+            <td><img src="solution_easy_2.png" style="margin-right: 5em"></td>
+            <td><img src="solution_easy_1.png"></td>
+            </tr>
+            </table>
+         </div>
+         <div class="medium">   
+            <p>Voici les 3 séquences à trouver. </p>
+            <p><img src="solution_medium.png"></p>
+         </div>
+         <div class="hard">         
+            <p>Voici les 3 séquences à trouver. </p>
+            <p><img src="solution_hard.png"></p>
+         </div>
+        
+         <h2>C'est de l'informatique !</h2>
+
+         <p>Pour trouver les séquences, on peut procéder de manière systématique.
+         On essaie parmi les mots possibles ceux qui peuvent correspondre au début.
+         Dès qu'on a trouvé un mot, on essaie de compléter la suite. Si on n'arrive
+         pas à obtenir une nouvelle séquence, on revient en arrière, et on essaie
+         un autre mot qui pourrait se placer à la position courante.</p>
+
+         <p>Cette idée de revenir en arrière pour explorer de manière systématique
+         l'ensemble des solutions possibles est très utile en informatique.
+         En effet, de nombreux problèmes peuvent se résoudre sans réfléchir,
+         &laquo;&nbsp;simplement&nbsp;&raquo; en effectuant des millions ou des milliards d'étapes de calcul.
+         Attention&nbsp;: ce qui est &laquo;&nbsp;simple&nbsp;&raquo; pour un ordinateur ne correspond en 
+         général pas à ce qui est &laquo;&nbsp;simple&nbsp;&raquo; pour un être humain&nbsp;!
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

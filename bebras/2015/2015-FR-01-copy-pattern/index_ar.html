@@ -1,0 +1,283 @@
+<!doctype html>
+<html dir="rtl">
+   <head>
+      <meta charset="utf-8">
+      <title>2015-FR-01-copy pattern</title>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript">
+         var taskStrings = {
+           instructions: [
+                  "خطوة لليمين",
+                  "خطوة لليسار",
+                  "خطوة للأعلى",
+                  "خطوة للأسفل",
+                  "س خطوات لليمين",
+                  "س خطوات لليسار",
+                  "س خطوات للأعلى",
+                  "س خطوات للأسفل",
+                  "زيادة س بواحد"
+                  ],
+            resume: "أكمل",
+            pause: "توقف",
+            success: "أحسنت إجابة صحيحة",
+            missingInstr: "أضف أوامر إلى برنامجك",
+            incorrect: "الرسمة غير متطابقة، حاول مرة أخرى",
+            noInstruction: "لا يوجد أوامر لتنفيذها",
+            completed: "تم التنفيذ بنجاح",
+            repetitionNumber: ":تكرار رقم",
+            exitGrid: "لقد خرجت خارج المربعات"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-01-track/",
+          "language": "ar",
+          "version": "en.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": false
+      };
+      </script>
+      <style>
+         #drawing {
+            margin-left: 0.5em;
+         }
+         #columns-wrapper {
+            margin-top: 1em;
+         }
+         .columns td {
+            vertical-align: top;
+            padding-right: 1em;
+         }
+         .column_head {
+            font-weight: bold;
+         }
+         #message {
+            text-align: center;
+            font-weight: bold;
+            color: blue;
+            padding: 0.5em;
+            height: 1em;
+         }
+         .buttons input {
+            margin-bottom: 5px;
+         }
+         #textSolution li {
+            margin-top: 0.2em;
+         }
+         .valigntop td {
+            vertical-align: top;
+         }
+         .examples, .objectif  {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+         }
+         .objectif {
+            border: 1px solid black;   
+         }
+         .examples td, .objectif td {
+            padding: 0.5em;
+         }
+         .examples td td {
+            border: 1px solid #D0D0D0;
+            padding: 0.5em;
+         }
+         .exampleButton {
+            margin: 2px;
+         }
+         .resetButton {
+            display:none;
+         }
+         #variableInfo {
+            text-align: center;
+            font-weight: bold;
+            color: #FF7700;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         #top-spacing {
+            margin-top: 1em;
+         }
+         #simuButtons input {
+            width: 100px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>إعادة الرسمة</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+قم بإعادة الرسم المطلوب عن طريق وضع الأوامر الموجودة بالأسفل بشكل صحيح. سوف يتم تكرار تلك الأوامر <span class = "nbLoops"> </span> مرات
+            </p>
+            <div id="top-spacing"></div>
+            <div style="text-align:center">
+               <table class="valigntop">
+                  <tr>
+                     <td>
+                        <table class='examples valigntop'>
+                           <tr>
+                              <td style="text-align:center"><b>مثال<br> سوف تكرر الأوامر التالية <span class="nbLoops"></span> مرات</b></td>
+                           </tr>
+                           <tr>
+                              <td style="text-align:center">
+                                 <table style="margin:auto" id="sample0Text" class="example-text"></table>
+                                 <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="اضغط لتجربة المثال"></input>
+                              </td>
+                           </tr>
+                        </table>
+                     </td>
+                     <td>
+                        <table class='objectif valigntop'>
+                           <tr>
+                              <td style="text-align:center"><b>الرسمة المطلوبة</b></td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div id="target"></div>
+                              </td>
+                           </tr>
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+             
+            <div id="columns-wrapper">
+               <table class="columns" style="clear: both">
+               <tr>
+                  <td style="width:170px">
+                     <div class="column_head" style="text-align:center">ضع الأوامر هنا</div>
+                  </td>
+                  <td style="width:250px">
+                     <div class="column_head" style="text-align:center">الأوامر</div>
+                  </td>
+                  <td>
+                     <div class="column_head" style="text-align:center">نتيجة عمل البرنامج<br/> تم تنفيذ الأوامر <span class="nbLoops"></span> مرات</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <div id="program" class="touch"></div>
+                  </td>
+                  <td rowspan="2">
+                     <div id="simuButtons" class="buttons" style="text-align:center;padding:10px">
+                        <input type="button" id="pause" value="توقف" onclick="task.pause()"/>
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="button" id="stop" value="إنهاء" onclick="task.stop()" />
+                     </div>
+                     <div id="variableInfo" class="medium hard">قيمة "س" الحالية هي <span id="valueS">1</span>.</div>
+                     <div><span id="message"></span></div>
+                     <div id="result"></div>            
+                     
+                  </td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td>
+                     <div class="buttons" style="text-align: center">
+                        <input id="tryOrReset" type="button" onclick="task.trySequence()" value="محاولة">
+                     </div>
+                  </td>
+               </tr>
+               </table>
+            </div>
+
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+         <div class="easy">
+            <p>On commence par repérer le motif qui est répété 6 fois. Il est encadré en rouge ci-dessous.</p>
+            <p style="text-align:center"><img src="solution_easy_pattern_1.png" width="500"></p>
+            <p>On regarde alors de plus près ce motif, afin de décomposer les déplacements.</p>
+            <p style="text-align:center"><img style="vertical-align:top" src="solution_easy_pattern_2.png" width="150"></p>
+            <p>On cherche alors les instructions qui correspondent aux déplacements. On obtient alors la solution&nbsp;:</p>
+            <p style="text-align:center"><img style="vertical-align:top" src="solution_easy.png" width="150"></p>
+         </div>
+<!--1 pas à droite <br />1 pas à droite <br />1 pas en haut <br />1 pas à droite <br />1 pas à droite <br />1 pas en bas <br /></p>-->
+         <div class="medium">
+            <p>On commence par repérer le motif qui est répété. Les 4 flèches rouges correspondent à la première répétition du motif. Les 4 flèches bleues correspondent à la seconde répétition.</p>
+            <p style="text-align:center"><img src="solution_medium_pattern.png" width="200"></p>
+            <p>On étudie alors la composition du motif.</p>
+            <ul>
+               <li>La première fois&nbsp;: 1 pas à droite, 2 pas en bas, 3 pas à gauche, 4 pas en haut  (c'est le tracé rouge).</li>
+               <li>La second fois&nbsp;: 5 pas à droite, 6 pas en bas,  7 pas à gauche, 8 pas en haut  (c'est le tracé bleu).</li>
+               <li>La troisième fois&nbsp;: 9 pas à droite, 10 pas en bas, 11 pas à gauche, 12 pas en haut, etc.</li>
+            </ul>
+            <p>On observe que le motif répété consiste à aller dans chacune des 4 directions (droite, bas, gauche, haut), en augmentant de une unité à chaque fois le nombre de pas effectués. On va donc utiliser l'instruction &laquo;&nbsp;augmenter N&nbsp;&raquo; entre chaque déplacement. Le solution est ainsi&nbsp;:</p>
+            <p style="text-align:center"><img src="solution_medium.png" width="150" style="vertical-align:text-top"></p>
+         </div>
+         <div class="hard">
+            <p>Voici trois solutions, assez différentes les unes des autres.</p>
+            <p><b>Première solution</b></p>
+            <p><img src="solution_hard.png" width="150" style="margin:0em 2em 0em 2em">
+               <img src="solution_hard_pattern.png" ></p>
+
+            <p><b>Deuxième solution</b></p>
+            <p><img src="solution_hard_2.png" width="150" style="margin:0em 2em 0em 2em">
+               <img src="solution_hard_pattern_2.png" ></p>
+
+            <p><b>Troisième solution</b></p>
+            <p><img src="solution_hard_3.png" width="150" style="margin:0em 2em 0em 2em">
+               <img src="solution_hard_pattern_3.png" ></p>
+            <p>Notez que dans la troisième solution, seules 6 répétitions sont nécessaires pour compléter le dessin.</p>
+         </div>
+         <!--
+            Voici une séquence de déplacements qui permet de dessiner le motif&nbsp;: 
+            <br/>1 pas en bas,  1 pas à droite, 1 pas à gauche, 1 pas à gauche, 1 pas à droite,  (tracé rouge sur le dessin ci-dessous)
+            <br/> 1 pas en bas, 2 pas à droite, 2 pas à gauche, 2 pas à gauche, 2 pas à droite, (tracé bleu sur le dessin ci-dessous)
+            <br/> 1 pas en bas, 3 pas à droite, 3 pas à gauche, 3 pas à gauche, 3 pas à droite, (tracé vert sur le dessin ci-dessous)
+            <br/>etc. </p>
+               <p>On observe que&nbsp;: </p>
+               <ol>
+                     <li>Une séquence de déplacements est répétée 12 fois : en bas,  à droite, à gauche, à gauche, à droite.</li>
+			          <li>Le premier déplacement de la séquence répétée est toujours le même : 1 pas en bas</li>
+			         <li>Le nombre de pas des autres déplacements augmente de 1 à chaque répétition : il faut utiliser les instructions avec N pas et augmenter N de 1 à chaque fin de la séquence</li>
+            </ol></p>
+         -->
+
+	 <h2>C'est de l'informatique !</h2>
+       <p>
+       Dans ce sujet, il faut écrire un programme en utilisant des instructions.
+       Ces instructions seront répétées de manière systématique.
+       La faculté de répéter une opération un grand nombre de fois sans se lasser
+       est le point fort des ordinateurs&nbsp;!
+       </p>
+       <p class="medium hard">
+       Certaines des instructions proposées dépendent de la valeur de la
+       <b>variable</b> nommée N. On l'appelle &laquo;&nbsp;variable&nbsp;&raquo; car
+       justement sa valeur peut varier au cours de l'exécution du programme.
+       </p>
+       <p class="medium hard">
+       L'utilisation de variables permet d'écrire des programmes beaucoup 
+       plus intéressants, car plus génériques, que ce que l'on pourrait obtenir sans.
+       </p>
+
+
+      </div> <!-- task-solution -->
+   </body>
+</html>

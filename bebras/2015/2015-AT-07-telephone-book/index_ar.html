@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-AT-07</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simpleKeyboard-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simpleKeyboard-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-AT-07-telephone-book/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         incorrectNumber: function(nbTarget) { return "You must select " + nbTarget + " words."; },
+         incorrect: "You have not selected the right words. Try again.",
+         correct: "Congratulations, you have succeeded." };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .symbol, .pattern, .char {
+            font-family: 'Courier New';
+            font-size: 20px;
+         }
+         .symbol, .pattern {
+            color: #CC0000;
+            font-weight: bold;
+         }
+         .pattern {
+            margin-right: 0.5em;
+            margin-left: 0.5em;
+         }
+         .words {
+            border-collapse: collapse;
+            margin: auto;
+         }
+         .words td {
+            border: solid #AAAAAA 1px;
+            padding: 10px;
+            background-color: #EEEEEE;
+         }
+         .example td {
+            padding-top: 4px;
+            padding-bottom: 4px;
+         }
+         #main_words td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+         }
+         .example .word {
+            cursor: default;
+            padding: 5px 5px 5px 5px;
+         }
+         #main_words .word {
+            cursor: default;
+            padding: 10px 10px 10px 10px;
+         }
+         .words .selected {
+            background-color: blue;
+            color: white;
+         }
+         .char {
+            padding: 3px;
+            width: 10px;
+         }
+         .example {
+            margin-top: 10px;
+            margin-bottom: 5px;
+         }
+         #results_container {
+            width: 10em;
+         }
+         .example_container {
+            padding: 0.2em;
+            padding-bottom: 0.5em;
+            padding-left: 0.5em;
+            margin-left: 0.5em;
+            width: 180px;
+            text-align: left;
+            border: 1px solid black;
+            margin-left: 1em;
+         }
+         .example_container p {
+            margin-top: 0.5em;
+            margin-left: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         .example_title {
+            text-align: center;
+         }
+         #main_words {
+            margin: 0px auto;
+            margin-bottom: 20px;
+         }
+         #task_description td {
+            vertical-align: top;
+         }
+         #task_description {
+            margin-top: 0.8em;
+         }
+         #pattern_given {
+            font-weight: bold;
+            padding-bottom: 0.8em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Selection of Words</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <table id="task_description">
+               <tr>
+                  <td>
+                     <p>
+                        A pattern is formed of letters<span class="easy"> and question marks</span><span class="medium hard">, Question marks and three small dots</span>.
+                     </p>
+                     <p>
+                        Each symbol <span class="symbol">?</span> refers to exactly one letter.
+                     </p>
+                     <p class="medium hard">
+                       Each symbol <span class="symbol">&#8230;</span> means zero, one or more letters.
+                     </p>
+                  </td>
+                  <td>
+                     <div class="example_container">
+                        <p class="example_title"><strong>Example</strong></p>
+                        <p> Pattern&nbsp;: <strong><span id="pattern_example_0" class="pattern"></span></strong>
+                        </p>
+                        <p> Related words&nbsp;: </p>
+                        <table id="example0" class="words example"></table>
+                     </div>
+                  </td>
+                  <td>
+                     <div class="example_container">
+                       <p class="example_title"><strong>Example</strong></p>
+                        <p> Pattern&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
+                        <p> Related words&nbsp;: </p>
+                        <table id="example1" class="words example"></table>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            <br/>
+            <div id="pattern_given">
+               Select <span class="hard">all</span> the <span class="easy medium"><b>3</b></span> words that match
+               the pattern&nbsp;:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
+               <span class="hard"><br/>You are not told how many words match.</span>
+            </div>
+            <table id="main_words" class="words"></table>
+            <img src="icon.png" style="display:none">
+         </div>
+     </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+         
+         <div class="easy">
+            <img style="float:right" s src="solution_easy.png">
+            <p> Un mot qui correspond au motif <span class="pattern">c??t</span> est un mot composé de 4 lettres, qui commence par un <strong>c</strong> et qui se termine par un <strong>t</strong>. Les deux lettres du milieu peuvent être n'importe lesquelles.</p>
+            <p>Dans la liste proposée, les mots correspondant à cette description sont&nbsp;: <b>chat</b>, <b>chut</b> et <b>cuit</b>. </p
+            <p>Les autres mots ne correspondent pas. En effet, <b>char</b>  ne se termine pas par un <strong>t</strong>, tandis que <b>plat</b> ne commence pas par un <strong>c</strong>.</p>
+         </div>
+          
+         <div class="medium">
+            <img style="float:right" src="solution_medium.png">
+            <p>Un mot qui correspond au motif <span class="pattern">?a&#8230;e</span> est un mot dont la deuxième lettre est un <strong>a</strong>, et qui se termine par un <strong>e</strong>. La première lettre peut être n'importe laquelle, et entre le <strong>a</strong> et le <strong>e</strong>, il peut y avoir zéro, une, ou plusieurs lettres, n'importe lesquelles.</p>
+            <p>Dans la liste proposée, les mots correspondant à cette description sont&nbsp;: <b>table</b>, <b>rave</b> et <b>mare</b>. </p>
+            <p>Les autres mots ne correspondent pas au motif. En effet, <b>tacher</b>, <b>tartes</b>, <b>parer</b> ne se terminent pas par un <strong>e</strong>, tandis que les mots <b>arrive</b> et <b>charme</b> n'ont pas de <strong>a</strong> en deuxième position.</p>
+         </div>
+          
+         <div class="hard">
+            <img style="float:right" src="solution_hard.png">
+            <p>Un mot qui correspond au motif <span class="pattern">&#8230;pro?&#8230;s&#8230;</span>  est un mot qui comporte la suite de lettres <strong>pro</strong> et qui comporte, plus loin, un <strong>s</strong>. Le morceau de motif <span class="pattern">?&#8230;</span> indique qu'il doit y avoir au moins une lettre entre
+            le <strong>o</strong> et le <strong>s</strong>.
+            </p>
+            <p>Remarque&nbsp;: le mot peut très bien commencer par <strong>pro</strong> ou se terminer par <strong>s</strong>.</p>
+            <p>Dans la liste proposée, les mots correspondant  à cette description sont&nbsp;: <b>reproches</b>, <b>pronostic</b>, <b>prochains</b> et <b>promesse</b>. </p>
+            <p>Les autres mots ne correspondent pas au motif. En effet, les mots <b>attraper</b>, <b>reposer</b> et <b>crocheter</b> ne comportent pas la suite de lettres <strong>pro</strong>, tandis que le mot <b>prosterner</b> ne contient aucune lettre entre <strong>pro</strong> et <strong>s</strong>.</p>
+         </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+         <p>En informatique, on utilise des motifs de mots de la sorte, ainsi que des
+         motifs plus compliqués appelés &laquo;&nbsp;<strong>expressions rationnelles</strong>&nbsp;&raquo; (on trouve aussi le terme &laquo;&nbsp;expressions régulières&nbsp;&raquo; issu de la traduction de l'anglais <I>regular expression</i>). 
+         <br />On peut utiliser alors des programmes très efficaces afin de trouver où le motif apparaît dans un très long texte.</p>
+         <p>On peut aussi utiliser de telles expressions dans de nombreux logiciels. Par exemple, dans la plupart des logiciels de traitement de texte, il est possible de faire une recherche de mots en utilisant des expressions rationnelles.</p>
+         <!--Des programmes similaires
+         peuvent également être utiles pour trouver des apparitions d'un gène dans une 
+         longue séquence d'ADN.-->
+         <!--Ces expressions rationnelles sont utilisées en pratique dans les
+           filtres anti-spam et les anti-virus. Ils sont alors bien plus
+           complexes que celui ci-dessus.-->
+         
+
+
+	  </div> <!-- task-solution -->
+  </body>
+</html>

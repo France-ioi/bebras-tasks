@@ -1,0 +1,147 @@
+<!doctype html>
+<html dir="rtl">
+   <head>
+    <meta charset="utf-8">
+    <title>2015-SI-05</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelButton-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelButton-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-SI-05-horse-race/",
+          "language": "ar",
+          "version": "en.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         podium: "المنصة",
+         pastRaces: "نتيجة \n السباقات السابقة:",
+         arrival: [" الثالث", "الثاني", "اﻷول"],
+         launch: "بداية السباق",
+         maxRacesReached: "You ran # races, الحد الأقصى المسموح به.\nيمكنك وضع الخيول على المنصة ، أو البدء من جديد.",
+         success: "احسنت إجابة صحيحة",
+         successPartial: function(steps, stepsOptimal) { return "لقد فزت في السباق " + steps + " races.<br> حاول ايجاد اسرع 3 خيول " + stepsOptimal + " races."; },
+         incorrect: "المنصة غير صحيحة.",
+         incorrectCannotBeSure: "لم تقم بتنظيم السباقات للتأكد من صحة المنصة الخاصة بك.",
+         incomplete: "لم تضع الاحصنة علي المنصة.",
+
+         prepareRaceText: function(raceSize) {
+            return "اختر " + raceSize + " احصنة لبداية السباق.";
+         }
+      };
+
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      </style>   
+   </head>
+   <body>
+      <div id="task">
+         <img src="horse.png" style="display:none">
+         <h1>سباق الخيول</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               <span class="easy">أعثر علي الحصان الأسرع </span>
+               <span class="medium">أعثر علي الاسرع <b>2</b> الحصان </span>
+               <span class="hard">أعثر علي الاسرع <b>3</b> الحصان </span>
+               من خلال تنظيم أقل عدد من السباقات الممكنة.
+            </p>
+            <p>ثلاثة خيول تتنافس في كل سباق ولها نفس السرعة  . </p>
+
+            <p>لتنظيم السباق حدد الخيول المطلوبة ثم اضغط علي بداية السباق. </p> 
+
+            <p>لاحظ أن 3 سباقات قد اكتملت بالفعل.</p>
+ 
+            <div id="anim"></div>
+            <img src="icon.png" style="display:none">
+            
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+         
+    
+            <div>
+               <div> <img style="float:right" src="solution_courses_0.png" width="150">
+               <p>Le sujet présente les résultats de 3 courses déjà réalisées. Nous avons ajouté des flèches&nbsp;: chaque flèche relie un cheval vers un autre cheval plus lent que lui. </p>
+               <p>Nous n'avons dessiné que les flèches directes&nbsp;: par exemple, il n'y a pas de flèche de B vers C, car il y a déjà une flèche de B vers A et une de A vers C.</p>
+               </div>
+               <p><strong>Étape 1 : trouver le cheval le plus rapide de tous</strong> </p>
+               <p>Le plus rapide est forcément l'un des 3 vainqueurs des 3 courses passées. Ici, il s'agit de&nbsp;: B, E et G. On organise donc une course entre eux. Le vainqueur est le plus rapide, on le place en haut du podium.</p>
+               <table><tr><td><img src="solution_course_1.png" width="150" style="margin-right:4em"></td>
+                     <td><span class="easy"><img src="easy_podium_1.png" width="150"></span>
+                         <span class="medium"><img src="medium_podium_1.png" width="150"></span>
+                         <span class="hard"><img src="hard_podium_1.png" width="150"></span></td>
+               </tr></table>
+            </div>
+            <div class="medium hard">
+            <img style="float:right" src="medium_graph.png" width="200">
+         
+               <p><strong>Étape 2 : trouver le deuxième cheval le plus rapide</strong></p>
+               <p>La course effectuée à l'étape 1 nous apporte de l'information. Nous l'avons représentée par les flèches rouges ci-contre.</p>
+               <p>Le deuxième cheval le plus rapide est forcément l'un des deux chevaux encadrés en bleu. Il s'agit de chevaux qui sont arrivés deuxièmes à une course précédente, juste derrière le cheval le plus rapide.</p>
+               <p>On organise une course entre ces deux chevaux, en complétant avec un autre cheval pris au hasard (ici H). Le gagnant prend la deuxième place du podium.</p>
+               <table><tr><td><img src="solution_course_2.png" width="150" style="margin-right:4em"></td>
+                  <td><span class="medium"><img src="medium_podium_2.png" width="150"></span>
+                        <span class="hard"><img src="hard_podium_2.png" width="150"></span></td>
+               </tr></table>
+            </div>
+            <div class=" hard">
+            <img style="float:right" src="hard_graph_1.png" width="200">
+               <p><strong>Étape 3 : trouver le troisième cheval le plus rapide</strong> </p>
+               <p>La course effectuée à l'étape 2 nous apporte encore de l'information, que nous représentons en rouge ci-contre.</p>
+               <p> Pour la troisième place, il y a deux candidats possibles, encadrés de bleu. Il s'agit de ceux qui sont arrivés juste après le deuxième plus rapide (ici F) dans les courses qu'il a déjà couru. Il s'agit de D et de B.</p>
+               <p>On organise une course entre ces deux chevaux, en complétant avec un autre cheval pris au hasard (ici H). Le gagnant prend la troisième place du podium.</p>
+                  <table><tr><td><img src="solution_course_3.png" width="150"></td>
+                     <td>Le vainqueur est B&nbsp;. <br />c'est le troisième plus rapide de tous.</td>
+                     <td><img src="hard_podium_3.png" width="150"></span></td>
+                  </tr></table>
+
+               <p><strong>Une variante de l'étape 3</strong> </p>
+               <img style="float:right" src="hard_graph_2.png" width="200">
+               <p>Supposons que le résultat de la deuxième course soit B / F / H, à la place de F / B / H. Dans ce cas, le cheval B prend la deuxième place du podium. Nous aurions alors la situation ci-contre. Pour déterminer la troisième place, nous aurions fait courir les chevaux arrivés après B dans les courses précédentes, c'est-à-dire A, F et G.</p>
+    
+               <p><strong>Une autre variante de l'étape 3</strong> </p>
+
+               <p>Supposons maintenant que nous ayons utilisé à l'étape 2 le cheval D pour compléter la course, à la place du cheval H. Le résultat aurait été F / B / D. Dans ce cas, on aurait pu conclure directement que B était le troisième cheval le plus rapide, sans organiser de troisième course.</p>
+
+            </div>
+
+           <h2>C'est de l'informatique !</h2>
+               <p>
+               Lorsque vous placez les bons chevaux sur le podium, comment est-ce que nous pouvons être certains que vous ayez bien réalisé les courses permettant de déduire le podium et que vous n'avez pas simplement essayé toutes les possibilités&nbsp;?
+               </p>
+               <p>
+               Le programme d'évaluation est représenté par l'ensemble des flèches correspondantes aux informations déduites de chacune des courses organisées, comme sur les illustrations montrées ci-dessus. Plus précisément, on place une flèche entre deux chevaux lorsqu'un cheval est arrivé avant un autre dans une course.
+               </p>
+               <p>
+               Pour vérifier que les courses organisées suffisent à déduire que le cheval placé en haut du podium est bien le plus rapide, il suffit de vérifier que, en partant de ce cheval, on peut atteindre tous les autres en suivant les flèches. En effet, s'il existait un autre cheval qui n'est pas relié par une suite de flèches, alors cet autre cheval pourrait être le plus rapide.
+               </p>
+               <p>De même, pour vérifier que l'on peut déduire que le second cheval est correct, il suffit de vérifier que de ce cheval on peut atteindre tous les autres sauf le premier en suivant les flèches. Enfin, de même pour le troisième, à partir duquel on doit atteindre tous les autres sauf le premier et le second cheval.</p>
+               <p>Pour vérifier que, à partir d'un cheval, on puisse atteindre tous les autres chevaux en suivant les flèches, nous avons programmé ce que l'on appelle un <b>algorithme de graphe</b>, un outil couramment utilisé en informatique.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

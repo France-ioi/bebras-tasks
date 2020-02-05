@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html dir="rtl">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
@@ -7,8 +7,7 @@
       <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
       <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
       <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 
       <script class="module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
       <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js"        id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
@@ -23,12 +22,11 @@
 
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-CZ-02-relationships/",
-          "language": "en",
+          "language": "ar",
           "version": "",
-          "authors": "Jiří Vaníček, vanicek@pf.jcu.cz, Czechia ; Mathias Hiron ; Arthur Charguéraud",
+          "authors": "",
           "license": "CC BY-SA 3.0",
           "translators": [
-            "Arthur Charguéraud"
           ],
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -44,19 +42,19 @@
       };
       </script>
       <script type="text/javascript">
-         var stringsLanguage = 'en';
       var taskStrings = {
-         error: "The beaver at the beginning of the red arrow is older than the one at the end of the arrow.",
-         remains: "You still have labels to place.",
-         success: "Congratulations, you have succeeded",
+         error: "القندس الموجود في بداية السهم الأحمر أكبر سناً من القندس الموجود في نهاية السهم",
+         remains: "لا يزال لديك اسماء لوضعها",
+         success: "أحسنت إجابة صحيحة",
          names: {
-            easy: ["Julie\n8 ans", "Ahmed\n11 ans", "Sarah\n12 ans", "Kim\n14 ans", "Léa\n15 ans"],
-            medium: ["Julie\n8 ans", "Ahmed\n11 ans", "Sarah\n12 ans", "Kim\n14 ans", "Léa\n15 ans",  "Lise\n16 ans", "Théo\n17 ans", "Yann\n20 ans"],
-            hard: ["Julie\n8 ans", "Ahmed\n11 ans", "Sarah\n12 ans", "Kim\n14 ans", "Léa\n15 ans", "Lise\n16 ans", "Théo\n17 ans"] 
+            easy: ["رولا\n8 سنوات", "أحمد\n11 سنة", "سارة\n12 سنة", "كريم\n14 سنة", "ليلى\n15 سنة"],
+            medium: ["رولا\n8 سنوات", "أحمد\n11 سنة", "سارة\n12 سنة", "كريم\n14 سنة", "ليلى\n15 سنة", "خديجة\n16 سنة", "سامي\n17 سنة", "يامن\n20 سنة"],
+            hard: ["رولا\n8 سنوات", "أحمد\n11 سنة", "سارة\n12 سنة", "كريم\n14 سنة", "ليلى\n15 سنة", "خديجة\n16 سنة", "سامي\n17 سنة"] 
+              // Anna Paul
          }
       };
       </script>
-      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript" src="task_ar.js"></script>
       <style>
       #relations td {
          vertical-align: top;
@@ -79,33 +77,32 @@
   </head>
   <body>
       <div id="task">
-         <h1>Age Relationships</h1>
+         <h1>العلاقة بين الأعمار</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
            <p>
-            Drag labels with first names in the right boxes.
+ضع الاسماء الموجودة بالمربعات التي على اليسار داخل الشكل بالأسفل
             </p>
             <div class="easy medium">
                <p>
-               An arrow must always go from a younger person to an older person.
+بحيث يكون اتجاه السهم من الشخص الأصغر سناً إلى الأكبر سناً
                </p>
             </div>
             <div class="hard">
                <p>
-               An arrow must always go from a younger person to an older person but if one of the boxes connected by the arrow is empty, the constraint doesn't apply.
+بحيث يكون اتجاه السهم من الشخص الأصغر سناً إلى الأكبر سناً، وإذا كان الصندوق فارغ فهذا الشرط لا ينطبق في هذه الحالة
                </p>
-               <p id="remark">Note that one of the boxes will remain empty.</p>
+               <p id="remark">لاحظ أن أحد الصناديق سيظل فارغاً</p>
             </div>
             <div id="anim" class="touch"></div>
             <div id="execute_container">
-               <input type="button" value="Validate my answer" id="execute"/>
+               <input type="button" value="تأكد من الإجابة" id="execute"/>
             </div>
             <img src="icon.png" style="display:none">
          </div>
       </div>
       
       <div id="solution">
-<!--
          <h2>Solution</h2> 
          <div class="easy medium">
             <p>Pour obtenir la solution, on place les personnes une par une par ordre d'âge, intuitivement &laquo; en suivant l'ordre des flèches &raquo;. Plus précisément, on remplit à chaque fois une case vérifiant la propriété suivante : s'il y a des flèches qui arrivent à cette case, alors les cases d'où viennent les flèches sont déjà remplies. </p>
@@ -169,7 +166,6 @@
          Un ordinateur est capable de construire un tri topologique
          en quelques secondes, même lorsqu'il y a des milliards de flèches.
          </p>
--->
-     </div> <!-- task-solution -->
+	  </div> <!-- task-solution -->
   </body>
 </html>
