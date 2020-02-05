@@ -103,46 +103,6 @@
 
          <h2>Solution</h2>
 
-            <div class="easy">
-               <p>Une manière naïve de résoudre le sujet est de se demander, pour chaque cercle, s'il existe un chemin permettant d'aller au cercle rouge.</p>
-               <p>Une manière plus astucieuse de résoudre le sujet consiste à partir du cercle rouge, et à remonter les flèches à l'envers, en coloriant en bleu tous les cercles que l'on peut atteindre ainsi.</p>
-               <p><img src="sol_easy.png"></p>
-            </div>   
-            <div class="medium">
-               <p>Une manière naïve de résoudre le sujet est de se demander, pour chaque cercle, s'il existe un chemin permettant d'aller à chacun des deux cercles rouges.</p>
-               <p>Une manière plus astucieuse de résoudre le sujet consiste à d'abord repérer que, pour pouvoir rejoindre les deux cercles rouges, il faut forcément passer par le cercle central (le cercle bleu du milieu). Ensuite, il suffit de remonter les flèches à l'envers en partant de ce cercle bleu central, en coloriant en bleu tous les cercles que l'on peut atteindre ainsi.</p>
-               <p><img src="sol_medium.png"></p>
-            </div>
-            <div class="hard">
-<<<<<<< .mine
-               <p>On peut déjà commencer par trouver un premier cercle qui permet de rejoindre tous les cercles rouges, en prenant soin de colorier les chemins qui permettent d'y accéder. Par exemple, on peut repérer que le coin en haut à gauche permet de rejoindre tous les cercles rouges. (Le raisonnement que l'on fait dans la suite aurait fonctionné également avec un autre cercle). </p>
-               <p><img src="sol_hard_1.png"></p>
-               <p>Ensuite, on va chercher tous les cercles à partir desquels on peut rejoindre ce premier cercle bleu. Tous ces cercles pourront également être coloriés en bleu : si on peut aller au cercle bleu, et que depuis ce dernier on peut aller à tous les cercles rouges, alors on peut aller à tous les cercles rouges. Concrètement, on part du cercle bleu, et on remonte toutes les flèches à l'envers. On prend ici encore soin de colorier les chemins qui permettent d'y accéder.</p>
-||||||| .r3390
-               <p>On peut déjà commencer par trouver un premier cercle qui permet de rejoindre tous les cercles rouges, en prenant soin de colorier les chemins qui permettent d'y accéder. Par exemple, on peut repérer que le coin en haut à gauche permet de rejoindre tous les cercles rouges. (Le raisonnement que l'on fait dans la suite aurait fonctionné également avec un autre noeud). </p>
-               <p><img src="sol_hard_1.png"></p>
-               <p>Ensuite, on va chercher tous les cercles à partir desquels on peut rejoindre ce premier cercle bleu. Tous ces cercles pourront également être coloriés en bleu : si on peut aller au cercle bleu, et que depuis ce dernier on peut aller à tous les cercles rouges, alors on peut aller à tous les cercles rouges. Concrètement, on part du cercle bleu, et on remonte toutes les flèches à l'envers. On prend ici encore soin de colorier les chemins qui permettent d'y accéder.</p>
-=======
-               <p>On peut simplifier le problème en étudiant la structure générale de la figure. Si l'on enlève les cercles du milieu qui ne servent à rien, et si l'on "compresse" les groupes de 4 noeuds situés sur chacun des 4 bords, on se ramène à un petit problème sur lequel il est relativement aisé d'identifier les cercles qui permettent d'accéder aux 4 noeuds rouges.</p>
-               <p><img src="sol_hard_a.png"></p>
-               <p>Les chemins noirs de la figure simplifiée ci-dessus correspondent aux chemins coloriés en verts sur la figure d'origine ci-dessous :</p>
-               <p><img src="sol_hard_y.png"></p>
-
-               <p>On peut alors revenir au problème de départ, et se demander quels sont les cercles qu'il reste à colorier en bleu. On peut faire l'observation suivante :  si une flèche part d'un cercle gris et pour rejoindre un cercle bleu, alors on peut colorier le cercle gris en bleu. En effet, de ce cercle gris on peut aller au cercle bleu en utilisant cette flèche, puis ensuite du cercle bleu on peut aller à tous les cercles rouges (puisque c'est la propriété des cercles bleus).</p> 
-               <p>Du coup, on va répéter l'opération suivante : pour chaque cercle gris, regarder s'il y a une flèche vers un cercle bleu. Si oui, on colorie le cercle gris en bleu (et on peut aussi colorier la flèche correspondante en vert). Sinon, on cherche un autre cercle gris. On répète le processus jusqu'à ce qu'on ne puisse plus rien colorier en bleu. On a alors terminé.</p>
->>>>>>> .r3402
-               <p><img src="sol_hard_2.png"></p>
-               <!---<p>Comment peut-on être certain d'avoir terminé (sans appuyer sur le bouton "essayer") ? On peut remarquer que si d'un cercle on peut rejoindre les 4 cercles rouges, alors en particulier on peut rejoindre le cercle rouge en haut à gauche, et donc on peut rejoindre le cercle bleu en haut à gauche. Du coup, on sait que depuis tout cercle bleu, il existe un chemin vers le cercle bleu en haut à gauche. Or, s'il existe un tel chemin, alors forcément avec la méthode décrite ci-dessous, on a du colorier en bleu tous les cercles de ce chemin. En conclusion : avec la méthode que l'on a appliqué, tous les cercles qui permettent de rejoindre les 4 cercles rouges ont été coloriés en bleu.</p>-->
-            </div>
-
-
-         <h2>C'est de l'informatique !</h2>
-
-            <p>Les cercles et les flèches représentent une structure très fréquente en information, appelée <strong>graphe</strong>. Des graphes peuvent décrire des structures concrètes, comme par exemple des réseaux routiers ou des réseaux informatiques. Ils peuvent également décrire des structures abstraites, comme par exemple, un réseau social sur lequel chaque cercle représente une personne et chaque flèche représente le fait qu'une personne suit le fil d'actualité d'une autre personne.</p>
-
-            <p>La question que posait ce sujet porte sur la propriété <strong>d'accessibilité</strong> : quels sont les cercles à partir desquels on peut accéder à un ensemble d'autres cercles. Il existe des algorithmes très performants permettant à des ordinateurs de répondre de manière entièrement automatique à cette question et de traiter des cas avec des milliards de cercles et de flèches.</p>
-
-
 	  </div> <!-- task-solution -->
    </body>
 </html>
