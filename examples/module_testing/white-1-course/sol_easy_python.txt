@@ -1,0 +1,8 @@
+from robot import *
+
+haut()
+droite()
+droite()
+bas()
+bas()
+gauche()

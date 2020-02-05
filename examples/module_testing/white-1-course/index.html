@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>white-1-course</title>
+      <script>
+      window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules/'
+        importModules([
+            'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'beaver-task-2.0', 'jschannel', 'raphaelFactory-1.0', 'delayFactory-1.0', 'simulationFactory-1.0',
+            'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
+            'conceptDisplay-1.0', 'conceptViewer-1.0', 'conceptViewer_css-1.0',
+            'taskStyles-mobileFirst', 'blockly-robot-1.0']);
+        // set Blockly as default language when none is specified through ?language=
+        importLanguageModules('blockly');
+      </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/questions/algorea_training/training-repeat-if-obstacles/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "CC-BY-SA",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "minWidth": "auto"
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+   </head>
+   <body onresize="task.displayedSubTask.updateScale()">
+      <div id="task">
+         <h1>1 - Suivre le parcours</h1>
+         <img src="obstacle.png" style="display:none" />
+         <img src="red_robot.png" style="display:none" />
+         <img src="icon.png" style="display:none" />
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="taskIntro">
+               <div class="basic">
+                  <p class="short">
+                     Programmez le robot pour qu'il atteigne la zone verte tout au bout du parcours.
+                  </p>
+                  <div class="long" data-lang="blockly scratch">
+						   <p>
+					   		Glissez les blocs avec la souris :
+					   	</p>
+					   	<div style="display: inline-block; border: 1px solid black; padding: 2px; margin-bottom: 10px;">
+					   		<p>
+					   			Démonstration :
+				   			</p>
+				   			<button class="videoBtn" data-lang="blockly" data-video="demo_b.mp4"></video>
+				   			<button class="videoBtn" data-lang="scratch" data-video="demo_s.mp4"></video>
+				   		</div>
+				   		<div style="display: inline-block; vertical-align: top; margin-left: 10px;">
+			   		   	<p>
+			   					Cliquez ensuite sur le bouton
+				   			</p>
+				   			<img src="button.png" />
+				   			<p>
+				   				qui se trouve <span style="color: red;">sous le dessin</span>
+			     		   	</p>
+					   		<p>
+					   			et observez le résultat !
+					   		</p>
+					   	</div>
+					   </div>
+					</div>
+					<p class="easy medium hard">
+                     Programmez le robot pour qu'il atteigne la zone verte tout au bout du parcours.
+                  </p>
+               <p class="medium hard" data-lang="python">
+                  Vous pouvez avoir besoin de <a onclick="conceptViewer.showConcept('blockly_controls_repeat')">la boucle for</a>.
+               </p>
+            </div>
+            <div id="gridContainer"></div>
+            <div id="blocklyLibContent"></div>
+         </div>
+
+      </div><!-- task -->
+   </body>
+</html>
+

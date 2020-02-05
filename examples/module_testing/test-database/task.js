@@ -132,26 +132,40 @@ function initTask(subTask) {
     }
 
     subTask.data = {
-        easy: [{
-            tables: {
-                test_table: {
-                    public: true,
-                    data: test_table
-                },
-                valid_table: {
-                    public: false,
-                    data: valid_table
-                },
-                test_table2: {
-                    public: true,
-                    data: test_table2
-                },
-                valid_table2: {
-                    public: false,
-                    data: valid_table2
+        easy: [
+            {
+                tables: {
+                    test_table: {
+                        public: true,
+                        data: test_table
+                    },
+                    valid_table: {
+                        public: false,
+                        data: valid_table
+                    }
+                }
+            },
+            {
+                tables: {
+                    test_table: {
+                        public: true,
+                        data: test_table
+                    },
+                    valid_table: {
+                        public: false,
+                        data: valid_table
+                    },
+                    test_table2: {
+                        public: true,
+                        data: test_table2
+                    },
+                    valid_table2: {
+                        public: false,
+                        data: valid_table2
+                    }
                 }
             }
-        }]
+        ]
     }
     initBlocklySubTask(subTask)
 }

@@ -1,0 +1,14 @@
+from robot import *
+
+for loop in range(4):
+    droite()
+    droite()
+    haut()
+for loop in range(3):
+    haut()
+gauche()
+gauche()
+for loop in range(3):
+    gauche()
+    bas()
+    gauche()
