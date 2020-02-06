@@ -177,15 +177,20 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+           
       initJSON();
       initPaper();
-      initHandlers();
+      initHandlers(); 
       applyAttr();
       fromJSON();
       optionsFromJSON();
       updateJSON(false);
-      updateGridVisibility(showGrid);
+      // updateGridVisibility(showGrid); // remove click event on paper?
+      // $("#anim").click(function() {
+      //    console.log("click")
+      // });
       updateInfo();
+
    };
 
    subTask.getAnswerObject = function() {
