@@ -1,12 +1,13 @@
 <!doctype html>
-<html>
+<html dir="rtl">
    <head>
     <meta charset="utf-8">
     <title>2015-AT-07</title>
     <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
     <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
     <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
@@ -18,11 +19,11 @@
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-AT-07-telephone-book/",
-          "language": "en",
+          "language": "ar",
           "version": "en.01",
-          "authors": "Arthur Chargueraud",
+          "authors": "Elisabeth Oberhauser, elisabeth.aisha.oberhauser@gmail.com, Austria, initial idea; Arthur Chargueraud",
           "translators": [],
-          "license": "",
+          "license": "CC BY-SA 3.0",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
           "browserSupport": [],
@@ -32,10 +33,11 @@
       };
       </script>
       <script type="text/javascript">
+         var stringsLanguage = 'ar';
       var taskStrings = {
-         incorrectNumber: function(nbTarget) { return "You must select " + nbTarget + " words."; },
-         incorrect: "You have not selected the right words. Try again.",
-         correct: "Congratulations, you have succeeded." };
+         incorrectNumber: function(nbTarget) { return "يجب إختيار " + nbTarget + " كلمات"; },
+         incorrect: "لم تختار كلمات المرور الصحيحة. حاول مرة أخرى",
+         correct: "أحسنت لقد نجحت" };
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
@@ -127,36 +129,36 @@
    </head>
    <body>
       <div id="task">
-         <h1>Selection of Words</h1>
+         <h1>كلمات المرور</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <table id="task_description">
                <tr>
                   <td>
                      <p>
-                        A pattern is formed of letters<span class="easy"> and question marks</span><span class="medium hard">, Question marks and three small dots</span>.
+                         تتكون كلمة المرور من حروف<span class="easy"> وعلامات استفهام </span><span class="medium hard"> وعلامات استفهام وثلاث نقاط صغيرة  </span>.
                      </p>
                      <p>
-                        Each symbol <span class="symbol">?</span> refers to exactly one letter.
+                        كل علامة <span class="symbol">?</span> ترمز لحرف واحد فقط
                      </p>
                      <p class="medium hard">
-                       Each symbol <span class="symbol">&#8230;</span> means zero, one or more letters.
+                       النقاط الثلاثة الحمراء <span class="symbol">&#8230;</span> تعني وجود حرف أو حرفين أو أكثر
                      </p>
                   </td>
                   <td>
                      <div class="example_container">
-                        <p class="example_title"><strong>Example</strong></p>
-                        <p> Pattern&nbsp;: <strong><span id="pattern_example_0" class="pattern"></span></strong>
+                        <p class="example_title"><strong>مثال</strong></p>
+                        <p> الكلمة&nbsp;: <strong><span id="pattern_example_0" dir="ltr" class="pattern"></span></strong>
                         </p>
-                        <p> Related words&nbsp;: </p>
+                        <p> الكلمات الشبيهة&nbsp;: </p>
                         <table id="example0" class="words example"></table>
                      </div>
                   </td>
                   <td>
                      <div class="example_container">
-                       <p class="example_title"><strong>Example</strong></p>
-                        <p> Pattern&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
-                        <p> Related words&nbsp;: </p>
+                       <p class="example_title"><strong>مثال</strong></p>
+                        <p> الكلمة&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" dir="ltr" class="pattern"></span></strong></p>  
+                        <p> الكلمات الشبيهة&nbsp;: </p>
                         <table id="example1" class="words example"></table>
                      </div>
                   </td>
@@ -164,16 +166,16 @@
             </table>
             <br/>
             <div id="pattern_given">
-               Select <span class="hard">all</span> the <span class="easy medium"><b>3</b></span> words that match
-               the pattern&nbsp;:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
-               <span class="hard"><br/>You are not told how many words match.</span>
+               قم باختيار <span class="hard">جميع</span> الـ <span class="easy medium"><b>3</b></span> كلمات الشبيهة
+               للكلمة&nbsp;:&nbsp;&nbsp; <span id="pattern_target" dir="ltr" class="pattern"></span>
+               <span class="hard"><br/>لن نخبرك بعدد الكلمات المشابهة</span>
             </div>
             <table id="main_words" class="words"></table>
             <img src="icon.png" style="display:none">
          </div>
      </div><!-- task -->
       <div id="solution">
-
+<!--
          <h2>Solution</h2>
          
          <div class="easy">
@@ -212,10 +214,4 @@
          longue séquence d'ADN.-->
          <!--Ces expressions rationnelles sont utilisées en pratique dans les
            filtres anti-spam et les anti-virus. Ils sont alors bien plus
-           complexes que celui ci-dessus.-->
-         
-
-
-	  </div> <!-- task-solution -->
-  </body>
-</html>
+           complexes que لم تختار الكلمات الصحيحة. حاول مرة أخرى taskأحسنت لقد نجحتتrar
