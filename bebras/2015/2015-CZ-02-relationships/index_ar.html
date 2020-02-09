@@ -77,28 +77,30 @@
   </head>
   <body>
       <div id="task">
-         <h1>العلاقة بين الأعمار</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-           <p>
-ضع الاسماء الموجودة بالمربعات التي على اليسار داخل الشكل بالأسفل
-            </p>
-            <div class="easy medium">
-               <p>
-بحيث يكون اتجاه السهم من الشخص الأصغر سناً إلى الأكبر سناً
+         <div style="direction: rtl">
+            <h1>العلاقة بين الأعمار</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+              <p>
+   ضع الاسماء الموجودة بالمربعات التي على اليسار داخل الشكل بالأسفل
                </p>
+               <div class="easy medium">
+                  <p>
+   بحيث يكون اتجاه السهم من الشخص الأصغر سناً إلى الأكبر سناً
+                  </p>
+               </div>
+               <div class="hard">
+                  <p>
+   بحيث يكون اتجاه السهم من الشخص الأصغر سناً إلى الأكبر سناً، وإذا كان الصندوق فارغ فهذا الشرط لا ينطبق في هذه الحالة
+                  </p>
+                  <p id="remark">لاحظ أن أحد الصناديق سيظل فارغاً</p>
+               </div>
+               <div id="anim" class="touch"></div>
+               <div id="execute_container">
+                  <input type="button" value="تأكد من الإجابة" id="execute"/>
+               </div>
+               <img src="icon.png" style="display:none">
             </div>
-            <div class="hard">
-               <p>
-بحيث يكون اتجاه السهم من الشخص الأصغر سناً إلى الأكبر سناً، وإذا كان الصندوق فارغ فهذا الشرط لا ينطبق في هذه الحالة
-               </p>
-               <p id="remark">لاحظ أن أحد الصناديق سيظل فارغاً</p>
-            </div>
-            <div id="anim" class="touch"></div>
-            <div id="execute_container">
-               <input type="button" value="تأكد من الإجابة" id="execute"/>
-            </div>
-            <img src="icon.png" style="display:none">
          </div>
       </div>
       

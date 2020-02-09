@@ -98,33 +98,35 @@
    </head>
    <body>
       <div id="task">
-         <h1>ساعد الروبوت</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <p id="difficultyWarning" class="hard"></p>
-            <p>
-               برمج الروبوت ليصل إلى المنطقة الخضراء
-            </p> 
-            <div id="anim_container">
-               <div id="anim1"></div>
-               <div class="instructionsUsage">
-                  <p>
-                     ضع الأسهم داخل المربعات البيضاء بالأسفل. الروبوت سوف ينفذ الأمر <span id="loopTimes">loopTimes</span> مرات.
-                  </p>
-                  <p>
-                     لتنجح في إتمام المهمة, يجب أن يكون أخر سهم يساعد الروبوت على تخطي الخط الأزرق.
-                  </p>
-                  <p id="markersUsage">
-                     مساعدة: اضغط على المربعات البيضاء بالمتاهة لتلوينها لتحصل على رؤية أفضل.
-                  </p>
+         <div style="direction: rtl">
+            <h1>ساعد الروبوت</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <p id="difficultyWarning" class="hard"></p>
+               <p>
+                  برمج الروبوت ليصل إلى المنطقة الخضراء
+               </p> 
+               <div id="anim_container">
+                  <div id="anim1"></div>
+                  <div class="instructionsUsage">
+                     <p>
+                        ضع الأسهم داخل المربعات البيضاء بالأسفل. الروبوت سوف ينفذ الأمر <span id="loopTimes">loopTimes</span> مرات.
+                     </p>
+                     <p>
+                        لتنجح في إتمام المهمة, يجب أن يكون أخر سهم يساعد الروبوت على تخطي الخط الأزرق.
+                     </p>
+                     <p id="markersUsage">
+                        مساعدة: اضغط على المربعات البيضاء بالمتاهة لتلوينها لتحصل على رؤية أفضل.
+                     </p>
+                  </div>
+                  <div id="anim2"></div>
+                    <div id="control">
+                     <input type="button" id="execute" value="Play"/>
+                     <input type="button" id="stop" value="Arrêter"/>
+                   </div>
                </div>
-               <div id="anim2"></div>
-                 <div id="control">
-                  <input type="button" id="execute" value="Play"/>
-                  <input type="button" id="stop" value="Arrêter"/>
-                </div>
+               <img src="icon.png" style="display:none">
             </div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

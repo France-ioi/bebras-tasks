@@ -82,37 +82,39 @@
    </head>
    <body>
       <div id="task">
-         <h1>الجيرة الطيبة</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <p class="easy">
-               غير ترتيب الأشكال التالية بحيث لا يكون هناك أي شكلين متطابقين متلامسين ببعضهم
-            </p>
-            <div class="medium">
-               <p>
-               غير ترتيب الأشكال بحيث :
+         <div style="direction: rtl">
+            <h1>الجيرة الطيبة</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <p class="easy">
+                  غير ترتيب الأشكال التالية بحيث لا يكون هناك أي شكلين متطابقين متلامسين ببعضهم
                </p>
-               <ul class="constraints">
-                  <li>لا يوجد أي دائرة أو مربع بجانب بعضهم</li>
-                  <li>لا يوجد شكلين كبيرين أو شكلين صغيرين بجانب بعضهم</li>
-               </ul>
-            </div>
-            <div class="hard">
-               <p>
+               <div class="medium">
+                  <p>
                   غير ترتيب الأشكال بحيث :
+                  </p>
                   <ul class="constraints">
-                     <li>لا يوجد أي تلامس بين دائرتين أو مربعين في جانب واحد</li>
-                     <li>لا يوجد أي تلامس بين الأشكال الكبيرة والأشكال الصغيرة في الزوايا</li>
+                     <li>لا يوجد أي دائرة أو مربع بجانب بعضهم</li>
+                     <li>لا يوجد شكلين كبيرين أو شكلين صغيرين بجانب بعضهم</li>
                   </ul>
-               </p>
+               </div>
+               <div class="hard">
+                  <p>
+                     غير ترتيب الأشكال بحيث :
+                     <ul class="constraints">
+                        <li>لا يوجد أي تلامس بين دائرتين أو مربعين في جانب واحد</li>
+                        <li>لا يوجد أي تلامس بين الأشكال الكبيرة والأشكال الصغيرة في الزوايا</li>
+                     </ul>
+                  </p>
+               </div>
+               <div id="anim_container">
+                  <div id="anim"></div>
+               </div>
+               <div id="control">
+                   <input type="button" id="execute" value="Valider"/>
+               </div>
+               <img src="icon.png" style="display:none">
             </div>
-            <div id="anim_container">
-               <div id="anim"></div>
-            </div>
-            <div id="control">
-                <input type="button" id="execute" value="Valider"/>
-            </div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

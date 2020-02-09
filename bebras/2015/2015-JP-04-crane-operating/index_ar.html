@@ -124,50 +124,52 @@
    </head>
    <body>
       <div id="task">
-         <h1>اختبار الرافعة</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-               <p>
-                  اضغط علي المربع الرمادي المرقم لتحريك الرافعة علي الهدف "الصندوق" المطلوب  .
-               </p>
-               <p>
-                  كلما نقص عدد الخطوات في الحل كلما زادت النقاط التي تحصل عليها .
-               </p>
-            <table id="inputs">
-               <tr>
-                  <td id="target_container">
-                     <p>
-                        Target:
-                     </p>
-                     <div id="target_anim"></div>
-                  </td>
-               </tr>
-            </table>
+         <div style="direction: rtl">
+            <h1>اختبار الرافعة</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+                  <p>
+                     اضغط علي المربع الرمادي المرقم لتحريك الرافعة علي الهدف "الصندوق" المطلوب  .
+                  </p>
+                  <p>
+                     كلما نقص عدد الخطوات في الحل كلما زادت النقاط التي تحصل عليها .
+                  </p>
+               <table id="inputs">
+                  <tr>
+                     <td id="target_container">
+                        <p>
+                           Target:
+                        </p>
+                        <div id="target_anim"></div>
+                     </td>
+                  </tr>
+               </table>
 
-            <div id="anim_container">
-               <div id="anim"></div>
-            </div>
-            <!-- FOR TOKENS  <table id="sequence">
-               <tr>
-                  <td id="tokens">
-                     &nbsp;
-                  </td>
-               </tr>
-            </table> -->
-            <p id="feedback">
-            </p>
-            <!--<p id="instructions">
-               Click on the grey buttons to control the crane.
-            </p>-->
+               <div id="anim_container">
+                  <div id="anim"></div>
+               </div>
+               <!-- FOR TOKENS  <table id="sequence">
+                  <tr>
+                     <td id="tokens">
+                        &nbsp;
+                     </td>
+                  </tr>
+               </table> -->
+               <p id="feedback">
+               </p>
+               <!--<p id="instructions">
+                  Click on the grey buttons to control the crane.
+               </p>-->
 
-            
-            <div id="buttons">
-               <span id="message_counter">Number of steps: <span id="step_counter"></span>.</span>
-               <input type="button" id="undo" value="Undo" />
-               <!--<input type="button" id="reset" value="Restart" />-->
+               
+               <div id="buttons">
+                  <span id="message_counter">Number of steps: <span id="step_counter"></span>.</span>
+                  <input type="button" id="undo" value="Undo" />
+                  <!--<input type="button" id="reset" value="Restart" />-->
+               </div>
+               <img src="magnet.png" style="display:none">           
+               <img src="icon.png" style="display:none">
             </div>
-            <img src="magnet.png" style="display:none">           
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

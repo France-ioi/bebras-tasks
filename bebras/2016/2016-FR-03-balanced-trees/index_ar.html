@@ -89,45 +89,47 @@
    </head>
    <body>
       <div id="task">
-         <h1>الدوائر والأسهم</h1>
-         <div id="tabsContainer"></div>
-<div id="taskContent">
-            <p>
-               اضف <span class="easy medium">5</span><span class="hard">13</span> أسهم للشكل التالي بحيث
-               <ul>
-                  <li>نستطيع الوصل إلى اي دائرة من دائرة القندس بتتبع<span class="easy"> الأسهم </span><span class="medium"> سهمين أو أقل </span><span class="hard"> ثلاث أسهم أو أقل </span>.</li>
-                  <li class="medium hard">لا يوجد أكثر من سهمين بالدائرة الواحدة</li>
-               </ul>
-            </p>
+         <div style="direction: rtl">
+            <h1>الدوائر والأسهم</h1>
+            <div id="tabsContainer"></div>
+   <div id="taskContent">
+               <p>
+                  اضف <span class="easy medium">5</span><span class="hard">13</span> أسهم للشكل التالي بحيث
+                  <ul>
+                     <li>نستطيع الوصل إلى اي دائرة من دائرة القندس بتتبع<span class="easy"> الأسهم </span><span class="medium"> سهمين أو أقل </span><span class="hard"> ثلاث أسهم أو أقل </span>.</li>
+                     <li class="medium hard">لا يوجد أكثر من سهمين بالدائرة الواحدة</li>
+                  </ul>
+               </p>
 
 
-            <p>
-               اضغط على دائرتين للتوصيل بينهم
-            </p>
-            <p>
-               اضغط على السهم لحذفه
-            </p>
-            <div id="anim_container">
-               <div id="anim"></div>
-               <div id="feedback"></div>
+               <p>
+                  اضغط على دائرتين للتوصيل بينهم
+               </p>
+               <p>
+                  اضغط على السهم لحذفه
+               </p>
+               <div id="anim_container">
+                  <div id="anim"></div>
+                  <div id="feedback"></div>
+               </div>
+               <div id="control">
+                  <table>
+                     <tr>
+                        <td>
+                           <span id="edges"></span>
+                        </td>
+                        <td>
+                           <span id="verticesLeft"></span>
+                        </td>
+                        <td>
+                           <input type="button" value="Essayer" id="execute" />
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+               <img src="icon.png" style="display:none">
+               <img src="castor.png" style="display:none">
             </div>
-            <div id="control">
-               <table>
-                  <tr>
-                     <td>
-                        <span id="edges"></span>
-                     </td>
-                     <td>
-                        <span id="verticesLeft"></span>
-                     </td>
-                     <td>
-                        <input type="button" value="Essayer" id="execute" />
-                     </td>
-                  </tr>
-               </table>
-            </div>
-            <img src="icon.png" style="display:none">
-            <img src="castor.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

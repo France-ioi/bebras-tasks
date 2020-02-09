@@ -154,298 +154,300 @@
    </head>
    <body>
       <div id="task">
-         <h1>قائمة الطعام</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <p>
-               اجعل قائمة الطعام مطابقة لقائمة الطعام المطلوبة
-               <span class="easy">.</span><span class="medium hard"> <br/> ورتبها بالترتيب الصحيح.</span>
-            </p>
-            <p>
-               استعمل القوائم التالية لتغيير قائمة الطعام.
-            </p>
-            <div id="controllersDiv">
-               <table>
-                  <tr>
-                     <td>
-                        <div class="easy">
-                           <table>
-                              <tr>
-                                 <td>
-                                    اختر النوع:
-                                 </td>
-                                 <td>
-                                    <select id="easy-type" class="controller property-type">
+         <div style="direction: rtl">
+            <h1>قائمة الطعام</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <p>
+                  اجعل قائمة الطعام مطابقة لقائمة الطعام المطلوبة
+                  <span class="easy">.</span><span class="medium hard"> <br/> ورتبها بالترتيب الصحيح.</span>
+               </p>
+               <p>
+                  استعمل القوائم التالية لتغيير قائمة الطعام.
+               </p>
+               <div id="controllersDiv">
+                  <table>
+                     <tr>
+                        <td>
+                           <div class="easy">
+                              <table>
+                                 <tr>
+                                    <td>
+                                       اختر النوع:
+                                    </td>
+                                    <td>
+                                       <select id="easy-type" class="controller property-type">
+                                          <option value="_empty"></option>
+                                       </select>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       اختر اللون:
+                                    </td>
+                                    <td>
+                                       <select id="easy-color" class="controller property-color">
+                                          <option value="_empty"></option>
+                                       </select>
+                                    </td>
+                                </tr>
+                              </table>
+                           </div>
+                           <div class="medium">
+                              <table>
+                                 <tr>
+                                    <td>
+                                       النوع
+                                    </td>
+                                    <td>
+                                       <select id="medium-type-comp" class="controller">
+                                          <option value="_empty"></option>
+                                          <option value="equal">يكون</option>
+                                          <option value="unequal">ليس</option>
+                                       </select>
+                                       <select id="medium-type" class="controller property-type">
+                                          <option value="_empty"></option>
+                                       </select>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr>
+                                 <tr>
+                                    <td>
+                                       اللون
+                                    </td>
+                                    <td>
+                                       <select id="medium-color-comp" class="controller">
+                                          <option value="_empty"></option>
+                                          <option value="equal">يكون</option>
+                                          <option value="unequal">ليس</option>
+                                       </select>
+                                       <select id="medium-color" class="controller property-color">
+                                          <option value="_empty"></option>
+                                       </select>
+                                    </td>
+                                 </tr>
+                                 <tr>
+                                    <td>
+                                       السعر
+                                    </td>
+                                    <td>
+                                       <select id="medium-price-comp" class="controller">
+                                          <option value="_empty"></option>
+                                          <option value="lower_equal">على الأكثر</option>
+                                          <option value="greater_equal">على الأقل</option>
+                                       </select>
+                                       <select id="medium-price" class="controller property-price">
+                                          <option value="_empty"></option>
+                                          <option value="1">1 جنيه</option>
+                                          <option value="2">2 جنيه</option>
+                                          <option value="3">3 جنيه</option>
+                                          <option value="4">4 جنيه</option>
+                                          <option value="5">5 جنيه</option>
+                                          <option value="6">6 جنيه</option>
+                                          <option value="7">7 جنيه</option>
+                                          <option value="8">8 جنيه</option>
+                                          <option value="9">9 جنيه</option>
+                                          <option value="10">10 جنيه</option>
+                                       </select>
+                                    </td>
+                                </tr>
+                                 <tr>
+                                    <td>الترتيب</td>
+                                    <td colspan="5">
+                                       <select id="medium-sorting" class="controller sorting">
                                        <option value="_empty"></option>
-                                    </select>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    اختر اللون:
-                                 </td>
-                                 <td>
-                                    <select id="easy-color" class="controller property-color">
-                                       <option value="_empty"></option>
-                                    </select>
-                                 </td>
-                             </tr>
+                                       <option value="color">باللون وأبجدياً</option>
+                                       <option value="name">بالاسم وأبجدياً</option>
+                                       <option value="type">بالنوع وأبجدياً</option>
+                                       <option value="price">بالسعر من الأقل إلى الأغلى</option>
+                                       </select>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                           <div class="hard">
+                              <table>
+                                 <tr>
+                                    <td>
+                                       <table>
+                                          <tr>
+                                             <td>
+                                                النوع
+                                             </td>
+                                             <td>
+                                                <select id="hard-type-comp1" class="controller">
+                                                   <option value="_empty"></option>
+                                                   <option value="equal">يكون</option>
+                                                   <option value="unequal">ليس</option>
+                                                </select>
+                                                <select id="hard-type1" class="controller property-type">
+                                                   <option value="_empty"></option>
+                                                </select>
+                                             </td>
+                                             <td>
+                                                <select id="hard-type-cond" class="controller conditionals">
+                                                   <option value="and">و</option>
+                                                   <option value="or">أو</option>
+                                                </select>
+                                             </td>
+                                             <td>
+                                                النوع
+                                             </td>
+                                             <td>
+                                                <select id="hard-type-comp2" class="controller">
+                                                   <option value="_empty"></option>
+                                                   <option value="equal">يكون</option>
+                                                   <option value="unequal">ليس</option>
+                                                </select>
+                                                <select id="hard-type2" class="controller property-type">
+                                                   <option value="_empty"></option>
+                                                </select>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                اللون
+                                             </td>
+                                             <td>
+                                                <select id="hard-color-comp1" class="controller">
+                                                   <option value="_empty"></option>
+                                                   <option value="equal">يكون</option>
+                                                   <option value="unequal">ليس</option>
+                                                </select>
+                                                <select id="hard-color1" class="controller property-color">
+                                                   <option value="_empty"></option>
+                                                </select>
+                                             </td>
+                                             <td>
+                                                <select id="hard-color-cond" class="controller conditionals">
+                                                   <option value="and">و</option>
+                                                   <option value="or">أو</option>
+                                                </select>
+                                             </td>
+                                             <td>
+                                                اللون
+                                             </td>
+                                             <td>
+                                                <select id="hard-color-comp2" class="controller">
+                                                   <option value="_empty"></option>
+                                                   <option value="equal">يكون</option>
+                                                   <option value="unequal">ليس</option>
+                                                </select>
+                                                <select id="hard-color2" class="controller property-color">
+                                                   <option value="_empty"></option>
+                                                </select>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                             <td>
+                                                السعر
+                                             </td>
+                                             <td>
+                                                <select id="hard-price-comp1" class="controller">
+                                                   <option value="_empty"></option>
+                                                   <option value="lower_equal">على الأكثر</option>
+                                                   <option value="greater_equal">على الأقل</option>
+                                                </select>
+                                                <select id="hard-price1" class="controller property-price">
+                                                   <option value="_empty"></option>
+                                                   <option value="1">1 جنيه</option>
+                                                   <option value="2">2 جنيه</option>
+                                                   <option value="3">3 جنيه</option>
+                                                   <option value="4">4 جنيه</option>
+                                                   <option value="5">5 جنيه</option>
+                                                   <option value="6">6 جنيه</option>
+                                                   <option value="7">7 جنيه</option>
+                                                   <option value="8">8 جنيه</option>
+                                                   <option value="9">9 جنيه</option>
+                                                   <option value="10">10 جنيه</option>
+                                                </select>
+                                             </td>
+                                             <td>
+                                                <select id="hard-price-cond" class="controller conditionals">
+                                                   <option value="and">و</option>
+                                                   <option value="or">أو</option>
+                                                </select>
+                                             </td>
+                                             <td>
+                                                السعر
+                                             </td>
+                                             <td>
+                                                <select id="hard-price-comp2" class="controller">
+                                                   <option value="_empty"></option>
+                                                   <option value="lower_equal">على الأكثر</option>
+                                                   <option value="greater_equal">على الأقل</option>
+                                                </select>
+                                                <select id="hard-price2" class="controller property-price">
+                                                   <option value="_empty"></option>
+                                                   <option value="1">1 جنيه</option>
+                                                   <option value="2">2 جنيه</option>
+                                                   <option value="3">3 جنيه</option>
+                                                   <option value="4">4 جنيه</option>
+                                                   <option value="5">5 جنيه</option>
+                                                   <option value="6">6 جنيه</option>
+                                                   <option value="7">7 جنيه</option>
+                                                   <option value="8">8 جنيه</option>
+                                                   <option value="9">9 جنيه</option>
+                                                   <option value="10">10 جنيه</option>
+                                                </select>
+                                             </td>
+                                          </tr>
+                                          <tr>
+                                              <td>
+                                                الترتيب
+                                              </td>
+                                              <td colspan="5">
+                                                <select id="hard-sorting" class="controller sorting">
+                                                   <option value="_empty"></option>
+                                                      <option value="color">باللون وأبجدياً</option>
+                                                      <option value="name">بالاسم وأبجدياً</option>
+                                                      <option value="type">بالنوع وأبجدياً</option>
+                                                      <option value="price">بالسعر من الأقل إلى الأغلى</option>
+                                                </select>
+                                             </td>
+                                          </tr>
+                                       </table>
+                                    </td>
+                                 </tr>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+               <div id="mainDiv">
+                  <table id="mainTable">
+                     <tr>
+                        <td class="mainTableTitle titles">قائمة الطعام:</td>
+                        <td class="mainTableTitle titles">القائمة المطلوبة:</td>
+                     </tr>
+                     <tr>
+                        <td class="mainTableCell">
+                           <table id="resultTable" class="itemTable">
                            </table>
-                        </div>
-                        <div class="medium">
-                           <table>
-                              <tr>
-                                 <td>
-                                    النوع
-                                 </td>
-                                 <td>
-                                    <select id="medium-type-comp" class="controller">
-                                       <option value="_empty"></option>
-                                       <option value="equal">يكون</option>
-                                       <option value="unequal">ليس</option>
-                                    </select>
-                                    <select id="medium-type" class="controller property-type">
-                                       <option value="_empty"></option>
-                                    </select>
-                                 </td>
-                                 <td></td>
-                                 <td></td>
-                               </tr>
-                              <tr>
-                                 <td>
-                                    اللون
-                                 </td>
-                                 <td>
-                                    <select id="medium-color-comp" class="controller">
-                                       <option value="_empty"></option>
-                                       <option value="equal">يكون</option>
-                                       <option value="unequal">ليس</option>
-                                    </select>
-                                    <select id="medium-color" class="controller property-color">
-                                       <option value="_empty"></option>
-                                    </select>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    السعر
-                                 </td>
-                                 <td>
-                                    <select id="medium-price-comp" class="controller">
-                                       <option value="_empty"></option>
-                                       <option value="lower_equal">على الأكثر</option>
-                                       <option value="greater_equal">على الأقل</option>
-                                    </select>
-                                    <select id="medium-price" class="controller property-price">
-                                       <option value="_empty"></option>
-                                       <option value="1">1 جنيه</option>
-                                       <option value="2">2 جنيه</option>
-                                       <option value="3">3 جنيه</option>
-                                       <option value="4">4 جنيه</option>
-                                       <option value="5">5 جنيه</option>
-                                       <option value="6">6 جنيه</option>
-                                       <option value="7">7 جنيه</option>
-                                       <option value="8">8 جنيه</option>
-                                       <option value="9">9 جنيه</option>
-                                       <option value="10">10 جنيه</option>
-                                    </select>
-                                 </td>
-                             </tr>
-                              <tr>
-                                 <td>الترتيب</td>
-                                 <td colspan="5">
-                                    <select id="medium-sorting" class="controller sorting">
-                                    <option value="_empty"></option>
-                                    <option value="color">باللون وأبجدياً</option>
-                                    <option value="name">بالاسم وأبجدياً</option>
-                                    <option value="type">بالنوع وأبجدياً</option>
-                                    <option value="price">بالسعر من الأقل إلى الأغلى</option>
-                                    </select>
-                                 </td>
-                              </tr>
+                        </td>
+                        <td class="mainTableCell">
+                           <table id="targetTable" class="itemTable">
                            </table>
-                        </div>
-                        <div class="hard">
-                           <table>
-                              <tr>
-                                 <td>
-                                    <table>
-                                       <tr>
-                                          <td>
-                                             النوع
-                                          </td>
-                                          <td>
-                                             <select id="hard-type-comp1" class="controller">
-                                                <option value="_empty"></option>
-                                                <option value="equal">يكون</option>
-                                                <option value="unequal">ليس</option>
-                                             </select>
-                                             <select id="hard-type1" class="controller property-type">
-                                                <option value="_empty"></option>
-                                             </select>
-                                          </td>
-                                          <td>
-                                             <select id="hard-type-cond" class="controller conditionals">
-                                                <option value="and">و</option>
-                                                <option value="or">أو</option>
-                                             </select>
-                                          </td>
-                                          <td>
-                                             النوع
-                                          </td>
-                                          <td>
-                                             <select id="hard-type-comp2" class="controller">
-                                                <option value="_empty"></option>
-                                                <option value="equal">يكون</option>
-                                                <option value="unequal">ليس</option>
-                                             </select>
-                                             <select id="hard-type2" class="controller property-type">
-                                                <option value="_empty"></option>
-                                             </select>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td>
-                                             اللون
-                                          </td>
-                                          <td>
-                                             <select id="hard-color-comp1" class="controller">
-                                                <option value="_empty"></option>
-                                                <option value="equal">يكون</option>
-                                                <option value="unequal">ليس</option>
-                                             </select>
-                                             <select id="hard-color1" class="controller property-color">
-                                                <option value="_empty"></option>
-                                             </select>
-                                          </td>
-                                          <td>
-                                             <select id="hard-color-cond" class="controller conditionals">
-                                                <option value="and">و</option>
-                                                <option value="or">أو</option>
-                                             </select>
-                                          </td>
-                                          <td>
-                                             اللون
-                                          </td>
-                                          <td>
-                                             <select id="hard-color-comp2" class="controller">
-                                                <option value="_empty"></option>
-                                                <option value="equal">يكون</option>
-                                                <option value="unequal">ليس</option>
-                                             </select>
-                                             <select id="hard-color2" class="controller property-color">
-                                                <option value="_empty"></option>
-                                             </select>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                          <td>
-                                             السعر
-                                          </td>
-                                          <td>
-                                             <select id="hard-price-comp1" class="controller">
-                                                <option value="_empty"></option>
-                                                <option value="lower_equal">على الأكثر</option>
-                                                <option value="greater_equal">على الأقل</option>
-                                             </select>
-                                             <select id="hard-price1" class="controller property-price">
-                                                <option value="_empty"></option>
-                                                <option value="1">1 جنيه</option>
-                                                <option value="2">2 جنيه</option>
-                                                <option value="3">3 جنيه</option>
-                                                <option value="4">4 جنيه</option>
-                                                <option value="5">5 جنيه</option>
-                                                <option value="6">6 جنيه</option>
-                                                <option value="7">7 جنيه</option>
-                                                <option value="8">8 جنيه</option>
-                                                <option value="9">9 جنيه</option>
-                                                <option value="10">10 جنيه</option>
-                                             </select>
-                                          </td>
-                                          <td>
-                                             <select id="hard-price-cond" class="controller conditionals">
-                                                <option value="and">و</option>
-                                                <option value="or">أو</option>
-                                             </select>
-                                          </td>
-                                          <td>
-                                             السعر
-                                          </td>
-                                          <td>
-                                             <select id="hard-price-comp2" class="controller">
-                                                <option value="_empty"></option>
-                                                <option value="lower_equal">على الأكثر</option>
-                                                <option value="greater_equal">على الأقل</option>
-                                             </select>
-                                             <select id="hard-price2" class="controller property-price">
-                                                <option value="_empty"></option>
-                                                <option value="1">1 جنيه</option>
-                                                <option value="2">2 جنيه</option>
-                                                <option value="3">3 جنيه</option>
-                                                <option value="4">4 جنيه</option>
-                                                <option value="5">5 جنيه</option>
-                                                <option value="6">6 جنيه</option>
-                                                <option value="7">7 جنيه</option>
-                                                <option value="8">8 جنيه</option>
-                                                <option value="9">9 جنيه</option>
-                                                <option value="10">10 جنيه</option>
-                                             </select>
-                                          </td>
-                                       </tr>
-                                       <tr>
-                                           <td>
-                                             الترتيب
-                                           </td>
-                                           <td colspan="5">
-                                             <select id="hard-sorting" class="controller sorting">
-                                                <option value="_empty"></option>
-                                                   <option value="color">باللون وأبجدياً</option>
-                                                   <option value="name">بالاسم وأبجدياً</option>
-                                                   <option value="type">بالنوع وأبجدياً</option>
-                                                   <option value="price">بالسعر من الأقل إلى الأغلى</option>
-                                             </select>
-                                          </td>
-                                       </tr>
-                                    </table>
-                                 </td>
-                              </tr>
-                           </table>
-                        </div>
-                     </td>
-                  </tr>
-               </table>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+               <img id="orange_image" src="orange.png" style="display:none">
+               <img id="brocoli_image"  src="brocoli.png" style="display:none">
+               <img id="rose_image"  src="rose.png" style="display:none">
+               <img id="carrot_image"  src="carrot.png" style="display:none">
+               <img id="cucumber_image" src="cucumber.png" style="display:none">
+               <img id="radish_image" src="radish.png" style="display:none">
+               <img id="apple_image" src="apple.png" style="display:none">
+               <img id="tulip_image" src="tulip.png" style="display:none">
+               <img id="banana_image" src="banana.png" style="display:none">
+               <img id="kiwi_image" src="kiwi.png" style="display:none">
+               <img id="eggplant_image" src="eggplant.png" style="display:none">
+               <img id="blackberry_image" src="blackberry.png" style="display:none">
+               <img id="icon_image" src="icon.png" style="display:none">
             </div>
-            <div id="mainDiv">
-               <table id="mainTable">
-                  <tr>
-                     <td class="mainTableTitle titles">قائمة الطعام:</td>
-                     <td class="mainTableTitle titles">القائمة المطلوبة:</td>
-                  </tr>
-                  <tr>
-                     <td class="mainTableCell">
-                        <table id="resultTable" class="itemTable">
-                        </table>
-                     </td>
-                     <td class="mainTableCell">
-                        <table id="targetTable" class="itemTable">
-                        </table>
-                     </td>
-                  </tr>
-               </table>
-            </div>
-            <img id="orange_image" src="orange.png" style="display:none">
-            <img id="brocoli_image"  src="brocoli.png" style="display:none">
-            <img id="rose_image"  src="rose.png" style="display:none">
-            <img id="carrot_image"  src="carrot.png" style="display:none">
-            <img id="cucumber_image" src="cucumber.png" style="display:none">
-            <img id="radish_image" src="radish.png" style="display:none">
-            <img id="apple_image" src="apple.png" style="display:none">
-            <img id="tulip_image" src="tulip.png" style="display:none">
-            <img id="banana_image" src="banana.png" style="display:none">
-            <img id="kiwi_image" src="kiwi.png" style="display:none">
-            <img id="eggplant_image" src="eggplant.png" style="display:none">
-            <img id="blackberry_image" src="blackberry.png" style="display:none">
-            <img id="icon_image" src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

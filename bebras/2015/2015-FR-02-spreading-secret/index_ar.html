@@ -63,31 +63,33 @@
    </head>
    <body>
       <div id="task">
-         <h1>تركيب الهوائيات</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-           <table id="instructions">
-           <tr>
-              <td>
-                 <p>
-                   انقر على المربعات التالية لوضع هوائيات بحيث يتم تغطية جميع الخلايا "البيضاء" بموجات الهوائي<span class="hard"> </span>  
-                 </p>
-                <p>يجب ألا يحدث أي تداخل بين الموجات </p>
-                <div id="error_text"></div>
-              </td>
-              <td>
-                 <div style="float:right" class="easy antenna"><img src="antenna_horizontal.png" /></div> 
-                 <div style="float:right" class="medium hard antenna"><img src="antenna.png" /></div> 
-              </td>
-           </tr>
-           </table>
+         <div style="direction: rtl">
+            <h1>تركيب الهوائيات</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+              <table id="instructions">
+              <tr>
+                 <td>
+                    <p>
+                      انقر على المربعات التالية لوضع هوائيات بحيث يتم تغطية جميع الخلايا "البيضاء" بموجات الهوائي<span class="hard"> </span>  
+                    </p>
+                   <p>يجب ألا يحدث أي تداخل بين الموجات </p>
+                   <div id="error_text"></div>
+                 </td>
+                 <td>
+                    <div style="float:right" class="easy antenna"><img src="antenna_horizontal.png" /></div> 
+                    <div style="float:right" class="medium hard antenna"><img src="antenna.png" /></div> 
+                 </td>
+              </tr>
+              </table>
 
 
-            <div id="grid_container" style="text-align:center">
-               <div id="grid"></div>
+               <div id="grid_container" style="text-align:center">
+                  <div id="grid"></div>
+               </div>
+               <div id="demo"></div>
+               <img src="icon.png" style="display:none">
             </div>
-            <div id="demo"></div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">

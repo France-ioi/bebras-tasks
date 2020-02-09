@@ -129,49 +129,51 @@
    </head>
    <body>
       <div id="task">
-         <h1>كلمات المرور</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <table id="task_description">
-               <tr>
-                  <td>
-                     <p>
-                         تتكون كلمة المرور من حروف<span class="easy"> وعلامات استفهام </span><span class="medium hard"> وعلامات استفهام وثلاث نقاط صغيرة  </span>.
-                     </p>
-                     <p>
-                        كل علامة <span class="symbol">?</span> ترمز لحرف واحد فقط
-                     </p>
-                     <p class="medium hard">
-                       النقاط الثلاثة الحمراء <span class="symbol">&#8230;</span> تعني وجود حرف أو حرفين أو أكثر
-                     </p>
-                  </td>
-                  <td>
-                     <div class="example_container">
-                        <p class="example_title"><strong>مثال</strong></p>
-                        <p> الكلمة&nbsp;: <strong><span id="pattern_example_0" dir="ltr" class="pattern"></span></strong>
+         <div style="direction: rtl">
+            <h1>كلمات المرور</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <table id="task_description">
+                  <tr>
+                     <td>
+                        <p>
+                            تتكون كلمة المرور من حروف<span class="easy"> وعلامات استفهام </span><span class="medium hard"> وعلامات استفهام وثلاث نقاط صغيرة  </span>.
                         </p>
-                        <p> الكلمات الشبيهة&nbsp;: </p>
-                        <table id="example0" class="words example"></table>
-                     </div>
-                  </td>
-                  <td>
-                     <div class="example_container">
-                       <p class="example_title"><strong>مثال</strong></p>
-                        <p> الكلمة&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" dir="ltr" class="pattern"></span></strong></p>  
-                        <p> الكلمات الشبيهة&nbsp;: </p>
-                        <table id="example1" class="words example"></table>
-                     </div>
-                  </td>
-               </tr>
-            </table>
-            <br/>
-            <div id="pattern_given">
-               قم باختيار <span class="hard">جميع</span> الـ <span class="easy medium"><b>3</b></span> كلمات الشبيهة
-               للكلمة&nbsp;:&nbsp;&nbsp; <span id="pattern_target" dir="ltr" class="pattern"></span>
-               <span class="hard"><br/>لن نخبرك بعدد الكلمات المشابهة</span>
+                        <p>
+                           كل علامة <span class="symbol">?</span> ترمز لحرف واحد فقط
+                        </p>
+                        <p class="medium hard">
+                          النقاط الثلاثة الحمراء <span class="symbol">&#8230;</span> تعني وجود حرف أو حرفين أو أكثر
+                        </p>
+                     </td>
+                     <td>
+                        <div class="example_container">
+                           <p class="example_title"><strong>مثال</strong></p>
+                           <p> الكلمة&nbsp;: <strong><span id="pattern_example_0" dir="ltr" class="pattern"></span></strong>
+                           </p>
+                           <p> الكلمات الشبيهة&nbsp;: </p>
+                           <table id="example0" class="words example"></table>
+                        </div>
+                     </td>
+                     <td>
+                        <div class="example_container">
+                          <p class="example_title"><strong>مثال</strong></p>
+                           <p> الكلمة&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" dir="ltr" class="pattern"></span></strong></p>  
+                           <p> الكلمات الشبيهة&nbsp;: </p>
+                           <table id="example1" class="words example"></table>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+               <br/>
+               <div id="pattern_given">
+                  قم باختيار <span class="hard">جميع</span> الـ <span class="easy medium"><b>3</b></span> كلمات الشبيهة
+                  للكلمة&nbsp;:&nbsp;&nbsp; <span id="pattern_target" dir="ltr" class="pattern"></span>
+                  <span class="hard"><br/>لن نخبرك بعدد الكلمات المشابهة</span>
+               </div>
+               <table id="main_words" class="words"></table>
+               <img src="icon.png" style="display:none">
             </div>
-            <table id="main_words" class="words"></table>
-            <img src="icon.png" style="display:none">
          </div>
      </div><!-- task -->
       <div id="solution">

@@ -126,86 +126,88 @@
    </head>
    <body>
       <div id="task">
-         <h1>إعادة الرسمة</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <p>
-قم بإعادة الرسم المطلوب عن طريق وضع الأوامر الموجودة بالأسفل بشكل صحيح. سوف يتم تكرار تلك الأوامر <span class = "nbLoops"> </span> مرات
-            </p>
-            <div id="top-spacing"></div>
-            <div style="text-align:center">
-               <table class="valigntop">
+         <div style="direction: rtl">
+            <h1>إعادة الرسمة</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <p>
+   قم بإعادة الرسم المطلوب عن طريق وضع الأوامر الموجودة بالأسفل بشكل صحيح. سوف يتم تكرار تلك الأوامر <span class = "nbLoops"> </span> مرات
+               </p>
+               <div id="top-spacing"></div>
+               <div style="text-align:center">
+                  <table class="valigntop">
+                     <tr>
+                        <td>
+                           <table class='examples valigntop'>
+                              <tr>
+                                 <td style="text-align:center"><b>مثال<br> سوف تكرر الأوامر التالية <span class="nbLoops"></span> مرات</b></td>
+                              </tr>
+                              <tr>
+                                 <td style="text-align:center">
+                                    <table style="margin:auto" id="sample0Text" class="example-text"></table>
+                                    <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="اضغط لتجربة المثال"></input>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                        <td>
+                           <table class='objectif valigntop'>
+                              <tr>
+                                 <td style="text-align:center"><b>الرسمة المطلوبة</b></td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <div id="target"></div>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+                
+               <div id="columns-wrapper">
+                  <table class="columns" style="clear: both">
                   <tr>
-                     <td>
-                        <table class='examples valigntop'>
-                           <tr>
-                              <td style="text-align:center"><b>مثال<br> سوف تكرر الأوامر التالية <span class="nbLoops"></span> مرات</b></td>
-                           </tr>
-                           <tr>
-                              <td style="text-align:center">
-                                 <table style="margin:auto" id="sample0Text" class="example-text"></table>
-                                 <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="اضغط لتجربة المثال"></input>
-                              </td>
-                           </tr>
-                        </table>
+                     <td style="width:170px">
+                        <div class="column_head" style="text-align:center">ضع الأوامر هنا</div>
+                     </td>
+                     <td style="width:250px">
+                        <div class="column_head" style="text-align:center">الأوامر</div>
                      </td>
                      <td>
-                        <table class='objectif valigntop'>
-                           <tr>
-                              <td style="text-align:center"><b>الرسمة المطلوبة</b></td>
-                           </tr>
-                           <tr>
-                              <td>
-                                 <div id="target"></div>
-                              </td>
-                           </tr>
-                        </table>
+                        <div class="column_head" style="text-align:center">نتيجة عمل البرنامج<br/> تم تنفيذ الأوامر <span class="nbLoops"></span> مرات</div>
                      </td>
                   </tr>
-               </table>
-            </div>
-             
-            <div id="columns-wrapper">
-               <table class="columns" style="clear: both">
-               <tr>
-                  <td style="width:170px">
-                     <div class="column_head" style="text-align:center">ضع الأوامر هنا</div>
-                  </td>
-                  <td style="width:250px">
-                     <div class="column_head" style="text-align:center">الأوامر</div>
-                  </td>
-                  <td>
-                     <div class="column_head" style="text-align:center">نتيجة عمل البرنامج<br/> تم تنفيذ الأوامر <span class="nbLoops"></span> مرات</div>
-                  </td>
-               </tr>
-               <tr>
-                  <td colspan="2">
-                     <div id="program" class="touch"></div>
-                  </td>
-                  <td rowspan="2">
-                     <div id="simuButtons" class="buttons" style="text-align:center;padding:10px">
-                        <input type="button" id="pause" value="توقف" onclick="task.pause()"/>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="button" id="stop" value="إنهاء" onclick="task.stop()" />
-                     </div>
-                     <div id="variableInfo" class="medium hard">قيمة "س" الحالية هي <span id="valueS">1</span>.</div>
-                     <div><span id="message"></span></div>
-                     <div id="result"></div>            
-                     
-                  </td>
-               </tr>
-               <tr>
-                  <td></td>
-                  <td>
-                     <div class="buttons" style="text-align: center">
-                        <input id="tryOrReset" type="button" onclick="task.trySequence()" value="محاولة">
-                     </div>
-                  </td>
-               </tr>
-               </table>
-            </div>
+                  <tr>
+                     <td colspan="2">
+                        <div id="program" class="touch"></div>
+                     </td>
+                     <td rowspan="2">
+                        <div id="simuButtons" class="buttons" style="text-align:center;padding:10px">
+                           <input type="button" id="pause" value="توقف" onclick="task.pause()"/>
+                           &nbsp;&nbsp;&nbsp;
+                           <input type="button" id="stop" value="إنهاء" onclick="task.stop()" />
+                        </div>
+                        <div id="variableInfo" class="medium hard">قيمة "س" الحالية هي <span id="valueS">1</span>.</div>
+                        <div><span id="message"></span></div>
+                        <div id="result"></div>            
+                        
+                     </td>
+                  </tr>
+                  <tr>
+                     <td></td>
+                     <td>
+                        <div class="buttons" style="text-align: center">
+                           <input id="tryOrReset" type="button" onclick="task.trySequence()" value="محاولة">
+                        </div>
+                     </td>
+                  </tr>
+                  </table>
+               </div>
 
-            <img src="icon.png" style="display:none">
+               <img src="icon.png" style="display:none">
+            </div>
          </div>
       </div><!-- task -->
       <div id="solution">

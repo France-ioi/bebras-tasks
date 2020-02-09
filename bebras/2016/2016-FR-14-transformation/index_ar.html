@@ -72,25 +72,27 @@
    </head>
    <body>
       <div id="task">
-         <h1>تنسيق الأشكال</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <p id="difficultyWarning" class="hard"></p>
-            <p>أضف أسهم للأشكال الموجودة داخل الدائرة البيضاء لتتحرك لمثيلتها في المنطقة الرمادية.</p>
+         <div style="direction: rtl">
+            <h1>تنسيق الأشكال</h1>
+            <div id="tabsContainer"></div>
+            <div id="taskContent">
+               <p id="difficultyWarning" class="hard"></p>
+               <p>أضف أسهم للأشكال الموجودة داخل الدائرة البيضاء لتتحرك لمثيلتها في المنطقة الرمادية.</p>
 
-            الشكل سوف يتبع  <span class="easy">السهم الذي يليه</span><span class="medium">السهمان الذان يليهاه</span><span class="hard">الثلاثة أسهم الاتي تليه</span></strong></p>
-            <p>اضغط على الشكلين الذان تريد إيصالهما ببعض لترسم سهم بينهم. اضغط على السهم لحذفه.</p>
-            
-            <div id="anim_container">
-               <div id="anim"></div>
+               الشكل سوف يتبع  <span class="easy">السهم الذي يليه</span><span class="medium">السهمان الذان يليهاه</span><span class="hard">الثلاثة أسهم الاتي تليه</span></strong></p>
+               <p>اضغط على الشكلين الذان تريد إيصالهما ببعض لترسم سهم بينهم. اضغط على السهم لحذفه.</p>
+               
+               <div id="anim_container">
+                  <div id="anim"></div>
+               </div>
+               <div id="stepCounter" class="medium hard"></div>
+               <div id="control">
+                  <input type="button" value="Essayer" id="execute" />
+                  <br><br>
+                  <input type="button" value="Remettre les formes à leur place de départ" id="resetSim" />
+               </div>
+               <img src="icon.png" style="display:none">
             </div>
-            <div id="stepCounter" class="medium hard"></div>
-            <div id="control">
-               <input type="button" value="Essayer" id="execute" />
-               <br><br>
-               <input type="button" value="Remettre les formes à leur place de départ" id="resetSim" />
-            </div>
-            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">
