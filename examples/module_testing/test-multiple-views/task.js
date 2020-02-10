@@ -9,9 +9,9 @@
                 },
                 database: {
                     databaseConfig: {
-                        pin_file: 'img/pin.png',
-                        pin_file_mistake: 'img/pin2.png',
-                        map_file: 'img/carteDeFrance.png',
+                        pin_file: 'database/pin.png',
+                        pin_file_mistake: 'database/pin2.png',
+                        map_file: 'database/carteDeFrance.png',
                         map_lng_left: -4.85,
                         map_lng_right: 9.65,
                         map_lat_top: 51.6,
@@ -20,32 +20,35 @@
                         //calculate_hash: true,
                         //strict_types: true
                     }
+                },
+                turtle: {
+                    overlayFileName: "turtle/grid5.png"
                 }
             },
 
             conceptViewer: true,
             maxInstructions: { easy: 50, medium: 50 },
             includeBlocks: {
-                groupByCategory: false,
+                groupByCategory: true,
                 generatedBlocks: {
                     robot: {
-                        shared: ['east'],
-                        easy: ['north', 'south', 'east', 'west'],
-                        medium: ['north', 'south', 'east', 'west'],
-                        hard: ['north', 'south', 'east', 'west']
+                        shared: ['north', 'south', 'east', 'west'],
                     },
                     database: {
                         shared: ['loadTable', 'displayTable' ]
+                    },
+                    p5: {
+                        shared: ['playSignal', 'playRecord', 'playStop', 'sleep', 'echo']
+                    },
+                    turtle: {
+                        shared: ['moveamountvalue', 'turnleftamountvalue', 'turnrightamountvalue', 'colourvalue']
                     }
                 },
                 standardBlocks: {
                     includeAll: false,
                     wholeCategories: [],
                     singleBlocks: {
-                        shared: [],
-                        easy: [],
-                        medium: ['controls_repeat'],
-                        hard: ['controls_repeat']
+                        shared: ['controls_repeat'],
                     }
                 }
             },
@@ -60,9 +63,9 @@
                 'number', 'image', 'string', 'date'
             ],
             records: [
-                [ 1, 'img/apple.jpg', 'apple', '2018-01-01' ],
-                [ 2, 'img/banana.jpg', 'banana', '2019-01-01' ],
-                [ 3, 'img/kiwi.jpg', 'kiwi', '2020-01-01' ],
+                [ 1, 'database/apple.jpg', 'apple', '2018-01-01' ],
+                [ 2, 'database/banana.jpg', 'banana', '2019-01-01' ],
+                [ 3, 'database/kiwi.jpg', 'kiwi', '2020-01-01' ],
                 //[ 4, null, 'null_image_here_null_image_here_null_image_here_null_image_here', '2021-01-01' ],
             ]
         }
@@ -81,6 +84,11 @@
                                 data: test_table
                             }
                         }
+                    },
+                    turtle: {
+                        drawSolution : function(turtle) {
+                            turtle.move(100);
+                        },
                     }
                 },
                 {
@@ -99,6 +107,11 @@
                                 data: test_table
                             }
                         }
+                    },
+                    turtle: {
+                        drawSolution : function(turtle) {
+                            turtle.move(100);
+                        },
                     }
                 }
             ],
@@ -115,6 +128,11 @@
                                 data: test_table
                             }
                         }
+                    },
+                    turtle: {
+                        drawSolution : function(turtle) {
+                            turtle.move(100);
+                        },
                     }
                 }
             ]

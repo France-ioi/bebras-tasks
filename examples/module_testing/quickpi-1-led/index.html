@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Quick Pi Test Template</title>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/quickpi/quickpi.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules/';
+        importModules([
+            'jquery-1.7.1', 'JSON-js', 'raphael-2.2.1', 'beaver-task-2.0', 'jschannel', 'raphaelFactory-1.0', 'delayFactory-1.0', 'simulationFactory-1.0',
+            'platform-pr', 'buttonsAndMessages', 'beav-1.0', 'installationAPI.01', 'miniPlatform',
+            'conceptDisplay-1.0', 'conceptViewer-1.0', 'conceptViewer_css-1.0',
+            'taskStyles-mobileFirst', 'quickpi-board', 'blockly-quickpi' ]);
+
+        // set Blockly as default language when none is specified through ?language=
+        importLanguageModules('blockly');
+    </script>
+    <script class="remove" type="text/javascript">
+        var json = {
+            "id": "test-template",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "acceptedAnswers": [""],
+            "fullFeedback": true,
+            "minWidth": "auto"
+        };
+
+        var strings = {
+            outputCorrect: "Bravo ! La sortie est correcte.",
+            outputIncorrect: "La sortie est incorrecte."
+        };
+    </script>
+    <script type="text/javascript" src="task.js"></script>
+</head>
+
+   <body onresize="task.displayedSubTask.updateScale()">
+      <div id="task">
+         <h1>Exemple d'exercice</h1>
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="taskIntro">
+                <!--
+               <p>
+                  Turn led on in port D5.
+               </p>
+                -->
+               <div class="basic">
+                   <!--<p>solution: while true { sleep(1); ledOn(); sleep(1); ledOff() } </p>-->
+               </div>
+
+               <div class="easy">
+                   <p>Écrivez un programme qui allume la LED.</p>
+                   <!--
+                   <p>solution:
+                       while True { if button(22) on(5) else off(5) if button(24) on(16) else off(16) }
+                    }
+                   </p>-->
+               </div>
+               <div class="medium">
+                  <p>Écrivez un programme qui allume la LED pendant une seconde (1000 millisecondes), puis l'éteint.</p>
+                  <!--
+                   <p>
+                       a = 0;
+                       while true {
+                         waitForButton();
+                         a = a + 1;
+                         displayText("count", a);
+                       }
+                   </p>-->
+               </div>
+               <div class="hard">
+                   <p>Écrivez un programme qui allume la LED pendant 3 secondes, l'éteint pendant 2 secondes, puis la rallume pendant 1 seconde.</p>
+                   <!--
+                   <p>
+                       while true {
+                            setServoAngle( getPotencioneter * 1.8  );
+                       }
+                   </p>-->
+               </div>
+               <br/>
+
+            </div>
+            <div id="gridContainer"></div>
+            <div id="blocklyLibContent"></div>
+         </div>
+      </div><!-- task -->
+   </body>
+</html>

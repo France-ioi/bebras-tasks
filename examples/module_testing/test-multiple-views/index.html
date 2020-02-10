@@ -19,7 +19,8 @@
 
             'database', 'blockly_database', 'database_css',
             'blockly-robot-1.0',
-            'p5', 'p5.sound', 'player_p5', 'blockly_p5', 'logger'
+            'p5', 'p5.sound', 'player_p5', 'blockly_p5', 'logger',
+            'blockly-turtle'
 
          ]);
         // set Blockly as default language when none is specified through ?language=
@@ -45,9 +46,12 @@
    <body onresize="task.displayedSubTask.updateScale()">
       <div id="task">
          <h1>header</h1>
-         <img src="obstacle.png" style="display:none" />
-         <img src="red_robot.png" style="display:none" />
-         <img src="icon.png" style="display:none" />
+         <img src="robot/obstacle.png" style="display:none" />
+         <img src="robot/red_robot.png" style="display:none" />
+         <img src="robot/icon.png" style="display:none" />
+
+			<img src="turtle/grid5.png" style="display: none" />
+			<img src="turtle/turtle.png" id="turtleImg" style="display: none" />
 
          <div id="tabsContainer"></div>
          <div id="taskContent">
