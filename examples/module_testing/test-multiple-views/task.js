@@ -4,6 +4,16 @@
             mergedMode: true,
 
             mergedModeOptions: {
+                map: {
+                    mapConfig: {
+                        pin_file: 'map/pin.png',
+                        map_file: 'map/carteDeFrance.png',
+                        map_lng_left: -4.85,
+                        map_lng_right: 9.65,
+                        map_lat_top: 51.6,
+                        map_lat_bottom: 41.7
+                    }
+                },
                 robot: {
                     contextType: 'course',
                 },
@@ -31,6 +41,9 @@
             includeBlocks: {
                 groupByCategory: true,
                 generatedBlocks: {
+                    map: {
+                        shared:[ 'clearMap', 'addLocation', 'addRoad', 'geoDistance', 'getLatitude', 'getLongitude','getNeighbors', 'shortestPath', 'echo' ]
+                    },
                     robot: {
                         shared: ['north', 'south', 'east', 'west'],
                     },
