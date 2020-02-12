@@ -4,6 +4,12 @@
             mergedMode: true,
 
             mergedModeOptions: {
+                processing: {
+                    buttonHideInitialDrawing: true,
+                    processing3D: false,
+                    //processing3D: true,
+                    buttonScaleDrawing: true,
+                },
                 map: {
                     mapConfig: {
                         pin_file: 'map/pin.png',
@@ -41,8 +47,11 @@
             includeBlocks: {
                 groupByCategory: true,
                 generatedBlocks: {
+                    processing: {
+                        shared: ["line", "point", "quad", "rect"]
+                    },
                     map: {
-                        shared:[ 'clearMap', 'addLocation', 'addRoad', 'geoDistance', 'getLatitude', 'getLongitude','getNeighbors', 'shortestPath', 'echo' ]
+                        shared: ['clearMap', 'addLocation', 'addRoad', 'geoDistance', 'getLatitude', 'getLongitude','getNeighbors', 'shortestPath', 'echo' ]
                     },
                     robot: {
                         shared: ['north', 'south', 'east', 'west'],
@@ -83,9 +92,43 @@
             ]
         }
 
+
+        // Processing 2D
+        var initialDrawing = function(processing) {
+            processing.noStroke();
+            processing.fill(255, 0, 0);
+            processing.ellipse(150, 180, 180, 180);
+            processing.ellipse(70, 70, 100, 100);
+            processing.ellipse(230, 70, 100, 100);
+            processing.fill(255);
+            processing.ellipse(150, 180, 150, 150);
+            processing.fill(0, 255, 0);
+            processing.ellipse(150, 180, 50, 50);
+        }
+
+        // Processing 3D
+        /*
+        var initialDrawing = function(processing) {
+            processing.noStroke();
+            processing.lights();
+            processing.pushMatrix();
+            processing.fill(255, 0, 0);
+            processing.sphere(39.9);
+            processing.translate(0, -60, 0);
+            processing.fill(0, 255, 0);
+            processing.sphere(19.9);
+            processing.popMatrix();
+            processing.fill(255, 255, 255);
+        }
+        */
+
+
         subTask.data = {
             easy: [
                 {
+                    processing: {
+                        initialDrawing: initialDrawing
+                    },
                     robot: {
                         tiles: [[2, 2, 2, 2, 2, 2], [2, 1, 1, 1, 3, 2], [2, 2, 2, 2, 2, 2]],
                         initItems: [{ row: 1, col: 1, type: 'red_robot' }],
@@ -105,6 +148,9 @@
                     }
                 },
                 {
+                    processing: {
+                        initialDrawing: initialDrawing
+                    },
                     robot: {
                         tiles: [[2, 2, 2, 2, 2], [2, 1, 1, 1, 2], [2, 1, 2, 1, 2], [2, 2, 3, 1, 2], [2, 2, 2, 2, 2]],
                         initItems: [{ row: 2, col: 1, type: 'red_robot', dir: null }]
@@ -130,6 +176,9 @@
             ],
             medium: [
                 {
+                    processing: {
+                        initialDrawing: initialDrawing
+                    },
                     robot: {
                         tiles: [[0, 0, 0, 0, 0, 0, 2, 3, 2, 0], [0, 0, 0, 0, 0, 2, 2, 1, 2, 2], [0, 0, 0, 0, 0, 2, 1, 1, 1, 2], [2, 2, 2, 2, 2, 2, 2, 1, 1, 2], [2, 1, 1, 2, 2, 1, 2, 1, 1, 2], [2, 1, 2, 2, 1, 1, 2, 2, 1, 2], [2, 1, 1, 1, 1, 1, 1, 1, 1, 2], [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]],
                         initItems: [{ row: 4, col: 2, type: 'red_robot' }]
