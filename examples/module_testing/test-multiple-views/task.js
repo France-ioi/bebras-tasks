@@ -47,6 +47,9 @@
             includeBlocks: {
                 groupByCategory: true,
                 generatedBlocks: {
+                    printer: {
+                        shared: ["print", "read", "readInteger", "readFloat", "eof"]
+                    },
                     processing: {
                         shared: ["line", "point", "quad", "rect"]
                     },
@@ -68,7 +71,7 @@
                 },
                 standardBlocks: {
                     includeAll: false,
-                    wholeCategories: [],
+                    wholeCategories: [ 'variables', 'texts'],
                     singleBlocks: {
                         shared: ['controls_repeat'],
                     }
@@ -126,6 +129,10 @@
         subTask.data = {
             easy: [
                 {
+                    printer: {
+                        input: "2\n",
+                        output: "2\n"
+                    },
                     processing: {
                         initialDrawing: initialDrawing
                     },
@@ -148,6 +155,10 @@
                     }
                 },
                 {
+                    printer: {
+                        input: "3\n",
+                        output: "3\n"
+                    },
                     processing: {
                         initialDrawing: initialDrawing
                     },
@@ -176,6 +187,10 @@
             ],
             medium: [
                 {
+                    printer: {
+                        input: "2\n",
+                        output: "2\n"
+                    },
                     processing: {
                         initialDrawing: initialDrawing
                     },
