@@ -33,7 +33,8 @@ window.Quiz.grader.data = [
         messages: [
             'Grader msg: question 2, wrong answer idx 0',
             null,
-            'Grader msg: question 2, wrong answer idx 2'
+            'Grader msg: question 2, wrong answer idx 2',
+            null
         ],
         value: [1, 3]
     },
