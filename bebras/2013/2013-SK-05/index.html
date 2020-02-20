@@ -2,19 +2,23 @@
 <html>
    <head>
       <meta charset="utf-8">
+      <meta name="viewport" content="width=770, initial-scale=1.0">
       <title>2013-SK-05</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+         ]);
+      </script>
 
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2013/2013-SK-05/",
@@ -33,156 +37,58 @@
           ]
       };
       </script>
-      <!-- put task css here -->
-      <style class="">
-         #jaune_sol, #rouge_sol1, #bleu_sol, #bleu_sol1 {
-            
-         }
-      </style>
       <script type="text/javascript" src="2013-SK-05-blue.js"></script>
       <script type="text/javascript" src="2013-SK-05-green.js"></script>
       <script type="text/javascript" src="2013-SK-05-red.js"></script>
       <script type="text/javascript" src="2013-SK-05-yellow.js"></script>
-      <script type="text/javascript" src="2013-SK-05-necklace-V1.js"></script>
-      <script class="" type="text/javascript">
-         var paperWidth = 400, paperHeight = 170;
-         var dragAndDrop;
-         var nb = 4, w = 80, h = 80;
-         var wIm = 3*w/4, hIm = 3*w/4;
-         var iYellow = 3;
-
-         function drawBead(paper, id) {
-            switch(id) {
-               case 0:
-                  return DrawBleu(paper);
-                  break;
-               case 1:
-                  return DrawVert(paper);
-                  break;
-               case 2:
-                  return DrawRouge(paper);
-                  break;
-               case 3:
-                  return DrawJaune(paper);
-                  break;
-            }
+      <!-- <script type="text/javascript" src="2013-SK-05-necklace-V1.js"></script> -->
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            failure: "Ce n'est pas la bonne réponse"
+         };
+      </script>
+      <style>
+         #necklace {
+            width:430px;
+            height:234px;
+            margin: auto;
+         }
+         #paper {
+            margin: auto;
+            margin-top: 1em;
          }
 
-            task.solutionViewLoaded= false;
-            task.hackShowViews = function(views) {
-                  if (views.solution && !this.solutionViewLoaded) {
-                     this.solutionViewLoaded = true;
-                     loadJaune("sol1");
-                     loadRouge("sol2");
-                     loadBleu("sol3");
-                     loadRouge("sol4");
-                  }
-            }
-            
-            task.load= function(views, callback) {
-               paper = Raphael('anim',paperWidth, paperHeight);
-               
-               if (views.solution && !this.solutionViewLoaded) {
-                  this.solutionViewLoaded = true;
-                  loadJaune("sol1");
-                  loadRouge("sol2");
-                  loadBleu("sol3");
-                  loadRouge("sol4");
-               }
-               loadNecklace();
-               
-               //DragAndDropSystem
-               dragAndDrop = DragAndDropSystem({
-                  paper : paper,
-                  canBeTaken : function(contId, pos) { 
-                     return !(contId == 'seq' && pos == 0); 
-                  },
-                  actionIfDropped : function(srcCont, srcPos, dstCont, dstPos, dropType) {
-                     return (dstCont == 'seq' && dstPos > 0) || dstCont == null;
-                  }
-               });
-
-               var perlImage = [
-                  drawBead(paper, 0),
-                  drawBead(paper, 1),
-                  drawBead(paper, 2),
-                  drawBead(paper, 3)
-               ];
-               
-               dragAndDrop.addContainer({
-                  ident : 'seq',
-                  cx : paperWidth/2, cy: 120, widthPlace : w, heightPlace : h,
-                  nbPlaces : nb,
-                  placeBackgroundArray : [paper.rect(-w/2,-h/2,w,h)],
-                  dropMode : 'insertBefore',
-                  dragDisplayMode : 'preview'
-               });
-               
-               for(var iSource = 0; iSource < 4; iSource++)
-               {
-                  dragAndDrop.addContainer({
-                     ident : iSource,
-                     cx : paperWidth*(1+iSource)/(nb+1), cy: 40, widthPlace : w, heightPlace : h,
-                     type : 'source',
-                     placeBackgroundArray : [],
-                     sourceElemArray : [perlImage[iSource]]
-                  });
-               }
-
-               dragAndDrop.insertObject('seq', 0, {ident : iYellow, elements : [DrawJaune(paper)] });
-               callback();
-            },
-
-            task.reloadAnswer= function(strAnswer, callback) {
-               var answer = [3, null, null, null];
-               if (strAnswer != "") {
-                  answer = $.parseJSON(strAnswer);
-               }
-               var current = dragAndDrop.getObjects('seq');
-               for (var iObject = 1; iObject < 4; iObject++) {
-                  if (current[iObject] != null) {
-                     dragAndDrop.removeObject('seq', iObject);
-                  }
-                  var id = answer[iObject];
-                  if (id != null) {
-                     var element = [drawBead(paper, id)];
-                     dragAndDrop.insertObject('seq', iObject, {ident : id, elements : element });
-                  }
-               }
-               callback();
-            };
-
-            task.getAnswer= function(callback) {
-               callback(JSON.stringify(dragAndDrop.getObjects('seq')));
-            };
-      </script>
+      </style>
+      
    </head>
    <body>
       <div id="task">
          <h1>Collier de perles</h1>
-         <table><tr><td>
-            <p>
-            Castor veut fabriquer le collier ci-contre à l'aide d'une machine.
-            </p>
-            <p>
-            Pour cela, il doit indiquer un motif de 4 perles. La machine produira alors un collier en répétant ce motif, en enfilant les perles une par une sur le fil situé sur le haut du collier.
-            </p>
-         </td><td>
-            <div id="necklace" style="width:450px;height:234px"><div/>
-         </td></tr></table>
-         <table><tr><td>
-         <p>
-         Quelle est la séquence de 4 perles que Castor doit utiliser&nbsp;?
-         </p>
-         <p>
-         Glissez les perles dans les cases pour former cette séquence. La première perle vous est donnée.
-         </p>
-         </td><td>
-            <table><tr><td>
-            <div id="anim" style="width:400px;height:174px" class="touch"></div>
-            </td></tr></table>
-         </td></tr>
-      </table>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  Castor veut fabriquer le collier ci-contre à l'aide d'une machine.
+                  </p>
+                  <p>
+                  Pour cela, il doit indiquer un motif de 4 perles. La machine produira alors un collier en répétant ce motif, en enfilant les perles une par une sur le fil situé sur le haut du collier.
+                  </p>
+                  <p>
+                  Quelle est la séquence de 4 perles que Castor doit utiliser&nbsp;?
+                  </p>
+                  <p>
+                  Glissez les perles dans les cases pour former cette séquence. La première perle vous est donnée.
+                  </p>
+                  <div id="necklace"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper" class="touch"></div>
+            </div>
+         </div>            
       </div><!-- task -->
       <div id="solution">
          <h2>La solution</h2>
