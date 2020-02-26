@@ -11,11 +11,11 @@
       <script class="remove" type="text/javascript">
          var modulesPath = '../../../_common/modules';
          importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
             'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths'
          ]);
       </script>
 
@@ -37,23 +37,20 @@
           ]
       };
       </script>
-      <script type="text/javascript" src="2013-SK-05-blue.js"></script>
-      <script type="text/javascript" src="2013-SK-05-green.js"></script>
-      <script type="text/javascript" src="2013-SK-05-red.js"></script>
-      <script type="text/javascript" src="2013-SK-05-yellow.js"></script>
-      <!-- <script type="text/javascript" src="2013-SK-05-necklace-V1.js"></script> -->
       <script type="text/javascript" src="task.js"></script>
       <script type="text/javascript">
          var taskStrings = {
             success: "Bravo, vous avez réussi !",
-            failure: "Ce n'est pas la bonne réponse"
+            failure: "Ce n'est pas la bonne réponse",
+            current: "Résultat",
+            target: "Objectif"
          };
       </script>
       <style>
          #necklace {
-            width:430px;
-            height:234px;
-            margin: auto;
+            /*width:430px;*/
+            /*height:234px;*/
+            margin: 1em auto;
          }
          #paper {
             margin: auto;
@@ -82,10 +79,10 @@
                   <p>
                   Glissez les perles dans les cases pour former cette séquence. La première perle vous est donnée.
                   </p>
-                  <div id="necklace"></div>
                </div>
             </div>
             <div id="zone_2">
+               <div id="necklace"></div>
                <div id="paper" class="touch"></div>
             </div>
          </div>            
