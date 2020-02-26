@@ -4,13 +4,19 @@ function initTask(subTask) {
    var answer = null;
    var data = {
       easy: {
-         
+         nbShapes: 4,
+         nbRepeat: 7,
+         solution: [3,2,0,2]
       },
       medium: {
-         
+         nbShapes: 5,
+         nbRepeat: 5,
+         solution: [2,4,1,3,0]
       },
       hard: {
-         
+         nbShapes: 5,
+         nbRepeat: 5,
+         solution: [3,2,0,2,4]
       }
    };
    var patternPaper;
@@ -22,18 +28,19 @@ function initTask(subTask) {
    var titleH = 30;
    var marginY = 20;
    var necklacePaperH = titleH + 2*marginY + necklaceH;
-   var nb = 4, w = 80, h = 80;
+   var nb, w = 80, h = 80;
    var r = w * 3/8;
    var rBeads = 11;
 
    var dragAndDrop;
+   var rng;
    var targetRaph = {};
    var currRaph = {};
    var iYellow = 3;
-   var solution = [3,2,0,2];
-   var nbRepeat = 7;
-   var shapes = [ "pentagon", "triangle", "circle", "square" ];
-   var shapeColors = [ "blue", "green", "red", "yellow" ];
+   var solution;
+   var nbRepeat;
+   var shapes = [ "pentagon", "triangle", "circle", "square", "diamond" ];
+   var shapeColors = [ "blue", "green", "red", "yellow", "cyan" ];
    var stringAttr = {
       stroke: "black",
       "stroke-width": 2
@@ -45,7 +52,11 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function (curLevel) {
-
+      level = curLevel;
+      nb = data[level].nbShapes;
+      nbRepeat = data[level].nbRepeat;
+      solution = data[level].solution;
+      rng = new RandomGenerator(subTask.taskParams.randomSeed);
    };
 
    subTask.getStateObject = function () {
@@ -54,6 +65,9 @@ function initTask(subTask) {
 
    subTask.reloadAnswerObject = function (answerObj) {
       answer = answerObj;
+      if(answer){
+         rng.reset(answer.seed);
+      }
    };
 
    subTask.resetDisplay = function () {
@@ -67,13 +81,31 @@ function initTask(subTask) {
    };
 
    subTask.getDefaultAnswerObject = function () {
-      var defaultAnswer = Beav.Array.init(nb,(x => (x == 0) ? iYellow : null));
+      var defaultAnswer = { seed: rng.nextInt(1,10000) };
+      if(level == "easy"){
+         defaultAnswer.necklace = Beav.Array.init(nb,(x => (x == 0) ? iYellow : null));
+      }else{
+         defaultAnswer.necklace = Beav.Array.make(nb,null);
+         // if(level == "medium"){
+            defaultAnswer.beadChange = Beav.Array.init(nb,(x => x));
+            var different = false;
+            do{
+               rng.shuffle(defaultAnswer.beadChange);
+               for(var iBead = 0; iBead < nb; iBead++){
+                  if(defaultAnswer.beadChange[iBead] != iBead){
+                     different = true;
+                  }
+               }
+            }while(!different)
+         // }
+      }
       return defaultAnswer;
    };
 
    function getResultAndMessage() {
-      for(var iPearl = 0; iPearl < answer.length; iPearl++){
-         if(answer[iPearl] != solution[iPearl]){
+      for(var iPearl = 0; iPearl < answer.necklace.length; iPearl++){
+         var pearl = (level == "easy") ? answer.necklace[iPearl] : answer.beadChange[answer.necklace[iPearl]];
+         if(pearl != solution[iPearl]){
             return { successRate: 0, message: taskStrings.failure };
          }
       }
@@ -100,14 +132,14 @@ function initTask(subTask) {
       dragAndDrop = DragAndDropSystem({
          paper : patternPaper,
          drop : function(srcContId, srcPos, dstContId, dstPos, type) {
-            answer = dragAndDrop.getObjects('seq');
+            answer.necklace = dragAndDrop.getObjects('seq');
             updateNecklace();
          },
          canBeTaken : function(contId, pos) { 
-            return !(contId == 'seq' && pos == 0); 
+            return (level == "easy") ? !(contId == 'seq' && pos == 0) : true; 
          },
          actionIfDropped : function(srcCont, srcPos, dstCont, dstPos, dropType) {
-            return (dstCont == 'seq' && dstPos > 0) || dstCont == null;
+            return (level == "easy") ? ((dstCont == 'seq' && dstPos > 0) || dstCont == null) : (dstCont == 'seq'|| dstCont == null);
          }
       });
       
@@ -120,18 +152,17 @@ function initTask(subTask) {
          dragDisplayMode : 'preview'
       });
       
-      for(var iSource = 0; iSource < 4; iSource++)
-      {
+      for(var iSource = 0; iSource < nb; iSource++){
          dragAndDrop.addContainer({
             ident : iSource,
-            cx : patternPaperWidth*(1+iSource)/(nb+1), cy: 40, widthPlace : w, heightPlace : h,
+            cx : patternPaperWidth/2 -(nb/2)*w +(1/2+iSource)*w, cy: 40, widthPlace : w, heightPlace : h,
             type : 'source',
             placeBackgroundArray : [],
             sourceElemArray : [drawBead(iSource,patternPaper,0,0,r)]
          });
       }
       for(var iPearl = 0; iPearl < nb; iPearl++){
-         var pearl = answer[iPearl];
+         var pearl = answer.necklace[iPearl];
          if(pearl != null){
             dragAndDrop.insertObject('seq', iPearl, {ident : pearl, elements : [drawBead(pearl,patternPaper,0,0,r)] });
          }
@@ -169,15 +200,29 @@ function initTask(subTask) {
       }else{
          x0 += (neckLacePaperW/2 - necklaceW)/2;
          path = currRaph.string;
-         source = answer;
+         if(level == "easy"){
+            source = answer.necklace;
+         }else{
+            source = [];
+            for(var iBead = 0; iBead < nb; iBead++){
+               source[iBead] = answer.beadChange[answer.necklace[iBead]];
+            }
+         }
          currRaph.beads = necklacePaper.set(); 
       }
-      var length = path.getTotalLength() - 50;
+      var length = (level == "easy") ? path.getTotalLength() - 50 : path.getTotalLength() - 90;
       for(var iRepeat = 0; iRepeat < nbRepeat; iRepeat++){
          for(var iBead = 0; iBead < source.length; iBead++){
-            var beadID = source[iBead];
+            if(level != "hard"){
+               var beadID = source[iBead];
+            }else{
+               var beadID = (source[iBead] != null) ? (source[iBead] + 2*iRepeat)%nb : null;
+            }
             if(beadID != null){
                length -= rBeads*2;
+            }
+            if(length < rBeads){
+               continue
             }
             var pos = path.getPointAtLength(length);
             var bead = drawBead(beadID,necklacePaper,x0 + pos.x,y0 + pos.y,rBeads);
