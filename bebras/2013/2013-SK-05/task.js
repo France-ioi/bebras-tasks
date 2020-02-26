@@ -83,21 +83,25 @@ function initTask(subTask) {
    subTask.getDefaultAnswerObject = function () {
       var defaultAnswer = { seed: rng.nextInt(1,10000) };
       if(level == "easy"){
-         defaultAnswer.necklace = Beav.Array.init(nb,(x => (x == 0) ? iYellow : null));
+         defaultAnswer.necklace = [];
+         for(var iBead = 0; iBead < nb; iBead++){
+         	defaultAnswer.necklace[iBead] = (iBead == 0) ? iYellow : null;
+         }
       }else{
          defaultAnswer.necklace = Beav.Array.make(nb,null);
-         // if(level == "medium"){
-            defaultAnswer.beadChange = Beav.Array.init(nb,(x => x));
-            var different = false;
-            do{
-               rng.shuffle(defaultAnswer.beadChange);
-               for(var iBead = 0; iBead < nb; iBead++){
-                  if(defaultAnswer.beadChange[iBead] != iBead){
-                     different = true;
-                  }
+         defaultAnswer.beadChange = [];
+         for(var iBead = 0; iBead < nb; iBead++){
+         	defaultAnswer.beadChange[iBead] = iBead;
+         }
+         var different = false;
+         do{
+            rng.shuffle(defaultAnswer.beadChange);
+            for(var iBead = 0; iBead < nb; iBead++){
+               if(defaultAnswer.beadChange[iBead] != iBead){
+                  different = true;
                }
-            }while(!different)
-         // }
+            }
+         }while(!different)
       }
       return defaultAnswer;
    };
@@ -226,7 +230,7 @@ function initTask(subTask) {
             }
             var pos = path.getPointAtLength(length);
             var bead = drawBead(beadID,necklacePaper,x0 + pos.x,y0 + pos.y,rBeads);
-            bead.rotate(pos.alpha);
+            bead.transform("r"+pos.alpha);
             if(necklace == "current"){
                currRaph.beads.push(bead);
             }
