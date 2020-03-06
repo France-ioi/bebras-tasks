@@ -189,7 +189,8 @@ function initTask(subTask) {
          var yText = yc*0.4;
          var name = paper.text(xText,yText,answer.names[iPetal]).attr(attr.text);
          var textAngle = (angle <= 180) ? -90 : 90
-         name.transform("r"+angle+" "+xc+" "+yc+",r"+textAngle);
+         // name.transform("r"+angle+" "+xc+" "+yc+",r"+textAngle);
+         name.transform("r"+angle+" "+xc+" "+yc+",r"+textAngle+" "+xText+" "+yText);
          flowerRaph[iPetal] = paper.set(petal,name);
       }
       paper.circle(xc,yc,36).attr(attr.circle);
