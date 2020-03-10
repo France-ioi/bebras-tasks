@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-FR-09</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script type="text/javascript" src="2013-FR-09_palace.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-09/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": []
+      };
+      </script>
+      <script class="" type="text/javascript">
+         task.load = function(views, callback) {
+            loadPalace();
+            callback();
+         };
+         task.unload = function(callback) {
+            if(setIntervalHandle != null) {
+               clearInterval(setIntervalHandle);
+               setIntervalHandle = null;
+            }
+            callback();
+         };
+         task.reloadAnswer= function(strAnswer, callback) {
+            $("#answer").val(strAnswer);
+            callback();
+         };
+         
+         task.getAnswer= function(callback) {
+            callback($("#answer").val());
+         };
+      </script>
+      <script class="grader" type="text/javascript">
+      grader.gradeTask= function(strAnswer, answerToken, callback) {
+          platform.getTaskParams(null, null, function(taskParams) {
+            strAnswer = strAnswer.toUpperCase();
+            var score = taskParams.minScore;
+            var wrong = false;
+            if (checkCommand(strAnswer) != "") {
+               wrong = true;
+            } else {
+               var lin = 1, col = 0;
+               if(getDoor(lin, col, strAnswer.charAt(0)) != 0) {
+                   wrong = true;
+               } else {
+                  for (var pos = 1; pos < strAnswer.length; pos++) {
+                     var door = getDoor(lin, col, strAnswer.charAt(pos));
+                     if(door < 0) {
+                        wrong = true;
+                        break;
+                     }
+                     lin += dirs[door][0];
+                     col += dirs[door][1];
+                     if(lin < 0 || col < 0 || lin >= letters.length || col >= letters[0].length) {
+                        wrong = true;
+                        break;
+                     }
+                  }
+               }
+            }
+            if (wrong === false && lin == 2 && col == 5) {
+               score = taskParams.maxScore;
+            }
+            callback(score, '');
+         });
+      };
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Sauver le prince</h1>
+         <p>
+         Le prince Castor est emprisonné dans le château, dans la pièce marquée d'une croix bleue sur le plan. 
+         Les pièces du château contiennent des portes, chacune marquée par une lettre. 
+         </p>
+         <p>
+         La princesse va partir de l'entrée et tenter de délivrer le prince. Quelle séquence de lettres donner à la princesse pour qu'elle puisse rejoindre le prince en passant les portes correspondantes&nbsp;?
+         </p>
+         <center>
+       <div id="palace" style="width:700px;height:380px"></div>
+         <div><span id="error"></span><span id="success"></span></div>
+         <input type="text" id="answer"> <input type="button"
+         value="Essayer cette séquence" onclick="execute()">
+         </center>
+         <p>
+         Vous pouvez essayer autant de séquences que vous souhaitez.
+         </p>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+         <p>
+         Il y avait plusieurs chemins possibles. La solution la plus courte est&nbsp;: <input type="text" readonly="true" style="border:none;font-size:100%;font-weight:bold" value="ABCEBEDAE">.</p>
+
+         <h2>C'est de l'informatique !</h2>
+         <p>
+         Les déplacements sont souvent décrits à l'aide d'instructions qui ne dépendent pas de l'état du terrain, par exemple «&nbsp;déplace-toi d'une case vers le Nord&nbsp;», ou «&nbsp;tourne à droite de 90 degrés&nbsp;» ou «&nbsp;avance d'une case&nbsp;».
+         </p>
+         <p>
+         Cependant, les règles de déplacements peuvent également dépendre du terrain. Ainsi, dans ce sujet, une instruction «&nbsp;passe par la porte B&nbsp;» décrit un déplacement qui dépend non seulement de la lettre «&nbsp;B&nbsp;» considérée, mais aussi de la pièce où se trouve actuellement la princesse.
+         </p>
+         <p>
+         Plus généralement, les instructions d'un programme informatique peuvent être indépendantes des données (par exemple, «&nbsp;écrire 5 dans la case numéro 3&nbsp;»), ou bien être dépendantes des données (par exemple, «&nbsp;écrire 5 dans la case dont le numéro est égal à la valeur stockée dans la case numéro 2&nbsp;»). Les programmes dont les actions sont indépendantes des données sont plus simples à comprendre, mais les programmes dont les actions dépendent des données permettent d'accomplir beaucoup plus de tâches.
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>
+ 

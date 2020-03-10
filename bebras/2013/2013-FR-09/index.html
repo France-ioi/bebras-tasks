@@ -2,19 +2,34 @@
 <html>
    <head>
       <meta charset="utf-8">
+      <meta name="viewport" content="width=770, initial-scale=1.0">
       <title>2013-FR-09</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', 'jschannel',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths'
+         ]);
+      </script>
+    <!-- <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css"> -->
+    <!-- <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script> -->
+    <!-- <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script> -->
 
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script type="text/javascript" src="2013-FR-09_palace.js"></script>
+    <!-- <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script> -->
+    <!-- <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script> -->
+    <!-- <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script> -->
+    <!-- <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script> -->
+    <!-- <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script> -->
+    <!-- <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script> -->
+    <!-- <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script> -->
+      <!-- <script type="text/javascript" src="2013-FR-09_palace.js"></script> -->
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2013/2013-FR-09/",
@@ -30,81 +45,120 @@
       };
       </script>
       <script class="" type="text/javascript">
-         task.load = function(views, callback) {
-            loadPalace();
-            callback();
-         };
-         task.unload = function(callback) {
-            if(setIntervalHandle != null) {
-               clearInterval(setIntervalHandle);
-               setIntervalHandle = null;
-            }
-            callback();
-         };
-         task.reloadAnswer= function(strAnswer, callback) {
-            $("#answer").val(strAnswer);
-            callback();
-         };
+         // task.load = function(views, callback) {
+         //    loadPalace();
+         //    callback();
+         // };
+         // task.unload = function(callback) {
+         //    if(setIntervalHandle != null) {
+         //       clearInterval(setIntervalHandle);
+         //       setIntervalHandle = null;
+         //    }
+         //    callback();
+         // };
+         // task.reloadAnswer= function(strAnswer, callback) {
+         //    $("#answer").val(strAnswer);
+         //    callback();
+         // };
          
-         task.getAnswer= function(callback) {
-            callback($("#answer").val());
-         };
+         // task.getAnswer= function(callback) {
+         //    callback($("#answer").val());
+         // };
       </script>
       <script class="grader" type="text/javascript">
-      grader.gradeTask= function(strAnswer, answerToken, callback) {
-          platform.getTaskParams(null, null, function(taskParams) {
-            strAnswer = strAnswer.toUpperCase();
-            var score = taskParams.minScore;
-            var wrong = false;
-            if (checkCommand(strAnswer) != "") {
-               wrong = true;
-            } else {
-               var lin = 1, col = 0;
-               if(getDoor(lin, col, strAnswer.charAt(0)) != 0) {
-                   wrong = true;
-               } else {
-                  for (var pos = 1; pos < strAnswer.length; pos++) {
-                     var door = getDoor(lin, col, strAnswer.charAt(pos));
-                     if(door < 0) {
-                        wrong = true;
-                        break;
-                     }
-                     lin += dirs[door][0];
-                     col += dirs[door][1];
-                     if(lin < 0 || col < 0 || lin >= letters.length || col >= letters[0].length) {
-                        wrong = true;
-                        break;
-                     }
-                  }
-               }
-            }
-            if (wrong === false && lin == 2 && col == 5) {
-               score = taskParams.maxScore;
-            }
-            callback(score, '');
-         });
-      };
+      // grader.gradeTask= function(strAnswer, answerToken, callback) {
+      //     platform.getTaskParams(null, null, function(taskParams) {
+      //       strAnswer = strAnswer.toUpperCase();
+      //       var score = taskParams.minScore;
+      //       var wrong = false;
+      //       if (checkCommand(strAnswer) != "") {
+      //          wrong = true;
+      //       } else {
+      //          var lin = 1, col = 0;
+      //          if(getDoor(lin, col, strAnswer.charAt(0)) != 0) {
+      //              wrong = true;
+      //          } else {
+      //             for (var pos = 1; pos < strAnswer.length; pos++) {
+      //                var door = getDoor(lin, col, strAnswer.charAt(pos));
+      //                if(door < 0) {
+      //                   wrong = true;
+      //                   break;
+      //                }
+      //                lin += dirs[door][0];
+      //                col += dirs[door][1];
+      //                if(lin < 0 || col < 0 || lin >= letters.length || col >= letters[0].length) {
+      //                   wrong = true;
+      //                   break;
+      //                }
+      //             }
+      //          }
+      //       }
+      //       if (wrong === false && lin == 2 && col == 5) {
+      //          score = taskParams.maxScore;
+      //       }
+      //       callback(score, '');
+      //    });
+      // };
       </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            failure: "Ce n'est pas la bonne réponse. Cliquez sur \"Réessayer\"",
+            prince: "Prince",
+            empty: "La séquence est vide.",
+            tooLong: "La séquence des portes est trop longue ! Vous ne devez pas dépasser 50 caractères.",
+            invalidChar: "Un des caractères est invalide.",
+            window: "La princesse est tombée par la fenêtre!",
+            errorFirstDoor: "Le code de la première porte est mauvais.",
+            wrongPath: "La princesse n'est pas arrivée à destination.",
+            out: "La princesse est ressortie du château!",
+            noDoor: function(char) {
+               return "Il n'y a pas de porte nommée " + char+ " ici."
+            }
+         };
+      </script>
+      <style type="text/css">
+         #paper {
+            margin: 1em auto;
+         }
+         #answer {
+            margin-right: 2em;
+         }
+         #error {
+            text-align: center;
+         }
+      </style>
    </head>
    <body>
       <div id="task">
          <h1>Sauver le prince</h1>
-         <p>
-         Le prince Castor est emprisonné dans le château, dans la pièce marquée d'une croix bleue sur le plan. 
-         Les pièces du château contiennent des portes, chacune marquée par une lettre. 
-         </p>
-         <p>
-         La princesse va partir de l'entrée et tenter de délivrer le prince. Quelle séquence de lettres donner à la princesse pour qu'elle puisse rejoindre le prince en passant les portes correspondantes&nbsp;?
-         </p>
-         <center>
-       <div id="palace" style="width:700px;height:380px"></div>
-         <div><span id="error"></span><span id="success"></span></div>
-         <input type="text" id="answer"> <input type="button"
-         value="Essayer cette séquence" onclick="execute()">
-         </center>
-         <p>
-         Vous pouvez essayer autant de séquences que vous souhaitez.
-         </p>
+          <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  Le prince Castor est emprisonné dans le château, dans la pièce marquée d'une croix bleue sur le plan. 
+                  Les pièces du château contiennent des portes, chacune marquée par une lettre. 
+                  </p>
+                  <p>
+                  La princesse va partir de l'entrée et tenter de délivrer le prince. Quelle séquence de lettres donner à la princesse pour qu'elle puisse rejoindre le prince en passant les portes correspondantes&nbsp;?
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+               <center>
+                  <input type="text" id="answer"> 
+                  <input type="button" value="Essayer cette séquence" id="answerButton">
+                  <p>
+                  Vous pouvez essayer autant de séquences que vous souhaitez.
+                  </p>
+               </center>
+               <div id="error"></div>
+            </div>
+            <img src="prince.png" id="prince" style="display:none">
+            <img src="princess.png" id="princess" style="display:none">
 
       </div><!-- task -->
       <div id="solution">
