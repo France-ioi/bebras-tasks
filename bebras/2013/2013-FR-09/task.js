@@ -6,20 +6,18 @@ function initTask(subTask) {
       easy: {
          corridors: {
             Y: [
-               ["C","D","A","D","C","B"],
-               [null,"C","C",null,"D",null],
-               ["D",null,"D","E",null,"E"],
-               ["B","B",null,null,"C","B"],
-               ["D","D","D","B","E","A"]
+               ["C","C","C","C"],
+               ["D","D","D","D"],
+               ["C","C","C","C"],
+               ["D","D","D","D"]
             ],
             X: [
-               ["A","B","E","B","E","A","D"],
-               ["A","B",null,"B",null,"A","B"],
-               ["A",null,"C","B","D",null,"D"],
-               ["C","A",null,"C","A","D","E"]
+               ["A","B","A","B","A"],
+               ["A","B","A","B","A"],
+               ["A","B","A","B","A"]
             ]
          },
-         princePos: [2,5]
+         princePos: [2,3]
          
       },
       medium: {
