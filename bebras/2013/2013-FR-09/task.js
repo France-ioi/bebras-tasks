@@ -6,34 +6,33 @@ function initTask(subTask) {
       easy: {
          corridors: {
             Y: [
-               ["C","C","C","C"],
-               ["D","D","D","D"],
-               ["C","C","C","C"],
-               ["D","D","D","D"]
+               [2,2,2,2],
+               [3,3,3,3],
+               [2,2,2,2],
+               [3,3,3,3]
             ],
             X: [
-               ["A","B","A","B","A"],
-               ["A","B","A","B","A"],
-               ["A","B","A","B","A"]
+               [0,1,0,1,0],
+               [0,1,0,1,0],
+               [0,1,0,1,0]
             ]
          },
          princePos: [2,3]
-         
       },
       medium: {
          corridors: {
             Y: [
-               ["C","D","A","D","C","B"],
-               [null,"C","C",null,"D",null],
-               ["D",null,"D","E",null,"E"],
-               ["B","B",null,null,"C","B"],
-               ["D","D","D","B","E","A"]
+               [2,3,0,3,2,1],
+               [null,2,2,null,3,null],
+               [3,null,3,4,null,4],
+               [1,1,null,null,2,1],
+               [3,3,3,1,4,0]
             ],
             X: [
-               ["A","B","E","B","E","A","D"],
-               ["A","B",null,"B",null,"A","B"],
-               ["A",null,"C","B","D",null,"D"],
-               ["C","A",null,"C","A","D","E"]
+               [0,1,4,1,4,0,3],
+               [0,1,null,1,null,0,1],
+               [0,null,2,1,3,null,3],
+               [2,0,null,2,0,3,4]
             ]
          },
          princePos: [2,5]
@@ -41,20 +40,20 @@ function initTask(subTask) {
       hard: {
          corridors: {
             Y: [
-               ["C","D","A","D","C","B"],
-               [null,"C","C",null,"D",null],
-               ["D",null,"D","E",null,"E"],
-               ["B","B",null,null,"C","B"],
-               ["D","D","D","B","E","A"]
+               [3,1,0,2,0,2],
+               [2,null,3,0,2,null],
+               [null,2,0,null,null,1],
+               [1,0,2,0,3,3],
+               [0,2,0,3,0,1]
             ],
             X: [
-               ["A","B","E","B","E","A","D"],
-               ["A","B",null,"B",null,"A","B"],
-               ["A",null,"C","B","D",null,"D"],
-               ["C","A",null,"C","A","D","E"]
+               [1,0,2,1,null,1,3],
+               [0,1,null,1,3,1,0],
+               [0,3,null,3,null,null,2],
+               [2,null,1,null,1,2,0]
             ]
          },
-         princePos: [2,5]
+         princePos: [2,4]
       }
    };
 
@@ -77,6 +76,9 @@ function initTask(subTask) {
    var towerW = 40;
    var towerH = 60;
    var animTime = 500;
+   var letters = ["A","B","C","D","E"];
+
+   var rng;
 
    var corridors;
    var nbCol;
@@ -85,6 +87,7 @@ function initTask(subTask) {
    var princess;
    var initPos = {};
    var roomPos = [];
+   var corrRaph = {};
 
    var wallAttr = {
       stroke: "black",
@@ -126,6 +129,7 @@ function initTask(subTask) {
       nbCol = corridors.Y[0].length;
       paperWidth = marginX + 2*labelSpace + hallLength + nbCol*(roomSize + corridorLength) + wallThickness;
       paperHeight = 4*marginY + 2*wallThickness + nbRows*(roomSize + corridorLength) + corridorLength;
+      rng = new RandomGenerator(subTask.taskParams.randomSeed);
    };
 
    subTask.getStateObject = function () {
@@ -135,13 +139,13 @@ function initTask(subTask) {
    subTask.reloadAnswerObject = function (answerObj) {
       answer = answerObj;
       if(answer){
-         // rng.reset(answer.seed);
+         rng.reset(answer.seed);
       }
    };
 
    subTask.resetDisplay = function () {
       displayError("");
-      $("#answer").val(answer);
+      $("#answer").val(answer.seq);
       initPaper();
       initHandlers();
       displayHelper.hideValidateButton = true;
@@ -152,7 +156,19 @@ function initTask(subTask) {
    };
 
    subTask.getDefaultAnswerObject = function () {
-      var defaultAnswer = "";
+      var defaultAnswer = { 
+         seq: "", 
+         letters: JSON.parse(JSON.stringify(letters)),
+         seed: rng.nextInt(1,10000) 
+      };
+      if(level != "hard"){
+         rng.shuffle(defaultAnswer.letters);
+      }else{
+         var shift = rng.nextInt(0,letters.length);
+         for(var iLetter = 0; iLetter < letters.length; iLetter++){
+            defaultAnswer.letters[iLetter] = letters[(iLetter + shift)%letters.length];
+         }
+      }
       return defaultAnswer;
    };
 
@@ -163,6 +179,7 @@ function initTask(subTask) {
 
    subTask.unloadLevel = function (callback) {
       subTask.raphaelFactory.stopAnimate("anim");
+      subTask.delayFactory.destroy("delay");
       callback();
    };
 
@@ -192,9 +209,8 @@ function initTask(subTask) {
       resetPrincess();
       var command = $("#answer").val();
       command = command.replace(/\s+/g, '').toUpperCase();
-      answer = command;
+      answer.seq = command;
       checkResult();
-      // console.log("commande:"+command);
    };
 
    function drawPalace() {
@@ -250,32 +266,44 @@ function initTask(subTask) {
             }
          }
       }
+      corrRaph.Y = [];
       for(var iRow = 0; iRow < corridors.Y.length; iRow++){
+         corrRaph.Y[iRow] = [];
          var y = yWallTop + wallThickness + marginY + iRow*(roomSize + corridorLength);
          for(var iCol = 0; iCol < corridors.Y[0].length; iCol++){
             var x = xWallTop + wallThickness + marginX + corridorLength + roomSize/2 - corridorW/2 + iCol*(roomSize + corridorW);
-            var corr = corridors.Y[iRow][iCol];
-            if(corr){
-               paper.rect(x,y,corridorW,corridorLength).attr(corridorAttr);
-               paper.text(x + corridorW/2,y + corridorLength/2,corr).attr(letterAttr);
+            var corrID = corridors.Y[iRow][iCol];
+            if(corrID != null){
+               var letter = answer.letters[corrID];
+               var rect = paper.rect(x,y,corridorW,corridorLength).attr(corridorAttr);
+               var text = paper.text(x + corridorW/2,y + corridorLength/2,letter).attr(letterAttr);
+               corrRaph.Y[iRow][iCol] = paper.set(rect,text);
+            }else{
+               corrRaph.Y[iRow][iCol] = null;
             }
          }
       }
+      corrRaph.X = [];
       var xHall, yHall;
       for(var iRow = 0; iRow < corridors.X.length; iRow++){
+         corrRaph.X[iRow] = [];
          var y = yWallTop + wallThickness + marginY + corridorLength + roomSize/2 - corridorW/2 + iRow*(roomSize + corridorW);
          for(var iCol = 0; iCol < corridors.X[0].length; iCol++){
             var x = xWallTop + wallThickness + marginX + iCol*(roomSize + corridorW);
-            var corr = corridors.X[iRow][iCol];
-            if(corr){
+            var corrID = corridors.X[iRow][iCol];
+            if(corrID != null){
+               var letter = answer.letters[corrID];
                if(iRow == 1 && iCol == 0){
                   xHall = x - hallLength + corridorLength;
                   yHall = y;
-                  paper.rect(xHall,yHall,hallLength,corridorW).attr(hallAttr);
+                  var rect = paper.rect(xHall,yHall,hallLength,corridorW).attr(hallAttr);
                }else{
-                  paper.rect(x,y,corridorLength,corridorW).attr(corridorAttr);
+                  var rect = paper.rect(x,y,corridorLength,corridorW).attr(corridorAttr);
                }
-               paper.text(x + corridorLength/2,y + corridorW/2,corr).attr(letterAttr);
+               var text = paper.text(x + corridorLength/2,y + corridorW/2,letter).attr(letterAttr);
+               corrRaph.X[iRow][iCol] = paper.set(rect,text);
+            }else{
+               corrRaph.X[iRow][iCol] = null;
             }
          }
       }
@@ -309,13 +337,13 @@ function initTask(subTask) {
 
    function checkResult(noVisual) {
       var error;
-      if(answer.length == 0){
+      if(answer.seq.length == 0){
          error = taskStrings.empty;
-      }else if(answer.length > 50){
+      }else if(answer.seq.length > 50){
          error = taskStrings.tooLong;
       }else{
          for(var iChar = 0; iChar < answer.length; iChar++)
-            if(answer.charAt(iChar) < "A" || answer.charAt(iChar) > "Z") {
+            if(answer.seq.charAt(iChar) < "A" || answer.seq.charAt(iChar) > "Z") {
               error = taskStrings.invalidChar;
          }
       }
@@ -336,7 +364,7 @@ function initTask(subTask) {
       }
 
       if(!noVisual){
-         runAnimation(path,error);
+         runAnimation(path,error,0);
       }else if(error){
          return { successRate: 0, message: error }
       }else{
@@ -346,8 +374,21 @@ function initTask(subTask) {
 
    function nextMove(path) {
       var index = path.length;
-      var nextChar = (path.length <= answer.length) ? answer.charAt(index) : null;
-      if(index == 0 && nextChar != corridors.X[1][0]){
+      var currCorr = JSON.parse(JSON.stringify(corridors))
+      var nextChar = (path.length <= answer.seq.length) ? answer.seq.charAt(index) : null;
+      if(level == "hard"){
+         for(var dir in currCorr){
+            for(var iRow = 0; iRow < currCorr[dir].length; iRow++){
+               for(var iCol = 0; iCol < currCorr[dir][iRow].length; iCol++){
+                  if(currCorr[dir][iRow][iCol] != null){
+                     var newCorrID = (currCorr[dir][iRow][iCol] + index)%letters.length;
+                     currCorr[dir][iRow][iCol] = newCorrID;
+                  }
+               }
+            }
+         }
+      }
+      if(index == 0 && nextChar != answer.letters[currCorr.X[1][0]]){
          return taskStrings.errorFirstDoor;
       }else if(index == 0){
          path.push([1,0]);
@@ -360,14 +401,14 @@ function initTask(subTask) {
       var row = currPos[0];
       var col = currPos[1];
       var availCorr = {
-         top: corridors.Y[row][col],
-         bottom: corridors.Y[row + 1][col],
-         left: corridors.X[row][col],
-         right: corridors.X[row][col + 1]
+         top: currCorr.Y[row][col],
+         bottom: currCorr.Y[row + 1][col],
+         left: currCorr.X[row][col],
+         right: currCorr.X[row][col + 1]
       };
 
       for(var dir in availCorr){
-         if(nextChar == availCorr[dir]){
+         if(nextChar == answer.letters[availCorr[dir]]){
             switch(dir){
                case "top":
                   var newRow = row - 1;
@@ -410,7 +451,7 @@ function initTask(subTask) {
       return taskStrings.noDoor(nextChar);
    };
 
-   function runAnimation(path,error) {
+   function runAnimation(path,error,index) {
       if(path.length == 0){
          if(error){
             displayError(error);
@@ -423,7 +464,14 @@ function initTask(subTask) {
       var nextRoomPos = roomPos[nextPos[0]][nextPos[1]];
       var nextCoord = { x: nextRoomPos.x - princeW/2, y: nextRoomPos.y - princeH/2 };
       var anim = new Raphael.animation(nextCoord,animTime,function(){
-         runAnimation(path,error);
+         if(level == "hard"){
+            updateCorridors(index + 1);
+            subTask.delayFactory.create("delay",function(){
+               runAnimation(path,error,index + 1);
+            },animTime);
+         }else{
+            runAnimation(path,error,index + 1);
+         }
       });
       subTask.raphaelFactory.animate("anim",princess,anim);
    };
@@ -434,6 +482,22 @@ function initTask(subTask) {
 
    function resetPrincess() {
       princess.attr(initPos);
+      if(level == "hard"){
+         updateCorridors(0);
+      }
+   };
+
+   function updateCorridors(shift) {
+      for(var dir in corridors){
+         for(var iRow = 0; iRow < corridors[dir].length; iRow++){
+            for(var iCol = 0; iCol < corridors[dir][iRow].length; iCol++){
+               if(corridors[dir][iRow][iCol] != null){
+                  var newCorrID = (corridors[dir][iRow][iCol] + shift)%letters.length;
+                  corrRaph[dir][iRow][iCol][1].attr("text",answer.letters[newCorrID]);
+               }
+            }
+         }
+      }
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
