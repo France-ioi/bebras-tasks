@@ -342,9 +342,11 @@ function initTask(subTask) {
       }else if(answer.seq.length > 50){
          error = taskStrings.tooLong;
       }else{
-         for(var iChar = 0; iChar < answer.length; iChar++)
+         for(var iChar = 0; iChar < answer.seq.length; iChar++){
             if(answer.seq.charAt(iChar) < "A" || answer.seq.charAt(iChar) > "Z") {
-              error = taskStrings.invalidChar;
+              	error = taskStrings.invalidChar;
+               break;
+            }
          }
       }
       if(error){
