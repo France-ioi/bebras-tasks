@@ -1,24 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
    <head>
       <meta charset="utf-8">
-      <meta name="viewport" content="width=770, initial-scale=1.0">
       <title>2013-AT-02a</title>
-      <script>
-         window.stringsLanguage = 'fr';
-      </script>
-      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
-      <script class="remove" type="text/javascript">
-         var modulesPath = '../../../_common/modules';
-         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', 'jschannel',
-            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths'
-         ]);
-      </script>
-
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2013/2013-AT-02ab/",
@@ -33,49 +28,33 @@
           "acceptedAnswers": ["011000"]
       };
       </script>
-      <script type="text/javascript" src="task.js"></script>
-      <script type="text/javascript">
-         var taskStrings = {
-            success: "Bravo, vous avez réussi !",
-            failure: "Ce n'est pas la bonne réponse.",
-            check: "Cochez les cases correspondant aux mots de passe qui respectent les règles données.",
-            missing: "Vous n'avez pas coché tous les mots de passe valides."
-         };
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(1, [
+             "R5#a",
+             "Ouvre-T@1",
+             "1Grand-Pere",
+             "Sesame7",
+             "100%grandpa",
+             "P@ss%word"
+            ], "checkboxes", "#answers_2013-AT-02");
       </script>
-      <style type="text/css">
-         #checkboxes {
-            margin: 1em auto;
-            width: 200px;
-         }
-         #checkboxes input {
-            margin: 0.5em;
-         }
-      </style>
    </head>
    <body>
       <div id="task">
          <h1>Mot de passe</h1>
-         <div id="tabsContainer"></div>
-         <div id="taskContent">
-            <div id="zone_1">
-               <div class="consigne">
-                  <p>Grand-père Castor a besoin d'aide pour choisir un mot de passe qui respecte certaines règles.
-                  Son mot de passe doit comporter&nbsp;:
-                  <ul>
-                     <li> au moins 8 caractères,</li>
-                     <li> au moins un chiffre,</li>
-                     <li class="medium hard"> à la fois des lettres majuscules et des lettres minuscules,</li>
-                     <li> au moins un caractère spécial parmi % $ - # @ ? ! : / &amp;.</li>
-                  </ul>
-                  </p>
-                  <p>
-                  Parmi les mots de passe ci-dessous, quels sont <b>ceux qui respectent toutes les règles</b>&nbsp;?  
-                  </p>
-               </div>
-            </div>
-            <div id="zone_2">
-               <div id="checkboxes">
-            </div>
+
+         <p>Grand-père Castor a besoin d'aide pour choisir un mot de passe qui respecte certaines règles.
+         Son mot de passe doit comporter&nbsp;:
+         <ul><li> au moins 8 caractères,</li>
+         <li> au moins un chiffre,</li>
+         <li> à la fois des lettres majuscules et des lettres minuscules,</li>
+         <li> au moins un caractère spécial parmi % $ - # @ ? ! : / &amp;.</li>
+         </ul>
+         </p>
+         <p>
+         Parmi les mots de passe ci-dessous, quels sont <b>ceux qui respectent toutes les règles</b>&nbsp;?  
+         </p>
+         <div class="reponses" id="answers_2013-AT-02">
          </div>
       </div><!-- task -->
    <div id="solution">
