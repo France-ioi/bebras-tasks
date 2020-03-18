@@ -1,22 +1,25 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
    <head>
       <meta charset="utf-8">
+      <meta name="viewport" content="width=770, initial-scale=1.0">
       <title>2013-SI-01</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="stdAnswerTypes module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
-    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', 'jschannel',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths',
+            'graph-1.0', 'visual-graph-1.1'
+         ]);
+      </script>
 
-      <script type="text/javascript" src="2013-SI-01-reseau.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2013/2013-SI-01/",
@@ -31,49 +34,74 @@
           "acceptedAnswers": ["6"]
       };
       </script>
-      <script class="task" type="text/javascript">
-         stdAnsTypes.genTaskMultipleChoices(5, [
-              "Mounira",
-              "Nicolas",
-              "Kevin",
-              "Angela",
-              "Farid",
-              "Boris",
-              "Nathan",
-              "Yamina",
-              "Anna",
-              "Hasna"
-            ], "added", "#answers_2013-SI-01");
-      </script>
-      <script class="task" type="text/javascript">
-         // TODO: fix with the future pub/sub system
-         var taskViewLoaded = false;
-         var solutionViewLoaded = false;
-         task.hackShowViews = function(views) {
-            if (views.task && !taskViewLoaded) {
-               taskViewLoaded = true;
-               loadReseau();
+
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            failure: "Ce n'est pas la bonne réponse. Cliquez sur \"Réessayer\"",
+            check: "Vous devez cocher un nom.",
+            validate: "Valider",
+            retry: "Réessayer",
+            names: function(name1,name2) {
+               return "<b>"+name1+"</b> et <b>"+name2+"</b>"
             }
-         }
+         };
       </script>
+      <style type="text/css">
+         #network {
+            display: block;
+            width: 300px;
+            margin: 1em auto;
+         }
+         #paper {
+            margin: 1em auto;
+         }
+         #checkboxes {
+            margin: 2em auto;
+            width: 500px;
+         }
+         #checkboxes table {
+            border-collapse: collapse;
+         }
+         #checkboxes td {
+            border: 1px solid black;
+            padding: 0.5em;
+         }
+         #checkboxes input {
+            margin: 0.5em;
+         }
+         #error {
+            margin-top: 1em;
+            text-align: center;
+         }
+      </style>
    </head>
    <body>
       <div id="task">
          <h1>Élève absent</h1>
-         <div id="reseau" style="float:right;margin-left:1em;width:391px;height:330px" /></div>
-         <p> À l'école, les castors adorent propager des rumeurs. 
-         Le schéma montre qui répète les rumeurs à qui. 
-         </p>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p> À l'école, les castors adorent propager des rumeurs. 
+                  Le schéma montre qui répète les rumeurs à qui. 
+                  </p>
 
-         <p>Ce matin, <b>Anna</b> a rapporté une rumeur qui s'est aussitôt propagée parmi les castors. Mais, à midi, 
-         <b>Hasna</b> et <b>Nicolas</b>, qui avaient entendu la rumeur, ont croisé <b>Yamina</b> et <b>Farid</b>, qui n'avaient pas entendu la rumeur. 
-         </p>
-         <p>
-         Ils en ont déduit que l'un des castors est absent aujourd'hui. De qui s'agit-il&nbsp;?
-         </p>
+                  <p>Ce matin, <span id="source"></span> a rapporté une rumeur qui s'est aussitôt propagée parmi les castors. Mais, à midi, 
+                  <span id="heard"></span>, qui avaient entendu la rumeur, ont croisé <span id="notHeard"></span>, qui <span class="easy">n'avait</span><span class="medium hard">n'avaient</span> pas entendu la rumeur. 
+                  </p>
+                  <p>
+                  Ils en ont déduit que l'un des castors est absent aujourd'hui. De qui s'agit-il&nbsp;?
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+               <div id="checkboxes"></div>
+               <div id="error"></div>
+            </div>
 
-         <div style="clear:both"></div>
-         <div class="reponses" id="answers_2013-SI-01">
 
          </div>
       </div><!-- task -->

@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-SI-01</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script type="text/javascript" src="2013-SI-01-reseau.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-SI-01/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Janez Demsar (SI)",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["6"]
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(5, [
+              "Mounira",
+              "Nicolas",
+              "Kevin",
+              "Angela",
+              "Farid",
+              "Boris",
+              "Nathan",
+              "Yamina",
+              "Anna",
+              "Hasna"
+            ], "added", "#answers_2013-SI-01");
+      </script>
+      <script class="task" type="text/javascript">
+         // TODO: fix with the future pub/sub system
+         var taskViewLoaded = false;
+         var solutionViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               taskViewLoaded = true;
+               loadReseau();
+            }
+         }
+      </script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Élève absent</h1>
+         <div id="reseau" style="float:right;margin-left:1em;width:391px;height:330px" /></div>
+         <p> À l'école, les castors adorent propager des rumeurs. 
+         Le schéma montre qui répète les rumeurs à qui. 
+         </p>
+
+         <p>Ce matin, <b>Anna</b> a rapporté une rumeur qui s'est aussitôt propagée parmi les castors. Mais, à midi, 
+         <b>Hasna</b> et <b>Nicolas</b>, qui avaient entendu la rumeur, ont croisé <b>Yamina</b> et <b>Farid</b>, qui n'avaient pas entendu la rumeur. 
+         </p>
+         <p>
+         Ils en ont déduit que l'un des castors est absent aujourd'hui. De qui s'agit-il&nbsp;?
+         </p>
+
+         <div style="clear:both"></div>
+         <div class="reponses" id="answers_2013-SI-01">
+
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>La solution</h2>
+         <p>La bonne réponse est <b>Boris.</b> En effet :</p>
+         <ul>
+         <li>Farid ne reçoit des rumeurs que de Boris; Boris n'en reçoit que d'Angela; Angela n'en reçoit que de Anna.</li>
+         <li>Donc, vu que Farid n'a pas reçu la rumeur d'Anna, c'est que soit Angela soit Boris n'est pas là.</li>
+         <li>Mais, si Angela n'était pas là, Nicolas n'aurait jamais pu entendre la rumeur.</li>
+         <li>Donc, c'est forcément Boris qui n'est pas là.</li>
+         </ul>
+         <p>On peut vérifier que l'absence de Boris empêche également Yamina d'entendre la rumeur.</p>
+
+         <h2>C'est de l'informatique </h2>
+         <p>La propagation des rumeurs entre les castors est similaire à une opération appelée «&nbsp;broadcast&nbsp;» sur un réseau local, c'est-à-dire un réseau constitué d'un 
+         nombre restreint d'ordinateurs situés à proximité les uns des autres.
+         L'opération de broadcast permet à un ordinateur de diffuser un «&nbsp;paquet&nbsp;»
+         (une petite quantité d'information) à tous les autres ordinateurs du réseau,
+         éventuellement en rebondissant sur des machines intermédiaires.
+         </p>
+         <p>L'opération de broadcast, de part le fait qu'elle communique un paquet à tous les
+         ordinateurs du réseau, n'est utilisable que sur des réseaux de petite taille. 
+         Il serait impensable par exemple d'imaginer de broadcaster un
+         message à toutes les machines reliées à Internet&nbsp;! 
+         </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>
