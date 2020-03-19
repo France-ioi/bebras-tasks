@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Image pixellisée</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+         <script class="" type="text/javascript">
+         task.nbCols = 12;
+         task.solution = [];
+         task.nbRows = 5;
+         task.load = function(views, callback) {
+            mode = 'task';
+            if (views.solution) {
+               mode = 'solution';
+            }
+            if (typeof Tracker !== 'undefined') {Tracker.prepareTrackInputs();}
+            task.reset(false);
+            callback();
+         }
+        task.getAnswer= function(callback) {
+          sol = "";
+          for(var r = 0; r < task.nbRows; r++) {
+            for(var c = 0; c < task.nbCols; c++) {
+              sol += task.solution[r][c];
+            }
+          }
+          callback(sol);
+        };
+
+        task.reloadAnswer = function(strAnswer, callback) {
+           if (strAnswer == "") {
+               task.reset();
+           } else {
+              for(var r = 0; r < task.nbRows; r++) {
+                for(var c = 0; c < task.nbCols; c++) {
+                  task.solution[r][c] = parseInt(strAnswer.charAt(r*task.nbCols + c));
+                }
+              }
+           }
+           task.draw();
+           callback();
+        };
+   
+        task.selectCell= function (row, col) {
+          return $("#pic-2012-AT-04 tr:eq("+(row)+") td:eq("+(col)+")");
+        };
+
+        task.draw= function() {
+          var htmlContent = "";
+          for(var r = 0; r < task.nbRows; r++) {
+            htmlContent += "<tr>";
+            for(var c = 0; c < task.nbCols; c++) {
+              var style = '';
+              if(task.solution[r][c]) {
+                style = "background:black";
+              } else {
+                var x = -40 * c;
+                var y = -40 * r;
+                style = "background-position: " + x + "px " + y + "px";
+              }
+              htmlContent += "<td style='" + style + "'></td>";
+            }
+            htmlContent += "</tr>";
+          }
+          $("#pic-2012-AT-04").html(htmlContent);
+          $("#pic-2012-AT-04").css("background-image","url('fish.png')");
+
+          $("#pic-2012-AT-04 td").click(function() {
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).parent().parent().children().index($(this).parent());
+            task.solution[row][col] = 1 - task.solution[row][col];
+            if (typeof Tracker !== 'undefined') {
+               Tracker.trackData({dataType:"clickitem", item:"[" + row + "][" + col + "] = " + task.solution[row][col]});
+            }
+            task.draw();
+          });
+
+
+          $("#pic-2012-AT-04 td").hover(function() {
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).parent().parent().children().index($(this).parent());
+            task.selectCell(row, col).addClass("topred leftred rightred bottomred");
+            task.selectCell(row-1, col).addClass("bottomred");
+            task.selectCell(row, col-1).addClass("rightred");
+
+            }, function() {
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).parent().parent().children().index($(this).parent());
+
+            task.selectCell(row, col).removeClass("topred leftred rightred bottomred");
+            task.selectCell(row-1, col).removeClass("bottomred");
+            task.selectCell(row, col-1).removeClass("rightred");
+          });
+        };
+
+        task.reset= function(withConfirm) {
+          if (withConfirm) {
+             if (!confirm("Voulez-vous vraiment repartir de zéro sur cette question ?")) {
+                return;
+             }
+             Tracker.trackData({dataType:"clickitem", item:"reset"});
+          }
+          for(var r = 0; r < task.nbRows; r++) {
+            task.solution[r] = [];
+            for(var c = 0; c < task.nbCols; c++) {
+              task.solution[r][c] = 0;
+            }
+          }
+          task.draw();
+        };
+      </script>
+         <style class="">#pic-2012-AT-04 td {
+        width: 39px;
+        height: 40px;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 0px;
+        margin: 0px;
+        background-repeat: no-repeat;
+      }
+
+      #pic-2012-AT-04 td.leftred   { border-left:1px solid red; }
+      #pic-2012-AT-04 td.rightred  { border-right:1px solid red; }
+      #pic-2012-AT-04 td.topred    { border-top:1px solid red; }
+      #pic-2012-AT-04 td.bottomred { border-bottom:1px solid red; }
+
+      #pic-2012-AT-04 {
+        border-spacing: 0px;
+        border-collapse: collapse;
+        border: 1px solid black;
+        margin-left: 20px;
+        margin-bottom: 20px;
+      }</style>
+
+      <script class="remove" type="text/javascript">var json = {
+    "id": "http://castor-informatique.fr/tasks/2012/2012-AT-04/",
+    "language": "fr",
+    "version": "fr.01",
+    "authors": "",
+    "translators": [
+
+    ],
+    "license": "",
+    "taskPathPrefix": "",
+    "modulesPathPrefix": "",
+    "browserSupport": [
+
+    ],
+    "acceptedAnswers": [
+        "111111000011110001110111100000011101110001110111111111000011"
+    ]
+};</script>
+   </head>
+   <body>
+      <div id="task">
+<h1>Image pixellisée</h1>
+
+<p>Castor veut dessiner un poisson sur son ordinateur.</p>
+
+<center>
+<img src="fish.png" style="width:100px"/>
+
+</center>
+
+<p>Cependant, son ordinateur est assez vieux, et il ne permet d'enregistrer qu'un petit nombre
+de &laquo;&nbsp;pixels&nbsp;&raquo; (les petits carrés qui constituent une image numérique).</p>
+
+<p>Aidez Castor à créer son image. Pour cela, <strong>noircissez toutes les cases de la grille qui contiennent un morceau de trait noir du poisson</strong>. Les autres cases doivent rester blanches.</p>
+
+   
+   <center>
+      <table id="pic-2012-AT-04">
+      </table>
+      <div id="buttons-2012-AT-04">
+         <input type="button" value="Recommencer" onclick="task.reloadAnswer('', function() {})" />
+      </div>
+   </center>
+   <img style="display: none;" src="fish.png" />
+</div><!-- task -->
+      <div id="solution">
+<div class="explications">
+<h2>La solution</h2>
+
+<p>Il fallait noircir les cases de la grille comme montré ci-dessous.<br />
+<img src="2012-AT-04-solution.png" />
+</p>
+
+
+<h2>C'est de l'informatique </h2>
+
+<p>Cette tâche fait manipuler une notion utile en <strong>infographie</strong>, domaine de l'informatique qui consiste à créer, mémoriser et transformer des images avec des dispositifs informatisés. L'image construite dans cet exemple est une <strong>image pixellisée</strong>, ou image <em>bitmap</em>. C'est-à-dire qu'elle est constituée d'un ensemble de points (pixels) placés sur une grille. Chaque point possède le code de sa couleur. Dans l'exemple, il n'y a que deux couleurs&nbsp;: noir et blanc. Pour mémoriser une telle image, il suffit de mémoriser pour chaque point ses coordonnées dans la grille et le code de sa couleur. L'image sera d'autant plus précise que la grille sera très fine, c'est-à-dire comportera beaucoup de points. Sur l'exemple, l'image obtenue est peu précise car la grille utilisée est assez grossière.</p>
+
+<h2>Culture informatique </h2>
+
+<p>
+Il y a deux manières principales de représenter des images de manière numérique&nbsp;:
+</p>
+<ul>
+<li><strong>Les images pixellisée</strong>, obtenues en découpant une image en cases et en stockant la couleur de chaque case.</li>
+<li><strong>Les images vectorielles</strong>, obtenues en construisant l'image à partir de formes mathématiques (carrés, segments, élipses, arcs de cercles, ...) et d'indications sur la couleur des zones délimitées par ces formes.</li>
+</ul>
+
+<p>Avec une image pixellisée, dès que l'on zoom un peu trop, on voit apparaître des carrés. Au contraire, avec des images vectorielles, on peut zoomer autant que l'on veut, l'image reste toujours parfaitement nette. 
+</p>
+<p>
+Regardons par exemple la différence avec le logo du concours Castor, en comparant
+une image pixellisée avec une image vectorielle du même Castor.
+Tant qu'on ne zoom pas, il n'y a aucune différence à l'affichage.
+</p>
+
+<style>
+.solution 
+{
+   width:770px;
+    border-collapse:collapse;
+}
+.solution  tr td
+{
+   padding:0.5em;
+   text-align:center;
+   border:1px solid black;
+}
+.solution  tr td img
+{
+   border:0px solid black;
+}
+
+.solution-title {
+   padding:0.5em; 
+   font-size:x-large;
+   font-weight: bold;
+}
+</style>
+<table class="solution">
+<tr>
+  <td colspan="2" style="width:335px"><b>Image pixellisée, pas de zoom</b></td>
+  <td colspan="2" style="width:335px"><b>Image vectorielle, pas de zoom</b></td>
+</tr>
+<tr><td colspan="2"><img src="vec1-solution.png" style="" /></td><td colspan="2"><img src="pix1-solution.png" style=""></td></tr>
+</table>
+
+<p>
+En revanche, dès que l'on zoom, on voit clairement apparaître l'intérêt de l'image vectorielle.
+</p>
+
+<table class="solution">
+<tr>
+  <td colspan="2" style="width:335px"><b>Image pixellisée, zoom 6x</b></td>
+  <td colspan="2" style="width:335px"><b>Image vectorielle, zoom 6x</b></td>
+</tr>
+<tr>
+<td colspan="2">
+<img src="solution-zoomX6-pix.png" style="width:330px">
+</td>
+<td colspan="2">
+<img src="solution-zoomX6-vec.png" style="width:330px">
+</td></tr>
+</table>
+
+<p>
+Pour limiter l'effet de la pixellisation, la plupart des logiciels modernes
+comme les logiciels de photos ou bien les navigateurs web utilisent une technique 
+d'<b>interpolation</b> pour essayer de rendre les contours plus continus.
+Cette technique permet de zoomer dans les images pixellisées sans faire
+apparaître de carrés, comme illustré ci-dessous à gauche.
+Néanmoins le résultat n'est jamais aussi net qu'avec
+une image vectorielle.
+</p>
+
+<table class="solution">
+<tr>
+  <td style="width:335px"><b>Image pixellisée, zoom 6x avec interpolation</b></td>
+  <td style="width:335px"><b>Image vectorielle, zoom 6x</b></td>
+</tr>
+<tr>
+<td>
+<img src="solution-zoomX6-pixInter.png" style="width:330px">
+</td>
+<td>
+<img src="solution-zoomX6-vec.png" style="width:330px">
+</td></tr>
+</table>
+
+
+</div>
+</div> <!-- task-solution -->
+   </body>
+</html>

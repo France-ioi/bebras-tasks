@@ -1,190 +1,103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
    <head>
       <meta charset="utf-8">
+      <meta name="viewport" content="width=770, initial-scale=1.0">
       <title>Image pixellisée</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-         <script class="" type="text/javascript">
-         task.nbCols = 12;
-         task.solution = [];
-         task.nbRows = 5;
-         task.load = function(views, callback) {
-            mode = 'task';
-            if (views.solution) {
-               mode = 'solution';
-            }
-            if (typeof Tracker !== 'undefined') {Tracker.prepareTrackInputs();}
-            task.reset(false);
-            callback();
-         }
-        task.getAnswer= function(callback) {
-          sol = "";
-          for(var r = 0; r < task.nbRows; r++) {
-            for(var c = 0; c < task.nbCols; c++) {
-              sol += task.solution[r][c];
-            }
-          }
-          callback(sol);
-        };
-
-        task.reloadAnswer = function(strAnswer, callback) {
-           if (strAnswer == "") {
-               task.reset();
-           } else {
-              for(var r = 0; r < task.nbRows; r++) {
-                for(var c = 0; c < task.nbCols; c++) {
-                  task.solution[r][c] = parseInt(strAnswer.charAt(r*task.nbCols + c));
-                }
-              }
-           }
-           task.draw();
-           callback();
-        };
-   
-        task.selectCell= function (row, col) {
-          return $("#pic-2012-AT-04 tr:eq("+(row)+") td:eq("+(col)+")");
-        };
-
-        task.draw= function() {
-          var htmlContent = "";
-          for(var r = 0; r < task.nbRows; r++) {
-            htmlContent += "<tr>";
-            for(var c = 0; c < task.nbCols; c++) {
-              var style = '';
-              if(task.solution[r][c]) {
-                style = "background:black";
-              } else {
-                var x = -40 * c;
-                var y = -40 * r;
-                style = "background-position: " + x + "px " + y + "px";
-              }
-              htmlContent += "<td style='" + style + "'></td>";
-            }
-            htmlContent += "</tr>";
-          }
-          $("#pic-2012-AT-04").html(htmlContent);
-          $("#pic-2012-AT-04").css("background-image","url('fish.png')");
-
-          $("#pic-2012-AT-04 td").click(function() {
-            var col = $(this).parent().children().index($(this));
-            var row = $(this).parent().parent().children().index($(this).parent());
-            task.solution[row][col] = 1 - task.solution[row][col];
-            if (typeof Tracker !== 'undefined') {
-               Tracker.trackData({dataType:"clickitem", item:"[" + row + "][" + col + "] = " + task.solution[row][col]});
-            }
-            task.draw();
-          });
-
-
-          $("#pic-2012-AT-04 td").hover(function() {
-            var col = $(this).parent().children().index($(this));
-            var row = $(this).parent().parent().children().index($(this).parent());
-            task.selectCell(row, col).addClass("topred leftred rightred bottomred");
-            task.selectCell(row-1, col).addClass("bottomred");
-            task.selectCell(row, col-1).addClass("rightred");
-
-            }, function() {
-            var col = $(this).parent().children().index($(this));
-            var row = $(this).parent().parent().children().index($(this).parent());
-
-            task.selectCell(row, col).removeClass("topred leftred rightred bottomred");
-            task.selectCell(row-1, col).removeClass("bottomred");
-            task.selectCell(row, col-1).removeClass("rightred");
-          });
-        };
-
-        task.reset= function(withConfirm) {
-          if (withConfirm) {
-             if (!confirm("Voulez-vous vraiment repartir de zéro sur cette question ?")) {
-                return;
-             }
-             Tracker.trackData({dataType:"clickitem", item:"reset"});
-          }
-          for(var r = 0; r < task.nbRows; r++) {
-            task.solution[r] = [];
-            for(var c = 0; c < task.nbCols; c++) {
-              task.solution[r][c] = 0;
-            }
-          }
-          task.draw();
-        };
+      <script>
+         window.stringsLanguage = 'fr';
       </script>
-         <style class="">#pic-2012-AT-04 td {
-        width: 39px;
-        height: 40px;
-        border-right: 1px solid black;
-        border-bottom: 1px solid black;
-        padding: 0px;
-        margin: 0px;
-        background-repeat: no-repeat;
-      }
-
-      #pic-2012-AT-04 td.leftred   { border-left:1px solid red; }
-      #pic-2012-AT-04 td.rightred  { border-right:1px solid red; }
-      #pic-2012-AT-04 td.topred    { border-top:1px solid red; }
-      #pic-2012-AT-04 td.bottomred { border-bottom:1px solid red; }
-
-      #pic-2012-AT-04 {
-        border-spacing: 0px;
-        border-collapse: collapse;
-        border: 1px solid black;
-        margin-left: 20px;
-        margin-bottom: 20px;
-      }</style>
-
-      <script class="remove" type="text/javascript">var json = {
-    "id": "http://castor-informatique.fr/tasks/2012/2012-AT-04/",
-    "language": "fr",
-    "version": "fr.01",
-    "authors": "",
-    "translators": [
-
-    ],
-    "license": "",
-    "taskPathPrefix": "",
-    "modulesPathPrefix": "",
-    "browserSupport": [
-
-    ],
-    "acceptedAnswers": [
-        "111111000011110001110111100000011101110001110111111111000011"
-    ]
-};</script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', 'jschannel',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths',
+            // 'graph-1.0', 'visual-graph-1.1'
+            'grid-1.0'
+         ]);
+      </script>
+      <script class="remove" type="text/javascript">
+         var json = {
+            "id": "http://castor-informatique.fr/tasks/2012/2012-AT-04/",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "",
+            "translators": [  ],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [ ],
+            "acceptedAnswers": [
+               "111111000011110001110111100000011101110001110111111111000011"
+            ]
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            failure: "Ce n'est pas la bonne réponse.",
+            errorBlack: "Une des cases noircies ne contient pas de morceau de trait noir.",
+            errorWhite: "Certaines cases qui contiennent un morceau de trait noir n'ont pas été noircies.",
+            errorBlackHard: "Une des cases coloriées en noir contient moins de 2 tiers de bleu.",
+            errorWhiteHard: "Une case contenant plus d'un tiers de bleu n'est pas coloriée.",
+            errorGreyWhite: "Une des cases coloriées en gris contient moins d'un tiers de bleu.",
+            errorGreyBlack: "Une des cases coloriées en gris contient plus de 2 tiers de bleu."
+         };
+      </script>
+      <style type="text/css">
+         #container {
+            margin: 1em auto;
+            position: relative;
+         }
+         canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+         }
+         #paper {
+            z-index: 10;
+         }
+         #error {
+            text-align: center;
+         }
+      </style>
    </head>
    <body>
       <div id="task">
-<h1>Image pixellisée</h1>
+         <h1>Image pixellisée</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Castor veut dessiner un poisson sur son ordinateur.</p>
 
-<p>Castor veut dessiner un poisson sur son ordinateur.</p>
+                     <center>
+                     <img src="fish.png" style="width:100px"/>
+                     </center>
 
-<center>
-<img src="fish.png" style="width:100px"/>
+                  <p>Cependant, son ordinateur est assez vieux, et il ne permet d'enregistrer qu'un petit nombre
+                     de &laquo;&nbsp;pixels&nbsp;&raquo; (les petits carrés qui constituent une image numérique).</p>
 
-</center>
+                  <p>Aidez Castor à créer son image. Pour cela, <strong class="easy medium">noircissez toutes les cases de la grille qui contiennent un morceau de trait noir du poisson.</strong><span class="hard">remplissez les cases qui contiennent un morceau de dessin selon les règles suivantes:</span> <ul class="hard"><li>Si plus des 2 tiers de la case sont bleus, coloriez la en noir,</li><li>Si plus d'un tiers mais moins des 2 tiers de la case sont bleus, coloriez la en gris.</li></ul> Les autres cases doivent rester blanches.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="container">
+                  <canvas></canvas>  
+                  <div id="paper"></div> 
+               </div>
+               <div id="error"></div>
+            </div>
+         </div>
 
-<p>Cependant, son ordinateur est assez vieux, et il ne permet d'enregistrer qu'un petit nombre
-de &laquo;&nbsp;pixels&nbsp;&raquo; (les petits carrés qui constituent une image numérique).</p>
-
-<p>Aidez Castor à créer son image. Pour cela, <strong>noircissez toutes les cases de la grille qui contiennent un morceau de trait noir du poisson</strong>. Les autres cases doivent rester blanches.</p>
-
-   
-   <center>
-      <table id="pic-2012-AT-04">
-      </table>
-      <div id="buttons-2012-AT-04">
-         <input type="button" value="Recommencer" onclick="task.reloadAnswer('', function() {})" />
-      </div>
-   </center>
-   <img style="display: none;" src="fish.png" />
-</div><!-- task -->
+         <!-- <img style="display: none;" src="fish.png" id="fish" /> -->
+      </div><!-- task -->
       <div id="solution">
 <div class="explications">
 <h2>La solution</h2>
