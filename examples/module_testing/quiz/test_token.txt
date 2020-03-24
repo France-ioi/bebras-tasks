@@ -1,0 +1,11 @@
+{
+    id: 'quiz',
+    idUserAnswer: '',
+    sAnswer: '',
+    platformName: 'test',
+    randomSeed: '0',
+    hints_requested: [],
+    itemUrl: 'http://localhost/?taskID=quiz'
+}
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InRlc3QtcXVpeiIsImlkVXNlckFuc3dlciI6IiIsInNBbnN3ZXIiOiIiLCJwbGF0Zm9ybU5hbWUiOiJ0ZXN0IiwicmFuZG9tU2VlZCI6IjAiLCJoaW50c19yZXF1ZXN0ZWQiOltdLCJpdGVtVXJsIjoiaHR0cDovL2xvY2FsaG9zdC8_dGFza0lEPXF1aXoiLCJpYXQiOjE1ODQ0MDA1OTZ9.DPs8Si4Tzhv3ifojeBrIIo_66zygi0ksxGUs8YgEdBk
