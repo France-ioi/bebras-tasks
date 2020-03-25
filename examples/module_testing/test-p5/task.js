@@ -5,7 +5,7 @@ function initTask(subTask) {
         actionDelay: 200,
         buttonScaleDrawing: false,
         conceptViewer: true,
-        hideValidate: true,
+        //hideValidate: false,
 
         includeBlocks: {
             groupByCategory: true,
