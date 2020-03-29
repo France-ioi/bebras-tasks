@@ -19,8 +19,6 @@ function initTask(subTask) {
                             "toggleLedState",
 
                             "waitForButton",
-                            "buttonState",
-                            "buttonStateInPort",
                             "buttonWasPressed",
 
                             "setServoAngle",
@@ -101,7 +99,7 @@ displayHelper.timeoutMinutes = 0;
 initWrapper(initTask, ["easy"], "easy", true);
 
 
-
+/*
 setTimeout(function() {
     task.displayedSubTask.blocklyHelper._aceEditor.setValue(
         'from quickpi import *\n' +
@@ -115,3 +113,5 @@ setTimeout(function() {
         'drawPoint(120, 15)'
     );
 }, 50)
+
+*/
