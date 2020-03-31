@@ -41,7 +41,7 @@ function initTask(subTask) {
    var nbRows;
    var xShift;
    var yShift;
-   var threshold = 253; // cell above this value will be rounded to 255
+   var threshold = 250; // cell above this value will be rounded to 255
 
    var grid;
 
