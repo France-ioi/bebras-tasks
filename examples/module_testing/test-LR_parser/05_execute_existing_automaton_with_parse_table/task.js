@@ -54,7 +54,7 @@ function initTask(subTask) {
                   "v_7":{"label":"8","content":"E -> E * B."},
                   "v_8":{"label":"9","content":"E -> E + B."},
                   "v_9":{"label":"7","content":"S -> E * c.","terminal":false},
-                  "v_10":{"label":"10","terminal":true,"content":"S' → S. $"}
+                  "v_10":{"label":"10","terminal":true,"content":"S' -> S. $"}
                },
                "edgeInfo":{
                   "e_0":{"label":"E"},
