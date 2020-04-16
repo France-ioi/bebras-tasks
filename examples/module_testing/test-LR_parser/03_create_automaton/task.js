@@ -22,7 +22,7 @@ function initTask(subTask) {
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' -> . S $"},
+                  "v_0":{"label":"0","content":"S' -> . S $","initial":true},
                   "v_1":{"label":"10","content":"S' -> S . $","terminal":true}
                },
                "edgeInfo":{
@@ -73,7 +73,7 @@ function initTask(subTask) {
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .a \nB -> ."},
+                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .a \nB -> .","initial":true},
                   "v_1":{"label":"1","content":"S -> E. * c\nE -> E.* B\nE -> E.+ B"},
                   "v_2":{"label":"2","content":"E -> B."},
                   "v_3":{"label":"3","content":"B -> a."},
@@ -134,7 +134,7 @@ function initTask(subTask) {
             },
             "minGraph":{
                "vertexInfo":{
-                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .\nB -> .b"},
+                  "v_0":{"label":"0","content":"S' -> .S $\nS -> .E * c\nE -> .E * B\nE -> .E + B\nE -> .B \nB -> .\nB -> .b","initial":true},
                   "v_1":{"label":"1","content":"S -> E. * c\nE -> E.* B\nE -> E.+ B"},
                   "v_2":{"label":"2","content":"E -> B."},
                   "v_3":{"label":"3","content":"B -> b."},
