@@ -38,8 +38,7 @@ function initTask(subTask) {
       stroke: "grey"
    };
    var rectAttr = {
-      stroke: "grey",
-      fill: "white"
+      stroke: "grey"
    };
    var clickAreaAttr = {
       stroke: "none",
@@ -174,7 +173,7 @@ function initTask(subTask) {
       var addWhiteCircle = false;
       var addBlackSquare = false;
       var circleColors = (level == "easy") ? ["black"] : ["black","white"];
-      var squareColors = ["white"]; 
+      var squareColors = (level != "hard") ? ["white"] : ["black","white"]; 
 
       switch(id){
          case 3:
@@ -209,6 +208,7 @@ function initTask(subTask) {
          nbSquares: nbSquares,
          squareBehindCircle: squareBehindCircle,
          circleColors: circleColors,
+         squareColors: squareColors,
          addWhiteCircle: addWhiteCircle,
          addBlackSquare: addBlackSquare
       });
@@ -218,6 +218,7 @@ function initTask(subTask) {
       var x = data.x;
       var y = data.y;
       var circleColors = data.circleColors;
+      var squareColors = data.squareColors;
       var minSize = 10;
       var R = rng.nextInt(1,10)*2 + minSize;
       var bg = paper.rect(x,y).attr(imgAttr);
@@ -226,15 +227,16 @@ function initTask(subTask) {
       for(var iDraw = 0; iDraw < Math.max(data.nbCircles,data.nbSquares); iDraw++){
          var circleR = (data.fixedR) ? R : minSize + iDraw*4;
          var circleColorID = rng.nextInt(0,circleColors.length - 1);
+         var squareColorID = rng.nextInt(0,squareColors.length - 1);
          var rectW = rng.nextInt(1,10)*2 + 2*minSize;
          if(!data.squareBehindCircle){
             if(currCirclePos.length < data.nbCircles){
                var circlePos = generateNewPos(x,y,currCirclePos,currRectPos,circleR,"circle");
                currCirclePos.push(circlePos);
                if(data.addWhiteCircle && iDraw == 1){
-                  addCircle(circlePos,"white",circleR);
+                  addShape(circlePos,"white",circleR,"circle");
                }else{
-                  addCircle(circlePos,circleColors[circleColorID],circleR);
+                  addShape(circlePos,circleColors[circleColorID],circleR,"circle");
                }
             }
             if(currRectPos.length < data.nbSquares){
@@ -242,34 +244,41 @@ function initTask(subTask) {
                currRectPos.push(rectPos);
                var rect = paper.rect(rectPos.x,rectPos.y,rectW,rectW).attr(rectAttr);
                if(data.addBlackSquare && iDraw == 1){
-                  rect.attr("fill","black");
+                  addShape(rectPos,"black",rectW,"rect");
+               }else{
+                  addShape(rectPos,squareColors[squareColorID],rectW,"rect");
                }
             }
          }else{
             if(currRectPos.length < data.nbSquares){
                var rectPos = generateNewPos(x,y,currCirclePos,currRectPos,rectW,"rect");
                currRectPos.push(rectPos);
-               var rect = paper.rect(rectPos.x,rectPos.y,rectW,rectW).attr(rectAttr);
                if(data.addBlackSquare && iDraw == 1){
-                  rect.attr("fill","black");
+                  addShape(rectPos,"black",rectW,"rect");
+               }else{
+                  addShape(rectPos,squareColors[squareColorID],rectW,"rect");
                }
             } 
             if(currCirclePos.length < data.nbCircles){
                var circlePos = generateCirclePosAboveRect(x,y,currCirclePos,rectPos,circleR);
                currCirclePos.push(circlePos);
                if(data.addWhiteCircle && iDraw == 1){
-                  addCircle(circlePos,"white",circleR);
+                  addShape(circlePos,"white",circleR,"circle");
                }else{
-                  addCircle(circlePos,circleColors[circleColorID],circleR);
+                  addShape(circlePos,circleColors[circleColorID],circleR,"circle");
                }
             }
          }
       }
    };
 
-   function addCircle(pos,color,R) {
-      var circle = paper.circle(pos.x,pos.y,R).attr(circleAttr);
-      circle.attr("fill",color);
+   function addShape(pos,color,size,type) {
+      if(type == "circle"){
+         var shape = paper.circle(pos.x,pos.y,size).attr(circleAttr);
+      }else{
+         var shape = paper.rect(pos.x,pos.y,size,size).attr(rectAttr);
+      }
+      shape.attr("fill",color);
    };
 
    function generateNewPos(x,y,currCirclePos,currRectPos,size,type) {
