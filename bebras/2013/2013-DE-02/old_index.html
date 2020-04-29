@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2013-DE-02</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script type="text/javascript" src="2013-DE-02-A.js"></script>
+      <script type="text/javascript" src="2013-DE-02-B.js"></script>
+      <script type="text/javascript" src="2013-DE-02-C.js"></script>
+      <script type="text/javascript" src="2013-DE-02-D.js"></script>
+      <script type="text/javascript" src="2013-DE-02-E.js"></script>
+      <script type="text/javascript" src="2013-DE-02-F.js"></script>
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-DE-02/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Michael Weigend, Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["011010"]
+      };
+      </script>
+      <!-- put task css here -->
+      <style class="">
+          .pseudo {
+            font-weight: bold; 
+            line-height: 140%;
+          }
+      </style>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskMultipleChoices(3, [
+              "<div id='imageA'></div>",
+              "<div id='imageB'></div>",
+              "<div id='imageC'></div>",
+              "<div id='imageD'></div>",
+              "<div id='imageE'></div>",
+              "<div id='imageF'></div>"
+            ], "checkboxes", "#answers_2013-DE-02");
+      </script>
+      <script class="task" type="text/javascript">
+         // TODO: fix with the future pub/sub system
+         var taskViewLoaded = false;
+         var solutionViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               taskViewLoaded = true;
+               loadImageA("imageA");
+               loadImageB("imageB");
+               loadImageC("imageC");
+               loadImageD("imageD");
+               loadImageE("imageE");
+               loadImageF("imageF");
+            }
+            if (views.solution && !solutionViewLoaded) {
+               solutionViewsLoaded = true;
+               loadImageA("sol_imageA");
+               loadImageB("sol_imageB");
+               loadImageC("sol_imageC");
+               loadImageD("sol_imageD");
+               loadImageE("sol_imageE");
+               loadImageF("sol_imageF");
+            }
+         }
+      </script>
+    </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Images aléatoires</h1>
+         <p>
+         Castor a écrit le programme suivant&nbsp;:
+         </p>
+         <div class="pseudo" style="margin-left: 30px">
+         Remplir tout l'écran de gris.<br/>
+         Choisir un nombre aléatoire entre 1 et 10 et l'appeler R.<br/>
+         Répéter 5 fois la séquence d'instructions suivante :<br/>
+         <div style="margin-left: 30px;">
+            afficher un disque de rayon R, blanc ou noir, à une position aléatoire,<br/>
+            afficher un carré blanc de taille aléatoire à une position aléatoire.<br/>
+         </div>
+         </div>
+         <p>
+            Seulement 3 des dessins ci-dessous ont pu être générés par le programme de Castor.<br/>
+            Pouvez-vous déterminer lesquels ? Sélectionnez-les en cliquant dessus.
+         </p>
+         <div class="reponses" id="answers_2013-DE-02">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+          <h2>Solution</h2>
+          <p>Les trois images ci-dessous n'ont pas pu être générées par le programme.</p>
+          <style>
+          .soltable td {
+            vertical-align:top;
+            padding: 0.5em;
+            }
+          </style>
+          <table class='soltable'> 
+          <tr>
+             <td style='width:12em'><span id='sol_imageA'></span></td>
+             <td style='width:12em'><span id='sol_imageD'></span></td>
+             <td style='width:12em'><span id='sol_imageF'></span></td>
+          </tr>
+          <tr>
+             <td style='width:12em'>Ci-dessus, au moins un des disques aurait du être dessiné avant un des carrés; 
+             or, aucun des disques n'aurait pu être dessiné en premier, car ils sont tous au-dessus d'un carré.</td>
+             <td style='width:12em'>Ci-dessus, les disques n'ont pas tous le même rayon.</td>
+             <td style='width:12em'>Ci-dessus, même problème que le précédent.</td>
+          </tr>
+          </table>
+          <p>Au contraire, les trois images ci-dessous ont pu être générées par le programme.</p>
+          <table class='soltable'> 
+          <tr>
+             <td style='width:12em'><span id='sol_imageB'></span></td>
+             <td style='width:12em'><span id='sol_imageC'></span></td>
+             <td style='width:12em'><span id='sol_imageE'></span></td>
+          </tr>
+          </table>
+          <h2>C'est de l'informatique !</h2>
+          <p>On imagine souvent que le travail principal d'un informaticien consiste 
+          à <b>programmer</b>, c'est-à-dire à écrire un programme permettant 
+          de réaliser une tâche donnée. Mais c'est un mythe&nbsp;!</p>
+          <p>En réalité, un informaticien passe typiquement la plus grande majorité 
+          de son temps à se demander
+          pourquoi un programme écrit par lui-même (ou par quelqu'un d'autre)
+          ne fait pas ce qu'il est censé faire. On dit que l'informaticien est en
+          train de <b>débugger</b> le programme.
+          </p>
+          <p>Avant de débugger un programmer, il faut d'abord trouver
+          les bugs. Pour cela, on peut <b>tester</b> un programme, 
+          en l'exécutant de nombreuses fois en utilisant différents paramètres.
+          &Agrave; chaque execution, on examine si le comportement  
+          que l'on observe correspond ou non à ce que l'on attend du programme.
+          </p>
+          <p>Enfin, un informaticien se demande parfois comment fonctionne un programme 
+          qui, visiblement, effectue son travail correctement. Cette situation se
+          présente tout particulièrement lorsque le code source du programme est
+          secret. On appelle cette activité la  <b>rétroingénierie</b>
+          (ou «&nbsp;reverse-engineering&nbsp;» en anglais).
+          </p>
+
+      </div> <!-- task-solution -->
+  </body>
+</html>
