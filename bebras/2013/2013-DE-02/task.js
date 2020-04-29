@@ -35,10 +35,10 @@ function initTask(subTask) {
       fill: "grey"
    };
    var circleAttr = {
-      stroke: 1
+      stroke: "grey"
    };
    var rectAttr = {
-      stroke: 1,
+      stroke: "grey",
       fill: "white"
    };
    var clickAreaAttr = {
