@@ -217,7 +217,8 @@ function initTask(subTask) {
          answer = $(this).val();
       });
       var vertices = graph.getAllVertices();
-      for(var vertex of vertices){
+      for(var iVertex = 0; iVertex < vertices.length; iVertex++){
+      	var vertex = vertices[iVertex];
          var raph = visualGraph.getRaphaelsFromID(vertex);
          raph[0].click(showVertexID(vertex));
       }
@@ -231,7 +232,8 @@ function initTask(subTask) {
 
    function addImages() {
       var vertices = graph.getAllVertices();
-      for(var vertex of vertices){
+      for(var iVertex = 0; iVertex < vertices.length; iVertex++){
+         var vertex = vertices[iVertex];
          switch(vertex){
             case "v_0":
                if(level == "easy"){
@@ -325,7 +327,8 @@ function initTask(subTask) {
       var house;
       var rings = [];
       var volcanoes = [];
-      for(var vertex of vertices){
+      for(var iVertex = 0; iVertex < vertices.length; iVertex++){
+         var vertex = vertices[iVertex];
          var info = solGraph.getVertexInfo(vertex);
          if(info.house){
             house = vertex;
@@ -338,10 +341,12 @@ function initTask(subTask) {
       var distFromHouse = solGraph.bfs(house).distances;
       var distFromRing = {};
       var distFromVolcano = {};
-      for(var ring of rings){
+      for(var iRing = 0; iRing < rings.length; iRing++){
+         var ring = rings[iRing];
          distFromRing[ring] = solGraph.bfs(ring).distances;
       }
-      for(var volcano of volcanoes){
+      for(var iVolcano = 0; iVolcano < volcanoes.length; iVolcano++){
+         var volcano = volcanoes[iVolcano];
          distFromVolcano[volcano] = solGraph.bfs(volcano).distances;
       }
 
@@ -349,7 +354,8 @@ function initTask(subTask) {
       ringOrders = [];
       usedChars = [];
       permute(rings);
-      for(var ringOrder of ringOrders){
+      for(var iRingOrder = 0; iRingOrder < ringOrders.length; iRingOrder++){
+         var ringOrder = ringOrders[iRingOrder];
          var distance1 = 0;
          var lastRing;
          for(var iRing = 0; iRing < ringOrder.length; iRing++){
@@ -359,12 +365,14 @@ function initTask(subTask) {
             lastRing = vertexID;
          }
          var totalDistances = [];
-         for(var volcano of volcanoes){
+         for(var iVolcano = 0; iVolcano < volcanoes.length; iVolcano++){
+            var volcano = volcanoes[iVolcano];
             var distance2 = distance1;
             distance2 += (distFromRing[lastRing][volcano] + distFromVolcano[volcano][house]);
             totalDistances.push(distance2);
          }
-         for(var totalDist of totalDistances){
+         for(var iTotalDist = 0; iTotalDist < totalDistances.length; iTotalDist++){
+            var totalDist = totalDistances[iTotalDist];
             if(totalDist < minDistance){
                minDistance = totalDist;
             }
