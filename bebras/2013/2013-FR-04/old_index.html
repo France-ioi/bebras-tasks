@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Boîtes de chocolats</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="stdAnswerTypes module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.js"></script>
+    <link class="stdAnswerTypes module" rel="stylesheet" type="text/css" href="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/answerTypes.css" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/stdAnsTypes.css" />
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script type="text/javascript" src="2013-FR-04.js"></script>
+      <script type="text/javascript" src="2013-FR-04_carre.js"></script>
+      <script type="text/javascript" src="2013-FR-04_ronde.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-04/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": ["77"]
+      };
+      </script>
+      <script class="task" type="text/javascript">
+         stdAnsTypes.genTaskFreeInput("integer", "#answers_2013-FR-04", 2, 1);
+      </script>
+      <script class="" type="text/javascript">
+         // TODO: fix with the future pub/sub system
+         var taskViewLoaded = false;
+         task.hackShowViews = function(views) {
+            if (views.task && !taskViewLoaded) {
+               taskViewLoaded = true;
+               loadImage();
+               loadRonde();
+               loadCarre();
+            }
+         }
+      </script>   
+   </head>
+   <body>
+   <div id="task">
+      <h1>Boîtes de chocolats</h1>
+      <table><tr><td style="vertical-align:top">
+         <p>
+         Castor veut ranger des chocolats dans ces deux boîtes&nbsp;:
+         </p>
+         <p>
+         <center>
+            <table>
+               <tr>
+                  <td>
+                  <div id="ronde" style="width:100px;height:80px"></div>
+                  </td>
+                  <td>
+                  <div id="carre" style="width:100px;height:80px"></div>
+               </td>
+            </tr>
+           </table>
+        </center>
+        </p>
+         <p>
+         Le schéma ci-contre indique la méthode qu'il suit.
+         Il commence au rectangle «&nbsp;Début&nbsp;». Il suit ensuite la flèche pour trouver l'instruction suivante. 
+         Quand il y a une question, il suit la flèche qui correspond à la réponse à cette question. 
+         </p>
+         <p>
+         Castor s'arrête quand il arrive sur le rectangle «&nbsp;Fin&nbsp;». À ce moment-là, combien de chocolats
+         se trouvent dans la boîte ronde&nbsp;?
+         </p>
+         <div class="reponses" id="answers_2013-FR-04"></div>
+      </td><td>
+         <p><div style="height:446px;width:350px" id="image"></div></p>
+      </td></tr></table>
+   </div><!-- task -->
+   <div id="solution">
+      <h2>Solution</h2>
+      <p>
+      Le schéma appelé organigramme décrit une séquence d'instructions. En particulier, il contient une «&nbsp;boucle&nbsp;», qui consiste à répéter plusieurs fois la même séquence d'instructions tant qu'une certaine condition est respectée. Ici, la séquence d'instructions à répéter est «&nbsp;prendre un chocolat dans la boîte carrée, mettre un chocolat dans la boîte ronde&nbsp;». Cette séquence est répétée jusqu'à ce qu'il y ait 5 chocolats exactement dans la boîte carrée. En effet, on sort de la boucle lorsque la condition «&nbsp;il y a strictement plus de 5 chocolats dans la boîte carrée&nbsp;» est fausse. 
+      </p>
+      <p>
+      La première fois que l'on commence la répétition (ou qu'on «&nbsp;entre dans la boucle&nbsp;»), la boîte ronde contient 2 chocolats et la boîte carrée contient 80 chocolats. &Agrave; chaque étape, on transfert un chocolat de la boîte carrée vers la boîte ronde. Vu qu'à la fin la boîte carrée contient 5 chocolats, c'est donc qu'on en a transféré 75. La boîte ronde, qui contenait 2 chocolats et qui en a reçu 75, contient donc à la fin 77 chocolats.
+      </p>
+      <h2>C'est de l'informatique</h2>
+      <p>Ce genre de diagramme s'appelle un <i>graphe de flot de
+      contrôle</i>. C'est une représentation graphique de la structure
+      d'un programme informatique. Elle permet ainsi de visualiser les
+      boucles et les dépendances entre les opérations. En pratique,
+      une telle représentation sert à analyser la structure des
+      programmes et est très utile pour optimiser des programmes.
+      </p>
+   </div> <!-- task-solution -->
+</body>
+</html>
