@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=770, initial-scale=1.0">
+      <title>2013-FR-05</title>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', 'jschannel',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths',
+            // 'graph-1.0', 'visual-graph-1.1'
+            'grid-1.0'
+         ]);
+      </script>
+     
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-05a/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Charles Freou",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            failure: "Ce n'est pas la bonne réponse.",
+            noSense: "Je ne comprends pas votre programme.",
+            tooLong1: "Votre programme mettrait trop de temps à s'exécuter.",
+            tooLong2: "Le programme est trop long&nbsp;! Vous ne devez pas dépasser 50 caractères.",
+            out: "Aïe, le robot est sorti de la zone à peindre&nbsp;!",
+            empty: "Votre programme est vide"
+         };
+      </script>
+      <style>
+         .examples_2013_FR_05ab  {
+            border-collapse: collapse;
+         }
+         .examples_2013_FR_05ab td {
+            border: 1px solid black;
+            padding: 0.5em;
+         }
+         #paper {
+            margin: 1em auto;
+         }
+         #answer {
+            text-align: center;
+         }
+         #error {
+            text-align: center;
+            margin: 1em 0;
+         }
+         #program {
+            width: 300px;
+            margin: 0 1em;
+         }
+         #compass {
+            display: none;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Robot peintre</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  Castor a acheté un robot programmable pour peindre le sol de sa maison.
+                  </p>
+                  <p>
+                  Voici quelques exemples de programmes et leur effet&nbsp;:
+                  </p>
+
+                  <table class='examples_2013_FR_05ab'>
+                  <td>1S</td>
+                  <td>avance de 1 case vers le sud</td>
+                  </tr>
+                  <tr>
+                  <td>3E 1O</td>
+                  <td>avance de 3 cases vers l'est, puis 1 case vers l'ouest</td>
+                  </tr>
+                  <tr>
+                  <td>3S 2E 1N</td>
+                  <td>avance de 3 cases vers le sud, puis 2 cases vers l'est, puis 1 case vers le nord</td>
+                  </tr>
+                  <tr class='easy medium'>
+                  <td>4(3S 2E)</td>
+                  <td>fait 4 fois de suite : avance de 3 cases vers le sud, puis 2 cases vers l'est</td>
+                  </tr>
+                  <tr class='hard'>
+                  <td>3E 4(3S 2E 1N)</td>
+                  <td>avance de 3 cases vers l'est, puis exécute le programme ci-dessus 4 fois de suite</td>
+                  </tr>
+                  <tr class='hard'>
+                  <td>2(3E 4(3S 2E 1N)) 1N</td>
+                  <td>exécute deux fois le programme ci-dessus, puis avance de 1 case vers le nord</td>
+                  </tr>
+                  </table>
+                  <p>Aidez Castor à écrire un programme de moins de 50 caractères qui reproduit le motif de gauche. Le robot commence sur la case rouge.</p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>
+               <div id="answer" >
+                  <label>Votre programme:</label>
+                  <input type="text" id="program">   
+                  <input type="button" value="Essayer le programme" id="validate">                
+               </div>
+               <div id="error"></div>    
+            </div>
+            <img src="compass.png" id="compass">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2> 
+           <p class='easy'>La solution la plus simple est : <input type='text' readonly='true' style='border:none;font-size:100%;font-weight:bold;margin:auto' value='7(1S 1N 2E 1S)'></p> 
+           <p class='hard'>La solution la plus simple est : <input type='text' readonly='true' style='border:none;font-size:100%;font-weight:bold' value='2(5(1S 2E 1S 1O) 3E 10N)'></p> 
+           <h2>C'est de l'informatique !</h2>
+           <p>
+           Pour résoudre ce problème, il fallait tout d'abord repérer le motif 
+           à faire répéter au robot, puis trouver la séquence de déplacements permettant 
+           de dessiner ce motif, et enfin «&nbsp;programmer&nbsp;» cette séquence. 
+           </p>
+           <p>
+           Le «&nbsp;code&nbsp;» du programme est exprimé dans un petit langage constitué 
+           de 4 instructions de base, correspondant aux 4 déplacements possibles. 
+           Le langage contient également une notion de «&nbsp;répétition d'une suite d'instructions&nbsp;». 
+           Cette notion s'appelle en informatique une «&nbsp;boucle&nbsp;», parce que l'on 
+           recommence un certain nombre de fois l'exécution d'une même suite d'instructions. 
+           </p>
+      </div> <!-- task-solution -->
+   </body>
+</html>
