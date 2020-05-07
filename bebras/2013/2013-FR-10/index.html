@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=770, initial-scale=1.0">
+      <title>2013-FR-10</title>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', 'jschannel',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths',
+            // 'graph-1.0', 'visual-graph-1.1'
+            // 'grid-1.0'
+         ]);
+      </script>
+    
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-10a/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Mathias Hiron",
+          "translators": [],
+          "license": "",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": []
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            failure: "Ce n'est pas la bonne réponse.",
+            tooManySteps: "Vous avez effectué trop d'étapes. Recommencez en procédant autrement.",
+            noModification: "La séquence n'apparaît pas dans le texte."
+         };
+      </script>
+      <style>
+         #instruction {
+            width: 100%;
+            text-align: center;
+         }
+         #tool {
+            width: 100%;
+            text-align: left;
+            border: 1px solid black;
+         }
+         #tool td {
+            padding: 0.5em 1em;
+         }
+         #margin {
+            height: 40px;
+         }
+         #cancel {
+            margin-top: 1em;
+         }
+         #error {
+            text-align: center;
+            margin: 1em 0;
+         }
+      </style>
+      <!-- put task css here -->
+   </head>
+   <body>
+   <div id="task">
+      <h1>Chercher-remplacer</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+               Castor a récupéré un fichier constitué de 12 lignes ayant toutes le même format. Il a besoin de modifier le format de ces données, exactement comme décrit ci-dessous.
+               </p>
+               <p>
+               Pour convertir ses données efficacement, Castor aimerait utiliser l'outil «&nbsp;chercher-remplacer&nbsp;»
+               qui permet de remplacer, partout dans le texte, une séquence de caractères par une autre.
+               </p>
+               <p>Pouvez-vous montrer à Castor comment s'y prendre <b>en moins de 11 étapes</b>&nbsp;? 
+               </p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="instruction">
+               <tr>
+                  <td><b>Avant :</b></td>
+                  <td><b>Après : <span class="easy">(attention aux espaces)</span></b></td>
+               </tr>
+               <tr>
+                  <td>
+                     <textarea id='source' style='height:80px' readonly cols='30' class='pattern'></textarea>               
+                  </td>
+                  <td>
+                     <textarea id='dest' style='height:80px' readonly cols='30' class='pattern'></textarea>               
+                  </td>
+               </tr>
+               <tr id="margin"></tr>
+               <tr>
+                  <td><b>Outil :</b></td>
+                  <td><b>État courant du fichier :</b></td>
+               </tr>
+               <tr>
+                  <td>
+                     <table id="tool">
+                        <tr>
+                           <td>Chercher :</td>
+                           <td><input type='text' id='search' class='pattern' autocapitalize='off'></td>
+                        </tr>
+                        <tr>
+                           <td>Remplacer par :</td>
+                           <td><input type='text' id='replace' class='pattern' autocapitalize='off'></td>
+                        </tr>
+                        <tr>
+                           <td colspan="2"><center><input type='button' id='replace_all' value='Remplacer tout'></center></td>
+                        </tr>
+                        <tr>
+                           <td colspan="2">Nombre d'étapes utilisées: <span id="nbSteps">0</span></td>
+                        </tr>
+                     </table>
+                  </td>
+                  <td>
+                     <textarea id='current' style='height:80px' readonly cols='30' class='pattern'></textarea><br>                   
+                     <input type='button' id='cancel' value='Annuler une étape'>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <div id='error'></div>
+
+      </div>
+                                 
+   </div><!-- task -->
+   <div id="solution">
+      <h2>Solution</h2>
+      <style>
+      .solpattern {
+         background: #EEEEEE;
+         font-family: monospace;
+         font-size: 100%;
+      }
+     .soltable  {
+        border-collapse: collapse;
+     }
+     .soltable td {
+        border: solid 1px black;
+        padding: 0.5em;
+        margin: 0em;
+     }
+      </style>
+   <div class='easy'>
+     <p>On peut effectuer les 3 remplacements décrits ci-dessous&nbsp;:</p>
+      <table class='soltable'>
+      <tr>
+         <td style='width:6em'>Chercher</td>
+         <td style='width:6em'>Remplacer&nbsp;par</td>
+         <td style='width:12em'>Résultat</td>
+      </tr>
+      <tr>
+         <td></td>
+         <td></td>
+         <td><span class='solpattern'>mix(rouge,bleu)=violet</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>mix(</span></td>
+         <td><i>rien</i></td>
+         <td><span  class='solpattern'>rouge,bleu)=violet</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>,(</span></td>
+         <td><span  class='solpattern'>&nbsp;+&nbsp;</span></td>
+         <td><span  class='solpattern'>rouge + bleu)=violet</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>)=</span></td>
+         <td><span  class='solpattern'>&nbsp;=&nbsp;</span></td>
+         <td><span  class='solpattern'>rouge + bleu = violet</span></td>
+      </tr>
+      </table>
+   </div>
+   <div class='hard'>
+     <p>La principale difficulté provient du fait que l'on veut remplacer
+     une virgule par un deux-points, et un deux-points par une virgule.
+     Plusieurs méthodes sont possibles pour contourner ce problème.
+     </p><p>Une première méthode consiste à utiliser
+     un caractère intermédaire, par exemple <span class='solpattern'>#</span>,
+     pendant les remplacements, comme décrit ci-dessous&nbsp;:</p>
+      <table class='soltable'>
+      <tr>
+         <td style='width:6em'>Chercher</td>
+         <td style='width:6em'>Remplacer&nbsp;par</td>
+         <td style='width:12em'>Résultat</td>
+      </tr>
+      <tr>
+         <td></td>
+         <td></td>
+         <td><span class='solpattern'>((42-3)+5),8:5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>((</span></td>
+         <td><span  class='solpattern'>(</td>
+         <td><span  class='solpattern'>(42-3)+5),8:5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>)+</span></td>
+         <td><span  class='solpattern'>+</td>
+         <td><span  class='solpattern'>(42-3+5),8:5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>:</span></td>
+         <td><span  class='solpattern'>#</td>
+         <td><span  class='solpattern'>(42-3+5),8#5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>),</span></td>
+         <td><span  class='solpattern'>):</td>
+         <td><span  class='solpattern'>(42-3+5):8#5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>,</span></td>
+         <td><span  class='solpattern'>:</td>
+         <td><span  class='solpattern'>(42-3+5):8#5:72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>#</span></td>
+         <td><span  class='solpattern'>,</td>
+         <td><span  class='solpattern'>(42-3+5):8,5::72</span></td>
+      </tr>
+      </table>
+     <p>Une seconde méthode permet de s'en sortir sans introduire un
+     caractère intermédiaire. Il faut pour cela remplacer la
+     virgule par une double virgule avant de remplacer la virgule
+     par un deux-points. Voici comment faire&nbsp;:
+     <table class='soltable'>
+      <tr>
+         <td style='width:6em'>Chercher</td>
+         <td style='width:6em'>Remplacer&nbsp;par</td>
+         <td style='width:12em'>Résultat</td>
+      </tr>
+      <tr>
+         <td></td>
+         <td></td>
+         <td><span class='solpattern'>((42-3)+5),8:5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>((</span></td>
+         <td><span  class='solpattern'>(</td>
+         <td><span  class='solpattern'>(42-3)+5),8:5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>)+</span></td>
+         <td><span  class='solpattern'>+</td>
+         <td><span  class='solpattern'>(42-3+5),8:5,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>,</span></td>
+         <td><span  class='solpattern'>,,</td>
+         <td><span  class='solpattern'>(42-3+5),,8:5,,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>:</span></td>
+         <td><span  class='solpattern'>,</td>
+         <td><span  class='solpattern'>(42-3+5),,8,5,,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>),,</span></td>
+         <td><span  class='solpattern'>):</td>
+         <td><span  class='solpattern'>(42-3+5):8,5,,72</span></td>
+      </tr>
+      <tr>
+         <td><span  class='solpattern'>,,</span></td>
+         <td><span  class='solpattern'>::</td>
+         <td><span  class='solpattern'>(42-3+5):8,5::72</span></td>
+      </tr>
+      </table>
+   </div>
+      <h2>C'est de l'informatique !</h2>
+      <p>
+      Lorsqu'on manipule des textes sous forme de fichier, il est très pratique
+      de pouvoir chercher toutes les <i>occurrences</i> (les apparitions)
+      d'un mot dans ce texte. De même, il est très pratique de pouvoir remplacer
+      toutes ces occurrences d'un mot par un autre mot.
+      </p><p> 
+      Dans ce sujet, on s'intéressait à remplacer tous les mots qui apparaissent 
+      exactement sous une forme donnée. Dans d'autres problèmes de la vie réelle, 
+      on s'intéresse à savoir si une forme approchée d'un mot donné apparaît 
+      dans un texte.
+      Par exemple, cela sert en biologie&nbsp;: on dispose 
+      d'une séquence d'ADN, c'est-à-dire un très long texte formé uniquement 
+      des lettres A, G, C et T, et on souhaite détecter si cette séquence 
+      contient une version mutée d'un gène donné. </p><p>Le gène est décrit par 
+      une relativement courte séquence de lettres, mais certaines de ces 
+      lettres peuvent avoir été modifiées suite à des mutations.
+      Vu que les séquences d'ADN contiennent des milliards de symboles,
+      il est important de disposer d'algorithmes très efficaces de recherche 
+      de motifs. </p>
+   </div> <!-- task-solution -->
+</body>
+</html>
