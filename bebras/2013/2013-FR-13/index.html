@@ -1,171 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
    <head>
       <meta charset="utf-8">
+      <meta name="viewport" content="width=770, initial-scale=1.0">
       <title>2013-FR-13</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
       <script class="remove" type="text/javascript">
-       var json = {
-          "id": "http://castor-informatique.fr/tasks/2013/2013-FR-13/",
-          "language": "fr",
-          "version": "fr.01",
-          "authors": "",
-          "translators": [
-          ],
-          "license": "",
-          "taskPathPrefix": "",
-          "modulesPathPrefix": "",
-          "browserSupport": [
-          ],
-          "acceptedAnswers": [
-              "[5,3,0,2,1,4]"
-          ]
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', 'jschannel',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths',
+            // 'graph-1.0', 'visual-graph-1.1'
+            // 'grid-1.0'
+         ]);
+      </script>
+
+      <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2013/2013-FR-13/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "",
+         "translators": [
+         ],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [
+         ],
+         "acceptedAnswers": [
+            "[5,3,0,2,1,4]"
+         ]
       };
       </script>
-      <!-- put task css here -->
-      <style class="">
-      </style>
-      <script src="scale.js"></script>
-      <script class="" type="text/javascript">
-         // Array Remove - By John Resig (MIT Licensed)
-         Array.prototype.remove = function (from, to) {
-             var rest = this.slice((to || from) + 1 || this.length);
-             this.length = from < 0 ? this.length + from : from;
-             return this.push.apply(this, rest);
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var taskStrings = {
+            success: "Bravo, vous avez réussi !",
+            failure: "Ce n'est pas la bonne réponse.",
+            lighter: "plus léger",
+            heavier: "plus lourd",
          };
-         var paper;
-         var NB_BALLS;
-         var dragAndDrop;
-         var weighted_circles;
-
-         task.load = function(views, callback) {
-               paper = new Raphael("raf", 650, 320);
-					weighted_circles = new Array();
-					NB_BALLS = 6;
-               r = 30;
-               d  = 10;
-               var offset = 0;
-               var offset_shelf = 200;
-               yScale = 100;
-               dist = 2*r+d;
-               offset_total = offset+offset_shelf;
-               offset_scale = 150;
-               
-               scale = new Scale(paper, offset_scale);				
-
-					var lightLeft = paper.text(300,245,"plus léger").attr('font-size','12').hide();
-					var heavyLeft = paper.text(300,280,"plus lourd").attr('font-size','12').hide();
-					var lightRight = paper.text(500,245,"plus léger").attr('font-size','12').hide();
-					var heavyRight = paper.text(500,280,"plus lourd").attr('font-size','12').hide();
-
-               // Drag And Drop
-               dragAndDrop = new DragAndDropSystem({
-                  paper : paper,
-                  actionIfDropped : function(srcCont, srcPos, dstCont, dstPos, type)
-                  {
-                     if(dstCont == null)
-                        return false;
-                     return true;
-                  },
-                  drop : function(srcCont, srcPos, dstCont, dstPos, type)
-                  {
-                     scale.reset(-1);
-							lightLeft.hide(); heavyLeft.hide(); lightRight.hide(); heavyRight.hide();  
-                  },
-                  over : function(srcCont, srcPos, dstCont, dstPos)
-                  {
-							lightLeft.hide(); heavyLeft.hide(); lightRight.hide(); heavyRight.hide();  
-                     if(dstCont == null)
-                        scale.reset(-1);
-                     else
-                     {
-                        var objs = dragAndDrop.getObjects('seq');
-                        scale.reset(-1);
-                        scale.compare(weighted_circles[objs[srcPos]],weighted_circles[objs[dstPos]],0);
-								// not used: if(weighted_circles[objs[srcPos]].weight < weighted_circles[objs[dstPos]].weight)
-								lightLeft.show();
-								heavyRight.show();
-                     }
-                  }
-               });
-               dragAndDrop.addContainer({
-                  ident : 'seq',
-                  cx : 400, cy : 70, widthPlace : 60, heightPlace : 60,
-                  nbPlaces : NB_BALLS,
-                  dropMode : 'insertBefore',
-                  dragDisplayMode : 'marker',
-                  placeBackgroundArray : []
-               });
-               paper.rect(200,102,400,1).attr('stroke-width',5);
-
-               for(var i = 0; i < NB_BALLS; i++) {
-                  var circle = getObject(i);
-                  dragAndDrop.insertObject('seq',i, {ident : i, elements : circle} );
-               }
-               callback();
-            },
-
-            task.getAnswer= function(callback) {
-               callback(JSON.stringify(dragAndDrop.getObjects('seq')));
-            };
-            
-            task.reloadAnswer= function(strAnswer, callback) {
-               var answer = [0, 1, 2, 3, 4, 5];
-               if (strAnswer != "") {
-                  answer = $.parseJSON(strAnswer);
-               }
-               for (var i = 0; i < NB_BALLS; i++) {
-                  dragAndDrop.removeObject('seq', i);
-               }
-               for (var i = 0; i < NB_BALLS; i++) {
-                  dragAndDrop.insertObject('seq',i, {ident : answer[i], elements : getObject(answer[i])});
-               }
-               callback();
-            };
-
-         function getObject(id) {
-				var weights = [3, 5, 4, 2, 6, 1];
-				var colors = ["#FFFF00", "#00FFFF", "#FF00FF", "#0000FF", "#FF0000", "#00FF00"];
-				var texts = ["A", "B", "C", "D", "E", "F"];
-            var c = paper.circle(0,0,26).attr('fill', colors[id]);
-            var t = paper.text(0,0,texts[id]).attr({'font-size' : 25, 'font-weight' : 'bold'});
-				 $(t.node).css({
-					"-webkit-touch-callout": "none",
-					"-webkit-user-select": "none",
-					"-khtml-user-select": "none",
-					"-moz-user-select": "none",
-					"-ms-user-select": "none",
-					"user-select": "none",
-					"cursor" : "default"
-				});
-            weighted_circles[id] = paper.set();
-            weighted_circles[id].push(c, t);
-            weighted_circles[id].weight = weights[id];
-            return [c, t];
-         }
       </script>
+      <style>
+         #paper {
+            margin: 1em auto;
+         }
+         #error {
+            text-align: center;
+            margin: 1em 0;
+         }
+      </style>
    </head>
    <body>
       <div id="task">
          <h1>Trier par poids</h1>
-         <p>
-         Castor possède 6 frisbees de différentes couleurs et de différents poids. Il souhaite les ranger sur son étagère du plus léger (à gauche) au plus lourd (à droite). 
-         </p>
-         <p>
-         Aidez Castor à ranger ses frisbees. Pour comparer le poids de deux frisbees, faites-en glisser un sur l'autre. La balance vous indiquera alors quel est le plus léger des deux. 
-         </p>
-         <div id="raf" style="margin:10px;" class="touch"></div>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>
+                  Castor possède 6 frisbees de différentes couleurs et de différents poids. Il souhaite les ranger sur son étagère du plus léger (à gauche) au plus lourd (à droite). 
+                  </p>
+                  <p>
+                  Aidez Castor à ranger ses frisbees. Pour comparer le poids de deux frisbees, faites-en glisser un sur l'autre. La balance vous indiquera alors quel est le plus léger des deux. 
+                  </p>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="paper"></div>   
+            </div>
+            <div id="error"></div>
+         </div>
       </div><!-- task -->
       <div id="solution">
          <h2>Solution</h2>
