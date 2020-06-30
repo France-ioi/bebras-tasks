@@ -38,7 +38,7 @@ function initTask(subTask) {
             {
                 valid_result: {
                     type: 'string',
-                    data: '011010010100'
+                    data: '101101001010010001'
                 },
                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABLSURBVChTY3j48OF/GDYxMfl/8+bN/wEBAWD89OnT/y4uLv+fP38OxtHR0WAxOzu7/zdu3ABjNTU1sBgMMzFQGYwaSDkYcQYyMAAAyjc72weRpLAAAAAASUVORK5CYII='
             }
