@@ -42,6 +42,20 @@ function initTask(subTask) {
                     data: '101101001010010001'
                 },
                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABLSURBVChTY3j48OF/GDYxMfl/8+bN/wEBAWD89OnT/y4uLv+fP38OxtHR0WAxOzu7/zdu3ABjNTU1sBgMMzFQGYwaSDkYcQYyMAAAyjc72weRpLAAAAAASUVORK5CYII='
+            },
+            {
+                valid_result: {
+                    type: 'string',
+                    data: '101101001010010001'
+                },
+                image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABLSURBVChTY3j69Ol/GFZTU/t/48YNMLazswOLRUdH/3/+/DkYP3z48L+LiwtYPCAgAIxv3rz538TEBCwHwkwMVAajBlIORpyBDAwAHr4722FJumkAAAAASUVORK5CYII='
+            },
+            {
+                valid_result: {
+                    type: 'string',
+                    data: '101101001010010001'
+                },
+                image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABMSURBVChTY3j69Ol/GH748OF/FxcXMDsgIACMb968+d/ExAQsp6am9v/GjRtgbGdnB1YXHR39//nz52AMUsPEQGUwaiDlYMQZyMAAAOrvO9u/S2TkAAAAAElFTkSuQmCC'
             }
         ],
         medium: [
