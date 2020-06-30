@@ -9,6 +9,8 @@ function initTask(subTask) {
                 barcode: [
                     'getPixelLuminosity',
                     'setPixelLuminosity',
+                    'width',
+                    'height',
                     'printResult'
                 ]
             },
