@@ -84,8 +84,9 @@ function initTask(subTask) {
                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABLSURBVChTY3j69Ol/GFZTU/t/48YNMLazswOLRUdH/3/+/DkYP3z48L+LiwtYPCAgAIxv3rz538TEBCwHwkwMVAajBlIORpyBDAwAHr4722FJumkAAAAASUVORK5CYII='
             },            
             
-/*
-            
+        
+
+            /*
             {
                 valid_result: {
                     type: 'string',
@@ -107,8 +108,8 @@ function initTask(subTask) {
                 },
                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAYAAAAywQxIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAABMSURBVChTY3j69Ol/GH748OF/FxcXMDsgIACMb968+d/ExAQsp6am9v/GjRtgbGdnB1YXHR39//nz52AMUsPEQGUwaiDlYMQZyMAAAOrvO9u/S2TkAAAAAElFTkSuQmCC'
             }
-  */          
-            
+            */
+           
         ],
         medium: [
             {
