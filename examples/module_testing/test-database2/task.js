@@ -161,6 +161,10 @@ function initTask(subTask) {
     subTask.data = {
         easy: [{
             tables: {
+                test_table2: {
+                    public: true, // false,
+                    data: test_table2
+                },                
                 valid_table3: {
                     public: true, // false,
                     data: valid_table3
