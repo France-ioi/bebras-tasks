@@ -49,9 +49,10 @@ function initTask(subTask) {
             
             map3d: true,
             camera: {
-                lat: 46,
+                lat: 48,
                 lng: 3
             },            
+            distance: 0.02,            
             
             map_lng_left: -4.85,
             map_lng_right: 9.65,
