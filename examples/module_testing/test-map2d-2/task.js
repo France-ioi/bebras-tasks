@@ -1,5 +1,6 @@
 function initTask(subTask) {
    
+   //console.log('initTask', subTask.display)
    $("#map").empty();
 
    var state = {};
@@ -167,6 +168,7 @@ function initTask(subTask) {
    };
 
    function checkResult(noVisual, callback) {
+      //console.log('checkResult',noVisual)
       if(answer.figures.length == 0){
          error = taskStrings.emptyMap;
          if(!noVisual){
@@ -179,7 +181,7 @@ function initTask(subTask) {
          return;
       }
       initMap2d(function() {
-         var valid = map2d.diff(target);
+         var valid = map2d.diff(target, noVisual);
          if(!valid){
             if(!noVisual){
                displayError("error");
