@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <title>AmazonSNT - Map2d v2</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'raphaelButton-1.0', 'map2d_styles', 'map2d', 'openstreetmap' ]);
+   </script>  
+
+   <script class="remove" type="text/javascript">
+         var json = {
+            "id": "AmazonSNT/PhotoNumerique/01 - reglages_appareil",
+            "language": "fr",
+            "version": "fr.01",
+            "authors": "France-ioi, Mathias Hiron, Nicolas Esposito, Arnaud Le Grand",
+            "translators": [],
+            "license": "",
+            "taskPathPrefix": "",
+            "modulesPathPrefix": "",
+            "browserSupport": [],
+            "fullFeedback": true,
+            "acceptedAnswers": [],
+            "usesRandomSeed": false
+         };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Félicitations, vous avez réussi !",
+         fail: "Ce n'est pas la bonne réponse.",
+         // openStreeMapCopyright: "© les contributeurs d’OpenStreetMap",
+         emptyMap: "La carte est vide."
+      }
+   </script>
+
+   <script type="text/javascript" src="../../../_local_common/common_AmazonSNT.js"></script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      @import url('../../../../_common/modules/fonts/fontAwesome/css/all.css');
+
+      #map {
+         margin: 1em 0;
+      }
+      .map2d {
+         margin: auto;
+      }
+
+      #jsonContainer {
+         display: flex;
+         justify-content: space-around;
+      }
+      .json {
+         border: 1px #4a4a4a solid;
+         width: 350px;
+         height: 300px;
+         overflow: scroll;
+      }
+      #jsonContainer h3 {
+         color: #4a4a4a;
+         font-size: 14px;
+      }
+
+
+      #error {
+         color: "red";
+         padding-left: 1em;
+      }
+      #error h3 {
+         color: #808080;
+         font-size: 12px;
+      }
+      
+      .consigne {
+         color: #4a4a4a;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Exercice 6 v2</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">     
+               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+               <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+         </div>
+         
+         <div id="zone_2"> 
+            <div id="map"></div>
+            <div id="jsonContainer">
+               <div id="current">
+                  <h3>Current JSON</h3>
+                  <div class="json"></div>
+               </div>
+               <div id="target">
+                  <h3>Target JSON</h3>
+                  <div class="json"></div>
+               </div>
+            </div>
+            <div id="error">
+               <h3>MESSAGE</h3>
+               <p><i class="fas fa-times"></i> <span id="errorMsg"></span></p>
+            </div>
+         </div>
+ 
+         <img src="icon.png" style="display:none">
+      </div>
+   </div>
+   <div id="solution">
+      <h2>Solution</h2>
+   </div>
+</body>
+</html>
