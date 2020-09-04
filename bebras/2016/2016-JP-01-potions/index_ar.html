@@ -50,14 +50,14 @@
       <script type="text/javascript">
       var taskStrings = {
             names: {
-               curlyWhiskers: "شنب ملفوف",
-               whiteEyes: "عيون بيضاء",
-               bigTeeth: "أسنان كبيرة",
-               bigEars: "أذن كبيرة",
-               blackTeeth: "أسنان سوداء",
-               whiteNose: "أنف أبيض",
-               blackEars: "أذن سوداء",
-               whiteSkin: "وجه أبيض"
+               curlyWhiskers: " شنب  ملفوف ",
+               whiteEyes: " عيون بيضاء ",
+               bigTeeth: " أسنان كبيرة ",
+               bigEars: " أذن كبيرة ",
+               blackTeeth: " أسنان سوداء ",
+               whiteNose: " أنف أبيض ",
+               blackEars: " أذن سوداء ",
+               whiteSkin: " وجه أبيض "
             },
 
             success: "ممتاز. إجابتك صحيحة",
@@ -68,11 +68,11 @@
             wrongLogic: "لقد وضعت القندس المحاط باللون الأحمر وانت لا غير متأكد من الإجابة",
 
             drinkButton: function(beavers) {
-               return "القنادس\nتشرب";
+               return "دع القنادس تشرب";
             },
-            reshuffleButton: "اخلط الجرعات\nوابدأ",
+            reshuffleButton: "اخلط الجرعات \n وابدأ",
 
-            noDrink: "رأس قندس\nلم يتناول الجرعات",
+            noDrink: "رأس قندس \n لم يتناول الجرعات",
             emptyExperiment: "اغطى كل قندس جرعة واحدة على الأقل",
             answerTooEarly: "دع القنادس تشرب أولا",
             cupsTooLate: "يجب ضعط زر اخلط الجرعات وابدأ قبل أن تستطيع تغيير الجرعات" 
@@ -128,35 +128,34 @@
             <div id="taskContent">
                <p id="difficultyWarning" class="hard"></p>
                <p>
-                  وجد القنادس عدد <من الجرعات السحريةspan class="totalCups">X</span> 
-                  Each potion modifies one aspect of the beavers who drink it.
+                  وجدت القنادس عدد <span class="totalCups">X</span> من الجرعات السحرية, 
+                  كل جرعة تغير شئ واحد في وجه القندس الذي يشربها.
                </p>
-               <p id="drinkingInstruction" class="easy medium">Three beavers drank <span class="experimentCups">X</span> potions each. They changed like this :
-               </p>
-               <p class="hard">
-                  Have potions with three beavers to be able to deduce which potion corresponds to each letter. 
+               <p id="drinkingInstruction" class="easy medium">شرب كل واحد من القنادس الثلاثة التالية عدد  <span class="experimentCups">X</span> جرعة, فتغيرت وجوههم على النحو التالي: 
                </p>
                <p class="hard">
-                  Slide over each beaver what you want him to drink.
+               قدم الجرعات السحرية لكل واحد من القنادس الثلاثة أدناه لتكتشف تأثير كل جرعة. 
                </p>
                <p class="hard">
-                     <strong>Attention :</strong> Once the beavers have drunk, if you try again, the potions will be mixed.
+                  ضع الجرعات في المستطيلات الموجودة فوق كل قندس ثم اضغط على زر "دع القنادس تشرب".
+               </p>
+               <p class="hard">
+                     <strong>تنبيه :</strong> عند جعل القنادس تشرب الجرعات مرة أخرى، سيتغير مفعول كل جرعة، لذلك حاول اكتشاف تأثير الجرعات بعد محاولة شرب واحدة فقط.
                </p>
                <div id="anim_container">
                   <div id="anim1"></div>
                   <div id="feedback"></div>
                   <div class="usageInstructions">
                      <p>
-                     The beavers below drank a potion each.
-                     Slide each beaver under the potion he has drunk.
+                        كل واحد من القنادس أدنا شرب جرعة سحرية واحدة، ضع كل قندس تحت الجرعة التي شربها.
                      </p>
                      <p class="hard">
-                     <strong>Attention :</strong> If you are not sure about yourself, do not fill out randomly, but leave empty boxes.
+                     <strong>تنبيه :</strong> إذا لم تكن متأكد من إجابتك فلا تضع إجابة عشوائية، بل من الأفضل أن تترك الخلية فارغة.
                      </p>
                   </div>
                   <div id="anim2"></div>
                </div>
-               <div id="validation"><input type="button" value="Valider" id="execute" /></div>
+               <div id="validation"><input type="button" value="تحقق" id="execute" /></div>
 
                <img id="bigEars_image" src="bigEars.png" style="display:none">
                <img id="bigTeeth_image" src="bigTeeth.png" style="display:none">

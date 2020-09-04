@@ -78,7 +78,7 @@ function initTask(subTask) {
       },
       diffsY: 375,
       teamX: 0,
-      totalX: 450,
+      totalX: taskParams.totalX,
       sumX: 430, // totalX-20
       sumY: 420
    };
