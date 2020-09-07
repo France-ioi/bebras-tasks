@@ -1,5 +1,5 @@
 /*
-  usage: 
+  usage:
      index.html
   or
      index.html?dev=1
@@ -57,7 +57,7 @@ var getLinkTask = function(code, options, language) {
          arg += "\"" + String(key) + "\":\"" + String(value) + "\"";
       }
       arg += "}";
-      sOptions = "?options=" + encodeURIComponent(arg); 
+      sOptions = "?options=" + encodeURIComponent(arg);
    }
    var file = (language == undefined || language == "fr") ? "index.html" : "index_" + language + ".html";
    return code + "/" + file + sOptions;
@@ -71,7 +71,7 @@ function loadTask(taskCode) {
    $('#iframe').attr('src', taskCode);
    $('#iframe').css('display', "block");
    $('body').scrollTop(0);
-   $('#task_icons').css('display', "none"); 
+   $('#task_icons').css('display', "none");
 };
 
 //-----------------------------------------------------------------------------
@@ -103,11 +103,11 @@ var standaloneLoadPage = function(codes, pathToRoot) {
   if (theContents !== null && theContents === undefined) {
      console.log("Resources not found: " + codes[0]);
   }
-  
+
   var showLinks = ($.urlParam('links') == "1") ? true : false;
   var showDev = ($.urlParam('dev') == "1") ? true : false;
   var showGroupIcon = false;
-  if (showDev) { 
+  if (showDev) {
     showLinks = true;
     if (onlyOneGroup) {
        showGroupIcon = true;
@@ -122,7 +122,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
   //------------------------------
   // Main html contents
 
-  var getHtmlContents = function() { 
+  var getHtmlContents = function() {
     /*
               <!--<td id="header_score">Score&nbsp;:<br/><b>214 points</b></td> \
               <td id="header_time">Temps restant&nbsp;: <br/><b>38 minutes</b></td>--> \
@@ -166,17 +166,17 @@ var standaloneLoadPage = function(codes, pathToRoot) {
     $(document).ready(function() {
 
        // --- Setting up page elements ---
-      
+
        $("#body").html(getHtmlContents());
        if (onlyOneGroup) {
          $("#header_title").html(theContents.title);
        }
 
-       $("#header_logo").html('<img id="header_logo_img" src="' + pathToRoot + 'icons/castor_small.png" />');
+       $("#header_logo").html('<img id="header_logo_img" src="' + pathToRoot + 'demo_files/castor_small.png" />');
 
        $("#button_return_list").click(function() {
            $('#iframe').css('display', "none");
-           $('#task_icons').css('display', "block");  
+           $('#task_icons').css('display', "block");
         });
        $("#task_icons").css("display", "block");
 
@@ -193,7 +193,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
          var language = contents.language;
          var tasks = contents.tasks;
          var pathPrefix = pathToRoot + contents.folder;
-        
+
          if (!onlyOneGroup) {
             $("#task_icons").append('<div class="groupTitle">' + contents.title + '</div>');
          }
@@ -213,15 +213,15 @@ var standaloneLoadPage = function(codes, pathToRoot) {
             }
             //options.difficulty = "easy";
             //var targetNormalEasy = pathPrefix + getLinkTask(task.code, options, language);
-            
+
             var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
             if (showLinks) {
               onclick = " onclick=\"window.open('" + targetNormal + "', '_blank')\" ";
-            } 
+            }
 
             var iconTitle = '<div class="icon_title">' + task.title + '</div>';
             var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;"><img src="' + pathPrefix + task.code + '/icon.png"  ' + onclick + '/></td></tr></table></div>';
-      
+
             // stars
             var stars = '';
             for (var i = 0; i < 4; i++) {
@@ -244,7 +244,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
 
             // development links
             var iconDev = '';
-            if (showDev) { 
+            if (showDev) {
               var versionTargets = [];
               for (var iDifficulty = 0; iDifficulty < difficulties.length; iDifficulty++) {
                  var diff = difficulties[iDifficulty];
@@ -258,18 +258,18 @@ var standaloneLoadPage = function(codes, pathToRoot) {
                  var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
                  var optionsSol = jQuery.extend({}, options);
                  optionsSol.showSolutionOnLoad = "1";
-                 var targetSol = pathPrefix + getLinkTask(task.code, optionsSol);            
-                 // var targetEnglish = pathPrefix + getLinkTask(task.code, optionsSol, "en");            
+                 var targetSol = pathPrefix + getLinkTask(task.code, optionsSol);
+                 // var targetEnglish = pathPrefix + getLinkTask(task.code, optionsSol, "en");
                  versionTargets.push({normal: targetNormal, solution: targetSol });
               }
               var sDev = "";
               sDev += " <a href='" + versionTargets[0].normal + "' style='color:black'>[T1]</a>";
               sDev += " <a href='" + versionTargets[1].normal + "' style='color:black'>[T2]</a>";
-              sDev += " <a href='" + versionTargets[2].normal + "' style='color:black'>[T3]</a>"; 
+              sDev += " <a href='" + versionTargets[2].normal + "' style='color:black'>[T3]</a>";
               sDev += "&nbsp;&nbsp;&nbsp;";
               sDev += " <a href='" + versionTargets[0].solution + "' style='color:black'>[S1]</a>";
               sDev += " <a href='" + versionTargets[1].solution + "' style='color:black'>[S2]</a>";
-              sDev += " <a href='" + versionTargets[2].solution + "' style='color:black'>[S3]</a>"; 
+              sDev += " <a href='" + versionTargets[2].solution + "' style='color:black'>[S3]</a>";
               //sDev += "&nbsp;&nbsp;";
               //sDev += "<a href='" + versionTargets[0].english + "' style='color:black'>[en1]</a>";
               sDev += "<br/><br/>";
@@ -282,7 +282,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
 
 
          // --- Generation of the image with combined icons ---
-         
+
          if (showGroupIcon) {
            $("#all_icons").css('display', "block");
            $("#all_icons").append("<table>");
