@@ -181,8 +181,7 @@ function initTask(subTask) {
          return;
       }
       initMap2d(function() {
-         //var valid = map2d.diff(target, noVisual);
-         var valid = map2d.diff(target, true);
+         var valid = map2d.diff(target, noVisual);
          if(!valid){
             if(!noVisual){
                displayError("error");
