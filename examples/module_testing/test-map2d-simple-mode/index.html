@@ -15,7 +15,10 @@
          'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
          'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
          'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-         'taskStyles-0.1', 'raphaelButton-1.0', 'map2d_styles', 'map2d', 'openstreetmap' ]);
+         'taskStyles-0.1', 'raphaelButton-1.0', 'map2d_styles', 
+         'map2d',
+         'json-text-editor', 'jsonlint'
+      ]);
    </script>  
 
    <script class="remove" type="text/javascript">
@@ -53,15 +56,14 @@
          margin: auto;
       }
 
-      #jsonContainer {
+      #json {
          display: flex;
          justify-content: space-around;
       }
 
-      #jsonContainer textarea {
+      #json pre {
          border: 1px #4a4a4a solid;
          width: 100%;
-         height: 300px;
          overflow: scroll;
       }
 
@@ -95,9 +97,7 @@
          
          <div id="zone_2"> 
             <div id="map"></div>
-            <div id="jsonContainer">
-               <textarea id="json"></textarea>
-            </div>
+            <div id="json"></div>
             <div id="error">
                <h3>MESSAGE</h3>
                <p><i class="fas fa-times"></i> <span id="errorMsg"></span></p>
