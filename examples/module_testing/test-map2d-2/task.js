@@ -134,19 +134,7 @@ function initTask(subTask) {
             updateCurrentJSON();
             displayError("");
          },
-         onLoad: onLoad,
-         markerRenderer: function(context2d, point, type, scale) {
-            if(type == 'extra') {
-               context2d.strokeStyle = '#FFFF00';
-            } else if(type == 'miss') {
-               context2d.strokeStyle = '#00FFFF';               
-            }            
-            context2d.lineWidth = 5 / scale;                
-            var s = 20 / scale;                
-            context2d.beginPath();                
-            context2d.arc(point.x, point.y, s, 0, 2 * Math.PI);
-            context2d.stroke();            
-         }
+         onLoad: onLoad
       });
    };
 
@@ -193,7 +181,8 @@ function initTask(subTask) {
          return;
       }
       initMap2d(function() {
-         var valid = map2d.diff(target, noVisual);
+         //var valid = map2d.diff(target, noVisual);
+         var valid = map2d.diff(target, true);
          if(!valid){
             if(!noVisual){
                displayError("error");
