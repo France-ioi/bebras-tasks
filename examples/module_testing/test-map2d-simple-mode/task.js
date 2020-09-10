@@ -1,5 +1,5 @@
 function initTask(subTask) {
-   
+
    //console.log('initTask', subTask.display)
    $("#map").empty();
    $("#json").empty();
@@ -83,7 +83,7 @@ function initTask(subTask) {
       //answer.figures = [{"type":"point", "x":540.5,"y":332}]
       editor = JSONTextEditor({
          parent: document.getElementById('json'),
-         min_height: '400px',
+         min_height: '200px',
          content: answer.figures
       });      
       initMap2d(function() {
@@ -92,17 +92,17 @@ function initTask(subTask) {
 
          var draw_btn = $('#displayHelper_validate > .btn-draw');
          if(!draw_btn.length) {
-            draw_btn = $('<input type="button" value="Draw" class="btn-draw"/>');
+            draw_btn = $('<input type="button" value="' + taskStrings.btn_draw + '" class="btn-draw"/>');
             draw_btn.on('click', function() {
                displayError(false);
                var figures = editor.getContent();
                if(!Array.isArray(figures)) {
-                  displayError("Invalid JSON");
+                  displayError(taskStrings.invalid_json)
                   figures = [];
                }      
                var obj = editor.getContent();
                if(typeof obj === 'indefined') {
-                  displayError("Invalid JSON");
+                  displayError(taskStrings.invalid_json);
                }
                answer = {
                   figures: obj || []
@@ -166,7 +166,7 @@ function initTask(subTask) {
 
 
    function displayError(msg) {
-      console.log('displayError', msg);
+      //console.log('displayError', msg);
       if(msg == ""){
          $("#error").hide();
       }else{
@@ -178,7 +178,7 @@ function initTask(subTask) {
    function checkResult(noVisual, callback) {
       //console.log('checkResult',noVisual)
       if(answer.figures.length == 0){
-         error = taskStrings.emptyMap;
+         error = taskStrings.empty_map;
          if(!noVisual){
             displayError(error);
          }
