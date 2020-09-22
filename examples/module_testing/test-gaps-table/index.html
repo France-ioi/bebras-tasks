@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+   <head>
+        <meta charset="utf-8">
+        <title>Test gaps table</title>
+        <script>
+            var stringsLanguage = 'en';
+            var gaps_table_options = {
+                values: [
+                    ['', 'static cell 1', '*'],
+                    ['*', '*', '*'],
+                    ['*', '*', 'static cell 2']
+                ],
+                valid: [
+                    ['', '', 'cell C1'],
+                    ['cell A2', 'cell B2', 'cell C2'],
+                    ['cell A3', 'cell B3', '']
+                ]
+            };
+        </script>
+        <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
+        <script class="remove" type="text/javascript">
+            var json = {
+                "id": "test-gaps-table",
+                "license": "",
+                "authors": [],
+                "language": "en",
+                "version": "fr.01",
+                "translators": []
+            };
+            var modulesPath = '../../../_common/modules';
+            importModules([
+                'jquery-1.7.1',
+                'jquery-ui-1.10.3',
+                'JSON-js',
+                'raphael-2.2.1',
+                'jschannel',
+                'platform-pr',
+                'installationAPI.01',
+                'miniPlatform',
+                'fonts-loader-1.0',
+                'gaps_table_styles',
+                'gaps_table',
+                'gaps_table_task'
+            ]);
+        </script>
+    </head>
+    <body>
+        <div id="task">
+            <div class="intro">
+                <h2 class="title">Test gaps table</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="taskContent"></div>
+        </div>
+   </body>
+</html>
