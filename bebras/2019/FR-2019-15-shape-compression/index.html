@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-15-shape-compression</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         partialSuccess: "Vous avez correctement reproduit l'objectif, mais en utilisant trop de formes. Essayez autrement pour que votre séquence ne contienne que 6 formes.",
+         transformationRules: "Règles de transformation :",
+         yourSequence: "Votre séquence :",
+         result: "Résultat :",
+         target: "Objectif :",
+         clickHere: "Cliquez ici",
+         missingShape: "Il vous manque des formes dans la séquence résultat.",
+         wrongShape: "Les formes encadrées en rouge sont différentes.",
+         wrongLength: "Le résultat est plus long que l'objectif."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Formes compactées</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <p id="difficultyWarning" class="hard"></p>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Castor dispose d'une machine qui transforme une séquence de formes selon certaines règles.</p>
+               <p>Trouvez <strong><span class="medium hard">des règles et</span> une séquence de formes</strong> qui donne<span class="medium hard">nt</span> un résultat comme l'objectif.</p>
+               <p class="medium hard">Cliquez sur les boutons <img src="buttons.png" style="width:58px;vertical-align:-10px;"> pour ajouter ou retirer des formes.</p>
+               <p>Cliquez sur les formes dans les boutons gris pour les modifier. Par exemple, cliquez sur <img src="button_shape.png" style="width:35px;vertical-align:-14px;">.</p>
+               <p class="hard" style="font-weight:bold">Pour obtenir tous les points, votre séquence ne doit contenir que 6 formes.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+
+          <div class="easy">
+           <p></p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p></p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p></p>
+           <img src="sol_hard.png"> 
+         </div>
+
+      <h2>C'est de l'informatique !</h2>
+
+         <p>Ce défi montre comment on peut représenter une suite de formes (ici, la séquence objectif), en utilisant une suite de formes plus courte (ici, votre séquence), en exploitant le fait que certains "motifs" (des petites suites de formes) se répètent plusieurs fois.</p>
+         <p>En informatique, ce type de technique est utilisé pour <a href="https://fr.wikipedia.org/wiki/Compression_de_donn%C3%A9es" target="_blank">compresser</a> des données, afin qu'elles prennent moins d'espace de stockage. Les fichiers compressés ont souvent un nom qui termine par ".zip". Les images avec l'extension  ".png" telles que celles utilisées ci-dessus sont également compressées avec une approche similaire à celle décrite ici.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

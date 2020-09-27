@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-15-shape-compression</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-15-shape-compression/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         partialSuccess: "لقد قمت بإعادة إنتاج الهدف بشكل صحيح، ولكن باستخدام العديد من الأشكال. حاول مرة أخرى حتى تكون سلسلتك من 6 أشكال فقط.",
+         transformationRules: "قواعد التحويل",
+         yourSequence: "سلسلة الاشكال الهندسية",
+         result: "نتيجة التحويل",
+         target: "الهدف",
+         clickHere: "انقر على الشكل لتغييره",
+         missingShape: "الأشكال مفقودة في سلسلة النتائج",
+         wrongShape: "الأشكال المظللة باللون الأحمر مختلفة.",
+         wrongLength: "النتيجة أطول من الهدف."
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      #error {
+         text-align: center;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>الأشكال المركبة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <p id="difficultyWarning" class="hard"></p>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>لدى القندس آلة تقوم بتحويل سلسلة من الأشكال الهندسية وفقا لقواعد التحويل</p>
+               <p>حاول العثور على <strong><span class="medium hard">القواعد و</span> سلسلة الاشكال</strong> التي تعطي نتيجة مطابقة للهدف بعد التحويل</p>
+               <p class="medium hard">انقر على <img src="buttons.png" style="width:58px;vertical-align:-10px;">  لإضافة أو إزالة الأشكال.</p>
+               <p>انقر على الأشكال التي في المربعات الرمادية لتغييرها</p>
+               <p class="hard" style="font-weight:bold">للحصول على الدرجة الكاملة يجب أن تتكون السلسلة التي حصلت عليها على 6 أشكال فقط.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+       <div class="easy">
+        <p></p>
+        <img src="sol_easy_ar_eg.png">
+       </div>
+
+      <div class="medium">
+        <p></p>
+        <img src="sol_medium_ar_eg.png">
+      </div>
+
+      <div class="hard">
+        <p></p>
+        <img src="sol_hard_ar_eg.png">
+      </div>
+
+      <h2>انها المعلوماتية</h2>
+	  <p> يوضح هذا التحدي كيف يمكننا تمثيل سلسلة من النماذج (الهدف) ، باستخدام تسلسل أقصر من النماذج (هنا ، سلسلة الأشكال الهندسي’) ، من خلال استغلال حقيقة أن "أنماط" معينة (تسلسلات صغيرة) متكرره عدة مرات. </p>
+          <p> في تقنية المعلومات ، يتم استخدام هذا النوع من تقنية <a href="https://ar.wikipedia.org/wiki/%D8%B6%D8%BA%D8%B7_%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA" target="_blank"> ضغط البيانات </a> ، حتى تأخذ مساحة تخزين أقل. غالبًا ما يكون للملفات المضغوطة اسم ينتهي بـ ".zip". يتم ضغط الصور ذات الامتداد ".png" مثل تلك المستخدمة أعلاه أيضًا بطريقة مشابهة لتلك الموضحة هنا. </p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

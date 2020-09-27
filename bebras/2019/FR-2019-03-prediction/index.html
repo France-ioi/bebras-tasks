@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-FR-03-prediction</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <!-- <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.1.js"></script> -->
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-03-prediction/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         "try": "Essayer",
+         next: "Suivant",
+         errorMissingAndExtraGift: "Il y a des pots sans fleurs, et des fleurs sans pot.",
+         errorExtraGift: "Il y a des pots sans fleur.",
+         errorMissingGift: "Il y a des fleurs sans pot.",
+         noBeaver: "Cliquez sur les kangourous qui recevront une fleur.",
+         tryToUnderstand: "Trouvez pourquoi certains kangourous ont des fleurs et pas les autres, puis cliquez sur le bouton \"suivant\".",
+         clickNext: "Cliquez sur le bouton \"suivant\" pour continuer.",
+         clickNow: "Cliquez tout de suite sur essayer, ou bien cliquez sur des kangourous pour leur donner des pots."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+
+      #error {
+         margin-top: 1em;
+         min-height: 2em;
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Prédictions</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Votre objectif est de comprendre pourquoi certains kangourous reçoivent une fleur et pas les autres.</p>
+               <p>Cliquez sur le bouton essayer pour faire apparaître les fleurs. </p>
+               <p>Regardez bien ce qui se trouve
+               <strong>
+               <span class="easy">dans la case  au-dessus de chaque kangourou.</span>
+               <span class="medium hard"> dans la case au dessus et dans la case en dessous de chaque kangourou.</span>
+               </strong></p>
+
+               <p>Ensuite, cliquez sur le bouton "suivant", puis cliquez sur les kangourous qui vont recevoir une fleur pour leur donner un pot de fleur.</p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="crocodile.png" style="display:none" id="crocodile">
+      <img src="kangourou.png" style="display:none" id="kangourou">
+      <img src="ours.png" style="display:none" id="ours">
+      <img src="flower_transparent.png" style="display:none" id="flower">
+      <img src="pot.png" style="display:none" id="pot">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+          <div class="easy">
+           <p>Il faut cliquer sur les kangourous qui ont un crocodile au-dessus d'eux, puis valider.</p>
+           <p>Par exemple : </p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>Il faut cliquer sur les kangourous qui ont un seul crocodile à côté d'eux.</p>
+           <p>Autrement dit, il faut cliquer sur les kangourous qui ont un crocodile au-dessus d'eux, et sur ceux qui ont un crocodile en-dessous d'eux, mais pas sur les kangourous qui ont un à la fois un crocodile au-dessus et un en-dessous.</p>
+           <p>Par exemple : </p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Il faut cliquer sur les kangourous qui ont :</p>
+           <ul>
+           <li>soit un crocodile au-dessus et un ours en-dessous,</li>
+           <li>soit un ours au-dessus et rien en-dessous,</li>
+           <li>soit un crocodile en-dessous et rien au-dessus.</li>
+           </ul>
+           <p>Par exemple : </p>
+           <img src="sol_hard.png">
+         </div>
+      <h2>C'est de l'informatique !</h2>
+      <p>
+         Ce sujet aborde la notion de <b>condition booléenne</b> : un kangourou reçoit une fleur si ceci et cela mais pas ceci. Les conditions de la forme "si ... alors ..." sont une des briques fondamentales des langages de programmation.
+      </p>
+      <p>
+         Plus précisément, le sujet est une sorte d'<a href="https://fr.wikipedia.org/wiki/Automate_cellulaire" target="_blank">automate cellulaire</a>, où l'on a une grille dont le contenu d'une case lors d'une étape est déterminé en fonction de son contenu et du contenu de ses cases voisines à l'étape précédente.
+      </p>
+      <p>
+         Certains automates cellulaires sont utilisés pour étudier des systèmes complexes, en physique, biologie, ou pour l'étude du trafic routier. L'un des automates cellulaires les plus connus est le <a href="https://fr.wikipedia.org/wiki/Jeu_de_la_vie" target="_blank">jeu de la vie</a>.
+      </p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

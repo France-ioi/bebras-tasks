@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-AR-06-inclusion</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-06-inclusions/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجخت",
+         errorGraph: "السهم الأحمر غير موجود في كل المخططات."
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #diagrams {
+         margin: 1em 0 1em 0;
+      }
+      #diagrams > * {
+         display: inline-block;
+         vertical-align: middle;
+      }
+      #target, #current {
+         width: 350px;
+      }
+      hr {
+         width: 1px;
+         /*height: 250px;*/
+         background: black;
+         border: none;
+      }
+      h4 {
+         text-align: center;
+         /*margin: 0;*/
+      }
+      #rectangles {
+         touch-action: none;
+         margin: auto;
+      }
+      #error {
+         height: 2em;
+         text-align: center;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>المستطيلات المتداخلة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  يوضح المثال التالي كيفية تداخل المستطيلات ذات الزوايا الزرقاء داخل بعضها البعض.
+               </p>
+               <table><tr><td>
+                 <div id="example" style="padding-right: 10px"></div>
+               </td><td>
+                  السهم من B إلى A يعني بأن المستطيل B يجب أن يكون بالكامل داخل المستطيل A.
+               </td></tr></table>
+               <p>
+                  لتحقيق الرسمة المطلوبة قم بتحريك المستطيلات عن طريق سحبها وتغيير أحجامها عن طريق سحب الزوايا الزرقاء وانظر إلى الرسمة الحالية لتفهم التغيرات التي تحدث.
+               </p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="diagrams">
+               <div>
+                  <h4>الرسمة الحالية</h4>
+                  <div id="current"></div>
+               </div>
+               
+               <hr>
+               <div>
+                  <h4>الرسمة المطلوبة</h4>
+                  <div id="target"></div>
+               </div>
+               
+               
+            </div>
+            <div id="rectangles"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <div class = "easy">
+           <p> ضع المستطيلات <b> B </b> و <b> C </b> في المستطيل <b> A </b>. </p>
+           <img src = "sol_easy.png">
+           <p> ملاحظة: يجب تجنب وضع <b> B </b> بالكامل في <b> C </b>،أو وضع <b> C </b> بالكامل في <b> B </b>. </B>
+          </div>
+
+         <div class = "medium">
+           <p>في المستطيل <b> A </b> ، ضع المستطيلات <b> B </b> و <b> C </b>. ثم في المستطيل <b> B </b> ، يجب عليك وضع <b> D </b> و <b> E </b>. بالإضافة إلى ذلك ، في المستطيل <b> F </b> ، يجب وضع <b> G </b>. </p>
+           <img src = "sol_medium.png">
+           <p> ملاحظة: يمكننا أيضًا رؤية المشكلة في الاتجاه المعاكس. من ناحية ، يجب وضع المستطيل <b> G </b> في <b> F </b>. من ناحية أخرى ، يجب وضع المستطيلات <b> D </b> و <b> E </b> في <b> B </b> ، ثم ضع المستطيلات <b> B </b> و <b> C </b> في <b> A </b>. </p>
+         </div>
+
+         <div class = "hard">
+           <p> يسهل وضع المستطيل <b> C </b> في النهاية: ضعه في المستطيل <b> A </b> ، بعيدًا عن المستطيلات الأخرى. الأمر نفسه ينطبق على المستطيلات <b> D </b> و <b> G </b> ، والتي يمكن وضعها في النهاية في المستطيل <b> B </b> ، بعيدًا المستطيلات الأخرى. </ p>
+           <p> لذلك دعونا نركز على المستطيلات <b> A </b> و <b> B </b> و <b> E </b> و <b> F </b> و <b> H </B>. يجب أن يكون المستطيلان <b> E </b> و <b> F </b> في <b> A </b> و <b> B </b>. لذلك من الضروري وجود منطقة متداخلة بين هذه المستطيلات ، وأن <b> E </b> و <b> F </b> يوضعان في هذه المنطقة المشتركة. </p>
+           <img src = "sol_hard_1.png">
+           <p> ثم ضع المستطيل <b> H </b> ، والذي يجب أن يكون في كل من <b> E </b> و <b> F </b>. لهذا يفرض علينا ضبط <b> E </b> و <b> F </b> لإنشاء مساحة متداخلة بينهما ، من أجل وضع <b> H </b> في هذه المنطقة المشتركة. </P>
+           <img src = "sol_hard_2.png">
+           <p> ننتهي بوضع المستطيلات <b> C </b> و <b> D </b> و <b> G </b> ، كما هو موضح في البداية. </p>
+           <img src = "sol_hard.png">
+           <p> ملاحظة: لاحظ أنه يجب تجنب وضع <b> A </b> بالكامل داخل <b> B </b> أو العكس ، وبالمثل يجب عليك تجنب وضع <b > E </b> بالكامل داخل <b> F </b> أو العكس. </p>
+         </div>
+      <h2>المعلوماتية</h2>
+	  <P>يتعلق هذا الموضوع باستخدام <a href="https://fr.wikipedia.org/wiki/Th٪C3٪A9orie_des_graphes" target="_blank"> الرسوم البيانية </a> لتمثيل خصائص معينة للنظام ودراستها. يتكون الرسم البياني من العقد المتصلة بواسطة الأقواس. هنا العقد هي المربعات السوداء ، التي تمثل كل مستطيل ، والأقواس هي الأسهم ، التي تمثل المعلومات "في الداخل".
+       </P>
+       <P>تمثيل العلاقات "داخل" مجموعة من المستطيلات بواسطة رسم بياني ، بدقة أكبر بواسطة هدف <a href = "https://fr.wikipedia.org/wiki/Graphe_orient٪C3٪A9_acyclique" "_blank"> الرسم البياني الموجه</a> ، يسمح بتطبيق الخوارزميات الكلاسيكية على الرسوم البيانية للإجابة الفعالة على جميع أنواع الأسئلة حول المستطيلات وتداخلها ، دون الحاجة إلى اختراع خوارزمية جديدة.
+       </P>
+       </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-FR-03-prediction</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <!-- <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.1.js"></script> -->
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-03-prediction/",
+         "language": "fi",
+         "version": "fi.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": ["Heikki Hyyrö"],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Onnittelut, ratkaisit tämän version!",
+         "try": "Kokeile",
+         next: "Seuraava",
+         errorMissingAndExtraGift: "Joissain ruukuissa ei ole kukkaa, ja joillain kukilla ei ole ruukkua.",
+         errorExtraGift: "Joissain ruukuissa ei ole kukkaa.",
+         errorMissingGift: "Joillain kukilla ei ole ruukkua.",
+         noBeaver: "Klikkaa kenguruita, jotka saavat kukan.",
+         tryToUnderstand: "Selvitä, miksi jotkut kengurut saavat kukan ja toiset eivät, ja klikkaa \"Seuraava\"-nappia.",
+         clickNext: "Klikkaa \"Seuraava\"-nappia jatkaaksesi.",
+         clickNow: "Klikkaa kenguruita antaaksesi niille kukkaruukkuja, ja klikkaa \"Kokeile\"-nappia."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+
+      #error {
+         margin-top: 1em;
+         min-height: 2em;
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Päättely</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Tehtäväsi on päätellä, millaisen säännön perusteella jotkut kengurut saavat kukan ja toiset eivät.</p>
+               <p>Klikkaa "Kokeile"-nappia, niin kukat ilmestyvät näkyviin.</p>
+               <p>Katso sitten tarkkaan kunkin kengurun
+               <strong>
+               <span class="easy"> yläpuolella olevaa ruutua.</span>
+               <span class="medium hard"> ala- ja yläpuolella olevia ruutuja.</span>
+               </strong></p>
+               <p>Klikkaa sen jälkeen "Seuraava"-nappia, jolloin asetelma muuttuu. Tehtäväsi on antaa jokaiselle kukan
+               saavalle kengurulle kukkaruukku klikkaamalla kyseisiä kenguruita.
+               Klikkaa lopuksi "Kokeile"-nappia.</p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="crocodile.png" style="display:none" id="crocodile">
+      <img src="kangourou.png" style="display:none" id="kangourou">
+      <img src="ours.png" style="display:none" id="ours">
+      <img src="flower_transparent.png" style="display:none" id="flower">
+      <img src="pot.png" style="display:none" id="pot">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>FR-2019-07-two-connect</title>
+      <script>
+         window.stringsLanguage = 'en';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.1']);
+      </script>
+
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2019/FR-2019-07-two-connect/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <script>
+         var taskStrings = {
+            success: "Congratulations! You succeeded!",
+            alreadyExist: "There is already a pipe there.",
+            isolatedHouse: "A pipe got stuck and the flower highlighted in red doesn't receive any water",
+            max: function(max) {
+              return "You already added "+max+"&nbsp;pipes.";
+            }
+         };
+      </script>
+      <style class="">
+         #paper { /* IE8 */
+            text-align: center;
+            margin: 1em auto 0 auto;
+            text-align: center;
+            touch-action: none;
+         }
+         #message {
+            margin-bottom: 1em;
+         }
+         #error {
+            height: 2em;
+         }
+         .paper-instr td {
+            vertical-align: top;
+         }
+      </style>
+      <script src="task.js"></script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Water the flowers</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Beaver installed pipes to water his flowers with water coming from the faucet.</p>
+                  <p>Your goal is that all the flowers continue to get water even if one of the pipes gets stuck.</p>
+                  <p>To do this, add <strong><span id="minEdges"></span> pipes</strong>.</p>
+                  <p>
+                  Click on two flowers to connect them with a pipe.
+                  Click on an added pipe to remove it.
+                  </p>
+
+               </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <table class="paper-instr">
+                     <tr>
+                     <td style="width:520px">
+                        <div id="paper"></div>
+                     </td>
+                     <td style="width:200px">
+                        <br/>
+                        <p class="hard" style="margin-top:1em; height:3em" id="instructions">
+                        <strong>You can move the flowers to help you.</strong>
+                        </p>
+                        <div id="error"></div>
+                     </td>
+                     </tr>
+                  </table>
+               </center>
+            </div>
+         </div>
+         <img src="flower.png" style="display:none" id="flower">
+         <img src="faucet.png" style="display:none" id="faucet">
+         <img src="icon.png" style="display:none">
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         
+   </body>
+</html>

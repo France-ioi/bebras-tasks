@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>AR-2019-17-base-4-encoding</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-base-4-encoding/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         result: "الرمز الحالي",
+         target: "الرمز المطلوب",
+         error: "الأرمز التي تحتها خط باللون الأحمر مختلفة",
+         wrongCase: "أحد الرموز التي تحتها خط أحمر مكتوب بأرمز كبيرة بينما الأخرى بأرمز صغيرة",
+         sliders: "الأزرار المنزلقة"
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>التشفير</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>يستخدم القندس الأزرار الزرقاء المنزلقة ليمثل بها <strong><span class="easy">رمز واحد ققط</span><span class="medium">رمزان</span><span class="hard">3&nbsp;أرمز</span></strong>.</p>
+               <p>قم بتحريك الأزرار الزرقاء لكي يصبح الرمز الحالي في مطابق للرمز المطلوب.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <p> لحل هذا التحدي ، كان من الضروري أولاً فهم تأثير موضع المؤشرات على النتيجة ، من خلال مراقبة المواضع على شبكة الرموز. </p>
+            
+           <div class = "easy">
+           <p> في هذا الإصدار ، نلاحظ أن تعديل المؤشر الأول بواحد على اليمين يؤدي إلى قفزة طويلة بطول 8 إلى اليمين إلى موضع النتيجة ، أثناء نقل المؤشر الثاني بواحد إلى إلى اليمين فقط حركه إلى الموضع التالي. </ p>
+           <p> لحل التحدي ، يجب أن تبدأ بتحريك المؤشر الأول إلى اليمين لتقترب من الهدف قدر الإمكان ، دون تجاوزه. ثم انقل المؤشر الثاني إلى اليمين حتى تصل إلى الرمز الموضوعي. </p>
+           </div>
+
+           <div class = "medium">
+           <p> في هذا الإصدار ، نلاحظ أولاً أن منزلقات الثلاثة الأولى تتحكم في الرمز الأول للعدسة ، بينما تتحكم منزلقات الثلاثة الأخرى في الرمز الثاني للعدسة. لذلك يمكننا التعامل مع المؤشرات الثلاثة الأولى أولاً ، وعندما نحصل على أول رمز مرغوب ، يمكننا التعامل مع الآخرين بالطريقة نفسها. </ p>
+           <p> لاحظ أن تحريك المؤشر الأول للأعلى يؤدي إلى تحرك 16 موضعًا للنتيجة إلى اليمين ، بينما يؤدي تحريك المؤشر الثاني إلى تحريك المواضع الناتجة للنتيجة 4 إلى اليمين ، بينما يؤدي تحريك المؤشر الثالث إلى تحريك النتيجة بـ موقف واحد إلى اليمين. </ p>
+           <p> نبدأ بتحريك المؤشر الأول ، الذي يكون له التأثير الأكبر ، طالما أن رمز النتيجة (الرمز الملون في القائمة) هو قبل الرمز الأول للهدف. ثم ، نحن نفعل الشيء نفسه مع المؤشر الثاني. ثم باستخدام المؤشر الثالث ، حتى تصل إلى الرمز الموضوعي. </p>
+           </div>
+
+           <div class = "hard">
+           <p> في هذا الإصدار ، نلاحظ أولاً أن أول 8 منزلقات تتحكم في الرمز الأول للهدف ، وأن الـ 8 التالية تتحكم في الرمز الثاني ، وأن الـ 8 الأخيرة تتحكم في الرمز الثالث. لذلك يمكننا أولاً التعامل مع أول 8 مؤشرات ، وعندما نحصل على أول رمز مرغوب ، يمكننا التعامل مع المجموعتين الأخريين من 8 مؤشرات بالطريقة نفسها. </p>
+           <P>
+           لاحظ أن تحريك المؤشر الأول للأعلى يؤدي إلى نقل النتيجة 32 مكانًا إلى اليمين ، بينما يؤدي تحريك المؤشر الثاني إلى تحريكه بمقدار 16 ، والأخير في 8 ، إلخ.
+           </P>
+           <p> وبالتالي ، سوف نستخدم المؤشرات من أجل الاقتراب من النتيجة شيئًا فشيئًا ، دون تحريكها.
+           </P>
+           <P>
+           نحن نحاول التحرك بالترتيب ، كل مؤشر إلى الأعلى. إذا كان رمز النتيجة (الرمز الملون في القائمة) قبل الرمز الأول للهدف ، فإننا نتركه في الأعلى. خلاف ذلك ، وضعناها مرة أخرى إلى أسفل. ثم نفعل نفس الشيء مع المؤشر التالي ، إلخ. من خلال القيام بذلك ، ستجد حتماً الرمز الموضوعي بعد ضبط أول 8 منزلقات. </p>
+           </div>
+
+           <img class = "easy" src = "sol_easy.png">
+           <img class = "medium" src = "sol_medium.png">
+           <img class = "hard" src = "sol_hard.png">
+
+           <p> يمكن لكل مؤشر أن يأخذ <span class = "easy"> 8 </span> <span class = "medium"> 4 </span> <span class = "hard"> 2 </span> القيم المحتملة. مزيج من <span class = "easy"> 2 </span> <span class = "medium"> 4 </span> <span class = "hard"> 8 </span> مؤشرات يصف <span class = "easy"> 8 * 8 </span> <span class = "medium"> 4 * 4 * 4 </span> <span class = "hard"> 2 * 2 * 2 * 2 * 2 * 2 * 2 * 2 </span> ، أي 64 رمزًا ممكنًا. هذا يكفي لتمثيل 26 حرفًا كبيرًا و 26 حرفًا صغيرًا والأرقام العشرة بالإضافة إلى رمزين خاصين (# و @). </p>
+
+           <p class = "medium"> مع وجود مجموعتين من 3 مؤشرات لكل منهما 4 قيم ممكنة ، يمكننا بالتالي وصف رمزين. </p>
+           <p class = "hard"> مع وجود 3 مجموعات من 8 مؤشرات لكل منها قيمتان ممكنتان ، يمكننا بالتالي وصف 3 رموز. </p>
+      <h2>المعلوماتية</h2>
+	  
+	  <p> يوضح هذا التحدي كيف يمكننا وصف الرموز (الرموز) عن طريق "ترميزها" بطريقة مختلفة <a href = "https://fr.wikipedia.org/wiki/Base_(arithm٪C3٪A9tique" ) "target =" _ blank"> القواعد </a>. في الإصدار الأول من التحدي ، هذا هو الأساس 8 ، لأن المتزلجون لديهم 8 وظائف ممكنة. في الإصدار الثاني ، هذا هو الأساس 4. في الإصدار الثالث ، هو الأساس 2 ، ويسمى أيضًا <a href = "https://fr.wikipedia.org/wiki/Syst٪C3 ٪ A8me_binaire "target =" _ blank "> نظام ثنائي </a>. </p>
+         
+         <p> تمثل جميع أجهزة الكمبيوتر الحديثة البيانات في <b> ثنائي </b>. يتوافق موضع المؤشرات مع <b> 1 </b> أو <b> 0 </b> في الأساس الثنائي. يحتوي القرص 1 تيرابايت (تيرابايت) على 1000 مليار رأس. </p>
+         
+         <p> لحل هذا التحدي ، كان من الضروري بشكل خاص الانتباه إلى حقيقة أن بعض المتزلجون ، أولئك الموجودون على اليسار ، لديهم تأثير أكثر أهمية على النتائج من تلك التالية ، ومن الأفضل بالتالي البدء بتعديل قيمتها. . في الرقم الثنائي ، تسمى الأرقام الموجودة في أقصى اليسار <a href="https://fr.wikipedia.org/wiki/Bit_de_poids_fort" target="_blank"> أهم البتات </a> نظرًا لأن تأثيرها أكبر بكثير على القيمة من تلك الموجودة على اليمين ، <a href="https://en.wikipedia.org/wiki/Bit_de_poids_faible" target="_blank"> وحدات البت الأقل أهمية </a> . </P>
+	  
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

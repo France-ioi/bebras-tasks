@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-09-hidden-words</title>
+            <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-09-hidden-words/",
+         "language": "ar",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: ".أحسنت، الإجابة صحيحة",
+         end: "fin",
+         toRemove: "لازلت ورقة اسحبها خرج منتقت الاجبة", // DEPRECATED
+         wrongSpot: "يوجد ورقة في هد المكان لازلتهى اسحببى نحو الشباك",
+         wrongNeighbourLeft: "الورقة التي تحاول وضعها لا تتواجد على الشباك في المكان المكتوب أسفل الورقة التي على يسارهة",
+         wrongNeighbourRight: "الورقة التي تحاول وضعها تحمل احدتيات مخلفة للاحداتيات المكتوبة على الورقة التي  على يمينهى",
+         wrongOrder: "ضع الأورقة بدية من اليسار",
+         wrongFirstLetter: "هذه الوقة الأولى ليست صحيحة اقرأ جيدا",
+         failure: function(level) {
+            if(level == "easy" || level == "medium"){
+               var word = "كلمت السر من 5 أحرف";
+            }else if(level == "hard"){
+               var word = "ال3 كلمات الر من 5 أشكال"
+            }
+            return "لم تجد "+word+".";
+         },
+         wrongGoto: function(letter,goto,nextLetter,nextCoord) {
+            if (goto == null) {
+               return " تكون في نهايت كلمت السر و لا يمكن أن تكون متبوعة بورقة أخرى"+letter+"الورقة";
+            } else {
+               return "." +goto.col+goto.row+ " لا تأتي من تلك الاحدتية" +nextCoord.col+nextCoord.row+  "."+nextLetter+" تدل على احدتية "+letter+" الورقة";
+            }
+         },
+         wrongLastLetter: function(lastLetterCoord) {
+            return "كلمت السر لم تنتهي لأن الورقة الأخيرة ليست المدكورة في الورقة : "+lastLetterCoord.col+lastLetterCoord.row+".";
+         },
+         sameWordTwice: "ملمت سر تضهر مرتين",
+         tooManyWords: function(n) {
+            var plural = (n > 1) ? "s" : "";   
+            return "عليك تشكيل"+n+"كلمت سر في الشباك";
+         },
+         missingWord: function(nbWords, nbSolutions) {
+            var plural = (nbWords > 1) ? "s" : "";   
+            return "لقد وجدت " + nbWords +  " كلمت سر أكمل لاجاد " + nbSolutions + " كلمات سر";
+         },
+         wrongLength: function(solutionLength) { 
+            return "كلمت السر لا تحتوي على " + solutionLength + " أوراق"; 
+         },
+         dropLabel: "اسحب الأوراق الى هنا وشكل 3 كلمات سر"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto 0 auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .instr-bullets li {
+         margin-left: -0.8em;
+         padding-bottom: 0.5em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>كلمة السر</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>اسحب الأوراق الى الأمكن الفرغة لصنع <span class="easy medium">كلمت سر</span><span class="hard" style="font-weight:bold">3 كلمات سر</span> مكونة من 5 أورق<span class="hard"> لكل واحدة </span></p>
+               <p class="hard" style="font-weight:bold"> :لكل كلمت سر</p>
+               <p class="easy">هو موقع الورقة الأولى <strong>A1</strong></p>
+               <p>لا نقول لكم أين توجد الورقة الأولى</p>
+               <p>كل ورقة تدل على مكن الورقة التي تليهة</p>
+               <p class="medium hard"> <strong><span class="medium">F3</span><span class="hard">C6</span></strong>الورقة الأخيرة موجودة في الخنة </p>
+               <p class="medium hard"></p>
+
+               <table><tr>
+               <td><img src="example.png" style="width:100px; padding-bottom:0px"></td>
+               <td>مثال بعد هده الورقة يجب وضع <br/>والسطر 2 C الورقة الموجودة في العمود
+               </td></tr></table>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

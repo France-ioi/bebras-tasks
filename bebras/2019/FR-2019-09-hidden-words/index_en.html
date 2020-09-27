@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-09-hidden-words</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-09-hidden-words/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Congratulations, you succeeded !",
+         end: "end",
+         toRemove: "To remove a card, drag & drop it \noutside of the response area.",
+         wrongSpot: "There is already a card there. You can remove a card by dragging it towards the grid.",
+         wrongNeighbourLeft: "The card you are trying to place is not at the coordinates given by the card place to its left.",
+         wrongNeighbourRight: "The card you are trying to place gives the coordinates of a card that doesn't correspond to the card place on its right.",
+         wrongOrder: "Place the cards starting from the left.",
+         wrongFirstLetter: "This first card is not the correct one. Read the task statement again.",
+         failure: function(level) {
+            if(level == "easy" || level == "medium"){
+               var word = "the 5 symbols password";
+            }else if(level == "hard"){
+               var word = "the three 5 symbols passwords"
+            }
+            return "You didn't find "+word+".";
+         },
+         wrongGoto: function(letter,goto,nextLetter,nextCoord) {
+            if (goto == null) {
+               return "The card "+letter+" should be at the end of a password, and can't be followed by another card.";
+            } else {
+               return "The card "+letter+" indicates the cell "+goto.col+goto.row+", but the card "+nextLetter+" that follows it comes from cell "+nextCoord.col+nextCoord.row+".";
+            }
+         },
+         wrongLastLetter: function(lastLetterCoord) {
+            return "The password is not completed, since the last symbol is not the one from cell "+lastLetterCoord.col+lastLetterCoord.row+".";
+         },
+         sameWordTwice: "The same password is present twice",
+         tooManyWords: function(n) {
+            var plural = (n > 1) ? "s" : "";   
+            return "You only need to form "+n+" password"+plural+" in the grid.";
+         },
+         missingWord: function(nbWords, nbSolutions) {
+            var plural = (nbWords > 1) ? "s" : "";   
+            return "VYou have found " + nbWords + " password" + plural + ". Continue and find the " + nbSolutions + " passwords.";
+         },
+         wrongLength: function(solutionLength) { 
+            return "This password doesn't contain " + solutionLength + " symbols."; 
+         },
+         dropLabel: "Place cards in this area to create three words."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto 0 auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .instr-bullets li {
+         margin-left: -0.8em;
+         padding-bottom: 0.5em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Passwords</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Drag cards from the grid into the answer area, to form <span class="easy medium">a password</span><span class="hard" style="font-weight:bold">three passwords</span> made of 5 symbols<span class="hard"> each</span>.</p>
+               <p class="hard">For each password:</p>
+               <ul class="instr-bullets">
+               <li class="easy">The first card is the card from cell <strong>A1</strong>.</li>
+               <li class="medium hard">We don't tell you where the first card is from.</li>
+               <li>Each card indicates which cell contains the next card.</li>
+               <li class="medium hard">The last card is from cell <strong><span class="medium">F3</span><span class="hard">C6</span></strong>.</li>
+               </ul>
+
+               <table><tr>
+               <td><img src="example.png" style="width:100px; padding-bottom:0px"></td>
+               <td>For example, after this card,<br/>you need to put the card located in column C, row 2.
+               </td></tr></table>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

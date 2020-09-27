@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-FR-06-inclusion</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-06-inclusions/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         errorGraph: "La flèche rouge n'est pas présente sur les deux diagrammes."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #diagrams {
+         margin: 1em 0 1em 0;
+      }
+      #diagrams > * {
+         display: inline-block;
+         vertical-align: middle;
+      }
+      #target, #current {
+         width: 350px;
+      }
+      hr {
+         width: 1px;
+         /*height: 250px;*/
+         background: black;
+         border: none;
+      }
+      h4 {
+         text-align: center;
+         /*margin: 0;*/
+      }
+      #rectangles {
+         touch-action: none;
+         margin: auto;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Rectangles imbriqués</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  Le diagramme décrit comment les rectangles de la zone grise sont les uns dans les autres.
+               </p>
+               <table><tr><td>
+                 <div id="example" style="padding-right: 10px"></div>
+               </td><td>
+                  Une flèche de B vers A indique que&nbsp;le rectangle B est dans le rectangle&nbsp;A.
+               </td></tr></table>
+               <p>
+                  Reproduisez l'objectif en déplaçant les rectangles.
+               </p>
+               <p>
+                  Vous pouvez aussi changer leur taille en attrapant les coins bleus.
+               </p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="diagrams">
+               <div>
+                  <h4>Diagramme</h4>
+                  <div id="current"></div>
+               </div>
+
+               <hr>
+               <div>
+                  <h4>Objectif</h4>
+                  <div id="target"></div>
+               </div>
+
+            </div>
+            <div id="rectangles"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+          <div class="easy">
+           <p>Il faut placer les rectangles <b>B</b> et <b>C</b> dans le rectangle <b>A</b>.</p>
+           <img src="sol_easy.png">
+           <p>Remarque : il faut éviter que <b>B</b> soit complètement inclus dans <b>C</b>, ou que <b>C</b> soit complètement inclus dans <b>B</b>.</b>
+          </div>
+
+         <div class="medium">
+           <p>Dans le rectangle <b>A</b>, il faut placer les rectangles <b>B</b> et <b>C</b>. Puis dans le rectangle <b>B</b>, il faut placer <b>D</b> et <b>E</b>. Par ailleurs, dans le rectangle <b>F</b>, il faut placer <b>G</b>.</p>
+           <img src="sol_medium.png">
+           <p>Remarque : on peut aussi voir le problème dans l'autre sens. D'une part, il faut placer le rectangle <b>G</b> dans <b>F</b>. D'autre part, il faut placer les rectangles <b>D</b> et <b>E</b> dans <b>B</b>, puis placer les rectangles <b>B</b> et <b>C</b> dans <b>A</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>Le rectangle <b>C</b> est facile à placer tout à la fin : il suffit de le placer dans le rectangle <b>A</b>, à l'écart des autres rectangles. Il en va de même des rectangles <b>D</b> et <b>G</b>, qu'on pourra placer tout à la fin dans le rectangle <b>B</b>, à l'écart des autres rectangles.</p>
+           <p>Concentrons-nous donc sur les rectangles <b>A</b>, <b>B</b>, <b>E</b>, <b>F</b>, et <b>H</b>. Les rectangles <b>E</b> et <b>F</b> doivent se trouver à la fois dans <b>A</b> et <b>B</b>. il faut donc avoir une zone de recouvrement entre ces rectangles, et que <b>E</b> et <b>F</b> soient placés dans cette zone commune.</p>
+           <img src="sol_hard_1.png">
+           <p>Il faut ensuite placer le rectangle <b>H</b>, qui doit se trouver à la fois dans <b>E</b> et <b>F</b>. Cela nous oblige à ajuster <b>E</b> et <b>F</b> de sorte à créer une zone de recouvrement entre eux, afin de placer <b>H</b> dans cette zone commune.</p>
+           <img src="sol_hard_2.png">
+           <p>On termine en plaçant les rectangles <b>C</b>, <b>D</b> et <b>G</b>, comme expliqué au début.</p>
+           <img src="sol_hard.png">
+           <p>Remarque : notez qu'il faut éviter de placer <b>A</b> entièrement à l'intérieur de <b>B</b> ou bien le contraire, et de même il faut éviter de placer <b>E</b> entièrement à l'intérieur de <b>F</b> ou bien le contraire.</p>
+         </div>
+
+      <h2>C'est de l'informatique !</h2>
+      <p>
+         Ce sujet porte sur l'utilisation des <a href="https://fr.wikipedia.org/wiki/Th%C3%A9orie_des_graphes" target="_blank">graphes</a> pour représenter certaines propriétés d'un système et les étudier. Un graphe est constitué de noeuds reliés par des arcs. Ici les noeuds sont les carrés noirs, qui représentent chacun un rectangle, et les arcs sont les flèches, qui représentent l'information "est à l'intérieur de".
+      </p>
+      <p>
+         Représenter les relations "est à l'intérieur de" d'un ensemble de rectangles par un graphe, plus précisément par un <a href="https://fr.wikipedia.org/wiki/Graphe_orient%C3%A9_acyclique" target="_blank">graphe orienté acyclique</a>, permet d'exploiter des algorithmes classiques sur les graphes pour répondre efficacement à toutes sortes de questions sur les rectangles et leur imbrication, sans avoir à inventer un nouvel algorithme pour chaque question.
+      </p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

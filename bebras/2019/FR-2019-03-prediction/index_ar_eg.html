@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-AR-03-prediction</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <!-- <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.1.js"></script> -->
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-03-prediction/",
+         "language": "ar",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         "try": "محاولة",
+         next: "التالي",
+         errorMissingAndExtraGift: "هناك أواني بدون أزهار ، وأزهار بدون أواني.",
+         errorExtraGift: "هناك أواني بدون زهور.",
+         errorMissingGift: "هناك زهور بدون أواني.",
+         noBeaver: "انقر على الكنغر الذي سيتلقى الزهور.",
+         tryToUnderstand: "تعرف على سبب حصول بعض الكنغر على أزهار ، والبعض الآخر لا يفعل ذلك ، ثم انقر فوق الزر \"التالي \".",
+         clickNext: "انقر فوق الزر \"التالي \" للمتابعة.",
+         clickNow: "انقر على الفور للمحاولة، أو انقر على بعض الكناغر لمنحهم الأواني."
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+
+      #error {
+         margin-top: 1em;
+         min-height: 2em;
+         text-align: center;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>التوقعات</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+                <p>هدفك هو أن تفهم لماذا يحصل بعض الكناغر الزرقاء على زهور والبعض الآخر لا.</p>
+                <p>انقر على زر "محاولة" لتظهر لك الزهور.</p>
+                <p>انظر جيدا على محتوى.
+               <strong>
+                   <span class="easy">الخلية أعلى الكنغر.</span>
+                   <span class="medium hard">الخلايا أسفل وأعلى الكنغر.</span>
+               </strong></p>
+
+               <p>ثم انقر على زر "التالي" لتبدأ في توزيع الأواني على كل كنغر سوف يحصل على زهرة بالنقر عليه.</p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="crocodile.png" style="display:none" id="crocodile">
+      <img src="kangourou.png" style="display:none" id="kangourou">
+      <img src="ours.png" style="display:none" id="ours">
+      <img src="flower_transparent.png" style="display:none" id="flower">
+      <img src="pot.png" style="display:none" id="pot">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <div class = "easy">
+           <p>يجب النقر على الكنغر الذي يوجد أعلاه تمساح ، ثم التحقق من الصحة. </p>
+           <p>على سبيل المثال: </p>
+           <img src = "sol_easy.png">
+          </div>
+
+         <div class = "medium">
+           <p>يجب عليك النقر على الكنغر الذي لديه تمساح واحد بجانبه. </p>
+           <p>وبعبارة أخرى ، انقر فوق الكنغر الذي لديه تمساح فوقه ، وعلى أولئك الذين لديهم تمساح تحتها ، ولكن ليس على الكنغر الذي لديه واحد في كل مرة تمساح أعلاه وواحد أدناه. </p>
+           <p>على سبيل المثال: </ p>
+           <img src = "sol_medium.png">
+         </div>
+
+         <div class = "hard">
+           <p>يجب النقر على الكنغر الذي لديه: </p>
+           <UL>
+               <li> تمساحًا أعلاه ودبًا أسفله. </li>
+               <li> دبًا أعلاه ولا يوجد شيء أدناه. </li>
+           <li>  تمساحًا أسفل دون أي شيء أعلاه. </li>
+           </UL>
+           <p> على سبيل المثال: </p>
+           <img src = "sol_hard.png">
+         </div>
+      <h2>المعلوماتية</h2>
+	  <P>يعالج هذا الموضوع مفهوم <b> الحالة المنطقية </b>: يتلقى الكنغر زهرة إذا كان هذا وذاك ولكن ليس هذا. الشروط إذا ... إذن هي واحدة من اللبنات الأساسية للغات البرمجة.
+       </P>
+       <P>بتعبير أدق ، يكون الموضوع نوعًا من <a href="https://ar.wikipedia.org/wiki/%D8%A3%D8%AA%D9%85%D8%AA%D8%A9_%D8%AE%D9%84%D9%88%D9%8A%D8%A9" target="_blank"> التشغيل التلقائي الخلوي </a> ، حيث لدينا شبكة يتم تحديد محتوى المربع أثناء الخطوة وفقًا لمحتواه ومحتوى الصناديق المجاورة له في الخطوة السابقة.
+       </P>
+       <P>يتم استخدام بعض الأتمتة الخلوية لدراسة الأنظمة المعقدة ، في الفيزياء ، أو البيولوجيا ، أو لدراسة حركة المرور على الطرق. أحد <a href="https://en.wikipedia.org/wiki/Jeu_de_la_vie" target="_blank"> لعبة الحياة </a> الأكثر شهرة هي الأوتوماتة الخلوية المعروفة.
+       </P>
+     </div>
+   <!-- task-solution -->
+</body>
+
+</html>

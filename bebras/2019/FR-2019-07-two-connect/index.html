@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>FR-2019-07-two-connect</title>
+      <script>
+         window.stringsLanguage = 'fr';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.1']);
+      </script>
+
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2019/FR-2019-07-two-connect/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <script>
+         var taskStrings = {
+            success: "Bravo ! Vous avez réussi.",
+            alreadyExist: "Il existe déjà un tuyau à cet endroit.",
+            isolatedHouse: "Un tuyau s'est bouché et la fleur marquée en rouge n'a plus d'eau.",
+            max: function(max) {
+              return "Vous avez déjà ajouté "+max+"&nbsp;tuyaux.";
+            }
+         };
+      </script>
+      <style class="">
+         #paper { /* IE8 */
+            text-align: center;
+            margin: 1em auto 0 auto;
+            touch-action: none;
+         }
+         #message {
+            margin-bottom: 1em;
+         }
+         .paper-instr td {
+            vertical-align: top;
+         }
+      </style>
+      <script src="task.js"></script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Arroser les fleurs</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Castor a installé des tuyaux pour arroser les fleurs à partir du robinet.</p>
+                  <p>Votre objectif est que toutes les fleurs continuent à recevoir de l'eau même si l'un des tuyaux se bouche.</p>
+                  <p>Pour cela, ajoutez <strong><span id="minEdges"></span> tuyaux</strong>.</p>
+                  <p>
+                  Cliquez sur deux fleurs pour les relier par un tuyau.
+                  Cliquez sur un tuyau ajouté pour l'effacer.
+                  </p>
+
+               </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <table class="paper-instr">
+                     <tr>
+                     <td>
+                        <div id="paper" style="text-align:right"></div>
+                     </td>
+                     <td style="width:220px;padding-left:15px">
+                        <br/>
+                        <p class="hard" style="margin-top:1em; min-height:3em" id="instructions">
+                        <strong>Vous pouvez déplacer les fleurs pour vous aider.</strong>
+                        </p>
+                        <div id="error"></div>
+                     </td>
+                     </tr>
+                  </table>
+               </center>
+            </div>
+         </div>
+         <img src="flower.png" style="display:none" id="flower">
+         <img src="faucet.png" style="display:none" id="faucet">
+         <img src="icon.png" style="display:none">
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+
+          <div class="easy">
+           <p>Il faut relier entre elles les fleurs isolées, c'est-à-dire celles reliées par un seul tuyau. Il y a 4 fleurs isolées, donc 2 tuyaux suffisent. Par exemple :</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>Il faut relier entre elles les fleurs isolées, c'est-à-dire celles reliées par un seul tuyau. Il y a 6 fleurs isolées, donc a priori 3 tuyaux suffisent. Cependant, certaines configurations des tuyaux ne permettent pas de se protéger contre un tuyau qui se bouche. Par exemple, cette configuration ne convient pas :</p>
+           <img src="sol_medium_bad.png">
+           <p>Il y a en revanche plusieurs configurations qui conviennent. En voici deux :</p>
+           <img src="sol_medium_1.png">
+           <img src="sol_medium_2.png">
+         </div>
+
+         <div class="hard">
+           <p>La première étape consiste à déplacer les fleurs pour éviter tous les croisements de tuyaux. Cela permet d'y voir plus clair. Par exemple, on peut obtenir :</p>
+           <img src="sol_hard_1.png">
+           <p>La seconde étape consiste à déterminer des fleurs "critiques". Tout d'abord, une fleur est critique si elle est relié par un seul tuyau. De plus, on peut aussi avec des groupes de fleurs "critiques", lorsque le groupe de fleurs est relié au reste par un seul tuyau. On est obligé de relier chaque groupe critique par un nouveau tuyau. Pour cela, on va choisir, de manière arbitraire, une fleur dans chaque groupe critique. Au total, on a 6 fleurs "critiques", coloriées en rouge ci-dessous.
+           <img src="sol_hard_2.png">
+           <p>A priori, avec 3 tuyaux, il va être possible de relier les 6 fleurs critiques entre elles. Mais attention, il ne faut surtout pas placer l'un des deux tuyaux représentés ci-dessous, sinon il restera des groupes isolés qui pourront être privés d'eau si un tuyau se bouche.</p>
+           <img src="sol_hard_3.png">
+           <p>Si l'on évite de placer ces deux tuyaux là, alors toutes les autres configurations donnent une solution valide. En voici une :</p>
+           <img src="sol_hard.png">
+         </div>
+         
+      <h2>C'est de l'informatique !</h2>
+         <p>Ce sujet présente la structure de <b>graphe</b>, très utilisée en informatique, où des objets, représentés par des <b>noeuds</b> sont reliés entre eux, les liens étant représentés par des <b>arêtes</b> entre ces noeuds. Ici les fleurs et le robinet sont les noeuds, et les tuyaux sont les arêtes du graphe.
+         </p>
+
+         <p>La question posée dans ce sujet illustre la notion de <a href="https://fr.wikipedia.org/wiki/Isthme_(th%C3%A9orie_des_graphes)" target="_blank"><b>pont</b>, ou <b>isthme</b></a>, un concept important de la <b>théorie des graphes</b>. Un pont est une arête telle que si on la supprime, le graphe dont il fait partie se retrouve divisé en deux morceaux, appelées <b>composantes</b>. Ajouter des arêtes pour que le graphe ne contienne plus aucun <b>pont</b> est ce que l'on appelle rendre le graphe <a href="https://fr.wikipedia.org/wiki/Graphe_ar%C3%AAte-connexe" target="_blank"><b>2-arête-connexe</b></span>.</p>
+   </body>
+</html>

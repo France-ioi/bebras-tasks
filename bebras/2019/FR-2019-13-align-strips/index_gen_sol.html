@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-13-align-strips</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-13-align-strips/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         actionHandleRight: "D",
+         actionHandleLeft: "G",
+         actionHandleUnique: "P",
+         success: "Bravo, vous avez réussi !",
+         wrong: function(nbBeavers) {
+            var msg = "Certains Castors ne reçoivent pas d'eau.";
+            if (nbBeavers == 1) {
+               msg = "Castor ne reçoit pas d'eau.";
+            }
+            return msg + " Essayez autrement pour que tous les tuyaux soient bleus.";
+           },
+         clickToTurn: "Cliquez pour tourner",
+         clickToLower: "Cliquez sur une roue pour la déconnecter",
+         tooManyDisconnect: "Vous avez réussi, mais il est possible d'y arriver en déconnectant moins de roues.",
+         undo: "Annuler une étape",
+         nbDisconnect: function(n) {
+            return "Nombre de déconnexions : "+n;
+         }
+      };
+   </script>
+   <script type="text/javascript" src="task_gen_sol.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      #error {
+         text-align: center;
+      }
+      .actions-descr li {
+         margin-top: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Réseau hydraulique</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <p id="difficultyWarning" class="hard"></p>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Votre objectif est d'aligner les tuyaux gris pour que l'eau coule du réservoir carré <span class="easy medium">jusqu'à Castor</span><span class="hard">jusqu'aux 4 Castors</span>.</p>
+
+               <p>Les tuyaux sont accrochés sur des roues. Pour les orienter, vous pouvez effectuer deux types d'actions&nbsp;:
+               </p>
+               <ol class="actions-descr">
+               <li>Bouger la poignée noire pour faire tourner d'un quart de tour toutes les roues connectées.</li>
+               <li>Cliquer sur une roue pour la déconnecter des autres, ou bien la reconnecter.</li>
+               </ol>
+               <p class="hard" style="font-weight:bold">Pour obtenir tous les points, effectuez seulement <span id="minDisconnect"></span>&nbsp;déconnexions.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>AR-2019-13-align-strips</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-13-align-strips/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         wrong: function(nbBeavers) {
+            var msg = "بعض القنادس لا يتلقون أي ماء.";
+            if (nbBeavers == 1) {
+               msg = "القندس لا يتلقى الماء.";
+            }
+            return msg + " حاول بطريقة مختلفة حتى تصبح جميع الأنابيب زرقاء.";
+           },
+         clickToTurn: " ",
+         clickToLower: "انقر على العجلة لفصلها عن الدوران",
+         tooManyDisconnect: "لقد نجحت، لكن من الممكن القيام بذلك عن طريق فصل عدد أقل من العجلات.",
+         undo: "رجوع",
+       	nbDisconnect: function(n) {
+            return "عدد العجلات التي تم فصلها: " +n;
+         }
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      #error {
+         text-align: center;
+      }
+      .actions-descr li {
+         margin-top: 1em;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>شبكة المياة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <p id="difficultyWarning" class="hard"></p>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>قم بتوصيل الأنابيب الرمادية لتتدفق المياة من الخزان الأزرق إلى   <span class="easy medium">القندس</span><span class="hard">القنادس الأربعة.</span></p>
+
+               <p>علما بأن الأنابيب موصلة بعجلات، ولتغيير وضع كل العجلات المتصلة بالمقبض اضغط على المقبض الأسود
+               <span class="hard">في الاتجاهين للحصول على حركات عكسية للعجلة</span></p>
+              <p>إذا اردت فصل العجلة (منع عجلة من الدوران) يمكنك الضغط عليها ولإعادة تركيبها اضعط عليها مرة أخرى
+               </p>
+               
+              
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <p> فيما يلي قائمة بالإجراءات لحل التحدي: <b>
+	  <span class="easy">P 2&nbsp;&nbsp;P 3 P 3</span>
+          <span class="medium">P 2&nbsp;&nbsp;P 3 P 3&nbsp;&nbsp;P 4 P 4&nbsp;&nbsp;P 6 P 6</span>
+          <span class="hard">G 7 G 2 D 2 D 10 G 10 G 9 D 9 G 12 D 12 G 14 D 14</span>          </b></p>
+         
+          <img class="easy" src="sol_easy.png">
+          <img class="medium" src="sol_medium.png">
+          <img class="hard" src="sol_hard.png">
+		  <p> في قائمة الإجراءات ، يشير الرقم إلى أنه يجب عليك النقر فوق العجلة المقابلة ، وفقًا للترقيم الموضح في الرسم أعلاه.
+          <span class = "easy medium"> يشير الحرف <b> P </b> إلى أنه يجب عليك النقر فوق المقبض. </span>
+          <span class = "hard"> يشير الحرف <b> G </b> إلى أنه يجب عليك النقر فوق المقبض الأيسر، ويشير الحرف <b> D </b> إلى أنه يجب النقر فوق المقبض الأيمن. </span>
+          </P>
+
+          <p> هناك العديد من الطرق لحل هذا التحدي. الطريقة التي ربما تكون الأسهل موصوفة أدناه. </p>
+          <p> في البداية ، نضغط على المقبض لتوجيه الأنبوب على العجلة المتصلة بالمقبض بشكل صحيح. بعد ذلك ، سنقوم بتصحيح اتجاه الأنابيب واحدًا تلو الآخر ، بدءًا من الأقرب إلى المصدر ، بحيث يمكن أن يتدفق الماء في عجلات أكثر فأكثر. </P>
+          <p> نحن ننظر إلى العجلة الأولى التي لا تدور فيها المياه ، وسنقوم بمعالجة تسمح بتوجيه هذه العجلة عند الضرورة ، دون تعديل اتجاه العجلات التي يتدفق فيها الماء بالفعل. </P>
+          <p> لذلك ، نضغط على المقبض <span class = "hard"> على الجانب الأيمن </span> لتوجيه هذه العجلة كما نريد. ثم ، نقوم بفصل العجلة من خلال النقر عليها. نضغط مرة أخرى على المقبض <span class = "hard"> ، هذه المرة على الجانب الآخر ، </span> للتراجع عن الدورات التي قمنا بها من قبل. ثم نعيد توصيل العجلة بالنقر عليها مرة أخرى. المياه تتدفق الآن من خلال. </p>
+          <p> نواصل هذه العملية خطوة بخطوة ، حتى يتم توجيه جميع العجلات بشكل صحيح. </p>
+		  
+      <h2>المعلوماتية</h2>
+	  
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-10-lighting</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         red: "Rouge",
+         green: "Vert",
+         blue: "Bleu",
+         redInitial: "R",
+         greenInitial: "V",
+         blueInitial: "B",
+         lightingCurrent: "Votre \néclairage",
+         lightingToReproduce: "Objectif \nd'éclairage",
+         lightIntensity: "Intensité lumineuse :",
+         error: "L'éclairage courant est différent de l'objectif.",
+         tooManySpots: "Vous avez correctement reproduit l'éclairage. Essayez maintenant d'obtenir le même résultat en utilisant moins de lampes.",
+         drag: "Glissez des lampes \nvers des points gris",
+         spotOccupied: "Il y a déjà une lampe ici.",
+         trash: "Poubelle"
+
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+         height: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Ambiance lumineuse</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Glissez des lampes de couleur sur les points gris afin de reproduire l'objectif d'éclairage.</p>
+
+               <p>Aidez-vous des nombres affichés dans les deux tableaux.</p>
+               
+               <p class="easy">Pour vous aider, on a déjà placé deux lampes.</p>
+               
+               <p class="medium hard" style="font-weight:bold">Pour obtenir tous les points, utilisez seulement <span class="nbLampsTarget"></span>&nbsp;lampes.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper" style="padding-left:10px"></div>
+            <div id="error"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+            <div id="overlay_3"></div>
+            <div id="overlay_4"></div>
+         </div>
+      </div>
+      <img src="trash.png" style="display:none" id="trash">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+
+          <div class="easy">
+           <p>Voici la solution :</p>
+           <img src="sol_easy.png" style="width:450px">
+          </div>
+
+         <div class="medium">
+           <p>On peut procéder couleur par couleur, en cherchant à chaque fois à placer les lampes le plus haut possible, de sorte à en utiliser le plus petit nombre possible. Commençons par le rouge.</p>
+           <img src="sol_medium_1.png" style="width:460px">
+           <p>Puis ajoutons le vert.</p>
+           <img src="sol_medium_2.png" style="width:460px">
+           <p>Et terminons par le bleu.</p>
+           <img src="sol_medium.png" style="width:460px">
+         </div>
+
+         <div class="hard">
+           <p>On peut procéder couleur par couleur, en cherchant à chaque fois à placer les lampes le plus haut possible, de sorte à en utiliser le plus petit nombre possible. Commençons par le rouge.</p>
+           <img src="sol_hard_1.png" style="width:525px">
+           <p>Puis ajoutons le vert.</p>
+           <img src="sol_hard_2.png" style="width:525px">
+           <p>Et terminons par le bleu.</p>
+           <img src="sol_hard.png" style="width:525px">
+
+         </div>
+
+
+      <h2>C'est de l'informatique !</h2>
+
+      <p>En informatique, les couleurs sont la plupart du temps <a href="https://fr.wikipedia.org/wiki/Rouge_vert_bleu" target="_blank">représentées</a> à l'aide de 3 nombres compris en 0 et 255. Le premier décrit l'intensité du rouge, le second l'intensité du vert, et le troisième l'intensité du bleu. Additionner des sources de lumière de ces trois couleurs permet d'en produire de nombreuses autres.</p>
+      
+      <p>Si vous observez à la loupe un écran couleur d'ordinateur, de téléphone ou de télévision, vous verrez que chaque pixel est en fait composé de ces trois couleurs :</p>
+      <center><img src="LCD_pixels_RGB.jpg" /></center>
+      
+      <p>L'oeil humain lui-même utilise trois types de <a href="https://fr.wikipedia.org/wiki/C%C3%B4ne_%28photor%C3%A9cepteur%29" target="_blank">cônes photorecepteurs</a> pour voir les couleurs, sensibles à différentes plages de longueurs d'onde de lumière. Les couleurs rouge, vert et bleu des écrans ont été choisies pour s'y adapter et permettre de représenter simplement une grande partie des couleurs que nous sommes capables de percevoir.</p>
+      
+      <p>Pour représenter un nombre entre 0 et 255, il faut encoder 256 possibilités, c'est-à-dire "2 puissance 8". Les ordinateurs comptent en <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_binaire" target="_blank">binaire</a>, c'est-à-dire en utilisant que les chiffres <b>0</b> et <b>1</b>. Pour représenter un nombre entre 0 (inclus) et "2 puissance 8" (exclus), on a besoin de <b>8</b> bits. Vu qu'il faut 8 bits pour décrire l'intensité du rouge, 8 pour le vert, et 8 pour le bleu, en tout il faut 24 bits pour représenter une couleur.</p>
+
+      <p> On parle en informatique d'une image <b>24 bits</b> pour décrire la précision avec laquelle les couleurs de l'image sont représentées. On entend également parfois dire <b>en 16 millions de couleurs</b>, car 256*256*256 est égal à 16777216, soit un peu plus de 16 millions.</p>
+
+      <!--<p>On estime que l'œil humain ne peut pas discerner plus de 10 millions de couleurs. Même si l'humain perçoit davantage de teinte de vert que des autres couleurs, en première approximation l'utilisation de plus de 16 millions de couleurs semble donc suffisante.</p>-->
+     
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

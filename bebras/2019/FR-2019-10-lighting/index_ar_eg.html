@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>AR-2019-10-lighting</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         red: "أحمر",
+         green: "أخضر",
+         blue: "أزرق",
+         redInitial: "R",
+         greenInitial: "G",
+         blueInitial: "B",
+         lightingCurrent: "الإضاءة الحالية ",
+         lightingToReproduce: "الإضاءة المطلوبة",
+         lightIntensity: " ",
+         error: "الإضاءة الحالية الخاصة بك مختلفة عن الإضاءة المطلوبة.",
+         tooManySpots: "تتناسب الإضاءة الخاصة بك مع الإضاءة المطلوبة ، لكن من الممكن القيام بذلك باستخدام عدد أقل من المصابيح.",
+         drag: " ",
+         spotOccupied: "يوجد بالفعل مصباح هناك.",
+         trash: "سلة المهملات"
+
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+         height: 1em;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>الإضاءة المطلوبة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>يرغب القندس في إضاءة الغرفة بالألوان الموجودة في شريط "الإضاءة المطلوبة"، قم بسحب المصابيح الملونة نحو النقاط الرمادية لإضاءة المكان أسفل المصباح</p>
+
+               <p> الأرقام المكتوبة في الجداول الملونة لمساعدتك.</p>
+               
+               <p class="easy">وضعنا لك مصباحين لمساعدتك.</p>
+               
+               <p class="medium hard" style="font-weight:bold">للحصول على الدرجة الكاملة استخدم  <span class="nbLampsTarget"></span> مصابيح فقط.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="error"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+            <div id="overlay_3"></div>
+            <div id="overlay_4"></div>
+         </div>
+      </div>
+      <img src="trash.png" style="display:none" id="trash">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <div class = "easy">
+           <p> إليك الحل: </p>
+           <img src = "sol_easy.png" style = "width: 450px">
+          </div>
+
+         <div class = "medium">
+           <p> يمكننا أستخدام اللون تلو الأخر، في كل مرة سنضع المصباح في أعلي مستوي ممكن، وذلك لاستخدام أقل عدد ممكن من المصابيح. لنبدأ باللون الأحمر. </p>
+           <img src = "sol_medium_1.png" style = "width: 460px">
+           <p> ثم نضيف اللون الأخضر. </p>
+           <img src = "sol_medium_2.png" style = "width: 460px">
+           <p> ودعونا ننتهي باللون الأزرق. </p>
+           <img src = "sol_medium.png" style = "width: 460px">
+         </div>
+
+         <div class = "hard">
+           <p> يمكننا أستخدام اللون تلو الأخر، في كل مرة سنضع المصباح في أعلي مستوي ممكن، وذلك لاستخدام أقل عدد ممكن من المصابيح. لنبدأ باللون الأحمر. </p>
+           <img src = "sol_hard_1.png" style = "width: 525px">
+           <p> ثم دعنا نضيف اللون الأخضر. </p>
+           <img src = "sol_hard_2.png" style = "width: 525px">
+           <p> ودعونا ننتهي باللون الأزرق. </p>
+           <img src = "sol_hard.png" style = "width: 525px">
+
+         </div>
+      <h2>أنها المعلوماتية</h2>
+	  <p> في علوم الكمبيوتر، تكون الألوان في معظم الأحيان <a href="https://fr.wikipedia.org/wiki/Rouge_vert_bleu" target="_blank"> ممثلة </a> باستخدام 3 أرقام المدرجة في 0 و 255. الأول يصف شدة اللون الأحمر، والثاني شدة الأخضر، والثالث شدة اللون الأزرق. تؤدي إضافة مصادر الضوء لهذه الألوان الثلاثة إلى إنتاج المزيد. </p>
+      
+      <p> إذا ألقيت نظرة فاحصة على جهاز كمبيوتر ملون أو هاتف و شاشة تلفزيون ، فسترى أن كل بكسل يتكون فعليًا من هذه الألوان الثلاثة: </p>
+      <center> <img src = "LCD_pixels_RGB.jpg" /> </center>
+      
+      <p> تستخدم عين الإنسان نفسها ثلاثة أنواع من <a href = "https://fr.wikipedia.org/wiki/C٪C3٪B4ne_٪28photor٪C3٪A9cepteur٪29" target = "_ blank" > المخاريط مستقبلة للضوء </a> لرؤية الألوان ، حساسة لنطاقات مختلفة من الأطوال الموجية الخفيفة. تم اختيار الألوان الأحمر والأخضر والأزرق للشاشات لتتكيف معها وتمثيل جزء كبير من الألوان التي يمكننا إدراكها. </p>
+      
+      <p> لتمثيل عدد يتراوح بين 0 و 255 ، يجب عليك تشفير 256 احتمالًا ، أي "2 power 8". يتم حساب أجهزة الكمبيوتر من خلال <a href="https://en.wikipedia.org/wiki/Syst٪C3٪A8me_binaire" target="_blank"> ثنائي </a> ، أي باستخدام فقط الأرقام <b> 0 </b> و <b> 1 </b>. لتمثيل رقم بين 0 (ضمني) و "2 قوة 8" (مستبعد) ، نحتاج إلى <b> 8 </b> بت. نظرًا لأن الأمر يستغرق 8 بتات لوصف شدة اللون الأحمر و 8 للأخضر و 8 للأزرق ، فيستغرق الأمر ما مجموعه 24 بتة لتمثيل اللون. </p>
+
+      <p> نتحدث في علوم الكمبيوتر عن صورة <b> 24 بت </b> لوصف الدقة التي يتم بها تمثيل ألوان الصورة. أحيانًا نسمع أيضًا قل <b> بـ 16 مليون لون </b> ، لأن 256 * 256 * 256 تساوي 16777216 ، أو ما يزيد قليلاً عن 16 مليون. </p>
+	  
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

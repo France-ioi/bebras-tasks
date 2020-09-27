@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>FR-2019-07-two-connect</title>
+      <script>
+         window.stringsLanguage = 'fi';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.1']);
+      </script>
+
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2019/FR-2019-07-two-connect/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud",
+          "translators": ["Heikki Hyyrö"],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <script>
+         var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            alreadyExist: "Siinä on jo putki.",
+            isolatedHouse: "Putki meni tukkoon, eikä punaisella korostettu kukka saa enää vettä",
+            max: function(max) {
+              return "Olet jo lisännyt "+max+"&nbsp;putkea.";
+            }
+         };
+      </script>
+      <style class="">
+         #paper { /* IE8 */
+            text-align: center;
+            margin: 1em auto 0 auto;
+            text-align: center;
+            touch-action: none;
+         }
+         #message {
+            margin-bottom: 1em;
+         }
+         #error {
+            height: 2em;
+         }
+         .paper-instr td {
+            vertical-align: top;
+         }
+      </style>
+      <script src="task.js"></script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Kukkien kastelu</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>Majavalla on putkiverkko kukkien kastelemiseksi.</p>
+                  <p>Lisää verkostoon <strong><span id="minEdges"></span> putkea</strong> niin,
+                  että kaikki kukat saavat yhä vettä, vaikka jokin yksittäinen putki menisi tukkoon.</p>
+                  <p>
+                  Minkä tahansa kahden kukan välille voi lisätä putken klikkaamalla kyseisiä kukkia.
+                  Lisätyn putken voi poistaa klikkaamalla putkea.
+                  </p>
+
+               </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <table class="paper-instr">
+                     <tr>
+                     <td style="width:520px">
+                        <div id="paper"></div>
+                     </td>
+                     <td style="width:235px">
+                        <br/>
+                        <p class="hard" style="margin-top:1em; height:5em" id="instructions">
+                        <strong>Tässä versiossa voit siirtää kukkia raahaamalla helpottaaksesi ratkaisun hahmottelua.</strong>
+                        </p>
+                        <div id="error"></div>
+                     </td>
+                     </tr>
+                  </table>
+               </center>
+            </div>
+         </div>
+         <img src="flower.png" style="display:none" id="flower">
+         <img src="faucet.png" style="display:none" id="faucet">
+         <img src="icon.png" style="display:none">
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         
+   </body>
+</html>

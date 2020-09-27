@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-12-roller</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-12-roller/",
+         "language": "sv",
+         "version": "sv.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, du klarade det!",
+         rollerParameters: function(id) {
+            if(id){
+               id = "nr " + id;
+            }
+            return "Parametrar för hjul "+id;
+         },
+         nbStamps: "Antal stämplar:",
+         stamps: "Stämplar:",
+         startPos: "Startposition:",
+         endPos: "Slutposition:",
+         target: "Mål:",
+         "try": "Försök",
+         error: "Rutan i rött är inte rätt enligt målet.",
+         clickHere: "Klicka för att modifiera"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #parameters {
+         margin: 0.5em auto 0.5em auto;
+         border: 1px solid black;
+         border-radius: 5px;
+         padding: 0.5em;
+      }
+      #parameters td:nth-child(odd) {
+         text-align: right;
+      }
+      #parameters td#rollerParameters {
+         text-align: center;
+         font-weight: bold;
+         padding-top: 0em;
+         padding-bottom: 0.5em;
+      }
+      #parameters td#clickHere {
+         text-align: center;
+         color: red;
+         position: relative;
+         top: -0.5em;
+      }
+      #parameters td {
+         padding: 0.2em 1em;
+      }
+      #error {
+         text-align: center;
+      }
+      select {
+         display: block;
+         width: 4em;
+         height: 2em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Tryckeri</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p><span class="easy">Ett hjul rullar över rutorna och stämplar ett mönster i dem när det snurrar. </span><span class="medium hard">Hjulen rullar över rutorna och stämplar mönster i dem medan de snurrar. Modifiera hjulens parametrar för att uppnå Mål-mönstret.</span></p>
+
+               <p class="easy">Modifiera hjulets parametrar för att uppnå Mål-mönstret.</p>
+               <p class="medium hard">Klicka på ett hjul för att se och ändra dess parametrar. </p>
+
+               <p class="medium">Hjul nummer 1 rullar först, sedan hjul nummer 2.</p>
+
+               <p class="hard">Hjul nummer 1 rullar först, sedan hjul nummer 2, och till sist hjul nummer 3.</p>
+               
+               <p class="medium hard">Ett senare hjul kan ändra det mönster som bildats av ett tidigare.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="parameters">
+               <tr>
+                  <td id="rollerParameters" colspan="4"></td>
+               </tr>
+               <tr>
+                  <td id="nbStamps"></td><td id="nbStamps_"></td><td id="stamps"></td><td id="stampsPaper"></td>
+               </tr>
+               <tr>
+                  <td colspan="3"></td><td id="clickHere"></td>
+               </tr>
+               <tr>
+                  <td id="startPos"></td><td id="startPos_"></td><td id="endPos"></td><td id="endPos_"></td>
+               </tr>
+            </table>
+            <div id="paper"></div>
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Lösning</h2>
+      <h2>Det är datavetenskap!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ar">
+
+<head>
+
+   <meta charset="utf-8"></meta>
+   <title>2019-AR-01-poles</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-01-poles/",
+         "language": "ar",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت !",
+         tooManyJumps: function(nbBounces, maxNbBounces) {
+             return "استطاع القندس القفز لأسفل " + nbBounces + " مرات.<br/>من المفترض أن يعلق القندس بعد  " + maxNbBounces + " قفزة."; },
+         "try": "حاول"
+
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+         touch-action: none;
+      }
+      #error {
+         min-height: 1em;
+         text-align: center;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>القفزات </h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  يحاول القندس القفز على أكبر عدد ممكن من الأعمدة الخضراء.
+
+               </p>
+               <p>
+                  يمكن للقندس القفز فقط على عمود أقصر من مستوى مكان وجوده.
+
+               </p>
+               <p>
+                  قم بإعادة ترتيب الأعمدة لمنع القندس من القفز أكثر من  <strong><span class="easy medium">مرتين</span><span class="hard"> ثلاثة مرات</span></strong>.
+               </p>
+            </div>
+         </div>
+         <div id="zone_2">
+             <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+   <h2>الحل</h2>
+	  <div class = "easy">
+           <p>عليك أن تضع الأعمدة حيث يترك القندس في الوسط.</p>
+           <img src = "sol_easy.png">
+          </div>
+
+         <div class = "medium">
+           <p>نبدأ بوضع الأعمدة حيث يترك القندس في الوسط. القندس يقتصر بالتالي على القفز ثلاث قفزات.</p>
+           <img src = "sol_medium_1.png">
+           <p> ثم، نقوم بإعادة تنظيم الـ 3 أعمدة على اليسار، و الـ 3 أعمدة على اليمين.  <br> ثم على الجانب الأيسر، نضع أكبر عمود  في منتصف الاثنين الأخريين. وعلى اليمين نفعل الشيء نفسه.<br> القندس يقتصر فقط على قفزتين.</p>
+           <img src = "sol_medium.png">
+	        <h2>انها المعلوماتية!</h2>
+
+         </div>
+
+         <div class = "hard">
+           <p> نبدأ بوضع الأعمدة حيث يترك القندس في الوسط. </p>
+           <img src = "sol_hard_1.png">
+           <p>ثم نعيد تنظيم 7 أعمدة على اليسار و 7 أعمدة على اليمين. حيث نضع في كل جزء أكبر عمود في المنتصف  . </ P>
+           <br><img src = "sol_hard_2.png">
+           <p> بعد ذلك ، نعيد تنظيم كل مجموعة من المجموعات الأربع المكونة من 3 أعمدة التي عزلناها. لكل منها نضع أكبر بامبو في المنتصف. </ P>
+           <img src = "sol_hard.png">
+           <p> وبالتالي فإننا نقصر القندس على 3 قفزات فقط </p>
+	        <h2>انها المعلوماتية!</h2>
+
+	  <p> توضح النسخة الصعبة من هذا الموضوع فكرة خوارزمية الـrecursion </a>، والتي تتمثل في تكرار نفس الإجراء على عدة مستويات. هنا، يتمثل الإجراء في وضع أكبر الأعمدة في الوسط ، قبل المتابعة بنفس الطريقة على اليسار وعلى اليمين. يتوافق هذان الجزءان مع المستوى التالي في حل المشكلة. </p>
+
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

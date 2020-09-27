@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-09-hidden-words</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-09-hidden-words/",
+         "language": "sv",
+         "version": "sv.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, du klarade det!",
+         end: "slut",
+         toRemove: "Pour enlever une carte, glissez la \nen-dehors de la zone de réponse.", // DEPRECATED
+         wrongSpot: "Det ligger redan ett kort här. Du kan ta bort det genom att dra det tillbaka till rutmönstret.",
+         wrongNeighbourLeft: "Kortet du försöker lägga kommer inte från den ruta som indikeras av kortet till vänster.",
+         wrongNeighbourRight: "Kortet du försöker lägga indikerar inte det kort som redan ligger till höger.",
+         wrongOrder: "Placera korten med början från vänster.",
+         wrongFirstLetter: "Detta är inte rätt första kort. Läs igen.",
+         failure: function(level) {
+            if(level == "easy" || level == "medium"){
+               var word = "lösenordet med 5 symboler";
+            }else if(level == "hard"){
+               var word = "de tre lösenorden med 5 symboler vardera"
+            }
+            return "Du har inte hittat "+word+".";
+         },
+         wrongGoto: function(letter,goto,nextLetter,nextCoord) {
+            if (goto == null) {
+               return "Kortet "+letter+" indikerar slutet på ett lösenord och kan därför inte följas av ett annat kort.";
+            } else {
+               return "Kortet "+letter+" indikerar "+goto.col+goto.row+", men kortet "+nextLetter+" som följer kommer från "+nextCoord.col+nextCoord.row+".";
+            }
+         },
+         wrongLastLetter: function(lastLetterCoord) {
+            return "Lösenordet är inte avslutat eftersom den sista symbolen inte kommer från rutan "+lastLetterCoord.col+lastLetterCoord.row+".";
+         },
+         sameWordTwice: "Det finns två lika lösenord.",
+         tooManyWords: function(n) {
+            var plural = (n > 1) ? "s" : "";   
+            return "Du ska bilda högst "+n+" lösenord.";
+         },
+         missingWord: function(nbWords, nbSolutions) {
+            var plural = (nbWords > 1) ? "s" : "";   
+           return "Du har hittat " + nbWords + " lösenord. Fortsätt tills du har hittat " + nbSolutions + " stycken.";
+         },
+         wrongLength: function(solutionLength) { 
+            return "Detta lösenord innehåller inte " + solutionLength + " symboler."; 
+         },
+         dropLabel: "Flytta kort till denna kvadrat och bilda tre lösenord."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto 0 auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .instr-bullets li {
+         margin-left: -0.8em;
+         padding-bottom: 0.5em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Lösenord</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Dra kort från rutmönstret till <span class="easy medium"> svarsrutorna för att bilda ett lösenord</span><span class="hard" >svarsområdet för att bilda <strong>tre lösenord</strong></span> med 5 symboler<span class="hard"> vardera</span>.</p>
+               <p class="hard" style="font-weight:bold">För varje lösenord:</p>
+               <ul class="instr-bullets">
+               <li class="easy">Det första kortet finns i ruta <strong>A1</strong>.</li>
+               <li class="medium hard">Du får inte veta var det första kortet finns.</li>
+               <li>Varje kort indikerar var det följande befinner sig.</li>
+               <li class="medium hard">Sista kortet finns i ruta <strong><span class="medium">F3</span><span class="hard">C6</span></strong>.</li>
+
+               </ul>
+               <p class="medium hard"></p>
+
+               <table><tr><td><img src="example.png" style="width:100px; padding-bottom:40px"></td><td>Till exempel, efter detta kort följer det som befinner sig i kolumn C och på rad 2.
+               </td></tr></table>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Lösning</h2>
+      <h2>Det är datavetenskap!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

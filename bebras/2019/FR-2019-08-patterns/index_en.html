@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-08-patterns</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-08-patterns/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Congratulations, you succeeded!",
+         missingPattern: function(n) {
+            return "You must place the "+n+" blue shapes in the grid."
+         },
+         almost: function(n) {
+            return "You managed to place "+(n - 1)+" shapes. Try again to place the last one."
+         },
+         errorMismatch: "The content of the two cells highlighted in red is different.",
+         rotationText: "Turn the shapes.",
+         spotOccupied: "The shapes should not overlap one another."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Repeated patterns</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Place the <strong><span class="nbPatterns"></span></strong> blue shapes on the grid.</p>
+               <p>The content of every shape should be the same.</p>
+               <p class="hard">You can turn the shapes at each step.</p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img src="trash.png" style="display:none" id="trash">
+      <img src="wifi.png" style="display:none" id="wifi">
+      <img src="usb.png" style="display:none" id="usb">
+      <img src="bluetooth.png" style="display:none" id="bluetooth">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

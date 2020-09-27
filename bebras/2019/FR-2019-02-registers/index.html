@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-FR-02-registers</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0',
+         'graph-1.0','visual-graph-1.0','graph-mouse-1.1', "shape-paths"
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-02-registers/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         tooManyMarkers: function(max) {
+            return "Vous n'avez plus de cailloux dans la réserve. Cliquez sur les cailloux pour les reprendre.";
+         },
+         sumGreaterThan: function(max) {
+            return "Vous n'avez plus de cailloux dans la réserve. Cliquez sur les cailloux pour les reprendre.";
+         },
+         // REVIEW[ARNAUD]: factoriser les messages ?
+         noMarkerBelow: "Pour mettre un caillou dans le cercle rouge, il faut que les cercles juste en-dessous aient tous des cailloux.",
+         placed: "Cailloux posés",
+         failure: "Le cercle situé tout en haut ne contient pas de cailloux.",
+         reserve: "Réserve de cailloux :",
+         empty: "Vide.",
+         takeBack: "Cliquez sur des cailloux pour les reprendre.",
+         validateNow: "Vous avez réussi, cliquez sur le bouton valider.",
+         undo: "Annuler une étape",
+         pebbleClick: "Il est inutile de cliquer sur les cailloux de la réserve."
+
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+      }
+      #error {
+         text-align: center;
+      }
+      .task-rules li {
+         margin-top: 1em;
+      }
+      #undo {
+         display: block;
+         margin: auto;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Cailloux</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  Votre objectif est de placer un caillou dans le cercle tout en haut.
+               <p>Pour placer <span class="easy medium">un caillou</span><span class="hard">des cailloux</span> dans un cercle, il faut que tous les cercles juste en-dessous aient des cailloux. Vous pouvez ensuite les récupérer.
+               </p>
+               </p>
+               <p>Cliquez sur un cercle pour y mettre <span class="easy medium">un caillou ou le retirer</span><span class="hard"><span style="font-weight:bold">le nombre de cailloux indiqué dans le cercle</span>, ou les retirer</span>.</p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <button type="button" class="btn btn-default" id="undo">Annuler</button>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+          <div class="easy">
+           <p>On commence par remplir la partie gauche en partant du bas.</p>
+           <img src="sol_easy_1.png">
+           <p>On peut alors récupérer les deux cailloux du bas, pour remplir la partie droite.</p>
+           <img src="sol_easy_2.png">
+           <p>On peut à nouveau récupérer les cailloux du bas, et placer un caillou tout en haut.</p>
+           <img src="sol_easy_3.png">
+          </div>
+
+         <div class="medium">
+           <p>On est obligé de commencer par remplir les 3 cercles qui pointent vers un même cercle. En effet, on n'a que 4 cailloux en tout, donc si on ne commence pas par là on ne pourra jamais le faire plus tard.</p>
+           <img src="sol_medium_1.png">
+           <p>Ensuite, on est obligé de tout faire pour pouvoir remplir dès que possible le cercle qui se trouve juste en-dessous de celui tout en haut, car ce cercle est lui aussi pointé par 3 flèches. On se concentre donc sur la partie centrale. Il faut attaquer par la gauche, car cela nécessite d'utiliser les 3 cailloux restants.</p>
+           <img src="sol_medium_2.png">
+           <p>On peut alors terminer la partie centrale.</p>
+           <img src="sol_medium_3.png">
+           <p>Ensuite, on peut récupérer 3 cailloux et terminer facilement, en commençant par le bord gauche.</p>
+           <img src="sol_medium_4.png">
+         </div>
+
+         <div class="hard">
+           <p>Pour pouvoir placer un caillou sur le cercle en jaune ci-dessous en portant le nombre <b>1</b>, il faut forcément disposer de 8 cailloux. Comme on n'a que 8 cailloux en tout, on est obligé de commencer par là tout au début.</p>
+           <img src="sol_hard_1.png">
+           <p>On peut alors récupérer 7 cailloux. Il faut alors traiter l'endroit marqué en jaune ci-dessous, pour lequel on a également besoin de 7 cailloux.</p>
+           <img src="sol_hard_2.png">
+           <p>De même, on est obligé au niveau du dessus d'utiliser 7 cailloux.</p>
+           <img src="sol_hard_3.png">
+           <p>On peut alors récupérer 6 cailloux, et les utiliser pour la partie qui nécessite exactement 6 cailloux.</p>
+           <img src="sol_hard_4.png">
+           <p>On récupère 5 cailloux, et les utiliser pour la partie qui nécessite exactement 5 cailloux.</p>
+           <img src="sol_hard_5.png">
+           <p>On récupère 4 cailloux, et les utiliser pour la partie qui nécessite exactement 4 cailloux.</p>
+           <img src="sol_hard_6.png">
+           <p>Avec les 2 cailloux restants, on peut terminer.</p>
+           <img src="sol_hard_7.png">
+
+         </div>
+
+      <h2>C'est de l'informatique !</h2>
+
+         <p>Ce sujet montre une structure organisée en <b>arbre</b>, en imaginant l'arbre dessiné à l'envers. La <b>racine</b> se trouve tout en haut, et les <b>feuilles</b> tout en bas. Au milieu, il y a des <b>nœuds</b> avec des branchements représentés par des flèches. Les structures d'arbres sont extrêmement utiles en informatique.</p>
+         
+         <p>Le problème qui est posé sur cet arbre est inspiré du problème consistant à utiliser efficacement les registres d'un microprocesseur lors d'un calcul, par exemple l'évaluation
+         d'une expression arithmétique. Une expression comme (3 - 4) &times; (1 + 2) peut en effet être représentée par un arbre, comme ceci :
+         </p>
+         <img src="sol_expression_tree.png" style="width:300px">
+         <p>
+         Lors d'un calcul, les résultats intermédiaires doivent être stockés. Par exemple on commence par calculer 3 - 4, et on stocke le résultat -1, pendant que l'on s'occupe de calculer 1 + 2.
+         </p>
+         <p>
+         Les cailloux du sujet correspondent aux registres d'un microprocesseur : des zones de mémoire très rapides utilisées pour stocker les valeurs pendant les calculs. Lorsqu'il y a plus de valeurs à retenir que de registres disponibles, une mémoire beaucoup plus lente doit être utilisée pour stocker temporairement les valeurs, et les recharger plus tard au moment où elles seront réutilisées.
+         </p>
+         <p>
+         Comme pour les cailloux du sujet, choisir le bon ordre pour effectuer les calculs permet d'économiser le nombre de registres utilisés, donc de réduire le nombre d'écritures et lectures en mémoire, et accélérer le calcul. L'algorithme appliqué pour résoudre le sujet s'appelle l'algorithme de <a href="https://en.wikipedia.org/wiki/Sethi%E2%80%93Ullman_algorithm" target="_blank">Sethi-Ullman</a>.
+         </p>
+
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

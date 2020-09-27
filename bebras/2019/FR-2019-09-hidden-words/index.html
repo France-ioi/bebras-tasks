@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-09-hidden-words</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-09-hidden-words/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         end: "fin",
+         toRemove: "Pour enlever une carte, glissez la \nen-dehors de la zone de réponse.", // DEPRECATED
+         wrongSpot: "Il y a déjà une carte à cet endroit. Vous pouvez retirer une carte en la glissant dans la grille.",
+         wrongNeighbourLeft: "La carte que vous essayez de déposer ne se trouve pas aux coordonnées indiquées sur la carte déjà posée à sa gauche.",
+         wrongNeighbourRight: "La carte que vous essayez de déposer indique les coordonnées d'une carte qui ne correspond pas à la carte déjà posée à sa droite.",
+         wrongOrder: "Placez les cartes en partant de la gauche.",
+         wrongFirstLetter: "Cette première carte n'est pas la bonne. Relisez l'énoncé.",
+         failure: function(level) {
+            if(level == "easy" || level == "medium"){
+               var word = "le mot de passe de 5 lettres";
+            }else if(level == "hard"){
+               var word = "les 3 mots de passe de 5 symboles"
+            }
+            return "Vous n'avez pas trouvé "+word+".";
+         },
+         wrongGoto: function(letter,goto,nextLetter,nextCoord) {
+            if (goto == null) {
+               return "La carte "+letter+" indique la fin d'un mot de passe, et ne peut donc pas être suivi d'une autre carte.";
+            } else {
+               return "La carte "+letter+" indique l'emplacement "+goto.col+goto.row+", mais la carte "+nextLetter+" qui la suit vient de l'emplacement "+nextCoord.col+nextCoord.row+".";
+            }
+         },
+         wrongLastLetter: function(lastLetterCoord) {
+            return "Le mot de passe n'est pas terminé car le dernier symbole n'est pas celui de la case "+lastLetterCoord.col+lastLetterCoord.row+".";
+         },
+         sameWordTwice: "Un même mot de passe apparaît deux fois.",
+         tooManyWords: function(n) {
+            var plural = (n > 1) ? "s" : "";   
+            return "Vous devez constituer seulement "+n+" mot"+plural+" de passe dans la grille.";
+         },
+         missingWord: function(nbWords, nbSolutions) {
+            var plural = (nbWords > 1) ? "s" : "";   
+            return "Vous avez trouvé " + nbWords + " mot" + plural + " de passe. Continuez pour trouver les " + nbSolutions + " mots de passe.";
+         },
+         wrongLength: function(solutionLength) { 
+            return "Ce mot de passe ne fait pas " + solutionLength + " symboles de long."; 
+         },
+         dropLabel: "Glissez les cartes dans ce cadre pour former trois mots."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto 0 auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .instr-bullets li {
+         margin-left: -0.8em;
+         padding-bottom: 0.5em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Mots de passe</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Glissez des cartes de la grille dans la zone de réponse afin de former <span class="easy medium">un mot</span><span class="hard" style="font-weight:bold">trois mots</span> de passe de 5 symboles<span class="hard"> chacun</span>.</p>
+               <p class="hard" style="font-weight:bold">Pour chaque mot de passe :</p>
+               <ul class="instr-bullets">
+               <li class="easy">La première carte se trouve dans la case <strong>A1</strong>.</li>
+               <li class="medium hard">On ne vous dit pas où se trouve la première carte.</li>
+               <li>Chaque carte indique la case de la carte suivante.</li>
+               <li class="medium hard">La dernière carte se trouve dans la case <strong><span class="medium">F3</span><span class="hard">C6</span></strong>.</li>
+
+               </ul>
+               <p class="medium hard"></p>
+
+               <table><tr>
+               <td><img src="example.png" style="width:100px; padding-bottom:0px"></td>
+               <td>Par exemple, après cette carte, il faut<br/>mettre la carte située sur la colonne C, à la ligne 2.
+               </td></tr></table>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+
+
+          <div class="easy">
+           <p>On commence par la première carte, celle située dans la case <b>A1</b>. Sur cette carte est écrit <b>C2</b>. On place donc en deuxième position la carte de la case <b>C2</b>. Sur cette dernière carte est écrit <b>B3</b>. On place donc en troisième position la carte de la case <b>B3</b>. On continue ainsi de suite jusqu'à la dernière carte, celle de la case <b>E3</b>, qui termine le mot.</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>On commence en partant de la fin du mot. On place la carte de la case <b>F3</b>. Puis on place à l'avant dernière position une carte sur laquelle est écrit <b>F3</b>. Il n'y en a qu'une seule, c'est la carte qui se trouve dans la case <b>E1</b>.</p>
+           <img src="sol_medium_1.png">
+           <p>On continue ainsi de proche en proche. On cherche la carte sur laquelle est écrit <b>E1</b>. C'est la case de la carte <b>B2</b>. On la place sur la troisième position en partant de la fin. Puis on cherche la carte sur laquelle est écrit <b>B2</b>. C'est la case de la carte <b>D2</b>. On la place, puis on cherche la carte sur laquelle est écrit <b>D2</b>. On la place, et le mot est terminé.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>On commence en partant de la fin du mot. On place la carte de la case <b>C6</b>, qui termine le mot, puis on essaie de remonter en arrière, en considérant tous les cas lorsqu'il y a plusieurs possibilités.</p>
+           <img src="sol_hard_1.png">
+           <p>On cherche une carte sur laquelle est écrit <b>C6</b>. Il y en a deux : la carte de la case <b>A2</b>, et celle de la case <b>A5</b>. Notons ces deux possibilités pour la fin du mot.</p>
+           <img src="sol_hard_2.png">
+           <p>On cherche ensuite une carte sur laquelle est écrit <b>A2</b>. Là encore, il y en a deux : la carte de la case <b>B3</b>, et la carte de la case <b>C4</b>. On cherche par ailleurs une carte sur laquelle est écrit <b>A5</b>. Il n'y en a qu'une seule, c'est la carte de la case <b>C2</b>.</p>
+           <img src="sol_hard_3.png">
+           <p>On cherche alors les possibilités pour la lettre précédente dans le mot de passe. Il y a deux cartes sur laquelle est écrit <b>B3</b>, ce sont les cartes des cases <b>A1</b> et <b>C5</b>. Il n'y a qu'une seule carte sur laquelle est écrit <b>C4</b>, c'est la carte de la case <b>A3</b>. Et il n'y a qu'une seule carte sur laquelle est écrit <b>C2</b>, c'est la carte de la case <b>C1</b>. </p>
+           <img src="sol_hard_4.png">
+           <p>Reste à placer la dernière carte. On cherche tout d'abord une carte sur laquelle est écrit <b>A1</b>. Mais il n'y en n'a pas. On en déduit qu'il n'y pas de mot de passe incluant la lettre <b>A1</b>, donc on peut laisser tomber la première des quatre possibilités représentées ci-dessus.</p>
+           <p>En revanche, pour chacune des trois autres possibilités, il y a exactement une carte qui convient. On obtient ainsi la solution suivante.</p>
+           <img src="sol_hard.png">
+         </div>
+
+      <h2>C'est de l'informatique !</h2>
+
+          <p>Un ordinateur est équipé d'une mémoire, organisée en première approximation comme une grande grille. Pour trouver une information stockée dans une certaine case, il faut donner les coordonnées de cette case. Certaines cases de la mémoire stockent des informations, comme des nombres ou des lettres, qui ont un sens pour l'utilisateur. Mais il y a également des cases de la mémoire qui stockent les coordonnées d'autres cases de la mémoire. En informatique, on appelle <a href="https://fr.wikipedia.org/wiki/Pointeur_(programmation)" target="_blank">pointeur</a> le contenu de ces cases. Les pointeurs jouent un rôle absolument essentiel pour permettre l'organisation de grandes quantités de données dans la mémoire.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

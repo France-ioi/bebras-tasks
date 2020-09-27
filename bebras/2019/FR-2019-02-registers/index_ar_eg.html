@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-AR-02-registers</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0',
+         'graph-1.0','visual-graph-1.0','graph-mouse-1.1', 'shape-paths'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-02-registers/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت !",
+         tooManyMarkers: function(max) {
+            return "لا يوجد لديك أحجار متبقية. انقر على الأحجار لاستعادتها.";
+         },
+         sumGreaterThan: function(max) { 
+            return "لا يوجد لديك أحجار متبقية. انقر على الأحجار لاستعادتها.";
+         },
+         noMarkerBelow: "لوضع حجر في الدائرة الحمراء، يجب وضع أحجار في جميع الدوائر الموجودة أسفلها.",
+         placed: "وضعت الأحجار",
+         failure: "لا يوجد أحجار في الدائرة العليا",
+         reserve: "الأحجار المتبقية:",
+         empty: "فارغة.",
+         validateNow: "لقد نجحت، تحتاج فقط إلى التحقق من الحل الآن.",
+         undo: "رجوع",
+         pebbleClick: "النقر على الأحجار لا يفعل أي شيء."
+
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+      }
+      #error {
+         text-align: center;
+         height: 2em;
+      }
+      .task-rules li {
+         margin-top: 1em;
+      }
+      #undo {
+         display: block;
+         margin: auto;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task" dir="rtl">
+      <h1>الأحجار</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  الهدف هو وضع إحدى الأحجار الحمراء في الدائرة العليا من الرسمة.
+               </p>
+               <p>لوضع <span class="easy medium">حجر</span> <span class="hard">أحجار</span> في دائرة، يجب وضع أحجار في جميع الدوائر المتصلة بها بالأسهم ثم يمكنك بعد ذلك الحصول على تلك الأحجار مرة أخرى بالضغط عليها وترك تلك الدوائر خالية.
+               </p>
+               <p>اضغط على الدائرة لوضع <span class="easy medium">حجر</span><span class="hard"> عدد </span><span class="hard">الأحجار المكتوب بها </span> أو لحذف <span class="easy medium">الحجر</span><span class="hard">الأحجار</span>.</p>
+
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <button type="button" class="btn btn-default" id="undo">إلغاء</button>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <div class = "easy">
+<p> نبدأ بملء الجزء الأيسر بدءًا من الأسفل. </P>
+<img src = "sol_easy_1.png">
+<p> يمكننا بعد ذلك استعادة الحجرين بالأسفل ، لملء الجزء الأيمن. </P>
+<img src = "sol_easy_2.png">
+<p> يمكننا الحصول على الحجرين مرة أخرى من أسفل ، ووضع حجر في الأعلى. </P>
+<img src = "sol_easy_3.png">
+</div>
+
+<div class = "medium">
+<p> علينا أن نبدأ بملء الدوائر الثلاث التي تشير إلى نفس الدائرة. في الواقع ، لدينا فقط 4 أحجار في المجموع ، لذلك إذا لم نبدأ هناك فلن نتمكن من القيام بها لاحقًا. </P>
+<img src = "sol_medium_1.png">
+<p> بعد ذلك ، يتعين علينا أن نفعل كل شيء حتى نتمكن من ملء الدائرة بأقل ما يمكن أسفل الدائرة الموجودة أعلى الصفحة ، لأن هذه الدائرة يشار إليها أيضًا بثلاثة أسهم. لذلك نحن نركز على الجزء المركزي. عليك أن تضع الأحجار في اليسار ، لأن ذلك يتطلب استخدام الحجارة الثلاثة المتبقية. </P>
+<img src = "sol_medium_2.png">
+<p> يمكننا بعد ذلك إنهاء الجزء المركزي. </P>
+<img src = "sol_medium_3.png">
+<p> ثم ، يمكنك جمع 3 أحجار والانتهاء بسهولة ، بدءًا من اليسار. </P>
+<img src = "sol_medium_4.png">
+</div>
+
+<div class = "hard">
+<p> لتتمكن من وضع الأحجار على الدائرة الصفراء أدناه مع الرقم <b> 1 </b> ، يجب أن يكون لديك 8 حصى. نظرًا لأن لدينا 8 أحجار فقط ، يجب أن نبدأ هناك في البداية. </P>
+<img src = "sol_hard_1.png">
+<p> يمكننا بعد ذلك استعادة 7 أحجار. يجب علينا بعد ذلك التعامل مع المكان المحدد باللون الأصفر أدناه ، والذي نحتاج أيضًا إلى 7 أحجار. </P>
+<img src = "sol_hard_2.png">
+<p> وبالمثل ، نحن مضطرون في الأعلى إلى استخدام 7 أحجار</P>
+<img src = "sol_hard_3.png">
+<p> يمكننا بعد ذلك جمع 6 أحجار واستخدامها للجزء الذي يتطلب 6 أحجار بالضبط. </P>
+<img src = "sol_hard_4.png">
+<p> نجمع 5 أحجار، ونستخدمها للجزء الذي يتطلب بالضبط 5 أحجار</P>
+<img src = "sol_hard_5.png">
+<p> نجمع 4 أحجار، ونستخدمها للجزء الذي يتطلب 4 أحجار بالضبط. </P>
+<img src = "sol_hard_6.png">
+<p> مع وجود حجرين المتبقيتين ، يمكننا الانتهاء. </P>
+<img src = "sol_hard_7.png">
+
+</div>
+      <h2>انها المعلوماتية !</h2>
+	  <p> يعرض هذا الموضوع هيئة بنية منظمة في <b> شجرة </b> ، متخيلًا الشجرة مرسومة رأسًا على عقب. <b> الجذر </b> في الأعلى ، و <b> أوراق الشجره </b> في الأسفل. في الوسط ، توجد <b> التفريعات </b> مع فروع ممثلة بالأسهم. هياكل الشجرة مفيدة للغاية في علوم الكمبيوتر. </p>
+         
+         <p>إن المشكلة التي تطرح على هذه الشجرة مستوحاة من المشكلة التي تتمثل في استخدام سجلات المعالج الدقيق بكفاءة أثناء  العمليات الحسابية ، على سبيل المثال التقييم من التعبير الحسابي. يمكن تمثيل عبارة مثل (3 - 4) * (1 + 2) بواسطة شجرة ، مثل هذا:
+         </P>
+         <img src = "sol_expression_tree.png" style = "width: 300px">
+         <P>أثناء عملية حسابية ، يجب تخزين النتائج الوسيطة. على سبيل المثال ، نبدأ بحساب 3 - 4 ، ونخزن النتيجة -1 ، بينما نحن مشغولون بحساب 1 + 2.
+         </P>
+         <P>تمثل الأحجار سجلات المعالج الدقيق: وهي مساحات سريعة جدًا من الذاكرة تستخدم لتخزين القيم أثناء العمليات الحسابية. عندما يكون هناك المزيد من القيم التي يجب تذكرها من السجلات المتاحة ، يجب استخدام ذاكرة أبطأ بكثير لتخزين القيم مؤقتًا ، وإعادة تحميلها لاحقًا عند إعادة استخدامها.
+         </P>
+         <P>بالنسبة للأحجار ، فإن اختيار الترتيب الصحيح لإجراء العمليات الحسابية يوفر عدد السجلات المستخدمة ، وبالتالي تقليل عدد عمليات الكتابة والقراءات في الذاكرة ، وتسريع عملية الحساب. تسمى الخوارزمية المطبقة لحل الموضوع<br> <a href="https://en.wikipedia.org/wiki/Sethi%E2%80%93Ullman_algorithm" target="_blank"> Sethi-Ullman </a>.
+         </P>
+	  
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

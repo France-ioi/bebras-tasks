@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-09-hidden-words</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-09-hidden-words/",
+         "language": "fi",
+         "version": "fi.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": ["Heikki Hyyrö"],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Onnittelut, ratkaisit tämän version!",
+         end: "loppu",
+         toRemove: "Kortin voi poistaa raahaamalla sen vastausruudukon ulkopuolelle.",
+         wrongSpot: "Siinä on jo kortti. Voit poistaa kortin raahaamalla sen vastausruudukon ulkopuolelle.",
+         wrongNeighbourLeft: "Lisäämäsi kortti ei vastaa vasemmanpuoleisen kortin koordinaatteja.",
+         wrongNeighbourRight: "Lisäämäsi kortin määrittämät koordinaatit eivät vastaa oikeanpuoleista korttia.",
+         wrongOrder: "Asettele kortit vasemmalta alkaen.",
+         wrongFirstLetter: "Ensimmäinen kortti on väärä. Lue ohjeet uudelleen!",
+         failure: function(level) {
+            var word = "";
+            if(level == "hard"){
+               var word = "kolmea ";
+            }
+            return "Et löytänyt "+word+"5 merkin pituista salasanaa.";
+         },
+         wrongGoto: function(letter,goto,nextLetter,nextCoord) {
+            if (goto == null) {
+               return "Kortin "+letter+" tulee olle salasanan lopussa, eikä sen perään voi asettaa korttia.";
+            } else {
+               return "Kortti "+letter+" viittaa ruutuun "+goto.col+goto.row+", mutta sen perään asetettu kortti "+nextLetter+" on peräisin ruudusta "+nextCoord.col+nextCoord.row+".";
+            }
+         },
+         wrongLastLetter: function(lastLetterCoord) {
+            return "Salasana ei ole oikein, koska viimeinen kortti ei ole peräisin ruudusta "+lastLetterCoord.col+lastLetterCoord.row+".";
+         },
+         sameWordTwice: "Sama salasana esiintyy kaksi kertaa",
+         tooManyWords: function(n) {
+            var plural = (n > 1) ? "a" : "";   
+            return "Sinun täytyy muodostaa "+n+" salasana"+plural+" ruudukkoon.";
+         },
+         missingWord: function(nbWords, nbSolutions) {
+            var plural = (nbWords > 1) ? "a" : "";   
+            return "Muodostit " + nbWords + " salasana" + plural + ". Jatka löytääksesi " + nbSolutions + " salasanaa.";
+         },
+         wrongLength: function(solutionLength) { 
+            return "Salasanasi pituus ei ole " + solutionLength + "."; 
+         },
+         dropLabel: "Raahaa tänne kortteja muodostaaksesi kolme eri sanaa."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto 0 auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .instr-bullets li {
+         margin-left: -0.8em;
+         padding-bottom: 0.5em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Salasanat</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Raahaa ruudukosta kortteja <span class="easy medium">vastausriville</span><span class="hard">vastausalueelle</span> muodostaaksesi <span class="easy medium">yhden 5 merkkiä pitkän salasanan</span><span class="hard"><b>kolme erilaista</b> 5 merkkiä pitkää salasanaa</span>.</p>
+               <p class="hard">Kullekin salasanalle pitää päteä:</p>
+               <ul class="instr-bullets">
+               <li class="easy">Ensimmäinen kortti on otettava ruudusta <strong>A1</strong>.</li>
+               <li class="medium hard">Ensimmäinen kortti otetaan jostain ruudusta (jota emme kerro).</li>
+               <li>Kunkin kortin alaosaan on merkitty, mistä ruudusta sen perään asetettava kortti on otettava.</li>
+               <li class="medium hard">Viimeinen kortti on otettava ruudusta <strong><span class="medium">F3</span><span class="hard">C6</span></strong>.</li>
+               </ul>
+               <table><tr>
+               <td><img src="example.png" style="width:100px; padding-bottom:0px"></td>
+               <td>Esimerkiksi tämän kortin perään pitää<br/>asettaa sarakkeen C rivillä 2 sijaitseva kortti.
+               </td></tr></table>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

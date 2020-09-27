@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-AR-01-poles</title>
+         <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>   
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/2019-FR-01-poles/",
+         "language": "fr",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+            success: ".أحسنت، الإجابة صحيحة",
+         tooManyJumps: function(nbBounces, maxNbBounces) {
+             return "القندس استطاع القفز" + nbBounces + " مرات الى الاسفل<br/>القنس يجب أن يتوقف عند " + maxNbBounces + " قفزة";
+          },
+         "try": "حاول"  // IE8 bug fix
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+         min-height: 1em;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>الأعمدة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+               
+                  .القندس يريد القفز فوق أكبر عدد ممكن من الأعمدة, عليك اقفه
+               </p>
+               <p>
+                  .لا يستطيع القفز الى للأسفل, ولا يستطيع القفز فوق الأعمدة الأعلى منه
+               </p>
+               <p>
+                  غير ترتيب الأعمدة لمنع القنس من القفز الكتر من  <strong><span class="easy medium">مرتين</span><span class="hard">مرة</span></strong>
+               </p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

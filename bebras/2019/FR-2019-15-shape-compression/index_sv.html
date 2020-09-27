@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-15-shape-compression</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+         "language": "sv",
+         "version": "sv.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, du klarade det!",
+         partialSuccess: "Du har fått fram målsekvensen, men genom att använda för många former. Försök på ett annat sätt, så att din sekvens bara består av 6 former.",
+         transformationRules: "Regler för transformationen:",
+         yourSequence: "Din sekvens :",
+         result: "Resultat :",
+         target: "Mål :",
+         clickHere: "Klicka här",
+         missingShape: "Det fattas former i resultatsekvensen.",
+         wrongShape: "Formerna i de röda rutorna är olika.",
+         wrongLength: "Resultatsekvensen är längre än målsekvansen."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Komprimering</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <p id="difficultyWarning" class="hard"></p>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Castor har en maskin som förvandlar en serie former till en annan enligt vissa regler.</p>
+               <p>Din uppgift är att finna <strong><span class="medium hard">reglerna och </span> den sekvens av utgångsformer</strong> som förvandlar den till Målsekvensen.</p>
+               <p class="medium hard">Klicka på knapparna <img src="buttons.png" style="width:58px;vertical-align:-10px;"> för att lägga till eller ta bort former.</p>
+               <p>Klicka på formerna i de grå knapparna för att ändra dem. Klicka t.ex. på <img src="button_shape.png" style="width:35px;vertical-align:-14px;">.</p>
+               <p class="hard" style="font-weight:bold">För att få full poäng får din sekvens inte innehålla mer än sex former.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Lösning</h2>
+      <h2>Det är datavetenskap !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

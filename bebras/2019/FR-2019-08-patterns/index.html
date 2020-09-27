@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-08-patterns</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-08-patterns/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         missingPattern: function(n) {
+            return "Vous devez placer les "+n+" formes bleues dans la grille."
+         },
+         almost: function(n) {
+            return "Vous avez réussi à placer "+(n - 1)+" formes. Essayez encore pour trouver le dernier."
+         },
+         errorMismatch: "Les deux cases entourées en rouge ont des contenus différents.",
+         rotationText: "Tourner les formes.",
+         spotOccupied: "Les formes ne doivent pas se recouvrir."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">   
+      <h1>Motifs répétés</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Placez les <strong><span class="nbPatterns"></span></strong> formes bleues sur la grille.</p>
+               <p>Le contenu de chaque forme doit être le même.</p>
+               <p class="hard" style="font-weight:bold">Vous pouvez faire tourer les formes à chaque étape.</p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img src="trash.png" style="display:none" id="trash">
+      <img src="wifi.png" style="display:none" id="wifi">
+      <img src="usb.png" style="display:none" id="usb">
+      <img src="bluetooth.png" style="display:none" id="bluetooth">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+          <p>
+            On pouvait utiliser la combinaison de deux approches différentes pour résoudre ce problème :
+            <ol>
+               <li>Essayer un par un des emplacements pour la première forme, puis parcourir la grille pour chercher d'autres emplacements contenant le même motif.</li>
+               <li>Analyser certaines propriétés sur le contenu de la grille, pour n'essayer que les motifs qui ont une chance d'apparaître le nombre de fois demandé.</li>
+            </ol>
+          </p>
+
+          <div class="easy">
+           <p>La première approche, rapide dans cette version du sujet, consiste à essayer à placer la forme sur les premières positions en partant de la gauche, et de voir sur quelle position on fait apparaître un motif qui se répète 3 autres fois.</p>
+           <img src="sol_easy.png">
+           <p>La deuxième approche consiste à remarquer que seul le symbole jaune apparaît au moins 4 fois sur la ligne du bas. Il faut donc l'inclure dans le contenu du motif. Parmi les motifs jaunes de la ligne du bas, 2 sont surmontés d'un symbole vert, et 4 sont surmontés d'un symbole violet. Il faut donc forcément placer les formes bleues sur les symboles jaunes surmontés d'un symbole violet.</p>
+          </div>
+
+         <div class="medium">
+           <p>Suivons la seconde approche. Les deux cases du bas de chaque forme vont forcément couvrir des cases de la zone marquée en rouge ci-dessous.</p>
+           <img src="sol_medium_1.png">
+           <p>Dans cette zone, seule la paire "symbole jaune suivi d'un symbole violet" apparaît plus que 5 fois. On n'est pas obligé de compter dans les détails pour s'en rendre compte, mais à titre d'information voici le nombre de fois que chaque paire de symboles apparaît dans la zone rouge.</p>
+           <img src="sol_medium_2.png">
+           <p>Une fois que l'on a déterminé que les symboles des deux cases du bas de la forme bleue sont jaune et violet, on peut assez facilement placer les formes dans la grille, en commençant par les formes du haut et en évitant les recouvrements.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Suivons la seconde approche. La forme bleue doit contenir 4 symboles parmi les 3 symboles : jaune, vert et violet. Donc forcément un des symboles doit apparaître deux fois dans chaque forme bleue. Ce symbole ne peut être que le symbole vert, car c'est le seul à apparaître 10 fois (il y a 10 verts, 7 violets, et 8 jaunes).</p>
+           <p>On peut ensuite se demander quel symbole va apparaître dans la case du milieu de la forme bleue.</p>
+           <ul>
+           <li>Le symbole du milieu de la forme bleue ne peut pas être le jaune car, si on enlève les symboles des coins (qui ne peuvent pas être utilisés pour un milieu), il ne reste que 5 symboles jaunes, et parmi ces 5 symboles il y en a 3 qui sont trop proches les uns des autres pour pouvoir être au milieu de 3 formes bleues distinctes. On n'arrivera donc pas à placer 5 fois le symbole jaune au milieu d'une forme bleue.</li>
+           <li>Le symbole du milieu de la forme bleue ne peut pas être le vert, car sinon la forme bleue contiendrait forcément deux symboles verts l'un à côté de l'autre (vu qu'il y aurait deux symboles verts dans chaque forme, dont un au milieu). Or, dans la grille de symboles, il n'y a que 3 paires de symboles verts côte à côte, et il faudrait 5 paires.</li>
+           </ul>
+           <p>En résumé, chaque forme bleue doit avoir un symbole violet en position centrale, et être constitué d'un symbole jaune et de deux verts.</p>
+           <p>Si l'on n'a pas de chance, on peut commencer par placer une forme, et être tout de suite coincé car il n'y a aucun autre endroit pour en placer une autre au contenu identique.</p>
+           <img src="sol_hard_1.png">
+           <p>Si l'on a toujours pas de chance, on peut placer une forme (celle en bas à gauche) qui occupe la place de deux autres, et on n'arrive qu'à placer 5 formes.</p>
+           <img src="sol_hard_2.png">
+           <p>En cherchant à bien ranger les 5 formes, on obtient la solution.</p>
+           <img src="sol_hard.png">
+         </div>
+
+      <h2>C'est de l'informatique !</h2>
+
+         <p>En informatique comme dans ce petit jeu, il est très utile d'exploiter des <b>contraintes</b>, c'est-à-dire des propriétés qui doivent nécessairement être respectées, afin de réduire significativement l'<b>espace des possibilités</b> à tester avant d'atteindre une solution.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

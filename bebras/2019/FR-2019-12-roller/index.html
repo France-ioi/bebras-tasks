@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-12-roller</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-12-roller/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         rollerParameters: function(id) {
+            if(id){
+               id = "n°" + id;
+            }
+            return "Paramètres du rouleau "+id;
+         },
+         nbStamps: "Nombre de tampons :",
+         stamps: "Tampons :",
+         startPos: "Position de départ :",
+         endPos: "Position de fin :",
+         target: "Objectif :",
+         "try": "Essayer",
+         error: "La case en rouge est différente de l'objectif.",
+         clickHere: "Cliquez pour modifier"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #parameters {
+         margin: 0.5em auto 0.5em auto;
+         border: 1px solid black;
+         border-radius: 5px;
+         padding: 0.5em;
+      }
+      #parameters td:nth-child(odd) {
+         text-align: right;
+      }
+      #parameters td#rollerParameters {
+         text-align: center;
+         font-weight: bold;
+         padding-top: 0em;
+         padding-bottom: 0.5em;
+      }
+      #parameters td#clickHere {
+         text-align: center;
+         color: red;
+         position: relative;
+         top: -0.5em;
+      }
+      #parameters td {
+         padding: 0.2em 1em;
+      }
+      #error {
+         text-align: center;
+      }
+      select {
+         display: block;
+         width: 4em;
+         height: 2em;
+      }
+      .marker-parameters {
+         border: 1px solid gray;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Tampons</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p><span class="easy">Un rouleau roule sur les cases. Il applique</span><span class="medium hard">Des rouleaux roulent sur les cases. Ils appliquent</span> les tampons en tournant.</p>
+
+               <p class="easy">Modifiez ses paramètres pour reproduire l'objectif.</p>
+               <p class="medium hard">Cliquez sur chaque rouleau pour voir ses paramètres et les modifier pour reproduire l'objectif. </p>
+
+               <p class="medium">Le rouleau n°1 va tourner d'abord, puis le rouleau n°2.</p>
+
+               <p class="hard">Le rouleau n°1 va tourner d'abord, puis le rouleau n°2, et enfin le rouleau n°3.</p>
+               
+               <p class="medium hard"><strong>Un rouleau peut modifier ce qu'a fait le précédent.</strong></p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="parameters">
+               <tr>
+                  <td id="rollerParameters" colspan="4"></td>
+               </tr>
+               <tr>
+                  <td id="nbStamps"></td><td id="nbStamps_"></td><td id="stamps"></td><td id="stampsPaper"></td>
+               </tr>
+               <tr>
+                  <td colspan="3"></td><td id="clickHere"></td>
+               </tr>
+               <tr>
+                  <td id="startPos"></td><td id="startPos_"></td><td id="endPos"></td><td id="endPos_"></td>
+               </tr>
+            </table>
+            <div id="paper"></div>
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+
+          <div class="easy">
+           <p>
+           On pouvait repérer que l'objectif est formé d'une même séquence de 4 formes, répétée 4 fois. On pouvait donc le reproduire avec un rouleau de 4 tampons, appliqué sur toute la longueur.
+           </p>
+           <img src="sol_easy.png" class="marker-parameters">
+          </div>
+
+         <div class="medium">
+           <p>
+              On repère que les 4 premières cases et les 3 dernières cases de l'objectif contiennent une alternance des empreintes rondes (vert) et trianle (jaune).
+           </p>
+           <img src="sol_medium_0.png">
+           <p>On peut reproduire cette alternance en configurant le premier rouleau ainsi :</p>
+           <img src="sol_medium_1a.png" class="marker-parameters">
+           <img src="sol_medium_1b.png">
+           <p>Il reste à utiliser le second rouleau pour corriger les cases 5 à 13.</p>
+           <img src="sol_medium_2a.png" class="marker-parameters">
+           <p>On obtient ainsi le marquage qu'il faut sur ces cases.</p>
+           <img  style="margin-left: 180px" src="sol_medium_2b.png">
+         </div>
+
+         <div class="hard">
+           <p>
+            Pour nous aider à trouver, il est utile de bien avoir en tête les différentes manières dont les rouleaux peuvent se recouvrir. En voici quelques exemples.
+           </p>
+           <img src="sol_hard_segments.png">
+           <p>Une approche consiste à se concentrer sur le premier segment, en cherchant un motif permettant de produire le début et la fin de la bande.
+           <p>
+              Il y a plusieurs possibilités, mais lorsque l' on envisage celle-ci avec 2 tampons :</p>
+           <img src="sol_hard_begin_end.png">
+           <p>On remarque que ce qui reste peut être en grande partie produit par un rouleau à 4 tampons :</p>
+           <img src="sol_hard_begin_end_b.png">
+           <p>Le reste peut facilement être couvert par un troisième rouleau.</p>
+           <p>Une autre approche était d'essayer de repérer un motif qui apparaît à plusieurs endroits. On pouvait par exemple remarquer à deux endroits, deux empruntes carrées mauves côte à côte. Si on regarde de plus près, on voit que la ressemblance s'étend aux deux cases voisines, puis qu'une partie du même bloc de 4 tampons se répète :
+           </p>
+           <img src="sol_hard_pattern.png">
+           <p>On retombe sur le même motif que pour le 2e tampon de la première approche.
+           <p>Voici la solution obtenue au final :</p>
+           <img src="sol_hard_1.png" class="marker-parameters">
+           <p></p>
+           <img src="sol_hard_2.png" class="marker-parameters">
+           <p></p>
+           <img src="sol_hard_3.png" class="marker-parameters">
+           <p>Ces paramètres se visualisent ainsi :</p>
+           <img src="sol_hard.png">
+         </div>
+
+      <h2>C'est de l'informatique !</h2>
+         <p>L'application d'un rouleau qui imprime plusieurs fois une séquence de formes et couleurs est comparable à l'utilisation des <a href="https://fr.wikipedia.org/wiki/Boucle_for" target="_blank">boucles de répétition</a>, une des briques fondamentales de la programmation.</p>
+         <p>Par ailleurs, un rouleau peut avoir différents <a href="https://fr.wikipedia.org/wiki/Param%C3%A8tre_(programmation_informatique)" target="_blank">paramètres</a>, mais il a toujours la même <b>fonctionnalité</b>, à savoir répéter un motif constitué d'un certain nombre de tampons, sur une certaine plage de cases. Avec un même concept de rouleau, on peut ainsi dessiner de nombreux motifs selon les paramètres que l'on choisit.</p>
+         <p>En informatique, on utilise le mot <a href="https://fr.wikipedia.org/wiki/Routine_(informatique)#Fonction" target="_blank">fonction</a> pour décrire le fait qu'un ensemble d'instructions effectuant une action ou un calcul dépend d'un ou plusieurs paramètres. Les fonctions sont une autre des briques fondamentales de la programmation.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-13-align-strips</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-13-align-strips/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         wrong: function(nbBeavers) {
+            var msg = "Certains Castors ne reçoivent pas d'eau.";
+            if (nbBeavers == 1) {
+               msg = "Castor ne reçoit pas d'eau.";
+            }
+            return msg + " Essayez autrement pour que tous les tuyaux soient bleus.";
+           },
+         clickToTurn: "Cliquez pour tourner",
+         clickToLower: "Cliquez sur une roue pour la déconnecter",
+         tooManyDisconnect: "Vous avez réussi, mais il est possible d'y arriver en déconnectant moins de roues.",
+         undo: "Annuler une étape",
+         nbDisconnect: function(n) {
+            return "Nombre de déconnexions : "+n;
+         }
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      #error {
+         text-align: center;
+      }
+      .actions-descr li {
+         margin-top: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Réseau hydraulique</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <p id="difficultyWarning" class="hard"></p>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Votre objectif est d'aligner les tuyaux gris pour que l'eau coule du réservoir carré <span class="easy medium">jusqu'à Castor</span><span class="hard">jusqu'aux 4 Castors</span>.</p>
+
+               <p>Les tuyaux sont accrochés sur des roues. Pour les orienter, vous pouvez effectuer deux types d'actions&nbsp;:
+               </p>
+               <ol class="actions-descr">
+               <li>Bouger la poignée noire pour faire tourner d'un quart de tour toutes les roues connectées.</li>
+               <li>Cliquer sur une roue pour la déconnecter des autres, ou bien la reconnecter.</li>
+               </ol>
+               <p class="hard" style="font-weight:bold">Pour obtenir tous les points, effectuez seulement <span id="minDisconnect"></span>&nbsp;déconnexions.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+
+          <p>Voici une liste d'actions permettant de résoudre le défi :<b>
+          <span class="easy">2 P 2&nbsp;&nbsp;P 3 P 3</span>
+          <span class="medium">2 P 2&nbsp;&nbsp;P 3 P 3&nbsp;&nbsp;P 4 P 4&nbsp;&nbsp;P 6 P 6</span>
+          <span class="hard">7 G 7&nbsp;&nbsp;G 2 D 2&nbsp;&nbsp;D 10 G 10&nbsp;&nbsp;G 9 D 9&nbsp;&nbsp;G 12 D 12&nbsp;&nbsp;G 14 D 14</span>
+          </b></p>
+         
+          <img class="easy" src="sol_easy.png">
+          <img class="medium" src="sol_medium.png">
+          <img class="hard" src="sol_hard.png">
+
+          <p>Dans la liste d'actions, un nombre indique qu'il faut cliquer sur la roue correspondante, selon la numérotation montrée dans le dessin ci-dessus. 
+          <span class="easy medium">La lettre <b>P</b> indique qu'il faut cliquer sur la poignée.</span>
+          <span class="hard">La lettre <b>G</b> indique qu'il faut cliquer sur la poignée de gauche, et la lettre <b>D</b> indique qu'il faut cliquer sur la poignée de droite.</span>
+          </p>
+
+          <p>Il y a de nombreuses manières de s'y prendre pour résoudre ce défi. Nous décrivons ci-dessous la méthode qui est sans doute la plus simple.</p>
+          <p>Tout au début, on clique sur la poignée pour bien orienter le tuyau sur la roue accrochée à la poignée. Ensuite, on va corriger l'orientation des tuyaux les uns après les autres, en commençant par ceux qui sont le plus proche de la source, de sorte à ce que l'eau puisse couler dans de plus en plus de roues.</p> 
+          <p>On regarde la première roue dans laquelle l'eau ne circule pas, et on va effectuer une manipulation permettant d'orienter cette roue là comme il faut, sans modifier l'orientation des roues dans lesquelles l'eau coule déjà.</p>
+          <p>Pour cela, on clique sur la poignée <span class="hard">du bon côté</span> pour orienter cette roue comme on souhaiterait qu'elle soit. Ensuite, on déconnecte la roue en cliquant dessus. On clique à nouveau sur la poignée<span class="hard">,cette fois de l'autre côté,</span> pour défaire les rotations que l'on a effectuée juste avant. Puis on reconnecte la roue en cliquant à nouveau dessus. L'eau coule désormais à travers.</p>
+          <p>On continue ainsi de proche en proche, jusqu'à ce que toutes les roues soient bien orientées.</p>
+
+      <h2>C'est de l'informatique !</h2>
+      <p>
+         La version quatre étoiles de ce sujet nous faisait manipuler une structure que l'on appelle un <a href="https://fr.wikipedia.org/wiki/Arbre_enracin%C3%A9" target="_blank">arbre enraciné</a>, en informatique. Le réservoir est la racine de l'arbre, les roues sont les noeuds intermédiaires, et les Castors sont les feuilles. Les versions deux et trois étoiles sont aussi des arbres, mais très simples, avec une seule feuille.
+      </p>
+      <p>
+         Il fallait trouver ici une manière de s'organiser pour placer toutes les roues aux bonnes positions les unes par rapport aux autres. S'organiser, cela revient à appliquer un <a href="https://fr.wikipedia.org/wiki/Algorithme" target="_blank">algorithme</a>. L'algorithme présenté en solution est un <a href="https://fr.wikipedia.org/wiki/Algorithme_de_parcours_en_profondeur" target="_blank">parcours en profondeur</a> de l'arbre, où l'on part de la racine, et va vers chacune des feuilles en suivant les branches étape par étape.
+      </p>
+      <p>
+         Lors du parcours de cet arbre, on appliquait un algorithme dit <a href="https://fr.wikipedia.org/wiki/Algorithme_glouton" target="_blank">glouton</a>. À chaque étape du parcours, on faisait en sorte que la roue parcourue soit bien placée par rapport aux roues déjà traitées. Pour la version difficile, une petite amélioration de cet algorithme glouton permet d'obtenir le nombre de déconnexions minimal possible.
+      </p>
+
+
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

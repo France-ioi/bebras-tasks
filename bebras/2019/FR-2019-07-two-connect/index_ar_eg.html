@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+   <head>
+      <meta charset="utf-8">
+      <title>AR-2019-07-two-connect</title>
+      <script>
+         window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.1']);
+      </script>
+
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2019/FR-2019-07-two-connect/",
+          "language": "en",
+          "version": "en.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <script>
+         var taskStrings = {
+            success: "أحسنت، لقد نجحت",
+            alreadyExist: "يوجد أنبوب هنا بالفعل",
+            isolatedHouse: "تعطل الانبوب و الزهرة المظللة باللون الأحمر لا تتلقى أي ماء.",
+            max: function(max) {
+              return "لقد أضفت  "+max+"&nbsp;أنابيب.";
+            }
+         };
+         var enableRtl = true;
+      </script>
+      <style class="">
+         #paper { /* IE8 */
+            text-align: center;
+            margin: 1em auto 0 auto;
+            text-align: center;
+            touch-action: none;
+         }
+         #message {
+            margin-bottom: 1em;
+         }
+         #error {
+            height: 2em;
+         }
+         .paper-instr td {
+            vertical-align: top;
+         }
+         .largeScreen #zone_1,
+         .largeScreen #zone_2
+         {
+            float: right;
+         }
+      </style>
+      <script src="task.js"></script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>سقي الأزهار</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>قام القندس بتثبيت أنابيب لسقي أزهاره من الماء المتدفق من الصنبور.</p>
+                  <p>يجب أن تحصل كل الزهور على الماء باستمرار حتى لو تعطلت إحدى الأنابيب.</p>
+                  <p>للقيام بذلك أضف <strong><span id="minEdges"></span> أنابيب</strong>.</p>
+                  <p>
+                  انقر على زهرتين لتوصيل الأنبوب بينهم أو انقر على الأنبوب الذي أضفته لإزالته.
+                  </p>
+
+               </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <table class="paper-instr">
+                     <tr>
+                     <td style="width:520px">
+                        <div id="paper"></div>
+                     </td>
+                     <td style="width:200px">
+                        <br/>
+                        <p class="hard" style="margin-top:1em; height:3em" id="instructions">
+                        <strong>يمكنك تحريك الزهور لمساعدتك.</strong>
+                        </p>
+                        <div id="error"></div>
+                     </td>
+                     </tr>
+                  </table>
+               </center>
+            </div>
+         </div>
+         <img src="flower.png" style="display:none" id="flower">
+         <img src="faucet.png" style="display:none" id="faucet">
+         <img src="icon.png" style="display:none">
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>الحل</h2>
+		 <div class = "easy">
+           <p> من الضروري توصيل الزهور المعزولة معًا ، أي تلك المرتبطة بواسطة أنبوب واحد. هناك 4 زهور معزولة ، لذلك 2 أنابيب كافية. على سبيل المثال: </p>
+           <img src = "sol_easy.png">
+          </div>
+
+         <div class = "medium">
+           <p>من الضروري توصيل الزهور المعزولة معًا ، أي تلك المرتبطة بواسطة أنبوب واحد. هناك 6 أزهار معزولة ، وبالتالي فإن  3 أنابيب كافية. ومع ذلك ، فإن بعض تكوينات الأنابيب لا تحمي الأزهار من الأنابيب التي تصبح معطلة. على سبيل المثال ، هذا التكوين غير مناسب: </p>
+           <img src = "sol_medium_bad.png">
+           <p>ومع ذلك ، هناك العديد من التكوينات المناسبة. إليك اثنان: </p>
+           <img src = "sol_medium_1.png">
+           <img src = "sol_medium_2.png">
+         </div>
+
+         <div class = "hard">
+           <p>الخطوة الأولى هي تحريك الأزهار لتجنب جميع تقاطعات الأنابيب. هذا يتيح لك رؤية أكثر وضوحا. على سبيل المثال ، يمكننا الحصول على هذا الشكل: </p>
+           <img src = "sol_hard_1.png">
+           <p>الخطوة الثانية هي تحديد الزهور "الحرجة". أولاً ، الزهرة تكون حرجة إذا كانت متصلة بواسطة أنبوب واحد. بالإضافة إلى ذلك ، يوجد أيضًا مجموعات "حرجة" من الزهور ، عندما تكون مجموعة من الزهور متصله بالباقي بواسطة أنبوب واحد. يجب أن نربط كل مجموعة "حرجة" بانبوب جديد. لهذا ، سوف نختار ، بشكل عشوائي ، زهرة في كل مجموعة مهمة. في المجموع ، لدينا 6 أزهار "حرجة" ، ملونة باللون الأحمر أدناه.
+           <img src = "sol_hard_2.png">
+           <p>بالطبع ، بوجود 3 أنابيب ، سيكون من الممكن ربط 6 أزهار حرجة معًا. لكن احذار ، من المهم عدم وضع أحد الأنبوبين الموضحين أدناه ، وإلا ستظل هناك مجموعات منعزلة يمكن حرمانها من الماء في حالة سد الأنبوب. </ p>
+           <img src = "sol_hard_3.png">
+           <p>إذا تجنبنا وضع هذين الأنبوبين هناك ، فستوفر جميع التكوينات الأخرى حلاً صالحًا. هنا واحد: </p>
+           <img src = "sol_hard.png">
+         </div>
+<h2>المعلوماتية</h2>
+<p>يعرض هذا الموضوع بنية <b> الجراف  </b> ، يُستخدم على نطاق واسع في علوم الكمبيوتر ، حيث ترتبط الكائنات ، الممثلة بـ <b> العقد </b> ببعضها البعض ، والروابط التي تمثلها <b> الخطوط الواصلة </b> بين هذه العقد. هنا الزهور والحنفية هي العقد ، والأنابيب هي الخطوط الواصله في الجراف.
+          </P>
+
+          <p>يوضح السؤال المطروح في هذا الموضوع فكرة <a href="https://en.wikipedia.org/wiki/Isthme_(th٪C3٪A9orie_des_graphes)" target="_blank"> <b> جسر </b> أو <b> isthmus </b> </a> ، وهو مفهوم مهم في <b> نظرية الجراف </b>. الجسر هو خط واصل بحيث إذا تم حذفه ، فإن الرسم البياني الذي هو جزء منه يتم تقسيمه إلى قسمين ، يسمى <b> المكونات </b>. إن إضافة الحواف حتى لا يحتوي الرسم البياني على أي <b> جسور </b> هو ما نسميه استدعاء الرسم البياني <b> متصل بـ 2 خطوط واصلة </b> </span>. </p>
+         
+   </body>
+</html>

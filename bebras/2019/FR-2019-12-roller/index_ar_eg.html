@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>AR-2019-12-roller</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-12-roller/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         rollerParameters: function(id) {
+            if(id){
+               id += " ";
+            }
+            return "خصائص العجلة  "+id+"";
+         },
+         nbStamps: "عدد الأشكال:",
+         stamps: "الأشكال:",
+         startPos: "موقع البداية:",
+         endPos: "موقع النهاية:",
+         target: "الرسمة المطلوبة:",
+         "try": "محاولة",
+         error: "البلاط المحدد باللون الأحمر يختلف عن الهدف.",
+         clickHere: "انقر للتغيير"
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #parameters {
+         margin: 1em auto 0 auto;
+         border: 1px solid black;
+         border-radius: 5px;
+         padding: 1em;
+      }
+      #parameters td:nth-child(odd) {
+         text-align: right;
+      }
+      #parameters td#rollerParameters {
+         text-align: left;
+         font-weight: bold;
+      }
+      #parameters td#clickHere {
+         text-align: center;
+         color: red;
+      }
+
+      #parameters td {
+         padding: 0.2em 1em;
+      }
+      #error {
+         text-align: center;
+      }
+      select {
+         display: block;
+         width: 4em;
+         height: 2em;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>عجلة الأشكال</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p><span class="easy">عندما تدور العجلة تقوم بطباعة أشكال على الأرضية، اضغط على زر "محاولة" ليتضح لك الأمر </span><span class="medium hard">عندما تدور العجلة رقم 1 و 2 تقومان بطباعة أشكال على الأرضية، اضغط على زر محاولة ليتضح لك الأمر.  </span</p> </p>
+
+               <p class="easy">يمكنك تعديل خصائص العحلة بإختيار عدد الأشكال بها وكذلك يمكنك تغيير الأشكال بالنقر عليها.</p>
+               <p class="medium hard">انقر على كل عجلة لتستعرض خصائصها، ثم قم بتعديلها لتحقق الرسمة المطلوبة.</p>
+
+               <p class="medium">تدور العجلة رقم 1 أولاً ثم سوف تدور العجلة رقم 2.</p>
+
+               <p class="hard">ستدور العجلة رقم 1 أولاً، وبعد ذلك ستدور العجلة رقم 2، وأخيراً ستدور العجلة رقم 3.</p>
+               
+               <p class="medium hard"><strong>العجلة التالية يمكنها تغيير الشكل الذي تركته العجلة السابقة.</strong></p>
+
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="parameters">
+               <tr>
+                  <td id="rollerParameters" colspan="4"></td>
+               </tr>
+               <tr>
+                  <td id="nbStamps"></td><td id="nbStamps_"></td><td id="stamps"></td><td id="stampsPaper"></td>
+               </tr>
+               <tr>
+                  <td id="startPos"></td><td id="startPos_"></td><td id="endPos"></td><td id="endPos_"></td>
+               </tr>
+            </table>
+            <div id="paper"></div>
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <div class = "easy">
+           <P>
+           يمكنك أن ترى أن الهدف يتكون من نفس تسلسل 4 أشكال ، يتكرر 4 مرات. وبالتالي يمكن استنساخها مع لفة من 4 أوجه ، وتطبيقها على كامل الرسمة المطلوبة.
+           </P>
+           <img src = "sol_easy_ar_eg.png" class = "marker -eters">
+          </div>
+
+         <div class = "medium">
+           <P> نلاحظ أن المربعات الأربعة الأولى والمربعات الثلاثة الأخيرة للهدف تحتوي على تبادل بين الطبعات الدائرية (الخضراء) والترايل (الصفراء).
+           </P>
+           <img src = "sol_medium_0.png">
+           <p> يمكننا إعادة إنتاج هذا البديل عن طريق تكوين القائمة الأولى كما يلي: </p>
+           <img src = "sol_medium_1a_ar_eg.png" class = "marker-parameter">
+           <img src = "sol_medium_1b.png">
+           <p> يبقى استخدام الأسطوانة الثانية لتصحيح المربعات من 5 إلى 13. </p>
+           <img src = "sol_medium_2a_ar_eg.png" class = "marker-parameter">
+           <p> يمنحك هذا وضع العلامات التي تحتاجها في هذه الصناديق. </p>
+           <img style = "margin-left: 180px" src = "sol_medium_2b.png">
+         </div>
+
+         <div class = "hard">
+           <P>
+            لمساعدتنا في العثور عليها ، من المفيد مراعاة الطرق المختلفة التي يمكن أن تتداخل بها مسارات العجلات. فيما يلي بعض الأمثلة.
+           </P>
+           <img src = "sol_hard_segments.png">
+           <p> تتمثل إحدى الطرق في التركيز على الجزء الأول ، والبحث عن نمط لإنتاج بداية ونهاية المسار.
+           <P>
+              هناك العديد من الاحتمالات ، ولكن عندما ننظر إلى هذا المسار باستخدام عجلة: </p>
+           <img src = "sol_hard_begin_end.png">
+           <p> نلاحظ أن معظم ما تبقى يمكن إنتاجه بواسطة عجلة ذات 4 أوجه مؤقتة: </p>
+           <img src = "sol_hard_begin_end_b.png">
+           <p> يمكن بسهولة تغطية الباقي بواسطة عجلة ثالثة. </p>
+           <p> هناك طريقة أخرى تتمثل في محاولة اكتشاف نمط يظهر في عدة أماكن. يمكن أن نلاحظ على سبيل المثال في مكانين ، وهما بصمات أرجوانية مربعة جنبًا إلى جنب. إذا نظرنا عن كثب ، نرى أن التشابه يمتد إلى المربعين المجاورين ، ثم يتم تكرار هذا الجزء من نفس الكتلة المكونة من 4 مخازن مؤقتة:
+           </P>
+           <img src = "sol_hard_pattern.png">
+           <p> نعود إلى نفس السبب بالنسبة للختم الثاني للنهج الأول.
+           <p> إليك الحل الذي تم الحصول عليه في النهاية: </p>
+           <img src = "sol_hard_1_ar_eg.png" class = "marker -eters">
+           <P> </P>
+           <img src = "sol_hard_2_ar_eg.png" class = "marker -eters">
+           <P> </P>
+           <img src = "sol_hard_3_ar_eg.png" class = "marker -eters">
+           <p> يتم عرض هذه المعلمات كما يلي: </p>
+           <img src = "sol_hard.png">
+         </div>
+      <h2>المعلوماتية</h2>
+	  <p> تطبيق أسطوانة تطبع سلسلة من الأشكال والألوان عدة مرات يشبه استخدام <a href = "https://fr.wikipedia.org/wiki/Boucle_for" target = "_ blank "> تكرار الحلقات </a> ، أحد لبنات البرمجة الأساسية. </p>
+         <p> بالإضافة إلى ذلك ، يمكن أن تحتوي القائمة على <a href="https://en.wikipedia.org/wiki/Param٪C3٪A8tre_(programmation_informatique)" target="_blank"> معلمات </a> مختلفة ، ولكن لها دائمًا نفس الوظيفة <b> </b> ، أي تكرار نمط يتكون من عدد معين من الطوابع ، على مدى معين من الصناديق. باستخدام نفس مفهوم الأسطوانة ، يمكنك رسم العديد من الأنماط وفقًا للمعايير التي تختارها. </p>
+         <p> في علوم الكمبيوتر ، نستخدم كلمة <a href="https://en.wikipedia.org/wiki/Routine_(informatique)#Function" target="_blank"> دالة </a> لوصف حقيقة أن تعتمد مجموعة من الإرشادات التي تقوم بإجراء أو عملية حسابية على معلمة واحدة أو أكثر. وظائف أخرى من اللبنات الأساسية للبرمجة. </p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

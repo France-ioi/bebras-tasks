@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="he">
+
+<head>
+
+   <meta charset="utf-8"></meta>
+   <title>2019-AR-01-poles</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-01-poles/",
+         "language": "he",
+         "version": "he.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "כל הכבוד, הצלחת!",
+         tooManyJumps: function(nbBounces, maxNbBounces) {
+             return "הבונה הצליח לקפוץ למטה " + nbBounces + " פעמים.<br/>הבונה צריך להפסיק לאחר " + maxNbBounces + " קפיצות."; },
+         "try": "נסה"
+
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+         touch-action: none;
+      }
+      #error {
+         min-height: 1em;
+         text-align: center;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Jumping posts</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  הבונה מנסה לגעת במספר מקסימלי של במבוקים. משימתך היא לעצור אותו.
+
+               </p>
+               <p>
+                  הבונה יכול לקפוץ רק כלפי מטה. הוא לא יכול לקפוץ מעל במבוקים גבוהים ממנו.
+
+               </p>
+               <p>
+                 שנה את סדר הבמבוקים, על מנת למנוע ממנו לקפוץ יותר מ <strong><span class="easy medium">פעמיים</span><span class="hard">שלוש פעמים</span></strong>.
+               </p>
+            </div>
+         </div>
+         <div id="zone_2">
+             <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+   <h2>פתרון</h2>
+	  <div class = "easy">
+           <p>צריך למקם את הבמבוק ממנו יוצא הבונה באמצע.</p>
+           <img src = "sol_easy.png">
+          </div>
+
+         <div class = "medium">
+           <p>נתחיל בהנחת הבמבוק ממנו יוצא הבונה באמצע. הבונה מוגבל אם כך ל 3 קפיצות.</p>
+           <img src = "sol_medium_1.png">
+           <p> מוגבל אם כך ל 3 קפיצות בלבד.אחר מכן נארגן מחדש את 3 הבמבוקים משמאל, ואת 3 הבמבוקים מימין. בצד שמאל נמקם את הגדול מבין 3 הבמבוקים כך שיהיה באמצע, בין שני האחרים. בצד ימין נעשה אותו דבר. הבונה מ</p>
+           <img src = "sol_medium.png">
+         </div>
+
+         <div class = "hard">
+          	<p>נתחיל בהנחת הבמבוק ממנו יוצא הבונה באמצע. הבונה מוגבל אם כך ל 3 קפיצות.</p>
+           <img src = "sol_hard_1.png">
+           <p>לאחר מכן מארגנים מחדש את 7 הבמבוקים מצד שמאל ואת 7 הבמבוקים מצד ימין. הניחו על כל חלק את הגדול מבין 3 הבמבוקים באמצע השניים האחרים. </ P>
+           <br><img src = "sol_hard_2.png">
+           <p>לאחר מכן, אנו מארגנים מחדש כל אחת מארבע החבילות של 3 הבמבוקות שבידדנו. עבור כל אחד, אנו ממקמים את הגדול מבין 3 הבמבוקים באמצע השניים האחרים. </ P>
+           <img src = "sol_hard.png">
+           <p>הבונה מוגבל אם כן ל3 קפיצות בלבד</p>
+		</div>
+	  <h2>It's informatics!</h2>
+         <p>הגירסה הקשה של בעיה זו ממחישה את הרעיון של <a href="https://he.wikipedia.org/wiki/%D7%A8%D7%A7%D7%95%D7%A8%D7%A1%D7%99%D7%94" target="_blank">אלגוריתם רקורסיבי</a>, המורכבת מחזרה על אותה פעולה בכמה רמות. כאן, הפעולה מורכבת מהנחת הבמבוק הגדול ביותר באמצע, לפני שממשיכים באותה צורה משמאל ומימין. שני החלקים הללו תואמים לרמה הבאה בפתרון הבעיה.</p>
+
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

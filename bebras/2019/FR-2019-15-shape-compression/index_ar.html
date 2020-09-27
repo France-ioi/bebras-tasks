@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-15-shape-compression</title>
+            <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+         "language": "ar",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: ".أحسنت، الإجابة صحيحة",
+         partialSuccess: " لقد حققت الهدف باستعمل الكتير من الأشكال حاول بستعمل 6",
+         transformationRules: ":قواعد التحويل ",
+         yourSequence: ":سلسلتك",
+         result: ":النتيجة",
+         target: ":الهدف",
+         clickHere: "أنقر هنا",
+         missingShape: "تنقصك أشكال في النتيجة",
+         wrongShape: "الأشكال الملونة بلأحمر مختلفة",
+         wrongLength: "النتيجة أطول من الهدف"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>الأشكال المضغوطة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <p id="difficultyWarning" class="hard"></p>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>القندس لديه ألة تحول سلسلة من الأشكال وفقا للقواعد معينة</p>
+               <p>جد التسلسل<strong><span class="medium hard">و القواعد</span></strong> اللذي يعطي نتيجة كلاهدف</p>
+               <p class="medium hard"> اضغط على الأزرار <img src="buttons.png" style="width:58px;vertical-align:-10px;"> لاضافة أو ازالة أشكال</p>
+               <p>اضغط على الأشكال في الأزرار الرمدسة لتغيرها مثال اضغط على <img src="button_shape.png" style="width:35px;vertical-align:-14px;">.</p>
+               <p class="hard" style="font-weight:bold">للحصول على جميع النقاط يجب أن يحتوي التسلسل على 6 أشكال فقط</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

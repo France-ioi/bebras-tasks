@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-AR-03-prediction</title>
+         <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <!-- <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.1.js"></script> -->
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-03-prediction/",
+         "language": "ar",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: ".أحسنت، الإجابة صحيحة",
+         "try": "حاول",
+         next: "التالي",
+         errorMissingAndExtraGift: "يوجد مزهريات دوون أزهار و أزهار دون مزهريات",
+         errorExtraGift: "يوجد مزهريات دون أزهار",
+         errorMissingGift: "يوجد أزهار دون مزهريات",
+         noBeaver: "اضغط على كل كنغر سوف يتحصل على أزهار",
+         tryToUnderstand: "افهم لماذ يتحصل بعض الكنغر ى أزهر ثم اضغط على الزر التالي",
+         clickNext: "اضغط على الزر التالي لبداية اللعب",
+         clickNow: "اضغط على الكنغر لاعطاىه مزهريةثم جرب الجابتك بضغط على الزر حاول"
+         };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+
+      #error {
+         margin-top: 1em;
+         min-height: 2em;
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>توقعات</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>هدفك هو أن تفهم لماذا يتلقى بعض الكنغر زهرة وليس غيرها</p>
+               <p>انقر فوق زر حاول لإضهار الزهور </p>
+               <p>أنضر جيدا ماد ليوجد
+               <strong>
+               <span class="easy">في الخانة الموجودة فوق كل كنغر</span>
+               <span class="medium hard"> في الخانات الموجودة فوق و تحت كل كنغر</span>
+               </strong></p>
+
+               <p> أنقر على الزر "التلي" ثم أنقر على الكناقر التي سوف تتحصل على أزهار لاعطائهم مزهريات </p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="crocodile.png" style="display:none" id="crocodile">
+      <img src="kangourou.png" style="display:none" id="kangourou">
+      <img src="ours.png" style="display:none" id="ours">
+      <img src="flower_transparent.png" style="display:none" id="flower">
+      <img src="pot.png" style="display:none" id="pot">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

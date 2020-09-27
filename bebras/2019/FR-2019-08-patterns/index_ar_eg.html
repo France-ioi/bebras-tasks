@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>AR-2019-08-patterns</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-08-patterns/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         missingPattern: function(n) {
+            return " يجب أن تضع ال "+n+" أشكال الزرقاء على الشبكة"
+         },
+         almost: function(n) {
+            return "أنت تمكنت من وضع "+(n - 1)+" أشكال. حاول مرة أخرى لوضع شكل آخر"
+         },
+         errorMismatch: "يختلف محتوى الخليتين المميزتين باللون الأحمر.",
+         rotationText: " ",
+         spotOccupied: "يجب ألا تتداخل الأشكال مع بعضها البعض."
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>الأنماط المتكررة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>ضع الـ  <strong><span class="nbPatterns"></span></strong> أشكال الرمادية المحددة باللون الأزرق على المربعات</p>
+               <p> بحيث يكون محتوى جميع الأشكال متطابق</p>
+               <p class="hard">يمكنك تغيير وضعية الأشكال في كل خطوة بالضعط على الزر المربع بالأسفل</p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+      <img src="trash.png" style="display:none" id="trash">
+      <img src="wifi.png" style="display:none" id="wifi">
+      <img src="usb.png" style="display:none" id="usb">
+      <img src="bluetooth.png" style="display:none" id="bluetooth">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+	  <P> يمكننا استخدام مزيج من طريقتين مختلفتين لحل هذه المشكلة:
+            <ol>
+               <li> جرب مواقع الشكل الأول واحدًا تلو الآخر، ثم استعرض الشبكة للعثور على مواقع أخرى تحتوي على نفس النمط. </li>
+               <li> حلل بعض الخصائص على محتوى الشبكة، لتجربة الأنماط التي لديها فرصة لتظهر عدد المرات المطلوبة فقط. </li>
+            </OL>
+          </P>
+
+          <div class = "easy">
+           <p> تتمثل الطريقة الأولى، سريعة في هذا الإصدار من الموضوع، في محاولة وضع الشكل على المواضع الأولى بدءًا من اليسار، ومعرفة الموضع الذي يتكرر فيه النمط والذي يتكرر 3 مرات أخرى. </P>
+           <img src = "sol_easy.png">
+           <p>الطريقة الثانية تتمثل في ملاحظة ان الشكل الأصفر يتكرر علي الأقل أربع مرات في الخط السفلي. علي سبيل المثال، الشكل الأصفر تكرر هنا 6 مرات. يوجد أثنين منهم يعتليهم شكل أخصر، وأربع مرات يعتليهم شكل بنفسجي. ولذلك يجب علينا وضع الأشكال الرمادية علي الأشكال الصفراء اللتي تعتليها أشكال بنفسجية</p>
+		   </div>
+
+         <div class = "medium">
+           <p> سيغطي المربعان السفليان من كل شكل المربعات في المنطقة المحددة باللون الأحمر أدناه. </p>
+           <img src = "sol_medium_1.png">
+           <p> في هذه المنطقة، فقط الزوج "الرمز الأصفر متبوعًا بالرمز البنفسجي" يظهر أكثر من 5 مرات. وهذا هو عدد مرات ظهور كل زوج من الرموز في المنطقة الحمراء. </p>
+           <img src = "sol_medium_2.png">
+           <p>بمجرد تحديد أن الرموز الموجودة في المربعين السفليين من الشكل الرمادي هما الرموز صفراء والبنفسيجية، يمكننا بسهولة وضع الأشكال في الشبكة. </P>
+           <img src = "sol_medium.png">
+         </div>
+
+         <div class = "hard">
+           <p> يجب أن يحتوي الشكل الرمادي على 4 رموز بين الرموز الثلاثة: الأصفر والأخضر والبنفسجي. لذلك بالضرورة يجب أن يظهر أحد الرموز مرتين في كل نموذج أزرق. يمكن أن يكون هذا الرمز هو الرمز الأخضر فقط ، لأنه الرمز الوحيد الذي يظهر 10 مرات (هناك 10 أخضر و 7 بنفسجي و 8 أصفر). </p>
+           <p> يمكننا بعد ذلك أن نتساءل عن الرمز الذي سيظهر في المربع الأوسط للشكل الرمادي. </p>
+           <ul>
+           <li> لا يمكن أن يكون الرمز الأوسط للشكل الأزرق أصفر، لأننا إذا أزلنا الرموز اللتي في الزاويا (التي لا يمكن استخدامها للوسط)، فلن يتبقى سوى 5 رموز صفراء، ومن بين هذه الرموز الخمسة هناك 3 رموز قريبة جدًا من بعضها البعض لتكون قادرًا على أن تكون في منتصف 3 أشكال رمادية مختلفة. لذلك لن نتمكن من وضع الرمز الأصفر 5 مرات في منتصف الشكل الرمادي. </li>
+           <li> لا يمكن أن يكون الرمز الأوسط للشكل الرمادي هو الرمز أخضر، وإلا فسيكون في للشكل الرمادي بالضرورة رمزان أخضران بجوار بعضهما البعض (حيث سيكون هناك رمزان أخضران في كل شكل، بما في ذلك واحد في الوسط). ومع ذلك، في شبكة الرموز، لا يوجد سوى 3 أزواج فقط من الرموز الخضراء جنبًا إلى جنب. </li>
+           </Ul>
+           <p> باختصار، يجب أن يكون لكل شكل رمادي رمز بنفسجي في الموضع المركزي، ورمز أصفر ورمزين باللون الأخضر. </p>
+           <p> إذا كنت غير محظوظًا، فيمكنك البدء بوضع الشكل الرمادي، والتوقف فورًا لأنه لا يوجد مكان آخر لوضع شكل آخر مماثل. </p>
+           <img src = "sol_hard_1.png">
+           <p> إذا كنت لا تزال غير محظوظ، فيمكنك وضع شكل (الشكل في أسفل اليسار) والذي يحل محل اثنين آخرين. </p>
+           <img src = "sol_hard_2.png">
+           <p> بمحاولة تنظيم الأشكال الخمسة جيدًا، نحصل على الحل. </p>
+           <img src = "sol_hard.png">
+         </div>
+      <h2>انها المعلوماتية</h2>
+	  <p> في علوم الكمبيوتر كما في هذه اللعبة الصغيرة ، من المفيد للغاية استخدام <b> القيود </b> ، أي تحديد الخصائص التي يجب احترامها بالضرورة ، من أجل تقليل <b> مساحة الاحتمالات </b> ليتم اختبارها قبل الوصول إلى حل. </p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

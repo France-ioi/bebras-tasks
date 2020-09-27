@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <meta name="viewport" content="width=770, initial-scale=1.0">
+   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+   <title>2019-FR-01-poles</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.2', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/2019-FR-01-poles/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         tooManyJumps: function(nbBounces, maxNbBounces) {
+             return "Castor a pu sauter " + nbBounces + " fois en descendant.<br/>Castor doit être bloqué après " + maxNbBounces + " sauts.";
+          },
+         "try": "Essayer"  // IE8 bug fix
+      };
+      var timeOut;
+
+   </script>
+   <script type="text/javascript" src="task_resp.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+         min-height: 1em;
+      }
+      #zone_2 {
+         padding: 1px 0;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Bambous</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  Castor essaie de passer par le plus de bambous possible. Vous devez l'en empêcher.
+               </p>
+               <p>
+                  Il ne peut sauter que vers le bas. Il ne peut pas passer par dessus des bambous plus hauts que lui.
+               </p>
+               <p>
+                  Changez l'ordre des bambous pour empêcher Castor de sauter plus que <strong><span class="easy medium">deux</span><span class="hard">trois</span></strong> fois.
+               </p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+
+          <div class="easy">
+           <p>Il faut placer le bambou d'où part Castor au milieu.</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>On commence par placer le bambou d'où part Castor au milieu. On limite ainsi castor à 3 sauts.</p>
+           <img src="sol_medium_1.png">
+           <p>Ensuite, on réorganise les 3 bambous de gauche, et les 3 bambous de droite. Sur la partie gauche, on place le plus grand des 3 bambous au milieu des deux autres. Sur la partie droite, on fait de même. On limite ainsi Castor à seulement 2 sauts.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>On commence par placer le bambou d'où part Castor au milieu.</p>
+           <img src="sol_hard_1.png">
+           <p>Ensuite, on réorganise les 7 bambous de gauche, et les 7 bambous de droite. Sur chaque partie, on place le plus grand des 3 bambous au milieu des deux autres. </p>
+           <img src="sol_hard_2.png">
+           <p>Ensuite, on réorganise chacun des 4 paquets de 3 bambous que l'on a isolés. Pour chacun, on place le plus grand des 3 bambous au milieu des deux autres. </p>
+           <img src="sol_hard.png">
+           <p>On limite ainsi Castor à seulement 3 sauts.</p>
+
+         </div>
+
+      <h2>C'est de l'informatique !</h2>
+
+         <p>La version difficile de ce sujet illustre la notion de <a href="https://fr.wikipedia.org/wiki/Algorithme_r%C3%A9cursif" target="_blank">algorithme récursif</a>, qui consiste à répéter à plusieurs niveaux la même action. Ici, l'action consiste à placer le plus grand bambou au milieu, avant de continuer de la même manière sur la partie gauche et sur la partie droite. Ces deux parties correspondent au niveau suivant dans la résolution du problème.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

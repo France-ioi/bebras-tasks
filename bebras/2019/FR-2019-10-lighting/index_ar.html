@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-10-lighting</title>
+            <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+         "language": "ar",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: ".أحسنت، الإجابة صحيحة",
+         red: "أحمر",
+         green: "أخضر",
+         blue: "أزرق",
+         redInitial: "R",
+         greenInitial: "V",
+         blueInitial: "B",
+         lightingCurrent: "الاضاءة الحلية",
+         lightingToReproduce: "هدف الأضاءة",
+         lightIntensity: "قوت الاضاءة",
+         error: "الأضاءة الحالية مختلفة عن الهدف",
+         tooManySpots: "لقد تحصلت على الاضاءة المطلوبة حاول الأن بستعمال مصبيح أقل",
+         drag: "ضع المصبيح على النقاط الرمدية",
+         spotOccupied: "يوجد مصباح هنا",
+         trash: "سلة"
+
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+         height: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>الاضاءة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>اسحب المصبيح الملونة نحو النقاط الرمدية لنسخ الهدف</p>
+
+               <p>ساعد نفسك بستعمال الجدول</p>
+               
+               <p class="easy">لمسعدتك وضعنا لك مصبحين</p>
+               
+               <p class="medium hard" style="font-weight:bold">للحصول على النقاط استعمل فقط <span class="nbLampsTarget"></span>&nbsp; مصبيح</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper" style="padding-left:10px"></div>
+            <div id="error"></div>
+         </div>
+      </div>
+      <img src="trash.png" style="display:none" id="trash">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

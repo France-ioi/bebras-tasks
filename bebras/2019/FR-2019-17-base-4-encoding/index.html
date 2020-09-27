@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>FR-2019-17-base-4-encoding</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-base-4-encoding/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         result: "Résultat",
+         target: "Objectif",
+         error: "Les symboles soulignés en rouge sont différents.",
+         wrongCase: "Un des symboles soulignés en rouge est en majuscule alors que l'autre est en minuscule.",
+         sliders: "Curseurs"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Curseurs</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Castor utilise des curseurs pour représenter <strong><span class="easy">un symbole</span><span class="medium">2&nbsp;symboles</span><span class="hard">3&nbsp;symboles</span></strong>.</p>
+               <p>Déplacez ces curseurs pour que le résultat soit identique à l'objectif.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+           <p>Pour résoudre ce défi, il fallait tout d'abord comprendre l'effet de la position des curseurs sur le résultat, en observant les positions sur la grille de symboles.</p>
+            
+           <div class="easy">
+           <p>Dans cette verssion, on remarque que modifier le premier curseur d'un cran vers la droite fait faire un grand saut de longueur 8 vers la droite à la position du résultat, tandis que déplacer le deuxième curseur d'un cran vers la droite la faisait simplement passer à la position suivante.</p>
+           <p>Pour résoudre le défi, il faut donc commencer par déplacer le premier curseur vers la droite pour se rapprocher au maximum de l'objectif, sans le dépasser. Ensuite, on déplace le second curseur vers la droite jusqu'à atteindre la lettre objectif.</p>
+           </div>
+
+           <div class="medium">
+           <p>Dans cette version, on observe d'abord que les 3 premiers curseurs contrôlent le premier symbole de l'objectif, tandis que les trois autres curseurs contrôlent le second symbole de l'objectif. On peut donc d'abord s'occuper des trois premiers curseurs, et lorsqu'on aura obtenu le premier symbole souhaité, on pourra s'occuper des autres de la même manière.</p>
+           <p>On remarque que déplacer le premier curseur d'un cran vers le haut déplace le résultat de 16 positions vers la droite, tandis que déplacer le deuxième déplace le résultat de 4 positions vers la droite, et déplacer le troisième déplace le résultat de 1 position vers la droite.</p>
+           <p>On commence par déplacer le premier curseur, qui a le plus d'effet, vers le haut tant que le symbole résultat (celle qui est colorée dans la liste) se trouve avant le premier symbole de l'objectif. Ensuite, on fait de même avec le second curseur. Puis avec le troisième curseur, jusqu'à atteindre le symbole objectif.</p>
+           </div>
+
+           <div class="hard">
+           <p>Dans cette version, on observe d'abord que les 8 premiers curseurs contrôlent le premier symbole de l'objectif, que les 8 suivants contrôlent le second symbole, et que les 8 derniers contrôlent le troisième symbole. On peut donc d'abord s'occuper des 8 premiers curseurs, et lorsqu'on aura obtenu le premier symbole souhaité, on pourra s'occuper des deux autres groupes de 8 curseurs de la même manière.</p>
+           <p>
+           On remarque que déplacer le premier curseur vers le haut déplace le résultat de 32 positions vers la droite, déplacer le 2e curseur le déplace de 16, le suivant de 8, etc.
+           </p>
+           <p>On va donc utiliser les curseurs dans l'ordre pour se rapprocher du résultat petit à petit, sans le déplacer.
+           </p>
+           <p>
+           On essaie de déplacer dans l'ordre, chaque curseur vers le haut. Si le symbole résultat (celle qui est colorée dans la liste) se trouve avant le premier symbole de l'objectif, on le laisse en haut. Sinon, on le remet en bas. Ensuite, on fait de même avec le curseur suivant, etc. En procédant ainsi, on trouve forcément le symbole objectif après avoir réglé les 8 premiers curseurs.</p>
+           </div>
+
+           <img class="easy" src="sol_easy.png">
+           <img class="medium" src="sol_medium.png">
+           <img class="hard" src="sol_hard.png"> 
+
+           <p>Chaque curseur peut prendre <span class="easy">8</span><span class="medium">4</span><span class="hard">2</span> valeurs possibles. La combinaison de <span class="easy">2</span><span class="medium">4</span><span class="hard">8</span> curseurs permet de décrire <span class="easy">8*8</span><span class="medium">4*4*4</span><span class="hard">2*2*2*2*2*2*2*2</span> combinaisons, c'est-à-dire 64 symboles possibles. Cela suffit pour représenter les 26 lettres majuscules, les 26 lettres minuscules, les 10 chiffres, plus 2 symboles spéciaux (# et @).</p>
+
+           <p class="medium">Avec 2 groupes de 3 curseurs à 4 valeurs possibles chacun, on peut ainsi décrire 2 symboles.</p>
+           <p class="hard">Avec 3 groupes de 8 curseurs à 2 valeurs possibles chacun, on peut ainsi décrire 3 symboles.</p>
+
+      <h2>C'est de l'informatique !</h2>
+
+         <p>Ce défi illustre la manière dont on peut décrire des symboles (lettres ou chiffres) en les "codant" dans différentes <a href="https://fr.wikipedia.org/wiki/Base_(arithm%C3%A9tique)" target="_blank">bases</a>. Dans la première version du défi, il s'agit de la base 8, car les curseurs ont 8 positions possibles. Dans la seconde version, il s'agit de la base 4. Dans la troisième version, il s'agit de la base 2, aussi appelée <a href="https://fr.wikipedia.org/wiki/Syst%C3%A8me_binaire" target="_blank">système binaire</a>.</p>
+         
+         <p>Tous les ordinateurs modernes représentent les données en <b>binaire</b>. La position des curseurs correspond à un <b>1</b> ou un <b>0</b> dans la base binaire. Un disque de 1 To (Tera-octet) contient 1000 milliards de curseurs.</p>
+         
+         <p>Pour résoudre le défi, il fallait surtout faire attention à ce que certains curseurs, ceux placés à gauche, ont une influence beaucoup plus importante sur le résultats que les suivants, et qu'il est donc préférable de commencer par régler leur valeur. Dans un nombre en base binaire, on appelle ainsi les chiffres les plus à gauche les <a href="https://fr.wikipedia.org/wiki/Bit_de_poids_fort" target="_blank">bits de poids forts</a> car ils ont un impact beaucoup plus important sur la valeur que ceux de droite, les <a href="https://fr.wikipedia.org/wiki/Bit_de_poids_faible" target="_blank">bits de poids faible</a>.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

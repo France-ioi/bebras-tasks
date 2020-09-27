@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-FR-02-registers</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0',
+         'graph-1.0','visual-graph-1.0','graph-mouse-1.1', 'shape-paths'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-02-registers/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Congratulations, you succeeded !",
+         tooManyMarkers: function(max) {
+            return "You have no pebbles left in your reserve. Click on pebbles to take them back.";
+         },
+         sumGreaterThan: function(max) { 
+            return "You have no pebbles left in your reserve. Click on pebbles to take them back.";
+         },
+         noMarkerBelow: "To place a pebble in the red circle, you need all circles underneath to contain pebbles.",
+         placed: "Pebbles placed",
+         failure: "There is no pebble in the top circle.",
+         reserve: "Reserve of pebbles:",
+         empty: "Empty. Remove pebbles that are not needed.",
+         validateNow: "You succeeded, you just need to validate now.",
+         undo: "Undo",
+         pebbleClick: "Clicking on the pebbles in the reserve doesn't do anything."
+
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+      }
+      #error {
+         text-align: center;
+         height: 2em;
+      }
+      .task-rules li {
+         margin-top: 1em;
+      }
+      #undo {
+         display: block;
+         margin: auto;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Rising pebbles</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  Your goal is to place a pebble in the top circle.
+               </p>
+               <p>To place <span class="easy medium">a</span> pebble<span class="hard">s</span> in a circle, all the circles underneath need to have pebbles. You can then get these back.
+               </p>
+               <p>Click on a circle to place <span class="easy medium">a</span><span class="hard">the number of</span> pebble<span class="hard">s indicated in the circle, </span> or to remove <span class="easy medium">it</span><span class="hard">them</span>.</p>
+
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <button type="button" class="btn btn-default" id="undo">Cancel</button>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

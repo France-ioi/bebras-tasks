@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-FR-06-inclusion</title>
+         <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-06-inclusions/",
+         "language": "ar",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: ".أحسنت، الإجابة صحيحة",
+         errorGraph: "السهم الأحمر غير موجود في الرسمين"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #diagrams {
+         margin: 1em 0 1em 0;
+      }
+      #diagrams > * {
+         display: inline-block;
+         vertical-align: middle;
+      }
+      #target, #current {
+         width: 350px;
+      }
+      hr {
+         width: 1px;
+         /*height: 250px;*/
+         background: black;
+         border: none;
+      }
+      h4 {
+         text-align: center;
+         /*margin: 0;*/
+      }
+      #rectangles {
+         touch-action: none;
+         margin: auto;
+      }
+      #error {
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>مستطيلات متداخلة</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  يصف الرسم التخطيطي الحالي كيف تتداخل المستطيلات ذات الزوايا الزرقاء داخل بعضها البعض
+               </p>
+               <table><tr><td>
+                 <div id="example" style="padding-right: 10px"></div>
+               </td><td>
+                 يعني أن المستطيل "A" إلى "B" يشير السهم من "A" يجب أن يكون بالكامل داخل المستطيل "B"
+               </td></tr></table>
+               <p>
+                 أعد إنتاج الهدف من خلال إعادة ترتيب المستطيلات
+               </p>
+               <p>
+                  يمكنك تحريكها بسحبها ، أو تغيير حجمها عن طريق السحب على الزوايا الزرقاء.
+               </p>
+         </div>
+         </div>
+         <div id="zone_2">
+            <div id="diagrams">
+               <div>
+                  <h4>الرسم التخطيطي الحالي</h4>
+                  <div id="current"></div>
+               </div>
+               
+               <hr>
+               <div>
+                  <h4>الهدف</h4>
+                  <div id="target"></div>
+               </div>
+               
+            </div>
+            <div id="rectangles"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

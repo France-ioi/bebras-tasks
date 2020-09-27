@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2019-FR-01-poles</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-01-poles/",
+         "language": "fi",
+         "version": "fi.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": ["Heikki Hyyrö"],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Onnittelut, ratkaisit tämän version!",
+         tooManyJumps: function(nbBounces, maxNbBounces) {
+             return "Majava onnistui hyppäämään " + nbBounces + " kertaa.<br/>Majavan pitäisi jäädä jumiin " + maxNbBounces + " hypyn jälkeen."; },
+         "try": "Kokeile"
+
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto;
+         touch-action: none;
+      }
+      #error {
+         min-height: 1em;
+         text-align: center;
+      }
+
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Pylväät</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>
+                  Majava hyppii pylväältä toiselle. Hän hyppää aina nykyistä matalammalle pylväälle.
+               </p>
+               <p>
+                  Majava ei voi hypätä nykyistä korkeamman pylvään yli.
+               </p>
+               <p>
+                  Majava hyppää mahdollisimman monta kertaa. Estä majavaa hyppäämästä enempää kuin <strong><span class="easy medium">kaksi</span><span class="hard">kolme</span></strong> kertaa.
+               </p>
+               <p>
+                  Muuta pylväiden paikkoja raahaamalla.
+               </p>
+            </div>
+         </div>
+         <div id="zone_2">
+             <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="beaversBall.png" style="display:none" id="beaversBall">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

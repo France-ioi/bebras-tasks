@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>AR-2019-09-hidden-words</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-09-hidden-words/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "أحسنت، لقد نجحت",
+         end: "نهاية",
+         toRemove: "لإزالة بطاقة ، اسحبها وأسقطها \n خارج منطقة الاجابة.",
+         wrongSpot: "يوجد بالفعل بطاقة هناك. يمكنك إزالة البطاقة بسحبها نحو المربعات.",
+         wrongNeighbourLeft: "البطاقة التي تحاول وضعها ليست في الإحداثيات المكتوبة في البطاقة إلتي تسبقها.",
+         wrongNeighbourRight: "الإحداثيات المكتوبة على البطاقة التي تحاول وضعها لا تتوافق مع مكان البطاقة على يمينها",
+         wrongOrder: "ضع البطاقات من اليسار.",
+         wrongFirstLetter: "هذه البطاقة ليست هي البطاقة الصحيحة. اقرأ المسألة مرة أخرى.",
+         failure: function(level) {
+            if(level == "سهل" || level == "متوسط"){
+               var word = "كلمة مرور ذات 5 رموز";
+            }else if(level == "صعب"){
+               var word = "ال3 كلمات ذات ال5 رموز"
+            }
+            return "You didn't find "+word+".";
+         },
+         wrongGoto: function(letter,goto,nextLetter,nextCoord) {
+            if (goto == null) {
+               return "البطاقة "+letter+" يجب أن تكون في نهاية كلمة المرور ، ولا يمكن أن تتبعها بطاقة أخرى.";
+            } else {
+               return "البطاقة "+letter+" تشير إلى الخلية "+goto.col+goto.row+", لكن البطاقة "+nextLetter+" جاءت من الخلية "+nextCoord.col+nextCoord.row+".";
+            }
+         },
+         wrongLastLetter: function(lastLetterCoord) {
+            return "لم تكتمل كلمة المرور ، لأن الرمز الأخير ليس صحيح "+lastLetterCoord.col+lastLetterCoord.row+".";
+         },
+         sameWordTwice: "كلمة المرور نفسها موجودة مرتين",
+         tooManyWords: function(n) {
+            var plural = (n > 1) ? "s" : "";   
+            return "تحتاج فقط إلى النموذج "+n+" كلمة مرور"+plural+" في الشبكة.";
+         },
+         missingWord: function(nbWords, nbSolutions) {
+            var plural = (nbWords > 1) ? "s" : "";   
+            return "لقد وجدت " + nbWords + " كلمة مرور" + plural + ". أكمل وأوجد " + nbSolutions + " كلمات المرور.";
+         },
+         wrongLength: function(solutionLength) { 
+            return "كلمة المرور هذه لا تحتوي " + solutionLength + " رموز."; 
+         },
+         dropLabel: "ضع البطاقات في هذه المنطقة لإنشاء ثلاث كلمات."
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin: 1em auto 0 auto;
+         touch-action: none;
+      }
+      #error {
+         text-align: center;
+      }
+      .instr-bullets li {
+         margin-left: -0.8em;
+         padding-bottom: 0.5em;
+      }
+      .largeScreen #zone_1,
+      .largeScreen #zone_2
+      {
+         float: right;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>كلمات المرور</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>اسحب من البطاقات الصفراء إلى منطقة الإجابة لكي تنشئ  <span class="easy medium">كلمة مرور</span><span class="hard" style="font-weight:bold">ثلاث كلمات مرور</span> مكونة من 5 رموز<span class="hard">  </span>.</p>
+               <p class="hard">لكل كلمات المرور:</p>
+               <ul class="instr-bullets">
+               <li class="easy">	البطاقة الأولى من اليسار هي البطاقة التي توجد في  <strong>A1.</strong> </li>
+               <li class="medium hard">	نحن لا نعلم أين تقع البطاقة الأولى.</li>
+               <li>	الجزء الرمادي من كل بطاقة يشير إلى مكان البطاقة التي تليها.</li>
+               <li class="medium hard">	البطاقة الأخيرة تقع في الخلية <strong><span class="medium">.F3</span><span class="hard">C6</span></strong>.</li>
+               </ul>
+
+               <table><tr>
+               <td><img src="example.png" style="width:100px; padding-bottom:0px"></td>
+               <td>مثال: تشير هذه البطاقة أن البطاقة التي تليها تقع في <br/> تقاطع العمود C مع الصف 2.
+               </td></tr></table>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <div id="error"></div>
+      </div>
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>الحل</h2>
+      <div class = "easy">
+           <p> نبدأ بالبطاقة الأولى ، البطاقة الموجودة في المربع <b> A1 </b>. على هذه البطاقة مكتوب <b> C2 </b>. لذلك نضع البطاقة في الموضع الثاني في المربع <b> C2 </b>. على هذه البطاقة الأخيرة مكتوبة <b> B3 </b>. لذلك ، نضع البطاقة في الموضع الثالث في المربع <b> B3 </b>. نستمر بهذه الطريقة حتى آخر بطاقة ، المربع <b> E3 </b> ، الذي ينهي الكلمة. </p>
+           <img src = "sol_easy.png">
+          </div>
+
+         <div class = "medium">
+           <p> نبدأ من نهاية الكلمة. نضع البطاقة في المربع <b> F3 </b>. ثم ضع بطاقة في الموضع قبل الأخير مكتوب عليها <b> F3 </b>. هناك بطاقة واحدة فقط ، وهي البطاقة الموجودة في المربع <b> E1 </b>. </p>
+           <img src = "sol_medium_1.png">
+           <p> نواصل مثل هذه الخطوة خطوة. نحن نبحث عن البطاقة المكتوبة عليها <b> E1 </b>. هذا هو المربع الموجود على بطاقة <b> B2 </b>. نحن نضعها في المركز الثالث بدءًا من النهاية. ثم نبحث عن البطاقة المكتوبة عليها <b> B2 </b>. هذا هو المربع الموجود على بطاقة <b> D2 </b>. نضعها ، ثم نبحث عن البطاقة المكتوبة عليها <b> D2 </b>. نحن نضعها ، وقد انتهت الكلمة. </p>
+           <img src = "sol_medium.png">
+         </div>
+
+         <div class = "hard">
+           <p> نبدأ من نهاية الكلمة. نضع البطاقة في المربع <b> C6 </b> ، الذي ينهي الكلمة ، ثم نحاول العودة ، مع مراعاة جميع الحالات عندما يكون هناك العديد من الاحتمالات. </p>
+           <img src = "sol_hard_1.png">
+           <p> نحن نبحث عن بطاقة مكتوب عليها <b> C6 </b>. هناك نوعان: البطاقة في المربع <b> A2 </b> ، والأخرى في المربع <b> A5 </b>. لاحظ هذين الاحتمالين لنهاية الكلمة. </p>
+           <img src = "sol_hard_2.png">
+           <p> ثم نبحث عن بطاقة مكتوب عليها <b> A2 </b>. مرة أخرى ، هناك نوعان: البطاقة في المربع <b> B3 </b> ، والبطاقة في المربع <b> C4 </b>. نحن نبحث أيضًا عن بطاقة مكتوب عليها <b> A5 </b>. هناك بطاقة واحدة فقط ، وهي البطاقة الموجودة في المربع <b> C2 </b>. </p>
+           <img src = "sol_hard_3.png">
+           <p> ثم نبحث عن إمكانات الرسالة السابقة في كلمة المرور. يوجد بطاقتان مكتوب عليهما <b> B3 </b> ، وهما البطاقات في المربعات <b> A1 </b> و <b> C5 </b>. هناك بطاقة واحدة فقط مكتوبة عليها <b> C4 </b> ، وهي بطاقة المربع <b> A3 </b>. وهناك بطاقة واحدة فقط مكتوب عليها <b> C2 </b> ، وهي البطاقة الموجودة في المربع <b> C1 </b>. </ P>
+           <img src = "sol_hard_4.png">
+           <p> يبقى وضع آخر بطاقة. نبحث أولاً عن بطاقة مكتوب عليها <b> A1 </b>. ولكن لا يوجد شيء. نستنتج أنه لا توجد كلمة مرور بما في ذلك الحرف <b> A1 </b> ، حتى نتمكن من إسقاط أول الاحتمالات الأربعة المذكورة أعلاه. </ p>
+           <p> من ناحية أخرى ، لكل واحدة من الاحتمالات الثلاثة الأخرى ، هناك بطاقة واحدة مناسبة تمامًا. وبالتالي نحصل على الحل التالي. </p>
+           <img src = "sol_hard.png">
+         </div>
+   
+   <!-- task-solution -->
+   <h2>المعلوماتية</h2>
+   <p> تم تجهيز الكمبيوتر بذاكرة ، تم تنظيمها كتقريب أولي مثل الشبكة الكبيرة. للعثور على المعلومات المخزنة في مربع معين ، يجب عليك تقديم إحداثيات هذا المربع. تقوم بعض صناديق الذاكرة بتخزين المعلومات ، مثل الأرقام أو الحروف ، والتي تكون منطقية للمستخدم. ولكن هناك أيضا صناديق الذاكرة التي تخزن إحداثيات صناديق الذاكرة الأخرى. في علوم الكمبيوتر ، نسمي <a href="https://fr.wikipedia.org/wiki/Pointeur_(programmation)" target="_blank"> المؤشر </a> بمحتوى هذه المربعات. تلعب المؤشرات دورًا أساسيًا للغاية في تنظيم كميات كبيرة من البيانات في الذاكرة. </p>
+   </div>
+   
+</body>
+
+</html>

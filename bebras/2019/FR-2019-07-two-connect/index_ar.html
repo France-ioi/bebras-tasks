@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>FR-2019-07-two-connect</title>
+         <!-- j'ajoute un style ici de la part de aymen -->
+         <style> p{text-align: right}</style>           
+      <script>
+         window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
+            'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.1']);
+      </script>
+
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2019/FR-2019-07-two-connect/",
+          "language": "ar",
+          "version": "ar.01",
+          "authors": "Arthur Charguéraud",
+          "translators": [],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""]
+      };
+      </script>
+      <script>
+         var taskStrings = {
+             success: ".أحسنت، الإجابة صحيحة",
+            alreadyExist: "يوجد أنبوبان في هد المكان",
+            isolatedHouse: " انسد الأنبوب والأزهار بالأحمر لاتتحصل على الماء",
+            max: function(max) {
+              return "لقد وضعت "+max+"&nbsp;أنبيب";
+            }
+         };
+      </script>
+      <style class="">
+         #paper { /* IE8 */
+            text-align: center;
+            margin: 1em auto 0 auto;
+            touch-action: none;
+         }
+         #message {
+            margin-bottom: 1em;
+         }
+         .paper-instr td {
+            vertical-align: top;
+         }
+      </style>
+      <script src="task.js"></script>
+   </head>
+   <body>
+      <div id="task">
+         <h1>اسقي الأزهار</h1>
+         <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
+         <div id="taskContent">        <!-- will contain the content of the task --> 
+            <div id="zone_1">
+               <div class="consigne">
+                  <p>القنس وضع  أنبيب لسقي الأزهار من الحنفية</p>
+                  <p>هدفك اصال الماء الى الأزهار حتى لو انسد أنبوب</p>
+                  <p>لهذا اضف <strong><span id="minEdges"></span> أنبيب</strong></p>
+                  <p>
+                  أنقر على زهرتين لربطهما بأنبوب
+                  أنقر على أنبوب مضاف لمحوه
+                  </p>
+
+               </div>
+            </div>
+            <div id="zone_2">
+               <center>
+                  <table class="paper-instr">
+                     <tr>
+                     <td>
+                        <div id="paper" style="text-align:right"></div>
+                     </td>
+                     <td style="width:220px;padding-left:15px">
+                        <br/>
+                        <p class="hard" style="margin-top:1em; min-height:3em" id="instructions">
+                        <strong>يمكنك تحريك الأزهار لمسعدتك</strong>
+                        </p>
+                        <div id="error"></div>
+                     </td>
+                     </tr>
+                  </table>
+               </center>
+            </div>
+         </div>
+         <img src="flower.png" style="display:none" id="flower">
+         <img src="faucet.png" style="display:none" id="faucet">
+         <img src="icon.png" style="display:none">
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Solution</h2>
+         
+   </body>
+</html>
