@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-06</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-06-pacman/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            error: "Haamu sai majavan kiinni. Voit aloittaa uudelleen alusta tai perua viimeisiä askeleitasi.",
+            undoOption: "Peru viime askel",
+            restartOption: "Aloita alusta",
+            partial: "Majava jäi kiinni, mutta saat osan pisteistä. <br> Voit aloittaa uudelleen alusta tai perua viimeisiä askeleitasi.",
+            livesLeft: function(lives) {
+               return "elämät:<br>" + lives;
+            },
+            livesFeedback: function(livesLost, livesLeft) {
+               return "";
+               //return "Castor a perdu " + livesLost + " vie(s). Il lui reste " + livesLeft + " vie(s).";
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #controlsContainer {
+            text-align: center;
+            padding-left: 20px;
+         }
+         #controlsContainer input {
+            min-width: 80px;
+            padding: 10px;
+         }
+         #arrowsTable td {
+            width: 30px;
+            height: 30px;
+         }
+         .livesStatus {
+            margin-top: 30px;
+            font-size: 24px;
+            display: none;
+         }
+         #restart {
+            padding: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Haamut</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p class="hard" id="difficultyWarning"></p>
+             <p>
+               Siirrä majava keltaisen ympyrän luo ilman että <span class="easy medium">haamu</span><span class="hard">haamut</span> saavat majavaa kiinni. </p>
+             <p>Voit siirtää majavaa nuolinäppäimillä tai klikkaamalla ruudukkoa.
+             </p>
+             <p class="easy medium">
+               Huomaa, että haamu liikkuu koko ajan saman periaatteen mukaisesti. Yritä välttää sitä!
+             </p>
+             <p class="hard">
+               Huomaa, että haamut liikkuvat koko ajan saman periaatteen mukaisesti. Yritä välttää niitä!
+             </p>
+
+             <div id="anim_container">
+               <table>
+                  <tr>
+                     <td>
+                        <div id="anim"></div>
+                     </td>
+                     <td id="controlsContainer">
+                        <input type="button" id="undo" value="Peru" />
+                        <br>
+                        <div class="livesStatus"></span>
+                     </td>
+                  </tr>
+               </table>
+               <div id="feedback"></div>
+               <input type="button" id="restart" value="Aloita alusta" />
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+            <img id="image_ghost1" src="ghost1.png" style="display:none">
+            <img id="image_ghost2" src="ghost2.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+   
+   
+            <style>
+            .table-sol img {
+               width: 240px;
+            }
+            .table-sol td {
+               width: 250px;
+               padding-bottom: 20px;
+               vertical-align: bottom;
+            }
+            .table-sol p {
+               margin: 0px 0px 5px 0px;
+            }
+            </style>
+        
+            <div class="easy">
+                  <table class="table-sol"><tr>
+               <td>
+                  <p>Haluamme jumittaa haamun.</p>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <p>Houkutellaan se ensin oikealle.</p>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <p>Palataan sitten vasemmalle.</p>
+                  <img src="Sol_easy_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>Nyt voimme liikkua alas.</p>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <p>Ja pääsimme maaliin!</p>
+                  <img src="Sol_easy_5.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="medium">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>Haluamme jumittaa haamun.</p>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <p>Houkutellaan se ensin oikealle.</p>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <p>Palataan sitten vasemmalle.</p>
+                  <img src="Sol_medium_3.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>Nyt voimme liikkua alas ja maaliin.</p>
+                  <img src="Sol_medium_4.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+
+               <table class="table-sol"><tr>
+               <td>
+                  <p>Houkutellaan  molemmat haamut...</p>
+                  <img src="Sol_hard_0.png">
+               </td>
+               <td>
+                  <p>...kohti kulmia.</p>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <p>Nyt ne molemmat ovat jumissa.</p>
+                  <img src="Sol_hard_2.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>Mennään alas vasenta laitaa pitkin</p>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <p>Ja palataan ylös jumittaen alempi haamu.</p>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <p>Houkutellaan alempi haamu oikealle...</p>
+                  <img src="Sol_hard_5.png">
+               </td>
+               </tr>
+               <tr>
+               <td>
+                  <p>...ja sitten vasemmalle, jättäen sen taas jumiin.</p>
+                  <img src="Sol_hard_6.png">
+               </td>
+               <td>
+                  <p>Nyt voimme mennä alas...</p>
+                  <img src="Sol_hard_7.png">
+               </td>
+               <td>
+                  <p>...ja jatkaa maaliin.</p>
+                  <img src="Sol_hard_8.png">
+               </td>
+               </tr>
+               </table>
+
+            </div>            
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            <p>Tässä tehtävässä meidän piti ensin <b>takaisinmallintaa</b>, millaisen periaatteen mukaan haamu liikkuu: aina kohti majavaa. Sen jälkeen meidän piti päätellä, kuinka tämä haamun yksinkertainen liikkumisperiaate voidaan voittaa hyödyntämällä ruudukon esteitä.</p>
+            <p><b>Takaisinmallinnus</b> on tietojenkäsittelyn käsite, joka viittaa yleisesti ottaen jonkin järjestelmän tai ohjelman toiminnallisuuden selvittämiseen esimerkiksi sen suoritusta seuraamalla. Katso esim. <a href="https://fi.wikipedia.org/wiki/Takaisinmallinnus" target="_blank">https://fi.wikipedia.org/wiki/Takaisinmallinnus</a>.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

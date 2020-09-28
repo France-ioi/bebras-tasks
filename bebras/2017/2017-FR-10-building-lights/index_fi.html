@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-10</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            emptyError: "Raahaa harmaita kortteja valkeisiin laatikoihin.",
+            mismatchError: "Valot eivät täsmää tavoitteen kanssa. Mieti huolellisesti ja yritä uudelleen.",
+            fullError: "Kaikki laatikot ovat täynnä. Poista kortteja ennen kuin voit lisätä uusia."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         .wrapper {
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .anim {
+         }
+         .animTitle {
+            font-weight: bold;
+            padding: 10px;
+         }
+         .animBuilding {
+            border: 1px solid black;
+         }
+         #animDrag {
+            margin-top: 20px;
+         }
+         #control {
+            margin-top: 1em;
+            margin-bottom: 1em;
+         }
+         #control input {
+            margin-left: 1em;
+            margin-right: 1em;
+            width: 8em;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Valokuviot</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p>Aseta rakennuksen valot päälle samalla tavalla kuin tavoitteessa on esitetty. Tee tämä raahaamalla valojen asetuksia järjestyksessä säätäviä harmaita kortteja alarivin valkeisiin laatikoihin ja suorita asetukset.</p>
+             <p>Kukin kortti<span class="medium hard">, paitsi viimeinen,</span> laittaa kaikki yhden rivin tai sarakkeen valot päälle.</p>
+             <p class="medium hard"><b>Viimeinen kortti kääntää kaikki valot päinvastaisiksi (sammuttaa palavat ja laittaa sammutetut päälle).</b></p>
+            
+            <div id="anim_container">
+               <div class="wrapper">
+                  <div class="animTitle">Rakennus</div>
+                  <div class="anim animBuilding" id="animUser"></div>
+               </div>
+               <div class="wrapper">
+                  <div class="animTitle">Tavoite</div>
+                  <div class="anim animBuilding" id="animTarget"></div>
+               </div>
+               <br>
+               <div id="animDrag"></div>
+               <div id="feedback"></div>
+               <div id="control">
+                  <input type="button" id="execute" value="Suorita"/>
+                  <input type="button" id="stop" value="Pysäytä"/>
+               </div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+         <br>
+         <center><span id="error"></span></center>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+           <div class="easy">
+              <p>Aluksi rakennuksen kaikki valot ovat sammuksissa ja tavoitteessa kaikki sarakkeiden B and C ja rivien 3 ja 4 valot palavat. Tavoite saavutetaan suoraviivaisesti asettamalla näiden sarakkeiden ja rivien valot päälle. Sarakkeiden ja rivien järjestyksellä ei ole tässä merkitystä. Voimme toimia esimerkiksi seuraavasti:
+              <p>
+              <img src="Sol_easy_1.png">
+           </div>
+
+           <div class="medium">
+              <p>Aluksi kaikki rakennuksen valot ovat päällä. Tällöin ainoa vaikuttava kortti on viimeinen, joka tässä tapauksessa sammuttaa kaikki valot.
+              <p>Nyt on kaksi mahdollista strategiaa.</p>
+              <p>(1) Laitamme päälle (ainakin) kaikki tavoitteessa päällä olevat valot, ja sammutetaan sen jälkeen ylimääräiset päällä olevat valot.</p>
+              <p>Kaikki tavoitteen valot saadaan päälle laittamalla sarakkeet A ja D päälle. Sen jälkeen pitää vielä sammuttaa ylimääräiser rivien 5 ja 2 palavat valot. Tämä saadaan aikaiseksi kääntämällä kaikki valot päinvastaisiksi, asettamalla rivit 5 ja 2 päälle, ja kääntämällä taas kaikki valot päinvastaisiksi.
+              <p>
+              <img src="Sol_medium_1.png">
+              <p>(2) Laitamme päälle kaikki ne valot, jotka eivät ole päällä tavoitteessa, ja sen jälkeen käännämme kaikki valot päinvastaisiksi.</p>
+              <img src="Sol_medium_2.png">
+           </div>
+
+           <div class="hard">
+              <p>Tässä on monia ratkaisuita.</p>
+              <p>Eräs ratkaisu koostuu seuraavista askeleista:
+              <ul>
+               <li>Sammuta ainoa valo, joka ei ole päällä tavoitteen rivillä 2: käännä kaikki valot, laita rivi 2 päälle, ja käännä kaikki valot.
+               <li>Laita päälle kaikki valot, jotka ovat päällä tavoitteessa: laita päälle sarakkeet A ja D sekä rivi 5.
+               <li>Sammuta ylimääräiset valot: käännä kaikki, aseta päälle rivit 0, 1 ja 6, ja käännä kaikki valot.
+               </ul>
+              </p>
+              <p>
+              <img src="Sol_hard_1.png">
+              <p>Alla on kuvattu lyhin mahdollinen ratkaisu.</p>
+              <img src="Sol_hard_2.png">
+           </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            <p>Tehtävässä kukin valo on joko päällä tai pois päältä (valolla on kaksi mahdollista arvoa). Samaan tapaan tietokoneen muisti koostuu <b>biteistä</b>, joista kunkin arvo on joko <b>0</b> tai <b>1</b>. Kaikki luvut, kuvat, teksti,  ohjelmat jne. on kuvattu tietokoneen muistissa bittimuodossa eli arvoista <b>0</b> ja <b>1</b> koostuvina jonoina.</p>
+
+            <p>Tietokoneen ydin on <b>prosessori</b>, joka osaa käsitellä biteistä koostuvia arvoja (tyypillisesti <b>64</b> bitin kokoisia) erittäin tehokkaasti. Prosessorissa on esimerkiksi tyypillisesti "bittien kääntö"-operaatio, joka muuttaa silmänräpäyksessä 64-bittisen arvon kaikki bitit päinvastaisiksi: kunkin <b>0</b>:n tilalle tulee  <b>1</b> ja kunkin <b>1</b>:n tilalle <b>0</b>. Tietokone pystyy suorittamaan jopa miljardeja tällaisia 64-bittisiä operaatioita sekunnissa, tehden näin ollen jopa yli 100 miljardia yksittäisen bitin manipulaatioita yhden sekunnin aikana!</p>
+            
+            <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Digitaalisuus" target="_blank">https://fi.wikipedia.org/wiki/Digitaalisuus</a> ja <a href="https://fi.wikipedia.org/wiki/Looginen_portti" target="_blank">https://fi.wikipedia.org/wiki/Looginen_portti</a>.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

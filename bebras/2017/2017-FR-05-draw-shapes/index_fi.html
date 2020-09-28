@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-05</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            error: "Hahmot eivät vastaa koodia.",
+            removeShape: "Poista",
+            dragAttempt: "Klikkaa ensin hahmoa ja sitten kohtaa, johon haluat sijoittaa hahmon." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #taskDescription p {
+            text-align: left;
+         }
+         .exampleWrapper {
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid black;
+         }
+         .exampleContainer {
+            padding-left: 15px;
+         }
+         .exampleTitle {
+            font-weight: bold;
+            padding: 10px;
+         }
+         #animContainer {
+            text-align: center;
+         }
+         #animContainer div {
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0px 10px 0px 0px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #animContainer {
+            margin-top: 1em;
+         }
+         .drawAreaDiv {
+            border: 3px solid black;
+         }
+         .drawAreaDivExample {
+            vertical-align: center;
+         }
+         #anim {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         .configString {
+            font-weight: bold;
+            font-size: 1.5em;
+            text-align: center;
+         }
+         #taskDescription td {
+            vertical-align: top;
+         }
+         .hint {
+            font-weight: bold;
+            color: green;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Hahmokieli</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <table><tr><td style="vertical-align:center">
+              Koodi <span class="configString" id="configString_example0">A</span> <br class="hard"/>vastaa hahmokuviota:</td><td><span id="exampleAnim0" class="drawAreaDivExample"></span>
+            </td><td>.</td></tr></table>
+            <table class="medium"><tr><td style="vertical-align:center">
+               Koodi <span class="configString" id="configString_example1">A</span> vastaa hahmokuviota:</td><td><span id="exampleAnim1" class="drawAreaDivExample"></span>
+            </td><td>.</td></tr></table>
+            <div id="animContainer">
+               <div>
+                  <div id="buttonsAnim"></div>
+               </div>
+               <div id="targetWrapper">
+                  <p>Piirrä alun esimerkin perusteella hahmokuvio, jota vastaa seuraava koodi:</p>
+                  <span class="configString" id="configString_main">A</span><br/>
+                  <div id="anim" class="drawAreaDiv"></div>
+                  <p>
+                  <span class="hint">Klikkaa haluttua kohtaa.</span>&nbsp;
+                  </p>
+               </div>
+           </div>
+           <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+   
+           <p>Voimme päätellä kirjainten ja kuvioiden väliset vastaavuudet. </p>
+           <ul>
+               <li>A vastaa vihreää kolmiota.</li>
+               <li>X vastaa vaaleanpunaista neliötä.</li>
+               <li>O vastaa sinistä ympyrää.</li>
+           </ul>
+   
+           <p class="medium">Lisäksi jos kirjaimen perässä on kirjaimia sulkujen sisällä, on kyseessä iso kuvio, jonka sisällä on sulkujen sisällä kuvatut alikuviot. Alikuviot kuvataan kolmella kirjaimella: ensimmäinen kertoo keskellä ylhäällä, toinen alhaalla vasemmalla ja kolmas alhaalla oikealla olevan alikuvion.</p>
+          
+           <p class="hard">Kuvioita voidaan sisällyttää toisiinsa (isomman kuvion sisällä on pienempiä kuvioita), ja tämä hierarkia kuvataan koodissa suluilla. Tehtävässä esiintyy kolme tasoa: ison kuvion sisällä voi olla keskikokoisia kuvioita, joiden sisällä puolestaan voi olla pieniä kuvioita.</p>
+            
+           <p class="hard">Huomaa, ettei suluissa ole välttämättä annettu kolmea kuviota. Alikuvioita voi olla vähemmänkin, kuten esimerkiksi vain yksi koodissa <b>A(X)</b> tai ei yhtään koodissa <b>O()</b>.<p>
+
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            
+          <p>Tehtävä havainnollistaa tietojenkäsittelytieteessä usein käytettyä tapaa <b>puumaisen rakenteen</b> esittämiseen <b>sisäkkäisiä rakenteita sisältävässä tekstimuodossa</b>. Sisäkkäiset rakenteet voidaan esittää tekstissä esimerkiksi sulkumerkkien avulla. Puumainen rakenne syntyy, kun tekstissä on elementtejä, joiden alaisuudessa on muita elementtejä, joiden alaisuudessa voi puolestaan olla muita elementtejä, ja niin edelleen.</P>
+
+          <p>Esimerkiksi internetin www-sivujen sisältö kuvataan <b>puumaisena rakenteena</b>, jossa sivun elementtejä voi olla sisäkkäin. Useimmissa nykyisissä www-selaimissa voi helposti tarkastella sivun rakennetta. Voit kokeilla tätä avaamalla selaimeen jonkin mieleisesi www-sivun, viemällä hiiren kursorin jonkin sivun elementin (esim. kuvan) kohdalle, klikkaamalla hiiren oikeaa nappia, ja valitsemalla avautuvasta valikosta <b>Tarkista</b> (tai <b>Inspect element</b> tms.). Tämä avaa sivun rakennetta kuvaavan työkalun, jossa voit tarkastella sivun elementtien puurakennetta.</p>
+
+          <p>Alla on esimerkki siitä, miltä erään selaimen työkalu näyttää tarkasteltaessa verkkosivun <a href="http://www.france-ioi.org" target="_blank">France-ioi</a> rakennetta.</p>
+          <img src="its_info.png" style="border:1px solid black"/>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

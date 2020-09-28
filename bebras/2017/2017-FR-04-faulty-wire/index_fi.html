@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-04</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0',
+            'visual-graph-1.0', 'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-04-faulty-wire/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            found: "", // empty when using automatic validation
+            notFound: "Etsi siemeniä sisältävä putki, ja päästä majava putken luukusta sisään.",
+            noSeeds: "Majava ei löytänyt siemeniä. Etsi muualta.",
+            noPath: "Klikkaa kahta saman putken eri luukkua.",
+            /*
+            testLimit: function (limit) { return "Vous avez déjà fait " + limit + " tests, mais vous n'avez pas encore trouvé les graines. Essayez autrement, en cliquant sur &quot;Recommencer&quot;."; },
+            */
+            seedsInPath: function(pathLength) { return "<p>Majava näki siemeniä " + pathLength + " putken osassa.</p><p>Jatka etsintää löytääksesi tarkan kohdan.</p>"; },
+            partial: function(userSteps, optimalSteps, hasPoints) {
+               var pointsMessage;
+               if (!hasPoints) {
+                  pointsMessage = "Teit liikaa hakuaskeleita saadaksesi pisteitä.";
+               } else {
+                  pointsMessage = "Sait osan pisteistä.";
+               }
+               return "<p>Löysit siemenet käyttäen " + userSteps + " askelta.</p><p>" + pointsMessage + "</p><p>Yritä uudelleen löytääksesi ne pienemmällä askelmäärällä.</p><p>Huom! Siemenet asetetaan satunnaiseen uuteen paikkaan.</p>";
+            },
+            obstructedPathText: ""
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 35px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         #exampleTable {
+            margin: auto;
+         }
+         #exampleTitle {
+            text-align: center;
+            font-weight: bold;
+         }
+         #exampleDescr {
+            text-align: center;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         #exampleFrame {
+            border: 1px solid black;
+            padding: 5px;
+            margin: 15px 0px 0px 0px;
+         }
+         .animWithSep {
+            border-right: 1px dashed gray;
+            padding-right: 10px;
+         }
+         #feedback {
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red;
+         }
+         .stepsMessage {
+            font-size: 18px;
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Kadonneet siemenet</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p id="enemyWarning"></p>
+            <div style="float:right; padding: 5px; margin-left: 25px; margin-bottom: 10px; border: 1px solid black"><img src="seeds.png" style="height:55px"></div>
+            <p>Majava kadotti keräämänsä siemenet jonkin putken johonkin osaan.</p>
+            <p style="font-weight: bold">Etsi siemenet suorittamalla mahdollisimman pieni määrä hakuaskeleita.</p>
+            <p >Suorita yksi hakuaskel klikkaamalla kahta saman putken luukkua. Tällöin majava kulkee klikattujen luukkujen välisen matkan putkessa ja kertoo, ovatko siemenet jossain kohtaa luukkujen välillä.</p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+            <div id="feedback"></div>
+            <div id="buttons">
+               <span class="stepsMessage">Hakuaskeleita: <span id="stepCounter"></span>.</span>
+            </div>
+            <img src="icon.png" style="display:none">
+            <img src="castor.png" style="display:none">
+         </div>
+      </div><!-- task -->
+
+      <div id="solution">
+
+         <h2>Solution</h2>
+           
+           <div class="easy">
+              <p>Siemenet voidaan aina löytää 4 hakuaskeleella. Ensin tehdään koko putken läpi kulkevat haut kahdessa putkessa. Näiden kahden haun jälkeen tiedämme, missä putkessa siemenet ovat. Sen jälkeen siementen tarkka sijainti on helppo varmistaa kahdella puolen putken haulla.</p> 
+              <ul>
+              <li>
+                  <p><strong>Askel 1</strong>: Tutkitaan kokonaan mikä tahansa putki (vaikkapa ylin)</p>
+                  <p><img src="Sol_easy_1.png"></p>
+                  <p>Tulos: ei löydetty siemeniä.</p>
+              </li>
+              <li>   
+                  <p><strong>Askel 2</strong>: Kokeillaan seuraavaksi jotain muuta putkea, kuten vaikkapa vasemmanpuoleista. </p>
+                  <p><img src="Sol_easy_2.png"></p>
+                  <p>Tulos: ei löydetty siemeniä.</p>
+              </li>
+              <li>
+                  <p><strong>Askel 3</strong>: Siementen on pakko olla kolmannessa putkessa. Tätä ei tarvitse enää tutkia koko putken läpi kulkevalla haulla. Riittää tutkia kumpikin puoli erikseen (esim. ensin vasen ja sitten oikea puoli), ja näiden hakujen myötä saadaan siementen tarkka sijainti selville.</p>
+                  <p><img src="Sol_easy_3.png"></p>
+                  <p>Tulos: siemenet eivät ole vasemmassa puoliskossa. Niiden on siten oltava oikeassa puoliskossa.</li>
+              <li>
+                  <p><strong>Askel 4</strong>: Annetaan majavan löytää siemenet oikeasta puoliskosta.</p>
+                  <p><img src="Sol_easy_4.png"></p>
+                  <p>Tulos: tehtävä on ratkaistu!</p>
+              </li>
+              </ul>
+           </div>
+
+           <div class="medium">
+              <p>Siemenet voi löytää 5 hakuaskeleella. Pyrimme eliminoimaan kullakin askeleella mahdollisimman suuren määrän mahdollisia sijaintikohtia.</p> 
+              <ul>
+              <li>
+                  <p><strong>Askel 1</strong>: Annetaan majavan kulkea puolet putkesta.</p>
+                  <p><img src="Sol_medium_1.png"></p>
+                  <p>Tulos: siemeniä ei löydetty. Tämä osuus esitetään jatkossa kuvissa mustalla.</p>
+                  <p>Huom: jos majava kulkee vähän alle tai yli puoli putkea, tietokone aina järjestää tilanteen sellaiseksi, että siemenet ovat isommassa puoliskossa.</p>
+              </li>
+              <li>   
+                  <p><strong>Askel 2</strong>: Samoin kuin edellä, annetaan majavan kulkea puolet siitä putken osuudesta, jossa siementen tiedetään olevan. </p>
+                  <p><img src="Sol_medium_2.png"></p>
+                  <p>Tulos: siemenet ovat tässä osuudessa. Putken muu osuus on jatkossa esitetty kuvissa mustalla.</p>
+              </li>
+              <li>
+                  <p><strong>Askel 3</strong>: Nyt on 4 putken osaa jäljellä. Saman periaatteen mukaan, annetaan majavan kulkea puolet eli nyt 2 osan pituinen puolisko.</p>
+                  <p><img src="Sol_medium_3.png"></p>
+                  <p>Tulos: siemenet eivät ole kahden ensimmäisen osan puoliskossa. Ne ovat siis jälkimmäisessä puoliskossa.</li>
+              <li>
+                  <p><strong>Askel 4</strong>: Tutkitaan toinen jäljellä olevista osista.</p>
+                  <p><img src="Sol_medium_4.png"></p>
+                  <p>Tulos: siemeniä ei löydetty.</p>
+              </li>
+              <li>
+                  <p><strong>Askel 5</strong>: Anna majavan tutkia viimeinen jäljellä oleva osa. Siementen on oltava siellä.</p>
+                  <p><img src="Sol_medium_5.png"></p>
+                  <p>Tulos: tehtävä on ratkaistu!</p>
+              </li>
+              </ul>
+           </div>
+
+
+          <div class="hard">
+              <p>Siemenet voi löytää 5 hakuaskeleella. Pyrimme eliminoimaan kullakin askeleella mahdollisimman suuren määrän mahdollisia sijaintikohtia.</p> 
+              <ul>
+              <li>
+                  <p><strong>Askel 1</strong>: Annetaan majavan kulkea putken yläkaari, joka kattaa 6 putken osaa.</p>
+                  <p><img src="Sol_hard_1.png"></p>
+                  <p>Tulos: siemeniä ei löydetty. Tämä osuus esitetään jatkossa kuvissa mustalla.</p>
+              </li>
+              <li>   
+                  <p><strong>Askel 2</strong>: Jäljellä olevista osista 4 on mahdollista tutkia yhdellä haulla. Esimerkiksi seuraavasti:</p>
+                  <p><img src="Sol_hard_2.png"></p>
+                  <p>Tulos: siemeniä ei löydetty. Tämä osuus esitetään jatkossa kuvissa mustalla.</p>
+              </li>
+              <li>
+                  <p><strong>Askel 3</strong>: Vain 4 osaa jäljellä. Näistä puolet eli 2 osaa voidaan tutkia kerralla asettamalla majava kulkemaan sellainen reitti, joka kulkee osin myös jo tutkitun putken osan läpi. Tämä ei ole ongelma.</p>
+                  <p><img src="Sol_hard_3.png"></p>
+                  <p>Tulos: siemenet eivät ole oikeanpuoleisissa kahdessa osassa. Niiden on siis oltava toisessa vasemmanpuoleisitsa osista.</li>
+              <li>
+                  <p><strong>Askel 4</strong>: Tutkitaan toinen jäljellä olevista osista.</p>
+                  <p><img src="Sol_hard_4.png"></p>
+                  <p>Tulos: siemeniä ei löydetty.</p>
+              </li>
+              <li>
+                  <p><strong>Askel 5</strong> : Anna majavan tutkia viimeinen jäljellä oleva osa. Siementen on oltava siellä.</p>
+                  <p><img src="Sol_hard_5.png"></p>
+                  <p>Tulos: tehtävä on ratkaistu!</p>
+              </li>
+              </ul>
+          </div>
+
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+
+         <p>Tehtävä sivuaa <b>dikotomista hakua</b>, joka on yleinen hakuperiaate tietojenkäsittelytieteessä. Lähtökohtana on tilanne, jossa etsitään jotain alkiota suuresta joukosta mahdollisia sijaintikohtia. Dikotomisen haun periaatteena on jakaa (jäljellä olevat) mahdolliset sijaintikohdat aina kahteen osaan ja tutkia, löytyykö etsitty alkio toisesta puoliskosta. Jos alkiota ei löydy, tiedetään sen olevan mahdollisesti toisessa vielä tutkimattomassa puoliskossa. Tällöin ongelma on "puolitettu": nyt tehtävänä on etsiä alkio siitä puoliskosta, joka on vielä jäljellä. Samaa periaatetta jatketaan tämän toisen puoliskon tutkimiseen.</p>
+         <p>Kukin edellä kuvatun toimintatavan kierros puolittaa jäljellä olevien sijaintikohtien lukumäärän. Tämän ansiosta päädymme varsin nopeasti tilanteeseen, jossa on jälkellä enää korkeintaan yksi mahdollinen sijaintikohta.</p>
+         <p>Edellämainittua periaatetta voidaan joissain tapauksissa soveltaa erittäin tehokkaasti. Yksi tällainen tilanne on järjestettyyn joukkoon kohdistuva haku, jolloin voidaan käyttää ns. puolitushakua. Katso esim. <a href="https://fi.wikipedia.org/wiki/Puolitushaku">https://fi.wikipedia.org/wiki/Puolitushaku</a>.</p>
+
+
+	   </div> <!-- task-solution -->
+       
+   </body>
+</html>

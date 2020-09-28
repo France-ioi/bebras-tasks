@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-01</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-01-home-distance/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };+
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            existsError: "Näiden kahden puun välillä on jo köysi. Voit poistaa köyden klikkaamalla sitä.",
+            distanceError: "Punaisella merkityn puun luku ei vastaa lyhimmän siihen lipulta kulkevan reitin pituutta.",
+            unconnectedError: "Lipulta ei kulje reittiä punaisella merkittyyn puuhun. Lisää/muuta köysiä."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         .constraints li {
+            padding-bottom: 0.5em; 
+         }
+         #taskContent {
+            text-align: left;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Köysirata</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+
+            <div style="float:right; padding: 5px; margin-left: 25px; margin-bottom: 10px; border: 1px solid black; text-align:center; width: 270px ">
+               <div style="font-weight: bold; margin: 10px;">Esimerkki</div>
+               <div style="margin: 0; padding: 0" id="exampleAnim">
+               </div>
+            </div>
+
+            <p>Majava haluaa rakentaa puiden välillä kulkevan köysiradan.</p>
+
+            <p><b>Köysiradan sääntö: puuhun merkitty luku kertoo, kuinka monta köyttä lyhin lipulta kyseiseen puuhun kulkeva köysireitti sisältää. Katso oheista esimerkkiä.</b></p>
+
+            <p>Lisää köysiradalle uusi köysi klikkaamalla kahta puuta. Jo lisätyn köyden voi poistaa klikkaamalla sitä.</p>
+
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+            </div>
+            <div id="validation"><input type="button" value="Tarkista" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+            <img src="start.png" style="display:none">
+         </div>
+      </div>
+      <!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+
+            <div class="easy">
+
+               <p>Tässä on yksi ratkaisu:</p>
+               <p><img style="width:250px" src="Sol_easy_11.png"></p>
+               <p>Alkutilanteessa puihin oli merkitty numerot 2, 3 ja 5.
+               Numeron 2 omaavasta puusta lipulle kulkevan 2 köyden reitin on pakko
+               edetä puuhun, josta kulkee 1 köyden sisältävä reitti lipulle.
+               Samalla tavalla numeron 5 omaavasta puusta on edettävä puuhun, josta lähtee
+               4 köyttä sisältävä reitti lipulle. Voimme siis mielessämme asettaa
+               nämä luvut 1 ja 4 kahteen numeroimattomaan puuhun ja asettaa sen
+               jälkeen köydet niin, että numerosta 5 edetään numeroon 4, siitä numeroon 3, jne.
+               <p>Numerot 1 ja 4 oli mahdollista laittaa numeroimattomiin puihin
+               kahdessa eri järjestyksessä. Alla on toista järjestystä vastaava ratkaisu:</p>
+               <p><img style="width:250px" src="Sol_easy_12.png"></p>
+
+            </div>
+
+            <div class="medium">
+
+               <p>Tässä on yksi ratkaisu:</p>
+               <p><img  style="width:280px" src="Sol_medium_01.png"></p>
+               <p>Tehtävään on olemassa muitakin ratkaisuja. Tässä on esimerkiksi toinen:</p>
+               <p><img  style="width:280px" src="Sol_medium_02.png"></p>
+
+            </div>
+
+            <div class="hard">
+
+               <p>Tässä on yksi ratkaisu:</p>
+               <p><img  style="width:400px" src="Sol_hard_01.png"></p>
+               <p>Tehtävään on olemassa muitakin ratkaisuja. Tässä on esimerkiksi toinen:</p>
+               <p><img  style="width:400px" src="Sol_hard_02.png"></p>
+
+            </div>
+
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>
+            Tehtävä pohjautuu yleiseen tietojenkäsittelytieteen käsitteeseen: <b>solmujen etäisyyteen graafissa</b>. Tehtävässä sekä lippu että puut vastaavat solmuja. Kun lähdetään jostain alkusolmusta (tehtävässä lipulta), voimme kulkea muihin solmuihin
+            seuraamalla niiden välisiä yhteyksiä (tehtävässä köysiä). Solmujen välinen etäisyys on lyhimmän ne yhdistävän
+            reitin pituus.
+         </p>
+         <p>
+             Katso lisää graafeista esim. <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a> ja lyhimmistä poluista esim. <a href="https://fi.wikipedia.org/wiki/Dijkstran_algoritmi" target="_blank">https://fi.wikipedia.org/wiki/Dijkstran_algoritmi</a>.
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

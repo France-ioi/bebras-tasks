@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-11</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0', 'visual-graph-1.0',
+            'graph-mouse-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-11-graph-isomorphism/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            vertexError: "Kukin sininen pallo pitää asettaa harmaan paikanpitäjän päälle.",
+            edgeError: "Kuviot ovat erilaisia. Punaisella korostettu viiva ei ole oikein."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #animContainer {
+            text-align: center;
+            margin: auto;
+            padding-top: 0.5em;
+         }
+         .anim {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         .paperTitle {
+            font-size: 18px;
+            font-weight: bold;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Pallokuvio</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>Raahaa vasemmalla olevat siniset pallot harmaiden paikanpitäjäpallojen päälle niin, että lopputulos vastaa oikealla esitettyä tavoitekuviota. </p>
+
+             <table id="animContainer">
+                <tr>
+                   <td></td>
+                   <td class="paperTitle">Tavoitekuvio</td>
+                </tr>
+                <tr>
+                   <td>
+                     <div class="anim" id="animUser"></div>
+                  </td>
+                  <td>
+                     <div class="anim" id="animTarget"></div>
+                  </td>
+                </tr>
+            </table>
+            <div id="validation"><input type="button" value="Tarkista" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+           <div class="easy medium">Voimme hyödyntää havaintoa, että vain yhteen palloon liittyy vain yksi viiva. Tämä pallo on tavoitekuviossa oikealla <span class="easy">alhaalla</span><span class="medium">ylhäällä</span></span>. Myös kyseisen pallon ainoan naapurin (viivan toisessa päässä olevan pallon) sijoituskohta on selvä. Nyt tilanne on seuraava:</div>
+           <div class="easy">
+              <img style="width: 250px" src="Sol_easy_1.png">
+              <p>Tästä eteenpäin on helppo asetella loput kolme palloa paikoilleen.</p>
+           </div>
+
+           <div class="medium">
+              <img style="width: 250px" src="Sol_medium_1.png">
+              <p>Seuraavaksi voimme asetella viimeksimainitun pallon kolme muuta naapuria.</p>
+              <img style="width: 250px" src="Sol_medium_2.png">
+              <p>Tämän jälkeen loput neljä palloa ovat suoraviivaisia asetella paikoilleen.</p>
+           </div>
+
+           <div class="hard" id="img-hard">
+              <style>
+              #img-hard img { 
+               width: 250px;
+               border: 1px solid gray;
+               padding: 3px;
+               margin: 3px 13px 3px 13px;
+              }
+              </style>
+              <p>Voimme aluksi laskea, kuinka monta viivalla yhdistettyä naapuria kullakin tavoitekuvion pallolla on. Löydämme 4 palloa, joista kullakin on 4 naapuria, ja kaikilla muilla on 3 naapuria. Ohessa 4 naapuria omaavat pallot ovat tummanpunaisia ja 3 naapuria omaavat vaaleanpunaisia. Kuvasta huomataan, että 4 naapuria omaavat pallot muodostavat katkeamattoman "naapuriketjun".</p>
+              <img src="Sol_hard_0.png">
+              <p>Jotta pallojen yhteyksien hahmottaminen olisi helpompaa, voimme asetella siniset pallot niin, että 3 naapurin pallot tulevat yhteen riviin ja 4 naapurin pallot toiseen (ja 4 naapurin pallot on järjestetty keskenään ketjuksi ilman niiden keskinäisten viivojen risteämiä).</p>
+              <img src="Sol_hard_1.png">
+              <p>4 naapurin palloketju voidaan asettaa tavoitekuviossa sitä vastaavaan paikkaan vain kahdella tavalla: joko edeten alhaalta ylös tai ylhäältä alas. Kokeillaan ensimmäistä vaihtoehtoa (pallojen numerointi havainnollistaa, missä järjestyksessä ketjun pallot aseteltiin).</p>
+              <img src="Sol_hard_2.png">
+              <p>Nyt tuli ongelma: kun yritämme lisäksi asettaa jonkin 3 naapurin pallon (esim. sen, joka oli edellisessä kuvassa oikealla ylhäällä), ei sille löydy yhtään tavoitekuviota vastaavaa paikkaa.</p>
+              <img src="Sol_hard_3.png">
+              <p>Edellinen arvauksemme 4 naapurin pallojen ketjun suunnasta oli siis väärin. Kokeillaan nyt asettaa ketju ylhäältä alas. Tämän jälkeen voimme kokeilemalla löytää tavoitekuviota vastaavan paikan edellä epäonnistuneesti yrittämällemme 3 naapurin pallolle.</p>
+              <img src="Sol_hard_4.png">
+              <img src="Sol_hard_5.png">
+              <p>Myös lopuille 3 naapurin palloille löytyy tavoitekuviota vastaavat paikat kokeilemalla suhteellisen pientä määrää vaihtoehtoja.</p>
+              <img src="Sol_hard_6.png">
+              <img src="Sol_hard_7.png">
+           </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+   
+            <p>Tehtävän palloista ja viivoista muodostuva kuvio vastaa tietojenkäsittelyn erittäin tärkeää tietorakennetta, <b>graafia</b>. Tehtävän tavoite puolestaan havainnollistaa tietojenkäsittelyn ongelmaa, jossa haluamme <i>täsmätä</i> kaksi <b>graafia</b> keskenään.
+
+             <p>Tämä ongelma tunnetaan nimellä <b>graafien isomorfismi</b>, ja se on yleisessä tapauksessa erittäin vaikea ratkaista: ongelmaan ei tunneta yhtään ratkaisua, joka toimisi tehokkaasti isoilla mielivaltaisen rakenteen omaavilla graafeilla.</p>
+
+             <p>Joidenkin verrattaen yksinkertaisten tai säännöllisten graafien (kuten tehtävän pallokuvioiden) yhteydessä voi kuitenkin olla mahdollista löytää ratkaisu nopeastikin. Esimerkiksi tässä tehtävässä ratkaisun löytäminen helpottui, jos vertailimme palloihin liittyvien viivojen lukumääriä.</p>
+             
+             <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a>.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
