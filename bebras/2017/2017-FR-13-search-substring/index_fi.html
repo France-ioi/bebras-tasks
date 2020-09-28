@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-13</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+            'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-13-search-substring/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            empty: "Valitse kirjastosta etsittävä vähintään yhdestä peräkkäisestä rivistä koostuva jakso.", 
+            partial: "Pisin kirjastosta löytyvä peräkkäisten rivien jakso voidaan löytää pienemmällä määrällä hakuja.", 
+            wrong: "<p>Et onnistunut löytämään pisintä kirjastossa esiintyvää peräkkäisten rivien jaksoa.</p><p>Jatka tai aloita uudelleen alusta. Jos aloitat alusta, sekä kirjaston sisältö että oikea ratkaisu arvotaan uudelleen!</p>", 
+            selectFirstLine: "<p>Klikkaa kirjastosta etsittävän jakson <b>ensimmäistä</b> riviä.</p>",
+            selectSecondLine: "<p>Klikkaa nyt kirjastosta etsittävän jakson <b>viimeistä</b> riviä (haku suoritetaan heti tämän jälkeen).</p>",
+            searchResult: function(found, isLongest, level) {
+               var result = "Haun tulos: ";
+               if(found) {
+                  if(isLongest) {
+                     result += "<span class=\"answer answerYesLongest\">Löysit jakson</span> ";
+                     if (level != "easy") {
+                        result += ", joka on kaikkein pisin"
+                     }
+                     result += "!</p>";
+                     return result;
+                  }
+                  else {
+                     if (level != "easy") {
+                        result += "<span class=\"answer answerYes\">LÖYTYI!.</span>";
+                     } else {
+                        result = "";
+                     }
+                     result += "<p>Hakemasi jakso löytyi kirjastosta ";
+                     if (level == "easy") {
+                        result += "mutta siinä ei ole 3 riviä.</p>";
+                     } else {
+                        result += "mutta se ei ole eniten rivejä omaava kirjastosta löytyvä jakso.</p>";
+                     }
+                  }
+               }
+               else {
+                  result += "<span class=\"answer answerNo\">EI LÖYTYNYT!</span><p>Hakemaasi jaksoa ei esiinny kirjastossa.</p>";
+               }
+               result += "<p>Tee uusi haku.</p>";
+               return result;
+            },
+            history: function(numSearches, longestSub, level) {
+               var string = "";
+               if (level == "hard") {
+                  string = "Hakujen lukumäärä: " + numSearches;
+               }
+               return string;
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .longestSub {
+            border: 1px solid gray;
+            color: gray;
+         }
+         .answer {
+            font-weight: bold;
+         }
+         .answerYesLongest {
+            color: green
+         }
+         .answerYes {
+            color: orange;
+         }
+         .answerNo {
+            color: red;
+         }
+         .mainTable {
+            width: 770px;
+            margin: auto;
+         }
+         .resultDiv, .wordsDiv, .word {
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .resultDiv {
+            width: 240px;
+         }
+         #currentSearch {
+            width: 240px;
+         }
+         .resultDivCell {
+            vertical-align: top;
+            text-align: center;
+         }
+         .wordsDivCell {
+            vertical-align: top;
+            width: 200px;
+         }
+         .word {
+            border: 1px solid black;
+            padding: 4px 8px 4px 8px;
+            cursor: default;
+         }
+         .selectedWord {
+            background: cyan;
+         }
+         .wordFoundLongest {
+            background: #00FF00;
+         }
+         .wordFound {
+            background: orange;
+         }
+         .wordNotFound {
+            background: #FF1010;
+         }
+         .search {
+            vertical-align: top;
+         }
+         .search div {
+            width:6px;
+            vertical-align: middle;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Rivijaksot</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p class="hard" id="enemyWarning"></p>
+            <p>
+            Alla on hakutyökalu, jolla voi etsiä vasemmalla annettujen ranskankielisten rivien yhdestä tai useammasta peräkkäisestä rivistä koostuvan jakson esiintymiä kirjaston kirjoista. </p>
+            <p class="easy">Etsi työkalun avulla jokin <b>kolmen peräkkäisen rivin jakso</b>, joka löytyy kirjastosta. Jokin sellainen löytyy varmasti.</p>
+            <p class="medium hard">Etsi työkalun avulla <b>pisin (eniten rivejä sisältävä) peräkkäisten rivien jakso</b>, joka löytyy kirjastosta. Jokin jakso löytyy varmasti.</p>
+            <div class="hard">
+               <p>Saat tehdä <b>korkeintaan <span id="maxAttempts"></span> hakua</b>.</p>
+               <!--<p>Remarque : chaque ligne individuelle est au moins dans un livre.</p>-->
+            </div>
+            <table class="mainTable">
+               <tr>
+                  <p>Haettavissa olevat rivit:</p>
+                  <td class="wordsDivCell">
+                     <div class="wordsDiv">
+                        <!-- To be filled with elements in the format:
+                           <div class="word" id="word_0">Word</div>
+                        -->
+                     </div>
+                  </td>
+                  <td class="search"><div id="test0"></div></td>
+                  <td class="search"><div id="test1"></div></td>
+                  <td class="search"><div id="test2"></div></td>
+                  <td class="search"><div id="test3"></div></td>
+                  <td class="search"><div id="test4"></div></td>
+                  <td class="search"><div id="test5"></div></td>
+                  <td class="search"><div id="test6"></div></td>
+                  <td class="search"><div id="test7"></div></td>
+                  <td class="search"><div id="test8"></div></td>
+                  <td class="search"><div id="test9"></div></td>
+                  <td class="search"><div id="test10"></div></td>
+                  <td class="search"><div id="test11"></div></td>
+                  <td class="search"><div id="test12"></div></td>
+                  <td class="search"><div id="test13"></div></td>
+                  <td class="search"><div id="test14"></div></td>
+                  <td class="search"><div id="test15"></div></td>
+                  <td class="search"><div id="test16"></div></td>
+                  <td class="search"><div id="test17"></div></td>
+                  <td class="resultDivCell">
+                     <table cellspacing=0>
+                     <tr><td style="border: solid black 1px;vertical-align:middle;background:lightgray;width:230px">
+                     <div style="height:40px;padding-top:5px">
+                     <b>Kirjaston<br/>hakutyökalu</b>
+                     </div>
+                     </td></tr>
+                     <tr><td style="border: solid black 1px;">
+                        <div class="resultDiv" style="position:relative;">
+                           <div id="currentSearch" style="height:150px;margin-top:20px;"></div>
+                           <div class="hard" id="history" style="height:30px;"></div>
+                           <div class="hard" style="background:#FFA0A0;bottom:0px;width:100%;"><div style="padding:5px">Jos aloitat alusta, sekä kirjaston sisältö että oikea ratkaisu arvotaan uudelleen!</div></div>
+                        </div>
+                     </td></tr>
+                     <tr><td>
+                        <input type="button" id="hideSearches" class="easy medium" style="margin-top:5px" value="Tyhjennä hakutulos" />
+                     </td></tr>
+                     </table>
+                  </td>
+               </tr>
+            </table>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+   
+           <div class="easy">
+              <p>Haluamme löytää 3 rivin jakson (ja tehtävässä on luvattu, että sellainen löytyy). On 4 erilaista mahdollisuutta valita 3 peräkkäisen rivin jakso: rivit 1-3, rivit 2-4, rivit 3-5 tai rivit 4-6. Jos kokeilemme yksi kerrallaan hakea kutakin edellämainituista 4 jaksosta, jokin niistä löytyy.</p>
+              <img src="Sol_easy_1.png">
+           </div>
+
+           <div class="medium">
+              <p>Haluamme löytää pisimmän jakson, joka löytyy kirjastosta. Yksinkertainen strategia on etsiä yksitellen kaikki eri mahdollisuudet. Voimme aloittaa etsimällä yksi kerrallaan jokaista 1 rivin pituista jaksoa. Tämä käsittää 8 erilaista hakua.</p>
+              <img src="Sol_medium_1.png">
+              <p>Kun 1 rivin pituinen jakso on löytynyt, voimme yrittää etsiä jokaista 2 rivin pituista jaksoa. Tämä käsittää 7 erilaista hakua.</p>
+              <img src="Sol_medium_2.png">
+              <p>Voimme jatkaa samaa periaatetta, hakien 6:tta eri 3-rivistä jaksoa ja sitten 5:ttä eri 4-rivistä jaksoa.</p>
+              <img src="Sol_medium_3.png">
+              <p>Näiden jälkeen on vielä jäljellä tutkittavana 3 eri 6-rivistä jaksoa, 2 eri 7-rivistä jaksoa ja 1 eri 8-rivinen jakso (= kaikki rivit). Koska tutkimme kaikki eri mahdollisuudet, löydämme jossain vaiheessa kaikkein pisimmän kirjastossa esiintyvän jakson. Tämän sattuessa tietokone ilmoittaa meille onnistumisesta.</p>
+              <p>Huomio: 4 tähden version yhteydessä kuvataan tehokkaampi hakustragegia.</p>
+           </div>
+
+           <div class="hard">
+              <p>Aloitetaan tekemällä muutama havainto, jotka auttavat tehokkaan ratkaisustrategian suunnittelemisessa.</p>
+              <ul>
+              <li>Jos olemme löytäneet jonkin määrän rivejä sisältävän jakson, ei samanpituisia jaksoja kannata enää etsiä: voimme seuraavaksi etsiä yhden rivin pidempiä jaksoja.</li>
+              <li>Jos jostain rivistä alkavaa jaksoa ei löydy kirjastosta, ei kirjastosta löydy myöskään mitään samalta riviltä alkavaa pidempää jaksoa: pidemmän jakso esiintymä sisältäisi osanaan myös epäonnistuneesti haetun lyhyemmän jakson, mutta aiemman haun perusteella lyhyempää jaksoa ei löydetty.</li>
+              </ul>
+              <p>Hyödynnämme edeltäviä havaintoja seuraavasti.
+              <ul>
+              <li>Ensimmäinen haku etsii ylimmältä riviltä (= rivi 1) alkavaa yhden rivin pituista jaksoa.</li>
+              <li>Etsimme askeleittain pidempää ja pidempää riviltä 1 alkavaa jaksoa niin kauan, kuin haku löytää esiintymän kirjastosta. Eli toinen haku koskisi riveistä 1 ja 2 koostuvaa jaksoa, kolmas haku riveistä 1, 2 ja 3 koostuvaa jaksoa, jne. Jos haku epäonnistuu, olemme löytäneet pisimmän riviltä 1 alkavan jakson esiintymän, ja siirrymme seuraavaksi tutkimaan riviltä 2 alkavia jaksoja.</li>
+              <li>Riviltä 2 alkavien jaksojen haut aloitetaan sellaisella jaksolla, jonka pituus on yhden rivin pidempi kuin pisin löytämämme riviltä 1 alkava jakso. Jos tämä rivin 1 jakso sisälsi k riviä eli kattoi rivit 1...k, koskisi ensimmäinen riviä 2 koskeva haku riveistä 2...k+2. Tässä voidaan sivuhuomiona todeta, että rivin 1 viimeisen epäonnistuneen haun tiedetään koskeneen jaksoa 1...k+1, joten riville 2 siirryttäessä ensimmäinen seuraavaksi tutkittava jakso voidaan määrittää yksinkertaisesti kasvattamalla jakson alku- ja loppurivejä yhdellä: 1+1...k+1+1 = 2...k+2.</li>
+              </ul>
+              <p>Jatkamme edellistä toimintapaa: aina kun riviltä i alkavia jaksoja koskien on tehty epäonnistunut rivejä i...j koskeva haku, siirrytään seuraavaksi tutkimaan riviltä i+1 alkavia jaksoja aloittaen haut rivit i+1...j+1 käsittävästä jaksosta. Haut voidaan lopettaa, kun ei ole enää laillisia tutkittavia jaksoja jäljellä (jakson viimeisen rivin indeksi j+1 olisi suurempi kuin alimman rivin numero).</p>
+              <img src="Sol_hard_1.png">
+              <p>Tämän ratkaisustrategian voidaan osoittaa tarvitsevan korkeintaan 12 hakua löytääkseen pisimmän kirjastossa esiintyvän jakson: tutkittavan jakson viimeisen rivin indeksi kasvaa jokaisen hakukerran jälkeen, ja tehtävässä oli kaikkiaan 12 riviä, mitä voidaan etsiä. Näin ollen 12 haun jälkeen jakson loppuindeksi menee alimman rivin ohi ja haku voidaan lopettaa.</p>
+           </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+      
+            <p>Tehtävä havainnollistaa monissa tietojenkäsittelyn algoritmeissa käytettävää <b>liukuvan ikkunan</b> periaatetta. Tätä periaatetta voi hyödyntää monissa sellaisissa ongelmissa, joissa jostain arvojonosta halutaan löytää tietynlaiset kriteerit täyttävä peräkkäisten alkioiden jakso.</p>
+
+            <p>Sana <b>ikkuna</b> viittaa tässä "tällä hetkellä" tarkasteltavaan jaksoon. Ikkunaa voidaan siirtää suoraviivaisesti askel eteenpäin, kuten esimerkiksi 2 tähden versiossa tehtiin: siinä 3 rivin pituinen haettavia rivejä vastaava ikkuna liikkui kaikkien hakurivien alusta loppuun. Ikkunaa voidaan siirtää myös dynaamisemmin niin, että ikkunan alku ja loppu etenevät eri tahtiin (ja ikkunan koko voi muuttua). Näin toimittiin esimerkiksi 4 tähden versiossa.</p>
+
+            <p>Liukuvan ikkunan perusperiaate, joka tekee menetelmästä tehokkaan, on, että ikkunan alkua ja loppua siirretään aina vain eteenpäin (ei koskaan taaksepäin).</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-03</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'crane-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+    <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-03-three-towers/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            error: "Lopputulos on väärin.", // not displayed
+            partial: function(steps, stepsOptimal, level) { 
+               var s = "Onnistuit käyttäen " + steps + " askelta. Voit aloittaa uudelleen alusta yrittääksesi löytää optimaalisen " + stepsOptimal + " askeleen ratkaisun.";
+               if (level == 'hard') {
+                  s += "<br> Huom, tämä ei ole helppoa!";
+               }
+               return s;
+            },
+            pickupError: "Tämän napin yläpuolella ei ole yhtään palikkaa.",
+            blockClick: "Ohjaa nosturia klikkaamalla harmaita nappeja." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0em;
+            margin-bottom: 0.5em;
+            text-align: center;
+            font-weight: bold; 
+            color: #CC8844;
+         }
+         #target_anim_container {
+            border: solid 1px black;
+            text-align: center;
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 14px;
+         }
+         #target_cell {
+            padding-left: 80px;
+         }
+         #animTable {
+            margin: auto;
+         }
+         #buttons {
+            margin-bottom: 20px;
+            margin-top: 15px;
+            text-align: center;
+         }
+         #buttons input {
+            margin-left: 1em;
+         }
+         .targetNumber {
+            font-weight: bold;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Palikkatorni</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>Aseta palikat tavoitekuvan mukaisella tavalla. Voit ohjata nosturia nostamaan/pudottamaan yhden palikan kerrallaan klikkaamalla harmaita nappeja.</p>
+
+            <p>Saat käyttää korkeintaan <span id="nbStepsPartial" class="targetNumber"></span> askelta (askel = yhden palikan nosto ja pudotus)<span class="medium hard"> saadaksesi osan pisteistä, ja <span id="nbStepsOptimal" class="targetNumber"></span> askelta saadaksesi täydet pisteet<span class="hard"></span></span>.
+             </p>
+            <table id="animTable">
+               <tr>
+                  <td>
+                     <div id="anim_container">
+                        <div id="anim"></div>
+                        <div id="feedback">
+                           Palaute
+                        </div>
+                     </div>
+                     <div id="buttons">
+                        <span>Askelten lukumäärä: <span id="stepCounter"></span>.</span>
+                        <input type="button" id="undo" value="Peru edellinen askel" />
+                     </div>
+                  </td>
+                  <td id="target_cell">
+                     <div id="target_anim_container">
+                        Tavoite
+                        <br><br>
+                        <div id="target_anim"></div>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            <img src="icon.png" style="display:none">
+            <img src="magnet.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+   
+            <style>
+            .table-sol img {
+               width: 80%;
+            }
+            .table-sol td {
+               width: 120px;
+               vertical-align: top;
+            }
+            </style>
+        
+            <div class="easy">
+               <p>Palikat 3 ja 2 asetetaan välissä keskimmäiseen sarakkeeseen.</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_easy_1.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_2.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_3.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_4.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_5.png">
+               </td>
+               <td>
+                  <img src="Sol_easy_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="medium">
+               <p>Palikka 1 vapautetaan siirtämällä muut palikat kahteen keskimmäiseen sarakkeeseen. Jotta lopullinen tavoite saavutetaan suoraviivaisesti, palikat asetetaan keskimmäisiin sarakkeisiin niin, että pienempi numero on isomman numeron päällä: 2 on 3:n päällä ja 4 on 5:n päällä.</p>
+               <table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_medium_1.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_2.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_3.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_4.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_5.png">
+               </td>
+               <td>
+                  <img src="Sol_medium_6.png">
+               </td>
+               </tr>
+               </table>
+            </div>
+
+            <div class="hard">
+               <table class="table-sol" style="float:right;margin-left:20px"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_b.png">
+               </td>
+               </tr></table>
+               <p>Jotta palikka 1 saadaan siirrettyä oikeanpuoleisen sarakkeen alimmaiseksi, täytyy palikat 5, 4 ja 7 ensin siirtää pois tieltä. Jos laitamme ne suoraan kahteen keskimmäiseen sarakkeeseen, jäävät palikat 2 ja 3 pohjalle, ja niiden siirto oikeanpuoleiseen sarakkeeseen tulee vaatimaan paljon siirtoja.
+               <p style="clear:both">
+               <table class="table-sol" style="float:left"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_1_c.png">
+               </td>
+               </tr></table>
+               <p>Tämä ongelma voidaan välttää järjestämällä aluksi palikat 2 ja 3 paremmin: siirrämme palikan 2 palikan 3 päälle. Tämä kuitenkin
+               vaatii palikan 6 siirtämisen pois tieltä.
+               <p>Nyt meidän täytyy päättää, siirretäänkö palikka 6 palikan 5 vai 7 päälle.
+               <p style="clear:both;margin-top:20px;">Jos laitamme palikan 6 palikan 5 päälle, voimme sen jälkeen siirtää palikat 7, 6, 5 ja 4 sarakkeeseen C, josta ne on lopuksi helppo siirtää oikeanpuoleiseen sarakkeeseen.
+               <p>Edellä kuvattu ratkaisu on kuvattu tässä:
+               <center><table class="table-sol"><tr>
+               <td>
+                  <img src="Sol_hard_1.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_2.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_3.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_4.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_5.png">
+               </td>
+               <td>
+                  <img src="Sol_hard_6.png">
+               </td>
+               </tr>
+               </table></center>
+
+               <p>Toinen vaihtoehto olisi siirtää ensin palikka 3 sarakkeeseen C ja sitten palikat 7, 5 ja 4 sarakkeeseen B, jonka jälkeen loppuratkaisu olisi suoraviivainen.
+            </div>            
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            <p>Tämä tehtävä liittyy mm. tietojenkäsittelytieteen käsitteeseen <b>heuristiikka</b>. Aluksi emme ole varmoja, miten toimia, mutta voimme arvioida, että jonkinlaiset askeleet vaikuttavat muita lupaavammilta. Esimerkiksi voimme arvella, ettei palikkaa kannata siirtää sen omaa numeroa pienemmän numeron omaavan palikan päälle.
+            </p>
+            <p>Jotkut tietokoneohjelmat hyödyntävät <b>heuristisia algoritmeja</b>: sen sijaan, että pyrittäisiin huomioimaan kaikki mahdolliset vaihtoehdot, ohjelma voi suosia "hyviltä vaikuttavia" vaihtoehtoja, kuten tässä esimerkissä sellaisia askeleita, jotka siirtävät palikan vain sellaisen palikan päälle, jonka numero on sen omaa numeroa suurempi.
+            </p>
+            <p>Katso esim. <a href="https://fi.wikipedia.org/wiki/Heuristiikka">https://fi.wikipedia.org/wiki/Heuristiikka</a>.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

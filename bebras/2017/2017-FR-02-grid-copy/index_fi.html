@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-02</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-02-grid-copy/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            patternError: "Väritit myös sellaisia ruutuja mustaksi, joissa ei ole ympyrää!",
+            patternMissing: "Yksi tai useampi ruutu, jossa on ympyrä, ei ole vielä musta.",
+            pasteLimit: function (limit) { return "Olet käyttänyt Liitä-nappia jo " + limit + " kertaa, mutta et ole saanut ratkaisua valmiiksi."; },
+	    stepCounter: function(count, limit) {
+               return count + " / " + limit;
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim_container table {
+            margin: auto;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #controlsContainer {
+            text-align: center;
+         }
+         #controlsContainer input {
+            min-width: 80px;
+            padding: 10px;
+         }
+         #arrowsTable td {
+            width: 30px;
+            height: 30px;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Nopea kopiointi</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p>Väritä kaikki ympyrän sisältävät ruudut mustaksi niin, että kaikki muut ruudut säilyvät valkoisina.</p>
+             <p>Klikkaa <b>"Kopioi mustat ruudut"</b>-nappia, siirrä kopioitu ruutukuvio sopivaan paikkaan nuolinapeilla, ja liitä kuvio
+             yhden tai useamman kerran <b>"Liitä"</b>-napilla.<span class="medium hard"> <strong>Huomaa, että "Kopioi mustat ruudut"-nappia voi käyttää uudelleen liittämisen jälkeen</strong></span>.</p>
+        <p class="medium hard"><strong>Saat klikata "Liitä"-nappia korkeintaan 7 kertaa.</strong></p>
+             <div id="anim_container">
+               <table>
+                  <tr>
+                     <td>
+                        <div id="anim"></div>
+                     </td>
+                     <td id="controlsContainer">
+                        <input type="button" value="Kopioi mustat ruudut" id="copyAll" />
+                        <br><br>
+                        <table id="arrowsTable">
+                           <tr>
+                              <td></td>
+                              <td>
+                                 <div id="paper_up"></div>
+                              </td>
+                              <td></td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div id="paper_left"></div>
+                              </td>
+                              <td></td>
+                              <td>
+                                 <div id="paper_right"></div>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 <div id="paper_down"></div>
+                              </td>
+                              <td></td>
+                           </tr>
+                        </table>
+                        <br>
+                        <p>
+                           <input type="button" value="Liitä" id="paste" />
+                           <br><br>
+                           <span id="stepsCount" class="medium hard"></span>
+                           <br><br>
+                           <input type="button" value="Peru" id="undo" class="medium hard" />
+                        </p>
+                     </td>
+                  </tr>
+               </table>
+               <div id="feedback"></div>
+            </div>
+            <div id="validation"><input type="button" value="Tarkista" id="execute" /></div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+   
+            
+
+         <!--
+         <h2>C'est de l'informatique !</h2>
+            
+           -->
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

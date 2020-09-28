@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-12</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-12-distinct-paths/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            unknown: "?",
+            success: "Onnittelut, ratkaisit tämän version!",
+            pathDiscovered: function(discoveredPaths, totalPaths) {
+               return "Löysit uuden polun. Nyt on vielä " + (totalPaths - discoveredPaths) + " polkua löytämättä! <br> Voit aloittaa alusta mustasta ympyrästä tai muokata nykyisen polun loppua.";
+            },
+            pathExists: "Olet jo aiemmin löytänyt tämän polun.",
+            notCycle: "Tämä polku ei pääty alkupisteeseen", // currently not used
+            cycleNotComplete: "Tämä silmukka ei käy kaikissa ruuduissa.", // currently not used
+            blockedCell: "Polku saa kulkea ainoastaan valkoisia ruutuja pitkin.",
+            notAdjacentToStart: "Klikkaa mustan ympyrän viereistä vakoista ruutua.",
+            notAdjacentToHead: "Klikkaa valkoisen ympyrän viereistä valkoista ruutua.",
+            notAllFound: function(discoveredPaths, totalPaths) {
+               if (discoveredPaths == 0) {
+                  return "Et ole vielä löytänyt kaikkien valkoisten ruutujen läpi käyvää polkua.";
+               } else {
+                  return "Löysit " + discoveredPaths + " polkua, mutta on vielä " + (totalPaths - discoveredPaths) + " löytämättä.";
+               }
+            }
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #animContainer {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 2em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #discoveredPaths {
+            margin-top: 5px;
+            text-align: center;
+         }
+         #discoveredPaths div {
+            margin: 5px;
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Erilaiset polut</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+             <p>Muodosta kaikki erilaiset polut, jotka alkavat mustasta ympyrästä ja kulkevat kaikkien valkoisten ruutujen läpi täsmälleen kerran.</p>
+
+             <p>Polkua voi muuttaa raahaamalla sitä tai klikkaamalla ruutuja.</p>
+
+               
+               <div id="animContainer">
+                  <div id="anim"></div>
+               </div>
+               <div id="discoveredPaths">
+                  <!--
+                     To be filled with elements of this form, each of which will contain a Raphael paper:
+                     
+                     <div class="discoveredPath"></div>
+                  -->
+               </div>
+               <div id="feedback"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+   
+              <style>
+              #img-easy img, #img-medium img { 
+               width: 120px;
+              }
+              #img-hard img { 
+               width: 180px;
+              }
+              </style>
+
+           <div class="easy" id="img-easy">
+              <p>Alussa voi mennä oikealle tai vasemmalle. Jos menemme oikealle, voisimme sen jälkeen mahdollisesti jatkaa ylös. Askel ylös johtaisi kuitenkin umpikujaan, koska sen jälkeen mikään mahdollinen jatko ei kulje molempiin punaisella ruksilla merkittyihin ruutuihin.</p>
+              <img src="Sol_easy_RU.png">
+              <p>Voisimme jatkaa pidemmälle oikealle ja sitten ylös, mutta tällöin päädyttäisiin taas jompaan kumpaan alla kuvattuun umpikujaan.</p>
+              <img src="Sol_easy_RRa.png">
+              <img src="Sol_easy_RRb.png">
+              <p>Lähdetään seuraavaksi alkuruudusta vasemmalle. Tällöin ensimmäiset 5 askelta ovat yksikäsitteisiä, ja niiden jälkeen voimme edetä alas tai oikealle.</p>
+              <img src="Sol_easy_L.png">
+              <p>Jos menemme alas, löydämme yhden mahdollisuuden kulkea kaikkiin ruutuihin.</p>
+              <img src="Sol_easy_LD.png">
+              <p>Jos menemmekin oikealle, on seuraavaksi mentävä ainakin askel alas. Tämän jälkeen on kaksi mahdollista vaihtoehtoa (jatketaan alas tai käännytään vasemmalle), ja kumpikin johtaa kaikkien ruutujen läpi kulkevaan polkuun.</p>
+              <img src="Sol_easy_LR.png">
+              <p>Alla on nämä kolme mahdollista kaikkien valkoisten ruutujen läpi kulkevaa polkua.</p>
+              <img src="Sol_easy.png" style="width:450px">
+           </div>
+
+           <div class="medium" id="img-medium">
+              <p>Alussa voi mennä alas tai oikealle. Jos menemme alas, yksi vaihtoehto sen jälkeen olisi jatkaa oikealle, mutta tämä johtaisi kuvattuun umpikujaan, jossa mikään polun jatke ei voi käydä molemmissa punaisella ruksilla merkityissä ruuduissa.</p>
+              <img src="Sol_medium_DR.png">
+              <p>Jos menemme alusta kaksi askelta alas, pitää sen jälkeen kääntyä oikean kautta takaisin ylös.</p>
+              <img src="Sol_medium_DD.png">
+              <p>Tämän jälkeen löydämme suoraviivaisesti seuraavat 3 kaikissa valkoisissa ruuduissa käyvää polkua.</p>
+              <img src="Sol_medium_DDX.png" style="width:450px">
+              <p>Tutkitaan seuraavaksi vaihtoehtoa, jossa alussa lähdetään oikealle. Jos menemme seuraavaksi alas, päädymme umpikujaan, jossa polku ei voi jatkua molempiin ruksilla merkittyihin ruutuihin.</p>
+              <img src="Sol_medium_RD.png">
+              <p>Jos menemme alussa kaksi askelta oikealle ja sitten alas, päädymme jälleen umpikujaan.</p>
+              <img src="Sol_medium_RRD.png">
+              <p>Menemme siten kolme askelta oikealle, jonka jälkeen on pakko kääntyä alakautta takaisin vasemmalle.</p>
+              <img src="Sol_medium_RRR.png">
+              <p>Tämän jälkeen löydämme helpohkosti seuraavat 2 kaikissa valkoisissa ruuduissa käyvää polkua.</p>
+              <img src="Sol_medium_RRRX.png" style="width:300px">
+           </div>
+
+           <div class="hard" id="img-hard">
+              <p>Alussa voi mennä vasemmalle tai ylös. Koitetaan ensin mennä vasemmalle. Jos menemme aluksi 1, 2 tai 3 askelta vasemmalle ja sitten ylös, päädymme kuvattuihin umpikujiin, joissa mikään polun jatke ei voi käydä molemmissa punaisella ruksilla merkityissä ruuduissa.</p>
+              <img src="Sol_hard_LU.png">
+              <img src="Sol_hard_LLU.png">
+              <img src="Sol_hard_LLLU.png">
+              <p>Jos menemme alussa 4 askelta vasemmalle, pitää polun sen jälkeen kiertää harmaan ruduun ympäri. Kukin tämän jälkeinen mahdollinen jatko kuitenkin taas johtaa umpikujaan.</p>
+              <img src="Sol_hard_LLLL.png">
+              <img src="Sol_hard_LLLLXD.png">
+              <img src="Sol_hard_LLLLXR.png">
+
+              <p>Kokeillaan siis vaihtoehtoa, jossa alussa mennään ylös. Sen jälkeen on heti pakko kääntyä vasemmalle.</p>
+              <img src="Sol_hard_UL.png">
+              <p>Seuraavat 3 jatkovaihtoehtoa johtavat umpikujiin.</p>
+              <img src="Sol_hard_ULLD.png">
+              <img src="Sol_hard_ULLL.png">
+              <img src="Sol_hard_ULLU.png">
+              <p>Ainoa hyvältä vaikuttava aloitusmahdollisuus on seuraava.</p>
+              <img src="Sol_hard_ULDL.png">
+              <p>Jos edeltävästä asetelmasta jatketaan ylös, löydämme 3 kaikissa valkoisissa ruuduissa käyvää polkua.</p>
+              <img src="Sol_hard_ULDLUX.png" style="width:550px">
+              <p>Jos edeltävästä asetelmasta jatketaankin vasemmalle, löydämme 3 muuta kaikissa valkoisissa ruuduissa käyvää polkua.</p>
+              <img src="Sol_hard_ULDLLX.png" style="width:550px">
+
+           </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+   
+            <p>Tehtävä havainnollistaa polkujen <b>täydellistä hakua</b> sekä <b>takaisin peruuttamista</b>, jos polku on päätynyt umpikujaan, josta ei voi jatkaa järkevään lopputulokseen.
+
+            <p>Monissa tietojenkäsittelyn ongelmissa hyödynnetään tällaista peruuttavaa hakua. Yleinen tämäntapainen hakumenetelmä on ns. <b>branch and bound</b> -haku. Menetelmä toimii hyvin sellaisissa ongelmissa, joissa jo hakupolun etenemisen varhaisessa vaiheessa voidaan verrattain helposti havaita, onko kyseessä epäkelpo polku (ja on parempi peruuttaa, ohjaten sen jälkeen hakupolku jollekin vielä tutkimattomalle polulle).</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

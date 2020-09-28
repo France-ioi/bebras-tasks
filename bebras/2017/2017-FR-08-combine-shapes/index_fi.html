@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-08</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'simpleKeyboard-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-08-combine-shapes/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            error: "Hahmoyhdistelmäsi ei tuota tavoitekuviota.",
+            syntaxErrorShape: "Tähän ei voi asettaa hahmoa, käytä toista nappia.",
+            syntaxError: function(symbol) {
+               return "Hahmoa \"" + symbol + "\" ei voi asettaa tähän, käytä toista nappia.";
+            },
+            examplesTitle: "Esimerkit",
+            backspace: "Poista"
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.5em;
+            margin-bottom: 0.1em;
+            text-align: center;
+            font-weight: bold;
+            color: red; 
+         }
+         #error {
+            color: red;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         .sectionContainer {
+            text-align: center;
+            vertical-align: top;
+            display: inline-block;
+            padding-bottom: 10px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .sectionBlock {
+            vertical-align: bottom;
+            display: inline-block;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .mainDiv {
+            text-align: center;
+         }
+         .exampleTitle {
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         .targetTitle {
+            margin-bottom: 0.5em;
+         }
+         .exampleTitle, .targetTitle {
+            font-size: 16px;
+            font-weight: bold;
+         }
+         #examplesContainer {
+            border: 1px solid black;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            width: 320px;
+         }
+         .paperDiv {
+            border: 1px solid black;
+            display: inline-block;
+            margin-left: 2px;
+            margin-right: 2px;
+            *zoom: 1; /*IE6/7*/
+            *display: inline; /*IE6/7*/
+         }
+         .symbolButton {
+            background: #F2F2F2;
+         }
+         #inputContainer {
+            width: 230px;
+         }
+         #keyboardContainer {
+            margin-top: 5px;
+            margin-bottom: 20px;
+            width: 220px;
+         }
+         .keyboard_row {
+            display: block;
+         }
+         .keyboard_button {
+            width: 40px;
+            margin: 5px;
+            padding: 9px;
+         }
+         .keyboard_button_8 {
+            width: 80px;
+         }
+         #inputDiv {
+            border: 2px solid black;
+            font-size: 16px;
+            min-height: 30px;
+            width: 220px;
+            text-align: left;
+            padding-top: 8px;
+         }
+         #descriptionContainer {
+            text-align: left;
+            margin-top: 20px;
+            margin-right: 20px;
+         }
+         #leftContainer {
+            padding: 0px;
+            margin: 0px;
+            width: 440px;
+         }
+         .example {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            margin-left: 3px;
+            margin-right: 3px;
+         }
+         #inputContainer {
+            margin-right: 10px;
+            margin-bottom: 20px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Kuvioiden yhdistäminen</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div class="mainDiv">
+               <div class="sectionContainer" id="leftContainer">
+                  <div id="descriptionContainer">
+                     <p>
+                        Majava voi luoda piirroksia yhdistelemällä kolmea hahmoa.
+                     </p>
+                     <p>
+                        Päättele oheisista esimerkeistä, miten majavan piirrokset syntyvät, ja luo sitten tavoitekuvio käyttämällä alla vasemmalle annettuja kolmea hahmoa sekä niihin sovellettavia operaattoreita.
+
+                     </p>
+                  </div>
+               </div>
+               <div class="sectionContainer" id="examplesContainer">
+                  <div class="exampleTitle">Esimerkit</div>
+                  <div id="examples"></div>
+                  <!-- Filled automatically with divs of the form.
+                        <div class="example sectionBlock">
+                           <span class="paperTitle">A+B</span><br>
+                           <div class="paperDiv" id="paperExample0"></div>
+                        </div>
+                  -->
+               </div>
+               
+               <div class="sectionContainer" id="controlContainer">
+                  <div id="inputContainer" class="sectionBlock">
+                     <div id="symbolsContainer">
+                        <!-- Automatically filled with divs in this format:
+                           <div class="symbol sectionBlock">
+                              <span class="paperTitle">A</span><br>
+                              <div class="paperDiv" id="paperSymbolA"></div>
+                           </div>
+                        -->
+                     </div>
+                     <div id="keyboardContainer"></div>
+                     <div id="inputDiv">&nbsp;&nbsp;<span id="input"></span></div>
+                     <!--<input type="text" id="input" value="abc" disabled>-->
+                  </div>
+                  <div class="paperDiv sectionBlock" id="paperUser"></div>
+                  <div class="objectiveContainer sectionBlock">
+                     <div class="targetTitle">Tavoitekuvio</div>
+                     <div class="paperDiv" id="paperTarget"></div>
+                  </div>
+               </div>
+               <br>
+               <span id="error"></span>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+
+            <div class="easy">
+            <p>Tavoitekuvio näyttää kuviolta B, jonka keskiosa on poistettu. Esimerkeistä huomaamme, että "-"-operaatio poistaa yhden hahmon osuden toisesta. Löydämme nyt melko suoraviivaisesti ratkaisun, jossa hahmosta B poistetaan hahmo A:
+            <p><b>B -A</b>
+            </div>
+   
+            <div class="medium">
+            <p>Tavoitekuvio näyttää hahmolta B, jonka keskiosa on poistettu ja johon on lisätty osa hahmoa C.
+            <p>Aloitetaan ottamalla pohjaksi hahmo B, josta poistetaan hahmo A:
+            <center>
+               <b>B -A</b><br/>
+               <img src="sol_medium_1.png" style="width:100px">
+            </center>
+            <p>Sitten haluamme lisätä hahmon C:
+            <center>
+               <b>B -A +C</b><br/>
+               <img src="sol_medium_2.png" style="width:100px">
+            </center>
+            <p>Nyt kuitenkin pitäisi vielä poistaa tämän hahmon C ala- ja yläosa. Tämä onnistuu operaatiolla #B, joka jättää jäljelle sen osan, joka on päällekkäin hahmon B kanssa, ja lopputulos on:
+            <center>
+               <b>B -A +C #B</b><br/>
+               <img src="sol_medium_3.png" style="width:100px">
+            </center>
+            </div>
+
+            <div class="hard">Tässä on monta erilaista ratkaisua.
+            <p>Tavoitekuvio näyttää hahmojen B ja C yhdistelmältä, josta on pistettu ulko-osa ja keskus.
+            <p>Voimme aloittaa lisäämällä hahmon C hahmon A päälle:
+            <center>
+               <b>B +C</b><br/>
+               <img src="sol_hard_1.png" style="width:100px">
+            </center>
+            <p>Nyt haluamme poistaa ulko-osan ja keskustan. Ulko-osan poisto on helppoa: rajaamme kuvion hahmolla A käyttämällä operaatiota #A:
+            <center>
+               <b>B +C #A</b><br/>
+               <img src="sol_hard_2.png" style="width:100px">
+            </center>
+            <p>Nyt pitää vielä poistaa keskusta, mutta meillä ei ole siihen sopivaa valmista hahmoa. Esimerkistä <b> A + (B #C)</b> voimme kuitenkin päätellä, että operaatio <b>B #C</b> vastaa keskustaa, jonka haluamme poistaa. Näin ollen saamme ratkaisuksi:
+            <center>
+            <table style="text-align:center;width:400px"><tr>
+            <td>
+               <b>B +C #A</b><br/>
+               <img src="sol_hard_2.png" style="width:100px">
+            </td>
+            <td>
+               <b>B #C</b><br/>
+               <img src="sol_hard_4.png" style="width:100px">
+            </td>
+            <td>
+               <b>B +C #A -(B #C)</b><br/>
+               <img src="sol_hard_3.png" style="width:100px">
+            </td>
+            </tr>
+            </table>
+            </center>
+            <p>Edellä käytettiin ratkaisukaavaa <b>B +C #A -(B #C)</b>. Muita mahdollisia ratkaisuita on esimerkiksi:
+            <ul>
+               <li><p><b>B +C -(B #C) #A</b>: Samantapainen idea kuin edellä, mutta poistetaan ensin keskusta ja vasta sitten ulko-osa.</li></p>
+               <li><p><b>C -B #A +(B -C #A)</b>: otetaan hahmosta C keskusta ja ulko-osa pois (= <b>C -B #A</b>), ja lisätään B, josta myös on ensin otettu keskusta ja ulko-osa pois (= <b>B -C #A</b>).</p></li>
+            </ul>
+            </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+        
+    <p>Kuvankäsittelyssä käytetyt tietokoneohjelmat osaavat tehdä monenlaisia kuvia yhdistäviä operaatioita, kuten liitoksia (tässä <b> + </b>), leikkauksia (tässä <b> - </b>), tai alueellisia rajauksia (tässä <b> # </b>). </p>
+
+    <p>Tällaiset operaatiot on helppo toteuttaa ohjelmoimalla. Esimerkiksi liitos <b>A + B</b> voidaan tehdä käymällä läpi jokainen kuvan <b>A</b> pikseli (kuvan muodostama pieni alkeispiste; kuvapiste) tutkien, millainen pikseli kuvan <b>B</b> vastaavassa kohdassa on (liitoksen sijoituskohdan suhteen). Jos kuvan <b>B</b> pikseli on valkoinen (mikä tulkitaan tässä läpinäkyväksi), pidetään kuvan <b>A</b> pikseli ennallaan, ja muuten kuvan <b>A</b> pikseli korvataan kuvan <b>B</b> pikselillä. Kun tämä on tehty kaikille pikseleille, on tuloksena liitos <b>A + B</b>.</p>
+
+    <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Kuvank%C3%A4sittely" target="_blank">https://fi.wikipedia.org/wiki/Kuvankäsittely</a>.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

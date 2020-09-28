@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2017-FR-07</title>
+    <script>
+        window.stringsLanguage = 'fi';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
+            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+            'taskStyles-0.1']);
+    </script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2017/2017-FR-07-graph-representation/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+            success: "Onnittelut, ratkaisit tämän version!",
+            missingVertex: 'Kuvia puuttuu vielä. Liikuta puinaista palloa muihin soluihin ja ota kuva klikkaamalla "Ota kuva"-nappia.',
+            missingEdge: "Joidenkin kuvien väliltä puuttuu yhteys. Lisää yhteys klikkaamalla kahta kuvaa.",
+            shouldAddVertices: "Määritä nyt yhteydet kuvien välille, kuten ohjeissa pyydettiin tekemään.",
+            wrongEdge: "Ainakin yksi yhteys on väärin. Yhteyden voi poistaa klikkaamalla sitä.",
+            vertexExists: "Tämä kuva on jo olemassa. Liikuta punainen pallo johonkin toiseen soluun ennen uuden kuvan ottamista.",
+            vertexAdded: "Kuva otettiin.",
+            wrongCell: "Palloa voi liikuttaa vain viereiseen soluun.",
+            droppingOnBall: "Kahta palloa ei voi laittaa samaan soluun.",
+            dragError: "Raahaa pallo viereiseen soluun.",
+            dropMinimalDistance: "",
+            edgeExists: "Kuvien välillä on jo yhteys. Voit poistaa yhteyden klikkaamalla sitä.", 
+            needEdges: "Kaikki kuvat on nyt otettu. Luo nyt yhteyksiä kuvien välille tehtävän ohjeen mukaisesti. Klikkaa ensin yhtä ja sitten toista kuvaa luodaksesi yhteyden niiden välille. Voit halutessasi siirtää kuvien paikkoja harmaan suorakulmion sisällä."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+            padding-top: 15px;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #validation {
+            margin-top: 1em;
+            text-align: center;
+         }
+         #validation input {
+            padding: 2px 10px 2px 10px;
+         }
+         #configTable {
+            margin: auto;
+            width: 740px;
+         }
+         #configContainer {
+            padding-left: 40px;
+            text-align: center;
+         }
+         #addSituation {
+            padding: 10px;
+            margin-left: 10px;
+         }
+         #messageConfig {
+            font-weight: bold;
+            color: red;
+            width: 400px;
+            height: 5em;
+            margin: 10px;
+         }
+      </style>
+   </head>
+   <body>
+
+      <div id="task">
+         <h1>Kuvapeli</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div style="float:right;text-align:center; margin-left:20px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>Esimerkki</b></p><p style="margin-top: 0px; margin-bottom: 20px">Luo yhteys, jos kuvat eroavat yhden askeleen verran.</p><img src="example.png"></div>
+            <p>Auta majavaa ottamaan kuvat <span class="easy medium">jokaisesta mahdollisesta punaisen pallon sijaintikohdasta.</span><span class="hard">kaikista mahdollisista kahden punaisen pallon sijaintikohdista.</span>
+            </p>
+            <p>Tee tämä liikuttamalla <span class="easy medium">palloa</span><span class="hard">palloja</span> solusta viereiseen soluun ja klikkaamalla "Ota kuva"-nappia jokaisen erilaisen asetelman kohdalla.
+            </p>
+            <p>Ottamasi kuvat tulevat näkyviin alla olevan harmaan suorakulmion alueelle. Kun kaikki kuvat on otettu, sinun pitää vielä luoda yhteydet kaikkien sellaisten kuvaparien välille, joissa kuvat eroavat toisistaan vain yhden pallon siirtoaskeleen verran.
+            </p>
+            <p>
+                Klikkaa kahta kuvaa luodaksesi yhteyden niiden välille.
+            </p>
+            <center><table>
+               <tr>
+                  <td><div id="anim_config"></div></td>
+                  <td>
+                     <div><input type="button" value="Ota kuva" id="addSituation" /></div>
+                     <div id="messageConfig">&nbsp;</div>
+                  </td>
+               </tr>
+            </table>
+            </center>
+            <div style="font-weight: bold; margin-top: 1em; text-align: center">Kuvat:</div>
+            <div id="anim_container">
+               <div id="anim_graph"></div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+   
+           <p class="easy medium"Otetaan aluksi  kuva jokaisesta <span class="easy">4</span><span class="medium hard">5</span> erilaisesta pallon sijaintikohdasta. Voimme sitten vaikkapa asettaa kuvat harmaalla alueella samaan järjestykseen, missä otimme ne (pallo liikkunut aina yhden askeleen). Sitten on  helppo yhdistää kuvaparit, joiden välillä pallo on liikkunut yhden askeleen.</p>
+
+           <p class="hard">Otamme aluksi kuvat kaikista 6 mahdollisesta erilaisesta tavasta asetella 2 palloa soluihin. Sitten voimme asetella kuvat harmaalle alueelle vaikkapa sellaiseen järjestykseen, että aina toinen pallo pysyy samassa paikassa kuin edellisessä kuvassa, ja toinen pallo on liikkunut yhden askeleen. Tämän jälkeen lisäämme yhteydet katsomalla tarkkaan, mitkä kuvaparit eroavat vain yhden pallon yhden askeleen verran toisistaan.</p>
+  
+           <p>
+            <img class="easy" src="Sol_easy_1.png">
+            <img class="medium" src="Sol_medium_1.png">
+            <img class="hard" src="Sol_hard_1.png"> 
+           </p>
+           
+           <p>Kunkin yksittäisen kuvan osalta on mahdollista varmistaa, ettemme ole unohtaneet lisätä siihen yhtään yhteyttä: lasketaan kuvassa olevien <span class="easy medium">punaisen pallon vieressä olevien valkoisten solujen määrä</span><span class="hard">kummankin pallon vieressä olevien valkoisten solujen määrät, kummallekin pallolle erikseen</span>. <span class="easy medium">Tämä määrä</span><span class="hard">Näiden määrien summa</span> kertoo, kuinka  monta yhteyttä kuvalla tulisi olla, koska jokainen tällainen valkoinen vierussolu vastaa yhtä mahdollista toista kuvaa, joka eroaa vain yhden pallon yhden askeleen verran.</p>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+           <p>Tehtävä havainnollistaa, kuinka tilanteita (tässä kuvia pallojen asetelmista) sekä niiden välisiä siirtymiä (asetelman muunnos siirtämällä yhtä palloa) voidaan mallintaa <b>graafina</b> (kuvaajana, jossa on viivoilla yhdistettyjä objekteja). Tietojenkäsittelyssä pyritään usein muuntamaan ongelma graafiksi, koska moniin graafimuodossa esitettyihin ongelmiin on olemassa valmiita ja hyvin analysoituja ratkaisualgoritmeja.</p>
+
+           <p>Monet ongelmat voidaan luontevasti kuvata graafeilla, kuten reitin etsintä kaupungista toiseen: tällöin graafi koostuu kaupungeista sekä niitä yhdistävistä teistä. Joissain ongelmissa taas yhteys graafiin on vähemmän suora. Tällöin voimme puhua ongelmaa kuvaavasta <b>implisiittisestä graafista</b>.
+           
+           <p>Ammattitaitoinen ohjelmoija kykenee tunnistamaan, onko ongelma mahdollisesti kuvattavissa graafimuodossa. Tämän onnistuessa ohjelmoija voi usein ratkaista ongelman valmiilla hyvin tunnetuilla graafialgoritmeilla sen sijaan, että yrittäisi keksiä itse uuden mahdollisesti tehottomaksi osoittautuvan ratkaisutavan.</p>
+           
+           <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a> ja <a href="https://fi.wikipedia.org/wiki/Verkkoteoria" target="_blank">https://fi.wikipedia.org/wiki/Verkkoteoria</a>.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>
