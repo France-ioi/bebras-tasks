@@ -37,9 +37,19 @@ function initTask(subTask) {
             map_lng_right: 9.65,
             map_lat_top: 51.6,
             map_lat_bottom: 41.7,            
+
+            /*
             // map2d options
             pin_file: 'img/pin.png',
             map_file: 'img/carteDeFrance.png',
+            */
+
+            // map3d options
+            map3d: true,
+            camera: {
+                lat: 46,
+                lng: 3
+            }
         },
         
 
