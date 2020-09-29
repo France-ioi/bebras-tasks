@@ -172,7 +172,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
          $("#header_title").html(theContents.title);
        }
 
-       $("#header_logo").html('<img id="header_logo_img" src="' + pathToRoot + 'demo_files/castor_small.png" />');
+       $("#header_logo").html('<img id="header_logo_img" src="' + pathToRoot + 'demo_files/img/castor_very_small.png" />');
 
        $("#button_return_list").click(function() {
            $('#iframe').css('display', "none");
