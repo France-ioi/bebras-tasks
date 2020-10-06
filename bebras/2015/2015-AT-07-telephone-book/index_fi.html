@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-AT-07</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simpleKeyboard-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simpleKeyboard-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-AT-07-telephone-book/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Elisabeth Oberhauser, elisabeth.aisha.oberhauser@gmail.com, Austria, initial idea; Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         incorrectNumber: function(nbTarget) { return "Sinun pitää valita " + nbTarget + " sanaa."; },
+         incorrect: "Et ole valinnut oikeita sanoja. Yritä uudelleen.",
+         correct: "Onnittelut, ratkaisit tämän version!" };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         .symbol, .pattern, .char {
+            font-family: 'Courier New';
+            font-size: 20px;
+         }
+         .symbol, .pattern {
+            color: #CC0000;
+            font-weight: bold;
+         }
+         .pattern {
+            margin-right: 0.5em;
+            margin-left: 0.5em;
+         }
+         .words {
+            border-collapse: collapse;
+            margin: auto;
+         }
+         .words td {
+            border: solid #AAAAAA 1px;
+            padding: 10px;
+            background-color: #EEEEEE;
+         }
+         .example td {
+            padding-top: 4px;
+            padding-bottom: 4px;
+         }
+         #main_words td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+         }
+         .example .word {
+            cursor: default;
+            padding: 5px 5px 5px 5px;
+         }
+         #main_words .word {
+            cursor: default;
+            padding: 10px 10px 10px 10px;
+         }
+         .words .selected {
+            background-color: blue;
+            color: white;
+         }
+         .char {
+            padding: 3px;
+            width: 10px;
+         }
+         .example {
+            margin-top: 10px;
+            margin-bottom: 5px;
+         }
+         #results_container {
+            width: 10em;
+         }
+         .example_container {
+            padding: 0.2em;
+            padding-bottom: 0.5em;
+            padding-left: 0.5em;
+            margin-left: 0.5em;
+            width: 180px;
+            text-align: left;
+            border: 1px solid black;
+            margin-left: 1em;
+         }
+         .example_container p {
+            margin-top: 0.5em;
+            margin-left: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         .example_title {
+            text-align: center;
+         }
+         #main_words {
+            margin: 0px auto;
+            margin-bottom: 20px;
+         }
+         #task_description td {
+            vertical-align: top;
+         }
+         #task_description {
+            margin-top: 0.8em;
+         }
+         #pattern_given {
+            font-weight: bold;
+            padding-bottom: 0.8em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Täsmäävät sanat</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <table id="task_description">
+               <tr>
+                  <td>
+                     <p>
+                        Hahmo koostuu kirjaimista<span class="easy"> ja kysymysmerkeistä</span><span class="medium hard">, kysymysmerkeistä ja kolmesta pienestä pisteestä</span>.
+                     </p>
+                     <p>
+                        Yksi kymysmerkki <span class="symbol">?</span> täsmää minkä tahansa yhden kirjaimen.
+                     </p>
+                     <p class="medium hard">
+                       Kolme pistettä <span class="symbol">&#8230;</span> tarkoittaa, että täsmätään jokin määrä (<b>voi olla myös 0</b>) mitä tahansa kirjaimia.
+                     </p>
+                  </td>
+                  <td>
+                     <div class="example_container">
+                        <p class="example_title"><strong>Esimerkki</strong></p>
+                        <p> Hahmo:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_0" class="pattern"></span></strong>
+                        </p>
+                        <p> Täsmääviä sanoja:</p>
+                        <table id="example0" class="words example"></table>
+                     </div>
+                  </td>
+                  <td>
+                     <div class="example_container">
+                       <p class="example_title"><strong>Esimerkki</strong></p>
+                        <p> Hahmo:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
+                        <p> Täsmääviä sanoja:</p>
+                        <table id="example1" class="words example"></table>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+            <br/>
+            <div id="pattern_given">
+               Valitse alta klikkaamalla <span class="hard">kaikki sanat</span><span class="easy medium"><b>3 sanaa</b></span>, jotka täsmäävät hahmoon:&nbsp;&nbsp;<span id="pattern_target" class="pattern"></span>
+               <span class="hard"><br/>Tässä versiossa sinulle ei kerrota täsmäävien sanojen määrää.</span>
+            </div>
+            <table id="main_words" class="words"></table>
+            <img src="icon.png" style="display:none">
+         </div>
+     </div><!-- task -->
+      <div id="solution">
+         <h2>Ratkaisu</h2>
+         
+         <div class="easy">
+            <img style="float:right" s src="solution_easy.png">
+            <p>Hahmo <span class="pattern">c??t</span> vastaa 4-kirjaimisia sanoja, joiden ensimmäinen kirjain on <strong>c</strong>, viimeinen kirjain on <strong>t</strong>, ja keskellä saa olla kaksi mitä tahansa kirjainta.</p>
+            <p>Sanalistassa oli seuraavat nämä ehdot täyttävät sanat: <b>chat</b>, <b>chut</b> ja <b>cuit</b>. </p
+            <p>Muut sanat eivät täsmää: sanan <b>char</b> viimeinen kirjain ei ole <strong>t</strong>, eikä sanan <b>plat</b> ensimmäinen kirjain ole <strong>c</strong>.</p>
+         </div>
+          
+         <div class="medium">
+            <img style="float:right" src="solution_medium.png">
+            <p>Hahmon <span class="pattern">?a&#8230;e</span> kanssa täsmäävän sanan toinen kirjain on <strong>a</strong> ja viimeinen kirjain on <strong>e</strong>. Ensimmäinen kirjain saa olla mikä tahansa, ja <strong>a</strong>- ja <strong>e</strong>-kirjainten välissä saa olla mitä tahansa kirjaimia (tai ei yhtään).</p>
+            <p>Annetuista sanoista seuraavat täyttivät nämä ehdot: <b>table</b>, <b>rave</b> ja <b>mare</b>. </p>
+            <p>Muut sanat eivät täsmää: <b>tacher</b>, <b>tartes</b> ja <b>parer</b> eivät pääty <strong>e</strong>-kirjaimeen, eikä sanojen <b>arrive</b> ja <b>charme</b> toinen kirjain ole <strong>a</strong>.</p>
+         </div>
+          
+         <div class="hard">
+            <img style="float:right" src="solution_hard.png">
+            <p>Hahmon <span class="pattern">&#8230;pro?&#8230;s&#8230;</span> kanssa täsmäävä sana sisältää osan <strong>pro</strong>, jota seuraa yhden tai useamman kirjaimen jälkeen kirjain <strong>s</strong>. Huomaa, että hahmon osa <span class="pattern">?&#8230;</span> täsmää yhden tai useamman minkä tahansa kirjaimen.
+            </p>
+            <p>Huomaa, että sana voi hyvinkin alkaa osalla <strong>pro</strong> tai päättyä kirjaimeen <strong>s</strong>.</p>
+            <p>Seuraavat annetut sanat täyttävät edelliset ehdot: <b>reproches</b>, <b>pronostic</b>, <b>prochains</b> ja <b>promesse</b>. </p>
+            <p>Muut sanat eivät täsmää: sanat <b>attraper</b>, <b>reposer</b> ja <b>crocheter</b> eivät sisällä osaa <strong>pro</strong>, eikä sanassa <b>prosterner</b> löydy sellaisia osan <strong>pro</strong> ja kirjaimen <strong>s</strong> esiintymiä, joiden välissä olisi vähintään yksi kirjain.</p>
+         </div>
+
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>Tehtävässä käytetyt hahmot ovat yksinkertaistettu versio tietojenkäsittelyssä laajasti käytetyistä <b>säännöllisistä lausekkeista</b>, joiden avulla voi suorittaa monipuolisesti hakuja tekstimuotoisesta datasta. Esimerkiksi monissa tekstieditoreissa on mahdollista tehdä säännöllisiin lausekkeisiin perustuvia hakuja.</p>
+         <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/S%C3%A4%C3%A4nn%C3%B6llinen_lauseke" target="_blank">https://fi.wikipedia.org/wiki/Säännöllinen_lauseke</a>.</p>         
+	  </div> <!-- task-solution -->
+  </body>
+</html>

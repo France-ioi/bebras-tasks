@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-13</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-13-open-lock/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+         var taskStrings = {
+            alreadyFound: function(found) {
+               if (found.length == 0) {
+                  return "Koodi ei täsmää.";
+               } else if (found.length == 1) {
+                  return "Löysit koodin " + found[0] + ".";
+               } else if (found.length == 2) {
+                  return "Löysit koodit " + found[0] + " ja " + found[1] + ".";
+               } else if (found.length == 3) {
+                  return "Löysit seuraavat koodit: " + found.join(", ") + "."; 
+               }
+            },
+            instruction: "Määritä koodi klikkailemalla alla annettujen numerorivien ruutuja",
+            freshlyTried: "Löysit uuden koodin.",
+            alreadyTried: "Olit jo aiemmin löytänyt tämän koodin!",
+            remaining: function(nbRemaining) { return "Etsi vielä " + nbRemaining + ((nbRemaining>1) ? " muuta koodia" : " muu koodi") + "."; },
+            success: "Onnittelut, ratkaisit tämän version!",
+            successPartial: function(counter, bestCounter) { return "Klikkasit numeroita " + counter + " kertaa.<br> Yritä uudelleen tehden vain " + bestCounter + " klikkausta.";  } };
+
+      </script>
+      <style>
+         .table_main div {
+            margin: 0em;
+            padding: 0em;
+         }
+         .digits_title {
+            color: #555555;
+         }
+         div.digits {
+            margin-left: 1.3em;
+            padding-top: 0.5em;
+            margin-bottom: 1em;
+         }
+         .easy, .medium, .hard {
+            display: none;
+         }
+         .current_code_message {
+            font-weight: bold;
+         }
+         .table_main td { 
+            border: 1px solid black;
+            vertical-align: top;
+            margin: 1em;
+            padding: 0.5em;
+         }   
+         #anim_container { 
+            text-align: center;
+         }
+         .features li {
+            margin-left: 15em;
+            font-weight: bold;
+            margin-top: 0.5em;
+         }
+         #counter {
+            text-align: center;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Numerolukko</h1>
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+
+            <p>
+            Avaa majavan lukko etsimällä <b>kaikki erilaiset</b> seuraavat säännöt täyttävät numerokoodit:
+            </p>
+           <div class="features">
+           <ul class="easy">
+              <li>Ensimmäinen numero on 8,</li>
+              <li>sisältää kaksi numeroa 5,</li>
+              <li>ja sisältää yhden numeron 3.</li>
+           </ul>
+           <ul class="medium">
+              <li>Ensimmäinen numero on 8,</li>
+              <li>sisältää kaksi numeroa 5,</li>
+              <li>ja sisältää joko numeron 1 tai 2.</li>
+           </ul>
+           <ul class="hard">
+              <li>Sisältää kaksi numeroa 3,</li>
+              <li>ja sisältää kaksi numeroa 5.</li>
+              <li style="list-style-type:none">&nbsp;</li>
+           </ul>
+           </div>
+
+           <p class="hard">
+           Avaa lukko mahdollisimman pienellä numeroiden klikkausten määrällä. Kynä ja paperi voivat auttaa ratkaisun hahmottelemisessa!
+           </p>
+            
+           <p class="hard" id="counter"><b>Numeroiden klikkauksia: <span id='step_counter'></span></b>.</p>
+          
+            <div id="anim_container">
+               <div id="anim">
+               </div>
+            </div>
+
+            <img src="icon.png" style="display:none">
+         </div>
+      </div>
+      <!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+         	<div class="easy">
+               <p>Kaikki 3 erilaista koodia on esitetty alla:</p>
+               <table><tr>
+               <td style="text-align:center"><b>8553</b></td>
+               <td style="text-align:center"><b>8535</b></td>
+               <td style="text-align:center"><b>8355</b></td>
+               </tr>
+               <tr>
+               <td><img src="solution_easy_1.png" width="220" style="margin-right:1em"></td>
+               <td><img src="solution_easy_2.png" width="220" style="margin-right:1em"></td>
+               <td><img src="solution_easy_3.png" width="220"></td>
+               </tr>
+               </table>
+               <p>Ensimmäinen numero on aina <b>8</b>, ja on kolme eri tapaa asettaa kaksi numeroa <b>5</b> viimeisiin kolmeen paikkaan. Jäljelle jäävään paikkaan tulee aina numero <b>3</b>.</p>
+           </div>
+               
+			<div class="medium">
+           <p>Kaikki 6 erilaista koodia ovat: <b> 8551, 8552, 8515, 8525, 8155, 8255</b>.</p>
+       	  
+           <p>Ensimmäinen numero on aina <b>8</b>, ja on kolme eri tapaa asettaa kaksi numeroa <b>5</b> viimeisiin kolmeen paikkaan. Jäljelle jäävään paikkaan tulee joko <b>1</b> tai <b>2</b>.
+  			
+			</div>
+			<div class="hard">
+	
+	      <p>Kaikki 6 erilaista koodia ovat: <b>3355, 3553, 3535, 5335, 5353, 5533 </b>.</p>
+
+         <p>Nämä löytyvät asettamalla systemaattisesti kaksi numeroa <b>3</b> kaikkiin eri paikkoihin. Jäljelle jääviin paikkoihin asetetaan kaksi numeroa <b>5</b>. </p>
+         <p>Pienin määrä klikkauksia saavutetaan käymällä koodit läpi sellaisella järjestyksessä, että edellisestä koodista seuraavaan päästään aina kahdella klikkauksella. Klikkauksia tarvitaan tällöin 4 (= ensimmäinen koodi) + 5x2 (= loput 5 koodia) = 14 kappaletta.</p>
+   		</div>
+
+		 <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>Tehtävässä pitää luetella kaikki tietyt numeroiden lukumääriä koskevat rajoitteet täyttävät ratkaisut. Tietojenkäsittelyn erilaisissa sovelluksissa kohdataan paljon tämäntapaisia hakuongelmia, joissa jostain mahdollisten ratkaisuiden joukosta halutaan etsiä tietyt rajoitteet täyttäviä ratkaisuita. Ongelma voidaan ratkaista esimerkiksi systemaattisella kaikkien mahdollisten ratkaisuiden läpikäynnillä (ns. <b>täydellinen haku</b>), joskin tämä voi olla hyvin tehotonta, jos mahdollisia ratkaisuja on paljon.</p>
+         <p>Usein ratkaisuiden läpikäyntiä voidaan tehostaa huomattavasti, jos hakuprosessin aikana voidaan jo varhaisessa vaiheessa karsia pois sellaisia ratkaisuvaihtoehtoja, jotka eivät selvästi voi täyttää rajoitteita. Esimerkiksi tässä tehtävässä olisi ollut periaatteessa 9999 erilaista tutkittavaa koodia (kun alkuasetelmaa 0000 ei lasketa), mutta rajoitteina annettujen numeroiden lukumäärien huomiointi auttoi keskittymään vain pieneen määrään mahdollisia ratkaisuita.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

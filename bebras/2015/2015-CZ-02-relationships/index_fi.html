@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="utf-8">
+      <title>2015-CZ-02-relationships</title>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+
+      <script class="module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js"        id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
+      <script class="remove" type="text/javascript">
+
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-CZ-02-relationships/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Jiří Vaníček, vanicek@pf.jcu.cz, Czechia ; Mathias Hiron ; Arthur Charguéraud",
+          "license": "CC BY-SA 3.0",
+          "translators": "Heikki Hyyrö",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [
+          ],
+          "acceptedAnswers": [
+          ],
+          "difficulty": {"1": "keskitaso", "2": "keskitaso", "3": "helppo", "4": "helppo"},
+          "categories": {},
+          "answerType": "Interaktiivinen, raahaus",
+          "fullFeedback": true, 
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         error: "Punaisen nuolen alussa oleva majava on vanhempi kuin nuolen lopussa oleva majava.",
+         remains: "On vielä asettamattomia nimikylttejä.",
+         success: "Onnittelut, ratkaisit tämän version!",
+         names: {
+            easy: ["Julie\n8 v", "Ahmed\n11 v", "Sarah\n12 v", "Kim\n14 v", "Léa\n15 v"],
+            medium: ["Julie\n8 v", "Ahmed\n11 v", "Sarah\n12 v", "Kim\n14 v", "Léa\n15 v",  "Lise\n16 v", "Théo\n17 v", "Yann\n20 v"],
+            hard: ["Julie\n8 v", "Ahmed\n11 v", "Sarah\n12 v", "Kim\n14 v", "Léa\n15 v", "Lise\n16 v", "Théo\n17 v"] 
+         }
+      };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #relations td {
+         vertical-align: top;
+       }
+      #relations td ul {
+         margin-top: 0em;
+         margin-bottom: 0.5em;
+      }
+      .easy, .hard {
+         display: none;
+      }
+      #execute_container {
+         text-align: center;
+      }
+      #remark {
+         text-align: center;
+         font-weight: bold;
+      }
+      </style>
+  </head>
+  <body>
+      <div id="task">
+         <h1>Ikäsuhteet</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+           <p>
+            Raahaa vasemmalla annetut nimikyltit sopiviin paikkoihin vaaleansinisiin laatikoihin.
+            </p>
+            <div class="easy medium">
+               <p>
+               Kunkin nuolen pitää osoittaa nuoremmasta henkilöstä vanhempaan.
+               </p>
+            </div>
+            <div class="hard">
+               <p>
+               Kunkin nuolen pitää osoittaa nuoremmasta henkilöstä vanhempaan, <b>jos nuolen kummassakin päässä olevassa laatikossa on nimikyltti</b>.
+               </p>
+               <p id="remark">Huomaa, että yksi laatikko jää tyhjäksi.</p>
+            </div>
+            <div id="anim" class="touch"></div>
+            <div id="execute_container">
+               <input type="button" value="Tarkista vastaus" id="execute"/>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div>
+      <div id="solution">
+         <h2>Ratkaisu</h2>
+         <div class="easy medium">
+            <p>Ratkaisun voi löytää intuitiivisesti asettelemalla nimikyltit iän mukaan kasvavassa järjestyksessä, edeten nuolten mukaisesti. Tarkemmin ottaen voimme aina asettaa nuorimman vielä asettamatta olevan nimikyltin sellaiseen laatikkoon, jota nuolten mukaan edeltäviin laatikoihin on jo asetettu nimikyltit.</p>
+         </div>
+         <div class="easy">
+            <img src="solution_easy_fi.png">
+         </div>
+         <div class="medium">
+            <img src="solution_medium_fi.png">
+        </div>   
+        <div class="hard">      
+           <img style="float:right" src="graphe_cycles.png">
+           <p>Tehtävässä on oleellista huomata, että laatikoiden ja nuolten muodostamasta kuviosta voi löytää kaksi silmukkaa: oheisessa kuvassa punaisella merkitty laatikot B, C ja E sisältävä silmukka sekä sinisellä merkitty laatikot A, C, E ja D sisältävä silmukka. Silmukalla tarkoitetaan, että jostain laatikosta on mahdollista päätyä takaisin samaan laatikkoon kulkemalla laatikosta toiseen nuolten mukaisessa suunnassa.</p>
+           <p>Silmukat ovat oleellisia, koska minkään silmukan kaikkiin laatikoihin ei voida laittaa nimikylttejä: tämä johtaisi nuolia ja ikiä koskevan säännön mukaan ristiriitaan, että laatikossa olevan nimikyltin ikä on itseään pienempi (kun samaan laatikkoon päästään silmukan nuolia pitkin uudelleen).</p>
+           <p>Koska tehtävässä saa jättää vain yhden laatikon tyhjäksi, on tyhjäksi jätettävä sellainen laatikko, joka kuuluu molempiin löytämiimme silmukoihin. Tällaisia laatikoita on kaksi: E ja C. Jos jätämme laatikon E tyhjäksi ja asettelemme nimikyltit muihin laatikoihin kasvavassa ikäjärjestyksessä, löydämme 1. ratkaisun. Jos jätämme laatikon C tyhjäksi, päädymme 2. ratkaisuun.</p>
+            <center>
+            <table>
+            <tr>
+            <td><b>1. ratkaisu:</b></td>
+            <td><b>2. ratkaisu:</b></td>
+            </tr>
+            <tr>
+            <td><img src="solution_hard_1_fi.png" style="margin-right:3em" width="330"></td>
+            <td><img src="solution_hard_2_fi.png" width="330"></td>
+            </tr>
+            </table>
+            </center>
+         </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>
+         Tehtävän kuviot vastaavat tietojenkäsittelyssä hyvin yleistä tietorakennetta, <b>suunnattua graafia</b>. Suunnattuja graafeja voidaan käyttää esim. kuvaamaan joidenkin objektien (tässä nimikylttien) edeltävyysvaatimuksia (tässä ikäjärjestystä) niin, että graafin solmujen (tässä laatikoiden) väliset edeltävyysvaatimukset kuvataan suunnatuilla kaarilla (tässä nuolilla).
+         </p>
+         <p>
+         Suunnattua graafia voisi hyödyntää vaikkapa rakennusprojektin eri työtehtävien välisen aikataulun suunnittelussa. Esimerkiksi seinät pitänee rakentaa ennen kattoa, alakerta ennen yläkertaa, jne. Työtehtävien välinen suoritusjärjestys voitaisiin kuvata graafina, jossa solmut vastaavat työtehtäviä ja suunnatut kaaret edeltävyysjärjestystä.
+         </p>
+         <p>
+         Graafin kaarten (nuolten) suuntia noudattavan solmujen (nimikylttien) järjestyksen määrittämistä kutsutaan <b>topologiseksi lajitteluksi</b>, joka on yksi hyvin perustavanlaatuinen ongelma tietojenkäsittelytieteessä.
+         </p>
+         <p>
+         Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a> ja <a href="https://fi.wikipedia.org/wiki/Topologinen_lajittelu" target="_blank">https://fi.wikipedia.org/wiki/Topologinen_lajittelu</a>.
+         </p>
+	  </div> <!-- task-solution -->
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-03</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelButton-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelButton-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-03-mark-and-shuffle/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         success: "Onnittelut, ratkaisit tämän version!",
+         emptySlot: "Alarivissä on vielä lintuja jäljellä.",
+         incorrect: "Et palauttanut lintuja oikeaan järjestykseen. <br/>Voit palata taaksepäin tai aloittaa alusta.",
+         restart: "Tyhjennä rengastusmerkit.",
+         validate: "Tarkista vastaus.",
+         shuffle: "Päästä linnut vapaiksi.",
+         backToPrevious: "Palaa taaksepäin.",
+         moveBirds: "Palauta linnut takaisin yläriville alkuperäisiin paikkoihinsa.",
+         notDifferent: "Kaikilla linnuilla pitää olla erilaiset rengastusmerkit.",
+         instruction: "Palauta linnut takaisin yläriville alkuperäisiin paikkoihinsa."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Lintujen rengastus</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Luo kullekin linnulle <b>keskenään erilainen</b> rengastusmerkki klikkailemalla lintujen alla olevia valkeita ruutuja.
+            </p>
+            <p>
+               Päästä linnut sen jälkeen vapaiksi. </p><p>
+               Linnut asettuvat alariville satunnaiseen järjestykseen, ja sinun pitää palauttaa linnut takaisin yläriville niiden <b>alkuperäiseen järjestykseen</b>.
+            </p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+ 
+         <img src="bird.png" style="display:none">
+         <img src="icon.png" style="display:none">
+         </div>
+
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Ratkaisu</h2>
+            <p>Tehtävään on useita ratkaisustrategioita. Alla on kuvattu eräs tapa luoda merkit niin, että lintujen järjestys on helppo muistaa.</p>
+            <p>
+            <img class="easy" src="solution_easy.png">
+            <img class="medium" src="solution_medium.png">
+            <img class="hard" src="solution_hard.png">
+            </p>
+         
+            <div class="hard">
+               <p>
+               Huomaa, että tässä versiossa lintujen määrä vastasi kaikkien mahdollisten erilaisten merkkien määrää. Rengastusmerkissä on 3 ruutua, joista kullakin on 2 värivaihtoehtoa: valkoinen tai musta. Näin ollen on mahdollista luoda 2 * 2 * 2 = 8 erilaista rengastusmerkkiä, ja tehtävässä oli täsmälleen 8 lintua.
+               </p>
+               <p>Alla on vielä toinen ratkaisu, joka on luotu tietyn tietojenkäsittelyssä yleisen logiikan mukaan. Mahdatko keksiä millaisen?</p>
+               <p><img src="solution_hard2.png"></p>
+            </div>
+
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+
+            <p>Tehtävä havainnollistaa tietojenkäsittelyssä yleisten <b>binäärikoodien</b> käyttöä. Binäärikoodilla tarkoitetaan tiedon esittämistä sellaisessa muodossa, että esityksessä saa käyttää vain kahta erilaista merkkiä. Tämä tarkoittaa yleensä käytännössä <b>binäärijärjestelmää</b>, jossa kukin merkki on joko 0 tai 1. Binäärijärjestelmän yksittäisestä merkistä käytetään nimitystä <b>bitti</b>.
+            </p>
+            <p>Tietokoneiden käsittelemä data on pohjimmiltaan tallennettu 0- ja 1-bitteinä. Modernit tietokoneet kykenevät käsittelemään valtavia määriä informaatiota. Esimerkiksi monissa tietokoneissa on teratavun (1 TB) kokoinen kiintolevy, johon mahtuu 8 biljoonaa bittiä informaatiota (biljoona = 1000000000000 = tuhat miljardia).</p>
+            <p>Tehtävässä lintujen rengastusmerkit koostuivat ruuduista, joista kukin on joko valkoinen tai musta. Tämän voidaan tulkita vastaavan esimerkiksi binäärijärjestelmää, jossa valkoinen vastaa 0-bittiä ja musta 1-bittiä. Esimerkiksi kolmesta ruudusta, joiden värit ovat musta, valkoinen ja musta, koostuva rengastusmerkki vastaisi tällöin binäärijärjestelmän lukua 101.</p>
+
+      <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Bin%C3%A4%C3%A4rij%C3%A4rjestelm%C3%A4" target="_blank">https://fi.wikipedia.org/wiki/Binäärijärjestelmä</a> ja <a href="https://fi.wikipedia.org/wiki/Bitti" target="_blank">https://fi.wikipedia.org/wiki/Bitti</a>.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-15</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-15-guess-who/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         elements: {
+            "tie": ["rusetti", "rusettia"], 
+            "glasses": ["silmälasit", "silmälaseja"],
+            "hat": ["lakki", "lakkia"],
+            "hair": ["hiukset", "hiuksia"],
+            "mouth": ["suu", "suuta"],
+            "nose": ["nenä", "nenää"] },
+         remainingFaces: "Et ole vielä asettanut kaikkia henkilöitä.",
+         remainingQuestions: "Et ole vielä asettanut kaikkia ehtoja.",
+         errorHasNotButShouldHave: function(part) { 
+            return "Punaisella korostetulla henkilöllä pitäisi olla " + this.elements[part][0] + "."; },
+         errorHasButShouldNot: function(part) {
+            return "Punaisella korostetulla henkilöllä ei pitäisi olla " + this.elements[part][1] + "."; },
+         success: "Onnittelut, ratkaisit tämän version!",
+         yes: "On",
+         no: "Ei ole"         
+         };
+
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #ellipse_descr {
+            margin-bottom: 0em;
+           padding-bottom: 0em;
+         }
+         #ellipse_descr_ul {
+            margin-top: 0.2em;
+         }
+         #validate {
+            width: 9em;
+            margin: 16px;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0em;
+            text-align: center;
+            font-weight: bold; 
+            color: #CC8844;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Kuka on kuka?</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p class="easy">
+               Raahaa henkilöt kaavion alarivin laatikoihin niin, että henkilöt täyttävät kaavion ehdot.
+            </p>
+            <div class="medium hard">
+               Raahaa
+               <ul>
+                  <li>jokaiseen kaavion ehtoon (= soikioon) jokin ominaisuus, ja</li>
+                  <li>kaikki henkilöt kaavion alarivin laatikoihin</li>
+               </ul>
+               siten, että henkilöt täyttävät kaavion ehdot. Samaa ominaisuutta voi käyttää monta kertaa.
+            </div>
+            <p id="ellipse_descr">Kukin soikio määrittää sisältämäänsä ominaisuutta koskevan ehdon:</p>
+            <ul id="ellipse_descr_ul">
+               <li>Kaikilla soikion vasempaan alihaaraan sijoitetuilla henkilöillä on kyseinen ominaisuus.
+               <li>Kenelläkään soikion oikeaan alihaaraan sijoitetulla henkilöllä ei ole kyseistä ominaisuutta.
+               </ul>
+
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+               <input type="button" value="Tarkista vastaus" id="validate"/>
+            </div>
+
+            <img src="icon.png" style="display:none">
+         </div>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+         	<div class="easy">
+               <p>Alla on ratkaisu.</p>
+               <p><img src="solution_easy_fi.png" width="500"></p>
+               <p>Voimme tarkistaa, että henkilöt täyttävät kaavion ehdot.
+               <ul>
+               <li>Ensimmäisellä henkilöllä <b>on</b> rusetti <b>ja myös</b> silmälasit.</li>
+               <li>Toisella henkilöllä <b>on</b> rusetti mutta <b>ei ole</b> silmälaseja.</li>
+               <li>Kolmannella henkilöllä <strong>ei ole</strong> rusettia mutta <b>on</b> lakki.</li>
+               <li>Neljännellä henkilöllä <strong>ei ole</strong> rusettia <strong>eikä myöskään</strong> lakkia.</li>
+               </ul></p>
+         	</div>
+            <div class="medium">
+               <p>Toinen mahdollisista ratkaisuista on:</p>
+               <p><img src="solution_medium_fi.png" width="500"></p>
+               <p>Ylimpään ehto-soikioon täytyy asettaa silmälasit, koska se on ainoa ominaisuus, joka jakaa henkilöt kahteen kahden hengen ryhmään.</p>
+               <p>Vasemman haaran ehtoon täytyy asettaa hiukset, koska se on ainoa kyseiset kaksi henkilöä erottava ominaisuus.</p>
+               <p>Oikean haaran ehtoon voi laittaa joko lakin tai rusetin, koska henkilöt ilman silmälaseja voidaan erottaa kummallakin näistä ominaisuuksista. Kyseisten henkilöiden sijoituspaikat kaaviossa riippuvat siitä, kumpi ominaisuus valitaan. Esimerkkikuvassa valittiin lakki, mutta jos oltaisiinkin valittu rusetti, pitäisi kahden oikeanpuoleisimman henkilön paikat vaihtaa keskenään.</p>
+            </div>
+		    <div class="hard">
+            <p>
+               Eräs mahdollinen ratkaisu on:</p>
+            <img src="solution_hard_fi.png" width="600">
+               <p>Ylimmän ehdon täytyy jakaa henkilöt kahteen 4 hengen ryhmään. Tämä onnistuu asettamalla siihen jokin seuraavista ominaisuuksista: rusetti, silmälasit, hiukset tai suu.</p>
+               <p>Jos asettaisimme ylös suun, pitäisi meidän sen jälkeen pystyä jakamaan sekä neljä suun omaavaa että neljä suutonta henkilöä kahteen kahden hengen ryhmään. Suun omaavat voidaan jakaa kahtia lakin perusteella (vasen kuva alla).</p>
+               <p><img src="solution_bad_mouth.png" width="300">
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <img src="solution_bad_no_mouth.png" width="300"></p>
+               <p>Suuttomien osalta (oikea kuva yllä) huomataan, ettei mikään ominaisuus jaa heitä puoliksi kahteen kahden hengen ryhmään. Kolmella on lakki tai hiukset ja yhdellä on silmälasit tai nenä; ei löydy ominaisuutta, joka olisi heistä tasan kahdella.</p>
+               <p>Koska törmäsimme umpikujaan, voimma päätellä ettei ylimmän ehdon ominaisuudeksi voida asettaa suuta. Samaan tapaan kuin edellä, voimme myös havaita ettei myöskään rusetti tai silmälasit johda ratkaisuun: ylös on asetettava hiukset.</p>
+               <p>Kun hiukset on asetettu ylös, huomaamme suoraviivaisesti, että ainoa hiukset omaavat henkilöt puoliksi jakava ominaisuus on nenä, ja ainoa hiuksettomat henkilöt puoliksi jakava ominaisuus on lakki. Näin toisenkin tason ominaisuudet voidaan asettaa vain yhdellä tavalla. Tämän jälkeen kokonainen ratkaisu löydetään suoraviivaisesti (alimman tason ominaisuuksien valintaan on muutamia erilaisia ratkaisuun johtavia vaihtoehtoja).</p>
+          </div>
+         
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            <p>Tehtävä havainnollistaa <b>päätöspuita</b>, joita käytetään tietojenkäsittelyssä esimerkiksi tekoälyn sovelluksissa. Päätöspuu luokittelee alkioita hierarkkisesti niiden ominaisuuksia koskevien ehtojen mukaan alaryhmiin, ja päätöspuun alimman tason alaryhmät vastaavat yleensä jotain johtopäätöksiä tms.</p>
+            <p>Tässä tehtävässä päätöspuun tavoitteena oli identifioida yksittäinen henkilö. Mutta myös esimerkiksi sovellus, joka auttaa lääkäriä diagnosoimaan potilaan mahdollisen sairauden, voisi perustua päätöspuuhun. Tällöin päätöspuun ehdot voisivat koskea esimerkiksi potilaiden testituloksia tai muita ominaisuuksia (onko korkea verenpaine, onko kuumetta, jne.), ja kukin alimman tason alaryhmä vastaisi diagnoosia potilaan tilasta.</p>
+            <p>Katso lisää esim. <a href="https://en.wikipedia.org/wiki/Decision_tree" target="_blank">https://en.wikipedia.org/wiki/Decision_tree</a> (englanniksi).</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

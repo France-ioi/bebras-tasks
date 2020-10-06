@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-02</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-02-spreading-secret/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         overlap: "Ainakin kahden antennin kantamat menevät päällekkäin.",
+         missing: "Antennit eivät kata kaikkia ruutuja.",
+         success: "Onnittelut, ratkaisit tämän version!",
+         warning: "Huomio: kantamat eivät saa mennä päällekkäin." };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #error_text {
+         font-weight: bold;
+         text-align: center;
+         margin-bottom: 0.5em;
+         color: red;
+         height: 1em;
+      }
+      .antenna {
+         margin-top: 1em;
+         margin-left: 1em;
+      }
+      #instructions td {
+         vertical-align: top;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Antennit</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+           <table id="instructions">
+           <tr>
+              <td>
+                 <p>
+                  Lisää (ja poista) klikkaamalla ruutuihin <span class="hard"><b>(valkoisiin ja harmaisiin)</b></span> antenneja niin, että antennien kantamat kattavat kaikki valkoiset ruudut.
+                 </p>
+                <p>Antennien kantamat eivät saa mennä päällekkäin toistensa kanssa!</p>
+                <div id="error_text"></div>
+              </td>
+              <td>
+                 <div style="float:right" class="easy antenna"><img src="antenna_horizontal.png" /></div> 
+                 <div style="float:right" class="medium hard antenna"><img src="antenna.png" /></div> 
+              </td>
+           </tr>
+           </table>
+
+
+            <div id="grid_container" style="text-align:center">
+               <div id="grid"></div>
+            </div>
+            <div id="demo"></div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+            <div class="easy">
+               <p>Antennit voi asetella suoraviivaisesti peräkkäin valkoisiin ruutuihin.</p>
+               <p><img src="solution_easy_1.png"></p>
+               <p>Toinen ratkaisuvaihtoehto käyttää myös harmaita ruutuja.</p>
+               <p><img src="solution_easy_2.png"></p>
+            </div>
+
+            <div class="medium">
+               <p>Antennit asetellaan peräkkäin, mutta vuorotellen eri riveille.</p>
+               <p><img src="solution_medium_1.png"></p>
+               <p>Toinen ratkaisuvaihtoehto käyttää myös harmaita ruutuja.</p>
+               <p><img src="solution_medium_2.png"></p>
+            </div>
+
+            <div class="hard">
+               <p>Perusidea on asetella antennit systemaattisesti säännöllisiin paikkoihin.</p>
+               <p><img src="solution_hard.png"></p></p>
+               <p>On myös muita ratkaisuita (jotka kuitenkin ovat tämän ratkaisun peilikuvia tai rotaatioita).</p>
+            </div>
+         
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+
+            <p>Tehtävä on esimerkki <b>peiteongelmasta</b> ("tessellaatio"), jossa halutaan peittää jokin pinta tietyn muotoisilla laatoilla niin, etteivät laatat mene päällekkäin. Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Tessellaatio" target="_blank">https://fi.wikipedia.org/wiki/Tessellaatio</a>.
+            </p>
+            <p>Voimme etsiä ratkaisua asettamalla ensin antennin johonkin kohtaan, ja yrittämällä sitten asetella askeleittain sen naapurustoon lisää antenneja niin, ettei väleihin jää tyhjiä ruutuja eivätkä antennien kantamat mene päällekkäin.</p>
+            <p class="easy"><img src="solution_easy_1.png"></p>
+            <p class="medium hard"><img src="solution_medium_1.png"></p>
+  
+            <div class="hard">
+            <p>Jos annettu ruudukko on suuri, törmäämme helposti tilanteeseen, jossa ei löydykään mitään laillista tapaa kattaa kaikki ruudut antenneilla. Alla on esimerkki tällaisesta tilanteesta: toiseksi alimman näkyvän rivin 3 ruudun pituisia tyhjiä jaksoja on mahdotonta kattaa lisäantenneilla ilman päällekkäisyyttä.</p>
+            <p><img src="solution_hard_bad_start.png"></p>
+            <p>Jos ajaudumme tällaiseen umpikujaan, pitää palata alkuun ja yrittää aloittaa antennien asettelu toisella tapaa. Jos toimimme riittävän systemaattisesti (ja ongelmaan on olemassa ratkaisu), löydämme ennen pitkää antennien asettelutavan, joka ei johda umpikujaan. Alla on esimerkki 5 antennin alkuasetelmasta, josta voidaan suoraviivaisesti jatkaa kattamaan koko ruudukko.</p>
+            <p><img src="solution_hard_good_start.png"></p>
+            <p>Tällaista ratkaisun etsintätapaa kursutaan tietojenkäsittelyssä nimellä <b>peruuttava haku</b>. Samantapaista ratkaisumenetelmää voitaisiin soveltaa esimerkiksi Sudoku-ruudukon ratkaisuun.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-07</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-07-placing-arrows/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         execute: "Aloita",
+         pause: "Pysäytä",
+         resume: "Jatka",
+         alreadyObstacle: "Ruudussa on jo este.",
+         refuseObstacle: "Tähän ruutuun ei voi lisätä estettä.",
+         errorLoop: "Robotti jäi toistamaan silmukan muodostavaa reittiä, joka ei johda maaliruutuun.",
+         success: "Onnittelut, ratkaisit tämän version!"          
+         };
+
+         /* successPartial: function(obstacles, minObstacles) { return "Vous avez atteint l'objectif en utilisant " + obstacles + " obstacles.<br/> Recommencez pour essayer de n'utiliser que " + minObstacles + " obstacles."; } */ 
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+         #feedback {
+            height: 1em;
+            margin-top: 0.3em;
+            margin-bottom: 0.3em;
+            text-align: center;
+            font-weight: bold; 
+            color: #CC8844;
+         }
+         #instructions {
+            margin-top: 1em;
+            margin-bottom: 2em;
+         }
+         #instructions input {
+            /* padding: 0.3em; */
+            margin-left: 1em;
+            margin-right: 1em;
+            width: 8em;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Robotin reitti</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Sininen robotti kulkee eteenpäin, jos sen edessä ei ole estettä. Jos robotti kohtaa esteen, se kääntyy kulkusuuntaansa nähden 90 astetta oikealle.
+            </p>
+            <p>
+               Lisää ruudukkoon esteitä niin, että robotti päätyy vihreällä ympyrällä merkittyyn maaliruutuun. Esteen lisäys/poisto: klikkaa ruudukon ruutua.
+            </p>
+            <div id="anim_container">
+               <div id="anim"></div>
+               <div id="feedback"></div>
+               <div id="instructions">
+                  <input type="button" id="execute" value="Aloita"/>
+                  <input type="button" id="stop" value="Palaa alkuun"/>
+                  </div>
+            </div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+			<div>
+               <p>Robotti osaa kääntyä ainoastaan menosuuntaansa nähden oikealle. Tehtävässä tulee huomata, että jos haluamme kääntyä jossain kohtaa menosuuntaan nähden vasemmalle, pitää se tehdä usean oikealle kääntymisen avulla: kolme käännöstä oikealle vastaa kääntymistä vasemmalle.
+               </p>
+             </div>
+            <div class="easy"> 
+               <p>Alla on esitetty kaksi ratkaisua. Myös muita on olemassa.</p>
+               <table>
+                  <tr>
+                  <td><img src="solution_easy_2.png" width="350" style="margin-right:2em"></td>
+                  <td><img src="solution_easy.png" width="350"></td>
+                  </tr>
+               </table>
+            </div>
+            <div class="medium"> 
+              <p>Alla on esitetty eräs ratkaisu. Myös muita on olemassa.</p>
+              <p><img src="solution_medium.png" width="350"></p>
+            </div>
+            <div class="hard"> 
+               <p>
+               Tässä versiossa robotin piti tehdä useita kolmesta oikealle kääntymisestä koostuvia vasemmalle kääntymisiä. Nämä piti suunnitella huolellisesti niin, että kunkin kääntymisen jälkeen myös seuraava käännös onnistuu. Alla on esimerkki epäonnistuneesta ensimmäisestä käännöksestä, jonka jälkeen robotilla ei ole tilaa seuraavaan oikean kautta kiertävään vasemmalle kääntymiseen.
+               </p>
+               <p><img src="solution_hard_bad.png" width="350"></p>
+			   <p>Alla on esitetty eräs mahdollinen ratkaisu. Myös muita lähes samanlaisia on olemassa.</p>
+               <p><img src="solution_hard.png" width="350"></p>
+           </div>
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            <p>Tietojenkäsittelyssä on paljon ongelmia, joissa meidän pitää analysoida jonkin tiettyjä sääntöjä noudattavan toimijan (esim. tässä robotin) käyttäytymistä tietyssä tilanteessa (tässä annetussa ruudukossa). Konkreettinen tehtävää osin muistuttava esimerkki voisi olla vaikkapa robotti-imuria ohjaavan ohjelmiston analysointi.</p>
+            <p>Tätä tehtävää voi lähestyä esimerkiksi noudattaen "taaksepäin työskentelyn" heuristiikkaa, jossa edetään lopullisesta tavoitteesta (maaliruudusta) askeleittain taaksepäin: millaisia mahdollisia edeltäviä askeleita on, joiden kautta voi päästä tämänhetkiseen tilanteeseen. Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Ratkaisemisen_taito#Heuristiikka" target="_blank">https://fi.wikipedia.org/wiki/Ratkaisemisen_taito#Heuristiikka</a>.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>
