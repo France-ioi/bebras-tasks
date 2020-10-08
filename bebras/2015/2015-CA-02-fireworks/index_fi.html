@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-CA-02</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-CA-02-fireworks/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "J.P. Pretti, jpretti@uwaterloo.ca, Canada : initial idea ; Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-NC SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+         var taskStrings = { 
+            availableWords: "Sanasto",
+            clickToAdd: "Lisää sana\nklikkaamalla sitä",
+            clickToRemove: "Poista sana\nklikkaamalla sitä",
+            otherSequence: "Jo löydetty ratkaisu",
+            yourSequence: "Valitsemasi sanat",
+            message: "Viesti",
+            words: ["Pato", "Puu", "Ranta", "Kivi", "Pesä", "Vesi", "Luola"],
+            success: "Onnittelut, ratkaisit tämän version!",
+            already: "Olet jo löytänyt tämän ratkaisun. Poista sanoja klikkaamalla niitä.",
+            tooLong: "Ratkaisusi on liian pitkä.",
+            tooShort: "Ratkaisusi on liian lyhyt.",
+            notMatch: "Ratkaisusi ei vastaa viestiä.",
+            clickLeft: "Muodosta ratkaisu klikkaamalla vasemmalla olevia sanoja.",
+            foundSoFar: function(nbCompleted) { return "Olet löytänyt " + nbCompleted + " ratkaisu" + ((nbCompleted>1) ? "a" : "n") + ". Etsi lisää."; },
+            hint: "<br/>Vihje: samaa sanaa saa käyttää monta kertaa." 
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #clear_current {
+         margin-bottom: 1em;
+      }
+      #clear_current_container {
+         text-align: center;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Värikoodit</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+            Majavat muodostavat viestinsä värikoodeista.
+            </p>
+            <p class="easy">
+            Muodosta sanaston sanoista <b>yksi</b> sanayhdistelmä, joka vastaa keskellä näytettyä viestiä.
+            </p>
+            <p class="medium hard">
+            Muodosta sanaston sanoista <b>kolme erilaista</b> sanayhdistelmää, jotka vastaavat keskellä näytettyä viestiä.
+            </p>
+
+            <div id="anim"></div>
+            <div id="clear_current_container"><input type="button" id="clear_current" value="Tyhjennä valitut sanat" /></div>
+            <img src="icon.png" style="display:none">
+         </div>
+     </div><!-- task -->
+      <div id="solution">
+         <h2>Ratkaisu</h2>
+       
+         <div class="easy">        
+            <p>Tässä on kaksi mahdollista ratkaisua. </p>
+            <table>
+            <tr>
+            <td><b>1. ratkaisu:</b></td>
+            <td><b>2. ratkaisu:</b></td>
+            </tr>
+            <tr>
+            <td><img src="solution_easy_2_fi.png" style="margin-right: 5em"></td>
+            <td><img src="solution_easy_1_fi.png"></td>
+            </tr>
+            </table>
+         </div>
+         <div class="medium">   
+            <p>Voidaan löytää nämä kolme sanayhdistelmää:</p>
+            <p><img src="solution_medium_fi.png"></p>
+         </div>
+         <div class="hard">         
+            <p>Voidaan löytää nämä kolme sanayhdistelmää:</p>
+            <p><img src="solution_hard_fi.png"></p>
+         </div>
+        
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+
+         <p>Ratkaisu voidaan löytää kokeilemalla eri vaihtoehtoja systemaattisesti. Valitsemme ensin sanoja, jotka täsmäävät viestin alun kanssa. Kun alkuun sopiva sana on löytynyt, yritämme seuraavaksi löytää edellisen sanan perään sopivia sanoja. Ellei sopivaa jatkosanaa löydy, poistamme ratkaisun edellisen sanan, ja yritämme sen tilalle jotain toista sanaa. Tätä menettelyä jatketaan, kunnes halutut ratkaisut on löydetty tai kaikki mahdolliset ratkaisuvaihtoehdot on kokeiltu.</p>
+
+         <p>Edellä kuvattu ratkaisuperiaate tunnetaan tietojenkäsittelytieteessä nimellä <b>peruuttava haku</b>. Menetelmä on suhteellisen yksinkertainen toteuttaa ja sopii varsinkin sellaisten hakuongelmien ratkaisuun, joissa haun aikana mahdollisesti kokeiltavien mahdollisten ratkaisuvaihtoehtojen lukumäärä ei ole valtavan suuri.
+         </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

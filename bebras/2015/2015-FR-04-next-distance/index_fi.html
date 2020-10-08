@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-04</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-04-next-distance/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Arthur Chargueraud",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false,
+          "tests": [
+            {
+               "answer": '{"easy":[[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false]],"medium":[[false,true,false,false,false,true,false],[true,false,false,false,true,false,true],[false,false,false,false,false,false,false],[true,false,false,false,false,false,false],[false,false,false,false,false,false,false],[true,false,false,false,false,false,true],[false,true,false,true,false,true,false]],"hard":[[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false]]}',
+               "scoreOutOf100": 75
+            },
+            {
+               "answer": '{"easy":[[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false],[false,false,false,false,false]],"medium":[[false,true,false,false,false,true,false],[true,false,false,false,true,false,true],[false,false,false,false,false,false,false],[true,false,false,false,false,false,false],[false,false,false,false,false,false,false],[true,false,false,false,false,false,true],[false,true,false,true,false,true,false]],"hard":[[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false],[false,false,false,false,false,false,false,false,false,false]]}',
+               "scoreOutOf100": 75,
+               "reload": true
+            }
+          ]
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         incorrectExplain: "Sinisellä korostettu ruutu on väärin.",
+         missingExplain: "Merkitse puuttuvat ruudut klikkaamalla.",
+         incorrect: "Et ole merkinnyt ruutuja oikein.",
+         success: "Onnittelut, ratkaisit tämän version!" };
+
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+         #grid_container {
+            margin-left: 0.5em;
+            padding-top: 0.5em;
+         }
+         #grid {
+           /* border: 1px solid black; */
+           margin: 0px auto;
+           display: inline-block;
+         }
+         #example_grid {
+            margin: 10px;
+         }
+         #example_container {
+            text-align: center;
+            border: 1px solid black;
+            margin-left: 1em;
+            margin-top: 0.5em;
+         }
+         #example_container p {
+            font-weight: bold;
+            margin: 0em;
+            margin-top: 0.5em;
+         }
+         #execute_container {
+            margin-top: 0.5em;
+            text-align: center;
+         }
+         #feedback {
+            margin-left: 0.5em;
+            margin-top: 0em;
+            color: red;
+            font-weight: bold;
+         } 
+         #layout td {
+            /* border: 1px solid black; */
+            vertical-align: top;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Etäisyydet</h1>
+
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <table id="layout"><tr>
+            <td colspan=2 style="height: 125px">
+               <p>
+                  Alla olevassa ruudukossa ne ruudut, joihin majava pääsee <strong><span class="easy">1</span><span  class="medium">4</span><span class="hard">5</span></strong> askeleella, on merkitty numerolla <strong><span class="easy">1</span><span class="medium">4</span><span class="hard">5</span></strong>.
+               </p>
+               <p>
+                  Merkitse klikkaamalla kaikki ne ruudut, joihin majava pääsee <strong><span class="easy">2</span><span class="medium">5</span><span class="hard">7</span></strong> askeleella<span class="medium hard">, <strong>eikä millään sitä pienemmällä askelmäärällä</strong></span>.
+               </p>
+            </td>
+            <td rowspan=2 style="width: 200px">
+               <div id="example_container">
+                  <p>Example :</p>
+                  <div id="example_grid"></div>
+               </div>
+            </td>
+         </tr>
+         <tr>
+            <td rowspan=2 style="text-align: center; width: 400px">
+               <div id="grid_container">
+                  <div id="grid"></div>
+               </div>
+            </td>
+            <td></td>
+         </tr>
+         <tr>
+            <td colspan=2>
+               <div id="feedback"></div>
+               <!---<div id="displayHelper_graderMessage"></div>-->
+            </td>
+         </tr>
+         </table>
+
+            <div id="execute_container">
+               <input type="button" value="Tarkista vastaus" id="execute"/>
+            </div>
+            <img src="castor_tete.png" style="display:none">
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+            <p>Tässä on ratkaisu:<br />
+            <div class="easy">
+               <img src="solution_easy.png">
+            </div>
+            <div class="medium">
+               <img src="solution_medium.png">
+               <p>Esimerkiksi punaisella korostettua ruutua ei merkitty, koska siihen pääsee lyhimmillään 3 askeleella.
+            </div>
+            <div class="hard">
+               <img src="solution_hard.png">
+            </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            <p>Tehtävä esittelee tietojenkäsittelyn sovelluksissa yleisen <b>lyhimpien polkujen</b> ongelman, jossa halutaan selvittää lyhin reitti alkupisteestä toiseen paikkaan. Esimerkiksi nykyisin yleisesti käytetyt sähköiset palvelut, jotka osaavat ehdottaa käyttäjälle lyhimmän ajoreitin tai bussireitin kahden osoitteen välillä, perustuvat tämäntapaisen ongelman ratkaisuun. Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Polunetsint%C3%A4" target="_blank">https://fi.wikipedia.org/wiki/Polunetsintä</a>.</p>
+            <p>Tehtävän yksi tyypillinen ratkaisumenetelmä pohjautuu sellaiseen <b>leveyssuuntaiseen hakuun</b>, jossa etäisyydet alkupisteestä muihin pisteisiin määritetään etäisyyksien suhteen kasvavassa järjestyksessä. Esimerkiksi tässä tehtävässä majavan etäisyys (askeleiden määrä) kaikkiin muihin ruutuihin voidaan määrittää merkitsemällä ensin alkupisteen välittömiin naapureihin arvot <b>1</b>, sen jälkeen kaikkiin arvon 1 saaneiden ruutujen välittömiin tyhjiin naapureihin (joilla ei ole vielä arvoa) arvot <b>2</b>, sen jälkeen kaikkiin arvon 2 saaneiden ruutujen välittömiin tyhjiin naapureihin arvot <b>3</b>, jne. Kun ruudukon kaikki ruudut ovat saaneet arvot, on meillä tiedossa kaikki lyhimmät polut majavan alkuruudusta muihin ruutuihin. Polun askeleet voidaan selvittää peruuttamalla kohderuudusta askeleittain kohti majavan alkuruutua: kullakin askeleella voidaan peruuttaa nykyruudusta sellaiseen naapuriin, jonka arvo on 1 pienempi kuin nykyruudun arvo. Tämä peruutusketju päättyy majavan alkuruutuun. Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Dijkstran_algoritmi" target="_blank">https://fi.wikipedia.org/wiki/Dijkstran_algoritmi</a>.
+            </p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>

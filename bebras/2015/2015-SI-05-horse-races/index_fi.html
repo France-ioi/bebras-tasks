@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-SI-05</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelButton-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelButton-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-SI-05-horse-race/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Janez Demšar, janez.demsar@fri.uni-lj.si, Slovenia; adaptation from  http://math.stackexchange.com/questions/744473/horse-race-math-question; Arthur Chargueraud ; Mathias Hiron",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-NC-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": true
+      };
+      </script>
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+      var taskStrings = {
+         podium: "Palkintopalli",
+         pastRaces: "Edellisten\n kilpailujen tulokset:",
+         arrival: ["1.", "2.", "3."],
+         launch: "Aloita kilpailu",
+         maxRacesReached: "Järjestit # kilpailua, joka on suurin sallittu määrä.\nAsettele hevoset palkintopallilla tai aloita uudelleen alusta.",
+         success: "Onnittelut, ratkaisit tämän version!",
+         successPartial: function(steps, stepsOptimal) { return "Löysit ratkaisun " + steps + " kilpailulla.<br> Yritä selvittää nopeimmat 3 hevosta " + stepsOptimal + " kilpailulla."; },
+         incorrect: "Ratkaisusi on väärin.",
+         incorrectCannotBeSure: "Järjestämiesi kilpailujen perusteella ei voi vielä tietää oikeaa ratkaisua!",
+         incomplete: "Palkintopallilta puuttuu hevonen.",
+
+         prepareRaceText: function(raceSize) {
+            return "Raahaa oikealle " + raceSize + " ruutuun\nhevoset ja järjestä kilpailu.";
+         }
+      };
+
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <img src="horse.png" style="display:none">
+         <h1>Hevoskilpailut</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               <span class="easy">Selvitä mikä on nopein hevonen</span>
+               <span class="medium">Selvitä mitkä ovat <b>2</b> nopeinta hevosta</span>
+               <span class="hard">Selvitä mitkä ovat <b>3</b> nopeinta hevosta</span>
+               järjestämällä mahdollisimman pieni määrä 3 hevosen välisiä kilpailuja. Raahaa lopuksi vastauksesi palkintopallille.
+            </p>
+            <p>Kilpailuun osallistuu aina 3 hevosta. Hevosten nopeudet eivät muutu kilpailujen välillä.</p>
+
+            <p>Järjestä kilpailu valitsemalla 3 hevosta ja klikkaamalla "Aloita kilpailu"-nappia.</p> 
+
+            <p><b>Huomaa, että aiemmin on jo järjestetty 3 kilpailua</b>.</p>
+ 
+            <div id="anim"></div>
+            <img src="icon.png" style="display:none">
+            
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Ratkaisu</h2>
+    
+            <div>
+               <div> <img style="float:right" src="solution_courses_0_fi.png" width="150">
+               <p>Oheisessa kuvassa on esitetty esimerkkinä  aiemmin pidettyjen 3 kilpailun tulokset (ne voivat poiketa tehtävässä sinulle esitetyistä, mutta ratkaisuperiaate on sama!). Kuvaan on lisätty nuolet merkitsemään hevosten nopeusjärjestystä: nuolet kulkevat nopeammista hitaampiin hevosiin.</p>
+               <p>Kuvaan ei ole erikseen piirretty esimerkiksi nuolta B &#8594; C, mutta niiden järjestys voidaan päätellä nuoliketjusta B &#8594; A &#8594; C.</p>
+               </div>
+               <p><strong>Ensimmäinen kilpailu: selvitetään nopein hevonen</strong></p>
+               <p>Nopeimman hevosen on oltava jokin aiempien kolmen kilpailun voittajista eli oheisen kuvan perusteella hevosista B, E ja G. Järjestämme näiden hevosten välisen kilpailun ja asetamme kilpailun voittajan palkintopallin sijalle 1: kyseessä on kaikkein nopein hevonen.</p>
+               <table><tr><td><img src="solution_course_1_fi.png" width="150" style="margin-right:4em"></td>
+                     <td><span class="easy"><img src="easy_podium_1_fi.png" width="150"></span>
+                         <span class="medium"><img src="medium_podium_1_fi.png" width="150"></span>
+                         <span class="hard"><img src="hard_podium_1_fi.png" width="150"></span></td>
+               </tr></table>
+            </div>
+            <div class="medium hard">
+            <img style="float:right" src="medium_graph_fi.png" width="200">
+               <p><strong>Toinen kilpailu: selvitetään toiseksi nopein hevonen</strong></p>
+               <p>Edellä järjestämämme kilpailun tuoma lisätieto on kuvattu ohessa punaisilla nuolilla E &#8594; B ja B &#8594; G.</p>
+               <p>Toiseksi nopeimman hevosen on tässä tilanteessa oltava toinen sinisellä korostetuista hevosista B ja F, jotka ovat saavuttaneet toisen sijan kilpaillessaan nopeinta hevosta vastaan. Järjestämme siis kilpailun, johon nämä kaksi hevosta osallistuvat. Kolmas hevonen voidaan valita vapaasti. Kilpailun voittanut hevonen on toiseksi nopein ja voidaan asettaa palkintopallin sijalle 2.</p>
+               <table><tr><td><img src="solution_course_2_fi.png" width="150" style="margin-right:4em"></td>
+                  <td><span class="medium"><img src="medium_podium_2_fi.png" width="150"></span>
+                        <span class="hard"><img src="hard_podium_2_fi.png" width="150"></span></td>
+               </tr></table>
+            </div>
+            <div class=" hard">
+            <img style="float:right" src="hard_graph_1_fi.png" width="200">
+               <p><strong>Kolmas kilpailu: selvitetään kolmanneksi nopein hevonen</strong> </p>
+               <p>Edellä järjestämämme toinen kilpailu tuotti taas lisää tietoa, joka on kuvattu ohessa: mukana on nyt punainen nuoli F &#8594; B.</p>
+               <p>Kolmanneksi nopeimman hevosen on oltava toinen sinisellä korostetuista hevosista B ja D, jotka ovat tulleet toistaiseksi järjestetyissä kilpailuissa toiseksi nopeimman hevosen jälkeiselle sijalle. Järjestämme siis kilpailun, johon nämä kaksi hevosta B ja D osallistuvat. Kolmas hevonen voidaan taas valita vapaasti. Kilpailun voittanut hevonen on kolmanneksi nopein ja voidaan asettaa palkintopallin sijalle 3.</p>
+                  <table><tr><td><img src="solution_course_3_fi.png" width="150" style="margin-right:4em"></td>
+                     <td><img src="hard_podium_3_fi.png" width="150"></span></td>
+                  </tr></table>
+
+               <p><strong>Vaihtoehtoisia skenaarioita kolmanteen kilpailuun</strong> </p>
+               <img style="float:right" src="hard_graph_2_fi.png" width="200">
+               <p>Tutkitaan seuraavaksi tilannetta, jossa toisen järjestämämme kilpailun tulos olisikin ollut B &#8594; F &#8594; H eikä F &#8594; B &#8594; H. Tällöin B olisi tullut palkintopallin sijalle 2, ja kolmas kilpailu olisi järjestetty aiemmissa kilpailuissa välittömästi B:n jälkeisen sijan saavuttaneiden hevosten A, G ja F kesken. Oheinen kuva havainnollistaa tätä tilannetta.</p>
+               <p>Käsitellään viimeisenä vielä tilannetta, jossa olisimmekin valinneet toiseen kilpailuun hevoset B, F ja D eikä B, F ja H kuten edellä oli tehty. Tällöin kilpailun tulos olisi ollut F &#8594; B &#8594; D ja olisimme suoraan tienneet hevosen B olevan kolmanneksi nopein tarvitsematta järjestää kolmatta kilpailua.</p>
+            </div>
+
+           <h2>Tämä on tietojenkäsittelyä!</h2>
+               <p>
+                  Jonkin alkiojoukon (tässä hevosten) alkioiden välisen järjestyksen määrittäminen, ns. <b>lajittelu</b>, on yksi perustavanlaatuisimpia ja yleisimpiä tietojenkäsittelyn ongelmia. Ongelmasta on monia variantteja. Esimerkiksi joissain tapauksissa (kuten tässä tehtävässä) riittää määrittää vain osa järjestyksestä (tällöin voidaan puhua osittaisesta lajittelusta tai yksittäisten alkioiden kohdalla järjestyksessä k:nnen alkion hausta).
+               </p>
+               <p>
+                  Eräs tietojenkäsittelytieteen keskeinen teoreettinen tutkimustulos koskee sitä, mikä on pienin mahdollinen määrä alkioiden välisiä vertailuita, joka riittää minkä tahansa alkiojoukon lajitteluun. Tehtävän tavoite muistuttaa tätä asetelmaa, joskin tehtävän hevoskilpailut määrittivät kerralla kolmen alkion (hevosen) välisen järjestyksen, kun tavallisesti yksi alkioiden välinen vertailu vertaa kahta alkiota toisiinsa. Yksi kolmen hevosen A, B ja C välinen kilpailu tuotti saman informaation kuin kolme erillistä parien (A, B), (A, C) ja (B, C) välistä vertailua.
+               </p>
+               <p>
+                  Tehtävän esimerkkiratkaisuissa hyödynnettiin <b>suunnattua graafia</b> esittämään hevosten välisestä nopeusjärjestyksestä toistaiseksi saatua tietoa. Graafit ovat yksi tietojenkäsittelytieteen tärkeimmistä apuvälineistä ja koostuvat solmuista (tässä hevosista) sekä niiden välisistä yhteyksistä (kaarista; tässä tehtävässä nuolista). Silloin kun tämän tapaisessa graafissa tarkastellaan solmujen (tässä hevosten) järjestystä, puhutaan tietojenkäsittelytieteessä usein <b>topologisesta lajittelusta</b>.
+               </p>
+               <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Lajittelualgoritmi" target="_blank">https://fi.wikipedia.org/wiki/Lajittelualgoritmi</a>, <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a> ja <a href="https://fi.wikipedia.org/wiki/Topologinen_lajittelu" target="_blank">https://fi.wikipedia.org/wiki/Topologinen_lajittelu</a>.</p>
+	  </div> <!-- task-solution -->
+   </body>
+</html>

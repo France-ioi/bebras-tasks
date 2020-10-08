@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>2015-FR-01-copy pattern</title>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript">
+         var stringsLanguage = 'fi';
+         var taskStrings = {
+           instructions: [
+                  "1 askel oikealle",
+                  "1 askel vasemmalle",
+                  "1 askel ylös",
+                  "1 askel alas",
+                  "N askelta oikealle",
+                  "N askelta vasemmalle",
+                  "N askelta ylös",
+                  "N askelta alas",
+                  "kasvata N = N+1"
+                  ],
+            resume: "Jatka",
+            pause: "Tauko",
+            success: "Onnittelut, ratkaisit tämän version!",
+            missingInstr: "Lisää komentoja ohjelmaasi.",
+            incorrect: "Kuvat eivät täsmää.<br>Muuta ohjelmaasi.",
+            noInstruction: "Ei ole yhtään komentoa.",
+            completed: "Suoritus päättyi.",
+            repetitionNumber: "Toisto n°",
+            exitGrid: "Menit ruudukon ulkopuolelle."
+         };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-01-track/",
+          "language": "fi",
+          "version": "fi.01",
+          "authors": "Mathias Hiron",
+          "translators": "Heikki Hyyrö",
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "acceptedAnswers": [""],
+          "fullFeedback": false
+      };
+      </script>
+      <style>
+         #drawing {
+            margin-left: 0.5em;
+         }
+         #columns-wrapper {
+            margin-top: 1em;
+         }
+         .columns td {
+            vertical-align: top;
+            padding-right: 1em;
+         }
+         .column_head {
+            font-weight: bold;
+         }
+         #message {
+            text-align: center;
+            font-weight: bold;
+            color: blue;
+            padding: 0.5em;
+            height: 1em;
+         }
+         .buttons input {
+            margin-bottom: 5px;
+         }
+         #textSolution li {
+            margin-top: 0.2em;
+         }
+         .valigntop td {
+            vertical-align: top;
+         }
+         .examples, .objectif  {
+            border-collapse: collapse;
+            text-align: center;
+            border: 1px solid black;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+         }
+         .objectif {
+            border: 1px solid black;   
+         }
+         .examples td, .objectif td {
+            padding: 0.5em;
+         }
+         .examples td td {
+            border: 1px solid #D0D0D0;
+            padding: 0.5em;
+         }
+         .exampleButton {
+            margin: 2px;
+         }
+         .resetButton {
+            display:none;
+         }
+         #variableInfo {
+            text-align: center;
+            font-weight: bold;
+            color: #FF7700;
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+         }
+         #top-spacing {
+            margin-top: 1em;
+         }
+         #simuButtons input {
+            width: 100px;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Kuvan jäljentäminen</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+            Muodosta komennoista koostuva ohjelma, joka piirtää tavoitekuvan. <strong> Muodostamasi ohjelman komennot suoritetaan <span class = "nbLoops"> </span> kertaa peräkkäin. </strong>
+            </p>
+            <div id="top-spacing"></div>
+            <div style="text-align:center">
+               <table class="valigntop">
+                  <tr>
+                     <td>
+                        <table class='examples valigntop'>
+                           <tr>
+                              <td style="text-align:center"><b>Esimerkkiohjelma</b></td>
+                           </tr>
+                           <tr>
+                              <td style="text-align:center">
+                                 <table style="margin:auto" id="sample0Text" class="example-text"></table>
+                                 <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="Suorita esimerkki"></input>
+                              </td>
+                           </tr>
+                        </table>
+                     </td>
+                     <td>
+                        <table class='objectif valigntop'>
+                           <tr>
+                              <td style="text-align:center"><b>Tavoitekuva</b></td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div id="target"></div>
+                              </td>
+                           </tr>
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+             
+            <div id="columns-wrapper">
+               <table class="columns" style="clear: both">
+               <tr>
+                  <td style="width:170px">
+                     <div class="column_head" style="text-align:center">Komentovalikoima<br />(raahaa komentoja tästä)</div>
+                  </td>
+                  <td style="width:250px">
+                     <div class="column_head" style="text-align:center">Ohjelma<br />(raahaa komentoja tänne)</div>
+                  </td>
+                  <td>
+                     <div class="column_head" style="text-align:center">Ohjelman suorituksen tulos<br/> (Ohjelma toistetaan <span class="nbLoops"></span> kertaa)</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <div id="program" class="touch"></div>
+                  </td>
+                  <td rowspan="2">
+                     <div id="simuButtons" class="buttons" style="text-align:center;padding:10px">
+                        <input type="button" id="pause" value="Tauko" onclick="task.pause()"/>
+                        &nbsp;&nbsp;&nbsp;
+                        <input type="button" id="stop" value="Lopeta" onclick="task.stop()" />
+                     </div>
+                     <div id="variableInfo" class="medium hard">N on nyt: <span id="valueS">1</span>.</div>
+                     <div><span id="message"></span></div>
+                     <div id="result"></div>            
+                     
+                  </td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td>
+                     <div class="buttons" style="text-align: center">
+                        <input id="tryOrReset" type="button" onclick="task.trySequence()" value="Suorita ohjelma">
+                     </div>
+                  </td>
+               </tr>
+               </table>
+            </div>
+
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+         <h2>Ratkaisu</h2>
+         <div class="easy">
+            <p>Ohjelma toistetaan 6 kertaa, joten aloitamme tutkimalla tavoitekuvasta, millainen osuus siinä toistuu 6 kertaa.</p>
+            <p style="text-align:center"><img src="solution_easy_pattern_1.png" width="500"></p>
+            <p>Seuraavaksi tutkimme, millaisista askeleistä tämä osuus koostuu.</p>
+            <p style="text-align:center"><img style="vertical-align:top" src="solution_easy_pattern_2.png" width="150"></p>
+            <p>Lopuksi määritämme edellä havaitut askeleet suorittavan ohjelman, ja ratkaisu on valmis.</p>
+            <p style="text-align:center"><img style="vertical-align:top" src="solution_easy_fi.png" width="150"></p>
+         </div>
+         <div class="medium">
+            <p>Ohjelma toistetaan 5 kertaa, joten aloitamme tutkimalla, millainen hahmo tavoitekuviossa toistuu 5 kertaa. Voimme löytää alla kuvatunlaisen hahmon: punaiset nuolet kuvaavat hahmon ensimmäisen esiintymän ja siniset toisen.</p>
+            <p style="text-align:center"><img src="solution_medium_pattern.png" width="200"></p>
+            <p>Seuraavaksi analysoimme hahmon rakennetta.</p>
+            <ul>
+               <li>Ensimmäinen toisto (punaiset nuolet): 1 askel oikealle, 2 askelta alas, 3 askelta vasemmalle ja 4 askelta ylös.</li>
+               <li>Toinen toisto (siniset nuolet): 5 askelta oikealle, 6 askelta alas, 7 askelta vasemmalle ja 8 askelta ylös.</li>
+               <li>Seuraavaksi kolmannessa toistossa olisi: 9 askelta oikealle, 10 askelta alas, 11 askelta vasemmalle ja 12 askelta ylös.</li>
+            </ul>
+            <p>Edellä huomataan säännönmukaisuus, että kukin toisto liikkuu oikealle, alas, vasemmalle ja ylös, ja askeleiden määrä kasvaa aina yhdellä. Tällainen askeleiden määrän kasvatus voidaan toteuttaa ohjelmassa arvon N avulla. Ratkaisu näyttää seuraavalta:</p>
+            <p style="text-align:center"><img src="solution_medium_fi.png" width="150" style="vertical-align:text-top"></p>
+         </div>
+         <div class="hard">
+            <p>Tähän versioon on monta ratkaisutapaa. Alla on esitetty kolme erilaista ratkaisuvaihtoehtoa.</p>
+            <p><b>1. ratkaisu</b></p>
+            <p><img src="solution_hard_fi.png" width="150" style="margin:0em 2em 0em 2em">
+               <img src="solution_hard_pattern.png" ></p>
+
+            <p><b>2. ratkaisu</b></p>
+            <p><img src="solution_hard_2_fi.png" width="150" style="margin:0em 2em 0em 2em">
+               <img src="solution_hard_pattern_2.png" ></p>
+
+            <p><b>3. ratkaisu</b></p>
+            <p><img src="solution_hard_3_fi.png" width="150" style="margin:0em 2em 0em 2em">
+               <img src="solution_hard_pattern_3.png" ></p>
+            <p>Huomaa, että 3. ratkaisu tarvitsee ainoastaan 6 ohjelman toistokertaa tavoitekuvion piirtämiseksi.</p>
+         </div>
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>
+         Tehtävä käsittelee tietojenkäsittelyn perustavanlaatuista työkalua: halutun toimenpiteen suorittavan ohjelman määritystä (ja siten yleensäkin ohjelmointia). Tietokoneohjelmat koostuu joukosta yksinkertaisia alkeisoperaatioita (tässä kulkemisesta tai N:n kasvattamisesta), jotka tietokone suorittaa.
+         </p>
+         <p>Tehtävä havainnollisti esimerkiksi <span class="easy">seuraavaa ohjelmoinnin peruspilaria</span><span class="medium hard">seuraavia ohjelmoinnin peruspilareita</span>:</p>
+         <ul>
+            <li><b>Toistoa</b>. Tietokoneohjelmissa käytetään varsin usein toistorakenteita (ns. silmukoita), jotka toistavat määritettyjä komentoja useita kertoja peräkkäin. Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Toistorakenne" target="_blank">https://fi.wikipedia.org/wiki/Toistorakenne</a>.</li>
+            <li class="medium hard">
+            <b>Muuttujia</b>. Ohjelmassa oli mahdollista hyödyntää sekä muuttaa arvoa N. Tietokoneohjelmissa käsiteltäviä arvoja ylläpidetään tyypillisesti tämäntapaisissa muuttujissa, joita ohjelman suorittamat komennot voivat käyttää tai muuttaa. Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Muuttuja_(ohjelmointi)" target="_blank">https://fi.wikipedia.org/wiki/Muuttuja_(ohjelmointi)</a>.
+            </li>
+         </ul>
+      </div> <!-- task-solution -->
+   </body>
+</html>
