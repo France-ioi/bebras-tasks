@@ -30,7 +30,7 @@
           "language": "fi",
           "version": "fi.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, France-ioi",
-          "translators": "Eslam Wageed",
+          "translators": "Timo Poranen, Heikki Hyyrö",
           "license": "CC BY-SA 3.0",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -87,7 +87,7 @@
                 "price": 55
                 },
             priceOf: function(cost) { return cost + " &euro;"; },
-            success: "Onnittelut, teit sen!",
+            success: "Onnittelut, ratkaisit tämän version!",
             wrong: "Sinun listasi on erilainen kuin toivelista. Yritä uudelleen.",
             empty: "Tyhjä (mikään ei täytä ehtojasi)." 
          };
@@ -449,47 +449,45 @@
       </div><!-- task -->
       <div id="solution">
 
-         <h2>Solution</h2>
+         <h2>Ratkaisu</h2>
             <div class="easy">
-               <p>Dans la liste souhaitée, on a uniquement des légumes verts. On les sélectionne ainsi :</p>
+               <p>Toivelista koostuu parsakaalista ja kurkusta, ja ne molemmat ovat vihreitä vihanneksia. Toisaalta nämä kaksi ovat ainoat aluksi omassa listassamme olevat vihreät vihannekset. Toivelista voidaan siten muodostaa seuraavilla valinnoilla:</p>
                <ol>
-               <li><p class="solutionFilter">Le type est Légume.</p></li>
-               <li><p class="solutionFilter">La couleur est Vert.</p></li>
+               <li><p class="solutionFilter">Valitse tyyppi: vihannes</p></li>
+               <li><p class="solutionFilter">Valitse väri: vihreä</p></li>
                </ol>
             </div>   
             <div class="medium">
-               <p>On peut construire la liste souhaitée étape par étape :</p>
+               <p>Toivelista saadaan luotua askeleittain:</p>
                <ol>
-               <li>On veut sélectionner des fruits et une fleur. On va donc éliminer le troisième type d'éléments :
-               <p class="solutionFilter">Le type n'est pas Légume.</p></li>
-               <li>On veut sélectionner des éléments jaune et rouge. On peut donc éliminer les éléments oranges et verts. Comme il n'y a pas d'éléments verts restant dans la liste, on va seulement éliminer les éléments oranges :
-               <p class="solutionFilter">La couleur n'est pas Orange.</p></li>
-               <li>Il reste alors à éliminer la Tulipe, ce que l'on peut faire en demandant à limiter le prix, par exemple :
-               <p class="solutionFilter">Le prix est au plus 6€.</p></li>
-               <li>Enfin, on met les éléments dans le bon ordre :
-               <p class="solutionFilter">Trier selon le nom, par ordre alphabétique.</p></li>
+               <li>Toivelistassa on kahta eri tyyppiä: hedelmä ja kukka. Omassa listassa on alunperin kolmea eri tyyppiä: edellisten lisäksi vihanneksia. Karsitaan vihannekset pois valitsemalla:
+               <p class="solutionFilter">Tyyppi: ei ole vihannes</p></li>
+               <li>Toivelistassa esiintyy keltainen ja punainen väri. Omassa listassa on alunperin näiden lisäksi myös vihreää ja oranssia, mutta toisaalta edellä tehty tyyppivalinta tuli jo karsineeksi pois vihreät vaihtoehdot. Karsitaan tässä pois lisäksi oranssi väri valinnalla:
+               <p class="solutionFilter">Väri: ei ole oranssi</p></li>
+               <li>Edellisten valintojen jälkeen ainoa ylimääräinen omassa listassa oleva vaihtoehto on tulppaani. Sen voi karsia pois esimerkiksi hinnan perusteella:
+               <p class="solutionFilter">Hinta: on enintään 6 €</p></li>
+               <li>Nyt omassa listassa on samat vaihtoehdot kuin toivelistassa. Enää pitää järjestää ne (toivelista on nimikkeiden mukaisessa aakkosjärjestyksessä):
+               <p class="solutionFilter">Järjestys: nimikkeen mukainen aakkosjärjestys</p></li>
                </ol>
             </div>
             <div class="hard">
-               <p>On peut construire la liste souhaitée étape par étape :</p>
+               <p>Toivelista saadaan luotua askeleittain:</p>
                <ol>
-               <li>On veut sélectionner des légumes et des fruits, donc :
-               <p class="solutionFilter">"Le type est Fruit" ou "Le type est Légume".</p></li>
-               <li>On veut sélectionner des éléments rouge, vert ou noir. On peut donc éliminer le jaune et l'orange :
-               <p class="solutionFilter">"La couleur n'est pas jaune" et "La couleur n'est pas orange".</p></li>
-               <li>Il reste alors à éliminer l'aubergine (6€) et le concombre (5€), ce que l'on peut faire par exemple en demandant à ce que le prix soit inférieur à 4€ ou bien supérieur à 7€ :
-               <p class="solutionFilter">"Le prix est au plus 4€" ou "Le prix est au moins 7€".</p></li>
-               <li>Enfin, on met les éléments dans le bon ordre :
-               <p class="solutionFilter">Trier selon le prix, du plus petit au plus grand.</p></li>
+               <li>Toivelistassa on hedelmiä ja vihanneksia, joten valitaan:
+               <p class="solutionFilter">Tyyppi: on hedelmä tai Tyyppi: on vihannes</p></li>
+               <li>Toivelistan värit ovat punainen, vihreä ja musta, joten karsitaan muut värit eli oranssi ja keltainen pois:
+               <p class="solutionFilter">Väri: ei ole oranssi ja Väri: ei ole keltainen</p></li>
+               <li>Nyt omassa listassa on ylimääräisinä enää 6 € maksava munakoiso ja 5 € maksava kurkku. Toivelistan hinnoista huomataan, että kukin maksaa joko korkeintaan 4 € tai vähintään 9 €. Lisätään siis vielä tällainen valinta:
+               <p class="solutionFilter">Hinta: on enintään 4 € tai Hinta: on vähintään 9 €</p></li>
+               <li>Nyt omassa listassa on samat vaihtoehdot kuin toivelistassa, mutta järjestys pitää vielä määrittää samaksi kuin toivelistassa:
+               <p class="solutionFilter">Järjestys: hinnan mukainen kasvava järjestys</p></li>
                </ol>
-               <p>D'autres solutions étaient possibles.</p>
+               <p>Tämä oli eräs ratkaisutapa. On olemassa myös muita tapoja.</p>
             </div>
-         <h2>C'est de l'informatique !</h2>
-
-            <p>Ce sujet illustre la manière dont on effectue une <strong>requête</strong> pour sélectionner certains éléments parmi une <strong>base de données</strong> contenant les descriptions d'un ensemble d'éléments.</p>
-
-            <p>Des bases de données, on en trouve partout aujourd'hui, et certaines contiennent des centaines de millions d'éléments. Par exemple, l'ensemble de toutes les réponses des participants au concours Castor est stocké dans une base de données. Cette base permet non seulement d'afficher les résultats pour un participant particulier, mais également de calculer le score de chaque participant, le nombre de participants de chaque niveau dans chaque établissement, ou dans chaque académie, ou encore de faire des statistiques sur les sujets qui ont été le mieux réussis, etc.</p>
-            
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+            <p>Tehtävä havainnollistaa tietojenkäsittelyssä käytettyjä <strong>tietokantakyselyitä</strong>. Esimerkiksi erittäin laajasti käytetyt <b>relaatiotietokannat</b> tyypillisesti tallettavat tietoa tehtävässä esitetyn "oman listan" tapaisiin taulukoihin, joiden rivit sisältävät yksittäisten alkioiden erilaisia ominaisuuksia. Tietokannoista voidaan tietokantakyselyiden avulla hakea kyselyssä määritetyt ominaisuudet omaavat alkiot, samaan tapaan kuin tehtävässä voitiin karsia omasta listasta jäljelle vain määrittämämme ehdot täyttävät rivit.</p>
+            <p>Tietokantoihin ja tietokantakyselyihin törmää (ainakin välillisesti) päivittäisessä elämässä. Yksi esimerkki varsin puhtaasta tietokannan käytöstä on vaikkapa monen kirjaston verkkosivuillaan tarjoama mahdollisuus tehdä hakuja kirjaston kokoelmista. Kokoelman tiedot on tallennettu tietokantaan, ja hakusivulla voi kohdistaa tietokantaan kyselyitä, joihin voi yleensä määrittää samantapaisia ehtoja kuin tässä tehtävässäkin (esim. onko haettava tyyppi kirja, CD-levy, tms.). Valtaosa verkossa toimivista kaupoista tarjoaa verkkosivuillaan mahdollisuuden hakea tietynlaiset ehdot täyttäviä tuotteita kaupan valikoimasta; tässäkin on kyse tietokantakyselystä, joka kohdistuu verkkokaupan tuotteiden tietoja ylläpitävään tietokantaan. Ja jos kirjaudut verkossa jollekin sivustolle (vaikkapa pankkiin tai sosiaalisen median palveluun), ylläpitää sivusto todennäköisesti käyttäjätietojasi (käyttäjätunnus, nimi, sähköpostiosoite tms.) tietokannassa. Vastaavia esimerkkejä löytyy todella paljon lisääkin; tietokantoja on lähes kaikkialla!</p>
+            <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Tietokanta" target="_blank">https://fi.wikipedia.org/wiki/Tietokanta</a> (ja erityisesti alakohta <a href="https://fi.wikipedia.org/wiki/Tietokanta#Relaatiotietokannat" target="_blank">https://fi.wikipedia.org/wiki/Tietokanta#Relaatiotietokannat</a>).</p>
 
 	  </div> <!-- task-solution -->
    </body>

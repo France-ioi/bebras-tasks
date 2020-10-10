@@ -48,13 +48,13 @@
             collision: "Robotti on törmännyt seinään.",
             outside: "Robotti on ruudukon ulkopuolella.",
             noGoal: "Robotti ei ole päässyt vihreälle alueelle.",
-            success: "Onnittelut, teit sen!",
+            success: "Onnittelut, ratkaisit tämän version!",
             noInstructions: "Raahaa nuolet alla oleviin valkoisiin ruutuihin.",
             zoneTooEarly: "Robotti ylitti sinisen viivan ennen käskyjonon viimeisen käskyn suorittamista.",
             zoneNoExit: "Robotti ei ylittänyt viimeisellä käskyllä sinistä viivaa.",
 
-            executeButtonPlay: "Kokeile",
-            executeButtonPause: "Pysäytä",
+            executeButtonPlay: "Suorita käskyt",
+            executeButtonPause: "Lopeta",
             executeButtonContinue: "Jatka",
 
             loopText: function(loopTimes) {
@@ -119,8 +119,8 @@
                </div>
                <div id="anim2"></div>
                  <div id="control">
-                  <input type="button" id="execute" value="Play"/>
-                  <input type="button" id="stop" value="Stop"/>
+                  <input type="button" id="execute" value="Suorita ohjelma"/>
+                  <input type="button" id="stop" value="Palauta robotti"/>
                 </div>
             </div>
             <img src="icon.png" style="display:none">
@@ -128,31 +128,44 @@
       </div><!-- task -->
       <div id="solution">
 
-         <h2>Solution</h2>
+         <h2>Ratkaisu</h2>
             <div class="easy">
-               <p><img src="solution_easy.png"></p>
+				<p>Alla on kuvattu koko polku niin, että komentojen kunkin eri toistokerran askeleet on esitetty eri väreillä:</p>
+               <p><img src="solution_easy_fi.png"></p>
+               <p>Kunkin toistokerran sisällä tehtävät askeleet vastaavat seuraavia nuolia:</p>
                <p><img src="sol_easy_arrows.png"></p>
             </div>   
             <div class="medium">
-               <p><img src="solution_medium.png"></p>
-               <p><img src="sol_medium_0.png"></p> 
-               <!--<p><img src="sol_medium_path.png"></p>-->
-               <p><img src="sol_medium_1.png"></p> 
-               <p><img src="sol_medium_2.png"></p> 
-               <p><img src="sol_medium_3.png"></p> 
+			   <p>Robotti suorittaa kussakin neljässä osassa täsmälleen samanlaiset askeleet. Yritetään etsiä sellainen ratkaisu, jossa robotti siirtyy osasta seuraavaan aina ylimmällä rivillä: tällöin robotti kulkee jokaisessa osassa keskenään täysin vastaavat ruudut. Mahdollinen esteeseen törmääminen voidaan tällöin tutkia asettamalla kaikkien neljän osan esteet yhteen osaan. Tämä on esitettu alla vaiheittain. Lisätään ensimmäiseen osaan toisen osan esteet (mustina neliöinä).</p>
+               <p><img src="sol_medium_1.png"></p>
+               <p>Seuraavaksi lisätään myös kolmannen osan esteet.</p>
+               <p><img src="sol_medium_2.png"></p>
+               <p>Ja lopuksi neljännen osan esteet.</p>
+               <p><img src="sol_medium_3.png"></p>
+               <p>Nyt kaikkien osien esteet on huomioitu ja voimme etsiä polun, joka kulkee osan vasemmasta yläkulmasta osan oikeaan yläkulmaan törmäämättä mihinkään esteeseen. Alla on esitetty tällaisista osapoluista koostuva kokonainen ratkaisu niin, että kunkin osan sisällä kuljetut polut on esitetty eri väreillä:</p>
+			   <p><img src="solution_medium_fi.png"></p>
+			   <p>Kunkin toistokerran sisällä tehtävät askeleet vastaavat seuraavia nuolia:</p>
+               <p><img src="sol_medium_0.png"></p>
             </div>
             <div class="hard">
-               <p><img src="solution_hard.png"></p>
-               <p><img src="sol_hard_arrows.png"></p>>
-               <p><img src="sol_hard_path_1.png"></p> 
-               <p><img src="sol_hard_path_2.png"></p> 
-               <p><img src="sol_hard_path_3.png"></p> 
+				<p>Robotti suorittaa kussakin neljässä osassa täsmälleen samanlaiset askeleet. Tässä versiossa emme voi löytää ratkaisua, jossa robotti siirtyisi osasta seuraavaan aina oikeasta ylänurkasta: toisen osan vasemmassa yläkulmassa on este. Tästä seuraa, että robotti siirtyy osasta seuraavaan alemmalla rivillä kuin mistä se tuli osaan. Koska ruudukon sisusta on 6 riviä korkea, on ainoa vaihtoehto siirtyä yksi rivi alemmas (muuten robotti törmäisi ruudukon alalaitaan). Alla olevaan kuvaan on merkitty kunkin osan alku- ja loppuruudut mustilla neliöillä.</p>
+               <p><img src="sol_hard_path_1.png"></p>
+               <p>Lähdetään nyt etsimään polkua, joka yhdistää kunkin osan alku- ja loppuruudut törmäämättä esteeseen minkään osan sisällä. Toisessa osassa on pakko kiertää alakautta (muuten vastaava polku törmäisi ensimmäisessä osassa ruudun ylälaitaan). Tätä vastaavat ruudut on merkitty toiseen osaan mustilla neliöillä.</p>
+               <p><img src="sol_hard_path_2.png"></p>
+               <p>Yllä toiseen osaan osittain hahmoteltu alakautta kiertäminen ei voi edetä yhtään askelta alemmas, koska muuten vastaava polku törmäisi neljännessä osassa ruudukon alalaitaan. Alla on täydennetty toiseen osaan siitä puuttunut yksi ruutu, ja tämän toisessa osassa valmiiksi saadun osapolun askeleet on lisäksi merkitty muihinkin osiin. Ratkaisu on löydetty.</p>
+               <p><img src="sol_hard_path_3.png"></p>
+               <p>Alla on kuvattu koko polku nuolilla niin, että komentojen kunkin eri toistokerran askeleet on esitetty eri väreillä:</p>
+               <p><img src="solution_hard_fi.png"></p>
+               <p>Kunkin toistokerran sisällä tehtävät askeleet vastaavat seuraavia nuolia:</p>
+               <p><img src="sol_hard_arrows.png"></p>
             </div>
          
          
          <h2>Tämä on tietojenkäsittelyä!</h2>
 
-            <p>Tässä tehtävässä tutustuttiin ohjelmointiin muodostamalla robotille käskyjono, jota sitten toistettiin useita kertoja.</p>
+            <p>Tässä tehtävässä tutustuttiin ohjelmointiin muodostamalla robotille käskyjono, jonka toistuvan suorittamisen piti tuottaa haluttu lopputulos. Haastavampien versioiden ratkaisuissa piti lisäksi osata yhdistää useita ehtoja, jotka kunkin eri toistokerran tuottaman osapolun piti täyttää. Monissa tietojenkäsittelyn ongelmissa on tavallista, että pitää huomioida useita ehtoja samanaikaisesti.</p>
+            <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Imperatiivinen_ohjelmointi" target="_blank">https://fi.wikipedia.org/wiki/Imperatiivinen_ohjelmointi</a>.</p>
+
 
 	  </div> <!-- task-solution -->
    </body>
