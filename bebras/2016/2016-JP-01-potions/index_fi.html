@@ -36,7 +36,7 @@
           "language": "fi",
           "version": "fi.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, and authors from Japanese Bebras team, France-ioi",
-          "translators": "Eslam Wageed",
+          "translators": "Timo Poranen, Heikki Hyyrö",
           "license": "CC BY-SA 3.0",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -59,7 +59,7 @@
                whiteSkin: "Vaalea iho"
             },
 
-            success: "Onnittelut, teit sen!",
+            success: "Onnittelut, ratkaisit tämän version!",
             wrong: "Väärä vastaus. Yritä uudelleen.",
             wrongHard: function(correct, total) {
                return "Olet päätellyt oikein " + correct + " / " + total + " juomaa. Nyt voit yrittää päätellä vielä enemmän. Klikkaa nappia sekoittaaksesi juomat ja aloittaaksesi uudelleen.";
@@ -138,7 +138,7 @@
                Raahaa juomat majavien luo ja klikkaa "Anna majavien juoda".
             </p>
             <p class="hard">
-                  <strong>Huom:</strong> Jos yrität uudelleen sen jälkeen, kun majavat ovat juoneet, juomat sekoitetaan uudelleen.
+                  <strong>Huom:</strong> Jos annat majavan juoda uudelleen, myös juomat sekoitetaan uudelleen (ja tehtävän vastaus muuttuu!).
             </p>
             <div id="anim_container">
                <div id="anim1"></div>
@@ -148,12 +148,12 @@
                   Kukin alla oleva majava joi yhden juoman. Raahaa kukin majava sen juoman alle, jota hän joi.
                   </p>
                   <p class="hard">
-                  <strong>Huom:</strong> Jos olet epävarma vastauksestasi, on parempi jättää kokonaan vastaamatta kuin antaa satunnainen ratkaisu.
+                  <strong>Huom:</strong> ei kannata yrittää löytää oikeaa vastausta satunnaisesti arvaamalla.
                   </p>
                </div>
                <div id="anim2"></div>
             </div>
-            <div id="validation"><input type="button" value="Check My Answer" id="execute" /></div>
+            <div id="validation"><input type="button" value="Tarkista vastaus" id="execute" /></div>
 
             <img id="bigEars_image" src="bigEars.png" style="display:none">
             <img id="bigTeeth_image" src="bigTeeth.png" style="display:none">
@@ -168,7 +168,127 @@
       </div><!-- task -->
       <div id="solution">
 
-         <h2>Solution</h2>
+         <h2>Ratkaisu</h2>
+          <p>Tehtävässä pitää tutkia, mitkä juomat ja kasvojen muutokset esiintyvät keskenään samoissa kohdissa.</p>
+            <div class="easy">
+               <ul>
+               <li>Vain 1. ja 2. majava joivat juomaa B, ja vain heille tuli kiharat viikset: tämä on juoman B vaikutus.</li>
+               <li>Vain 2. ja 3. majava joivat juomaa C, ja vain heille tuli isot korvat: tämä on juoman C vaikutus.</li>
+               <li>Vain 1. majava joi juomaa A, ja vain hänelle tuli isot hampaat: tämä on juoman A vaikutus.</li>
+               <li>Vain 3. majava joi juomaa D, ja vain hänelle tuli mustat hampaat: tämä on juoman D vaikutus.</li>
+               </ul>
+               <p><img src="sol_easy_fi.png"></p>
+            </div>   
+            <div class="medium">
+               <ul>
+               <li>Vain 1. ja 2. majava joivat juomaa A, ja vain heille tuli isot hampaat: tämä on juoman A vaikutus.</li>
+               <li>Vain 2. ja 3. majava joivat juomaa D, ja vain heille tuli isot korvat: tämä on juoman D vaikutus.</li>
+               <li>Vain 1. ja 3. majava joivat juomaa C, ja vain heille tuli mustat hampaat: tämä on juoman C vaikutus.</li>
+               <li>Vain 1. majava joi juomaa B, ja vain hänelle tuli kiharat viikset: tämä on juoman B vaikutus.</li>
+               <li>Vain 2. majava joi juomaa E, ja vain hänelle tuli mustat korvat: tämä on juoman E vaikutus.</li>
+               <li>Vain 3. majava joi juomaa F, ja vain hänelle tuli vaalea iho: tämä on juoman F vaikutus.</li>
+               </ul> 
+               <p><img src="sol_medium_fi.png"></p>
+
+            </div>
+            <div class="hard">
+               <p>Toimitaan seuraavasti, jotta voimme yksikäsitteisesti yhdistää juomat kasvojen muutoksiin:</p>
+               <ul>
+               <li>Joitain juomia juo vain yksi majava.</li>
+               <li>Joitain juomia juo vain kaksi majavaa.</li>
+               <li>Yhtä juomaa juo vain kolme majavaa.</li>
+               <li>Yhtä juomaa ei juo yksikään majava.</li>
+               </ul>
+               <p>Aloitetaan jakamalla juomat A, B ja C kullekin eri kokeilijalle:</p>
+               <p><img src="sol_hard_1.png"></p>
+               <p>Jaetaan sitten juomat D, E ja F kullekin kolmelle mahdolliselle kahden kokeilijan yhdistelmälle: 1. ja 2. majava juovat juomaa D, 2. ja 3. majava juomaa E, ja 1. ja 3. majava juomaa F.</p>
+               <p><img src="sol_hard_2.png"></p>
+               <p>Lopuksi annetaan kaikille kokeilijoille juomaa G. Tämän jälkeen jäljelle jäänyttä juomaa H ei kokeilla lainkaan. Nyt voidaan antaa majavien juoda juomia.</p>
+               <p><img src="sol_hard_3.png"></p>
+               <p>Yllä on esitetty yksi mahdollinen tulos (juomien vaikutukset voivat vaihdella eri kerroilla, joten sinulle tulisi mahdollisesti erilainen tulos). Tuloksesta voi kuitenkin aina päätellä juomien vaikutukset. Esimerkkituloksen kohdalla se tapahtuisi seuraavasti:</p>
+               <ul>
+               <li>Kaikilla kolmella majavalla on isot hampaat: he kaikki joivat juomaa G. </li>
+               <li>Vain 1. ja 2. majavalla on isot korvat: vain he joivat juomaa D.</li>
+               <li>Vain 2. ja 3. majavalla on vaalea iho: vain he joivat juomaa E.</li>
+               <li>Vain 1. ja 3. majavalla on mustat korvat: vain he joivat juomaa F.</li>
+               <li>Vain 1. majavalla on mustat hampaat: vain hän joi juomaa A.</li>
+               <li>Vain 2. majavalla on kiharat viikset: vain hän joi juomaa B.</li>
+               <li>Vain 3. majavalla on valkoinen nenä: vain hän joi juomaa C.</li>
+               <li>Yhdenkään majavan silmät eivät ole valkoiset: kukaan ei juonut juomaa H.</li>
+               </ul>
+               <p>Alla on esitetty edellisten johtopäätösten mukainen ratkaisu:</p>
+               <p><img src="sol_hard_4_fi.png"></p>
+            </div>  
+         
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+
+            <p>Tehtävän taustalta voidaan löytää esimerkiksi tietojenkäsittelyssä yleisesti käytetty perustavanlaatuinen <b>binäärilukujärjestelmä</b>.</p>
+            <p>Vaikeimmassa versiossa piti jakaa juomat majaville niin, että voimme yksikäsitteisesti yhdistää juomat kasvojen muutoksiin. Juomien jakotapa voidaan esittää esimerkiksi seuraavanlaisena taulukkona, jossa tiettyä majavaa vastaan sarakkeen tiettyä juomaa vastaavalla rivillä on arvo 1, jos kyseinen majava joi kyseistä juomaa, ja muuten 0. Kunkin juoman vaikutus voidaan päätellä yksikäsitteisesti jos ja vain jos taulukon kaikki rivit ovat keskenään erilaisia (jos kahdella juomalla olisi samanlaiset rivit, ei juomien vaikutuksia voisi erottaa toisistaan).
+            </p>
+            <p>Mikä tahansa sellainen taulukon täyttötapa, jossa kaikki rivit ovat erilaisia, mahdollistaa ratkaisun. Alla on yksi esimerkki (mikä poikkeaa esimerkkiratkaisun valinnoista).</p>
+
+            <p><table id="solInfo">
+            <tr>
+               <td></td>
+               <td>1. majava</td>
+               <td>2. majava</td>
+               <td>3. majava</td>
+            </tr>
+            <tr>
+               <td>Juoma A</td>
+               <td>0</td>
+               <td>0</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Juoma B</td>
+               <td>0</td>
+               <td>0</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Juoma C</td>
+               <td>0</td>
+               <td>1</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Juoma D</td>
+               <td>0</td>
+               <td>1</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Juoma E</td>
+               <td>1</td>
+               <td>0</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Juoma F</td>
+               <td>1</td>
+               <td>0</td>
+               <td>1</td>
+            </tr>
+            <tr>
+               <td>Juoma G</td>
+               <td>1</td>
+               <td>1</td>
+               <td>0</td>
+            </tr>
+            <tr>
+               <td>Juoma H</td>
+               <td>1</td>
+               <td>1</td>
+               <td>1</td>
+            </tr>
+            </table></p>
+
+            <p>Voimme tehdä huomion, että taulukon kaikki erilaisista riveistä koostuvat täyttötavat ovat pohjimmiltaan samantapaisia kuin yllä esitetty taulukko: taulukot eroavat vain sen suhteen, missä järjestyksessä numerorivit ovat. Tähän on selvä syy: taulukossa on kolme saraketta, ja niistä kuhunkin laitetaan joko 0 tai 1. On siis olemassa 2x2x2 = 8 erilaista riviä, ja toisaalta taulukossa on 8 riviä. Näin ollen jokainen rivi voidaan täyttää eri tavalla vain jos taulukkoon laitetaan kaikki 8 erilaista rivimahdollisuutta (jossain järjestyksessä).</p>
+
+            <p>Yllä esitetyn esimerkkitaulukon rivit vastaavat 10-kantajärjestelmän lukujen 0-7 esityksiä <strong>binäärilukuina</strong>: 000 = 0, 001 = 1, 010 = 2, 011 = 3, 100 = 4, 101 = 5, 110 = 6 ja 111 = 7.</p>
+             <p>Sellaisissa tietojenkäsittelyn ongelmissa, joiden ratkaisuun liittyy jonkin osajoukon (kuten tässä tiettyä juomaa maistavien majavien joukko) valinta, osajoukkoja kuvataan usein binäärilukuina. Esimerkiksi esimerkkitaulukon binääriluvut kuvaavat kaikki erilaiset 8 mahdollista tapaa valita jokin osajoukko kolmen alkion (tässä majavan) joukosta. Yleisemmin ottaen n-numeroisilla binääriluvuilla voidaan kuvata n-alkioisen joukon osajoukkoja.</p>
+
 	  </div> <!-- task-solution -->
    </body>
 </html>

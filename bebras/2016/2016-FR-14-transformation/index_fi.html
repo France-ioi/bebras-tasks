@@ -36,7 +36,7 @@
           "language": "fi",
           "version": "fi.01",
           "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, France-ioi",
-          "translators": "Eslam Wageed",
+          "translators": "Timo Poranen, Heikki Hyyrö",
           "license": "CC BY-SA 3.0",
           "taskPathPrefix": "",
           "modulesPathPrefix": "",
@@ -48,7 +48,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
-            success: "Onnittelut, teit sen!",
+            success: "Onnittelut, ratkaisit tämän version!",
             wrong: "Punaisella ympäröity kuvio on väärässä paikassa."
          };
       </script>
@@ -75,7 +75,7 @@
          <div id="tabsContainer"></div>
          <div id="taskContent">
             <p id="difficultyWarning" class="hard"></p>
-            <p>Lisää valkean ympyrän kuvioiden välille nuolia niin, että kukin kuvio siirtyy harmaalla reunuksella olevan samanlaisen kuvion viereen.
+            <p>Lisää valkean ympyrän kuvioiden välille nuolia niin, että kukin kuvio siirtyy harmaassa renkaassa olevan samanlaisen kuvion viereen.
             Kukin kuvio siirtyy <strong><span class="easy">nuolen mukaisesti</span><span class="medium">nuolten mukaisesti kaksi peräkkäistä askelta</span><span class="hard">nuolten mukaisesti kolme peräkkäistä askelta</span></strong>.</p>
             <p>Nuolen voi lisätä klikkaamalla peräkkäin kahta valkean ympyrän kuviota. Nuolen voi poistaa klikkaamalla sitä.</p>
             
@@ -84,59 +84,51 @@
             </div>
             <div id="stepCounter" class="medium hard"></div>
             <div id="control">
-               <input type="button" value="Try" id="execute" />
+               <input type="button" value="Tarkista vastaus" id="execute" />
                <br><br>
-               <input type="button" value="Undo" id="resetSim" />
+               <input type="button" value="Palauta kuviot" id="resetSim" />
             </div>
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">
 
-         <h2>Solution</h2>
-
-<style>
-.solutionInstanceMismatch {
-   font-style: italic;
-}
-</style>
-<p class="solutionInstanceMismatch">Remarque : les données de la correction ne correspondent pas forcément à celles de votre sujet.</p>
+         <h2>Ratkaisu</h2>
 
             <div class="easy">
-               <p>Pour chaque forme dans la zone blanche, on pose une flèche allant de cette forme à la forme identique se trouvant dans la zone grise. </p>
+               <p>Kukin valkean ympyrän kuvio liikkuu suoraan nuolen osoittamaan paikkaan. Haluttu lopputulos saadaan asettamalla kustakin valkoisen ympyrän kuviosta nuoli siihen valkoisen ympyrän kuvioon, jonka kohdalla harmaassa renkaassa on sama kuvio.</p>
                <p><img src="sol_easy.png"></p>
             </div>   
             <div class="medium">
-               <p>Choisissons une forme au hasard, par exemple l'étoile, et posons deux flèches qui se suivent de sorte à amener l'étoile à sa place finale. Pour la première flèche, on part de l'étoile, et on peut aller vers n'importe quelle autre position que la position finale. Pour la seconde flèche, on repart du point d'arrivée de la première flèche, et on va jusqu'à la position finale de l'étoile. Ainsi :</p>
+               <p>Tässä versiossa valkoisen ympyrän kuviot liikkuvat kaksi peräkkäistä nuolten osoittamaa askelta. Valitaan aluksi umpimähkään jokin kuvio (vaikkapa tähti), ja luodaan siitä alkava kahden nuolen polku, joka johtaa harmaan renkaan tähden viereen. Valitsemme ensimmäisen nuolen kohteen satunnaisesti (tässä se johtaa vaikkapa kolmioon):</p>
                <p><img src="sol_medium_1.png"></p>
-               <p>Regardons maintenant ce qu'il va se passer pour le triangle, qui se trouve à l'arrivée de la première flèche. Lors de son premier déplacement, le triangle va se déplacer vers la position finale de l'étoile. Lors de son second déplacement, il faut alors que le triangle rejoigne sa position définitive. Donc, on n'a pas le choix, on ajoute la flèche correspondante :</p>
+               <p>Ohjataan seuraavaksi edellisen polun toinen kuvio (= kolmio) oikeaan paikkaan jatkamalla edellä luotua polkua nuolella, joka johtaa harmaan renkaan kolmion viereen:</p>
                <p><img src="sol_medium_2.png"></p>
-               <p>Il reste alors trois autres formes, pour lesquelles on peut ajouter 3 flèches en procédant exactement de la même manière. Par exemple, prenons le rond orange, on le dirige d'abord avec une première flèche vers une autre position que la position finale du rond orange, puis on le dirige vers sa position finale à l'aide d'une seconde flèche. On complète alors avec la dernière flèche manquante.</p>
+               <p>Tässä vaiheessa huomataan, että myös risti on jo tullut ohjatuksi oikeaan paikkaan. Jäljellä on vielä salmiakki, ympyrä ja 6-kulmio. Noudatamme niiden kohdalla samanlaista periaatetta kuin edellä ja saamme seuraavanlaisen ratkaisun:</p>
                <p><img src="sol_medium_3.png"></p>
 
             </div>
             <div class="hard">
-               <p>Pour commencer, on va repérer où chaque forme doit arriver à la fin. Dessinons en vert les flèches correspondantes.</p>
+               <p>Tässä versiossa valkoisen ympyrän kuviot liikkuvat kolme peräkkäistä nuolten osoittamaa askelta. Aloitetaan ratkaisun etsiminen merkitsemällä kuvioon kunkin valkoisen ympyrän kuvion oikea siirtokohde. Nämä on esitetty alla vihreillä nuolilla.</p>
                <p><img src="sol_hard_1.png"></p>
-               <p>On observe qu'il y a 3 groupes de 3 formes. Regardons par exemple le groupe de droite, avec les deux étoiles et le carré troué. Si on essaie de mettre 3 flèches uniquement à l'intérieur de se groupe pour faire tourner les formes dans un sens ou dans l'autre, on ne pourra pas obtenir une solution qui marche. En effet, après avoir effectué 3 déplacements, chaque forme se retrouvera à sa place initiale.</p>
-               <p>Donc, il faut utiliser des flèches qui font passer les formes d'un groupe à l'autre. Considérons par exemple l'étoile jaune. Il faut d'abord l'emmener dans un autre groupe, par exemple le groupe de l'hexagone bleu, puis dans le troisième groupe, celui du triangle bleu clair, et enfin en troisième déplacement on pourra amener l'étoile jaune à sa position finale.</p>
+               <p>Voimme huomata, että lisäämämme nuolet jakoivat kuviot kolmeen erilliseen kolmen nuolen määrittämään silmukkaan: salmiakki-kolmio-I, ympyrä-tiimalasi-6-kulmio ja noppa-tähti-risti. On selvää, että kolmen nuolen kulkeminen 3 kuvion silmukassa vie kuvion takaisin alkuperäiseen paikkaansa, joten mikään kuvio ei päädy kolmen nuolen kulkemisen jälkeen oikeaan kohtaa ellemme lisää kuvioon sellaisia nuolia, jotka kulkevat eri silmukoiden välillä.</p>
+               <p>Valitaan aluksi vaikkapa tähti, ja luodaan sellainen kolmen nuolen polku, joka käy kahden muun silmukan kautta. Valitsimme alla umpimähkään välietapeiksi 6-kulmion ja kolmion.</p>
                <p><img src="sol_hard_2.png"></p>
-               <p>Une fois ces flèches posées, il n'y a plus qu'une seule manière possible de compléter les autres flèches pour que toutes les formes arrivent à leur place finale. Reprenons le dessin, et concentrons nous sur l'hexagone bleu, car pour cette forme les deux premiers déplacements sont déjà imposés.</p>
+               <p>Alla on kuvattu tämän polun lisäyksen jälkeinen tilanne.</p>
                <p><img src="sol_hard_3.png"></p>
-               <p>On n'a donc pas le choix, il faut que le troisième déplacement de l'hexagone bleu l'amène à sa destination finale.</p>
+               <p>Tarkastellaan seuraavaksi polun toista kuviota: 6-kulmiota. Sen vienti oikealle paikalle vaatii edellisen polun jatkamista nuolella, joka vie harmaan renkaan 6-kulmion viereen:</p>
                <p><img src="sol_hard_4.png"></p>
-               <p>De la même manière, il faut ensuite emmener le triangle bleu clair à sa destination finale. Puis l'étoile à quatre branche. </p>
+               <p>Jatkamme polkua saman periaatteen mukaisesti myös polun kolmannen ja neljännen kuvion (kolmio ja risti) kohdalla:</p>
                <p><img src="sol_hard_5.png"></p>
-               <p>On continue de la même manière, en amenant le sablier rouge, puis le H tourné, puis le carré troué a leur place. Il ne reste alors plus qu'à vérifier que le rond orange et le losange vert arrivent bien à leur place. </p>
+               <p>Kun nuolipolkua pidennetään edellisen periaatteen mukaisesti lopuillekin kuvioille (tiimalasi, I, noppa, ympyrä ja salmiakki), saadaan lopputuloksena alla esitetty ratkaisu:</p>
                <p><img src="sol_hard_6.png"></p>
 
             </div>
 
-         <h2>C'est de l'informatique !</h2>
-              <p>Ce sujet illustre la notion de <strong>permutation</strong>, qui consiste à diriger chaque élément à la place d'un autre. Même si l'on ne s'en rend pas compte, les permutations se trouvent un peu partout autour de nous. Par exemple, lorsqu'on mélange un jeu de carte, on effectue une permutation de l'ordre des cartes.</p>
-              <p>La notion de permutation est à la base une notion des mathématiques. De nombreux programmes informatiques s'appuient sur les propriétés mathématiques des permutations pour pouvoir modéliser efficacement des scénarios de la vie réelle.</p>
-             
-
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+              <p>Tehtävä havainnollistaa monessa tietojenkäsittelytieteen ongelmassa tärkeitä <strong>permutaatioita</strong>. Meillä on annettu joukko alkioita (tässä kuvioita), jotka voidaan muuttaa toiseen järjestykseen (= saman alkiojoukon toinen permutaatio). Permutaatioiden tulee usein noudattaa tiettyjä sääntöjä.</p>
+              <p>Eräs kuuluisimmista permutaatioihin liittyvistä ongelmista on ns. kauppamatkustajan ongelma, jossa haluttaisiin löytää kokonaispituudeltaan lyhin reitti, joka kulkee kaikkien haluttujen kaupunkien läpi. Kukin kauppamatkustajan ongelman mahdollinen ratkaisu voidaan pohjimmiltaan esittää käytyjen kaupunkien permutaationa (kaupunkien järjestys permutaatiossa ilmaisee, missä järjestyksessä kaupungeissa käydään). Monia arkisiakin ongelmia voidaan kuvata permutaatioiden avulla. Esimerkiksi korttipakan sekoittamisessa on kyse korttien satunnaisen permutaation luomisesta.</p>
+             <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Permutaatio" target="_blank">https://fi.wikipedia.org/wiki/Permutaatio</a> ja <a href="https://fi.wikipedia.org/wiki/Kauppamatkustajan_ongelma" target="_blank">https://fi.wikipedia.org/wiki/Kauppamatkustajan_ongelma</a>.</p>
 	  </div> <!-- task-solution -->
    </body>
 </html>

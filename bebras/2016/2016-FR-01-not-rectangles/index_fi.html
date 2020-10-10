@@ -48,9 +48,9 @@
             steps: function(count, limit) {
                return "Askelten lukumäärä : " + count; 
             },
-            success: "Onnittelut, teit sen!",
-            drag: "Maalataksesi suorakulmion ruutuja, vedä hiirellä yhdestä kulmasta vastakkaiseen kulmaan.", // drag your mouse or finger 
-            moveLimit: "Olet tehnyt maksimimäärän vaiheita. Yritä uudelleen. Voit peruuttaa tai aloittaa uudelleen."
+            success: "Onnittelut, ratkaisit tämän version!",
+            drag: "Maalaa suorakulmion ruutuja raahaamalla hiirellä (tai kosketusnäytöllä) yhdestä kulmasta vastakkaiseen kulmaan.",
+            moveLimit: "Olet tehnyt maksimimäärän askeleita. Voit peruuttaa askeleita tai aloittaa uudelleen alusta."
          };
       </script>
       <script type="text/javascript" src="task.js"></script>
@@ -105,7 +105,7 @@
             <p>
                Piirrä "Tavoite"-ruudukon kuvio "Sinun piirroksesi" -ruudukkoon.
             </p>
-             <p>Voit vaihtaa suorakulmion ruutujen väriä (musta / valkoinen) raahaamalla hiirellä maalattavan alueen kulmasta kulmaan.</p> 
+             <p>Voit vaihtaa suorakulmion ruutujen väriä (musta / valkoinen) raahaamalla hiirellä (tai kosketusnäytöllä) maalattavan alueen kulmasta kulmaan.</p> 
             </p>
             <p class="easy">
                Tämä versio tehtävästä voidaan ratkaista <strong>vain kahdella askeleella</strong>.
@@ -145,14 +145,14 @@
                      </td>
                   </tr>
                </table>
-               <div><input type="button" value="Tarkista vastaukseni" id="execute" /></div>
+               <div><input type="button" value="Tarkista vastaus" id="execute" /></div>
             </div>
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
       <div id="solution">
 
-         <h2>Solution</h2>
+         <h2>Ratkaisu</h2>
          <div id="solutionImages">
             <div class="easy">
                <img src="solution_easy_step0.png">
@@ -184,7 +184,7 @@
             <p>Nykypäivän tietokone voi yhdessä sekunnissa suorittaa satoja miljardeja tällaisia toimintoja!</p>
 
             <p>Lisäksi tietokone ei väsy koskaan. Se voi jatkaa toimintojen suorittamista samalla nopeudella pitkiäkin aikoja.</p>
-               
+            <p>Katso lisää esim. <a href="https://en.wikipedia.org/wiki/Binary_image" target="_blank">https://en.wikipedia.org/wiki/Binary_image</a> (englanniksi).</p>
 	  </div> <!-- task-solution -->
    </body>
 </html>

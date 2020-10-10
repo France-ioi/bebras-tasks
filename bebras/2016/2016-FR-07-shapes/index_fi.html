@@ -44,7 +44,7 @@
          var stringsLanguage = 'fi';  //Currently causes code to crash
       var taskStrings = {
             wrong: "Lopputuloksesi ei täsmää tavoitteen kanssa.",
-            success: "Onnittelut, teit sen!",
+            success: "Onnittelut, ratkaisit tämän version!",
 
             titleProgram: "Ohjelmasi:",
             titleResult: "Tulos vaiheen jälkeen:",
@@ -88,33 +88,27 @@
       </div><!-- task -->
       <div id="solution">
 
-         <h2>Lösning</h2>
-<style>
-.solutionInstanceMismatch {
-   font-style: italic;
-}
-</style>
-<p class="solutionInstanceMismatch"> Obs! Bilderna motsvarar inte nödvändigtvis dem i din egen lösning, men principen förblir densamma. Vi ber om ursäkt för att texten i bilderna är på franska.</p>
-
+         <h2>Ratkaisu</h2>
             <div class = "easy">
-               <p> <img src = "sol_easy.png"> </p>
+			<p>Tavoite koostuu kolmesta peräkkäisestä salmiakki-tähti-parista. Voimme siten ensin valita minkä tahansa kuvion (vaikkapa ympyrän), ja asettaa sen kolme kertaa peräkkäin alkuasetelmaan. Tämän jälkeen määritämme korvaussäännön, jossa edellä valitsemamme kuvio (vaikkapa ympyrä) korvataan salmiakilla ja tähdellä.</p>
+			<p><img src = "sol_easy_fi.png"></p>
             </Div>
             <div class = "medium">
-               <p> <img src = "sol_medium_1.png"> </p>
-               <p> <img src = "sol_medium.png"> </p>
+				<p>Koska alkuasetelmaan valitaan vain yksi kuvio, joka sitten toisessa vaiheessa korvataan kolmella kuviolla, on tilanne sama kuin jos alussa suoraan valitsisimme kolme kuviota, joista kolmannessa vaiheessa jonkin kuvion esiintymät korvataan joillain kahdella kuviolla. Jotta tämä tuottaisi tavoitekuvion, pitää siitä löytää keskenään samanlaisia kahden kuvion osia. Esim. heti tavoitteen alusta lötyy kaksi peräkkäistä 6-kulmio-kolmio-paria. Jos kolmannen vaiheen korvaus tuottaisi nämä kaksi paria, on tavoitteen viimeisen 6-kulmion oltava jo aiemmin olemassa. Jos valitsemme 6-kulmio-kolmio parien korvaamaksi kuvioksi vaikkapa ympyrän, on asetelma alla esitetyn mukainen:</p>	
+               <p><img src = "sol_medium_1_fi.png"></p>
+               <p>Edellinen asetelma voidaan suoraviivaisesti täydentää kokonaiseksi ratkaisuksi. Huomaa, että voimme vapaasti valita, mitkä kuviot valitsemme ensimmäiseen vaiheeseen ja toisen vaiheen kahdeksi ensimmäiseksi korvaavaksi kuvioksi. Alla käytetään salmiakkia ja ympyrää, mutta on paljon muitakin toimivia vaihtoehtoja.</p>
+               <p><img src = "sol_medium_fi.png"></p>
             </Div>
             <div class = "hard">
-               <p> <img src = "sol_hard_0.png"> </p>
-               <p> <img src = "sol_hard_2.png"> </p>
-               <p> <img src = "sol_hard.png"> </p>
+				<p>Koska korvaukset muuttavat kaikkia täsmääviä osia samalla tavalla, voimme aloittaa yrittämällä etsiä tavoitteesta keskenään samanlaisia osia. Voimme huomata, että tavoitteen alussa ja lopussa on kolmen kuvion yhdistelmä tähti-ympyrä-kolmio, ja näiden välissä on kaksi 6-kulmiota. Alussa meidän pitää valita neljä kuviota. Voisimme siis yrittää edetä seuraavan kuvan esittämästä lähtökohdasta: asetamme 6-kulmiot jo valmiiksi keskelle, ja niitä ennen ja jälkeen asetetaan keskenään samat kuviot (vaikkapa salmiakit), jotka sitten toisessa ja kolmannessa vaiheessa pyrimme muuntamaan tähti-ympyrä-kolmio-yhdistelmiksi.</p>
+               <p><img src = "sol_hard_2_fi.png"></p>
+               <p>Sekä toisessa että kolmannessa askeleessa yksi kuvio korvataan kahdella kuviolla. Ei ole hankalaa keksiä tapaa, miten salmiakki saadaan muutettua tähti-ympyrä-kolmio-yhdistelmäksi kahdella tällaisella korvauksella. Alla on esimerkiksi esitetty ratkaisu, jossa ensin salmiakki korvataan tähdellä ja salmiakilla, ja sen jälkeen salmiakki korvataan ympyrällä ja kolmiolla. Tähän voi keksiä monia muitakin tapoja.</p>
+               <p><img src = "sol_hard_fi.png"></p>
             </Div>
 
          <h2> Tämä on tietojenkäsittelyä! </h2>
 
-            <p> Tässä tehtävässä tutustuttiin haku- ja korvaustoimintoihin.</p>
-            
-
-
+            <p>Esimerkiksi monet tekstinkäsittelyohjelmat sisältävät "etsi ja korvaa"-toiminnon, jolla kaikki antamamme hakumerkkijonon esiintymät dokumentissa voi korvata antamallamme korvausmerkkijonolla. Tehtävässä käytettiin samantapaista toimintoa, joskin etsittiin ja korvattiin merkkijonojen sijaan kuvioita ja pääpaino oli sen pohtimisessa, miten korvaukset muuttavat lähtöasetelmaa.</p>
 	  </div> <!-- task-solution -->
    </body>
 </html>
