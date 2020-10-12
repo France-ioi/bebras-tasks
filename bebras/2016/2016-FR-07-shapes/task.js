@@ -278,6 +278,7 @@ function initTask(subTask) {
       leftX += arrayWidth + textParams.textShapePadX;
 
       // Infix.
+      textX = leftX;
       if (rtl) {
          textX = paper.width - leftX;
       }
