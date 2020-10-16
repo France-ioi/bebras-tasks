@@ -1,23 +1,10 @@
 function initTask(subTask) {
 
-    var valid_data = {
-        cities: [
-            { lng: 2.35392, lat: 48.855815, name: "Paris" },
-            { lng: -4.486885, lat: 48.392168, name: "Brest" },
-            { lng: 7.269332, lat: 43.950121, name: "Nice" }
-        ],
-        roads: [
-            { city_idx_1: 0, city_idx_2: 1, highlighted: true },
-            { city_idx_1: 0, city_idx_2: 2, highlighted: false }
-        ]
-    }
-
     subTask.gridInfos = {
         hideSaveOrLoad: false,
         actionDelay: 200,
         buttonScaleDrawing: false,
         //conceptViewer: true,
-        hideValidate: true,
 
         includeBlocks: {
             groupByCategory: false,
