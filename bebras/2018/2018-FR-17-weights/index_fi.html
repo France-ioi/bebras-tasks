@@ -22,7 +22,7 @@
             "language": "fi",
             "version": "fi.01",
             "authors": "France-ioi",
-            "translators": [],
+            "translators": "Heikki Hyyrö",
             "license": "CC BY-SA 3.0",
             "taskPathPrefix": "",
             "modulesPathPrefix": "",
@@ -81,7 +81,7 @@
                   <p>Alla annetut siniset ympyrät ovat keskenään eripainoisia.
                   <span class="medium hard"><br/>Kutakin sinistä ympyrää kohden on annettu täsmälleen yksi samanpainoinen keltainen neliö.</span></p>
                   <p>Voit verrata vaa'alla <span class="easy">kahden sinisen ympyrän</span><span class="medium hard">sinisen ympyrän ja keltaisen neliön</span> painoja.</p>
-                  <p>Asettele siniset ympyrät harmaisiin ympyröihin kasvavassa painojärjestyksessä.</p>
+                  <p>Sijoita (raahaa) siniset ympyrät harmaisiin ympyröihin kasvavassa painojärjestyksessä.</p>
                   <p class="hard"><b>Käytä vaakaa mahdollisimman pieni määrä kertoja.</b> Saat täydet pisteet, jos käytät vaakaa korkeintaan 16 kertaa.</p>
                </div>
             </div>
@@ -98,10 +98,46 @@
             <img id="square" src="square.png" style="display:none">
       </div>
       <div id="solution">
-            <h2>Solution</h2>
-         <!-- description of the solution -->
-            <h2>C'est de l'informatique !</h2>
-         <!-- explanations on why this task is about informatics -->
-      </div>
+         <h2>Ratkaisu</h2>
+         <div class="easy">
+           <p>Suoraviivainen tapa määrittää ympyrän sijoituspaikka on verrata sitä kaikkiin muihin ympyröihin ja laskea, kuinka monta sitä kevyempää ympyrää on. Jos ympyrälle löytyy:
+           <ul>
+             <li>0 sitä kevyempää ympyrää, on ympyrä kaikkein kevein ja sijoitetaan vasemmanpuoleisimpaan paikkaan.</li>
+             <li>1 sitä kevyempi ympyrä, on ympyrä toiseksi kevein ja sijoitetaan keskimmäiseen paikkaan.</li>
+             <li>2 sitä kevyempää ympyrää, on ympyrä kolmanneksi kevein (eli tässä painavin) ja sijoitetaan oikeanpuoleisimpaan paikkaan.</li>
+           </ul>
+           <p>Valmis ratkaisu saadaan soveltamalla edellistä periaatetta yksi kerrallaan jokaiseen ympyrään <b>A</b>, <b>B</b> ja <b>C</b>.</p>
+           <p>Tätä suoraviivaista ratkaisutapaa voi hieman tehostaa huomaamalla, että kun ensimmäinen ympyrä <b>A</b> on asetettu oikealle paikalleen yllä kuvatun säännön perusteella, tarvitsee meidän tehdä enää yksi kahden jäljelle jääneen ympyrän <b>B</b> ja <b>C</b> välinen vertailu voidaksemme sijoittaa ne kahteen jäljellä olevaan vapaaseen sijoituspaikkaan: niistä kevyempi tulee vasemmanpuoleiseen vielä vapaaseen paikkaan ja painavampi oikeanpuoleiseen vielä vapaaseen paikkaan.</p>
+         </div>
+         
+         <div class="medium">
+           <p>Kutakin ympyrää kohden on täsmälleen yksi sen kanssa samanpainoinen neliö. Yksi suoraviivainen tapa määrittää ympyrän sijoituspaikka on verrata sitä kaikkiin neliöihin ja laskea, kuinka monta sitä kevyempää neliötä on. Jos kevyempien neliöiden lukumäärä on <b>i</b>, on ympyrä (<b>i</b>+1):nneksi kevein (koska on olemassa <b>i</b> sitä kevyempää ympyrää). Ympyrä sijoitetaan tällöin <b>i</b> paikkaa vasemmanpuoleisimman sijoituspaikan oikealle puolelle. Kukin ympyrä voidaan sijoittaa oikeaan paikkaan noudattamalla tätä samaa periaatetta.</p>
+           <p>Tätä suoraviivaista ratkaisutapaa voisi hieman tehostaa vertaamalla ympyrää vain niihin neliöihin, jotka eivät ole samanpainoisia minkään aiemmin jo oikeaan paikkaan sijoitetun ympyrän kanssa. Tällöin ympyrää kevyempien lukumäärä kertoo, kuinka monta <i>vapaata</i> paikkaa vasemmanpuoleisimman <i>vapaan</i> paikan oikealle puolelle ympyrä tulee sijoittaa.</p>
+         </div>
+
+         <div class="hard">
+           <p>Kuvaamme tässä ratkaisuperiaatteen, joka toimii <i>keskimäärin</i> tehokkaasti isollakin määrällä ympyröitä.</p>
+           <p>Käytämme nimitystä "ympyrän neliö" tarkoittamaan ympyrän kanssa samanpainoista neliötä, ja vastaavasti nimitystä "neliön ympyrä" tarkoittamaan neliön kanssa samanpainoista ympyrää. Tehtävässä kutakin ympyrää kohti on täsmälleen yksi samanpainoinen neliö, joten nämä suhteet ovat yksikäsitteisiä. Kun teemme ympyröiden ja neliöiden välisiä vertailuita, järjestämme sekä ympyrät että niiden neliöt järjestykseen (vaikka tehtävässä vain ympyrät pitää konkreettisesti sijoitella). Viittaamme ympyröiden/neliöiden sijoituspaikkoihin numeroilla: ensimmäinen (vasemmanpuoleisin) on paikka 1, seuraava on paikka 2, ja niin edelleen. Ympyröiden sekä niiden neliöiden järjestykset (ja sijoituspaikat) vastaavat toisiaan.</p>
+           <p>Asettelemme ympyrät paikoilleen järjestyksessä <b>A</b>, <b>B</b>, jne. Aloitetan vertaamalla ympyrää <b>A</b> kaikkiin neliöihin ja jaetaan vertailuiden tuloksien perusteella (ja välillisesti niiden ympyrät) kolmeen osaan:
+           <ol>
+             <li>Ympyrää kevyemmät neliöt (ja välillisesti kevyemmät ympyrät). Nämä sijoittuvat nykyisen ympyrän neliön vasemmalle puolelle.</li>
+             <li>Ympyrän neliö.</li>
+             <li>Ympyrää painavammat neliöt (ja välillisesti painavammat ympyrät). Nämä sijoittuvat ympyrän neliön oikealle puolelle.</li>
+           </ol>
+           </p>
+           <p>Tämä informaatio määrittää sekä ympyrän <b>A</b> että sen neliön paikan ympyröiden ja neliöiden järjestyksessä. Jos kevyempien neliöiden lukumäärä on <b>i</b>, on ympyrä (<b>i</b>+1):nneksi kevein, koska on olemassa <b>i</b> sitä kevyempää ympyrää.</p>
+           <p>Tietoa kolmesta yllämainitusta osasta voidaan hyödyntää, kun siirrymme tarkastelemaan seuraavaa ympyrää (ellei kaikkia ole vielä sijoiteltu). Asian käsittelyä helpottaa, jos puhumme niin sanotusta <b>hakuintervallista</b>, joka ilmaisee mihin sijoituspaikkojen intervalliin (yhtenäiseen osaan) tämänhetkisen ympyrän tiedetään kuuluvan. Ilmaisemme hakuintervallin muodossa <b>a</b>...<b>b</b>, missä <b>a</b> on intervallin ensimmäisen paikan ja <b>b</b> intervallin viimeisen paikan numero. Esimerkiksi neljän tähden versiossa oli 6 ympyrää/paikkaa, ja sen kaikki paikat kattava intervalli olisi 1...6.</p>
+           <p>Kun tarkastelemme jotain ympyrän <b>A</b> jälkeistä ympyrää, on sitä vastaava hakuintervalli aluksi 1...<b>n</b>, missä <b>n</b> on kaikkien ympyröiden/paikkojen lukumäärä. Ensimmäinen askel on verrata nykyistä ympyrää ympyrän <b>A</b> neliöön. Vertailun tulos kertoo, kummalle puolelle ympyrää <b>A</b> nykyinen ympyrä sijoittuu: vasemmalle (jos kevyempi) vai oikealle (jos painavampi). Tämä tarkoittaa hakuintervallin supistamista: jos ensimmäinen ympyrä oli sijoitettu paikkaan <b>i</b>, on uusi intervalli joko 1...<b>i</b>-1 (eli <b>A</b>:n vasen puoli) tai <b>i</b>+1...<b>n</b> (eli <b>A</b>:n oikea puoli).</p>
+           <p>Jos uuden hakuintervallin pituus on 1 (eli siihen kuuluu vain yksi paikka), voidaan nykyinen ympyrä sijoittaa tähän ainoaan paikkaan.</p>
+           <p>Jos uusi intervalli on pidempi, täytyy nykyisen ympyrän tarkempi sijoituskohta määrittää tekemällä lisää vertailuja. Uuden hakuintervallin käsittelyssä noudatetaan samaa logiikkaa kuin ensimmäisen hakuintervallin kohdalla: jos hakuintervalliin sisältyy vähintään yksi jo sijoitettu ympyrä, verrataan nykyistä ympyrää intervalliin kaikkein aikaisimmin sijoitetun ympyrän neliöön. Tämän vertailun pohjalta voimme jälleen supistaa hakuintervallia. Esimerkiksi jos nykyinen hakuintervalli oli 1...<b>i</b>, edellämainittu jo sijoitettu ympyrä oli paikassa <b>j</b> ja vertailun mukaan nykyinen ympyrä oli painavampi kuin paikassa <b>j</b> oleva ympyrä, on uusi hakuintervalli <b>j+1</b>...<b>i</b>.</p>
+           <p>Ellei uuteen hakuintervalliin ole vielä sijoitettu yhtään aiempaa ympyrää, toimitaan kuten ympyrän <b>A</b> kanssa alussa eli verrataan nykyistä ympyrää uuden hakuintervallin kaikkien neliöiden kanssa ja jaetaan hakuintervallin neliöt (ja välillisesti ympyrät) kolmeen osaan.</p>
+           <p>Neljän tähden versiosta saa täydet pisteet asettamalla ympyrät <b>A</b>, <b>B</b>, <b>C</b>, <b>D</b>, <b>E</b> ja <b>F</b> paikoilleen noudattamalla edellä kuvattuja periaatteita.</p>
+           </ul>
+         </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>Tehtävän taustalla on tietojenkäsittelyssä erittäin yleinen tehtävä: alkioiden <b>lajittelu</b> järjestykseen. Tarkemmin ottaen tehtävässä oli kyse yksittäisten alkioparien välisiin vertailuihin pohjautuvasta lajittelusta. Eräs tietojenkäsittelytieteen teorian tärkeä perustulos on, että <b>n</b> alkiota sisältävän alkiojoukon lajitteleminen vaatii vähintään noin <b>n log(n)</b> alkioparien välistä vertailua (missä tarkemmin ottaen logaritmi lasketaan kantaluvulla 2).</p>
+         <p>Tehtävässä lajiteltiin ympyröitä. Helpoin versio vastasi yllä kuvattua lajittelua suoraan sellaisenaan, ja kahdessa vaikeammassa versiossa tehtävään oli tuotu ylimääräisenä hankaloituksena jako ympyröihin ja neliöihin ja sääntö, ettei samanmuotoisia kuvioita saa verrata keskenään. Vaikeimpaan versioon ehdotettu malliratkaisu perustuu erittäin laajasti käytetyn <b>pikalajittelu</b>-lajittelualgoritmin toimintalogiikkaan.</p>
+         <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Lajittelualgoritmi" target="_blank">https://fi.wikipedia.org/wiki/Lajittelualgoritmi</a> ja <a href="https://fi.wikipedia.org/wiki/Pikalajittelu" target="_blank">https://fi.wikipedia.org/wiki/Pikalajittelu</a>.</p>
    </body>
 

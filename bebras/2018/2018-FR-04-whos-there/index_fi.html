@@ -116,7 +116,7 @@
                   <p>Kun klikkaat isoa harmaata "Aloita"-nappia, alkaa kuvioita siirtyä taloon <span class="medium bold"> tai lähteä talosta</span> <span class="easy medium">yksi kerrallaan</span><span class="hard">pareittain</span>.</p>
                   <p>Piirrä talon alla olevaan kenttään muistiinpanoja (esim. pisteitä, viivoja tms.) auttaaksesi muistamista.</p>
                   <p>Alussa talo on tyhjä.</p>
-                  <p>Klikkaa isoa harmaata nappia aina, kun talossa on 3 keskenään samanlaista <span class="hard bold">kuvioparia</span><span class="easy medium">kuviota</span>.</p>
+                  <p>Klikkaa isoa harmaata nappia aina, kun taloon ilmestyy uusi kolmen keskenään samanlaisten <span class="hard bold">kuvioparien</span><span class="easy medium">kuvioiden</span> ryhmä.</p>
                </div>
             </div>
             <div id="zone_2">
@@ -140,8 +140,37 @@
       </div>
       <div id="solution">
          <h2>Ratkaisu</h2>
-         <h2>Tämä on tietojenkäsittelyä!</h2>
-      </div>
+         
+          <div class="easy">
+           <p>Voit esimerkiksi piirtää kuvion alle pisteen joka kerta, kun kyseinen kuvio siirtyy taloon. Alla on havainnollistettu, miltä tämä voisi näyttää:</p>
+           <img src="sol_easy1.png">
+           <p>Kuvan tilanteessa talossa olisi 1 salmiakki, 3 neliötä, 1 kolmio, 3 6-kulmiota ja 2 tähteä. Tällä tapaa on helppo pitää kirjaa, milloin taloon tulee 3 uutta keskenään samanlaista kuviota.</p>
+          </div>
+
+         <div class="medium">
+           <p>Tässä versiossa kuvio voi myös poistua talosta.</p>
+           <p>Voit esimerkiksi piirtää kuvion alle pisteen joka kerta, kun kyseinen kuvio siirtyy taloon. Pisteen yli voi vetää viivan aikan kun se poistuu talosta. Alla on havainnollistettu, miltä tämä voisi näyttää:</p>
+           <img src="sol_medium1.png">
+           <p>Kuvan tilanteessa olisimme nähneet kaikkiaan 2 salmiakkia (joista 1 poistunut), 4 neliötä (joista 2 poistunut), 4 kolmiota (joista 3 poistunut) ja 4 6-kulmiota (kaikki vielä talossa). Tällä tapaa on helppo pitää kirjaa, milloin taloon tulee 3 uutta keskenään samanlaista kuviota.</p>
+         </div>
+
+         <div class="hard">
+           <p>Tässä versiossa käsiteltiin yksittäisten kuvioiden sijaan kuviopareja.</p>
+           <p>Tehtävässä on monia käteviä kirjanpitotapoja. Edhotamme tässä kolmea erilaista.</p>
+           <p><b>Ensimmäinen tapa</b> on piirtää työtilan yläosaan vierekkäin kaikki erilaiset kuvioparit, ja piirtää kuvioparin alle piste aina kun kuviopari siirtyy taloon. Esimerkki:</p>
+           <img src="sol_hard3.png">
+           <p><b>Toinen tapa</b> on hieman suoraviivaisempi. Kaikkien kuvioparien piirtämisen sijaan piirrämmekin työtilaan vasempaan laitaan kaikki yksittäiset kuviot. Nyt meillä on taulukko, jossa vasemman sarakkeen kuvion rivin ja ylärivin kuvion sarakkeen risteymäkohtaan voi kirjata tietoa kyseisten kuvioiden muodostaman kuvioparin lukumäärästä. Esimerkki:</p>
+           <img src="sol_hard2.png">
+           <p><b>Kolmas tapa</b> ei vaadi kuvioiden piirtämistä. Kun kuviopari siirtyy taloon, piirrämme työtilaan viivan, joka yhdistää kuvioparin kuvioiden sarakkeet. Esimerkki:</p>
+           <img src="sol_hard1.png">
+           <p>Tämän kolmannen tavan heikkous on, että sitä käyttäen voi olla kahta ensimmäistä tapaa hankalampaa hahmottaa, kuinka monta millaistakin kuvioparia talossa on.</p>
+         </div>
+
+
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+      <p>Tehtävän onnistunut ratkaisu luultavasti edellytti sen miettimistä, millaisessa muodossa kuvioita koskevaa tietoa kannattaa kirjata muistiinpanoihin. Hyvin monissa tietojenkäsittelyn ongelmissa kohdataan samantapainen peruskysymys: millaista dataa ja missä muodossa sovelluksen kannattaa tallettaa, jotta datan käyttö olisi mahdollisimman kätevää, tehokasta ja palvelisi sovelluksen tavoitetta. Datan käyttöä helpottavaa/tehostavaa tallennustapaa kutsutaan tietojenkäsittelyssä nimellä <b>tietorakenne</b>. Tämän tehtävän ratkaisuehdotuksissa ehdotettiin käytettäväksi varsin yksinkertaisia <b>taulukoita</b>, mutta monissa tietojenkäsittelyn sovelluksissa käytetään huomattavasti monimutkaisempiakin tietorakenteita.</p>
+      <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Tietorakenne" target="_blank">https://fi.wikipedia.org/wiki/Tietorakenne</a>.</p>
+    </div>
       <!-- task-solution -->
    </body>
 

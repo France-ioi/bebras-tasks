@@ -22,7 +22,7 @@
             "language": "fi",
             "version": "fi.01",
             "authors": "France-ioi",
-            "translators": [],
+            "translators": "Heikki Hyyrö",
             "license": "CC BY-SA 3.0",
             "taskPathPrefix": "",
             "modulesPathPrefix": "",
@@ -79,10 +79,43 @@
             <img src="icon.png" style="display:none">
          </div>
          <div id="solution">
-            <h2>Solution</h2>
-         <!-- description of the solution -->
-            <h2>C'est de l'informatique !</h2>
-         <!-- explanations on why this task is about informatics -->
+         <h2>Ratkaisu</h2>
+         <p>Meidän pitää pudottaa kuulat tavoitteen kuulia oikealta vasemmalle vastaavassa järjestyksessä.</p>
+         <div class="easy">
+           <p>Tavoite koostuu kolmesta keskenään samanlaisesta 5 kuulan ryhmästä. Kussakin ryhmässä on (oikealta vasemmalle) kuulat <b>A</b>, <B>B</B>, <b>C</b>, <b>A</b> ja <b>B</b>.</p>
+           <p>Ensin pitää pudottaa kuulat <b>A</b>, <b>B</b> ja <b>C</b>. Jos pudotamme kuulat <b>A</b> ja <b>B</b> riviltä 1, emme sen jälkeen voi pudottaa kuulaa <b>C</b>.</p>
+           <img src="sol_easy_1.png">
+           <p>Sen sijaan voimme aloittaa pudottamalla kuulat <b>A</b>, <b>B</b> ja <b>C</b> riviltä 2.</p>
+           <img src="sol_easy_2.png">
+           <p>Tämän jälkeen saamme ensimmäisen 5 kuulan ryhmän valmiiksi pudottamalla kuulat <b>A</b> ja <b>B</b> riviltä 1.</p>
+           <img src="sol_easy_3.png">
+           <p>Ensimmäistä ryhmää vastaavat klikkaukset olivat <b>2, 2, 2, 1, 1</b>. Kaksi jäljellä olevaa 5 kuulan ryhmää saadaan muodostettua samalla tavalla: ensin pudotetaan 3 kuulaa riviltä 2 ja sitten 2 kuulaa riviltä 1. Tällaista kokonaista ratkaisua vastaavat klikkaukset ovat <b>2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1</b>.</p>
+           <p>On myös toinen ratkaisuvaihtoehto: <b>2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 1, 1</b>.</p>
+         </div>
+
+         <div class="medium">
+           <p>Tavoite koostuu kolmesta keskenään samanlaisesta 6 kuulan ryhmästä. Kussakin ryhmässä on (oikealta vasemmalle) kuulat <b>A</b>, <B>B</B>, <b>C</b>, <b>D</b>, <b>C</b> ja <b>E</b>. Yksi 6 kuulan ryhmä saadaan muodostettua pudottamalla 3 kuulaa riviltä 2 ja 3 kuulaa riviltä 3. Kuulia ei kuitenkaan voi pudottaa suoraan tässä järjestyksessä. Jos pudottaisimme suoraan 3 kuulaa riviltä 2, emme sen jälkeen voisi pudottaa kuulaa <b>D</b>. Pudotamme sen sijaan ensin 2 kuulaa riviltä 2 ja 1 kuulan riviltä 3:</p>
+           <img src="sol_medium_1.png">
+           <p>Tämän jälkeen ensimmäinen 6 kuulan ryhmä saadaan valmiiksi pudottamalla 1 kuula riviltä 3, 1 kuula riviltä 2 ja taas 1 kuula riviltä 3.</p>
+           <img src="sol_medium_2.png">
+           <p>Ensimmäistä ryhmää vastaavat klikkaukset olivat <b>2, 2, 3, 3, 2, 3</b>. Kaksi jäljellä olevaa 6 kuulan ryhmää saadaan muodostettua samalla tavalla, ja kokonaista ratkaisua vastaavat klikkaukset ovat <b>2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2, 3</b>.</p>
+           <p>On myös toinen ratkaisuvaihtoehto: <b>1, 1, 3, 3, 1, 3, 2, 2, 3, 3, 2, 3, 2, 2, 3, 3, 2, 3</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>Tavoite koostuu kahdesta keskenään samanlaisesta 12 kuulan ryhmästä. Kussakin ryhmässä on (oikealta vasemmalle) 7 <b>A</b>-kuulaa, 2 <B>B</B>-kuulaa ja 3 <b>C</b>-kuulaa. Millään rivillä ei ole peräkkäisiä <b>B</b>- tai <b>C</b>-kuulia, joten ensimmäisen ryhmän 3 peräkkäistä <b>C</b>-kuulaa pitää pudottaa 3 eri riviltä. Lisäksi näiden <b>C</b>-kuulien edestä on täytynyt pudottaa täsmälleen 2 <b>B</b>-kuulaa. Välitön havainto on, että yksi <b>C</b>-kuula pitää pudottaa riviltä 5, koska muuten 3 <b>C</b>-kuulan edestä pitäisi pudottaa 3 <b>B</b>-kuulaa.</p>
+           <p>Rivillä 5 on 3 <b>A</b>-kuulaa ennen <b>C</b>-kuulaa. Kaksi muuta <b>C</b>-kuulaa tulee pudottaa sellaisilta kahdelta riviltä, joissa <b>B</b>-kuuliin päästään pudottamalla yhteensä 7-3 = 4 <b>A</b>-kuulaa. Tämä onnistuu ainoastaan valitsemalla rivit 1 ja 3. Aloitamme siis pudottamalla yhteensä 7 <b>A</b>-kuulaa riveiltä 1, 3 ja 5:</p>
+           <img src="sol_hard_1.png">
+           <p>Tämän jälkeen pudotetaan 2 <b>B</b>-kuulaa riveiltä 1 ja 3:</p>
+           <img src="sol_hard_2.png">
+           <p>Ensimmäinen 12 kuulan ryhmä saadaan valmiiksi pudottamalla lopuksi 3 <b>C</b>-kuulaa riveiltä 1, 3 ja 5:</p>
+           <img src="sol_hard_3.png">
+           <p>Ensimmäistä ryhmää vastaavat klikkaukset olivat <b>1, 1, 3, 3, 5, 5, 5, 1, 3, 1, 3, 5</b>. Toinen ryhmä saadaan muodostettua samalla tavalla, ja kokonaista ratkaisua vastaavat klikkaukset ovat <b>1, 1, 3, 3, 5, 5, 5, 1, 3, 1, 3, 5, 1, 1, 3, 3, 5, 5, 5, 1, 3, 1, 3, 5</b>. Olennaisesti samaan ratkaisuun päästäisiin myös hieman erilaisilla klikkausjärjestyksillä.</p>
+        </div>
+        <h2>Tämä on tietojenkäsittelyä!</h2>
+        <p>Tehtävä muistuttaa <b>listojen lomitusta</b>, joka on kohtalaisen yleinen toimenpide monissa tietojenkäsittelyn sovelluksissa. Kun on annettu kaksi tai useampaa jonkinlaisista tietoalkioista (tässä kuulista) koostuvaa listaa (tässä kuulariviä), lomituksen tavoite on yhdistää nämä erilliset listat yhdeksi halutut kriteerit (tässä vastaavuus tavoitteen kanssa) täyttäväksi listaksi.</p>
+        <p>Lomitusta käytetään yleensä varsinkin järjestettyjen alkiolistojen yhteydessä, jolloin kukin aluksi annettu lista on järjestyksessä, ja ne halutaan yhdistää yhdeksi samojen kriteerien mukaan järjestetyksi listaksi. Kukin aluksi annettu lista voisi esimerkiksi sisältää tietyn luokan oppilaat pituusjärjestykseen järjestettyinä, ja näistä voitaisin haluta luoda yksi lista, joka esittää kaikki koko koulun oppilaaat pituusjärjestyksessä. Tavoite saataisiin aikaiseksi lomittamalla kaikki yksittäisten luokkien listat yhdeksi isoksi listaksi. Tämäntapainen keskenään samanlaista järjestystä noudattavien listojen lomittaminen onnistuu tehokkaasti, ja esimerkiksi jonkin alunperin järjestämättömän aliojoukon alkiot järjestykseen asettava (<b>lajitteleva)</b> ns. <b>lomituslajittelu</b> pohjautuu järjestettyjen listojen lomitukseen.</p>
+        <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Lomituslajittelu" target="_blank">https://fi.wikipedia.org/wiki/Lomituslajittelu</a>.</p>
          <img src="icon.png" style="display:none">
       </div>
    </body>

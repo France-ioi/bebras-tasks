@@ -96,8 +96,34 @@
             <img id="treasure" src="treasure.png" style="display:none">
          </div>
       </div>
-      <div id="solution">
-         <h2>Ratkaisu</h2>
-      </div>
+    <div id="solution">
+
+          <h2>Ratkaisu</h2>
+          <div class="easy">
+            <p>Tässä toimii seuraava yleinen ratkaisuperiaate: valitaan jokaisella askeleella sellainen vielä käymättömään huoneeseen johtava käytävä, jossa on vähiten seiniä.</p>
+           <p>Esimerkiksi oheisen kuvan tilanteessa etenisimme seuraavaksi oikealla alhaalla olevaa käytävää pitkin, jossa on vain kaksi seinää. Sen yläpuolella olevat kaksi muuta käymättömään huoneeseen johtavaa käytävää ovat huonompia, koska niissä on kolme seinää.</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>Tässä toimii seuraava yleinen ratkaisuperiaate: valitaan jokaisella askeleella sellainen vielä käymättömään huoneeseen johtava käytävä, jossa on vähiten seiniä.</p>
+           <p>Esimerkiksi oheisen kuvan tilanteessa etenisimme seuraavaksi toisen sarakkeen alarivillä olevaa käytävää, jossa on yksi seinä.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Tässä toimii seuraava yleinen ratkaisuperiaate: valitaan jokaisella askeleella sellainen vielä käymättömään huoneeseen johtava käytävä, jossa on ohuin seinä.</p>
+           <p>Esimerkiksi oheisen kuvan tilanteessa etenisimme seuraavaksi jompaa kumpaa käytävää, joissa on 13 yksikköä paksu seinä, koska kaikissa muissa käymättömiin huoneisiin johtavissa käytävissä on paksumpi seinä.</p>
+           <img src="sol_hard.png">
+         </div>
+
+
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+      <p>Tehtävä vastaa tietojenkäsittelyssä hyvin kuuluisaa <b>pienimmän virittävän puun</b> ongelmaa. Kun on annettu jokin <b>solmuista</b> (tässä huoneista) ja niiden välisistä <b> painotetuista kaarista</b> (tässä seiniä sisältävistä käytävistä) koostuva <b>graafi</b>, on minimivirittävä puu sellainen mahdollisimman pienen painojen summan omaava kaarien (tässä käytävien) joukko, joita pitkin pääsee kaikkiin solmuihin.</p>
+      <p>Minimivirittävät puut voivat kuvata monia käytännön tilanteita. Esimerkiksi jos meillä on joukko rakennuksia, jotka halutaan yhdistää toisiinsa verkkokaapelilla (vaikkapa internet-yhteyden jakamiseksi), voisimme ajatella taloja solmuina ja kunkin taloparin välisen kaapeloinnin kustannuksia painotettuna kaarena. Tällöin halvin tapa yhdistää rakennukset yhtenäiseksi verkoksi niin, että kustakin rakennuksesta kulkee jonkinlainen kaapelireitti kuhunkin toiseen rakennukseen, voidaan määrittää muodostamalla minimivirittävä puu.</p>
+      <p>Tehtävän ratkaisun yhteydessä kuvattu periaate vastaa Primin algoritmia, joka on yksi tunnetuimmista minimivirittävän puun ratkaisualgoritmeista.</p>
+      <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a>, <a href="https://fi.wikipedia.org/wiki/Viritt%C3%A4v%C3%A4_puu" target="_blank">https://fi.wikipedia.org/wiki/Virittävä_puu</a> ja <a href="https://en.wikipedia.org/wiki/Prim%27s_algorithm" target="_blank">https://en.wikipedia.org/wiki/Prim's_algorithm</a> (englanniksi).</p>
+
+    </div> <!-- task-solution -->
     </body>
 </html>

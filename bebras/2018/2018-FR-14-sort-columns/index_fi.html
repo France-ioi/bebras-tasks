@@ -22,7 +22,7 @@
             "language": "fi",
             "version": "fi.01",
             "authors": "France-ioi",
-            "translators": [],
+            "translators": "Heikki Hyyrö",
             "license": "CC BY-SA 3.0",
             "taskPathPrefix": "",
             "modulesPathPrefix": "",
@@ -39,7 +39,7 @@
             nSortText : function(nSort) {
                return "Järjestyskertojen lukumäärä: " + nSort;
             },
-            trick : "Ehdotus: ratkaisu voi löytyä helpommin,\njos keskityt vain tavoitteen palleroihin.",
+            trick : "Ehdotus: ratkaisu voi löytyä helpommin,\njos keskityt vain tavoitteen helmiin.",
             success: "Onnittelut, ratkaisit tämän version!",
             wrongAnswer: "Punaisella korostettu sarake on väärässä kohdassa.",
             tooManySort : "Onnistuit järjestämään sarakkeet oikein, mutta käyttäen yli 3 järjestyskertaa. Yritä ratkaista tehtävä vain 3 järjestyskerralla."
@@ -67,7 +67,7 @@
          <div id="taskContent">        <!-- will contain the content of the task -->
             <div id=zone_1>    
                <div class=consigne>
-                  <p>"Järjestä"-napin klikkaaminen muuttaa <b>sarakkeiden järjestystä</b> niin, että klikatun napin rivin <span class="easy">pienet pallurat siirtyvät isojen palluroiden vasemmalla puolelle</span><span class="medium">pallurat tulevat kasvavaan kokojärjestykseen (pienemmät vasemmalle, isommat oikealle)</span><span class="hard">luvut tulevat kasvavaan järjestykseen</span>.</p>
+                  <p>"Järjestä"-napin klikkaaminen muuttaa <b>sarakkeiden järjestystä</b> niin, että klikatun napin rivin <span class="easy">pienet helmet siirtyvät isojen helmien vasemmalla puolelle</span><span class="medium">helmet tulevat kasvavaan kokojärjestykseen (pienemmät vasemmalle, isommat oikealle)</span><span class="hard">luvut tulevat kasvavaan järjestykseen</span>.</p>
                   <p>Yksittäisen järjestämisen yhteydessä kutakin saraketta siirretään mahdollisimman vähän.</p>
                   <p>Asettele sarakkeet samaan järjestykseen kuin tavoitekuvassa klikkailemalla "Järjestä"-nappeja.</p>
                   <p class="medium hard">Saat tästä versiosta täydet pisteet, jos pääset tavoitteeseen käyttämällä korkeintaan 3 järjestyskertaa.</p>
@@ -84,10 +84,48 @@
          <img src="icon.png" style="display:none">
       </div>
       <div id="solution">
-         <h2>Solution</h2>
-      <!-- description of the solution -->
-         <h2>C'est de l'informatique !</h2>
-      <!-- explanations on why this task is about informatics -->
+         <h2>Ratkaisu</h2>
+            <p>Otetaan lähtökohdaksi ehdotus, että kannattaa keskittyä tavoitteen helmiin.</p>
+            <div class="easy">
+              <p>Viimeinen järjestyskerta täytyy suorittaa jollekin tavoitteen suuruusjärjestystä noudattavista riveistä <b>c</b>, <b>e</b> tai <b>f</b>. Valitaan vaikkapa <b>c</b> viimeiseksi järjestettäväksi riviksi.</p>
+              <img src="sol_easy_1_fi.png">
+              <p>Edellinen siirtää sarakkeen <b>D</b> viimeiseksi eikä muuta muiden sarakkeiden järjestystä. Sitä aiempien järjestyskertojenpitää asetttaa sarakkeet <b>A</b>, <b>B</b> ja <b>C</b> haluttuun järjestykseen. Rivin <b>e</b> järjestäminen siirtää sarakkeen <b>A</b> alkuun vaikuttamatta muihin sarakkeisiin, joten valitaan se toiseksi viimeiseksi järjestettäväksi riviksi.</p>
+              <img src="sol_easy_2_fi.png">
+              <p>Kolmanneksi viimeisen (joka samalla osoittautuu ensimmäiseksi) järjestyskerran pitää asettaa sarakkeet <b>B</b> ja <b>C</b> oikeaan järjestykseen. Tämä onnistuu valitsemalla ensimmäiseksi järjestettäväksi riviksi rivi <b>f</b>.
+              <img src="sol_easy_3_fi.png">
+              <p>Kokonainen ratkaisu saadaan siis järjestämällä ensin rivi <b>f</b>, sitten <b>b</b> ja lopuksi <b>c</b>.</p>
+              <p>Tähän on muitakin mahdollisia ratkaisuja, kuten esim. rivien <b>b</b>, <b>f</b> ja <b>e</b>, tai rivien <b>d</b>, <b>c</b> ja <b>f</b>, tai rivien <b>e</b>, <b>c</b> ja <b>f</b> järjestäminen.</p>
+            </div>
+
+            <div class="medium">
+              <p>Viimeinen järjestyskerta täytyy suorittaa jommalle kummalle tavoitteen suuruusjärjestystä noudattavista riveistä <b>c</b> tai <b>e</b>. Valitaan vaikkapa <b>c</b> viimeiseksi järjestettäväksi riviksi.</p>
+              <img src="sol_medium_1_fi.png">
+              <p>Tämä siirtää sarakkeen <b>A</b> ensimmäiseksi, ja lisäksi varmistaa, että sarakkeet <b>B</b> ja <b>C</b> ovat ennen sarakkeita <b>D</b>, <b>E</b> ja <b>F</b>. Viimeksimainittujen tarkempi järjestys riippuu edeltävistä järjestyskerroista. Asetetaan seuraavaksi sarakkeet <b>B</b> ja <b>C</b> oikeaan keskinäiseen järjestykseen valitsemalla <b>a</b> toiseksi viimeiseksi järjestettäväksi riviksi.</p>
+              <img src="sol_medium_2_fi.png">
+              <p>Voimme todeta, että rivin <b>a</b> järjestäminen asettaa myös sarakkeet <b>E</b> ja <b>F</b> oikeaan keskinäisen järjestykseen. Tarkemmin ottaen nyt ainoa väärässä järjestyksessä oleva sarake on <b>D</b>, jonka rivin <b>a</b> järjestäminen siirtää sarakkeen <b>F</b> oikealle puolelle. Tämä voidaan korjata lisäämällä rivin <b>a</b> järjestämiskerran perään (uudeksi toiseksi viimeiseksi järjestämiskerraksi) sellaisen rivin järjestäminen, joka siirtää sarakkeen <b>D</b> oikeaan paikkaan sotkematta muita sarakkeita. Rivin <b>e</b> järjestäminen tuottaa halutun vaikutuksen.</p>
+              <img src="sol_medium_3_fi.png">
+              <p>Kokonainen ratkaisu saadaan siis järjestämällä ensin rivi <b>a</b>, sitten <b>e</b> ja lopuksi <b>c</b>.</p>
+              <p>Toinen mahdollinen ratkaisu on järjestää rivit <b>a</b>, <b>c</b> ja <b>e</b>.</p>
+
+            </div>
+
+            <div class="hard">
+              <p>Viimeinen järjestyskerta täytyy suorittaa tavoitteen ainoalle suuruusjärjestystä noudattavalle riville <b>d</b>.</p>
+              <img src="sol_hard_1_fi.png">
+              <p>Rivin <b>d</b> järjestäminen asettaa kolme ryhmää järjestykseen: ensin <b>A</b>, <b>B</b> ja <b>C</b>, sitten <b>D</b>, <b>E</b> ja <b>F</b>, ja lopuksi <b>G</b> ja <b>H</b>. Kunkin ryhmän sisäinen järjestys määräytyy aiempien järjestyskertojen perusteella. Valitaan siis aiemmat järjestyskerrat siten, että kunkin ryhmäm sisäiset sarakkeet tulevat järjestetyiksi oikein.</p>
+              <p>Aloitetaan sarakkeiden <b>A</b>, <b>B</b> ja <b>C</b> ryhmästä. Ainoa niiden järjestyksen yksikäsitteisesti oikein määrittävä rivi on <b>f</b>; valitaan siis <b>f</b> toiseksi viimeisen järjestyskerran riviksi. Huomaamme, että tämä järjestyskerta asettaa samalla myös sarakkeiden <b>G</b> ja <b>H</b> ryhmän järjestykseen, ja lisäksi sarakkeiden <b>D</b>, <b>E</b> ja <b>F</b> ryhmässä <b>D</b> tulee oikeaan järjestykseen.</p>
+              <img src="sol_hard_2_fi.png">
+              <p>Jäljellä on enää sarakkeiden <b>D</b>, <b>E</b> ja <b>F</b> ryhmän sarakkeiden <b>E</b> ja <b>F</b> järjestäminen keskenään oikein. Rivi <b>g</b> on ainoa, jonka järjestäminen asettaa sarakkeen <b>E</b> ennen saraketta <b>F</b>.</p>
+              <img src="sol_hard_3_fi.png">
+              <p>Kokonainen ratkaisu saadaan siis järjestämällä ensin rivi <b>g</b>, sitten <b>f</b> ja lopuksi <b>d</b>.</p>
+              <img src="sol_hard_4_fi.png">
+           </div>
+
+         <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>Tehtävässä suoritetaan tietojenkäsittelyssä varsin yleistä toimenpidettä: <b>lajittelua</b>. Lajittelussa pitää järjestää jokin alkiojoukko tietyn vertailusäännön mukaiseen järjestykseen. Kaikkein yksinkertaisin esimerkki lienee jonkin lukujoukon järjestäminen kasvavaan järjestykseen. Lajiteltavat alkiot sekä vertailusääntö voivat toki olla monimutkaisempiakin. Alkiot esimerkiksi voisivat kuvata henkilötietoja, jotka halutaan lajitella vaikkapa ensisijaisesti sukunimen, toissijaisesti (jos sukunimet keskenään samat) etunimen ja kolmanneksi (jos sekä suku- että etunimi olivat samat) iän mukaiseen järjestykseen. Koska lajittelu on hyvin keskeinen toimenpide monissa tietojenkäsittelyn sovelluksissa, on olemassa laaja kirjo erilaisia lajittelualgoritmeja.</p>
+         <p>Lajittelualgoritmia sanotaan <b>vakaaksi</b>, jos se säilyttää lajiteltavan alkiojoukon keskenään samanarvoisiksi katsotut alkiot niiden lajittelua edeltäneessä keskinäisessä järjestyksessä. Tämän ansiosta vakaalla lajitelualgoritmilla on mahdollista järjestää alkiojoukko asteittain tarkempaan ja tarkempaan järjestykseen eri kriteerien perusteella. Esimerkiksi jos tarkastellaan yllä kuvattua henkilötietojen lajittelua, voisi tiedot lajitella vakaalla lajittelualgoritmilla kolmessa vaiheessa: ensin iän, sitten etunimen ja lopuksi sukunimen perusteella (voit pohtia, miksi lajittelut tehtäisiin tässä järjestyksessä). Tämä toimii oikein nimenomaan <i>vakaalla</i> lajittelualgoritmilla.</p>
+         <p>Tehtävässä käytetty rivien lajittelutapa toimi vakaasti, ja ratkaisuissa pitikin hyödyntää tätä ominaisuutta. Kun jonkin rivin mukaan lajittelu asetti sarakkeet tiettyyn järjestykseen, pysyivät nämä sarakkeet keskenään samassa järjestyksessä myöhemminkin, jos ne olivat myöhempien järjestyskertojen käyttämissä riveissä joko samassa järjestyksessä tai vähintään keskenään samanarvoisia.</p>
+         <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Lajittelualgoritmi" target="_blank">https://fi.wikipedia.org/wiki/Lajittelualgoritmi</a>.</p>
       </div>
    </body>
 

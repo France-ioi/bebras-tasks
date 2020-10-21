@@ -174,6 +174,56 @@
       </div>
       <div id="solution">
         <h2>Ratkaisu</h2>
-      </div>
+          <div class="easy">
+           <p>Eräs ratkaisu on:</p>
+           <img src="sol_easy_repl1_fi.png" style="margin-right:3em">
+           <img src="sol_easy_repl2_fi.png" style="margin-right:3em">
+           <img src="sol_easy_repl3_fi.png">
+           <p>Nämä korvaukset muodostavat tavoitteen askeleittain seuraavasti:</p>
+           <img src="sol_easy_step0.png"><br/>
+           <img src="sol_easy_step1.png"><br/>
+           <img src="sol_easy_step2.png"><br/>
+           <img src="sol_easy_step3.png">
+         </div>
+
+         <div class="medium">
+           <p>Korvataan aluksi neliö kärkikolmiolla, ja sen jälkeen ympyrä neliöllä:</p>
+           <img src="sol_medium_repl1_fi.png" style="margin-right:3em">
+           <img src="sol_medium_repl2_fi.png">
+           <p>Näiden korvausten tuottamat muutokset:</p>
+           <img src="sol_medium_step0.png"><br/>
+           <img src="sol_medium_step1.png" style="margin-left:7px"><br/>
+           <img src="sol_medium_step2.png" style="margin-left:2px">
+           <p>Tämän jälkeen täytyy vielä saada korvattua tähti kolmiolla ja kolmio tähdellä:</p>
+           <img src="sol_medium_step2b.png">
+           <p>Tämä saadaan aikaiseksi kolmella korvauksella käyttämällä jotain nykytilanteesta puuttuvaa kuviota väliaikaisena apukuviona (alla käytetään salmiakkia):</p>
+           <img src="sol_medium_repl3_fi.png" style="margin-right:3em">
+           <img src="sol_medium_repl4_fi.png" style="margin-right:3em">
+           <img src="sol_medium_repl5_fi.png">
+           <p>Alla on esitetty näiden korvausten tuottamat muutokset. Ratkaisu on nyt valmis.</p>
+           <img src="sol_medium_step2.png" style="margin-left:2px"><br/>
+           <img src="sol_medium_step3.png"><br/>
+           <img src="sol_medium_step4.png" style="margin-left:4px"><br/>
+           <img src="sol_medium_step5.png" style="margin-left:4px">
+         </div>
+
+         <div class="hard">
+           <p>Aloitetaan tarkastelu tähdestä. Se pitää korvata neliöllä. Toisaalta neliö pitää korvata salmiakilla ja salmiakki tähdellä.</p>
+           <img src="sol_hard_step0.png">
+           <p>Nämä muutokset saadaan aikaan käyttämällä jotain alkutilanteesta puuttuvaa kuviota väliaikaisena apukuviona. Ainoa tällainen on risti. Alla on esitetty eräs tapa tehdä sopivat korvaukset:</p>
+           <img src="sol_hard_repl2_fi.png" style="width: 360px">
+           <p>Edellisten korvausten jälkeen ollaan tilanteessa:</p>
+           <img src="sol_hard_step1.png">
+           <p>Alla on vertailun vuoksi tavoite:</p>
+           <img src="sol_hard_step2.png">
+           <p>Meidän pitää vielä korvata kolmio kärkikolmiolla, ympyrä kolmiolla ja kärkikolmio ympyrällä. Tässä tulee jälleen käyttää jotain nykytilanteesta puuttuvaa kuviota väliaikaisena apukuviona. Voimme käyttää taas ristiä. Alla one esitetty eräs tapa. Näiden korvausten jälkeen ratkaisu on valmis.</p>
+           <img src="sol_hard_repl1_fi.png">
+         </div>
+
+        <h2> Tämä on tietojenkäsittelyä! </h2>
+
+            <p>Esimerkiksi monet tekstinkäsittelyohjelmat sisältävät "etsi ja korvaa"-toiminnon, jolla kaikki antamamme hakumerkkijonon esiintymät dokumentissa voi korvata antamallamme korvausmerkkijonolla. Tehtävässä käytettiin samantapaista toimintoa, joskin etsittiin ja korvattiin merkkijonojen sijaan kuvioita ja pääpaino oli sen pohtimisessa, miten korvaukset muuttavat lähtöasetelmaa.</p>
+
+    </div>
     </body>
 </html>

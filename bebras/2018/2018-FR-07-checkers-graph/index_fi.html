@@ -22,7 +22,7 @@
             "language": "fi",
             "version": "fi.01",
             "authors": "France-ioi",
-            "translators": [],
+            "translators": "Heikki Hyyrö",
             "license": "CC BY-SA 3.0",
             "taskPathPrefix": "",
             "modulesPathPrefix": "",
@@ -129,9 +129,45 @@
       </div><!-- #task -->
       <div id="solution">
          <h2>Ratkaisu</h2>
-      <!-- description of the solution -->
+         <div class="easy">
+           <p><b>A</b>:n ja <b>B</b>:n välillä on yhteys, joten aloitetaan asettamalla ne vaikkapa vierekkäin.</p>
+           <img src="sol_easy_1.png">
+           <p><b>B</b>:n ja <b>C</b>:n välillä on yhteys, joten <b>C</b> pitää laittaa <b>B</b>:n kanssa samalle riville tai sarakkeeseen. Jos laittaisimme <b>C</b>:n samalle riville, syntyisi yhteys myös <b>A</b>:n ja <b>C</b>:n välille. Tämä ei vastaisi tavoitetta.</p>
+           <img src="sol_easy_2.png">
+           <p>Asetamme siis <b>C</b>:n samaan sarakkeeseen kuin <b>B</b>, esimerkiksi seuraavasti:</p>
+           <img src="sol_easy_3.png">
+           <p>Vain <b>D</b> on jäljellä. Sillä on yhteys vain <b>C</b>:n kanssa, joten <b>D</b> pitää asettaa samalle riville tai sarakkeeseen kuin <b>C</b> olematta kuitenkaan samalla rivillä tai sarakkeessa kuin <b>A</b> tai <b>B</b>. Sama sarake ei käy, koska <b>B</b> on siinä. Samalla rivillä käy kaikki muut ruudut paitsi se, joka olisi samassa sarakkeessa <b>A</b>:n kanssa. Tässä on esitetty yksi ratkaisu:</p>
+           <img src="sol_easy_4.png">
+           <p>Alla on vielä esimerkin vuoksi toinen hieman erilainen ratkaisu. Tehtävään on monia erilaisia ratkaisuvaihtoehtoja.</p>
+           <img src="sol_easy_5.png">
+         </div>
+
+         <div class="medium">
+           <p><b>A</b>, <b>B</b> ja <b>C</b> ovat yhteyksissä toisiinsa. Aloitetaan luomalla nämä yhteydet asettamalle ne vierekkäin.</p>
+           <img src="sol_medium_1.png">
+           <p><b>D</b> on yhteydessä edellisistä kolmesta vain <b>B</b>:n kanssa. Luodaan tämä yhteys asettamalla <b>D</b> samaan sarakkeeseen kuin <b>B</b>.</p>
+           <img src="sol_medium_2.png">
+           <p><b>E</b> on yhteydessä sekä <b>C</b>:n että <b>D</b>:n kanssa (ja vain niiden), joten asetetaan <b>E</b> samalle riville kuin <b>D</b> ja samaan sarakkeeseen kuin <b>C</b>. Ratkaisu on valmis.</p>
+           <img src="sol_medium_3.png">
+         </div>
+
+         <div class="hard">
+           <p>Yksi toimivaksi osoittautuva lähestymistapa on aloittaa keskittymällä tavoitteessa oleviin "kolmioihin" eli sellaisiin kolmen pelinappuloiden ryhmiin, joissa kaikkien välillä on keskinäiset yhteydet. Kunkin tällaisen kolmen nappulan ryhmän kolmen nappulan on oltava keskenään samalla rivillä tai keskenään samassa sarakkeessa.</p>
+           <p>Aloitetaan asettamalla kolmion <b>A</b>-<b>D</b>-<b>G</b> nappulat vierekkäin, ja lisätään sen jälkeen kolmion <b>D</b>-<b>C</b>-<b>F</b> nappulat <b>C</b> ja <b>F</b> samaan sarakkeeseen kuin <b>D</b>.</p>
+           <img src="sol_hard_1.png">
+           <p>Kolmion <b>H</b>-<b>C</b>-<b>E</b> puuttuvat nappulat <b>H</b> ja <b>E</b> pitää yhdistää <b>C</b>:n kanssa. Asetetaan ne samalle riville kuin <b>C</b> mutta menemättä samaan sarakkeeseen kuin muut toistaiseksi asetetut nappulat.</p>
+           <img src="sol_hard_2.png">
+           <p>Enää puutuu nappula <b>B</b>, jolla pitää olla yhteys vain <b>E</b>:n ja <b>F</b>:n kanssa. Asetetaan <b>B</b> samalle riville kuin <b>F</b> ja samaan sarakkeeseen kuin <b>E</b>. Ratkaisu on valmis.</p>
+           <img src="sol_hard_3.png">
+         </div>
          <h2>Tämä on tietojenkäsittelyä!</h2>
-      <!-- explanations on why this task is about informatics -->
+         <p>Tehtävä esitteli epäsuorasti tietojenkäsittelyssä yleisesti käytettyä apuvälinettä, <b>graafeja</b>. Graafi koostuu solmuista (tehtävässä pelinappulat) sekä niiden välisiä yhteyksiä kuvaavista kaarista (tehtävässä käytettiin nimitystä "yhteys"). Tehtävässä annettu tavoitekuva vastasi hyvin tyypillistä tapaa piirtää graafi.
+         </p>
+         <p>Yksi luonteva esimerkki graafien soveltamisesta on erilaiset reitinhakuongelmat. Esim. kaupunkien välisiä, mahdollisesti lentokoneen vaihtoja sisältäviä, lentoyhteyksiä voidaan analysoida graafien avulla: tällöin lentokentät ovat solmuja ja lentokenttien väliset lentoyhteydet ovat kaaria. Myös esim. monenlaisia sosiaalisia verkostoja voisi mallintaa graafilla, jossa ihmiset ovat solmuja ja kaaret kuvaavat ihmisten välisiä suhteita.</p>
+         <p>Tietojenkäsittelyssä pyritään usein muuntamaan ongelma graafiksi, koska moniin graafimuodossa esitettyihin ongelmiin on olemassa valmiita ja hyvin analysoituja ratkaisualgoritmeja.</p>
+           
+           <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a> ja <a href="https://fi.wikipedia.org/wiki/Verkkoteoria" target="_blank">https://fi.wikipedia.org/wiki/Verkkoteoria</a>.</p>
+
       <img src="icon.png" style="display:none">
    </div>
    </body>

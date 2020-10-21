@@ -115,13 +115,47 @@
          </div>
       </div><!-- task -->
       <div id="solution">
+      <h2>Ratkaisu</h2>
+      <div class="easy">
+           <p>Tässä versiossa reitin askeleet vastaavat lukuja seuraavasti:</p>
+           <ul>
+           <li><b>0</b> tarkoittaa siirtymistä askeleen oikealle.</li>
+           <li><b>1</b> tarkoittaa rivin vaihtamista (joko yläriviltä alariville tai päinvastoin).</li>
+           </ul>
+           <p>Esimerkiksi lukujono <b>0 1 0 0 1 0 1</b> vastaa reitin askeleita <b>oikealle, rivin vaihto (alas), oikealle, oikealle, rivin vaihto (ylös), oikealle, rivin vaihto (alas)</b>.</p>
+           <p>Edellä kuvatut säännöt tuottavat tehtävässä annettua lukujonoa vastaavaksi reitiksi:</p>
+           <img src="sol_easy.png">
+         </div>
 
-         <h2>Ratkaisu</h2>
-   
+         <div class="medium">
+           <p>Tässä versiossa reitin askeleet vastaavat lukuja seuraavasti:</p>
+           <ul>
+           <li><b>0</b> tarkoittaa siirtymistä askeleen ylös.</li>
+           <li><b>1</b> tarkoittaa siirtymistä askeleen oikealle.</li>
+           <li><b>2</b> tarkoittaa siirtymistä askeleen alas.</li>
+           <li><b>3</b> tarkoittaa siirtymistä askeleen vasemmalle.</li>
+           </ul>
+           <p>Esimerkiksi lukujono <b>1 2 3 2 1 1 0</b> vastaa reitin askeleita <b>oikealle, alas, vasemmalle, alas, oikealle, oikealle, ylös</b>.</p>
+           <p>Edellä kuvatut säännöt tuottavat tehtävässä annettua lukujonoa vastaavaksi reitiksi:</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Tässä versiossa reitin askeleet vastaavat lukuja seuraavasti:</p>
+           <ul>
+           <li><b>0</b> tarkoittaa siirtymistä eteenpäin.</li>
+           <li><b>1</b> tarkoittaa kääntymistä menosuuntaan nähden 90 astetta oikealle.</li>
+           <li><b>2</b> tarkoittaa kääntymistä menosuuntaan nähden 90 astetta vasemmalle.</li>
+           </ul>
+           <p>Esimerkiksi lukujono <b>0 0 1 0 2 2 0</b> vastaa reitin askeleita <b>eteenpäin, eteenpäin, käännös oikealle, eteenpäin, käännös vasemmalle, käännös vasemmalle, eteenpäin</b>.</p>
+           <p>Edellä kuvatut säännöt tuottavat tehtävässä annettua lukujonoa vastaavaksi reitiksi:</p>
+           <img src="sol_hard.png">
+         </div>
 
          <h2>Tämä on tietojenkäsittelyä!</h2>
-   
-
+         <p>Tietojenkäsittelyn sovelluksissa on usein kätevää ja tehokasta kuvata tieto tiiviissä lukumuodossa. Yleisesti ottaen voitaisiin puhua <b>koodista</b> eli tavasta esittää jotain tietoa (usein toisella tavalla). Esimerkiksi tehtävässä käsitellyt tavat esittää reitin askeleet lukumuodossa mahdollistavat reitin kuvaamisen varsin pienellä määrällä dataa: vertaa esim. lukuesitystä <b>1 2 3 2 1 1 0</b> ja sanallista esitystä <b>oikealle, alas, vasemmalle, alas, oikealle, oikealle, ylös</b>. Koska tietokoneet joka tapauksessa pohjimmiltaan käsittelevat tietoa lukumuodossa, on lukumuotoisen esityksen käsittely yleensä myös tehokasta. Ihmisten on toki yleensä selvästi helpompi ymmärtää vähemmän tiivistä / sanallista esitysmuotoa.</p>
+         <p>Riippuu sovelluksesta, millainen datan esitysmuoto mihinkin tilanteeseen kannattaa valita. Tehtävässä kahden tähden version esitystapa rajoittui vain tilanteeseen, jossa reitti voi kulkea kahdella rivillä, kun kahden muun version esitystavat voivat kuvata periaatteessa mielivaltaisesti ruudukossa kulkevan reitin.</p>
+         <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Koodi" target="_blank">https://fi.wikipedia.org/wiki/Koodi</a>.</p>
      </div> <!-- task-solution -->
    </body>
 </html>

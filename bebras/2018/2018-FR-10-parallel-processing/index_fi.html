@@ -27,7 +27,7 @@
             "language": "fi",
             "version": "fi.01",
             "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, France-ioi",
-            "translators": [],
+            "translators": "Heikki Hyyrö",
             "license": "CC BY-SA 3.0",
             "taskPathPrefix": "",
             "modulesPathPrefix": "",
@@ -118,9 +118,45 @@
     <!-- task -->
 
     <div id="solution">
-        <h2>Solution</h2>
+        <h2>Ratkaisu</h2>
 
-        <h2>It's infromatics!</h2>
+         <div class="easy">
+           <p>Robotit <b>1</b> ja <b>2</b> voivat törmätä vain niiden reittien risteyksessä.</p>
+           <img src="sol_easy_1.png">
+           <p>Voimme esimerkiksi ensin liikuttaa robotin <b>2</b> risteykseen ja jättää sen siihen. Kun tämän jälkeen liikutamme myös robotin <b>1</b> risteykseen asti, se törmää robottiin <b>2</b>.</p>
+           <img src="sol_easy_2_fi.png">
+           <p>Edellä kuvattu ratkaisu vastaa robottien ohjausnappien klikkaamista järjestyksessä: <b>2, 2, 1, 1, 1, 1, 1</b>.</p>
+         </div>
+
+         <div class="medium">
+           <p>Jos liikutamme ensin robotin <b>2</b> robottien reittien risteykseen ja alamme vasta sen jälkeen liikuttaa robottia <b>1</b> eteenpäin, jää robotti <b>1</b> jumiin törmäämättä robottiin <b>2</b>: kun robotti <b>1</b> saapuisi robotin <b>2</b> viereen, siirtyisi ohjelman 1. askel 3. askeleeseen, joka taas siirtyisi 1. askeleeseen, joka taas siirtyisi 3. askeleeseen, ja niin edelleen.</p>
+           <img src="sol_medium_0_fi.png" style="width:650px">
+
+           <p>Meidän täytyy siis saada aikaan tilanne, jossa robotti <b>1</b> on valmis suorittamaan eteenpäin liikkuvan 2. askeleen, vaikka sen edessä olisikin robotti <b>2</b>. Tämä voidaan tehdä esimerkiksi liikuttamalla ensin robotti <b>1</b> risteystä edeltävään ruutuun ja suorittamalla edessä olevaa ruutua tutkiva 1. askel jo valmiiksi: nyt robotti <b>1</b> on valmis liikkumaan eteenpäin tutkimatta enää edessään olevaa ruutua.  </p>
+           <img src="sol_medium_1_fi.png" style="width:650px">
+            
+           <p>Liikutetaan tämän jälkeen robotti <b>2</b> risteykseen ja liikutetaan sen jälkeen robottia <b>1</b>: nyt robotti <b>1</b> törmää robottiin <b>2</b>.</p>
+           <img src="sol_medium_2_fi.png" style="width:650px"> 
+           
+           <p>Edellä kuvattu ratkaisu vastaa robottien ohjausnappien klikkaamista järjestyksessä: <b>1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>Jotta robotit saataisiin jumiin, pitää ne ensin siirtää asemiin, jossa ne ovat yhden askeleen päässä lopullisesta jumiutumiseen johtavasta ruudusta ja niiden ohjelmissa on seuraavaksi vuorossa eteenpäin liikkuva 2. askel.</p>
+           <p>Robotit voidan suoraviivaisesti liikuttaa yksitellen seuraavaan tilanteeseen asti:</p>
+           <img src="sol_hard_1_fi.png" style="width:650px">
+           <p>Tämän jälkeen tarvitsee enää suorittaa 2. askel kullekin robotille, jolloin tuloksena on kaikkien robottien jumittuminen:</p>
+           <img src="sol_hard_2.png" style="width:215px">
+           <p>Edellä kuvattu ratkaisu vastaa robottien ohjausnappien klikkaamista järjestyksessä: <b>1, 1, 1, 1, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 1, 2, 3, 4</b>.</p>
+         </div>
+
+
+        <h2>Tämä on tietojenkäsittelyä!</h2>
+        <p>Tehtävä sivuaa mm. seuraavia tietojenkäsittelyn alueita:</p>
+        <ul><li><b>Samanaikainen laskenta</b>: usean ohjelman (tai saman ohjelman kopioiden) suorittamista samanaikaisesti toistensa rinnalla.</li>
+        <li><b>Autonomiset toimijat</b>: usean itsenäisesti toimivan ohjelman tai laitteen yhteistyö.</li></ul>
+        <p>Kummallekin edellämainituista alueista on yhteistä se, että täytyy hallita useita rinnakkain suoritettavia/toimivia ohjelmia/toimijoita. Tämä voi olla todella haastavaa saada toimimaan oikein. Esimerkiksi tämän tehtävän kolmen tähden versiossa oli tilanne, jossa ohjelman 1. askel pyrki estämään robotin törmäämisen toiseen robottiin, mutta siitä huolimatta robotit oli mahdollista saada törmäämään toisiinsa. Tehtävä toki on yksinkertaistus oikeasta elämästä, mutta esimerkiksi autonomisten autojen (robottiautojen) kehittäjille on suuri haaste saada toteutettua autoa ohjaava järjestelmä niin, että sen toimintalogiikka kykenisi luotettavasti välttämään tarpeettomia kolareita erilaisissa toimintaympäristöissä ja mahdollisissa poikkeustilanteissa.</p>
+        <p>Katso lisää esim. <a href="https://en.wikipedia.org/wiki/Concurrent_computing" target="_blank">https://en.wikipedia.org/wiki/Concurrent_computing</a> (englanniksi) ja <a href="https://en.wikipedia.org/wiki/Autonomous_agent" target="_blank">https://en.wikipedia.org/wiki/Autonomous_agent</a> (englanniksi).</p>
     </div>
     <!-- task-solution -->
 </body>
