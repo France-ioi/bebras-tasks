@@ -496,8 +496,54 @@
     <div id="solution">
         <h2>Ratkaisu</h2>
 
-        <h2>Tämä on tietojenkäsittelyä!</h2>
+         <div class="easy">
+           <p>Ensimmäisen värityksen jälkeen vasemmanpuoleisen sarakkeen kaksi ruutua ovat sinisiä ja oikeanpuoleisen sarakkeen kaksi ruutua ovat vihreitä.</p>
+           <p>Meidän tulee määrittää vihreälle ruudulle värityssääntö, joka luo tavoitekuvion oikean yläneljänneksen tai alaneljänneksen (jotka ovat samanlaisia) neljä pientä ruutua:</p>
+           <img src="sol_easy_1.png">
+           <p>Tämä antaa meille puolittaisen ratkaisun:</p>
+           <img src="sol_easy_2.png" style="width:600px">
+           <p>Määritetään seuraavaksi samaan tapaan siniselle ruudulle värityssääntö, joka luo tavoitekuvion vasemman yläneljänneksen tai alaneljänneksen neljä pientä ruutua. Nyt meillä on seuraavat värityssäännöt, ja ne tuottavat halutun lopputuloksen.</p>
+           <img src="sol_easy_3.png">
+         </div>
 
+         <div class="medium">
+           <p>Tässä versiossa meidän pitää määrittää myös ensimmäinen värityssääntö, joka värittää valkoisen alkuneliön neljällä vihreällä tai sinisellä aliruudulla.<p>
+           <p>Aloitetaan vertailemalla tavoitteen neljänneksiä keskenään: keskenään samanlaiset neljännekset kannattaa värittää samalla värillä, jotta niiden sisältö pysyy samanlaisena myöhempienkin väritysten jälkeen. Tavoitekuvion vasen yläneljännes on samanlainen kuin oikea alaneljännes, ja oikea yläneljännes on samanlainen kuin vasen alaneljännes. Tämän pohjalta voidaan määrittää seuraava värityssääntö (tämä ei ole ainoa mahdollisuus: vihreät ja siniset värit voisivat myös vaihtaa paikkoja keskenään).</p>
+           <img src="sol_medium_1.png">
+           <p>Tämä tuottaa ensimmäisen välituloksen:</p>
+           <img src="sol_medium_2.png" style="width:600px">
+           <p>Seuraavaksi määritetään vihreälle ruudulle värityssääntö, joka tuottaa tavoitteen vastaavien neljännesten (eli oikea yläneljännes ja vasen alaneljännes) neljä pientä ruutua:</p>
+           <img src="sol_medium_3.png">
+           <p>Tämän jälkeen tilanne on:</p>
+           <img src="sol_medium_4.png" style="width:600px">
+           <p>Määritetään vielä saman periaatteen mukaisesti siniselle ruudulle värityssääntö, joka tuottaa tavoitteen vastaavien neljännesten (eli vasen yläneljännes ja oikea alaneljännes) neljä pientä ruutua. Nyt meillä on seuraavat värityssäännöt, ja ne tuottavat halutun lopputuloksen.</p>
+           <img src="sol_medium_5.png">
+           <p>Alla on näytetty vielä toinen ratkaisuvaihtoehto, joka on muuten samanlainen kuin edellinen, mutta vihreät ja siniset värit ovat vaihtaneet paikkoja keskenään:</p>
+           <img src="sol_medium_6.png">
+
+         </div>
+
+         <div class="hard">
+           <p>Tässä versiossa tehdään kolme värityskertaa, ja kahden ensimmäisen värityskerran välituloksia ei näytetä.</p>
+           <p>Aloitetaan tarkastelemalla tavoitteen sisältämiä neljän pienen ruudun alineliöitä:</p>
+           <img src="sol_hard_0.png">
+           <p>Voimme huomata, että on kolme erilaista alineliötä:</p>
+           <img src="sol_hard_1.png">
+           <p>Koska nämä tavoitteen alineliöt syntyvät kolmannen värityksen tuottamina, pitää meidän määrittää kolme ne luovaa värityssääntöä. AEnää pitää ratkaista, mikä alineliö määritetään minkäkin värin (valkoinen, vihreä ja sininen) värityssäännön tulokseksi.</p>
+           <p>Ensimmäisen värityksen (joka kohdistuu alun valkoiseen ruutuun) sääntö voidaan päätellä tarkastelemalla tavoitteen neljänneksiä (joista kukin on 4x4-kokoinen aliruudukko):</p>
+           <img src="sol_hard_2.png">
+           <p>Voime havaita, että vasen ja oikea yläneljännes ovat keskenään samanlaisia ja alaneljännekset ovat erilaisia kuin muut. Tämä tarkoittaa, että valkoisen ruudun värityssäännön pitää määrittää sama väri kummallekin ylärivin ruudulle. Ylempänä tarkastelemiemme tavoitteen kolmen erilaisen alineliön joukossa on vain yksi vaihtoehto, jossa tämä pätee. Saamme siis valmiiksi seuraavan värityssäännön valkoiselle ruudulle:</p>
+           <img src="sol_hard_3.png">
+           <p>Nyt pitää enää päättää, kumpi jäljellä olevista kahdesta tavoitteen erilaisista alineliöistä valitetaan vihreän ja kumpi sinisen ruudun värityssääntöön. Tämän voi ratkaista nopeasti kokeilemalla (se onnistuu nopeammin kuin yrittää päätellä asiaa formaalimmin). Päädymme seuraavaan tavoitteen tuottavaan ratkaisuun:</p>
+           <img src="sol_hard_4.png">
+         </div>
+
+
+        <h2>Tämä on tietojenkäsittelyä!</h2>
+        <p>Tehtävä sivuaa mm. tietojenkäsittelyssä tärkeässä asemassa olevia <b>kontekstitonta kielioppia</b> ja <b>rekursiota</b>.</p>
+        <p>Kontekstiton kielioppi koostuu joukosta sallittuja symboleita (tehtävässä valkoinen, vihreä ja sininen ruutu) sekä korvaussäännöistä symbolien välillä (tehtävässä värityssäännöt). Erilaisia kielioppeja käytetään monissa tietojenkäsittelytieteen sovelluksissa. Esimerkiksi kun lataat jonkin verkkosivun, hyödyntää internet-selain sivujen rakenteen kuvauksessa käytetyn kielen (ns. HTML-kieli) kielioppia päätelläkseen, miten sivun sisältö pitäisi näyttää sinulle.</p>
+        <p>Rekursio on tietojenkäsittelyn sovelluksissa monesti käytetty tekniikka, missä jokin toimenpide (tässä tehtävässä väritys) suoritetaan toistuvasti alitapauksiin haarautuen (tässä tehtävässä: ensin värityssääntöä sovelletaan alkuruutuun, sen jälkeen ensimmäisen värityksen tuloksen aliruutuihin, sen jälkeen toisen värityksen tuloksen aliruutuihin, jne.). Rekursio on huolellisesti sovelletuna varsin kätevä lähestymistapa monien tietojenkäsittelyn ongelmien ratkaisuun, joskin tekniikkaa pidetään hieman hankalana oppia.</p>
+        <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Yhteydet%C3%B6n_kielioppi" target="_blank">https://fi.wikipedia.org/wiki/Yhteydetön_kielioppi</a> ja <a href="https://fi.wikipedia.org/wiki/Rekursiivinen_algoritmi" target="_blank">https://fi.wikipedia.org/wiki/Rekursiivinen_algoritmi</a>.</p>
     </div>
 
     <!-- task-solution -->

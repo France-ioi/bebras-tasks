@@ -22,7 +22,7 @@
             "language": "fi",
             "version": "fi.01",
             "authors": "France-ioi",
-            "translators": [],
+            "translators": "Heikki Hyyrö",
             "license": "CC BY-SA 3.0",
             "taskPathPrefix": "",
             "modulesPathPrefix": "",
@@ -93,12 +93,40 @@
          <img id="castor" src="castor.png" style="display:none">
          <img id="house" src="house.png" style="display:none">
       </div>
-      <div id="solution">
-         <h2>Solution</h2>
-         <!-- description of the solution -->
-         <h2>C'est de l'informatique !</h2>
-         <!-- explanations on why this task is about informatics -->
-         <img src="icon.png" style="display:none">
-      </div>
+    <div id="solution">
+      <h2>Ratkaisu</h2>
+
+         <div class="easy">
+           <p>Ohjelistassa on 5 kuviota, joten majavan pitää seurata yläkautta kiertävää reittiä, jossa on 5 askelta, eikä suoraa reittiä, jossa on vain 4 askelta. Näin ollen asettelemme ohjelistan kuviot järjestyksessä majavasta kotitaloon yläkautta kiertävälle reitille.</p>
+           <img src="sol_easy_1.png">
+           <p>Yläkautta kiertävän reitin väliin jättämiin kahteen neliöön voi laittaa mitkä tahansa kuviot, kunhan niistä vasemmanpuoleinen ei ole ympyrä: muuten majava voisi harhautua kulkemaan toisella askeleellaan suoraan eteenpäin. Alla esitetyssä valmiissa ratkaisussa näihin kahteen neliöön on laitettu kolmiot.</p>
+           <img src="sol_easy_2.png">
+         </div>
+
+         <div class="medium">
+           <p>Majavan reitin keskikohdasta lähtee kaksi "silmukkaa": toinen kiertää yläpuolella ja toinen alapuolella. Jos majava kulkisi ensin alasilmukkaa pitkin, päätyisi hän ohjelistan kuvioiden mukaan aloittamaan toisenkin alasilmukan kierroksen ja jäisi jumiin.</p>
+           <img src="sol_medium_1.png">
+           <p>Näin ollen meidän on ohjattava majava ensin yläsilmukkaan:</p>
+           <img src="sol_medium_2.png">
+           <p>Tämän jälkeen ainoa vaihtoehto on ohjata majava alasilmukkaan, koska on vielä liian aikaista kääntyä kotitaloa kohti. Voimme huomata, että nyt ohjelista ohjaa majavan kulkemaan ensin yläsilmukan, sitten alasilmukan, ja sitten vielä kerran yläsilmukan. Tämän jälkeen ohejlistassa on enää vain yksi kuvio jäljellä, ja se asetetaan kotitalon eteen. Ratkaisu on valmis:</p>
+           <img src="sol_medium_3.png">
+         </div>
+
+         <div class="hard">
+           <p>Ohjelistassa on ensimmäisen ympyrän jälkeen kaksi kertaa jakso (tähti, kolmio, kolmio, tähti), sen jälkeen tähti, sen jälkeen kaksi kertaa jakso (ympyrä, ympyrä, kolmio), ja lopuksi tähti. Aloitetaan sijoittamalla ensimmäinen neljän kuvion jakso käymään neljän neliön muodostama alasilmukka. Ohjelista ohjaa majavan kulkemaan kyseisen alasilmukan kaksi kertaa, päätyen lopuksi silmukan oikeaan yläkulmaan.</p>
+           <img src="sol_hard_1.png">
+           <p>Nyt ainoa mahdollisuus on ohjata majava käymään oikealla ylhäällä oleva kolmen neliön silmukka. Asetetaan siihen jälkimmäinen ohjelistassa havaitsemamme jakso. Ohjelista ohjaa majavan kulkemaan yläsilmukan kaksi kertaa. Sen jälkeen ohjelistassa on jäljellä enää tähti, ja asetamme sen kotitalon eteen. Ratkaisu on valmis:</p>
+           <img src="sol_hard_2.png">
+         </div>
+
+
+
+      <!-- description of the solution -->
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+      <p>Tehtävän taustalla piileskelee tietojenkäsittelyssä monien ongelmien analysointiin ja ratkaisemiseen käytetty <b>tilakone</b> (tai <b>automaatti</b>). Tilakone koostuu joukosta tiloja (tehtävässä nuolten päissä olevat kohdat: majava, reitin varren pallot ja kotitalo) sekä säännöistä, miten tilojen välillä siirrytään (tehtävässä nuolet ja neliöt, joihin piti asettaa kuviot). Tilakoneelle syötetään syötetta (tehtävässä majava lukee ohjelistaa) yksi symboli kerrallaan, ja tilakone "siirtyy" tämänhetkisestä tilasta siirtymäsääntöjen nyt luettua symbolia vastaavaan tilaan. Tilakone käyttäytyy siten varsin samantapaisesti kuin tehtävässä reittiä pitkin kulkeva majava.
+      </p>
+      <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/%C3%84%C3%A4rellinen_automaatti" target="_blank">https://fi.wikipedia.org/wiki/Äärellinen_automaatti</a>.</p>
+      <img src="icon.png" style="display:none">
+    </div>
    </body>
 
