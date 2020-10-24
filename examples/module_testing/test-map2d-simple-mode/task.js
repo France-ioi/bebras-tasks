@@ -84,33 +84,31 @@ function initTask(subTask) {
       editor = JSONTextEditor({
          parent: document.getElementById('json'),
          min_height: '200px',
-         content: answer.figures
-      });      
-      initMap2d(function() {
-         // displayHelper.hideRestartButton = true;
-         displayHelper.customValidate = checkResult;
-
-         var draw_btn = $('#displayHelper_validate > .btn-draw');
-         if(!draw_btn.length) {
-            draw_btn = $('<input type="button" value="' + taskStrings.btn_draw + '" class="btn-draw"/>');
-            draw_btn.on('click', function() {
+         content: answer.figures,
+         onChange: function(figures, error) {
+            if(error) {
+               if(error.metadata.expected.length) {
+                  displayError(taskStrings.expecting + error.metadata.expected.join(','));
+               } else {
+                  displayError(taskStrings.invalid_json);
+               }
+               map2d.setFigures([]);            
+            } else {
                displayError(false);
-               var figures = editor.getContent();
                if(!Array.isArray(figures)) {
                   displayError(taskStrings.invalid_json)
                   figures = [];
                }      
-               var obj = editor.getContent();
-               if(typeof obj === 'indefined') {
-                  displayError(taskStrings.invalid_json);
-               }
                answer = {
-                  figures: obj || []
+                  figures: figures
                }
-               map2d.setFigures(answer.figures);
-            });
-            $('#displayHelper_validate').prepend(draw_btn);
+               map2d.setFigures(answer.figures);            
+            }
          }
+      });      
+      initMap2d(function() {
+         // displayHelper.hideRestartButton = true;
+         displayHelper.customValidate = checkResult;
       });
    };
 
