@@ -5,45 +5,60 @@
         <title>Test CSV editor</title>
         <script>
             var stringsLanguage = 'en';
-            var csv_editor_options = {
-                content: 'aaa,"bbb",ccc\n"ddd,ddd",eee,2',
-                valid_data: 'aaa,"bbb",ccc\n"ddd,ddd",eee,2'
-            };
+            var taskStrings = {
+                success: "Success!",
+                fail: "Fail.",
+                labels: {
+                    output: 'Output CSV:',
+                    input: 'Input CSV:',
+                    table: 'Table:'                    
+                }
+            }            
         </script>
         <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
         <script class="remove" type="text/javascript">
             var json = {
                 "id": "test-csv-editor",
-                "license": "",
-                "authors": [],
-                "language": "en",
+                "language": "fr",
                 "version": "fr.01",
-                "translators": []
+                "authors": "",
+                "translators": [],
+                "license": "",
+                "taskPathPrefix": "",
+                "modulesPathPrefix": "",
+                "browserSupport": [],
+                "fullFeedback": true,
+                "acceptedAnswers": [],
+                "usesRandomSeed": false                
             };
             var modulesPath = '../../../_common/modules';
             importModules([
-                'jquery-1.7.1',
-                'JSON-js',
-                'raphael-2.2.1',
-                'jschannel',
-                'platform-pr',
-                'installationAPI.01',
-                'miniPlatform',
-                'fonts-loader-1.0',
+                'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+                'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+                'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+                'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+                'taskStyles-0.1', 'raphaelButton-1.0', 'shape-paths', 'drag_lib-2.0',
+                'jquery-ui-1.10.3', 'jquery-ui-1.10.3-styles',
                 'jquery.csv',
-                'csv_editor',
-                'csv_editor_styles',
-                'csv_editor_task'
+                'csv_editor', 'csv_editor_styles', 'csv_editor_task'
             ]);
         </script>
+        <script type="text/javascript" src="task.js"></script>
     </head>
     <body>
         <div id="task">
-            <div class="intro">
-                <h2 class="title">Test CSV editor</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h1>Test CSV editor</h1>
+            <div id="tabsContainer"></div>         
+            <div id="taskContent">
+                <div class="intro">
+                    <p>Intro.</p>
+                </div>
+                <div id="csv-editor"></div>                
+                <img src="icon.png" style="display:none">
             </div>
-            <div class="taskContent"></div>
         </div>
-   </body>
+        <div id="solution">
+            <h2>Solution</h2>
+        </div>                
+    </body>   
 </html>
