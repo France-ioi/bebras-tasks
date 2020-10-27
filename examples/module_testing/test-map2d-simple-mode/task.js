@@ -72,8 +72,106 @@ function initTask(subTask) {
       if(!answer) {
          return;
       }
-      editor && editor.setContent(answer.figures);
+      editor && editor.setContent(answer.data);
    };
+
+
+
+   function testProps(obj, expected_props) {
+      var missed_props = [];
+      for(var i=0; i<expected_props.length; i++) {
+         if(!(expected_props[i] in obj)) {
+            missed_props.push(expected_props[i]);
+         }
+      }
+      if(missed_props.length) {
+         return displayError(taskStrings.missed_props + missed_props.join(', '));
+      }
+
+      var obj_props = Object.keys(obj);
+      var extra_props = [];
+      for(var i=0; i<obj_props.length; i++) {
+         if(expected_props.indexOf(obj_props[i]) === -1) {
+            extra_props.push(obj_props[i]);
+         }
+      }      
+      if(extra_props.length) {
+         return displayError(taskStrings.extra_props + extra_props.join(', '));
+      }
+      return true;      
+   }
+
+
+
+   // [{"type":"point","x":100,"y":100,"aa":1}]
+   function validateFigureData(item) {
+      if(typeof(item) !== 'object' || item === null) {
+         return displayError(taskStrings.invalid_data);
+      }
+      if(!('type' in item)) {
+         return displayError(taskStrings.missed_props + 'type');   
+      }
+      if(item.type == 'point') {
+         if(!testProps(item, ['type', 'x', 'y'])) {
+            return false;
+         }
+      } else if(item.type == 'line' || item.type == 'area') {
+         if(!testProps(item, ['type', 'points'])) {
+            return false;
+         }
+         if(!Array.isArray(item.points)) {
+            return displayError(taskStrings.not_array + 'points');               
+         }
+         if(!item.points.length) {
+            return displayError(taskStrings.points_empty);               
+         }
+         for(var i=0; i<item.points.length; i++) {
+            if(!testProps(item.points[i], ['x', 'y'])) {
+               return false;
+            }
+         }
+      } else {
+         return displayError(taskStrings.invalid_type + item.type);   
+      }
+      return item;
+   }
+
+
+   function validateFiguresData(data) {
+      var figures = [];
+      if(!Array.isArray(data)) {
+         displayError(taskStrings.invalid_data);   
+      } else {
+         for(var i=0; i<data.length; i++) {
+            var figure = validateFigureData(data[i]);
+            if(figure) {
+               figures.push(figure);
+            }
+         }
+      }
+      return figures;
+   }
+
+
+   function onDataChange(data, parse_error) {
+      displayError(false);
+      var figures = [];
+      if(parse_error) {
+         if(parse_error.metadata.expected.length) {
+            displayError(taskStrings.expecting + parse_error.metadata.expected.join(','));
+         } else {
+            displayError(taskStrings.invalid_json);
+         }
+      } else {
+         figures = validateFiguresData(data);
+      }
+      map2d.setFigures(figures); 
+      answer = {
+         data: data || []
+      }                     
+   }
+
+
 
    subTask.resetDisplay = function() {
       //console.log('resetDisplay');
@@ -85,26 +183,7 @@ function initTask(subTask) {
          parent: document.getElementById('json'),
          min_height: '200px',
          content: answer.figures,
-         onChange: function(figures, error) {
-            if(error) {
-               if(error.metadata.expected.length) {
-                  displayError(taskStrings.expecting + error.metadata.expected.join(','));
-               } else {
-                  displayError(taskStrings.invalid_json);
-               }
-               map2d.setFigures([]);            
-            } else {
-               displayError(false);
-               if(!Array.isArray(figures)) {
-                  displayError(taskStrings.invalid_json)
-                  figures = [];
-               }      
-               answer = {
-                  figures: figures
-               }
-               map2d.setFigures(answer.figures);            
-            }
-         }
+         onChange: onDataChange
       });      
       initMap2d(function() {
          // displayHelper.hideRestartButton = true;
