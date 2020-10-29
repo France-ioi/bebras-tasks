@@ -25,7 +25,7 @@
          "language": "fi",
          "version": "fi.01",
          "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
-         "translators": ["Heikki Hyyrö"],
+         "translators": "Heikki Hyyrö",
          "license": "CC BY-SA 3.0",
          "taskPathPrefix": "",
          "modulesPathPrefix": "",
@@ -97,8 +97,36 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>It's informatics!</h2>
+        <h2>Ratkaisu</h2>
+          <div class="easy">
+           <p>Jokainen kenguru, jonka yläpuolella on krokotiili, saa kukan. Sinun piti siten klikata jokaista kengurua, jonka yläpuolella on krokotiili, ja klikata "Kokeile". Asetelma olisi voinut olla esimerkiksi seuraava:</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>Jokainen kenguru, jonka joko yläpuolella tai alapuolella (mutta ei molemmissa) on krokotiili, saa kukan. Asetelma olisi voinut olla esimerkiksi seuraava:</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Kenguru saa kukan, jos <b>mikä tahansa</b> seuraavista kolmesta pätee:</p>
+           <ol>
+           <li>Kengurun yläpuolella on krokotiili ja alapuolella karhu.</li>
+           <li>Yläpuolella on karhu ja alapuolella ei mitään.</li>
+           <li>Yläpuolella ei ole mitään ja alapuolella on krokotiili.</li>
+           </ol>
+           <p>Asetelma olisi voinut olla esimerkiksi seuraava:</p>
+           <img src="sol_hard.png">
+         </div>
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+      <p>
+         Tehtävän ehdot (milloin kenguru saa kukan ja milloin ei) voidaan kuvata esimerkiksi käyttäen <b>Boolen algebraa</b>, joka on yleisesti tietojenkäsittelyssä käytetty tapa käsitellä loogisia totuusarvoja tosi/epätosi (onko kukka, onko yläpuolella karhu, jne.) sekä niistä ja/tai/ei-tyyppisillä ehdoilla muodostettuja yhdistelmiä (yläpuolella krokotiili ja alapuolelle ei tai alapuolella krokotiili ja yläpuolella ei).
+      </p>
+      <p>
+         Tehtävän asetelma vastaa <b>soluautomaattia</b>, joka on erilaisissa tietojenkäsittelyn sovelluksissa käytetty malli, jonka avulla voidaan mallintaa esimerkiksi fysikaalisia tai biologisia järjestelmiä, tai vaikkapa liikennettä. Soluautomaatti voi koostua tehtävän tapaan esimerkiksi soluruudukosta, jonka kunkin solun/ruudun tila (tuleeko kukkaa) riippuu sen vierekkäisten solujen sisällöistä. Toisin kuin tässä tehtävässä, soluautomaattien käyttäytymistä simuloidaan yleensä useita askelia. Kullakin askeleella jokaisen solun tila päivitetään solujen käyttäytymissääntöjen mukaisesti. Seuraavan päivitysaskeleen tulos riippuu aina edellisen päivitysakeleen tuloksesta, jolloin soluautomaatti voi käyttäytyä ajan mittaan varsin monipuolisellakin tavalla. Yksi kuuluisa esimerkki soluautomaatista on Life-peli (Game of Life).
+      </p>
+      <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Boolen_algebra" target="_blank">https://fi.wikipedia.org/wiki/Boolen_algebra</a>, <a href="https://fi.wikipedia.org/wiki/Soluautomaatti" target="_blank">https://fi.wikipedia.org/wiki/Soluautomaatti</a> ja <a href="https://fi.wikipedia.org/wiki/Life-peli" target="_blank">https://fi.wikipedia.org/wiki/Life-peli</a>.</p>
+
    </div>
    <!-- task-solution -->
 </body>

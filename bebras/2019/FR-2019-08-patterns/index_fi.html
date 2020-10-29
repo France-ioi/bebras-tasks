@@ -90,8 +90,51 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>It's informatics!</h2>
+      <h2>Ratkaisu</h2>
+          <p>
+            Tehtävää voi lähestyä esimerkiksi seuraavasti:
+            <ol>
+               <li>Aseta ensin yksi hahmo johonkin kohtaan, ja etsi sitten ruudukosta kaikki muut ensimmäisen hahmon sijoituskohdan kanssa samanlaisista ruuduista muodostuvat kohdat.</li>
+               <li>Analysoi ensin ruudukkoa sekä hahmoa, esimerkiksi etsien ruudukosta eri paikoissa esiintyviä keskenään samanlaisten vierekkäisten ruutujen kohtia.</li>
+            </ol>
+          </p>
+
+          <div class="easy">
+           <p>Voimme ensimmäisen lähestymistavan mukaisesti kokeilla asettaa ensimmäistä hahmoa jokaiseen mahdolliseen kohtaan vasemmalta oikealle edeten. Jo järjestyksessä toinen  kohta johtaa ratkaisuun:</p>
+           <img src="sol_easy.png">
+           <p>Tehtävässä voisi myös soveltaa toista lähestymistapaan esimerkiksi tekemällä havainnon, että ainoastaan keltainen ruutu esiintyy alarivillä vähintään neljä kertaa. Ja heti perään voimme havaita, että neljän keltaisen ruudun yläpuolella on violetti ruutu (ja muita keltaisten ruutujen yläpuolisia värejä on vähemmän). Koska hahmoja on neljä, on ne pakko asettaa kattamaan nämä neljä edellä havaittua kohtaa.</p>
+          </div>
+
+         <div class="medium">
+           <p>Käytetään toista lähestymistapaa. Voimme esimerkiksi havaita, että kun hahmon asettaa ruudukkoon, on sen kahdesta ruudusta koostuva alarivi ruudukossa alla punaisella suorakulmiolla rajatulla alueella.</p>
+           <img src="sol_medium_1.png">
+           <p>Keskitytään nyt etsimään rajatulta alueelta keskenään samanlaisia kahden vierekkäisen ruudun kohtia. Alla on esitetty kunkin erilaisen kahden vierekkäisen ruudun yhdistelmän esiintymien lukumäärät. Meillä on 5 hahmoa, ja voimme huomata että ainoa vähintään 5 kertaa toistuva kahden ruudun yhdistelmä on keltainen-violetti.</p>
+           <img src="sol_medium_2.png">
+           <p>Kukin hahmo pitää selvästi asettaa sellaiseen kohtaan, jossa sen alarivi peittää keltaisen ja violetin ruudun. Erilaisia mahdollisuuksia asetella hahmot näin on sen verran pieni määrä, että seuraava ratkaisu on helppo löytää kokeilemalla:</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Käytetään toista lähestymistapaa. Aivan aluksi voimme havaita, että koska hahmo peittää 4 ruutua ja ruudukossa on 3 erilaista ruutua, on hahmon pakko peittää vähintään kaksi keskenään samanlaista ruutua. Näin ollen 5 hahmoa peittää yhteensä vähintään 10 keskenään samanlaista ruutua. Ruudukossa on 10 vihreää, 7 violettia ja 8 keltaista ruutua, joten voimme suoraan päätellä, että kunkin hahmon on peitettävä täsmälleen 2 vihreää ruutua. Toisaalta voimme lisäksi päätellä, että kunkin hahmon on lisäksi peitettävä 1 violetti ja 1 keltainen ruutu (koska se ei voi ruutujen lukumäärien vuoksi peittää 2 violettia tai 2 keltaista ruutua).</p>
+           <p>Siirrytään seuraavaksi pohtimaan sitä, minkä värisen ruudun kunkin hahmon "keskikohdan" tulee peittää.</p>
+           <ul>
+           <li>3 keltaista ruutua on ruudukon kulmissa (= mahdoton peittää keskikohdalla), ja lisäksi esim. ruudukon alarivin toisen keltaisen ruudun peittäminen hahmon keskikohdalla johtaisi myös sen viereisen keltaisen ruudun peittämiseen (mutta hahmo saa peittää vain yhden). Näiden lisäksi on vain 4 muuta keltaista ruutua, joka ei riitä 5 hahmon keskikohdille. Hahmojen keskikohdat eivät siten voi peittää keltaisia ruutuja.</li>
+           <li>Ruudukon kaikki 10 vihreää ruutua pitää peittää 5 hahmolla. Ruudukon oikean yläkulman vihreää ruutua on mahdotonta peittää sellaisella hahmolla, jonka keskimmäinen ruutu peittäisi (jonkin toisen) vihreän ruudun. Näin ollen hahmojen keskikohdat eivät voi peittää myöskään vihreitä ruutuja.</li>
+           <li>Edellisten seuraus: hahmojen keskikohdat peittävät violetteja ruutuja.</li>
+           </ul>
+           <p>Yhteenvetona tiedämme nyt, että kunkin hahmon keskikohta peittää violetin ruudun, ja hahmon kolme "sakaraa" peittävät kaksi vihreää ja yhden keltaisen ruudun. Näiden pohjatietojen ansiosta meidän tarvitsee kokeilla vain kohtalaisen pientä määrää erilaisia mahdollisia tapoja asetella hahmot ruudukkoon.</p>
+           <p>Ensimmäinen yritys voisi mahdollisesti jäädä heti umpikujaan: kuvan tilanteessa ensimmäisen asetetun hahmon jälkeen ei voi asettaa enää toista hahmoa.</p>
+           <img src="sol_hard_1.png">
+           <p>Myöhempi yritys voisi mahdollisesti onnistua asettamaan 4 hahmoa, ja jäädä sitten jumiin.</p>
+           <img src="sol_hard_2.png">
+           <p>Kokeilemalla systemaattisesti erilaisia vaihtoehtoja voimme kuitenkin löytää toimivan ratkaisun:</p>
+           <img src="sol_hard.png">
+         </div>
+
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+         <p>Hyvin monet tietojenkäsittelyn ongelmat voi ainakin periaatteessa ratkaista nimellä <b>täydellinen haku</b> tunnetulla ratkaisumenetelmällä, joka pohjautuu jokaisen mahdollisen ratkaisuehdokkaan kokeilemiseen. Menetelmä on sinänsä melko yleispätevä, mutta yleensä varsin paljon aikaa vievä, jos erilaisia kokeiltavia ratkaisuehdotuksia on paljon. Täydellistä hakua pyritäänkin usein nopeuttamaan etsimällä ongelmasta jotain sellaisia rajoitteita, joiden avulla erilaisten kokeiltavien ratkaisumahdollisuuksien määrää voidaan jo lähtökohtaisesti karsia pienemmäksi.</p>
+         <p>Tämän tehtävän esimerkkiratkaisut sovelsivat pohjimmiltaan täydellistä hakua, jossa kokeiltavien asettelutapojen määrää oli pyritty karsimaan rajoittamalla hahmojen asettelu koskemaan vain tietyt ehdot täyttäviä ruudukon kohtia.</p>
+         <p>Katso lisää esim. <a href="https://en.wikipedia.org/wiki/Brute-force_search" target="_blank">https://en.wikipedia.org/wiki/Brute-force_search</a> (englanniksi).</p>
    </div>
    <!-- task-solution -->
 </body>

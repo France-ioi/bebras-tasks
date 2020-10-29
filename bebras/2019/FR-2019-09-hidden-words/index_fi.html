@@ -25,7 +25,7 @@
          "language": "fi",
          "version": "fi.01",
          "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
-         "translators": ["Heikki Hyyrö"],
+         "translators": "Heikki Hyyrö",
          "license": "CC BY-SA 3.0",
          "taskPathPrefix": "",
          "modulesPathPrefix": "",
@@ -125,8 +125,42 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>It's informatics!</h2>
+      <h2>Ratkaisu</h2>
+
+          <div class="easy">
+           <p>Aloitetaan asettamalla ohjeiden mukaisesti ruudun <b>A1</b> kortti ensimmäiseksi. Kortissa lukee <b>C2</b>, joten ruudun <b>C2</b> kortti asetetaan toiseksi. Tässä kortissa taas puolestaan lukee <b>B3</b>, joten ruudun <b>B3</b> kortti asetetaan kolmanneksi. Samaan tapaan jatkaen ruudun <b>C1</b> kortti asetetaan neljänneksi ja ruudun <b>E3</b> kortti viidenneksi. Ratkaisu on valmis:</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>Muodostetaan ratkaisu päinvastaisessa järjestyksessä: asettelemme kortit järjestyksessä oikealta vasemmalle.</p>
+           <p>Aloitetaan asettamalla ohjeiden mukaisesti ruudun <b>F3</b> kortti <i>viimeiseksi</i>. Toiseksi viimeiseksi valittavassa kortissa pitää lukea tämän kortin sijainti eli <b>F3</b>. Ruudukossa vain ruudun <b>E1</b> kortissa lukee <b>F3</b>, joten asetetaan ruudun <b>E1</b> kortti toiseksi viimeiseksi.</p>
+           <img src="sol_medium_1.png">
+           <p>Kolmanneksi viimeisessä kortissa pitää lukea <b>E1</b>. Ainoa vaihtoehto on ruudun <b>B2</b> kortti. Samaan tapaan jatkaen neljänneksi viimeiseksi (= toiseksi) kortiksi pitää valita ruudun <b>D2</b> ja viidenneksi viimeiseksi (= ensimmäiseksi) ruudun <b>C3</b> kortti. Ratkaisu on valmis:</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Muodostetaan ratkaisu päinvastaisessa järjestyksessä: asettelemme kortteja järjestyksessä oikealta vasemmalle.</p>
+           <p>Aloitetaan valitsemalla ohjeiden mukaisesti ruudun <b>C6</b> kortti <i>viimeiseksi</i> (raahataan se vastausalueen oikeaan laitaan).</p>
+           <img src="sol_hard_1.png">
+           <p>Toiseksi viimeiseksi valittavassa kortissa pitää lukea <b>C6</b>. Ruudukossa on kaksi mahdollisuutta: sekä ruudun <b>A2</b> että <b>A5</b> korteissa lukee <b>C6</b>. Muodostetaan vastausalueelle allekkain kumpaakin vaihtoehtoa vastaavat osaratkaisut.</p>
+           <img src="sol_hard_2.png">
+           <p>Nyt kolmanneksi viimeisessä kortissa pitää vaihtoehdosta riippuen lukea joko <b>A2</b> tai <b>A5</b>. <b>A2</b> löytyy korteista <b>B3</b> ja <b>C4</b>, ja <b>A5</b> kortista <b>C2</b>. Laajennetaan vastausalueen osaratkaisuita kattamaan nämä vaihtoehdot.</p>
+           <img src="sol_hard_3.png">
+           <p>Neljänneksi viimeisessä (= toisessa) kortissa pitää vaihtoehdosta riippuen lukea joko <b>B3</b>, <b>C4</b> tai <b>C2</b>. <b>B3</b> löytyy korteista <b>A1</b> ja <b>C5</b>, <b>C4</b> kortista <b>A3</b>, ja <b>C2</b> kortista <b>C1</b>. Laajennetaan jälleen vastausalueen osaratkaisuita kattamaan nämä vaihtoehdot.</p></p>
+           <img src="sol_hard_4.png">
+           <p>Viidenneksi viimeisessä (= ensimmäisessä) kortissa pitää vaihtoehdosta riippuen lukea joko <b>A1</b>, <b>C5</b>, <b>A3</b> tai <b>C1</b>. <b>A1</b> ei esiinny yhdessäkään, joten sitä vastaava osaratkaisu hylätään. Muissa osaratkaisuissa <b>C5</b> on kortissa <b>A4</b>, <b>A3</b> kortissa <b>B6</b> ja <b>C1</b> kortissa <b>A6</b>. Kun laajennamme vastausalueen osaratkaisut kattamaan nämä vaihtoehdot, on lopullinen ratkaisu valmis. Se koostuu täsmälleen kolmesta 5 merkin salasanasta, kuten tehtävässä haluttiinkin:</p>
+           <img src="sol_hard.png">
+         </div>
+
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+
+          <p>Tietokone tallettaa käsittelemänsä datan <b>keskusmuistiin</b>. Muistia voidaan havainnollistaa tehtävän tapaan ruudukkona, jossa kukin ruutu kuvaa yksittäistä muistikohtaa, johon voidaan tallettaa yksittäinen arvo. Jokaisella muistikohdalla on sen sijainnin ilmaiseva <b>muistiosoite</b> (tässä tehtävässä ruuduilla oli koordinaatit).
+          </p>
+          <p>Yksittäiseen muistikohtaan voidaan tallettaa tavallisen arvon (esim. lukuarvo) sijaan tieto siitä, missä jokin arvo sijaitsee: tällöin muistikohtaan talletetaankin arvon sijaan muistiosoite. Tällöin voidaan sanoa, että muistikohta <b>viittaa</b> tai <b>osoittaa</b> toiseen muistikohtaan (siihen, jonka muistiosoitteen ensiksi mainittu muistikohta sisältää). Se tapa, miten tehtävän kortteihin oli kirjattu niitä seuraavien korttien koordinaatit, vastaa toiseen muistikohtaan (tehtävässä kortin koordinaatteihin) osoittamista.</p>
+          <p>Tällaisella viittaus/osoitusmekanismilla on tärkeä rooli tietokoneohjelmien toteuttamisessa.</p>
+          <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Keskusmuisti" target="_blank">https://fi.wikipedia.org/wiki/Keskusmuisti</a> ja <a href="https://en.wikipedia.org/wiki/Pointer_(computer_programming)" target="_blank">https://en.wikipedia.org/wiki/Pointer_(computer_programming)</a> (englanniksi).</p>
    </div>
    <!-- task-solution -->
 </body>

@@ -25,7 +25,7 @@
          "language": "fi",
          "version": "fi.01",
          "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
-         "translators": ["Heikki Hyyrö"],
+         "translators": "Heikki Hyyrö",
          "license": "CC BY-SA 3.0",
          "taskPathPrefix": "",
          "modulesPathPrefix": "",
@@ -103,8 +103,45 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>It's informatics!</h2>
+      <h2>Ratkaisu</h2>
+      <div class="easy">
+           <p>Alla on eräs vain neljä lamppua tarvitseva ratkaisu. Tämä ratkaisu on muuttanut valmiiksi annetun sinisen lampun paikkaa:</p>
+           <img src="sol_easy.png" style="width:450px">
+          </div>
+
+          <div class="medium hard">
+           <p>Voimme edetä väri kerrallaan yrittäen aina asettaa lampun niin korkealle kuin mahdollista (kuitenkaan rikkomatta tavoitetta), jotta tarvittavien lamppujen määrä olisi mahdollisimman pieni.</p>
+           </div>
+
+         <div class="medium">
+           <p>Aloitetaan punaisesta. Sen osalta yksi lamppu riittää:</p>
+           <img src="sol_medium_1.png" style="width:460px">
+           <p>Sitten vihreä. Tarvitsemme kaksi lamppua:</p>
+           <img src="sol_medium_2.png" style="width:460px">
+           <p>Ja lopuksi sininen. Tarvitsemme kolme lamppua. Ratkaisu on valmis:</p>
+           <img src="sol_medium.png" style="width:460px">
+         </div>
+
+         <div class="hard">
+           <p>Aloitetaan punaisesta. Tarvitsemme kolme lamppua, joista kaksi 50% ja yksi 100% voimakkuudella:</p>
+           <img src="sol_hard_1.png" style="width:525px">
+           <p>Sitten vihreä. Tarvitsemme kolme lamppua, joista kaksi 50% ja yksi 100% voimakkuudella:</p>
+           <img src="sol_hard_2.png" style="width:525px">
+           <p>Ja lopuksi sininen. Tarvitsemme kolme lamppua, joista yksi 50% ja kaksi 100% voimakkuudella. Ratkaisu on valmis:</p>
+           <img src="sol_hard.png" style="width:525px">
+
+         </div>
+         
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+      <p>Tietojenkäsittelyssä (kuten tekniikassa laajemminkin) kuvien värit esitetään usein käyttämällä <b>RGB-värimallia</b>, missä RGB tulee sanoista Red (punainen), Green (vihreä) ja Blue (sininen). RGB-värimallissa kukin väri esitetään yhdistämällä punaista, vihreää ja sinistä väriä sopivassa suhteessa. Kunkin värin määrä (intensiteetti) esitetään usein väliin 0-255 sijoittuvana kokonaislukuna. Esimerkiksi kolmikko (255, 105, 180) vastaisi RGB-värimallissa väriä, jossa punaisen intensiteetti on 255 (= maksimi), vihreän 105 ja sinisen 180: lopputuloksena syntyy (räikeähkö) vaaleanpunainen väri. Koska tällaisessa mallissa kunkin kolmen värin intensiteetti on välillä 0-255 eli on 256 eri intensiteettiä, kykenee tällainen ns. 24-bittinen RGB-värimalli esittämään yhteensä 256 &times; 256 &times; 256 = 16777216 eli vähän yli 16 miljoonaa erilaista väriä.</p>
+      
+      <p>Näyttöteknologiassa (televisiot, tietokoneiden ja älypuhelinten näytöt, jne.) käytetään yleensä vastaavaa periaatetta. Esimerkiksi jos katsomme television ruutua suurennuslasilla, voimme havaita kunkin kuvan muodostavan alkeispisteen (ns. <b>kuvapiste</b> tai <b>pikseli</b>) koostuvan kolmesta vierekkäin asetetusta eri väristä. Kuvapisteet ovat niin pieniä, ettei ihmissilmä huomaa niiden kooostuvan erillisistä väreistä. Ihminen näkee kuvapisteen väriksi sen erillisten värien yhdistelmää vastaavan värin.</p>
+      <center><img src="LCD_pixels_RGB.jpg" /></center>
+      
+      <p>Ei ole sattumaa, miksi RGB-värimalli pohjautuu nimenomaan punaiseen, vihreään ja siniseen. Ihmisen silmän värinäkö perustuu siihen, että silmän verkkokalvolla on kolmenlaisia ns. tappisoluja. Niistä yhdet havaitsevat punaista, toiset vihreää ja kolmannet sinistä väriä.</p>
+      
+      <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/RGB-v%C3%A4rimalli" target="_blank">https://fi.wikipedia.org/wiki/RGB-värimalli</a>, <a href="https://fi.wikipedia.org/wiki/Pikseli" target="_blank">https://fi.wikipedia.org/wiki/Pikseli</a> ja <a href="https://fi.wikipedia.org/wiki/V%C3%A4riaisti" target="_blank">https://fi.wikipedia.org/wiki/Väriaisti</a>.
+
    </div>
    <!-- task-solution -->
 </body>

@@ -25,7 +25,7 @@
          "language": "fi",
          "version": "fi.01",
          "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard, France-ioi",
-         "translators": ["Heikki Hyyrö"],
+         "translators": "Heikki Hyyrö",
          "license": "CC BY-SA 3.0",
          "taskPathPrefix": "",
          "modulesPathPrefix": "",
@@ -97,7 +97,7 @@
             <div class="consigne">
                <p><span class="easy">Rulla liikkuu pyörien ruudukon yli. Se asettaa </span><span class="medium hard">Rullat liikkuvat pyörien ruudukossa. Ne asettavat </span> liikkuessaan leimoja ruutuihin.</p>
                <p class="easy">Muokkaa rullan asetuksia saavuttaaksesi tavoitteen.</p>
-               <p class="medium hard">Muokkaa rullien asetuksia saavuttaaksesi tavoitteen. Valitse muokattava rulla klikkaamalla sitä.</p>
+               <p class="medium hard">Muokkaa rullien asetuksia saavuttaaksesi tavoitteen. <b>Valitse muokattava rulla klikkaamalla sitä</b>.</p>
 
                <p class="medium">Rulla 1 liikkuu ensin, ja sitten rulla 2.</p>
 
@@ -129,8 +129,49 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>It's informatics!</h2>
+      <h2>Ratkaisu</h2>
+      <div class="easy">
+           <p>Tavoite koostuu alla näytettyjen 4 leiman peräkkäin toistuvista jaksoista:</p>
+           <img src="sol_easy_fi.png" class="marker-parameters">
+          </div>
+
+         <div class="medium">
+           <p>Voimme huomata, että tavoitteen alussa ja lopussa on vuorotellen pyöreä (vihreä) ja kolmio (keltainen) leima.</p>
+           <img src="sol_medium_0.png">
+           <p>Muokataan rullan 1 asetukset sellaisiksi, että se tuottaa vuorotellen pyöreän leiman ja kolmioleiman:</p>
+           <img src="sol_medium_1a_fi.png" class="marker-parameters">
+           <p>Alla on rullan 1 nyt tuottama tulos. Se poikkeaa tavoitteista kohdissa 5-13:</p>
+           <img src="sol_medium_1b_fi.png">
+           <p>Korjataan seuraavaksi rullalla 2 kohtien 5-13 välinen osa oikeaksi. On helppo havaita, että siinä toistuu (lopussa osittain katketen) alla määritetty 5 leiman jakso:</p>
+           <img src="sol_medium_2a_fi.png" class="marker-parameters">
+           <p>Rulla 2 asettaa nyt kohtien 5-13 väliseen osuuteen seuraavat leimat, ja lopputuloksena koko tavoite on valmis.</p>
+           <img  style="margin-left: 180px" src="sol_medium_2b.png">
+         </div>
+
+         <div class="hard">
+           <p>Voimme aluksi pistää merkille, että kolme rullaa voivat liikkua keskenään päällekkäin esimerkiksi seuraavilla tavoilla:</p>
+           <img src="sol_hard_segments.png">
+           <p>Kokeillaan löytää jokin sellainen ratkaisu, missä rulla 1 liikkuu alusta loppuun vastaten sekä ensimmäisten että viimeisten kohtien lopullisista leimoista, ja rullat 2 ja 3 korjaavat keskiosien leimoja oikeiksi.<p>
+           <p>Yksinkertainen valinta rullaksi 1 koostuisi 2 leimasta, jotka asettavat vuorotellen kolmioleimoja (keltainen) ja pyöreitä leimoja (vihreä). Se asettaa alun kohdat 1-3 ja lopun kohdan 20 oikein:</p>
+           <img src="sol_hard_begin_end.png">
+           <p>Kun tarkastellaan yhä virheellistä kohdista 4-19 koostuvaa osaa, voimme löytää siitä alla havainnollistetun 4 leimasta koostuvan jakson, joka asettaa kohdat 4-9 ja 14-19 oikeaksi:</p>
+           <img src="sol_hard_begin_end_b.png">
+            <p>Edellä kuvatun 4 leiman jakson voisi löytää myös etsimällä tavoitteesta systemaattisesti keskenään samanlaisia jaksoja. Esimerkiksi alla on kuvattu, kuinka voisimme ensiksi havaita kahdesta peräkkäisestä suorakulmioleimasta (violetista) koostuvat kohdissa 7-8 ja 15-16 olevat jaksot. Sen jälkeen voimme laajentaa jaksoja yhden ruudun kumpaankin suuntaan niin, että jaksot ovat yhä keskenään samanlaisia. Lopuksi voimme havaita, että ensimmäistä jaksoa edeltää jakson kahden viimeisen kohdan kanssa täsmäävä osa, ja jälkimmäisen jakson perässä on jakson kahden ensimmäisen kohdan kanssa täsmäävä osa. Tästä päädytään loppujen lopuksi löytämään edellä kuvattu aiempi 4 leiman jakso.</p>
+           <img src="sol_hard_pattern.png">
+           <p>Enää pitää korjata kohdat 10-13, joka onnistuu helposti rullalla 3.</p>
+           <p>Käydään nyt vielä läpi koko ratkaisu. Ensin rulla 1 asettaa vuorotellen kolmioleimoja ja pyöreitä leimoja kohtiin 1-20:</p>
+           <img src="sol_hard_1_fi.png" class="marker-parameters">
+           <p>Tämän jälkeen rullaan 2 asetetaan ylempänä löytämämme 4 leiman jakso, ja rullaa 2 sovelletaan kohtiin 4-19:</p>
+           <img src="sol_hard_2_fi.png" class="marker-parameters">
+           <p>Tämän jälkeen rulla 3 asetetaan korjaamaan kohdat 10-13. Tämä onnistuu suoraviivaisesti esim. asettamalla rullaan 3 kohtia 10-13 vastaavat 4 leimaa ja soveltamalla sitä kohtiin 10-13:</p>
+           <img src="sol_hard_3_fi.png" class="marker-parameters">
+           <p>Kokonaisuus näyttää nyt seuraavalta:</p>
+           <img src="sol_hard_fi.png">
+         </div>
+         
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+        <p>Tehtävän asetelma muistuttaa tietojenkäsittelytieteen ongelmaa, jossa on tavoitteena paloitella annettu merkkijono (tässä leimajono) samanlaisena toistuviin osiin (tässä samalla leimarullalla leimattaviin osiin). Tällaisen toistuvan osan ("jakson") määrittäminen antaa tietoa merkkijonon (joka voisi kuvata esimerkiksi DNA-sekvenssiä) rakenteellisista toistuvuudesta. Tietojenkäsittelytieteen tutkijat ovat onnistuneet kehittämään ongelmaan tehokkaita ratkaisualgoritmeja.</p>
+
    </div>
    <!-- task-solution -->
 </body>

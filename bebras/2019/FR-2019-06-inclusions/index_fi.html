@@ -25,7 +25,7 @@
          "language": "fi",
          "version": "fi.01",
          "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
-         "translators": ["Heikki Hyyrö"],
+         "translators": "Heikki Hyyrö",
          "license": "CC BY-SA 3.0",
          "taskPathPrefix": "",
          "modulesPathPrefix": "",
@@ -125,10 +125,35 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>It's informatics!</h2>
-   </div>
-   <!-- task-solution -->
+      <h2>Ratkaisu</h2>
+          <div class="easy">
+           <p>Tässä piti asettaa suorakulmiot <b>B</b> ja <b>C</b> suorakulmion <b>A</b> sisälle.</p>
+           <img src="sol_easy.png">
+           <p>Huomaa, että suorakulmio <b>B</b> ei saa olla suorakulmion <b>C</b> sisällä eikä suorakulmio <b>C</b> saa olla suorakulmion <b>B</b> sisällä.</b>
+          </div>
+
+         <div class="medium">
+           <p>Suorakulmiot <b>B</b> ja <b>C</b> pitää asettaa suorakulmion <b>A</b> sisälle, ja lisäksi suorakulmiot <b>D</b> ja <b>E</b> suorakuomion <b>B</b> sisälle. Näistä erillään pitää vielä asettaa suorakulmio <b>G</b> suorakulmion <b>F</b> sisälle.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Suorakulmio <b>C</b> on helppo asettaa oikein, koska se tarvitsee ainoastaan asettaa suorakulmion <b>A</b> sisälle ilman suhteita muihin suorakulmioihin. Samaan tapaan myös suorakulmiot <b>D</b> ja <b>G</b> ovat yksinkertaisia: ne tarvitsee ainoastaan asettaa suorakulmion <b>B</b> sisälle. Jätetään siis aluksi suorakulmiot <b>C</b>, <b>D</b> ja <b>G</b>sivuun, ja muodostetaan ratkaisu muiden suorakulmioiden osalta. Nämä kolme suorakulmiota voidaan suoraviivaisesti lisätä ratkaisuun vasta lopuksi.</p>
+           <p>Suorakulmioiden <b>E</b> ja <b>F</b> pitää olla sekä suorakulmion <b>A</b> että <b>B</b> sisällä. Asetetaan siis suorakulmiot <b>A</b> ja <b>B</b> toistensa kanssa osin päällekkäin ja sitten <b>E</b> ja <b>F</b> kyseisen päällekkäin olevan osan sisälle.</p>
+           <img src="sol_hard_1.png">
+           <p>Suorakulmion <b>H</b> pitää olla sekä suorakulmion <b>E</b> että <b>F</b> sisällä, joten muutetaan jälkimmäisten asettelu osin päällekkäiseksi ja asetetaan <b>H</b> päällekkäisen osan sisälle.</p>
+           <img src="sol_hard_2.png">
+           <p>Nyt meillä on enää jäljellä kolme alussa sivuun jättämäämme suorakulmiota <b>C</b>, <b>D</b> ja <b>G</b>, joista ensimmäinen voidaan suoraviivaisesti lisätä suorakulmion <b>A</b> ja kaksi jälkimmäistä suorakulmion <b>B</b> sisälle. Ratkaisu on valmis!</p>
+           <img src="sol_hard.png">
+         </div>
+
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+      <p>
+         Tietojenkäsittelyssä käytetään yleisestä <b>graafeja</b> kuvaamaan jonkin systeemin osien välisiä suhteita. Graafi koostuu solmuista sekä niiden välisiä yhteyksiä kuvaavista kaarista. Tässä tehtävässä pienet mustat kirjaimilla merkityt neliöt olivat graafin solmuja ja niiden väliset nuolet kaaria, ja tehtävässä piti osata tulkita annetun graafin pohjalta, millaisia suorakulmioiden välisiä suhteita se kuvaa.
+      </p>
+      <p>Tietojenkäsittelytieteessä on kehitetty vuosien saatossa suuri määrä graafien ominaisuuksia kuvaavaa teoriaa sekä monia erilaisia graafeihin liittyviä ongelmia ratkaisevia algoritmeja. Tämän vuoksi monet tietojenkäsittelyn sovelluksissa ratkaistavat ongelmat pyritään usein esittämään graafimuodossa, jotta ongelman analysoinnissa ja ratkaisussa voitaisiin hyödyntää valmiiksi tunnettuja teoreettisia tuloksia ja algoritmeja.</p>
+      <p>Katso lisää esim. <a href="https://fi.wikipedia.org/wiki/Graafi" target="_blank">https://fi.wikipedia.org/wiki/Graafi</a>.</p>
+   </div>   <!-- task-solution -->
 </body>
 
 </html>
