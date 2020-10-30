@@ -1,8 +1,6 @@
 function initTask(subTask) {
 
-   //console.log('initTask', subTask.display)
    $("#map").empty();
-   $("#json").empty();
 
    var state = {};
    var level;
@@ -29,8 +27,6 @@ function initTask(subTask) {
       }      
    };
 
-   var marginX = 20;
-   var marginY = 20;
    var imgW = 1200;
    var imgH = 650;
    var mapW = 730;
@@ -101,14 +97,60 @@ function initTask(subTask) {
       return state;
    };
 
+
+
+   subTask.resetDisplay = function() {
+      //console.log('resetDisplay');
+      displayError("");
+      initEditor();
+      initMap2d(function() {
+         displayHelper.customValidate = checkResult;
+      });
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      //console.log('getDefaultAnswerObject');
+      var defaultAnswer = { 
+         json: '[]'
+      };
+      return defaultAnswer;
+   };
+
+   subTask.getAnswerObject = function() {
+      //console.log('subTask.getAnswerObject', answer);
+      return answer;
+   };
+
+
    subTask.reloadAnswerObject = function(answerObj) {
       //console.log('subTask.reloadAnswerObject', answerObj)
       answer = answerObj;
       if(!answer) {
          return;
       }
-      editor && editor.setContent(answer.data);
+      editor && editor.setContent(answer.json);
+   };   
+   
+   
+
+   subTask.unloadLevel = function(callback) {
+      //console.log('subTask.unloadLevel');      
+      map2d && map2d.destroy();
+      editor && editor.destroy();
+      callback();
    };
+
+   subTask.getGrade = function(callback) {
+      checkResult(true, function(res) {
+         //console.log('subTask.getGrade', res)
+         callback(res)
+      });      
+   };
+
+
+
+
+
 
 
 
@@ -202,83 +244,41 @@ function initTask(subTask) {
    }
 
 
-   function onDataChange(data, parse_error) {
+   function onEditorChange(content) {
       displayError(false);
-      var figures = [];
-      if(parse_error) {
-         if(parse_error.metadata.expected.length) {
-            displayError(taskStrings.expecting + parse_error.metadata.expected.join(','));
-         } else {
-            displayError(taskStrings.invalid_json);
-         }
-      } else {
-         figures = validateFiguresData(data);
-      }
-      map2d.setFigures(figures); 
       answer = {
-         data: data || []
-      }                     
+         json: content
+      }                           
+      refreshMap();
    }
 
 
+   function refreshMap() {
+      var figures = [];
+      try { 
+         var data = JSON.parse(answer.json);
+         figures = validateFiguresData(data);
+      } catch(e) {}
+      map2d.setFigures(figures); 
+   }
 
-   subTask.resetDisplay = function() {
-      //console.log('resetDisplay');
-      displayError("");
-      map2d && map2d.destroy();
-      editor && editor.destroy();
-      //answer.figures = [{"type":"point", "x":540.5,"y":332}]
 
-      editor = JSONTextEditor({
-         parent: document.getElementById('json'),
-         min_height: '200px',
-         content: answer.data,
-         onChange: onDataChange
-      });      
-      initMap2d(function() {
-         // displayHelper.hideRestartButton = true;
-         displayHelper.customValidate = checkResult;
-      });
-   };
-
-   subTask.getAnswerObject = function() {
-      //console.log('subTask.getAnswerObject', answer);
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      //console.log('getDefaultAnswerObject');
-      var defaultAnswer = { 
-         data: []
-      };
-      
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      //console.log('subTask.unloadLevel');      
-      map2d && map2d.destroy();
-      callback();
-   };
-
-   subTask.getGrade = function(callback) {
-      checkResult(true, function(res) {
-         //console.log('subTask.getGrade', res)
-         callback(res)
-      });      
-   };
+   function initEditor() {
+      if(!editor) {
+         editor = JSONTextEditor({
+            parent: document.getElementById('json'),
+            onChange: onEditorChange
+         });                     
+      }
+      editor.setContent(answer.json);
+   }
 
 
    function initMap2d(callback) {
-
-      //dimk
-      var figures = validateFiguresData(answer.data); //answer.figures.slice();
-
       function onLoad() {
-         map2d.setFigures(figures);
+         refreshMap();
          callback && callback();
       }
-
       if(map2d) {
          return onLoad();
       } 
@@ -330,15 +330,6 @@ function initTask(subTask) {
    };
 
 
-   function refreshAnswer() {
-      var figures = editor.getContent();
-      if(!Array.isArray(figures)) {
-         figures = [];
-      }      
-      answer = {
-         figures: editor.getContent() || []
-      }
-   }
 
 }
 initWrapper(initTask, ["easy", "hard"]);

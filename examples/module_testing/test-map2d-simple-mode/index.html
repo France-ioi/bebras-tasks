@@ -7,17 +7,18 @@
    <script>
       window.stringsLanguage = 'fr';
    </script>
-   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
    <script class="remove" type="text/javascript">
       var modulesPath = '../../../_common/modules';
       importModules([
-         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js',
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
          'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
          'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
          'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-         'taskStyles-0.1', 'raphaelButton-1.0', 'map2d_styles', 
-         'map2d',
-         'json-text-editor', 'jsonlint'
+         'taskStyles-0.1', 'raphaelButton-1.0', 
+         'ace', 'ace_json', 'ace_language_tools', 
+         'map2d', 'map2d_styles', 
+         'json-text-editor',
       ]);
    </script>  
 
@@ -41,10 +42,8 @@
       var taskStrings = {
          success: "Félicitations, vous avez réussi !",
          fail: "Ce n'est pas la bonne réponse.",
-         // openStreeMapCopyright: "© les contributeurs d’OpenStreetMap",
          empty_map: "La carte est vide.",
          invalid_json: 'Invalid JSON string',
-         expecting: 'JSON parse error, expecting: ',
          invalid_data: 'Data must be array of objects',
          not_array: 'Property is not an array: ',
          not_object: 'Property is not an object',
@@ -53,8 +52,7 @@
          extra_props: 'Redundant propertie(s): ',
          points_empty: 'Points array is empty',
          invalid_lat: 'Latitude is out of range: ',
-         invalid_lng: 'Longitude is out of range: ',
-         wrong_drawing: 'Wrong drawing'
+         invalid_lng: 'Longitude is out of range: '
       }
    </script>
    <script type="text/javascript" src="task.js"></script>
@@ -69,16 +67,9 @@
       }
 
       #json {
-         display: flex;
-         justify-content: space-around;
-      }
-
-      #json pre {
-         border: 1px #4a4a4a solid;
          width: 100%;
-         overflow: scroll;
+         height: 200px;
       }
-
       #error {
          color: "red";
          padding-left: 1em;
@@ -99,23 +90,17 @@
       <h1>Map2d - simple mode</h1>
       <div id="tabsContainer"></div>
       <div id="taskContent">
-         <div id="zone_1">
-            <div class="consigne">     
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
-               <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
+         <div class="consigne">     
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
          </div>
-         
-         <div id="zone_2"> 
-            <div id="map"></div>
-            <div id="json"></div>
-            <div id="error">
-               <h3>MESSAGE</h3>
-               <p><i class="fas fa-times"></i> <span id="errorMsg"></span></p>
-            </div>
+         <div id="map"></div>
+         <div id="json"></div>
+         <div id="error">
+            <h3>MESSAGE</h3>
+            <p><i class="fas fa-times"></i> <span id="errorMsg"></span></p>
          </div>
- 
          <img src="icon.png" style="display:none">
       </div>
    </div>
