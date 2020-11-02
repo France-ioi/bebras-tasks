@@ -9,10 +9,20 @@
                 success: "Success!",
                 fail: "Fail.",
                 labels: {
-                    output: 'Output CSV:',
-                    input: 'Input CSV:',
-                    table: 'Table:'                    
-                }
+                    editor: 'Editor:',
+                    preview: 'Result:'
+                },
+                mistake_InvalidQuotes: 'Trailing quote on quoted field is malformed',
+                mistake_MissingQuotes: 'Quoted field unterminated',
+                mistake_rows_lack: 'La table ne contient pas assez de lignes',
+                mistake_rows_excess: 'La table contient trop de lignes',
+                mistake_cols_lack: 'La table ne contient pas assez de colonnes',
+                mistake_cols_excess: 'La table contient trop de colonnes',
+                mistake_incorrect_data: 'Les données sont invalides',
+                mistake_illegal_state: 'Le format du CSV est invalide',
+                mistake_illegal_quote: 'Erreur de guillemets',
+                mistake_illegal_data: 'Données non autorisées',
+                mistake_unknown_state: 'Le format du CSV est invalide'                                
             }            
         </script>
         <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
@@ -39,7 +49,8 @@
                 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
                 'taskStyles-0.1', 'raphaelButton-1.0', 'shape-paths', 'drag_lib-2.0',
                 'jquery-ui-1.10.3', 'jquery-ui-1.10.3-styles',
-                'jquery.csv',
+                'papaparse',
+                'ace', 'ace_plain_text',// 'ace_language_tools', 
                 'csv_editor', 'csv_editor_styles', 'csv_editor_task'
             ]);
         </script>
