@@ -88,8 +88,10 @@ function initTask(subTask) {
       //console.log('subTask.loadLevel', curLevel)
       displayHelper.avatarType = "none";
       level = curLevel;
-      target = data[level].target;
-      target.figures = coordinates_map.convertFigures(target.figures);
+      target = {
+         figures: coordinates_map.convertFigures(data[level].target.figures),
+         bias: data[level].target.bias
+      }
    };
 
    subTask.getStateObject = function() {
