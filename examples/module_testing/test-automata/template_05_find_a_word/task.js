@@ -1,7 +1,4 @@
 function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
    var data = {
       easy: {
          regex:"A|BC",
@@ -81,65 +78,34 @@ function initTask(subTask) {
       "stroke-width": 6
    };
 
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      displayHelper.customValidate = validation;
+   function loadLevel(level) {
       vGraph = JSON.parse(JSON.stringify(data[level].vGraph));
       paperHeight = data[level].paperHeight;
       regex = data[level].regex;
+      $("#input_word").val("");
    };
 
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer)
-         $("#input_word").val(answer);
+   function loadAnswer(answer) {
+      $("#input_word").val(answer);
    };
 
    subTask.resetDisplay = function() {
       $("#regex").text(regex);
-      initPaper();
-      initAutomata();
    };
 
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = null;
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      if(automata){
-         automata.stopAnimation();
-         automata.setEnabled(false);
-      }
-      resetCallback();
-      $("#input_word").val("");
-      callback();
-   };
-
-   subTask.getGrade = function(callback) {
-      callback({
-         successRate: 1, message: taskStrings.success
-      });
+   function saveAnswer() {
+      return $("#input_word").val();
    };
 
    function initPaper() {
-      graphPaper = subTask.raphaelFactory.create("graph", "graph", paperWidth, paperHeight);
+      graphPaper = subTask.raphael("graph", "graph", paperWidth, paperHeight);
       graphPaper.rect(1,1,paperWidth-2,paperHeight-2);
-      sequencePaper = subTask.raphaelFactory.create("sequence","sequence",paperWidth,50);
+      sequencePaper = subTask.raphael("sequence","sequence",paperWidth,50);
    };
 
-   function initAutomata() {
-      var settings = {
+   function getAutomataSettings() {
+      return {
          mode: 5,
-         subTask: subTask,
          graphPaper: graphPaper,
          graphPaperElementID: "graph",
          visualGraphJSON: JSON.stringify(vGraph),
@@ -147,35 +113,16 @@ function initTask(subTask) {
          edgeAttr: defaultLineAttr,
          sequencePaper: sequencePaper,
          seqLettersAttr: seqLettersAttr,
-         resetCallback: resetCallback,
-         callback: saveAnswer,
          alphabet: alphabet,
          regex: regex,
          acceptedByRegex: true,
          acceptedByAutomaton: false,
-         enabled: true
+         enabled: true,
+         editEnabled: false
       };
-      automata = new Automata(settings);
-      automata.setEditEnabled(false);
    };
 
-   function validation() {
-      saveAnswer();
-      var res = automata.validate(answer);
-      if(res.error){
-         $("#feedback").text(res.error);
-      }else{
-         displayHelper.validate("stay");
-      }
-   };
-
-   function resetCallback() {
-      $("#feedback").empty();
-   };
-
-   function saveAnswer() {
-      answer = $("#input_word").val();
-   };
+   AutomataTask(subTask, loadLevel, loadAnswer, saveAnswer, initPaper, getAutomataSettings);
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
 displayHelper.useFullWidth();

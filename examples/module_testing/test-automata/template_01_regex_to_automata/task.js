@@ -1,7 +1,4 @@
 function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
    var data = {
       easy: {
          regex: '(A|B)C',
@@ -101,7 +98,6 @@ function initTask(subTask) {
    var graphPaper;
    var seqPaper;
    var graph;
-   var automata;
 
    var targetNFA;
 
@@ -110,74 +106,29 @@ function initTask(subTask) {
       "stroke-width": 6
    };
 
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      displayHelper.customValidate = validation;
+   function loadLevel(level) {
       vGraph = JSON.parse(JSON.stringify(data[level].vGraph));
       regex = data[level].regex;
       targetNFA = new NFA(alphabet,data[level].transitionTable,[data[level].start],[data[level].end]);
       paperHeight = data[level].paperHeight;
    };
 
-   subTask.getStateObject = function() {
-      return state;
+   function loadAnswer(answer) {
+      vGraph = JSON.parse(answer);
    };
 
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer)
-         vGraph = JSON.parse(answer);
-   };
-
-   subTask.resetDisplay = function() {
-      $("#regex").text(regex);
-      initPaper();
-      initAutomata();
-      // initHandlers();
-      // updateAutomata();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = null;
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      if(automata){
-         automata.stopAnimation();
-         automata.setEnabled(false);
-      }
-      resetCallback();
-      callback();
-   };
-
-   subTask.getGrade = function(callback) {
-      callback({
-         successRate: 1, message: taskStrings.success
-      });
+   function saveAnswer() {
+      return subTask.automata.visualGraph.toJSON();
    };
 
    function initPaper() {
-      graphPaper = subTask.raphaelFactory.create("graph", "graph", paperWidth, paperHeight);
+      graphPaper = subTask.raphael("graph", "graph", paperWidth, paperHeight);
       graphPaper.rect(1,1,paperWidth-2,paperHeight-2);
-      sequencePaper = subTask.raphaelFactory.create("sequence","sequence",paperWidth,50);
+      sequencePaper = subTask.raphael("sequence", "sequence", paperWidth, 50);
    };
 
-   function initAlphabet() {
-      $("#alphabet").empty();
-      var text = "<h3>Alphabet:</h3>";
-      for(var letter of alphabet){
-         text += letter + " ";
-      }
-      $("#alphabet").append(text);
-   };
-
-   function initAutomata() {
-      var settings = {
+   function getAutomataSettings() {
+      return {
          mode: 1,
          subTask: subTask,
          graphPaper: graphPaper,
@@ -188,39 +139,16 @@ function initTask(subTask) {
          sequencePaper: sequencePaper,
          sequence: sequence,
          seqLettersAttr: seqLettersAttr,
-         resetCallback: resetCallback,
-         callback: saveAnswer,
          alphabet: alphabet,
          targetNFA: targetNFA,
          enabled: true
       };
-      automata = new Automata(settings);
    };
 
+   AutomataTask(subTask, loadLevel, loadAnswer, saveAnswer, initPaper, getAutomataSettings);
 
-   function validation() {
-      var res = automata.validate();
-      if(res.error){
-         $("#feedback").text(res.error);
-      }else{
-         displayHelper.validate("stay");
-      }
-   };
-
-   function handleResult(result) {
-      var text = result.message;
-      if(result.nEdges > 1)
-         text += " "+result.nEdges+" edges available";
-      $("#feedback").text(text);
-   };
-
-   function resetCallback() {
-      // $("#result").empty();
-      $("#feedback").empty();
-   };
-
-   function saveAnswer() {
-      answer = automata.visualGraph.toJSON();
+   subTask.resetDisplay = function() {
+      $("#regex").text(regex);
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);

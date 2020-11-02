@@ -1,6 +1,4 @@
 function initTask(subTask) {
-   var state = {};
-   var level;
    var answer = null;
    var data = {
       easy: {
@@ -53,55 +51,6 @@ function initTask(subTask) {
       "stroke-width": 6
    };
 
-   subTask.loadLevel = function(curLevel) {
-      level = curLevel;
-      displayHelper.customValidate = validation;
-      wordList = data[level].wordList.slice();
-      maxNbChar = data[level].maxNbChar;
-   };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer)
-         $("#input_regex").val(answer);
-   };
-
-   subTask.resetDisplay = function() {
-      initInstructions();
-      initHandlers();
-      initAutomata();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = null;
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      if(automata){
-         automata.stopAnimation();
-         automata.setEnabled(false);
-      }
-      resetCallback();
-      $("#input_regex").off("keyup");
-      $("#input_regex").val("");
-      callback();
-   };
-
-   subTask.getGrade = function(callback) {
-      callback({
-         successRate: 1, message: taskStrings.success
-      });
-   };
-
    function initInstructions() {
       $("#nbChar").text(maxNbChar);
       var html = "";
@@ -122,43 +71,39 @@ function initTask(subTask) {
       });
    };
 
-   function initAutomata() {
-      var settings = {
+   subTask.resetDisplay = function() {
+      initInstructions();
+      initHandlers();
+   };
+
+   function loadLevel(level) {
+      wordList = data[level].wordList.slice();
+      maxNbChar = data[level].maxNbChar;
+      $("#input_regex").off("keyup");
+      $("#input_regex").val("");
+   };
+
+   function loadAnswer(answer) {
+      $("#input_regex").val(answer);
+   };
+
+   function initPaper() {};
+
+   function getAutomataSettings() {
+      return {
          mode: 7,
-         subTask: subTask,
          alphabet: alphabet,
          wordList: wordList,
          maxNbChar: maxNbChar,
          enabled: true
       };
-      automata = new Automata(settings);
-   };
-
-   function validation() {
-      saveAnswer();
-      var res = automata.validate(answer);
-      if(res.error){
-         $("#feedback").text(res.error);
-      }else{
-         displayHelper.validate("stay");
-      }
-   };
-
-   function onGraphChange() {
-      saveAnswer();
-      var nVertices = automata.graph.getVerticesCount();
-      if(nVertices > maxNbStates){
-         $("#feedback").text("The number of states is greater than "+maxNbStates);
-      }
-   }
-
-   function resetCallback() {
-      $("#feedback").empty();
    };
 
    function saveAnswer() {
-      answer = $("#input_regex").val();
+      return $("#input_regex").val();
    };
+
+   AutomataTask(subTask, loadLevel, loadAnswer, saveAnswer, initPaper, getAutomataSettings);
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
 displayHelper.useFullWidth();

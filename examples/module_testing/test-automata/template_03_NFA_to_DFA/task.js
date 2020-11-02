@@ -1,7 +1,5 @@
 function initTask(subTask) {
-   var state = {};
-   var level;
-   var answer = null;
+   var level = null;
    var data = {
       easy: {
          vGraph: {
@@ -79,109 +77,47 @@ function initTask(subTask) {
       "stroke-width": 6
    };
 
-   subTask.loadLevel = function(curLevel) {
+   function loadLevel(curLevel) {
       level = curLevel;
-      displayHelper.customValidate = validation;
       vGraph = JSON.parse(JSON.stringify(data[level].vGraph));
       paperHeight = data[level].paperHeight;
-   };
-
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      if(answer)
-         vGraph = JSON.parse(answer);
-   };
-
-   subTask.resetDisplay = function() {
-      initPaper();
-      initAutomata();
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      var defaultAnswer = null;
-      return defaultAnswer;
-   };
-
-   subTask.unloadLevel = function(callback) {
-      if(automata){
-         automata.stopAnimation();
-         automata.setEnabled(false);
-      }
-      resetCallback();
       $("#input_regex").val("");
-      callback();
    };
 
-   subTask.getGrade = function(callback) {
-      callback({
-         successRate: 1, message: taskStrings.success
-      });
+   function loadAnswer(answer) {
+      vGraph = JSON.parse(answer);
+   };
+
+   function saveAnswer() {
+      return subTask.automata.visualGraph.toJSON();
    };
 
    function initPaper() {
-      nfaPaper = subTask.raphaelFactory.create("nfa", "nfa", paperWidth, paperHeight);
+      nfaPaper = subTask.raphael("nfa", "nfa", paperWidth, paperHeight);
       nfaPaper.rect(1,1,paperWidth-2,paperHeight-2);
-      sequencePaper = subTask.raphaelFactory.create("sequence","sequence",paperWidth,50);
-      dfaPaper = subTask.raphaelFactory.create("dfa", "dfa", paperWidth, paperHeight);
+      sequencePaper = subTask.raphael("sequence","sequence",paperWidth,50);
+      dfaPaper = subTask.raphael("dfa", "dfa", paperWidth, paperHeight);
       dfaPaper.rect(1,1,paperWidth-2,paperHeight-2);
    };
 
-   function initAutomata() {
-      var settings = {
+   function getAutomataSettings() {
+      return {
          mode: 3,
-         subTask: subTask,
          graphPaper: dfaPaper,
          graphPaperElementID: "dfa",
          visualGraphJSON: JSON.stringify(vGraph),
-         subTask: subTask,
          staticGraphPaper: nfaPaper,
          staticVisualGraphJSON: JSON.stringify(data[level].vGraph),
          circleAttr: defaultCircleAttr,
          edgeAttr: defaultLineAttr,
          sequencePaper: sequencePaper,
          seqLettersAttr: seqLettersAttr,
-         resetCallback: resetCallback,
-         callback: saveAnswer,
          alphabet: alphabet,
          enabled: true
       };
-      automata = new Automata(settings);
-      // automata.setEditEnabled(false);
    };
 
-   function validation() {
-      saveAnswer();
-      var res = automata.validate();
-      if(res.error){
-         $("#feedback").text(res.error);
-      }else{
-         displayHelper.validate("stay");
-      }
-   };
-
-   function handleResult(result) {
-      var text = result.message;
-      if(result.nEdges > 1)
-         text += " "+result.nEdges+" edges available";
-      $("#feedback").text(text);
-   };
-
-   function resetCallback() {
-      // $("#result").empty();
-      $("#feedback").empty();
-   };
-
-   function saveAnswer() {
-      answer = automata.visualGraph.toJSON();
-   };
+   AutomataTask(subTask, loadLevel, loadAnswer, saveAnswer, initPaper, getAutomataSettings);
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
 displayHelper.useFullWidth();
