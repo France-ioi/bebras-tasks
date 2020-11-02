@@ -15,16 +15,16 @@
          'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
          'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
          'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-         'taskStyles-0.1', 'raphaelButton-1.0', 
-         'ace', 'ace_json', 'ace_language_tools', 
+         'taskStyles-0.1', 'raphaelButton-1.0',
+         'ace', 'ace_json',
          'map2d', 'map2d_styles', 
-         'json-text-editor',
+         'json-text-editor', 'json-text-editor-jsonlint'
       ]);
    </script>  
 
    <script class="remove" type="text/javascript">
          var json = {
-            "id": "AmazonSNT/PhotoNumerique/01 - reglages_appareil",
+            "id": "AmazonSNT/StructuredData/json-map-1",
             "language": "fr",
             "version": "fr.01",
             "authors": "France-ioi, Mathias Hiron, Nicolas Esposito, Arnaud Le Grand",
@@ -43,7 +43,8 @@
          success: "Félicitations, vous avez réussi !",
          fail: "Ce n'est pas la bonne réponse.",
          empty_map: "La carte est vide.",
-         invalid_json: 'Chaîne JSON string',
+         invalid_json: 'Chaîne JSON invalide',
+         expecting: 'JSON parse error, expecting: ',
          invalid_data: 'La réponse doit être un tableau d\'objets',
          not_array: 'La propriété n\'est pas un tableau : ',
          not_object: 'La propriété n\'est pas un objet :',
@@ -57,8 +58,6 @@
    </script>
    <script type="text/javascript" src="task.js"></script>
    <style>
-      @import url('../../../_common/modules/fonts/fontAwesome/css/all.css');
-
       #map {
          margin: 1em 0;
       }
@@ -70,6 +69,12 @@
          width: 100%;
          height: 200px;
       }
+
+      #json .mistake {
+         background: #FAA;
+         position: absolute;
+      }      
+
       #error {
          color: "red";
          padding-left: 1em;
@@ -82,6 +87,13 @@
       .consigne {
          color: #4a4a4a;
       }
+      
+      .enableSelect {
+        -webkit-user-select: text;  
+        -moz-user-select: text;    
+        -ms-user-select: text;      
+        user-select: text;
+      }
    </style>
 </head>
 
@@ -90,17 +102,64 @@
       <h1>Map2d - simple mode</h1>
       <div id="tabsContainer"></div>
       <div id="taskContent">
-         <div class="consigne">     
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> 
-            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div class="consigne">     
+               <p>
+                  Un emplacement sur la carte ci-contre peut être décrit par un objet JSON, une chaîne entre accollades contenant les propriétés type, lat et lng séparées par des virgules.
+
+               <p>
+                  Chaque propriété est décrite par son nom entre guillemets, deux points, puis sa valeur entre guillemets.
+               </p>
+               <p>
+                  Une liste est décrite par un ensemble d'objets séparés par des virgules, le tout entre crochets.
+               </p>
+               <p class="easy medium">
+                  Voici un exemple avec un emplacement de la ville de Loix&nbsp;:
+               </p>
+               <pre class="easy medium enableSelect">[
+   {
+      "type":"point",
+      "lat": 46.222,
+      "lng": -1.445
+   }
+]</pre>             
+               <p class="easy">
+                  Écrivez un fichier JSON qui place un point sur la ville de Le Bois-plage-en-Ré.
+               </p>
+               <p class="medium">
+                  Écrivez un fichier JSON qui place deux points sur la carte. L'un sur la ville de Le Bois-plage-en-Ré, et l'autre sur la ville de la Couarde sur mer..
+               </p>
+               <p class="hard">
+                  Écrivez un fichier JSON qui trace deux lignes brisées. La première va de Les Portes-en-Ré à Saint-Clément-des-Balaines, et la deuxième part de La Couarde-sur-Mer, passe par Saint-Martin-de-Ré puis va jusqu'à Le Bois-Plage-en-Ré.
+               </p>
+               <p class="hard">
+                  Voici un exemple avec une partie de la deuxième route :
+               </p>
+               <pre class="hard enableSelect">[
+   {
+      "type":"line",
+      "points": [
+         {
+            "lat": 46.1785,
+            "lng": -1.375
+         },
+         {
+            "lat": 46.1975,
+            "lng": -1.371
+         }
+      ]
+   }
+]
+</pre>
+            </div>
          </div>
+         
          <div id="map"></div>
          <div id="json"></div>
          <div id="error">
             <h3>MESSAGE</h3>
             <p><i class="fas fa-times"></i> <span id="errorMsg"></span></p>
          </div>
+ 
          <img src="icon.png" style="display:none">
       </div>
    </div>

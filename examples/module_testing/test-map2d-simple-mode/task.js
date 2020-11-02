@@ -315,17 +315,26 @@ function initTask(subTask) {
       }
    };
 
+   function formatSyntaxErrorMsg(metadata) {
+      if(metadata.expected.length) {	
+         return taskStrings.expecting + metadata.expected.join(',');	
+      } else {	
+         return taskStrings.invalid_json;	
+      }      
+   }
+
    function checkResult(noVisual, callback) {
       //console.log('checkResult',noVisual)
       initMap2d(function() {
          var syntax_error = editor.getSyntaxError(noVisual);
          if(syntax_error) {
+            var msg = formatSyntaxErrorMsg(syntax_error);
             if(!noVisual){
-               displayError(syntax_error.msg);
+               displayError(msg);
             }
             callback && callback({ 
                successRate: 0, 
-               message: syntax_error.msg
+               message: msg
             });
             return;            
          }
