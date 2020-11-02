@@ -121,7 +121,6 @@ function initTask(subTask) {
       return answer;
    };
 
-
    subTask.reloadAnswerObject = function(answerObj) {
       //console.log('subTask.reloadAnswerObject', answerObj)
       answer = answerObj;
@@ -130,8 +129,6 @@ function initTask(subTask) {
       }
       editor && editor.setContent(answer.json);
    };   
-   
-   
 
    subTask.unloadLevel = function(callback) {
       //console.log('subTask.unloadLevel');      
@@ -146,13 +143,6 @@ function initTask(subTask) {
          callback(res)
       });      
    };
-
-
-
-
-
-
-
 
    function testProps(obj, expected_props) {
       var missed_props = [];
@@ -243,7 +233,6 @@ function initTask(subTask) {
       return coordinates_map.convertFigures(res);
    }
 
-
    function onEditorChange(content) {
       displayError(false);
       answer = {
@@ -261,7 +250,6 @@ function initTask(subTask) {
       } catch(e) {}
       map2d.setFigures(figures); 
    }
-
 
    function initEditor() {
       if(!editor) {
@@ -292,7 +280,6 @@ function initTask(subTask) {
          onLoad: onLoad
       });
    };
-
 
    function displayError(msg) {
       //console.log('displayError', msg);
