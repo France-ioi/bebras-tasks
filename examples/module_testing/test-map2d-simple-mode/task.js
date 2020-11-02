@@ -129,14 +129,7 @@ function initTask(subTask) {
    subTask.getDefaultAnswerObject = function() {
       //console.log('getDefaultAnswerObject');
       var defaultAnswer = { 
-         //json: '[]'
-         json: '[\n\
-            {\n\
-               "type":"point",\n\
-               "lat: 46.222,\n\
-               "lng": -1.445\n\
-            }\n\
-         ]'
+         json: '[]'
       };      
       return defaultAnswer;
    };
@@ -259,7 +252,6 @@ function initTask(subTask) {
    }
 
    function onEditorChange(content) {
-      displayError(false);
       answer = {
          json: content
       }                           
@@ -325,6 +317,7 @@ function initTask(subTask) {
 
    function checkResult(noVisual, callback) {
       //console.log('checkResult',noVisual)
+      initEditor();
       initMap2d(function() {
          var syntax_error = editor.getSyntaxError(noVisual);
          if(syntax_error) {
