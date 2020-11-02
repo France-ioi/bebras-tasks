@@ -1,6 +1,8 @@
 function initTask(subTask) {
 
+   //console.log('initTask', subTask.display)
    $("#map").empty();
+   $("#json").empty();
 
    var state = {};
    var level;
@@ -14,13 +16,27 @@ function initTask(subTask) {
             ]
          } 
       },
+      medium: {
+         target: {
+            bias: 10,
+            figures: [
+               {"type":"point", "lat": 46.179015,"lng": -1.374416},
+               {"type":"point", "lat": 46.1975,"lng": -1.432}
+            ]
+         } 
+      },
       hard: {
          target: {
             bias: 10,
             figures: [
                {"type":"line", "points": [
-                  {"lat": 46.242569,"lng": -1.543923},
-                  {"lat": 46.179015,"lng": -1.374416}
+                  {"lat": 46.1785,"lng": -1.375},
+                  {"lat": 46.1975,"lng": -1.371},
+                  {"lat": 46.1975,"lng": -1.432}
+               ]},
+               { "type": "line", "points": [  
+                  {"lat": 46.2467,"lng": -1.4945},
+                  {"lat": 46.2243,"lng": -1.5364}
                ]}
             ]
          } 
@@ -113,8 +129,15 @@ function initTask(subTask) {
    subTask.getDefaultAnswerObject = function() {
       //console.log('getDefaultAnswerObject');
       var defaultAnswer = { 
-         json: '[]'
-      };
+         //json: '[]'
+         json: '[\n\
+            {\n\
+               "type":"point",\n\
+               "lat: 46.222,\n\
+               "lng": -1.445\n\
+            }\n\
+         ]'
+      };      
       return defaultAnswer;
    };
 
@@ -129,8 +152,8 @@ function initTask(subTask) {
       if(!answer) {
          return;
       }
-      editor && editor.setContent(answer.json);
-   };   
+      editor && editor.setContent(answer.data);
+   };
 
    subTask.unloadLevel = function(callback) {
       //console.log('subTask.unloadLevel');      
@@ -263,7 +286,6 @@ function initTask(subTask) {
       editor.setContent(answer.json);
    }
 
-
    function initMap2d(callback) {
       function onLoad() {
          refreshMap();
@@ -296,6 +318,18 @@ function initTask(subTask) {
    function checkResult(noVisual, callback) {
       //console.log('checkResult',noVisual)
       initMap2d(function() {
+         var syntax_error = editor.getSyntaxError(noVisual);
+         if(syntax_error) {
+            if(!noVisual){
+               displayError(syntax_error.msg);
+            }
+            callback && callback({ 
+               successRate: 0, 
+               message: syntax_error.msg
+            });
+            return;            
+         }
+
          var valid = map2d.diff(target, noVisual);
          if(!valid){
             if(!noVisual){
@@ -318,8 +352,6 @@ function initTask(subTask) {
       });
    };
 
-
-
 }
-initWrapper(initTask, ["easy", "hard"]);
+initWrapper(initTask, ["easy", "medium", "hard"]);
 displayHelper.useFullWidth();
