@@ -77,10 +77,7 @@ function initTask(subTask) {
 `from traceroute import *
 
 domain = parseArgument()
-print("domain: " + domain)
-
 ip = getAddrInfo(domain)
-print("ip:" + ip)
 
 max_ttl = 10
 
@@ -89,7 +86,6 @@ for ttl in range(1, max_ttl + 1):
     print(str(ttl) + " " + res["domain"] + " " + res["ip"] + " " + str(res["rtt"]) + "ms")
     if res["ip"] == ip:
         break
-print("end")
 `
             }
         }
