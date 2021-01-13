@@ -60,9 +60,12 @@ function initTask(subTask) {
                 */
             },
         },
+        checkEndEveryTurn: false,
+        checkEndCondition: function(context, lastTurn) {
+            context.validator.checkScanIP(context, lastTurn);
+        },                        
         startingExample: {
-            easy: {
-                blockly: '<xml xmlns="http://www.w3.org/1999/xhtml"><block type="robot_start" id="A?fwe,`GgY=]2!BAN!Zb" deletable="false" movable="false" editable="false" x="0" y="0"><next><block type="print" id=")#CEGR4Z,@c|kFtkz]x)"><value name="PARAM_0"><block type="getArgumentsLength" id="N3-efW3EtRU_6-}Q?*qG"></block></value><next><block type="print" id="0Azf3~7JPttEX4d,IIBr"><value name="PARAM_0"><block type="getArgument" id="|XG4wmS/01VO#l#RGP[7"><value name="PARAM_0"><block type="math_number" id="25|9p|odEi2`9DRtfM@c"><field name="NUM">0</field></block></value></block></value></block></next></block></next></block><additional>{}</additional></xml>',
+            basic: {
                 python: 
 `from scanip import *
 
