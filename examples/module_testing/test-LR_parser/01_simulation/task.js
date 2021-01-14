@@ -16,15 +16,15 @@ function initTask(subTask) {
             "vertexVisualInfo":{
                "v_0":{"x":99,"y":87,"tableMode":true},
                "v_1":{"x":209,"y":307,"tableMode":true},
-               "v_2":{"x":307,"y":51.046875,"tableMode":true},
-               "v_3":{"x":271,"y":205.046875,"tableMode":true},
-               "v_4":{"x":479,"y":52.046875,"tableMode":true},
-               "v_5":{"x":453,"y":208.046875,"tableMode":true},
-               "v_6":{"x":451,"y":354.046875,"tableMode":true},
-               "v_7":{"x":669,"y":190.046875,"tableMode":true},
-               "v_8":{"x":658,"y":355.046875,"tableMode":true},
-               "v_9":{"x":649,"y":52.046875,"tableMode":true},
-               "v_10":{"x":74,"y":355.046875,"tableMode":true}
+               "v_2":{"x":307,"y":51,"tableMode":true},
+               "v_3":{"x":271,"y":205,"tableMode":true},
+               "v_4":{"x":479,"y":52,"tableMode":true},
+               "v_5":{"x":453,"y":208,"tableMode":true},
+               "v_6":{"x":451,"y":354,"tableMode":true},
+               "v_7":{"x":669,"y":190,"tableMode":true},
+               "v_8":{"x":658,"y":355,"tableMode":true},
+               "v_9":{"x":649,"y":52,"tableMode":true},
+               "v_10":{"x":74,"y":355,"tableMode":true}
             },
             "edgeVisualInfo":{
                "e_0":{"radius-ratio":2.16,"sweep":0,"large-arc":0},
