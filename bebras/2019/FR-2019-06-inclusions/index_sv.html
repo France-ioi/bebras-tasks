@@ -119,7 +119,36 @@
 
    <div id="solution">
       <h2>Lösning</h2>
+          <div class="easy">
+           <p>Man måste placera rektanglarna <b>B</b> och <b>C</b> inuti rektangeln <b>A</b>.</p>
+           <img src="sol_easy.png">
+           <p><b>Obs:</b>  Man måste undvika att <b>B</b> liger helt inom <b>C</b>, eller att <b>C</b> ligger helt inom <b>B</b>.</b>
+          </div>
+
+         <div class="medium">
+           <p>I rektangeln <b>A</b> ska man placera rektanglarna <b>B</b> och <b>C</b>. Sedan ska man i rektangeln <b>B</b> placera <b>D</b> och <b>E</b>. Dessutom ska man i rektangeln <b>F</b> placera <b>G</b>.</p>
+           <img src="sol_medium.png">
+           <p><b>Obs:</b> Man kan också se det från andra hållet. Först placerar man rektangeln <b>G</b> i <b>F</b>. Sedan ska man placera <b>D</b> och <b>E</b> i <b>B</b>, och till sist rektanglarna <b>B</b> och <b>C</b> i <b>A</b>.</p>
+         </div>
+
+         <div class="hard">
+           <p>Rektangeln <b>C</b> är lätt att placera allra sist: det räcker att placera den i rektangeln <b>A</b>, oberoende av de andra rektanglarna. Detsamma gäller rektanglarna <b>D</b> och <b>G</b>, som man på slutet fritt kan placera in i rektangeln <b>B</b> utan andra villkor.</p>
+           <p>Låt oss alltså koncentrera oss på rektanglarna <b>A</b>, <b>B</b>, <b>E</b>, <b>F</b>, och <b>H</b>. Rektanglarna <b>E</b> och <b>F</b> ska befinna sig inuti både <b>A</b> och <b>B</b>. Dessa måste då delvis täcka varandra, med <b>E</b> och <b>F</b> placerade i det gemensamma området.</p>
+           <img src="sol_hard_1.png">
+           <p>Sen ska också rektangeln <b>H</b> befinna sig inuti både <b>E</b> och <b>F</b>. Vi får då på samma sätt låta <b>E</b> och <b>F</b> överlappa och placera <b>H</b> i det gemensamma området.</p>
+           <img src="sol_hard_2.png">
+           <p>Till sist kan man placera rektanglarna <b>C</b>, <b>D</b> och <b>G</b> som vi förklarade i början.</p>
+           <img src="sol_hard.png">
+           <p><b>Obs:</b> Man måste undvika att placera <b>A</b> helt inne i <b>B</b> , eller tvärtom, liksom man inte heller får placera <b>E</b> eller <b>F</b> helt inne i varandra.</p>
+         </div>
+   
       <h2>Det är datavetenskap !</h2>
+    <p>
+         Problemet illustrerar användningen av <a href="https://sv.wikipedia.org/wiki/Grafteori" target="_blank">grafer</a> för att representera vissa egenskaper hos det system man studerar. En graf består av noder förbundna med bågar. Här är noderna de svarta kvadraterna, som var och en representerar en rektangel, och bågarna de pilar som representerar informationen "befinna sig inuti ..".
+      </p>
+      <p>
+         I detta fall används en graf, mer specifikt en <a href="https://it-ord.idg.se/ord/riktad-acyklisk-graf/" target="_blank">riktad acyklisk graf</a>, för att representera relationerna "befinna sig inuti .." för en hel grupp rektanglar. Man kan då användana klassiska grafalgoritmer för att efektivt svara på frågor om rektanglarna och deras överlappningar, utan att behöva uppfinna nya algoritmer för varje fråga.
+      </p>
    </div>
    <!-- task-solution -->
 </body>

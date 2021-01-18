@@ -83,7 +83,44 @@
 
    <div id="solution">
       <h2>Lösning</h2>
+              <p>För att lösa denna uppgift gäller det att lista ut hur skjutreglagens position väljer ut en av symbolerna på raderna nedanför.</p>
+            
+           <div class="easy">
+           <p>I denna version märker man att ett steg åt höger på det första (övre) skjutreglaget motsvarar ett stort hopp 8 steg åt höger längs raden av symboler. Ett steg på det undre reglaget ger i stället bara ett steg åt höger bland symbolerna.</p>
+           <p>För att komma till målsymbolen får man alltså först flytta fram den valda (blå) positionen med det övre reglaget, men bara så att man fortfarande är till vänster om (eller på) målet. Sedan stegar man vid behov ända fram till målet, ett steg i taget, med hjälp av det undre reglaget. Målet erhålls med följande inställningar:</p>
+           </div>
+
+           <div class="medium">
+           <p>I denna version märker man att de tre första (vänstra) skjutreglagen påverkar den första av målets symboler, medan de tre följande påverkar bara den andra målsymbolen. Man kan alltså lösa problemet i två separata steg som var och en rör bara en symbol.</p>
+          <p>Man märker att ett steg uppåt på det vänstra reglaget ger en förflyttning åt höger med 16 steg, ett steg på det mellersta en förflyttning med 4 steg, och ett steg på det högra ett enda steg åt höger bland symbolerna.</p>
+           <p>Man börjar med det vänstra reglaget, som har störst effekt, och ser till att man inte stegar för långt. Sedan tar man det mellersta på samma sätt, och avslutar med att steg för steg flytta fram till målsymbolen med hjälp av det tredje reglaget. Målet erhålls med följande inställningar:</p>
+           </div>
+
+           <div class="hard">
+           <p>I denna version är det de 6 första reglagen som ger den första symbolen, de 6 följande den andra, och de 6 sista skjutreglagen den tredje symbolen. Man kan alltså som förut ställa in varje symbol för sig, på samma sätt.</p>
+           <p>
+           Man märker nu att varje reglage har bara två steg, av eller på (0 eller 1). Reglaget längst till vänster i en 6-grupp ger en förflyttning 32 steg år höger längs symbolraden, nästa ger 16 steg, ytterligare nästa 8, det fjärde 4 steg, det femte 2 steg och det sjätte 1 steg åt höger.           </p>
+           <p>Som förut använder man reglagen i ordning från vänster, och ser hela tiden till att man inte stegar för långt. Målet erhålls med följande inställningar:
+           </p>
+           <p>
+           
+           </div>
+
+           <img class="easy" src="sol_easy.png">
+           <img class="medium" src="sol_medium.png">
+           <img class="hard" src="sol_hard.png"> 
+
+           <p>Varje skjutreglage kan anta <span class="easy">8</span><span class="medium">4</span><span class="hard">2</span> värden. De <span class="easy">2</span><span class="medium">3</span><span class="hard">6</span> reglagen ger <span class="easy">8*8</span><span class="medium">4*4*4</span><span class="hard">2*2*2*2*2*2</span> olika inställningar, dvs de kan specificera 64 olika symboler. Det räcker för att representera 26 stora bokstäver, 26 små bokstäver, 10 siffror, plus 2 specialtecken (# et @).</p>
+
+           <p class="medium">Med 2 grupper med 3 reglage (vardera med 4 möjliga värden) kan man alltså beskriva 2 symboles.</p>
+           <p class="hard">Med 3 grupper med 6 binära reglage kan man beskriva 3 symboler.</p>
+     
       <h2>Det är datavetenskap!</h2>
+       <p>Denna uppgift illustrerar hur man kan beskriva symboler (bokstäver eller siffor) genom att översätta dem till tal, vilka kan anges i olika <a href="https://sv.wikipedia.org/wiki/Positionssystem" target="_blank">Positionsssystem</a>, med olika <a href="https://sv.wikipedia.org/wiki/Talbas" target="_blank">talbaser</a>. I det första problemet var basen 8, eftersom varje skjutreglage hade 8 möjliga lägen. I den andra versionen var basen 4, med 4 lägen på reglagen. I den tredje versionen var basen 2, det berömda <a href="https://sv.wikipedia.org/wiki/Bin%C3%A4ra_talsystemet" target="_blank">binära talsystemet</a>.</p>
+         
+         <p>Alla moderna datorer representerar tal och symboler i <b>binärkod</b>. Skjutreglagens två positioner motsvarar binärkodens <b>0</b> eller <b>1</b>. </p>
+         
+         <p>För att lösa uppgifterna måste man framför allt inse att reglagen längst till vänster har störst inverkan på resultatet, och att man därför måste börja med att ställa in dem. I ett binärt tal kallas bitarna längst till vänster för <a href="https://sv.wikipedia.org/wiki/Mest_signifikanta_siffra" target="_blank">Mest signifikanta bitar</a> eftersom de har mycket större inflytande än de <a href="https://sv.wikipedia.org/wiki/Minst_signifikanta_siffra" target="_blank">Minst signifikanta bitarna</a> längst till höger.</p>
    </div>
    <!-- task-solution -->
 </body>

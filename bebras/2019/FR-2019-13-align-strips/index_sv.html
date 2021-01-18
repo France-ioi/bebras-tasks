@@ -100,8 +100,40 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>C'est de l'informatique !</h2>
+      <h2>Lösning</h2>
+     <p>Det finns många sätt att ta sig an detta problem, men vi beskriver här den troligen enklaste metoden.</p>
+          <p>Allra först klickar man på handtaget för att orientera slangen närmast vattenbehållaren korrekt. Med start från vattenbehållaren korrigerar man successivt slangarna en efter en, så att vattnet kommer längre och längre ut mot bävrarna. 
+          När vägen är spärrad måste man vrida det aktuella hjulet så att slangen hamnar korrekt, men <b>utan</b> att göra några modifieringar i den tidigare vägen där vattnet redan kan rinna.</p>
+          <p>För att göra det måste man klicka på handtaget <span class="hard">åt rätt håll</span> för att orientera det aktuella hjulet som man vill ha det. Sedan kopplar man loss det genom att klicka på det, och trycker ner handtaget igen<span class="hard">, denna gång åt andra hållet,</span> för att motverka rotationen man nyss gjorde. Sedan kopplar man in hjulet igen med ett nytt klick. Vattnet flyter nu vidare ett eller flera steg.</p>
+          <p>Man fortsätter på detta sätt tills vattnet når Castor <span class="hard">( eller i detta fall alla fyra bävrarna)</span>.</p>
+
+        <p>Här är en lista på operationer som löser uppgiften :<b>
+          <span class="easy">2 P 2&nbsp;&nbsp;P 3 P 3</span>
+          <span class="medium">2 P 2&nbsp;&nbsp;P 3 P 3&nbsp;&nbsp;P 4 P 4&nbsp;&nbsp;P 6 P 6</span>
+          <span class="hard">7 V 7&nbsp;&nbsp;V 2 H 2&nbsp;&nbsp;H 10 V 10&nbsp;&nbsp;V 9 H 9&nbsp;&nbsp;V 12 H 12&nbsp;&nbsp;V 14 H 14</span>
+          </b></p>
+         
+          <img class="easy" src="sol_easy.png">
+          <img class="medium" src="sol_medium.png">
+          <img class="hard" src="sol_hard_corr.png">
+
+          <p>En siffra betyder ett klick på motsvarande hjul, enligt bildens numrering. 
+          <span class="easy medium">Bokstaven <b>P</b> indikerar att man ska trycka ner handtaget P.</span>
+          <span class="hard">Bokstaven <b>V</b> indikerar att man ska trycka ner handtaget åt vänster, och bokstaven <b>H</b> att man ska trycka ner det åt höger.</span>
+          </p>
+
+          
+
+      <h2>Det är datavetenskap !</h2>
+      <p>
+         Den svåra versionen av detta problem kan datavetenskapligt åskådliggöras som ett <a href="https://sv.wikipedia.org/wiki/Tr%C3%A4d_(datastruktur)" target="_blank">träd</a>. Vattenbehållaren är trädets rot, hjulen inre noder, och bävrarna trädets löv. De enklare versionerna av problemet kan också ses som träd, men mycket enkla med bara ett löv.
+      </p>
+      <p>
+         Det gäller alltså att hitta ett sätt att systematiskt få alla hjulen i rätt positioner relativt varandra. Det innebär att apllicera en <a href="https://sv.wikipedia.org/wiki/Algoritm" target="_blank">algoritm</a>. Lösningsalgoritmen som beskrivs ovan är en <a href="https://sv.wikipedia.org/wiki/Djup-f%C3%B6rst-s%C3%B6kning" target="_blank">djup-först-sökning</a> i trädet, där man utgår från roten och går ut gren för gren till varje löv.
+      </p>
+      <p>
+         När den genomlöper trädet är detta en s.k. <a href="https://sv.wikipedia.org/wiki/Girig_algoritm" target="_blank">Girig algoritm</a>. I varje steg ser den bara till att det aktuella hjulet är korrekt vridet i förhållande till de tidigare stegen, utan att se till helheten. För den svåra versionen krävs en liten justering av algoritmen för att uppnå det minimala antalet bortkopplade hjul.
+      </p>
    </div>
    <!-- task-solution -->
 </body>

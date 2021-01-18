@@ -86,7 +86,33 @@
 
    <div id="solution">
       <h2>Lösning</h2>
-      <h2>Detta är datavetenskap !</h2>
+     
+         <div class="easy">
+           <p>Man måste placera stolpen som bäverbollen börjar hoppa från i mitten.</p>
+           <img src="sol_easy.png">
+         </div>
+
+         <div class="medium">
+           <p>Man börjar med att placera startstolpen i mitten. Bäverbollen kan då göra högst tre hopp.</p>
+           <img src="sol_medium_1.png">
+           <p>Sedan ändrar man ordningen på de tre stolparna till vänster, och de tre till höger. I båda fallen placerar man den längsta stolpen mellan de två andra. Nu kan Bäverbollen göra högst 2 hopp.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Liksom tidigare börjar man med att placera startstolpen i mitten.</p>
+           <img src="sol_hard_1.png">
+           <p>Sedan ändrar man ordingen först på de sju vänstra, sen på de sju högra stolparna. I varje del placerar man den längsta av de sju i mitten av gruppen. </p>
+           <img src="sol_hard_2.png">
+           <p>Sedan ändrar man ordningen inom var och en av de fyra grupper av tre stolpar man nu har isolerat. I varje tre-grupp placerar man åter den längsta stolpen i mitten. </p>
+           <img src="sol_hard.png">
+           <p>Bäverbollen kan nu ingenstans göra mer än tre hopp innan den fastnar.</p>
+
+         </div>
+
+      <h2>Det är datavetenskap !</h2>
+
+         <p>Den svåra versionen av detta problem illustrerar begreppet <a href="https://sv.wikipedia.org/wiki/Rekursiv_algoritm" target="_blank">Rekursiv algoritm</a>, vilket innebär att upprepa samma operation på flera nivåer. Operationen består här i att placera den längsta stolpen i mitten. Först gör man det i hela gruppen av stolpar, sedan på delmängderna till höger resp. vänster, och sedan på en ytterligare lägre nivå där man bara har tre stolpar per grupp, varefter problemet är löst.</p>
    </div>
    <!-- task-solution -->
 </body>

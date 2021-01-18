@@ -96,8 +96,44 @@
    <!-- task -->
 
    <div id="solution">
-      <h2>Solution</h2>
-      <h2>It's informatics!</h2>
+      <h2>Lösning</h2>
+   
+        <div class="easy">
+           <p>Som man ganska lätt finner är detta lösningen :</p>
+           <img src="sol_easy_corr.png" style="width:450px">
+          </div>
+
+         <div class="medium">
+           <p>Man kan ta en färg i taget, och hela tiden försöka placera lampan så högt som möjligt, så att man inte behöver så många lampor. Låt oss börja med rött.</p>
+           <img src="sol_medium_1corr.png" style="width:460px">
+           <p>Sedan lägger vi till grönt, där det behövs två lampor.</p>
+           <img src="sol_medium_2corr.png" style="width:460px">
+           <p>Och avslutar med tre blå lampor för att få allt rätt.</p>
+           <img src="sol_medium_corr.png" style="width:460px">
+         </div>
+
+         <div class="hard">
+           <p>Man kan ta en färg i taget, och hela tiden försöka placera lampan så högt som möjligt, så att man inte behöver så många lampor. Låt oss börja med rött, som behövs på flera ställen, med minst tre lampor.</p>
+           <img src="sol_hard_1corr.png" style="width:525px">
+           <p>Sedan lägger vi till grönt, som också behövs på tre ställen.</p>
+           <img src="sol_hard_2corr.png" style="width:525px">
+           <p>Till sist är det möjligt att fullborda med tre blå lampor.</p>
+           <img src="sol_hard_corr.png" style="width:525px">
+
+         </div>
+          <h2>Det är datavetenskap!</h2>
+         <p>I datavetenskapen representeras <a href="https://sv.wikipedia.org/wiki/RGB" target="_blank">färger</a> oftast av tre tal mellan 0 och 255. Det första beskriver intensiteten i rött, det andra intensiteten i grönt, och det tredje intensiteten i blått. Genom att addera de tre grundfärgerna kan man erhålla en stor mängd andra nyanser.</p>
+      
+      <p>Om man tittar i mikroskop på en färgskärm från en TV, dator eller telefon, så ser man att varje pixel i själva verket består av tre delar i olika färg :</p>
+      <center><img src="LCD_pixels_RGB.jpg" /></center>
+      
+      <p>Även det mänskliga ögat använder tre slag av tappar för att uppnå <a href="https://sv.wikipedia.org/wiki/F%C3%A4rgseende" target="_blank">färgseende</a>, känsliga för olika våglängder av ljuset. Färskärmens rött, grönt och blått är valda för att kunna åstadkomma en stor del av de färger som ögat kan urskilja.</p>
+      
+      <p>För att representera ett tal mellan 0 och 255 krävs 256 möjligheter, dvs 2^8. Datorer använder det <a href="https://sv.wikipedia.org/wiki/Bin%C3%A4ra_talsystemet" target="_blank">binära talsystemet</a>, som bara använder sifforna <b>0</b> och <b>1</b>. För att representera talen 0-255 räcker det då med 8 binära siffror (bit). Det behövs alltså 8 bitar för att ange intensiteten i rött, 8 för intensiteten i grönt och 8 för intensitetn i blått, totalt 24 bitar.</p>
+
+      <p>Man talar i detta fall om <b>24 bitars-färg</b> för att beskriva precisionen med vilken färgen är representerad. Man hör ibland det ekvivalenta uttrycket <b>16 miljoner färger</b>, eftersom 256*256*256 är lika med 16777216, dvs lite över 16 miljoner.
+      Man beräknar att det mänskliga kan urskilja högst 10 miljoner färger. Även om ögat är extra känsligt för nyanser av grönt verkar alltså 16 miljoner färger vara fullt tillräckligt.</p>
+     
    </div>
    <!-- task-solution -->
 </body>

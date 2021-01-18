@@ -128,7 +128,35 @@
 
    <div id="solution">
       <h2>Lösning</h2>
+             <div class="easy">
+           <p>Man börjar med det första kortet i ruta <b>A1</b>. På det står <b>C2</b>, och man placerar därför som andra kort det som finns i position <b>C2</b>. På detta står det <b>B3</b>, och man placerar på tredje plats kortet i ruta <b>B3</b>. Så fortsätter man på samma sätt till det sista kortet i ruta <b>E3</b> som avslutar lösenordet.</p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>Man börjar nu med sista kortet, som man vet finns i ruta <b>F3</b>. På det näst sista ska det alltså stå <b>F3</b>, och enda möjligheten är det kort som finns i ruta <b>E1</b>.</p>
+           <img src="sol_medium_1.png">
+           <p>Man fortsätter på samma sätt. Kortet där det står <b>E1</b> finns i ruta <b>B2</b>, och man placerar det alltså som tredje kort från slutet. Kortet med <b>B2</b> finns i ruta <b>D2</b>, och när man har hittat kortet med <b>D2</b> är lösenordet fullbordat.</p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Man börjar igen från slutet av ordet, som man vet finns i ruta <b>C6</b>. För kortet innan finns det dock nu mer än en möjlighet.</p>
+           <img src="sol_hard_1.png">
+           <p>Det står <b>C6</b> både på kortet i ruta <b>A2</b> och det i ruta <b>A5</b>, och vi har alltså två möjliga slut på lösenordet.</p>
+           <img src="sol_hard_2.png">
+           <p>Det finns sedan också två kort där det står <b>A2</b>, nämligen korten i ruta <b>B3</b> eller ruta <b>C4</b>, men bara ett kort märkt <b>A5</b>, det i ruta <b>C2</b>. Vi har nu tre möjliga slut på lösenordet.</p>
+           <img src="sol_hard_3.png">
+           <p>Åter får man leta efter möjliga tidigare kort. Det finns två kort märkta <b>B3</b>, från rutorna <b>A1</b> eller <b>C5</b>. Det finns ett kort märkt <b>C4</b>, från ruta <b>A3</b>, och ett kort märkt <b>C2</b>, från ruta <b>C1</b>. </p>
+           <img src="sol_hard_4.png">
+           <p>Det visar sig dock att det inte finns något kort märkt <b>A1</b>, så den översta varianten av ovanstående fyra utgår.</p>
+           <p>För de tre kvarstående visar det sig finnas precis ett kort som passar, så man får till sist följande unika lösning.</p>
+           <img src="sol_hard.png">
+         </div>
+
       <h2>Det är datavetenskap!</h2>
+   
+          <p>En dator har alltid ett minne, organiserat i en första approximation som ett stort rutnät. För att hitta informationen på en viss plats i minnet måste man ange dess koordinater. En del platser i minnet innehåller information, siffror eller bokstäver, som betyder något för användaren. Men det finns också minnesplatser som i stället innehåller koordinater för andra minnesplatser. Inom datavetenskapen kallas innehållet i sådana minnesplatser för <a href="https://en.wikipedia.org/wiki/Pointer_(computer_programming)" target="_blank">pekare (pointer)</a>. Pekare spelar en fundamental roll när det gäller att organisera stora mängder data i minnet.</p>
    </div>
    <!-- task-solution -->
 </body>

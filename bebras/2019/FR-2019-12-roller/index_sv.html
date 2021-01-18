@@ -136,7 +136,57 @@
 
    <div id="solution">
       <h2>Lösning</h2>
-      <h2>Det är datavetenskap!</h2>
+     
+          <div class="easy">
+           <p>
+           Man ser att målet bildas av samma serie av fyra former, upprepad 4 gånger. Man kan alltså bilda det med ett hjul med 4 stämplar som får rulla längs alla rutorna.
+           </p>
+           <img src="sol_easy_corr.png" class="marker-parameters">
+          </div>
+
+         <div class="medium">
+           <p>
+              Man upptäcker att de 4 första och de tre sista rutorna i målbilden består av alternerande runda (gröna) och triangulära (gula) avtryck.
+           </p>
+           <img src="sol_medium_0.png">
+           <p>Denna växling kan man åstadkomma med bara två stämplar på det första hjulet:</p>
+           <img src="sol_medium_1a_corr.png" class="marker-parameters">
+           <img src="sol_medium_1b.png">
+           <p>Sedan använder man hjul nummer två för att korrigera plats 5 till 13.</p>
+           <img src="sol_medium_2a_corr.png" class="marker-parameters">
+           <p>vilket ger precis rätt mönster.</p>
+           <img  style="margin-left: 180px" src="sol_medium_2b.png">
+         </div>
+
+         <div class="hard">
+           <p>
+            Man kan inledningsvis fundera över hur de tre hjulen kan samverka. De grå linjerna visar några exempel på hur målets olika delar kan påverkas av ett två eller tre av hjulen.
+           </p>
+           <img src="sol_hard_segments.png">
+           <p>En metodik består i att försöka hitta upprepningar i början och slutet som går att få fram med en genomgående körning med det första hjulet.<p>
+              Det finns flera möjligheter, men med två stämplar kan man få rätt mönster i rutorna 1-3 plus ruta 20 :</p>
+           <img src="sol_hard_begin_end.png">
+           <p>I en andra körning med fyra stämplar kan man göra rutorna 4-9 plus 14-19 :</p>
+           <img src="sol_hard_begin_end_b.png">
+           <p> De återstående rutorna 10-13 kan sedan lätt stämplas av det tredje hjulet.</p>
+           <p>En annan metodik försöker hitta sekvenser som upprepas på flera ställen. Man ser lätt de två lila avtrycken bredvid varandra på två ställen. Om man ser efter närmare ser man att likheten sträcker sig till rutona före och efter, och att faktiskt ett längre mönster kan åstadkommas av 4 stämplar :
+           </p>
+           <img src="sol_hard_pattern.png">
+           <p>Detta motsvarar precis den körning med hjul nummer två som vi fann tidigare.
+           <p>Lösningen fås alltså som följer :</p>
+           <img src="sol_hard_1corr.png" class="marker-parameters">
+           <p></p>
+           <img src="sol_hard_2corr.png" class="marker-parameters">
+           <p></p>
+           <img src="sol_hard_3corr.png" class="marker-parameters">
+           <p>eller mer visualiserat:</p>
+           <img src="sol_hard.png">
+         </div>
+
+      <h2>Det är datavetenskap !</h2>
+         <p>Ett hjul som upprepade gånger trycker trycker en sekvens av färger och former har en viss lihet med en <a href="https://sv.wikipedia.org/wiki/Slinga_(programmering)" target="_blank">programslinga</a>, en av programmeringens fundmentala byggstenar.</p>
+         <p>Dessutom kan som här ett hjul ha olika <a href="https://it-ord.idg.se/ord/parameter" target="_blank">parametrar</a>, men samma grundläggande <b>funktionalitet</b>, i detta fall att repetera ett mönster med hjälp av ett antal stämplar. Med samma grundkoncept av rullande hjul kan man alltså bilda många olika mönster beroende på de parametrar man väljer.</p>
+         <p>Inom datavetenskapen använder man ordet  <a href="https://sv.wikipedia.org/wiki/Funktion_(programmering)" target="_blank">funktion</a> för att beskriva hur en grupp instruktioner åstadkommer ett önskat resultat utgående från en eller flera parametrar. Funktioner är en annan grundsten inom programmeringen.</p>
    </div>
    <!-- task-solution -->
 </body>

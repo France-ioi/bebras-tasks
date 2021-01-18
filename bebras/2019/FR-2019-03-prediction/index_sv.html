@@ -97,7 +97,40 @@
 
    <div id="solution">
       <h2>Lösning</h2>
+          <div class="easy">
+           <p>Man ska klicka på de kängurur som har en krokodil i rutan ovanför sig.</p>
+           <p>Till exempel : </p>
+           <img src="sol_easy.png">
+          </div>
+
+         <div class="medium">
+           <p>Man ska klicka på de kängurur som har en enda krokodil över eller under sig.</p>
+           <p>Alltså, man ska klicka på en känguru som har en krokodil i cellen ovanför sig, och på en känguru som har en krokodil i cellen under sig, men <i>inte</i> på en känguru som har en krokodil både över och under sig.</p>
+           <p>Exempel : </p>
+           <img src="sol_medium.png">
+         </div>
+
+         <div class="hard">
+           <p>Man ska klicka på en känguru om den har :</p>
+           <ul>
+           <li>en krokodil i cellen ovanför sig och en björn i cellen under,</li>
+           <li>eller en björn i cellen ovanför, och en tom cell under sig,</li>
+           <li>eller en tom cell ovanför sig och en krokodil i cellen under.</li>
+           </ul>
+           <p>Exempel : </p>
+           <img src="sol_hard.png">
+         </div>
       <h2>Det är datavetenskap !</h2>
+      <p>
+         Problemet illustrerar begreppet <b>Booleska villkor</b> : en känguru får en blomma om det eller det är uppfyllt, men inte om det eller det andra. Villkor av formen "om ... så ..." är fundamentala byggstenar i de flesta programmeringsspråk.
+      </p>
+      <p>
+         Mer precist är det också en slags <a href="https://sv.wikipedia.org/wiki/Cellul%C3%A4r_automat" target="_blank">cellulär automat</a>, där man i ett rutnät har celler vars innehåll i varje steg bestäms av innehållet i cellen och dess närmaste grannar i ett föregående steg.
+      </p>
+      <p>
+         Cellulära automater används för att studera komplexa system, i fysik, biologi, eller kanske för att studera trafikflöden. Ett klassiskt exempel på cellulär automat är <a href="https://sv.wikipedia.org/wiki/Game_of_Life" target="_blank">Game of Life</a>.
+      </p>
+   
    </div>
    <!-- task-solution -->
 </body>
