@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <title>test responsive</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+         'platform-pr', 'buttonsAndMessages_resp', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.3', 'raphaelButton-1.0'/*, 'fonts-loader-1.0'*//*, 'grid-1.1'*/ ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+      };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         error: "Ce n'est pas la bonne réponse.",
+         coded: "Texte encodé",
+         result: "Résultat"
+      }
+   </script>
+
+   <script type="text/javascript" src="task_resp.js"></script>
+   <style>
+      #taskContent {
+         /*text-align: left;*/
+      }
+
+      .consigne {
+         background: #F5F5F5;
+         border-radius: 5px;
+         font-size: 14px;
+         color: #30242B;
+         padding: 0;
+         margin: 20px;
+      }
+      .consigne h3 {
+         display: block;
+         background: #88BB88;
+         font-size: 14px;
+         color: white;
+         border-radius: 5px 5px 0 0;
+         text-align: center;
+         margin: 0;
+         padding: 13px;
+      }
+      .consigne #text {
+         padding: 20px;
+         padding-bottom: 10px;
+         padding-top: 0px;
+         /*font-size: 0;*/
+      }
+      .consigne #text,
+      .consigne #example  {
+         /*font-size: 14px;*/
+
+      }
+
+      #displayHelper_validate > input, #displayHelper_cancel > input {
+         border: none;
+         background-color: #88BB88;
+         color: white;
+         font-weight: bold;
+         font-size: 12px;
+         padding: 8px;
+         min-width: 180px;
+         margin: 0px 8px;
+      }
+      #displayHelper_cancel > input {
+         background-color: #30242B;
+      }
+      #error {
+         color: red;
+         font-weight: bold;
+         text-align: center;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Titre</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <h3><i class="far fa-sticky-note"></i>ÉNONCÉ</h3>
+               <!-- <div id="textCont"> -->
+                  <div id="text">
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                     <p><b>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</b></p>
+                  </div>
+                  <div id="example"></div>
+                  <div class="spacer" style="clear: both;"></div>
+               <!-- </div> -->
+            </div>
+         </div>
+         
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+
+         <div id="zone_3">
+            <div id="error"></div>
+         </div>
+ 
+         <img src="icon.png" style="display:none">
+      </div>
+   </div>
+   <div id="solution">
+      <h2>Solution</h2>
+   </div>
+</body>
+</html>
