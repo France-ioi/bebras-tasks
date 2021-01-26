@@ -129,10 +129,10 @@ function initTask(subTask) {
       paper = subTask.raphaelFactory.create("paper","paper",paperW,paperH);
       paper.rect(0,0,paperW,paperH).attr(backgroundAttr);
       paper.rect(marginX,marginY,rectW,rectH).attr(rectAttr);
-      $("#paper").css({
-         width: paperW+"px",
-         margin: marginY+"px auto"
-      });
+      // $("#paper").css({
+      //    width: paperW+"px",
+      //    margin: marginY+"px auto"
+      // });
       paper.text(paperW/2,paperH/2,level.toUpperCase()).attr(titleAttr);
 
    };
@@ -155,7 +155,13 @@ function initTask(subTask) {
    };
 
    function displayError(msg) {
+      // $("#error").html(msg);
       $("#error").html(msg);
+      if(msg){
+         $("#errorTable").show();
+      }else{
+         $("#errorTable").hide();
+      }
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);

@@ -98,11 +98,11 @@
       #displayHelper_cancel > input {
          background-color: #30242B;
       }
-      #error {
+      /*#error {
          color: red;
          font-weight: bold;
          text-align: center;
-      }
+      }*/
    </style>
 </head>
 
@@ -112,7 +112,8 @@
          <h1>Titre</h1>
          <div id="tabsContainer"></div>
       </div>
-      <div id="taskContent">
+      <!-- <div id="taskContent"> -->
+         <div id="zone_12"></div>
          <div id="zone_1">
             <div class="consigne">
                <h3><i class="fas fa-sticky-note"></i>ÉNONCÉ</h3>
@@ -128,15 +129,19 @@
          </div>
          
          <div id="zone_2">
-            <div id="paper"></div>
+            <div id="taskCont">
+               <div id="paper"></div>            
+            </div>
          </div>
 
          <div id="zone_3">
-            <div id="error"></div>
+            <table id="errorTable">
+               <td id="errorCell"><span id="error"></span><i class="fas fa-times"></i></td>
+            </table>
          </div>
  
          <img src="icon.png" style="display:none">
-      </div>
+      <!-- </div> -->
    </div>
    <div id="solution">
       <h2>Solution</h2>
