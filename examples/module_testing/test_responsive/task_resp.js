@@ -4,23 +4,26 @@ function initTask(subTask) {
    var answer = null;
    var data = {
       easy: {
+         paperH: 300
       },
       medium: {
+         paperH: 600
       },
       hard: {
+         paperH: 800
       }
    };
 
    var paper, exPaper;
    var paperW = 770;
-   var paperH = 300;
+   var paperH;
    var exPaperW = 100;
    var exPaperH = 100;
 
    var marginX = 20;
    var marginY = 20;
    var rectW = paperW - 2*marginX;
-   var rectH = paperH - 2*marginY;
+   var rectH;
    var exRectW = exPaperW - 2;
    var exRectH = exPaperH - 2;
 
@@ -63,6 +66,9 @@ function initTask(subTask) {
       displayHelper.avatarType = "laptop";
       displayHelper.responsive = true;
       level = curLevel;
+      paperH = data[level].paperH;
+      rectH = paperH - 2*marginY;
+      displayHelper.taskH = paperH;
    };
 
    subTask.getStateObject = function() {
@@ -77,7 +83,7 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
-      displayError("message d'erreur");
+      displayError("");
       initExample();
       initPaper();
       // initCodedFrame();
@@ -156,11 +162,11 @@ function initTask(subTask) {
 
    function displayError(msg) {
       // $("#error").html(msg);
-      $("#error").html(msg);
+      $("#errorMsg").html(msg);
       if(msg){
-         $("#errorTable").show();
+         $("#error").show();
       }else{
-         $("#errorTable").hide();
+         $("#error").hide();
       }
    };
 }

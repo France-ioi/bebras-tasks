@@ -85,7 +85,7 @@
 
       }
 
-      #displayHelper_validate > input, #displayHelper_cancel > input {
+      /*#displayHelper_validate > input, #displayHelper_cancel > input {
          border: none;
          background-color: #88BB88;
          color: white;
@@ -97,7 +97,7 @@
       }
       #displayHelper_cancel > input {
          background-color: #30242B;
-      }
+      }*/
       /*#error {
          color: red;
          font-weight: bold;
@@ -108,37 +108,42 @@
 
 <body>
    <div id="task">
-      <div id="zone_0">
-         <h1>Titre</h1>
-         <div id="tabsContainer"></div>
-      </div>
-      <!-- <div id="taskContent"> -->
-         <div id="zone_12"></div>
-         <div id="zone_1">
-            <div class="consigne">
-               <h3><i class="fas fa-sticky-note"></i>ÉNONCÉ</h3>
-               <!-- <div id="textCont"> -->
-                  <div id="text">
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                     <p><b>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</b></p>
+      <div id="zone_012">
+         <div id="zone_0">
+            <h1>Titre</h1>
+            <div id="tabsContainer"></div>
+         </div>
+         <!-- <div id="taskContent"> -->
+            <div id="zone_12">
+               <div id="zone_1">
+                  <div class="consigne">
+                     <h3><i class="fas fa-sticky-note"></i>ÉNONCÉ</h3>
+                     <!-- <div id="textCont"> -->
+                        <div id="text">
+                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                           <p><b>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</b></p>
+                        </div>
+                        <div id="example"></div>
+                        <div class="spacer" style="clear: both;"></div>
+                     <!-- </div> -->
                   </div>
-                  <div id="example"></div>
-                  <div class="spacer" style="clear: both;"></div>
-               <!-- </div> -->
-            </div>
+               </div>
+               
+               <div id="zone_2">
+                  <div id="taskCont">
+                     <div id="paper"></div>            
+                  </div>
+               </div>
          </div>
-         
-         <div id="zone_2">
-            <div id="taskCont">
-               <div id="paper"></div>            
-            </div>
          </div>
-
          <div id="zone_3">
-            <table id="errorTable">
-               <td id="errorCell"><span id="error"></span><i class="fas fa-times"></i></td>
-            </table>
+
          </div>
+         <span id="error">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="errorMsg"></span>
+            <i class="fas fa-times"></i>
+         </span>
  
          <img src="icon.png" style="display:none">
       <!-- </div> -->
