@@ -17,6 +17,11 @@
          'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
          'platform-pr', 'buttonsAndMessages_resp', 'installationAPI.01', 'miniPlatform',
          'taskStyles-0.3', 'raphaelButton-1.0', 'fonts-loader-1.0'/*, 'grid-1.1' */]);
+      // if ('CSS' in window && CSS.supports('display', 'flex')){
+         // importModules(['taskStyles-0.3_flex']);
+      // }else{
+         // importModules(['taskStyles-0.3']);
+      // }
    </script>
    <script class="remove" type="text/javascript">
       var json = {
@@ -46,10 +51,6 @@
 
    <script type="text/javascript" src="task_resp.js"></script>
    <style>
-      #taskContent {
-         /*text-align: left;*/
-      }
-
       .consigne {
          background: #F5F5F5;
          border-radius: 5px;
@@ -79,30 +80,10 @@
          padding-top: 0px;
          /*font-size: 0;*/
       }
-      .consigne #text,
-      .consigne #example  {
-         /*font-size: 14px;*/
-
+      #paper {
+         width: 100%;
+         height: 100%;
       }
-
-      /*#displayHelper_validate > input, #displayHelper_cancel > input {
-         border: none;
-         background-color: #88BB88;
-         color: white;
-         font-weight: bold;
-         font-size: 12px;
-         padding: 8px;
-         min-width: 180px;
-         margin: 0px 8px;
-      }
-      #displayHelper_cancel > input {
-         background-color: #30242B;
-      }*/
-      /*#error {
-         color: red;
-         font-weight: bold;
-         text-align: center;
-      }*/
    </style>
 </head>
 
