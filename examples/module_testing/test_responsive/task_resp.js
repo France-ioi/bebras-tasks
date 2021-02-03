@@ -4,13 +4,19 @@ function initTask(subTask) {
    var answer = null;
    var data = {
       easy: {
-         paperH: 300
+         paperH: 300,
+         minTaskW: 500,
+         maxTaskW: 900
       },
       medium: {
-         paperH: 600
+         paperH: 600,
+         minTaskW: 500,
+         maxTaskW: 900
       },
       hard: {
-         paperH: 800
+         paperH: 800,
+         minTaskW: 500,
+         maxTaskW: 900
       }
    };
 
@@ -69,6 +75,8 @@ function initTask(subTask) {
       paperH = data[level].paperH;
       rectH = paperH - 2*marginY;
       displayHelper.taskH = paperH;
+      displayHelper.minTaskW = data[level].minTaskW;
+      displayHelper.maxTaskW = data[level].maxTaskW;
    };
 
    subTask.getStateObject = function() {
@@ -86,11 +94,6 @@ function initTask(subTask) {
       displayError("");
       initExample();
       initPaper();
-      // initCodedFrame();
-      // initResultFrame();
-      // initHandlers();
-      // updateColumns();
-      // updateResult();
       // displayHelper.customValidate = checkResult;
       displayError("message d'erreur");
    };
