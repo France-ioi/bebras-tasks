@@ -71,6 +71,7 @@ function initTask(subTask) {
    subTask.loadLevel = function(curLevel) {
       displayHelper.avatarType = "laptop";
       displayHelper.responsive = true;
+      // displayHelper.hideSolutionButton = true;
       level = curLevel;
       paperH = data[level].paperH;
       rectH = paperH - 2*marginY;
@@ -138,12 +139,7 @@ function initTask(subTask) {
       paper = subTask.raphaelFactory.create("paper","paper",paperW,paperH);
       paper.rect(0,0,paperW,paperH).attr(backgroundAttr);
       paper.rect(marginX,marginY,rectW,rectH).attr(rectAttr);
-      // $("#paper").css({
-      //    width: paperW+"px",
-      //    margin: marginY+"px auto"
-      // });
       paper.text(paperW/2,paperH/2,level.toUpperCase()).attr(titleAttr);
-
    };
 
    function checkResult(noVisual) {
@@ -164,7 +160,6 @@ function initTask(subTask) {
    };
 
    function displayError(msg) {
-      // $("#error").html(msg);
       $("#errorMsg").html(msg);
       if(msg){
          $("#error").show();
