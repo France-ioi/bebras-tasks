@@ -269,7 +269,7 @@ function initTask(subTask) {
          mode: 1,
          rules: rules,
          input: input,
-
+         animationTime: 2000,
          paperHeight: paperHeight,
          paperWidth: paperWidth,
          visualGraphJSON: visualGraphJSON,
