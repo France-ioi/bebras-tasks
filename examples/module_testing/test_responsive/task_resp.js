@@ -70,7 +70,11 @@ function initTask(subTask) {
 
    subTask.loadLevel = function(curLevel) {
       displayHelper.avatarType = "laptop";
-      displayHelper.responsive = true;
+      if(false){
+         displayHelper.responsive = true;
+      }else{
+         displayHelper.responsive = false;
+      }
       // displayHelper.hideSolutionButton = true;
       level = curLevel;
       paperH = data[level].paperH;
@@ -160,12 +164,14 @@ function initTask(subTask) {
    };
 
    function displayError(msg) {
-      $("#errorMsg").html(msg);
-      if(msg){
-         $("#error").show();
-      }else{
-         $("#error").hide();
-      }
+      // console.log('displayError');
+      displayHelper.displayError(msg);
+      // $("#errorMsg").html(msg);
+      // if(msg){
+      //    $("#error").show();
+      // }else{
+      //    $("#error").hide();
+      // }
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
