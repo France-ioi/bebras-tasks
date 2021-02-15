@@ -70,11 +70,13 @@ function initTask(subTask) {
 
    subTask.loadLevel = function(curLevel) {
       displayHelper.avatarType = "laptop";
-      if(false){
+      // console.log(Beav.Navigator.supportsResponsive())
+      if(Beav.Navigator.supportsResponsive()){
          displayHelper.responsive = true;
       }else{
          displayHelper.responsive = false;
       }
+      // console.log(Beav.Navigator.getVersion())
       // displayHelper.hideSolutionButton = true;
       level = curLevel;
       paperH = data[level].paperH;
