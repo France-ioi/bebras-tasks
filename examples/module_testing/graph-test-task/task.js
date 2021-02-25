@@ -185,7 +185,7 @@ function initTask(subTask) {
       fromJSON();
       optionsFromJSON();
       updateJSON(false);
-      // updateGridVisibility(showGrid); // remove click event on paper?
+      updateGridVisibility(showGrid); 
       // $("#anim").click(function() {
       //    console.log("click")
       // });
@@ -382,6 +382,7 @@ function initTask(subTask) {
    };
 
    var updateGridVisibility = function(show) {
+      // console.log('updateGridVisibility'+show)
       showGrid = show;
       removeGrid();
       if(showGrid) {
