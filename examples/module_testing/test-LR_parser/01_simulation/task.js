@@ -269,10 +269,11 @@ function initTask(subTask) {
          mode: 1,
          rules: rules,
          input: input,
-         animationTime: 2000,
+         animationTime: 1000,
+         showLog: true,
          paperHeight: paperHeight,
          paperWidth: paperWidth,
-         visualGraphJSON: visualGraphJSON,
+         visualGraphJSON: visualGraphJSON
       },subTask);
    };
 }
