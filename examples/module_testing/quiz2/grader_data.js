@@ -48,5 +48,15 @@ window.Quiz.grader.data = [
                 'Q3 amet is correct'
             ]
         }
+    ],
+    [
+        {
+            value: ['6','1','2','3','4','5'],
+            strict: true,
+            messages: [
+                'Q5 wrong order',
+                'Q5 success'
+            ]
+        }
     ]
 ]
