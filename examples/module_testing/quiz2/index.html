@@ -17,7 +17,7 @@
                 "alert_if_no_answer": true // bool
             };
             var task_data_info = {"markdown":true};
-            var quiz_question_types = {"input":true,"single":true,"multiple":true,"fill_gaps":true, 'sort_list': true};
+            var quiz_question_types = {"input":true,"single":true,"multiple":true,"fill_gaps":true, 'sort_list': true, 'sort_items': true};
         </script>
         <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
         <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/quiz2/loader.js"></script>
@@ -111,7 +111,7 @@
                 <question-group>
                     <question type="sort_list">
                         <statement>Sort this list</statement>
-                        <div id="list_cont" class="list-group col">
+                        <div id="list_cont" class="list-group">
                             <div class="list-group-item" item_id="1">Item 1</div>
                             <div class="list-group-item" item_id="2">Item 2</div>
                             <div class="list-group-item" item_id="3">Item 3</div>
@@ -122,6 +122,33 @@
                     </question>
                 </question-group>
 
+                <question-group>
+                    <question type="sort_items">
+                        <statement>Place each item in the right container</statement>
+                        <div class="src list-group">
+                            <div class="list-group-item" item_id="1">Item 1</div> 
+                            <div class="list-group-item" item_id="2">Item 2</div> 
+                            <div class="list-group-item" item_id="3">Item 3</div> 
+                            <div class="list-group-item" item_id="4">Item 4</div> 
+                            <div class="list-group-item" item_id="5">Item 5</div> 
+                            <div class="list-group-item" item_id="6">Item 6</div> 
+                        </div>
+                        <div class="dest">
+                            <div class="cont">
+                                <label>Container 1</label>
+                                <div class="list-group"></div>
+                            </div>
+                            <div class="cont">
+                                <label>Container 2</label>
+                                <div class="list-group"></div>
+                            </div>
+                            <div class="cont">
+                                <label>Container 3</label>
+                                <div class="list-group"></div>
+                            </div>
+                        </div>
+                    </question>
+                </question-group>
                 <!--
                 <question-group>
                     <question type="input">

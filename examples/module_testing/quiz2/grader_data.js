@@ -58,5 +58,15 @@ window.Quiz.grader.data = [
                 'Q5 success'
             ]
         }
+    ],
+    [
+        {
+            value: [['1','2'],['3','4'],['5','6']],
+            twoDimArray: true,
+            messages: [
+                'Q6 some items are not in the right container' ,
+                'Q6 success'
+            ]
+        }
     ]
 ]
