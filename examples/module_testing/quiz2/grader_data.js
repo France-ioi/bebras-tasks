@@ -51,7 +51,7 @@ window.Quiz.grader.data = [
     ],
     [
         {
-            value: ['6','1','2','3','4','5'],
+            value: [5,0,1,2,3,4],
             strict: true,
             messages: [
                 'Q5 wrong order',
@@ -61,7 +61,7 @@ window.Quiz.grader.data = [
     ],
     [
         {
-            value: [['1','2'],['3','4'],['5','6']],
+            value: [[0,1],[2,3],[4,5]],
             twoDimArray: true,
             messages: [
                 'Q6 some items are not in the right container' ,
