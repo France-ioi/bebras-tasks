@@ -84,6 +84,7 @@ function initTask(subTask) {
       displayHelper.taskH = paperH;
       displayHelper.minTaskW = data[level].minTaskW;
       displayHelper.maxTaskW = data[level].maxTaskW;
+      displayHelper.sideZoneEnabled = true;
    };
 
    subTask.getStateObject = function() {
