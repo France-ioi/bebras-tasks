@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-05-css</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', /*'grid-1.0',*/
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'/*, 'shape-paths'*/
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "fr",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         result: "Votre texte",
+         objective: "Objectif",
+         text0: "Le Castor",
+         text1: "Le castor est un rongeur capable d'abattre un tronc de 10 cm de diamètre en moins de 30 minutes.",
+         text2: "Le barrage",
+         text3: "Le barrage permet de conserver de l'eau en été et de protéger le terrier.",
+         text4: "Au début du XXème siècle, il n'y en avait plus qu'une centaine en France.",
+         center: "Centré",
+         bold: "Gras",
+         underline: "Souligné",
+         upperCase: "MAJUSCULE",
+         italic: "Italique",
+         large: "Gros",
+         small: "Petit",
+         colored: "Coloré",
+         style: "STYLE",
+         stylesOf: function(nb) {
+            return (nb > 1) ? "Styles de" : "Style de";
+         },
+         styleOption: function(name) {
+            return "Style " + name + " : ";
+         },
+         and: "et",
+         errorStyle: function(line,attr,missing) {
+            var attrText = "";
+            switch(attr) {
+               case 0:
+                  attrText = "centré";
+                  break;
+               case 1:
+                  attrText = "en gras";
+                  break;
+               case 2:
+                  attrText = "souligné";
+                  break;
+               case 3:
+                  attrText = "en italique";
+                  break;
+               case 4:
+                  attrText = "en majuscule";
+                  break;
+               case 5:
+                  attrText = "en petits caractères";
+                  break;
+               case 6:
+                  attrText = "en gros caractères";
+                  break;
+               default:
+                  attrText = "coloré";
+            }
+            if(!missing){
+               return "Le texte de la zone "+line+" est "+attrText+" alors qu'il ne devrait pas l'être."
+            }else{
+               return "Le texte de la zone "+line+" n'est pas "+attrText+" alors qu'il devrait l'être."
+            }
+         }
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #htmlTable {
+         margin: 0px 20px 15px 20px;
+         border-spacing: 0px;
+         position: relative;
+         box-sizing: border-box;
+      }
+      #htmlTable td {
+         padding: 10px;
+      }
+      #htmlTable .spacing td {
+         height: 10px;
+         padding: 0;
+      }
+      .col_0, .col_2 {
+         background: #f2f2f2;
+         width: 314px;
+         border: 3px solid #f2f2f2;
+      }
+      .col_1 {
+         border-right: 2px #4a90e2 solid;
+         border-left: 2px #4a90e2 solid;
+         width: 80px;
+      }
+      .row_0 {
+         text-align: center;
+         font-size: 20px;
+      }
+      .row_0 .col_0, .row_0 .col_2 {
+         background: none;
+         border: none;
+      }
+      .row_0 .col_1 {
+         border: none;
+      }
+      #vertLine {
+         width: 1px;
+         height: 400px;
+         border: none;
+         background: #e5e5e5;
+         position: absolute;
+         left: 365px;
+      }
+      .horLine {
+         width: 50px;
+         height: 2px;
+         background: #4a90e2;
+         margin: auto;
+         position: relative;
+         top: 15px;
+      }
+      .number {
+         color: white;
+         background: #ccb336;
+         width: 30px;
+         height: 30px;
+         margin: auto;
+         border-radius: 20px;
+         font-weight: bold;
+         text-align: center;
+         position: relative;
+      }
+      .number span {
+         position: relative;
+         top: 7px;
+      }
+      #paper {
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Mise en forme</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Déplacez les étiquettes bleues dans les zones pointillées.</p>
+
+               <p>Les deux colonnes de texte doivent être exactement pareilles.</p>
+
+               <p>Par exemple, le texte de la zone n°1 doit être <span class="easy medium">centré et en gras</span><span class="hard">centré, en majuscule, et souligné</span>.</p>
+
+               <p class="medium hard">En bas à droite, choisissez le nom <span class="medium">du style</span><span class="hard"><b>du style ou des styles</b></span> que vous voulez associer à chaque zone.</p>
+               <p class="medium hard">En bas à gauche, choisissez les propriétés que vous voulez associer à chaque style. Ces propriétés seront appliquées à toutes les zones qui ont ce style.</p> 
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="htmlTable">
+
+            </table>
+            <div id="paperContainer">
+               <div id="paper"></div>
+            </div>
+         </div>
+      </div>      
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+      <p>Ce défi présente la notion de <b>feuille de style</b> associé à un document. Toutes les pages Internet sont affichées en utilisant cette technique. </p>
+      <p>Le document décrivant le contenu d'une page web, au format <b>HTML</b>, contient des paragraphes de textes accompagnés d'indications pour dire quelle <b>style</b> doit s'appliquer à chaque paragraphe.</p>
+      <p>La feuille de style, au format <b>CSS</b>, décrit les <b>propriétés</b> associées à chaque <b>style</b> utilisé dans le document. Par exemple, un style peut correspondre aux propriétés "gras" et "centré".</p>
+      <p>Le fait de séparer le contenu (HTML) de la définition des styles (CSS) permet de grandement factoriser la description d'une page web, en évitant de répéter pour chaque paragraphe la liste complète de toutes les propriétés à appliquer.</p>
+
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

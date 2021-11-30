@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-IE-07-pollution</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         fail: function(pollutedTube,answerTube) {
+            return "C'était le tube "+pollutedTube+" qui était pollué, et pas le tube "+answerTube+".<br/>Cliquez sur recommencer pour essayer avec des nouveaux tubes."
+         },
+         drag: "Indiquez quel tube est pollué avant de valider.",
+         noSend: "Vous ne pouvez pas deviner quel tube est pollué.<br/>Commencez par remplir tous les tubes numérotés, puis analysez-les.",
+         dragSamples: "Faites glissez des tubes d'en haut sur les\ntubes ci-dessous pour verser de l'eau.",
+         youCanMix: "Vous pouvez faire des mélanges.",
+         analyseThem: "Lancez l'analyse. On vous dira\nquels tubes contiennent de l'eau polluée.",
+         whenYouKnow: "Après l'analyse, déduisez quel\ntube du haut contient l'eau polluée.",
+         send: "Analyser ces tubes",
+         validate: "Valider",
+         retry: "Réessayer",
+         polluted: "Pollué",
+         clean: "Non pollué",
+         errorNoMoreTest: "Vous ne pouvez plus faire d'analyse. Si vous pouvez déduire quel tube du haut est pollué, sélectionnez-le. Sinon, cliquez sur recommencer pour essayer avec des nouveaux tubes.",
+         tube: "Tube"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+      #buttons div {
+         height: 30px;
+         border-radius: 15px;
+         color: white;
+         font-size: 12px;
+         font-weight: bold;
+         position: relative;
+         display: inline-block;
+         cursor: pointer;
+      }
+      #send {
+         width: 240px;
+         margin-left: 70px;
+         background: #f5a623;
+      }
+      #validate {
+         width: 186px;
+         margin-left: 170px;
+         background: #4a90e2;
+      }
+      #buttons div i {
+         position: absolute;
+         left: 20px;
+         top: 10px;
+      }
+      #buttons div span {
+         position: absolute;
+         top: 8px;
+      }
+      #send span {
+         left: 60px;
+      }
+      #validate span {
+         left: 70px;
+      }
+      .instruction-items li {
+         margin-bottom: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Pollution</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <center><p id="enemyWarning" style="width:700px"></p></center>
+         <div id="zone_1">
+            <div class="consigne">
+
+               <p>L'un des <span class="nbTubes"></span> tubes du haut contient de l'eau polluée. Trouvez lequel.</p>
+               <p>Pour cela, suivez les trois étapes indiquées, en préparant <span class="easy medium">2</span><span class="hard">3</span> tubes à analyser.</p>
+               <p><strong>Attention</strong> : à chaque fois que vous recommencez, cela peut être un tube différent qui est pollué.</p>
+
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="buttons">
+               <div id="send"><i class="fas fa-upload"></i><span>ANALYSER CES TUBES</span></div>
+               <div id="validate"><i class="fas fa-check"></i><span>VALIDER</span></div>
+            </div>
+         </div>
+      </div>
+      <img src="tube.png" style="display:none" id="tube">
+      <img src="polluted_tube.png" style="display:none" id="polluted_tube">
+      <img src="upload.png" style="display:none" id="upload">
+      <img src="../../../_common/modules/img/icons/check_white.png" style="display:none" id="check">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+      <p>La solution fait intervenir des <b>nombres binaires</b>, c'est-à-dire des nombres écrits avec des 0 et des 1 uniquement. Toute l'informatique est construite sur des représentations binaires des nombres.</p>
+      <p>La technique présentée dans ce défi permet de réduire le nombre d'analyses à effectuer pour identifier des sources de pollution, de bactéries, ou de virus, notamment.</p>
+
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

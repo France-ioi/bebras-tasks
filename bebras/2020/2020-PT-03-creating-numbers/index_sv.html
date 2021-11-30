@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-PT-03-creating-numbers</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2020/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": ["Mathias Hiron"],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: function(nb) {
+            return "Du fick "+nb+", vilket är det högsta möjliga talet. Grattis, du lyckades!";
+         },
+         fail: function(nb) {
+            return "Du fick talet "+nb+". Det går att få ett större tal.<br/>Klicka på börja om."
+         },
+         click: "För att skicka iväg en boll, tryck på en av pilarna högst upp.",
+         missingBall: "Alla bollar måste användas",
+         maxHole: "Mittenhålet kan bara innehålla 3 bollar.",
+         maxSeq: function(max) {
+					 return "Du kan inte sätta fler än "+max+" bollar i bottenområdet.<br/>Du måste sätta exakt 3 bollar i mittenhålet.";
+         },
+         undo: "Ångra"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-bottom: 0em;
+         /*touch-action: none;*/
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Flipperspel</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+							<p>Klicka på en av de <span class="easy medium">två</span><span class="hard">tre</span> pilarna ovanpå flipperspelet för att skicka iväg varje boll.</p>
+							<p class="hard">Exakt <b>3 bollar</b> behöver hamna i mittenhålet, med hjälp av den mittersta pilen.</p>
+
+							<p>Ditt mål är att bilda det största möjliga <span class="hard">12-siffriga </span>talet.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="assets/Flipper-13.png" style="display:none" id="background">
+      <img src="assets/Flipper-14.png" style="display:none" id="background_hard">
+      <img src="assets/Flipper-15.png" style="display:none" id="lid">
+      <img src="assets/lever.png" style="display:none" id="lever">
+      <img src="../../../_common/modules/img/icons/undo_white.png" style="display:none" id="undo">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+       <h2>Lösning</h2>
+      <h2>Det är datavetenskap!</h2>
+  </div>
+   <!-- task-solution -->
+</body>
+
+</html>

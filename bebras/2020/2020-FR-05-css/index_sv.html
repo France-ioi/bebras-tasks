@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-05-css</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', /*'grid-1.0',*/
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'/*, 'shape-paths'*/
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Grattis, du lyckades!",
+         result: "Din text",
+         objective: "Mål",
+         text0: "Bävern",
+         text1: "En bäver är en gnagare som kan hugga ner en trädstam med 10cm diameter på mindre än 30 minuter.",
+         text2: "Damm",
+         text3: "En damm hjälper till att spara vatten under sommaren, och skyddar bäverhyddan.",
+         text4: "Bävrar var regionalt utrotade i Sverige under 1800-talet, men i början av 1900-talet inplanterade man bävrar från Norge. Tack vare skyddsåtgärder har dessa klarat sig bra, och idag uppskattas det finnas runt 100 000 bävrar i Sverige.",
+         center: "Centrerad",
+         bold: "Fetstil",
+         underline: "Understr.",
+         upperCase: "VERSAL",
+         italic: "Kursiv",
+         large: "Stor",
+         small: "Liten",
+         colored: "Färgad",
+         style: "STIL",
+         stylesOf: function(nb) {
+            return (nb > 1) ? "Stilar för" : "Stil för";
+         },
+         styleOption: function(name) {
+            return "Stil " + name + ": ";
+         },
+         and: "och ",
+         errorStyle: function(line,attr,missing) {
+            var attrText = "";
+            switch(attr) {
+               case 0:
+                  attrText = "centrerad";
+                  break;
+               case 1:
+                  attrText = "fetstil";
+                  break;
+               case 2:
+                  attrText = "understruken";
+                  break;
+               case 3:
+                  attrText = "kursiv";
+                  break;
+               case 4:
+                  attrText = "med versaler";
+                  break;
+               case 5:
+                  attrText = "med gemener";
+                  break;
+               case 6:
+                  attrText = "med stora bokstäver";
+                  break;
+               default:
+                  attrText = "färgad";
+            }
+            if(!missing){
+							 return "Texten i område "+line+" är "+attrText+" men borde inte vara det.";
+            }else{
+               return "Texten i område "+line+" borde vara "+attrText+" med är det inte.";
+            }
+         }
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #htmlTable {
+         margin: 0px 20px 15px 20px;
+         border-spacing: 0px;
+         position: relative;
+      }
+      #htmlTable td {
+         padding: 10px;
+      }
+      #htmlTable .spacing td {
+         height: 10px;
+         padding: 0;
+      }
+      .col_0, .col_2 {
+         background: #f2f2f2;
+         width: 314px;
+         border: 3px solid #f2f2f2;
+      }
+      .col_1 {
+         border-right: 2px #4a90e2 solid;
+         border-left: 2px #4a90e2 solid;
+         width: 80px;
+      }
+      .row_0 {
+         text-align: center;
+         font-size: 20px;
+      }
+      .row_0 .col_0, .row_0 .col_2 {
+         background: none;
+         border: none;
+      }
+      .row_0 .col_1 {
+         border: none;
+      }
+      #vertLine {
+         width: 1px;
+         height: 400px;
+         border: none;
+         background: #e5e5e5;
+         position: absolute;
+         left: 365px;
+      }
+      .horLine {
+         width: 50px;
+         height: 2px;
+         background: #4a90e2;
+         margin: auto;
+         position: relative;
+         top: 15px;
+      }
+      .number {
+         color: white;
+         background: #ccb336;
+         width: 30px;
+         height: 30px;
+         margin: auto;
+         border-radius: 20px;
+         font-weight: bold;
+         text-align: center;
+         position: relative;
+      }
+      .number span {
+         position: relative;
+         top: 7px;
+      }
+      #paper {
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Textformat</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Flytta de blå stilmarkörerna in i de streckade områdena så att din text visas exakt som måltexten.</p>
+
+							 <p>Till exempel borde texten i område #1 vara <span class="easy medium">centrerad och fetstilt</span><span class="hard">centrerad, med versaler, och understruken</span>.</p>
+
+               <p class="medium hard">I det nedre högra området, välj namnet på <span class="medium">den stil</span><span class="hard">den eller de stilar</b></span> som du vill ha i varje område.</p>
+
+               <p class="medium hard">I det nedre vänstra området, välj vilka egenskaper som du vill sätta för varje stil. Dessa egenskaper kommer att appliceras i alla områden som har denna stil.</p> 
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="htmlTable">
+
+            </table>
+            <div id="paperContainer">
+               <div id="paper"></div>
+            </div>
+         </div>
+      </div>      
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-IE-07-pollution</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": ["Mathias Hiron"],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Grattis, du lycakdes!",
+         fail: function(pollutedTube,answerTube) {
+					 return "Provrör "+pollutedTube+" var det förorenade, inte provrör "+answerTube+".<br/>Klicka på Börja om för att försöka igen med nya prover.";
+         },
+         drag: "Välj ett svar innan du kontrollerar om du hade rätt.",
+         noSend: "Börja med att hälla vatten i alla numrerade provrör, och analysera resultatet.",
+         dragSamples: "Dra de övre provrören till de nedre \nför att hälla över vatten.",
+         youCanMix: "Det går att blanda vatten från olika provrör.",
+         analyseThem: "Analysera dessa provrör. Notera huruvida \nvarje blandning är förorenad eller inte.",
+         whenYouKnow: "När analysen är klar, konstatera \nvilket av de övre provrören som \ninnehåller förorenat vatten.",
+         send: "Analysera dessa tuber",
+         validate: "Kontrollera ditt svar",
+         retry: "Börja om",
+         polluted: "Förorenat",
+         clean: "Rent",
+         errorNoMoreTest: "Du kan inte köra en till analys. Om du kan konstatera vilket av de övre provrören som är förorenat, välj det. I annat fall, tryck på \"Börja om\" för att analysera nya prover.",
+         tube: "Provrör",
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+      #buttons div {
+         height: 30px;
+         border-radius: 15px;
+         color: white;
+         font-size: 12px;
+         font-weight: bold;
+         position: relative;
+         display: inline-block;
+         cursor: pointer;
+      }
+      #send {
+         width: 240px;
+         margin-left: 70px;
+         background: #f5a623;
+      }
+      #validate {
+         width: 186px;
+         margin-left: 170px;
+         background: #4a90e2;
+      }
+      #buttons div i {
+         position: absolute;
+         left: 20px;
+         top: 10px;
+      }
+      #buttons div span {
+         position: absolute;
+         top: 8px;
+      }
+      #send span {
+         left: 60px;
+      }
+      #validate span {
+         left: 70px;
+      }
+      .instruction-items li {
+         margin-bottom: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Förorening</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <center><p id="enemyWarning" style="width:700px"></p></center>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Ett av de <span class="nbTubes"></span> provrören på översta bilden innehåller förorenat vatten. Ditt mål är att ta reda på vilket.</p>
+               
+               <p>För att åstadkomma detta, följ de tre stegen för att analysera de <span class="easy medium">2</span><span class="hard">3</span> provrören på nedre bilden.</p>
+               <p><strong>OBS</strong>: Varje gång du börjar om kan det vara ett annat provrör som är förorenat.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="buttons">
+               <div id="send"><i class="fas fa-upload"></i><span>Analysera dessa prover</span></div>
+               <div id="validate"><i class="fas fa-check"></i><span>Kontrollera ditt svar</span></div>
+            </div>
+         </div>
+      </div>
+      <img src="tube.png" style="display:none" id="tube">
+      <img src="polluted_tube.png" style="display:none" id="polluted_tube">
+      <img src="upload.png" style="display:none" id="upload">
+      <img src="../../../_common/modules/img/icons/check_white.png" style="display:none" id="check">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Lösning</h2>
+      <h2>Det är datavetenskap!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

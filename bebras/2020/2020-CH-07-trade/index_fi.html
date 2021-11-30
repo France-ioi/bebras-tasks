@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-CH-07-trade</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "fi",
+         "version": "fi.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": "Heikki Hyyrö",
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Onnittelut, ratkaisit tämän version!",
+         dragTheBeavers: function(item1,item2) {
+            return "";
+         },
+         dragAsFewBeavers: function(target) {
+            return "";
+         },
+         startItem: "Alkutilanne",
+         noticeForHard: "\"Alkutilanne\"-laatikon sisältö näytetään, kun klikkaat \"Vahvista valintasi\"-nappia.\nSuorita sen jälkeen vaihtokauppoja käyttäen valitsemiasi majavia.",
+         instrForHard: "Raahaa valitsemiasi majavia harmaisiin laatikoihin\nvaihtokauppojen mukaisessa järjestyksessä.\nEllei ratkaisu onnistu, klikkaa \"Muuta valintojasi\"\n-nappia ja yritä uudelleen.",
+         itemToFind: "Tavoite",
+         try: 'Tarkista',
+         myTeam: "Vahvista valintasi",
+         changeTeam: "Muuta valintojasi",
+         emptyDrop: "Raahaa majavia harmaaseen suorakulmioon.",
+         emptyTeam: "Raahaa majavia harmaaseen suorakulmioon.",
+         errorExchange: "Punaisella korostetun majavan kyltin asia ei täsmää nykyisen asian kanssa!",
+         errorWrongItem: "Sinulla lopuksi ollut asia on eri kuin \"Tavoite\"-laatikon asia!",
+         tooManyBeavers: "Yritä uudelleen valitsemalla vähemmän majavia."
+      };
+
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Vaihtokaupat</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+         <center><p class="hard" id="enemyWarning"></p></center>
+               <p>
+               Kukin majava tarjoaa sinulle vaihtokauppaa: anna majavalle hänen kylttinsä kuvaama asia ja saat tilalle majavan kädessä olevan asian.</p>
+
+               <p class="easy medium">Sinulla on "Alkutilanne"-laatikossa kuvattu asia. Määritä sellainen vaihtokauppojen ketju, että saat itsellesi "Tavoite"-laatikossa kuvatun asian.</p>
+               <p class="easy medium">Raahaa majavat harmaisiin laatikoihin suorittamiesi vaihtokauppojen mukaisessa järjestyksessä.</p>
+
+               <p class="hard">Raahaa harmaan suorakulmion sisälle <b>mahdollisimman pieni sellainen majavien joukko, että voit saada "Tavoite"-laatikon kuvaaman asian riippumatta siitä, mikä asia sinulla alkutilanteessa on.</b></p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+            <div id="overlay_3"></div>
+            <div id="overlay_4"></div>
+            <div id="overlay_5"></div>
+            <div id="overlay_6"></div>
+         </div>
+      </div>
+      <img src="assets/Castor.png" style="display:none" id="beaver">
+      <img src="../../../_common/modules/img/icons/check_white.png" style="display:none" id="check">
+      <img src="./icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Ratkaisu</h2>
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

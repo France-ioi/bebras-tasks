@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-CH-07-trade</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         startItem: "Objet de\ndépart",
+         noticeForHard: "Quand vous appuierez sur le bouton \"essayer avec ce groupe\", un objet\nde départ apparaîtra. Vous pourrez alors faire des échanges en utilisant\nles castors de votre groupe.",
+         instrForHard: "Effectuez l'échange souhaité en déplaçant des\ncastors de votre groupe vers la zone du bas.\nSi vous n'y arrivez pas, modifiez le groupe.",
+         itemToFind: "Objet à\nobtenir",
+         tryStr: "Valider",
+         myTeam: "Essayer avec ce groupe",
+         changeTeam: "Modifier le groupe",
+         instrChangeTeam: "Vous pouvez modifier le groupe.",
+         emptyDrop: "Déplacez des castors dans la zone grise.",
+         emptyTeam: "Déplacez des castors dans la zone grise.", // could differ from emptyDrop
+         errorExchange: "Le panneau du castor encadré en rouge montre un objet différent de l'objet courant.",
+         errorWrongItem: "L'objet que vous avez obtenu ne correspond pas l'objet à obtenir.",
+         tooManyBeavers: "Essayez maintenant de réussir avec un groupe contenant moins de castors."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Échanges</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+         <center><p class="hard" id="enemyWarning"></p></center>
+               <p>Chaque castor propose un échange : donnez-lui l'objet dessiné sur son panneau, il vous donnera l'objet qu'il tient dans sa main.</p>
+
+               <p class="easy medium">Trouvez une suite d'échanges permettant de passer de l'objet de départ à l'objet à obtenir.</p>
+               <p class="easy medium">Placez des castors dans la zone grise, dans l'ordre des échanges à effectuer.</p>
+
+               <p class="hard">Placez dans la zone grise <b>le plus petit nombre possible de castors permettant, quelque soit l'objet de départ, d'arriver à échanger cet objet contre l'objet à obtenir.</b></p>
+   
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+            <div id="overlay_3"></div>
+            <div id="overlay_4"></div>
+            <div id="overlay_5"></div>
+            <div id="overlay_6"></div>
+         </div>
+      </div>
+      <img src="assets/Castor.png" style="display:none" id="beaver">
+      <img src="../../../_common/modules/img/icons/check_white.png" style="display:none" id="check">
+      <img src="./icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      
+      <div class="easy">
+         <p>
+            Dans cette version, il fallait utiliser tous les Castors pour passer de l'objet de départ à l'objet à obtenir.
+         </p>
+         <p>
+            Prenons par exemple la situation suivante (elle peut être différente de celle que vous aviez à résoudre) :
+         </p>
+         <center><img style="width:350px" src="sol_easy_data.png"></center>
+         <p>
+            Si l'objectif est de passer du muffin à la pomme, il faut commencer par placer le castor qui a un muffin sur son panneau, et donne en échange la glace au chocolat. On place ensuite le castor qui a une glace au chocolat sur son panneau, et donne en échange la pièce de monnaie. On continue ainsi jusqu'à obtenir la pomme :
+         </p>
+         <center><img style="width:700px" src="sol_easy.png"></center>
+      </div>
+      <div class="medium">
+         <p>
+            Dans cette version, il fallait choisir une partie des Castors pour passer de l'objet de départ à l'objet à obtenir.
+         </p>
+         <p>
+            Prenons par exemple la situation suivante, où il faut passer de la carotte à la glace au chocolat. Notez que cette situation peut être différente de celle que vous aviez à résoudre, mais elle est similaire :
+         </p>
+         <center><img style="width:700px" src="sol_medium_data.png"></center>
+         <p>
+            On remarque que six castors ont une carotte sur leur panneau, ce qui signifie qu'il y a six débuts différents à essayer. Seul l'un d'entre eux permet d'atteindre la glace au chocolat.
+         </p>
+         <p>
+            On peut gagner beaucoup de temps si l'on remarque qu'un seul castor propose une glace au chocolat, qu'il donnera en échange d'un muffin.
+         </p>
+         <p>
+            De même, un seul castor propose un muffin, qu'il donnera en échange d'une pierre précieuse. Enfin un seul Castor propose une pierre précieuse, qu'il donnera en échange d'une carrote.
+         </p>
+         <p>
+            Avec ces trois castors, on peut donc passer, de la carotte, à la pierre précieuse, puis au muffin et à la glace au chocolat.
+         </p>
+         <center><img style="width:550px" src="sol_medium.png"></center>
+         <p>
+            On peut représenter l'ensemble des possibilités en réorganisant les castors et en reliant par des traits ceux qui peuvent s'échanger des objets :
+         </p>
+         <center><img style="width:550px" src="sol_medium_graph.png"></center>
+      </div>
+      <div class="hard">
+         <p>
+            Dans cette version, il fallait choisir un ensemble de castors, de sorte que quel que soit l'objet que l'on nous donne au départ, on puisse faire une série d'échanges qui donne l'objet à obtenir.
+         </p>
+         <p>
+            Prenons par exemple la situation suivante, où il faut former un groupe de Castor qui permetrra d'obtenir une glace au chocolat, quel que soit l'objet que l'on nous donne au départ :
+         </p>
+         <center><img style="width:700px" src="sol_hard_data.png"></center>
+         <p>
+            Pour trouver cette équipe, il faut partir de la glace au chocolat, puis ajouter le castor qui donne une glace au chocolat en échange d'une pièce de monnaie, puis les deux castors qui donnent une pièce de monnaie, en échange d'une pomme pour l'un, et d'une feuille pour l'autre.
+         </p>
+         <p>   
+            À chaque castor ajouté ainsi au groupe, on a un nouvel objet à partir duquel on est capable d'obtenir la glace au chocolat. Parmi les castors qui proposent cet objet, on peut alors ajouter tous ceux qui demandent un objet qui n'est pas déjà sur un panneau des castors du groupe.
+         </p>
+         <p>
+            On peut visualiser les différents castors que l'on peut ajouter en partant de la glace au chocolat en bas. Sur fond gris, on met les Castors du groupe sélectionné. D'autres groupes pouvaient aussi fonctionner.
+         </p>
+         <center><img style="width:700px" src="sol_hard.png"></center>         
+      </div>
+      
+      <h2>C'est de l'informatique !</h2>
+      <p>
+         Dans ce défi, on manipulait ce que l'on appelle un graphe : on avait différents objets, qui correspondent à ce que l'on appelle les noeuds d'un graphe, et des possibilités de passage d'un objet à l'autre, qui correspondent à ce que l'on appelle des arcs entre les noeuds du graphe.
+      </p>
+      <p>
+         Dans les versions deux et trois étoiles, il fallait simplement trouver un chemin entre deux noeuds de ce graphe.
+      </p>
+      <p>
+         Dans la version quatre étoiles, il fallait sélectionner un sous-ensemble des arcs, tels que de tout noeud, il existe un chemin vers le noeud objectif.
+      </p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

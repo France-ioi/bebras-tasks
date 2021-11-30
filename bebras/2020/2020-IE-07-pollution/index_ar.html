@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-IE-07-pollution</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "ar",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": ["Mathias Hiron"],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "تهانينا لقد نجحت!",
+         fail: function(pollutedTube,answerTube) {
+            return "الأنبوب الملوث هو أنبوب "+pollutedTube+", وليس أنبوب "+answerTube+".<br/>اضغط على ابدأ من جديد للمحاولة مرة أخرى بأنابيب جديدة."
+         },
+         drag: "اختر الأنبوب الملوث قبل الضغط على زرالتحقق.",
+         noSend: "لا يمكنك تخمين أي أنبوب هو الملوث.<br/>ابدأ بسكب بعض الماء في جميع الأنابيب المرقمة ومن ثم قم بتحليلها.",
+         dragSamples: ["قم بسحب الأنابيب العلوية فوق", "الأنابيب التالية لسكب بعض الماء فيها."],
+         youCanMix: "يمكنك مزج أنواع مختلفة من المياه.",
+         analyseThem: ["حلل هذه الأنابيب لتكتشف", "أي منها يحتوي على ماء ملوث."],
+         whenYouKnow: ["بعد التحليل استنتج أي أنبوب من", "الأنابيب أعلاه يحتوي على الماء الملوث."],
+         send: "حلل هذه الأنابيب",
+         validate: "تحقق",
+         retry: "حاول مرة أخرى",
+         polluted: "ملوث",
+         clean: "غير ملوث",
+         errorNoMoreTest: "لا يمكنك إجراء تحليل آخر، لو كنت قادر على استنتاج أي من الأنابيب ملوث فقم باختياره وإلا فاضغط على زر ابدأ من جديد لتحاول مرة أخرى بأنابيب جديدة.",
+         tube: "أنبوب"
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+      #buttons div {
+         height: 30px;
+         border-radius: 15px;
+         color: white;
+         font-size: 12px;
+         font-weight: bold;
+         position: relative;
+         display: inline-block;
+         cursor: pointer;
+      }
+      #send {
+         margin-right: 60px;
+         margin-left: 60px;
+         width: 240px;
+         background: #f5a623;
+      }
+      #validate {
+         margin-right: 90px;
+         margin-left: 80px;
+         width: 186px;
+         background: #4a90e2;
+      }
+      #buttons div i {
+         position: absolute;
+         left: 20px;
+         top: 10px;
+      }
+      #buttons div span {
+         position: absolute;
+         top: 8px;
+      }
+      #send span {
+         left: 90px;
+      }
+      #validate span {
+         left: 80px;
+      }
+      .instruction-items li {
+         margin-bottom: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>التلوث</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <center><p id="enemyWarning" style="width:700px"></p></center>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>واحد من  <span class="nbTubes"></span> أنابيب  في القسم العلوي يحتوي على ماء ملوث، مهمتك أن تجد أي واحد هو الملوث.</p>
+               
+               <p>لتقوم بذلك اتبع الخطوات الثلاثة عن طريق تجهيز عدد <span class="easy medium">2</span><span class="hard">3</span> من الأنابيب للتحليل والفحص.</p>
+               <p><strong>تنبيه</strong>: في كل مرة تبدأ بها من جديد سيكون الأنبوب الملوث مختلفاً.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="buttons">
+               <div id="send"><i class="fas fa-upload"></i><span>حلل هذه الأنابيب</span></div>
+               <div id="validate"><i class="fas fa-check"></i><span>تحقق</span></div>
+            </div>
+         </div>
+      </div>
+      <img src="tube.png" style="display:none" id="tube">
+      <img src="polluted_tube.png" style="display:none" id="polluted_tube">
+      <img src="upload.png" style="display:none" id="upload">
+      <img src="../../../_common/modules/img/icons/check_white.png" style="display:none" id="check">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

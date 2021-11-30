@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="100"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="G-clef.svg"
+   inkscape:export-filename="D:\Travail\2018 - ..., Web Dev\2018 - Bebra's Tasks\tasks\v01\Bebras\2020\2020-FR-01-play-music\assets\G-clef.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata20">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>G-clef</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview18"
+     showgrid="false"
+     inkscape:zoom="6.2105263"
+     inkscape:cx="31.70419"
+     inkscape:cy="57.644068"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg16" />
+  <title
+     id="title2">G-clef</title>
+  <defs
+     id="defs7">
+    <filter
+       id="filter-1">
+      <feColorMatrix
+         in="SourceGraphic"
+         type="matrix"
+         values="0 0 0 0 0.592157 0 0 0 0 0.592157 0 0 0 0 0.592157 0 0 0 1.000000 0"
+         id="feColorMatrix4" />
+    </filter>
+  </defs>
+  <g
+     id="g838"
+     transform="matrix(1.0727511,0,0,1.0727511,-3.6376741,-3.6379602)">
+    <path
+       transform="matrix(2.3045354,0,0,2.3045354,35.02052,8.5183638)"
+       style="fill:#3c3c3c;fill-opacity:1;fill-rule:nonzero;stroke:#3c3c3c;stroke-width:0.49988383;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0"
+       id="path1947"
+       d="m 3.0430443,32.312576 c -0.2164964,1.171707 0.9893683,3.605004 3.4154376,3.684494 2.9329209,0.0961 4.8067121,-2.178265 3.9337491,-5.890052 L 6.0142366,9.6245891 C 5.4930755,7.1863381 5.8842542,5.8638552 6.1625326,5.075712 6.9049627,2.9729939 8.7598271,2.1057129 9.211402,2.778897 9.4692203,3.1632391 10.092608,4.9603659 8.3180676,8.1791462 6.9340812,10.689514 0.49488579,13.98138 0.02233032,19.872421 -0.38675973,24.995211 4.9032178,28.778703 9.4689457,27.291329 12.50026,26.303819 14.062919,21.640096 12.186638,19.234456 7.2351241,12.885959 -0.70587978,22.60192 6.9866726,25.263639 6.1501911,24.596495 5.5800216,24.079902 5.4738586,23.448485 4.440249,17.300971 13.558595,18.924024 11.101745,24.756106 10.091481,27.154275 6.0108127,27.618192 3.6869062,25.478679 1.7401756,23.686415 0.87634138,20.233807 3.0427089,17.755181 5.9768277,14.398141 9.4410527,11.384498 10.361141,6.7889351 11.449176,1.3545345 7.8968024,-2.8821932 5.6509537,2.4633528 4.8973634,4.2570407 4.6166446,6.0576362 5.3382201,9.5080983 L 9.71276,30.426464 c 0.313184,1.497597 0.1035198,3.558417 -1.2752951,4.505574 -0.6830085,0.469183 -3.0999199,0.792088 -3.6912236,-0.327871" />
+    <path
+       style="fill:#3c3c3c;fill-opacity:1;fill-rule:nonzero;stroke:#3c3c3c;stroke-width:0.50513899;stroke-opacity:1"
+       inkscape:connector-curvature="0"
+       transform="matrix(-2.3041295,-0.0432503,0.0432503,-2.3041295,57.18024,158.65891)"
+       id="path4608"
+       d="m 7.1564156,32.530756 c 4.84e-4,1.173414 -0.9137445,2.124268 -2.0419867,2.123792 -1.1282422,-4.76e-4 -2.0432557,-0.952102 -2.0437401,-2.125516 -3.13e-4,-0.759066 0.3887651,-1.460307 1.0206725,-1.839574 0.6319075,-0.379266 1.4106426,-0.378937 2.0428633,8.62e-4 0.6322206,0.3798 1.0218776,1.08137 1.022191,1.840436 z" />
+  </g>
+</svg>

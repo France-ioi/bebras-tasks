@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>2020-FR-06-overlap-rectangles</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.1',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', /*'drag_lib-2.0',*/ 
+         // 'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+    
+   <script class="remove" type="text/javascript">
+    var json = {
+       "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
+       "language": "en",
+       "version": "fr.01",
+       "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+       "translators": ["Arthur Charguéraud"],
+       "license": "CC BY-SA 3.0",
+       "taskPathPrefix": "",
+       "modulesPathPrefix": "",
+       "browserSupport": [],
+       "fullFeedback": true,
+       "acceptedAnswers": [],
+       "usesRandomSeed": false
+   };
+   </script>
+   <script type="text/javascript">
+   var taskStrings = {
+         patternUnwanted: "Les cases avec les croix rouges ne devraient pas être coloriées en bleu.",
+         patternMissing: "La case encadrée en rouge devrait être coloriée en bleu.",
+         steps: function(count, limit) {
+            return "Nombre de rectangles utilisés : " + count +" / "+limit; 
+         },
+         success: "Bravo, vous avez réussi !",
+         drag: "Pour dessiner, glissez d'une case à une autre en restant appuyé.", // drag your mouse or finger 
+         moveLimit: "Vous ne pouvez pas dessiner davantage de rectangles. Essayez autrement.<br/>Vous pouvez annuler des étapes ou bien tout recommencer.",
+         tooManyRect: function(max) {
+            return "Vous avez utilisé plus de "+max+" rectangles. Essayez autrement.<br/>Vous pouvez annuler des étapes ou bien tout recommencer."
+         },
+         color: "Remplissage", // DEPRECATED
+         undo: "Annuler",
+         cross: "Les cases avec une croix rouge devraient rester vides."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         touch-action: none;
+         margin-top: 1em;
+      }
+      #error {
+         min-height: 2em;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+      #solutionImages img {
+         height: 200px;
+      }
+   </style>
+</head>
+<body>
+   <div id="task">
+      <h1>Rectangles</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <p>Tracez <b><span id='textLimit'></span> rectangles</b> dans la grille, pour recouvrir toutes les cases contenant des points.</p>
+            <p>Les autres cases doivent rester vides.</p>
+            <p>Pour dessiner un rectangle, glissez d'un coin à l'autre tout en restant appuyé.</p>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="error"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+            <div id="overlay_3"></div>
+            <div id="overlay_4"></div>
+            <div id="overlay_5"></div>
+         </div>
+         <img src="../../../_common/modules/img/icons/undo_white.png" id="undo" style="display:none">
+         <img src="../../../_common/modules/img/icons/cross_red.png" id="cross" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+   </div><!-- task -->
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+      <p>Ce défi met en avant la notion <b>d'algorithme glouton</b> : à chaque étape, on choisit l'action qui permet de se rapprocher le plus vite possible de la solution.</p>
+      <p>Sur certains problèmes, l'approche gloutonne permet d'obtenir la meilleure solution à la fin. Sur d'autres problèmes, ce n'est pas forcément le cas.</p>
+
+  </div> <!-- task-solution -->
+</body>
+</html>

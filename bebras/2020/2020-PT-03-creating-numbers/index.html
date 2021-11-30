@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-PT-03-creating-numbers</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2020/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: function(nb) {
+            return "Vous avez obtenu le nombre "+nb+", c'est le plus grand nombre possible. Bravo, vous avez réussi !"
+         },
+         fail: function(nb) {
+            return "Vous avez obtenu le nombre "+nb+". Il est possible d'obtenir un nombre plus grand.<br/>Cliquez sur recommencer."
+         },
+         click: "Pour lancer une boule, cliquez sur une des flèches situées en haut.",
+         missingBall: "Il reste des boules à lancer.",
+         maxHole: "Le trou du milieu ne peut contenir que 3 boules au maximum.",
+         maxSeq: function(max) {
+            return "Vous ne pouvez pas mettre plus de "+max+" boules dans la zone d'arrivée.<br/>Il faut utiliser la flèche du milieu 3 fois en tout."
+         },
+         undo: "Annuler"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-bottom: 0em;
+         /*touch-action: none;*/
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Flipper</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Pour lancer une boule, cliquez sur l'une des <span class="easy medium">deux</span><span class="hard">trois</span> flèches en haut du flipper.</p>
+               <p class="hard">La flèche du milieu permet de <b>placer 3 boules dans le trou central</b>. Il faudra remplir les 3 trous.</p>
+
+               <p>Votre objectif est de former <b>le plus grand nombre <span class="hard">à 12 chiffres</span> possible</b>.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="assets/Flipper-13.png" style="display:none" id="background">
+      <img src="assets/Flipper-14.png" style="display:none" id="background_hard">
+      <img src="assets/Flipper-15.png" style="display:none" id="lid">
+      <img src="assets/lever.png" style="display:none" id="lever">
+      <img src="../../../_common/modules/img/icons/undo_white.png" style="display:none" id="undo">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+      <p>Dans ce défi, on appliquer un <b>algorithme</b> pour déterminer à chaque étape si l'on veut envoyer la balle à gauche ou à droite.</p>
+      <p class="easy medium">Dans les versions 2 et 3 étoiles, la décision prise à chaque étape ne dépend que de la valeur de la boule déjà posée la plus à gauche. 
+        On peut ainsi prendre des décisions <b>locales</b>, qui aboutissent à la meilleure solution <b>globale</b>. 
+        Les algorithmes satisfiant cette propriété s'appellent des <b>algorithmes gloutons</b>. <p>
+      <p class="hard">Dans la version 4 étoiles, on ne peut pas se contenter comme dans les versions précédentes de prendre une décision à chaque étape en fonction des boules déjà posées.
+      Autrement dit, si l'on prend uniquement des décisions <b>locales</b>, on n'aboutit pas à la meilleure solution <b>globale</b>, tout à la fin.
+      Ce défi 4 étoiles présente donc un problème que l'on ne peut pas résoudre avec un <b>algorithme glouton</b>.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-PT-03-creating-numbers</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2020/FR-2019-10-lighting/",
+         "language": "fi",
+         "version": "fi.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": "Heikki Hyyrö",
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: function(nb) {
+            return "Muodostamasi luku "+nb+" oli suurin mahdollinen. Onnittelut, ratkaisit tämän version!"
+         },
+         fail: function(nb) {
+            return "Muodostamasi luku oli "+nb+". On mahdollista muodostaa suurempi luku.<br/>Aloita uudelleen alusta."
+         },
+         click: "Laukaise kuula klikkaamalla jotain flipperin yläosan nuolta.",
+         missingBall: "Käyttämättömiä kuulia on vielä jäljellä.",
+         maxHole: "Keskellä olevaan kuoppaan mahtuu vain 3 kuulaa.",
+         maxSeq: function(max) {
+            return "Korkeintaan "+max+" kuulaa saa pudota alas.<br/>Sinun pitää laukaista 3 kuulaa keskellä olevaan kuoppaan."
+         },
+         undo: "Peru"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-bottom: 0em;
+         /*touch-action: none;*/
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Flipperi</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Laukaise kaikki kuulat klikkailemalla flipperin yläosassa olevia <span class="easy medium">kahta</span><span class="hard">kolmea</span> nuolta.</p>
+               <p class="hard"><b>3 kuulaa pitää laukaista flipperin keskellä olevaan kuoppaan</b>.</p>
+
+               <p>Tavoitteena on muodostaa kuulista <b>mahdollisimman suuri <span class="hard">12-numeroinen</span> luku</b>.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="assets/Flipper-13.png" style="display:none" id="background">
+      <img src="assets/Flipper-14.png" style="display:none" id="background_hard">
+      <img src="assets/Flipper-15.png" style="display:none" id="lid">
+      <img src="assets/lever.png" style="display:none" id="lever">
+      <img src="../../../_common/modules/img/icons/undo_white.png" style="display:none" id="undo">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Ratkaisu</h2>
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

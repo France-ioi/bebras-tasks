@@ -1,0 +1,30 @@
+
+*) Consigne:
+
+Pour effectuer une opération de retournement, faites glisser votre doigt sur des formes qui se suivent. L'ordre de toutes ces formes sera inversé.
+
+Votre but est que les formes identiques se retrouvent les unes à côté des autres.
+
+Moins vous faites d'opérations, plus vous aurez de points.
+
+*) In canvas: "Nombre d'opérations effectuées : 4"
+
+*) Animation : trajectoire en demi-ellipse, centré sur le point au milieu de forme de gauche et forme de droite de l'intervalle sélectionné. Les formes de gauche passent par le haut, celles de droites par le bas. Toutes les formes atteignent la cible en même temps. Pour une zone impaire, la forme du milieu ne bouge pas (ou bouge sur une ellipse de rayon zéro, c'est pareil).
+
+*) Feedback: Les deux formes encadrés en rouge sont séparées par une forme différente.
+
+*) Feedback: Essayez maintenant de réussir en moins d'opérations.
+
+*) Scoring : soit n = data[level].nbOptimal.
+Pour le facile et le moyen, le score est :
+- 100% pour un succès n opérations
+- 60% pour un succès en n+1
+- 40% pour un succès en n+2 coups
+- 20% pour un succès en plus de coups
+
+Pour le dur, c'est :
+- 100% pour un succès n opérations
+- 50% pour un succès en n+1
+- 20% pour un succès en n+2
+- 0% pour davantage
+

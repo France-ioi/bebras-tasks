@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-05-css</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', /*'grid-1.0',*/
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'/*, 'shape-paths'*/
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "fi",
+         "version": "fi.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": "Heikki Hyyrö",
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Onnittelut, ratkaisit tämän version!",
+         result: "Sinun tekstisi",
+         objective: "Tavoite",
+         text0: "Majava",
+         text1: "Majava on jyrsijä, joka kykenee katkaisemaan 10 cm paksun puun alle 30 minuutissa.",
+         text2: "Pato",
+         text3: "Pato auttaa säästämään vettä kesällä, ja se myös suojelee majavien pesää.",
+         text4: "Suomessa arvioitiin vuoden 2017 laskennassa olevan noin 14000 - 24000 majavaa.",
+         center: "Keskitetty",
+         bold: "Paksu",
+         underline: "Alleviivattu",
+         upperCase: "ISO KIRJAIN",
+         italic: "Kursiivi",
+         large: "Isompi",
+         small: "Pienempi",
+         colored: "Taustaväri",
+         style: "TYYLI",
+         stylesOf: function(nb) {
+            return (nb > 1) ? "Kappale: " : "Kappale: ";
+         },
+         styleOption: function(name) {
+            return "Tyyli " + name + ": ";
+         },
+         and: "ja",
+         errorStyle: function(line,attr,missing) {
+            var attrText = "";
+            switch(attr) {
+               case 0:
+                  attrText = "keskitetty";
+                  break;
+               case 1:
+                  attrText = "paksua";
+                  break;
+               case 2:
+                  attrText = "alleviivattu";
+                  break;
+               case 3:
+                  attrText = "kursiivilla";
+                  break;
+               case 4:
+                  attrText = "isoilla kirjaimilla";
+                  break;
+               case 5:
+                  attrText = "pienikokoista";
+                  break;
+               case 6:
+                  attrText = "isokokoista";
+                  break;
+               default:
+                  attrText = "taustavärillistä";
+            }
+            if(!missing){
+               return "Kappaleen "+line+" teksti on "+attrText+", vaikka sen ei pitäisi."
+            }else{
+               return "Kappaleen "+line+" tekstin pitäisi olla "+attrText+", mutta se ei ole."
+            }
+         }
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #htmlTable {
+         margin: 0px 20px 15px 20px;
+         border-spacing: 0px;
+         position: relative;
+         box-sizing: border-box;
+      }
+      #htmlTable td {
+         padding: 10px;
+      }
+      #htmlTable .spacing td {
+         height: 10px;
+         padding: 0;
+      }
+      .col_0, .col_2 {
+         background: #f2f2f2;
+         width: 314px;
+         border: 3px solid #f2f2f2;
+      }
+      .col_1 {
+         border-right: 2px #4a90e2 solid;
+         border-left: 2px #4a90e2 solid;
+         width: 80px;
+      }
+      .row_0 {
+         text-align: center;
+         font-size: 20px;
+      }
+      .row_0 .col_0, .row_0 .col_2 {
+         background: none;
+         border: none;
+      }
+      .row_0 .col_1 {
+         border: none;
+      }
+      #vertLine {
+         width: 1px;
+         height: 400px;
+         border: none;
+         background: #e5e5e5;
+         position: absolute;
+         left: 365px;
+      }
+      .horLine {
+         width: 50px;
+         height: 2px;
+         background: #4a90e2;
+         margin: auto;
+         position: relative;
+         top: 15px;
+      }
+      .number {
+         color: white;
+         background: #ccb336;
+         width: 30px;
+         height: 30px;
+         margin: auto;
+         border-radius: 20px;
+         font-weight: bold;
+         text-align: center;
+         position: relative;
+      }
+      .number span {
+         position: relative;
+         top: 7px;
+      }
+      #paper {
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Tekstin tyylit</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Raahaa sinisiä laatikoita niiden alla oleviin katkoviiva-laatikoihin niin, että tekstisi näyttää samanlaiselta kuin tavoite.</p>
+
+               <p>Esimerkiksi kappaleen 1 tekstin tyylin pitäisi olla <span class="easy medium">"Paksu" ja "Keskitetty"</span><span class="hard">"Alleviivattu", "ISO KIRJAIN" ja "Keskitetty"</span>.</p>
+
+               <p class="medium hard">Valitse oikealla alhaalla jokaiselle kappaleelle <span class="medium">jokin tyyli (A, B tai C), jolle määrittämiäsi muotoiluasetuksia kappaleeseen sovelletaan</span><span class="hard"><b>yksi tai useampi tyyli (A, B ja/tai C), joille määrittämiäsi muotoiluasetuksia kappaleeseen sovelletaan</b></span>.</p>
+
+               <p class="medium hard">Voit määrittää vasemmalla alhaalla kullekin tyylille yhden tai useampia muotoilutasetuksia.</p> 
+
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="htmlTable">
+
+            </table>
+            <div id="paperContainer">
+               <div id="paper"></div>
+            </div>
+         </div>
+      </div>      
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Ratkaisu</h2>
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

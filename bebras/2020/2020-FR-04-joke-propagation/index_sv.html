@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-04-joke-propagation</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', /*'drag_lib-2.0',*/ 
+         'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Grattis, du lyckades!",
+         retry: "Försök igen",
+         validate: "Testa din lösning",
+         clickRetry: "I detta exempel behövde du placera bävrarna med en blå markering i det blåa området, eftersom de var de sista som fick höra idén. Klicka på \"Försök igen\".",
+         afterRetry: "Försök att simula hur idén kommer propagera bland bävrarna i ditt huvud.",
+         day: "Dag",
+         startZone: "Bävern som\nförst fick\nidén.",
+         endZone: "Placera bävrarna\nsom kommer\natt få idén sist här.",
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #day {
+         margin-top: 1em;
+         padding-left: 1em;
+         font-size: 20px;
+         font-weight: bold;
+      }
+      #paper {
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Idéspridning</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>Bävern i det gröna området fick just en bra idé. Varje dag kommer bävrar som hört idén att sprida den till de vänner som finns en linje bort.</p>
+               <p>Placera de bävrar som kommer att höra om idén sist i det blåa området.</p>
+               <p>Du kan klicka på "Testa din lösning" för att se ett exempel.</p>
+               <p class="medium hard">Det kan hjälpa att organisera om bävrarna i det vita området.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="day"></div>
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="castor.png" style="display:none" id="beaver">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Lösning</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>2020-FR-10-reorder</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.1',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'shape-paths', /*'drag_lib-2.0',*/ 
+         // 'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+    
+   <script class="remove" type="text/javascript">
+    var json = {
+       "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
+       "language": "en",
+       "version": "fr.01",
+       "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+       "translators": ["Arthur Charguéraud"],
+       "license": "CC BY-SA 3.0",
+       "taskPathPrefix": "",
+       "modulesPathPrefix": "",
+       "browserSupport": [],
+       "fullFeedback": true,
+       "acceptedAnswers": [],
+       "usesRandomSeed": false
+   };
+   </script>
+   <script type="text/javascript">
+   var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         error: "Les deux formes encadrées en rouge sont séparées par une forme différente.",
+         tooMany: "Essayez maintenant de réussir en moins d'opérations.<br/>Cliquez sur recommencer.",
+         counter: "Nombre d'opérations effectuées :",
+         undo: "Annuler une étape"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         touch-action: none;
+         margin-top: 1em;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+      #solutionImages img {
+         height: 200px;
+      }
+   </style>
+</head>
+<body>
+   <div id="task">
+      <h1>Retournements</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <p>Placez les formes identiques les unes à côté des autres en effectuant des opérations de retournement.</p>
+            <p>Pour effectuer un retournement, sélectionnez des formes qui se suivent en glissant dessus. L'ordre de toutes ces formes sera inversé.</p>
+            <p>Moins vous faites de retournements, plus vous aurez de points.</p>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <img src="../../../_common/modules/img/icons/undo_white.png" id="undo" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+   </div><!-- task -->
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+      <p>Ce défi présente un problème d'optimisation. Les versions proposées ont été soigneusement choisies de sorte à pouvoir être résolues de manière <b>gloutonne</b>, en essayant à chaque étape de rapprocher des formes semblables sur les deux extrémités de la zone retournée. Ce n'est pas toujours le cas pour une configuration de départ quelconque.</p>
+ </div> <!-- task-solution -->
+</body>
+</html>

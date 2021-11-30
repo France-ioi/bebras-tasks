@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-03-waiting-room</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2020/2020-FR-03-waiting-room",
+         "language": "ar",
+         "version": "ar.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "تهانينا لقد نجحت!",
+         place: ["ضع هذا القندس في إحدى", "المربعات الرمادية الفارغة"],
+         occupied: "هذه الغرفة مشغولة بالفعل.",
+         longest: [" ضع هنا", "القندس", "الذي دخل أولاً"],
+         shortest: ["ضع هنا", "القندس", "الذي دخل أخيراً"],
+         notFirst: "هذا ليس القندس الذي دخل أولاً، اضغط على البدء من جديد",
+         notLast: "هذا ليس القندس الذي دخل أخيراً، اضغط على البدء من جديد",
+         notComplete: "لم تنته من المهمة بعد"
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>غرفة الانتظار</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>عندما يصل القندس من الأعلى، عليك أن تضعه في إحدى مربعات غرف الانتظار الرمادية.</p>
+               <p>ومن وقت لآخر سيطلب منك أن تخرج القندس الذي  <b>دخل أولاً </b> من بين القنادس التي ما تزال في غرف الانتظار</p>
+               <p class="medium hard">وبالمقابل وفي بعض الأحيان سيطلب منك أن تخرج القندس الذي  <b>دخل مؤخراً</b>.</p>
+               <p>كن منظماً بشكل جيد كي لا تصنع أي خطأ!</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="assets/beaver.png" style="display:none" id="beaver">
+      <img src="assets/blue_shadow.png" style="display:none" id="blue_shadow">
+      <img src="assets/green_shadow.png" style="display:none" id="green_shadow">
+      
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

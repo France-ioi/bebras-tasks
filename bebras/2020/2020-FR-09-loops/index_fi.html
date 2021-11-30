@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>2016-FR-09-loops</title>
+    <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.1',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'shape-paths', 'drag_lib-2.0', 
+         // 'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+    var json = {
+         "id": "http://castor-informatique.fr/tasks/2016/2016-FR-08-repeating-pattern/",
+         "language": "fi",
+         "version": "fi.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee, France-ioi",
+         "translators": "Heikki Hyyrö",
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+   };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         validate: "Käynnistä robotti",
+         crash: "Robotti meni pusikkoon.",
+         outside: "Robotti meni ruudukon ulkopuolelle.",
+         notAtGoal: "Ohjelman suoritus päättyi, mutta robotti ei ole vielä maalissa.",
+         success: "Onnittelut, ratkaisit tämän version!",
+         loopText: function(loopTimes) {
+            return "Toista "+loopTimes+" kertaa";
+         },
+         stop: "Palauta robotti",
+         fillFirst: "Raahaa ainakin ensimmäiseen harmaaseen ruutuun jokin nuoli."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+     #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+<body>
+   <div id="task">
+      <h1>Robotin toistot</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <p>Määritä robotille ohjelma, joka vie robotin maalilipun luo menemättä pusikkoon tai ruudukon ulkopuolelle.</p> 
+            <p>Ohjelma koostuu harmaisiin laatikoihin raahaamistasi nuolista (= robotin askeleiden suunnat) sekä mustilla miinus- ja plus-napeilla määrittämistäsi toistokerroista.</p>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <img src="obstacle.png" style="display:none" id="wall">
+         <img src="red_robot.png" style="display:none" id="robot">
+         <img src="green.png" style="display:none" id="goal">
+         <img src="icon.png" style="display:none">
+      </div>
+   </div><!-- task -->
+   <div id="solution">
+  </div> <!-- task-solution -->
+</body>
+</html>

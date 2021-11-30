@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>2020-FR-06-overlap-rectangles</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', /*'drag_lib-2.0',*/ 
+         // 'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+    
+   <script class="remove" type="text/javascript">
+    var json = {
+       "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
+       "language": "en",
+       "version": "fr.01",
+       "authors": "Arthur Charguéraud, Mathias Hiron, Nir Lavee",
+       "translators": ["Arthur Charguéraud"],
+       "license": "CC BY-SA 3.0",
+       "taskPathPrefix": "",
+       "modulesPathPrefix": "",
+       "browserSupport": [],
+       "fullFeedback": true,
+       "acceptedAnswers": [],
+       "usesRandomSeed": false
+   };
+   </script>
+   <script type="text/javascript">
+   var taskStrings = {
+         patternError: "The red cell is painted incorrect.",
+         suboptimal: "Well done. Try again to solve it in fewer steps.",
+         steps: function(count, limit) {
+            return "Number of rectangles : " + count +" / "+limit; 
+         },
+         success: "Congratulations, you did it.",
+         drag: "To paint cell, drag the mouse from one corner to the opposite one.", // drag your mouse or finger 
+         moveLimit: "You have reached the maximum number of steps. Try again. You may cancel steps or restart.",
+         color: "Color",
+         undo: "Undo"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+      }
+      
+      #solutionImages img {
+         height: 200px;
+      }
+   </style>
+</head>
+<body>
+   <div id="task">
+      <h1>Painting Rectangles</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <p id="difficultyWarning" class="hard"></p>
+            <p>
+               Draw the shape in the "Target" grid to "Your Drawing" grid.
+            </p>
+             <p>You can paint black and white cells on the grids, by dragging the mouse from a corner to the opposite one.</p> 
+            </p>
+            <p class="easy">
+               This version of task can be solved in <strong>only 3 steps</strong>.
+            </p>   
+            <p class="medium">
+               This version of task can be solved in <strong>no more than 5 steps</strong>.
+            </p>
+            <p class="hard">
+               This version of task can be solved in <strong>only 8 steps</strong>.
+            </p>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="error"></div>
+         </div>
+         <img src="undo.png" id="undo" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+   </div><!-- task -->
+   <div id="solution">
+
+      <h2>Solution</h2>
+      <div id="solutionImages">
+         <div class="easy">
+            <img src="solution_easy_step0.png">
+            <img src="solution_easy_step1.png">
+            <img src="solution_easy_step2.png">
+         </div>   
+         <div class="medium">
+            <img src="solution_medium_step0.png">
+            <img src="solution_medium_step1.png">
+            <img src="solution_medium_step2.png">
+            <img src="solution_medium_step3.png">
+            <img src="solution_medium_step4.png">
+            <img src="solution_medium_step5.png">
+         </div>
+         <div class="hard">
+            <img src="solution_hard_step0.png">
+            <img src="solution_hard_step1.png">
+            <img src="solution_hard_step2.png">
+            <img src="solution_hard_step3.png">
+            <img src="solution_hard_step4.png">
+         </div>
+      </div>
+      <h2>It's infromatics!</h2>
+
+         <p>In computers, black and white images are typically described using digits "1" and "0", for a black pixel and a white pixel, respectively. (A pixel corresponds to a single cell in the grid that represents the image.)</p>
+
+         <p>The operation involved in this task consists if toggling the filling of a set of cells. To implement this operation on a computer, we ask it to replace each 0 by a 1 and each 1 by a 0, for all the cells in the desired area.</p>
+
+         <p>In a single second, a modern computer is able to execute more than a hundred billion such toggle operations!</p>
+
+         <p>And, after a second work, the computer does not even get tired :) Tireless, it is able to continue its job at such daunting speed for years on...</p>
+            
+  </div> <!-- task-solution -->
+</body>
+</html>

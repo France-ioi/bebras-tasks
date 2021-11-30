@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-04-joke-propagation</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', /*'drag_lib-2.0',*/ 
+         'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Congratulations, you suceeded!",
+         retry: "Try again",
+         validate: "Validate",
+         clickRetry: "In this example, you had to place in the blue area, the beavers that have a blue sticker,<br/>as these were the last to learn the idea. Click on \"Try again\".",
+         afterRetry: "Try to simulate in your head, how the idea will propagate among beavers.",
+         day: "Day",
+         startZone: "Beaver that\nhas the idea\nfirst",
+         endZone: "Here, place the\nlast Beavers that will\nlearn the idea."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #day {
+         margin-top: 1em;
+         padding-left: 1em;
+         font-size: 20px;
+         font-weight: bold;
+      }
+      #paper {
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Great idea</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>The beaver in the green area just had a great idea. Every day, the beavers that know this idea, will share it with their friends, that are connected to them with lines.</p>
+               <p>Place in the blue area, the beavers who will be the last ones to learn about the idea.</p>
+               <p>You can <b>click on "validate" to see an example.</b></p>
+               <p class="medium hard">To help you, start by <b>reorganizing</b> the beavers within the white area.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="day"></div>
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="castor.png" style="display:none" id="beaver">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

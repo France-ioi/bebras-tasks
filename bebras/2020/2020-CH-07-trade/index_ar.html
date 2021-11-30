@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar">
+   
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-CH-07-trade</title>
+   <script>
+      window.stringsLanguage = 'ar';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0', 'shape-paths'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "ar",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": ["Mathias Hiron"],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "تهانينا لقد نجحت!",
+         dragTheBeavers: function(item1,item2) {
+            return "";
+         },
+         dragAsFewBeavers: function(target) {
+            return "";
+         },
+         enableRtl: true,
+         startItem: "عنصر البداية",
+         noticeForHard: ["عندما تضغط على زر جرب هذه المجموعة سيظهر لك عنصر البداية", "وعندها يمكنك ترتيب المقايضات باستخدام القنادس في مجموعتك"],
+         instrForHard: ["قم بعمل المبادلات التي ترغب بها بوضع القندس من المجموعة التي أعددتها", "في المنطقة المخصصة بالأسفل في حال عدم وجود القندس", "المناسب قم بتغيير المجموعة بالضغط على زر غير المجموعة"],
+         itemToFind:  "العنصر المطلوب",
+         try: 'تحقق',
+         myTeam: "جرب هذه المجموعة",
+         changeTeam: "غير المجموعة",
+         emptyDrop: "حرك بعض القنادس للمنطقة الرمادية",
+         emptyTeam: "حرك بعض القنادس للمنطقة الرمادية",
+         errorExchange: "اللافتة التي في يد القندس ومحاطة بدائرة حمراء تظهر عنصر مختلف عن العنصر الحالي",
+         errorWrongItem: "العنصر الذي حصلت عليه مختلف عن العنصر الذي طلب منك أن تحصل عليه",
+         tooManyBeavers: "الآن جرب بمجموعة تحتوي على عدد أقل من القنادس"
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>المقايضات</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <center><p class="hard" id="enemyWarning"></p></center>
+               <p>
+                  كل قندس في الصورة يعرض عليك عملية مبادلة أو مقايضة، أعطه الشيء الموجود في اللافتة التي يحملها، وهو بالمقابل سيعطيك ما يحمله بيده</p>
+
+               <p class="easy medium">أوجد تسلسل المبادلات التي تسمح لك باستخدام الشيء في عنصر البداية وتنتهي بالعنصر المطلوب في النهاية</p>
+               <p class="easy medium">في المنطقة الرمادية ضع بعض القنادس بالترتيب الذي تود أن تكمل المبادلات أو المقايضات به</p>
+
+               <p class="hard">في المنطقة الرمادية، ضع <b>أقل عدد ممكن من القنادس، بحيث مهما كان عنصر البداية سيكون هناك إمكانية لتكوين تسلسل من المبادلات أو المقايضات للحصول على العنصر المطلوب في النهاية</b></p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+            <div id="overlay_3"></div>
+            <div id="overlay_4"></div>
+            <div id="overlay_5"></div>
+            <div id="overlay_6"></div>
+         </div>
+      </div>
+      <img src="assets/Castor.png" style="display:none" id="beaver">
+      <img src="../../../_common/modules/img/icons/check_white.png" style="display:none" id="check">
+      <img src="./icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

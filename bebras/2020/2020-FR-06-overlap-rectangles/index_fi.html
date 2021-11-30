@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>2020-FR-06-overlap-rectangles</title>
+   <script>
+      window.stringsLanguage = 'fi';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.1',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', /*'drag_lib-2.0',*/ 
+         // 'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+    
+   <script class="remove" type="text/javascript">
+    var json = {
+       "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
+       "language": "fi",
+       "version": "fi.01",
+       "authors": "Arthur Charguéraud, Mathias Hiron",
+       "translators": "Heikki Hyyrö",
+       "license": "CC BY-SA 3.0",
+       "taskPathPrefix": "",
+       "modulesPathPrefix": "",
+       "browserSupport": [],
+       "fullFeedback": true,
+       "acceptedAnswers": [],
+       "usesRandomSeed": false
+   };
+   </script>
+   <script type="text/javascript">
+   var taskStrings = {
+         patternUnwanted: "Punaisella merkittyjen ruutujen ei pitäisi olla sinisiä.",
+         patternMissing: "Punaisella merkityn ruudun pitäisi olla sininen.",
+         steps: function(count, limit) {
+            return "Suorakulmioiden lukumäärä: " + count +" / "+limit; 
+         },
+         success: "Onnittelut, ratkaisit tämän version!",
+         drag: "Piirrä suorakulmio raahaamalla ruudusta ruutuun.",
+         moveLimit: "Et voi piirtää enempää suorakulmioita.<br/>Peru askeleita tai aloita uudelleen alusta.",
+         tooManyRect: function(max) {
+            return "Piirsit enemmän kuin "+max+" suorakulmiota.<br/>Peru askeleita tai aloita uudelleen alusta.";
+         },
+         color: "Täyttö",
+         undo: "Peru askel",
+         cross: "Punaisella ruksilla merkittyjen ruutujen pitäisi olla tyhjiä!"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         touch-action: none;
+         margin-top: 1em;
+      }
+      #error {
+         min-height: 2em;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+      #solutionImages img {
+         height: 200px;
+      }
+   </style>
+</head>
+<body>
+   <div id="task">
+      <h1>Päällekkäiset suorakulmiot</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <p>Piirrä ruudukkoon <b><span id='textLimit'></span> suorakulmiota</b> niin, että niiden reunat peittävät kaikki harmaan ympyrän sisältävät ruudut.</p>
+            <p>Muiden ruutujen pitää pysyä tyhjinä.</p>
+            <p>Piirrä suorakulmio raahaamalla ruudukon ruutuja.</p>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="error"></div>
+            <div id="overlay_1"></div>
+            <div id="overlay_2"></div>
+            <div id="overlay_3"></div>
+            <div id="overlay_4"></div>
+            <div id="overlay_5"></div>
+         </div>
+         <img src="../../../_common/modules/img/icons/undo_white.png" id="undo" style="display:none">
+         <img src="../../../_common/modules/img/icons/cross_red.png" id="cross" style="display:none">
+         <img src="icon.png" style="display:none">
+      </div>
+   </div><!-- task -->
+   <div id="solution">
+     <h2>Ratkaisu</h2>
+      <h2>Tämä on tietojenkäsittelyä!</h2>
+  </div> <!-- task-solution -->
+</body>
+</html>

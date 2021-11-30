@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-07-tool-deadlock</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', /*'grid-1.0',*/
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', /*'drag_lib-2.0', 'shape-paths'*/
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         sameTool: function(line,tool) {
+            var textLine, toolName;
+            switch(line){
+               case 0:
+                  textLine = "première";
+                  break;
+               case 1:
+                  textLine = "deuxième";
+                  break;
+               case 2:
+                  textLine = "troisième";
+                  break;
+               case 3:
+                  textLine = "quatrième";
+                  break;
+            }
+            switch(tool){
+               case 0:
+                  toolName = "le marteau";
+                  break;
+               case 1:
+                  toolName = "le tournevis";
+                  break;
+               case 2:
+                  toolName = "la scie";
+                  break;
+            }
+            return "Le castor de la "+textLine+" ligne ne peut pas prendre "+toolName+", car un autre castor l'a pris"+((tool == 2) ? "e" : "")+"."
+         },
+         undo: "Annuler"
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Outils partagés</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+
+               <p><span class="easy">Deux</span><span class="medium">Trois</span><span class="hard">Quatre</span> castors bricolent. Ils doivent utiliser des outils, dans un certain ordre, pendant un certain temps, comme dessiné sur les <span class="easy">deux</span><span class="medium">trois</span><span class="hard">quatre</span> lignes du dessin.</p>
+
+               <p>Un outil ne peut être utilisé que par un seul castor à la fois.</p>
+               <p>Glissez les outils pour les déplacer.</p>
+               <p><b>Il ne doit pas y avoir deux outils pareils l'un au-dessus de l'autre.</b></p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <!-- <div id="error"></div> -->
+         </div>
+      </div>
+      <img src="castor.png" style="display:none" id="beaver">
+      <img src="../../../_common/modules/img/icons/cross_red.png" style="display:none" id="cross">
+      <img src="hammer.png" style="display:none" id="hammer">
+      <img src="screwdriver.png" style="display:none" id="screwdriver">
+      <img src="saw.png" style="display:none" id="saw">
+      <img src="../../../_common/modules/img/icons/undo_white.png" id="undo" style="display:none">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>C'est de l'informatique !</h2>
+      <p>Ce défi met en avant la notion <b>d'ordonnancement</b> : il s'agit de construire un planning de tâches, pour certains acteurs, en respectant certaines contraintes, et en minimisant la durée totale.</p>
+      <p>Ici, les tâches sont représentés par les rectangles colorés, les acteurs sont les 3 castors, et les contraintes correspondent au fait que deux tâches correspondant au même outil (rectangles de la même couleurs) ne peuvent être effectuer en même temps.</p>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

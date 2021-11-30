@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-01-play-music</title>
+   <script>
+      window.stringsLanguage = 'sv';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": ["Mathias Hiron"],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Grattis, du lyckades!",
+         moves: "Drag:",
+         undo: "Ångra ett steg",
+         score: "Spela instrumenten i denna ordning:",
+         notComplete: "Det är inte över än. Bäver behöver spela instrumentet inringat i blått.",
+         noMove: "Flytta instrument framför Bäver.",
+         tooManyMoves: function(max) {
+					 return "Försök nu med endast "+max+" drag.<br/>Var försiktig med vilket instrument du byter ut vid varje drag." ;
+				 },
+         takeTwo: "Flytta två instrument sammtidigt i det första draget, för att spara på ett drag.",
+         youCant: "För att byta ut ett instrument framför Bäver, dra ett nytt instrument och släpp det ovanpå det gamla.",
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Musik</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <p id="difficultyWarning" class="hard"></p>
+
+            <div class="consigne">
+							 <p>Bäver spelar ett musikstycke med flera instrument.</p>
+               
+							 <p>Placera instrumenten i rutorna framför Bäver så han kan spela dem.</p>
+               
+							 <p>För att få maxpoäng, använd endast <span id="nbMoves"></span> drag. Tänk på vilket instrument du byter ut.</p>
+
+							 <p class="hard">I denna svårighetsgrad så kan du dra <b>två instrument</b> som är brevid varandra <b>i samma drag<b>. För att göra det, dra ett instrument till ett intilligande intrument för att sen släppa båda framför Bäver.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="assets/Arrow-left.png" style="display:none" id="arrowLeft">
+      <img src="assets/Arrow-right.png" style="display:none" id="arrowRight">
+      <img src="assets/Beaver.png" style="display:none" id="beaver">
+      <img src="assets/Caisse.png" style="display:none" id="caisse">
+      <img src="assets/Caisse_shadow.png" style="display:none" id="caisseShadow">
+      <img src="assets/G-clef.png" style="display:none" id="GClef">
+      <img src="assets/Sax.png" style="display:none" id="sax">
+      <img src="assets/Sax_shadow.png" style="display:none" id="saxShadow">
+      <img src="assets/Trompette.png" style="display:none" id="trompette">
+      <img src="assets/Trompette_shadow.png" style="display:none" id="trompetteShadow">
+      <img src="assets/Vibraphone.png" style="display:none" id="vibraphone">
+      <img src="assets/Vibraphone_shadow.png" style="display:none" id="vibraphoneShadow">
+      <img src="assets/Violon.png" style="display:none" id="violon">
+      <img src="assets/Violon_shadow.png" style="display:none" id="violonShadow">
+      <img src="../../../_common/modules/img/icons/undo_white.png" style="display:none" id="undo">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Lösning</h2>
+      <h2>Det är datavetenskap!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>

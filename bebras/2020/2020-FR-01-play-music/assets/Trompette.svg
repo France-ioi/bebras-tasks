@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg44"
+   sodipodi:docname="Trompette.svg"
+   width="100"
+   height="100"
+   inkscape:export-filename="D:\Travail\2018 - ..., Web Dev\2018 - Bebra's Tasks\tasks\v01\Bebras\2020\2020-FR-01-play-music\assets\Trompette.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata48">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Trompette</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview46"
+     showgrid="false"
+     inkscape:zoom="4.0508068"
+     inkscape:cx="76.135508"
+     inkscape:cy="14.612405"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg44" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1,.cls-2{fill:none;stroke:#f2b529;stroke-miterlimit:10;}.cls-1{stroke-width:7.49px;}.cls-2{stroke-width:6.97px;}.cls-3{fill:#ffd343;}.cls-4{fill:#f2b529;}</style>
+  </defs>
+  <title
+     id="title6">Trompette</title>
+  <g
+     id="Layer_2"
+     data-name="Layer 2"
+     transform="matrix(-0.38184202,0,0,0.38184202,95.065817,5.5061837)">
+    <g
+       id="Layer_1-2"
+       data-name="Layer 1">
+      <path
+         class="cls-1"
+         d="M 125.83,137.83 103,160.62 c 0,0 -5.46,5.88 1,12.29 5.92,5.92 14.16,-2.75 14.16,-2.75 l 19.76,-19.76"
+         id="path8"
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#f2b529;stroke-width:7.48999977px;stroke-miterlimit:10" />
+      <path
+         class="cls-2"
+         d="M 165.35,122.53 186.22,101 c 0,0 5,-5.55 -0.88,-11.61 -5.42,-5.59 -13,2.6 -13,2.6 l -18.09,18.66"
+         id="path10"
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#f2b529;stroke-width:6.96999979px;stroke-miterlimit:10" />
+      <rect
+         class="cls-3"
+         x="121.87"
+         y="102.33"
+         width="14.99"
+         height="59.07"
+         transform="rotate(-45,129.35752,131.85836)"
+         id="rect12"
+         style="fill:#ffd343" />
+      <rect
+         class="cls-3"
+         x="97.660004"
+         y="104.75"
+         width="17.41"
+         height="8.2399998"
+         transform="rotate(-45,106.36614,108.8717)"
+         id="rect14"
+         style="fill:#ffd343" />
+      <rect
+         class="cls-4"
+         x="105.49"
+         y="101.51"
+         width="8.2399998"
+         height="8.2399998"
+         transform="rotate(-45,109.60366,105.63068)"
+         id="rect16"
+         style="fill:#f2b529" />
+      <polygon
+         class="cls-4"
+         points="131.44,144.54 151.55,143.32 144.95,158.04 107.34,120.44 117.94,109.84 125.74,117.65 "
+         id="polygon18"
+         style="fill:#f2b529" />
+      <rect
+         class="cls-3"
+         x="135.92"
+         y="88.279999"
+         width="14.99"
+         height="59.07"
+         transform="rotate(-45,143.40788,117.80851)"
+         id="rect20"
+         style="fill:#ffd343" />
+      <polygon
+         class="cls-4"
+         points="146.08,131.08 165.6,129.28 159,143.99 121.39,106.39 131.99,95.79 139.79,103.6 "
+         id="polygon22"
+         style="fill:#f2b529" />
+      <rect
+         class="cls-3"
+         x="111.75"
+         y="90.660004"
+         width="17.41"
+         height="8.2399998"
+         transform="rotate(-45,120.46064,94.783569)"
+         id="rect24"
+         style="fill:#ffd343" />
+      <rect
+         class="cls-4"
+         x="119.58"
+         y="87.419998"
+         width="8.2399998"
+         height="8.2399998"
+         transform="rotate(-45,123.69816,91.542543)"
+         id="rect26"
+         style="fill:#f2b529" />
+      <rect
+         class="cls-3"
+         x="124.93"
+         y="76.510002"
+         width="17.41"
+         height="8.2399998"
+         transform="rotate(-45,133.63638,80.625998)"
+         id="rect28"
+         style="fill:#ffd343" />
+      <rect
+         class="cls-4"
+         x="132.75999"
+         y="73.269997"
+         width="8.2399998"
+         height="8.2399998"
+         transform="rotate(-45,136.87391,77.384972)"
+         id="rect30"
+         style="fill:#f2b529" />
+      <rect
+         class="cls-3"
+         x="149.11"
+         y="74.410004"
+         width="14.99"
+         height="59.07"
+         transform="rotate(-45,156.60434,103.94236)"
+         id="rect32"
+         style="fill:#ffd343" />
+      <polygon
+         class="cls-4"
+         points="159.94,117.53 178.79,115.41 172.19,130.13 134.59,92.53 145.19,81.93 152.99,89.74 "
+         id="polygon34"
+         style="fill:#f2b529" />
+      <path
+         class="cls-3"
+         d="M 235.6,9.61 226.69,0.48 A 2.07,2.07 0 0 0 223.8,0.73 L 220.41,4 a 2.07,2.07 0 0 0 -0.31,2.89 l 0.21,0.22 a 6.48,6.48 0 0 0 -0.58,3.53 l -19.94,19.5 c -0.75,-0.61 -2.37,-0.09 -3.71,1.22 l -26.64,26 a 6.36,6.36 0 0 0 -0.95,1.18 24.19,24.19 0 0 0 -2.12,1.78 L 86.63,138.28 C 79.51,144.06 60,159.69 52.2,163.4 c -9.59,4.57 -16.57,9 -37.16,8.4 -20.59,-0.6 -13.66,7.26 -13.66,7.26 L 27,205.33 52.7,231.59 c 0,0 7.67,7.1 7.58,-13.49 -0.09,-20.59 4.46,-27.47 9.26,-36.95 a 63.25,63.25 0 0 1 4.74,-7.39 20.36,20.36 0 0 0 4.72,8.08 19.91,19.91 0 0 0 14.45,5.73 v 0 c 7.71,0 15.77,-3.56 22.12,-9.77 l 5.16,-4.39 79.84,-78 c 0,0 17.93,-17.4 0.75,-35 A 25.26,25.26 0 0 0 189.85,53.29 L 204,39.49 c 1.35,-1.31 1.9,-2.93 1.31,-3.68 l 19.93,-19.47 a 6.49,6.49 0 0 0 3.55,-0.5 l 0.2,0.21 a 2.07,2.07 0 0 0 2.9,-0.24 l 3.39,-3.31 a 2.07,2.07 0 0 0 0.32,-2.89 z m -43.31,59.67 c 0,0 8.71,8.13 -0.47,17.11 l -79.84,78 -8.58,7.19 a 14.89,14.89 0 0 1 -7.63,2.25 9.23,9.23 0 0 1 -6.77,-2.6 c -1.9,-1.94 -4.29,-6 -3.93,-9.21 0.24,-2.07 1.69,-4 2.93,-5.85 3.18,-3.83 6,-7.17 7.74,-9.17 l 79.43,-77.62 c 9.18,-9 17.12,-0.1 17.12,-0.1 z"
+         id="path36"
+         inkscape:connector-curvature="0"
+         style="fill:#ffd343" />
+      <path
+         class="cls-4"
+         d="M 24.2,208.1 C 39.69,224 54.11,235 56.41,232.75 58.71,230.5 48,215.82 32.53,200 17.06,184.18 2.61,173.08 0.31,175.33 c -2.3,2.25 8.4,16.92 23.89,32.77 z"
+         id="path38"
+         inkscape:connector-curvature="0"
+         style="fill:#f2b529" />
+      <path
+         class="cls-4"
+         d="m 235.6,9.61 -2.89,-3 -0.27,0.34 -5.83,5.55 -3.89,2.22 -18.86,18.36 c 0,0 -115.45,106.85 -131.55,127.92 -16.1,21.07 -28.31,51.53 -27.59,52.34 l -7.72,2.22 15.67,16 c 0,0 7.67,7.1 7.58,-13.49 -0.09,-20.59 4.46,-27.47 9.26,-36.95 a 48.9,48.9 0 0 1 3.17,-5.12 4.73,4.73 0 0 1 0.52,-1.73 4.9,4.9 0 0 1 4.05,-2.53 2.28,2.28 0 0 1 1.27,0.26 3.2,3.2 0 0 1 1,1.38 22.34,22.34 0 0 0 18.58,11.8 8.65,8.65 0 0 1 3.08,0.42 2.88,2.88 0 0 1 0.8,0.52 35.17,35.17 0 0 0 13.57,-8.36 l 5.16,-4.39 79.84,-78 c 0,0 17.93,-17.4 0.75,-35 A 25.26,25.26 0 0 0 189.83,53.25 L 204,39.49 c 1.35,-1.31 1.9,-2.93 1.31,-3.68 l 19.93,-19.47 a 6.49,6.49 0 0 0 3.55,-0.5 l 0.2,0.21 a 2.07,2.07 0 0 0 2.9,-0.24 l 3.39,-3.31 a 2.07,2.07 0 0 0 0.32,-2.89 z m -44.54,58.55 c 1.23,-0.9 4.51,-2.51 8.64,1.83 8,7.4 -0.28,17.76 -0.28,17.76 l -92.08,88.81 c 0,0 -6.17,6.94 -13.94,1.39 A 7.35,7.35 0 0 1 90.72,172.56 8.2,8.2 0 0 1 89,171.23 c -1.9,-1.94 -4.29,-6 -3.93,-9.21 0.24,-2.07 1.69,-4 2.93,-5.85 3.18,-3.83 6,-7.17 7.74,-9.17 l 79.43,-77.62 c 7.03,-6.9 13.32,-3.29 15.89,-1.22 z"
+         id="path40"
+         inkscape:connector-curvature="0"
+         style="fill:#f2b529" />
+    </g>
+  </g>
+</svg>

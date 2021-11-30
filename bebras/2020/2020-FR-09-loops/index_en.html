@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>2016-FR-09-loops</title>
+    <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.1',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'shape-paths', 'drag_lib-2.0', 
+         // 'graph-1.0','visual-graph-1.1','graph-mouse-1.1'
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+    var json = {
+         "id": "http://castor-informatique.fr/tasks/2016/2016-FR-08-repeating-pattern/",
+         "language": "en",
+         "version": "fr.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, France-ioi",
+         "translators": [],
+         "license": "CC BY-SA 3.0",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+   };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         validate: "Try",
+         crash: "The robot tried to go into a bush.",
+         outside: "The robot tried to exit the grid.",
+         notAtGoal: "The program execution is over but the robot did not reach the flag.",
+         success: "Congratulations, you succeeded!",
+         
+         loopText: function(loopTimes) {
+            return "Repeat "+loopTimes+" times";
+         },
+         stop: "Stop",
+         fillFirst: "Start by placing an arrow in the first gray cell."
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+     #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+<body>
+   <div id="task">
+      <h1>Boucles</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <p>Program the robot so that it reaches the flag while avoiding the bushes.</p> 
+            <p>Drag an arrow into <b>each of the gray cells</b>.</p>
+            <p>Click on the black buttons to change the number of repetitions<span class="medium hard"> of the loops</span>.</p>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+         <img src="obstacle.png" style="display:none" id="wall">
+         <img src="red_robot.png" style="display:none" id="robot">
+         <img src="green.png" style="display:none" id="goal">
+         <img src="icon.png" style="display:none">
+      </div>
+   </div><!-- task -->
+   <div id="solution">
+  </div> <!-- task-solution -->
+</body>
+</html>
