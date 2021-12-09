@@ -1,0 +1,69 @@
+<!DOCTYPE html><html><head>
+        <meta charset="utf-8">
+        <title></title>
+        <script>
+            var stringsLanguage = 'en';
+
+            /*
+                score_calculation_formula:
+                    "default"
+                    "percentage_of_correct"
+                    "balance"
+                    "disbalance"
+            */
+            //var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","score_calculation_formula":""};
+            var quiz_settings = {"graderUrl":false,"score_calculation_formula":"disbalance"};
+            //var quiz_settings = {"graderUrl":false};
+            
+            var task_data_info = {"markdown":false};
+            var quiz_question_types = {"multiple":true};
+        </script>
+        <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.4-mobileFirst.js" id="import-modules"></script>
+        <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/quiz2/loader.js"></script>
+        <script class="remove" type="text/javascript">
+            var json = {"id":"","authors":[],"language":"fr"};
+            var modulesPath = '../../../_common/modules/';
+            loadQuizModules();
+        </script>
+        <script class="remove" type="text/javascript" src="grader_data.js"></script>
+        <style>
+            * {
+                unicode-bidi: plaintext;
+            }
+        </style>
+    </head>
+    <body dir="ltr">
+        <div dir="auto" id="task" style="display: none">
+            <div dir="auto" class="intro"></div>
+            <div dir="auto" class="taskContent">
+
+    
+
+    
+        <question type="multiple">
+            <statement><p>question multiple choice</p></statement>
+
+            
+                <answer><p>answer 1 [correct]</p></answer>
+            
+                <answer><p>answer 2 [incorrect]</p></answer>
+            
+                <answer><p>answer 3 [correct]</p></answer>
+            
+                <answer><p>answer 4 [incorrect]</p></answer>
+            
+                <answer><p>answer 5 [incorrect]</p></answer>
+            
+
+            
+        </question>
+    
+
+    
+
+</div>
+        </div>
+        <div dir="auto" id="solution" class="remove" style="display: none"></div>
+   
+
+</body></html>
