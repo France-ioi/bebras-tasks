@@ -5,14 +5,15 @@
             var stringsLanguage = 'en';
 
             /*
-                score_calculation_formula:
+                score_calculation formula:
                     "default"
                     "percentage_of_correct"
                     "balance"
                     "disbalance"
             */
-            //var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","score_calculation_formula":""};
-            var quiz_settings = {"graderUrl":false,"score_calculation_formula":"disbalance"};
+            //var quiz_settings = {"graderUrl":"http://localhost:3000/quiz","score_calculation":{"formula": "disbalance"}};
+            var quiz_settings = {"graderUrl":false,"score_calculation":{"formula": "disbalance"}};
+            //var quiz_settings = {"graderUrl":false,"score_calculation":{"wrong_answer_penalty": 2}};
             //var quiz_settings = {"graderUrl":false};
             
             var task_data_info = {"markdown":false};
