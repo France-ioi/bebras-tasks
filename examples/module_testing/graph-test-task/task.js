@@ -48,9 +48,9 @@ function initTask(subTask) {
                   "v_2":{label:"v_2"},
                   "v_3":{label:"v_3"} },
                "edgeInfo": {
-                  "e_0":{label:"e_0"},
-                  "e_1":{label:"e_1"},
-                  "e_2":{label:"e_2"},
+                  "e_0":{label:"e_0", edgeType: 0},
+                  "e_1":{label:"e_1", edgeType: 1},
+                  "e_2":{label:"e_2", edgeType: 2},
                   "e_3":{label:"e_3"} },
                "edgeVertices": {
                   "e_0":["v_0","v_3"],
@@ -113,6 +113,23 @@ function initTask(subTask) {
       "stroke": "black",
       "stroke-width": 4, 
       "arrow-end": "long-classic-wide" 
+   };
+   var edgeTypeAttr = {
+      0: {
+         "stroke": "red",
+         "stroke-width": 4, 
+         "arrow-end": "long-classic-wide" 
+      },
+      1: {
+         "stroke": "green",
+         "stroke-width": 4, 
+         "arrow-end": "long-classic-wide" 
+      },
+      2: {
+         "stroke": "blue",
+         "stroke-width": 4, 
+         "arrow-end": "long-classic-wide" 
+      }
    };
 
    var paperWidth = 750;
@@ -489,6 +506,14 @@ function initTask(subTask) {
       graphDrawer = new SimpleGraphDrawer(circleAttr, lineAttr, null, true);
       graphDrawer.setVertexLabelAttr(vertexLabelAttr);
       graphDrawer.setVertexContentAttr(vertexContentAttr);
+      
+      if(level == "medium"){
+         // for(var id = 0; id < 3; id++){
+         //    graphDrawer.setEdgeTypeAttr(id,edgeTypeAttr[id]);
+         // }
+         graphDrawer.setAllEdgeTypeAttr(edgeTypeAttr);
+      }
+
       visualGraph = VisualGraph.fromJSON($("#visual_json").val(), "visual", paper, null, graphDrawer, true);
       graph = visualGraph.graph;
       graphMouse = new GraphMouse("mouse", graph, visualGraph);
