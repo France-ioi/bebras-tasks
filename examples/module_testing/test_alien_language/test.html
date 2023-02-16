@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <title>Test</title>
+      <script type="text/javascript" src="../../../_common/modules/pemFioi/alien_language-1.0.js"></script>
+      <script type="text/javascript" src="../../../_common/modules/ext/jquery/2.1/jquery.min.js"></script>
+      <script type="text/javascript">
+         $(function(){
+            initUI();
+         })
+      </script>
+      <style type="text/css">
+         #text, #form {
+            width: 60%;
+            margin: 1em auto;
+         }
+         #text {
+            word-break: break-all;
+            border: 1px solid black;
+            min-height: 600px;
+            padding: 0.5em 1em;
+         }
+         #form label, #form select {
+            margin-right: 1em; 
+         }
+         #freq {
+            overflow-x: auto;
+         }
+         table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+         }
+         th, td {
+            padding: 0.5em;
+            border-left: 1px solid black;
+         }
+         tr:nth-child(even) {
+            background-color: silver;
+         }
+
+         .line {
+            display: block;
+         }
+         .margin_bottom {
+            margin-bottom: 20px;
+         }
+         .margin_right {
+            margin-right: 20px;
+         }
+         .margin_left {
+            margin-left: 20px;
+         }
+         .border_bottom {
+            border-bottom: 1px solid black;
+         }
+         .border_bottom_strong {
+            border-bottom: 2px solid black;
+         }
+
+      </style>
+   </head>
+   <body>
+      <div id="form"></div>
+      <div id="freq"></div>
+      <div id="text"></div>
+   </body>
+</html>
