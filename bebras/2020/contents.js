@@ -3,6 +3,7 @@ standaloneAddContents({
   code: "castor_2020",
   title: "Concours Castor 2020",
   folder: "2020/",
+  difficulties: ["easy", "medium", "hard"],
   tasks: [
      { code: "2020-CH-07-trade",
        title: "Échanges" },

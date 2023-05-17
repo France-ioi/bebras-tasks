@@ -3,6 +3,7 @@ standaloneAddContents({
   code: "castor_2013",
   title: "Concours Castor 2013",
   folder: "2013/",
+  difficulties: ["default"],
   tasks: [
     { code: "2013-SK-01",
       title: "Promenade en forêt" },

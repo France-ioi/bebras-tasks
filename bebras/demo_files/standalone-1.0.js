@@ -4,8 +4,16 @@
   or
      index.html?dev=1
   or
-     index.html?links=1
+     index.html?interactive=1
+  or
+     index.html?private=1
 
+
+
+   // using feature of tasks:
+         ?level=easy
+         ?initialLevel=easy
+         ?options={showSolutionOnLoad:1}
 */
 
 //-----------------------------------------------------------------------------
@@ -44,20 +52,47 @@ var extractTextCode = function(code) {
 
 //-----------------------------------------------------------------------------
 
+function difficultyToInteger(diff) {
+   if (diff == "default")
+      return -1;
+   if (diff == "basic")
+      return 0;
+   if (diff == "easy")
+      return 1;
+   if (diff == "medium")
+      return 2;
+   if (diff == "hard")
+      return 3;
+   return -2;
+}
+
+//-----------------------------------------------------------------------------
+
 // To build link to version
 
 var getLinkTask = function(code, options, language) {
    var sOptions = '';
+   var sOtherOptions = '';
    if (options != null) {
       var arg = "{";
+      var first = true;
       for (var key in options) {
-         if (arg.length > 1)
-            arg += ",";
-         var value = options[key];
-         arg += "\"" + String(key) + "\":\"" + String(value) + "\"";
+          // TODO: file:///home/charguer/ioi/tasks/v01/Bebras_Public/2014/2014-CH-05-abacus/index.html?options=%7B%7D&initialLevel=hard
+          //       options: {difficulty: "easy"} },
+
+         if (key == "difficulty") { // special handling
+            sOtherOptions = "&initialLevel=" + options[key];
+         } else {
+            if (! first) {
+               arg += ",";
+               first = false;
+            }
+            var value = options[key];
+            arg += "\"" + String(key) + "\":\"" + String(value) + "\"";
+         }
       }
       arg += "}";
-      sOptions = "?options=" + encodeURIComponent(arg);
+      sOptions = "?options=" + encodeURIComponent(arg) + sOtherOptions;
    }
    var file = (language == undefined || language == "fr") ? "index.html" : "index_" + language + ".html";
    return code + "/" + file + sOptions;
@@ -65,13 +100,17 @@ var getLinkTask = function(code, options, language) {
 
 //-----------------------------------------------------------------------------
 
+
 // Action handlers
 
 function loadTask(taskCode) {
+    window.location = taskCode;
+/* DEPRECATED for use of iframe
    $('#iframe').attr('src', taskCode);
    $('#iframe').css('display', "block");
    $('body').scrollTop(0);
    $('#task_icons').css('display', "none");
+*/
 };
 
 //-----------------------------------------------------------------------------
@@ -87,9 +126,27 @@ var standaloneAddContents = function(descr) {
 }
 
 
+
+
+
 //-----------------------------------------------------------------------------
 
 var standaloneLoadPage = function(codes, pathToRoot) {
+
+    // Extra private contents
+    var showPrivate = ($.urlParam('private') == "1");
+    if (showPrivate) {
+      var extraCodes = [ "castor_2022", "castor_2021" ];
+      codes = extraCodes.concat(codes);
+      // dynamic load of contents files
+      for (var iCode = 0; iCode < extraCodes.length; iCode++) {
+        var code = extraCodes[iCode];
+        var year = code.substring("castor_".length);
+        var path = "./" + year + "/contents.js";
+        document.write('<script type="text/javascript" src="'+path+'"></script>');
+      }
+    }
+
 
   //------------------------------
   // Configuration
@@ -98,26 +155,120 @@ var standaloneLoadPage = function(codes, pathToRoot) {
     pathToRoot = "../";
   }
 
-  var onlyOneGroup = (codes.length == 1);
-  var theContents = (onlyOneGroup) ? standaloneContents[codes[0]] : null;
-  if (theContents !== null && theContents === undefined) {
-     console.log("Resources not found: " + codes[0]);
-  }
-
-  var showLinks = ($.urlParam('links') == "1") ? true : false;
-  var showDev = ($.urlParam('dev') == "1") ? true : false;
+  // DEPRECATED var showLinks = ($.urlParam('links') == "1");
+  var showDev = ($.urlParam('dev') == "1");
+  var showLinksOpeningInSeparateWindows = showDev;
   var showGroupIcon = false;
+  var showOnlyInteractive = ($.urlParam('interactive') == "1");
   if (showDev) {
-    showLinks = true;
     if (onlyOneGroup) {
        showGroupIcon = true;
     }
   }
 
   //------------------------------
-  // Versions
+  // Display properties
 
-  var difficulties = ["easy", "medium", "hard"];
+  var onlyOneGroup = (codes.length == 1);
+  var theContents = (onlyOneGroup) ? standaloneContents[codes[0]] : null;
+  if (theContents !== null && theContents === undefined) {
+     console.log("Resources not found: " + codes[0]);
+  }
+
+
+
+  //------------------------------
+  // Task icon html contents
+
+  function computeTaskDiv(contents, iTask) {
+    var language = contents.language;
+    var pathPrefix = pathToRoot + contents.folder;
+    var tasks = contents.tasks;
+    var task = tasks[iTask];
+    var difficulties = task.difficulties;
+
+    // options for link generation
+    var options = task.options;
+
+    // image and main link
+    var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
+    if (options == null) {
+      options = [];
+    }
+    //options.difficulty = "easy";
+    //var targetNormalEasy = pathPrefix + getLinkTask(task.code, options, language);
+
+    // DEPRECATED: open task inside iframe
+    var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
+    //    var onclick = " onclick=\"window.open('" + targetNormal + "', '_blank')\" ";
+
+    var iconTitle = '<div class="icon_title">' + task.title + '</div>';
+    var imgPath = pathPrefix + task.code + '/icon.png';
+    //if (showLinksOpeningInSeparateWindows) {
+       var sImg = '<img src="' + imgPath + '" ' + onclick + '/>';
+    //} else {
+    //   var sImg = '<a href="' + targetNormal + '"><img src="' + imgPath + '"/></a>';
+    //}
+    var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;">' + sImg + '</td></tr></table></div>';
+
+    // filter-out non-interactive tasks if requested
+    if (showOnlyInteractive && ! task.isInteractive) {
+      return '';
+    }
+
+    var stars = '';
+    for (var i = 0; i < 4; i++) { // 4 versions max
+       stars += (task.hasStar[i]) ? getStarSVGfull() : getStarSVGempty();
+    }
+    var iconStars = '<div class="icon_stars">' + stars + '</div>';
+
+    // standalone links placed below the image
+    var iconLink = '';
+    /* DEPRECATED  show textual links that can be copy-pasted
+    if (showLinks) {
+      var textTitle = extractTextCode(task.code);
+      var shortCode = extractShortCode(task.code);
+      var sLinkTitle = (showDev) ? (shortCode + " " + textTitle) : task.title; // "Lien direct";
+      var sLinkStyle = (showDev) ? "icon_link_text_black" : "icon_link_text_link";
+      var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormal + '">' + sLinkTitle + '</a>';
+      iconLink = '<div class="icon_link">' + sLink + '</div>';
+    }
+    */
+
+    // development links
+    var iconDev = '';
+    if (showDev) {
+      var versionTargets = [];
+      for (var iDifficulty = 0; iDifficulty < difficulties.length; iDifficulty++) {
+         var diff = difficulties[iDifficulty];
+         var sDiff = "" + difficultyToInteger(diff);
+         if (sDiff == -1)
+            sDiff = "";
+         options.difficulty = difficulties[iDifficulty];
+         var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
+         var optionsSol = jQuery.extend({}, options);
+         optionsSol.showSolutionOnLoad = "1";
+         var targetSol = pathPrefix + getLinkTask(task.code, optionsSol);
+         // var targetEnglish = pathPrefix + getLinkTask(task.code, optionsSol, "en");
+         versionTargets[sDiff] = {normal: targetNormal, solution: targetSol };
+      }
+      var sDev = "";
+      for (var diff in versionTargets) {
+         sDev += " <a href='" + versionTargets[diff].normal + "' style='color:black'>[T" + diff + "]</a>";
+      }
+      sDev += "<br/>";
+      for (var diff in versionTargets) {
+        sDev += " <a href='" + versionTargets[diff].solution + "' style='color:black'>[S" + diff + "]</a>";
+      }
+      //sDev += "&nbsp;&nbsp;";
+      //sDev += "<a href='" + versionTargets[0].english + "' style='color:black'>[en1]</a>";
+      sDev += "<br/><br/>";
+      iconDev = '<div class="icon_dev">' + sDev + '</div>';
+    }
+    return '<div class="icon"><div ' + onclick + '>' + iconTitle + iconImg + iconStars + '</div>' +  iconLink + iconDev + '</div>';
+  };
+
+
 
   //------------------------------
   // Main html contents
@@ -129,6 +280,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
               <!--<td id="header_space"></td>-->
 
     */
+    var interactifs = (showOnlyInteractive) ? "interactifs " : "";
     return ' \
     <div id="main_wrapper"> \
      <div id="main"> \
@@ -136,9 +288,9 @@ var standaloneLoadPage = function(codes, pathToRoot) {
            <table id="header_table"> \
            <tr> \
               <td id="header_logo"></td> \
-              <td id="header_title"></td> \
+              <td id="header_title">Défis ' + interactifs + 'du Concours Castor</td> \
               <td id="header_button"> \
-                <input id="button_return_list" type="button" value="Retour à la liste des exercices"></input> \
+                <!--<input id="button_return_list" type="button" value="Retour à la liste des exercices"></input>--> \
               </td> \
            </tr> \
            </table> \
@@ -163,7 +315,11 @@ var standaloneLoadPage = function(codes, pathToRoot) {
 
   //------------------------------
 
+
+  //------------------------------
+
     $(document).ready(function() {
+
 
        // --- Setting up page elements ---
 
@@ -187,99 +343,48 @@ var standaloneLoadPage = function(codes, pathToRoot) {
          var code = codes[iCode];
          var contents = standaloneContents[code];
          if (contents === undefined) {
-           console.log("Resources not found: " + code);
-           break;
+           console.log("undefined contents for " + code);
+           continue; //  silently ignore unavailable resources
          }
-         var language = contents.language;
          var tasks = contents.tasks;
-         var pathPrefix = pathToRoot + contents.folder;
 
-         if (!onlyOneGroup) {
-            $("#task_icons").append('<div class="groupTitle">' + contents.title + '</div>');
-         }
+         // --- Compute versions available for each task ---
 
-         // --- Setting up of tasks table ---
+         var defaultDifficulties = contents.difficulties;
 
+         var nbInteractive = 0;
          for (var iTask = 0; iTask < tasks.length; iTask++) {
             var task = tasks[iTask];
-
-            // options for link generation
-            var options = task.options;
-
-            // image and main link
-            var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
-            if (options == null) {
-              options = [];
-            }
-            //options.difficulty = "easy";
-            //var targetNormalEasy = pathPrefix + getLinkTask(task.code, options, language);
-
-            var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
-            if (showLinks) {
-              onclick = " onclick=\"window.open('" + targetNormal + "', '_blank')\" ";
+            if (! task.hasOwnProperty('difficulties')) {
+              task.difficulties = defaultDifficulties;
             }
 
-            var iconTitle = '<div class="icon_title">' + task.title + '</div>';
-            var iconImg = '<div class="icon_img"><table><tr><td class="icon_img_td" style="vertical-align: middle;"><img src="' + pathPrefix + task.code + '/icon.png"  ' + onclick + '/></td></tr></table></div>';
-
-            // stars
-            var stars = '';
-            for (var i = 0; i < 4; i++) {
-               stars += (i < 2) ? getStarSVGfull() : getStarSVGempty();
+            task.hasStar = [0, 0, 0, 0]; // 4 versions max
+            for (var iDifficulty = 0; iDifficulty < task.difficulties.length; iDifficulty++) {
+               var diff = task.difficulties[iDifficulty];
+               var i = difficultyToInteger(diff);
+               if (i >= 0 && i < 4) { // 4 versions max
+                 task.hasStar[i] = 1;
+               }
             }
-            var iconStars = '<div class="icon_stars">' + stars + '</div>';
-
-            // standalone links placed below the image
-            var iconLink = '';
-            /*
-            if (showLinks) {
-              var textTitle = extractTextCode(task.code);
-              var shortCode = extractShortCode(task.code);
-              var sLinkTitle = (showDev) ? (shortCode + " " + textTitle) : task.title; // "Lien direct";
-              var sLinkStyle = (showDev) ? "icon_link_text_black" : "icon_link_text_link";
-              var sLink = '<a class="' + sLinkStyle + '" target = "_blank" href="' + targetNormal + '">' + sLinkTitle + '</a>';
-              iconLink = '<div class="icon_link">' + sLink + '</div>';
+            task.isInteractive = (task.hasStar[1] && task.hasStar[2]); // criteria could be refined
+            if (task.isInteractive) {
+              nbInteractive++;
             }
-            */
+         }
 
-            // development links
-            var iconDev = '';
-            if (showDev) {
-              var versionTargets = [];
-              for (var iDifficulty = 0; iDifficulty < difficulties.length; iDifficulty++) {
-                 var diff = difficulties[iDifficulty];
-                 if (diff == "easy")
-                    diff = "1";
-                 if (diff == "medium")
-                    diff = "2";
-                 if (diff == "hard")
-                    diff = "3";
-                 options.difficulty = difficulties[iDifficulty];
-                 var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
-                 var optionsSol = jQuery.extend({}, options);
-                 optionsSol.showSolutionOnLoad = "1";
-                 var targetSol = pathPrefix + getLinkTask(task.code, optionsSol);
-                 // var targetEnglish = pathPrefix + getLinkTask(task.code, optionsSol, "en");
-                 versionTargets.push({normal: targetNormal, solution: targetSol });
-              }
-              var sDev = "";
-              sDev += " <a href='" + versionTargets[0].normal + "' style='color:black'>[T1]</a>";
-              sDev += " <a href='" + versionTargets[1].normal + "' style='color:black'>[T2]</a>";
-              sDev += " <a href='" + versionTargets[2].normal + "' style='color:black'>[T3]</a>";
-              sDev += "&nbsp;&nbsp;&nbsp;";
-              sDev += " <a href='" + versionTargets[0].solution + "' style='color:black'>[S1]</a>";
-              sDev += " <a href='" + versionTargets[1].solution + "' style='color:black'>[S2]</a>";
-              sDev += " <a href='" + versionTargets[2].solution + "' style='color:black'>[S3]</a>";
-              //sDev += "&nbsp;&nbsp;";
-              //sDev += "<a href='" + versionTargets[0].english + "' style='color:black'>[en1]</a>";
-              sDev += "<br/><br/>";
-              iconDev = '<div class="icon_dev">' + sDev + '</div>';
-            }
+         // --- Display contents ---
 
-            $("#task_icons").append('<div class="icon"><div ' + onclick + '>' + iconTitle + iconImg + iconStars + '</div>' +  iconLink + iconDev + '</div>');
+         if (! (showOnlyInteractive && nbInteractive == 0)) {
+           if (!onlyOneGroup) {
+              $("#task_icons").append('<div class="groupTitle">' + contents.title + '</div>');
+           }
 
-         } // end loop on iTaks
-
+           for (var iTask = 0; iTask < tasks.length; iTask++) {
+              var taskdiv = computeTaskDiv(contents, iTask);
+              $("#task_icons").append(taskdiv);
+           }
+         }
 
          // --- Generation of the image with combined icons ---
 

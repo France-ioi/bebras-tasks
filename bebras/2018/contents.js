@@ -3,6 +3,7 @@ standaloneAddContents({
   code: "castor_2018",
   title: "Concours Castor 2018",
   folder: "2018/",
+  difficulties: ["easy", "medium", "hard"],
   tasks: [
      { code: "2018-FR-05-treasure",
        title: "Effort minimal" },

@@ -10,6 +10,11 @@ cd bebras-tasks
 git submodule update --init
 ```
 
+To open tasks, open in a browser the file `bebras/index.html`.
+
+To view only interactive tasks, edit the url to: `index.html?interactive=1`.
+To view the loading specific versions, edit the url to: `index.html?dev=1`.
+
 To update:
 
 ```
