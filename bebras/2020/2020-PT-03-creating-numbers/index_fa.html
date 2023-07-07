@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-PT-03-creating-numbers</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2020/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": ["Mathias Hiron"],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: function(nb) {
+            return "شماره‌ "+nb+", که بزرگترین عدد ممکن است را به‌دست آوردی. آفرین، موفق شدی!"
+         },
+         fail: function(nb) {
+            return "شماره "+nb+". به‌دست آوردی، هنوز می‌توانی عدد بزرگتری به‌دست بیاوری.<br/> روی دکمه بازنشانی کلیک کن."
+         },
+         click: "برای پرتاب توپ، روی یکی از فلش‌های بالا کلیک کن.",
+         missingBall: "هنوز توپ برای پرتاب داری.",
+         maxHole: "سوراخ میانی، فقط گنجایش سه توپ را دارد.",
+         maxSeq: function(max) {
+            return "نمی‌توانی بیشتر از "+max+" توپ در ناحیه پایین، بذاری.<br/>باید دقیقا سه توپ در سوراخ میانی بگذاری."
+         },
+         undo: "بازگشت"
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-bottom: 0em;
+         /*touch-action: none;*/
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>پرتاب توپ</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p> برای پرتاب هر توپ روی<span class="easy medium">دو</span><span class="hard">سه</span> فلش بالا، کلیک کن.</p>
+               <p class="hard">بااستفاده از فلش وسط باید دقیقا <b>سه توپ در سوراخ میانی قرا بدی.</b></p>
+
+               <p>هدف ساختن <b>بزرگترین عدد دوازده رقمی ممکن است<span class="hard"></span> </b>.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+         </div>
+      </div>
+      <img src="assets/Flipper-13.png" style="display:none" id="background">
+      <img src="assets/Flipper-14.png" style="display:none" id="background_hard">
+      <img src="assets/Flipper-15.png" style="display:none" id="lid">
+      <img src="assets/lever.png" style="display:none" id="lever">
+      <img src="../../../_common/modules/img/icons/undo_white.png" style="display:none" id="undo">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>
