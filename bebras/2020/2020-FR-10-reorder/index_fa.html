@@ -37,12 +37,13 @@
    </script>
    <script type="text/javascript">
    var taskStrings = {
-         success: "Congratulations, you have succeeded!",
-         error: "The two shapes circled in red have another type of shape between them.",
-         tooMany: "Now, try to do it using fewer operations.<br/>Click on restart or undo.",
-         counter: "Number of operations done:",
-         undo: "Undo"
+         success: "آفرین، موفق شدی!",
+         error: "میان دو شکلی که با رنگ قرمز مشخص شدند، شکل دیگری قرار دارد.",
+         tooMany: "حالا، تلاش کن تا با تکرارهای کمتری بازی را تمام کنی.<br/>Click on restart or undo.",
+         counter: "تعداد تکرارها تا پایان بازی:",
+         undo: "بازگشت"
       };
+      var enableRtl = true;
    </script>
    <script type="text/javascript" src="task.js"></script>
    <style>
@@ -61,13 +62,13 @@
 </head>
 <body>
    <div id="task">
-      <h1>Flipping</h1>
+      <h1>برعکس‌کردن</h1>
       <div id="tabsContainer"></div>
       <div id="taskContent">
          <div id="zone_1">
-            <p>Reorganize the shapes so that identical shapes are all next to eachother.</p>
-            <p>You can flip a group of shapes, by dragging a section of the grid to select them. The order of these shapes will be inverted.</p>
-            <p>To get all the points, you need to use only <span class="easy medium">3</span><span class="hard">5</span> operations.</p>
+            <p>شکل‌ها را به‌نحوی بازچینی کن که تمام اشکال یکسان در کنار یکدیگر قرار بگیرند.</p>
+            <p>می‌توانی ترکیب شکل‌ها را با انتخاب و کشیدن گروهی از آن‌ها برعکس کنی.</p>
+            <p>برای گرفتن تمام امتیاز فقط باید از  <span class="easy medium">۳</span><span class="hard">۵</span> حرکت استفاده کنی.</p>
          </div>
          <div id="zone_2">
             <div id="paper"></div>
