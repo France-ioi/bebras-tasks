@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-IE-07-pollution</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.1', 'JSON-js', //'grid-1.0',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0', 'graph-1.0'
+      ]);
+   </script>
+   <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.1.js"></script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": ["Mathias Hiron"],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "آفرین، تو موفق شدی!",
+         fail: function(pollutedTube,answerTube) {
+            return "لوله‌ای که آلوده بود، لوله "+pollutedTube+", نه لوله‌ی "+answerTube+".<br/>  روی دکمه‌ی ری‌استارت کلیک کن تا لوله جدید را امتحان کنی."
+         },
+         drag: "لوله آلوده را قبل از ولیدیشن انتخاب کن.",
+         noSend: "نمی‌توانی حدس بزنی کدام لوله آلوده است.<br/>باریختن آب درون همه‌ی لوله‌های شماره‌گذاری شده شروع کن و سپس آن‌ها تجزیه و تحلیل کن",
+         dragSamples: "لوله‌های بالا را زیر لوله‌های پایین بکش\n تا آب به درون لوله‌های پایین بریزد.",
+         youCanMix: "می‌توانی آب‌های مختلف را با هم مخلوط کنی.",
+         analyseThem: "لوله‌ها را تجزیه و تحلیل کن، می‌فهمی\n که کدام‌یک شامل لوله‌های آلوده است.",
+         whenYouKnow: "پس از تجزیه و تحلیل، استنباط کن که\nکدام‌یک از لوله‌های بالا حاوی آب آلوده است.",
+         send: "این لوله‌ها را تجزیه و تحلیل کن",
+         validate: "تمام!",
+         retry: "شروع دوباره",
+         polluted: "آلوده",
+         clean: "غیر آلوده",
+         errorNoMoreTest: " تو نمی‌توانی بازی دیگری را شروع کنی، اگر می‌توانی استباط کنی کدام لوله آلوده است انتخابش کن در غیراینصورت روی راه‌اندازی مجدد کلیک کن تا با لوله‌های جدید بازی را شروع کنی.",
+         tube: "لوله"
+      };
+      var enableRtl = true;
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #paper {
+         margin-top: 1em;
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+      #buttons div {
+         height: 30px;
+         border-radius: 15px;
+         color: white;
+         font-size: 12px;
+         font-weight: bold;
+         position: relative;
+         display: inline-block;
+         cursor: pointer;
+      }
+      #send {
+         width: 240px;
+         margin-left: 70px;
+         background: #f5a623;
+      }
+      #validate {
+         width: 186px;
+         margin-left: 170px;
+         background: #4a90e2;
+      }
+      #buttons div i {
+         position: absolute;
+         left: 20px;
+         top: 10px;
+      }
+      #buttons div span {
+         position: absolute;
+         top: 8px;
+      }
+      #send span {
+         left: 60px;
+      }
+      #validate span {
+         left: 70px;
+      }
+      .instruction-items li {
+         margin-bottom: 1em;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>لوله آلوده</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <center><p id="enemyWarning" style="width:700px"></p></center>
+         <div id="zone_1">
+            <div class="consigne">
+               <p>یکی از <span class="nbTubes"></span> لوله‌ها در بخش بالا دارای آب آلوده هستند، هدف پیدا کردن آن است.</p>
+               
+               <p>برای این‌کار، سه مرحله را با آماده‌سازی <span class="easy medium">۲</span><span class="hard">۳</span> لوله برای تجزیه‌وتحلیل، دنبال کن.</p>
+               <p><strong>توجه</strong>: در هر مرتبه بازنشانی ممکن است، یک لوله جدید آلوده شود.</p>
+            </div>
+         </div>
+         <div id="zone_2">
+            <div id="paper"></div>
+            <div id="buttons">
+               <div id="send"><i class="fas fa-upload"></i><span>ANALYSE THESE TUBES</span></div>
+               <div id="validate"><i class="fas fa-check"></i><span>VALIDATE</span></div>
+            </div>
+         </div>
+      </div>
+      <img src="tube.png" style="display:none" id="tube">
+      <img src="polluted_tube.png" style="display:none" id="polluted_tube">
+      <img src="upload.png" style="display:none" id="upload">
+      <img src="../../../_common/modules/img/icons/check_white.png" style="display:none" id="check">
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>
