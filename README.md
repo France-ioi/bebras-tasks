@@ -1,6 +1,6 @@
 # French Beaver Contest Archive
 
-Testing commiting from 185.83.114.246
+Testing commit 2 from remote
 
 This repository contains tasks used in past [French Beaver Contest](http://castor-informatique.fr/). They are in a particular format, and can be used in [Bebras Platform](https://github.com/France-ioi/bebras-platform).
 
