@@ -16,7 +16,7 @@ jobs:
       with:
         host: ${{ secrets.REMOTE_HOST }}  # the IP or domain of your remote server
         username: ${{ secrets.REMOTE_USER }}  # the username of your remote server
-        key: ${{ secrets.REMOTE_SSH_KEY }}  # the private SSH key of your remote server
+        passphrase: ${{ secrets.REMOTE_SSH_KEY }}  # the private SSH key of your remote server
         script: |  # commands to be executed on the remote server
           cd /var/www/html/bebras-platform/teacherInterface/bebras-tasks
           git checkout master
