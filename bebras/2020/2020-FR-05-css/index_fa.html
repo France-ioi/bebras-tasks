@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8"></meta>
+   <title>2020-FR-05-css</title>
+   <script>
+      window.stringsLanguage = 'en';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', /*'grid-1.0',*/
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
+         'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
+         'taskStyles-0.1', 'randomGenerator-1.0', 'drag_lib-2.0'/*, 'shape-paths'*/
+      ]);
+   </script>
+   <script class="remove" type="text/javascript">
+      var json = {
+         "id": "http://castor-informatique.fr/tasks/2019/FR-2019-10-lighting/",
+         "language": "en",
+         "version": "en.01",
+         "authors": "Arthur Charguéraud, Mathias Hiron, Marielle Léonard",
+         "translators": [],
+         "license": "",
+         "taskPathPrefix": "",
+         "modulesPathPrefix": "",
+         "browserSupport": [],
+         "fullFeedback": true,
+         "acceptedAnswers": [],
+         "usesRandomSeed": false
+       };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "باریکلا! موفق شدی.",
+         result: "متن شما",
+         objective: "هدف",
+         text0: "سگ آبی",
+         text1: "میتونه یک درخت رو توی کمتر از سی دقیقه تبدیل به تکه های کوچیک کنه",
+         text2: "سد",
+         text3: "سدها به وجود آب در تابستان کمک میکنن. همچنین پناهگاه امن سگهای آبی میشن.",
+         text4: "در اوایل قرن 20، فقط صدتا ازشون توی فراسنه وجود داشت",
+         center: "وسط چین",
+         bold: "پر رنگ",
+         underline: "زیرش خط داره",
+         upperCase: "حرف بزرگ",
+         italic: "کج",
+         large: "بزرگ",
+         small: "کوچک",
+         colored: "رنگی",
+         style: "استایل",
+         stylesOf: function(nb) {
+            return (nb > 1) ? "Styles of" : "استایل شماره";
+         },
+         styleOption: function(name) {
+            return "استایل " + name + ": ";
+         },
+         and: "و",
+         errorStyle: function(line,attr,missing) {
+            var attrText = "";
+            switch(attr) {
+               case 0:
+                  attrText = "وسط چین";
+                  break;
+               case 1:
+                  attrText = "پر رنگ";
+                  break;
+               case 2:
+                  attrText = "زیرش خط داره";
+                  break;
+               case 3:
+                  attrText = "in italic";
+                  break;
+               case 4:
+                  attrText = "حروف بزرگ";
+                  break;
+               case 5:
+                  attrText = "حروف کوچک";
+                  break;
+               case 6:
+                  attrText = "بزرگ";
+                  break;
+               default:
+                  attrText = "رنگی";
+            }
+            if(!missing){
+               return "این متن"+line+" اینحوریه "+attrText+" نباید اینجوری باشه."
+            }else{
+               return "این متن "+line+" اینجوری باید باشه "+attrText+" ولی نیست."
+            }
+         }
+      };
+   </script>
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+      #htmlTable {
+         margin: 0px 20px 15px 20px;
+         border-spacing: 0px;
+         position: relative;
+         box-sizing: border-box;
+      }
+      #htmlTable td {
+         padding: 10px;
+      }
+      #htmlTable .spacing td {
+         height: 10px;
+         padding: 0;
+      }
+      .col_0, .col_2 {
+         background: #f2f2f2;
+         width: 314px;
+         border: 3px solid #f2f2f2;
+      }
+      .col_1 {
+         border-right: 2px #4a90e2 solid;
+         border-left: 2px #4a90e2 solid;
+         width: 80px;
+      }
+      .row_0 {
+         text-align: center;
+         font-size: 20px;
+      }
+      .row_0 .col_0, .row_0 .col_2 {
+         background: none;
+         border: none;
+      }
+      .row_0 .col_1 {
+         border: none;
+      }
+      #vertLine {
+         width: 1px;
+         height: 400px;
+         border: none;
+         background: #e5e5e5;
+         position: absolute;
+         left: 365px;
+      }
+      .horLine {
+         width: 50px;
+         height: 2px;
+         background: #4a90e2;
+         margin: auto;
+         position: relative;
+         top: 15px;
+      }
+      .number {
+         color: white;
+         background: #ccb336;
+         width: 30px;
+         height: 30px;
+         margin: auto;
+         border-radius: 20px;
+         font-weight: bold;
+         text-align: center;
+         position: relative;
+      }
+      .number span {
+         position: relative;
+         top: 7px;
+      }
+      #paper {
+         touch-action: none;
+      }
+      #displayHelper_graderMessage {
+         color: red;
+         font-weight: bold;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="task">
+      <h1>Styling</h1>
+      <div id="tabsContainer"></div>
+      <div id="taskContent">
+         <div id="zone_1">
+            <div class="consigne">
+               <p>خونه های آبی رنگ رو به قسمت خط چین ببرین.</p>
+               
+               <p>متن های دو طرف که با شماره از هم جدا شدن باید یکسان به نظر برسن.</p>
+
+               <p>برای مثال متن شماره یک باید پر رنگ و وسط چین باشه <span class="easy medium"> وسط چین و پررنگ </span><span class="hard">حروف بزرگ، خط کش دار و وسط چین</span>.</p>
+
+               <p class="medium hard">از قسمت پایین سمت راست  <span class="medium">استایل </span><span class="hard"><b>استایل یا استایلهایی </b></span> که میخواید به متنتون اعمال بشه رو انتخاب کنین</p>
+
+               <p class="medium hard">از قسمت پایین سمت چپ ویژگی هایی که میخواید به متن اعمال بشه و در استایل شما باشه رو انتخاب کنید</p> 
+            </div>
+         </div>
+         <div id="zone_2">
+            <table id="htmlTable">
+
+            </table>
+            <div id="paperContainer">
+               <div id="paper"></div>
+            </div>
+         </div>
+      </div>      
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <!-- task -->
+
+   <div id="solution">
+      <h2>Solution</h2>
+      <h2>It's informatics!</h2>
+   </div>
+   <!-- task-solution -->
+</body>
+
+</html>
