@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="fa">
 
 <head>
    <meta charset="utf-8"></meta>
@@ -36,7 +36,7 @@
    </script>
    <script type="text/javascript">
       var taskStrings = {
-         success: "آفرین، شما موفق شدید!",
+         success: "آفرین! تو بردی!",
          sameTool: function(line,tool) {
             var textLine, toolName;
             switch(line){
@@ -64,9 +64,9 @@
                   toolName = "ارّه";
                   break;
             }
-            return "سگ آبی ردیف "+textLine+" نمی‌تواند "+toolName+" را بردارد چون یک سگ آبی دیگر آن را برداشته."
+            return "ببراس ردیف "+textLine+" نمی‌تواند "+toolName+" را بردارد چون یک ببراس دیگر آن را برداشته."
          },
-         undo: "برگرداندن"
+         undo: "برگشت"
       };
       var enableRtl = true;
    </script>
@@ -85,16 +85,16 @@
 
 <body>
    <div id="task">
-      <h1>ابزارهای مشترک</h1>
+      <h1>اشتراک ابزارها</h1>
       <div id="tabsContainer"></div>
       <div id="taskContent">
          <div id="zone_1">
             <div class="consigne">
 
-               <p><span class="easy">دو</span><span class="medium">سه</span><span class="hard">چهار</span> سگ های آبی در حال کار کردن روی یک پروژه عمرانی هستند. آنها باید از تعدادی ابزار به ترتیب داده شده استفاده کنند، هرکدام برای مدتی مشخص که در  <span class="easy">دو</span><span class="medium">سه</span><span class="hard">چهار</span> ردیف مقابل آنها نشان داده شده.</p>
+               <p><span class="easy">دو</span><span class="medium">سه</span><span class="hard">چهار</span> ببراس در حال کار کردن روی یک هواپیمای چوبی هستند. هرکدامشان نیاز به استفاده از تعدادی ابزار به ترتیب خودش و برای مدتی مشخص که در ردیف مقابلش نشان داده شده.</p>
 
-               <p>هر ابزار می‌تواند در هر لحظه در دست حداکثر یک سگ آبی باشد.</p>
-               <p>جوری ابزارها را بکشید که هیچ‌گاه <b>دو ابزار یکسان روی یکدیگر نباشند. </b></p>
+               <p>هر ابزار می‌تواند در هر لحظه در دست حداکثر یک ببراس باشد.</p>
+               <p>جوری ابزارها را قرار بدهید که هیچ‌گاه <b>دو ببراس همزمان از یک ابزار استفاده ننکند تا دعوا نشود! </b></p>
             </div>
          </div>
          <div id="zone_2">
