@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>3D letters</title>
+   <script>
+      window.stringsLanguage = 'fr';
+   </script>
+   <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+   <script class="remove" type="text/javascript">
+      var modulesPath = '../../../_common/modules';
+      importModules([
+         'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+         'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+         'platform-pr', 'buttonsAndMessages_resp', 'installationAPI.01', 'miniPlatform',
+         'raphaelButton-1.0', 'shape-paths-1.1', 'grid-1.1', 'fonts-loader-1.0' ]);
+      importModules(['taskStyles-0.3_M']);
+   </script>
+
+   <script type="text/javascript">
+      if(Beav.Navigator.supportsResponsive()){
+         var json = {nbHints: 0, autoHeight: true};
+      }
+      window.FontsLoader.loadFonts(['fontawesome']);
+   </script>
+   <script class="remove" type="text/javascript">
+        var json = {
+           "id": "",
+           "language": "fr",
+           "version": "fr.01",
+           "authors": "",
+           "translators": [],
+           "license": "",
+           "taskPathPrefix": "",
+           "modulesPathPrefix": "",
+           "browserSupport": [],
+           "fullFeedback": true,
+           "acceptedAnswers": [],
+           "usesRandomSeed": false
+        };
+   </script>
+   <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         errorWrongMessage: "Vous n'avez pas correctement décodé le message"
+      }
+   </script>
+
+   <script type="text/javascript" src="task.js"></script>
+   <style>
+
+   </style>
+</head>
+
+<body>
+   <div id="task" alkindi>
+      <div id="zone_012">
+         <div id="zone_0">
+            <h1>Damier</h1>
+            <div id="tabsContainer"></div>
+         </div>
+
+         <div id="zone_12">
+            <div id="zone_1">
+               <div class="consigne">
+                  <h3><i class="far fa-sticky-note"></i>VOTRE MISSION</h3>
+                  <div id="text">
+				     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.></p> 
+                  </div>
+                  <div class="spacer" style="clear: both;"></div>
+               </div>
+            </div>
+            <div id="zone_2">
+               <div id="taskCont">
+                  <div id="paper"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div id="zone_3"></div>
+      
+      <span id="error">
+      </span>
+ 
+      <img src="icon.png" style="display:none">
+   </div>
+
+   <div id="solution">
+      <h2>Solution</h2>
+   </div>
+</body>
+</html>
