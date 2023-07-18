@@ -3,6 +3,7 @@ standaloneAddContents({
   code: "castor_2010",
   title: "Concours Castor Suisse 2010",
   folder: "2010/",
+  difficulties: ["default"],
   tasks: [
     { code: "2010-a-gauche",
       title: "À gauche !" },
