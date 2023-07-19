@@ -4,7 +4,60 @@ function initTask(subTask) {
    var answer = null;
    var data = {
       basic: {
+         initPos: [
+            
+         ],
+         nbSpheres: 200
+      },
+      easy: {
+         initPos: [
+            { x: -80, y: -20 },
+            { x: -70, y: -20 },
+            { x: -60, y: -20 },
+            { x: -90, y: -10 },
+            { x: -50, y: -10 },
+            { x: -90, y: 0 },
+            { x: -80, y: 0 },
+            { x: -70, y: 0 },
+            { x: -60, y: 0 },
+            { x: -50, y: 0 },
+            { x: -90, y: 10 },
+            { x: -50, y: 10 },
+            { x: -90, y: 20 },
+            { x: -50, y: 20 },
 
+            { x: -20, y: -20 },
+            { x: -10, y: -20 },
+            { x: 0, y: -20 },
+            { x: 10, y: -20 },
+            { x: -20, y: -10 },
+            { x: 20, y: -10 },
+            { x: -20, y: 0 },
+            { x: -10, y: 0 },
+            { x: 0, y: 0 },
+            { x: 10, y: 0 },
+            { x: -20, y: 10 },
+            { x: 20, y: 10 },
+            { x: -20, y: 20 },
+            { x: -10, y: 20 },
+            { x: 0, y: 20 },
+            { x: 10, y: 20 },
+
+            { x: 60, y: -20 },
+            { x: 70, y: -20 },
+            { x: 80, y: -20 },
+            { x: 90, y: -20 },
+            { x: 50, y: -10 },
+            { x: 50, y: 0 },
+            { x: 50, y: 10 },
+            { x: 60, y: 20 },
+            { x: 70, y: 20 },
+            { x: 80, y: 20 },
+            { x: 90, y: 20 },
+
+         ],
+         // nbSpheres: 41
+         nbSpheres: 200
       }
    };
 
@@ -20,13 +73,12 @@ function initTask(subTask) {
    var x0 = paperW/2;
    var y0 = paperH/2;
 
-   var nbSpheres = 200;
+   var nbSpheres;
+   var initPos;
    var spherePos = [];
    var spheres = [];
    var overlay;
 
-   // var deltaLong = 0;
-   // var deltaCola = 0;
    var rotMatrix = [
          [1,0,0],
          [0,1,0],
@@ -65,6 +117,9 @@ function initTask(subTask) {
       }
       level = curLevel;
 
+      initPos = data[level].initPos;
+      nbSpheres = data[level].nbSpheres;
+
       rng = new RandomGenerator(subTask.taskParams.randomSeed);
 
       displayHelper.taskW = paperW;
@@ -84,7 +139,6 @@ function initTask(subTask) {
       if(!answer) {
          return;
       }
-      // updateGridContent();
    };
 
    subTask.resetDisplay = function() {
@@ -122,14 +176,54 @@ function initTask(subTask) {
    };
 
    function initSpherePos() {
-      for(var iSph = 0; iSph < nbSpheres; iSph++){
-         var r = rng.nextInt(0,maxR);
-         var long = rng.nextInt(0,359);
-         var cola = rng.nextInt(0,180);
-         var x = r*Math.sin(cola*Math.PI/180)*Math.cos(long*Math.PI/180)
-         var y = r*Math.sin(cola*Math.PI/180)*Math.sin(long*Math.PI/180);
-         var z = r*Math.cos(cola*Math.PI/180);
-         spherePos[iSph] = { r, long, cola, x, y, z };
+      var maxX = -maxR;
+      var minX = maxR;
+      var maxY = -maxR;
+      var minY = maxR;
+      for(var iSph = 0; iSph < initPos.length; iSph++){
+         var { x, y } = initPos[iSph];
+         do{
+            var z = rng.nextInt(-maxR,maxR);
+            var r = Math.sqrt(x*x + y*y + z*z);
+         }while(r > maxR)
+         spherePos.push({ x, y, z });
+         maxX = Math.max(maxX,x);
+         maxY = Math.max(maxY,y);
+         minX = Math.min(minX,x);
+         minY = Math.min(minY,y);
+      }
+      minX = minX - 2*marginX;
+      minY = minY - 2*marginY;
+      maxX = maxX + 2*marginX;
+      maxY = maxY + 2*marginY;
+      for(var iSph = initPos.length; iSph < nbSpheres; iSph++){
+         var x, y, z;
+         do{
+            do{
+               x = rng.nextInt(-maxR,maxR);
+               y = rng.nextInt(-maxR,maxR);
+            }while(x > minX && x < maxX && y > minY && y < maxY)
+            z = rng.nextInt(-maxR,maxR);
+            var r = Math.sqrt(x*x + y*y + z*z);
+         }while(r > maxR)
+         // do{
+         //    var r = rng.nextInt(0,maxR);
+         //    var long = rng.nextInt(0,359);
+         //    var cola = rng.nextInt(0,180);
+         //    var x = r*Math.sin(cola*Math.PI/180)*Math.cos(long*Math.PI/180)
+         //    var y = r*Math.sin(cola*Math.PI/180)*Math.sin(long*Math.PI/180);
+         //    var z = r*Math.cos(cola*Math.PI/180);
+         //    var minD = Infinity;
+         //    for(var jSph = 0; jSph < spherePos.length; jSph++){
+         //       var pos = spherePos[jSph];
+         //       var d = Beav.Geometry.distance(x,y,z,pos.x,pos.y,pos.z);
+         //       if(d < minD){
+         //          minD = d;
+         //       }
+         //    }
+         // }while(minD < 2*circleR)
+         spherePos[iSph] = { x, y, z };
+         // console.log(x,y,z)
       }
    };
 
@@ -148,6 +242,10 @@ function initTask(subTask) {
    };
 
    function onMove(dx,dy,x,y,event) {
+      if(Beav.Geometry.distance(0,0,dx,dy) < 1){
+         return
+      }
+
       getRotationMatrix(dx,dy);
       updateSpheres();
    };
@@ -155,6 +253,9 @@ function initTask(subTask) {
    function onEnd() {
       for(var iSph = 0; iSph < nbSpheres; iSph++){
          var pos = spherePos[iSph];
+         if(!pos){
+            continue
+         }
          var { cx, cy, cz } = getRotatedSpherePos(pos);
          pos.x = cx - x0;
          pos.y = cy - y0;
@@ -190,6 +291,9 @@ function initTask(subTask) {
    function updateSpheres() {
       for(var iSph = 0; iSph < nbSpheres; iSph++){
          var pos = spherePos[iSph];
+         if(!pos){
+            continue
+         }
          var { cx, cy } = getRotatedSpherePos(pos);
          if(!spheres[iSph]){
             spheres[iSph] = paper.circle(cx,cy).attr(circleAttr);
@@ -241,5 +345,5 @@ function initTask(subTask) {
 }
 
 initialLevel = "basic";
-initWrapper(initTask, ["basic"/*, "easy", "medium", "hard"*/]);
+initWrapper(initTask, ["basic", "easy", /*"medium", "hard"*/]);
 displayHelper.useFullWidth();
