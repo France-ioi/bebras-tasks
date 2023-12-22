@@ -6,8 +6,9 @@
   or
      index.html?interactive=1
   or
-     index.html?private=1
-
+     index.html?private=1 // DEPRECATED, now using index_full
+  or
+     index.html?lang=en
 
 
    // using feature of tasks:
@@ -133,7 +134,7 @@ var standaloneAddContents = function(descr) {
 
 var standaloneLoadPage = function(codes, pathToRoot) {
 
-    // Extra private contents
+    // Extra private contents // DEPRECATED, NOW USING index_full.html
     var showPrivate = ($.urlParam('private') == "1");
     if (showPrivate) {
       var extraCodes = [ "castor_2022", "castor_2021" ];
@@ -165,6 +166,11 @@ var standaloneLoadPage = function(codes, pathToRoot) {
        showGroupIcon = true;
     }
   }
+  var showLang = $.urlParam('lang');
+  if (showLang == null) {
+    showLang = "fr";
+  }
+
 
   //------------------------------
   // Display properties
@@ -180,18 +186,31 @@ var standaloneLoadPage = function(codes, pathToRoot) {
   //------------------------------
   // Task icon html contents
 
-  function computeTaskDiv(contents, iTask) {
-    var language = contents.language;
+  function computeTaskDiv(contents, iTask, idLanguage) {
+
     var pathPrefix = pathToRoot + contents.folder;
     var tasks = contents.tasks;
     var task = tasks[iTask];
+
+    if (! task.hasOwnProperty("translations")) {
+      console.log("ERROR: missing translations field for " + task.code);
+    }
+    if (! (0 <= idLanguage && idLanguage < task.translations.length)) {
+      console.log("ERROR: invalid idLanguage " + idLanguage + "  for " + task.code);
+    }
+    var translation = task.translations[idLanguage];
+    if (! translation.hasOwnProperty("language")) {
+      console.log("ERROR: missing language field for " + task.code);
+    }
+    var language = translation.language;
+    // LATER: could read translation.file  to build the target;
     var difficulties = task.difficulties;
 
     // options for link generation
     var options = task.options;
 
     // image and main link
-    var targetNormal = pathPrefix + getLinkTask(task.code, options, language);
+    var targetNormal = pathPrefix + getLinkTask(task.code, options, language, idLanguage);
     if (options == null) {
       options = [];
     }
@@ -202,7 +221,8 @@ var standaloneLoadPage = function(codes, pathToRoot) {
     var onclick = " onclick=\"loadTask('" + targetNormal + "')\" ";
     //    var onclick = " onclick=\"window.open('" + targetNormal + "', '_blank')\" ";
 
-    var iconTitle = '<div class="icon_title">' + task.title + '</div>';
+    var title = task.translations[idLanguage].title; // DEPRECATED task.title
+    var iconTitle = '<div class="icon_title">' + title + '</div>';
     var imgPath = pathPrefix + task.code + '/icon.png';
     //if (showLinksOpeningInSeparateWindows) {
        var sImg = '<img src="' + imgPath + '" ' + onclick + '/>';
@@ -290,6 +310,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
               <td id="header_logo"></td> \
               <td id="header_title">Défis ' + interactifs + 'du Concours Castor</td> \
               <td id="header_button"> \
+                <span id="language_select"></span> \
                 <!--<input id="button_return_list" type="button" value="Retour à la liste des exercices"></input>--> \
               </td> \
            </tr> \
@@ -320,7 +341,6 @@ var standaloneLoadPage = function(codes, pathToRoot) {
 
     $(document).ready(function() {
 
-
        // --- Setting up page elements ---
 
        $("#body").html(getHtmlContents());
@@ -337,7 +357,7 @@ var standaloneLoadPage = function(codes, pathToRoot) {
        $("#task_icons").css("display", "block");
 
        // --- Loop over codes ---
-
+       var allLanguages = [];
        for (var iCode = 0; iCode < codes.length; iCode++) {
 
          var code = codes[iCode];
@@ -355,10 +375,10 @@ var standaloneLoadPage = function(codes, pathToRoot) {
          var nbInteractive = 0;
          for (var iTask = 0; iTask < tasks.length; iTask++) {
             var task = tasks[iTask];
+
             if (! task.hasOwnProperty('difficulties')) {
               task.difficulties = defaultDifficulties;
             }
-
             task.hasStar = [0, 0, 0, 0]; // 4 versions max
             for (var iDifficulty = 0; iDifficulty < task.difficulties.length; iDifficulty++) {
                var diff = task.difficulties[iDifficulty];
@@ -379,10 +399,29 @@ var standaloneLoadPage = function(codes, pathToRoot) {
            if (!onlyOneGroup) {
               $("#task_icons").append('<div class="groupTitle">' + contents.title + '</div>');
            }
-
+           var nbTasksShown = 0;
            for (var iTask = 0; iTask < tasks.length; iTask++) {
-              var taskdiv = computeTaskDiv(contents, iTask);
-              $("#task_icons").append(taskdiv);
+              var task = tasks[iTask];
+              var idLanguage = -1;
+              // save available languages
+              for (var iTrans = 0; iTrans < task.translations.length; iTrans++) {
+                var language = task.translations[iTrans].language;
+                if (language == showLang) {
+                  idLanguage = iTrans;
+                }
+                allLanguages[language] = true;
+              }
+              // display task if translation is available
+              if (idLanguage != -1) {
+                var taskdiv = computeTaskDiv(contents, iTask, idLanguage);
+                $("#task_icons").append(taskdiv);
+                nbTasksShown++;
+              }
+
+           }
+
+           if (nbTasksShown == 0) {
+             $('#task_icons').children().last().remove();
            }
          }
 
@@ -406,6 +445,21 @@ var standaloneLoadPage = function(codes, pathToRoot) {
 
       } // end loop on iCode
 
-   });
+    // Set the language control
+     var sLang = "Select language: ";
+     var languages = Object.keys(allLanguages);
+     console.log(languages);
+     for (var iLang = 0; iLang < languages.length; iLang++) {
+       var language = languages[iLang];
+       if (language == "he")  // TEMPORARILY HIDE, BECAUSE ONLY 1 TRANSLATION
+         continue;
+       if (language != showLang) {
+        language = "<a href='index.html?lang=" + language + "'>" + language + "</a>";
+       }
+       sLang += "&nbsp;&nbsp;" + language;
+     }
+    $('#language_select').html(sLang);
+
+   }); // end of document onload
 
 }

@@ -31,10 +31,10 @@ standaloneAddContents({
       difficulties: ["easy", "medium", "hard"] },
     { code: "2014-FR-19-summed-row",
       title: "Position secrète (a)",
-      options: {difficulty: "easy"} },
+      options: { difficulty: "easy"} },
     { code: "2014-FR-19-summed-row",
       title: "Position secrète (b)",
-      options: {difficulty: "hard"} },
+      options: { difficulty: "hard"} },
     { code: "2014-TW-05-summed-area",
       title: "Carte secrète" },
     { code: "2014-AU-02-pancake-flipping",
@@ -65,6 +65,6 @@ standaloneAddContents({
       title: "Dessin interactif",
       difficulties: ["easy", "medium", "hard"] }
    ]
-  });
+});
 
 
