@@ -127,9 +127,6 @@ var standaloneAddContents = function(descr) {
 }
 
 
-
-
-
 //-----------------------------------------------------------------------------
 
 var standaloneLoadPage = function(codes, pathToRoot) {
@@ -171,6 +168,8 @@ var standaloneLoadPage = function(codes, pathToRoot) {
     showLang = "fr";
   }
 
+  var path = window.location.pathname;
+  var showPage = path.split("/").pop();
 
   //------------------------------
   // Display properties
@@ -448,13 +447,12 @@ var standaloneLoadPage = function(codes, pathToRoot) {
     // Set the language control
      var sLang = "Select language: ";
      var languages = Object.keys(allLanguages);
-     console.log(languages);
      for (var iLang = 0; iLang < languages.length; iLang++) {
        var language = languages[iLang];
        if (language == "he")  // TEMPORARILY HIDE, BECAUSE ONLY 1 TRANSLATION
          continue;
        if (language != showLang) {
-        language = "<a href='index.html?lang=" + language + "'>" + language + "</a>";
+        language = "<a href='" + showPage + "?lang=" + language + "'>" + language + "</a>";
        }
        sLang += "&nbsp;&nbsp;" + language;
      }
