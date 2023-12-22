@@ -10,7 +10,7 @@ standaloneAddContents({
     { code: "2010-apprendre-anglais",
       title: "Apprendre l'anglais" },
     { code: "2010-approvisionnement-eau",
-      title: "Approvisionnement" }, // Approvisionnement en eau
+      title: "Approvisionnement" },
     { code: "2010-art-castor",
       title: "L'art de Castor" },
     { code: "2010-bits-egaux",
@@ -40,7 +40,7 @@ standaloneAddContents({
     { code: "2010-jeu-tri",
       title: "Jeu de tri" },
     { code: "2010-logique-approvisionnement",
-      title: "Approvisionnement 2" },  // Logique de l'approvisionnement en eau
+      title: "Approvisionnement 2" },
     { code: "2010-miroir-photo",
       title: "Miroir ou photo" },
     { code: "2010-ox",
@@ -70,7 +70,7 @@ standaloneAddContents({
     { code: "2010-tour-canoe",
       title: "Tour en canoë" },
     { code: "2010-transmission-donnees",
-      title: "Transmission" }, // Transmission de données
+      title: "Transmission" },
     { code: "2010-travaux-peinture",
       title: "Travaux de peinture" },
     { code: "2010-trier-chiffres",
@@ -83,6 +83,3 @@ standaloneAddContents({
       title: "Voisinage" }
    ]
   });
-
-
-

@@ -31,5 +31,3 @@ standaloneAddContents({
        title: "Coloriages répétés" }
     ]
   });
-
-

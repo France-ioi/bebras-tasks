@@ -31,5 +31,3 @@ standaloneAddContents({
        title: "Qui est-ce ?" }
     ]
   });
-
-

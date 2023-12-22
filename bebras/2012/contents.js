@@ -26,9 +26,9 @@ standaloneAddContents({
     { code: "2012-DE-01",
       title: "Réseau de Castoria" },
     { code: "2012-DE-02",
-      title: "Places au cinéma" }, // Choisir les places au cinéma
+      title: "Places au cinéma" },
     { code: "2012-DE-03",
-      title: "Castors aveugles" }, // Accessibilité du web pour les castors aveugles
+      title: "Castors aveugles" },
     { code: "2012-DE-05",
       title: "Plantons des fleurs" },
     { code: "2012-DE-07",
@@ -85,5 +85,3 @@ standaloneAddContents({
       title: "Verres" }
    ]
   });
-
-
