@@ -568,6 +568,14 @@
             var x = e.pageX - _offset.left,
                y = e.pageY - _offset.top;
          }
+         if (window.displayHelper) {
+            var scale = window.displayHelper.scaleFactor || 1;
+         }else{
+            var scale = 1;
+         }
+         // console.log(scale)
+         x = x/scale;
+         y = y/scale;
          
          _points.push([x, y]);
          _c = sketchpad.paper().path();
@@ -613,12 +621,47 @@
                var touch = e.originalEvent.touches[0];
                var x = touch.pageX - _offset.left,
                    y = touch.pageY - _offset.top;
-            }       
-            _points.push([x, y]);
+            }
+            if (window.displayHelper) {
+               var scale = window.displayHelper.scaleFactor || 1;
+            }else{
+               var scale = 1;
+            }
+            // console.log(scale)
+            x = x/scale;
+            y = y/scale;
+            function distMin(pt1, pt2) {
+               var dx = Math.abs(pt1[0] - pt2[0]);
+               var dy = Math.abs(pt1[1] - pt2[1]);
+               return Math.min(dx, dy);
+            }
+            function distSq(pt1, pt2) {
+               var dx = pt1[0] - pt2[0];
+               var dy = pt1[1] - pt2[1];
+               return dx*dx + dy*dy;
+            }
+            var newPoint = [x, y];
+            /*
+            if (_points.length > 1) {
+               prevPoint1 = _points[_points.length - 1];
+               prevPoint2 = _points[_points.length - 2];
+               var minDist = 5;
+               var minDistSq = 200*200;
+               while ((_points.length > 1) &&
+                      (distSq(prevPoint2, newPoint) < minDistSq) &&
+                      (distMin(prevPoint2, newPoint) < minDist)) {
+                  _points.pop();
+                  prevPoint1 = _points[_points.length - 1];
+                  prevPoint2 = _points[_points.length - 2];
+               }
+            }*/
+            //if (_points.length < 50) {
+               _points.push(newPoint);
+            //}
             _c.attr({ path: points_to_svg() });
          }
       };
-
+      
       function points_to_svg() {
          if (_points != null && _points.length > 1) {
             var p = _points[0];

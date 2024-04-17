@@ -162,6 +162,14 @@ function initTask(subTask) {
     };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+         displayHelper.responsive = true;
+         convertDOM();
+         // $("#paper").css("margin","0");
+      }else{
+         displayHelper.responsive = false;
+         // $("#paper").css("margin","1em auto");
+      }
       level = curLevel;
       randomGenerator = new RandomGenerator(subTask.taskParams.randomSeed + 1512486);
       delayFactory = this.delayFactory;
@@ -180,6 +188,11 @@ function initTask(subTask) {
 
       // This array will be used to pick tasks
       initState();
+
+      displayHelper.taskH = 640;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    function initState() {
@@ -253,6 +266,10 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled){
+         displayHelper.displayError("");
+         $("#taskCont").css("padding","1px");
+     }
       initHouse();
       // initAnswerFrame();
       initShapeList();
