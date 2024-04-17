@@ -24,7 +24,8 @@ function initTask(subTask) {
                     [0,0]
                 ]
             ],
-            transformationCounter: 3
+            transformationCounter: 3,
+            taskH: 640
         },
         medium: {
             grid: [
@@ -47,7 +48,8 @@ function initTask(subTask) {
                     [1,1]
                 ]
             ],
-            transformationCounter: 3
+            transformationCounter: 3,
+            taskH: 640
         },
         hard: {
             grid: [
@@ -74,12 +76,26 @@ function initTask(subTask) {
                     [0,0]
                 ]
             ],
-            transformationCounter: 3
+            transformationCounter: 3,
+            taskH: 660
         }
     };
 
     subTask.loadLevel = function(curLevel) {
+        if(respEnabled){
+         displayHelper.responsive = true;
+         convertDOM();
+         // $("#paper").css("margin","0");
+      }else{
+         displayHelper.responsive = false;
+         // $("#paper").css("margin","1em auto");
+      }
         level = curLevel;
+
+        displayHelper.taskH = data[level].taskH;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
     };
 
     subTask.getStateObject = function() {
@@ -94,6 +110,10 @@ function initTask(subTask) {
     };
 
     subTask.resetDisplay = function() {
+        if(respEnabled){
+            displayHelper.displayError("");
+            $("#taskCont").css("padding","1px");
+        }
         $("#objective").empty();
         $('.option-1').empty();
         $('.option-2').empty();

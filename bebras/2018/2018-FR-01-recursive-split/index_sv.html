@@ -15,13 +15,24 @@
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.0',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js', 'grid-1.0',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1'
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
         ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
 
     <script class="remove" type="text/javascript">
         var json = {
@@ -42,6 +53,7 @@
 
     <script type="text/javascript">
         var taskStrings = {
+         introTitle: "Your mission",
             success: "Bravo, du klarade det!",
             almost: "Ditt resultat blev inte exakt som målet, men du får ändå en del poäng.",
             error: "Ditt resultat blev inte som målet."
@@ -337,10 +349,10 @@
         <div id="tabsContainer"></div>
 
         <div id="taskContent">
-            <p id="difficultyWarning" class="hard"></p>
 
             <div id="zone_1">
                <div class="consigne">
+            <p id="difficultyWarning" class="hard"></p>
                   <p>
                      Denna uppgift börjar med en stor vit kvadrat, som färgläggs enligt regler som du kan ändra.
                   </p>
