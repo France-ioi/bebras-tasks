@@ -98,7 +98,20 @@ function initTask(subTask) {
     var nReplaced;
 
     subTask.loadLevel = function(curLevel) {
+        if(respEnabled){
+         displayHelper.responsive = true;
+         convertDOM();
+         // $("#paper").css("margin","0");
+      }else{
+         displayHelper.responsive = false;
+         // $("#paper").css("margin","1em auto");
+      }
        level = curLevel;
+
+       displayHelper.taskH = 414;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
     };
 
     subTask.getStateObject = function() {
@@ -110,6 +123,10 @@ function initTask(subTask) {
     };
 
     subTask.resetDisplay = function() {
+        if(respEnabled){
+            displayHelper.displayError("");
+            $("#taskCont").css("padding","1px");
+        }
         initAllShapes();
         hideTaskProcess();
         if (typeof(enableRtl) != "undefined") {
