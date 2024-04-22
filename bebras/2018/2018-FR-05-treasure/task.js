@@ -76,7 +76,8 @@ function initTask(subTask) {
     };
     var duration = 200; // animation
     var paper = null;
-    var paperWidth = 500;
+    var paperW = 500;
+    var paperH;
     var radius = 25;
     var hallwayLength = 60;
     var hallwayWidth = 28;
@@ -96,10 +97,24 @@ function initTask(subTask) {
     var openingW = 12;
 
     subTask.loadLevel = function(curLevel) {
+        if(respEnabled){
+             displayHelper.responsive = true;
+             convertDOM();
+             $("#anim").css({"margin-top":"0"});
+          }else{
+             displayHelper.responsive = false;
+             $("#anim").css("margin-top","20px");
+          }
        level = curLevel;
        displayHelper.hideValidateButton = true;
        answer = subTask.getDefaultAnswerObject();
        initMaze();
+       paperH =  (data[level].rooms.length - 1) * (radius * 2 + hallwayLength) + 2 * radius;
+       // console.log(paperH)
+       displayHelper.taskH = paperH;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
     };
 
     subTask.getStateObject = function() {
@@ -114,15 +129,18 @@ function initTask(subTask) {
     };
 
     subTask.resetDisplay = function() {
+        if(respEnabled){
+             displayHelper.displayError("");
+             $("#taskCont").css("padding","1px");
+         }
         if (answer == null) {
            return;
         }
         wallBitsPos = { "vertical" : [], "horizontal": [] };
-        var height =  (data[level].rooms.length - 1) * (radius * 2 + hallwayLength) + 2 * radius;
         if (paper != null) {
            paper.remove();
         }
-        paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, height);
+        paper = subTask.raphaelFactory.create("anim", "anim", paperW, paperH);
         draw();
         updateFeedback();
         if (typeof(enableRtl) != "undefined") {
@@ -189,7 +207,7 @@ function initTask(subTask) {
         }
 
         // Active this line for dynamic adjustment of the grid size
-        // hallwayLength = (paperWidth - rooms[0].length * radius * 2) / (rooms[0].length - 1);
+        // hallwayLength = (paperW - rooms[0].length * radius * 2) / (rooms[0].length - 1);
 
         var maxThickness = data[level].maxThickness;
         switch (level) {

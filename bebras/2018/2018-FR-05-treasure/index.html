@@ -14,10 +14,21 @@
         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
         'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
         'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
-        'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-        'taskStyles-0.1'
+        'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
       ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
     <script class="remove" type="text/javascript">
       var json = {
         "id": "http://castor-informatique.fr/tasks/2016/2016-FR-07-shapes/",
@@ -36,6 +47,7 @@
     </script>
     <script type="text/javascript">
       var taskStrings = {
+        introTitle: "Votre mission",
         error: function(level) {
                var walls = "de murs";
                if (level == "hard") {
@@ -72,7 +84,6 @@
             height:28px; /* should be equal to hallwayWidth in task.js */
          }
       </style>
-    <link rel="stylesheet" href="../style_responsive.css" />
   </head>
 
   <body>
@@ -99,7 +110,7 @@
         </div>
         <div id="zone_2">
          <div id="anim"></div>
-          <p id="result"></p>
+         <p id="result"></p>
         </div>
 
         <img src="icon.png" style="display:none">
