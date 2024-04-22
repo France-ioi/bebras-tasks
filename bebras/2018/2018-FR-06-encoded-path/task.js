@@ -96,6 +96,7 @@ function initTask(subTask) {
    var highlightedIndex;
    var rows;
    var cols;
+   var paperW, paperH;
 
    var gridParams = {
       xPad: 2,
@@ -167,10 +168,25 @@ function initTask(subTask) {
    var paperCodesAttr = { width : 750, height: 100 };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+          // $("#anim").css({"margin-top":"0"});
+       }else{
+          displayHelper.responsive = false;
+          // $("#anim").css("margin-top","20px");
+       }
       level = curLevel;
       rows = data[level].grid.length;
       cols = data[level].grid[0].length;
+      paperW = (2 * gridParams.xPad + gridParams.cellWidth * cols) * data[level].bigScale;
+      paperH = (2 * gridParams.yPad + gridParams.cellHeight * rows) * data[level].bigScale;
       initLevelData();
+
+      displayHelper.taskH = paperH + 150;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -185,6 +201,10 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled){
+          displayHelper.displayError("");
+          $("#taskCont").css("padding","1px");
+      }
       initPaperGrid();
       displayCodes();
       showFeedback(null);
@@ -256,6 +276,7 @@ function initTask(subTask) {
       var cols = grid[0].length;
       var row = position.row;
       var col = position.col;
+
       var result = row >= 0 && row < rows && col >= 0 && col < cols;
       if(result && !allowBlocked) {
          result &= (grid[row][col] !== 'X');
@@ -284,9 +305,8 @@ function initTask(subTask) {
       var self = this;
       var rows = initialGrid.length;
       var cols = initialGrid[0].length;
-      var paperWidth = (2 * gridParams.xPad + gridParams.cellWidth * cols) * scale;
-      var paperHeight = (2 * gridParams.yPad + gridParams.cellHeight * rows) * scale;
-      var paper = subTask.raphaelFactory.create(elementID, elementID, paperWidth, paperHeight);
+      
+      var paper = subTask.raphaelFactory.create(elementID, elementID, paperW, paperH);
       var virtualGrid;
       var visualGrid;
       var currentPath;
@@ -304,7 +324,7 @@ function initTask(subTask) {
          visualGrid = new Grid(elementID, paper, rows, cols, gridParams.cellWidth * scale, gridParams.cellHeight * scale, gridParams.xPad * scale, gridParams.yPad * scale, lineAttr);
          // Placeholder instances have a grid, a question mark, and nothing else.
          if(placeHolder) {
-            paper.text(paperWidth / 2, paperHeight / 2, taskStrings.unknown).attr(gridParams.labelAttr).toBack();
+            paper.text(paperW / 2, paperH / 2, taskStrings.unknown).attr(gridParams.labelAttr).toBack();
             return;
          }
 
@@ -540,7 +560,7 @@ function initTask(subTask) {
 
       this.highlight = function() {
          if(!highlightRect) {
-            highlightRect = paper.rect(0, 0, paperWidth, paperHeight).attr(gridParams.highlightAttr);
+            highlightRect = paper.rect(0, 0, paperW, paperH).attr(gridParams.highlightAttr);
          }
          highlightRect.show().toFront();
       };
