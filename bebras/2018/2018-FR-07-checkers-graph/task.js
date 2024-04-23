@@ -219,6 +219,14 @@ function initTask(subTask) {
    var graphLines = {};
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+          // $("#anim").css({"margin-top":"0"});
+       }else{
+          displayHelper.responsive = false;
+          // $("#anim").css("margin-top","20px");
+       }
       level = curLevel;
       rows = data[level].rows;
       columns = data[level].columns;
@@ -226,6 +234,11 @@ function initTask(subTask) {
       initGridArray();
       nbHighlightRect = (level == "queens") ? 4 : 2;
       displayHelper.customValidate = compareWithTarget;
+
+      displayHelper.taskH = 480;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -241,6 +254,10 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled){
+          displayHelper.displayError("");
+          $("#taskCont").css("padding","1px");
+      }
       initGrid();
       initTargetGraph();
       initCurrentGraph();
