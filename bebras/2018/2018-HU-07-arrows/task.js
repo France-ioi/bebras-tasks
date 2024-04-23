@@ -73,11 +73,24 @@ function initTask(subTask) {
    var undoButton;
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+          $("#paper").css({"margin-top":"0"});
+       }else{
+          displayHelper.responsive = false;
+          $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
       initRowCol();
       initActualArrDir();
       initArrowColors();
       initArrowSameColor();
+
+      displayHelper.taskH = gridHeight + 40;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -484,13 +497,21 @@ function initTask(subTask) {
    };
 
    function showFeedback(string) {
-      $("#displayHelper_graderMessage").html(string);
-      $("#displayHelper_graderMessage").css("color", "red");
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#displayHelper_graderMessage").html(string).css("color", "red");
+      }
    };
 
    function hideFeedBack() {
-      $("#displayHelper_graderMessage").html("");
+      if(respEnabled){
+         displayHelper.displayError("");
+      }else{
+         $("#displayHelper_graderMessage").html("");
+      }   
    };
+
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
 displayHelper.useFullWidth();
