@@ -98,6 +98,14 @@ function initTask(subTask) {
    var timeAnim;
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+          // $("#anim").css({"margin-top":"0"});
+       }else{
+          displayHelper.responsive = false;
+          // $("#anim").css("margin-top","20px");
+       }
       level = curLevel;
       colHeight = letterAttr["font-size"]+3*smallMargin+data[level].columns[0].seq.length*(colWidth+smallMargin+additionalVerticalSpacing)+smallMargin;
       paperDim.height = colHeight+titleFontSize+titleTopMargin+titleBottomMargin+3*bigMargin+2*smallMargin+Math.max(letterAttr["font-size"],2*trickAttr["font-size"]);
@@ -106,6 +114,11 @@ function initTask(subTask) {
       initCurrentCol();
       initRowPos();
       initSubmitButton();
+
+      displayHelper.taskH = paperDim.height;
+        displayHelper.taskW = paperDim.width;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -460,12 +473,19 @@ function initTask(subTask) {
    };
 
    function showFeedback(string) {
-      $("#displayHelper_graderMessage").html(string);
-      $("#displayHelper_graderMessage").css("color", "red");
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#displayHelper_graderMessage").html(string).css("color", "red");
+      }
    };
 
    function hideFeedBack() {
-      $("#displayHelper_graderMessage").html("");
+      if(respEnabled){
+         displayHelper.displayError("");
+      }else{
+         $("#displayHelper_graderMessage").html("");
+      }
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);

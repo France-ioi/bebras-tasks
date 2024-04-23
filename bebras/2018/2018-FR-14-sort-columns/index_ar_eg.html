@@ -11,12 +11,25 @@
       <script class="remove" type="text/javascript">
            var modulesPath = '../../../_common/modules';
            importModules([
-               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
                'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
                'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-               'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'randomGenerator-1.0',
-               'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+               'jschannel', 'platform-pr', 'installationAPI.01', 'randomGenerator-1.0',
+               'miniPlatform', 'graph-1.0', 'visual-graph-1.0', 'grid-1.0',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+               ]);
        </script>
+       <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
        <script class="remove" type="text/javascript">
             var json = {
             "id": "",
@@ -35,6 +48,7 @@
       </script>
       <script type="text/javascript">
          var taskStrings = {
+            introTitle: "Your mission",
             objective : "الهدف",
             sort : "رتب",
             nSortText : function(nSort) {
@@ -71,9 +85,9 @@
          <h1>ترتیب الأعمدة</h1>
          <div id="tabsContainer"></div>   <!-- will contain the versions tabs -->
          <div id="taskContent">        <!-- will contain the content of the task -->
-            <p id="difficultyWarning" class="hard"></p>
             <div id=zone_1>    
                <div class=consigne>
+            <p id="difficultyWarning" class="hard"></p>
                    <p>عند الضغط على زر "رتب" <b> يتغير </b> ترتیب الأعمدة، بحیث
                   <span class="easy"> توضع الدوائرالصغيرة على یسار الدوائر الكبيرة في الصف الذي تم ضغط الزر فیه. </span>
                   <span class="medium"> توضع الدوائر الأصغر على الیسار و الأكبر على الیمين في الصف الذي تم ضغط الزر فيه.</span>
