@@ -87,6 +87,14 @@ function initTask(subTask) {
    var balanceFeedback;
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+          $("#paper").css({"margin-top":"0"});
+       }else{
+          displayHelper.responsive = false;
+          $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
       nCircles = data[level].nCircles;
       nWeights = level == "easy" ? data[level].nCircles : 2*nCircles;
@@ -95,6 +103,11 @@ function initTask(subTask) {
       randGen = new RandomGenerator(subTask.taskParams.randomSeed);
       initWeightValues();
       initWeightPos();
+
+      displayHelper.taskH = paperDim.height;
+        displayHelper.taskW = paperDim.width;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -469,7 +482,8 @@ function initTask(subTask) {
 
    function initDrag() {
       for(var iWeight = 0; iWeight < nWeights; iWeight++) {
-         weightsRaph[iWeight].drag(dragMove(iWeight),dragStart(iWeight),dragEnd(iWeight));
+         Beav.dragWithTouch(weightsRaph[iWeight],dragMove(iWeight),dragStart(iWeight),dragEnd(iWeight))
+         // weightsRaph[iWeight].drag(dragMove(iWeight),dragStart(iWeight),dragEnd(iWeight));
       }
    };
 
@@ -495,9 +509,14 @@ function initTask(subTask) {
          if (answer.validated){
             return;
          }
+         if (window.displayHelper) {
+            var scale = window.displayHelper.scaleFactor || 1;
+         }else{
+            var scale = 1;
+         }
          var paperPos = $("#paper").offset();
-         var mouseX = x - paperPos.left;
-         var mouseY = y - paperPos.top;
+         var mouseX = (x - paperPos.left)/scale;
+         var mouseY = (y - paperPos.top)/scale;
          if((mouseX - radius) > 0 && (mouseX + radius) < paperDim.width && (mouseY - radius) > 0 && (mouseY + radius) < paperDim.height) {
             setPosition(id,mouseX,mouseY);
          }
@@ -755,18 +774,24 @@ function initTask(subTask) {
    };
 
    function showFeedback(string) {
-
-      $("#displayHelper_graderMessage").html(string);
-      $("#displayHelper_graderMessage").css("color", "red");
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#displayHelper_graderMessage").html(string).css("color", "red");
+      }
    };
 
    function hideFeedBack() {
-
-      $("#displayHelper_graderMessage").html("");
+      if(respEnabled){
+         displayHelper.displayError("");
+      }else{
+         $("#displayHelper_graderMessage").html("");
+      }
       if(balanceFeedback) {
         balanceFeedback.remove();
       }
    };
+
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
 displayHelper.useFullWidth();
