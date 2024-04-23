@@ -106,12 +106,26 @@ function initTask(subTask) {
    var answer = null;
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+          // $("#anim").css({"margin-top":"0"});
+       }else{
+          displayHelper.responsive = false;
+          // $("#anim").css("margin-top","20px");
+       }
       level = curLevel;
       marbleAttr.r = data[level].radius;
       initObjArray();
       initSourceArray();
       initCurrentSource();
       initMarblesRaph();
+      paperHeight = nSource*(raphButtonAttr.height+2*raphButtonAttr.vMargin)+paperTopPadding+80;
+
+      displayHelper.taskH = paperHeight + objPaperHeight + 20;
+        displayHelper.taskW = paperWidth;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -126,7 +140,7 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
-      paperHeight = nSource*(raphButtonAttr.height+2*raphButtonAttr.vMargin)+paperTopPadding+80;
+      // paperHeight = nSource*(raphButtonAttr.height+2*raphButtonAttr.vMargin)+paperTopPadding+80;
       rampStartX = raphButtonAttr.width+2*raphButtonAttr.hMargin+4*marbleAttr.r;
       bottomRampStartX = raphButtonAttr.width+2*raphButtonAttr.hMargin + 10;
       initRampLinEq();
@@ -526,19 +540,27 @@ function initTask(subTask) {
     };
 
    function showFeedback(string) {
-      $("#displayHelper_graderMessage").html(string);
-      $("#displayHelper_graderMessage").css("color", "red");
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#displayHelper_graderMessage").html(string).css("color", "red");
+      }
       for(var iButton = 0; iButton < nSource; iButton++) {
          buttons[iButton].disable();
       }
    };
 
    function hideFeedBack() {
-      $("#displayHelper_graderMessage").html("");
+      if(respEnabled){
+         displayHelper.displayError("");
+      }else{
+         $("#displayHelper_graderMessage").html("");
+      }
       for(var iButton = 0; iButton < nSource; iButton++) {
          buttons[iButton].enable();
       }
    };
+
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
 displayHelper.useFullWidth();

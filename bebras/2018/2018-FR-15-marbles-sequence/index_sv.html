@@ -10,12 +10,25 @@
     <script class="remove" type="text/javascript">
       var modulesPath = '../../../_common/modules';
       importModules([
-        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+        'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
         'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
         'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-        'platform-pr', 'buttonsAndMessages', 'installationAPI.01',
-        'miniPlatform', 'taskStyles-0.1','graph-1.0', 'visual-graph-1.0', 'grid-1.0']);
+        'jschannel', 'platform-pr', 'installationAPI.01',
+        'miniPlatform', 'graph-1.0', 'visual-graph-1.0', 'grid-1.0',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+        ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
     <script class="remove" type="text/javascript">
       var json = {
         "id": "",
@@ -34,6 +47,7 @@
     </script>
     <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
          objective: "Mönster",
          undo: "Ångra",
          success: "Bravo, du har klarat denna nivå!",
