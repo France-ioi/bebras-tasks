@@ -6,17 +6,29 @@
     <script>
         window.stringsLanguage = 'fi';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0',
-            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.4', 'jschannel',
+            'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-01-home-distance/",
@@ -31,10 +43,11 @@
           "fullFeedback": true,
           "acceptedAnswers": [],
           "usesRandomSeed": false
-      };+
+      };
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Onnittelut, ratkaisit tämän version!",
             existsError: "Näiden kahden puun välillä on jo köysi. Voit poistaa köyden klikkaamalla sitä.",
             distanceError: "Punaisella merkityn puun luku ei vastaa lyhimmän siihen lipulta kulkevan reitin pituutta.",
@@ -70,6 +83,27 @@
          #taskContent {
             text-align: left;
          }
+         #example {
+            float:right; 
+            padding: 5px; 
+            margin-left: 25px; 
+            margin-bottom: 10px; 
+            border: 1px solid black; 
+            text-align:center; 
+            width: 270px
+         }
+         .largeScreen #example {
+            float: none;
+            margin-top: 20px;
+         }
+         .consigne #example {
+            float:none; 
+            padding: 0; 
+            margin: 0; 
+            border: none; 
+            text-align:center; 
+            width: auto;
+         }
       </style>
    </head>
    <body>
@@ -78,24 +112,25 @@
          <h1>Köysirata</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
+            <div id="zone_1">
+               <div id="example" >
+                  <div style="font-weight: bold; margin: 10px;">Esimerkki</div>
+                  <div style="margin: 0; padding: 0" id="exampleAnim"></div>
+               </div>
 
-            <div style="float:right; padding: 5px; margin-left: 25px; margin-bottom: 10px; border: 1px solid black; text-align:center; width: 270px ">
-               <div style="font-weight: bold; margin: 10px;">Esimerkki</div>
-               <div style="margin: 0; padding: 0" id="exampleAnim">
+               <p>Majava haluaa rakentaa puiden välillä kulkevan köysiradan.</p>
+
+               <p><b>Köysiradan sääntö: puuhun merkitty luku kertoo, kuinka monta köyttä lyhin lipulta kyseiseen puuhun kulkeva köysireitti sisältää. Katso oheista esimerkkiä.</b></p>
+
+               <p>Lisää köysiradalle uusi köysi klikkaamalla kahta puuta. Jo lisätyn köyden voi poistaa klikkaamalla sitä.</p>
+            </div>
+
+            <div id="zone_2">
+               <div id="anim_container">
+                  <div id="anim"></div>
+                  <div id="feedback"></div>
                </div>
             </div>
-
-            <p>Majava haluaa rakentaa puiden välillä kulkevan köysiradan.</p>
-
-            <p><b>Köysiradan sääntö: puuhun merkitty luku kertoo, kuinka monta köyttä lyhin lipulta kyseiseen puuhun kulkeva köysireitti sisältää. Katso oheista esimerkkiä.</b></p>
-
-            <p>Lisää köysiradalle uusi köysi klikkaamalla kahta puuta. Jo lisätyn köyden voi poistaa klikkaamalla sitä.</p>
-
-            <div id="anim_container">
-               <div id="anim"></div>
-               <div id="feedback"></div>
-            </div>
-            <div id="validation"><input type="button" value="Tarkista" id="execute" /></div>
             <img src="icon.png" style="display:none">
             <img src="start.png" style="display:none">
          </div>

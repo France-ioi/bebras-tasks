@@ -143,8 +143,19 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
-      displayHelper.hideValidateButton = true;
+
+      displayHelper.taskH = data[level].height + 20;
+        displayHelper.taskW = data[level].width;
+        displayHelper.minTaskW = 0.6*data[level].width;
+        displayHelper.maxTaskW = 1.2*data[level].width;
    };
 
    subTask.getStateObject = function() {
@@ -153,14 +164,10 @@ function initTask(subTask) {
 
    subTask.reloadAnswerObject = function(answerObj) {
       answer = answerObj;
+      if(!answer) {
+         return;
+      }
       resetGraph();
-   };
-
-   subTask.resetDisplay = function() {
-      initPaper();
-      initExample();
-      initHandlers();
-      unhighlightError();
    };
 
    subTask.getAnswerObject = function() {
@@ -177,8 +184,27 @@ function initTask(subTask) {
          edgeCreator.setEnabled(false);
          visualGraph.remove();
       }
-      $("#execute").unbind("click");
+      // $("#execute").unbind("click");
       callback();
+   };
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+
+   subTask.resetDisplay = function() {
+      if(respEnabled){
+         displayHelper.displayError("");
+       }else{
+          // $("#anim").css({"margin":"auto"});
+       }
+      initPaper();
+      initExample();
+      // initHandlers();
+      unhighlightError();
+      
+      displayHelper.hideValidateButton = false;
+      displayHelper.customValidate = clickExecute;
    };
 
    var resetGraph = function() {
@@ -202,10 +228,10 @@ function initTask(subTask) {
       graph.addPostListener("edgeCounter", postListener, 20000);
    };
 
-   var initHandlers = function() {
-      $("#execute").unbind("execute");
-      $("#execute").click(clickExecute);
-   };
+   // var initHandlers = function() {
+   //    $("#execute").unbind("execute");
+   //    $("#execute").click(clickExecute);
+   // };
 
    var initExample = function() {
       paperExample = subTask.raphaelFactory.create("exampleAnim", "exampleAnim", examples[level].width, examples[level].height);
@@ -326,12 +352,12 @@ function initTask(subTask) {
    var clickExecute = function() {
       unhighlightError();
       var error = findError();
+      // console.log("clickExecute",error)
       if(error === null) {
          platform.validate("done");
       }
       else {
          highlightError(error);
-         displayHelper.validate("stay");
       }
    };
 
@@ -447,11 +473,14 @@ function initTask(subTask) {
       if(!string) {
          string = "";
       }
-      $("#feedback").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#feedback").html(string);
+      }
    };
 
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
-   };
+   
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
