@@ -266,6 +266,9 @@ function initTask(subTask) {
             visualGraph.getRaphaelsFromID(vertex)[0].attr(exampleGraphParams.unnumberedVertexAttr);
          }
       }
+      if(respEnabled){
+         displayHelper.updateLayout();
+      }
    };
 
    var initPaper = function() {
