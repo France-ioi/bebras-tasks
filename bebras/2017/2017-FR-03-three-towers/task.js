@@ -7,19 +7,22 @@ function initTask(subTask) {
          initial: [[0, 1, 2], [], []],
          target: [[], [], [0, 1, 2]],
          optimal: 5,
-         partial: 5
+         partial: 5,
+         taskH: 400
       },
       medium: {
          initial: [[0, 3, 1, 4, 2], [], [], []],
          target: [[], [], [], [0, 1, 2, 3, 4]],
          optimal: 9,
-         partial: 10
+         partial: 10,
+         taskH: 500
       },
       hard: {
          initial: [[0, 4], [2], [1, 5], [3, 6]],
          target: [[], [], [], [0, 1, 2, 3, 4, 5, 6]],
          optimal: 13,
-         partial: 15
+         partial: 15,
+         taskH: 600
       }
       /* 
       challenge: {
@@ -66,10 +69,22 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
       crane = new Crane(subTask.simulationFactory, {
          initialBlockState: data[level].initial
       });
+
+      displayHelper.taskH = data[level].taskH;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 0.6*data[level].width;
+        displayHelper.maxTaskW = 1.2*data[level].width;
    };
 
    subTask.getStateObject = function() {
@@ -79,16 +94,6 @@ function initTask(subTask) {
    subTask.reloadAnswerObject = function(answerObj) {
       answer = answerObj;
       crane.setActionSequence(answer);
-   };
-   
-   subTask.resetDisplay = function() {
-      updateFeedback(null);
-      initTargets();
-      initPaper();
-      initTargetPaper();
-      initHandlers();
-      updateUndo();
-      updateCounter();
    };
 
    subTask.getAnswerObject = function() {
@@ -110,6 +115,17 @@ function initTask(subTask) {
       unbindButtons();
       callback();
    };
+   
+   subTask.resetDisplay = function() {
+      updateFeedback(null);
+      initTargets();
+      initPaper();
+      initTargetPaper();
+      initHandlers();
+      updateUndo();
+      updateCounter();
+   };
+   
    function unbindButtons() {
       $("#undo").unbind("click");
    }
@@ -261,7 +277,12 @@ function initTask(subTask) {
       if (html === undefined || html === null) {
          html = "";
       }
-      $("#feedback").html(html);
+      if(respEnabled){
+         displayHelper.displayError(html);
+         $("#feedback").hide();
+      }else{
+         $("#feedback").html(html);
+      }
    }
 
    function getResultAndMessage() {
@@ -308,4 +329,5 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
 

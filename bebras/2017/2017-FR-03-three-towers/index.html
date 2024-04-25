@@ -6,16 +6,28 @@
     <script>
         window.stringsLanguage = 'fr';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
             'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'crane-1.0',
-            'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
     <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-03-three-towers/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Votre mission",
             success: "Bravo, vous avez réussi&nbsp;!",
             error: "La résultat obtenu ne correspond pas à l'objectif.", // not displayed
             partial: function(steps, stepsOptimal, level) { 
@@ -98,33 +111,38 @@
          <h1>Tour infernale</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>Placez les blocs comme sur l'objectif. Cliquez sur les boutons avec les lettres pour piloter la grue aimantée.</p>
+            <div id="zone_1">
+               <p>Placez les blocs comme sur l'objectif. Cliquez sur les boutons avec les lettres pour piloter la grue aimantée.</p>
 
-            <p>Réussissez en <span id="nbStepsPartial" class="targetNumber"></span> étapes<span class="medium hard"> pour avoir des points, et en <span id="nbStepsOptimal" class="targetNumber"></span> étapes pour avoir tous les points<span class="hard"> (difficile !)</span></span>.
-             </p>
-            <table id="animTable">
-               <tr>
-                  <td>
-                     <div id="anim_container">
-                        <div id="anim"></div>
-                        <div id="feedback">
-                           Feedback
+               <p>Réussissez en <span id="nbStepsPartial" class="targetNumber"></span> étapes<span class="medium hard"> pour avoir des points, et en <span id="nbStepsOptimal" class="targetNumber"></span> étapes pour avoir tous les points<span class="hard"> (difficile !)</span></span>.
+                </p>
+            </div>
+
+            <div id="zone_2">
+               <table id="animTable">
+                  <tr>
+                     <td>
+                        <div id="anim_container">
+                           <div id="anim"></div>
+                           <div id="feedback">
+                              Feedback
+                           </div>
                         </div>
-                     </div>
-                     <div id="buttons">
-                        <span>Nombre d'étapes&nbsp;: <span id="stepCounter"></span>.</span>
-                        <input type="button" id="undo" value="Annuler la dernière étape" />
-                     </div>
-                  </td>
-                  <td id="target_cell">
-                     <div id="target_anim_container">
-                        Objectif&nbsp;:
-                        <br><br>
-                        <div id="target_anim"></div>
-                     </div>
-                  </td>
-               </tr>
-            </table>
+                        <div id="buttons">
+                           <span>Nombre d'étapes&nbsp;: <span id="stepCounter"></span>.</span>
+                           <input type="button" id="undo" value="Annuler la dernière étape" />
+                        </div>
+                     </td>
+                     <td id="target_cell">
+                        <div id="target_anim_container">
+                           Objectif&nbsp;:
+                           <br><br>
+                           <div id="target_anim"></div>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
             <img src="icon.png" style="display:none">
             <img src="magnet.png" style="display:none">
          </div>

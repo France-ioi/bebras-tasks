@@ -6,16 +6,28 @@
     <script>
         window.stringsLanguage = 'fi';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
             'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0', 'crane-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
     <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-03-three-towers/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Onnittelut, ratkaisit tämän version!",
             error: "Lopputulos on väärin.", // not displayed
             partial: function(steps, stepsOptimal, level) { 
@@ -98,37 +111,43 @@
          <h1>Palikkatorni</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>Aseta palikat tavoitekuvan mukaisella tavalla. Voit ohjata nosturia nostamaan/pudottamaan yhden palikan kerrallaan klikkaamalla harmaita nappeja.</p>
+            <div id="zone_1">
+               <p>Aseta palikat tavoitekuvan mukaisella tavalla. Voit ohjata nosturia nostamaan/pudottamaan yhden palikan kerrallaan klikkaamalla harmaita nappeja.</p>
 
-            <p>Saat käyttää korkeintaan <span id="nbStepsPartial" class="targetNumber"></span> askelta (askel = yhden palikan nosto ja pudotus)<span class="medium hard"> saadaksesi osan pisteistä, ja <span id="nbStepsOptimal" class="targetNumber"></span> askelta saadaksesi täydet pisteet<span class="hard"></span></span>.
-             </p>
-            <table id="animTable">
-               <tr>
-                  <td>
-                     <div id="anim_container">
-                        <div id="anim"></div>
-                        <div id="feedback">
-                           Palaute
+               <p>Saat käyttää korkeintaan <span id="nbStepsPartial" class="targetNumber"></span> askelta (askel = yhden palikan nosto ja pudotus)<span class="medium hard"> saadaksesi osan pisteistä, ja <span id="nbStepsOptimal" class="targetNumber"></span> askelta saadaksesi täydet pisteet<span class="hard"></span></span>.
+                </p>
+            </div>
+
+            <div id="zone_2">
+               <table id="animTable">
+                  <tr>
+                     <td>
+                        <div id="anim_container">
+                           <div id="anim"></div>
+                           <div id="feedback">
+                              Feedback
+                           </div>
                         </div>
-                     </div>
-                     <div id="buttons">
-                        <span>Askelten lukumäärä: <span id="stepCounter"></span>.</span>
-                        <input type="button" id="undo" value="Peru edellinen askel" />
-                     </div>
-                  </td>
-                  <td id="target_cell">
-                     <div id="target_anim_container">
-                        Tavoite
-                        <br><br>
-                        <div id="target_anim"></div>
-                     </div>
-                  </td>
-               </tr>
-            </table>
+                        <div id="buttons">
+                           <span>Askelten lukumäärä: <span id="stepCounter"></span>.</span>
+                           <input type="button" id="undo" value="Peru edellinen askel" />
+                        </div>
+                     </td>
+                     <td id="target_cell">
+                        <div id="target_anim_container">
+                           Tavoite
+                           <br><br>
+                           <div id="target_anim"></div>
+                        </div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
             <img src="icon.png" style="display:none">
             <img src="magnet.png" style="display:none">
          </div>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>Ratkaisu</h2>
