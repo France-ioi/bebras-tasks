@@ -9,7 +9,8 @@ function initTask(subTask) {
          paperHeight: 285,
          optimal: 4,
          bigScale: 1,
-         smallScale: 0.7
+         smallScale: 0.7,
+         taskH: 410
       },
       medium: {
          visualGraphStr: '{"vertexVisualInfo":{"v_0":{"x":32,"y":112,"angle":0},"v_1":{"x":128,"y":112,"angle":0},"v_2":{"x":224,"y":112,"angle":0},"v_3":{"x":320,"y":112,"angle":0},"v_4":{"x":416,"y":112,"angle":0},"v_5":{"x":512,"y":112,"angle":0},"v_6":{"x":608,"y":112,"angle":45},"v_7":{"x":608,"y":208,"angle":90},"v_8":{"x":608,"y":304,"angle":135},"v_9":{"x":512,"y":304,"angle":180},"v_10":{"x":416,"y":304,"angle":180},"v_11":{"x":320,"y":304,"angle":180},"v_12":{"x":224,"y":304,"angle":180},"v_13":{"x":128,"y":304,"angle":180},"v_14":{"x":32,"y":304,"angle":180}},"edgeVisualInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{},"e_4":{},"e_5":{},"e_6":{},"e_7":{},"e_8":{},"e_9":{},"e_10":{},"e_11":{},"e_12":{},"e_13":{}},"minGraph":{"vertexInfo":{"v_0":{},"v_1":{},"v_2":{},"v_3":{},"v_4":{},"v_5":{},"v_6":{},"v_7":{},"v_8":{},"v_9":{},"v_10":{},"v_11":{},"v_12":{},"v_13":{},"v_14":{}},"edgeInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{},"e_4":{},"e_5":{},"e_6":{},"e_7":{},"e_8":{},"e_9":{},"e_10":{},"e_11":{},"e_12":{},"e_13":{}},"edgeVertices":{"e_0":["v_0","v_1"],"e_1":["v_1","v_2"],"e_2":["v_2","v_3"],"e_3":["v_3","v_4"],"e_4":["v_4","v_5"],"e_5":["v_5","v_6"],"e_6":["v_6","v_7"],"e_7":["v_7","v_8"],"e_8":["v_8","v_9"],"e_9":["v_9","v_10"],"e_10":["v_10","v_11"],"e_11":["v_11","v_12"],"e_12":["v_12","v_13"],"e_13":["v_13","v_14"]},"directed":false}}',
@@ -17,7 +18,8 @@ function initTask(subTask) {
          paperHeight: 402,
          optimal: 5,
          bigScale: 1,
-         smallScale: 0.7
+         smallScale: 0.7,
+         taskH: 530
       },
       hard: {
          visualGraphStr: '{"vertexVisualInfo":{"v_0":{"x":389.21768707482994,"y":107.58095238095238,"angle":0},"v_1":{"x":204.79319727891158,"y":169.05578231292517,"angle":-30},"v_2":{"x":573.6421768707484,"y":169.05578231292517,"angle":30},"v_3":{"x":112.58095238095238,"y":261.2680272108844,"angle":-30},"v_4":{"x":297.00544217687076,"y":261.2680272108844,"angle":30},"v_5":{"x":481.4299319727891,"y":261.2680272108844,"angle":-30},"v_6":{"x":665.8544217687075,"y":261.2680272108844,"angle":30},"v_7":{"x":66.47482993197279,"y":353.48027210884356,"angle":-30},"v_8":{"x":158.687074829932,"y":353.48027210884356,"angle":30},"v_9":{"x":250.89931972789117,"y":353.48027210884356,"angle":-30},"v_10":{"x":343.11156462585035,"y":353.48027210884356,"angle":30},"v_11":{"x":435.32380952380953,"y":353.48027210884356,"angle":-30},"v_12":{"x":527.5360544217688,"y":353.48027210884356,"angle":30},"v_13":{"x":619.748299319728,"y":353.48027210884356,"angle":-30},"v_14":{"x":711.9605442176871,"y":353.48027210884356,"angle":30}},"edgeVisualInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{},"e_4":{},"e_5":{},"e_6":{},"e_7":{},"e_8":{},"e_9":{},"e_10":{},"e_11":{},"e_12":{},"e_13":{}},"minGraph":{"vertexInfo":{"v_0":{},"v_1":{},"v_2":{},"v_3":{},"v_4":{},"v_5":{},"v_6":{},"v_7":{},"v_8":{},"v_9":{},"v_10":{},"v_11":{},"v_12":{},"v_13":{},"v_14":{}},"edgeInfo":{"e_0":{},"e_1":{},"e_2":{},"e_3":{},"e_4":{},"e_5":{},"e_6":{},"e_7":{},"e_8":{},"e_9":{},"e_10":{},"e_11":{},"e_12":{},"e_13":{}},"edgeVertices":{"e_0":["v_0","v_1"],"e_1":["v_0","v_2"],"e_2":["v_1","v_3"],"e_3":["v_1","v_4"],"e_4":["v_3","v_7"],"e_5":["v_3","v_8"],"e_6":["v_4","v_9"],"e_7":["v_4","v_10"],"e_8":["v_2","v_5"],"e_9":["v_2","v_6"],"e_10":["v_5","v_11"],"e_11":["v_5","v_12"],"e_12":["v_6","v_13"],"e_13":["v_6","v_14"]},"directed":false}}',
@@ -25,7 +27,8 @@ function initTask(subTask) {
          paperHeight: 395,
          optimal: 5,
          bigScale: 1,
-         smallScale: 0.7
+         smallScale: 0.7,
+         taskH: 530
       }
    };
 
@@ -133,9 +136,33 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
       initGraph();
       numEdges = graph.getEdgesCount();
+
+      displayHelper.taskH = data[level].taskH;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 0.6*data[level].width;
+        displayHelper.maxTaskW = 1.2*data[level].width;
+   };
+
+   subTask.unloadLevel = function(callback) {
+      if(mainInstance) {
+         mainInstance.remove();
+      }
+      if(exampleInstances) {
+         for(var iExample in exampleInstances) {
+            exampleInstances[iExample].remove();
+         }
+      }
+      callback();
    };
 
    subTask.getStateObject = function() {
@@ -153,15 +180,6 @@ function initTask(subTask) {
          processPair(answer.userVertexPairs[iPair]);
       }
    };
-   
-   subTask.resetDisplay = function() {
-      initMainInstance();
-      updateCounter();
-
-      $("#descriptionSteps").text(data[level].optimal);
-      showFeedback(null);
-      setRestartConfirmation(true);
-   };
 
    subTask.getAnswerObject = function() {
       return answer;
@@ -173,19 +191,19 @@ function initTask(subTask) {
          userEdge: null          // Selected faulty wire (edgeID)
       };
    };
+   
+   subTask.resetDisplay = function() {
+      initMainInstance();
+      updateCounter();
 
-   subTask.unloadLevel = function(callback) {
-      if(mainInstance) {
-         mainInstance.remove();
-      }
-      if(exampleInstances) {
-         for(var iExample in exampleInstances) {
-            exampleInstances[iExample].remove();
-         }
-      }
-      callback();
+      $("#descriptionSteps").text(data[level].optimal);
+      showFeedback(null);
+      setRestartConfirmation(true);
    };
 
+   
+
+   
    function initGraph() {
       graph = Graph.fromMinimized(JSON.parse(data[level].visualGraphStr).minGraph);
    }
@@ -791,9 +809,14 @@ function initTask(subTask) {
 
    function showFeedback(string) {
       if(string === null || string === undefined) {
-         string = "&nbsp;";
+         string = "";
       }
-      $("#feedback").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+         // $("#feedback").hide();
+      }else{
+         $("#feedback").html(string);
+      }
    }
 
    function setRestartConfirmation(confirm) {
@@ -839,4 +862,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
-
+displayHelper.useFullWidth();
