@@ -6,16 +6,28 @@
     <script>
         window.stringsLanguage = 'en';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.1', 'raphaelButton-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-02-grid-copy/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Congratulations, you have succeeded!",
             patternError: "You have colored some black boxes while they do not contain a circle.",
             patternMissing: "Some boxes marked with a circle have not yet been colored in black.",
@@ -88,59 +101,71 @@
          <h1>Fast Copying</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p>Paint the white boxes containing a circle with black, and leave the other boxes in white.</p>
+            <div id="zone_1">
+               <p>Paint the white boxes containing a circle with black, and leave the other boxes in white.</p>
              <p>First click on the <b>"Copy Black Boxes"</b> button, then move the copied pattern with the arrows, then paste this pattern as needed with the <b>"Paste Pattern"</b> button<span class="medium hard">,<strong> before using the "Copy Black Boxes" button again</strong></span>.</p>
         <p class="medium hard"><strong>You can use the "Paste Pattern" button for 7 times only.</strong></p>
-             <div id="anim_container">
-               <table>
-                  <tr>
-                     <td>
-                        <div id="anim"></div>
-                     </td>
-                     <td id="controlsContainer">
-                        <input type="button" value="Copy Black Boxes" id="copyAll" />
-                        <br><br>
-                        <table id="arrowsTable">
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_up"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                           <tr>
-                              <td>
-                                 <div id="paper_left"></div>
-                              </td>
-                              <td></td>
-                              <td>
-                                 <div id="paper_right"></div>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_down"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                        </table>
-                        <br>
-                        <p>
-                           <input type="button" value="Paste Pattern" id="paste" />
-                           <br><br>
-                           <span id="stepsCount" class="medium hard"></span>
-                           <br><br>
-                           <input type="button" value="Undo" id="undo" class="medium hard" />
-                        </p>
-                     </td>
-                  </tr>
-               </table>
-               <div id="feedback"></div>
             </div>
-            <div id="validation"><input type="button" value="Validate" id="execute" /></div>
+
+            <div id="zone_2">
+
+               <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <table id="controlsTable">
+                           <tr><td class="controlCell">
+                           <input type="button" value="Copy Black Boxes" id="copyAll" />
+                           </td></tr>
+                           <tr><td>
+                              <table id="arrowsTable">
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_up"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <div id="paper_left"></div>
+                                 </td>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_right"></div>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_down"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                           </table>
+                           </td></tr>
+                           <tr><td class="controlCell">
+                              <input type="button" value="Paste Pattern" id="paste" />
+                           </td></tr>
+                           <tr><td class="stepsCountCell">
+                              <div id="stepsCount" class="medium hard"></div>
+                           </td></tr>
+                           <tr><td class="controlCell">
+                              <input type="button" value="Undo" id="undo" />
+                           </td></tr>
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+               </div>
+            </div>
             <img src="icon.png" style="display:none">
          </div>
+         
       </div><!-- task -->
       <div id="solution">
 

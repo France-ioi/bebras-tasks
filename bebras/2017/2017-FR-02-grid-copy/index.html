@@ -6,16 +6,28 @@
     <script>
         window.stringsLanguage = 'fr';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
-            'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.1', 'raphaelButton-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
     <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-02-grid-copy/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Votre mission",
             success: "Bravo, vous avez réussi&nbsp;!",
             patternError: "Vous avez colorié certaines cases en noir alors qu'elles ne contiennent pas de rond. Essayez à nouveau.",
             patternMissing: "Certaines cases marquées d'un rond n'ont pas encore été coloriées en noir.",
@@ -97,65 +110,69 @@
          <h1>Copie rapide</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>Coloriez en noir les cases marquées d'un rond, et laissez les autres en blanc.</p>
-            <p>Cliquez d'abord sur le bouton "copier les cases noires", déplacez ensuite le motif copié avec les flèches, puis collez ce motif  une ou plusieurs fois<span class="medium hard">,<strong> avant d'utiliser à nouveau le bouton copier</strong></span>.</p>
+            <div id="zone_1">
+               <p>Coloriez en noir les cases marquées d'un rond, et laissez les autres en blanc.</p>
+               <p>Cliquez d'abord sur le bouton "copier les cases noires", déplacez ensuite le motif copié avec les flèches, puis collez ce motif  une ou plusieurs fois<span class="medium hard">,<strong> avant d'utiliser à nouveau le bouton copier</strong></span>.</p>
 
-            <p><span class="medium hard">Utilisez le bouton <strong>coller au maximum 7 fois</strong>.</span></p>
-        
-            <div id="anim_container">
-               <table>
-                  <tr>
-                     <td>
-                        <div id="anim"></div>
-                     </td>
-                     <td id="controlsContainer">
-                        <table id="controlsTable">
-                        <tr><td class="controlCell">
-                          <input type="button" value="Copier les cases noires" id="copyAll" />
-                        </td></tr>
-                        <tr><td>
-                           <table id="arrowsTable">
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_up"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                           <tr>
-                              <td>
-                                 <div id="paper_left"></div>
-                              </td>
-                              <td></td>
-                              <td>
-                                 <div id="paper_right"></div>
-                              </td>
-                           </tr>
-                           <tr>
-                              <td></td>
-                              <td>
-                                 <div id="paper_down"></div>
-                              </td>
-                              <td></td>
-                           </tr>
-                        </table>
-                        </td></tr>
-                        <tr><td class="controlCell">
-                           <input type="button" value="Coller" id="paste" />
-                        </td></tr>
-                        <tr><td class="stepsCountCell">
-                           <div id="stepsCount" class="medium hard"></div>
-                        </td></tr>
-                        <tr><td class="controlCell">
-                           <input type="button" value="Annuler" id="undo" />
-                        </td></tr>
-                        </table>
-                     </td>
-                  </tr>
-               </table>
-               <div id="feedback"></div>
+               <p><span class="medium hard">Utilisez le bouton <strong>coller au maximum 7 fois</strong>.</span></p>
             </div>
-            <div id="validation"><input type="button" value="Valider" id="execute" /></div>
+
+            <div id="zone_2">
+
+               <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <table id="controlsTable">
+                           <tr><td class="controlCell">
+                             <input type="button" value="Copier les cases noires" id="copyAll" />
+                           </td></tr>
+                           <tr><td>
+                              <table id="arrowsTable">
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_up"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                              <tr>
+                                 <td>
+                                    <div id="paper_left"></div>
+                                 </td>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_right"></div>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td></td>
+                                 <td>
+                                    <div id="paper_down"></div>
+                                 </td>
+                                 <td></td>
+                              </tr>
+                           </table>
+                           </td></tr>
+                           <tr><td class="controlCell">
+                              <input type="button" value="Coller" id="paste" />
+                           </td></tr>
+                           <tr><td class="stepsCountCell">
+                              <div id="stepsCount" class="medium hard"></div>
+                           </td></tr>
+                           <tr><td class="controlCell">
+                              <input type="button" value="Annuler" id="undo" />
+                           </td></tr>
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+               </div>
+            </div>
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->

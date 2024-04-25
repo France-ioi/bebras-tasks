@@ -24,7 +24,8 @@ function initTask(subTask) {
             ['.', '.', '.', 't', 't', 't', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
             ['.', '.', '.', '.', 't', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
             ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
-         ]
+         ],
+         taskH: 490
       },
       medium: {
          pasteLimit: 7,
@@ -44,7 +45,8 @@ function initTask(subTask) {
             ['.', '.', 't', '.', '.', '.', 't', '.', '.', '.', 't', '.', '.', '.', 't', '.', '.'],
             ['.', 't', 't', 't', '.', 't', 't', 't', '.', 't', 't', 't', '.', 't', 't', 't', '.'],
             ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
-         ]
+         ],
+         taskH: 450
       },
       hard: {
          pasteLimit: 7,
@@ -70,7 +72,8 @@ function initTask(subTask) {
             ['.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't'],
             ['t', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.'],
             ['.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't', '.', 't']
-         ]
+         ],
+         taskH: 550
       }
    };
 
@@ -148,11 +151,24 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
       rows = data[level].grid.length;
       cols = data[level].grid[0].length;
       createVirtualGrid();
-      displayHelper.hideValidateButton = true;
+      // displayHelper.hideValidateButton = true;
+      displayHelper.customValidat = clickExecute;
+
+      displayHelper.taskH = data[level].taskH;
+        displayHelper.taskW = 770;
+        displayHelper.minTaskW = 0.6*data[level].width;
+        displayHelper.maxTaskW = 1.2*data[level].width;
    };
 
    subTask.getStateObject = function() {
@@ -162,13 +178,6 @@ function initTask(subTask) {
    subTask.reloadAnswerObject = function(answerObj) {
       answer = answerObj;
       resetVirtualGrid();
-   };
-   
-   subTask.resetDisplay = function() {
-      initPaper();
-      initHandlers();
-      showFeedback(null);
-      updateSteps();
    };
 
    subTask.getAnswerObject = function() {
@@ -202,9 +211,18 @@ function initTask(subTask) {
       unbindButtons();
       callback();
    };
+   
+   subTask.resetDisplay = function() {
 
+      initPaper();
+      initHandlers();
+      showFeedback(null);
+      updateSteps();
+   };
+
+   
    function unbindButtons() {
-      $("#execute").unbind("click");
+      // $("#execute").unbind("click");
       $("#copyAll").unbind("click");
       $("#paste").unbind("click");
       $("#undo").unbind("click");
@@ -212,7 +230,7 @@ function initTask(subTask) {
 
    function initHandlers() {
       unbindButtons();
-      $("#execute").click(clickExecute);
+      // $("#execute").click(clickExecute);
       $("#copyAll").click(clickCopy);
       $("#paste").click(clickPaste);
       $("#undo").click(clickUndo);
@@ -454,7 +472,7 @@ function initTask(subTask) {
          platform.validate("done");
          return;
       }
-      displayHelper.validate("stay");
+      // displayHelper.validate("stay");
    }
 
    function clickCopy() {
@@ -529,12 +547,16 @@ function initTask(subTask) {
       }
    }
 
-   function showFeedback(string) {
+   var showFeedback = function(string) {
       if(!string) {
          string = "";
       }
-      $("#feedback").html(string);
-   }
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#feedback").html(string);
+      }
+   };
 
    function updateSteps() {
       if(!data[level].pasteLimit) {
@@ -605,4 +627,5 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
 
