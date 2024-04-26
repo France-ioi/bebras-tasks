@@ -6,16 +6,28 @@
     <script>
         window.stringsLanguage = 'fi';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.1', 'raphaelButton-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+          ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-06-pacman/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Onnittelut, ratkaisit tämän version!",
             error: "Haamu sai majavan kiinni. Voit aloittaa uudelleen alusta tai perua viimeisiä askeleitasi.",
             undoOption: "Peru viime askel",
@@ -90,13 +103,13 @@
       </style>
    </head>
    <body>
-
       <div id="task">
          <h1>Haamut</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p class="hard" id="difficultyWarning"></p>
-             <p>
+            <div id="zone_1">
+                <p class="hard" id="difficultyWarning"></p>
+                <p>
                Siirrä majava keltaisen ympyrän luo ilman että <span class="easy medium">haamu</span><span class="hard">haamut</span> saavat majavaa kiinni. </p>
              <p>Voit siirtää majavaa nuolinäppäimillä tai klikkaamalla ruudukkoa.
              </p>
@@ -106,22 +119,24 @@
              <p class="hard">
                Huomaa, että haamut liikkuvat koko ajan saman periaatteen mukaisesti. Yritä välttää niitä!
              </p>
+             </div>
 
-             <div id="anim_container">
-               <table>
-                  <tr>
-                     <td>
-                        <div id="anim"></div>
-                     </td>
-                     <td id="controlsContainer">
-                        <input type="button" id="undo" value="Peru" />
-                        <br>
-                        <div class="livesStatus"></span>
-                     </td>
-                  </tr>
-               </table>
-               <div id="feedback"></div>
-               <input type="button" id="restart" value="Aloita alusta" />
+            <div id="zone_2">
+                <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <input type="button" id="undo" value="Peru" />
+                           <br>
+                           <div class="livesStatus"></span>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+               </div>
             </div>
             <img src="icon.png" style="display:none">
             <img src="castor.png" style="display:none">
@@ -129,6 +144,7 @@
             <img id="image_ghost2" src="ghost2.png" style="display:none">
          </div>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>Ratkaisu</h2>

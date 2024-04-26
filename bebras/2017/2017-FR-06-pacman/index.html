@@ -6,16 +6,28 @@
     <script>
         window.stringsLanguage = 'fr';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.0', 'raphaelButton-1.0',
-            'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'grid-1.1', 'raphaelButton-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+          ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-06-pacman/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Votre mission",
             success: "Bravo, vous avez réussi&nbsp;!",
             error: "Castor a été attrapé par un fantôme. Vous pouvez recommencer ou annuler les dernières étapes.", //&quot;Recommencer&quot;
             undoOption: "Annuler la dernière étape",
@@ -96,33 +109,37 @@
          <h1>Fantôme</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p class="hard" id="difficultyWarning"></p>
-             <p>
-               Emmenez Castor au point jaune sans qu'il se fasse attraper par <span class="easy medium">le fantôme</span><span class="hard">les fantômes</span>. </p>
-             <p>Vous pouvez déplacer Castor avec les flèches du clavier ou bien en cliquant sur la grille.
-             </p>
-             <p class="easy medium">
-               Observez que le fantôme se déplace toujours selon la même stratégie. Profitez-en pour le coincer !
-             </p>
-             <p class="hard">
-               Observez que les fantômes se déplacent toujours selon la même stratégie.  Profitez-en pour les coincer !
-             </p>
+            <div id="zone_1">
+                <p class="hard" id="difficultyWarning"></p>
+                <p>
+                  Emmenez Castor au point jaune sans qu'il se fasse attraper par <span class="easy medium">le fantôme</span><span class="hard">les fantômes</span>. </p>
+                <p>Vous pouvez déplacer Castor avec les flèches du clavier ou bien en cliquant sur la grille.
+                </p>
+                <p class="easy medium">
+                  Observez que le fantôme se déplace toujours selon la même stratégie. Profitez-en pour le coincer !
+                </p>
+                <p class="hard">
+                  Observez que les fantômes se déplacent toujours selon la même stratégie.  Profitez-en pour les coincer !
+                </p>
+             </div>
 
-             <div id="anim_container">
-               <table>
-                  <tr>
-                     <td>
-                        <div id="anim"></div>
-                     </td>
-                     <td id="controlsContainer">
-                        <input type="button" id="undo" value="Annuler la dernière étape" />
-                        <br>
-                        <div class="livesStatus"></span>
-                     </td>
-                  </tr>
-               </table>
-               <div id="feedback"></div>
-               <input type="button" id="restart" value="Recommencer" />
+            <div id="zone_2">
+                <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td>
+                           <div id="anim"></div>
+                        </td>
+                        <td id="controlsContainer">
+                           <input type="button" id="undo" value="Annuler la dernière étape" />
+                           <br>
+                           <div class="livesStatus"></span>
+                        </td>
+                     </tr>
+                  </table>
+                  <div id="feedback"></div>
+                  <!-- <input type="button" id="restart" value="Recommencer" /> -->
+               </div>
             </div>
             <img src="icon.png" style="display:none">
             <img src="castor.png" style="display:none">
