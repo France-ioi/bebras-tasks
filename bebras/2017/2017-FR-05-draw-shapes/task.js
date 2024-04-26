@@ -40,7 +40,8 @@ function initTask(subTask) {
                shape: "circle",
                contents: []
             }
-         ]
+         ],
+         taskH: 310
       },
       medium: {
          target: [
@@ -61,7 +62,8 @@ function initTask(subTask) {
                   }
                ]
             }
-         ]
+         ],
+         taskH: 350
       },
       hard: {
          target: [
@@ -121,10 +123,15 @@ function initTask(subTask) {
                   }
                ]
             }
-         ]
+         ],
+         taskH: 570
       }
    };
-
+   var exampleScale = {
+      easy: 1,
+      medium: 0.8,
+      hard: 0.5
+   };
    var examplesData = {
       // Each level has an array of configurations.
       easy: [
@@ -330,7 +337,7 @@ function initTask(subTask) {
          "fill-opacity": 0
       },
       xPad: 15,
-      yPad: 10,
+      yPad: 25,
       xSpacing: 5,
       buttonsPaperXPad: 5,
       buttonsPaperYPad: 5,
@@ -353,34 +360,22 @@ function initTask(subTask) {
    var mouseupBindID = "mouseup.draw-shapes-bind";
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
       if(data[level].depth === undefined) {
          data[level].depth = getDepth(data[level].target);
       }
-   };
 
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-   };
-   
-   subTask.resetDisplay = function() {
-      initMainInstance();
-      initButtons();
-      initExamples();
-      $(".hint").hide();
-      $(document).bind(mouseupBindID, onMouseUp);
-   };
-
-   subTask.getAnswerObject = function() {
-      return answer;
-   };
-
-   subTask.getDefaultAnswerObject = function() {
-      return getEmptyConfig(); // Same format as described in the data.
+      displayHelper.taskH = data[level].taskH;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 600;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.unloadLevel = function(callback) {
@@ -392,6 +387,33 @@ function initTask(subTask) {
       $(document).unbind(mouseupBindID);
       callback();
    };
+
+   subTask.getStateObject = function() {
+      return state;
+   };
+
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+   };
+
+   subTask.getAnswerObject = function() {
+      return answer;
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      return getEmptyConfig(); // Same format as described in the data.
+   };
+
+   
+   subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
+      initMainInstance();
+      initButtons();
+      initExamples();
+      $(".hint").hide();
+      $(document).bind(mouseupBindID, onMouseUp);
+   };  
 
    function initMainInstance() {
       $("#configString_main").text(configToString(data[level].target));
@@ -476,12 +498,17 @@ function initTask(subTask) {
    function initExamples() {
       $(".exampleContainer").hide();
       exampleInstances = {};
+      var scale = exampleScale[level];
+      // var scale = 1;
       for(var iExample in examplesData[level]) {
          $("#exampleContainer" + iExample).show();
          var id = "exampleAnim" + iExample;
-         exampleInstances[iExample] = new VisualInstance(id, id, examplesData[level][iExample]);
+         exampleInstances[iExample] = new VisualInstance(id, id, examplesData[level][iExample],scale);
          var exampleString = configToString(examplesData[level][iExample]);
          $("#configString_example" + iExample).text(exampleString);
+      }
+      if(respEnabled){
+         displayHelper.updateLayout();
       }
    }
 
@@ -539,13 +566,15 @@ function initTask(subTask) {
       });
    }
 
-   function VisualInstance(id, elementID, config) {
+   function VisualInstance(id, elementID, config,scale) {
       var self = this;
-
+      var scale = scale || 1;
       this.init = function() {
          this.maxDepth = getDepth(config);
          this.paperWidth = 2 * visualParams.xPad + config.length * visualParams.shapesSizes[level][this.maxDepth] + visualParams.xSpacing * (config.length - 1);
          this.paperHeight = 2 * visualParams.yPad + visualParams.shapesSizes[level][this.maxDepth];
+         this.paperWidth = this.paperWidth*scale;
+         this.paperHeight = this.paperHeight*scale;
          this.paper = subTask.raphaelFactory.create(id, elementID, this.paperWidth, this.paperHeight);
 
          this.solidElements = {};
@@ -566,20 +595,26 @@ function initTask(subTask) {
           */
          this.slotInfo = [];
 
-         this._drawAll();
+         this._drawAll(scale);
          this.setMode(null);
+         this.paper.forEach(function(el){
+            el.scale(scale);
+         })
       };
 
-      this._getTopLevelPosition = function(index) {
+      this._getTopLevelPosition = function(index,scale) {
+         scale = scale || 1;
+         var x = visualParams.xPad + index * (visualParams.shapesSizes[level][this.maxDepth] + visualParams.xSpacing) + visualParams.shapesSizes[level][this.maxDepth] / 2;
+         var y = visualParams.yPad + visualParams.shapesSizes[level][this.maxDepth] / 2;
          return {
-            x: visualParams.xPad + index * (visualParams.shapesSizes[level][this.maxDepth] + visualParams.xSpacing) + visualParams.shapesSizes[level][this.maxDepth] / 2,
-            y: visualParams.yPad + visualParams.shapesSizes[level][this.maxDepth] / 2
+            x: x*scale,
+            y: y*scale
          };
       };
 
-      this._drawAll = function() {
+      this._drawAll = function(scale) {
          for(var index = 0; index < config.length; index++) {
-            this._recursiveDraw(config[index], this._getTopLevelPosition(index), this.maxDepth);
+            this._recursiveDraw(config[index], this._getTopLevelPosition(index,scale), this.maxDepth,scale);
          }
          this._updateLayers();
       };
@@ -605,9 +640,10 @@ function initTask(subTask) {
          return element;
       };
 
-      this._recursiveDraw = function(object, center, sizeIndex) {
+      this._recursiveDraw = function(object, center, sizeIndex, scale) {
+         // console.log(sizeIndex)
          var currentSize = visualParams.shapesSizes[level][sizeIndex];
-
+         scale = scale || 1;
          this.slotInfo.push({
             position: center,
             sizeIndex: sizeIndex,
@@ -628,24 +664,24 @@ function initTask(subTask) {
          if(object.contents.length === 0) {
             return;
          }
-
+         var dy = (sizeIndex == 2) ? -10 : 0;
          var childrenPositions = [
             {
                x: center.x,
-               y: center.y - currentSize * visualParams.topShapeYRatio
+               y: center.y - currentSize * visualParams.topShapeYRatio * scale + dy
             },
             {
-               x: center.x - currentSize * visualParams.bottomShapeXRatio,
-               y: center.y + currentSize * visualParams.bottomShapeYRatio
+               x: center.x - currentSize * visualParams.bottomShapeXRatio*scale,
+               y: center.y + currentSize * visualParams.bottomShapeYRatio*scale + dy
             },
             {
-               x: center.x + currentSize * visualParams.bottomShapeXRatio,
-               y: center.y + currentSize * visualParams.bottomShapeYRatio
+               x: center.x + currentSize * visualParams.bottomShapeXRatio*scale,
+               y: center.y + currentSize * visualParams.bottomShapeYRatio*scale + dy
             }
          ];
 
          for(var iContent = 0; iContent < object.contents.length; iContent++) {
-            this._recursiveDraw(object.contents[iContent], childrenPositions[iContent], sizeIndex - 1);
+            this._recursiveDraw(object.contents[iContent], childrenPositions[iContent], sizeIndex - 1,scale);
          }
       };
 
@@ -876,4 +912,5 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
 

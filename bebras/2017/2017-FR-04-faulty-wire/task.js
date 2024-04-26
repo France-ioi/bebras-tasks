@@ -149,8 +149,8 @@ function initTask(subTask) {
 
       displayHelper.taskH = data[level].taskH;
         displayHelper.taskW = 770;
-        displayHelper.minTaskW = 0.6*data[level].width;
-        displayHelper.maxTaskW = 1.2*data[level].width;
+        displayHelper.minTaskW = 500;
+        displayHelper.maxTaskW = 900;
    };
 
    subTask.unloadLevel = function(callback) {

@@ -1,21 +1,33 @@
 <!doctype html>
-<html>
+<html dir="rtl" align="right">
    <head>
     <meta charset="utf-8">
     <title>2017-AR-05</title>
     <script>
         window.stringsLanguage = 'ar';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'raphaelButton-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-05-draw-shapes/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "أحسنت. إجابة صحيحة",
             error: "الشكل لا يمثل الكود المكتوب",
             removeShape: "مسح",
@@ -101,20 +114,31 @@
             font-weight: bold;
             color: green;
          }
+         .instruction_example {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0;
+         }
       </style>
    </head>
    <body>
       <div id="task">
-         <div style="direction: rtl">
-            <h1>لغة الأشكال</h1>
-            <div id="tabsContainer"></div>
-            <div id="taskContent">
-               <table><tr><td style="vertical-align:center">
-                 الكود <span class="configString" id="configString_example0">A</span> <br class="hard"/>يمثل الرسم التالي:</td><td><span id="exampleAnim0" class="drawAreaDivExample"></span>
-               </td><td>.</td></tr></table>
-               <table class="medium"><tr><td style="vertical-align:center">
-                  الكود <span class="configString" id="configString_example1">A</span> يمثل الرسم التالي:</td><td><span id="exampleAnim1" class="drawAreaDivExample"></span>
-               </td><td>.</td></tr></table>
+         <h1>لغة الأشكال</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+              
+               <p class="instruction_example" id="example1">
+                  <span>الكود <span class="configString" id="configString_example0">A</span>يمثل الرسم التالي:</span>
+                  <span id="exampleAnim0" class="drawAreaDivExample"></span></p>
+               <p class="medium instruction_example" id="example2">
+                  الكود <span class="configString" id="configString_example1">A</span> يمثل الرسم التالي:
+                  <span id="exampleAnim1" class="drawAreaDivExample"></p>
+            </div>
+
+            <div id="zone_2">
                <div id="animContainer">
                   <div>
                      <div id="buttonsAnim"></div>
@@ -128,10 +152,11 @@
                      </p>
                   </div>
               </div>
-              <img src="icon.png" style="display:none">
-            </div>
+           </div>
+           <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>الحل</h2>
