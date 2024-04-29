@@ -166,6 +166,13 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $("#paper").css("margin-top","20px");
+       }
       level = curLevel;
       grid = data[level].grid;
       rows = grid.length;
@@ -173,6 +180,11 @@ function initTask(subTask) {
       graphParams = extractLevelSpecific(graphParamsLevels, level);
       initConfig();
       initTargetGraph();
+
+      displayHelper.taskH = 750;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -374,6 +386,25 @@ function initTask(subTask) {
       paperGraphBorder = paperGraph.rect(0, 0, paperGraphParams.width, paperGraphParams.height).attr(paperGraphParams.borderAttr);
 
       graphDrawer = new SimpleGraphDrawer(graphParams.circleAttr, graphParams.lineAttr, vertexDrawer, true, null);
+      graphDrawer.getDistanceFromVertex = function(id, xPos, yPos) { // bug fix
+         var vertexPos = this.getVertexPosition(id);
+
+         if (window.displayHelper) {
+            var scale = window.displayHelper.scaleFactor || 1;
+         }else{
+            var scale = 1;
+         }
+         var x = vertexPos.x*scale;
+         var y = vertexPos.y*scale;
+         var side = rectSide[level]*scale;
+         var x1 = x;
+         var x2 = x + side;
+         var y1 = y - side/2;
+         var y2 = y + side/2;
+         if(xPos < x1 || xPos > x2 || yPos < y1 || yPos > y2)
+            return Infinity
+         return 0
+      }
 
       if(answer.visualGraphStr) {
          visualGraph = VisualGraph.fromJSON(answer.visualGraphStr, "visual_graph", paperGraph, graph, graphDrawer, true);
@@ -411,11 +442,11 @@ function initTask(subTask) {
             isGoodPosition: isGoodPosition,
             enabled: true
          });
-         fuzzyRemover = null;
+         // fuzzyRemover = null;
       }
       else {
          vertexConnector = new EdgeCreator("connector", "anim_graph", paperGraph, graph, visualGraph, graphMouse, onVertexSelect, onPairSelect, true);
-         fuzzyRemover = new FuzzyRemover("fuzzyRemover", "anim_graph", paperGraph, graph, visualGraph, null, false, true, fuzzyVertexThreshold, fuzzyEdgeThreshold, true);
+         // fuzzyRemover = new FuzzyRemover("fuzzyRemover", "anim_graph", paperGraph, graph, visualGraph, null, false, true, fuzzyVertexThreshold, fuzzyEdgeThreshold, true);
       }
 
       graph.addPostListener("answerUpdater", answerUpdater, 10000);
@@ -800,7 +831,6 @@ function initTask(subTask) {
       var visualConfig = new VisualConfig(config, cellParams.attrs.small);
       visualConfig.draw(paperGraph, centerX + graphParams.gridOffset.x, centerY + graphParams.gridOffset.y);
       result = result.concat(visualConfig.getRaphaels());
-
       return result;
    }
 
@@ -818,7 +848,7 @@ function initTask(subTask) {
           * and if not, then a suitable feedback message was displayed).
           * Otherwise, the feedback should be reset.
           */
-         showMessage(null);
+         // showMessage(null);
       }
       var attr;
       if(selected) {
@@ -827,7 +857,8 @@ function initTask(subTask) {
       else {
          attr = graphParams.squareAttr;
       }
-      visualGraph.getRaphaelsFromID(id)[1].attr(attr);
+      var obj = visualGraph.getRaphaelsFromID(id)[2];
+      obj.attr(attr);
    }
 
    function onPairSelect(id1, id2) {
@@ -907,10 +938,18 @@ function initTask(subTask) {
    }
 
    function showMessage(string) {
-      if(string === null || string === undefined || string === "") {
-         string = "&nbsp;";
+      // if(string === null || string === undefined || string === "") {
+      //    string = "&nbsp;";
+      // }
+      // $("#messageConfig").html(string);
+      if(string === null || string === undefined) {
+         string = "";
       }
-      $("#messageConfig").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#feedback").html(string);
+      }
    }
 
    function checkUser(schoolArray, userArray, missingMessage, wrongMessage, emptyMessage) {
@@ -927,7 +966,6 @@ function initTask(subTask) {
       for(index in userArray) {
          userObj[userArray[index]] = true;
       }
-      
       // Special case if no edges
       if(userArray.length == 0) {
           return {
@@ -968,6 +1006,12 @@ function initTask(subTask) {
        */
       var vertexResult = checkUser(data[level].target.getAllVertices(), graph.getAllVertices(), taskStrings.missingVertex);
       if(!vertexResult.success) {
+         if(!vertexResult.message){
+            return {
+               successRate: 0,
+               message: taskStrings.missingVertex
+            };
+         }
          return {
             successRate: 0,
             message: vertexResult.message
@@ -993,3 +1037,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();

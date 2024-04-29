@@ -6,17 +6,29 @@
     <script>
         window.stringsLanguage = 'en';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
-            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.1',
+            'graph-1.0', 'visual-graph-1.2', 'graph-mouse-1.4', 'randomGenerator-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+          ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-07-graph-representation/",
@@ -35,6 +47,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Congratulations, you have succeeded !",
             missingVertex: "There are missing photos. Move the red ball to other cells, then click the button to add a photo.",
             missingEdge: "There are missing black lines between some photos. Click on two photos to link them.",
@@ -85,45 +98,49 @@
             height: 5em;
             margin: 10px;
          }
+         #example {
+            text-align:center;
+         }
       </style>
    </head>
    <body>
-
       <div id="task">
          <h1>Photos Game</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <div style="float:right;text-align:center; margin-left:20px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>Example</b></p><p style="margin-top: 0px; margin-bottom: 20px">with a board of 2 cells</p><img src="example.png"></div>
-            <p>Help the beaver to take pictures of all possible positions <span class="easy medium">of the red ball.</span><span class="hard">of the two red balls.</span>
-            </p>
-            <p>You can do this by moving <span class="easy medium">the ball</span><span class="hard">the balls</span> from one cell to a neighboring cell then click the "Take a Picture" button.
-            </p>
-            <p>
-You will find all the taken photos on the grey area below. Draw a line between any two photos if it is possible to move the red ball from one cell to another cell. 
-
-            </p>
-            <p>
-                Click on the photos to link them with lines.
-            </p>
+            <div id="zone_1">
+               <div id="example"><p><b>Example</b> with a board of 2 cells</p><img src="example.png"></div>
+               <p>Help the beaver to take pictures of all possible positions <span class="easy medium">of the red ball.</span><span class="hard">of the two red balls.</span>
+               </p>
+               <p>You can do this by moving <span class="easy medium">the ball</span><span class="hard">the balls</span> from one cell to a neighboring cell then click the "Take a Picture" button.
+               </p>
+            </div>
 
 
-            <center><table>
-               <tr>
-                  <td><div id="anim_config"></div></td>
-                  <td>
-                     <div><input type="button" value="Take a Picture" id="addSituation" /></div>
-                     <div id="messageConfig">&nbsp;</div>
-                  </td>
-               </tr>
-            </table>
-            </center>
-            <div style="font-weight: bold; margin-top: 1em; text-align: center">Photos:</div>
-            <div id="anim_container">
-               <div id="anim_graph"></div>
+            <div id="zone_2">
+               <p style="text-align: center;">
+                   Click on the photos to link them with lines.
+               </p>
+
+               <center><table>
+                  <tr>
+                     <td><div id="anim_config"></div></td>
+                     <td>
+                        <div><input type="button" value="Take a Picture" id="addSituation" /></div>
+                        <!-- <div id="messageConfig">&nbsp;</div> -->
+                     </td>
+                  </tr>
+               </table>
+               </center>
+               <div style="font-weight: bold; margin-top: 1em; text-align: center">Photos :</div>
+               <div id="anim_container">
+                  <div id="anim_graph"></div>
+               </div>
             </div>
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>Solution</h2>

@@ -6,17 +6,29 @@
     <script>
         window.stringsLanguage = 'fr';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
-            'graph-1.0', 'visual-graph-1.0', 'graph-mouse-1.0', 'randomGenerator-1.0',
-            'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.1',
+            'graph-1.0', 'visual-graph-1.2', 'graph-mouse-1.4', 'randomGenerator-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+          ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-07-graph-representation/",
@@ -35,6 +47,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Votre mission",
             success: "Bravo, vous avez réussi !",
             missingVertex: "Il manque des photos. Déplacez la bille rouge sur d'autres cases, puis cliquez sur le bouton pour ajouter une photo.",
             missingEdge: "Il manque des traits noirs entre certaines photos. Cliquez sur deux photos pour les relier.",
@@ -85,6 +98,9 @@
             height: 5em;
             margin: 10px;
          }
+         #example {
+            text-align:center;
+         }
       </style>
    </head>
    <body>
@@ -93,30 +109,36 @@
          <h1>Photos du jeu</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <div style="float:right;text-align:center; margin-left:20px; border: solid black 1px; padding:5px 10px 10px 10px "><p style="margin-top: 10px; margin-bottom: 10px"><b>Exemple</b></p><p style="margin-top: 0px; margin-bottom: 20px">avec un plateau de 2 cases</p><img src="example.png"></div>
-            <p>
-               Aidez Castor à prendre en photo toutes les positions possibles <span class="easy medium">de la bille rouge. Vous pouvez la déplacer</span><span class="hard">des deux billes rouges. Vous pouvez les déplacer</span> sur le plateau ci-dessous.
-            </p>
-            <p>
-                Ensuite, placez un trait entre deux photos s'il est possible de passer d'une situation à l'autre en déplaçant <span class="easy medium">la</span><span class="hard">une</span> bille d'une case vers une case voisine.
-            </p>
-            <p>
-                Cliquez sur les photos pour les relier par des traits.
-            </p>
+            <div id="zone_1">
+               <div id="example"><p><b>Exemple</b> avec un plateau de 2 cases</p><img src="example.png"></div>
+               <p>
+                  Aidez Castor à prendre en photo toutes les positions possibles <span class="easy medium">de la bille rouge. Vous pouvez la déplacer</span><span class="hard">des deux billes rouges. Vous pouvez les déplacer</span> sur le plateau ci-dessous.
+               </p>
+               <p>
+                   Ensuite, placez un trait entre deux photos s'il est possible de passer d'une situation à l'autre en déplaçant <span class="easy medium">la</span><span class="hard">une</span> bille d'une case vers une case voisine.
+               </p>
+            </div>
 
-            <center><table>
-               <tr>
-                  <td><div id="anim_config"></div></td>
-                  <td>
-                     <div><input type="button" value="Prendre une photo" id="addSituation" /></div>
-                     <div id="messageConfig">&nbsp;</div>
-                  </td>
-               </tr>
-            </table>
-            </center>
-            <div style="font-weight: bold; margin-top: 1em; text-align: center">Photos :</div>
-            <div id="anim_container">
-               <div id="anim_graph"></div>
+
+            <div id="zone_2">
+               <p style="text-align: center;">
+                   Cliquez sur les photos pour les relier par des traits.
+               </p>
+
+               <center><table>
+                  <tr>
+                     <td><div id="anim_config"></div></td>
+                     <td>
+                        <div><input type="button" value="Prendre une photo" id="addSituation" /></div>
+                        <!-- <div id="messageConfig">&nbsp;</div> -->
+                     </td>
+                  </tr>
+               </table>
+               </center>
+               <div style="font-weight: bold; margin-top: 1em; text-align: center">Photos :</div>
+               <div id="anim_container">
+                  <div id="anim_graph"></div>
+               </div>
             </div>
             <img src="icon.png" style="display:none">
          </div>
