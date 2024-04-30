@@ -118,10 +118,25 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       rows = data[level].grid.length;
       cols = data[level].grid[0].length;
       processLevelData();
+
+
+      var gridH = (2 * gridParams.yPad + gridParams.cellHeight * rows);
+      var taskH = (level != "hard") ? gridH*(1 + data[level].smallScale) + 60 : gridH*(1 + 2*data[level].smallScale) + 100;
+      displayHelper.taskH = taskH;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -136,6 +151,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       initPaper();
       showFeedback(null);
    };
@@ -875,3 +892,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
