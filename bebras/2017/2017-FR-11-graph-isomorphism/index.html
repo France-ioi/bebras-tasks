@@ -6,17 +6,29 @@
     <script>
         window.stringsLanguage = 'fr';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0', 'visual-graph-1.0',
-            'graph-mouse-1.0', 'jschannel',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'graph-1.0', 'visual-graph-1.2',
+            'graph-mouse-1.4', 'jschannel',
+            'platform-pr', 'installationAPI.01', 'miniPlatform',
+            'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+            ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-11-graph-isomorphism/",
@@ -35,6 +47,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Votre mission",
             success: "Bravo, vous avez réussi !",
             vertexError: "Chaque disque bleu doit être placé sur un disque en filigrane.",
             edgeError: "La tige rouge n'est pas placée comme sur l'objectif."
@@ -79,23 +92,26 @@
          <h1>Constellation</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>Déplacez les ronds bleus de gauche pour obtenir exactement la figure de droite. </p>
+            <div id="zone_1">
+               <p>Déplacez les ronds bleus de gauche pour obtenir exactement la figure de droite. </p>
+            </div>
 
-             <table id="animContainer">
-                <tr>
-                   <td></td>
-                   <td class="paperTitle">Objectif</td>
-                </tr>
-                <tr>
-                   <td>
-                     <div class="anim" id="animUser"></div>
-                  </td>
-                  <td>
-                     <div class="anim" id="animTarget"></div>
-                  </td>
-                </tr>
-            </table>
-            <div id="validation"><input type="button" value="Valider" id="execute" /></div>
+            <div id="zone_2">
+                <table id="animContainer">
+                   <tr>
+                      <td></td>
+                      <td class="paperTitle">Objectif</td>
+                   </tr>
+                   <tr>
+                      <td>
+                        <div class="anim" id="animUser"></div>
+                     </td>
+                     <td>
+                        <div class="anim" id="animTarget"></div>
+                     </td>
+                   </tr>
+               </table>
+           </div>
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->

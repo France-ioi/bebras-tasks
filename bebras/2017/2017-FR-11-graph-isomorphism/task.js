@@ -99,6 +99,13 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       visualGraphTarget = VisualGraph.fromJSON(data[level].targetStr, "visualTarget");
       graphTarget = visualGraphTarget.getGraph();
@@ -109,7 +116,11 @@ function initTask(subTask) {
       userVertices = graphUser.getAllVertices();
       userDefaultPositions = getAllPositions(graphUser, visualGraphUser);
 
-      displayHelper.hideValidateButton = true;
+      // displayHelper.hideValidateButton = true;
+      displayHelper.taskH = data[level].height + 50;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -130,8 +141,12 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       initPaper();
       initHandlers();
+
+      displayHelper.customValidate = clickExecute;
    };
 
    subTask.getAnswerObject = function() {
@@ -147,7 +162,7 @@ function initTask(subTask) {
          vertexDragger.setEnabled(false);
          visualGraphUser.remove();
       }
-      $("#execute").unbind("click");
+      // $("#execute").unbind("click");
       callback();
    };
 
@@ -197,8 +212,8 @@ function initTask(subTask) {
    }
 
    function initHandlers() {
-      $("#execute").unbind("click");
-      $("#execute").click(clickExecute);
+      // $("#execute").unbind("click");
+      // $("#execute").click(clickExecute);
       $("#animUser").unbind("mousedown");
       $("#animUser").mousedown(unhighlightEdge);
    }
@@ -353,3 +368,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
