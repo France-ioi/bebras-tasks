@@ -6,16 +6,28 @@
     <script>
         window.stringsLanguage = 'fi';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
-            'jschannel', 'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+            'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+            ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-13-search-substring/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Onnittelut, ratkaisit tämän version!",
             empty: "Valitse kirjastosta etsittävä vähintään yhdestä peräkkäisestä rivistä koostuva jakso.", 
             partial: "Pisin kirjastosta löytyvä peräkkäisten rivien jakso voidaan löytää pienemmällä määrällä hakuja.", 
@@ -152,64 +165,69 @@
          <h1>Rivijaksot</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p class="hard" id="enemyWarning"></p>
-            <p>
-            Alla on hakutyökalu, jolla voi etsiä vasemmalla annettujen ranskankielisten rivien yhdestä tai useammasta peräkkäisestä rivistä koostuvan jakson esiintymiä kirjaston kirjoista. </p>
-            <p class="easy">Etsi työkalun avulla jokin <b>kolmen peräkkäisen rivin jakso</b>, joka löytyy kirjastosta. Jokin sellainen löytyy varmasti.</p>
-            <p class="medium hard">Etsi työkalun avulla <b>pisin (eniten rivejä sisältävä) peräkkäisten rivien jakso</b>, joka löytyy kirjastosta. Jokin jakso löytyy varmasti.</p>
-            <div class="hard">
-               <p>Saat tehdä <b>korkeintaan <span id="maxAttempts"></span> hakua</b>.</p>
-               <!--<p>Remarque : chaque ligne individuelle est au moins dans un livre.</p>-->
+            <div id="zone_1">
+               <p class="hard" id="enemyWarning"></p>
+               <p>
+               Alla on hakutyökalu, jolla voi etsiä vasemmalla annettujen ranskankielisten rivien yhdestä tai useammasta peräkkäisestä rivistä koostuvan jakson esiintymiä kirjaston kirjoista. </p>
+               <p class="easy">Etsi työkalun avulla jokin <b>kolmen peräkkäisen rivin jakso</b>, joka löytyy kirjastosta. Jokin sellainen löytyy varmasti.</p>
+               <p class="medium hard">Etsi työkalun avulla <b>pisin (eniten rivejä sisältävä) peräkkäisten rivien jakso</b>, joka löytyy kirjastosta. Jokin jakso löytyy varmasti.</p>
+               <div class="hard">
+                  <p>Saat tehdä <b>korkeintaan <span id="maxAttempts"></span> hakua</b>.</p>
+                  <!--<p>Remarque : chaque ligne individuelle est au moins dans un livre.</p>-->
+               </div>
             </div>
-            <table class="mainTable">
-               <tr>
-                  <p>Haettavissa olevat rivit:</p>
-                  <td class="wordsDivCell">
-                     <div class="wordsDiv">
-                        <!-- To be filled with elements in the format:
-                           <div class="word" id="word_0">Word</div>
-                        -->
-                     </div>
-                  </td>
-                  <td class="search"><div id="test0"></div></td>
-                  <td class="search"><div id="test1"></div></td>
-                  <td class="search"><div id="test2"></div></td>
-                  <td class="search"><div id="test3"></div></td>
-                  <td class="search"><div id="test4"></div></td>
-                  <td class="search"><div id="test5"></div></td>
-                  <td class="search"><div id="test6"></div></td>
-                  <td class="search"><div id="test7"></div></td>
-                  <td class="search"><div id="test8"></div></td>
-                  <td class="search"><div id="test9"></div></td>
-                  <td class="search"><div id="test10"></div></td>
-                  <td class="search"><div id="test11"></div></td>
-                  <td class="search"><div id="test12"></div></td>
-                  <td class="search"><div id="test13"></div></td>
-                  <td class="search"><div id="test14"></div></td>
-                  <td class="search"><div id="test15"></div></td>
-                  <td class="search"><div id="test16"></div></td>
-                  <td class="search"><div id="test17"></div></td>
-                  <td class="resultDivCell">
-                     <table cellspacing=0>
-                     <tr><td style="border: solid black 1px;vertical-align:middle;background:lightgray;width:230px">
-                     <div style="height:40px;padding-top:5px">
-                     <b>Kirjaston<br/>hakutyökalu</b>
-                     </div>
-                     </td></tr>
-                     <tr><td style="border: solid black 1px;">
-                        <div class="resultDiv" style="position:relative;">
-                           <div id="currentSearch" style="height:150px;margin-top:20px;"></div>
-                           <div class="hard" id="history" style="height:30px;"></div>
-                           <div class="hard" style="background:#FFA0A0;bottom:0px;width:100%;"><div style="padding:5px">Jos aloitat alusta, sekä kirjaston sisältö että oikea ratkaisu arvotaan uudelleen!</div></div>
+
+            <div id="zone_2">
+               <table class="mainTable">
+                  <tr>
+                     <p>Haettavissa olevat rivit:</p>
+                     <td class="wordsDivCell">
+                        <div class="wordsDiv">
+                           <!-- To be filled with elements in the format:
+                              <div class="word" id="word_0">Word</div>
+                           -->
                         </div>
-                     </td></tr>
-                     <tr><td>
-                        <input type="button" id="hideSearches" class="easy medium" style="margin-top:5px" value="Tyhjennä hakutulos" />
-                     </td></tr>
-                     </table>
-                  </td>
-               </tr>
-            </table>
+                     </td>
+                     <td class="search"><div id="test0"></div></td>
+                     <td class="search"><div id="test1"></div></td>
+                     <td class="search"><div id="test2"></div></td>
+                     <td class="search"><div id="test3"></div></td>
+                     <td class="search"><div id="test4"></div></td>
+                     <td class="search"><div id="test5"></div></td>
+                     <td class="search"><div id="test6"></div></td>
+                     <td class="search"><div id="test7"></div></td>
+                     <td class="search"><div id="test8"></div></td>
+                     <td class="search"><div id="test9"></div></td>
+                     <td class="search"><div id="test10"></div></td>
+                     <td class="search"><div id="test11"></div></td>
+                     <td class="search"><div id="test12"></div></td>
+                     <td class="search"><div id="test13"></div></td>
+                     <td class="search"><div id="test14"></div></td>
+                     <td class="search"><div id="test15"></div></td>
+                     <td class="search"><div id="test16"></div></td>
+                     <td class="search"><div id="test17"></div></td>
+                     <td class="resultDivCell">
+                        <table cellspacing=0>
+                        <tr><td style="border: solid black 1px;vertical-align:middle;background:lightgray;width:230px">
+                        <div style="height:40px;padding-top:5px">
+                        <b>Kirjaston<br/>hakutyökalu</b>
+                        </div>
+                        </td></tr>
+                        <tr><td style="border: solid black 1px;">
+                           <div class="resultDiv" style="position:relative;">
+                              <div id="currentSearch" style="height:150px;margin-top:20px;"></div>
+                              <div class="hard" id="history" style="height:30px;"></div>
+                              <div class="hard" style="background:#FFA0A0;bottom:0px;width:100%;"><div style="padding:5px">Jos aloitat alusta, sekä kirjaston sisältö että oikea ratkaisu arvotaan uudelleen!</div></div>
+                           </div>
+                        </td></tr>
+                        <tr><td>
+                           <input type="button" id="hideSearches" class="easy medium" style="margin-top:5px" value="Tyhjennä hakutulos" />
+                        </td></tr>
+                        </table>
+                     </td>
+                  </tr>
+               </table>
+            </div>
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->

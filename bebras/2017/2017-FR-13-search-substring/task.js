@@ -61,6 +61,13 @@ function initTask(subTask) {
    var currentSelection;
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       lines = data[level].lines;
       words = [];
@@ -72,6 +79,11 @@ function initTask(subTask) {
       numWords = words.length;
       randomGenerator = new RandomGenerator(subTask.taskParams.randomSeed);
       displayHelper.hideRestartButton = (level != "hard");
+
+      displayHelper.taskH = lines.length * 40 + 30;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -92,6 +104,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       var wordsHTML = "";
       var wordIndex = 0;
       for(var iLine = 0; iLine < lines.length; iLine++) {
@@ -584,3 +598,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
