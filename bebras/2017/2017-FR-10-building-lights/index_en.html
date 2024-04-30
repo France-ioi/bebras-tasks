@@ -6,16 +6,31 @@
     <script>
         window.stringsLanguage = 'en';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.1',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
@@ -34,6 +49,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Congratulations, you have succeeded !",
             emptyError: "Drag the grey cards into the white boxes.",
             mismatchError: "The lights do not match, think carefully and try again.",
@@ -89,32 +105,35 @@
          <h1>Building lights</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p>Turn on the building lights as in the objective figure. To do this, drag the grey cards into the white boxes to form a sequence of instructions, then run it.</p>
+            <div id="zone_1">
+                <p>Turn on the building lights as in the objective figure. To do this, drag the grey cards into the white boxes to form a sequence of instructions, then run it.</p>
              <p>Each card <span class="medium hard">except the last</span> turns on all lights in a row or column.</p>
              <p class="medium hard"><b>The last card allows you to invert all the boxes.</b></p>
+             </div>
             
-            <div id="anim_container">
-               <div class="wrapper">
-                  <div class="animTitle">The Building</div>
-                  <div class="anim animBuilding" id="animUser"></div>
-               </div>
-               <div class="wrapper">
-                  <div class="animTitle">Objective Figure</div>
-                  <div class="anim animBuilding" id="animTarget"></div>
-               </div>
-               <br>
-               <div id="animDrag"></div>
-               <div id="feedback"></div>
-               <div id="control">
-                  <input type="button" id="execute" value="Run"/>
-                  <input type="button" id="stop" value="Stop"/>
+            <div id="zone_2">
+               <div id="anim_container">
+                  <div class="wrapper">
+                     <div class="animTitle">The Building</div>
+                     <div class="anim animBuilding" id="animUser"></div>
+                  </div>
+                  <div class="wrapper">
+                     <div class="animTitle">Objective Figure</div>
+                     <div class="anim animBuilding" id="animTarget"></div>
+                  </div>
+                  <br>
+                  <div id="animDrag"></div>
+                  <div id="feedback"></div>
+                  <div id="control">
+                     <input type="button" id="execute" value="Run"/>
+                     <input type="button" id="stop" value="Stop"/>
+                  </div>
                </div>
             </div>
             <img src="icon.png" style="display:none">
          </div>
-         <br>
-         <center><span id="error"></span></center>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>Solution</h2>

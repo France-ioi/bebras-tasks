@@ -1,21 +1,36 @@
 <!doctype html>
-<html>
+<html dir="rtl" align="right">
    <head>
     <meta charset="utf-8">
     <title>2017-AR-10</title>
     <script>
         window.stringsLanguage = 'ar';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.1',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
@@ -34,6 +49,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "أحسنت. إجابة صحيحة.",
             emptyError: "اسحب كارت رمادي إلى الفتحات البيضاء.",
             mismatchError: "الألوان غير متطابقة. فكر مرة أخرى.",
@@ -86,14 +102,16 @@
    </head>
    <body>
       <div id="task">
-         <div style="direction: rtl">
-            <h1>إنارة المبنى</h1>
-            <div id="tabsContainer"></div>
-            <div id="taskContent">
+         <h1>إنارة المبنى</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
                 <p>قم بإنارة المبنى كما هو موضح بالشكل المطلوب. لإنارة صف أو عمود, قم بوضع الكارت الخاص به داخل الفتحات البيضاء بالأسفل. ثم قم بالتشغيل.</p>
                 <p>كل كارت <span class="medium hard">عدا الأخير</span> سوف يضيئ الصف أو العمود المكتوب عليه.</p>
                 <p class="medium hard"><b>الكارت الأخير سوف يقوم بعكس التيار الكهربي ليطفئ اللمبات المضيئة والعكس.</b></p>
-               
+             </div>
+            
+            <div id="zone_2">
                <div id="anim_container">
                   <div class="wrapper">
                      <div class="animTitle">المبنى</div>
@@ -111,12 +129,11 @@
                      <input type="button" id="stop" value="توقف"/>
                   </div>
                </div>
-               <img src="icon.png" style="display:none">
             </div>
-            <br>
-            <center><span id="error"></span></center>
-            </div>
+            <img src="icon.png" style="display:none">
+         </div>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>Solution</h2>

@@ -202,10 +202,22 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       rows = data[level].initial.length;
       cols = data[level].initial[0].length;
       displayHelper.hideValidateButton = true;
+
+      displayHelper.taskH = 670;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -789,7 +801,11 @@ function initTask(subTask) {
       if(string === null || string === undefined) {
          string = "";
       }
-      $("#feedback").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#feedback").html(string);
+      }
    }
 
    function getResultAndMessage() {
@@ -819,3 +835,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();

@@ -6,16 +6,31 @@
     <script>
         window.stringsLanguage = 'fi';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script>
+        window.stringsLanguage = 'fr';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'delayFactory-1.0', 'simulationFactory-1.0', 'drag_lib-2.1',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-10-building-lights/",
@@ -34,6 +49,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "Onnittelut, ratkaisit tämän version!",
             emptyError: "Raahaa harmaita kortteja valkeisiin laatikoihin.",
             mismatchError: "Valot eivät täsmää tavoitteen kanssa. Mieti huolellisesti ja yritä uudelleen.",
@@ -89,32 +105,35 @@
          <h1>Valokuviot</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-             <p>Aseta rakennuksen valot päälle samalla tavalla kuin tavoitteessa on esitetty. Tee tämä raahaamalla valojen asetuksia järjestyksessä säätäviä harmaita kortteja alarivin valkeisiin laatikoihin ja suorita asetukset.</p>
+            <div id="zone_1">
+                <p>Aseta rakennuksen valot päälle samalla tavalla kuin tavoitteessa on esitetty. Tee tämä raahaamalla valojen asetuksia järjestyksessä säätäviä harmaita kortteja alarivin valkeisiin laatikoihin ja suorita asetukset.</p>
              <p>Kukin kortti<span class="medium hard">, paitsi viimeinen,</span> laittaa kaikki yhden rivin tai sarakkeen valot päälle.</p>
              <p class="medium hard"><b>Viimeinen kortti kääntää kaikki valot päinvastaisiksi (sammuttaa palavat ja laittaa sammutetut päälle).</b></p>
+             </div>
             
-            <div id="anim_container">
-               <div class="wrapper">
-                  <div class="animTitle">Rakennus</div>
-                  <div class="anim animBuilding" id="animUser"></div>
-               </div>
-               <div class="wrapper">
-                  <div class="animTitle">Tavoite</div>
-                  <div class="anim animBuilding" id="animTarget"></div>
-               </div>
-               <br>
-               <div id="animDrag"></div>
-               <div id="feedback"></div>
-               <div id="control">
-                  <input type="button" id="execute" value="Suorita"/>
-                  <input type="button" id="stop" value="Pysäytä"/>
+            <div id="zone_2">
+               <div id="anim_container">
+                  <div class="wrapper">
+                     <div class="animTitle">Rakennus</div>
+                     <div class="anim animBuilding" id="animUser"></div>
+                  </div>
+                  <div class="wrapper">
+                     <div class="animTitle">Tavoite</div>
+                     <div class="anim animBuilding" id="animTarget"></div>
+                  </div>
+                  <br>
+                  <div id="animDrag"></div>
+                  <div id="feedback"></div>
+                  <div id="control">
+                     <input type="button" id="execute" value="Suorita"/>
+                     <input type="button" id="stop" value="Pysäytä"/>
+                  </div>
                </div>
             </div>
             <img src="icon.png" style="display:none">
          </div>
-         <br>
-         <center><span id="error"></span></center>
       </div><!-- task -->
+
       <div id="solution">
 
          <h2>Ratkaisu</h2>
