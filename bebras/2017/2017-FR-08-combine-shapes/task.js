@@ -35,15 +35,18 @@ function initTask(subTask) {
    var data = {
       easy: {
          target: [null, colors.purple, null, null, null, null, null, null, null, colors.purple, null, null, null],
-         parentheses: false
+         parentheses: false,
+         taskH: 530
       },
       medium: {
          target: [colors.green, colors.purple, null, null, null, null, null, null, null, colors.purple, null, null, null],
-         parentheses: false
+         parentheses: false,
+         taskH: 530
       },
       hard: {
          target: [null, null, null, null, null, colors.green, colors.green, colors.purple, colors.purple, null, null, null, null],
-         parentheses: true
+         parentheses: true,
+         taskH: 570
       }
    };
 
@@ -79,7 +82,19 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
+
+      displayHelper.taskH = data[level].taskH;
+      displayHelper.taskW = 740;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -322,9 +337,12 @@ function initTask(subTask) {
       $("#examples").html(examplesContainerHTML);
 
       for(iExample in examples[level]) {
-         var visualConfig = createVisualConfig("paperExample_" + iExample, mediumParams);
+         var visualConfig = createVisualConfig("paperExample_" + iExample, smallParams);
          var config = configFromExpression(examples[level][iExample]);
          refreshVisualConfig(visualConfig, config);
+      }
+      if(respEnabled){
+         displayHelper.updateLayout();
       }
    }
 
@@ -591,9 +609,14 @@ function initTask(subTask) {
 
    function showError(string) {
       if(string === null || string === undefined || string === "") {
-         string = "&nbsp;";
+         string = "";
       }
-      $("#error").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#error").html(string);
+      }
+      // $("#error").html(string);
    }
 
    function getResultAndMessage() {
@@ -618,3 +641,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();

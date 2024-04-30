@@ -1,21 +1,33 @@
 <!doctype html>
-<html>
+<html dir="rtl" align="right">
    <head>
     <meta charset="utf-8">
     <title>2017-AR-08</title>
     <script>
         window.stringsLanguage = 'ar';
     </script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
     <script class="remove" type="text/javascript">
         var modulesPath = '../../../_common/modules';
         importModules([
-            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js',
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
             'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
             'delayFactory-1.0', 'simulationFactory-1.0', 'simpleKeyboard-1.0',
-            'platform-pr', 'buttonsAndMessages', 'installationAPI.01', 'miniPlatform',
-            'taskStyles-0.1']);
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform',
+         'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
     </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2017/2017-FR-08-combine-shapes/",
@@ -34,6 +46,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             success: "أحسنت. إجابة صحيحة.",
             error: "الشكل الذي رسمته ليس مطابق للشكل المطلوب.",
             syntaxErrorShape: "لا يمكنك وضع شكل هنا، استخدام زر آخر.",
@@ -61,9 +74,7 @@
             font-weight: bold;
             color: red; 
          }
-         #error {
-            color: red;
-         }
+
          #validation {
             margin-top: 1em;
             text-align: center;
@@ -88,23 +99,14 @@
          .mainDiv {
             text-align: center;
          }
-         .exampleTitle {
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
-         }
          .targetTitle {
             margin-bottom: 0.5em;
          }
-         .exampleTitle, .targetTitle {
+         .targetTitle {
             font-size: 16px;
             font-weight: bold;
          }
-         #examplesContainer {
-            border: 1px solid black;
-            margin-top: 15px;
-            margin-bottom: 25px;
-            width: 320px;
-         }
+
          .paperDiv {
             border: 1px solid black;
             display: inline-block;
@@ -153,77 +155,80 @@
             margin: 0px;
             width: 440px;
          }
-         .example {
-            margin-top: 5px;
-            margin-bottom: 5px;
-            margin-left: 3px;
-            margin-right: 3px;
-         }
+         
          #inputContainer {
             margin-right: 10px;
             margin-bottom: 20px;
          }
+
+         .example {
+            text-align: center;
+         }
+         #exampleTitle {
+            text-align: center;
+            margin: 10px 0;
+         }
+         #examples {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+         }
       </style>
    </head>
    <body>
-
       <div id="task">
-         <div style="direction: rtl">
-            <h1>دمج الأشكال</h1>
-            <div id="tabsContainer"></div>
-            <div id="taskContent">
-               <div class="mainDiv">
-                  <div class="sectionContainer" id="leftContainer">
-                     <div id="descriptionContainer">
-                        <p align="right">
+         <h1>دمج الأشكال</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+               <p align="right">
                            يمكن للقندس عمل أشكال من خلال الدمج بين الأشكال الثلاثة التي بالأسفل. 
                         </p>
    <p align="right">
    إنظر إلى الأمثلة لفهم كيف يفعل ذلك ثم قم برسم الشكل المطلوب باستخدام الأشكال الثلاثة والعلامات التي بالأسفل.                       
-                        </p>                     
-   <p>
-                          
                         </p>
-                     </div>
-                  </div>
-                  <div class="sectionContainer" id="examplesContainer">
-                     <div class="exampleTitle">أمثلة</div>
-                     <div id="examples"></div>
-                     <!-- Filled automatically with divs of the form.
-                           <div class="example sectionBlock">
-                              <span class="paperTitle">A+B</span><br>
-                              <div class="paperDiv" id="paperExample0"></div>
-                           </div>
-                     -->
-                  </div>
-                  
-                  <div class="sectionContainer" id="controlContainer">
-                     <div id="inputContainer" class="sectionBlock">
-                        <div id="symbolsContainer">
-                           <!-- Automatically filled with divs in this format:
-                              <div class="symbol sectionBlock">
-                                 <span class="paperTitle">A</span><br>
-                                 <div class="paperDiv" id="paperSymbolA"></div>
-                              </div>
-                           -->
+
+               <div id="example">
+                  <h4 id="exampleTitle">أمثلة</h4>
+                  <div id="examples"></div>
+                  <!-- Filled automatically with divs of the form.
+                        <div class="example sectionBlock">
+                           <span class="paperTitle">A+B</span><br>
+                           <div class="paperDiv" id="paperExample0"></div>
                         </div>
-                        <div id="keyboardContainer"></div>
-                        <div id="inputDiv">&nbsp;&nbsp;<span id="input"></span></div>
-                        <!--<input type="text" id="input" value="abc" disabled>-->
-                     </div>
-                     <div class="paperDiv sectionBlock" id="paperUser"></div>
-                     <div class="objectiveContainer sectionBlock">
-                        <div class="targetTitle">الشكل المطلوب</div>
-                        <div class="paperDiv" id="paperTarget"></div>
-                     </div>
-                  </div>
-                  <br>
-                  <span id="error"></span>
+                  -->
                </div>
-               <img src="icon.png" style="display:none">
             </div>
+               
+            <div id="zone_2">
+               <div class="sectionContainer" id="controlContainer">
+                  <div id="inputContainer" class="sectionBlock">
+                     <div id="symbolsContainer">
+                        <!-- Automatically filled with divs in this format:
+                           <div class="symbol sectionBlock">
+                              <span class="paperTitle">A</span><br>
+                              <div class="paperDiv" id="paperSymbolA"></div>
+                           </div>
+                        -->
+                     </div>
+                     <div id="keyboardContainer"></div>
+                     <div id="inputDiv">&nbsp;&nbsp;<span id="input"></span></div>
+                     <!--<input type="text" id="input" value="abc" disabled>-->
+                  </div>
+                  <div class="paperDiv sectionBlock" id="paperUser"></div>
+                  <div class="objectiveContainer sectionBlock">
+                     <div class="targetTitle">الشكل المطلوب</div>
+                     <div class="paperDiv" id="paperTarget"></div>
+                  </div>
+               </div>
+               <br>
+               <span id="error"></span>
+            </div>
+            <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->
+      
       <div id="solution">
 
          <h2>Solution</h2>
