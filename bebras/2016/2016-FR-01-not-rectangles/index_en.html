@@ -3,28 +3,32 @@
    <head>
     <meta charset="utf-8">
     <title>2016-FR-01</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
-
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
     <script>
        var stringsLanguage = 'en';
     </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
+            'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+            ]);
+    </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
+    
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2016/2016-FR-01-not-rectangles/",
@@ -43,6 +47,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             patternError: "The red cell is painted incorrect.",
             suboptimal: "Well done. Try again to solve it in fewer steps.",
             steps: function(count, limit) {
@@ -96,56 +101,58 @@
    </head>
    <body>
 
-
       <div id="task">
          <h1>Painting Rectangles</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p id="difficultyWarning" class="hard"></p>
-            <p>
-               Draw the shape in the "Target" grid to "Your Drawing" grid.
-            </p>
-             <p>You can paint black and white cells on the grids, by dragging the mouse from a corner to the opposite one.</p> 
-            </p>
-            <p class="easy">
-               This version of task can be solved in <strong>only 2 steps</strong>.
-            </p>   
-            <p class="medium">
-               This version of task can be solved in <strong>no more than 5 steps</strong>.
-            </p>
-            <p class="hard">
-               This version of task can be solved in <strong>only 4 steps</strong>.
-            </p>
+            <div id="zone_1">
+               <p id="difficultyWarning" class="hard"></p>
+               <p>
+                  Draw the shape in the "Target" grid to "Your Drawing" grid.
+               </p>
+                <p>You can paint black and white cells on the grids, by dragging the mouse from a corner to the opposite one.</p> 
+               </p>
+               <p class="easy">
+                  This version of task can be solved in <strong>only 2 steps</strong>.
+               </p>   
+               <p class="medium">
+                  This version of task can be solved in <strong>no more than 5 steps</strong>.
+               </p>
+               <p class="hard">
+                  This version of task can be solved in <strong>only 4 steps</strong>.
+               </p>
+            </div>
 
-         <div id="anim_container">
-               <table>
-                  <tr>
-                     <td class="gridTitle">
-                        Target:
-                     </td>
-                     <td>
-                        <div id="anim1"></div>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="gridTitle">
-                        Your<br/>Drawing:
-                     </td>
-                     <td>
-                        <div id="anim2"></div>
-                     </td>
-                     <td>
-                        <div id="control">
-                           <p id="feedback"></p>
-                           <p>
-                              <span id="steps"></span>
-                           </p>
-                           <input type="button" value="Undo One Step" id="undo" />
-                        </div>
-                     </td>
-                  </tr>
-               </table>
-               <div><input type="button" value="Check My Answer" id="execute" /></div>
+            <div id="zone_2">
+                <div id="anim_container">
+                  <table>
+                     <tr>
+                        <td class="gridTitle">
+                           Target:
+                        </td>
+                        <td>
+                           <div id="anim1"></div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="gridTitle">
+                           Your<br/>Drawing:
+                        </td>
+                        <td>
+                           <div id="anim2"></div>
+                        </td>
+                        <td>
+                           <div id="control">
+                              <p id="feedback"></p>
+                              <p>
+                                 <span id="steps"></span>
+                              </p>
+                              <input type="button" value="Undo One Step" id="undo" />
+                           </div>
+                        </td>
+                     </tr>
+                  </table>
+               </div>
             </div>
             <img src="icon.png" style="display:none">
          </div>

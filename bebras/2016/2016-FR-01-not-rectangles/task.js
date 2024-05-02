@@ -114,9 +114,23 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       virtualGrid = Beav.Matrix.make(data[level].grid.length, data[level].grid[0].length, 0);
-      displayHelper.hideValidateButton = true;
+      var nbRows = data[level].grid.length;
+      var gridH = nbRows*gridParams.cellHeight;
+      var taskH = 2*gridH + 80;
+
+      displayHelper.taskH = taskH;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -134,6 +148,8 @@ function initTask(subTask) {
       updateSteps();
       showFeedback(null);
       updateUserGridStatus();
+      // displayHelper.hideValidateButton = true;
+      displayHelper.customValidate = clickExecute;
    };
 
    subTask.getAnswerObject = function() {
@@ -371,7 +387,11 @@ function initTask(subTask) {
       if(!string) {
          string = "";
       }
-      $("#feedback").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#feedback").html(string);
+      }
    };
 
    var getResultAndMessage = function() {
@@ -427,4 +447,5 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
 
