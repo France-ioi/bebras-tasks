@@ -303,6 +303,9 @@ function initTask(subTask) {
    var preListener = {
       addEdge: function(id, vertex1, vertex2, vertex1Info, vertex2Info, edgeInfo) {
          unhighlightError();
+         if(vertex1 == vertex2){
+            return false
+         }
          if(graph.hasNeighbor(vertex1, vertex2)) {
             showFeedback(taskStrings.existsError);
             return false;
