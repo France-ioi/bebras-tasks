@@ -58,10 +58,22 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel, curState) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       state = curState;
       initGraph();
       initSolution();
+
+      displayHelper.taskH = data[level].height + 20;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -284,7 +296,11 @@ function initTask(subTask) {
       if(!string) {
          string = "";
       }
-      $("#feedback").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#feedback").html(string);
+      }
    };
 
    subTask.getGrade = function(callback) {
@@ -292,3 +308,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();

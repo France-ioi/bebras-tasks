@@ -3,32 +3,33 @@
    <head>
     <meta charset="utf-8">
     <title>2016-EN-05</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
-    
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/visual-graph-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/visual-graph-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/graph-mouse-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/graph-mouse-1.0.js"></script>
-
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script>
+    <script>
          var stringsLanguage = 'sv';
       </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
+            'graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.4',
+            'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+            ]);
+    </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
+      
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2016/2016-FR-05-red-and-blue/",
@@ -47,6 +48,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Your mission",
             tooFew: "Det finns fortfarande minst en cirkel kvar att markera.",
             tooManyEasy: "Du har markerat någon cirkel som inte kan ta dig till den röda cirkeln.",
             tooMany: "Du har markerat någon cirkel som inte kan ta dig till de röda cirklarna.",
@@ -86,18 +88,22 @@
          <h1>Startpunkter</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p id="difficultyWarning" class="hard"></p>
-             <p>Från vilka cirklar kan du komma till  
-             <span class="easy"  style="font-weight:bold">den röda cirkeln</span> 
-             <span class="medium" style="font-weight:bold">båda de röda cirklarna</span>
-             <span class="hard" style="font-weight:bold">alla de röda cirklarna</span> 
-             genom att följa pilarna. Klicka på cirklarna för att markera dem med blå färg.</p>
+            <div id="zone_1">
+               <p id="difficultyWarning" class="hard"></p>
+                <p>Från vilka cirklar kan du komma till  
+                <span class="easy"  style="font-weight:bold">den röda cirkeln</span> 
+                <span class="medium" style="font-weight:bold">båda de röda cirklarna</span>
+                <span class="hard" style="font-weight:bold">alla de röda cirklarna</span> 
+                genom att följa pilarna. Klicka på cirklarna för att markera dem med blå färg.</p>
+               
+                <p class="hard">Tips: Klicka på pilarna för att färga dem medan du löser uppgiften.</p>
+             </div>
             
-             <p class="hard">Tips: Klicka på pilarna för att färga dem medan du löser uppgiften.</p>
-            
-            <div id="anim_container">
-               <div id="anim"></div>
-               <div id="feedback"></div>
+            <div id="zone_2">
+               <div id="anim_container">
+                  <div id="anim"></div>
+                  <div id="feedback"></div>
+               </div>
             </div>
             <img src="icon.png" style="display:none">
          </div>
