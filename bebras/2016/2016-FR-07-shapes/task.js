@@ -52,6 +52,7 @@ function initTask(subTask) {
    var dragAndDrop;
    var visualResults;
    var levelTarget;
+   var paperHeight;
 
    var ruleMaxX;
    var resultsX;
@@ -120,11 +121,24 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       initPermutation();
       if (typeof(enableRtl) != "undefined") {
          rtl = true;
       }
+      textParams.targetY = textParams.startY + textParams.ruleYSpacing * (data[level].rules.length + 1); 
+      paperHeight = textParams.targetY + shapeParams.shapeDiameter;
+      displayHelper.taskH = paperHeight + 20;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -139,6 +153,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       initPaper();
       fillFromAnswer();
       refreshResults();
@@ -179,9 +195,6 @@ function initTask(subTask) {
    };
 
    var initPaper = function() {
-      textParams.targetY = textParams.startY + textParams.ruleYSpacing * (data[level].rules.length + 1); 
-      paperHeight = textParams.targetY + shapeParams.shapeDiameter;
-
       paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, paperHeight);
 
       // This fixes a bug that causes Raphael's element.getBBox() method to return wrong values for texts in IE6.
@@ -671,3 +684,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
