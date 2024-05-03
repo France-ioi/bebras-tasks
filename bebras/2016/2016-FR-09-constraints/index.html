@@ -3,31 +3,33 @@
    <head>
     <meta charset="utf-8">
     <title>2016-FR-09</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-2.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
-
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
-      <script>
+    <script>
          var stringsLanguage = 'fr';
       </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
+            'graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.4', 'drag_lib-2.1',
+            'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+            ]);
+    </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
+      
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2016/2016-FR-09-constraints/",
@@ -46,6 +48,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Votre mission",
             success: "Bravo, vous avez réussi !",
             wrong: function(attr, level) { 
                var base = "Les deux objets encadrés se touchent ";
@@ -85,33 +88,35 @@
          <h1>Bons voisins</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p class="easy">
-               Changez l'ordre des objets pour que deux objets identiques ne soient jamais côte à côte.
-            </p>
-            <div class="medium">
-               <p>
-               Changez l'ordre des objets pour que :
+            <div id="zone_1">
+               <p class="easy">
+                  Changez l'ordre des objets pour que deux objets identiques ne soient jamais côte à côte.
                </p>
-               <ul class="constraints">
-                  <li>deux ronds ou deux carrés ne soient jamais côte à côte ;</li>
-                  <li>deux petits objets ou deux gros objets ne soient jamais côte à côte.</li>
-               </ul>
-            </div>
-            <div class="hard">
-               <p>
-                  Changez les positions des objets dans la grille pour que :
+               <div class="medium">
+                  <p>
+                  Changez l'ordre des objets pour que :
+                  </p>
                   <ul class="constraints">
-                     <li>deux ronds ou deux carrés ne se touchent jamais <strong>par un côté</strong>;</li>
-                     <li>deux petits objets ou deux gros objets ne se touchent jamais <strong>par un coin</strong> (en diagonale).</li>
+                     <li>deux ronds ou deux carrés ne soient jamais côte à côte ;</li>
+                     <li>deux petits objets ou deux gros objets ne soient jamais côte à côte.</li>
                   </ul>
-               </p>
+               </div>
+               <div class="hard">
+                  <p>
+                     Changez les positions des objets dans la grille pour que :
+                     <ul class="constraints">
+                        <li>deux ronds ou deux carrés ne se touchent jamais <strong>par un côté</strong>;</li>
+                        <li>deux petits objets ou deux gros objets ne se touchent jamais <strong>par un coin</strong> (en diagonale).</li>
+                     </ul>
+                  </p>
+               </div>
             </div>
-            <div id="anim_container">
-               <div id="anim"></div>
+            <div id="zone_2">
+               <div id="anim_container">
+                  <div id="anim"></div>
+               </div>
             </div>
-            <div id="control">
-                <input type="button" id="execute" value="Valider"/>
-            </div>
+
             <img src="icon.png" style="display:none">
          </div>
       </div><!-- task -->

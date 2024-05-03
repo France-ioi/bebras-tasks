@@ -183,9 +183,23 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
-      displayHelper.hideValidateButton = true;
+      // displayHelper.hideValidateButton = true;
+      displayHelper.customValidate = clickExecute;
       initTable();
+      paperHeight = unmodifiedTable.length * shapeParams.cellSize + 2 * paperParams.yPad;
+
+      displayHelper.taskH = paperHeight + 20;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -197,6 +211,7 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      displayError("");
       initPaper();
       initHandlers();
       unhighlightWrong();
@@ -214,7 +229,7 @@ function initTask(subTask) {
       if(dragAndDrop) {
          dragAndDrop.disable();
       }
-      $("#execute").unbind(); 
+      // $("#execute").unbind(); 
       callback();
    };
 
@@ -244,7 +259,6 @@ function initTask(subTask) {
 
    var initPaper = function () {
       paperWidth = unmodifiedTable[0].length * shapeParams.cellSize + 2 * paperParams.xPad;
-      paperHeight = unmodifiedTable.length * shapeParams.cellSize + 2 * paperParams.yPad;
 
       paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, paperHeight);
 
@@ -364,6 +378,8 @@ function initTask(subTask) {
    };
 
    var actionIfDropped = function (srcCont, srcPos, dstCont, dstPos, dropType) {
+      displayError("");
+      unhighlightWrong();
       return dstCont != null;
    };
 
@@ -379,7 +395,6 @@ function initTask(subTask) {
    };
 
    var onDrop = function (srcContainerID, srcPos, dstContainerID, dstPos, dropType) {
-      unhighlightWrong();
       
       // When one element is dropped on another, replace them in the answer array.
       // There are two onDrop events: one when replacing, and another when the replaced object
@@ -397,8 +412,8 @@ function initTask(subTask) {
    };
 
    var initHandlers = function() {
-      $("#execute").unbind();
-      $("#execute").click(clickExecute);
+      // $("#execute").unbind();
+      // $("#execute").click(clickExecute);
    };
 
    var clickExecute = function() {
@@ -408,7 +423,17 @@ function initTask(subTask) {
       }
       else {
          highlightWrong(validationResult.wrongCells);
-         displayHelper.validate("stay");
+         var firstInvalidAttr = validationResult.commonAttributes[0];
+         var err = taskStrings.wrong(firstInvalidAttr, level);
+         displayError(err);
+      }
+   };
+
+   function displayError(msg) {
+      if(respEnabled){
+         displayHelper.displayError(msg);
+      }else{
+         $("#displayHelper_graderMessage").html(msg).css({color:"red","font-weight":"bold"});
       }
    };
 
@@ -578,3 +603,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
