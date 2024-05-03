@@ -82,8 +82,19 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
-      displayHelper.hideValidateButton = true;
+
+      displayHelper.taskH = data[level].height + 100;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -100,6 +111,7 @@ function initTask(subTask) {
       initHandlers();
       updateCounters();
       findAndHighlightError(false);
+      displayHelper.customValidate = clickExecute;
    };
 
    subTask.getAnswerObject = function() {
@@ -116,7 +128,7 @@ function initTask(subTask) {
          edgeCreator.setEnabled(false);
          visualGraph.remove();
       }
-      $("#execute").unbind("click");
+      // $("#execute").unbind("click");
       callback();
    };
 
@@ -143,8 +155,8 @@ function initTask(subTask) {
    };
 
    var initHandlers = function() {
-      $("#execute").unbind("execute");
-      $("#execute").click(clickExecute);
+      // $("#execute").unbind("execute");
+      // $("#execute").click(clickExecute);
    };
 
    var updateCounters = function() {
@@ -168,6 +180,9 @@ function initTask(subTask) {
 
    var preListener = {
       addEdge: function(id, vertex1, vertex2, vertex1Info, vertex2Info, edgeInfo) {
+         if(vertex1 == vertex2){
+            return false
+         }
          if(graph.hasNeighbor(vertex1, vertex2)) {
             showFeedback(taskStrings.existsError);
             return false;
@@ -412,7 +427,11 @@ function initTask(subTask) {
       if(!string) {
          string = "";
       }
-      $("#feedback").html(string);
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#feedback").html(string);
+      }
    };
 
    subTask.getGrade = function(callback) {
@@ -420,3 +439,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
