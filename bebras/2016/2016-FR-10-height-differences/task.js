@@ -101,10 +101,22 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       initElements();
       levelOptimal = solve();
       levelMaxHeight = calcHeight();
+
+      displayHelper.taskH = paperParams.height + 20;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -116,6 +128,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       initPaper();
    };
 
@@ -371,3 +385,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
