@@ -62,6 +62,7 @@ function initTask(subTask) {
    var paper2;
    var paperWidth;
    
+   var paper1Height;
    var paper2Height = 220;
    var instructionsSourceCenterY = 50;
    var instructionsCenterY = 130;
@@ -194,9 +195,23 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       displayHelper.hideValidateButton = true;
       initStartPosition();
+      
+      paper1Height = data[level].cellSize * data[level].grid.length + paperParams.yPad * 2;
+
+      displayHelper.taskH = paper1Height + paper2Height + 150;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -208,6 +223,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       initPaper();
       resetRobot();
       initButtons();
@@ -253,7 +270,7 @@ function initTask(subTask) {
 
    var initPaper = function () {
       paperWidth = data[level].cellSize * data[level].grid[0].length + paperParams.xPad * 2;
-      paper1Height = data[level].cellSize * data[level].grid.length + paperParams.yPad * 2;
+      // paper1Height = data[level].cellSize * data[level].grid.length + paperParams.yPad * 2;
    
       paper1 = subTask.raphaelFactory.create("anim1", "anim1", paperWidth, paper1Height);
       paper2 = subTask.raphaelFactory.create("anim2", "anim2", paperWidth, paper2Height);
@@ -831,3 +848,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
