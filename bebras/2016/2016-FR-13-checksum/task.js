@@ -117,10 +117,28 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel, curState) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       state = curState;
       numericRows = data[level].grid.length;
       numericCols = data[level].grid[0].length;
+
+      gridWidth = gridParams.firstWidth + gridParams.numericWidth * numericCols;
+      gridHeight = paperParams.gridTopPad + gridParams.cellHeight * (numericRows + 1);
+
+      paperWidth = digitParams.width * 10 + 2 * paperParams.xPad;
+      paperHeight = paperParams.digitSourceY + gridHeight + 2 * paperParams.yPad + gridParams.errorOffset.yOddExtra;
+
+      displayHelper.taskH = paperHeight + 20;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -132,6 +150,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         $("#feedback").hide();
       initPaper();
       initGrid();
       initDragAndDrop();
@@ -164,11 +184,7 @@ function initTask(subTask) {
    };
 
    function initPaper() {
-      gridWidth = gridParams.firstWidth + gridParams.numericWidth * numericCols;
-      gridHeight = paperParams.gridTopPad + gridParams.cellHeight * (numericRows + 1);
-
-      paperWidth = digitParams.width * 10 + 2 * paperParams.xPad;
-      paperHeight = paperParams.digitSourceY + gridHeight + 2 * paperParams.yPad + gridParams.errorOffset.yOddExtra;
+      
       paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, paperHeight);
    }
    
@@ -441,13 +457,11 @@ function initTask(subTask) {
    }
 
    function showFeedback(string) {
-      if(string) {
+      string = string || "";
+      if(respEnabled) {
+         displayHelper.displayError(string);
+      }else{
          $("#feedback").html(string);
-         // $("#feedback").show(); DEPRECATED
-      }
-      else {
-         $("#feedback").html("");
-         // $("#feedback").hide(); DEPRECATED
       }
    }
 
@@ -508,3 +522,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
