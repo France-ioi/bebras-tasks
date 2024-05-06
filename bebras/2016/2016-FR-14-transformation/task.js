@@ -89,6 +89,7 @@ function initTask(subTask) {
          "stroke-width": 72 // should be twice graphShapeToRadius
       }
    };
+   var graphOuterRadius;
 
    var shapeParams = {
       vertexRadius: 28, // should be even
@@ -128,9 +129,25 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       displayHelper.hideValidateButton = true;
       initPermutation();
+
+      graphOuterRadius = data[level].separatorRadius + graphParams.graphShapeToRadius;
+      paperParams.width = graphOuterRadius * 2 + shapeParams.vertexRadius * 3;
+      paperParams.height = graphOuterRadius * 2 + shapeParams.vertexRadius * 3;
+
+      displayHelper.taskH = paperParams.height + 80;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -143,6 +160,9 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled){
+         displayHelper.displayError("");
+      }
       initPaper();
       initHandlers();
       refreshResult();
@@ -213,11 +233,8 @@ function initTask(subTask) {
    };
 
    var initPaper = function() {
-      var graphOuterRadius = data[level].separatorRadius + graphParams.graphShapeToRadius;
-      paperParams.width = graphOuterRadius * 2 + shapeParams.vertexRadius * 3;
-      paperParams.height = graphOuterRadius * 2 + shapeParams.vertexRadius * 3;
       paper = subTask.raphaelFactory.create("anim", "anim", paperParams.width, paperParams.height);
-
+      
       paper.circle(paperParams.width / 2, paperParams.height / 2, graphOuterRadius).attr(graphParams.grayCircleAttr);
 
       graphDrawer = new SimpleGraphDrawer(graphParams.circleAttr, graphParams.lineAttr, vertexDrawer);
@@ -280,7 +297,9 @@ function initTask(subTask) {
       
       // Bring the invisible circles to front, so clicking the sticker counts as clicking the vertex.
       for(iVertex in levelVertices) {
-         visualGraph.getRaphaelsFromID(levelVertices[iVertex])[2].toFront();
+         var obj = visualGraph.getRaphaelsFromID(levelVertices[iVertex]);
+         // console.log(obj)
+         obj[3].toFront();
       }
    };
 
@@ -293,7 +312,7 @@ function initTask(subTask) {
 
       var shape = drawShape(id, position.x, position.y, shapeParams.vertexRadius);
       var overlay1 = paper.circle(centerX, centerY, graphParams.circleAttr.r).attr({
-         fill: "green",
+         fill: "blue",
          opacity: 0
       });
       var overlay2 = paper.circle(position.x, position.y, graphParams.circleAttr.r).attr({
@@ -402,6 +421,8 @@ function initTask(subTask) {
 
    var preListener = {
       addEdge: function(id, vertex1, vertex2, vertex1Info, vertex2Info, edgeInfo) {
+         if(vertex1 == vertex2)
+            return false
          if(graph.hasChild(vertex1, vertex2)) {
             return false;
          }
@@ -729,3 +750,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
