@@ -69,7 +69,8 @@ function initTask(subTask) {
          items: ["orange", "brocoli", "rose", "carrot", "cucumber", "radish", "apple", "tulip", "banana", "kiwi"],
          target: ["brocoli", "cucumber"],
          columns: ["image", "name", "type", "color"],
-         optionsAutoFill: ["type", "color"]
+         optionsAutoFill: ["type", "color"],
+         taskH: 527
       },
       medium: {
          items: ["orange", "brocoli", "rose", "carrot", "cucumber", "radish", "apple", "tulip", "banana"],
@@ -77,7 +78,8 @@ function initTask(subTask) {
          targetOrder: "name",
          columns: ["image", "name", "type", "color", "price"],
          optionsAutoFill: ["type", "color"],
-         sorting: ["name", "type", "color", "price"]
+         sorting: ["name", "type", "color", "price"],
+         taskH: 575
       },
       hard: {
          items: ["orange", "brocoli", "eggplant", "rose", "carrot", "cucumber", "radish", "apple", "tulip", "banana", "blackberry"],
@@ -85,7 +87,8 @@ function initTask(subTask) {
          targetOrder: "price", 
          columns: ["image", "name", "type", "color", "price"],
          optionsAutoFill: ["type", "color"],
-         sorting: ["name", "type", "color", "price"]
+         sorting: ["name", "type", "color", "price"],
+         taskH: 650
       }
    };
 
@@ -93,6 +96,13 @@ function initTask(subTask) {
    var controlQuery;
 
    subTask.loadLevel = function(curLevel, curState) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       controlQuery = "." + level + " .controller";
       controllers = $(controlQuery);
@@ -100,6 +110,11 @@ function initTask(subTask) {
       if(data[level].targetOrder) {
          sortByProperty(data[level].target, data[level].targetOrder);
       }
+
+      displayHelper.taskH = data[level].taskH + 20;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -111,6 +126,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       initEvents();
       autoFillControllers();
       answerToControllers();
@@ -437,3 +454,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
