@@ -43,7 +43,7 @@ function initTask(subTask) {
       }
    };
 
-   var paper;
+   var paper, papeH;
    var digitSources;
    var undoButton;
    var answerSlots;
@@ -110,10 +110,23 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel, curState) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          // $(".sectionContainer").css("margin-top","20px");
+       }
       level = curLevel;
       state = curState;
       gridRows = data[level].grid.length;
       gridCols = data[level].grid[0].length;
+      paperH = paperParams.gridY + data[level].gridCellSize * data[level].grid.length + 15;
+
+      displayHelper.taskH = paperH + 20;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -128,6 +141,8 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
+      if(respEnabled)
+         displayHelper.displayError("");
       initPaper();
       initSlots();
       initGrids();
@@ -163,8 +178,8 @@ function initTask(subTask) {
    };
 
    function initPaper() {
-      var height = paperParams.gridY + data[level].gridCellSize * data[level].grid.length + 15;
-      paper = subTask.raphaelFactory.create("anim", "anim", paperParams.width, height);
+      // var height = paperParams.gridY + data[level].gridCellSize * data[level].grid.length + 15;
+      paper = subTask.raphaelFactory.create("anim", "anim", paperParams.width, paperH);
 
       paper.text(paperParams.userGridCenterX, paperParams.gridTextY, taskStrings.userGrid).attr(textParams.attr);
       paper.text(paperParams.targetGridCenterX, paperParams.gridTextY, taskStrings.targetGrid).attr(textParams.attr);
@@ -516,3 +531,4 @@ function initTask(subTask) {
    };
 }
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
