@@ -161,15 +161,29 @@ function initTask(subTask) {
    };
 
    subTask.loadLevel = function(curLevel, curState) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+          $("#anim_container").css("margin-top","20px");
+       }
       level = curLevel;
       state = curState;
-      displayHelper.hideValidateButton = true;
+      // displayHelper.hideValidateButton = true;
+      displayHelper.customValidate = clickValidate;
 
       initProperties();
       if(internalSeed === null) {
          internalSeed = subTask.taskParams.randomSeed;
          randomGenerator = new RandomGenerator(internalSeed);
       }
+
+      // var dh = (level != "hard") ? 100 : 100;
+      displayHelper.taskH = data[level].height1 + paperParams.height2 + 100;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getStateObject = function() {
@@ -243,8 +257,8 @@ function initTask(subTask) {
    };
 
    function initButtons() {
-      $("#execute").unbind("click");
-      $("#execute").click(clickValidate);
+      // $("#execute").unbind("click");
+      // $("#execute").click(clickValidate);
    }
 
    function initProperties() {
@@ -1410,18 +1424,17 @@ function initTask(subTask) {
          if(resultAndMessage.wrongCup !== undefined) {
             highlightWrong(resultAndMessage.wrongCup, resultAndMessage.wrongProperty);
          }
-         displayHelper.validate("stay");
+         showFeedback(resultAndMessage.message);
+         // displayHelper.validate("stay");
       }
    }
 
    function showFeedback(string) {
-      if(string) {
-         $("#feedback").html(string);
-         $("#feedback").show();
-      }
-      else {
-         $("#feedback").html("");
-         $("#feedback").hide();
+      string = string || "";
+      if(respEnabled){
+         displayHelper.displayError(string);
+      }else{
+         $("#displayHelper_graderMessage").html(string).css({color:"red","font-weight":"bold"});
       }
    }
 
@@ -1429,4 +1442,5 @@ function initTask(subTask) {
       callback(getResultAndMessage());
    };
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
+initWrapper(initTask, ["easy", "medium", "hard"],"easy");
+displayHelper.useFullWidth();
