@@ -3,20 +3,33 @@
    <head>
     <meta charset="utf-8">
     <title>2015-AT-07</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script>
+         var stringsLanguage = 'fr';
+      </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+       <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+               'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
+               'graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.4', 'drag_lib-2.1', 'raphaelButton-1.0',
+               'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+               ]);
+       </script>
+       <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
     <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simpleKeyboard-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simpleKeyboard-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-AT-07-telephone-book/",
@@ -35,6 +48,7 @@
       </script>
       <script type="text/javascript">
       var taskStrings = {
+          introTitle: "Votre mission",
          incorrectNumber: function(nbTarget) { return "Vous devez sélectionner " + nbTarget + " mots."; },
          incorrect: "Vous n'avez pas sélectionné les bons mots. Essayez encore.",
          correct: "Bravo, vous avez réussi !" };
@@ -86,22 +100,27 @@
             padding: 3px;
             width: 10px;
          }
+         #example {
+            display: flex;
+            justify-content: space-around;
+         }
          .example {
             margin-top: 10px;
             margin-bottom: 5px;
+            font-size: 0.5rem;
          }
-         #results_container {
-            width: 10em;
+         .layout_2 .consigne #example {
+            width: 50%;
          }
+
          .example_container {
-            padding: 0.2em;
-            padding-bottom: 0.5em;
-            padding-left: 0.5em;
-            margin-left: 0.5em;
-            width: 180px;
+            padding: 0.5rem;
             text-align: left;
             border: 1px solid black;
-            margin-left: 1em;
+            display: flex;
+            flex-direction: column;
+            max-width: 50%;
+            overflow: auto;
          }
          .example_container p {
             margin-top: 0.5em;
@@ -124,6 +143,8 @@
          #pattern_given {
             font-weight: bold;
             padding-bottom: 0.8em;
+            margin: 2rem;
+            text-align: center;
          }
       </style>
    </head>
@@ -132,45 +153,41 @@
          <h1>Sélection de mots</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <table id="task_description">
-               <tr>
-                  <td>
-                     <p>
-                        Un motif est formé de lettres<span class="easy"> et de points d'interrogation</span><span class="medium hard">, de points d'interrogation, et de "trois petits points"</span>.
+            <div id="zone_1">
+               <p>
+                  Un motif est formé de lettres<span class="easy"> et de points d'interrogation</span><span class="medium hard">, de points d'interrogation, et de "trois petits points"</span>.
+               </p>
+               <p>
+                  Chaque symbole <span class="symbol">?</span> désigne exactement une lettre, n'importe laquelle.
+               </p>
+               <p class="medium hard">
+                 Chaque symbole <span class="symbol">&#8230;</span> désigne zéro, une, ou plusieurs lettres.
+               </p>
+               <div id="example">
+                  <div class="example_container">
+                     <p class="example_title"><strong>Exemple</strong></p>
+                     <p> Motif&nbsp;: <strong><span id="pattern_example_0" class="pattern"></span></strong>
                      </p>
-                     <p>
-                        Chaque symbole <span class="symbol">?</span> désigne exactement une lettre, n'importe laquelle.
-                     </p>
-                     <p class="medium hard">
-                       Chaque symbole <span class="symbol">&#8230;</span> désigne zéro, une, ou plusieurs lettres.
-                     </p>
-                  </td>
-                  <td>
-                     <div class="example_container">
-                        <p class="example_title"><strong>Exemple</strong></p>
-                        <p> Motif&nbsp;: <strong><span id="pattern_example_0" class="pattern"></span></strong>
-                        </p>
-                        <p> Mots correspondants&nbsp;: </p>
-                        <table id="example0" class="words example"></table>
-                     </div>
-                  </td>
-                  <td>
-                     <div class="example_container">
-                       <p class="example_title"><strong>Exemple</strong></p>
-                        <p> Motif&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
-                        <p> Mots correspondants&nbsp;: </p>
-                        <table id="example1" class="words example"></table>
-                     </div>
-                  </td>
-               </tr>
-            </table>
-            <br/>
-            <div id="pattern_given">
-               Sélectionnez <span class="hard">tous</span> les <span class="easy medium"><b>3</b></span> mots qui correspondent
-               au motif&nbsp;:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
-               <span class="hard"><br/>On ne vous dit pas combien de mots correspondent.</span>
+                     <p> Mots correspondants&nbsp;: </p>
+                     <table id="example0" class="words example"></table>
+                  </div>
+                  <div class="example_container">
+                    <p class="example_title"><strong>Exemple</strong></p>
+                     <p> Motif&nbsp;:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
+                     <p> Mots correspondants&nbsp;: </p>
+                     <table id="example1" class="words example"></table>
+                  </div>
+               </div>
             </div>
-            <table id="main_words" class="words"></table>
+
+            <div id="zone_2">
+               <div id="pattern_given">
+                  Sélectionnez <span class="hard">tous</span> les <span class="easy medium"><b>3</b></span> mots qui correspondent
+                  au motif&nbsp;:&nbsp;&nbsp; <span id="pattern_target" class="pattern"></span>
+                  <span class="hard"><br/>On ne vous dit pas combien de mots correspondent.</span>
+               </div>
+               <table id="main_words" class="words"></table>
+            </div>
             <img src="icon.png" style="display:none">
          </div>
      </div><!-- task -->
@@ -181,7 +198,7 @@
          <div class="easy">
             <img style="float:right" s src="solution_easy.png">
             <p> Un mot qui correspond au motif <span class="pattern">c??t</span> est un mot composé de 4 lettres, qui commence par un <strong>c</strong> et qui se termine par un <strong>t</strong>. Les deux lettres du milieu peuvent être n'importe lesquelles.</p>
-            <p>Dans la liste proposée, les mots correspondant à cette description sont&nbsp;: <b>chat</b>, <b>chut</b> et <b>cuit</b>. </p
+            <p>Dans la liste proposée, les mots correspondant à cette description sont&nbsp;: <b>chat</b>, <b>chut</b> et <b>cuit</b>. </p>
             <p>Les autres mots ne correspondent pas. En effet, <b>char</b>  ne se termine pas par un <strong>t</strong>, tandis que <b>plat</b> ne commence pas par un <strong>c</strong>.</p>
          </div>
           

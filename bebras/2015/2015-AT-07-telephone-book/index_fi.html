@@ -3,19 +3,32 @@
    <head>
     <meta charset="utf-8">
     <title>2015-AT-07</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simpleKeyboard-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simpleKeyboard-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    <script>
+         var stringsLanguage = 'fr';
+      </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+       <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+               'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
+               'graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.4', 'drag_lib-2.1', 'raphaelButton-1.0',
+               'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+               ]);
+       </script>
+       <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-AT-07-telephone-book/",
@@ -35,6 +48,7 @@
       <script type="text/javascript">
          var stringsLanguage = 'fi';
       var taskStrings = {
+          introTitle: "Your mission",
          incorrectNumber: function(nbTarget) { return "Sinun pitää valita " + nbTarget + " sanaa."; },
          incorrect: "Et ole valinnut oikeita sanoja. Yritä uudelleen.",
          correct: "Onnittelut, ratkaisit tämän version!" };
@@ -86,22 +100,27 @@
             padding: 3px;
             width: 10px;
          }
+         #example {
+            display: flex;
+            justify-content: space-around;
+         }
          .example {
             margin-top: 10px;
             margin-bottom: 5px;
+            font-size: 0.5rem;
          }
-         #results_container {
-            width: 10em;
+         .layout_2 .consigne #example {
+            width: 50%;
          }
+
          .example_container {
-            padding: 0.2em;
-            padding-bottom: 0.5em;
-            padding-left: 0.5em;
-            margin-left: 0.5em;
-            width: 180px;
+            padding: 0.5rem;
             text-align: left;
             border: 1px solid black;
-            margin-left: 1em;
+            display: flex;
+            flex-direction: column;
+            max-width: 50%;
+            overflow: auto;
          }
          .example_container p {
             margin-top: 0.5em;
@@ -124,6 +143,8 @@
          #pattern_given {
             font-weight: bold;
             padding-bottom: 0.8em;
+            margin: 2rem;
+            text-align: center;
          }
       </style>
    </head>
@@ -132,44 +153,39 @@
          <h1>Täsmäävät sanat</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <table id="task_description">
-               <tr>
-                  <td>
-                     <p>
-                        Hahmo koostuu kirjaimista<span class="easy"> ja kysymysmerkeistä</span><span class="medium hard">, kysymysmerkeistä ja kolmesta pienestä pisteestä</span>.
+            <div id="zone_1">
+               <p>
+                  Hahmo koostuu kirjaimista<span class="easy"> ja kysymysmerkeistä</span><span class="medium hard">, kysymysmerkeistä ja kolmesta pienestä pisteestä</span>.
+               </p>
+               <p>
+                  Yksi kymysmerkki <span class="symbol">?</span> täsmää minkä tahansa yhden kirjaimen.
+               </p>
+               <p class="medium hard">
+                 Kolme pistettä <span class="symbol">&#8230;</span> tarkoittaa, että täsmätään jokin määrä (<b>voi olla myös 0</b>) mitä tahansa kirjaimia.
+               </p>
+               <div id="example">
+                  <div class="example_container">
+                     <p class="example_title"><strong>Esimerkki</strong></p>
+                     <p> Hahmo:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_0" class="pattern"></span></strong>
                      </p>
-                     <p>
-                        Yksi kymysmerkki <span class="symbol">?</span> täsmää minkä tahansa yhden kirjaimen.
-                     </p>
-                     <p class="medium hard">
-                       Kolme pistettä <span class="symbol">&#8230;</span> tarkoittaa, että täsmätään jokin määrä (<b>voi olla myös 0</b>) mitä tahansa kirjaimia.
-                     </p>
-                  </td>
-                  <td>
-                     <div class="example_container">
-                        <p class="example_title"><strong>Esimerkki</strong></p>
-                        <p> Hahmo:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_0" class="pattern"></span></strong>
-                        </p>
-                        <p> Täsmääviä sanoja:</p>
-                        <table id="example0" class="words example"></table>
-                     </div>
-                  </td>
-                  <td>
-                     <div class="example_container">
-                       <p class="example_title"><strong>Esimerkki</strong></p>
-                        <p> Hahmo:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
-                        <p> Täsmääviä sanoja:</p>
-                        <table id="example1" class="words example"></table>
-                     </div>
-                  </td>
-               </tr>
-            </table>
-            <br/>
-            <div id="pattern_given">
-               Valitse alta klikkaamalla <span class="hard">kaikki sanat</span><span class="easy medium"><b>3 sanaa</b></span>, jotka täsmäävät hahmoon:&nbsp;&nbsp;<span id="pattern_target" class="pattern"></span>
-               <span class="hard"><br/>Tässä versiossa sinulle ei kerrota täsmäävien sanojen määrää.</span>
+                     <p> Täsmääviä sanoja:</p>
+                     <table id="example0" class="words example"></table>
+                  </div>
+                  <div class="example_container">
+                    <p class="example_title"><strong>Esimerkki</strong></p>
+                     <p> Hahmo:&nbsp;&nbsp;&nbsp;<strong><span id="pattern_example_1" class="pattern"></span></strong></p>  
+                     <p> Täsmääviä sanoja:</p>
+                     <table id="example1" class="words example"></table>
+                  </div>
+               </div>
             </div>
-            <table id="main_words" class="words"></table>
+            <div id="zone_2">
+               <div id="pattern_given">
+                  Valitse alta klikkaamalla <span class="hard">kaikki sanat</span><span class="easy medium"><b>3 sanaa</b></span>, jotka täsmäävät hahmoon:&nbsp;&nbsp;<span id="pattern_target" class="pattern"></span>
+                  <span class="hard"><br/>Tässä versiossa sinulle ei kerrota täsmäävien sanojen määrää.</span>
+               </div>
+               <table id="main_words" class="words"></table>
+            </div>
             <img src="icon.png" style="display:none">
          </div>
      </div><!-- task -->

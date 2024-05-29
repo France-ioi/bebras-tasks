@@ -1,8 +1,8 @@
-function initTask() {
-   'use strict';
+function initTask(subTask) {
+   // 'use strict';
    var level;
    var answer = null;
-   var state = null;
+   var state = {};
    function displayPatch(letter) {
       if (letter == "*") {
          return "?";
@@ -19,15 +19,18 @@ function initTask() {
    var data = {
       easy: {
          words: ["chat", "chut", "char", "plat", "cuit"],
-         pattern: "c**t"
+         pattern: "c**t",
+         taskH: 340
       },
       medium: {
          words: ["tacher", "table", "tartes", "arrive", "rave", "charme", "parer", "mare"],
-         pattern: "*a+e"
+         pattern: "*a+e",
+         taskH: 470
       },
       hard: {
          words: ["attraper", "reproches", "pronostic", "prosterner", "prochains", "reposer", "crocheter", "promesse"],
-         pattern: "+pro*+s+"
+         pattern: "+pro*+s+",
+         taskH: 490
       }
    };
    var examples = {
@@ -63,52 +66,61 @@ function initTask() {
       ]
    };
 
-   task.load = function(views, callback) {
-      // displayHelper.hideValidateButton = true;
-      displayHelper.setupLevels();
+   subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+       }
+      level = curLevel;
+      displayHelper.customValidate = checkResult;
 
-      if (views.solution) {
-         $("#solution").show();
-      }
-
-      callback();
+      displayHelper.taskH = data[level].taskH;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
-   task.getDefaultStateObject = function() {
-      return { level: "easy" };
-   };
-
-   task.getStateObject = function() {
-      state.level = level;
+   subTask.getStateObject = function() {
       return state;
    };
 
-   task.reloadStateObject = function(stateObj, display) {
-      state = stateObj;
-      level = state.level;
-
-      if (display) {
-         loadWords();
-         loadExamples();
-         loadHandlers();
-      }
-   };
-
-   task.reloadAnswerObject = function(answerObj) {
+   subTask.reloadAnswerObject = function(answerObj) {
       answer = answerObj;
       updateAllSelections();
    };
 
-   task.getAnswerObject = function() {
+   subTask.getAnswerObject = function() {
       return answer;
    };
 
-   task.getDefaultAnswerObject = function() {
-      var answer = {};
-      for(var level in data) {
-         answer[level] = Beav.Array.make(data[level].words.length, false);
-      }
-      return answer;
+   subTask.getDefaultAnswerObject = function() {
+      var defaultAnswer = {};
+      defaultAnswer = Beav.Array.make(data[level].words.length, false);
+      return defaultAnswer
+   };
+
+   var getResultAndMessage = function() {
+      var result = checkResult(true);
+      return result
+   };
+
+   subTask.unloadLevel = function(callback) {
+      callback();
+   };
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+
+   subTask.resetDisplay = function() {
+      displayError("");
+      loadWords();
+      loadExamples();
+      loadHandlers();
+      updateAllSelections();
+      displayHelper.updateLayout();
    };
 
    var loadWords = function() {
@@ -173,7 +185,8 @@ function initTask() {
 
    var clickWord = function(iWord) {
       var handler = function() {
-         answer[level][iWord] = !answer[level][iWord];
+         displayError("");
+         answer[iWord] = !answer[iWord];
          updateWordSelection(iWord);
       };
       return handler;
@@ -186,7 +199,9 @@ function initTask() {
    };
 
    var updateWordSelection = function(iWord) {
-      if(answer[level][iWord]) {
+      if(!answer)
+         return
+      if(answer[iWord]) {
          $("#main_words .word" + iWord).addClass("selected");
       }
       else {
@@ -202,7 +217,16 @@ function initTask() {
       });
    };
 
-   var getResultAndMessage = function(answer, level) {
+   var patternToRegex = function(pattern) {
+      var regexMatcher = function(match) {
+         return patternConversion[match];
+      };
+
+      var convertedAnswer = pattern.replace(/\*|\+/g, regexMatcher);
+      return new RegExp("^" + convertedAnswer + "$");
+   };
+
+   function checkResult(noVisual) {
       var correctSelections = getCorrectSelections(data[level]);
       var wrong = 0;
       var missing = 0;
@@ -213,12 +237,12 @@ function initTask() {
          if (correctSelections[iWord]) {
             nbToSelect++;
          }
-         if (answer[level][iWord]) {
+         if (answer[iWord]) {
             nbSelected++;
          }
-         if (correctSelections[iWord] && !(answer[level][iWord])) {
+         if (correctSelections[iWord] && !(answer[iWord])) {
             missing++;
-         } else if(!correctSelections[iWord] && answer[level][iWord]) {
+         } else if(!correctSelections[iWord] && answer[iWord]) {
             wrong++;
          } else {
             correct++;
@@ -227,58 +251,34 @@ function initTask() {
       var message = "";
       var result;
       if (wrong == 0 && missing == 0) {
-         result = "correct";
+         successRate = 1;
          message = taskStrings.correct;
+         if(!noVisual){
+            platform.validate("done");
+         }
       } else {
-         result = "wrong";
+         successRate = 0
          if (nbSelected != nbToSelect && level != "hard") {
             message = taskStrings.incorrectNumber(nbToSelect);
          } else {
             message = taskStrings.incorrect;
          }
-      }
-      return { result: result, message: message };
-   };
-
-   var patternToRegex = function(pattern) {
-      var regexMatcher = function(match) {
-         return patternConversion[match];
-      };
-
-      var convertedAnswer = pattern.replace(/\*|\+/g, regexMatcher);
-      return new RegExp("^" + convertedAnswer + "$");
-   };
-
-   grader.gradeTask = function(strAnswer, token, callback) {
-      task.getLevelGrade(strAnswer, token, callback, null);
-   };
-
-   task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
-      var taskParams = displayHelper.taskParams;
-      var scores = {};
-      var messages = {};
-      var maxScores = displayHelper.getLevelsMaxScores();
-
-      if (strAnswer === '') {
-         callback(taskParams.minScore, '');
-         return;
-      }
-      var answer = $.parseJSON(strAnswer);
-      for (var curLevel in data) {
-         var resultAndMessage = getResultAndMessage(answer, curLevel);
-         if (resultAndMessage.result == "correct") {
-            scores[curLevel] = maxScores[curLevel];
-         } else {
-            scores[curLevel] = 0;
+         if(!noVisual){
+            displayError(message);
          }
-         messages[curLevel] = resultAndMessage.message;
       }
+      return { successRate: successRate, message: message };
+   }
 
-      if (!gradedLevel) {
-         displayHelper.sendBestScore(callback, scores, messages);
-      } else {
-         callback(scores[gradedLevel], messages[gradedLevel]);
+   function displayError(msg) {
+      if(respEnabled){
+         displayHelper.displayError(msg);
+      }else{
+         $("#displayHelper_graderMessage").html(msg);
       }
    };
+   
 }
-initTask();
+// initTask();
+initWrapper(initTask, ["easy", "medium", "hard"],"easy");
+displayHelper.useFullWidth();
