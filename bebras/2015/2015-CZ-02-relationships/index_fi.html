@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
       <title>2015-CZ-02-relationships</title>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+      <script>
+         var stringsLanguage = 'fi';
+       </script>
+       <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+       <script class="remove" type="text/javascript">
+           var modulesPath = '../../../_common/modules';
+           importModules([
+               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
+               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+               'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+               'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
+               'graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.4', 'drag_lib-2.1', 'raphaelButton-1.0',
+               'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+               ]);
+       </script>
+       <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
 
-
-      <script class="module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js"        id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-      <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js"></script>
-
-      <link class="module" rel="stylesheet" type="text/css" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://castor-informatique.fr/tasks/modules/styles.css">
       <script class="remove" type="text/javascript">
-
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-CZ-02-relationships/",
           "language": "fi",
@@ -42,8 +52,8 @@
       };
       </script>
       <script type="text/javascript">
-         var stringsLanguage = 'fi';
       var taskStrings = {
+         introTitle: "Your mission",
          error: "Punaisen nuolen alussa oleva majava on vanhempi kuin nuolen lopussa oleva majava.",
          remains: "On vielä asettamattomia nimikylttejä.",
          success: "Onnittelut, ratkaisit tämän version!",
@@ -56,23 +66,11 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-      #relations td {
-         vertical-align: top;
-       }
-      #relations td ul {
-         margin-top: 0em;
-         margin-bottom: 0.5em;
-      }
-      .easy, .hard {
-         display: none;
-      }
-      #execute_container {
-         text-align: center;
-      }
-      #remark {
-         text-align: center;
-         font-weight: bold;
-      }
+      
+         #remark {
+            text-align: center;
+            font-weight: bold;
+         }
       </style>
   </head>
   <body>
@@ -80,23 +78,24 @@
          <h1>Ikäsuhteet</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-           <p>
-            Raahaa vasemmalla annetut nimikyltit sopiviin paikkoihin vaaleansinisiin laatikoihin.
-            </p>
-            <div class="easy medium">
-               <p>
-               Kunkin nuolen pitää osoittaa nuoremmasta henkilöstä vanhempaan.
+            <div id="zone_1">
+              <p>
+               Raahaa vasemmalla annetut nimikyltit sopiviin paikkoihin vaaleansinisiin laatikoihin.
                </p>
+               <div class="easy medium">
+                  <p>
+                  Kunkin nuolen pitää osoittaa nuoremmasta henkilöstä vanhempaan.
+                  </p>
+               </div>
+               <div class="hard">
+                  <p>
+                  Kunkin nuolen pitää osoittaa nuoremmasta henkilöstä vanhempaan, <b>jos nuolen kummassakin päässä olevassa laatikossa on nimikyltti</b>.
+                  </p>
+                  <p id="remark">Huomaa, että yksi laatikko jää tyhjäksi.</p>
+               </div>
             </div>
-            <div class="hard">
-               <p>
-               Kunkin nuolen pitää osoittaa nuoremmasta henkilöstä vanhempaan, <b>jos nuolen kummassakin päässä olevassa laatikossa on nimikyltti</b>.
-               </p>
-               <p id="remark">Huomaa, että yksi laatikko jää tyhjäksi.</p>
-            </div>
-            <div id="anim" class="touch"></div>
-            <div id="execute_container">
-               <input type="button" value="Tarkista vastaus" id="execute"/>
+            <div id="zone_2">
+               <div id="anim" class="touch"></div>
             </div>
             <img src="icon.png" style="display:none">
          </div>
