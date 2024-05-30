@@ -274,7 +274,7 @@ function initTask(subTask) {
       if(respEnabled){
          displayHelper.displayError(msg);
       }else{
-         $("#displayHelper_graderMessage").html(msg);
+         $("#displayHelper_graderMessage").html(msg).css({color:"red","font-weight":"bold"});
       }
    };
    

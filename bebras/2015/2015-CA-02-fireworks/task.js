@@ -1,6 +1,6 @@
-function initTask() {
+function initTask(subTask) {
    'use strict';
-   var state = null;
+   var state = {};
    var level;
    var answer = null;
    var data = {
@@ -19,28 +19,7 @@ function initTask() {
          options: ["RB", "RRR", "BRR", "RBB", "BR", "BB"], // BBR can also be given
          target: 3
       }
-      /*
-      hard_bof: {
-         sequence: "RBBRRR",
-         options: ["RRR", "BR", "BRRR", "RR", "RB", "RBB"],
-         target: 3
-      },
-      old_easy: {
-         sequence: "BBRB",
-         options: ["B", "BB", "R", "BRB"],w
-         target: 3
-      },
-      old_medium: {
-         sequence: "RBBRRR",
-         options: ["RRR", "BR", "BRRR", "RR", "RB", "RBB"],
-         target: 3
-      },
-      old_hard: {
-         sequence: "BRBBRBBRB",
-         options: ["RR", "RB","BR", "BRB", "BB", "RBB"],
-         target: 4
-      }
-      */
+
    };
    var words = taskStrings.words;
 
@@ -211,76 +190,66 @@ function initTask() {
       labelParams.xText = 50;
    }
 
+   subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+       }
+      level = curLevel;
+      displayHelper.customValidate = checkResult;
 
-   task.load = function(views, callback) {
-      platform.getTaskParams("randomSeed", null, function(randomSeed) {
-         taskSeed = randomSeed;
-         // displayHelper.hideValidateButton = true;
-         displayHelper.setupLevels();
-         initHandlers();
-         if (views.solutions) {
-            $("#solution").show();
-
-            // TODO: temporary
-         }
-
-         // FOR DEBUG (display a locked hard version):
-         // $("#tab_hard").addClass("lockedLevel");
-         
-         callback();
-      });
+      displayHelper.taskH = paperHeight[level] + 70;
+      displayHelper.taskW = paperWidth;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
-   task.getDefaultStateObject = function() {
-      return { level: "easy" };
-   };
-
-   task.getStateObject = function() {
-      state.level = level;
+   subTask.getStateObject = function() {
       return state;
    };
 
-   task.reloadStateObject = function(stateObj, display) {
-      state = stateObj;
-      level = state.level;
-      if (answer != null) {
-         labelBank = generateBank(level, answer[level].seed);
-      }
-
-      if (display) {
-      }
-   };
-
-   task.reloadAnswerObject = function(answerObj) {
+   subTask.reloadAnswerObject = function(answerObj) {
       answer = answerObj;
-      labelBank = generateBank(level, answer[level].seed);
-      initPaper();
+      if(!answer)
+         return
+      labelBank = generateBank(level, answer.seed);
    };
 
-   task.getAnswerObject = function() {
+   subTask.getAnswerObject = function() {
       return answer;
    };
 
-   task.getDefaultAnswerObject = function() {
+   subTask.getDefaultAnswerObject = function() {
        // TODO: why are the answers array of strings and not just arrays of ints?
       // currentSeedOffsets[level]++;
-      return {
-         easy: {
-            seed: 1000 + (taskSeed + currentSeedOffsets.easy) % numSeeds,
-            completed: [], // [ ["0","3"], ["0","0","2","0"] ],
-            current: []
-         },
-         medium: {
-            seed: 2000 + (taskSeed + currentSeedOffsets.medium) % numSeeds,
-            completed: [],
-            current: []
-         },
-         hard: {
-            seed: 3000 + (taskSeed + currentSeedOffsets.hard) % numSeeds,
-            completed: [],
-            current: []
-         }
+
+      var defaultAnswer = {
+         seed: 1000 + (subTask.taskParams.randomSeed + currentSeedOffsets[level]) % numSeeds,
+         completed: [],
+         current: []
       };
+      return defaultAnswer
+   };
+
+   var getResultAndMessage = function() {
+      var result = checkResult(true);
+      return result
+   };
+
+   subTask.unloadLevel = function(callback) {
+      callback();
+   };
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+
+   subTask.resetDisplay = function() {
+      displayError("");
+      initPaper();
+      initHandlers();
    };
 
    var initHandlers = function() {
@@ -303,10 +272,7 @@ function initTask() {
    };
 
    var initPaper = function() {
-      if (paper) {
-         paper.remove();
-      }
-      paper = new Raphael("anim", paperWidth, paperHeight[level]);
+      paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, paperHeight[level]);
       drawBank();
       drawTarget();
       drawCurrentSentence();
@@ -360,9 +326,9 @@ function initTask() {
             removeLabel(visualSentence[iWord]);
          }
       }
-      var sentence = answer[level].current;
-      if (answer[level].completed.length == data[level].target) {
-         sentence = answer[level].completed[answer[level].completed.length - 1];
+      var sentence = answer.current;
+      if (answer.completed.length == data[level].target) {
+         sentence = answer.completed[answer.completed.length - 1];
       }
       visualSentence = [];
       for (iWord in sentence) {
@@ -380,7 +346,7 @@ function initTask() {
          }
       }
       visualCompleted = [];
-      for (iSentence in answer[level].completed) {
+      for (iSentence in answer.completed) {
          visualCompleted.push(drawCompletedSentence(iSentence));
       }
    };
@@ -392,7 +358,7 @@ function initTask() {
       var params = $.extend({}, otherSentenceParams);
       params.xPos = otherSentenceParams.xPosById[iSentence];
         // += iSentence * (labelParams.width + marginCompleted);
-      var sentence = answer[level].completed[iSentence];
+      var sentence = answer.completed[iSentence];
       var labelList = [];
       for (var iWord in sentence) {
          var iLabel = sentence[iWord];
@@ -420,7 +386,6 @@ function initTask() {
       visualLabel.index = label.index;
       visualLabel.height = labelParams.verticalPadding * 2 + labelParams.star.diameter * label.stars.length + labelParams.star.verticalSpace * (label.stars.length - 1);
       visualLabel.background = paper.rect(xPos, yPos, labelParams.width, visualLabel.height).attr(labelParams.backAttr);
-      // visualLabel.text = paper.text(xPos + labelParams.width / 2, yPos + visualLabel.height / 2, label.word).attr(labelParams.textAttr).attr({'text-anchor': 'middle'});
       visualLabel.text = paper.text(xPos + labelParams.xText, yPos + visualLabel.height / 2, label.word).attr(labelParams.textAttr);
       visualLabel.text[0].style.cursor = "default";
       visualLabel.stars = [];
@@ -463,12 +428,13 @@ function initTask() {
 
    var clickBankLabel = function(iLabel) {
       var handler = function() {
+         displayError("");
          displayHelper.stopShowingResult();
-         if (answer[level].completed.length === data[level].target ||
-               isTooLong(answer[level].current, level)) {
+         if (answer.completed.length === data[level].target ||
+               isTooLong(answer.current, level)) {
             return;
          }
-         answer[level].current.push(iLabel);
+         answer.current.push(iLabel);
          addToSentence(iLabel);
       };
       return handler;
@@ -489,7 +455,7 @@ function initTask() {
 
    var removeFromSentence = function(iWord) {
       var handler = function() {
-         answer[level].current.splice(iWord, 1);
+         answer.current.splice(iWord, 1);
          drawCurrentSentence();
          onSentenceChange();
       };
@@ -497,30 +463,33 @@ function initTask() {
    };
 
    var clearCurrentMessage = function() {
-      answer[level].current = [];
+      displayError("");
+      answer.current = [];
       drawCurrentSentence();
    };
 
    var onSentenceChange = function() {
-      if (isTooLong(answer[level].current, level)) {
+      if (isTooLong(answer.current, level)) {
          // displayHelper.validate("stay", function() {});
          return;
       }
-      if (!checkSentenceMatch(answer[level].current, level)) {
+      if (!checkSentenceMatch(answer.current, level)) {
          return;
       }
-      if (isCurrentDuplicate(answer[level])) {
-         displayHelper.validate("stay", function() {});
+      if (isCurrentDuplicate(answer)) {
+         checkResult();
+         // displayHelper.validate("stay", function() {});
          return;
       }
-      if (answer[level].completed === data[level].target) {
+      if (answer.completed === data[level].target) {
          return;
       }
-      answer[level].completed.push(answer[level].current);
-      answer[level].current = [];
+      answer.completed.push(answer.current);
+      answer.current = [];
       drawCurrentSentence();
-      drawCompletedSentence(answer[level].completed.length - 1);
-      platform.validate("done", function() {});
+      drawCompletedSentence(answer.completed.length - 1);
+      // platform.validate("done", function() {});
+      checkResult();
    };
 
    var getSequenceLength = function(sentence, level) {
@@ -574,17 +543,19 @@ function initTask() {
       return false;
    };
 
-   var evaluate = function(input, level, maxScore) {
-      if (!verifyCompletedSentences(input, level)) {
+
+   function checkResult(noVisual) {
+      if (!verifyCompletedSentences(answer, level)) {
          return {
             score: 0,
             result: "error",
             message: "ERREUR. Les séquences complétées sont invalides."};
       }
 
-      var nbCompleted = input.completed.length;
+      var nbCompleted = answer.completed.length;
       var nbToComplete = data[level].target;
       var score = 0;
+      var maxScore = 1;
       if (level == "easy") {
          if (nbCompleted >= 1) {
             score = maxScore;
@@ -599,9 +570,9 @@ function initTask() {
          }
       }
       var message = "";
-      if (input.completed.length === nbToComplete) {
+      if (answer.completed.length === nbToComplete) {
          message = taskStrings.success;
-      } else if (isCurrentDuplicate(input)) {
+      } else if (isCurrentDuplicate(answer)) {
          /*if (level == "easy") {
             message = "Cette séquence apparaît déjà à droite. Cherchez-en une autre.";
          } */
@@ -609,13 +580,13 @@ function initTask() {
          if (level == "medium" || level == "hard") {
             message += taskStrings.hint;
          }
-      } else if (isTooLong(input.current, level)) {
+      } else if (isTooLong(answer.current, level)) {
          message = taskStrings.tooLong;
-      } else if (input.current.length > 0 && isTooShort(input.current, level)) {
+      } else if (answer.current.length > 0 && isTooShort(answer.current, level)) {
          message = taskStrings.tooShort;
-      } else if (input.current.length > 0 && !checkSentenceMatch(input.current, level)) {
+      } else if (answer.current.length > 0 && !checkSentenceMatch(answer.current, level)) {
          message = taskStrings.notMatch;
-      } else if (input.completed.length === 0) {
+      } else if (answer.completed.length === 0) {
          message = taskStrings.clickLeft;
       } else {
          message = taskStrings.foundSoFar(nbCompleted);
@@ -623,43 +594,25 @@ function initTask() {
             message += taskStrings.hint;
          }
       }
-      return { score: score, message: message };
+      if(!noVisual && score < maxScore){
+         displayError(message);
+      }else 
+      if(!noVisual && score == maxScore){
+         platform.validate("done");
+      }
+      return { successRate: score, message: message }
+
    };
 
-   grader.gradeTask = function(strAnswer, token, callback) {
-      task.getLevelGrade(strAnswer, token, callback, null);
-   };
-
-   task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
-      var taskParams = displayHelper.taskParams;
-      var scores = {};
-      var messages = {};
-      var maxScores = displayHelper.getLevelsMaxScores();
-
-      if (strAnswer === '') {
-         callback(taskParams.minScore, '');
-         return;
-      }
-      var answer = $.parseJSON(strAnswer);
-      // clone the state to restore after grading.
-      var oldState = $.extend({}, task.getStateObject());
-      for (var curLevel in data) {
-         state.level = curLevel;
-         task.reloadStateObject(state, false);
-         labelBank = generateBank(curLevel, answer[level].seed);
-
-         var result = evaluate(answer[curLevel], curLevel, 1.0);
-         scores[curLevel] = levelScoreInterpolate(maxScores, curLevel, result.score);
-         messages[curLevel] = result.message;
-      }
-
-      task.reloadStateObject(oldState, false);
-      if (!gradedLevel) {
-         displayHelper.sendBestScore(callback, scores, messages);
-      } else {
-         callback(scores[gradedLevel], messages[gradedLevel]);
+   function displayError(msg) {
+      if(respEnabled){
+         displayHelper.displayError(msg);
+      }else{
+         $("#displayHelper_graderMessage").html(msg).css({color:"red","font-weight":"bold"});
       }
    };
+
 }
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"],"easy");
+displayHelper.useFullWidth();
 

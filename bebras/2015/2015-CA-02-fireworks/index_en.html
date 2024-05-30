@@ -3,19 +3,32 @@
    <head>
     <meta charset="utf-8">
     <title>2015-CA-02</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
-
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/randomGenerator-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/randomGenerator-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    <script>
+         var stringsLanguage = 'en';
+    </script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+    <script class="remove" type="text/javascript">
+        var modulesPath = '../../../_common/modules';
+        importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
+            'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
+            'graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.4', 'drag_lib-2.1', 'raphaelButton-1.0',
+            'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+            ]);
+    </script>
+    <script type="text/javascript">
+      var respEnabled = Beav.Navigator.supportsResponsive();
+      // var respEnabled = false;
+      if(respEnabled){
+         importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+         window.FontsLoader.loadFonts(['fontawesome']);
+         task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+      }else{
+         importModules(['buttonsAndMessages','taskStyles-0.1']);
+      }
+   </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-CA-02-fireworks/",
@@ -33,8 +46,8 @@
       };
       </script>
       <script type="text/javascript">
-         var stringsLanguage = 'en';
          var taskStrings = { 
+            introTitle: "Your mission",
             availableWords: "Available words",
             clickToAdd: "Click on a word\nto add it",
             clickToRemove: "Click on a word\nto remove it",
@@ -54,12 +67,12 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-      #clear_current {
-         margin-bottom: 1em;
-      }
-      #clear_current_container {
-         text-align: center;
-      }
+         #clear_current {
+            margin-bottom: 1em;
+         }
+         #clear_current_container {
+            text-align: center;
+         }
       </style>
    </head>
    <body>
@@ -67,18 +80,22 @@
          <h1>Color Signals</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <p>
-            Beavers communicates by sending color signals.
-            </p>
-            <p class="easy">
-            Find <b>1</b> sequence of words which correspond to the message given below.
-            </p>
-            <p class="medium hard">
-            Find <b>3</b> sequences of different words which correspond to the message given below.
-            </p>
+            <div id="zone_1">
+               <p>
+               Beavers communicates by sending color signals.
+               </p>
+               <p class="easy">
+               Find <b>1</b> sequence of words which correspond to the message given below.
+               </p>
+               <p class="medium hard">
+               Find <b>3</b> sequences of different words which correspond to the message given below.
+               </p>
+            </div>
 
-            <div id="anim"></div>
-            <div id="clear_current_container"><input type="button" id="clear_current" value="Clear current sequence" /></div>
+            <div id="zone_2">
+               <div id="anim"></div>
+               <div id="clear_current_container"><input type="button" id="clear_current" value="Clear current sequence" /></div>
+            </div>
             <img src="icon.png" style="display:none">
          </div>
      </div><!-- task -->
