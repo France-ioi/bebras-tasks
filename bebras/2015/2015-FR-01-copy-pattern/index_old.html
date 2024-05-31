@@ -3,33 +3,46 @@
    <head>
       <meta charset="utf-8">
       <title>2015-FR-01-copy pattern</title>
-      <script>
-         var stringsLanguage = 'fr';
-       </script>
-       <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
-       <script class="remove" type="text/javascript">
-           var modulesPath = '../../../_common/modules';
-           importModules([
-               'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1b', 'JSON-js',
-               'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
-               'delayFactory-1.0', 'simulationFactory-1.0', 'randomGenerator-1.0',
-               'jschannel', 'platform-pr', 'installationAPI.01', 'miniPlatform', 'grid-1.1',
-               'graph-1.0', 'visual-graph-1.1', 'graph-mouse-1.4', 'drag_lib-2.1', 'raphaelButton-1.0',
-               'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
-               ]);
-       </script>
-       <script type="text/javascript">
-         var respEnabled = Beav.Navigator.supportsResponsive();
-         // var respEnabled = false;
-         if(respEnabled){
-            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
-            window.FontsLoader.loadFonts(['fontawesome']);
-            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
-         }else{
-            importModules(['buttonsAndMessages','taskStyles-0.1']);
-         }
-      </script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
 
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/tracker.js" id="http://castor-informatique.fr/tasks/modules/tracker.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+      <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-proxy.js"></script>
+      <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+      <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js"></script>
+
+      <link class="module" rel="stylesheet" type="text/css" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+      <script type="text/javascript">
+         var taskStrings = {
+           instructions: [
+                  "1 pas à droite",
+                  "1 pas à gauche",
+                  "1 pas en haut",
+                  "1 pas en bas",
+                  "N pas à droite",
+                  "N pas à gauche",
+                  "N pas en haut",
+                  "N pas en bas",
+                  "augmenter N de 1"
+                  ],
+            resume: "Continuer",
+            pause: "Pause",
+            success: "Bravo, vous avez réussi !",
+            missingInstr: "Ajoutez des instructions à votre programme.",
+            incorrect: "Le dessin ne correspond pas.<br> Essayez avec d'autres instructions.",
+            noInstruction: "Aucune instruction fournie.",
+            completed: "Exécution terminée.",
+            repetitionNumber: "Répétition n°",
+            exitGrid: "Vous êtes sorti de la grille."
+         };
+      </script>
+      <script type="text/javascript" src="task_old.js"></script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/algorea_2015/2015-FR-01-track/",
@@ -45,44 +58,12 @@
           "fullFeedback": false
       };
       </script>
-
-      <script type="text/javascript">
-         var taskStrings = {
-            introTitle: "Votre mission",
-           instructions: [
-                  "1 pas à droite",
-                  "1 pas à gauche",
-                  "1 pas en haut",
-                  "1 pas en bas",
-                  "N pas à droite",
-                  "N pas à gauche",
-                  "N pas en haut",
-                  "N pas en bas",
-                  "augmenter N de 1"
-                  ],
-            resume: "Continuer",
-            pause: "Pause",
-            success: "Bravo, vous avez réussi !",
-            takeInstr: "Prenez les\ninstructions ici",
-            dropInstr: "Glissez les\ninstructions là",
-            missingInstr: "Ajoutez des instructions à votre programme.",
-            incorrect: "Le dessin ne correspond pas.<br> Essayez avec d'autres instructions.",
-            noInstruction: "Aucune instruction fournie.",
-            completed: "Exécution terminée.",
-            repetitionNumber: "Répétition n°",
-            exitGrid: "Vous êtes sorti de la grille."
-         };
-      </script>
-      <script type="text/javascript" src="task.js"></script>
-      
       <style>
          #drawing {
             margin-left: 0.5em;
          }
          #columns-wrapper {
             margin-top: 1em;
-            display: flex;
-            justify-content: space-around;
          }
          .columns td {
             vertical-align: top;
@@ -95,8 +76,8 @@
             text-align: center;
             font-weight: bold;
             color: blue;
-            height: 1rem;
-            margin: 10px 0;
+            padding: 0.5em;
+            height: 1em;
          }
          .buttons input {
             margin-bottom: 5px;
@@ -104,37 +85,28 @@
          #textSolution li {
             margin-top: 0.2em;
          }
-
-         #example_container {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            margin-top: 20px;
+         .valigntop td {
+            vertical-align: top;
          }
-         .examples, .obj  {
+         .examples, .objectif  {
+            border-collapse: collapse;
             text-align: center;
             border: 1px solid black;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
          }
-         .obj {
+         .objectif {
             border: 1px solid black;   
          }
-         .obj {
-            padding: 1em;
+         .examples td, .objectif td {
+            padding: 0.5em;
          }
-
-         .examples > * {
-            padding: 1em;
-            margin: 0;
-         }
-         .examples td {
+         .examples td td {
             border: 1px solid #D0D0D0;
             padding: 0.5em;
          }
-         .examples table {
-            margin: auto;
-         }
          .exampleButton {
-            margin: 5px;
+            margin: 2px;
          }
          .resetButton {
             display:none;
@@ -146,10 +118,8 @@
             margin-top: 0.5em;
             margin-bottom: 0.5em;
          }
-         #result_container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+         #top-spacing {
+            margin-top: 1em;
          }
          #simuButtons input {
             width: 100px;
@@ -161,47 +131,80 @@
          <h1>Reproduire un dessin</h1>
          <div id="tabsContainer"></div>
          <div id="taskContent">
-            <div id="zone_1">
-               <p>
-               Pour reproduire le dessin objectif, construisez une séquence de commandes. <strong>Elle sera répétée <span class="nbLoops"></span> fois.</strong>
-               </p>
+            <p>
+            Pour reproduire le dessin objectif, construisez une séquence de commandes. <strong>Elle sera répétée <span class="nbLoops"></span> fois.</strong>
+            </p>
+            <div id="top-spacing"></div>
+            <div style="text-align:center">
+               <table class="valigntop">
+                  <tr>
+                     <td>
+                        <table class='examples valigntop'>
+                           <tr>
+                              <td style="text-align:center"><b>Exemple<br> (la séquence est répétée <span class="nbLoops"></span> fois)</b></td>
+                           </tr>
+                           <tr>
+                              <td style="text-align:center">
+                                 <table style="margin:auto" id="sample0Text" class="example-text"></table>
+                                 <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="Essayer"></input>
+                              </td>
+                           </tr>
+                        </table>
+                     </td>
+                     <td>
+                        <table class='objectif valigntop'>
+                           <tr>
+                              <td style="text-align:center"><b>Objectif</b></td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <div id="target"></div>
+                              </td>
+                           </tr>
+                        </table>
+                     </td>
+                  </tr>
+               </table>
             </div>
-
-            <div id="zone_2">
-               <div id="example_container">
-                  <div class='examples valigntop'>
-                     <p><b>Exemple<br> (la séquence est répétée <span class="nbLoops"></span> fois)</b></p>
-                     <div>
-                        <table id="sample0Text" class="example-text"></table>
-                        <input type="button" id="sample0" class="exampleButton" onclick="task.executeSample(0)" value="Essayer"></input>
-                     </div>
-                  </div>
-                  <div class='obj valigntop'>
-                        <p><b>Objectif</b></p>
-                        <div id="target"></div>
-                  </div>
-
-               </div>
-                
-               <div id="columns-wrapper">
-                  <div id="program" class="touch"></div>
-                  <div id="result_container">
-                     <span class="column_head" style="text-align:center">Résultat de l'exécution<br/> (la séquence est répétée <span class="nbLoops"></span> fois)</span>
+             
+            <div id="columns-wrapper">
+               <table class="columns" style="clear: both">
+               <tr>
+                  <td style="width:170px">
+                     <div class="column_head" style="text-align:center">Prenez les<br />instructions ici</div>
+                  </td>
+                  <td style="width:250px">
+                     <div class="column_head" style="text-align:center">Glissez les<br />instructions là</div>
+                  </td>
+                  <td>
+                     <div class="column_head" style="text-align:center">Résultat de l'exécution<br/> (la séquence est répétée <span class="nbLoops"></span> fois)</div>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <div id="program" class="touch"></div>
+                  </td>
+                  <td rowspan="2">
                      <div id="simuButtons" class="buttons" style="text-align:center;padding:10px">
                         <input type="button" id="pause" value="Pause" onclick="task.pause()"/>
                         &nbsp;&nbsp;&nbsp;
                         <input type="button" id="stop" value="Arrêter" onclick="task.stop()" />
                      </div>
-                     <span id="variableInfo" class="medium hard">La valeur actuelle de N est : <span id="valueS">1</span>.</span>
-                     <span id="message"></span>
+                     <div id="variableInfo" class="medium hard">La valeur actuelle de N est : <span id="valueS">1</span>.</div>
+                     <div><span id="message"></span></div>
                      <div id="result"></div>            
-
+                     
+                  </td>
+               </tr>
+               <tr>
+                  <td></td>
+                  <td>
                      <div class="buttons" style="text-align: center">
                         <input id="tryOrReset" type="button" onclick="task.trySequence()" value="Essayer">
                      </div>
-                  </div>
-
-               </div>
+                  </td>
+               </tr>
+               </table>
             </div>
 
             <img src="icon.png" style="display:none">

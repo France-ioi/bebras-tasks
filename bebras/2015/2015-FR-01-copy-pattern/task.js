@@ -1,6 +1,9 @@
 /*jshint eqnull:true */
-function initTask() {
+function initTask(subTask) {
    'use strict';
+   var level;
+   var answer = null;
+   var state = {};
 
    var resultCellSide = {
       easy: 14,
@@ -97,7 +100,15 @@ function initTask() {
       medium: 200,
       hard: 200
    };
+   var taskH = {
+      easy: 630,
+      medium: 880,
+      hard: 760,
+
+   }
    var simulationSpeedSuccess = 50;
+   var marginX = 20;
+   var marginY = 20;
 
    var drawing;
    var backgroundTargetContainer;
@@ -105,16 +116,17 @@ function initTask() {
    var dragAndDrop;
    var instructionDefs;
    var arrow;
-   var width = 390;
-   var height = 350;
+   // var height = 350;
+   var height;
    var widthLabel = 160;
+   var width = 2*widthLabel + 3*marginX;
    var heightLabel;
+   var labelH = 50;
    var simulationSpeed; 
    var paper;
    var papers = {};
    var margin = 5;
    var deltas = [ [0,1], [0,-1], [-1,0], [1,0] ];
-   var level = null;
    var nbLines;
    var nbCols;
    var simuStates = {
@@ -124,16 +136,177 @@ function initTask() {
       stopped: 3
    };
    var simuState = simuStates.initial;
-   var answer = null;
-   var state = null;
+   
    var rects = {target:[], result:[]};
    var selectedCell = null;
 
-   task.load = function(views, callback) {      
+   var labelAttr = {
+      "font-size": 16,
+      "font-weight": "bold",
+      fill: "black"
+   }
+
+   subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+          displayHelper.responsive = true;
+          convertDOM();
+       }else{
+          displayHelper.responsive = false;
+       }
+      level = curLevel;
+
+      simulationSpeed = simulationSpeeds[level];
+
+      heightLabel = 40;
+      nbLines = targetPatterns[level].length;
+      nbCols = targetPatterns[level][0].length;
+      height = Math.max(maxSequenceLength[level],instructionsAvailable[level].length)*heightLabel + labelH + marginY;
+
       displayHelper.hideValidateButton = true;
-      displayHelper.setupLevels();
+      // displayHelper.customValidate = checkResult;
+
+      displayHelper.taskH = taskH[level];
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
+   };
+
+   subTask.getStateObject = function() {
+      return state;
+   };
+
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+      if(!answer)
+         return
+   };
+
+   subTask.getAnswerObject = function() {
+      answer = dragAndDrop.getObjects('seq');
+      return answer;
+   };
+
+   subTask.getDefaultAnswerObject = function() {
+      var defaultAnswer = [];
+
+      return defaultAnswer;
+   };
+
+   var getResultAndMessage = function() {
+      var result = checkResult(true);
+      return result
+   };
+
+   // task.load = function(views, callback) {      
+   //    displayHelper.hideValidateButton = true;
+   //    displayHelper.setupLevels();
+   //    callback();
+   // };
+
+   subTask.unloadLevel = function(callback) {
+      subTask.delayFactory.destroyAll();
       callback();
    };
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+
+   // task.unload = function(callback) {
+   //    DelayedExec.stopAll();
+   //    callback();
+   // };
+
+   subTask.resetDisplay = function() {
+      displayError("");
+      curSimulation = null;
+      updateDisplay();
+      for (var iSample = 0; iSample < samples[level].length; iSample++) {
+         var sample = samples[level][iSample];
+         var html = "";
+         for (var iStep = 0; iStep  < sample.length; iStep++) {
+            html += "<tr><td>" + instructions[sample[iStep]] + "</td></tr>";
+         }
+         $("#sample" + iSample + "Text").html(html);
+      }
+      $(".nbLoops").html(nbLoops[level]);
+      subTask.delayFactory.destroyAll();
+      
+      var target = buildGrid("target", true);
+      drawing = buildGrid("result", false);
+      buildInstructions();
+      reloadAnswer();
+
+   };
+
+   // task.reloadStateObject = function(stateObj, display) {
+   //    state = stateObj;
+   //    level = state.level;
+   //    simulationSpeed = simulationSpeeds[level];
+
+   //    heightLabel = (height - 16) / maxSequenceLength[level];
+   //    nbLines = targetPatterns[level].length;
+   //    nbCols = targetPatterns[level][0].length;
+
+   //    if (display) {
+   //       curSimulation = null;
+   //       updateDisplay();
+   //       for (var iSample = 0; iSample < samples[level].length; iSample++) {
+   //          var sample = samples[level][iSample];
+   //          var html = "";
+   //          for (var iStep = 0; iStep  < sample.length; iStep++) {
+   //             html += "<tr><td>" + instructions[sample[iStep]] + "</td></tr>";
+   //          }
+   //          $("#sample" + iSample + "Text").html(html);
+   //       }
+   //       $(".nbLoops").html(nbLoops[level]);
+   //       DelayedExec.stopAll();
+   //       if (paper != null) {
+   //          paper.remove();
+   //       }
+   //       var target = buildGrid("target", true);
+   //       drawing = buildGrid("result", false);
+   //       buildInstructions();
+   //    }
+   // };
+
+   // task.getDefaultStateObject = function() {
+   //    return { level: "easy" };
+   // };
+
+   // task.getStateObject = function() {
+   //    state.level = level;
+   //    return state;
+   // };
+
+   var refreshAnswer = function() {
+      var sequence = answer;
+      while ((sequence.length > 0) && (sequence[sequence.length - 1] == null)) {
+         sequence.pop();
+      }
+      dragAndDrop.removeAllObjects('seq');
+      dragAndDrop.insertObjects('seq', 0, $.map(sequence, function(iInstr) {
+         return { ident : iInstr, elements: getInstructionObject(instructionsAvailable[level][iInstr]) }; })
+      );
+   };
+
+   var reloadAnswer = function() {
+      clearDisplay();
+      refreshAnswer();
+   };
+
+   // task.getAnswerObject = function() {
+   //    answer[level] = dragAndDrop.getObjects('seq');
+   //    return answer;
+   // };
+
+   // task.getDefaultAnswerObject = function() {
+   //    return {
+   //       "easy": [],
+   //       "medium": [],
+   //       "hard": [] // For debug: 4,5,6,6,5,0 
+   //    };
+   // };
 
    var getInstructionObject = function(iInstr) {
       var label = paper.rect(-widthLabel/2, -heightLabel/2, widthLabel, heightLabel, heightLabel/5)
@@ -153,12 +326,12 @@ function initTask() {
    };
 
    function showArrow(row) {
-      arrow.transform("t 346, " + (25 + heightLabel * row) + " S 4,6").show();
+      arrow.transform("t 346, " + (labelH + 10 + heightLabel * row) + " S 4,6").show().toFront();
    };
 
    var buildInstructions = function() {
-      paper = new Raphael("program", width, height);
-
+      paper = subTask.raphaelFactory.create("program", "program", width, height);
+      $("#program").css("width",width+"px");
       // LATER: use a helper function for the following
       // arrow = paper.text(arrowAttr.x, arrowAttr.y, arrowAttr.text).attr(arrowAttr);
 
@@ -167,6 +340,7 @@ function initTask() {
       dragAndDrop = new DragAndDropSystem({
          paper : paper,
          drop: function(srcCont, srcPos, dstCont, dstPos, dropType) {
+            displayError("");
             displayHelper.stopShowingResult();
             if (simuState != simuStates.initial) {
                clearDisplay();
@@ -193,32 +367,20 @@ function initTask() {
          }
          
       });
-      var cx = 270;
-      var cy = (height-20)/2 + 10;
+      var cxSrc = marginX + widthLabel/2;
+      var cxDst = 2*marginX + 1.5*widthLabel;
+      var cy = labelH + maxSequenceLength[level]*heightLabel/2;
       var margin = 10;
-      backgroundTargetContainer = paper.rect(cx - widthLabel / 2 - margin, 0, widthLabel + 2 * margin, height).attr({fill: "#AAFFAA"});
-      var backgroundTarget = paper.rect(-widthLabel/2,-heightLabel/2,widthLabel,heightLabel)
-         .attr('fill', '#F2F2FF');
-      dragAndDrop.addContainer({
-         ident : 'seq',
-         cx : cx,
-         cy : cy,
-         widthPlace : widthLabel, 
-         heightPlace : heightLabel,
-         nbPlaces : maxSequenceLength[state.level],
-         dropMode : 'insertBefore',
-         dragDisplayMode : 'preview',
-         direction : 'vertical', 
-         align : 'top',
-         placeBackgroundArray : [backgroundTarget]
-      });
-
+      
       instructionDefs = [];
+      var yTitle = labelH/2;
+      paper.text(cxSrc,yTitle,taskStrings.takeInstr).attr(labelAttr);
       for (var iInstr = 0; iInstr < instructionsAvailable[level].length; iInstr++) {
+         var y = labelH + iInstr*heightLabel + heightLabel/2;
          instructionDefs[iInstr] = dragAndDrop.addContainer({
             ident : iInstr,
-            cx : 5 + widthLabel/2, 
-            cy : 8 + (heightLabel / 2) + iInstr * heightLabel, 
+            cx : cxSrc, 
+            cy : y , 
             widthPlace : widthLabel, 
             heightPlace : heightLabel,
             type : 'source',
@@ -227,10 +389,29 @@ function initTask() {
             align: 'left'
          });
       }
+
+      paper.text(cxDst,yTitle,taskStrings.dropInstr).attr(labelAttr);
+      backgroundTargetContainer = paper.rect(cxDst - widthLabel/2 - margin, labelH - margin, widthLabel + 2 * margin, maxSequenceLength[level]*heightLabel + 2*margin).attr({fill: "#AAFFAA"});
+      var backgroundTarget = paper.rect(-widthLabel/2,-heightLabel/2,widthLabel,heightLabel)
+         .attr('fill', '#F2F2FF');
+      dragAndDrop.addContainer({
+         ident : 'seq',
+         cx : cxDst,
+         cy : cy,
+         widthPlace : widthLabel, 
+         heightPlace : heightLabel,
+         nbPlaces : maxSequenceLength[level],
+         dropMode : 'insertBefore',
+         dragDisplayMode : 'preview',
+         direction : 'vertical', 
+         align : 'top',
+         placeBackgroundArray : [backgroundTarget]
+      });
       return paper;
    };
 
    var fillGridCell = function(name, lin, col, cellSide) {
+      // console.log(name, lin, col, cellSide)
       var x = margin + col * cellSide;
       var y = margin + lin * cellSide;
       rects[name].push(papers[name].rect(x, y, cellSide, cellSide).attr({fill: "black"}));
@@ -244,16 +425,22 @@ function initTask() {
 
    var buildGrid = function(name, withTarget, cellSide) {
       if (withTarget) {
-         cellSide = targetCellSide[state.level];
+         cellSide = targetCellSide[level];
       } else {
-         cellSide = resultCellSide[state.level];
+         cellSide = resultCellSide[level];
       }
       var paperHeight = cellSide * nbLines + 2 * margin;
       var paperWidth = cellSide * nbCols + 2 * margin;
       if (papers[name] != null) {
          papers[name].remove();
       }
-      papers[name] = new Raphael(name, paperWidth, paperHeight); 
+      papers[name] = subTask.raphaelFactory.create(name, name, paperWidth, paperHeight);
+      $("#"+name).css("width",paperWidth+"px");
+      if(name == "result"){
+         $("#result_container").css("width",paperWidth+"px");
+      }
+      // papers[name] = new Raphael(name, paperWidth, paperHeight); 
+
       for (var lin = 0; lin <= nbLines; lin++) {
          var y = (margin + lin * cellSide);
          papers[name].path("M" + margin + "," + y + " L" + (margin + nbCols * cellSide) + "," + y).attr({"stroke": "gray"});
@@ -272,7 +459,7 @@ function initTask() {
             }
          }
       } else {
-         fillGridCell(name, initPos[state.level].lin, initPos[state.level].col, cellSide);
+         fillGridCell(name, initPos[level].lin, initPos[level].col, cellSide);
          rects[name] = [];
       }
    };
@@ -311,83 +498,10 @@ function initTask() {
       return simulation;
    };
 
-   task.unload = function(callback) {
-      DelayedExec.stopAll();
-      callback();
-   };
-
-   task.reloadStateObject = function(stateObj, display) {
-      state = stateObj;
-      level = state.level;
-      simulationSpeed = simulationSpeeds[level];
-
-      heightLabel = (height - 16) / maxSequenceLength[level];
-      nbLines = targetPatterns[level].length;
-      nbCols = targetPatterns[level][0].length;
-
-      if (display) {
-         curSimulation = null;
-         updateDisplay();
-         for (var iSample = 0; iSample < samples[level].length; iSample++) {
-            var sample = samples[level][iSample];
-            var html = "";
-            for (var iStep = 0; iStep  < sample.length; iStep++) {
-               html += "<tr><td>" + instructions[sample[iStep]] + "</td></tr>";
-            }
-            $("#sample" + iSample + "Text").html(html);
-         }
-         $(".nbLoops").html(nbLoops[level]);
-         DelayedExec.stopAll();
-         if (paper != null) {
-            paper.remove();
-         }
-         var target = buildGrid("target", true);
-         drawing = buildGrid("result", false);
-         buildInstructions();
-      }
-   };
-
-   task.getDefaultStateObject = function() {
-      return { level: "easy" };
-   };
-
-   task.getStateObject = function() {
-      state.level = level;
-      return state;
-   };
-
-   var refreshAnswer = function() {
-      var sequence = answer[level];
-      while ((sequence.length > 0) && (sequence[sequence.length - 1] == null)) {
-         sequence.pop();
-      }
-      dragAndDrop.removeAllObjects('seq');
-      dragAndDrop.insertObjects('seq', 0, $.map(sequence, function(iInstr) {
-         return { ident : iInstr, elements: getInstructionObject(instructionsAvailable[level][iInstr]) }; })
-      );
-   };
-
-   task.reloadAnswerObject = function(answerObj) {
-      clearDisplay();
-      answer = answerObj;
-      refreshAnswer();
-   };
-
-   task.getAnswerObject = function() {
-      answer[level] = dragAndDrop.getObjects('seq');
-      return answer;
-   };
-
-   task.getDefaultAnswerObject = function() {
-      return {
-         "easy": [],
-         "medium": [],
-         "hard": [] // For debug: 4,5,6,6,5,0 
-      };
-   };
+   
 
    var stopExecution = function() {
-      DelayedExec.stopAll();
+      subTask.delayFactory.destroyAll();
       if (arrow) {
          arrow.hide();
       }
@@ -407,7 +521,7 @@ function initTask() {
 
    var simulateStep = function(simulation, display, isSample) {
       var instrs = simulation.instrs;
-      if (simulation.step >= nbLoops[state.level] * instrs.length) {
+      if (simulation.step >= nbLoops[level] * instrs.length) {
          if (instrs.length === 0) {
             throw taskStrings.noInstruction;
          } else {
@@ -439,7 +553,7 @@ function initTask() {
                robot.lin = newLin;
                robot.col = newCol;
                if (display) {
-                  fillGridCell("result", robot.lin, robot.col, resultCellSide[state.level]);
+                  fillGridCell("result", robot.lin, robot.col, resultCellSide[level]);
                }
                simulation.grid[robot.lin][robot.col] = 1;
             }
@@ -510,7 +624,7 @@ function initTask() {
    };
 
    task.trySequence = function() {
-      task.execute(getInstructionsFromSequence(getSequence(), state.level), false);
+      task.execute(getInstructionsFromSequence(getSequence(), level), false);
       backgroundTargetContainer.show();
    };
 
@@ -548,7 +662,8 @@ function initTask() {
    };
 
    var executeSlow = function(isSample, speed) {
-      DelayedExec.setInterval("executeStep", function() { 
+      console.log(isSample)
+      subTask.delayFactory.create("executeStep",function() { 
          if (simuState == simuStates.paused) {
             return;
          }
@@ -557,7 +672,7 @@ function initTask() {
          } catch (exception) {
             stopExecution();
             if (!isSample) {
-               displayHelper.validate("stay");
+               checkResult();
             }
          }
          updateDisplay();
@@ -565,14 +680,35 @@ function initTask() {
             stopExecution();
             $("#pause").attr("disabled", "disabled");
             if (!isSample) {
-               if (curSimulation.success) {
-                  platform.validate("done");
-               } else {
-                  displayHelper.validate("stay");
-               }
+               checkResult();
             }
          }
-      }, speed);
+      }, speed,true);
+      // DelayedExec.setInterval("executeStep", function() { 
+      //    if (simuState == simuStates.paused) {
+      //       return;
+      //    }
+      //    try {
+      //       simulateStep(curSimulation, true, isSample);
+      //    } catch (exception) {
+      //       stopExecution();
+      //       if (!isSample) {
+      //          displayHelper.validate("stay");
+      //       }
+      //    }
+      //    updateDisplay();
+      //    if (curSimulation.completed) {
+      //       stopExecution();
+      //       $("#pause").attr("disabled", "disabled");
+      //       if (!isSample) {
+      //          if (curSimulation.success) {
+      //             platform.validate("done");
+      //          } else {
+      //             displayHelper.validate("stay");
+      //          }
+      //       }
+      //    }
+      // }, speed);
    };
 
    function fullSimulation(curLevel, simulation) {
@@ -589,48 +725,82 @@ function initTask() {
       }
    };
 
-   grader.gradeTask = function(strAnswer, token, callback) {
-      task.getLevelGrade(strAnswer, token, callback, null);
+   // grader.gradeTask = function(strAnswer, token, callback) {
+   //    task.getLevelGrade(strAnswer, token, callback, null);
+   // };
+
+   // task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
+   //    var taskParams = displayHelper.taskParams;
+   //    var scores = {};
+   //    var messages = {};
+   //    var maxScores = displayHelper.getLevelsMaxScores();
+   //    if (strAnswer === '') {
+   //       callback(taskParams.minScore, '');
+   //       return;
+   //    }
+   //    var answer = $.parseJSON(strAnswer);
+   //    // clone the state to restore after grading.
+   //    var oldState = $.extend({}, task.getStateObject());
+   //    for (var curLevel in targetPatterns) {
+   //       state.level = curLevel;
+   //       task.reloadStateObject(state, false);
+   //       var simulation = getSimulationInit(answer[curLevel], curLevel);
+   //       fullSimulation(curLevel, simulation);
+   //       if (simulation.error !== undefined) {
+   //          messages[curLevel] = simulation.error
+   //          scores[curLevel] = 0;
+   //       } else if (simulation.success) {
+   //          messages[curLevel] = taskStrings.success;
+   //          scores[curLevel] = maxScores[curLevel];
+   //       } else if (simulation.instrs.length == 0) { 
+   //          messages[curLevel] = taskStrings.missingInstr;
+   //          scores[curLevel] = 0;
+   //       } else {
+   //          messages[curLevel] = taskStrings.incorrect;
+   //          scores[curLevel] = 0;
+   //       }
+   //    }
+   //    task.reloadStateObject(oldState, false);
+   //    if (!gradedLevel) {
+   //       displayHelper.sendBestScore(callback, scores, messages);
+   //    } else {
+   //       callback(scores[gradedLevel], messages[gradedLevel]);
+   //    }
+   // };
+
+   function checkResult(noVisual) {
+      var simulation = getSimulationInit(answer, level);
+      fullSimulation(level, simulation);
+      var message, score;
+      if (simulation.error !== undefined) {
+         message = simulation.error
+         score = 0;
+      } else if (simulation.success) {
+         message = taskStrings.success;
+         score = 1;
+      } else if (simulation.instrs.length == 0) { 
+         message = taskStrings.missingInstr;
+         score = 0;
+      } else {
+         message = taskStrings.incorrect;
+         score = 0;
+      }
+      if(score < 1 && !noVisual){
+         displayError(message);
+      }
+      if(score == 1 && !noVisual){
+         platform.validate("done");
+      }
+      return { successRate: score, message: message }
    };
 
-   task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
-      var taskParams = displayHelper.taskParams;
-      var scores = {};
-      var messages = {};
-      var maxScores = displayHelper.getLevelsMaxScores();
-      if (strAnswer === '') {
-         callback(taskParams.minScore, '');
-         return;
-      }
-      var answer = $.parseJSON(strAnswer);
-      // clone the state to restore after grading.
-      var oldState = $.extend({}, task.getStateObject());
-      for (var curLevel in targetPatterns) {
-         state.level = curLevel;
-         task.reloadStateObject(state, false);
-         var simulation = getSimulationInit(answer[curLevel], curLevel);
-         fullSimulation(curLevel, simulation);
-         if (simulation.error !== undefined) {
-            messages[curLevel] = simulation.error
-            scores[curLevel] = 0;
-         } else if (simulation.success) {
-            messages[curLevel] = taskStrings.success;
-            scores[curLevel] = maxScores[curLevel];
-         } else if (simulation.instrs.length == 0) { 
-            messages[curLevel] = taskStrings.missingInstr;
-            scores[curLevel] = 0;
-         } else {
-            messages[curLevel] = taskStrings.incorrect;
-            scores[curLevel] = 0;
-         }
-      }
-      task.reloadStateObject(oldState, false);
-      if (!gradedLevel) {
-         displayHelper.sendBestScore(callback, scores, messages);
-      } else {
-         callback(scores[gradedLevel], messages[gradedLevel]);
+   function displayError(msg) {
+      if(respEnabled){
+         displayHelper.displayError(msg);
+      }else{
+         $("#displayHelper_graderMessage").html(msg).css({color:"red","font-weight":"bold"});
       }
    };
 }
-
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"],"easy");
+displayHelper.useFullWidth();
