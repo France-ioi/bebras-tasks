@@ -52,17 +52,31 @@ function initTask(subTask) {
 
    var grid;
    var paper;
+   var noVisual = false;
+   var paperWidth, paperHeight;
 
    //-------------------------------------------------------------------------
 
    subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+         displayHelper.responsive = true;
+         // displayHelper.hideSolutionButton = true;
+         convertDOM();
+      }else{
+         displayHelper.responsive = false;
+      }
       level = curLevel;
       var dimensions = data.dimensions[level];
       nbRows = dimensions[0];
       nbCols = dimensions[1];
-      if (subTask.display) {
-         initGraphics();
-      }
+
+      paperWidth = cellSide * nbCols + 2 * margin;
+      paperHeight = cellSide * nbRows + 2 * margin;
+
+      displayHelper.taskH = paperHeight;
+      displayHelper.taskW = paperWidth;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
    subTask.getDefaultAnswerObject = function() {
@@ -82,7 +96,9 @@ function initTask(subTask) {
    };
 
    subTask.resetDisplay = function() {
-      clearFeedback();
+      displayError("");
+      initGraphics();
+
       Beav.Matrix.forEach(answer, function(value, row, col) {
          updateCell(row, col);
       });
@@ -95,8 +111,6 @@ function initTask(subTask) {
          grid.remove();
          paper.remove();
       }
-      var paperWidth = cellSide * nbCols + 2 * margin;
-      var paperHeight = cellSide * nbRows + 2 * margin;
       paper = subTask.raphaelFactory.create("grid", "grid", paperWidth, paperHeight);
       grid = new Grid("grid", paper, nbRows, nbCols, cellSide, cellSide, margin, margin, lineAttr);
       grid.clickCell(cellClickHandler);
@@ -180,13 +194,9 @@ function initTask(subTask) {
       grid.setCell(cellFiller, { row: row, col: col });
    }
 
-   function clearFeedback() {
-      $("#error_text").html("&nbsp;");
-   }
-
    function cellClickHandler(event) {
       displayHelper.stopShowingResult();
-      clearFeedback();
+      displayError("");
       var row = event.data.row;
       var col = event.data.col;
       if (! isInGrid(row, col)) {
@@ -277,7 +287,21 @@ function initTask(subTask) {
       }
       callback();
    };
+
+   function displayError(msg) {
+      if(noVisual){
+         return
+      }
+      if(respEnabled){
+         displayHelper.displayError(msg);
+      }else{
+         $("#error").html(msg);
+      }
+      // $("#displayHelper_graderMessage").html(msg);
+   };
+
 }
 
 initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
 

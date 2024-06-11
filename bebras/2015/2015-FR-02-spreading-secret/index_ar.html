@@ -1,25 +1,33 @@
 <!doctype html>
-<html dir="rtl">
+<html dir="rtl" align="right">
    <head>
     <meta charset="utf-8">
     <title>2015-FR-02</title>
-    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.1/raphael-min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
-    
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
-    
-    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
-    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
-    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
-    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+    <script>
+         window.stringsLanguage = 'ar';
+      </script>
+      <script class="remove" type="text/javascript" src="../../../_common/modules/pemFioi/importModules-1.1_M.js" id="import-modules"></script>
+      <script class="remove" type="text/javascript">
+         var modulesPath = '../../../_common/modules';
+         importModules([
+            'jquery-1.7.1', 'jquery-ui.touch-punch', 'raphael-2.2.1', 'JSON-js', 'grid-1.1',
+            'beav-1.0', 'beaver-task-2.0', 'simulation-2.0', 'raphaelFactory-1.0',
+            'delayFactory-1.0', 'simulationFactory-1.0', 'button-1.0',
+            'platform-pr', 'installationAPI.01', 'miniPlatform',
+            'randomGenerator-1.0', 'shape-paths-1.1', 'responsiveDOMConverter','fonts-loader-1.0', 'loader-buttonsAndMessages'
+         ]);
+      </script>
+      <script type="text/javascript">
+         var respEnabled = Beav.Navigator.supportsResponsive();
+         // var respEnabled = false;
+         if(respEnabled){
+            importModules(['buttonsAndMessages_resp','taskStyles-0.3_M']);
+            window.FontsLoader.loadFonts(['fontawesome']);
+            task.getMetaData = function(cb) { cb({nbHints: 0, autoHeight: true}); }
+         }else{
+            importModules(['buttonsAndMessages','taskStyles-0.1']);
+         }
+      </script>
       <script class="remove" type="text/javascript">
        var json = {
           "id": "http://castor-informatique.fr/tasks/2015/2015-FR-02-spreading-secret/",
@@ -36,10 +44,10 @@
           "usesRandomSeed": false
       };
       </script>
-            <script> var stringsLanguage = 'ar';</script>
 
       <script type="text/javascript">
       var taskStrings = {
+         introTitle: "You mission",
          overlap: "هناك هوائيان على الأقل يتداخلان مع موجاتهما.",
          missing: " يوجد  بعض المربعات الفارغة غير مغطاة",
          success: "أحسنت إجابة صحيحة",
@@ -47,49 +55,33 @@
       </script>
       <script type="text/javascript" src="task.js"></script>
       <style>
-      #error_text {
-         font-weight: bold;
-         text-align: center;
-         margin-bottom: 0.5em;
-         color: red;
-         height: 1em;
-      }
-      .antenna {
-         margin-top: 1em;
-         margin-left: 1em;
-      }
-      #instructions td {
-         vertical-align: top;
-      }
+         #example {
+            text-align: center;
+         }
       </style>
    </head>
    <body>
       <div id="task">
-         <div style="direction: rtl">
-            <h1>تركيب الهوائيات</h1>
-            <div id="tabsContainer"></div>
-            <div id="taskContent">
-              <table id="instructions">
-              <tr>
-                 <td>
-                    <p>
-                      انقر على المربعات التالية لوضع هوائيات بحيث يتم تغطية جميع الخلايا "البيضاء" بموجات الهوائي<span class="hard"> </span>  
-                    </p>
-                   <p>يجب ألا يحدث أي تداخل بين الموجات </p>
-                   <div id="error_text"></div>
-                 </td>
-                 <td>
-                    <div style="float:right" class="easy antenna"><img src="antenna_horizontal.png" /></div> 
-                    <div style="float:right" class="medium hard antenna"><img src="antenna.png" /></div> 
-                 </td>
-              </tr>
-              </table>
+         <h1>تركيب الهوائيات</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <div id="zone_1">
+              <p>
+                انقر على المربعات التالية لوضع هوائيات بحيث يتم تغطية جميع الخلايا "البيضاء" بموجات الهوائي<span class="hard"> </span>  
+              </p>
+             <p>يجب ألا يحدث أي تداخل بين الموجات </p>
+              <div id="example" >
+                  <img src="antenna_horizontal.png" class="easy antenna" />
+                  <img src="antenna.png" class="medium hard antenna" />
+              </div>
 
 
-               <div id="grid_container" style="text-align:center">
-                  <div id="grid"></div>
+               <div id="zone_2">
+
+                  <div id="grid_container" style="text-align:center">
+                     <div id="grid"></div>
+                  </div>
                </div>
-               <div id="demo"></div>
                <img src="icon.png" style="display:none">
             </div>
          </div>
