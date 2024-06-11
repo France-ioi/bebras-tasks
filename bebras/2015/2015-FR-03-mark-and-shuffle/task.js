@@ -1,6 +1,6 @@
-function initTask() {
+function initTask(subTask) {
    'use strict';
-   var state = null;
+   var state = {};
    var level;
    var answer = null;
    var data = {
@@ -47,6 +47,8 @@ function initTask() {
 
    var containerDefaultAnimTime = 10;
    var containerShuffleAnimTime = 10;
+
+   var noVisual = false;
 
    var birdParams = {
       birdImage: {
@@ -147,77 +149,75 @@ function initTask() {
       medium: 0,
       hard: 0
    };
-   var taskSeed;
+   // var taskSeed;
 
-   task.load = function(views, callback) {
-      platform.getTaskParams("randomSeed", null, function(randomSeed) {
-         taskSeed = randomSeed;
-         // displayHelper.hideValidateButton = true;
-         // displayHelper.hideRestartButton = true;
-         displayHelper.setupLevels();
+   subTask.loadLevel = function(curLevel) {
+      if(respEnabled){
+         displayHelper.responsive = true;
+         // displayHelper.hideSolutionButton = true;
+         convertDOM();
+      }else{
+         displayHelper.responsive = false;
+      }
+      level = curLevel;
+      displayHelper.customValidate = checkResult;
 
-         if (views.solutions) {
-            $("#solution").show();
-
-            // TODO: temporary
-         }
-
-         // FOR DEBUG (display a locked hard version):
-         // $("#tab_hard").addClass("lockedLevel");
-
-         callback();
-      });
+      displayHelper.taskH = paperHeight + 30;
+      displayHelper.taskW = 770;
+      displayHelper.minTaskW = 500;
+      displayHelper.maxTaskW = 900;
    };
 
-   task.getDefaultStateObject = function() {
-      return {
-         level: "easy"
-      };
-   };
-
-   task.getStateObject = function() {
-      state.level = level;
+   subTask.getStateObject = function() {
       return state;
    };
 
-   task.reloadStateObject = function(stateObj, display) {
-      state = stateObj;
-      level = state.level;
-
-      if (display) {}
-   };
-
-   task.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-      initPaper();
-      loadPhase();
-      initBirds();
-      //initLetters();
-   };
-
-   task.getAnswerObject = function() {
+    subTask.getAnswerObject = function() {
       updateAnswer();
       return answer;
    };
 
-   task.getDefaultAnswerObject = function() {
+   subTask.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+   };
+
+   subTask.unloadLevel = function(callback) {
+      callback();
+   };
+
+   subTask.getGrade = function(callback) {
+      callback(getResultAndMessage());
+   };
+
+   var getResultAndMessage = function() {
+      noVisual = true;
+      var result = checkResult(true);
+      return result
+   };
+
+   subTask.getDefaultAnswerObject = function() {
       currentSeedOffsets[level]++;
-      var answer = {};
+      var defaultAnswer = {};
       var counter = 0;
-      for (var curLevel in data) {
-         counter++;
-         answer[curLevel] = {};
-         answer[curLevel].permutationIndex = (1237 * counter + taskSeed + currentSeedOffsets[curLevel]) % permutations[curLevel].length;
-         answer[curLevel].phase = phases.mark;
-         answer[curLevel].bottom = Beav.Array.make(data[curLevel].birds, null);
-         answer[curLevel].marks = [];
-         answer[curLevel].top = [];
-         for (var iBird = 0; iBird < data[curLevel].birds; iBird++) {
-            answer[curLevel].marks.push(Beav.Array.make(data[curLevel].marks, false));
-            answer[curLevel].top.push(iBird);
-         }
+      // counter++;
+      defaultAnswer = {};
+      defaultAnswer.permutationIndex = (1237 * counter + subTask.taskParams.randomSeed + currentSeedOffsets[level]) % permutations[level].length;
+      defaultAnswer.phase = phases.mark;
+      defaultAnswer.bottom = Beav.Array.make(data[level].birds, null);
+      defaultAnswer.marks = [];
+      defaultAnswer.top = [];
+      for (var iBird = 0; iBird < data[level].birds; iBird++) {
+         defaultAnswer.marks.push(Beav.Array.make(data[level].marks, false));
+         defaultAnswer.top.push(iBird);
       }
-      return answer;
+      return defaultAnswer;
+   };
+
+   subTask.resetDisplay = function() {
+      displayError("");
+      initPaper();
+      loadPhase();
+      initBirds();
    };
 
    function restart() {
@@ -225,7 +225,7 @@ function initTask() {
       displayHelper.stopShowingResult();
       for (var iBird = 0; iBird < data[level].birds; iBird++) {
          for (var iMark = 0; iMark < data[level].marks; iMark++) {
-            answer[level].marks[iBird][iMark] = false;
+            answer.marks[iBird][iMark] = false;
             marks[iBird][iMark].attr(markParams.unmarkedAttr);
          }
       }
@@ -233,27 +233,12 @@ function initTask() {
       // initBirds();
    };
 
-   task.unload = function(callback) {
-      stopExecution();
+   subTask.unloadLevel = function(callback) {
+      // stopExecution();
       callback();
    };
 
    var initPaper = function() {
-      if (paper) {
-         if(shuffleButton) {
-            shuffleButton.remove();
-         }
-         if(restartButton) {
-            restartButton.remove();
-         }
-         if(validateButton) {
-            validateButton.remove();
-         }
-         if(backButton) {
-            backButton.remove();
-         }
-         paper.remove();
-      }
       var nbMarks = data[level].marks;
       birdParams.legHeight = 2 * markParams.verticalSpaceFirstAndLast + nbMarks * markParams.height + (nbMarks-1) * markParams.verticalSpace;
       var margin = 10;
@@ -263,7 +248,11 @@ function initTask() {
       topContainerCenterY = maxSlotHeight - slotAttr.height/2;
       bottomContainerCenterY = bottomContainerY + slotAttr.height/2;
 
-      paper = new Raphael("anim", paperWidth, paperHeight);
+      if(paper){
+         paper.remove();
+         subTask.raphaelFactory.remove("anim");
+      }
+      paper = subTask.raphaelFactory.create("anim", "anim", paperWidth, paperHeight);
       initDragAndDrop();
       initButtonsAndLabels();
    };
@@ -282,6 +271,7 @@ function initTask() {
          paper: paper,
          canBeTaken: isDragPhase,
          actionIfDropped: function(srcCont, srcPos, dstCont, dstPos, dropType) {
+            displayError("");
             if (srcCont == dstCont && srcPos == dstPos) {
                return true;
             }
@@ -330,7 +320,7 @@ function initTask() {
          var container = containers[iContainer];
          dragAndDrop.removeAllObjects(container);
          for (var iSlot = 0; iSlot < data[level].birds; iSlot++) {
-            var iBird = answer[level][container][iSlot];
+            var iBird = answer[container][iSlot];
             if (iBird === null) {
                continue;
             }
@@ -353,7 +343,7 @@ function initTask() {
          var xPos = -markParams.width / 2 + markParams.offsetX;
          var yPos = -slotAttr.height / 2 + birdParams.legOffsetY + markParams.verticalSpaceFirstAndLast + iMark * (markParams.height + markParams.verticalSpace);
          var mark = paper.rect(xPos, yPos, markParams.width, markParams.height).attr(markParams.rectAttr);
-         if (answer[level].marks[iBird][iMark]) {
+         if (answer.marks[iBird][iMark]) {
             mark.attr(markParams.markedAttr);
          } else {
             mark.attr(markParams.unmarkedAttr);
@@ -366,13 +356,14 @@ function initTask() {
 
    var clickMark = function(iBird, iMark) {
       var handler = function() {
+         displayError("");
          displayHelper.stopShowingResult();
          errorLabel.hide();
-         if (answer[level].phase !== phases.mark) {
+         if (answer.phase !== phases.mark) {
             return;
          }
-         answer[level].marks[iBird][iMark] = !(answer[level].marks[iBird][iMark]);
-         if (answer[level].marks[iBird][iMark]) {
+         answer.marks[iBird][iMark] = !(answer.marks[iBird][iMark]);
+         if (answer.marks[iBird][iMark]) {
             this.attr(markParams.markedAttr);
          } else {
             this.attr(markParams.unmarkedAttr);
@@ -407,13 +398,14 @@ function initTask() {
 };
 
    var clickBack = function() {
+      displayError("");
       displayHelper.stopShowingResult();
-      answer[level].bottom = Beav.Array.make(data[level].birds, null);
-      answer[level].top = Beav.Array.init(data[level].birds, function(index) {
+      answer.bottom = Beav.Array.make(data[level].birds, null);
+      answer.top = Beav.Array.init(data[level].birds, function(index) {
          return index;
       });
-      answer[level].phase = phases.mark;
-      task.reloadAnswerObject(answer);
+      answer.phase = phases.mark;
+      subTask.resetDisplay();
    };
 
    var loadPhase = function() {
@@ -430,7 +422,7 @@ function initTask() {
          backButton.show();
          instructionLabel.show();
          startDragMode();
-      } else if (answer[level].phase === phases.mark) {
+      } else if (answer.phase === phases.mark) {
          restartButton.show();
          shuffleButton.show();
       }
@@ -461,7 +453,7 @@ function initTask() {
    };
 
    var isDragPhase = function() {
-      return answer[level].phase == phases.drag;
+      return answer.phase == phases.drag;
    };
 
    var simulateShuffle = function() {
@@ -471,7 +463,7 @@ function initTask() {
       if (true) {
          for (iBird = 0; iBird < data[level].birds; iBird++) {
             for (var jBird = iBird + 1; jBird < data[level].birds; jBird++) {
-               if (Beav.Object.eq(answer[level].marks[iBird], answer[level].marks[jBird])) {
+               if (Beav.Object.eq(answer.marks[iBird], answer.marks[jBird])) {
                   errorLabel.show();
                   return;
                }
@@ -479,14 +471,14 @@ function initTask() {
          }
       }
 
-      answer[level].phase = phases.drag;
+      answer.phase = phases.drag;
       loadPhase();
       simulation = new Simulation();
       var step = new SimulationStep();
 
       for (iBird = 0; iBird < data[level].birds; iBird++) {
          for (var iMark = 0; iMark < data[level].marks; iMark++) {
-            marks[iBird][iMark].hide();
+            // marks[iBird][iMark].hide();
          }
       }
 
@@ -499,12 +491,13 @@ function initTask() {
          name: "shuffle",
          action: {
             onExec: function() {
+               // console.log("shuffle")
                for (var iSlot = 0; iSlot < data[level].birds; iSlot++) {
-                  dragAndDrop.handleDrop(topContainer, iSlot, bottomContainer, permutations[level][answer[level].permutationIndex][iSlot], "replace");
+                  dragAndDrop.handleDrop(topContainer, iSlot, bottomContainer, permutations[level][answer.permutationIndex][iSlot], "replace");
                }
             },
             duration: containerShuffleAnimTime,
-            useTimeout: true
+            // useTimeout: true
          }
       });
 
@@ -512,6 +505,7 @@ function initTask() {
          name: "show",
          action: {
             onExec: function(params, duration, callback) {
+               console.log("show")
                for (var iBird = 0; iBird < data[level].birds; iBird++) {
                   for (var iMark = 0; iMark < data[level].marks; iMark++) {
                      marks[iBird][iMark].show();
@@ -532,33 +526,14 @@ function initTask() {
 
    var stopExecution = function() {
       if (simulation) {
-         simulation.stop();
+         // simulation.destroy();
       }
-   };
-
-   var getResult = function(answer, level) {
-      if (answer[level].phase != phases.drag && answer[level].phase != phases.finish) {
-         // should never be seen by the user
-         return {success: false, message: "You need to first let the bird fly away." };
-      }
-      var iBird;
-      for (iBird = 0; iBird < data[level].birds; iBird++) {
-         if (answer[level].top[iBird] === null) {
-            return {success: false, message: taskStrings.emptySlot };
-         }
-      }
-      for (iBird = 0; iBird < data[level].birds; iBird++) {
-         if (answer[level].top[iBird] !== iBird) {
-            return {success: false, message: taskStrings.incorrect };
-         } 
-      }
-      return {success: true, message: taskStrings.success };
    };
 
    var updateAnswer = function() {
-      answer[level].top = dragAndDrop.getObjects("top");
+      answer.top = dragAndDrop.getObjects("top");
       if (isDragPhase()) {
-         answer[level].bottom = dragAndDrop.getObjects("bottom");
+         answer.bottom = dragAndDrop.getObjects("bottom");
       }
    };
 
@@ -567,52 +542,55 @@ function initTask() {
       updateAnswer();
       var result = getResult(answer, level);
       if (result.success) {
-         answer[level].phase = phases.finish;
+         answer.phase = phases.finish;
          loadPhase();
          platform.validate("done");
       } else {
-         displayHelper.validate("stay");
+         // displayHelper.validate("stay");
       }
    };
 
-   grader.gradeTask = function(strAnswer, token, callback) {
-      task.getLevelGrade(strAnswer, token, callback, null);
-   };
-
-   task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
-      var taskParams = displayHelper.taskParams;
-      var scores = {};
-      var messages = {};
-      var maxScores = displayHelper.getLevelsMaxScores();
-
-      if (strAnswer === '') {
-         callback(taskParams.minScore, '');
-         return;
+   function checkResult(final) {
+      if (answer.phase != phases.drag && answer.phase != phases.finish) {
+         // should never be seen by the user
+         displayError("You need to first let the bird fly away.");
+         return {success: false, message: "You need to first let the bird fly away." };
       }
-      var answer = $.parseJSON(strAnswer);
-      // clone the state to restore after grading.
-      var oldState = $.extend({}, task.getStateObject());
-      for (var curLevel in data) {
-         state.level = curLevel;
-         task.reloadStateObject(state, false);
-
-         var result = getResult(answer, curLevel);
-         messages[curLevel] = result.message;
-         if (result.success) {
-            scores[curLevel] = maxScores[curLevel];
-         } else {
-            scores[curLevel] = taskParams.noScore;
+      var iBird;
+      for (iBird = 0; iBird < data[level].birds; iBird++) {
+         if (answer.top[iBird] === null) {
+            var error = taskStrings.emptySlot
+            displayError(error);
+            return {successRate: 0, message: error };
          }
       }
-
-      task.reloadStateObject(oldState, false);
-      if (!gradedLevel) {
-         displayHelper.sendBestScore(callback, scores, messages);
-      } else {
-         callback(scores[gradedLevel], messages[gradedLevel]);
+      for (iBird = 0; iBird < data[level].birds; iBird++) {
+         if (answer.top[iBird] !== iBird) {
+            var error = taskStrings.incorrect
+            displayError(error);
+            return {successRate: 0, message: error };
+         } 
       }
+      if(!final){
+         platform.validate("done");
+      }
+      return {successRate: 1, message: taskStrings.success };
+   };
+
+   function displayError(msg) {
+      if(noVisual){
+         return
+      }
+      if(respEnabled){
+         displayHelper.displayError(msg);
+      }else{
+         $("#error").html(msg);
+      }
+      // $("#displayHelper_graderMessage").html(msg);
    };
 }
-initTask();
+initWrapper(initTask, ["easy", "medium", "hard"]);
+displayHelper.useFullWidth();
+
 
 
