@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-03</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1.0/raphael-min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulation-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulation-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelButton-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelButton-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/drag_lib-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/drag_lib.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-03-mark-and-shuffle/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud, France-ioi",
+          "translators": [],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         success: "Bravo, vous avez réussi !",
+         emptySlot: "Il reste des oiseaux dans la zone du bas.",
+         incorrect: "Vous n'avez pas remis tous les oiseaux à leur place d'origine.<br/> Si vous n'y arrivez pas, revenez à l'étape précédente.",
+         restart: "Effacer les marques",
+         validate: "Valider la réponse",
+         shuffle: "Laisser les oiseaux s'envoler",
+         backToPrevious: "Revenir à l'étape précédente",
+         moveBirds: "Faites glissez les oiseaux à leur place d'origine.",
+         notDifferent: "Les oiseaux doivent tous avoir des marques différentes.",
+         instruction: "Remettez tous les oiseaux à leur place d'origine dans la zone du haut."
+         };
+      </script>
+      <script type="text/javascript" src="task_old.js"></script>
+      <style>
+         #anim_container {
+            text-align: center;
+         }
+         #anim {
+            display: inline-block;
+         }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Marquage d'oiseaux</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+            <p>
+               Cliquez sur les cases pour dessiner des motifs différents sur les pattes des oiseaux.
+            </p>
+            <p>
+               Cliquez ensuite sur le bouton pour les laisser s'envoler. </p><p>
+               Les oiseaux se mélangeront,
+               et il vous faudra les remettre à leur place d'origine.
+            </p>
+            <div id="anim_container">
+               <div id="anim"></div>
+            </div>
+ 
+         <img src="bird.png" style="display:none">
+         <img src="icon.png" style="display:none">
+         </div>
+
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+            <p>Voici une solution, parmi les nombreuses possibles.</p>
+            <p>
+            <img class="easy" src="solution_easy.png">
+            <img class="medium" src="solution_medium.png">
+            <img class="hard" src="solution_hard.png">
+            </p>
+         
+            <div class="hard">
+               <p>
+               Notez que pour cette version il fallait utiliser tous les marquages possibles.
+               </p>
+               <p>Voici une autre solution, construite de manière un peu plus systématique.
+               À vous de trouver la logique&nbsp;!</p>
+               <p><img src="solution_hard2.png"></p>
+            </div>
+
+
+         <h2>C'est de l'informatique !</h2>
+
+            <p>Sur chaque patte d'oiseau, on peut mettre un certain nombre de marques,
+            chaque marque étant soit blanche, soit noire. De la même manière, un 
+            ordinateur représente l'information en utilisant des <b>0</b> et des <b>1</b>,
+            chacun correspondant à un &laquo; bit &raquo; d'information.</p>
+
+            <p>Un disque dur usuel, par exemple un disque contenant un téra-octet d'information,
+            contient 8 000 milliards de bits&nbsp;! Vous avez bien lu&nbsp;: 8 millions de millions
+            de <b>0</b> et de <b>1</b>.</p>
+            
+            <p>Même si l'on dispose de beaucoup d'espace de stockage, il est important
+            d'utiliser des &laquo; codages &raquo; efficaces de l'information, de
+            la même manière que dans ce sujet on ne dispose que de quelques marques
+            pour représenter l'identité de nombreux oiseaux.</p>
+
+            <div class="hard">
+            <p>On a ici 3 marques possibles sur chaque oiseau. 
+            La première marque peut prendre 2 valeurs possibles,
+            la seconde marque également, et la troisième également,
+            donc on a <b>2 * 2 * 2 = 8</b> possibilités au total.
+            Vu qu'il faut distinguer 8 oiseaux, on est obligé d'utiliser
+            toutes les combinaisons possibles de marques.
+            </p>
+            </div>
+      
+	  </div> <!-- task-solution -->
+   </body>
+</html>

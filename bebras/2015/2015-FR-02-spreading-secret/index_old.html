@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+   <head>
+    <meta charset="utf-8">
+    <title>2015-FR-02</title>
+    <link class="module" rel="stylesheet" href="../../../_common/modules/pemFioi/taskStyles-0.1.css" id="http://www.france-ioi.org/modules/pemFioi/taskStyles-0.1.css">
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery/1.7/jquery.min.js" id="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/jquery-ui/jquery.ui.touch-punch.min.js" id="jquery.ui.touch-punch.min.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/raphael/2.2.1/raphael.min.js" id="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.1/raphael.min.js"></script>
+
+    <script class="module" type="text/javascript" src="../../../_common/modules/ext/json/json2.min.js" id="https://github.com/douglascrockford/JSON-js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beaver-task-2.0.js" id="http://www.france-ioi.org/modules/pemFioi/beaver-task-2.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/beav-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/beav-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/raphaelFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/raphaelFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/delayFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/delayFactory-1.0.js"></script>
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/simulationFactory-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/simulationFactory-1.0.js"></script>
+    
+    <script class="module" type="text/javascript" src="../../../_common/modules/pemFioi/grid-1.0.js" id="http://www.france-ioi.org/modules/pemFioi/grid-1.0.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js" id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/installation.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/ext/jschannel/jschannel.js"></script>
+    <script class="proxy module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/platform-pr.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/platform-pr.js"></script>
+    <script class="stdButtonsAndMessages module" type="text/javascript" src="../../../_common/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"  id="http://www.france-ioi.org/modules/integrationAPI.01/installationAPI.01/pemFioi/buttonsAndMessages.js"></script>
+    <script class="remove" type="text/javascript" src="../../../_common/modules/integrationAPI.01/official/miniPlatform.js" id="http://www.france-ioi.org/modules/integrationAPI.01/official/miniPlatform.js"></script>
+      <script class="remove" type="text/javascript">
+       var json = {
+          "id": "http://castor-informatique.fr/tasks/2015/2015-FR-02-spreading-secret/",
+          "language": "fr",
+          "version": "fr.01",
+          "authors": "Arthur Chargueraud, France-ioi",
+          "translators": [],
+          "license": "CC BY-SA 3.0",
+          "taskPathPrefix": "",
+          "modulesPathPrefix": "",
+          "browserSupport": [],
+          "fullFeedback": true,
+          "acceptedAnswers": [],
+          "usesRandomSeed": false
+      };
+      </script>
+      <script type="text/javascript">
+      var taskStrings = {
+         overlap: "Au moins deux antennes ont leurs ondes qui se recouvrent.",
+         missing: "Il reste des cases blanches qui ne sont pas couvertes.",
+         success: "Bravo, vous avez réussi !",
+         warning: "Attention : les ondes ne doivent pas se recouvrir." };
+      </script>
+      <script type="text/javascript" src="task.js"></script>
+      <style>
+      #error_text {
+         font-weight: bold;
+         text-align: center;
+         margin-bottom: 0.5em;
+         color: red;
+         height: 1em;
+      }
+      .antenna {
+         margin-top: 1em;
+         margin-left: 1em;
+      }
+      #instructions td {
+         vertical-align: top;
+      }
+      </style>
+   </head>
+   <body>
+      <div id="task">
+         <h1>Installation d'antennes</h1>
+         <div id="tabsContainer"></div>
+         <div id="taskContent">
+           <table id="instructions">
+           <tr>
+              <td>
+                 <p>
+                  Cliquez sur les cases <span class="hard"><b>blanches et grises</b></span> de la grille pour y placer des antennes, afin que toutes les cases blanches soient couvertes par des ondes.
+                 </p>
+                <p>Les ondes des antennes ne doivent pas se superposer. </p>
+                <div id="error_text"></div>
+              </td>
+              <td>
+                 <div style="float:right" class="easy antenna"><img src="antenna_horizontal.png" /></div> 
+                 <div style="float:right" class="medium hard antenna"><img src="antenna.png" /></div> 
+              </td>
+           </tr>
+           </table>
+
+
+            <div id="grid_container" style="text-align:center">
+               <div id="grid"></div>
+            </div>
+            <div id="demo"></div>
+            <img src="icon.png" style="display:none">
+         </div>
+      </div><!-- task -->
+      <div id="solution">
+
+         <h2>Solution</h2>
+            <div class="easy">
+               <p>On place les antennes à la suite les unes des autres.</p>
+               <p><img src="solution_easy_1.png"></p>
+               <p>D'autres solutions étaient possibles en plaçant des antennes dans les cases grises. Par exemple&nbsp;</p>
+               <p><img src="solution_easy_2.png"></p>
+            </div>
+
+            <div class="medium">
+               <p>On place les antennes à la suite les une des autres, en alternant entre ligne du haut et ligne du bas.</p>
+               <p><img src="solution_medium_1.png"></p>
+               <p>D'autres solutions étaient possibles en plaçant des antennes dans les cases grises. Par exemple&nbsp;:</p>
+               <p><img src="solution_medium_2.png"></p>
+            </div>
+
+            <div class="hard">
+               <p>L'idée est de placer les antennes selon un motif régulier.</p>
+               <p><img src="solution_hard.png"></p></p>
+               <p>Il y a d'autres solutions possibles, selon l'endroit où l'on place la première antenne, et selon si l'on place les antennes sur des lignes descendantes ou bien des lignes montantes. Ces solutions sont globalement toutes équivalentes (à une symétrie ou une translation près).</p>
+            </div>
+         
+
+         <h2>C'est de l'informatique&nbsp;!</h2>
+
+            <p>L'objectif de ce sujet est de trouver un motif régulier,
+            appelé &laquo; pavage &raquo;.
+            On peut construire ce motif en plaçant une première antenne couvrant
+            une première case blanche, puis en avançant de proche en proche.
+            </p>
+            <p>Sur une petit grille comme illustré ci-dessous, on n'a aucun choix possible&nbsp;:
+            pour ne pas laisser de case blanche non couverte, on est obligé 
+            de poser, à chaque fois, une antenne collée à la précédente.</p>
+            <p class="easy"><img src="solution_easy_1.png"></p>
+            <p class="medium hard"><img src="solution_medium_1.png"></p>
+  
+            <div class="hard">
+            <p>Sur une grande grille en revanche, appliquer ce principe ne fonctionne pas forcément.
+            Par exemple, en commençant comme montré ci-dessous, on se retrouve coincé.
+            Quel que soit la manière dont on continue, on aura forcément une case blanche non recouverte.</p>
+            <p><img src="solution_hard_bad_start.png"></p>
+            <p>Il n'y a alors pas d'autres solutions que de revenir en arrière, 
+            pour essayer de commencer autrement le remplissage de la grille.
+            Il n'y a en fait que très peu de manières différentes de commencer.
+            On finit donc par trouver celle qui fonctionne. Dès qu'on a le
+            bon début, on n'a plus le choix pour remplir le reste de la grille
+            sans laisser de trous.</p>
+            <p><img src="solution_hard_good_start.png"></p>
+            <p>Cette technique de retour en arrière ou <strong>retour sur trace</strong>  (&laquo;&nbsp;backtracking&nbsp;&raquo;
+            en anglais) permet d'explorer plusieurs départs possibles.
+            C'est une technique très utile pour résoudre de nombreux problèmes,
+            notamment pour trouver des solutions dans des jeux comme le Sudoku
+            ou le Scrabble.</p>
+
+	  </div> <!-- task-solution -->
+   </body>
+</html>
+ 

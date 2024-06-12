@@ -1,7 +1,7 @@
-function initTask(subTask) {
+function initTask() {
    'use strict';
    var level;
-   var state = {};
+   var state = null;
    var answer = null;
    var grid;
    var paper;
@@ -103,58 +103,49 @@ function initTask(subTask) {
    var wrongRectAttr = {"stroke-width": 5, "stroke": "blue"};
    var wrongRectPadding = 4;
    var wrongCell = null;
-   var paperSide;
-   var noVisual = false;
 
 
-   subTask.loadLevel = function(curLevel) {
-      if(respEnabled){
-         displayHelper.responsive = true;
-         // displayHelper.hideSolutionButton = true;
-         convertDOM();
-      }else{
-         displayHelper.responsive = false;
-      }
-      level = curLevel;
-
+   task.load = function(views, callback) {
       initSolutionClicks();
       initData();
+      initHandlers();
 
-      // displayHelper.hideValidateButton = true;
-      displayHelper.customValidate = checkResult;
-      paperSide = cellSide * data[level].table.length + 2 * margin;
+      displayHelper.hideValidateButton = true;
+      displayHelper.setupLevels();
 
-      displayHelper.taskH = paperSide + 30;
-      displayHelper.taskW = 770;
-      displayHelper.minTaskW = 500;
-      displayHelper.maxTaskW = 900;
-   };
+      if (views.solutions) {
+         $("#solutions").show();
+      }
 
-   subTask.getStateObject = function() {
-      return state;
-   };
-
-    subTask.getAnswerObject = function() {
-      // updateAnswer();
-      return answer;
-   };
-
-   subTask.reloadAnswerObject = function(answerObj) {
-      answer = answerObj;
-   };
-
-   subTask.unloadLevel = function(callback) {
       callback();
    };
 
-   subTask.getGrade = function(callback) {
-      callback(getResultAndMessage());
+   task.getDefaultStateObject = function() {
+      return {level: "easy"};
    };
 
-   var getResultAndMessage = function() {
-      noVisual = true;
-      var result = checkResult(true);
-      return result
+   task.getStateObject = function() {
+      state.level = level;
+      return state;
+   };
+
+   task.reloadStateObject = function(stateObj, display) {
+      state = stateObj;
+      level = state.level;
+
+      if (display) {
+         initGrid();
+         initExample(level);
+      }
+   };
+
+   task.reloadAnswerObject = function(answerObj) {
+      answer = answerObj;
+      updateDisplay();
+   };
+
+   task.getAnswerObject = function() {
+      return answer;
    };
 
    task.getEmptyGrid = function(level) {
@@ -172,15 +163,12 @@ function initTask(subTask) {
       */
    };
 
-   subTask.getDefaultAnswerObject = function() {
-      return task.getEmptyGrid(level);
-   };
-
-   subTask.resetDisplay = function() {
-      displayError("");
-      initGrid();
-      initExample(level);
-      updateDisplay();
+   task.getDefaultAnswerObject = function() {
+      var answer = {};
+      for (var level in data) {
+         answer[level] = task.getEmptyGrid(level);
+      }
+      return answer;
    };
 
    var initSolutionClicks = function() {
@@ -221,7 +209,8 @@ function initTask(subTask) {
          paper.remove();
       }
       $("#feedback").html("");
-      paper = subTask.raphaelFactory.create("grid", "grid", paperSide, paperSide);
+      var paperSide = cellSide * data[level].table.length + 2 * margin;
+      paper = new Raphael("grid", paperSide, paperSide);
       paper.rect(margin, margin, data[level].table.length*cellSide, data[level].table[0].length*cellSide).attr({"fill": "white", "stroke": commonBackground}).toBack();
       paper.rect(0, 0, paperSide, paperSide).attr({"stroke": commonBackground, "fill": commonBackground}).toBack();
       grid = Grid.fromArray("grid", paper, data[level].table, cellFiller, cellSide, cellSide, margin, margin, lineAttr);
@@ -245,17 +234,42 @@ function initTask(subTask) {
       // LATER: avoid copy-paste;
       var exampleMargin = margin * exampleCellSide / cellSide;
       var exampleSide = exampleCellSide * exampleData[level].table.length + 2 * exampleMargin;
-      examplePaper = subTask.raphaelFactory.create("example_grid", "example_grid", exampleSide, exampleSide);
+      examplePaper = new Raphael("example_grid", exampleSide, exampleSide);
       examplePaper.rect(exampleMargin, exampleMargin, exampleData[level].table.length*exampleCellSide, exampleData[level].table[0].length*exampleCellSide).attr({"fill": "white", "stroke": commonBackground}).toBack();
       examplePaper.rect(0, 0, exampleSide, exampleSide).attr({"stroke": commonBackground, "fill": commonBackground}).toBack();
 
       exampleGrid = Grid.fromArray("example_grid", examplePaper, solveBFS(exampleData[level].table), exampleCellFiller, exampleCellSide, exampleCellSide, exampleMargin, exampleMargin, lineAttr);
-      displayHelper.updateLayout();
+   };
+
+   var initHandlers = function() {
+      $("#execute").click(clickExecute);
+   };
+
+   var clickExecute = function() {
+      $("#feedback").html("");
+      var mistakes = countMistakes(answer[level], level);
+      if (mistakes.mistakesCount === 0) {
+         platform.validate("done", function() {});
+         return;
+      }
+      if (level == "hard" && mistakes.mistakesCount <= 2) {
+         platform.validate("stay", function() {});
+         return;
+      }
+      if (level == "easy" || level == "medium") {
+        var msg = "";
+        if (mistakes.wrongCount > 0) {
+           highlightWrong(mistakes.wrong[0], mistakes.wrong[1]);
+           msg = taskStrings.incorrectExplain;
+        } else { // (mistakes.missingCount > 0)
+           msg = taskStrings.missingExplain;
+        }
+        $("#feedback").html(msg);
+      }
+      displayHelper.validate("stay");
    };
 
    var highlightWrong = function(row, col) {
-      if(noVisual)
-         return
       wrongCell = [row, col];
       var data = {
          row: row,
@@ -361,8 +375,7 @@ function initTask(subTask) {
 
    var cellClickHandler = function(event) {
       displayHelper.stopShowingResult();
-      // $("#feedback").html("");
-      displayError("");
+      $("#feedback").html("");
       if(wrongCell) {
          grid.popFromCell(wrongCell[0], wrongCell[1]);
          wrongCell = null;
@@ -373,7 +386,7 @@ function initTask(subTask) {
       if (data[level].table[row][col] != ".") {
          return;
       }
-      answer[row][col] = !(answer[row][col]);
+      answer[level][row][col] = !(answer[level][row][col]);
       updateCellDisplay(row, col);
    };
 
@@ -391,7 +404,7 @@ function initTask(subTask) {
          return;
       }
 
-      if (!answer[row][col]) {
+      if (!answer[level][row][col]) {
          grid.clearCell(row, col);
          return;
       }
@@ -486,47 +499,52 @@ function initTask(subTask) {
       };
    };
 
-   function checkResult(final) {
-      displayError("");
-      var mistakes = countMistakes(answer, level);
-      if (mistakes.mistakesCount === 0) {
-         if(!final){
-            platform.validate("done");
-         }
-         return { successRate: 1, message: taskStrings.success }
-      }
-      // console.log(mistakes)
-      if (level == "hard" && mistakes.mistakesCount <= 2) {
-         if(!final){
-            platform.validate("done");
-         }
-         return { successRate: 0.5, message: taskStrings.incorrect }
-      }
-      // if (level == "easy" || level == "medium") {
-        var msg = "";
-        if (mistakes.wrongCount > 0) {
-           highlightWrong(mistakes.wrong[0], mistakes.wrong[1]);
-           msg = taskStrings.incorrectExplain;
-        } else { // (mistakes.missingCount > 0)
-           msg = taskStrings.missingExplain;
-        }
-        displayError(msg);
-        return { successRate: 0, message: msg }
-      // }
+   grader.gradeTask = function(strAnswer, token, callback) {
+      task.getLevelGrade(strAnswer, token, callback, null);
    };
 
-   function displayError(msg) {
-      if(noVisual){
-         return
+   task.getLevelGrade = function(strAnswer, token, callback, gradedLevel) {
+      var taskParams = displayHelper.taskParams;
+      var scores = {};
+      var messages = {};
+      var maxScores = displayHelper.getLevelsMaxScores();
+
+      if (strAnswer === '') {
+         callback(taskParams.minScore, '');
+         return;
       }
-      if(respEnabled){
-         displayHelper.displayError(msg);
-      }else{
-         $("#error").html(msg);
+      var answer = $.parseJSON(strAnswer);
+      // clone the state to restore after grading.
+      var oldState = $.extend({}, task.getStateObject());
+      for (var curLevel in data) {
+         state.level = curLevel;
+         task.reloadStateObject(state, false);
+
+         var mistakes = countMistakes(answer[curLevel], curLevel);
+         var solutionClicks = solutionClickCounts[curLevel];
+      
+         var relativeScore = 0.0;
+         if (mistakes.mistakesCount === 0) {
+            relativeScore = 1.0;
+            messages[curLevel] = taskStrings.success;
+         } else if (curLevel == "hard" && mistakes.mistakesCount <= 2) {
+            relativeScore = 0.5;
+            messages[curLevel] = taskStrings.incorrect;
+         } else {
+            relativeScore = 0.0;
+            // if (curLevel == "hard") 
+            messages[curLevel] = taskStrings.incorrect;
+         }
+         scores[curLevel] = levelScoreInterpolate(maxScores, curLevel, relativeScore);
       }
-      // $("#displayHelper_graderMessage").html(msg);
+
+      task.reloadStateObject(oldState, false);
+      if (!gradedLevel) {
+         displayHelper.sendBestScore(callback, scores, messages);
+      } else {
+         callback(scores[gradedLevel], messages[gradedLevel]);
+      }
    };
 }
-initWrapper(initTask, ["easy", "medium", "hard"]);
-displayHelper.useFullWidth();
+initTask();
 
