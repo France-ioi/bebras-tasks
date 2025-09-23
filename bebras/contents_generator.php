@@ -36,7 +36,6 @@
 
    Note: the files 'contents_en.js' are deprecated, they could be removed.
 */
-
 // Select list of available years
 $years = glob('????');
 
@@ -47,6 +46,14 @@ $sContentsObject = '{"code": "castor_2016"}';
   $jsonContents = json_decode($sContentsObject);
   print_r($jsonContents);   exit;
 */
+
+// parsing the server names for french titles
+$frenchTitleJson = json_decode(file_get_contents("task_french_titles_from_server.json"));
+$frenchTitleIndex = array();
+foreach ($frenchTitleJson->tasks_french_titles_from_server as $item) {
+  $frenchTitleIndex[$item->code] = $item->title;
+}
+//print_r($frenchTitleIndex); exit;
 
 
 $matches = array(); // for matching
@@ -86,10 +93,15 @@ foreach($years as $year) {
     chdir($pwd."/".$path);
     $indexes = glob("index_??.html");
     $translations = array(); // filled below
+    $french_title = $task->title;
+    // patch french title using server names obtained from json
+    if (isset($frenchTitleIndex[$task->code])) {
+      $french_title = $frenchTitleIndex[$task->code];
+    }
     $translations[] = array(
       "language" => "fr",
       "file" => "index.html",
-      "title" => $task->title);
+      "title" => $french_title);
     foreach ($indexes as $i => $index) {
       if ($year == "2018" && $index == "index_en.html") {
         $index == "index_en2.html"; // patch for 2018, file named index_en2.html
