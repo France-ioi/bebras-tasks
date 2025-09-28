@@ -861,99 +861,99 @@ var tasks_tags =  [
     },
     {
         "code": "FR-2019-01-poles",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "reverse", "simulation", "counter-example", "challenging-hard" ]
     },
     {
         "code": "FR-2019-02-registers",
-        "tags": [ "notags" ]
+        "tags": [ "register", "allocation", "scheduling", "construction", "challenging-hard" ]
     },
     {
         "code": "FR-2019-03-prediction",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "reverse-engineering", "identification" ]
     },
     {
         "code": "FR-2019-06-inclusions",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "implicit", "image", "nesting", "construction" ]
     },
     {
         "code": "FR-2019-07-two-connect",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "connexity", "reachability", "construction", "ok-young" ]
     },
     {
         "code": "FR-2019-08-patterns",
-        "tags": [ "notags" ]
+        "tags": [ "pattern", "puzzle", "ok-young" ]
     },
     {
         "code": "FR-2019-09-hidden-words",
-        "tags": [ "notags" ]
+        "tags": [ "password", "indirection", "grid", "identification" ]
     },
     {
         "code": "FR-2019-10-lighting",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "rgb", "color", "overlapping", "construction" ]
     },
     {
         "code": "FR-2019-12-roller",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "programming", "pattern", "overlapping", "resolution" ]
+    }, /* TODO generalize pattern > 2019 ?*/
     {
         "code": "FR-2019-13-align-strips",
-        "tags": [ "notags" ]
+        "tags": [ "reachability", "pipes", "resolution", "challenging-hard" ]
     },
     {
         "code": "FR-2019-15-shape-compression",
-        "tags": [ "notags" ]
+        "tags": [ "compression", "shapes", "construction", "challenging-hard" ]
     },
     {
         "code": "FR-2019-17-base-4-encoding",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "base", "binary", "characters", "resolution" ]
     },
     {
         "code": "2020-CH-07-trade",
-        "tags": [ "notags" ]
+        "tags": [ "permutation", "implicit", "graph", "reachability", "construction", "ok-young" ]
     },
     {
         "code": "2020-FR-01-play-music",
-        "tags": [ "notags" ]
+        "tags": [ "music", "scheduling", "construction", "ok-young", "challenging-hard" ]
     },
     {
         "code": "2020-FR-02-split-flowers",
-        "tags": [ "notags" ]
+        "tags": [ "image", "partitioning", "construction", "ok-young" ]
     },
     {
         "code": "2020-FR-03-waiting-room",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "queue", "waiting", "simulation" ]
+    },  /* tag simulation ou resolution ?*/
     {
         "code": "2020-FR-04-joke-propagation",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "bfs", "identification", "ok-young" ]
     },
     {
         "code": "2020-FR-05-css",
-        "tags": [ "notags" ]
+        "tags": [ "html", "css", "formatting", "resolution" ]
     },
     {
         "code": "2020-FR-06-overlap-rectangles",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "drawing", "overlapping", "grid", "resolution", "challenging-hard" ]
+    }, /* TODO: generalize drawing > 2020 */
     {
         "code": "2020-FR-07-tool-deadlock",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "concurrency", "scheduling", "resolution", "ok-young", "challenging-hard" ]
     },
     {
         "code": "2020-IE-07-pollution",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "samples", "testing", "resolution", "adversary", "challenging-hard" ]
+    }, /* TODO: generalized adversary > 2020 */
     {
         "code": "2020-PT-03-creating-numbers",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "balls", "resolution", "ok-young" ]
     },
     {
         "code": "2020-FR-10-reorder",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "sorting", "shapes", "resolution", "ok-young" ]
+    }, /* TODO: generalize shapes  > 2020 */
     {
         "code": "2020-FR-09-loops",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "path", "grid", "construction" ]
     },
     {
         "code": "2021-AT-03_NewYork",
@@ -961,7 +961,7 @@ var tasks_tags =  [
     },
     {
         "code": "2021-FR-01_overlapping_patterns",
-        "tags": [ "image", "overlapping", "resolution", "challenging-hard" ]
+        "tags": [ "image", "overlapping", "resolution", "ok-young", "challenging-hard" ]
     },
     {
         "code": "2021-FR-02_flip_and_split",
@@ -969,7 +969,7 @@ var tasks_tags =  [
     },
     {
         "code": "2021-FR-03_rise_and_fall",
-        "tags": [ "blocks", "grid", "3D", "construction", "challenging-hard" ]
+        "tags": [ "blocks", "grid", "3D", "construction", "ok-young", "challenging-hard" ]
     },
     {
         "code": "2021-IT-01_Stacks_of_tokens",
@@ -989,7 +989,7 @@ var tasks_tags =  [
     },
     {
         "code": "2021-UZ-01d_Kangaroo",
-        "tags": [ "bfs", "path", "search", "grid", "identification" ]
+        "tags": [ "bfs", "path", "search", "grid", "identification", "ok-young" ]
     },
     {
         "code": "2021-FR-07_genealogy",
@@ -997,7 +997,7 @@ var tasks_tags =  [
     },
     {
         "code": "2021-FR-08-graph",
-        "tags": [ "graph", "reachability", "independence", "construction" ]
+        "tags": [ "graph", "reachability", "independence", "construction", "ok-young" ]
     },
     {
         "code": "2021-FR-08_targeting",
