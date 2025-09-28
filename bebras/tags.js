@@ -717,147 +717,147 @@ var tasks_tags =  [
     },
     {
         "code": "2016-FR-03-balanced-trees",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "tree", "balanced", "constraints", "construction", "ok-young" ]
     },
     {
         "code": "2016-FR-09-constraints",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "constraints", "ok-young" ]
     },
     {
         "code": "2016-FR-10-height-differences",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "pairing", "construction", "ok-young" ]
     },
     {
         "code": "2016-FR-12-filters",
-        "tags": [ "notags" ]
+        "tags": [ "database", "query", "select", "construction", "ok-young" ]
     },
     {
         "code": "2016-FR-07-shapes",
-        "tags": [ "notags" ]
+        "tags": [ "search", "replace", "shapes", "construction", "ok-young" ]
     },
     {
         "code": "2016-FR-01-not-rectangles",
-        "tags": [ "notags" ]
+        "tags": [ "image", "drawing", "grid", "overlapping", "xor", "resolution" ]
     },
     {
         "code": "2016-FR-08-repeating-pattern",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "repetition", "grid", "path", "construction", "ok-young" ]
     },
     {
         "code": "2016-FR-05-red-and-blue",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "reachability", "multi-source", "ok-young", "challenging-hard" ]
     },
     {
         "code": "2016-JP-01-potions",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "css", "mixture", "resolution", "challenging-hard" ]
     },
     {
         "code": "2016-FR-13-checksum",
-        "tags": [ "notags" ]
+        "tags": [ "checksum", "fault", "tolerance", "grid", "identification" ]
     },
     {
         "code": "2016-FR-14-transformation",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "permutation", "shapes", "construction" ]
     },
     {
         "code": "2016-FR-11-encoded-image",
-        "tags": [ "notags" ]
+        "tags": [ "compression", "image", "grid", "construction", "challenging-hard" ]
     },
     {
         "code": "2017-FR-01-home-distance",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "shortest", "path", "bfs", "construction", "ok-young" ]
     },
     {
         "code": "2017-FR-02-grid-copy",
-        "tags": [ "notags" ]
+        "tags": [ "copy-paste", "exponentiation", "grid", "resolution", "ok-young" ]
     },
     {
         "code": "2017-FR-03-three-towers",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "crane", "ok-young" ]
     },
     {
         "code": "2017-FR-04-faulty-wire",
-        "tags": [ "notags" ]
+        "tags": [ "fault", "testing", "resolution", "adversary" ]
     },
     {
         "code": "2017-FR-05-draw-shapes",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "shapes", "image", "recursion", "construction" ]
     },
     {
         "code": "2017-FR-06-pacman",
-        "tags": [ "notags" ]
+        "tags": [ "pacman", "grid", "resolution", "ok-young" ]
     },
     {
         "code": "2017-FR-07-graph-representation",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "implicit", "states", "construction" ]
     },
     {
         "code": "2017-FR-08-combine-shapes",
-        "tags": [ "notags" ]
+        "tags": [ "image", "drawing", "overlapping", "programming", "resolution" ]
     },
     {
         "code": "2017-FR-10-building-lights",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "grid", "cover", "construction", "ok-young" ]
     },
     {
         "code": "2017-FR-11-graph-isomorphism",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "isomorphism", "construction" ]
     },
     {
         "code": "2017-FR-12-distinct-paths",
-        "tags": [ "notags" ]
+        "tags": [ "grid", "complete", "path", "enumeration", "construction", "ok-young" ]
     },
     {
         "code": "2017-FR-13-search-substring",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "text", "search", "adversary", "resolution" ]
+    }, /* check adversary */
     {
         "code": "2018-FR-05-treasure",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "shortest", "path", "grid", "resolution", "ok-young" ]
+    }, /* TODO generalize shortest > 2018 ?*/
     {
         "code": "2018-FR-03-search-replace",
-        "tags": [ "notags" ]
+        "tags": [ "search", "replace", "shapes", "resolution" ]
     },
     {
         "code": "2018-FR-06-encoded-path",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "grid", "path", "ok-young" ]
     },
     {
         "code": "2018-FR-04-whos-there",
-        "tags": [ "notags" ]
+        "tags": [ "hashtable", "counting", "simulation" ]
     },
     {
         "code": "2018-FR-07-checkers-graph",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "implicit", "grid", "construction" ]
     },
     {
         "code": "2018-FR-09-graph-of-shapes",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "labels", "path", "construction", "ok-young" ]
     },
     {
         "code": "2018-FR-17-weights",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "weight", "scale", "algorithm", "resolution", "challenging-hard" ] , /* check adversary */
     },
     {
         "code": "2018-FR-15-marbles-sequence",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "sorting", "interleaving", "resolution" ]
+    }, /* TODO generalize interleaving > 2018 ?*/
     {
         "code": "2018-FR-14-sort-columns",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "stable", "criteria", "resolution", "algorithm", "challenging-hard" ]
     },
     {
         "code": "2018-HU-07-arrows",
-        "tags": [ "notags" ]
+        "tags": [ "constraints", "grid", "puzzle", "construction", "challenging-hard" ]
     },
     {
         "code": "2018-FR-10-parallel-processing",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "concurrency", "counter-example", "construction", "challenging-hard" ]
     },
     {
         "code": "2018-FR-01-recursive-split",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "recursivity", "grid", "construction", "challenging-hard" ]
     },
     {
         "code": "FR-2019-01-poles",
@@ -941,7 +941,7 @@ var tasks_tags =  [
     },
     {
         "code": "2020-IE-07-pollution",
-        "tags": [ "samples", "testing", "resolution", "adversary", "challenging-hard" ]
+        "tags": [ "mixture", "testing", "resolution", "adversary", "challenging-hard" ]
     }, /* TODO: generalized adversary > 2020 */
     {
         "code": "2020-PT-03-creating-numbers",
