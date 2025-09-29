@@ -1,719 +1,726 @@
+  /* tag
+    in addition to custom keywords,
+    + category is one of:
+     - identification : one has to find/identify a specific object or configuration
+     - construction : build a configuration, visible at all at once
+     - resolution : one has to take a series of steps/actions in a specific order
+    + optional tags:
+    - enemy => computer plays an adversarial role
+    - ok-young => easily accessible by <10 year-old
+    - challenging-hard => hard version is quite hairy
+*/
 var tasks_tags =  [
     {
         "code": "2010-a-gauche",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-apprendre-anglais",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-approvisionnement-eau",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-art-castor",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-bits-egaux",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-castor-sportif",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-chemin-plus-court",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-chercher-remplacer",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-circuit-course",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-coder-images",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-couverture-maximale",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-cuisson-au-four",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-decoupeuse",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-excursion-photos",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-fichiers-desordre",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-heure-pandore",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-jeu-tri",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-logique-approvisionnement",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-miroir-photo",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-ox",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-paves",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-photo-classe",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-pile-assiettes",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-pomme-pin",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-quatre-grenouilles",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-rouge-vert-bleu",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-scarabee-robot",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-soyons-logiques",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-strategie-gagnante",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-t9",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-tampons",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-tour-canoe",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-transmission-donnees",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-travaux-peinture",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-trier-chiffres",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-tronc-fleur",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-trouve-la-figure",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2010-voisinage",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-AT-08",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-AT-11",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-AT-12",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-AT-14",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-CH-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-CH-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-CH-03",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-CH-05",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-CH-10",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-CZ-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-DE-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-DE-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-DE-03",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-DE-19",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-DE-20",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-FI-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-FR-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-FR-03",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-FR-05",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-FR-06",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-FR-07",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-IL-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-IL-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-IL-11",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-IT-09",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-IT-14",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-JP-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-JP-06",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-LT-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-LT-12",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-LT-14",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-NL-08",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-NL-11",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-NL-12",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-SK-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-SK-06",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-SK-08",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-SK-11",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2011-UA-07",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-AT-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-AT-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-AT-10",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-AT-12",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-AT-20",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-CA-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-CH-09",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-CZ-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-CZ-12",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-DE-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-DE-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-DE-03",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-DE-05",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-DE-07",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-DE-10",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-ES-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FI-03",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-02b",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-04b",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-06",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-07",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-08",
-        "tags": [ "notags" ]
+        "tags": [ "drawing", "grid", "xor", "resolution" ]
     },
     {
         "code": "2012-FR-09",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-FR-10",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-HU-01a",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-HU-06",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-IT-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-IT-13",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-JP-05",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-LV-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-RU-03",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-RU-05",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-SI-06",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-SK-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-SK-03",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-SK-10",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2012-UA-07",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "xor", "resolution" ]
     },
     {
         "code": "2013-SK-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-CZ-05",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-SK-05",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-06a",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-06b",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-09",
-        "tags": [ "notags" ]
+        "tags": [ "constraints", "puzzle", "resolution" ]
     },
     {
         "code": "2013-JP-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-AT-02ab",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-15",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-SI-01",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-08",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-SE-02",
-        "tags": [ "notags" ]
+        "tags": [ "network", "grid", "spanning", "tree", "construction" ]
     },
     {
         "code": "2013-FR-01",
-        "tags": [ "notags" ]
+        "tags": [ "image", "coloring", "construction" ]
     },
     {
         "code": "2013-SI-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-13",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "weight", "resolution" ]
     },
     {
         "code": "2013-FR-05a",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "drawing", "construction" ]
     },
     {
         "code": "2013-FR-05b",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "drawing", "construction" ]
     },
     {
         "code": "2013-FR-10a",
-        "tags": [ "notags" ]
+        "tags": [ "search", "replace", "resolution" ]
     },
     {
         "code": "2013-FR-10b",
-        "tags": [ "notags" ]
+        "tags": [ "search", "replace", "resolution" ]
     },
     {
         "code": "2013-FR-11",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "connexity", "construction" ]
     },
     {
         "code": "2013-FR-12a",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "maximal", "independant", "set", "construction" ]
     },
     {
         "code": "2013-FR-12b",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "maximal", "independant", "set", "construction" ]
     },
     {
         "code": "2013-SK-09ab",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "drawing", "construction" ]
     },
     {
         "code": "2013-RU-05a",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-RU-05b",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-04",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-NL-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-14",
-        "tags": [ "notags" ]
+        "tags": [ "parity", "grid", "redondance", "construction" ]
     },
     {
         "code": "2013-DE-02",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2013-FR-16",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2014-CH-05-abacus",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "number", "construction" ]
     },
     {
         "code": "2014-FR-20-shell",
-        "tags": [ "notags" ]
+        "tags": [ "usage", "shell", "command", "resolution" ]
     },
     {
         "code": "2014-FR-03-monster",
-        "tags": [ "notags" ]
-    },
+        "tags": [ "search", "dichotomy", "resolution" ]
+    }, /* to generalize dichotomy */
     {
         "code": "2014-FR-06-bridge",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "constraints", "construction", "algorithm" ]
     },
     {
         "code": "2014-FR-08-maze",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "grid", "construction" ]
     },
     {
         "code": "2014-FR-04-gattaca",
-        "tags": [ "notags" ]
+        "tags": [ "text", "search", "pattern", "resolution" ]
     },
     {
         "code": "2014-FR-05-laser",
-        "tags": [ "notags" ]
+        "tags": [ "mirror", "grid", "shortest", "path", "construction" ]
     },
     {
         "code": "2014-SI-02-alien-language",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "grid", "path", "construction" ]
     },
     {
         "code": "2014-FR-19-summed-row",
-        "tags": [ "notags" ]
-    },
-    {
-        "code": "2014-FR-19-summed-row",
-        "tags": [ "notags" ]
+        "tags": [ "prefix", "scan", "array", "identification" ]
     },
     {
         "code": "2014-TW-05-summed-area",
-        "tags": [ "notags" ]
+        "tags": [ "prefix", "scan", "grid", "identification" ]
     },
     {
         "code": "2014-AU-02-pancake-flipping",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "resolution" ]
     },
     {
         "code": "2014-NL-01-secret-number",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "identification" ]
     },
     {
         "code": "2014-SI-04-unknown-friendship",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "isomorphism", "constraints", "construction" ]
     },
     {
         "code": "2014-RU-04-carrot-storehouses",
-        "tags": [ "notags" ]
+        "tags": [ "tree", "query", "sum", "construction" ]
     },
     {
         "code": "2014-CA-02-shout-your-name",
-        "tags": [ "notags" ]
+        "tags": [ "tree", "traversal", "identification" ]
     },
     {
         "code": "2014-SK-01-sticker",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2014-SE-04-height-game",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2014-SP-02-traffic",
-        "tags": [ "notags" ]
+        "tags": [ ]
     },
     {
         "code": "2014-CH-07-rectangles",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "drawing", "construction" ]
     },
     {
         "code": "2015-JP-04-crane-operating",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "cycle", "resolution", "ok-young"  ]
     },
     {
         "code": "2015-CZ-02-relationships",
-        "tags": [ "notags" ]
+        "tags": [ "graph", "relationship", "constraints", "construction", "ok-young" ]
     },
     {
         "code": "2015-FR-02-spreading-secret",
-        "tags": [ "notags" ]
+        "tags": [ "paving", "grid", "construction", "ok-young" ]
     },
     {
         "code": "2015-AT-07-telephone-book",
-        "tags": [ "notags" ]
+        "tags": [ "text", "pattern", "regexep", "search", "identification" ]
     },
     {
         "code": "2015-FR-04-next-distance",
-        "tags": [ "notags" ]
+        "tags": [ "distance", "shortest", "bfs", "grid", "identification" ]
     },
     {
         "code": "2015-CA-02-fireworks",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "shapes", "construction" ]
     },
     {
         "code": "2015-FR-03-mark-and-shuffle",
-        "tags": [ "notags" ]
+        "tags": [ "encoding", "binary", "resolution" ]
     },
     {
         "code": "2015-FR-13-open-lock",
-        "tags": [ "notags" ]
+        "tags": [ "secret", "code", "enumeration", "constraints", "resolution" ]
     },
     {
         "code": "2015-FR-07-placing-arrows",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "robot", "path", "construction" ]
     },
     {
         "code": "2015-FR-01-copy-pattern",
-        "tags": [ "notags" ]
+        "tags": [ "programming", "variable", "image", "drawing", "grid", "construction" ]
     },
     {
         "code": "2015-SI-05-horse-races",
-        "tags": [ "notags" ]
+        "tags": [ "sorting", "resolution", "challenging-hard" ]
     },
     {
         "code": "2015-FR-15-guess-who",
-        "tags": [ "notags" ]
+        "tags": [ "decision", "tree", "construction", "challenging-hard" ]
     },
     {
         "code": "2016-FR-03-balanced-trees",
@@ -777,7 +784,7 @@ var tasks_tags =  [
     },
     {
         "code": "2017-FR-04-faulty-wire",
-        "tags": [ "fault", "testing", "resolution", "adversary" ]
+        "tags": [ "fault", "testing", "resolution", "enemy" ]
     },
     {
         "code": "2017-FR-05-draw-shapes",
@@ -809,12 +816,12 @@ var tasks_tags =  [
     },
     {
         "code": "2017-FR-13-search-substring",
-        "tags": [ "text", "search", "adversary", "resolution" ]
-    }, /* check adversary */
+        "tags": [ "text", "search", "enemy", "resolution" ]
+    },
     {
         "code": "2018-FR-05-treasure",
         "tags": [ "shortest", "path", "grid", "resolution", "ok-young" ]
-    }, /* TODO generalize shortest > 2018 ?*/
+    },
     {
         "code": "2018-FR-03-search-replace",
         "tags": [ "search", "replace", "shapes", "resolution" ]
@@ -825,7 +832,7 @@ var tasks_tags =  [
     },
     {
         "code": "2018-FR-04-whos-there",
-        "tags": [ "hashtable", "counting", "simulation" ]
+        "tags": [ "hashtable", "counting", "identification" ]
     },
     {
         "code": "2018-FR-07-checkers-graph",
@@ -837,12 +844,12 @@ var tasks_tags =  [
     },
     {
         "code": "2018-FR-17-weights",
-        "tags": [ "sorting", "weight", "scale", "algorithm", "resolution", "challenging-hard" ] , /* check adversary */
+        "tags": [ "sorting", "weight", "scale", "algorithm", "resolution", "challenging-hard" ] ,
     },
     {
         "code": "2018-FR-15-marbles-sequence",
         "tags": [ "sorting", "interleaving", "resolution" ]
-    }, /* TODO generalize interleaving > 2018 ?*/
+    },
     {
         "code": "2018-FR-14-sort-columns",
         "tags": [ "sorting", "stable", "criteria", "resolution", "algorithm", "challenging-hard" ]
@@ -853,7 +860,7 @@ var tasks_tags =  [
     },
     {
         "code": "2018-FR-10-parallel-processing",
-        "tags": [ "programming", "concurrency", "counter-example", "construction", "challenging-hard" ]
+        "tags": [ "programming", "concurrency", "deadlock", "robot", "counter-example", "construction", "challenging-hard" ]
     },
     {
         "code": "2018-FR-01-recursive-split",
@@ -861,7 +868,7 @@ var tasks_tags =  [
     },
     {
         "code": "FR-2019-01-poles",
-        "tags": [ "sorting", "reverse", "simulation", "counter-example", "challenging-hard" ]
+        "tags": [ "sorting", "reverse", "counter-example", "challenging-hard" ]
     },
     {
         "code": "FR-2019-02-registers",
@@ -894,7 +901,7 @@ var tasks_tags =  [
     {
         "code": "FR-2019-12-roller",
         "tags": [ "programming", "pattern", "overlapping", "resolution" ]
-    }, /* TODO generalize pattern > 2019 ?*/
+    },
     {
         "code": "FR-2019-13-align-strips",
         "tags": [ "reachability", "pipes", "resolution", "challenging-hard" ]
@@ -921,11 +928,11 @@ var tasks_tags =  [
     },
     {
         "code": "2020-FR-03-waiting-room",
-        "tags": [ "queue", "waiting", "simulation" ]
-    },  /* tag simulation ou resolution ?*/
+        "tags": [ "queue", "waiting", "identification" ]
+    },
     {
         "code": "2020-FR-04-joke-propagation",
-        "tags": [ "graph", "bfs", "identification", "ok-young" ]
+        "tags": [ "graph", "shortest", "bfs", "identification", "ok-young" ]
     },
     {
         "code": "2020-FR-05-css",
@@ -934,15 +941,15 @@ var tasks_tags =  [
     {
         "code": "2020-FR-06-overlap-rectangles",
         "tags": [ "drawing", "overlapping", "grid", "resolution", "challenging-hard" ]
-    }, /* TODO: generalize drawing > 2020 */
+    },
     {
         "code": "2020-FR-07-tool-deadlock",
         "tags": [ "programming", "concurrency", "scheduling", "resolution", "ok-young", "challenging-hard" ]
     },
     {
         "code": "2020-IE-07-pollution",
-        "tags": [ "mixture", "testing", "resolution", "adversary", "challenging-hard" ]
-    }, /* TODO: generalized adversary > 2020 */
+        "tags": [ "mixture", "testing", "resolution", "enemy", "challenging-hard" ]
+    },
     {
         "code": "2020-PT-03-creating-numbers",
         "tags": [ "sorting", "balls", "resolution", "ok-young" ]
@@ -950,7 +957,7 @@ var tasks_tags =  [
     {
         "code": "2020-FR-10-reorder",
         "tags": [ "sorting", "shapes", "resolution", "ok-young" ]
-    }, /* TODO: generalize shapes  > 2020 */
+    },
     {
         "code": "2020-FR-09-loops",
         "tags": [ "programming", "path", "grid", "construction" ]
@@ -977,11 +984,11 @@ var tasks_tags =  [
     },
     {
         "code": "2021-FR-04_tunnels",
-        "tags": [ "search", "algorithm", "challenging-hard" ]
+        "tags": [ "search", "algorithm", "enemy", "challenging-hard" ]
     },
     {
         "code": "2021-FR-05_treasure_rect",
-        "tags": [ "search", "algorithm", "grid", "challenging-hard" ]
+        "tags": [ "search", "algorithm", "grid", "enemy", "challenging-hard" ]
     },
     {
         "code": "2021-FR-06_memory",
@@ -989,11 +996,11 @@ var tasks_tags =  [
     },
     {
         "code": "2021-UZ-01d_Kangaroo",
-        "tags": [ "bfs", "path", "search", "grid", "identification", "ok-young" ]
+        "tags": [ "shortest", "bfs", "path", "search", "grid", "identification", "ok-young" ]
     },
     {
         "code": "2021-FR-07_genealogy",
-        "tags": [ "tree", "genealogy", "ancesters", "identification" ]
+        "tags": [ "tree", "genealogy", "ancesters", "identification",  "enemy" ]
     },
     {
         "code": "2021-FR-08-graph",
@@ -1009,11 +1016,11 @@ var tasks_tags =  [
     },
     {
         "code": "2022-FR-03_treasure_lidar",
-        "tags": [ "distance", "grid", "dichotomy", "algorithm" ]
+        "tags": [ "distance", "grid", "dichotomy", "algorithm", "enemy" ]
     },
     {
         "code": "2022-FR-04_closest_height",
-        "tags": [ "sorting", "identification" ]
+        "tags": [ "sorting", "identification", "enemy" ]
     },
     {
         "code": "2022-FR-05_shape_building",
@@ -1021,11 +1028,11 @@ var tasks_tags =  [
     },
     {
         "code": "2022-FR-06_chocolate_bars",
-        "tags": [ "counting", "tile", "grid", "algorithm" ]
+        "tags": [ "counting", "tile", "grid", "algorithm", "enemy" ]
     },
     {
         "code": "2022-FR-08_xor_shifted",
-        "tags": [ "image", "grid", "logical", "construction" ]
+        "tags": [ "image", "drawing", "grid", "logical", "construction" ]
     },
     {
         "code": "2022-FR-09_fourier",
@@ -1065,7 +1072,7 @@ var tasks_tags =  [
     },
     {
         "code": "2023-FR-06-video",
-        "tags": [ "reordering", "video", "frame", "sorting", "ok-young" ]
+        "tags": [ "reordering", "video", "frame", "shapes", "sorting", "ok-young" ]
     },
     {
         "code": "2023-FR-07-align-center",
@@ -1073,7 +1080,7 @@ var tasks_tags =  [
     },
     {
         "code": "2023-FR-08-railroad",
-        "tags": [ "programming", "circuit", "conditional", "state", "simulation", "challenging-hard" ]
+        "tags": [ "programming", "circuit", "conditional", "state", "construction", "challenging-hard" ]
     },
     {
         "code": "2023-FR-09-graph",
@@ -1081,7 +1088,7 @@ var tasks_tags =  [
     },
     {
         "code": "2023-FR-pipes",
-        "tags": [ "tree", "flow", "algorithm", "challenging-hard" ]
+        "tags": [ "tree", "flow", "algorithm", "enemy", "challenging-hard" ]
     },
     {
         "code": "2024-FR-01-spinning-shamrocks",
@@ -1093,7 +1100,7 @@ var tasks_tags =  [
     },
     {
         "code": "2024-FR-03-zen-garden",
-        "tags": [ "path", "grid", "construction", "ok-young" ]
+        "tags": [ "path", "drawing", "grid", "construction", "ok-young" ]
     },
     {
         "code": "2024-FR-04-bells",
@@ -1109,11 +1116,11 @@ var tasks_tags =  [
     },
     {
         "code": "2024-FR-07-rings",
-        "tags": [ "path", "grid", "simulation" ]
+        "tags": [ "path", "grid", "resolution" ]
     },
     {
         "code": "2024-FR-08-sheep",
-        "tags": [ "coding", "binary", "construction", "ok-young", "challenging-hard" ]
+        "tags": [ "coding", "binary", "construction", "enemy", "ok-young", "challenging-hard" ]
     },
     {
         "code": "2024-FR-09-rivers-map",
@@ -1121,6 +1128,6 @@ var tasks_tags =  [
     },
     {
         "code": "2024-FR-10-pixels",
-        "tags": [ "image", "processing", "grid", "construction", "ok-young" ]
+        "tags": [ "image", "drawing", "transformation", "grid", "construction", "ok-young" ]
     }
 ];
