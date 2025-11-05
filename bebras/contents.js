@@ -2084,7 +2084,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Relations d'âges"
+                    "title": "Relations d'âge"
                 },
                 {
                     "language": "ar",
@@ -2844,7 +2844,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Graines cachées"
+                    "title": "Tas de graines"
                 },
                 {
                     "language": "ar",
@@ -2896,7 +2896,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Fantôme"
+                    "title": "Fantômes"
                 },
                 {
                     "language": "ar",
@@ -2948,7 +2948,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Dessin combiné"
+                    "title": "Formes combinées"
                 },
                 {
                     "language": "ar",
@@ -2974,7 +2974,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Lumières d'immeuble"
+                    "title": "Immeuble éclairé"
                 },
                 {
                     "language": "ar",
@@ -3111,7 +3111,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Remplacements"
+                    "title": "Remplacer les formes"
                 },
                 {
                     "language": "ar",
@@ -3173,7 +3173,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Triades"
+                    "title": "Dans la maison"
                 },
                 {
                     "language": "ar",
@@ -3235,7 +3235,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Chemin décoré"
+                    "title": "Parcours décoré"
                 },
                 {
                     "language": "ar",
@@ -3359,7 +3359,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Flèches indicatrices"
+                    "title": "Flèches"
                 },
                 {
                     "language": "ar",
@@ -3464,7 +3464,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Bambous"
+                    "title": "Bambous "
                 },
                 {
                     "language": "ar",
@@ -3500,7 +3500,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Cailloux"
+                    "title": "Cailloux "
                 },
                 {
                     "language": "ar",
@@ -3531,7 +3531,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Prédictions"
+                    "title": "Prédictions "
                 },
                 {
                     "language": "ar",
@@ -3562,7 +3562,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Rectangles imbriqués"
+                    "title": "Rectangles imbriqués "
                 },
                 {
                     "language": "ar",
@@ -3593,7 +3593,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Arroser les fleurs"
+                    "title": "Arroser les fleurs "
                 },
                 {
                     "language": "ar",
@@ -3624,7 +3624,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Motifs répétés"
+                    "title": "Motifs répétés "
                 },
                 {
                     "language": "ar",
@@ -3655,7 +3655,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Mots de passe"
+                    "title": "Mots de passe "
                 },
                 {
                     "language": "ar",
@@ -3686,7 +3686,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Ambiance lumineuse"
+                    "title": "Ambiance lumineuse "
                 },
                 {
                     "language": "ar",
@@ -3717,7 +3717,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Tampons"
+                    "title": "Tampons "
                 },
                 {
                     "language": "ar",
@@ -3748,7 +3748,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Réseau hydraulique"
+                    "title": "Réseau hydraulique "
                 },
                 {
                     "language": "ar",
@@ -3779,7 +3779,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Formes compactées"
+                    "title": "Formes compactées "
                 },
                 {
                     "language": "ar",
@@ -3853,7 +3853,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Échanges"
+                    "title": "Échanges "
                 },
                 {
                     "language": "ar",
@@ -3884,7 +3884,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Musique"
+                    "title": "Musique "
                 },
                 {
                     "language": "ar",
@@ -3915,7 +3915,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Champignons"
+                    "title": "Champignons "
                 },
                 {
                     "language": "ar",
@@ -3946,7 +3946,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Salle d'attente"
+                    "title": "Salle d'attente "
                 },
                 {
                     "language": "ar",
@@ -3977,7 +3977,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Idée géniale"
+                    "title": "Idée géniale "
                 },
                 {
                     "language": "ar",
@@ -4008,7 +4008,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Mise en forme"
+                    "title": "Mise en forme "
                 },
                 {
                     "language": "ar",
@@ -4039,7 +4039,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Rectangles"
+                    "title": "Rectangles "
                 },
                 {
                     "language": "ar",
@@ -4070,7 +4070,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Outils partagés"
+                    "title": "Outils partagés "
                 },
                 {
                     "language": "ar",
@@ -4132,7 +4132,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Flipper"
+                    "title": "Flipper "
                 },
                 {
                     "language": "ar",
@@ -4163,7 +4163,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Retournements"
+                    "title": "Retournements "
                 },
                 {
                     "language": "ar",
@@ -4194,7 +4194,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Boucles"
+                    "title": "Boucles "
                 },
                 {
                     "language": "ar",
@@ -4238,7 +4238,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "New York"
+                    "title": "Taxis à New York "
                 },
                 {
                     "language": "ar",
@@ -4269,7 +4269,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Peinture triangle"
+                    "title": "Peinture triangulaire "
                 },
                 {
                     "language": "ar",
@@ -4300,7 +4300,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Billes renversantes"
+                    "title": "Billes renversantes "
                 },
                 {
                     "language": "ar",
@@ -4331,7 +4331,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Des hauts et des bas"
+                    "title": "Hauts et bas "
                 },
                 {
                     "language": "ar",
@@ -4362,7 +4362,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Piles identiques"
+                    "title": "Tours pareilles "
                 },
                 {
                     "language": "ar",
@@ -4393,7 +4393,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Caché dans le tunnel"
+                    "title": "Caché dans un tunnel "
                 },
                 {
                     "language": "ar",
@@ -4424,7 +4424,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Chasse au trésor"
+                    "title": "Terrier enterré "
                 },
                 {
                     "language": "ar",
@@ -4455,7 +4455,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Dans la mémoire"
+                    "title": "Dans la mémoire "
                 },
                 {
                     "language": "ar",
@@ -4486,7 +4486,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Sauts de grenouille"
+                    "title": "Nénuphars "
                 },
                 {
                     "language": "ar",
@@ -4517,7 +4517,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Généalogie"
+                    "title": "Généalogie "
                 },
                 {
                     "language": "ar",
@@ -4548,7 +4548,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Graph"
+                    "title": "Castors et renards "
                 },
                 {
                     "language": "ar",
@@ -4977,7 +4977,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Blocs"
+                    "title": "Construction"
                 },
                 {
                     "language": "ar",
@@ -5008,7 +5008,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Descente"
+                    "title": "Chute de billes"
                 },
                 {
                     "language": "ar",
@@ -5039,7 +5039,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Fleurs"
+                    "title": "Cueillir les fleurs"
                 },
                 {
                     "language": "ar",
@@ -5101,7 +5101,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Dessin animé"
+                    "title": "Ordre d'une vidéo"
                 },
                 {
                     "language": "ar",
@@ -5132,7 +5132,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Alignement"
+                    "title": "Aligner les points"
                 },
                 {
                     "language": "ar",
@@ -5163,7 +5163,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Train"
+                    "title": "Chemin de fer"
                 },
                 {
                     "language": "ar",
@@ -5194,7 +5194,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Amis"
+                    "title": "Amis de Castor"
                 },
                 {
                     "language": "ar",
@@ -5225,7 +5225,7 @@ standaloneAddContents({
                 {
                     "language": "fr",
                     "file": "index.html",
-                    "title": "Tuyaux"
+                    "title": "Tuyaux boueux"
                 },
                 {
                     "language": "ar",
@@ -5246,6 +5246,329 @@ standaloneAddContents({
                     "language": "sv",
                     "file": "index_sv.html",
                     "title": "Rör"
+                }
+            ]
+        }
+    ]
+});
+standaloneAddContents({
+    "code": "castor_2024",
+    "title": "Concours Castor 2024",
+    "folder": "2024/",
+    "difficulties": [
+        "basic",
+        "easy",
+        "medium",
+        "hard"
+    ],
+    "tasks": [
+        {
+            "code": "2024-FR-01-spinning-shamrocks",
+            "title": "Trèfles",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Trèfles"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "أوراق البرسيم"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Clovers"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Apilat"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Klöver"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-02-drone",
+            "title": "Drone",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Drone"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "الطائرة"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Drone"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Lennokki"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Drönaren"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-03-zen-garden",
+            "title": "Jardin zen",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Jardin zen"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "حديقة زين"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Zen Garden"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Hiekkakenttä"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Sandträdgård"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-04-bells",
+            "title": "Cloches",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Cloches"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "الأجراس"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Bells"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Kellot"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Klockor"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-05-distances",
+            "title": "Mesure de distance",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Mesure de distance"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "المسافات"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Distances"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Suurin etäisyys"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Största avståndet"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-06-vegetables",
+            "title": "Jardin potager",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Jardin potager"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "حديقة الخضراوات"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Vegetable Garden"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Vihannestarha"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Grönsaksland"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-07-rings",
+            "title": "Dans le noir",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Dans le noir"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "الكرة والأعلام"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Ball and Flags"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Kuulapeli"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Kulspel"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-08-sheep",
+            "title": "Moutons",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Moutons"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "الأغنام"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Sheep"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Lampaat"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Fårfält"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-09-rivers-map",
+            "title": "Rivières",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Rivières"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "خريطة الأنهار"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Rivers map"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Jokikartta"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Flodkarta"
+                }
+            ]
+        },
+        {
+            "code": "2024-FR-10-pixels",
+            "title": "Pixels",
+            "translations": [
+                {
+                    "language": "fr",
+                    "file": "index.html",
+                    "title": "Pixels"
+                },
+                {
+                    "language": "ar",
+                    "file": "index_ar.html",
+                    "title": "البِكْسِل"
+                },
+                {
+                    "language": "en",
+                    "file": "index_en.html",
+                    "title": "Pixels"
+                },
+                {
+                    "language": "fi",
+                    "file": "index_fi.html",
+                    "title": "Kuvapisteet"
+                },
+                {
+                    "language": "sv",
+                    "file": "index_sv.html",
+                    "title": "Bildpixlar"
                 }
             ]
         }
