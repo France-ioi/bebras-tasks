@@ -30,7 +30,7 @@
   "dependencies": {
     "array.prototype.fill": "^1.0.2",
     "bebras-server-modules-libs": "https://github.com/France-ioi/bebras-server-modules-libs.git",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "classnames": "^2.2.5",
     "epic-component": "^1.1.2",
     "epic-linker": "^3.1.0",
