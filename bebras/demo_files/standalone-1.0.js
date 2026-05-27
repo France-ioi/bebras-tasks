@@ -9,12 +9,21 @@
      index.html?private=1 // DEPRECATED, now using index_full
   or
      index.html?lang=en
-
+  or
+     index.html?tags=1
 
    // using feature of tasks:
          ?level=easy
          ?initialLevel=easy
          ?options={showSolutionOnLoad:1}
+
+   // assuming tags.js to have contents of the form:
+      var tasks_tags =  [
+        {
+            "code": "2010-a-gauche",
+            "tags": [ "tag1", "tag2", "tag3" ]
+        }, ... ];
+
 */
 
 //-----------------------------------------------------------------------------
@@ -163,6 +172,16 @@ var standaloneLoadPage = function(codes, pathToRoot) {
        showGroupIcon = true;
     }
   }
+  var showTags = ($.urlParam('tags') == "1");
+  var tasksTags = {};
+  if (showTags && (tasks_tags !== undefined)) {
+    // convert the array of entries from tags.js into an object with task codes as keys
+    var sTags = '';
+    for (var iTag = 0; iTag < tasks_tags.length; iTag++) {
+       var entry = tasks_tags[iTag];
+       tasksTags[entry.code] = entry.tags;
+    }
+  }
   var showLang = $.urlParam('lang');
   if (showLang == null) {
     showLang = "fr";
@@ -284,10 +303,19 @@ var standaloneLoadPage = function(codes, pathToRoot) {
       sDev += "<br/><br/>";
       iconDev = '<div class="icon_dev">' + sDev + '</div>';
     }
-    return '<div class="icon"><div ' + onclick + '>' + iconTitle + iconImg + iconStars + '</div>' +  iconLink + iconDev + '</div>';
+    var iconTags = '';
+    if (showTags) {
+      var sTags = '';
+      var tags = tasksTags[task.code];
+      if (tags !== undefined) {
+        for (var iTag = 0; iTag < tags.length; iTag++) {
+          sTags += " " + tags[iTag];
+        }
+        iconTags += '<div class="icon_tags">' + sTags + '</div>';
+      }
+    }
+    return '<div class="icon"><div ' + onclick + '>' + iconTitle + iconImg + iconStars + iconTags + '</div>' +  iconLink + iconDev + '</div>';
   };
-
-
 
   //------------------------------
   // Main html contents

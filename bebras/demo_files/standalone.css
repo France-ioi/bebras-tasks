@@ -151,6 +151,11 @@ body {
 .icon_stars {
    margin: 0.3em;
 }
+.icon_tags {
+   margin-top: 2px;
+   margin-bottom: 2px;
+   font-size: 14px;
+}
 #all_icons {
    display: none;
    margin-top: 5em;
