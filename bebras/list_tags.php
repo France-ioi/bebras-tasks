@@ -89,40 +89,9 @@ foreach($years as $year) {
   // echo "Processing ".count($descr->tasks)." tasks in $year\n";
   foreach ($descr->tasks as $task) {
     $path = $descr->folder . $task->code;
-    // echo("chdir:".$pwd."/".$path."\n");
-    chdir($pwd."/".$path);
-    $indexes = glob("index_??.html");
-    $translations = array(); // filled below
-    $french_title = $task->title;
-    // patch french title using server names obtained from json
-    if (isset($frenchTitleIndex[$task->code])) {
-      $french_title = $frenchTitleIndex[$task->code];
-    }
-    $translations[] = array(
-      "language" => "fr",
-      "file" => "index.html",
-      "title" => $french_title);
-    foreach ($indexes as $i => $index) {
-      if ($year == "2018" && $index == "index_en.html") {
-        $index == "index_en2.html"; // patch for 2018, file named index_en2.html
-      }
-      $language = str_replace(".html", "", str_replace("index_","",$index));
-      echo "Processing $path/$index for language $language\n";
-      $sTask = file_get_contents($index);
-      preg_match('#<h1>(.*)</h1>#',$sTask, $matches, PREG_OFFSET_CAPTURE);
-      if (isset($matches[1][0])) {
-        $title = $matches[1][0];
-      } else {
-        echo "Warning: could not obtain title for $path/$index\n";
-        $title = $task->code;
-      }
-      echo "Title extracted: $title\n";
-      $translations[] = array(
-        "language" => $language,
-        "file" => $index,
-        "title" => $title);
-    }
-    $task->translations = $translations;
+    unset($task->title);
+    unset($task->difficulties);
+    $task->translations = array("keyword");
   }
 
   $json = json_encode($descr, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -130,8 +99,8 @@ foreach($years as $year) {
 }
 
 chdir($pwd);
-file_put_contents('contents.js', $sOutput);
+file_put_contents('generated_tags.js', $sOutput);
 //echo $sOutput;
-echo "Generated contents.js\n"
+echo "Generated generated_tags.js\n"
 
 ?>
